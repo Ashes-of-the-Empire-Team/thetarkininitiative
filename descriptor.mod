@@ -1,0 +1,18 @@
+version="0.01"
+tags={
+	"Alternative History"
+	"Balance"
+	"Events"
+	"Gameplay"
+	"Graphics"
+	"Ideologies"
+	"Fixes"
+	"Map"
+	"Military"
+	"National Focuses"
+	"Sound"
+	"Technologies"
+	"Utilities"
+}
+name="Dawn of the Empire"
+supported_version="1.10.8"
