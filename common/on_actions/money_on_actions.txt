@@ -1,0 +1,352 @@
+on_actions = {
+	on_startup = {
+		effect = {
+			every_country={
+				set_variable = { debttotal = 0}
+				add_to_array = { global.all_countries_gdp = THIS.id }
+			set_variable = { mil_spending_multip = 1 }
+			set_variable = { education_spending_multip = 1 }
+			set_variable = { social_spending_multip = 1 }
+			set_variable = { security_spending_multip = 1 }
+			set_variable = { space_spending_multip = 1 }
+
+			}
+			set_variable = { Global.interest_rate = 1.5 }
+		}
+	}
+	#on_state_control_changed = { 
+	#	effect = {
+	#	#These distinguish planetside vs space states so people dont get money from tax on hyperspace lanes 
+	#	#using a state flag set on space states
+	#		IF = {
+	#			limit = {
+	#				FROM.FROM = {
+	#					NOT = {
+	#						has_state_flag = spacestate_flag #Leaves out states that are not taxable like in space
+	#					}
+	#				}
+	#			}
+	#			ROOT = {
+	#				add_to_variable = {  num_of_controlled_planets  = 1 }
+	#			}
+	#			FROM = {
+	#				add_to_variable = {  num_of_controlled_planets  = -1 }
+	#			}
+	#		}
+	#	}  
+	#}	
+    on_daily = {
+		effect = {
+		#Every day the income from resources and all expenses are deleted and recalculated
+		#Clearing the variables to be recalculated
+			clear_variable = resourceincome
+			clear_variable = resourceexpenses
+			clear_variable = allexpenses
+			clear_variable = nmn
+			clear_variable = tax_to_overlord
+			clear_variable = income
+
+			set_variable = { nmn = 0}
+			divide_variable = {  nmn  = 10 }
+
+			IF={
+				limit={
+					is_puppet = yes
+				}
+				divide_variable = {  overcome  = 2}
+				set_variable = { tax_to_overlord = overcome}
+			}
+
+			set_variable = { cfff = num_of_civilian_factories}
+			divide_variable = {  cfff  = 30 }
+			set_variable = { tax = max_manpower_k }
+			divide_variable = { tax = 30000 }
+
+		#These variables define themselves as equal to the number of the respective resource import
+			set_variable = { chromium_import = resource_imported@chromium}
+			divide_variable = {  chromium_import  = 300 }
+			set_variable = { tungsten_import = resource_imported@tungsten}
+			divide_variable = {  tungsten_import  = 600 }
+			set_variable = { rubber_import = resource_imported@rubber}
+			divide_variable = {  rubber_import  = 100 }
+			set_variable = { aluminum_import = resource_imported@aluminum}
+			divide_variable = {  aluminum_import  = 600 }
+			set_variable = { oil_import = resource_imported@oil}
+			divide_variable = {  oil_import  = 300 }
+			set_variable = { steel_import = resource_imported@steel}
+			divide_variable = {  steel_import  = 600 }
+
+			set_variable = { no = num_occupied_states }
+			divide_variable = { no = 20 }
+			set_variable = { nf = num_of_military_factories}
+			divide_variable = { nf = 40 }
+			set_variable = { navf = num_of_naval_factories}
+			divide_variable = { navf = 20 }
+			set_variable = { ms = num_divisions}
+
+		#These variables define themselves as equal to the number of the respective resource export
+			set_variable = { chromium_export = resource_exported@chromium}
+			divide_variable = { chromium_export = 400 }
+			set_variable = { tungsten_export = resource_exported@tungsten}
+			divide_variable = { tungsten_export = 800 }
+			set_variable = { rubber_export = resource_exported@rubber}
+			divide_variable = { rubber_export = 80 }
+			set_variable = { aluminum_export = resource_exported@aluminum}
+			divide_variable = { aluminum_export = 800 }
+			set_variable = { oil_export = resource_exported@oil}
+			divide_variable = { oil_export = 400 }
+			set_variable = { steel_export = resource_exported@steel}
+			divide_variable = {  steel_export  = 800 }
+			
+			set_variable = { debtexp = debttotal }
+			multiply_variable = { debtexp = Global.interest_rate }
+			divide_variable = { debtexp = 1000 }
+			add_to_variable = { Global.debtexp = debtexp }
+
+
+			clear_array = Global.nation_list
+			clear_array = Global.nation_debt_list
+			clear_array = Global.nation_debt_monthly_list
+			every_country = {
+				add_to_array = { Global.nation_list = THIS.id }
+			}
+#############################Income modifiers########################
+
+
+		#At the start of each day, expenses and resource income/expense is set to zero
+			set_variable = { allexpenses = 0 }
+			set_variable = { resourceexpenses = 0 }
+			set_variable = { resourceincome = 0 }
+		#All resource income from resource exports is added up
+			add_to_variable = {  resourceincome  = rubber_export}
+			add_to_variable = {  resourceincome  = chromium_export}
+			add_to_variable = {  resourceincome  = tungsten_export}
+			add_to_variable = {  resourceincome  = steel_export}
+			add_to_variable = {  resourceincome  = oil_export}
+			add_to_variable = {  resourceincome  = aluminum_export}
+		#All resource expenses from resource imports are added up
+			add_to_variable = {  resourceexpenses  = rubber_import}
+			add_to_variable = {  resourceexpenses  = chromium_import}
+			add_to_variable = {  resourceexpenses  = tungsten_import}
+			add_to_variable = {  resourceexpenses  = steel_import}
+			add_to_variable = {  resourceexpenses  = oil_import}
+			add_to_variable = {  resourceexpenses  = aluminum_import} 
+		#All expenses are added up here to calculate today's total expenses
+			add_to_variable = { allexpenses = no }
+			add_to_variable = { allexpenses = tax_to_overlord }
+			add_to_variable = { allexpenses = depression }
+			add_to_variable = { allexpenses = nc }
+			add_to_variable = { allexpenses = rubber_import }
+			add_to_variable = { allexpenses = chromium_import }
+			add_to_variable = { allexpenses = tungsten_import }
+			add_to_variable = { allexpenses = steel_import }
+			add_to_variable = { allexpenses = oil_import }
+			add_to_variable = { allexpenses = aluminum_import }
+			add_to_variable = { allexpenses = nf }
+			add_to_variable = { allexpenses = navf }
+			add_to_variable = { allexpenses = debtexp }
+			add_to_variable = { allexpenses = bounty_upkeep }
+			add_to_variable = { allexpenses = corruptioncost }
+
+
+			if = {
+				limit = {
+					has_country_flag = defense_low_spending
+				}
+				divide_variable = { ms = 20 }
+				add_to_variable = { allexpenses = ms }
+			}
+			if = {
+				limit = {
+					has_country_flag = defense_moderate_spending
+				}
+				divide_variable = { ms = 40 }
+				add_to_variable = { allexpenses = ms }
+			}
+			if = {
+				limit = {
+					has_country_flag = defense_high_spending
+				}
+				divide_variable = { ms = 60 }
+				add_to_variable = { allexpenses = ms }
+			}
+			if = {
+				limit = {
+					has_country_flag = education_low_spending
+				}
+				set_variable = { education_spending = max_manpower_k }
+				divide_variable = { education_spending = 40000 }
+				add_to_variable = { allexpenses = education_spending }
+			}
+			if = {
+				limit = {
+					has_country_flag = education_moderate_spending
+				}
+				set_variable = { education_spending = max_manpower_k }
+				divide_variable = { education_spending = 35000 }
+				add_to_variable = { allexpenses = education_spending }
+			}
+			if = {
+				limit = {
+					has_country_flag = education_high_spending
+				}
+				set_variable = { education_spending = max_manpower_k }
+				divide_variable = { education_spending = 30000 }
+				add_to_variable = { allexpenses = education_spending }
+			}
+			if = {
+				limit = {
+					has_country_flag = social_low_spending
+				}
+				set_variable = { social_spending = max_manpower_k }
+				divide_variable = { social_spending = 40000 }
+				add_to_variable = { allexpenses = social_spending }
+			}
+			if = {
+				limit = {
+					has_country_flag = social_moderate_spending
+				}
+				set_variable = { social_spending = max_manpower_k }
+				divide_variable = { social_spending = 35000 }
+				add_to_variable = { allexpenses = social_spending }
+				
+			}
+			if = {
+				limit = {
+					has_country_flag = social_high_spending
+				}
+				set_variable = { social_spending = max_manpower_k }
+				divide_variable = { social_spending = 30000 }
+				add_to_variable = { allexpenses = social_spending }
+			}
+			if = {
+				limit = {
+					has_country_flag = security_low_spending
+				}
+				set_variable = { security_spending = max_manpower_k }
+				divide_variable = { security_spending = 40000 }
+				add_to_variable = { allexpenses = security_spending }
+			}
+			if = {
+				limit = {
+					has_country_flag = security_moderate_spending
+				}
+				set_variable = { security_spending = max_manpower_k }
+				divide_variable = { security_spending = 35000 }
+				add_to_variable = { allexpenses = security_spending }
+			}
+			if = {
+				limit = {
+					has_country_flag = security_high_spending
+				}
+				set_variable = { security_spending = max_manpower_k }
+				divide_variable = { security_spending = 30000 }
+				add_to_variable = { allexpenses = security_spending }
+			}
+			if = {
+				limit = {
+					has_country_flag = space_low_spending
+				}
+				set_variable = { space_spending = space_maintenance }
+				add_to_variable = { allexpenses = space_spending }
+			}
+			if = {
+				limit = {
+					has_country_flag = space_moderate_spending
+				}
+				set_variable = { space_spending = space_maintenance }
+				add_to_variable = { allexpenses = space_spending }
+			}
+			if = {
+				limit = {
+					has_country_flag = space_high_spending
+				}
+				set_variable = { space_spending = space_maintenance }
+				add_to_variable = { allexpenses = space_spending }
+			}
+
+		############## Policies #########################
+			if = {
+				limit = {
+					has_country_flag = military_police
+				}
+				multiply_variable = { security_spending = 1.10 }
+			}
+
+
+		#Income is added up
+			add_to_variable = { income = tax }
+			add_to_variable = { income = resourceincome }
+			add_to_variable = { income = cfff }
+			add_to_variable = { nmn = tax }
+			add_to_variable = { nmn = resourceincome }
+			add_to_variable = { nmn = cfff }
+			subtract_from_variable = { nmn = allexpenses }
+
+			set_variable = { overcome = nmn }
+
+			add_to_variable = { currency_amount^primary_currency = nmn  }
+
+            if={
+            	limit={
+            		OR={
+            			check_variable={nmn>1}
+            			check_variable={nmn<-1}
+            		}
+            	}
+            	round_variable = dx
+            }
+        }
+		###Money ai###
+		every_country = {
+			if = {
+				limit = {
+					check_variable = { dx < 20}
+				}
+				set_country_flag = dontspendmoney
+			}
+			if = {
+				limit = {
+					check_variable = { dx > 20}
+				}
+				clr_country_flag = dontspendmoney
+			}
+		}
+    }
+	on_weekly = {
+		effect = {
+			GDP_change = yes
+		}
+	}
+}
+# num_of_controlled_planets :Variable that determines taxable states...excludes spacestates from #of owned states
+# dx : how much money you have
+# debttotal : how much debt you owe
+##########Expenses##########
+# allexpenses : adds all of the following to create total expenses per day
+# no : number of occupied states costs 20 each
+# tax_to_overlord : Total tax due to country that has you as a puppet
+	#overcome : Overcome is 500,000 and creates tax_to_overlord
+# depression : Unknown (No other mentions)
+# nc : Number of controlled planets (states(does not include space states)) costs is equal to number of controlled planets/250
+# ms : Number of divisions each division costs 1/40
+# nf : Number of military factories each mil factory costs 1/20
+# navf : Number of naval dockyards each dockyard costs 1/20
+# resourceexpenses : total expenses from all resource imports
+	# chromium_import : each chromium import costs 1/300
+	# tungsten_import : each tungsten import costs 1/600
+	# rubber_import : each rubber import costs 1/600
+	# aluminum_import : each aluminum import costs 1/600
+	# oil_import : each oil import costs 1/300
+	# steel_import : each steel import costs 1/600
+##########Income##########
+# nmn : Daily income
+# cfff : Number of civilian factories each is worth 1/20
+# tax : equal to population / 10,000
+# resourceincome : total income from all resource exports
+# chromium_export : each export of chromium is worth 1/400
+# tungsten_export : each export of tungsten is worth 1/800
+# rubber_export : each export of rubber is worth 1/800
+# aluminum_export : each export of aluminum is worth 1/800
+# oil_export : each export of oil is worth 1/400
+# steel_export : each export of steel is worth 1/800

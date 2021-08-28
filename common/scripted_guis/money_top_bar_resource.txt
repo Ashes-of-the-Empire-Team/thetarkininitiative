@@ -1,0 +1,40 @@
+scripted_gui = {
+
+	money = {
+		context_type = player_context
+		parent_window_token = top_bar
+		window_name = "money_container"
+		visible = {
+            always=yes
+		}
+		effects = {
+            buy_icon_click = {
+				 if = {
+           			limit={
+               			check_variable = { show = 0 }
+           			}
+           			set_variable = { show = 1 }
+           			else ={
+           				set_variable = { show = 0 }
+           			}
+           		}
+			}
+		}
+	}
+
+	gdp_window = {
+		context_type = player_context
+		window_name = "gdp_window"
+		
+		visible = {
+			has_country_flag = gdp_open
+		}
+        dynamic_lists = {
+            gdp_grid = {
+                array = Global.all_countries_gdp
+                change_scope = yes
+				entry_container = gdp_entry
+            }
+        }
+	}
+}

@@ -1,0 +1,76 @@
+scripted_gui = {
+
+	money_exchange = {
+		context_type = player_context
+		window_name = "money_exchange"
+		visible = {
+        	has_country_flag = money_exchange_open
+		}
+		effects = {
+			exchange_buy_click = {
+				set_temp_variable = { transfer = 100 }
+				subtract_from_variable = { currency_amount^currency_type_1 = transfer }
+				multiply_temp_variable = { transfer = Global.currency_exchange_rate_display^currency_type_1 }
+				divide_temp_variable = { transfer = Global.currency_exchange_rate_display^currency_type_2 }
+				add_to_variable = { currency_amount^currency_type_2 = transfer }
+				add_to_variable = { Global.currency_exchange_rate^currency_type_2 = 0.1 }
+			}
+			exchange_sell_click = {
+			}
+			print_money_click = {
+				print_currency = yes
+			}
+			select_button_money_click = {
+				set_variable = { currency_type_1 = i }
+			}
+			select_button_2_money_click = {
+				set_variable = { currency_type_2 = i }
+			}
+			currency_symbol_test_click = {
+				log = "test"
+				add_political_power = 10
+			}
+		}
+		dynamic_lists = {
+            buy_grid = {
+                array = global.currency_exchange_rate
+				entry_container = currency_entry
+            }
+			sell_grid = {
+                array = global.currency_exchange_rate
+				entry_container = currency_sell_entry
+            }
+        }
+		properties = {
+			currency_symbol = { image = "[Getmoneysymbolpic]" }
+		}
+		triggers = {
+			print_money_click_enabled = {
+				has_country_flag = central_bank
+			}
+			select_button_money_click_enabled = {
+				NOT = {
+					check_variable = { i = currency_type_1 }
+				}
+			}
+			select_button_2_money_click_enabled = {
+				NOT = {
+					check_variable = { i = currency_type_2 }
+				}
+			}
+			exchange_buy_click_enabled = {
+				check_variable = { currency_amount^currency_type_1 > 100 }
+			}
+			exchange_button_1_click_enabled = {
+				NOT = {
+					check_variable = { i = currency_type_1 }
+				}
+			}
+			exchange_button_2_click_enabled = {
+				NOT = {
+					check_variable = { i = currency_type_2 }
+				}
+			}
+		}
+	}
+}
