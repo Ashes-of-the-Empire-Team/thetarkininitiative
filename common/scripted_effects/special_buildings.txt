@@ -1,0 +1,55 @@
+#set_research_centre = {
+#	ROOT = { 
+#		add_to_array = { research_slots = PREV.id }
+#	}
+#}
+
+add_bio_centre = {
+	hidden_effect = {
+		random_owned_controlled_state = {
+				limit = {
+					is_in_home_area = yes
+					is_core_of = ROOT
+					is_fully_controlled_by = ROOT
+				}
+		add_building_construction = {
+			type = bio_lab
+			level = 1
+			instant_build = yes
+		}
+	}
+		set_state_flag = bio_center
+		#set_research_centre = yes
+		set_temp_variable = { bio_target_state = This.id }
+		add_research_slot = 1
+		add_to_array = { research_slots = 0 }
+		set_temp_variable = { research_calc = research_slots^num }
+		subtract_from_temp_variable = { research_calc = 1 }
+		set_variable = { bio_slot = research_calc }
+		add_to_variable = { health_index_equilibrium = 5}
+	}
+}
+add_space_centre = {
+	hidden_effect = {
+		random_owned_controlled_state = {
+				limit = {
+					is_in_home_area = yes
+					is_core_of = ROOT
+					is_fully_controlled_by = ROOT
+				}
+		add_building_construction = {
+			type = space_center
+			level = 1
+			instant_build = yes
+		}
+	}
+		set_state_flag = space_center
+		#set_research_centre = yes
+		set_temp_variable = { space_target_state = This.id }
+		add_research_slot = 1
+		add_to_array = { research_slots = 0 }
+		set_temp_variable = { research_calc = research_slots^num }
+		subtract_from_temp_variable = { research_calc = 1 }
+		set_variable = { space_slot = research_calc }
+	}
+}
