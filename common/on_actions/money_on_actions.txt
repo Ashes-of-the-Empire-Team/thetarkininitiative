@@ -35,7 +35,7 @@ on_actions = {
 	#		}
 	#	}  
 	#}	
-    on_daily = {
+	on_daily = {
 		effect = {
 		#Every day the income from resources and all expenses are deleted and recalculated
 		#Clearing the variables to be recalculated
@@ -83,6 +83,13 @@ on_actions = {
 			set_variable = { navf = num_of_naval_factories}
 			divide_variable = { navf = 20 }
 			set_variable = { ms = num_divisions}
+			set_variable = { bio_maintenace_cal = bio_maintenace }
+			set_variable = { space_maintenace_cal = space_maintenace }
+			multiply_variable = { bio_maintenace_cal = 3 }
+			multiply_variable = { space_maintenace_cal = 4 }
+			add_to_variable = { bio_maintenace_cal = allexpenses }
+			add_to_variable = { space_maintenace_cal = allexpenses }
+
 
 		#These variables define themselves as equal to the number of the respective resource export
 			set_variable = { chromium_export = resource_exported@chromium}
@@ -147,7 +154,8 @@ on_actions = {
 			add_to_variable = { allexpenses = debtexp }
 			add_to_variable = { allexpenses = bounty_upkeep }
 			add_to_variable = { allexpenses = corruptioncost }
-
+			add_to_variable = { allexpenses = bio_maintenace_cal }
+			add_to_variable = { allexpenses = space_maintenace_cal }
 
 			if = {
 				limit = {
@@ -287,35 +295,47 @@ on_actions = {
 
 			add_to_variable = { currency_amount^primary_currency = nmn  }
 
-            if={
-            	limit={
-            		OR={
-            			check_variable={nmn>1}
-            			check_variable={nmn<-1}
-            		}
-            	}
-            	round_variable = dx
-            }
-        }
-		###Money ai###
-		every_country = {
 			if = {
 				limit = {
-					check_variable = { dx < 20}
+					OR={
+						check_variable = { nmn > 1 }
+						check_variable={ nmn < -1 }
+					}
 				}
-				set_country_flag = dontspendmoney
+				round_variable = dx
 			}
-			if = {
-				limit = {
-					check_variable = { dx > 20}
+		###Money ai###
+			every_country = {
+				if = {
+					limit = {
+						check_variable = { dx < 20}
+					}
+					set_country_flag = dontspendmoney
 				}
-				clr_country_flag = dontspendmoney
+				if = {
+					limit = {
+						check_variable = { dx > 20}
+					}
+					clr_country_flag = dontspendmoney
+				}
 			}
 		}
-    }
+	}
 	on_weekly = {
 		effect = {
 			GDP_change = yes
+			set_temp_variable = { default_check = nmn }
+			multiply_variable = { default_check = 2 }
+			set_variable = { interest_check = interest_payments}
+			multiply_variable = { interest_check = -1 }
+			
+			if = {
+				limit = {
+					has_variable = interest_payments
+					check_variable = { default_check < interest_check}
+				}
+				set_country_flag = default_on_debt
+			}
 		}
 	}
 }

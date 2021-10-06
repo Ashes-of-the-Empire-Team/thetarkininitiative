@@ -1,0 +1,61 @@
+GDP_calculation = {
+	set_variable = { GDP = 0 }
+	set_variable = { consumption = cfff }
+	set_variable = { investments = investment_income }
+	set_variable = { government_spending = total_government_spending }
+	set_variable = { exports = resourceincome }
+	set_variable = { imports = resourceexpenses }
+	subtract_from_variable = { exports = imports }
+	add_to_variable = { GDP = consumption }
+	add_to_variable = { GDP = investments }
+	add_to_variable = { GDP = government_spending }
+	add_to_variable = { GDP = exports }
+
+	set_variable = { GDP_per_capita = GDP }
+	divide_variable = { GDP_per_capita = max_manpower_k }
+}
+clear_country_flags_money_exchange = {
+	clr_country_flag = pope_selected
+	clr_country_flag = Denar_selected
+	clr_country_flag = Euro_selected
+	clr_country_flag = american_dollar_selected
+	clr_country_flag = ruble_selected
+	clr_country_flag = yuan_selected
+	clr_country_flag = yen_selected
+	clr_country_flag = rupee_selected
+	clr_country_flag = peso_selected
+	clr_country_flag = Singapore_Dollar_selected
+	clr_country_flag = pound_selected
+	clr_country_flag = rand_selected
+	clr_country_flag = eco_selected
+	clr_country_flag = shilling_selected
+	clr_country_flag = shekel_selected
+	clr_country_flag = riyal_selected
+
+}
+print_currency = {
+    #Takes in a currency type (corresponding to the index that the currency uses) and prints currency_amount in universal units of currency
+    #Input: currency_amount (temp), currency_type (temp)
+	add_to_variable = { currency_amount^primary_currency = 100 }
+    set_temp_variable = { money_print_temp = 100 } #Amount to print
+    set_temp_variable = { exchange_rate_temp = global.currency_exchange_rate^primary_currency } #Exchange Rate
+    divide_temp_variable = { exchange_rate_temp = 100 }
+    divide_temp_variable = { money_print_temp = exchange_rate_temp }
+
+    set_temp_variable = { change_temp = global.currency_exchange_rate^primary_currency }
+    multiply_temp_variable = { change_temp = 0.01 }
+    subtract_from_variable = { global.currency_exchange_rate^primary_currency = change_temp }
+}
+exchange_currencies = {
+    #Exchanges currency_amount worth of universal units of currency from currency_type_1 to currency_type_2
+    #Input: currency_amount (temp), currency_type_1 (temp), currency_type_2 (temp)
+
+    set_temp_variable = { transfer = 100 }
+    subtract_from_variable = { currency_amount^currency_type_1 = transfer }
+    multiply_temp_variable = { transfer = currency_exchange_rate^currency_type_1 }
+    divide_temp_variable = { transfer = currency_exchange_rate^currency_type_2 }
+	set_temp_variable = { exchange_fee = transfer }
+	multiply_temp_variable = { exchange_fee = 0.10 }
+    add_to_temp_variable = { currency_amount^currency_type_2 = transfer }
+	subtract_from_variable = { currency_amount^currency_type_2 = exchange_fee }
+}
