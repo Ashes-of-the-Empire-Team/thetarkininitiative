@@ -8,6 +8,45 @@ scripted_gui = {
             always=yes
 		}
 		effects = {
+			imperial_button_menu_click = {
+				if = {
+					limit = {
+						has_country_flag = imperial_screen_politics_open
+					}
+					clr_country_flag = imperial_screen_politics_open
+				}
+				else = {
+					set_country_flag = imperial_screen_politics_open
+					clr_country_flag = consortium_screen_politics_open
+					clr_country_flag = rebel_screen_politics_open
+				}
+			}
+			consortium_button_menu_click = {
+				if = {
+					limit = {
+						has_country_flag = consortium_screen_politics_open
+					}
+					clr_country_flag = consortium_screen_politics_open
+				}
+				else = {
+					set_country_flag = consortium_screen_politics_open
+					clr_country_flag = imperial_screen_politics_open
+					clr_country_flag = rebel_screen_politics_open
+				}
+			}
+			rebel_button_menu_click = {
+				if = {
+					limit = {
+						has_country_flag = rebel_screen_politics_open
+					}
+					clr_country_flag = rebel_screen_politics_open
+				}
+				else = {
+					set_country_flag = rebel_screen_politics_open
+					clr_country_flag = consortium_screen_politics_open
+					clr_country_flag = imperial_screen_politics_open
+				}
+			}
 			factions_open_click = {
 				if = {
 					limit = {
@@ -58,140 +97,34 @@ scripted_gui = {
 					clr_country_flag = policies_open
 				}
 			}
-			demographic_category_click = {
-				set_country_flag = demographic_politics_click
-				clr_country_flag = existential_politics_click
-				clr_country_flag = security_politics_click
-				clr_country_flag = health_politics_click
-				clr_country_flag = economy_politics_click
-				clr_country_flag = justice_politics_click
-				clr_country_flag = education_politics_click
-				clr_country_flag = social_politics_click
-			}
-			existential_category_click = {
-				set_country_flag = existential_politics_click
-				clr_country_flag = demographic_politics_click
-				clr_country_flag = security_politics_click
-				clr_country_flag = health_politics_click
-				clr_country_flag = economy_politics_click
-				clr_country_flag = justice_politics_click
-				clr_country_flag = education_politics_click
-				clr_country_flag = social_politics_click
-			}
-			security_category_click = {
-				set_country_flag = security_politics_click
-				clr_country_flag = existential_politics_click
-				clr_country_flag = demographic_politics_click
-				clr_country_flag = health_politics_click
-				clr_country_flag = economy_politics_click
-				clr_country_flag = justice_politics_click
-				clr_country_flag = education_politics_click
-				clr_country_flag = social_politics_click
-			}
-			health_category_click = { 
-				set_country_flag = health_politics_click
-				clr_country_flag = existential_politics_click
-				clr_country_flag = security_politics_click
-				clr_country_flag = demographic_politics_click
-				clr_country_flag = economy_politics_click
-				clr_country_flag = justice_politics_click
-				clr_country_flag = education_politics_click
-				clr_country_flag = social_politics_click
-			}
-			economy_category_click = {
-				set_country_flag = economy_politics_click
-				clr_country_flag = existential_politics_click
-				clr_country_flag = security_politics_click
-				clr_country_flag = health_politics_click
-				clr_country_flag = demographic_politics_click
-				clr_country_flag = justice_politics_click
-				clr_country_flag = education_politics_click
-				clr_country_flag = social_politics_click
-			}
-			justice_category_click = {
-				set_country_flag = justice_politics_click
-				clr_country_flag = existential_politics_click
-				clr_country_flag = security_politics_click
-				clr_country_flag = health_politics_click
-				clr_country_flag = economy_politics_click
-				clr_country_flag = demographic_politics_click
-				clr_country_flag = education_politics_click
-				clr_country_flag = social_politics_click
-			}
-			education_category_click = {
-				set_country_flag = education_politics_click
-				clr_country_flag = existential_politics_click
-				clr_country_flag = security_politics_click
-				clr_country_flag = health_politics_click
-				clr_country_flag = economy_politics_click
-				clr_country_flag = justice_politics_click
-				clr_country_flag = demographic_politics_click
-				clr_country_flag = social_politics_click
-			}
-			social_programs_category_click = {
-				set_country_flag = social_politics_click
-				clr_country_flag = existential_politics_click
-				clr_country_flag = security_politics_click
-				clr_country_flag = health_politics_click
-				clr_country_flag = economy_politics_click
-				clr_country_flag = demographic_politics_click
-				clr_country_flag = justice_politics_click
-				clr_country_flag = education_politics_click
-			}
 		}
 		triggers = {
-			demographic_category_click_enabled = {
-				NOT = {
-					has_country_flag = demographic_politics_click
-				}
-			}
-			existential_category_click_enabled = {
-				NOT = {
-					has_country_flag = existential_politics_click
-				}
-			}
-			security_category_click_enabled = {
-				NOT = {
-					has_country_flag = security_politics_click
-				}
-			}
-			health_category_click_enabled = {
-				NOT = {
-					has_country_flag = health_politics_click
-				}
-			}
-			economy_category_click_enabled = {
-				NOT = {
-					has_country_flag = economy_politics_click
-				}
-			}
-			justice_category_click_enabled = {
-				NOT = {
-					has_country_flag = justice_politics_click
-				}
-			}
-			education_category_click_enabled = {
-				NOT = {
-					has_country_flag = education_politics_click
-				}
-			}
-			social_programs_category_click_enabled = {
-				NOT = {
-					has_country_flag = social_politics_click
-				}
-			}
-		}
-		dynamic_lists = {
-			active_policies_grid = {
-				array = active_policies_array
-				entry_container = policies_entry
-				change_scope = yes
-			}
 		}
 		properties = {
-			existential_government_button = { image = "[Getexistential]" }
-			policy = { image = "[Getpolicy]" }
-			economic_government_button = { image = "[Geteconomy]" }
+		}
+	}
+	consortium_politics = {
+		context_type = player_context
+		parent_window_name = countrypoliticsview
+		window_name = "consortium_politics"
+		visible = {
+            has_country_flag = consortium_screen_politics_open
+		}
+	}
+	consortium_politics = {
+		context_type = player_context
+		parent_window_name = countrypoliticsview
+		window_name = "rebel_politics"
+		visible = {
+            has_country_flag = rebel_screen_politics_open
+		}
+	}
+	consortium_politics = {
+		context_type = player_context
+		parent_window_name = countrypoliticsview
+		window_name = "imperial_politics"
+		visible = {
+            has_country_flag = imperial_screen_politics_open
 		}
 	}
 	policy_view = {
@@ -202,93 +135,8 @@ scripted_gui = {
            has_country_flag = policies_open
 		}
 		effects = {
-			police_state_click = {
-				add_to_array = { active_policies_array = 1 }            #Militarized Police
-				add_to_variable = { inteligentsia_equilibrium = 20  }
-				set_country_flag = police_state
-
-
-			}
-
-
-
-
-
-
-			demographic_category_click = {
-				category_switch_policies = yes
-				set_country_flag = demographic_click
-			}
-			existential_category_click = {
-				category_switch_policies = yes
-				set_country_flag = existential_click
-			}
-			security_category_click = {
-				category_switch_policies = yes
-				set_country_flag = security_click
-			}
-			health_category_click = { 
-				category_switch_policies = yes
-				set_country_flag = health_click
-			}
-			economy_category_click = {
-				category_switch_policies = yes
-				set_country_flag = economy_click
-			}
-			justice_category_click = {
-				category_switch_policies = yes
-				set_country_flag = justice_click
-			}
-			education_category_click = {
-				category_switch_policies = yes
-				set_country_flag = education_click
-			}
-			social_programs_category_click = {
-				category_switch_policies = yes
-				set_country_flag = social_click
-			}
 		}
 		triggers = {
-			demographic_category_click_enabled = {
-				NOT = {
-					has_country_flag = demographic_click
-				}
-			}
-			existential_category_click_enabled = {
-				NOT = {
-					has_country_flag = existential_click
-				}
-			}
-			security_category_click_enabled = {
-				NOT = {
-					has_country_flag = security_click
-				}
-			}
-			health_category_click_enabled = {
-				NOT = {
-					has_country_flag = health_click
-				}
-			}
-			economy_category_click_enabled = {
-				NOT = {
-					has_country_flag = economy_click
-				}
-			}
-			justice_category_click_enabled = {
-				NOT = {
-					has_country_flag = justice_click
-				}
-			}
-			education_category_click_enabled = {
-				NOT = {
-					has_country_flag = education_click
-				}
-			}
-			social_programs_category_click_enabled = {
-				NOT = {
-					has_country_flag = social_click
-				}
-			}
 		}
 	}
 }
