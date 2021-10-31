@@ -1,13 +1,275 @@
 scripted_gui = {
-
-	money_exchange = {
+	science_screen_open_init = {
 		context_type = player_context
-		window_name = "science_screen"
+		parent_window_token = politics_tab
+		window_name = "science_screen_init"
+		
 		visible = {
-           always = no
+			has_government = imperial
 		}
 		effects = {
-
+			science_screen_open_button_click = {
+				set_country_flag = science_screen_open
+				set_country_flag = science_cloning_open
+			}
 		}
 	}
+	science_screen_background = {
+		context_type = player_context
+		
+		window_name = "science_screen_background"
+		
+		visible = {
+			has_country_flag = science_screen_open
+		}
+		effects = {
+			cloning_screen_open_click = {
+				set_country_flag = science_cloning_open
+				clr_country_flag = droid_screen_open
+				clr_country_flag = science_disease_open
+			}
+			droid_screen_open_click = {
+				set_country_flag = science_droid_open
+				clr_country_flag = science_cloning_open
+				clr_country_flag = science_disease_open
+			}
+			disease_screen_open_click = {
+				set_country_flag = science_disease_open
+				clr_country_flag = science_droid_open
+				clr_country_flag = science_cloning_open
+			}
+			exit_button_click = {
+				clr_country_flag = science_disease_open
+				clr_country_flag = science_droid_open
+				clr_country_flag = science_cloning_open
+				clr_country_flag = science_screen_open
+			}
+		}
+	}
+	science_screen_cloning = {
+		context_type = player_context
+		parent_window_name = science_screen_background
+		window_name = "science_cloning_screen"
+		
+		visible = {
+			has_country_flag = science_cloning_open
+		}
+		effects = {
+			cloning_civilian_factories_click = {
+				add_ideas = factories_special_project
+				set_variable = { progress_bar_special_project = 0 }
+				set_country_flag = cloning_civilian_factories
+			}
+			cloning_money_spend_click = {
+				set_country_flag = money_spent_special_project
+				set_variable = { progress_bar_special_project = 0 }
+				set_country_flag = cloning_money_spend
+			}
+			cloning_planet_owner_click = {
+			}
+			cloning_search_for_relics_click = {
+				add_political_power = -100 ## EVENTS TO FIND THE RELICS
+			}
+		}
+		triggers = {
+			cloning_civilian_factories_click_enabled = {
+				num_of_civilian_factories > 50
+				NOT = {
+					has_variable = progress_bar_special_project
+				}
+			}
+			cloning_money_spend_click_enabled = {
+				OR = {
+					check_variable = { nmn > 15}
+					check_variable = { dx > 1600}
+				}
+				NOT = {
+					has_variable = progress_bar_special_project
+				}
+			}
+			cloning_planet_owner_click_enabled = {
+			}
+			cloning_search_for_relics_click_enabled = {
+				has_political_power > 100
+			}
+			cloning_money_spend_visible = {
+				NOT = {
+					has_country_flag = cloning_money_spend_complete
+				}
+			}
+			cloning_civilian_factories_visible = {
+				NOT = {
+					has_country_flag = cloning_civilian_factories_complete
+				}
+			}
+			cloning_civilian_factories_progress_visible = {
+				has_variable = progress_bar_special_project
+			}
+			cloning_money_spend_progress_visible = {
+				has_variable = progress_bar_special_project
+			}
+		}
+		properties = {
+			cloning_civilian_factories_progress = {
+				frame = progress_bar_special_project
+			}
+			cloning_money_spend_progress = {
+				frame = progress_bar_special_project
+			}
+		}
+	}
+	science_screen_droid = {
+		context_type = player_context
+		parent_window_name = science_screen_background
+		window_name = "science_droid_screen"
+		
+		visible = {
+			has_country_flag = science_droid_open
+		}
+		effects = {
+			droid_civilian_factories_click = {
+				add_ideas = factories_special_project
+				set_variable = { progress_bar_special_project = 0 }
+				set_country_flag = droid_civilian_factories
+			}
+			droid_money_spend_click = {
+				set_country_flag = money_spent_special_project
+				set_variable = { progress_bar_special_project = 0 }
+				set_country_flag = droid_money_spend
+			}
+			droid_planet_owner_click = {
+			}
+			droid_search_for_relics_click = {
+				add_political_power = -100
+			}
+		}
+		triggers = {
+			droid_civilian_factories_click_enabled = {
+				num_of_civilian_factories > 50
+				NOT = {
+					has_variable = progress_bar_special_project
+				}
+			}
+			droid_money_spend_click_enabled = {
+				OR = {
+					check_variable = { nmn > 15}
+					check_variable = { dx > 1600}
+				}
+				NOT = {
+					has_variable = progress_bar_special_project
+				}
+			}
+			droid_planet_owner_click_enabled = {
+			}
+			droid_search_for_relics_click_enabled = {
+				has_political_power > 100
+			}
+			droid_money_spend_visible = {
+				NOT = {
+					has_country_flag = droid_money_spend_complete
+				}
+			}
+			droid_civilian_factories_visible = {
+				NOT = {
+					has_country_flag = droid_civilian_factories_complete
+				}
+			}
+			droid_civilian_factories_progress_visible = {
+				has_variable = progress_bar_special_project
+			}
+			droid_money_spend_progress_visible = {
+				has_variable = progress_bar_special_project
+			}
+		}
+		properties = {
+			droid_civilian_factories_progress = {
+				frame = progress_bar_special_project
+			}
+			droid_money_spend_progress = {
+				frame = progress_bar_special_project
+			}
+		}
+	}
+	science_screen_disease = {
+		context_type = player_context
+		parent_window_name = science_screen_background
+		window_name = "science_disease_screen"
+		
+		visible = {
+			has_country_flag = science_disease_open
+		}
+		effects = {
+			disease_civilian_factories_click = {
+				add_ideas = factories_special_project
+				set_variable = { progress_bar_special_project = 0 }
+				set_country_flag = disease_civilian_factories
+			}
+			disease_money_spend_click = {
+				set_country_flag = money_spent_special_project
+				set_variable = { progress_bar_special_project = 0 }
+				set_country_flag = disease_money_spend
+			}
+			disease_planet_owner_click = {
+			}
+			disease_search_for_relics_click = {
+				add_political_power = -100
+			}
+		}
+		triggers = {
+			disease_civilian_factories_click_enabled = {
+				num_of_civilian_factories > 50
+				NOT = {
+					has_variable = progress_bar_special_project
+				}
+			}
+			disease_money_spend_click_enabled = {
+				OR = {
+					check_variable = { nmn > 15}
+					check_variable = { dx > 1600}
+				}
+				NOT = {
+					has_variable = progress_bar_special_project
+				}
+			}
+			disease_money_spend_visible = {
+				NOT = {
+					has_country_flag = disease_civilian_factories_complete
+				}
+			}
+			disease_civilian_factories_visible = {
+				NOT = {
+					has_country_flag = disease_money_spend_complete
+				}
+			}
+			disease_planet_owner_click_enabled = {
+			}
+			disease_search_for_relics_click_enabled = {
+				has_political_power > 100
+			}
+			disease_civilian_factories_progress_visible = {
+				has_variable = progress_bar_special_project
+			}
+			disease_money_spend_progress_visible = {
+				has_variable = progress_bar_special_project
+			}
+		}
+		properties = {
+			disease_civilian_factories_progress = {
+				frame = progress_bar_special_project
+			}
+			disease_money_spend_progress = {
+				frame = progress_bar_special_project
+			}
+		}
+	}
+	# money_exchange = {
+	# 	context_type = player_context
+	# 	window_name = "science_screen"
+	# 	visible = {
+ #           always = no
+	# 	}
+	# 	effects = {
+
+	# 	}
+	# }
 }
