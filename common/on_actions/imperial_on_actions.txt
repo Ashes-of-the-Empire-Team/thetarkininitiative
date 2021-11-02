@@ -1,30 +1,118 @@
 on_actions = {
 	on_startup = {
 		effect = {
-				ORT = {
+				EMP = {
 					add_to_array = { Global.imperial_warlords = THIS.id }
-					set_country_flag = moff
-				}
-				FON = {
-					add_to_array = { Global.imperial_warlords = THIS.id }
-					set_country_flag = admiral
-				}
-				COM = {
-					add_to_array = { Global.imperial_warlords = THIS.id }
-					set_country_flag = moff
-				}
-				KYK = {
-					add_to_array = { Global.imperial_warlords = THIS.id }
-					set_country_flag = moff
-				}
-				BES = {
-					add_to_array = { Global.imperial_warlords = THIS.id }
-					set_country_flag = moff
+					set_country_flag = emperor
 				}
 				EOH = {
 					add_to_array = { Global.imperial_warlords = THIS.id }
-					set_country_flag = admiral
 				}
+				FTU = {
+					add_to_array = { Global.imperial_warlords = THIS.id }
+				}
+				PEN = {
+					add_to_array = { Global.imperial_warlords = THIS.id }
+				}
+				ERI = {
+					add_to_array = { Global.imperial_warlords = THIS.id }
+				}
+				ZER = {
+					add_to_array = { Global.imperial_warlords = THIS.id }
+				}
+				REE = {
+					add_to_array = { Global.imperial_warlords = THIS.id }
+				}
+				BES = {
+					add_to_array = { Global.imperial_warlords = THIS.id }
+				}
+				ZSJ = {
+					add_to_array = { Global.imperial_warlords = THIS.id }
+				}
+			}
+		}
+		on_weekly = {
+			effect = {
+				if = {
+					limit = {
+						ROOT = {
+							has_government = imperial
+						}
+						add_to_variable = { legitimacy = 10 }
+					}
+				}
+				if = {
+					limit = {
+						has_country_flag = emperor
+						check_variable = { legitimacy < 50}
+					}
+					clr_country_flag = emperor
+				}
+				if = {
+					limit = {
+						NOT = {
+							any_country = {
+								has_country_flag = emperor
+							}
+						}
+						check_variable = { legitimacy > 70}
+					}
+					set_country_flag = emperor
+				}
+				set_temp_variable = { legitimacy_calc = 0 }
+				############# Controls Coruscant ##############
+				if = {
+					limit = {
+						ROOT = {
+							has_government = imperial
+							controls_state = 36
+							controls_state = 313
+							controls_state = 327
+							controls_state = 337
+							controls_state = 329
+							controls_state = 322
+							controls_state = 309
+							controls_state = 319
+						}
+					}
+					add_to_temp_variable = { legitimacy_calc = 25 }
+				}
+				############# Byss #################
+				if = {
+					limit = {
+						ROOT = {
+							has_government = imperial
+							controls_state = 411
+							controls_state = 48
+							controls_state = 408
+							controls_state = 416
+							controls_state = 422
+							controls_state = 419
+							controls_state = 414
+							controls_state = 404
+						}
+					}
+					add_to_temp_variable = { legitimacy_calc = 15 }
+				}
+				############# Anaxes ################
+				if = {
+					limit = {
+						ROOT = {
+							has_government = imperial
+							controls_state = 286
+							controls_state = 31
+							controls_state = 275
+							controls_state = 291
+							controls_state = 306
+							controls_state = 297
+							controls_state = 290
+							controls_state = 270
+						}
+					}
+					add_to_temp_variable = { legitimacy_calc = 10 }
+				}
+				############# Kessel ################
+
 			}
 		}
 	}
