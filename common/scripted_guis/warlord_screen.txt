@@ -7,6 +7,13 @@ scripted_gui = {
            has_country_flag = Warlord_Screen_open
 		}
 		effects = {
+			warlord_flag_click = {
+				capital_scope = {
+					ROOT = {
+						goto_state = PREV
+					}
+				}
+			}
 			doctrine_button_click = {
 				if = {
 					limit = {
@@ -18,9 +25,54 @@ scripted_gui = {
 					set_country_flag = policies_open_warlord_screen
 				}
 			}
+			voting_for_flag_click = {
+				capital_scope = {
+					ROOT = {
+						goto_state = PREV
+					}
+				}
+			}
+			warlord_deal_click = {
+				if = {
+					limit = {
+						NOT = {
+							has_country_Flag = warlord_deal_open
+						}
+					}
+					set_country_flag = warlord_deal_open
+				}
+				else = {
+					clr_country_flag = warlord_deal_open
+				}
+			}
 		}
 		triggers = {
-
+			warlord_symbol_visible = {
+				THIS = {
+					OR = {
+					has_country_flag = warlord_imperial
+						NOT = {
+							has_country_flag = voted_for_warlord
+						}
+					}
+				}
+			}
+			voting_for_flag_visible = {
+				THIS = {
+					NOT = {
+						has_country_flag = warlord_imperial
+					}
+					has_country_flag = voted_for_warlord
+				}
+			}
+			voting_for_border_visible = {
+				THIS = {
+					NOT = {
+						has_country_flag = warlord_imperial
+					}
+					has_country_flag = voted_for_warlord
+				}
+			}
 		}
 		dynamic_lists = {
 			warlord_grid = {
@@ -36,6 +88,120 @@ scripted_gui = {
 			leader_empire = {
 				image = "[EMP.Getleaderportrait]"
 			}
+			voting_for_flag = {
+				image = "[Getvoting_for]"
+			}
 		}
 	}
+	Warlord_Screen_deals = {
+		context_type = player_context
+		window_name = "Warlord_Screen_deals"
+		visible = {
+           has_country_flag = warlord_deal_open
+		}
+		effects = {
+			imperial_logo_click = {
+				set_variable = { Root.selected_country_voting = i }
+				add_to_array = { voting_array = This.id }
+				set_variable = { ROOT.selected_nation_var = This.id }
+			}
+			warlord_flag_click = {
+				set_variable = { Root.selected_country_voting = i }
+				add_to_array = { voting_array = This.id }
+				set_variable = { ROOT.selected_nation_var = This.id }
+			}
+			warlord_deal_click = {
+					clr_country_flag = voting_for_pen
+					clr_country_flag = voting_for_empire
+					clr_country_flag = voting_for_empire_of_hand
+					clr_country_flag = voting_for_f_t_u
+					clr_country_flag = voting_for_eri
+					clr_country_flag = voting_zero_command
+					clr_country_flag = voting_for_kareenth
+					clr_country_flag = voting_for_bespin
+					set_country_flag = voting_for_zsinj
+
+					if = {
+						limit = {
+							check_variable = { ROOT.selected_nation_var = EMP.id }
+						}
+						set_country_flag = voting_for_empire
+					}
+					if = {
+						limit = {
+							check_variable = { ROOT.selected_nation_var = PEN.id }
+						}
+						set_country_flag = voting_for_pen
+					}
+					if = {
+						limit = {
+							check_variable = { ROOT.selected_nation_var = EOH.id }
+						}
+						set_country_flag = voting_for_empire_of_hand
+					}
+					if = {
+						limit = {
+							check_variable = { ROOT.selected_nation_var = FTU.id }
+						}
+						set_country_flag = voting_for_f_t_u
+					}
+					if = {
+						limit = {
+							check_variable = { ROOT.selected_nation_var = ERI.id }
+						}
+						set_country_flag = voting_for_eri
+					}
+					if = {
+						limit = {
+							check_variable = { ROOT.selected_nation_var = ZER.id }
+						}
+						set_country_flag = voting_zero_command
+					}
+					if = {
+						limit = {
+							check_variable = { ROOT.selected_nation_var = REE.id }
+						}
+						set_country_flag = voting_for_kareenth
+					}
+					if = {
+						limit = {
+							check_variable = { ROOT.selected_nation_var = BES.id }
+						}
+						set_country_flag = voting_for_bespin
+					}
+					if = {
+						limit = {
+							check_variable = { ROOT.selected_nation_var = ZSJ.id }
+						}
+						set_country_flag = voting_for_zsinj
+					}
+					set_country_flag = voted_for_warlord
+			}
+		}
+		
+		triggers = {
+			warlord_flag_click_enabled = {
+				NOT = {
+					check_variable = { Root.selected_country_voting = i }
+				}
+			}
+			imperial_logo_click_enabled = {
+				NOT = {
+					check_variable = { Root.selected_country_voting = i }
+				}
+			}
+		}
+		properties = {
+			warlord_flag = {
+				image = "[This.GetFlag]"
+			}
+		}
+
+		dynamic_lists = {
+			warlord_voting_grid = {
+				array = Global.imperial_warlords
+				entry_container = imperial_voting_entry
+				change_scope = yes
+			}
+		}
 }
