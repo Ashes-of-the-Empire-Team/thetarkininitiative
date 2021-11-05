@@ -29,11 +29,21 @@ on_actions = {
 				ZSJ = {
 					add_to_array = { Global.imperial_warlords = THIS.id }
 				}
+				RIN = {
+					add_to_array = { Global.imperial_warlords = THIS.id }
+				}
 			}
 		}
 		on_weekly = {
 			effect = {
-				set_variable = { legitimacy_emp = 0 }
+				if = { 
+					limit = {
+						NOT = {
+							has_country_flag = imperial_calc
+						}
+					}
+					set_country_flag = { flag = imperial_calc value = 1 days = 3 }
+					set_variable = { legitimacy_emp = 0 }
 				if = {
 					limit = {
 						ROOT = {
@@ -166,7 +176,13 @@ on_actions = {
 					}
 					add_to_variable = { ZSJ.legitimacy_emp = legitimacy_emp }
 				}
-
+				if = {
+					limit = {
+						has_country_flag = voting_for_rin
+					}
+					add_to_variable = { RIN.legitimacy_emp = legitimacy_emp }
+				}
 			}
 		}
 	}
+}
