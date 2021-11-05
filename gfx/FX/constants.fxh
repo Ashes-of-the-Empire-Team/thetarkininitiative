@@ -86,7 +86,7 @@ static const float3 ICE_COLOR 					= float3( 0.5f, 0.6f, 0.9f );
 static const float 	ICE_NOISE_TILING  			= 0.1f; //0.068f;
 
 static const float WATER_COLOR_LIGHTNESS = 0.7;
-static const float WATER_RIPPLE_EFFECT = 0.0025;
+static const float WATER_RIPPLE_EFFECT = 0.0;
 
 static const float COLORMAP_OVERLAY_STRENGTH 	= 1.0f; //1.0f;
 static const float3 FAKE_CUBEMAP_COLOR 			= float3(0.0f, 0.0f, 0.0f);
@@ -126,7 +126,7 @@ static const float 	TREE_ROUGHNESS = 0.6f;
 
 //static const float  WATER_TILE					= 4.0f;
 static const float  WATER_TIME_SCALE			= 1.0f / 50.0f;
-static const float  WATER_HEIGHT = 9.5f;
+static const float  WATER_HEIGHT = 10.0f;
 static const float  WATER_HEIGHT_RECP = 1.0f / WATER_HEIGHT;
 static const float  WATER_HEIGHT_RECP_SQUARED = WATER_HEIGHT_RECP * WATER_HEIGHT_RECP;
 
