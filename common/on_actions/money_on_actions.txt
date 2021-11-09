@@ -117,6 +117,7 @@ on_actions = {
 			every_country = {
 				add_to_array = { Global.nation_list = THIS.id }
 			}
+			set_variable = {global.total_corporation_aid = 0}
 ############################ START OF INCOME MODIFIERS ########################
 			if = {
 				limit = {
@@ -124,6 +125,25 @@ on_actions = {
 				}
 				add_to_variable = {space_maintenace_cal = 10}
 			}
+			if = {
+				limit = {
+					has_global_flag = empowered_corporations
+					every_country = {
+						limit = {
+							has_country_flag = emperor ### BAD OPTIMISATION , LOOK AT LATER - Neverfire
+						}
+						every_country = {
+							limit = {
+								is_in_faction_with = PREV
+							}
+							add_to_variable = { tax_to_overlord = 0.1}
+							add_to_variable = { global.total_corporation_aid = 0.1}
+						}
+					}
+				}
+			}
+
+			clear_variable = global.total_corporation_aid ### REPLACE_ME, Add corporation money gain from the corporation aid
 ############################ END OF INCOME MODIFIERS ###########################
 		#At the start of each day, expenses and resource income/expense is set to zero
 			set_variable = { allexpenses = 0 }
