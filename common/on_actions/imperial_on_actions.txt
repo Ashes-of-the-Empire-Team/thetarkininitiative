@@ -1,9 +1,11 @@
 on_actions = {
 	on_startup = {
 		effect = {
+			# Imperial Warlords Setup
 				EMP = {
 					add_to_array = { Global.imperial_warlords = THIS.id }
 					set_country_flag = emperor
+					save_global_event_target_as = emperor_target
 				}
 				EOH = {
 					add_to_array = { Global.imperial_warlords = THIS.id }
@@ -36,153 +38,88 @@ on_actions = {
 		}
 		on_weekly = {
 			effect = {
-				if = { 
-					limit = {
-						NOT = {
-							has_country_flag = imperial_calc
-						}
-					}
-					set_country_flag = { flag = imperial_calc value = 1 days = 3 }
-					set_variable = { legitimacy_emp = 0 }
-				if = {
-					limit = {
-						ROOT = {
-							has_government = imperial
-						}
-					}
-					add_to_variable = { legitimacy_emp = 10 }
+				random_country = {
+					imperial_legitimacy_reset = yes
 				}
-				if = {
-					limit = {
-						has_country_flag = emperor
-						check_variable = { legitimacy_emp < 50}
-					}
-					clr_country_flag = emperor
-				}
-				if = {
-					limit = {
-						NOT = {
-							any_country = {
-								has_country_flag = emperor
-							}
-						}
-						check_variable = { legitimacy_emp > 70}
-					}
-					set_country_flag = emperor
-				}
-				set_temp_variable = { legitimacy_calc = 0 }
-				############# Controls Coruscant ##############
-				if = {
-					limit = {
-						ROOT = {
-							has_government = imperial
-							controls_state = 36
-							controls_state = 313
-							controls_state = 327
-							controls_state = 337
-							controls_state = 329
-							controls_state = 322
-							controls_state = 309
-							controls_state = 319
-						}
-					}
-					add_to_variable = { legitimacy_emp = 25 }
-				}
-				############# Byss #################
-				if = {
-					limit = {
-						ROOT = {
-							has_government = imperial
-							controls_state = 411
-							controls_state = 48
-							controls_state = 408
-							controls_state = 416
-							controls_state = 422
-							controls_state = 419
-							controls_state = 414
-							controls_state = 404
-						}
-					}
-					add_to_variable = { legitimacy_emp = 15 }
-				}
-				############# Anaxes ################
-				if = {
-					limit = {
-						ROOT = {
-							has_government = imperial
-							controls_state = 286
-							controls_state = 31
-							controls_state = 275
-							controls_state = 291
-							controls_state = 306
-							controls_state = 297
-							controls_state = 290
-							controls_state = 270
-						}
-					}
-					add_to_variable = { legitimacy_emp = 10 }
-				}
-				if = {
-					limit = {
-						has_country_flag = voting_for_empire
-					}
-						add_to_variable = { EMP.legitimacy_emp = legitimacy_emp }
-				}
-				if = {
-					limit = {
-						has_country_flag = voting_for_pen
-					}
-					add_to_variable = { PEN.legitimacy_emp = legitimacy_emp }
-				}
-				if = {
-					limit = {
-						has_country_flag = voting_for_empire_of_hand
-					}
-					add_to_variable = { EOH.legitimacy_emp = legitimacy_emp }
-				}
-				if = {
-					limit = {
-						has_country_flag = voting_for_f_t_u
-					}
-					add_to_variable = { FTU.legitimacy_emp = legitimacy_emp }
-				}
-				if = {
-					limit = {
-						has_country_flag = voting_for_eri
-					}
-					add_to_variable = { ERI.legitimacy_emp = legitimacy_emp }
-				}
-				if = {
-					limit = {
-						has_country_flag = voting_zero_command
-					}
-					add_to_variable = { ZER.legitimacy_emp = legitimacy_emp }
-				}
-				if = {
-					limit = {
-						has_country_flag = voting_for_kareenth
-					}
-					add_to_variable = { REE.legitimacy_emp = legitimacy_emp }
-				}
-				if = {
-					limit = {
-						has_country_flag = voting_for_bespin
-					}
-					add_to_variable = { BES.legitimacy_emp = legitimacy_emp }
-				}
-				if = {
-					limit = {
-						has_country_flag = voting_for_zsinj
-					}
-					add_to_variable = { ZSJ.legitimacy_emp = legitimacy_emp }
-				}
-				if = {
-					limit = {
-						has_country_flag = voting_for_rin
-					}
-					add_to_variable = { RIN.legitimacy_emp = legitimacy_emp }
+				random_country = {
+					imperial_legitimacy_vote = yes
 				}
 			}
 		}
+
+
+		# on_weekly = {
+		# 	effect = {
+		# 			if = {
+		# 				limit = {
+		# 				  NOT = {
+		# 					has_global_flag = weekly_check_imp
+		# 				  	}
+		# 				}
+		# 				set_variable = { legitimacy_emp = 0 }
+		# 				set_global_flag = { flag = weekly_check_imp value = 1 days = 1 }
+		# 		}
+		# 		imperial_legitimacy = yes
+		# 		if = {
+		# 			limit = {
+		# 				has_country_flag = voting_for_empire
+		# 			}
+		# 			add_to_variable = { EMP.legitimacy_emp = legitimacy_emp }
+		# 		}
+		# 		if = {
+		# 			limit = {
+		# 				has_country_flag = voting_for_pen
+		# 			}
+		# 			add_to_variable = { PEN.legitimacy_emp = legitimacy_emp }
+		# 		}
+		# 		if = {
+		# 			limit = {
+		# 				has_country_flag = voting_for_empire_of_hand
+		# 			}
+		# 			add_to_variable = { EOH.legitimacy_emp = legitimacy_emp }
+		# 		}
+		# 		if = {
+		# 			limit = {
+		# 				has_country_flag = voting_for_f_t_u
+		# 			}
+		# 			add_to_variable = { FTU.legitimacy_emp = legitimacy_emp }
+		# 		}
+		# 		if = {
+		# 			limit = {
+		# 				has_country_flag = voting_for_eri
+		# 			}
+		# 			add_to_variable = { ERI.legitimacy_emp = legitimacy_emp }
+		# 		}
+		# 		if = {
+		# 			limit = {
+		# 				has_country_flag = voting_zero_command
+		# 			}
+		# 			add_to_variable = { ZER.legitimacy_emp = legitimacy_emp }
+		# 		}
+		# 		if = {
+		# 			limit = {
+		# 				has_country_flag = voting_for_kareenth
+		# 			}
+		# 			add_to_variable = { REE.legitimacy_emp = legitimacy_emp }
+		# 		}
+		# 		if = {
+		# 			limit = {
+		# 				has_country_flag = voting_for_bespin
+		# 			}
+		# 			add_to_variable = { BES.legitimacy_emp = legitimacy_emp }
+		# 		}
+		# 		if = {
+		# 			limit = {
+		# 				has_country_flag = voting_for_zsinj
+		# 			}
+		# 			add_to_variable = { ZSJ.legitimacy_emp = legitimacy_emp }
+		# 		}
+		# 		if = {
+		# 			limit = {
+		# 				has_country_flag = voting_for_rin
+		# 			}
+		# 			add_to_variable = { RIN.legitimacy_emp = legitimacy_emp }
+		# 		}
+		# 	}
+		# }
 	}
-}

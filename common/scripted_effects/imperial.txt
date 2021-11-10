@@ -1,0 +1,294 @@
+imperial_legitimacy_reset = {
+	for_each_scope_loop = {
+		array = Global.imperial_warlords
+		# Reset Legitimacy
+			set_variable = {
+				var = legitimacy_emp
+				var = 0
+			}
+		# Re-calculate Legitimacy
+			if = {
+				limit = { has_government = imperial }
+				add_to_variable = {
+					var = legitimacy_emp
+					value = 10
+				}
+			}
+				# Planets
+					############# Controls Coruscant ##############
+					if = {
+						limit = {
+							controls_state = 36
+							controls_state = 313
+							controls_state = 327
+							controls_state = 337
+							controls_state = 329
+							controls_state = 322
+							controls_state = 309
+							controls_state = 319
+						}
+						add_to_variable = {
+							var = legitimacy_emp
+							value = 25
+						}
+					}
+					############# Byss #################
+					if = {
+						limit = {
+							controls_state = 411
+							controls_state = 48
+							controls_state = 408
+							controls_state = 416
+							controls_state = 422
+							controls_state = 419
+							controls_state = 414
+							controls_state = 404
+							}
+						add_to_variable = {
+							var = legitimacy_emp
+							value = 15
+						}
+					}
+					############# Anaxes ################
+					if = {
+						limit = {
+							controls_state = 286
+							controls_state = 31
+							controls_state = 275
+							controls_state = 291
+							controls_state = 306
+							controls_state = 297
+							controls_state = 290
+							controls_state = 270
+						}
+						add_to_variable = {
+							var = legitimacy_emp
+							value = 10
+						}
+					}
+			}
+	}
+imperial_legitimacy_vote = {
+	for_each_scope_loop = {
+		array = Global.imperial_warlords
+		# Vote
+			if = {
+				limit = {
+					has_country_flag = voting_for_empire
+				}
+				add_to_variable = { EMP.legitimacy_emp = legitimacy_emp }
+			}
+			if = {
+				limit = {
+					has_country_flag = voting_for_pen
+				}
+				add_to_variable = { PEN.legitimacy_emp = legitimacy_emp }
+			}
+			if = {
+				limit = {
+					has_country_flag = voting_for_empire_of_hand
+				}
+				add_to_variable = { EOH.legitimacy_emp = legitimacy_emp }
+			}
+			if = {
+				limit = {
+					has_country_flag = voting_for_f_t_u
+				}
+				add_to_variable = { FTU.legitimacy_emp = legitimacy_emp }
+			}
+			if = {
+				limit = {
+					has_country_flag = voting_for_eri
+				}
+				add_to_variable = { ERI.legitimacy_emp = legitimacy_emp }
+			}
+			if = {
+				limit = {
+					has_country_flag = voting_zero_command
+				}
+				add_to_variable = { ZER.legitimacy_emp = legitimacy_emp }
+			}
+			if = {
+				limit = {
+					has_country_flag = voting_for_kareenth
+				}
+				add_to_variable = { REE.legitimacy_emp = legitimacy_emp }
+			}
+			if = {
+				limit = {
+					has_country_flag = voting_for_bespin
+				}
+				add_to_variable = { BES.legitimacy_emp = legitimacy_emp }
+			}
+			if = {
+				limit = {
+					has_country_flag = voting_for_zsinj
+				}
+				add_to_variable = { ZSJ.legitimacy_emp = legitimacy_emp }
+			}
+			if = {
+				limit = {
+					has_country_flag = voting_for_rin
+				}
+				add_to_variable = { RIN.legitimacy_emp = legitimacy_emp }
+			}
+	}
+	# Not sure if this event target works. If not use commented out version
+	event_target:emperor_target = {
+		if = {
+			limit = {
+				check_variable = {
+					var = legitimacy_emp
+					value = 50
+					compare = less_than
+				}
+			}
+			clear_country_flag = emperor
+			clear_global_event_target = emperor_target
+			imperial_legitimacy_coronate = yes
+		}
+	}
+	# if = {
+	# 	limit = {
+	# 		any_country = {
+	# 			has_country_flag = emperor
+	# 		}
+	# 	}
+	# 	random_scope_in_array = {
+	#	array = Global.imperial_warlords
+	# 		limit = { has_country_flag  = emperor }
+	# 		if = {
+	# 			limit = {
+	# 				check_variable = {
+	# 					var = legitimacy_emp
+	# 					value = 50
+	# 					compare = less_than
+	# 				}
+	# 			}
+	# 			clear_country_flag = emperor
+	# 			clear_global_event_target = emperor_target
+	# 			imperial_legitimacy_coronate = yes
+	# 		}
+	# 	}
+	# }
+	# else = {
+	# 	clear_global_event_target = emperor_target
+	# 	imperial_legitimacy_coronate = yes
+	# }
+}
+
+imperial_legitimacy_coronate = {
+	clear_variable = global.imperial_legitimacy_best
+	clear_variable = global.imperial_legitimacy_best_score
+	for_each_scope_loop = {
+		array = Global.imperial_warlords
+		if = {
+			limit = {
+				check_variable = {
+					var = legitimacy_emp
+					value = global.imperial_legitimacy_best_score
+					value = greater_than
+				}
+			}
+			set_variable = {
+				var = global.imperial_legitimacy_best
+				value = THIS.id
+			}
+			set_variable = {
+				var = global.imperial_legitimacy_best_score
+				value = legitimacy_emp
+			}
+			set_global_event_target = emperor_target
+		}
+	}
+	# Again, unsure if this works
+	event_target:emperor_target = {
+		set_country_flag = emperor_potential
+	}
+	# random_scope_in_array = {
+	# 	array = Global.imperial_warlords
+	# 	limit = {
+	# 		check_variable = {
+	# 			var = global.imperial_legitimacy_best
+	# 			value = THIS.id
+	# 		}
+	# 	}
+	# 	set_country_flag = emperor
+	# }
+}
+
+
+
+
+imperial_legitimacy_old = {
+	if = {
+		limit = {
+			has_country_flag = emperor
+			check_variable = { legitimacy_emp < 50}
+		}
+		clr_country_flag = emperor
+	}
+	if = {
+		limit = {
+			NOT = {
+				any_country = {
+					has_country_flag = emperor
+				}
+			}
+			check_variable = { legitimacy_emp > 70}
+		}
+		set_country_flag = emperor
+	}
+	set_temp_variable = { legitimacy_calc = 0 }
+	############# Controls Coruscant ##############
+	if = {
+		limit = {
+			ROOT = {
+				has_government = imperial
+				controls_state = 36
+				controls_state = 313
+				controls_state = 327
+				controls_state = 337
+				controls_state = 329
+				controls_state = 322
+				controls_state = 309
+				controls_state = 319
+			}
+		}
+		add_to_variable = { legitimacy_emp = 25 }
+	}
+	############# Byss #################
+	if = {
+		limit = {
+			ROOT = {
+				has_government = imperial
+				controls_state = 411
+				controls_state = 48
+				controls_state = 408
+				controls_state = 416
+				controls_state = 422
+				controls_state = 419
+				controls_state = 414
+				controls_state = 404
+			}
+		}
+		add_to_variable = { legitimacy_emp = 15 }
+	}
+	############# Anaxes ################
+	if = {
+		limit = {
+			ROOT = {
+				has_government = imperial
+				controls_state = 286
+				controls_state = 31
+				controls_state = 275
+				controls_state = 291
+				controls_state = 306
+				controls_state = 297
+				controls_state = 290
+				controls_state = 270
+			}
+		}
+		add_to_variable = { legitimacy_emp = 10 }
+	}
+}
