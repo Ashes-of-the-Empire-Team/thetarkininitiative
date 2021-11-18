@@ -1,0 +1,77 @@
+on_actions = {
+	on_startup = {
+		effect = {
+				set_variable = {global.TotalEmpireManpower = 0}
+				set_variable = {global.TotalEmpireUnits = 0}
+				set_variable = {global.TotalEmpireShips = 0}
+				set_variable = {global.TotalEmpirePopulation = 0}
+				set_variable = {global.TotalEmpirePlanetsOwned = 0}
+				set_variable = {global.TotalEmpireIndustry = 0}
+				set_variable = {global.TotalEmpireMilitaryFactories = 0}
+			every_country ={
+				if = {
+					limit = {
+						has_government  = imperial
+					}
+					set_temp_variable  = {temp1 = manpower_k}
+					divide_temp_variable = {temp1 = 1000}
+					add_to_variable = {global.TotalEmpireManpower = temp1}
+					add_to_variable = {global.TotalEmpireUnits = num_divisions}
+					add_to_variable = {global.TotalEmpireShips = num_ships}
+					every_controlled_state = {
+						add_to_temp_variable  = {temp2 = state_population_k}
+						add_to_temp_variable  = {temp3 = 1}
+					}
+					divide_temp_variable = {temp3 = 8}
+					round_temp_variable = temp3
+					divide_temp_variable = {temp2 = 1000}
+					add_to_variable = {global.TotalEmpirePopulation = temp2}
+					add_to_variable = {global.TotalEmpirePlanetsOwned = temp3}
+					add_to_variable = {global.TotalEmpireIndustry = num_of_civilian_factories}
+					add_to_variable = {global.TotalEmpireMilitaryFactories = num_of_military_factories}
+					add_to_variable = {global.TotalEmpireDailyProfit = nmn}
+					round_variable = global.TotalEmpireDailyProfit
+				}
+			}
+		}
+	}
+	on_weekly_IBC = { ## Just need a country that wont get annexed so effects are one time
+		effect = {
+			clear_variable = global.TotalEmpireManpower
+			clear_variable = global.TotalEmpireUnits
+			clear_variable = global.TotalEmpireShips
+			clear_variable = global.TotalEmpirePopulation
+			clear_variable = global.TotalEmpirePlanetsOwned
+			clear_variable = global.TotalEmpireIndustry
+			clear_variable = global.TotalEmpireMilitaryFactories
+			clear_variable = global.TotalEmpireDailyProfit
+		}
+	}
+	on_weekly = {
+		effect = {
+			if = {
+				limit = { #### EMP DOES NOT WORK CURRENTLY WITH THIS
+					has_government  = imperial
+				}
+				set_temp_variable  = {temp1 = manpower_k}
+				divide_temp_variable = {temp1 = 1000}
+				add_to_variable = {global.TotalEmpireManpower = temp1}
+				add_to_variable = {global.TotalEmpireUnits = num_divisions}
+				add_to_variable = {global.TotalEmpireShips = num_ships}
+				every_controlled_state = {
+					add_to_temp_variable  = {temp2 = state_population_k}
+					add_to_temp_variable  = {temp3 = 1}
+				}
+				divide_temp_variable = {temp3 = 8}
+				round_temp_variable = temp3
+				divide_temp_variable = {temp2 = 1000}
+				add_to_variable = {global.TotalEmpirePopulation = temp2}
+				add_to_variable = {global.TotalEmpirePlanetsOwned = temp3}
+				add_to_variable = {global.TotalEmpireIndustry = num_of_civilian_factories}
+				add_to_variable = {global.TotalEmpireMilitaryFactories = num_of_military_factories}
+				add_to_variable = {global.TotalEmpireDailyProfit = nmn}
+				round_variable = global.TotalEmpireDailyProfit
+			}
+		}
+	}
+}
