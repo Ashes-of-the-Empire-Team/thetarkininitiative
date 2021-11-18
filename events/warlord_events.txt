@@ -1,0 +1,220 @@
+country_event = {
+        id = warlord_deals.1 ##ACCEPTS OFFER INFO
+        title = warlord_deals.1.t
+        desc = warlord_deals.1
+        picture = GFX_report_event_election_vote
+        is_triggered_only = yes
+        option = {
+                name = warlord_deals.1.a
+        }
+}
+
+country_event = {
+        id = warlord_deals.2 ## DECLINES OFFER INFO
+        title = warlord_deals.2.t
+        desc = warlord_deals.2
+        picture = GFX_report_event_election_vote
+        is_triggered_only = yes
+        option = {
+                name = warlord_deals.2.a
+        }
+}
+country_event = {
+	id = warlord_deals.3 ## WARLORD ACCEPTS OFFER FROM EMPEROR MILITARY
+        title = warlord_deals.3.t
+        desc = warlord_deals.3
+	picture = GFX_report_event_election_vote
+        is_triggered_only = yes
+        option = {
+                name = warlord_deals.3.b ## ACCEPT OFFER
+                trigger = {
+                        FROM = {
+                                stockpile_ratio = { ## Stops emperor from just not using up equipment in divisions
+                                    archetype = infantry_equipment ## REPLACE_ME depending on what base equipment we are using for divisions
+                                    ratio > 0.3
+                                }
+                        }
+                }
+                set_temp_variable = { temp1 = legitimacy_emp }
+                multiply_variable = {legitimacy_emp = 0.75}
+                FROM = {
+                        add_to_variable = {legitimacy_emp = temp1}
+                        country_event = {
+                               id = warlord_deals.1
+                        }
+                        transfer_units_fraction = {
+                                target = PREV
+                                size = 0.0
+                                stockpile_ratio = 0.2
+                                army_ratio = 0.0
+                                navy_ratio = 0.0
+                                air_ratio = 0.0
+                        }
+                        activate_targeted_decision = {
+                            target = PREV
+                            decision = warlord_civilian_decision
+                        } 
+                }
+        }
+        option = {
+                name = warlord_deals.3.a ## REFUSE OFFER
+                trigger = {
+                        FROM = {
+                                stockpile_ratio = { ## Stops emperor from just not using up equipment in divisions
+                                    archetype = infantry_equipment ## REPLACE_ME depending on what base equipment we are using for divisions
+                                    ratio > 0.3
+                                }
+                        }
+                }
+                FROM = {
+                        country_event = {
+                               id = warlord_deals.2
+                        }
+                }
+        }
+        option = {
+                trigger = {
+                        NOT = {
+                                FROM = {
+                                        stockpile_ratio = { ## Stops emperor from just not using up equipment in divisions
+                                            archetype = infantry_equipment ## REPLACE_ME depending on what base equipment we are using for divisions
+                                            ratio > 0.3
+                                        }
+                                }
+                        }
+                }
+                name = "A false promise, Emperor has no equipment to give us"
+                FROM = {
+                        country_event = {
+                               id = warlord_deals.2
+                        }
+                }
+        }
+}
+country_event = {
+        id = warlord_deals.4 ## WARLORD ACCEPTS OFFER FROM EMPEROR CIVILIAN
+        title = warlord_deals.4.t
+        desc = warlord_deals.4
+        picture = GFX_report_event_election_vote
+        is_triggered_only = yes
+        option = {
+                name = warlord_deals.4.b ## ACCEPT OFFER
+                trigger = {
+                        FROM = {
+                                num_of_civilian_factories_available_for_projects > 20
+                        }
+                }
+                set_temp_variable = { temp1 = legitimacy_emp }
+                multiply_variable = {legitimacy_emp = 0.75}
+                FROM = {
+                        add_to_variable = {legitimacy_emp = temp1}
+                        country_event = {
+                               id = warlord_deals.1
+                        }
+                        activate_targeted_decision = {
+                            target = PREV
+                            decision = warlord_civilian_decision
+                        }
+                        set_temp_variable = {temp2 = num_of_civilian_factories}
+                }
+                multiply_temp_variable = {temp2 = 0.8}
+                add_offsite_building = { type = industrial_complex level = temp2 }
+        }
+        option = {
+                name = warlord_deals.4.a ## REFUSE OFFER
+                trigger = {
+                        FROM = {
+                                num_of_civilian_factories_available_for_projects > 20
+                        }
+                }
+                FROM = {
+                        country_event = {
+                               id = warlord_deals.2
+                        }
+                }
+        }
+        option = {
+                trigger = {
+                        NOT = {
+                                FROM = {
+                                        num_of_civilian_factories_available_for_projects > 20
+                                }
+                        }
+                }
+                name = "A false promise, Emperor has no factories to give us"
+                FROM = {
+                        country_event = {
+                               id = warlord_deals.2
+                        }
+                }
+        }
+}
+country_event = {
+        id = warlord_deals.5 ## WARLORD ACCEPTS OFFER FROM EMPEROR MONEY
+        title = warlord_deals.5.t
+        desc = warlord_deals.5
+        picture = GFX_report_event_election_vote
+        is_triggered_only = yes
+        option = {
+                name = warlord_deals.5.b ## ACCEPT OFFER
+                trigger = {
+                        FROM = {
+                                check_variable = {nmn > 10}
+                        }
+                }
+
+                set_temp_variable = { temp1 = legitimacy_emp }
+                multiply_variable = {legitimacy_emp = 0.75}
+                FROM = {
+                        add_to_variable = {legitimacy_emp = temp1}
+                        country_event = {
+                               id = warlord_deals.1
+                        }
+                        activate_targeted_decision = {
+                            target = PREV
+                            decision = warlord_money_decision
+                        }
+                        if = {
+                                limit = {
+                                        has_variable = money_warlord_offer
+                                }
+                                set_variable = {money_warlord_offer = nmn}
+                                multiply_variable = {money_warlord_offer = 0.2}
+                        }
+                        else = {
+                                set_temp_variable = {temp3 = nmn }
+                                multiply_variable = {temp3 = 0.2}
+                                add_to_variable = {money_warlord_offer = temp3}
+                        }
+                }
+        }
+        option = {
+                name = warlord_deals.5.a ## REFUSE OFFER
+                trigger = {
+                        FROM = {  
+                                check_variable = {nmn > 10}
+                        }
+                }
+                FROM = {
+                        country_event = {
+                               id = warlord_deals.2
+                        }
+                }
+        }
+        option = {
+                name = "A false promise, Emperor has no money to give us"
+                trigger = {
+                        FROM = {
+                                NOT = {
+                                        check_variable = {nmn > 10}
+                                }
+                        }
+                }
+                FROM = {
+                        country_event = {
+                               id = warlord_deals.2
+                        }
+                }
+        }
+}
+############### CURRENTLY NOT FINISHED, TARGETED DISCIONS NEED TO BE CREATED AND RETURNING OF FACTORIES
