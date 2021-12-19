@@ -1,0 +1,1106 @@
+######################
+### FOREIGN POLICY ###
+######################
+
+shared_focus = {
+	id = REP_prepare_for_core_campain
+	icon = GFX_goal_REP_prepare_for_core_campain
+	cost = 3
+	x = 26
+	y = 0
+
+	available_if_capitulated = yes
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus REP_prepare_for_core_campain"
+		custom_effect_tooltip = FOP.tt
+		if = {
+			limit = {
+				has_country_flag = DEM_DEM
+			}
+			country_event = REPdem.8
+			else = {
+				custom_effect_tooltip = RIO_NEGRO
+				random_list = {
+					25 = {
+						country_event = REPfor.13
+					}
+					25 = {
+						FOP = {
+							country_event = REPfor.13
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+shared_focus = {
+	id = REP_Build_up_Defences
+	icon = GFX_goal_generic_fortify_city
+	available = {
+		owns_state = 511
+		owns_state = 278
+	}
+	prerequisite = {
+		focus = REP_prepare_for_core_campain
+	}
+	cost = 4
+	x = 0
+	y = 1
+	relative_position_id = REP_prepare_for_core_campain
+
+	available_if_capitulated = yes
+
+	bypass = {
+		has_elected_government = yes
+		owns_state = 512
+		owns_state = 1029
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus REP_Build_up_Defences"
+		278 = {
+			add_building_construction = {
+				type = bunker
+				province = 12321
+				level = 1
+				instant_build = yes
+			}
+		}
+		449 = {
+			add_building_construction = {
+				type = bunker
+				province = 13227
+				level = 1
+				instant_build = yes
+			}
+			add_building_construction = {
+				type = bunker
+				province = 5214
+				level = 1
+				instant_build = yes
+			}
+			add_building_construction = {
+				type = bunker
+				province = 13229
+				level = 1
+				instant_build = yes
+			}
+		}
+		579 = {
+			add_building_construction = {
+				type = bunker
+				province = 8192
+				level = 1
+				instant_build = yes
+			}
+			add_building_construction = {
+				type = bunker
+				province = 2199
+				level = 1
+				instant_build = yes
+			}
+			add_building_construction = {
+				type = bunker
+				province = 13228
+				level = 1
+				instant_build = yes
+			}
+			add_building_construction = {
+				type = bunker
+				province = 12306
+				level = 1
+				instant_build = yes
+			}
+		}
+	}
+	search_filters = { FOCUS_FILTER_INDUSTRY }
+}
+
+shared_focus = {
+	id = REP_Mobilise_the_Reserves
+	icon = GFX_goal_mass_concentration_of_army
+	prerequisite = {
+		focus = REP_prepare_for_core_campain
+	}
+	cost = 4
+	x = -2
+	y = 1
+	relative_position_id = REP_prepare_for_core_campain
+
+	available_if_capitulated = yes
+
+	bypass = {
+		has_elected_government = yes
+		owns_state = 512
+		owns_state = 1029
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus REP_Mobilise_the_Reserves"
+		hidden_effect = {
+			division_template = {
+				name = "División de Milicia"
+				division_names_group = REP_GAR_01
+				regiments = {
+					infantry = { x = 0 y = 0 }
+					infantry = { x = 0 y = 1 }
+					infantry = { x = 0 y = 2 }
+					infantry = { x = 1 y = 0 }
+					infantry = { x = 1 y = 1 }
+					infantry = { x = 1 y = 2 }
+				}
+			}
+			set_division_template_lock = {
+				division_template = "División de Milicia"
+				is_locked = yes
+			}
+		}
+		449 = {
+			create_unit = {
+				division =  "name = \"1ra Brigada de la Gendarmeria Nacional\" division_template = \"División de Milicia\" start_experience_factor = 0.1"
+				owner = REP
+			}
+			create_unit = {
+				division =  "name = \"2da Brigada de la Gendarmeria Nacional\" division_template = \"División de Milicia\" start_experience_factor = 0.1"
+				owner = REP
+			}
+			create_unit = {
+				division =  "name = \"3ra Brigada de la Gendarmeria Nacional\" division_template = \"División de Milicia\" start_experience_factor = 0.1"
+				owner = REP
+			}
+		}
+	}
+}
+
+shared_focus = {
+	id = REP_Fleet_Exercises
+	icon = GFX_goal_EGY_sultan_fleet
+	prerequisite = {
+		focus = REP_prepare_for_core_campain
+	}
+	cost = 2
+	x = 2
+	y = 1
+	relative_position_id = REP_prepare_for_core_campain
+
+	available_if_capitulated = yes
+
+	bypass = {
+		has_elected_government = yes
+		owns_state = 512
+		owns_state = 1029
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus REP_Fleet_Exercises"
+		navy_experience = 30
+	}
+	search_filters = { FOCUS_FILTER_NAVY_BONUS }
+}
+
+shared_focus = {
+	id = REP_Strike_Now
+	icon = GFX_focus_ger_bulwark_against_bolshevism
+	available = {
+		can_declare_war_on = FOP
+	}
+	prerequisite = {
+		focus = REP_Mobilise_the_Reserves
+	}
+	prerequisite = {
+		focus = REP_Build_up_Defences
+	}
+	prerequisite = {
+		focus = REP_Fleet_Exercises
+	}
+	cost = 1
+	x = 0
+	y = 2
+	relative_position_id = REP_prepare_for_core_campain
+
+	will_lead_to_war_with = ANA
+	will_lead_to_war_with = COR
+	will_lead_to_war_with = PAR
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus REP_Strike_Now"
+		declare_war_on = {
+			tREPet = FOP
+			type = annex_everything
+		}
+	}
+	search_filters = { FOCUS_FILTER_ANNEXATION }
+}
+
+shared_focus = {
+	id = REP_Reintegrate_Patagonia
+	icon = GFX_goal_generic_war_with_comintern
+	available = {
+		owns_state = 512
+		owns_state = 1029
+	}
+	prerequisite = {
+		focus = REP_Strike_Now
+	}
+	cost = 5
+	x = 0
+	y = 3
+	relative_position_id = REP_prepare_for_core_campain
+
+	ai_will_do = {
+		factor = 200
+	}
+
+	available_if_capitulated = yes
+
+	bypass = {
+		has_elected_government = yes
+		512 = {
+			is_core_of = REP
+		}
+		1029 = {
+			is_core_of = REP
+		}
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus REP_Reintegrate_Patagonia"
+		add_state_core = 512
+		add_state_core = 1029
+		add_stability = -0.1
+		hidden_effect = {
+			country_event = { id = REPcar.48 days = 90 }
+			if = {
+				limit = { has_template = "División de Milicia" }
+				delete_unit_template_and_units = {
+					division_template = "División de Milicia"
+					disband = yes
+				}
+			}
+			if = {
+				limit = { has_idea = REP_cheaper_guns_against_fop }
+				remove_ideas = REP_cheaper_guns_against_fop
+			}
+		}
+	}
+	search_filters = { FOCUS_FILTER_ANNEXATION FOCUS_FILTER_STABILITY }
+}
+
+### Confederation of the River Plata
+
+shared_focus = {
+	id = REP_A_Catholic_Federation
+	icon = GFX_goal_REP_coa
+	available = {
+		is_subject = no
+		has_authoritarian_government = yes
+	}
+	prerequisite = {
+		focus = REP_Reintegrate_Patagonia
+	}
+	cost = 6
+	x = 0
+	y = 4
+	relative_position_id = REP_prepare_for_core_campain
+
+	ai_will_do = {
+		factor = 200
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus REP_A_Catholic_Federation"
+		add_political_power = 150
+		add_war_support = 0.10
+		add_ideas = REP_prepared
+		if = {
+			limit = {
+				has_government = national_populist
+			}
+			custom_effect_tooltip = DIPLO_OPEN_TT
+			set_country_flag = DIPLO_OPEN
+		}
+		hidden_effect = {
+			BRA = { country_event = urg.64 }
+		}
+	}
+	search_filters = { FOCUS_FILTER_WAR_SUPPORT FOCUS_FILTER_MANPOWER FOCUS_FILTER_POLITICAL }
+}
+
+shared_focus = {
+	id = REP_Punish_Paraguay
+	icon = GFX_goal_paraguay
+	available = {
+		is_subject = no
+		can_declare_war_on = PAR
+		NOT = { has_country_flag = GOU_Control }
+	}
+	bypass = {
+		NOT = { can_declare_war_on = PAR }
+	}
+	prerequisite = {
+		focus = REP_A_Catholic_Federation
+	}
+	cost = 1
+	x = -4
+	y = 1
+	relative_position_id = REP_A_Catholic_Federation
+
+	ai_will_do = {
+		factor = 10
+		modifier = {
+			factor = 0
+			ROOT_is_threatened = yes
+		}
+		modifier = {
+			factor = 0
+			PAR = { ROOT_dont_start_major_faction_wars = yes }
+		}
+		modifier = {
+			factor = 0
+			PAR = {
+				OR = {
+					is_stronger_than_ROOT_and_not_vulnerable = yes
+					overlord_is_stronger_than_ROOT_and_not_vulnerable = yes
+					faction_leader_is_stronger_than_ROOT_and_not_vulnerable = yes
+				}
+			}
+		}
+	}
+
+	will_lead_to_war_with = PAR
+
+	select_effect = {
+		log = "[GetDateText]: [Root.GetName]: Select Focus REP_Five_Year_Plan"
+		hidden_effect = { country_event = REPcar.21 } #GOU calls Carles to order
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus REP_Punish_Paraguay"
+		create_wREPoal = {
+			type = annex_everything
+			tREPet = PAR
+		}
+		301 = {
+			if = {
+				limit = { is_owned_by = PAR }
+				add_claim_by = REP
+			}
+		}
+		688 = {
+			if = {
+				limit = { is_owned_by = PAR }
+				add_claim_by = REP
+			}
+		}
+		1027 = {
+			if = {
+				limit = { is_owned_by = PAR }
+				add_claim_by = REP
+			}
+		}
+	}
+	search_filters = { FOCUS_FILTER_ANNEXATION }
+}
+
+shared_focus = {
+	id = REP_Integrate_Paraguay
+	icon = GFX_focus_generic_oppression
+	available = {
+		owns_state = 301
+	}
+	prerequisite = {
+		focus = REP_Punish_Paraguay
+	}
+	cost = 10
+	x = -5
+	y = 2
+	relative_position_id = REP_A_Catholic_Federation
+
+	ai_will_do = {
+		factor = 40
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus REP_Integrate_Paraguay"
+		custom_effect_tooltip = REP_PAR_State_effct_TT
+		hidden_effect = {
+			301 = {
+				add_state_modifier = {
+					modifier = {
+						local_non_core_manpower = 0.5
+						#industry_free_repair_factor = 0.50
+					}
+				}
+			}
+		}
+	}
+}
+
+shared_focus = {
+	id = REP_Ideological_Persecution
+	icon = GFX_goal_generic_imprison_people
+	available = {
+		owns_state = 301
+	}
+	prerequisite = {
+		focus = REP_Integrate_Paraguay
+	}
+	cost = 6
+	x = -5
+	y = 3
+	relative_position_id = REP_A_Catholic_Federation
+
+	ai_will_do = {
+		factor = 40
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus REP_Ideological_Persecution"
+		add_political_power = -75
+		add_stability = 0.06
+	}
+	search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
+}
+
+shared_focus = {
+	id = REP_Mechanised_Agriculture
+	icon = GFX_goal_generic_mechanisation
+	available = {
+		has_full_control_of_state = 301
+		has_full_control_of_state = 300
+	}
+	prerequisite = {
+		focus = REP_Punish_Paraguay
+		focus = REP_Uruguay_is_ours
+	}
+	cost = 8
+	x = -3
+	y = 3
+	relative_position_id = REP_A_Catholic_Federation
+
+	ai_will_do = {
+		factor = 200
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus REP_Mechanised_Agriculture"
+		301 = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+		}
+		300 = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+		}
+	}
+	search_filters = { FOCUS_FILTER_INDUSTRY }
+}
+
+shared_focus = {
+	id = REP_Uruguay_is_ours
+	icon = GFX_goal_uruguay
+	available = {
+		is_subject = no
+		can_declare_war_on = URG
+		NOT = { has_country_flag = GOU_Control }
+	}
+	bypass = {
+		NOT = { can_declare_war_on = URG }
+	}
+	prerequisite = {
+		focus = REP_A_Catholic_Federation
+	}
+	cost = 1
+	x = -2
+	y = 1
+	relative_position_id = REP_A_Catholic_Federation
+
+	ai_will_do = {
+		factor = 10
+		modifier = {
+			factor = 0
+			ROOT_is_threatened = yes
+		}
+		modifier = {
+			factor = 0
+			URG = { ROOT_dont_start_major_faction_wars = yes }
+		}
+		modifier = {
+			factor = 0
+			URG = {
+				OR = {
+					is_stronger_than_ROOT_and_not_vulnerable = yes
+					overlord_is_stronger_than_ROOT_and_not_vulnerable = yes
+					faction_leader_is_stronger_than_ROOT_and_not_vulnerable = yes
+				}
+			}
+		}
+	}
+	will_lead_to_war_with = URG
+
+	select_effect = {
+		log = "[GetDateText]: [Root.GetName]: Select Focus REP_Reduce_Textile_Reliance"
+		hidden_effect = { country_event = REPcar.21 } #GOU calls Carles to order
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus REP_Uruguay_is_ours"
+		add_state_claim = 300
+		create_wREPoal = {
+			tREPet = URG
+			type = annex_everything
+		}
+	}
+	search_filters = { FOCUS_FILTER_ANNEXATION }
+}
+
+shared_focus = {
+	id = REP_Integrate_Uruguay
+	icon = GFX_focus_generic_authoritarian_government
+	available = {
+		OR = {
+			owns_state = 300
+			has_subject = URG
+		}
+	}
+	prerequisite = {
+		focus = REP_Uruguay_is_ours
+	}
+	cost = 10
+	x = -1
+	y = 2
+	relative_position_id = REP_A_Catholic_Federation
+
+	ai_will_do = {
+		factor = 40
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus REP_Integrate_Uruguay"
+		add_state_core = 300
+		if = {
+			limit = { has_subject = URG }
+			annex_country = {
+				tREPet = URG
+				transfer_troops = no
+			}
+		}
+	}
+	search_filters = { FOCUS_FILTER_ANNEXATION }
+}
+
+shared_focus = {
+	id = REP_Connect_the_Railroads
+	icon = GFX_goal_generic_construct_infrastructure
+	available = {
+		OR = {
+			owns_state = 300
+			has_subject = URG
+		}
+	}
+	prerequisite = {
+		focus = REP_Integrate_Uruguay
+		focus = REP_Expand_Mining_Facilities
+	}
+	cost = 8
+	x = -1
+	y = 3
+	relative_position_id = REP_A_Catholic_Federation
+
+	ai_will_do = {
+		factor = 40
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus REP_Connect_the_Railroads"
+		300 = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = infrastructure
+				level = 1
+				instant_build = yes
+			}
+		}
+		510 = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = infrastructure
+				level = 1
+				instant_build = yes
+			}
+		}
+		278 = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = infrastructure
+				level = 1
+				instant_build = yes
+			}
+		}
+	}
+	search_filters = { FOCUS_FILTER_INDUSTRY }
+}
+
+shared_focus = {
+	id = REP_Catholic_Brothers_around_the_World
+	icon = GFX_goal_SHX_Christian_Influence
+	prerequisite = {
+		focus = REP_A_Catholic_Federation
+	}
+	cost = 4
+	x = -8
+	y = 1
+	relative_position_id = REP_A_Catholic_Federation
+
+	ai_will_do = {
+		factor = 40
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus REP_Catholic_Brothers_around_the_World"
+		add_ideas = REP_Volunteer_Legion
+	}
+	search_filters = { FOCUS_FILTER_ANNEXATION }
+}
+
+shared_focus = {
+	id = REP_Encourage_Spanish_Immigration
+	icon = GFX_goal_refugee_management
+	available = {
+		has_war = no
+	}
+	prerequisite = {
+		focus = REP_Catholic_Brothers_around_the_World
+	}
+	cost = 3
+	x = -9
+	y = 2
+	relative_position_id = REP_A_Catholic_Federation
+
+	ai_will_do = {
+		factor = 200
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus REP_Encourage_Spanish_Immigration"
+		add_ideas = REP_Spanish_Immigrants
+	}
+	search_filters = { FOCUS_FILTER_MANPOWER }
+}
+
+shared_focus = {
+	id = REP_Protect_the_heart_of_Christianity
+	icon = GFX_goal_PAP_crusade
+	available = {
+		country_exists = SRI
+		country_exists = PAP
+		PAP = { has_capitulated = no }
+	}
+	prerequisite = {
+		focus = REP_Catholic_Brothers_around_the_World
+	}
+	cost = 2
+	x = -7
+	y = 2
+	relative_position_id = REP_A_Catholic_Federation
+
+	ai_will_do = {
+		factor = 200
+	}
+
+	bypass = {
+		OR = {
+			NOT = { country_exists = PAP }
+			PAP = { has_capitulated = yes }
+		}
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus REP_Protect_the_heart_of_Christianity"
+		country_event = REPfor.7
+	}
+}
+
+shared_focus = {
+	id = REP_Yacuiba_Dispute
+	icon = GFX_goal_bolivia
+	available = {
+		if = {
+			limit = { NOT = { can_declare_war_on = 1073.owner } }
+			OR = {
+				owns_state = 1073
+				1073 = { owner = { is_subject_of = ROOT } }
+			}
+		}
+		else = {
+			is_subject = no
+			can_declare_war_on = 1073.owner
+			NOT = { has_country_flag = GOU_Control }
+		}
+	}
+
+	prerequisite = {
+		focus = REP_A_Catholic_Federation
+	}
+	cost = 4
+	x = 2
+	y = 1
+	relative_position_id = REP_A_Catholic_Federation
+
+	ai_will_do = {
+		factor = 10
+		modifier = {
+			factor = 0
+			can_declare_war_on = 1073.owner
+			OR = {
+				ROOT_is_threatened = yes
+				ROOT_dont_start_major_faction_wars = yes
+				var:1073.owner = {
+					OR = {
+						is_stronger_than_ROOT_and_not_vulnerable = yes
+						overlord_is_stronger_than_ROOT_and_not_vulnerable = yes
+						faction_leader_is_stronger_than_ROOT_and_not_vulnerable = yes
+					}
+				}
+			}
+		}
+	}
+
+	select_effect = {
+		log = "[GetDateText]: [Root.GetName]: Select Focus REP_Renegotiate_with_Mitteleuropa"
+		hidden_effect = { country_event = REPcar.21 } #GOU calls Carles to order
+	}
+
+	will_lead_to_war_with = BOL
+	will_lead_to_war_with = PRU
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus REP_Yacuiba_Dispute"
+		add_state_core = 1073
+		if = {
+			limit = { BOL = { owns_state = 1073 } }
+			create_wREPoal = {
+				type = take_state_focus
+				tREPet = BOL
+				generator = { 1073 }
+			}
+		}
+		else_if = {
+			limit = { PRU = { owns_state = 1073 } }
+			create_wREPoal = {
+				type = take_state_focus
+				tREPet = PRU
+				generator = { 1073 }
+			}
+		}
+	}
+	search_filters = { FOCUS_FILTER_ANNEXATION }
+}
+
+shared_focus = {
+	id = REP_Expand_Mining_Facilities
+	icon = GFX_focus_generic_tungsten
+	available = {
+		OR = {
+			owns_state = 848
+			has_subject = BOL
+		}
+	}
+	prerequisite = {
+		focus = REP_Yacuiba_Dispute
+	}
+	cost = 6
+	x = 1
+	y = 2
+	relative_position_id = REP_A_Catholic_Federation
+
+	ai_will_do = {
+		factor = 40
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus REP_Expand_Mining_Facilities"
+		848 = {
+			add_resource = {
+				type = tungsten
+				amount = 12
+			}
+		}
+	}
+	search_filters = { FOCUS_FILTER_INDUSTRY }
+}
+
+shared_focus = {
+	id = REP_Break_Up_Socialist_Revolters
+	icon = GFX_goal_broken_red_star
+	available = {
+		has_subject = BOL
+	}
+	prerequisite = {
+		focus = REP_Yacuiba_Dispute
+	}
+	cost = 6
+	x = 2
+	y = 3
+	relative_position_id = REP_A_Catholic_Federation
+
+	ai_will_do = {
+		factor = 40
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus REP_Break_Up_Socialist_Revolters"
+		add_stability = 0.04
+		BOL = { add_stability = 0.08 }
+	}
+	search_filters = { FOCUS_FILTER_STABILITY }
+}
+
+shared_focus = {
+	id = REP_Missiones_Orientales
+	icon = GFX_goal_brazil
+
+	available = {
+		is_subject = no
+		can_declare_war_on = BRA
+		NOT = { has_country_flag = GOU_Control }
+	}
+	prerequisite = {
+		focus = REP_A_Catholic_Federation
+	}
+	cost = 1
+	x = 4
+	y = 1
+	relative_position_id = REP_A_Catholic_Federation
+
+	ai_will_do = {
+		factor = 60
+	}
+
+	bypass = {
+		NOT = { can_declare_war_on = BRA }
+	}
+
+	select_effect = {
+		log = "[GetDateText]: [Root.GetName]: Select Focus REP_TAMET_Steel"
+		hidden_effect = { country_event = REPcar.21 } #GOU calls Carles to order
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus REP_Missiones_Orientales"
+		add_war_support = 0.10
+	}
+	search_filters = { FOCUS_FILTER_WAR_SUPPORT }
+}
+
+shared_focus = {
+	id = REP_Coordinate_the_War_Effort
+	icon = GFX_goal_military_academy
+	prerequisite = {
+		focus = REP_Missiones_Orientales
+	}
+	cost = 2
+	x = 5
+	y = 2
+	relative_position_id = REP_A_Catholic_Federation
+
+	ai_will_do = {
+		factor = 60
+	}
+
+	available_if_capitulated = yes
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus REP_Coordinate_the_War_Effort"
+		add_tech_bonus = {
+			name = REP_Coordinate_the_War_Effort
+			bonus = 1
+			uses = 1
+			category = signal_company_tech
+		}
+	}
+	search_filters = { FOCUS_FILTER_RESEARCH }
+}
+
+shared_focus = {
+	id = REP_Ensure_Supply_Lines
+	icon = GFX_goal_generic_support_equipment
+	prerequisite = {
+		focus = REP_Missiones_Orientales
+	}
+	cost = 2
+	x = 3
+	y = 2
+	relative_position_id = REP_A_Catholic_Federation
+
+	ai_will_do = {
+		factor = 60
+	}
+
+	available_if_capitulated = yes
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus REP_Ensure_Supply_Lines"
+		add_tech_bonus = {
+			name = REP_Ensure_Supply_Lines
+			bonus = 1
+			uses = 1
+			category = logistics_tech
+		}
+	}
+	search_filters = { FOCUS_FILTER_RESEARCH }
+}
+
+shared_focus = {
+	id = REP_Ultimate_Confrontation
+	icon = GFX_REP_attack_brazil
+	available = {
+		is_subject = no
+		can_declare_war_on = BRA
+		NOT = { has_country_flag = GOU_Control }
+	}
+	bypass = {
+		NOT = { can_declare_war_on = BRA }
+	}
+	prerequisite = {
+		focus = REP_Coordinate_the_War_Effort
+	}
+	prerequisite = {
+		focus = REP_Ensure_Supply_Lines
+	}
+	cost = 4
+	x = 4
+	y = 4
+	relative_position_id = REP_A_Catholic_Federation
+
+	ai_will_do = {
+		factor = 0
+		modifier = {
+			factor = 0
+			ROOT_is_threatened = yes
+		}
+		modifier = {
+			factor = 0
+			BRA = {
+				OR = {
+					is_stronger_than_ROOT_and_not_vulnerable = yes
+					overlord_is_stronger_than_ROOT_and_not_vulnerable = yes
+					faction_leader_is_stronger_than_ROOT_and_not_vulnerable = yes
+				}
+			}
+		}
+	}
+	will_lead_to_war_with = BRA
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus REP_Ultimate_Confrontation"
+		create_wREPoal = {
+			type = annex_everything
+			tREPet = BRA
+		}
+	}
+	search_filters = { FOCUS_FILTER_ANNEXATION }
+}
+
+shared_focus = {
+	id = REP_America_Plan
+	icon = GFX_goal_generic_improve_relations
+	prerequisite = {
+		focus = REP_A_Catholic_Federation
+	}
+	cost = 5
+	x = 8
+	y = 1
+	relative_position_id = REP_A_Catholic_Federation
+
+	ai_will_do = {
+		factor = 100
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus REP_America_Plan"
+		every_other_country = {
+			limit = {
+				is_in_south_america = yes
+				has_socialist_government = no
+				NOT = { has_war_with = ROOT }
+			}
+			add_opinion_modifier = { tREPet = ROOT modifier = REP_improved_relations }
+		}
+	}
+}
+
+shared_focus = {
+	id = REP_Tigthen_ties_with_Peru
+	icon = GFX_goal_generic_military_deal
+	available = {
+		is_valid_peace_tREPet = yes
+		country_exists = PRU
+		NOT = {
+			has_war_with = PRU
+			has_wREPoal_against = PRU
+			is_justifying_wREPoal_against = PRU
+		}
+		PRU = {
+			is_subject = no
+			is_in_faction = no
+			has_socialist_government = no
+			NOT = { has_war_with = REP }
+		}
+		has_global_flag = PER_REP
+	}
+	prerequisite = {
+		focus = REP_America_Plan
+	}
+	cost = 5
+	x = 7
+	y = 2
+	relative_position_id = REP_A_Catholic_Federation
+
+	ai_will_do = {
+		factor = 200
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus REP_Tigthen_ties_with_Peru"
+		PRU = {
+			country_event = REPfor.1
+		}
+	}
+}
+
+shared_focus = {
+	id = REP_Fallout_of_the_American_Civil_War
+	icon = GFX_focus_generic_strike_at_democracy3
+	available = {
+		has_global_flag = USA_civil_war_begun_flag
+	}
+	prerequisite = {
+		focus = REP_America_Plan
+	}
+	cost = 5
+	x = 9
+	y = 2
+	relative_position_id = REP_A_Catholic_Federation
+
+	ai_will_do = {
+		factor = 100
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus REP_Fallout_of_the_American_Civil_War"
+		add_to_variable = { var = REP_im_factor value = 50 }
+		custom_effect_tooltip = IMMI_TEX_GIVETH
+		country_event = REPfor.12
+	}
+}
