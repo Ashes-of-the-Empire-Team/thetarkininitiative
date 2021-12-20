@@ -1,0 +1,70 @@
+﻿###########################
+# New Republic Events
+###########################
+
+add_namespace = newrepconstitution
+
+country_event = {
+	id = newrepconstitution.1
+	title = "Constitutional Convention"
+	desc = "Let the stars sing! Let the planets shout! Let the Republic begin!"
+	picture = GFX_report_event
+	is_triggered_only = yes
+
+	trigger = {
+		has_completed_focus = newrep_constitional_convention
+	}
+
+    option = {
+		name = newrepconstitution.1.b
+		add_political_power = 150
+		country_event = {
+			id = newrepconstitution.2
+			days = 2
+		}
+
+	}
+}
+
+country_event = {
+	id = newrepconstitution.2
+	title = "Bill of Rights"
+	desc = "bottomtext"
+	picture = GFX_report_event
+	is_triggered_only = yes
+
+	trigger = {
+		newrepconstitution.1.b
+	}
+
+    option = {
+		name = newrepconstitution.2.b
+		add_stability = 0.10
+		country_event = {
+			id = newrepconstitution.3
+			days = 1
+		}
+	}
+}
+
+country_event = {
+	id = newrepconstitution.3
+	title = "Structure of Government"
+	desc = "bottomtext"
+	picture = GFX_report_event
+	is_triggered_only = yes
+
+	trigger = {
+		newrepconstitution.2.b
+	}
+
+    option = {
+		name = newrepconstitution.3.b
+		set_country_flag = REB_Decentralized_Gov
+	}
+
+    option = {
+		name = newrepconstitution.3.c
+		set_country_flag = REB_Centralized_Gov
+	}
+}
