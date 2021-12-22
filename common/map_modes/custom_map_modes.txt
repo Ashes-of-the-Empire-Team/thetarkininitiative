@@ -97,7 +97,7 @@
 #}
 
 scripted_map_modes = {
-    test_map_mode = {
+    imperial_map_mode = {
         top = {
             type = country
 
@@ -116,6 +116,31 @@ scripted_map_modes = {
                     set_temp_variable = { red = 0.0 }
                     set_temp_variable = { blue = 1.0 }
                     set_temp_variable = { green = 0.0 }
+                    set_temp_variable = { alpha = 1.0 }
+                }
+                else_if = {
+                    limit = {
+                        FROM = {
+                            has_government = imperial
+                        }
+                    }
+                    set_temp_variable = { red = 0.21 }
+                    set_temp_variable = { blue = 0.25 }
+                    set_temp_variable = { green = 0.24 }
+                    set_temp_variable = { alpha = 1.0 }
+                }
+                else_if = {
+                    limit = {
+                        FROM = {
+                            NOT = {
+                                has_country_flag = emperor
+                            }
+                            has_country_flag = warlord
+                        }
+                    }
+                    set_temp_variable = { red = 0.2 }
+                    set_temp_variable = { blue = 0.63 }
+                    set_temp_variable = { green = 0.79 }
                     set_temp_variable = { alpha = 1.0 }
                 }
 				set_temp_variable = { thickness = 10 }
