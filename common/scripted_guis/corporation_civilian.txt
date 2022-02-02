@@ -4,17 +4,139 @@ scripted_gui = {
 		context_type = player_context
 		window_name = "corporation_civilian_screen"
 		visible = {
-           always = no
+           always = yes
 		}
 		effects = {
 			exit_button_click = {
 			}
+			add_entry_click = {
+				add_to_array = { production_array = 0 }
+			}
+			item_selection_button_click = {
+				set_country_flag = item_Selection_choice
+			}
+			corp_item_1_back_click = {
+				if = {
+					limit = {
+						has_country_flag = item_selection_choice
+					}
+					clr_country_flag = item_selection_choice
+				}
+				else = {
+					set_country_flag = item_selection_choice
+					set_variable = { selected_slot = 1 }
+				}
+			}
+			corp_item_2_back_click = {
+				if = {
+					limit = {
+						has_country_flag = item_selection_choice
+					}
+					clr_country_flag = item_selection_choice
+				}
+				else = {
+					set_country_flag = item_selection_choice
+					set_variable = { selected_slot = 2 }
+				}
+			}
+			corp_item_3_back_click = {
+				if = {
+					limit = {
+						has_country_flag = item_selection_choice
+					}
+					clr_country_flag = item_selection_choice
+				}
+				else = {
+					set_country_flag = item_selection_choice
+					set_variable = { selected_slot = 3 }
+				}
+			}
+			corp_item_4_back_click = {
+				if = {
+					limit = {
+						has_country_flag = item_selection_choice
+					}
+					clr_country_flag = item_selection_choice
+				}
+				else = {
+					set_country_flag = item_selection_choice
+					set_variable = { selected_slot = 4 }
+				}
+			}
+			corp_item_5_back_click = {
+				if = {
+					limit = {
+						has_country_flag = item_selection_choice
+					}
+					clr_country_flag = item_selection_choice
+				}
+				else = {
+					set_country_flag = item_selection_choice
+					set_variable = { selected_slot = 5 }
+				}
+			}
+			corp_item_6_back_click = {
+				if = {
+					limit = {
+						has_country_flag = item_selection_choice
+					}
+					clr_country_flag = item_selection_choice
+				}
+				else = {
+					set_country_flag = item_selection_choice
+					set_variable = { selected_slot = 6 }
+				}
+			}
+			corp_item_7_back_click = {
+				if = {
+					limit = {
+						has_country_flag = item_selection_choice
+					}
+					clr_country_flag = item_selection_choice
+				}
+				else = {
+					set_country_flag = item_selection_choice
+					set_variable = { selected_slot = 7 }
+				}
+			}
+			corp_item_8_back_click = {
+				if = {
+					limit = {
+						has_country_flag = item_selection_choice
+					}
+					clr_country_flag = item_selection_choice
+				}
+				else = {
+					set_country_flag = item_selection_choice
+					set_variable = { selected_slot = 8 }
+				}
+			}
 		}
 		triggers = {
-			
-		}
-		dynamic_lists = {
+			productivity_1_click_enabled = {
+				has_country_flag = production_1
+			}
+			productivity_2_click_enabled = {
+				has_country_flag = production_2
+			}
+			productivity_3_click_enabled = {
+				has_country_flag = production_3
+			}
+			quality_1_click_enabled = {
+				has_country_flag = quality_1
+			}
+			quality_2_click_enabled = {
+				has_country_flag = quality_2
+			}
+			quality_3_click_enabled = {
+				has_country_flag = quality_3
+			}
 
+			add_entry_click_enabled = {
+				#ROOT = {
+				#	check_variable = { production_array_amount > production_array^num }
+				#}
+			}
 		}
 		properties = {
 			corp_item_1_back = {
@@ -25,6 +147,25 @@ scripted_gui = {
 			}
 			corp_item_3_back = {
 				image = "[Getproduct3]"
+			}
+		}
+	}
+	production_item_container = {
+		context_type = player_context
+		window_name = "production_item_container"
+		visible = {
+           has_country_flag = item_selection_choice
+		}
+		effects = {
+			products_selection_click = {
+
+			}
+		}
+		dynamic_lists = {
+			product_production_grid = {
+				array = production_array
+				entry_container = corp_item
+				change_scope = yes
 			}
 		}
 	}
