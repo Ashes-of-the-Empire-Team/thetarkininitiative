@@ -1,0 +1,197 @@
+focus_tree = {
+	id = REB
+	continuous_focus_position = { x = 0 y = 1000 } 
+	country = {
+		factor = 0
+		modifier = {
+			add = 10
+			tag = REB
+		}
+	}
+	#Prepare for Reclamation
+	focus = {
+		id = REB_prepare_for_reclamation
+		icon = GFX_goal_unknown
+		x = 8
+		y = 3
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = REB_the_alliance_of_free_planets  }
+	}
+
+	#The Black Sun Captives
+	focus = {
+		id = REB_the_black_sun_captives
+		icon = GFX_goal_unknown
+		x = 6
+		y = 4
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_ANNEXATION
+		}
+		prerequisite = { focus = REB_prepare_for_reclamation  }
+	}
+
+	#Contact Criminal Cells
+	focus = {
+		id = REB_contact_criminal_cells
+		icon = GFX_goal_unknown
+		x = 6
+		y = 5
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_ANNEXATION
+		}
+		prerequisite = { focus = REB_the_black_sun_captives  }
+	}
+
+	#Take Back the Capital
+	focus = {
+		id = REB_take_back_the_capital
+		icon = GFX_goal_unknown
+		x = 8
+		y = 5
+		cost = 3
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = REB_prepare_for_reclamation  }
+	}
+
+	#Encourage Resistance Cells
+	focus = {
+		id = REB_encourage_resistance_cells
+		icon = GFX_goal_unknown
+		x = 7
+		y = 6
+		cost = 7
+		search_filters = {
+			FOCUS_FILTER_FRA_POLITICAL_VIOLENCE
+		}
+		prerequisite = { focus = REB_take_back_the_capital  }
+		mutually_exclusive = { focus = REB_the_army_of_freedom  }
+	}
+
+	#The Army of Freedom
+	focus = {
+		id = REB_the_army_of_freedom
+		icon = GFX_goal_unknown
+		x = 9
+		y = 6
+		cost = 7
+		search_filters = {
+			FOCUS_FILTER_WAR_SUPPORT
+		}
+		prerequisite = { focus = REB_take_back_the_capital  }
+		mutually_exclusive = { focus = REB_encourage_resistance_cells  }
+	}
+
+	#The Invasion Begins
+	focus = {
+		id = REB_the_invasion_begins
+		icon = GFX_goal_unknown
+		x = 8
+		y = 7
+		cost = 7
+		search_filters = {
+			FOCUS_FILTER_ANNEXATION
+		}
+		prerequisite = { focus = REB_the_army_of_freedom  focus = REB_encourage_resistance_cells  }
+	}
+
+	#The Republic Reborn
+	focus = {
+		id = REB_the_republic_reborn_a
+		icon = GFX_goal_unknown
+		x = 8
+		y = 8
+		cost = 7
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = REB_the_invasion_begins  }
+		completion_reward = {
+			load_focus_tree = NEW
+		}
+	}
+
+	#First Conference of Free Peoples
+	focus = {
+		id = REB_first_conference_of_free_peoples
+		icon = GFX_goal_unknown
+		x = 8
+		y = 0
+		cost = 7
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+	}
+
+	#Taxation
+	focus = {
+		id = REB_taxation
+		icon = GFX_goal_unknown
+		x = 5
+		y = 1
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_INDUSTRY
+		}
+		prerequisite = { focus = REB_first_conference_of_free_peoples  }
+	}
+
+	#Administration
+	focus = {
+		id = REB_administration
+		icon = GFX_goal_unknown
+		x = 7
+		y = 1
+		cost = 7
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = REB_first_conference_of_free_peoples  }
+	}
+
+	#Adjudication
+	focus = {
+		id = REB_adjudication
+		icon = GFX_goal_unknown
+		x = 9
+		y = 1
+		cost = 7
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = REB_first_conference_of_free_peoples  }
+	}
+
+	#Military
+	focus = {
+		id = REB_military
+		icon = GFX_goal_unknown
+		x = 11
+		y = 1
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_WAR_SUPPORT
+		}
+		prerequisite = { focus = REB_first_conference_of_free_peoples  }
+	}
+
+	#The Alliance of Free Planets
+	focus = {
+		id = REB_the_alliance_of_free_planets
+		icon = GFX_goal_unknown
+		x = 8
+		y = 2
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = REB_administration  } prerequisite = { focus = REB_taxation  } prerequisite = { focus = REB_adjudication  } prerequisite = { focus = REB_military  }
+	}
+
+}

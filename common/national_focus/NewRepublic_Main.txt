@@ -1,1106 +1,1186 @@
-######################
-### FOREIGN POLICY ###
-######################
-
-shared_focus = {
-	id = REP_prepare_for_core_campain
-	icon = GFX_goal_REP_prepare_for_core_campain
-	cost = 3
-	x = 26
-	y = 0
-
-	available_if_capitulated = yes
-
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus REP_prepare_for_core_campain"
-		custom_effect_tooltip = FOP.tt
-		if = {
-			limit = {
-				has_country_flag = DEM_DEM
-			}
-			country_event = REPdem.8
-			else = {
-				custom_effect_tooltip = RIO_NEGRO
-				random_list = {
-					25 = {
-						country_event = REPfor.13
-					}
-					25 = {
-						FOP = {
-							country_event = REPfor.13
-						}
-					}
-				}
-			}
-		}
-	}
-}
-
-shared_focus = {
-	id = REP_Build_up_Defences
-	icon = GFX_goal_generic_fortify_city
-	available = {
-		owns_state = 511
-		owns_state = 278
-	}
-	prerequisite = {
-		focus = REP_prepare_for_core_campain
-	}
-	cost = 4
-	x = 0
-	y = 1
-	relative_position_id = REP_prepare_for_core_campain
-
-	available_if_capitulated = yes
-
-	bypass = {
-		has_elected_government = yes
-		owns_state = 512
-		owns_state = 1029
-	}
-
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus REP_Build_up_Defences"
-		278 = {
-			add_building_construction = {
-				type = bunker
-				province = 12321
-				level = 1
-				instant_build = yes
-			}
-		}
-		449 = {
-			add_building_construction = {
-				type = bunker
-				province = 13227
-				level = 1
-				instant_build = yes
-			}
-			add_building_construction = {
-				type = bunker
-				province = 5214
-				level = 1
-				instant_build = yes
-			}
-			add_building_construction = {
-				type = bunker
-				province = 13229
-				level = 1
-				instant_build = yes
-			}
-		}
-		579 = {
-			add_building_construction = {
-				type = bunker
-				province = 8192
-				level = 1
-				instant_build = yes
-			}
-			add_building_construction = {
-				type = bunker
-				province = 2199
-				level = 1
-				instant_build = yes
-			}
-			add_building_construction = {
-				type = bunker
-				province = 13228
-				level = 1
-				instant_build = yes
-			}
-			add_building_construction = {
-				type = bunker
-				province = 12306
-				level = 1
-				instant_build = yes
-			}
-		}
-	}
-	search_filters = { FOCUS_FILTER_INDUSTRY }
-}
-
-shared_focus = {
-	id = REP_Mobilise_the_Reserves
-	icon = GFX_goal_mass_concentration_of_army
-	prerequisite = {
-		focus = REP_prepare_for_core_campain
-	}
-	cost = 4
-	x = -2
-	y = 1
-	relative_position_id = REP_prepare_for_core_campain
-
-	available_if_capitulated = yes
-
-	bypass = {
-		has_elected_government = yes
-		owns_state = 512
-		owns_state = 1029
-	}
-
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus REP_Mobilise_the_Reserves"
-		hidden_effect = {
-			division_template = {
-				name = "División de Milicia"
-				division_names_group = REP_GAR_01
-				regiments = {
-					infantry = { x = 0 y = 0 }
-					infantry = { x = 0 y = 1 }
-					infantry = { x = 0 y = 2 }
-					infantry = { x = 1 y = 0 }
-					infantry = { x = 1 y = 1 }
-					infantry = { x = 1 y = 2 }
-				}
-			}
-			set_division_template_lock = {
-				division_template = "División de Milicia"
-				is_locked = yes
-			}
-		}
-		449 = {
-			create_unit = {
-				division =  "name = \"1ra Brigada de la Gendarmeria Nacional\" division_template = \"División de Milicia\" start_experience_factor = 0.1"
-				owner = REP
-			}
-			create_unit = {
-				division =  "name = \"2da Brigada de la Gendarmeria Nacional\" division_template = \"División de Milicia\" start_experience_factor = 0.1"
-				owner = REP
-			}
-			create_unit = {
-				division =  "name = \"3ra Brigada de la Gendarmeria Nacional\" division_template = \"División de Milicia\" start_experience_factor = 0.1"
-				owner = REP
-			}
-		}
-	}
-}
-
-shared_focus = {
-	id = REP_Fleet_Exercises
-	icon = GFX_goal_EGY_sultan_fleet
-	prerequisite = {
-		focus = REP_prepare_for_core_campain
-	}
-	cost = 2
-	x = 2
-	y = 1
-	relative_position_id = REP_prepare_for_core_campain
-
-	available_if_capitulated = yes
-
-	bypass = {
-		has_elected_government = yes
-		owns_state = 512
-		owns_state = 1029
-	}
-
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus REP_Fleet_Exercises"
-		navy_experience = 30
-	}
-	search_filters = { FOCUS_FILTER_NAVY_BONUS }
-}
-
-shared_focus = {
-	id = REP_Strike_Now
-	icon = GFX_focus_ger_bulwark_against_bolshevism
-	available = {
-		can_declare_war_on = FOP
-	}
-	prerequisite = {
-		focus = REP_Mobilise_the_Reserves
-	}
-	prerequisite = {
-		focus = REP_Build_up_Defences
-	}
-	prerequisite = {
-		focus = REP_Fleet_Exercises
-	}
-	cost = 1
-	x = 0
-	y = 2
-	relative_position_id = REP_prepare_for_core_campain
-
-	will_lead_to_war_with = ANA
-	will_lead_to_war_with = COR
-	will_lead_to_war_with = PAR
-
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus REP_Strike_Now"
-		declare_war_on = {
-			tREPet = FOP
-			type = annex_everything
-		}
-	}
-	search_filters = { FOCUS_FILTER_ANNEXATION }
-}
-
-shared_focus = {
-	id = REP_Reintegrate_Patagonia
-	icon = GFX_goal_generic_war_with_comintern
-	available = {
-		owns_state = 512
-		owns_state = 1029
-	}
-	prerequisite = {
-		focus = REP_Strike_Now
-	}
-	cost = 5
-	x = 0
-	y = 3
-	relative_position_id = REP_prepare_for_core_campain
-
-	ai_will_do = {
-		factor = 200
-	}
-
-	available_if_capitulated = yes
-
-	bypass = {
-		has_elected_government = yes
-		512 = {
-			is_core_of = REP
-		}
-		1029 = {
-			is_core_of = REP
-		}
-	}
-
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus REP_Reintegrate_Patagonia"
-		add_state_core = 512
-		add_state_core = 1029
-		add_stability = -0.1
-		hidden_effect = {
-			country_event = { id = REPcar.48 days = 90 }
-			if = {
-				limit = { has_template = "División de Milicia" }
-				delete_unit_template_and_units = {
-					division_template = "División de Milicia"
-					disband = yes
-				}
-			}
-			if = {
-				limit = { has_idea = REP_cheaper_guns_against_fop }
-				remove_ideas = REP_cheaper_guns_against_fop
-			}
-		}
-	}
-	search_filters = { FOCUS_FILTER_ANNEXATION FOCUS_FILTER_STABILITY }
-}
-
-### Confederation of the River Plata
-
-shared_focus = {
-	id = REP_A_Catholic_Federation
-	icon = GFX_goal_REP_coa
-	available = {
-		is_subject = no
-		has_authoritarian_government = yes
-	}
-	prerequisite = {
-		focus = REP_Reintegrate_Patagonia
-	}
-	cost = 6
-	x = 0
-	y = 4
-	relative_position_id = REP_prepare_for_core_campain
-
-	ai_will_do = {
-		factor = 200
-	}
-
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus REP_A_Catholic_Federation"
-		add_political_power = 150
-		add_war_support = 0.10
-		add_ideas = REP_prepared
-		if = {
-			limit = {
-				has_government = national_populist
-			}
-			custom_effect_tooltip = DIPLO_OPEN_TT
-			set_country_flag = DIPLO_OPEN
-		}
-		hidden_effect = {
-			BRA = { country_event = urg.64 }
-		}
-	}
-	search_filters = { FOCUS_FILTER_WAR_SUPPORT FOCUS_FILTER_MANPOWER FOCUS_FILTER_POLITICAL }
-}
-
-shared_focus = {
-	id = REP_Punish_Paraguay
-	icon = GFX_goal_paraguay
-	available = {
-		is_subject = no
-		can_declare_war_on = PAR
-		NOT = { has_country_flag = GOU_Control }
-	}
-	bypass = {
-		NOT = { can_declare_war_on = PAR }
-	}
-	prerequisite = {
-		focus = REP_A_Catholic_Federation
-	}
-	cost = 1
-	x = -4
-	y = 1
-	relative_position_id = REP_A_Catholic_Federation
-
-	ai_will_do = {
-		factor = 10
-		modifier = {
-			factor = 0
-			ROOT_is_threatened = yes
-		}
-		modifier = {
-			factor = 0
-			PAR = { ROOT_dont_start_major_faction_wars = yes }
-		}
-		modifier = {
-			factor = 0
-			PAR = {
-				OR = {
-					is_stronger_than_ROOT_and_not_vulnerable = yes
-					overlord_is_stronger_than_ROOT_and_not_vulnerable = yes
-					faction_leader_is_stronger_than_ROOT_and_not_vulnerable = yes
-				}
-			}
-		}
-	}
-
-	will_lead_to_war_with = PAR
-
-	select_effect = {
-		log = "[GetDateText]: [Root.GetName]: Select Focus REP_Five_Year_Plan"
-		hidden_effect = { country_event = REPcar.21 } #GOU calls Carles to order
-	}
-
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus REP_Punish_Paraguay"
-		create_wREPoal = {
-			type = annex_everything
-			tREPet = PAR
-		}
-		301 = {
-			if = {
-				limit = { is_owned_by = PAR }
-				add_claim_by = REP
-			}
-		}
-		688 = {
-			if = {
-				limit = { is_owned_by = PAR }
-				add_claim_by = REP
-			}
-		}
-		1027 = {
-			if = {
-				limit = { is_owned_by = PAR }
-				add_claim_by = REP
-			}
-		}
-	}
-	search_filters = { FOCUS_FILTER_ANNEXATION }
-}
-
-shared_focus = {
-	id = REP_Integrate_Paraguay
-	icon = GFX_focus_generic_oppression
-	available = {
-		owns_state = 301
-	}
-	prerequisite = {
-		focus = REP_Punish_Paraguay
-	}
-	cost = 10
-	x = -5
-	y = 2
-	relative_position_id = REP_A_Catholic_Federation
-
-	ai_will_do = {
-		factor = 40
-	}
-
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus REP_Integrate_Paraguay"
-		custom_effect_tooltip = REP_PAR_State_effct_TT
-		hidden_effect = {
-			301 = {
-				add_state_modifier = {
-					modifier = {
-						local_non_core_manpower = 0.5
-						#industry_free_repair_factor = 0.50
-					}
-				}
-			}
-		}
-	}
-}
-
-shared_focus = {
-	id = REP_Ideological_Persecution
-	icon = GFX_goal_generic_imprison_people
-	available = {
-		owns_state = 301
-	}
-	prerequisite = {
-		focus = REP_Integrate_Paraguay
-	}
-	cost = 6
-	x = -5
-	y = 3
-	relative_position_id = REP_A_Catholic_Federation
-
-	ai_will_do = {
-		factor = 40
-	}
-
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus REP_Ideological_Persecution"
-		add_political_power = -75
-		add_stability = 0.06
-	}
-	search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
-}
-
-shared_focus = {
-	id = REP_Mechanised_Agriculture
-	icon = GFX_goal_generic_mechanisation
-	available = {
-		has_full_control_of_state = 301
-		has_full_control_of_state = 300
-	}
-	prerequisite = {
-		focus = REP_Punish_Paraguay
-		focus = REP_Uruguay_is_ours
-	}
-	cost = 8
-	x = -3
-	y = 3
-	relative_position_id = REP_A_Catholic_Federation
-
-	ai_will_do = {
-		factor = 200
-	}
-
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus REP_Mechanised_Agriculture"
-		301 = {
-			add_extra_state_shared_building_slots = 1
-			add_building_construction = {
-				type = industrial_complex
-				level = 1
-				instant_build = yes
-			}
-		}
-		300 = {
-			add_extra_state_shared_building_slots = 1
-			add_building_construction = {
-				type = industrial_complex
-				level = 1
-				instant_build = yes
-			}
-		}
-	}
-	search_filters = { FOCUS_FILTER_INDUSTRY }
-}
-
-shared_focus = {
-	id = REP_Uruguay_is_ours
-	icon = GFX_goal_uruguay
-	available = {
-		is_subject = no
-		can_declare_war_on = URG
-		NOT = { has_country_flag = GOU_Control }
-	}
-	bypass = {
-		NOT = { can_declare_war_on = URG }
-	}
-	prerequisite = {
-		focus = REP_A_Catholic_Federation
-	}
-	cost = 1
-	x = -2
-	y = 1
-	relative_position_id = REP_A_Catholic_Federation
-
-	ai_will_do = {
-		factor = 10
-		modifier = {
-			factor = 0
-			ROOT_is_threatened = yes
-		}
-		modifier = {
-			factor = 0
-			URG = { ROOT_dont_start_major_faction_wars = yes }
-		}
-		modifier = {
-			factor = 0
-			URG = {
-				OR = {
-					is_stronger_than_ROOT_and_not_vulnerable = yes
-					overlord_is_stronger_than_ROOT_and_not_vulnerable = yes
-					faction_leader_is_stronger_than_ROOT_and_not_vulnerable = yes
-				}
-			}
-		}
-	}
-	will_lead_to_war_with = URG
-
-	select_effect = {
-		log = "[GetDateText]: [Root.GetName]: Select Focus REP_Reduce_Textile_Reliance"
-		hidden_effect = { country_event = REPcar.21 } #GOU calls Carles to order
-	}
-
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus REP_Uruguay_is_ours"
-		add_state_claim = 300
-		create_wREPoal = {
-			tREPet = URG
-			type = annex_everything
-		}
-	}
-	search_filters = { FOCUS_FILTER_ANNEXATION }
-}
-
-shared_focus = {
-	id = REP_Integrate_Uruguay
-	icon = GFX_focus_generic_authoritarian_government
-	available = {
-		OR = {
-			owns_state = 300
-			has_subject = URG
-		}
-	}
-	prerequisite = {
-		focus = REP_Uruguay_is_ours
-	}
-	cost = 10
-	x = -1
-	y = 2
-	relative_position_id = REP_A_Catholic_Federation
-
-	ai_will_do = {
-		factor = 40
-	}
-
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus REP_Integrate_Uruguay"
-		add_state_core = 300
-		if = {
-			limit = { has_subject = URG }
-			annex_country = {
-				tREPet = URG
-				transfer_troops = no
-			}
-		}
-	}
-	search_filters = { FOCUS_FILTER_ANNEXATION }
-}
-
-shared_focus = {
-	id = REP_Connect_the_Railroads
-	icon = GFX_goal_generic_construct_infrastructure
-	available = {
-		OR = {
-			owns_state = 300
-			has_subject = URG
-		}
-	}
-	prerequisite = {
-		focus = REP_Integrate_Uruguay
-		focus = REP_Expand_Mining_Facilities
-	}
-	cost = 8
-	x = -1
-	y = 3
-	relative_position_id = REP_A_Catholic_Federation
-
-	ai_will_do = {
-		factor = 40
-	}
-
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus REP_Connect_the_Railroads"
-		300 = {
-			add_extra_state_shared_building_slots = 1
-			add_building_construction = {
-				type = infrastructure
-				level = 1
-				instant_build = yes
-			}
-		}
-		510 = {
-			add_extra_state_shared_building_slots = 1
-			add_building_construction = {
-				type = infrastructure
-				level = 1
-				instant_build = yes
-			}
-		}
-		278 = {
-			add_extra_state_shared_building_slots = 1
-			add_building_construction = {
-				type = infrastructure
-				level = 1
-				instant_build = yes
-			}
-		}
-	}
-	search_filters = { FOCUS_FILTER_INDUSTRY }
-}
-
-shared_focus = {
-	id = REP_Catholic_Brothers_around_the_World
-	icon = GFX_goal_SHX_Christian_Influence
-	prerequisite = {
-		focus = REP_A_Catholic_Federation
-	}
-	cost = 4
-	x = -8
-	y = 1
-	relative_position_id = REP_A_Catholic_Federation
-
-	ai_will_do = {
-		factor = 40
-	}
-
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus REP_Catholic_Brothers_around_the_World"
-		add_ideas = REP_Volunteer_Legion
-	}
-	search_filters = { FOCUS_FILTER_ANNEXATION }
-}
-
-shared_focus = {
-	id = REP_Encourage_Spanish_Immigration
-	icon = GFX_goal_refugee_management
-	available = {
-		has_war = no
-	}
-	prerequisite = {
-		focus = REP_Catholic_Brothers_around_the_World
-	}
-	cost = 3
-	x = -9
-	y = 2
-	relative_position_id = REP_A_Catholic_Federation
-
-	ai_will_do = {
-		factor = 200
-	}
-
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus REP_Encourage_Spanish_Immigration"
-		add_ideas = REP_Spanish_Immigrants
-	}
-	search_filters = { FOCUS_FILTER_MANPOWER }
-}
-
-shared_focus = {
-	id = REP_Protect_the_heart_of_Christianity
-	icon = GFX_goal_PAP_crusade
-	available = {
-		country_exists = SRI
-		country_exists = PAP
-		PAP = { has_capitulated = no }
-	}
-	prerequisite = {
-		focus = REP_Catholic_Brothers_around_the_World
-	}
-	cost = 2
-	x = -7
-	y = 2
-	relative_position_id = REP_A_Catholic_Federation
-
-	ai_will_do = {
-		factor = 200
-	}
-
-	bypass = {
-		OR = {
-			NOT = { country_exists = PAP }
-			PAP = { has_capitulated = yes }
-		}
-	}
-
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus REP_Protect_the_heart_of_Christianity"
-		country_event = REPfor.7
-	}
-}
-
-shared_focus = {
-	id = REP_Yacuiba_Dispute
-	icon = GFX_goal_bolivia
-	available = {
-		if = {
-			limit = { NOT = { can_declare_war_on = 1073.owner } }
-			OR = {
-				owns_state = 1073
-				1073 = { owner = { is_subject_of = ROOT } }
-			}
-		}
-		else = {
-			is_subject = no
-			can_declare_war_on = 1073.owner
-			NOT = { has_country_flag = GOU_Control }
-		}
-	}
-
-	prerequisite = {
-		focus = REP_A_Catholic_Federation
-	}
-	cost = 4
-	x = 2
-	y = 1
-	relative_position_id = REP_A_Catholic_Federation
-
-	ai_will_do = {
-		factor = 10
-		modifier = {
-			factor = 0
-			can_declare_war_on = 1073.owner
-			OR = {
-				ROOT_is_threatened = yes
-				ROOT_dont_start_major_faction_wars = yes
-				var:1073.owner = {
-					OR = {
-						is_stronger_than_ROOT_and_not_vulnerable = yes
-						overlord_is_stronger_than_ROOT_and_not_vulnerable = yes
-						faction_leader_is_stronger_than_ROOT_and_not_vulnerable = yes
-					}
-				}
-			}
-		}
-	}
-
-	select_effect = {
-		log = "[GetDateText]: [Root.GetName]: Select Focus REP_Renegotiate_with_Mitteleuropa"
-		hidden_effect = { country_event = REPcar.21 } #GOU calls Carles to order
-	}
-
-	will_lead_to_war_with = BOL
-	will_lead_to_war_with = PRU
-
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus REP_Yacuiba_Dispute"
-		add_state_core = 1073
-		if = {
-			limit = { BOL = { owns_state = 1073 } }
-			create_wREPoal = {
-				type = take_state_focus
-				tREPet = BOL
-				generator = { 1073 }
-			}
-		}
-		else_if = {
-			limit = { PRU = { owns_state = 1073 } }
-			create_wREPoal = {
-				type = take_state_focus
-				tREPet = PRU
-				generator = { 1073 }
-			}
-		}
-	}
-	search_filters = { FOCUS_FILTER_ANNEXATION }
-}
-
-shared_focus = {
-	id = REP_Expand_Mining_Facilities
-	icon = GFX_focus_generic_tungsten
-	available = {
-		OR = {
-			owns_state = 848
-			has_subject = BOL
-		}
-	}
-	prerequisite = {
-		focus = REP_Yacuiba_Dispute
-	}
-	cost = 6
-	x = 1
-	y = 2
-	relative_position_id = REP_A_Catholic_Federation
-
-	ai_will_do = {
-		factor = 40
-	}
-
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus REP_Expand_Mining_Facilities"
-		848 = {
-			add_resource = {
-				type = tungsten
-				amount = 12
-			}
-		}
-	}
-	search_filters = { FOCUS_FILTER_INDUSTRY }
-}
-
-shared_focus = {
-	id = REP_Break_Up_Socialist_Revolters
-	icon = GFX_goal_broken_red_star
-	available = {
-		has_subject = BOL
-	}
-	prerequisite = {
-		focus = REP_Yacuiba_Dispute
-	}
-	cost = 6
-	x = 2
-	y = 3
-	relative_position_id = REP_A_Catholic_Federation
-
-	ai_will_do = {
-		factor = 40
-	}
-
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus REP_Break_Up_Socialist_Revolters"
-		add_stability = 0.04
-		BOL = { add_stability = 0.08 }
-	}
-	search_filters = { FOCUS_FILTER_STABILITY }
-}
-
-shared_focus = {
-	id = REP_Missiones_Orientales
-	icon = GFX_goal_brazil
-
-	available = {
-		is_subject = no
-		can_declare_war_on = BRA
-		NOT = { has_country_flag = GOU_Control }
-	}
-	prerequisite = {
-		focus = REP_A_Catholic_Federation
-	}
-	cost = 1
-	x = 4
-	y = 1
-	relative_position_id = REP_A_Catholic_Federation
-
-	ai_will_do = {
-		factor = 60
-	}
-
-	bypass = {
-		NOT = { can_declare_war_on = BRA }
-	}
-
-	select_effect = {
-		log = "[GetDateText]: [Root.GetName]: Select Focus REP_TAMET_Steel"
-		hidden_effect = { country_event = REPcar.21 } #GOU calls Carles to order
-	}
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus REP_Missiones_Orientales"
-		add_war_support = 0.10
-	}
-	search_filters = { FOCUS_FILTER_WAR_SUPPORT }
-}
-
-shared_focus = {
-	id = REP_Coordinate_the_War_Effort
-	icon = GFX_goal_military_academy
-	prerequisite = {
-		focus = REP_Missiones_Orientales
-	}
-	cost = 2
-	x = 5
-	y = 2
-	relative_position_id = REP_A_Catholic_Federation
-
-	ai_will_do = {
-		factor = 60
-	}
-
-	available_if_capitulated = yes
-
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus REP_Coordinate_the_War_Effort"
-		add_tech_bonus = {
-			name = REP_Coordinate_the_War_Effort
-			bonus = 1
-			uses = 1
-			category = signal_company_tech
-		}
-	}
-	search_filters = { FOCUS_FILTER_RESEARCH }
-}
-
-shared_focus = {
-	id = REP_Ensure_Supply_Lines
-	icon = GFX_goal_generic_support_equipment
-	prerequisite = {
-		focus = REP_Missiones_Orientales
-	}
-	cost = 2
-	x = 3
-	y = 2
-	relative_position_id = REP_A_Catholic_Federation
-
-	ai_will_do = {
-		factor = 60
-	}
-
-	available_if_capitulated = yes
-
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus REP_Ensure_Supply_Lines"
-		add_tech_bonus = {
-			name = REP_Ensure_Supply_Lines
-			bonus = 1
-			uses = 1
-			category = logistics_tech
-		}
-	}
-	search_filters = { FOCUS_FILTER_RESEARCH }
-}
-
-shared_focus = {
-	id = REP_Ultimate_Confrontation
-	icon = GFX_REP_attack_brazil
-	available = {
-		is_subject = no
-		can_declare_war_on = BRA
-		NOT = { has_country_flag = GOU_Control }
-	}
-	bypass = {
-		NOT = { can_declare_war_on = BRA }
-	}
-	prerequisite = {
-		focus = REP_Coordinate_the_War_Effort
-	}
-	prerequisite = {
-		focus = REP_Ensure_Supply_Lines
-	}
-	cost = 4
-	x = 4
-	y = 4
-	relative_position_id = REP_A_Catholic_Federation
-
-	ai_will_do = {
+focus_tree = {
+	id = NEW
+	continuous_focus_position = { x = 0 y = 1000 } 
+	country = {
 		factor = 0
 		modifier = {
-			factor = 0
-			ROOT_is_threatened = yes
-		}
-		modifier = {
-			factor = 0
-			BRA = {
-				OR = {
-					is_stronger_than_ROOT_and_not_vulnerable = yes
-					overlord_is_stronger_than_ROOT_and_not_vulnerable = yes
-					faction_leader_is_stronger_than_ROOT_and_not_vulnerable = yes
-				}
-			}
+			add = 10
+			tag = 0
 		}
 	}
-	will_lead_to_war_with = BRA
+	#Borsk Fey'lya
+	focus = {
+		id = REB_borskfeylya_a
+		icon = GFX_goal_unknown
+		x = 26
+		y = 2
+		cost = 7
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = REB_the_first_chief_of_state  }
+		mutually_exclusive = { focus = REB_leia_organa_a  } mutually_exclusive = { focus = REB_mon_mothma_a  }
+	}
 
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus REP_Ultimate_Confrontation"
-		create_wREPoal = {
-			type = annex_everything
-			tREPet = BRA
+	#Mon Mothma
+	focus = {
+		id = REB_mon_mothma_a
+		icon = GFX_goal_unknown
+		x = 21
+		y = 2
+		cost = 7
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = REB_the_first_chief_of_state  }
+		mutually_exclusive = { focus = REB_leia_organa_a  } mutually_exclusive = { focus = REB_borskfeylya_a  }
+	}
+
+	#The Republic Reborn
+	focus = {
+		id = REB_the_republic_reborn
+		icon = GFX_goal_unknown
+		x = 18
+		y = 0
+		cost = 8
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
 		}
 	}
-	search_filters = { FOCUS_FILTER_ANNEXATION }
-}
 
-shared_focus = {
-	id = REP_America_Plan
-	icon = GFX_goal_generic_improve_relations
-	prerequisite = {
-		focus = REP_A_Catholic_Federation
-	}
-	cost = 5
-	x = 8
-	y = 1
-	relative_position_id = REP_A_Catholic_Federation
-
-	ai_will_do = {
-		factor = 100
+	#Rebuild Coruscant
+	focus = {
+		id = REB_rebuild_coruscant
+		icon = GFX_goal_unknown
+		x = 8
+		y = 1
+		cost = 8
+		search_filters = {
+			FOCUS_FILTER_INDUSTRY
+		}
+		prerequisite = { focus = REB_the_republic_reborn  }
 	}
 
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus REP_America_Plan"
-		every_other_country = {
-			limit = {
-				is_in_south_america = yes
-				has_socialist_government = no
-				NOT = { has_war_with = ROOT }
-			}
-			add_opinion_modifier = { tREPet = ROOT modifier = REP_improved_relations }
+	#The First Chief of State
+	focus = {
+		id = REB_the_first_chief_of_state
+		icon = GFX_goal_unknown
+		x = 21
+		y = 1
+		cost = 7
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = REB_the_republic_reborn  }
+	}
+
+	#Leia Organa
+	focus = {
+		id = REB_leia_organa_a
+		icon = GFX_goal_unknown
+		x = 17
+		y = 2
+		cost = 7
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = REB_the_first_chief_of_state  }
+		mutually_exclusive = { focus = REB_mon_mothma_a  } mutually_exclusive = { focus = REB_borskfeylya_a  }
+	}
+
+	#Outside Help
+	focus = {
+		id = REB_outside_help
+		icon = GFX_goal_unknown
+		x = 17
+		y = 3
+		cost = 7
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = REB_leia_organa_a  }
+	}
+
+	#The Hapes Consortium
+	focus = {
+		id = REB_the_hapes_consortium
+		icon = GFX_goal_unknown
+		x = 14
+		y = 4
+		cost = 8
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = REB_outside_help  }
+	}
+
+	#Marriage for an Alliance
+	focus = {
+		id = REB_marriage_for_an_alliance
+		icon = GFX_goal_unknown
+		x = 14
+		y = 5
+		cost = 7
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = REB_the_hapes_consortium  }
+	}
+
+	#The Civilian Sector
+	focus = {
+		id = REB_the_civilian_sector
+		icon = GFX_goal_unknown
+		x = 8
+		y = 2
+		cost = 7
+		search_filters = {
+			FOCUS_FILTER_INDUSTRY
+		}
+		prerequisite = { focus = REB_rebuild_coruscant  }
+	}
+
+	#Expand the Rail System
+	focus = {
+		id = REB_expand_the_rail_system
+		icon = GFX_goal_unknown
+		x = 12
+		y = 5
+		cost = 8
+		search_filters = {
+			FOCUS_FILTER_INDUSTRY
+		}
+		prerequisite = { focus = REB_the_civilian_sector  }
+	}
+
+	#Foreign Experts
+	focus = {
+		id = REB_foreign_experts
+		icon = GFX_goal_unknown
+		x = 11
+		y = 7
+		cost = 8
+		search_filters = {
+			FOCUS_FILTER_INDUSTRY
+		}
+		prerequisite = { focus = REB_expand_the_rail_system  }
+	}
+
+	#National Rail Company
+	focus = {
+		id = REB_national_rail_company
+		icon = GFX_goal_unknown
+		x = 13
+		y = 7
+		cost = 10
+		search_filters = {
+			FOCUS_FILTER_INDUSTRY
+		}
+		prerequisite = { focus = REB_expand_the_rail_system  }
+	}
+
+	#The War on Crime
+	focus = {
+		id = REB_the_war_on_crime
+		icon = GFX_goal_unknown
+		x = 2
+		y = 2
+		cost = 8
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = REB_rebuild_coruscant  }
+	}
+
+	#The BoSS code
+	focus = {
+		id = REB_the_boss_code
+		icon = GFX_goal_unknown
+		x = 4
+		y = 3
+		cost = 8
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = REB_the_war_on_crime  }
+	}
+
+	#Anti-Monopoly Act
+	focus = {
+		id = REB_antimonopoly_act
+		icon = GFX_goal_unknown
+		x = 9
+		y = 10
+		cost = 8
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = REB_csa_stance  }
+		mutually_exclusive = { focus = REB_free_capital  }
+	}
+
+	#Corporate Tax Act
+	focus = {
+		id = REB_corporate_tax_act
+		icon = GFX_goal_unknown
+		x = 12
+		y = 9
+		cost = 8
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = REB_csa_stance  }
+	}
+
+	#Purchase Bacta
+	focus = {
+		id = REB_purchase_bacta
+		icon = GFX_goal_unknown
+		x = 7
+		y = 4
+		cost = 8
+		search_filters = {
+			FOCUS_FILTER_INDUSTRY
+		}
+		prerequisite = { focus = REB_secure_a_source_of_bacta  }
+	}
+
+	#New Republic Police Force
+	focus = {
+		id = REB_new_republic_police_force
+		icon = GFX_goal_unknown
+		x = 1
+		y = 3
+		cost = 10
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = REB_the_war_on_crime  }
+	}
+
+	#Secure a Source of Bacta
+	focus = {
+		id = REB_secure_a_source_of_bacta
+		icon = GFX_goal_unknown
+		x = 8
+		y = 3
+		cost = 6
+		search_filters = {
+			FOCUS_FILTER_INDUSTRY
+		}
+		prerequisite = { focus = REB_the_civilian_sector  }
+	}
+
+	#Sanction Imperial Companies
+	focus = {
+		id = REB_sanction_imperial_companies
+		icon = GFX_goal_unknown
+		x = 8
+		y = 9
+		cost = 10
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = REB_csa_stance  }
+	}
+
+	#Free Capital
+	focus = {
+		id = REB_free_capital
+		icon = GFX_goal_unknown
+		x = 7
+		y = 10
+		cost = 8
+		search_filters = {
+			FOCUS_FILTER_INDUSTRY
+		}
+		prerequisite = { focus = REB_csa_stance  }
+		mutually_exclusive = { focus = REB_antimonopoly_act  }
+	}
+
+	#Corruption Crack Down
+	focus = {
+		id = REB_corruption_crack_down
+		icon = GFX_goal_unknown
+		x = 1
+		y = 4
+		cost = 6
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = REB_new_republic_police_force  }
+	}
+
+	#Rights of Sentience
+	focus = {
+		id = REB_rights_of_sentience
+		icon = GFX_goal_unknown
+		x = 5
+		y = 4
+		cost = 7
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = REB_the_boss_code  } prerequisite = { focus = REB_the_civilian_sector  }
+	}
+
+	#Anti-Slavery Sanctions
+	focus = {
+		id = REB_antislavery_sanctions
+		icon = GFX_goal_unknown
+		x = 5
+		y = 5
+		cost = 8
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = REB_rights_of_sentience  }
+	}
+
+	#Bacta Imports
+	focus = {
+		id = REB_bacta_imports
+		icon = GFX_goal_unknown
+		x = 9
+		y = 4
+		cost = 7
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = REB_secure_a_source_of_bacta  }
+	}
+
+	#Pathogen Act
+	focus = {
+		id = REB_pathogen_act
+		icon = GFX_goal_unknown
+		x = 8
+		y = 5
+		cost = 8
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = REB_purchase_bacta  } prerequisite = { focus = REB_bacta_imports  }
+	}
+
+	#Republic Virology Labs
+	focus = {
+		id = REB_republic_virology_labs
+		icon = GFX_goal_unknown
+		x = 8
+		y = 6
+		cost = 9
+		search_filters = {
+			FOCUS_FILTER_RESEARCH
+		}
+		prerequisite = { focus = REB_pathogen_act  }
+	}
+
+	#The Sanitation Act
+	focus = {
+		id = REB_the_sanitation_act
+		icon = GFX_goal_unknown
+		x = 8
+		y = 7
+		cost = 10
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = REB_republic_virology_labs  }
+	}
+
+	#Penalize Imperial Companies
+	focus = {
+		id = REB_penalize_imperial_companies
+		icon = GFX_goal_unknown
+		x = 10
+		y = 6
+		cost = 8
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = REB_the_civilian_sector  }
+	}
+
+	#CSA Stance
+	focus = {
+		id = REB_csa_stance
+		icon = GFX_goal_unknown
+		x = 10
+		y = 8
+		cost = 8
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = REB_penalize_imperial_companies  }
+	}
+
+	#Offer New Republic Membership
+	focus = {
+		id = REB_offer_new_republic_membership
+		icon = GFX_goal_unknown
+		x = 11
+		y = 10
+		cost = 8
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = REB_csa_stance  }
+		mutually_exclusive = { focus = REB_no_more_corrupt_governing  }
+	}
+
+	#No More Corrupt Governing
+	focus = {
+		id = REB_no_more_corrupt_governing
+		icon = GFX_goal_unknown
+		x = 13
+		y = 10
+		cost = 4
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = REB_csa_stance  }
+		mutually_exclusive = { focus = REB_offer_new_republic_membership  }
+	}
+
+	#Restoration of the Jedi Temple
+	focus = {
+		id = REB_restoration_of_the_jedi_temple
+		icon = GFX_goal_unknown
+		x = 16
+		y = 4
+		cost = 10
+		search_filters = {
+			FOCUS_FILTER_INDUSTRY
+		}
+		prerequisite = { focus = REB_outside_help  }
+	}
+
+	#Resettle the refugees
+	focus = {
+		id = REB_resettle_the_refugees
+		icon = GFX_goal_unknown
+		x = 16
+		y = 5
+		cost = 8
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = REB_restoration_of_the_jedi_temple  }
+	}
+
+	#The Beacon of Hope
+	focus = {
+		id = REB_the_beacon_of_hope
+		icon = GFX_goal_unknown
+		x = 16
+		y = 6
+		cost = 10
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = REB_resettle_the_refugees  }
+	}
+
+	#Expand Membership
+	focus = {
+		id = REB_expand_membership
+		icon = GFX_goal_unknown
+		x = 21
+		y = 5
+		cost = 8
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = REB_a_call_for_unity  } prerequisite = { focus = REB_the_yavin_jedi_temple  }
+	}
+
+	#A New Army
+	focus = {
+		id = REB_a_new_army
+		icon = GFX_goal_unknown
+		x = 18
+		y = 4
+		cost = 8
+		search_filters = {
+			FOCUS_FILTER_WAR_SUPPORT
+		}
+		prerequisite = { focus = REB_outside_help  }
+	}
+
+	#The Republic Academy
+	focus = {
+		id = REB_the_republic_academy
+		icon = GFX_goal_unknown
+		x = 18
+		y = 5
+		cost = 8
+		search_filters = {
+			FOCUS_FILTER_WAR_SUPPORT
+		}
+		prerequisite = { focus = REB_a_new_army  }
+	}
+
+	#Heroes of the Republic
+	focus = {
+		id = REB_heroes_of_the_republic
+		icon = GFX_goal_unknown
+		x = 17
+		y = 7
+		cost = 10
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = REB_the_beacon_of_hope  } prerequisite = { focus = REB_the_republic_academy  }
+	}
+
+	#Members of the New Republic
+	focus = {
+		id = REB_members_of_the_new_republic
+		icon = GFX_goal_unknown
+		x = 21
+		y = 3
+		cost = 10
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = REB_mon_mothma_a  }
+	}
+
+	#A Call for Unity
+	focus = {
+		id = REB_a_call_for_unity
+		icon = GFX_goal_unknown
+		x = 22
+		y = 4
+		cost = 8
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = REB_members_of_the_new_republic  }
+	}
+
+	#The Yavin Jedi Temple
+	focus = {
+		id = REB_the_yavin_jedi_temple
+		icon = GFX_goal_unknown
+		x = 20
+		y = 4
+		cost = 8
+		search_filters = {
+			FOCUS_FILTER_INDUSTRY
+		}
+		prerequisite = { focus = REB_members_of_the_new_republic  }
+	}
+
+	#Prepare Coruscant
+	focus = {
+		id = REB_prepare_coruscant
+		icon = GFX_goal_unknown
+		x = 20
+		y = 6
+		cost = 10
+		search_filters = {
+			FOCUS_FILTER_WAR_SUPPORT
+		}
+		prerequisite = { focus = REB_expand_membership  }
+	}
+
+	#Propaganda Campaigns
+	focus = {
+		id = REB_propaganda_campaigns
+		icon = GFX_goal_unknown
+		x = 20
+		y = 14
+		cost = 6
+		search_filters = {
+			FOCUS_FILTER_WAR_SUPPORT
+		}
+		prerequisite = { focus = REB_contact_partisans  }
+	}
+
+	#Sabotage Imperial Installments
+	focus = {
+		id = REB_sabotage_imperial_installments
+		icon = GFX_goal_unknown
+		x = 22
+		y = 14
+		cost = 8
+		search_filters = {
+			FOCUS_FILTER_WAR_SUPPORT
+		}
+		prerequisite = { focus = REB_contact_partisans  }
+	}
+
+	#De-Imperialisation
+	focus = {
+		id = REB_deimperialisation
+		icon = GFX_goal_unknown
+		x = 22
+		y = 6
+		cost = 10
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = REB_expand_membership  }
+	}
+
+	#Peace and Prosperity
+	focus = {
+		id = REB_peace_and_prosperity
+		icon = GFX_goal_unknown
+		x = 21
+		y = 7
+		cost = 10
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = REB_prepare_coruscant  } prerequisite = { focus = REB_deimperialisation  }
+	}
+
+	#Defense Declarations
+	focus = {
+		id = REB_defense_declarations
+		icon = GFX_goal_unknown
+		x = 21
+		y = 8
+		cost = 10
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = REB_peace_and_prosperity  }
+	}
+
+	#Defense Forces
+	focus = {
+		id = REB_defense_forces
+		icon = GFX_goal_unknown
+		x = 23
+		y = 3
+		cost = 8
+		search_filters = {
+			FOCUS_FILTER_MANPOWER
+		}
+		prerequisite = { focus = REB_mon_mothma_a  focus = REB_borskfeylya_a  }
+	}
+
+	#Joint Training Excercises
+	focus = {
+		id = REB_joint_training_excercises
+		icon = GFX_goal_unknown
+		x = 23
+		y = 5
+		cost = 8
+		search_filters = {
+			FOCUS_FILTER_MANPOWER
+		}
+		prerequisite = { focus = REB_defense_forces  }
+	}
+
+	#Wealth of the Republic
+	focus = {
+		id = REB_wealth_of_the_republic
+		icon = GFX_goal_unknown
+		x = 26
+		y = 3
+		cost = 10
+		search_filters = {
+			FOCUS_FILTER_INDUSTRY
+		}
+		prerequisite = { focus = REB_borskfeylya_a  }
+	}
+
+	#Secure Loyalty
+	focus = {
+		id = REB_secure_loyalty
+		icon = GFX_goal_unknown
+		x = 26
+		y = 4
+		cost = 8
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = REB_wealth_of_the_republic  }
+	}
+
+	#Efficient Bureaucrats
+	focus = {
+		id = REB_efficient_bureaucrats
+		icon = GFX_goal_unknown
+		x = 25
+		y = 5
+		cost = 8
+		search_filters = {
+			FOCUS_FILTER_INDUSTRY
+		}
+		prerequisite = { focus = REB_secure_loyalty  }
+	}
+
+	#Reduced Corporation Tax Act
+	focus = {
+		id = REB_reduced_corporation_tax_act
+		icon = GFX_goal_unknown
+		x = 27
+		y = 5
+		cost = 8
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = REB_secure_loyalty  }
+	}
+
+	#The New Republic Undercover Police
+	focus = {
+		id = REB_the_new_republic_undercover_police
+		icon = GFX_goal_unknown
+		x = 26
+		y = 6
+		cost = 10
+		search_filters = {
+			FOCUS_FILTER_STABILITY
+		}
+		prerequisite = { focus = REB_efficient_bureaucrats  } prerequisite = { focus = REB_reduced_corporation_tax_act  }
+	}
+
+	#Corporation Incentives
+	focus = {
+		id = REB_corporation_incentives
+		icon = GFX_goal_unknown
+		x = 26
+		y = 7
+		cost = 10
+		search_filters = {
+			FOCUS_FILTER_INDUSTRY
+		}
+		prerequisite = { focus = REB_the_new_republic_undercover_police  }
+	}
+
+	#Reparations to Non-Humans
+	focus = {
+		id = REB_reparations_to_nonhumans
+		icon = GFX_goal_unknown
+		x = 29
+		y = 5
+		cost = 8
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = REB_secure_loyalty  }
+	}
+
+	#Cabinet of the Galaxy
+	focus = {
+		id = REB_cabinet_of_the_galaxy
+		icon = GFX_goal_unknown
+		x = 28
+		y = 6
+		cost = 9
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = REB_reparations_to_nonhumans  }
+	}
+
+	#Undermine Ackbar
+	focus = {
+		id = REB_undermine_ackbar
+		icon = GFX_goal_unknown
+		x = 30
+		y = 6
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = REB_reparations_to_nonhumans  }
+	}
+
+	#Prepare out Doctrine
+	focus = {
+		id = REB_prepare_out_doctrine
+		icon = GFX_goal_unknown
+		x = 31
+		y = 13
+		cost = 8
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = REB_gial_ackbar  }
+	}
+
+	#New Republic Defense Forces
+	focus = {
+		id = REB_new_republic_defense_forces
+		icon = GFX_goal_unknown
+		x = 34
+		y = 1
+		search_filters = {
+			FOCUS_FILTER_WAR_SUPPORT
 		}
 	}
-}
 
-shared_focus = {
-	id = REP_Tigthen_ties_with_Peru
-	icon = GFX_goal_generic_military_deal
-	available = {
-		is_valid_peace_tREPet = yes
-		country_exists = PRU
-		NOT = {
-			has_war_with = PRU
-			has_wREPoal_against = PRU
-			is_justifying_wREPoal_against = PRU
+	#Flexibility of Command
+	focus = {
+		id = REB_flexibility_of_command
+		icon = GFX_goal_unknown
+		x = 32
+		y = 2
+		cost = 8
+		search_filters = {
+			FOCUS_FILTER_WAR_SUPPORT
 		}
-		PRU = {
-			is_subject = no
-			is_in_faction = no
-			has_socialist_government = no
-			NOT = { has_war_with = REP }
+		prerequisite = { focus = REB_new_republic_defense_forces  }
+		mutually_exclusive = { focus = REB_maintain_a_hierarchy  }
+	}
+
+	#Maintain a Hierarchy
+	focus = {
+		id = REB_maintain_a_hierarchy
+		icon = GFX_goal_unknown
+		x = 36
+		y = 2
+		cost = 7
+		search_filters = {
+			FOCUS_FILTER_WAR_SUPPORT
 		}
-		has_global_flag = PER_REP
-	}
-	prerequisite = {
-		focus = REP_America_Plan
-	}
-	cost = 5
-	x = 7
-	y = 2
-	relative_position_id = REP_A_Catholic_Federation
-
-	ai_will_do = {
-		factor = 200
+		prerequisite = { focus = REB_new_republic_defense_forces  }
+		mutually_exclusive = { focus = REB_flexibility_of_command  }
 	}
 
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus REP_Tigthen_ties_with_Peru"
-		PRU = {
-			country_event = REPfor.1
+	#Professional Miliary
+	focus = {
+		id = REB_professional_miliary
+		icon = GFX_goal_unknown
+		x = 33
+		y = 3
+		cost = 6
+		search_filters = {
+			FOCUS_FILTER_WAR_SUPPORT
+		}
+		prerequisite = { focus = REB_flexibility_of_command  focus = REB_maintain_a_hierarchy  }
+		mutually_exclusive = { focus = REB_militias_of_the_republic  }
+	}
+
+	#Militias of the Republic
+	focus = {
+		id = REB_militias_of_the_republic
+		icon = GFX_goal_unknown
+		x = 35
+		y = 3
+		cost = 6
+		search_filters = {
+			FOCUS_FILTER_WAR_SUPPORT
+		}
+		prerequisite = { focus = REB_maintain_a_hierarchy  focus = REB_flexibility_of_command  }
+		mutually_exclusive = { focus = REB_professional_miliary  }
+	}
+
+	#Republic Engineering Corporation
+	focus = {
+		id = REB_republic_engineering_corporation
+		icon = GFX_goal_unknown
+		x = 34
+		y = 4
+		cost = 6
+		search_filters = {
+			FOCUS_FILTER_WAR_SUPPORT
+		}
+		prerequisite = { focus = REB_professional_miliary  focus = REB_militias_of_the_republic  }
+	}
+
+	#New Class Modernization Program
+	focus = {
+		id = REB_new_class_modernization_program
+		icon = GFX_goal_unknown
+		x = 34
+		y = 5
+		cost = 6
+		search_filters = {
+			FOCUS_FILTER_WAR_SUPPORT
+		}
+		prerequisite = { focus = REB_republic_engineering_corporation  }
+	}
+
+	#The Defender Program
+	focus = {
+		id = REB_the_defender_program
+		icon = GFX_goal_unknown
+		x = 34
+		y = 6
+		cost = 10
+		search_filters = {
+			FOCUS_FILTER_WAR_SUPPORT
+		}
+		prerequisite = { focus = REB_new_class_modernization_program  }
+	}
+
+	#The Warlord Crisis
+	focus = {
+		id = REB_the_warlord_crisis
+		icon = GFX_goal_unknown
+		x = 26
+		y = 9
+		cost = 8
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
 		}
 	}
-}
 
-shared_focus = {
-	id = REP_Fallout_of_the_American_Civil_War
-	icon = GFX_focus_generic_strike_at_democracy3
-	available = {
-		has_global_flag = USA_civil_war_begun_flag
-	}
-	prerequisite = {
-		focus = REP_America_Plan
-	}
-	cost = 5
-	x = 9
-	y = 2
-	relative_position_id = REP_A_Catholic_Federation
-
-	ai_will_do = {
-		factor = 100
+	#The Hunt for Zsinj
+	focus = {
+		id = REB_the_hunt_for_zsinj
+		icon = GFX_goal_unknown
+		x = 26
+		y = 10
+		cost = 8
+		search_filters = {
+			FOCUS_FILTER_WAR_SUPPORT
+		}
+		prerequisite = { focus = REB_the_warlord_crisis  }
 	}
 
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus REP_Fallout_of_the_American_Civil_War"
-		add_to_variable = { var = REP_im_factor value = 50 }
-		custom_effect_tooltip = IMMI_TEX_GIVETH
-		country_event = REPfor.12
+	#Solo Command
+	focus = {
+		id = REB_solo_command
+		icon = GFX_goal_unknown
+		x = 26
+		y = 11
+		cost = 8
+		search_filters = {
+			FOCUS_FILTER_MANPOWER
+		}
+		prerequisite = { focus = REB_the_hunt_for_zsinj  }
 	}
+
+	#Leia Organa
+	focus = {
+		id = REB_leia_organa
+		icon = GFX_goal_unknown
+		x = 21
+		y = 12
+		cost = 6
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = REB_solo_command  }
+	}
+
+	#Contact Partisans
+	focus = {
+		id = REB_contact_partisans
+		icon = GFX_goal_unknown
+		x = 21
+		y = 13
+		cost = 8
+		search_filters = {
+			FOCUS_FILTER_WAR_SUPPORT
+		}
+		prerequisite = { focus = REB_leia_organa  }
+	}
+
+	#Mon Mothma
+	focus = {
+		id = REB_mon_mothma
+		icon = GFX_goal_unknown
+		x = 26
+		y = 12
+		cost = 6
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = REB_solo_command  }
+	}
+
+	#Gial Ackbar
+	focus = {
+		id = REB_gial_ackbar
+		icon = GFX_goal_unknown
+		x = 30
+		y = 12
+		cost = 6
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = REB_solo_command  }
+	}
+
+	#Secure Hapes Consortium Aid
+	focus = {
+		id = REB_secure_hapes_consortium_aid
+		icon = GFX_goal_unknown
+		x = 23
+		y = 13
+		cost = 8
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = REB_mon_mothma  } prerequisite = { focus = REB_leia_organa  }
+	}
+
+	#The Threat against the Republic
+	focus = {
+		id = REB_the_threat_against_the_republic
+		icon = GFX_goal_unknown
+		x = 25
+		y = 13
+		cost = 8
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = REB_mon_mothma  }
+	}
+
+	#Alliance against Zsinj
+	focus = {
+		id = REB_alliance_against_zsinj
+		icon = GFX_goal_unknown
+		x = 27
+		y = 13
+		cost = 8
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = REB_mon_mothma  }
+	}
+
+	#D9020616
+	focus = {
+		id = REB_d9020616
+		icon = GFX_goal_unknown
+		x = 25
+		y = 14
+		cost = 6
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = REB_the_threat_against_the_republic  }
+	}
+
+	#Sure up Confidence at home
+	focus = {
+		id = REB_sure_up_confidence_at_home
+		icon = GFX_goal_unknown
+		x = 27
+		y = 14
+		cost = 8
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = REB_alliance_against_zsinj  }
+	}
+
+	#Preparation for Invasions
+	focus = {
+		id = REB_preparation_for_invasions
+		icon = GFX_goal_unknown
+		x = 26
+		y = 15
+		cost = 6
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = REB_sure_up_confidence_at_home  } prerequisite = { focus = REB_d9020616  }
+	}
+
+	#Limited Warfare
+	focus = {
+		id = REB_limited_warfare
+		icon = GFX_goal_unknown
+		x = 26
+		y = 16
+		cost = 8
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = REB_preparation_for_invasions  }
+	}
+
+	#More autonomy for the army
+	focus = {
+		id = REB_more_autonomy_for_the_army
+		icon = GFX_goal_unknown
+		x = 21
+		y = 15
+		cost = 8
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = REB_sabotage_imperial_installments  } prerequisite = { focus = REB_propaganda_campaigns  }
+	}
+
+	#Investments into the Jedi
+	focus = {
+		id = REB_investments_into_the_jedi
+		icon = GFX_goal_unknown
+		x = 21
+		y = 16
+		cost = 8
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = REB_more_autonomy_for_the_army  }
+	}
+
+	#Securing a major fleet
+	focus = {
+		id = REB_securing_a_major_fleet
+		icon = GFX_goal_unknown
+		x = 29
+		y = 13
+		cost = 8
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = REB_gial_ackbar  }
+	}
+
+	#Expand the Shipyards
+	focus = {
+		id = REB_expand_the_shipyards
+		icon = GFX_goal_unknown
+		x = 29
+		y = 14
+		cost = 6
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = REB_securing_a_major_fleet  }
+	}
+
+	#Starfighter Purchases
+	focus = {
+		id = REB_starfighter_purchases
+		icon = GFX_goal_unknown
+		x = 31
+		y = 14
+		cost = 6
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = REB_prepare_out_doctrine  }
+	}
+
+	#Mon Calamari Subsidies
+	focus = {
+		id = REB_mon_calamari_subsidies
+		icon = GFX_goal_unknown
+		x = 30
+		y = 15
+		cost = 8
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = REB_expand_the_shipyards  } prerequisite = { focus = REB_starfighter_purchases  }
+	}
+	#Preemptive strikes against the warlords
+	focus = {
+		id = REB_preemptive_strikes_against_the_warlords
+		icon = GFX_goal_unknown
+		x = 30
+		y = 16
+		cost = 8
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = REB_mon_calamari_subsidies  }
+	}
+
 }
