@@ -658,6 +658,7 @@ focus_tree = {
 			focus = ZSJ_the_factory_act
 			focus = ZSJ_the_conscript_act
 			focus = ZSJ_air_superiority_act
+			focus = ZSJ_lockdown_enemy_sympathisers
 		}
 		x = 18
 		y = 7
@@ -1003,13 +1004,13 @@ focus_tree = {
 			diplomatic_relation = {
 				country = SHA
 				relation = guarantee
-				active = no
+				active = yes
 			}
 			SHA = {
 				diplomatic_relation = {
 					country = ZSJ
 					relation = guarantee
-					active = no
+					active = yes
 				}
 			}
 			SHA = {
@@ -1175,7 +1176,7 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = ZSJ_strike_at_the_empire
+		id = ZSJ_proclaim_the_second_galactic_empire
 		icon = GFX_goal_zsinj_basic
 		prerequisite = {
 			focus = ZSJ_reclaim_pentastar_territories
@@ -1213,6 +1214,8 @@ focus_tree = {
 					generator = { 31 }
 				}
 			}
+			###name change
+			###cores???
 		}
 	}
 	focus = {
@@ -1245,10 +1248,10 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = ZSJ_fallout_from_endor
+		id = ZSJ_rally_political_allies
 		icon = GFX_goal_zsinj_basic
 		x = 20
-		y = 1
+		y = 4
 
 		cost = 10
 
@@ -1265,15 +1268,21 @@ focus_tree = {
 		cancel_if_invalid = yes
 		continue_if_invalid = no
 		available_if_capitulated = yes
+			prerequisite = {
+			focus = ZSJ_the_lone_wolf
+		}
+		
 
 		completion_reward = {
+			add_political_power = 150
+			add_stability = 0.05
 		}
 	}
 	focus = {
-		id = ZSJ_fallout_from_endor
+		id = ZSJ_lockdown_enemy_sympathisers
 		icon = GFX_goal_zsinj_basic
 		x = 20
-		y = 1
+		y = 6
 
 		cost = 10
 
@@ -1290,15 +1299,266 @@ focus_tree = {
 		cancel_if_invalid = yes
 		continue_if_invalid = no
 		available_if_capitulated = yes
+		prerequisite = {
+			focus = ZSJ_rally_political_allies
+		}
+		prerequisite = {
+			focus = ZSJ_arrest_dissidents
+		}
 
 		completion_reward = {
+			add_political_power = 200
+			###start events here for triggers down zsinj's descent into madness
+			###begin propaganda system
 		}
 	}
 	focus = {
-		id = ZSJ_fallout_from_endor
+		id = ZSJ_arrest_dissidents
+		icon = GFX_goal_zsinj_basic
+		x = 22
+		y = 5
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 1
+		}
+
+		available = {
+		}
+		
+		bypass = {
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+		prerequisite = {
+			focus = ZSJ_rally_political_allies
+		}
+
+		completion_reward = {
+			remove_ideas = {
+				ZSJ_political_dissidents
+			}
+		}
+	}
+	focus = {
+		id = ZSJ_corporate_act
 		icon = GFX_goal_zsinj_basic
 		x = 20
-		y = 1
+		y = 7
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 1
+		}
+
+		available = {
+		}
+		
+		bypass = {
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+		prerequisite = {
+			focus = ZSJ_corporate_act
+		}
+
+		completion_reward = {
+			add_to_variable = { dx = 200 }
+		}
+	}
+	focus = {
+		id = ZSJ_national_fundraising_initiative
+		icon = GFX_goal_zsinj_basic
+		x = 20
+		y = 8
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 1
+		}
+
+		available = {
+		}
+		
+		bypass = {
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+		prerequisite = {
+			focus = ZSJ_corporate_act
+		}
+
+		completion_reward = {
+			###propaganda campaign for more money
+		}
+	}
+	focus = {
+		id = ZSJ_invest_in_the_homeworlds
+		icon = GFX_goal_zsinj_basic
+		x = 23
+		y = 6
+
+		cost = 10
+
+		prerequisite = {
+			 focus = ZSJ_arrest_dissidents
+			 focus = ZSJ_expansion_into_Dathomir
+			 focus = ZSJ_meet_with_the_banking_clan
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+
+		available = {
+		}
+		
+		bypass = {
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+
+		completion_reward = {
+			180 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 5
+				}
+			}
+			195 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 5
+				}
+			}
+			199 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 5
+				}
+			}
+			191 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 5
+				}
+			}
+			171 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 5
+				}
+			}
+			15 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 5
+				}
+			}
+			185 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 5
+				}
+			}
+			168 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 5
+				}
+			}
+		}
+	}
+	focus = {
+		id = ZSJ_buy_back_military_production
+		icon = GFX_goal_zsinj_basic
+		x = 23
+		y = 7
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 1
+		}
+
+		available = {
+		}
+		
+		bypass = {
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+		prerequisite = {
+			focus = ZSJ_invest_in_the_homeworlds
+		}
+
+		completion_reward = {
+			15 = {
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+				}
+			}
+			168 = {
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+				}
+			}
+		}
+	}
+	focus = {
+		id = ZSJ_outsource_civilian_production
+		icon = GFX_goal_zsinj_basic
+		x = 25
+		y = 7
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 1
+		}
+
+		available = {
+		}
+		
+		bypass = {
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+		prerequisite = {
+			focus = ZSJ_invest_in_the_homeworlds
+		}
+
+		completion_reward = {
+			171 = {
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+				}
+			}
+		}
+	}
+	focus = {
+		id = ZSJ_airbase_construction_effort
+		icon = GFX_goal_zsinj_basic
+		x = 23
+		y = 8
 
 		cost = 10
 
@@ -1316,7 +1576,601 @@ focus_tree = {
 		continue_if_invalid = no
 		available_if_capitulated = yes
 
+		prerequisite = {
+			focus = ZSJ_buy_back_military_production
+			focus = ZSJ_outsource_civilian_production
+		}
+
 		completion_reward = {
+			171 = {
+				add_building_construction = {
+					type = air_base
+					level = 7
+				}
+			}
+		}
+	}
+	focus = {
+		id = ZSJ_the_iron_fist_campaigns
+		icon = GFX_goal_zsinj_basic
+		x = 25
+		y = 8
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 1
+		}
+
+		available = {
+		}
+		
+		bypass = {
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+
+		prerequisite = {
+			focus = ZSJ_buy_back_military_production
+			focus = ZSJ_outsource_civilian_production
+		}
+
+		completion_reward = {
+			###new propaganda campaign
+			add_war_support = 0.2
+		}
+	}
+	focus = {
+		id = ZSJ_department_of_national_defence
+		icon = GFX_goal_zsinj_basic
+		x = 22
+		y = 9
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 1
+		}
+
+		available = {
+		}
+		
+		bypass = {
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+
+		prerequisite = {
+			focus = ZSJ_national_fundraising_initiative
+		}
+		prerequisite = {
+			focus = ZSJ_airbase_construction_effort
+		}
+		prerequisite = {
+			focus = ZSJ_the_iron_fist_campaigns
+		}
+
+		completion_reward = {
+			###unlocks all campaigns
+			###new idea for literal oppression of everyone conquered, maybe a zsinj leader trait? (custom)
+		}
+	}
+	focus = {
+		id = ZSJ_send_ambassadors_to_the_imperial_remnant
+		icon = GFX_goal_zsinj_basic
+		x = 28
+		y = 6
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 1
+		}
+
+		available = {
+		}
+		
+		bypass = {
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+
+		prerequisite = {
+			focus = ZSJ_consider_our_alignment
+			focus = ZSJ_arrest_dissidents
+		}
+
+		completion_reward = {
+			EMP = {
+				diplomatic_relation = 30
+			}
+		}
+	}
+	focus = {
+		id = ZSJ_approach_thrawn_with_a_deal
+		icon = GFX_goal_zsinj_basic
+		x = 28
+		y = 7
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 1
+		}
+
+		available = {
+		}
+		
+		bypass = {
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+
+		prerequisite = {
+			focus = ZSJ_send_ambassadors_to_the_imperial_remnant
+		}
+
+		completion_reward = {
+			EOH = {
+				diplomatic_relation = 30
+				guarantee = yes
+			}
+			ZSJ = {
+				EOH = { guarantee = yes }
+			}
+		}
+	}
+	focus = {
+		id = ZSJ_missionaries_to_the_star
+		icon = GFX_goal_zsinj_basic
+		x = 30
+		y = 7
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 1
+		}
+
+		available = {
+		}
+		
+		bypass = {
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+
+		prerequisite = {
+			focus = ZSJ_send_ambassadors_to_the_imperial_remnant
+		}
+
+		completion_reward = {
+			PEN = {
+				diplomatic_relation = 30
+				guarantee = yes
+			}
+			ZSJ = {
+				PEN = { guarantee = yes }
+			}
+		}
+	}
+	focus = {
+		id = ZSJ_reach_out_to_the_teradoc_union
+		icon = GFX_goal_zsinj_basic
+		x = 32
+		y = 7
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 1
+		}
+
+		available = {
+		}
+		
+		bypass = {
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+
+		prerequisite = {
+			focus = ZSJ_send_ambassadors_to_the_imperial_remnant
+		}
+
+		completion_reward = {
+			TER = {
+				diplomatic_relation = 30
+				guarantee = yes
+			}
+			ZSJ = {
+				TER = { guarantee = yes }
+			}
+		}
+	}
+	focus = {
+		id = ZSJ_join_the_imperial_cause
+		icon = GFX_goal_zsinj_basic
+		x = 30
+		y = 10
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 1
+		}
+
+		mutually_exclusive = {
+			focus = ZSJ_proclaim_the_second_galactic_empire
+		}
+
+		available = {
+		}
+		
+		bypass = {
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+
+		prerequisite = {
+			focus = ZSJ_joint_research_effort
+		}
+
+		completion_reward = {
+			###joins imperial faction, along with whoever they encouraged
+		}
+	}
+	focus = {
+		id = ZSJ_befriend_thrawn
+		icon = GFX_goal_zsinj_basic
+		x = 28
+		y = 8
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 1
+		}
+
+		available = {
+		}
+		
+		bypass = {
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+
+		prerequisite = {
+			focus = ZSJ_approach_thrawn_with_a_deal
+		}
+
+		completion_reward = {
+			###invites Thrawn into faction
+		}
+	}
+	focus = {
+		id = ZSJ_befriend_ardus_kaine
+		icon = GFX_goal_zsinj_basic
+		x = 30
+		y = 8
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 1
+		}
+
+		available = {
+		}
+		
+		bypass = {
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+
+		prerequisite = {
+			focus = ZSJ_missionaries_to_the_star
+		}
+
+		completion_reward = {
+			###invites pentastar into faction
+		}
+	}
+	focus = {
+		id = ZSJ_befriend_kosh_teradoc
+		icon = GFX_goal_zsinj_basic
+		x = 32
+		y = 8
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 1
+		}
+
+		available = {
+		}
+		
+		bypass = {
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+
+		prerequisite = {
+			focus = ZSJ_reach_out_to_the_teradoc_union
+		}
+
+		completion_reward = {
+			###invites Teradoc to faction
+		}
+	}
+	focus = {
+		id = ZSJ_joint_research_effort
+		icon = GFX_goal_zsinj_basic
+		x = 30
+		y = 9
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 1
+		}
+
+		available = {
+		}
+		
+		bypass = {
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+
+		prerequisite = {
+			focus = ZSJ_befriend_ardus_kaine
+			focus = ZSJ_befriend_kosh_teradoc
+			focus = ZSJ_befriend_thrawn
+		}
+
+		completion_reward = {
+			###change the number of research slots to number of people in faction
+			add_research_slot = 1 
+		}
+	}
+	focus = {
+		id = ZSJ_cult_of_personality_inspired_by_thrawn
+		icon = GFX_goal_zsinj_basic
+		x = 26.5
+		y = 9
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 1
+		}
+
+		available = {
+		}
+		
+		bypass = {
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+
+		prerequisite = {
+			focus = ZSJ_the_iron_fist_campaigns
+		}
+		prerequisite = {
+			focus = ZSJ_befriend_thrawn
+		}
+
+		completion_reward = {
+			###another good propaganda campiagn
+		}
+	}
+	focus = {
+		id = ZSJ_gather_political_support
+		icon = GFX_goal_zsinj_basic
+		x = 28
+		y = 4
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 1
+		}
+
+		available = {
+		}
+		
+		bypass = {
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+
+		prerequisite = {
+			focus = ZSJ_loyalty_to_the_empire
+		}
+
+		completion_reward = {
+			add_political_power = 150
+		}
+	}
+	focus = {
+		id = ZSJ_hold_a_military_parade
+		icon = GFX_goal_zsinj_basic
+		x = 30
+		y = 4
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 1
+		}
+
+		available = {
+		}
+		
+		bypass = {
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+
+		prerequisite = {
+			focus = ZSJ_loyalty_to_the_empire
+		}
+
+		completion_reward = {
+			add_war_support = 0.2
+		}
+	}
+	focus = {
+		id = ZSJ_meet_with_the_banking_clan
+		icon = GFX_goal_zsinj_basic
+		x = 26
+		y = 5
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 1
+		}
+
+		available = {
+		}
+		
+		bypass = {
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+
+		prerequisite = {
+			focus = ZSJ_gather_political_support
+		}
+
+		completion_reward = {
+			###gives a loan and maybe a national spirit
+		}
+	}
+	focus = {
+		id = ZSJ_consider_our_alignment
+		icon = GFX_goal_zsinj_basic
+		x = 28
+		y = 5
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 1
+		}
+
+		available = {
+		}
+		
+		bypass = {
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+
+		prerequisite = {
+			focus = ZSJ_gather_political_support
+			focus = ZSJ_hold_a_military_parade
+		}
+
+		completion_reward = {
+			###add party pop
+		}
+	}
+	focus = {
+		id = ZSJ_the_military_police
+		icon = GFX_goal_zsinj_basic
+		x = 30
+		y = 5
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 1
+		}
+
+		available = {
+		}
+		
+		bypass = {
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+
+		prerequisite = {
+			focus = ZSJ_hold_a_military_parade
+		}
+
+		completion_reward = {
+			operative_slot = 1
+			###spirit for less resistance and more compliance
+		}
+	}
+	focus = {
+		id = ZSJ_instate_martial_law
+		icon = GFX_goal_zsinj_basic
+		x = 30
+		y = 6
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 1
+		}
+
+		available = {
+		}
+		
+		bypass = {
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+
+		prerequisite = {
+			focus = ZSJ_the_military_police
+		}
+
+		completion_reward = {
+			operative_slot = 1
+			###spirit for even more less resistance and more compliance
 		}
 	}
 
