@@ -3,6 +3,7 @@
 ###########################
 
 add_namespace = newrepevent
+add_namespace = newrepleg
 
 country_event = {
 	id = newrepevent.1
@@ -38,52 +39,6 @@ country_event = {
 }
 
 country_event = {
-	id = newrepevent.3
-	title = "Recruitment Campains"
-	desc = "bottomtext"
-	picture = GFX_report_event
-	is_triggered_only = yes
-
-	trigger = {
-		newrepconstitution.1.b
-	}
-
-    option = {
-		name = newrepconstitution.2.b
-		add_stability = 0.10
-		country_event = {
-			id = newrepconstitution.3
-			days = 1
-		}
-	}
-}
-
-country_event = {
-	id = newrepevent.4
-	title = "Campains"
-	desc = "bottomtext"
-	picture = GFX_report_event
-	is_triggered_only = yes
-
-	trigger = {
-		has_completed_focus = newrep_incite_insurrection
-	}
-
-    option = {
-		name = newrepconstitution.4.b
-		EMP = {
-			every_state = {
-				remove_core_of = EMP
-			}
-		}
-		country_event = {
-			id = newrepconstitution.4
-			days = 1
-		}
-	}
-}
-
-country_event = {
 	id = newrepevent.12
 	title = "The Final Struggle"
 	desc = "bottomtext"
@@ -97,5 +52,55 @@ country_event = {
     option = {
 		name = newrepconstitution.3.c
 		set_country_flag = REB_Centralized_Gov
+	}
+}
+news_event = {
+	id = newrepleg.1
+	title = "Calc"
+	desc = ""
+	picture = GFX_report_event
+	is_triggered_only = yes
+
+	hidden = yes
+
+	immediate = {
+		set_temp_varialbe = { ratio_voting = new_republic_members }
+		multiply_temp_variable = { ratio_voting = 0.5 }
+		clr_global_flag = voting_on_legislation_nr
+		clr_country_flag = voted_on_legislation_nr
+		if = {
+			limit = {
+				check_variable = { Global.votes_for_new_republic > ratio_voting }
+			}
+			set_global_flag = legislation_passed_nr
+		}
+		else = {
+			limit = {
+				check_variable = { Global.votes_for_new_republic < ratio_voting }
+			}
+			set_global_flag = legislation_failed_nr
+		}
+	}
+}
+news_event = {
+	id = newrepleg.2
+	title = "Anti-Slavery Sanctions Act"
+	desc = "The Anti-Slavery Sanctions act targets all nations that still have slavery instituted and will aim to try and force them to stop these barbaric practices"
+	picture = GFX_report_event
+	is_triggered_only = yes
+
+    option = {
+		trigger = {
+			has_global_flag = legislation_passed_nr
+		}
+		name = "The Legislation has Passed"
+		clr_global_flag = legislation_passed_nr
+	}
+	option = {
+		trigger = {
+			has_global_flag = legislation_failed_nr
+		}
+		name = "The Legislation has Failed"
+		clr_global_flag = legislation_failed_nr
 	}
 }

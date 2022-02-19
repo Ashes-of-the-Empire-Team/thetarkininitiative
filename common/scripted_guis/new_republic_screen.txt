@@ -4,20 +4,139 @@ scripted_gui = {
 		context_type = player_context
 		window_name = "new_republic_senate"
 		visible = {
-           has_country_flag = new_republic_senate_open
+		   ROOT = {
+			OR = {
+				AND = {
+					is_ai = yes
+					has_country_flag = new_republic_member
+				}
+				has_country_flag = new_republic_senate_open
+				}
+			}
 		}
+		ai_enabled = {
+			always = yes
+		}
+		ai_check = {
+			always = yes
+		}
+
 		effects = {
+			rep_legislation_button_click = {
+				if = {
+					limit = {
+						has_country_flag = legislation_open
+					}
+					clr_country_flag = legislation_open
+				}
+				else = {
+					set_country_flag = legislation_open
+				}
+			}
+			vote_yes_button_click = {
+				add_to_variable = { Global.votes_for_new_republic = 1}
+				set_country_flag = voted_on_legislation_nr
+			}
+			vote_no_button_click = {
+				add_to_variable = { Global.votes_against_new_republic = 1}
+				set_country_flag = voted_on_legislation_nr
+			}
+			vote_abstain_button_click = {
+				add_to_variable = { Global.votes_abstained_new_republic = 1}
+				set_country_flag = voted_on_legislation_nr
+			}
 		}
 		triggers = {
+			vote_yes_button_visible = {
+				has_global_flag = voting_on_legislation_nr
+			}
+			vote_no_button_visible = {
+				has_global_flag = voting_on_legislation_nr
+			}
+			voting_indicator_visible = {
+				has_global_flag = voting_on_legislation_nr
+			}
+			votes_yes_indicator_visible = {
+				has_global_flag = voting_on_legislation_nr
+			}
+			votes_no_indicator_visible = {
+				has_global_flag = voting_on_legislation_nr
+			}
+			vote_abstain_button_visible = {
+				has_global_flag = voting_on_legislation_nr
+			}
 
+			vote_yes_button_click_enabled = {
+				NOT = {
+					has_country_flag = voted_on_legislation_nr
+				}
+			}
+			vote_no_button_click_enabled = {
+				NOT = {
+					has_country_flag = voted_on_legislation_nr
+				}
+			}
+			vote_abstain_button_click_enabled = {
+				NOT = {
+					has_country_flag = voted_on_legislation_nr
+				}
+			}
 		}
 		dynamic_lists = {
-
+			centrists_grid = {
+				array = Global.rep_populists
+				entry_container = new_rep_senate_entry
+				change_scope = yes
+			}
+			populists_grid = {
+				array = Global.rep_centrists
+				entry_container = new_rep_senate_entry
+				change_scope = yes
+			}
 		}
 		properties = {
-			warlord_flag = {
+			member_flag = {
 				image = "[This.GetFlag]"
 			}
+		}
+		ai_weights = { 
+			vote_yes_button_click = {
+				ai_will_do = {
+					factor = 2
+				}
+			}
+			vote_no_button_click = {
+				ai_will_do = {
+					factor = 2
+				}
+			}
+		}
+	}
+	new_republic_senate_legislation = {
+		context_type = player_context
+		window_name = "new_republic_senate_legislation"
+		visible = {
+           has_country_flag = legislation_open
+		}
+		effects = {
+			anti_slavery_click = {
+				set_global_flag = { flag = voting_on_legislation_nr value = 1 days = 30 }
+				set_variable = { Global.votes_for_new_republic = 0 }
+				set_variable = { Global.votes_against_new_republic = 0}
+				set_variable = { Global.votes_abstained_new_republic = 0}
+				news_event = {
+					id = new_republic_legislation.1
+					days = 30
+				}
+				news_event = {
+					id = new_republic_legislation.2
+					days = 31
+				}
+				clr_country_flag = legislation_open
+			}
+
+
+
 		}
 	}
 }

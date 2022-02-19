@@ -3,26 +3,71 @@ guiTypes = {
 	containerWindowType = {
 		name = "new_republic_senate"
 		position = { x = 620 y = 100 } #990
-		size = { width=800 height=600 }
+		size = { width=992 height=591 }
 		moveable = yes
 		background = {
 			name = "Background"
 			quadTextureSprite ="GFX_new_republic_senate"
 		}
+		#uttonType = {
+		#	name = "new_republic_big_button" 
+		#	position = {x=213 y=5}	
+		#	spriteType = "GFX_new_republic_button_big"
+		#
 		buttonType = {
-			name = "new_republic_big_button" 
-			position = {x=213 y=5}	
-			spriteType = "GFX_new_republic_button_big"
+			name = "vote_yes_button" 
+			position = {x=263 y=242}	
+			spriteType = "GFX_new_rep_yes"
 		}
 		buttonType = {
-			name = "flag_overlay" 
-			position = {x=213 y=90}	
-			spriteType = "GFX_flag_small2"
+			name = "vote_no_button" 
+			position = {x=630 y=242}	
+			spriteType = "GFX_new_rep_no"
+		}
+		buttonType = {
+			name = "voting_indicator" 
+			position = {x=372 y=232}	
+			spriteType = "GFX_voting_indicator"
+		}
+		buttonType = {
+			name = "rep_legislation_button" 
+			position = {x=427 y=70}	
+			spriteType = "GFX_rep_senate_leg_button"
+		}
+		instantTextboxType = {
+			name = "votes_yes_indicator"
+			position = { x = 430 y = 272 }
+			font = "hoi_30header"
+			borderSize = {x = 0 y = 0}
+			text = "[?Global.votes_for_new_republic]"
+			maxWidth = 240
+			maxHeight = 30
+			format = left
+		}
+		instantTextboxType = {
+			name = "votes_no_indicator"
+			position = { x = 550 y = 272 }
+			font = "hoi_30header"
+			borderSize = {x = 0 y = 0}
+			text = "[?Global.votes_against_new_republic]"
+			maxWidth = 240
+			maxHeight = 30
+			format = left
+		}
+		instantTextboxType = {
+			name = "anti_slavery_sanctions"
+			position = { x = 376 y = 372 }
+			font = "hoi_30header"
+			borderSize = {x = 0 y = 0}
+			text = "Anti-Slavery Sanctions Act"
+			maxWidth = 240
+			maxHeight = 30
+			format = center
 		}
 
 		containerWindowType = {
 			name = "centrists_container"
-			position = { x=322 y=110 }
+			position = { x=606 y=64 }
 			size = { width=600 height=500 } 
 			margin = { top = 10 bottom = 10 }
 			Orientation = upper_left
@@ -34,15 +79,15 @@ guiTypes = {
 
 			gridboxtype = {
 				name = "centrists_grid"
-				position = { x = 285 y = 0 }
-				slotsize = { width = 200 height = 56 }
-				max_slots_horizontal = 1
-				add_horizontal = no
+				position = { x = 215 y = 0 }
+				slotsize = { width = 50 height = 56 }
+				max_slots_horizontal = 2
+				add_horizontal = yes
 				}
 			}
 		containerWindowType = {
 			name = "populists_container"
-			position = { x=322 y=110 }
+			position = { x=-153 y=64 }
 			size = { width=600 height=500 } 
 			margin = { top = 10 bottom = 10 }
 			Orientation = upper_left
@@ -54,11 +99,48 @@ guiTypes = {
 
 			gridboxtype = {
 				name = "populists_grid"
-				position = { x = 285 y = 0 }
-				slotsize = { width = 200 height = 56 }
-				max_slots_horizontal = 1
-				add_horizontal = no
+				position = { x = 215 y = 0 }
+				slotsize = { width = 50 height = 56 }
+				max_slots_horizontal = 2
+				add_horizontal = yes
 				}
 			}
+	}
+	containerWindowType = {
+		name = "new_republic_senate_legislation"
+		position = { x = 620 y = 100 } #990
+		size = { width=996 height=662 }
+		moveable = yes
+		background = {
+			name = "Background"
+			quadTextureSprite ="GFX_rep_senate_legislation"
+		}
+		buttonType = {
+			name = "anti_slavery" 
+			position = {x=45 y=114}	
+			spriteType = "GFX_legislation_line"
+			buttonFont = "hoi_18mbs"
+			buttonText = "Anti Slavery Act"
+		}
+	}
+	containerWindowType = {
+		name = "new_rep_senate_entry"
+		position = { x = 0 y = 0 }
+		size = { width = 259 height = 37 }
+
+		buttonType = {
+			name = "member_flag"
+			quadTextureSprite = "GFX_flag_small2"
+			position = { x = 7 y = 6 }
+			pdx_tooltip = "[This.GetNameDefCap]"
+			pdx_tooltip_delayed = ""
+		}
+
+		iconType = {
+			name = "member_flag_border"
+			quadTextureSprite = "GFX_diplo_countrylist_flag_frame"
+			position = { x = 2 y = 1 }
+			alwaystransparent = yes
+		}
 	}
 }
