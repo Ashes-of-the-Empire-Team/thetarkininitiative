@@ -1,0 +1,345 @@
+focus_tree = {
+	id = EOH_focus
+	
+	country = {
+		factor = 0
+		
+		modifier = {
+			add = 10
+			tag = EOH
+		}
+	}
+	default = no
+	continuous_focus_position = { x = 0 y = 0 }
+
+	#Thrawn in the Unknown Regions
+	focus = {
+		id = EOH_the_ssi_ruuvi_threat
+		icon = GFX_goal_unknown
+		cost = 10
+		x = 11
+		y = 1
+		prerequisite = {
+		}
+		search_filters = {
+			FOCUS_FILTER_EXPANSION
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			declare_war_on = { target = SSI    type = puppet_wargoal_focus }
+		}
+		
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = EOH_learning_from_the_ssi_ruuvi
+		icon = GFX_goal_unknown
+		cost = 15
+		relative_position_id = EOH_the_ssi_ruuvi_threat
+		x = 2
+		y = 1
+		prerequisite = {
+			focus = EOH_the_ssi_ruuvi_threat
+		}
+		search_filters = {
+			FOCUS_FILTER_UNKNOWN_REGIONS
+			FOCUS_FILTER_RESEARCH
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			custom_effect_tooltip = "Ssi-Ruuvi Tech"
+		}
+		
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = EOH_the_chiss_on_their_own
+		icon = GFX_goal_unknown
+		cost = 10
+		relative_position_id = EOH_the_ssi_ruuvi_threat
+		x = -1
+		y = 2
+		prerequisite = {
+			focus = EOH_the_ssi_ruuvi_threat
+		}
+		search_filters = {
+			FOCUS_FILTER_UNKNOWN_REGIONS
+			FOCUS_FILTER_POLITICAL
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			add_political_power = 50
+		}
+		
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = EOH_natural_allies
+		icon = GFX_goal_unknown
+		cost = 18
+		relative_position_id = EOH_the_ssi_ruuvi_threat
+		x = 1
+		y = 2
+		prerequisite = {
+			focus = EOH_the_ssi_ruuvi_threat
+		}
+		search_filters = {
+			FOCUS_FILTER_UNKNOWN_REGIONS
+			FOCUS_FILTER_EXPANSION
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			diplomatic_relation = { 
+				country = CHS
+				relation = non_aggression_pact 
+			}
+			diplomatic_relation = { 
+				country = INR
+				relation = non_aggression_pact 
+			}
+			diplomatic_relation = { 
+				country = MIT
+				relation = non_aggression_pact 
+			}
+			custom_effect_tooltip = "This will allow us  to bring the Chiss planets further into our sphere of influence in the future."
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = EOH_Soontir_fel
+		icon = GFX_goal_unknown
+		cost = 8
+		relative_position_id = EOH_the_chiss_on_their_own
+		x = 1
+		y = 1
+		prerequisite = {
+			focus = EOH_the_chiss_on_their_own
+			focus = EOH_natural_allies
+		}
+		search_filters = {
+			FOCUS_FILTER_UNKNOWN_REGIONS
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			#country_event = { id = eoh_soontir_fel }
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = EOH_Soontir_fel
+		icon = GFX_goal_unknown
+		cost = 8
+		relative_position_id = EOH_the_chiss_on_their_own
+		x = 1
+		y = 1
+		prerequisite = {
+			focus = EOH_the_chiss_on_their_own
+			focus = EOH_natural_allies
+		}
+		search_filters = {
+			FOCUS_FILTER_UNKNOWN_REGIONS
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			#country_event = { id = eoh_soontir_fel }
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = EOH_the_final_expeditions
+		icon = GFX_goal_unknown
+		cost = 10
+		relative_position_id = EOH_Soontir_fel
+		x = 0
+		y = 1
+		prerequisite = {
+			focus = EOH_Soontir_fel
+		}
+		search_filters = {
+			FOCUS_FILTER_UNKNOWN_REGIONS
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			remove_ideas = EOH_thrawn_unknown_regions
+			add_ideas = EOH_thrawn_unknown_regions_2
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+
+
+	#THRAWN 1ST RETURN TREE
+	focus = {
+		id = EOH_the_return
+		icon = GFX_goal_unknown
+		cost = 15
+		relative_position_id = EOH_the_final_expeditions
+		x = 0
+		y = 1
+		prerequisite = {
+			focus = EOH_the_final_expeditions
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			remove_ideas = EOH_thrawn_unknown_regions_2
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = EOH_assume_command
+		icon = GFX_goal_unknown
+		cost = 8
+		relative_position_id = EOH_the_return
+		x = 0
+		y = 1
+		prerequisite = {
+			focus = EOH_the_return
+		}
+		search_filters = {
+			FOCUS_FILTER_MILITARY
+			FOCUS_FILTER_DIPLOMATIC
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			custom_effect_tooltip = "Becomes imperial marshal"
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = EOH_revitalization_of_the_imperial_military
+		icon = GFX_goal_unknown
+		cost = 8
+		relative_position_id = EOH_assume_command
+		x = -2
+		y = 2
+		prerequisite = {
+			focus = EOH_assume_command
+		}
+		search_filters = {
+			FOCUS_FILTER_MILITARY
+			FOCUS_FILTER_DIPLOMATIC
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			army_experience = 25
+			navy_experience = 25
+			EOH PEN EMP = {
+				add_timed_idea = {
+					idea = EOH_imperial_military_revitalization
+					days = 140
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = EOH_secure_the_fortress_worlds
+		icon = GFX_goal_unknown
+		cost = 8
+		relative_position_id = EOH_assume_command
+		x = 0
+		y = 1
+		prerequisite = {
+			focus = EOH_assume_command
+		}
+		search_filters = {
+			FOCUS_FILTER_DIPLOMATIC
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			COR = {
+				add_timed_idea = {
+					idea = EOH_support_from_thrawn
+					days = 365
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = EOH_thrawns_confederation
+		icon = GFX_goal_unknown
+		cost = 12
+		relative_position_id = EOH_secure_the_fortress_worlds
+		x = 0
+		y = 1
+		prerequisite = {
+			focus = EOH_secure_the_fortress_worlds
+		}
+		search_filters = {
+			FOCUS_FILTER_DIPLOMATIC
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			#country_event = { id = eoh_thrawns_confederation }
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = EOH_the_emperors_storehouse
+		icon = GFX_goal_unknown
+		cost = 12
+		relative_position_id = EOH_assume_command
+		x = 2
+		y = 2
+		prerequisite = {
+			focus = EOH_assume_command
+		}
+		available = {
+			EOH = {
+				controls_state = 277
+			}
+		}
+		search_filters = {
+			FOCUS_FILTER_RESEARCH
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			add_research_slot = 1
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+}
