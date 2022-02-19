@@ -1,0 +1,127 @@
+###########################
+# Kashyyyk events
+###########################
+
+add_namespace = KYK
+
+
+country_event = {
+    id = KYK.1 ## general event detailing the current situtaion in the universe
+        title = "Kashyyyk joins the New Republic"
+        desc = "lol"
+        picture = GFX_report_event_election_vote
+
+    is_triggered_only = yes
+
+    fire_only_once = yes
+
+    option = {
+        name = "REEEEEE"
+			REB = { add_to_faction = KYK }
+    }
+
+}
+
+country_event = {
+    id = KYK.2 ## general event detailing the current situtaion in the universe
+        title = "Arbitrating between Kashyyyk and Trandosha"
+        desc = "A sensitive matter"
+        picture = GFX_report_event_election_vote
+
+    is_triggered_only = yes
+
+    fire_only_once = yes
+
+    option = {
+        name = "Trandosha has done nothing wrong"
+		add_political_power = 50
+		add_stability = -0.05
+    }
+	
+	option = {
+        name = "The Republic is unable to provide such a service at this time"
+		add_political_power = -5
+		add_war_support = -0.05
+		
+    }
+	option = {
+        name = "The Trandoshan atrocities on Kashyyyk can not go unanswered"
+		add_political_power = -150
+		add_stability = -0.10
+		TRA = { country_event = { days = 1 id = KYK.3 } }
+    }
+
+}
+
+country_event = {
+    id = KYK.3 ## general event detailing the current situtaion in the universe
+        title = "The Republic demans we submit to occupation"
+        desc = "lol"
+        picture = GFX_report_event_election_vote
+
+    is_triggered_only = yes
+
+    fire_only_once = yes
+
+    option = {
+        name = "Unlikely"
+			KYK = { country_event = { days = 1 id = KYK.4 }}
+			REB = { country_event = { days = 1 id = KYK.4 }}
+    }
+	option = {
+        name = "There is no alternative"
+			KYK = { puppet = TRA }
+    }
+
+
+}
+
+country_event = {
+    id = KYK.4 ## general event detailing the current situtaion in the universe4
+        title = "Trandosha resists"
+        desc = "lol"
+        picture = GFX_report_event_election_vote
+
+    is_triggered_only = yes
+
+    fire_only_once = yes
+
+    option = {
+        name = "REEEEEE"
+			REB = { create_wargoal = { type = puppet_wargoal_focus target = TRA } }
+			KYK = { create_wargoal = { type = puppet_wargoal_focus target = TRA } }
+    }
+
+}
+
+country_event = {
+    id = KYK.99 ## general event detailing the current situtaion in the universe
+        title = "TEST"
+        desc = "lol"
+        picture = GFX_report_event_election_vote
+
+    is_triggered_only = yes
+
+    fire_only_once = yes
+
+    option = {
+        name = "REEEEEE"
+            add_ideas = KYK_Systematicdepopulation1
+    }
+
+}
+
+news_event = {
+	id = KYK.98 ## general event detailing the current situtaion in the universe
+	title = "Kashyyyk test event"
+	desc = "lol"
+	picture = GFX_report_event_election_vote
+
+is_triggered_only = yes
+
+fire_only_once = yes
+
+option = {
+	name = "REEEEEE"
+}
+}
