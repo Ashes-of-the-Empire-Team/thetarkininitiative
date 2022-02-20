@@ -12,6 +12,8 @@ focus_tree = {
 	
 	default = no
 
+	continuous_focus_position = { x = 500 y = 2500 }
+
 	focus = {
 		id = ZSJ_fallout_from_endor
 		icon = GFX_goal_zsinj_basic
@@ -164,6 +166,7 @@ focus_tree = {
 
 		completion_reward = {
 			add_stability = 0.1
+			###use legitimacy for the focuses !!!DONT FORGET!!!
 		}
 	}
 	focus = {
@@ -303,6 +306,70 @@ focus_tree = {
 		}
 	}
 	focus = {
+		id = ZSJ_align_the_upper_class
+		icon = GFX_goal_zsinj_basic
+		prerequisite = { focus = ZSJ_the_enemy_we_know }
+		x = 12
+		y = 4
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 1
+		}
+
+		available = {
+		}
+		
+		bypass = {
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+
+		completion_reward = {
+			add_stability = 0.1
+			add_popularity = {
+				ideology = imperial
+				popularity = 0.15
+			}
+		}
+	}
+	focus = {
+		id = ZSJ_remove_political_disidents
+		icon = GFX_goal_zsinj_basic
+		prerequisite = { focus = ZSJ_align_the_upper_class
+		focus = ZSJ_pursuade_the_officers
+		focus = ZSJ_gain_the_admirals_admiration
+		 }
+
+		x = 12
+		y = 5
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 1
+		}
+
+		available = {
+		}
+		
+		bypass = {
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+
+		completion_reward = {
+			remove_ideas = {
+				ZSJ_political_dissidents
+			}
+		}
+	}
+	focus = {
 		id = ZSJ_gain_the_admirals_admiration
 		icon = GFX_goal_zsinj_basic
 		prerequisite = { focus = ZSJ_the_enemy_we_know }
@@ -328,7 +395,7 @@ focus_tree = {
 		completion_reward = {
 			add_political_power = 100
 			add_popularity = {
-				ideology = democracy
+				ideology = imperial
 				popularity = 0.05
 			}
 		}
@@ -466,7 +533,7 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = ZSJ_hire_admiral_Goldstein
+		id = ZSJ_hire_admiral_Shu
 		icon = GFX_goal_zsinj_basic
 		prerequisite = { focus = ZSJ_restore_confederate_shipyards }
 		x = 6
@@ -490,7 +557,7 @@ focus_tree = {
 
 		completion_reward = {
 			create_navy_leader = {
-				name = "Vandera Goldstein"
+				name = "Han Shu"
 				traits = {  }
 				skill = 5
 			}
@@ -646,6 +713,7 @@ focus_tree = {
 		available_if_capitulated = yes
 
 		completion_reward = {
+			###research bonuses
 		}
 	}
 	focus = {
@@ -776,7 +844,7 @@ focus_tree = {
 		available_if_capitulated = yes
 
 		completion_reward = {
-			create_intelligence_agency = "Zsinj Hand"
+			create_intelligence_agency = "Leviathan"
 			operative_slot = 1
 		}
 	}
@@ -869,7 +937,7 @@ focus_tree = {
 		available_if_capitulated = yes
 
 		completion_reward = {
-			### starts a border war thingo with greater maldrood
+			### starts a border war thingo with pentastar
 		}
 	}
 	focus = {
@@ -898,7 +966,7 @@ focus_tree = {
 		available_if_capitulated = yes
 
 		completion_reward = {
-			### starts a border war thingo with greater maldrood
+			### starts a border war thingo with thrawn
 		}
 	}
 	focus = {
@@ -1085,7 +1153,7 @@ focus_tree = {
 
 		completion_reward = {
 			add_fuel = 100000
-			### adds guns, and adds a capital ship "donated by maul"
+			### adds guns, and adds a capital ship liberated from someone somwehre idk yet
 		}
 	}
 	focus = {
@@ -1115,6 +1183,7 @@ focus_tree = {
 
 		completion_reward = {
 			ZSJ = { add_state_claim = 22 }
+			###maybe add wargoals idk if thats too op
 		}
 	}
 	focus = {
@@ -1205,6 +1274,10 @@ focus_tree = {
 		cancel_if_invalid = yes
 		continue_if_invalid = no
 		available_if_capitulated = yes
+
+		mutually_exclusive = {
+			focus = ZSJ_join_the_imperial_cause
+		}
 
 		completion_reward = {
 			ZSJ = {
@@ -1369,7 +1442,7 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			add_to_variable = { dx = 200 }
+			###adds money
 		}
 	}
 	focus = {
@@ -2174,4 +2247,765 @@ focus_tree = {
 		}
 	}
 
+	focus = {
+		id = ZSJ_the_syndicate_question
+		icon = GFX_goal_zsinj_basic
+		x = 7
+		y = 11
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 1
+		}
+
+		available = {
+		}
+		
+		bypass = {
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+
+		completion_reward = {
+			add_political_power = 150
+		}
+	}
+	focus = {
+		id = ZSJ_eradication
+		icon = GFX_goal_zsinj_basic
+		x = 5
+		y = 12
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 1
+		}
+
+		available = {
+		}
+		
+		bypass = {
+		}
+
+		prerequisite = {
+			focus = ZSJ_the_syndicate_question
+		}
+
+		mutually_exclusive = {
+			focus = ZSJ_salvation
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+
+		completion_reward = {
+			###add dislike for all consortiums
+		}
+	}
+	focus = {
+		id = ZSJ_salvation
+		icon = GFX_goal_zsinj_basic
+		x = 9
+		y = 12
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 1
+		}
+
+		available = {
+		}
+		
+		bypass = {
+		}
+
+		prerequisite = {
+			focus = ZSJ_the_syndicate_question
+		}
+
+		mutually_exclusive = {
+			focus = ZSJ_eradication
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+
+		completion_reward = {
+			###positive opinions for consortiums
+			###lower legitimacy
+		}
+	}
+	focus = {
+		id = ZSJ_pyke_labour_act
+		icon = GFX_goal_zsinj_basic
+		x = 9
+		y = 13
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 1
+		}
+
+		available = {
+		}
+		
+		bypass = {
+		}
+
+		prerequisite = {
+			focus = ZSJ_salvation
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+
+		completion_reward = {
+			###adds spirit fir lower consumer factories
+			###pykes get some moneys
+			###mutual increased opinions
+			###lower legitimacy
+		}
+	}
+	focus = {
+		id = ZSJ_hutt_factory_act
+		icon = GFX_goal_zsinj_basic
+		x = 11
+		y = 13
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 1
+		}
+
+		available = {
+		}
+		
+		bypass = {
+		}
+
+		prerequisite = {
+			focus = ZSJ_salvation
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+
+		completion_reward = {
+			###adds spirit for more infantry production
+			###hutts gets some moneys
+			###mutual increased opinions
+			###lower legitimacy
+		}
+	}
+	focus = {
+		id = ZSJ_offworld_military_investments
+		icon = GFX_goal_zsinj_basic
+		x = 11
+		y = 14
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 1
+		}
+
+		available = {
+		}
+		
+		bypass = {
+		}
+
+		prerequisite = {
+			focus = ZSJ_hutt_factory_act
+			focus = ZSJ_pyke_labour_act
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+
+		completion_reward = {
+			random_owned_controlled_state = {
+				add_building_construction = {
+						type = arms_factory
+						level = 2
+						instant_build = yes
+					}
+				add_extra_state_shared_building_slots = 2
+			}
+		}
+	}
+	focus = {
+		id = ZSJ_syndicate_manufacturing_techniques
+		icon = GFX_goal_zsinj_basic
+		x = 9
+		y = 14
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 1
+		}
+
+		available = {
+		}
+		
+		bypass = {
+		}
+
+		prerequisite = {
+			 focus = ZSJ_pyke_labour_act
+			 focus = ZSJ_hutt_factory_act
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+
+		completion_reward = {
+			###less infantry eq. reliability but significantly higher production output
+		}
+	}
+	focus = {
+		id = ZSJ_treaty_of_mutual_assistance
+		icon = GFX_goal_zsinj_basic
+		x = 13
+		y = 15
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 1
+		}
+
+		available = {
+		}
+		
+		bypass = {
+		}
+
+		prerequisite = {
+			focus = ZSJ_offworld_military_investments
+		}
+		prerequisite = {
+			focus = ZSJ_syndicate_manufacturing_techniques
+		}
+
+		mutually_exclusive= {
+			focus = ZSJ_recruit_syndicate_volunteers
+		}
+		mutually_exclusive= {
+			focus = ZSJ_syndicate_fuelled_propaganda
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+
+		completion_reward = {
+			###significantly lower legitimacy (probanly cause civil war)
+			###add spirit for higehr research speed and more money
+			###faction stuff or non agression pacts/garauntees
+		}
+	}
+	focus = {
+		id = ZSJ_recruit_syndicate_volunteers
+		icon = GFX_goal_zsinj_basic
+		x = 11
+		y = 15
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 1
+		}
+
+		available = {
+		}
+		
+		bypass = {
+		}
+
+		prerequisite = {
+			focus = ZSJ_offworld_military_investments
+		}
+		prerequisite = {
+			focus = ZSJ_syndicate_manufacturing_techniques
+		}
+
+		mutually_exclusive= {
+			focus = ZSJ_syndicate_fuelled_propaganda
+		}
+		mutually_exclusive= {
+			focus = ZSJ_treaty_of_mutual_assistance
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+
+		completion_reward = {
+			###focus for more manpower, but lower org?
+		}
+	}
+	focus = {
+		id = ZSJ_syndicate_fuelled_propaganda
+		icon = GFX_goal_zsinj_basic
+		x = 9
+		y = 15
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 1
+		}
+
+		available = {
+		}
+		
+		bypass = {
+		}
+
+		prerequisite = {
+			focus = ZSJ_offworld_military_investments
+		}
+		prerequisite = {
+			focus = ZSJ_syndicate_manufacturing_techniques
+		}
+
+		mutually_exclusive= {
+			focus = ZSJ_recruit_syndicate_volunteers
+		}
+		mutually_exclusive= {
+			focus = ZSJ_treaty_of_mutual_assistance
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+
+		completion_reward = {
+			### idea for weekly war support and less garrison shit
+		}
+	}
+	focus = {
+		id = ZSJ_move_in_on_the_pykes
+		icon = GFX_goal_zsinj_basic
+		x = 5
+		y = 13
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 1
+		}
+
+		available = {
+		}
+		
+		bypass = {
+		}
+
+		prerequisite = {
+			focus = ZSJ_eradication
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+
+		completion_reward = {
+			###idea for less stability or war support idk 
+			###gives claims or wargoals on closest pyke planet
+		}
+	}
+	focus = {
+		id = ZSJ_black_sun_scum
+		icon = GFX_goal_zsinj_basic
+		x = 3
+		y = 13
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 1
+		}
+
+		available = {
+		}
+		
+		bypass = {
+		}
+
+		prerequisite = {
+			focus = ZSJ_eradication
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+
+		completion_reward = {
+			###less infantry equipment producytion
+			###gives claims or wargoals on closest black sun planets
+		}
+	}
+	focus = {
+		id = ZSJ_the_iron_fleet
+		icon = GFX_goal_zsinj_basic
+		x = 3
+		y = 14
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 1
+		}
+
+		available = {
+		}
+		
+		bypass = {
+		}
+
+		prerequisite = {
+			focus = ZSJ_black_sun_scum
+			focus = ZSJ_move_in_on_the_pykes
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+
+		completion_reward = {
+			###more dockyard output
+			###maybe gives a few free ships
+		}
+	}
+	focus = {
+		id = ZSJ_remnants_of_fleet_chimaera
+		icon = GFX_goal_zsinj_basic
+		x = 5
+		y = 14
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 1
+		}
+
+		available = {
+		}
+		
+		bypass = {
+		}
+
+		prerequisite = {
+			focus = ZSJ_black_sun_scum
+			focus = ZSJ_move_in_on_the_pykes
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+
+		completion_reward = {
+			###two free big boi ships
+			###maybe a super ship with the big decks
+		}
+	}
+	focus = {
+		id = ZSJ_finish_the_syndicates
+		icon = GFX_goal_zsinj_basic
+		x = 5
+		y = 15
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 1
+		}
+
+		available = {
+		}
+		
+		bypass = {
+		}
+
+		prerequisite = {
+			focus = ZSJ_the_iron_fleet
+		}
+		prerequisite = {
+			focus = ZSJ_remnants_of_fleet_chimaera
+		}
+		mutually_exclusive= {
+			focus = ZSJ_the_war_on_spice
+		}
+		mutually_exclusive= {
+			focus = ZSJ_the_shadow_in_the_corner
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+
+		completion_reward = {
+			###adds claims on all consortiums
+			###decisions to start border conflicts with them
+		}
+	}
+	focus = {
+		id = ZSJ_the_war_on_spice
+		icon = GFX_goal_zsinj_basic
+		x = 3
+		y = 15
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 1
+		}
+
+		available = {
+		}
+		
+		bypass = {
+		}
+
+		prerequisite = {
+			focus = ZSJ_the_iron_fleet
+		}
+		prerequisite = {
+			focus = ZSJ_remnants_of_fleet_chimaera
+		}
+		mutually_exclusive= {
+			focus = ZSJ_the_shadow_in_the_corner
+		}
+		mutually_exclusive= {
+			focus = ZSJ_finish_the_syndicates
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+
+		completion_reward = {
+			###think of something
+		}
+	}
+	focus = {
+		id = ZSJ_the_shadow_in_the_corner
+		icon = GFX_goal_zsinj_basic
+		x = 1
+		y = 15
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 1
+		}
+
+		available = {
+		}
+		
+		bypass = {
+		}
+
+		prerequisite = {
+			focus = ZSJ_the_iron_fleet
+		}
+		prerequisite = {
+			focus = ZSJ_remnants_of_fleet_chimaera
+		}
+
+		mutually_exclusive= {
+			focus = ZSJ_the_war_on_spice
+		}
+		mutually_exclusive= {
+			focus = ZSJ_finish_the_syndicates
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+
+		completion_reward = {
+			###wargoal on shadow collective
+		}
+	}
+
+
+
+
+
+	focus = {
+		id = ZSJ_Admiral_Zhao
+		icon = GFX_goal_zsinj_basic
+		x = 6
+		y = 16
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 1
+		}
+
+		available = {
+		}
+		
+		bypass = {
+		}
+
+		prerequisite = {
+			focus = ZSJ_the_shadow_in_the_corner
+			focus = ZSJ_the_war_on_spice
+			ZSJ_finish_the_syndicates
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+
+		completion_reward = {
+			###creates very good admiral with bonuses against consortiums
+		}
+	}
+	focus = {
+		id = ZSJ_Commander_Saiyuk
+		icon = GFX_goal_zsinj_basic
+		x = 8
+		y = 16
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 1
+		}
+
+		available = {
+		}
+		
+		bypass = {
+		}
+
+		prerequisite = {
+			focus = ZSJ_recruit_syndicate_volunteers
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+
+		completion_reward = {
+			###creates really good general
+		}
+	}
+	focus = {
+		id = ZSJ_syndicate_fuelled_propaganda
+		icon = GFX_goal_zsinj_basic
+		x = 9
+		y = 15
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 1
+		}
+
+		available = {
+		}
+		
+		bypass = {
+		}
+
+		prerequisite = {
+			focus = ZSJ_offworld_military_investments
+			focus = ZSJ_syndicate_fuelled_propaganda
+			focus = ZSJ_treaty_of_mutual_assistance
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+
+		completion_reward = {
+		}
+	}
+	focus = {
+		id = ZSJ_syndicate_fuelled_propaganda
+		icon = GFX_goal_zsinj_basic
+		x = 9
+		y = 15
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 1
+		}
+
+		available = {
+		}
+		
+		bypass = {
+		}
+
+		prerequisite = {
+			focus = ZSJ_offworld_military_investments
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+
+		completion_reward = {
+		}
+	}
+
+
+
+
+
+
+
+
+	focus = {
+		id = ZSJ_syndicate_fuelled_propaganda
+		icon = GFX_goal_zsinj_basic
+		x = 9
+		y = 15
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 1
+		}
+
+		available = {
+		}
+		
+		bypass = {
+		}
+
+		prerequisite = {
+			focus = ZSJ_offworld_military_investments
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+
+		completion_reward = {
+		}
+	}
 }		
