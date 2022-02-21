@@ -342,4 +342,440 @@ focus_tree = {
 			factor = 1
 		}
 	}
+	#Mount Tantiss Campaign and Following
+	focus = {
+		id = EOH_mount_tantiss_campaign
+		icon = GFX_goal_unknown
+		cost = 8
+		relative_position_id = EOH_thrawns_confederation
+		x = 0
+		y = 1
+		prerequisite = {
+			focus = EOH_revitalization_of_the_imperial_military
+		}
+		prerequisite = {
+			focus = EOH_thrawns_confederation
+		}
+		prerequisite = {
+			focus = EOH_the_emperors_storehouse
+		}
+		available = {
+			#Zsinj war over
+		}
+		search_filters = {
+			FOCUS_FILTER_EXPANSION
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			add_timed_idea = {
+				idea = EOH_mount_tantiss_campaign
+				days = 180
+			}
+			declare_war_on = { target = REB    type = puppet_wargoal_focus }
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = EOH_initial_success
+		icon = GFX_goal_unknown
+		cost = 8
+		relative_position_id = EOH_mount_tantiss_campaign
+		x = 0
+		y = 2
+		prerequisite = {
+			focus = EOH_mount_tantiss_campaign
+		}
+		available = {
+			#requires certain planets
+		}
+		search_filters = {
+			FOCUS_FILTER_EXPANSION
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			REB = {
+				add_war_support = -0.15
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = EOH_falling_republic
+		icon = GFX_goal_unknown
+		cost = 8
+		relative_position_id = EOH_initial_success
+		x = 0
+		y = 1
+		prerequisite = {
+			focus = EOH_initial_success
+		}
+		available = {
+			#requires certain planets
+		}
+		search_filters = {
+			FOCUS_FILTER_EXPANSION
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			REB = {
+				add_war_support = -0.15
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = EOH_deal_with_rogue_warlords
+		icon = GFX_goal_unknown
+		cost = 8
+		relative_position_id = EOH_falling_republic
+		x = -1
+		y = 1
+		prerequisite = {
+			focus = EOH_falling_republic
+		}
+		available = {
+		}
+		search_filters = {
+			FOCUS_FILTER_EXPANSION
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			#lose legitimacy
+			create_wargoal = {
+				type = annex_everything
+				target = ZSJ
+				expire = 0
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = ERI
+				expire = 0
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = EOH_victory_through_peace
+		icon = GFX_goal_unknown
+		cost = 8
+		relative_position_id = EOH_falling_republic
+		x = 1
+		y = 1
+		prerequisite = {
+			focus = EOH_falling_republic
+		}
+		available = {
+		}
+		search_filters = {
+			FOCUS_FILTER_DIPLOMATIC
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			white_peace = REB
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+
+	#First Military Tree
+	focus = {
+		id = EOH_traditional_warfare
+		icon = GFX_goal_unknown
+		cost = 8
+		relative_position_id = EOH_mount_tantiss_campaign
+		x = -4
+		y = 1
+		prerequisite = {
+			focus = EOH_revitalization_of_the_imperial_military
+		}
+		available = {
+		}
+		search_filters = {
+			FOCUS_FILTER_MILITARY
+		}
+		mutually_exclusive = {
+			focus = EOH_stateless_strategy
+		}
+		completion_reward = {
+			add_ideas = EOH_traditional_warfare_1
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = EOH_stateless_strategy
+		icon = GFX_goal_unknown
+		cost = 8
+		relative_position_id = EOH_mount_tantiss_campaign
+		x = -2
+		y = 1
+		prerequisite = {
+			focus = EOH_mount_tantiss_campaign
+		}
+		available = {
+		}
+		search_filters = {
+			FOCUS_FILTER_MILITARY
+		}
+		mutually_exclusive = {
+			focus = EOH_traditional_warfare
+		}
+		completion_reward = {
+			add_ideas = EOH_stateless_strategy_1
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = EOH_the_hidden_hand
+		icon = GFX_goal_unknown
+		cost = 8
+		relative_position_id = EOH_stateless_strategy
+		x = 0
+		y = 1
+		prerequisite = {
+			focus = EOH_stateless_strategy
+		}
+		available = {
+		}
+		search_filters = {
+			FOCUS_FILTER_MILITARY
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			220 = {
+				add_building_construction = {
+					type = radar_station
+					level = 2
+					instant_build = yes
+				}
+			}
+			remove_ideas = EOH_stateless_strategy_1
+			add_ideas = EOH_stateless_strategy_2
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = EOH_thrawn_tactics
+		icon = GFX_goal_unknown
+		cost = 8
+		relative_position_id = EOH_the_hidden_hand
+		x = -1
+		y = 1
+		prerequisite = {
+			focus = EOH_the_hidden_hand
+			focus = EOH_traditional_warfare
+		}
+		available = {
+		}
+		search_filters = {
+			FOCUS_FILTER_MILITARY
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			#enables special tactics
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = EOH_skillful_officers
+		icon = GFX_goal_unknown
+		cost = 8
+		relative_position_id = EOH_traditional_warfare
+		x = 0
+		y = 3
+		prerequisite = {
+			focus = EOH_traditional_warfare
+		}
+		available = {
+		}
+		search_filters = {
+			FOCUS_FILTER_MILITARY
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			remove_ideas = EOH_traditional_warfare_1
+			add_ideas = EOH_traditional_warfare_2
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+
+	#Espionage Tree
+	focus = {
+		id = EOH_delta_source
+		icon = GFX_goal_unknown
+		cost = 12
+		relative_position_id = EOH_revitalization_of_the_imperial_military
+		x = -5
+		y = 1
+		prerequisite = {
+			focus = EOH_revitalization_of_the_imperial_military
+		}
+		available = {
+		}
+		search_filters = {
+			FOCUS_FILTER_ESPIONAGE
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			add_ideas = EOH_delta_source
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = EOH_frame_calrissian
+		icon = GFX_goal_unknown
+		cost = 4
+		relative_position_id = EOH_delta_source
+		x = -1
+		y = 1
+		prerequisite = {
+			focus = EOH_delta_source
+		}
+		available = {
+		}
+		search_filters = {
+			FOCUS_FILTER_ESPIONAGE
+		}
+		mutually_exclusive = {
+			focus = EOH_frame_ackbar
+		}
+		completion_reward = {
+			REB = {
+				#country_event = { id = reb_calrissian_framed }
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = EOH_frame_ackbar
+		icon = GFX_goal_unknown
+		cost = 4
+		relative_position_id = EOH_delta_source
+		x = 1
+		y = 1
+		prerequisite = {
+			focus = EOH_delta_source
+		}
+		available = {
+		}
+		search_filters = {
+			FOCUS_FILTER_ESPIONAGE
+		}
+		mutually_exclusive = {
+			focus = EOH_frame_calrissian
+		}
+		completion_reward = {
+			REB = {
+				#country_event = { id = reb_ackbar_framed }
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = EOH_sources_in_civilian_government
+		icon = GFX_goal_unknown
+		cost = 4
+		relative_position_id = EOH_frame_ackbar
+		x = 0
+		y = 2
+		prerequisite = {
+			focus = EOH_frame_ackbar
+			focus = EOH_frame_calrissian
+		}
+		available = {
+		}
+		search_filters = {
+			FOCUS_FILTER_ESPIONAGE
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			#idk
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = EOH_the_question_of_protection
+		icon = GFX_goal_unknown
+		cost = 8
+		relative_position_id = EOH_frame_calrissian
+		x = 0
+		y = 2
+		prerequisite = {
+			focus = EOH_frame_calrissian
+			focus = EOH_frame_ackbar
+		}
+		available = {
+		}
+		search_filters = {
+			FOCUS_FILTER_ESPIONAGE
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			#gets rid of noghri bodyguards, reducing chance of thrawn dying
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = EOH_discipline_and_self_defence
+		icon = GFX_goal_unknown
+		cost = 4
+		relative_position_id = EOH_the_question_of_protection
+		x = 0
+		y = 1
+		prerequisite = {
+			focus = EOH_the_question_of_protection
+		}
+		available = {
+		}
+		search_filters = {
+			FOCUS_FILTER_ESPIONAGE
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			#further decreases chance of thrawn's death
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
 }
