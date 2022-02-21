@@ -20,6 +20,9 @@ focus_tree = {
 		}
 		prerequisite = { focus = kyk_imperial_assets_on_kashyyyk  }
 		mutually_exclusive = { focus = kyk_meriliscoup  }
+		completion_reward = {
+			remove_ideas = 	kyk_contested_command
+		}
 	}
 
 	#Silence the ones that can't be convinced
@@ -54,14 +57,14 @@ focus_tree = {
 		icon = GFX_goal_unknown
 		x = 10
 		y = 1
-		cost = 6
+		cost = 1
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
 		prerequisite = { } prerequisite = { }
 		mutually_exclusive = { focus = kyk_liberation_of_kashyyyk  }
 		completion_reward = {
-			add_ideas = KYK_TheFamineOfKashyyyk2
+			KYK = { country_event = { days = 1 id = KYK.7 } }		
 		}
 	}
 
@@ -75,10 +78,22 @@ focus_tree = {
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
-		prerequisite = { } prerequisite = { }
 		mutually_exclusive = { focus = kyk_true_to_the_empire  }
 		completion_reward = {
+			remove_ideas = kyk_contested_command
+			set_politics = {
+
+				ruling_party = democratic
+			}
+			KYK = { country_event = { days = 1 id = KYK.5 } }
 			add_timed_idea = { idea = KYK_Victory days = 20 }
+			set_popularities = {
+				democratic = 70
+        		consortium = 0
+        		imperial = 0
+        		neutrality = 30
+        		corporation = 0
+			}
 		}
 	}
 
@@ -93,22 +108,8 @@ focus_tree = {
 			FOCUS_FILTER_POLITICAL
 		}
 		prerequisite = { focus = kyk_true_to_the_empire  }
-		mutually_exclusive = { focus = kyk_exploitation  }
 	}
 
-	#Exploitation
-	focus = {
-		id = kyk_exploitation
-		icon = GFX_goal_unknown
-		x = 9
-		y = 2
-		cost = 10
-		search_filters = {
-			FOCUS_FILTER_POLITICAL
-		}
-		prerequisite = { focus = kyk_true_to_the_empire  }
-		mutually_exclusive = { focus = kyk_governance  }
-	}
 
 	#building rapport with Admirals and the other moffs
 	focus = {
@@ -123,18 +124,6 @@ focus_tree = {
 		prerequisite = { focus = kyk_governance  }
 	}
 
-	#Negotiations with the Zygerians
-	focus = {
-		id = kyk_negotiations_with_the_zygerians
-		icon = GFX_goal_unknown
-		x = 9
-		y = 3
-		cost = 6
-		search_filters = {
-			FOCUS_FILTER_POLITICAL
-		}
-		prerequisite = { focus = kyk_exploitation  }
-	}
 
 	#Imperial Kashyyyk
 	focus = {
@@ -146,7 +135,7 @@ focus_tree = {
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
-		prerequisite = { focus = kyk_building_rapport_with_admirals_and_the_other_moffs focus = kyk_negotiations_with_the_zygerians } prerequisite = { focus = kyk_cooperation focus = kyk_competition  }	}
+		prerequisite = { focus = kyk_building_rapport_with_admirals_and_the_other_moffs } prerequisite = { focus = kyk_cooperation focus = kyk_competition  }	}
 
 	#Prophet Merili's garrisons
 	focus = {
@@ -154,11 +143,14 @@ focus_tree = {
 		icon = GFX_goal_unknown
 		x = 4
 		y = 2
-		cost = 6
+		cost = 1
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
 		prerequisite = { focus = kyk_true_to_the_empire  }
+		completion_reward = {
+			load_oob = "KYK_4A2"
+		}
 	}
 
 	#cooperation
@@ -200,6 +192,8 @@ focus_tree = {
 			FOCUS_FILTER_POLITICAL
 		}
 		prerequisite = { focus = kyk_liberation_of_kashyyyk  focus = kyk_true_to_the_empire  }
+		available = { has_war = KYK }
+
 	}
 
 	#conquest
@@ -227,7 +221,7 @@ focus_tree = {
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
-		prerequisite = { focus = kyk_the_trandoshan_question  } prerequisite = { focus = kyk_liberation_of_kashyyyk  }
+		prerequisite = { focus = kyk_the_trandoshan_question  } prerequisite = { focus = kyk_join_the_new_republic  }
 		mutually_exclusive = { focus = kyk_conquest  }
 		completion_reward = {REB = { country_event = { days = 1 id = KYK.2 } }}
 	}
@@ -262,6 +256,9 @@ focus_tree = {
 			FOCUS_FILTER_POLITICAL
 		}
 		prerequisite = { focus = kyk_meriliscoup  }
+		completion_reward = {
+			add_ideas = kyk_church_of_the_dark_side1
+		}
 	}
 
 	#The Imperial academy of Kashyyyk
@@ -275,6 +272,9 @@ focus_tree = {
 			FOCUS_FILTER_POLITICAL
 		}
 		prerequisite = { focus = kyk_human_high_culture  }
+		completion_reward = {
+			add_ideas = kyk_the_imperial_academy_of_kashyyyk
+		}
 	}
 
 	#The future of Kashyyyk
@@ -301,25 +301,11 @@ focus_tree = {
 			FOCUS_FILTER_POLITICAL
 		}
 		prerequisite = { focus = kyk_liberation_of_kashyyyk  }
-		mutually_exclusive = { focus = kyk_independance_from_offworlders  }
 		completion_reward = {
 			KYK = {country_event = { days = 1 id = KYK.1 }}
 		}
 	}
 
-	#independance from offworlders
-	focus = {
-		id = kyk_independance_from_offworlders
-		icon = GFX_goal_unknown
-		x = 13
-		y = 2
-		cost = 6
-		search_filters = {
-			FOCUS_FILTER_POLITICAL
-		}
-		prerequisite = { focus = kyk_liberation_of_kashyyyk  }
-		mutually_exclusive = { focus = kyk_join_the_new_republic  }
-	}
 
 	#Start a voting bloc
 	focus = {
@@ -334,18 +320,6 @@ focus_tree = {
 		prerequisite = { focus = kyk_join_the_new_republic  }
 	}
 
-	#enter trade negotiations
-	focus = {
-		id = kyk_enter_trade_negotiations
-		icon = GFX_goal_unknown
-		x = 13
-		y = 3
-		cost = 6
-		search_filters = {
-			FOCUS_FILTER_POLITICAL
-		}
-		prerequisite = { focus = kyk_independance_from_offworlders  }
-	}
 
 	#Free Kashyyyk
 	focus = {
@@ -357,7 +331,7 @@ focus_tree = {
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
-		prerequisite = { focus = kyk_start_a_voting_bloc focus = kyk_enter_trade_negotiations  } prerequisite = { focus = kyk_democracy  focus = kyk_monarchy  } 	}
+		prerequisite = { focus = kyk_start_a_voting_bloc  } prerequisite = { focus = kyk_democracy  focus = kyk_monarchy  } 	}
 
 	#Wookie warriors
 	focus = {
@@ -365,11 +339,14 @@ focus_tree = {
 		icon = GFX_goal_unknown
 		x = 18
 		y = 2
-		cost = 6
+		cost = 2
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
 		prerequisite = { focus = kyk_liberation_of_kashyyyk  }
+		completion_reward = {
+			load_oob = "KYK_4B2"
+		}
 	}
 
 	#democracy
@@ -417,6 +394,12 @@ focus_tree = {
 			FOCUS_FILTER_POLITICAL
 		}
 		prerequisite = { focus = kyk_church_of_the_dark_side  }
+		completion_reward = {
+			swap_ideas = {
+				add_idea = kyk_church_of_the_dark_side2
+				remove_idea = kyk_church_of_the_dark_side1
+			}
+		}
 	}
 
 	#Life debts
@@ -630,6 +613,20 @@ focus_tree = {
 		prerequisite = { focus = kyk_request_new_republic_aid  focus = kyk_scramble_for_nutrition  }
 		completion_reward = {
 		remove_ideas = KYK_TheFamineOfKashyyyk1
+			random_owned_controlled_state = {
+				add_building_construction = {
+						type = infrastructure
+						level = 1
+						instant_build = yes
+					}
+				}
+				random_owned_controlled_state = {
+					add_building_construction = {
+							type = infrastructure
+							level = 1
+							instant_build = yes
+						}
+					}
 		}
 		
 	}
@@ -661,7 +658,7 @@ focus_tree = {
 		prerequisite = { focus = kyk_restarting_the_industry  }
 		mutually_exclusive = { focus = kyk_produce_for_the_moffs_and_admirals  }
 		completion_reward = {
-			add_
+	
 			random_owned_controlled_state = {
 				add_building_construction = {
 						type = industrial_complex
@@ -710,7 +707,14 @@ focus_tree = {
 		}
 		prerequisite = { focus = kyk_produce_for_the_moffs_and_admirals  focus = kyk_industrial_grants  }
 		completion_reward = { 
-			
+			random_owned_controlled_state = {
+				add_building_construction = {
+						type = dockyard
+						level = 2
+						instant_build = yes
+					}
+				add_extra_state_shared_building_slots = 2
+				}
 		}
 	}
 
@@ -753,6 +757,12 @@ focus_tree = {
 			FOCUS_FILTER_POLITICAL
 		}
 		prerequisite = { focus = kyk_kashyyyk_farming_cooperation  }
+		completion_reward = {
+			swap_ideas = {
+				add_idea = kyk_deforestation2
+				remove_idea = kyk_deforestation1
+			}
+		}
 	}
 
 	#Purchase more mining equipment
@@ -779,6 +789,12 @@ focus_tree = {
 			FOCUS_FILTER_POLITICAL
 		}
 		prerequisite = { focus = kyk_the_ecological_restoration_of_kashyyyk  }
+		completion_reward = {
+			swap_ideas = {
+				add_idea = kyk_deforestation3
+				remove_idea = kyk_deforestation2
+			}
+		}
 	}
 
 	#handle opposition to the new mining policy
@@ -818,6 +834,10 @@ focus_tree = {
 			FOCUS_FILTER_POLITICAL
 		}
 		prerequisite = { focus = kyk_seize_mining_operations_and_pass_new_restrictions  } prerequisite = { focus = kyk_handle_opposition_to_the_new_mining_policy  }
+		completion_reward = {
+			
+				remove_ideas = kyk_deforestation3
+		}
 	}
 
 	#The Kashyyyk orbital refinery
@@ -851,6 +871,9 @@ focus_tree = {
 			FOCUS_FILTER_POLITICAL
 		}
 		prerequisite = { focus = kyk_reforestation_initiative  }
+		completion_reward = {
+			add_research_slot = 1
+		}
 	}
 
 	#Navy resource priority
@@ -956,6 +979,11 @@ focus_tree = {
 		}
 		prerequisite = { focus = kyk_optimization_of_industrial_operations  } prerequisite = { focus = kyk_human_high_culture  }
 		completion_reward = {
+		
+				swap_ideas = {
+					add_idea = kyk_deforestation0
+					remove_idea = kyk_deforestation1
+				}
 			every_owned_state = {
 				add_extra_state_shared_building_slots = 2
 			}
@@ -1017,6 +1045,17 @@ focus_tree = {
 		}
 		prerequisite = { focus = kyk_force_wraiths  }
 		mutually_exclusive = { focus = kyk_human_high_culture  }
+		completion_reward = {
+			remove_ideas = 	kyk_contested_command
+			create_country_leader = {
+				name = "Prophet Merili"
+				desc = "Crazy bitch"
+				picture = "eeeee"
+				expire = "3678.1.1"
+				ideology = moff
+				traits = { }
+			}
+		}
 	}
 
 	#The navy of Kashyyyk
@@ -1029,7 +1068,19 @@ focus_tree = {
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
-		available = { threat = 0.1 } 	
+		available = { threat = 0.1 } 
+		completion_reward = {
+			add_tech_bonus = {
+				name = kyk_the_navy_of_Kashyyyk
+				bonus = 0.30
+				uses = 1
+				category = naval_equipment }
+				add_tech_bonus = {
+					name = kyk_the_fightercorps_of_Kashyyyk
+					bonus = 0.30
+					uses = 1
+					category = light_fighter }
+		}	
 	}
 
 	#Appointing new naval officers
@@ -1043,6 +1094,18 @@ focus_tree = {
 			FOCUS_FILTER_POLITICAL
 		}
 		prerequisite = { focus = kyk_the_navy_of_kashyyyk  }
+		completion_reward = {
+			add_tech_bonus = {
+				name = kyk_the_navy_school_of_Kashyyyk
+				bonus = 0.50
+				uses = 2
+				category = naval_doctrine }
+				add_tech_bonus = {
+					name = kyk_the_starfighter_school_of_Kashyyyk
+					bonus = 0.50
+					uses = 2
+					category = air_doctrine }
+		}
 	}
 
 	#Allocate resources to the new naval command
@@ -1056,6 +1119,20 @@ focus_tree = {
 			FOCUS_FILTER_POLITICAL
 		}
 		prerequisite = { focus = kyk_appointing_new_naval_officers  }
+
+		completion_reward = {
+			random_owned_controlled_state = {
+				add_building_construction = {
+						type = arms_factory
+						level = 1
+						instant_build = yes
+					}
+					add_building_construction = {
+						type = dockyard
+						level = 1
+						instant_build = yes
+					}
+				add_extra_state_shared_building_slots = 2 }}
 	}
 
 	#Kashyyyk naval armaments foundry
@@ -1069,6 +1146,19 @@ focus_tree = {
 			FOCUS_FILTER_POLITICAL
 		}
 		prerequisite = { focus = kyk_allocate_resources_to_the_new_naval_command  }
+		completion_reward = {
+			random_owned_controlled_state = {
+				add_building_construction = {
+						type = arms_factory
+						level = 1
+						instant_build = yes
+					}
+					add_building_construction = {
+						type = dockyard
+						level = 1
+						instant_build = yes
+					}
+				add_extra_state_shared_building_slots = 2 }}
 	}
 
 	#Choosing a starfighter model for the Kashyyyk navy
@@ -1095,6 +1185,9 @@ focus_tree = {
 			FOCUS_FILTER_POLITICAL
 		}
 		prerequisite = { focus = kyk_choosing_a_starfighter_model_for_the_kashyyyk_navy  }
+	 completion_reward = {
+		add_ideas = kyk_outsource_fighter_component_production
+	 }
 	}
 
 	#Organize advanced starfighter training courses
@@ -1261,6 +1354,14 @@ focus_tree = {
 			FOCUS_FILTER_POLITICAL
 		}
 		available = { threat = 0.1 } 	
+		completion_reward = {
+			
+		 add_tech_bonus = {
+			name = kyk_the_army_of_Kashyyyk
+			bonus = 0.30
+			uses = 2
+			category = infantry_tech }
+		}
 		}
 
 	#Appointing new military officers
@@ -1274,6 +1375,13 @@ focus_tree = {
 			FOCUS_FILTER_POLITICAL
 		}
 		prerequisite = { focus = kyk_the_army_of_kashyyyk  }
+		completion_reward = {
+			add_tech_bonus = {
+				name = kyk_the_army_school_of_Kashyyyk
+				bonus = 0.50
+				uses = 3
+				category = land_doctrine }
+		}
 	}
 
 	#Allocate resources to the new army command
@@ -1287,6 +1395,15 @@ focus_tree = {
 			FOCUS_FILTER_POLITICAL
 		}
 		prerequisite = { focus = kyk_appointing_new_military_officers  }
+		completion_reward = {
+			random_owned_controlled_state = {
+				add_building_construction = {
+						type = arms_factory
+						level = 2
+						instant_build = yes
+					}
+				add_extra_state_shared_building_slots = 2 }
+			}
 	}
 
 	#reinstating armor workshops
