@@ -7,16 +7,116 @@ scripted_gui = {
 		window_name = "mega_structure_screen"
 		
 		visible = {
-			has_state_flag = mega_structure
+			
 		}
 		
 		effects = {
+			wonder_buildings_click = {
+				ROOT = {
+					if = {
+						limit = {
+							has_country_flag = building_menu
+						}
+						clr_country_flag = building_menu
+					}
+					else = {
+						set_country_flag = building_menu
+					}
+				}
 
-	}
+			}
+			academy_button_click = {
+				ROOT = {
+					subtract_from_variable = { currency_amount^0 = 100 }
+				}
+				set_state_flag = academy_built
+				set_state_flag = mega_structure
+			}
+			science_button_click = {
+				ROOT = {
+					subtract_from_variable = { currency_amount^0 = 100 }
+				}
+				set_state_flag = lab_built
+				set_state_flag = mega_structure
+				subtract_from_variable = { currency_amount^0 = 100 }
+			}
+			shipyard_button_click = {
+				ROOT = {
+					subtract_from_variable = { currency_amount^0 = 100 }
+				}
+				set_state_flag = shipyard_built
+				set_state_flag = mega_structure
+				subtract_from_variable = { currency_amount^0 = 100 }
+			}
+			intelligence_button_click = {
+				ROOT = {
+					subtract_from_variable = { currency_amount^0 = 100 }
+				}
+				set_state_flag = intelligence_built
+				set_state_flag = mega_structure
+				subtract_from_variable = { currency_amount^0 = 100 }
+			}
+
+		}
 		
 		triggers = {
 			senate_building_visible = {
 				has_state_flag = senate_building
+			}
+			academy_building_visible = {
+				has_state_flag = academy_built
+			}
+			science_building_visible = {
+				has_state_flag = lab_built
+			}
+			drydock_building_visible = {
+				has_state_flag = shipyard_built
+			}
+			intelligence_building_visible = {
+				has_state_flag = intelligence_built
+			}
+
+			academy_button_visible = {
+				NOT = {
+					has_state_flag = mega_structure
+				}
+				is_controlled_by = ROOT
+				ROOT = {
+					has_country_flag = building_menu
+				}
+			}
+			science_button_visible = {
+				NOT = {
+					has_state_flag = mega_structure
+				}
+				is_controlled_by = ROOT
+				ROOT = {
+					has_country_flag = building_menu
+				}
+			}
+			shipyard_button_visible = {
+				NOT = {
+					has_state_flag = mega_structure
+				}
+				is_controlled_by = ROOT
+				ROOT = {
+					has_country_flag = building_menu
+				}
+			}
+			intelligence_button_visible = {
+				NOT = {
+					has_state_flag = mega_structure
+				}
+				is_controlled_by = ROOT
+				ROOT = {
+					has_country_flag = building_menu
+				}
+			}
+			wonder_buildings_visible = {
+				NOT = {
+					has_state_flag = mega_structure
+				}
+				is_controlled_by = ROOT
 			}
 	}
 
@@ -30,5 +130,6 @@ scripted_gui = {
 		ai_weights = {
 		}
 	}
+	
 }
 
