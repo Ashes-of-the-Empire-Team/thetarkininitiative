@@ -442,6 +442,9 @@ focus_tree = {
 			FOCUS_FILTER_POLITICAL
 		}
 		prerequisite = { focus = kyk_aplanetandapeoplebloodiedbutunbroken  }
+		completion_reward = {
+			add_timed_idea = { idea = kyk_solidifying_the_new_administration days = 70 }		
+		}
 	}
 
 	#freedom
@@ -456,6 +459,9 @@ focus_tree = {
 		}
 		prerequisite = { focus = kyk_solidifying_the_administation  }
 		mutually_exclusive = { focus = kyk_dicipline  }
+		completion_reward = {
+		add_ideas = kyk_Freedom1
+		}
 	}
 
 	#dicipline
@@ -470,6 +476,9 @@ focus_tree = {
 		}
 		prerequisite = { focus = kyk_solidifying_the_administation  }
 		mutually_exclusive = { focus = kyk_freedom  }
+		completion_reward = {
+			add_ideas = kyk_Dicipline1
+			}
 	}
 
 	#Divide the machinery
@@ -483,6 +492,12 @@ focus_tree = {
 			FOCUS_FILTER_POLITICAL
 		}
 		prerequisite = { focus = kyk_freedom  }
+		completion_reward = {
+		swap_ideas = {
+			add_idea = kyk_Freedom2
+			remove_idea = kyk_Freedom1
+			}
+		} 
 	}
 
 	#Harnass the refineries
@@ -496,6 +511,12 @@ focus_tree = {
 			FOCUS_FILTER_POLITICAL
 		}
 		prerequisite = { focus = kyk_dicipline  }
+		completion_reward = {
+			swap_ideas = {
+				add_idea = kyk_Dicipline2
+				remove_idea = kyk_Dicipline1
+				}
+			} 
 	}
 
 	#Finalize the new administration
@@ -504,11 +525,14 @@ focus_tree = {
 		icon = GFX_goal_unknown
 		x = 11
 		y = 11
-		cost = 6
+		cost = 1
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
 		prerequisite = { focus = kyk_harnass_the_refineries  focus = kyk_divide_the_machinery  }
+		completion_reward = { 
+			add_political_power = 150
+		 }
 	}
 
 	#Restarting the industry
@@ -643,6 +667,7 @@ focus_tree = {
 		}
 		prerequisite = { focus = kyk_increase_agricultural_yields  }
 		mutually_exclusive = { focus = kyk_kashyyyk_orbital_dockyard  }
+		completion_reward = { add_offsite_building = { type = industrial_complex level = 3 }}
 	}
 
 	#industrial grants (figure out how to spend money)
@@ -744,6 +769,9 @@ focus_tree = {
 			FOCUS_FILTER_POLITICAL
 		}
 		prerequisite = { focus = kyk_kashyyyk_orbital_dockyard  }
+		completion_reward = {
+			add_ideas = kyk_optimized_industry1
+		}
 	}
 
 	#The ecological restoration of Kashyyyk
@@ -776,6 +804,16 @@ focus_tree = {
 			FOCUS_FILTER_POLITICAL
 		}
 		prerequisite = { focus = kyk_optimization_of_industrial_operations  }
+		completion_reward = {
+			random_owned_controlled_state = {
+				add_building_construction = {
+						type = industrial_complex
+						level = 2
+						instant_build = yes
+					}
+				
+				add_extra_state_shared_building_slots = 2 }
+		}
 	}
 
 	#seize mining operations and pass new restrictions
@@ -821,6 +859,12 @@ focus_tree = {
 			FOCUS_FILTER_POLITICAL
 		}
 		prerequisite = { focus = kyk_handle_opposition_to_the_new_mining_policy  } prerequisite = { focus = kyk_purchase_more_mining_equipment  }
+		completion_reward = {
+			swap_ideas = {
+				add_idea = kyk_optimized_industry2
+				remove_idea = kyk_optimized_industry1
+			}
+		}
 	}
 
 	#reforestation initiative
@@ -1328,6 +1372,16 @@ focus_tree = {
 			FOCUS_FILTER_POLITICAL
 		}
 		prerequisite = { focus = kyk_army_resource_priority  }
+		completion_reward = {
+			random_owned_controlled_state = {
+				add_building_construction = {
+						type = arms_factory
+						level = 3
+						instant_build = yes
+					}
+				add_extra_state_shared_building_slots = 3
+			}
+		}
 	}
 
 	#expand the new weapons foundry
@@ -1341,6 +1395,16 @@ focus_tree = {
 			FOCUS_FILTER_POLITICAL
 		}
 		prerequisite = { focus = kyk_open_a_new_weapons_foundry  }
+		completion_reward = {
+			random_owned_controlled_state = {
+				add_building_construction = {
+						type = arms_factory
+						level = 4
+						instant_build = yes
+					}
+				add_extra_state_shared_building_slots = 4
+			}
+		}
 	}
 
 	#The army of Kashyyyk
