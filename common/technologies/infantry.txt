@@ -29,7 +29,7 @@ technologies = {
 		}
 		
 		path = {
-			leads_to_tech = infantry_weapons1
+			leads_to_tech = infantry_weapons2
 			research_cost_coeff = 1
 		}		
 
@@ -56,15 +56,15 @@ technologies = {
 		}
 				
 		path = {
-			leads_to_tech = infantry_weapons2
+			leads_to_tech = improved_infantry_weapons_2
 			research_cost_coeff = 1
 		}		
 
 		research_cost = 1.5
-		start_year = 4
+		start_year = 5
 		folder = {
 			name = infantry_folder
-			position = { x = 0 y = @4 }
+			position = { x = 0 y = 3 }
 		}
 		
 		categories = {
@@ -113,15 +113,15 @@ technologies = {
 		}
 		
 		path = {
-			leads_to_tech = improved_infantry_weapons
+			leads_to_tech = infantry_weapons1
 			research_cost_coeff = 1
 		}		
 
 		research_cost = 1.5
-		start_year = 5
+		start_year = 4
 		folder = {
 			name = infantry_folder
-			position = { x = 0 y = 4 }
+			position = { x = 0 y = 1 }
 		}
 		
 		categories = {
@@ -152,26 +152,38 @@ technologies = {
 		}
 	}
 	
-	improved_infantry_weapons = {
 
-		enable_equipments = {
-			infantry_equipment_2
+	improved_infantry_weapons_2 = {
+
+		category_light_infantry = {
+			soft_attack = 0.05
+		}
+		
+		cavalry = {
+			soft_attack = 0.05
+		}
+		
+		motorized = {
+			soft_attack = 0.05
+		}
+		
+		mechanized = {
+			soft_attack = 0.05
+		}
+		amphibious_mechanized = {
+			soft_attack = 0.05
 		}
 		
 		path = {
-			leads_to_tech = improved_infantry_weapons_2
+			leads_to_tech = improved_infantry_weapons_3
 			research_cost_coeff = 1
 		}
-		path = {
-			leads_to_tech = infantry_at
-			research_cost_coeff = 1
-		}		
 
 		research_cost = 2
-		start_year = 6
+		start_year = 7
 		folder = {
 			name = infantry_folder
-			position = { x = 0 y = @6 }
+			position = { x = 0 y = 6 }
 		}
 		
 		categories = {
@@ -179,30 +191,25 @@ technologies = {
 		}
 		
 		ai_will_do = {
-			factor = 3
-						
+			factor = 1
+			
 			modifier = {
-				factor = 10
-				date > "1939.1.1"
+				factor = 2
+				date > "1940.1.6"
 			}
+			
 			modifier = {
-				num_of_military_factories < 50
-				factor = 0.5
+				factor = 2
+				date > "1941.1.1"
 			}
-			#modifier = {
-			#	factor = 0
-			#	tag = SOV
-			#	OR = {
-			#		date < "1944.1.1" # stock up on lots of rifles, we got the manpower
-			#		AND = {
-			#			date > "1943.1.1"
-			#			surrender_progress < 0.1 # if we arent losing badly its ok
-			#		}
-			#	}
-			#}
+			
+			modifier = {
+				factor = 5
+				date > "1942.1.1"
+			}
 		}
 	}
-	improved_infantry_weapons_2 = {
+	improved_infantry_weapons_3 = {
 
 		category_light_infantry = {
 			soft_attack = 0.05
@@ -229,10 +236,10 @@ technologies = {
 		}
 
 		research_cost = 2
-		start_year = 6
+		start_year = 8
 		folder = {
 			name = infantry_folder
-			position = { x = 0 y = 8 }
+			position = { x = 0 y = 9 }
 		}
 		
 		categories = {
@@ -345,12 +352,6 @@ technologies = {
 		enable_equipments = {
 			infantry_equipment_3
 		}	
-		
-		path = {
-			leads_to_tech = advanced_infantry_weapons2
-			research_cost_coeff = 1
-		}
-
 		research_cost = 2
 		start_year = 9
 		folder = {
@@ -381,57 +382,7 @@ technologies = {
 			}
 		}
 	}
-	
-	advanced_infantry_weapons2 = {
 
-		category_light_infantry = {
-			soft_attack = 0.05
-		}
-		cavalry = {
-			soft_attack = 0.1
-		}		
-
-
-		motorized = {
-			soft_attack = 0.1
-		}
-		mechanized = {
-			soft_attack = 0.1
-		}
-		amphibious_mechanized = {
-			soft_attack = 0.1
-		}		
-
-		research_cost = 1.5
-		start_year = 12
-		folder = {
-			name = infantry_folder
-			position = { x = 0 y = 15 }
-		}
-		
-		categories = {
-			infantry_weapons
-		}
-		
-		ai_will_do = {
-			factor = 1
-			
-			modifier = {
-				factor = 2
-				date > "1944.1.6"
-			}
-			
-			modifier = {
-				factor = 2
-				date > "1945.1.1"
-			}
-			
-			modifier = {
-				factor = 2
-				date > "1946.1.1"
-			}
-		}
-	}
 	
 	paratroopers = {
 
@@ -1096,10 +1047,10 @@ technologies = {
 		}
 
 		research_cost = 2.5
-		start_year = 1943
+		start_year = 4
 		folder = {
 			name = infantry_folder
-			position = { x = 0 y = 12 }
+			position = { x = 3 y = 2 }
 		}
 		
 		categories = {
@@ -1136,10 +1087,48 @@ technologies = {
 		land_night_attack = 0.15	
 
 		research_cost = 2
-		start_year = 1946
+		start_year = 6
 		folder = {
 			name = infantry_folder
-			position = { x = 0 y = 14 }
+			position = { x = 3 y = 4 }
+		}
+		path = {
+			leads_to_tech = Trained_Trackers
+			research_cost_coeff = 1
+		}
+
+		categories = {
+			night_vision
+		}
+		
+		ai_will_do = {
+			factor = 4
+			
+			modifier = {
+				factor = 2
+				date > "1945.1.9"
+			}
+			
+			modifier = {
+				factor = 2
+				date > "1946.1.1"
+			}
+			
+			modifier = {
+				factor = 5
+				date > "1946.1.6"
+			}
+		}
+	}
+	Trained_Trackers = {
+
+		land_night_attack = 0.15	
+
+		research_cost = 2
+		start_year = 8
+		folder = {
+			name = infantry_folder
+			position = { x = 3 y = 6 }
 		}
 		
 		categories = {
