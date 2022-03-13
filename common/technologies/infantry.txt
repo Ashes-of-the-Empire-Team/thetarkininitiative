@@ -1452,6 +1452,12 @@ technologies = {
 			custom_effect_tooltip = UNLOCK_DIVISION_TEMPLATE
 		}
 		
+		
+		path = {
+			leads_to_tech = Riot_truck
+			research_cost_coeff = 1
+		}
+
 		path = {
 			leads_to_tech = mechanised_infantry
 			research_cost_coeff = 1
@@ -1587,6 +1593,60 @@ technologies = {
 			factor = 1
 		}
 	}
+
+	Riot_truck = {
+
+		enable_equipments = {
+			riot_truck_equipment
+		}
+
+		on_research_complete_limit = {
+			NOT = {
+				has_template_containing_unit = motorized
+			}
+		}
+		
+		
+	
+
+		research_cost = 2
+		start_year = 2
+		folder = {
+			name = infantry_folder
+			position = { x = 2 y = 2}
+		}
+		
+	
+		
+		categories = {
+			motorized_equipment
+			infantry_tech
+		}
+		
+		ai_will_do = {
+			factor = 1
+			
+			modifier = {
+				factor = 2
+				date > "1937.1.1"
+			}
+			
+			modifier = {
+				factor = 2
+				date > "1938.1.1"
+			}
+			
+			modifier = {
+				factor = 2
+				date > "1939.1.1"
+			}
+			modifier = {
+				is_major = no
+				factor = 0.5
+			}
+		}
+	}
+	
 	
 	
 	
