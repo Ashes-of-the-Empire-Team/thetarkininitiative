@@ -9,4 +9,140 @@ on_actions = {
 
 		}
 	}
+	on_state_control_changed = {
+		effect = {
+			if = {
+				limit = {
+					FROM.FROM = {
+						has_state_flag = academy_built
+					}
+				}
+				ROOT = {
+					add_to_variable = { academy = 1 }
+					if = {
+						limit = {
+							NOT = {
+								OR = {
+									has_idea = academy_lvl_1
+									has_idea = academy_lvl_2
+									has_idea = academy_lvl_3
+								}
+							}
+						}
+						add_ideas = academy_lvl_1
+					}
+				}
+				FROM = {
+					subtract_from_variable = { academy = 1 }
+					if = {
+						limit = {
+							check_variable = { academy < 1 }
+						}
+						remove_ideas = academy_lvl_1
+						remove_ideas = academy_lvl_2
+						remove_ideas = academy_lvl_3
+					}
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				FROM.FROM = {
+					has_state_flag = lab_built
+				}
+			}
+			ROOT = {
+				add_to_variable = { lab = 1 }
+				if = {
+					limit = {
+						NOT = {
+							OR = {
+								has_idea = lab_lvl_1
+								has_idea = lab_lvl_2
+								has_idea = lab_lvl_3
+							}
+						}
+					}
+					add_ideas = lab_lvl_1
+				}
+			}
+			FROM = {
+				subtract_from_variable = { lab = 1 }
+				if = {
+					limit = {
+						check_variable = { lab < 1 }
+					}
+					remove_ideas = lab_lvl_1
+					remove_ideas = lab_lvl_2
+					remove_ideas = lab_lvl_3
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				FROM.FROM = {
+					has_state_flag = shipyard_built
+				}
+			}
+			ROOT = {
+				add_to_variable = { shipyard = 1 }
+				if = {
+					limit = {
+						NOT = {
+							OR = {
+								has_idea = shipyard_lvl_1
+								has_idea = shipyard_lvl_2
+								has_idea = shipyard_lvl_3
+							}
+						}
+					}
+					add_ideas = shipyard_lvl_1
+				}
+			}
+			FROM = {
+				subtract_from_variable = { shipyard = 1 }
+				if = {
+					limit = {
+						check_variable = { shipyard < 1 }
+					}
+					remove_ideas = shipyard_lvl_1
+					remove_ideas = shipyard_lvl_2
+					remove_ideas = shipyard_lvl_3
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				FROM.FROM = {
+					has_state_flag = intelligence_built_lvl_1
+				}
+			}
+			ROOT = {
+				add_to_variable = { intelligence = 1 }
+				if = {
+					limit = {
+						NOT = {
+							OR = {
+								has_idea = intelligence_lvl_1
+								has_idea = intelligence_lvl_2
+								has_idea = intelligence_lvl_3
+							}
+						}
+					}
+					add_ideas = intelligence_lvl_1
+				}
+			}
+			FROM = {
+				subtract_from_variable = { intelligence = 1 }
+				if = {
+					limit = {
+						check_variable = { intelligence < 1 }
+					}
+					remove_ideas = intelligence_lvl_1
+					remove_ideas = intelligence_lvl_2
+					remove_ideas = intelligence_lvl_3
+				}
+			}
+		}
+	}
 }
