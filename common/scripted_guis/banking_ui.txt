@@ -1,0 +1,227 @@
+scripted_gui = {
+
+	banking_screen_drop = {
+		context_type = player_context
+		window_name = "banking_screen_drop"
+		visible = {
+           always = yes
+		}
+		effects = { ### MIGHT NEED TO REDO EFFECTS AND PUT THEM IN ON ACTIONS LATER, FOR NOW THIS IS JUST BASICS
+			exit_button_click = {
+				clr_country_flag = 
+			}
+			ibc_button_click = {
+				set_country_flag = ibc_selected
+				clr_country_flag = bank_of_core_selected
+				clr_country_flag = central_bank_selected
+			}
+			bank_of_core_button_click = {
+				set_country_flag = bank_of_core_selected
+				clr_country_flag = central_bank_selected
+				clr_country_flag = ibc_selected
+			}
+			central_bank_button_click = {
+				set_country_flag = central_bank_selected
+				clr_country_flag = bank_of_core_selected
+				clr_country_flag = ibc_selected
+			}
+			take_loan_click = {
+				add_to_variable = { currency_amount^primary_currency = 10 }
+				if = {
+					limit = {
+						has_country_flag = bank_of_core_selected
+					}
+					add_to_variable = { bank_of_core_debt = 10 }
+				}
+				if = {
+					limit = {
+						has_country_flag = central_bank_selected
+					}
+					add_to_variable = { central_bank_debt = 10 }
+				}
+				if = {
+					limit = {
+						has_country_flag = ibc_selected
+					}
+					add_to_variable = { ibc_debt = 10 }
+				}
+			}
+			pay_loan_click = {
+				subtract_from_variable = { currency_amount^primary_currency = 10 }
+				if = {
+					limit = {
+						has_country_flag = bank_of_core_selected
+					}
+					subtract_from_variable = { bank_of_core_debt = 10 }
+				}
+				if = {
+					limit = {
+						has_country_flag = central_bank_selected
+					}
+					subtract_from_variable = { central_bank_debt = 10 }
+				}
+				if = {
+					limit = {
+						has_country_flag = ibc_selected
+					}
+					subtract_from_variable = { ibc_debt = 10 }
+				}
+			}
+			negotiate_click = {
+				if = {
+					limit = {
+						has_country_flag = negotiations_open
+					}
+					clr_country_flag = negotiations_open
+				}
+				else = {
+					set_country_flag = negotiations_open
+				}
+				set_variable = { willing_to_accept = 0 }
+				if = {
+					limit = {
+						has_country_flag = { major_loan = 1 }
+					}
+					subtract_from_variable = { willing_to_accept = 1 }
+				}
+				if = {
+					limit = {
+						has_stability > 0.74
+					}
+					add_to_variable = { willing_to_accept = 1 }
+					}
+				if = {
+					limit = {
+						has_stability > 0.99
+					}
+					add_to_variable = { willing_to_accept = 1 }
+				}
+				if = {
+					limit = {
+						has_stability < 0.5
+					}
+					subtract_from_variable = { willing_to_accept = 1 }
+					}
+				if = {
+					limit = {
+						has_stability < 0.25
+					}
+					subtract_from_variable = { willing_to_accept = 1 }
+				}
+				if = {
+					limit = {
+						AND = {
+							has_war = yes
+							has_war_support < 0.5
+						}
+					}
+					subtract_from_variable = { willing_to_accept = 1 }
+				}
+				if = {
+					limit = {
+						AND = {
+							has_war = yes
+							has_war_support < 0.25
+						}
+					}
+					subtract_from_variable = { willing_to_accept = 5 }
+				}
+				if = {
+					limit = {
+						AND = {
+							has_war = yes
+							surrender_progress > 0.50
+						}
+					}
+					subtract_from_variable = { willing_to_accept = 5 }
+				}
+				if = {
+					limit = {
+						AND = {
+							has_war = yes
+							surrender_progress > 0.75
+						}
+					}
+					subtract_from_variable = { willing_to_accept = 100 }
+				}
+			}
+		}
+		triggers = {
+			take_loan_click_enabled = {
+
+			}
+			pay_loan_click_enabled = {
+				if = {
+					limit = {
+						has_country_flag = bank_of_core_selected
+					}
+					check_variable = { bank_of_core_debt > 0 }
+				}
+				if = {
+					limit = {
+						has_country_flag = central_bank_selected
+					}
+					check_variable = { central_bank_debt > 0 }
+				}
+				if = {
+					limit = {
+						has_country_flag = ibc_selected
+					}
+					check_variable = { ibc_debt > 0 }
+				}
+			}
+			ibc_button_click_enabled = {
+				NOT = {
+					has_country_flag = ibc_selected
+				}
+			}
+			bank_of_core_button_click_enabled = {
+				NOT = {
+					has_country_flag = bank_of_core_selected
+				}
+			}
+			central_bank_button_click_enabled = {
+				NOT = {
+					has_country_flag = central_bank_selected
+				}
+			}
+		}
+	}
+	banking_negotiations = {
+		context_type = player_context
+		window_name = "banking_negotiations"
+		visible = {
+           has_country_flag = negotiations_open
+		}
+		effects = {
+			increase_interest_rate_click = {
+				add_to_variable = { interest_rate = 1 }
+				add_to_variable = { willing_to_accept = 1}
+			}
+			decrease_interest_rate_click = {
+				subtract_from_variable = { interest_rate = 1 }
+				subtract_from_variable = { willing_to_accept = 1}
+			}
+			increase_loan_amount_click = {
+				add_to_variable = { loan_amount = 100 }
+				subtract_from_variable = { willing_to_accept = 1}
+			}
+			decrease_loan_amount_click = {
+				subtract_from_variable = { loan_amount = 100 }
+				add_to_variable = { willing_to_accept = 1 }
+			}
+		}
+		triggers = {
+			increase_interest_rate_click_enabled = {
+			}
+			decrease_interest_rate_click_enabled = {
+				check_variable = { interest_rate > 0 }
+			}
+			increase_loan_amount_click_enabled = {
+			}
+			decrease_loan_amount_click_enabled = {
+				check_variable = { loan_amount > 0 }
+			}
+		}
+	}
+}

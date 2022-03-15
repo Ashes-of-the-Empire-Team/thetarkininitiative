@@ -1,41 +1,52 @@
 on_actions = {
 	on_startup = {
 		effect = {
-			add_to_array = { currency_amount = 0 } #Universal
-			add_to_array = { currency_amount = 0 } #Dollar pope_dollar
-			add_to_array = { currency_amount = 0 } #Denar
-			add_to_array = { currency_amount = 0 } #Euro
-			add_to_array = { currency_amount = 0 } # American Dollar
-			add_to_array = { currency_amount = 0 } # Ruble
-			add_to_array = { currency_amount = 0 } # Yuan
-			add_to_array = { currency_amount = 0 } # Yen
-			add_to_array = { currency_amount = 0 } # Rupee
-			add_to_array = { currency_amount = 0 } # Peso
-			add_to_array = { currency_amount = 0 } # Singapore Dollar
-			add_to_array = { currency_amount = 0 } # Pound
-			add_to_array = { currency_amount = 0 } # Rand
-			add_to_array = { currency_amount = 0 } # Eco
-			add_to_array = { currency_amount = 0 } # East African Shilling
-			add_to_array = { currency_amount = 0 } # Shekel
-			add_to_array = { currency_amount = 0 } # Riyal
+			if = {
+				limit = {
+					has_government = democratic
+				}
+				set_variable = { primary_currency = 1 }
+			}
+			if = {
+				limit = {
+					has_government = imperial
+				}
+				set_variable = { primary_currency = 2 }
+			}
+			if = {
+				limit = {
+					has_government = corporation
+				}
+				set_variable = { primary_currency = 3 }
+			}
+			if = {
+				limit = {
+					has_government = consortium
+				}
+				set_variable = { primary_currency = 4 }
+			}
+			if = {
+				limit = {
+					has_government = neutrality
+				}
+				set_variable = { primary_currency = 2 }
+			}
+			
+			add_to_array = { currency_amount = 0 } # Universal
+			add_to_array = { currency_amount = 0 } # New Republic Credits
+			add_to_array = { currency_amount = 0 } # Imperial Credits
+			add_to_array = { currency_amount = 0 } # Corporation Credits
+			add_to_array = { currency_amount = 0 } # Consortium Credits
+			add_to_array = { currency_amount = 0 } # Spice
+			add_to_array = { currency_amount = 0 } # Nova Crystals
 
-			add_to_array = { global.currency_exchange_rate = 100 } #Universal
-			add_to_array = { global.currency_exchange_rate = 150 } #Dollar pope_dollar
-			add_to_array = { global.currency_exchange_rate = 6 } #Denar
-			add_to_array = { global.currency_exchange_rate = 150 } #Euro
-			add_to_array = { global.currency_exchange_rate = 140 } # American Dollar
-			add_to_array = { global.currency_exchange_rate = 40 } # Ruble
-			add_to_array = { global.currency_exchange_rate = 70 } # Yuan
-			add_to_array = { global.currency_exchange_rate = 70 } # Yen
-			add_to_array = { global.currency_exchange_rate = 50 } # Rupee
-			add_to_array = { global.currency_exchange_rate = 50 } # Peso
-			add_to_array = { global.currency_exchange_rate = 100 } # Singapore Dollar
-			add_to_array = { global.currency_exchange_rate = 160 } # Pound
-			add_to_array = { global.currency_exchange_rate = 4 } # Rand
-			add_to_array = { global.currency_exchange_rate = 4 } # Eco
-			add_to_array = { global.currency_exchange_rate = 4 } # East African Shilling
-			add_to_array = { global.currency_exchange_rate = 6 } # Shekel
-			add_to_array = { global.currency_exchange_rate = 230 } # Riyal
+			add_to_array = { global.currency_exchange_rate = 100 } # Universal
+			add_to_array = { global.currency_exchange_rate = 60 } # New Republic Credits
+			add_to_array = { global.currency_exchange_rate = 80 } # Imperial Credits
+			add_to_array = { global.currency_exchange_rate = 100 } # Corporation Credits
+			add_to_array = { global.currency_exchange_rate = 10 } # Consortium Credits
+			add_to_array = { global.currency_exchange_rate = 120 } # Spice
+			add_to_array = { global.currency_exchange_rate = 140 } # Nova Crystals
 
 
 			set_variable = { gun_shipment_cost = 100 }
@@ -121,6 +132,12 @@ on_actions = {
 					divide_variable = { Global.currency_exchange_rate_display^i = 100 }
 				}
 			}
+		}
+	}
+	############################# Inflation ##############################
+	on_monthly = {
+		effect = {
+			add_to_array = { global.currency_exchange_rate^0 = 1 }
 		}
 	}
 }
