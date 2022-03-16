@@ -75,6 +75,7 @@ focus_tree = {
 			FOCUS_FILTER_POLITICAL
 		}
 		mutually_exclusive = {
+			focus = EOH_natural_allies
 		}
 		completion_reward = {
 			add_political_power = 50
@@ -100,6 +101,7 @@ focus_tree = {
 			FOCUS_FILTER_EXPANSION
 		}
 		mutually_exclusive = {
+			focus = EOH_the_chiss_on_their_own
 		}
 		completion_reward = {
 			diplomatic_relation = { 
@@ -225,7 +227,7 @@ focus_tree = {
 		}
 		search_filters = {
 			FOCUS_FILTER_MILITARY
-			FOCUS_FILTER_DIPLOMATIC
+			FOCUS_FILTER_DIPLOMACY
 		}
 		mutually_exclusive = {
 		}
@@ -248,7 +250,7 @@ focus_tree = {
 		}
 		search_filters = {
 			FOCUS_FILTER_MILITARY
-			FOCUS_FILTER_DIPLOMATIC
+			FOCUS_FILTER_DIPLOMACY
 		}
 		mutually_exclusive = {
 		}
@@ -277,7 +279,7 @@ focus_tree = {
 			focus = EOH_assume_command
 		}
 		search_filters = {
-			FOCUS_FILTER_DIPLOMATIC
+			FOCUS_FILTER_DIPLOMACY
 		}
 		mutually_exclusive = {
 		}
@@ -304,7 +306,7 @@ focus_tree = {
 			focus = EOH_secure_the_fortress_worlds
 		}
 		search_filters = {
-			FOCUS_FILTER_DIPLOMATIC
+			FOCUS_FILTER_DIPLOMACY
 		}
 		mutually_exclusive = {
 		}
@@ -479,7 +481,7 @@ focus_tree = {
 		available = {
 		}
 		search_filters = {
-			FOCUS_FILTER_DIPLOMATIC
+			FOCUS_FILTER_DIPLOMACY
 		}
 		mutually_exclusive = {
 		}
@@ -947,9 +949,10 @@ focus_tree = {
 			220 = {
 				add_building_construction = {
 					type = dockyard
-					level = 2
+					level = 1
 					instant_build = yes
 				}
+				add_extra_state_shared_building_slots = 1
 			}
 			229 = {
 				add_building_construction = {
@@ -957,6 +960,7 @@ focus_tree = {
 					level = 1
 					instant_build = yes
 				}
+				add_extra_state_shared_building_slots = 1
 			}
 			215 = {
 				add_building_construction = {
@@ -964,6 +968,284 @@ focus_tree = {
 					level = 1
 					instant_build = yes
 				}
+				add_extra_state_shared_building_slots = 1
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = EOH_hand_of_thrawn
+		icon = GFX_goal_unknown
+		cost = 8
+		relative_position_id = EOH_new_age_imperial_shipyards
+		x = -1
+		y = 1
+		prerequisite = {
+			focus = EOH_new_age_imperial_shipyards
+		}
+		prerequisite = {
+			focus = EOH_cloning_on_nirauan
+		}
+		available = {
+		}
+		search_filters = {
+			FOCUS_FILTER_INDUSTRY
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			220 = {
+				add_building_construction = {
+					type = industrial_complex
+					level = 3
+					instant_build = yes
+				}
+				add_extra_state_shared_building_slots = 3
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+
+	focus = {
+		id = EOH_new_imperial_frontier
+		icon = GFX_goal_unknown
+		cost = 8
+		relative_position_id = EOH_new_age_imperial_shipyards
+		x = 1
+		y = 1
+		prerequisite = {
+			focus = EOH_new_age_imperial_shipyards
+		}
+		available = {
+			#Owns or allied to chiss planets
+		}
+		search_filters = {
+			FOCUS_FILTER_INDUSTRY
+			FOCUS_FILTER_DIPLOMACY
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			310 = {
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+				add_extra_state_shared_building_slots = 2
+			}
+			463 = {
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+				add_extra_state_shared_building_slots = 2
+			}
+			244 = {
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+				add_extra_state_shared_building_slots = 2
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = EOH_integration_through_industry
+		icon = GFX_goal_unknown
+		cost = 8
+		relative_position_id = EOH_hand_of_thrawn
+		x = 1
+		y = 1
+		prerequisite = {
+			focus = EOH_hand_of_thrawn
+			focus = EOH_new_imperial_frontier
+		}
+		available = {
+			#Owns certain planets
+		}
+		search_filters = {
+			FOCUS_FILTER_INDUSTRY
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			#develops conquered planets
+			277 = {
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+				add_extra_state_shared_building_slots = 2
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+
+	#Victory, Together
+	focus = {
+		id = EOH_victory_together
+		icon = GFX_goal_unknown
+		cost = 12
+		relative_position_id = EOH_skillful_officers
+		x = -2
+		y = 2
+		prerequisite = {
+			focus = EOH_skillful_officers
+		}
+		prerequisite = {
+			focus = EOH_thrawn_tactics
+		}
+		available = {
+		}
+		search_filters = {
+			FOCUS_FILTER_NATIONAL_SPIRIT
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			add_ideas = EOH_victory_together_1
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = EOH_common_enemies
+		icon = GFX_goal_unknown
+		cost = 12
+		relative_position_id = EOH_victory_together
+		x = 0
+		y = 4
+		prerequisite = {
+			focus = EOH_victory_together
+		}
+		available = {
+		}
+		search_filters = {
+			FOCUS_FILTER_DIPLOMACY
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			ZSJ = {
+				add_opinion_modifier = {
+					target = ROOT
+					modifier = large_increase
+				}
+			}
+			EMP = {
+				add_opinion_modifier = {
+					target = ROOT
+					modifier = large_increase
+				}
+			}
+			PEN = {
+				add_opinion_modifier = {
+					target = ROOT
+					modifier = large_increase
+				}
+			}
+			FTU = {
+				add_opinion_modifier = {
+					target = ROOT
+					modifier = large_increase
+				}
+			}
+			ZER = {
+				add_opinion_modifier = {
+					target = ROOT
+					modifier = large_increase
+				}
+			}
+			ERI = {
+				add_opinion_modifier = {
+					target = ROOT
+					modifier = large_increase
+				}
+			}
+			REE = {
+				add_opinion_modifier = {
+					target = ROOT
+					modifier = large_increase
+				}
+			}
+			BES = {
+				add_opinion_modifier = {
+					target = ROOT
+					modifier = large_increase
+				}
+			}
+			RIN = {
+				add_opinion_modifier = {
+					target = ROOT
+					modifier = large_increase
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = EOH_crucial_hyperlanes
+		icon = GFX_goal_unknown
+		cost = 6
+		relative_position_id = EOH_common_enemies
+		x = -2
+		y = 1
+		prerequisite = {
+			focus = EOH_common_enemies
+		}
+		available = {
+		}
+		search_filters = {
+			FOCUS_FILTER_DIPLOMACY
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			diplomatic_relation = {
+				country = CHA
+				relation = guarantee
+				active = yes
+			}
+			diplomatic_relation = {
+				country = TAR
+				relation = guarantee
+				active = yes
+			}
+			diplomatic_relation = {
+				country = REN
+				relation = guarantee
+				active = yes
+			}
+			diplomatic_relation = {
+				country = MIM
+				relation = guarantee
+				active = yes
+			}
+			diplomatic_relation = {
+				country = THY
+				relation = guarantee
+				active = yes
 			}
 		}
 		ai_will_do = {
