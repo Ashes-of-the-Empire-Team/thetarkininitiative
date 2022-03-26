@@ -4,7 +4,7 @@ focus_tree = {
 	country = {
 		factor = 0
 		
-		modifier = {
+		modifier = {###### MECHANIC, NEED TO FUFILL OBJECTIVES RELATED TO THE RESURRECTION OF LOVER, IF NOT LEADER WILL GET WORSE TILL HE RIPS COUNTRY APART IN PURSUIT OF HIS GOAL
 			add = 10
 			tag = ERI
 		}
@@ -46,6 +46,8 @@ focus_tree = {
 			focus = ERI_fear_above
 		}
 		completion_reward = {
+			set_country_flag = fear_ground_ERI
+			add_ideas = fear_ground_ERI
 		}
 		
 
@@ -88,7 +90,7 @@ focus_tree = {
 		available_if_capitulated = yes
 		
 		completion_reward = {
-
+			activate_mission = fight_on_our_turf
 		}
 		
 
@@ -109,6 +111,7 @@ focus_tree = {
 		available_if_capitulated = yes
 		
 		completion_reward = {
+			set_country_flag = overwhelming_firepower_unlocked
 		}
 		
 
@@ -117,7 +120,7 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id =  ERI_republic_spies ## Unlocks part of the doctrine
+		id =  ERI_republic_spies ## Unlocks new intelligence missions, slight debuff to entrenchment in a targeted area look at spanish civil war
 		icon = unknown
 		cost = 5
 		x = 11
@@ -136,6 +139,7 @@ focus_tree = {
 		available_if_capitulated = yes
 		
 		completion_reward = {
+			set_country_flag = republic_spies
 		}
 		
 
@@ -156,6 +160,17 @@ focus_tree = {
 		available_if_capitulated = yes
 		
 		completion_reward = {
+			subtract_from_variable = {legitimacy_emp = 5}
+			ERI = {
+				add_corps_commander_role = {
+				  character = ERI_sander_delvardus
+				  skill = 4
+				  attack_skill = 2
+				  defense_skill = 3
+				  planning_skill = 3
+				  logistics_skill = 5
+				}
+			}
 		}
 		
 
@@ -164,7 +179,7 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = ERI_EP.9_artillery
+		id = ERI_EP.9_artillery ## CHANGE_ME, module or set peice when tanks designed
 		icon = unknown
 		cost = 5
 		x = 12
@@ -226,25 +241,6 @@ focus_tree = {
 			factor = 1
 		}
 	}
-	focus = {
-		id = ERI_let_it_begin
-		icon = unknown
-		cost = 5
-		x = 15
-		y = 8
-		
-		available_if_capitulated = yes
-		prerequisite = {
-			focus = ERI_dreams_of_sullust
-		}
-		completion_reward = {
-		}
-		
-
-		ai_will_do = {
-			factor = 1
-		}
-	}
 	######## NAVY ########
 	focus = {
 		id = ERI_fear_above
@@ -260,6 +256,8 @@ focus_tree = {
 		}
 		available_if_capitulated = yes
 		completion_reward = {
+			set_country_flag = fear_above_ERI
+			add_ideas = fear_above_ERI
 		}
 		
 
@@ -322,7 +320,7 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = ERI_submission_at_any_cost
+		id = ERI_pride_of_the_fleet
 		icon = unknown
 		cost = 5
 		x = 20
@@ -332,6 +330,7 @@ focus_tree = {
 		}
 		available_if_capitulated = yes
 		completion_reward = {
+			add_ideas = pride_of_the_fleet_ERI
 		}
 		
 
@@ -346,7 +345,7 @@ focus_tree = {
 		x = 20
 		y = 7
 		prerequisite = {
-			focus = ERI_submission_at_any_cost
+			focus = ERI_pride_of_the_fleet
 		}
 		available_if_capitulated = yes
 		completion_reward = {
@@ -439,6 +438,16 @@ focus_tree = {
 		available_if_capitulated = yes
 		
 		completion_reward = {
+			599 = {
+				add_resource = {
+				    type = steel
+				    amount = 8
+				    state = 88
+				}
+			}
+			add_ideas = {
+				Lessons_of_forefathers_ERI
+			}
 		}
 		
 
@@ -480,7 +489,7 @@ focus_tree = {
 	focus = { 
 		id = ERI_fortress_surrounded ## forts
 		icon = unknown
-		cost = 5
+		cost = 16
 		x = 19
 		y = 3
 		prerequisite = {
@@ -864,6 +873,11 @@ focus_tree = {
 		available_if_capitulated = yes
 		
 		completion_reward = {
+			add_resource = {
+			    type = oil
+			    amount = 50
+			    state = 88
+			}
 		}
 		
 
@@ -881,6 +895,26 @@ focus_tree = {
 			focus = ERI_mountain_mining_rails
 			focus = ERI_allow_unsafe_mining
 			focus = ERI_sorosuub_carrier
+		}
+		
+		available_if_capitulated = yes
+		
+		completion_reward = {
+		}
+		
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = { 
+		id = ERI_revival_centres ## reduce maddness penaility
+		icon = unknown
+		cost = 5
+		x = 23
+		y = 7
+		prerequisite = {
+			focus = ERI_centrailise_industry
 		}
 		
 		available_if_capitulated = yes
@@ -937,7 +971,7 @@ focus_tree = {
 	#ERI POLITICAL AND WORLD STAGE#
 	###############################
 	focus = {
-		id = ERI_remind_the_people ### NEEDS GONE BUT NOT FORGOTTEN TO BE COMPLETED
+		id = ERI_remind_the_people
 		icon = unknown
 		cost = 5
 		x = 15
@@ -948,6 +982,8 @@ focus_tree = {
 			focus = ERI_choose_our_strength
 		}	
 		completion_reward = {
+			add_stability = -0.3
+			add_ideas = dreams_of_a_better_life_ERI
 		}
 		
 
@@ -967,6 +1003,7 @@ focus_tree = {
 			focus = ERI_remind_the_people
 		}	
 		completion_reward = {
+			set_country_flag = ERI_work_camps_true
 		}
 		
 
@@ -1006,6 +1043,10 @@ focus_tree = {
 			focus = ERI_dreams_of_sullust
 		}	
 		completion_reward = {
+			add_equipment_to_stockpile = {
+			    type = convoys
+			    amount = 100
+			}
 		}
 		
 
@@ -1047,6 +1088,10 @@ focus_tree = {
 			focus = ERI_prepare_a_invasion_force
 		}
 		completion_reward = {
+			declare_war_on = {
+			    target = SUL
+			    type = annex_everything
+			}
 		}
 		
 
@@ -1128,6 +1173,387 @@ focus_tree = {
 		prerequisite = {
 			focus = ERI_let_it_begin
 		}	
+		completion_reward = {
+		}
+		
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = ERI_search_the_medical_archive
+		icon = unknown
+		cost = 5
+		x = 11
+		y = 10
+		
+		available_if_capitulated = yes
+		prerequisite = {
+			focus = ERI_dreams_realised
+		}	
+		completion_reward = {
+		}
+		
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = ERI_rip_sullust_apart
+		icon = unknown
+		cost = 5
+		x = 11
+		y = 11
+		
+		available_if_capitulated = yes
+		prerequisite = {
+			focus = ERI_search_the_medical_archive
+			focus = ERI_cement_imperial_rule_over_region
+		}	
+		completion_reward = {
+		}
+		
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = ERI_cement_imperial_rule_over_region
+		icon = unknown
+		cost = 5
+		x = 13
+		y = 10
+		
+		available_if_capitulated = yes
+		prerequisite = {
+			focus = ERI_dreams_realised
+		}	
+		completion_reward = {
+		}
+		
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = ERI_deals_with_sorosubb
+		icon = unknown
+		cost = 5
+		x = 13
+		y = 11
+		
+		available_if_capitulated = yes
+		prerequisite = {
+			focus = ERI_cement_imperial_rule_over_region
+		}	
+		completion_reward = {
+		}
+		
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	########################################################################################################################
+	##################################################### NEXT STEP ########################################################
+	########################################################################################################################
+	focus = {
+		id = ERI_the_next_logical_step
+		icon = unknown
+		cost = 5
+		x = 15
+		y = 12
+		
+		available_if_capitulated = yes
+		prerequisite = {
+			focus = ERI_deals_with_sorosubb
+			focus = ERI_rip_sullust_apart
+		}
+		completion_reward = {
+		}
+		
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	####################
+	# bid for empereor #
+	####################
+	focus = {
+		id = ERI_bid_for_empereor 
+		icon = unknown
+		cost = 5
+		x = 15
+		y = 13
+		allow_branch = {
+			has_country_flag = ERI_chose_bid_for_empereor
+		}
+		available_if_capitulated = no
+		prerequisite = {
+			focus = ERI_the_next_logical_step
+		}
+		completion_reward = {
+		}
+		
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = ERI_return_to_greatest_defeat
+		icon = unknown
+		cost = 5
+		x = 15
+		y = 14
+		
+		available_if_capitulated = yes
+		prerequisite = {
+			focus = ERI_bid_for_empereor
+		}
+		completion_reward = {
+		}
+		
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = ERI_search_for_kyber_crystals
+		icon = unknown
+		cost = 5
+		x = 15
+		y = 15
+		
+		available_if_capitulated = yes
+		prerequisite = {
+			focus = ERI_return_to_greatest_defeat
+		}
+		completion_reward = {
+		}
+		
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = ERI_deathstar_holocron
+		icon = unknown
+		cost = 5
+		x = 15
+		y = 16
+		
+		available_if_capitulated = yes
+		prerequisite = {
+			focus = ERI_search_for_kyber_crystals
+		}
+		completion_reward = {
+		}
+		
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = ERI_negotiate_with_malrood ## CHANGE ME
+		icon = unknown
+		cost = 5
+		x = 18
+		y = 16
+		
+		available_if_capitulated = yes
+		prerequisite = {
+			focus = ERI_heavy_propaganda_campaign
+		}
+		completion_reward = {
+		}
+		
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = ERI_heavy_propaganda_campaign ## more legitmacy
+		icon = unknown
+		cost = 5
+		x = 17
+		y = 15
+		
+		available_if_capitulated = yes
+		prerequisite = {
+			focus = ERI_return_to_greatest_defeat
+		}
+		completion_reward = {
+		}
+		
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = ERI_reintergreate_naboo
+		icon = unknown
+		cost = 5
+		x = 17
+		y = 17
+		
+		available_if_capitulated = yes
+		prerequisite = {
+			focus = ERI_negotiate_with_malrood
+		}
+		completion_reward = {
+		}
+		
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = ERI_avenge_civil_war
+		icon = unknown
+		cost = 5
+		x = 13
+		y = 15
+		
+		available_if_capitulated = yes
+		prerequisite = {
+			focus = ERI_return_to_greatest_defeat
+		}
+		completion_reward = {
+		}
+		
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = ERI_pantorain_elite
+		icon = unknown
+		cost = 5
+		x = 19
+		y = 17
+		
+		available_if_capitulated = yes
+		prerequisite = {
+			focus = ERI_negotiate_with_malrood
+		}
+		completion_reward = {
+		}
+		
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = ERI_rodia_CHANGE_ME
+		icon = unknown
+		cost = 5
+		x = 12
+		y = 16
+		
+		available_if_capitulated = yes
+		prerequisite = {
+			focus = ERI_avenge_civil_war
+		}
+		completion_reward = {
+		}
+		
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = ERI_the_board_meeting ## reduce effect of leader malus
+		icon = unknown
+		cost = 5
+		x = 15
+		y = 17
+		
+		available_if_capitulated = yes
+		prerequisite = {
+			focus = ERI_deathstar_holocron
+		}
+		completion_reward = {
+		}
+		
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+
+	#####################
+	#   warlord tree    #
+	#####################
+	focus = {
+		id = ERI_down_with_all_of_them
+		icon = unknown
+		cost = 5
+		x = 15
+		y = 13
+		
+		available_if_capitulated = yes
+		prerequisite = {
+			focus = ERI_the_next_logical_step
+		}
+		completion_reward = {
+		}
+		
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	##############################
+	# focus on planet and sector #
+	##############################
+	focus = {
+		id = ERI_domestic_affairs
+		icon = unknown
+		cost = 5
+		x = 15
+		y = 13
+		
+		available_if_capitulated = yes
+		prerequisite = {
+			focus = ERI_the_next_logical_step
+		}
+		completion_reward = {
+		}
+		
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	####################################################
+	# secret path for those poor sods who look at this #
+	####################################################
+	focus = {
+		id = ERI_the_dark_side_is_a_path
+		icon = unknown
+		cost = 5
+		x = 15
+		y = 13
+		
+		available_if_capitulated = yes
+		prerequisite = {
+			focus = ERI_the_next_logical_step
+		}
 		completion_reward = {
 		}
 		
@@ -1264,6 +1690,7 @@ focus_tree = {
 			focus = ERI_rebellion_era_tactics
 		}	
 		completion_reward = {
+			add_country_leader_trait = cornered_fox  ## CHANGE_ME, alter trait
 		}
 		
 
@@ -1283,9 +1710,27 @@ focus_tree = {
 			focus = ERI_logistical_nightmare
 		}	
 		completion_reward = {
+			ERI = {
+				add_corps_commander_role = {
+				  character = ERI_cran_harend
+				  skill = 4
+				  attack_skill = 2
+				  defense_skill = 3
+				  planning_skill = 3
+				  logistics_skill = 5
+				}
+			}
+			ERI = {
+				add_corps_commander_role = {
+				  character = ERI_garm_beren
+				  skill = 4
+				  attack_skill = 2
+				  defense_skill = 3
+				  planning_skill = 3
+				  logistics_skill = 5
+				}
+			}
 		}
-		
-
 		ai_will_do = {
 			factor = 1
 		}
@@ -1384,6 +1829,9 @@ focus_tree = {
 			focus = ERI_the_pit
 		}	
 		completion_reward = {
+			set_technology = {
+			    jump_troopers = 1
+			}
 		}
 		
 
@@ -1392,7 +1840,7 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = ERI_incinerator_troops
+		id = ERI_incinerator_troopers
 		icon = unknown
 		cost = 5
 		x = 5
@@ -1403,6 +1851,9 @@ focus_tree = {
 			focus = ERI_the_pit
 		}	
 		completion_reward = {
+			set_technology = {
+			    incinerator_troopers = 1
+			}
 		}
 		
 
@@ -1422,6 +1873,9 @@ focus_tree = {
 			focus = ERI_the_pit
 		}	
 		completion_reward = {
+			set_technology = {
+			    magma_troopers = 1
+			}
 		}
 		
 
@@ -1430,7 +1884,7 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = ERI_snow_troopers
+		id = ERI_forest_troopers
 		icon = unknown
 		cost = 5
 		x = 7
@@ -1441,9 +1895,10 @@ focus_tree = {
 			focus = ERI_the_pit
 		}	
 		completion_reward = {
+			set_technology = {
+			    forest_troopers = 1
+			}
 		}
-		
-
 		ai_will_do = {
 			factor = 1
 		}
