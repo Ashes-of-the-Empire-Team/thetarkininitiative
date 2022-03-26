@@ -11,7 +11,7 @@ focus_tree = {
 		##}
 	}
 	default = no
-	continuous_focus_position = { x = 100 y = 500 }
+	continuous_focus_position = { x = 2200 y = 100 }
 
 	##
 	focus = {
@@ -648,7 +648,7 @@ focus_tree = {
 		icon = GFX_goal_unknown
 		cost = 8
 		relative_position_id = EOH_the_emperors_storehouse
-		x = 2
+		x = 3
 		y = 1
 		prerequisite = {
 			focus = EOH_the_emperors_storehouse
@@ -679,7 +679,7 @@ focus_tree = {
 		cost = 12
 		relative_position_id = EOH_cloning_on_nirauan
 		x = 0
-		y = 3
+		y = 4
 		prerequisite = {
 			focus = EOH_cloning_on_nirauan
 		}
@@ -702,7 +702,7 @@ focus_tree = {
 		icon = GFX_goal_unknown
 		cost = 8
 		relative_position_id = EOH_the_emperors_storehouse
-		x = 4
+		x = 6
 		y = 1
 		prerequisite = {
 			focus = EOH_the_emperors_storehouse
@@ -1204,6 +1204,7 @@ focus_tree = {
 			FOCUS_FILTER_DIPLOMACY
 		}
 		mutually_exclusive = {
+			focus = EOH_a_union_of_equals
 		}
 		completion_reward = {
 			#The federation will be hegemonic
@@ -1228,6 +1229,7 @@ focus_tree = {
 			FOCUS_FILTER_DIPLOMACY
 		}
 		mutually_exclusive = {
+			focus = EOH_thrawns_federation
 		}
 		completion_reward = {
 			#The federation will not be hegemonic
@@ -1386,6 +1388,7 @@ focus_tree = {
 			FOCUS_FILTER_POLITICAL
 		}
 		mutually_exclusive = {
+			focus = EOH_death_without_mercy
 		}
 		completion_reward = {
 			remove_ideas = EOH_psychological_warfare
@@ -1466,6 +1469,7 @@ focus_tree = {
 			FOCUS_FILTER_POLITICAL
 		}
 		mutually_exclusive = {
+			focus = EOH_benevolent_hero_of_a_new_age
 		}
 		completion_reward = {
 			remove_ideas = EOH_psychological_warfare
@@ -1582,5 +1586,142 @@ focus_tree = {
 		}
 	}
 
+	##Empire of Hand and Steel
+	focus = {
+		id = EOH_empire_of_hand_and_steel
+		icon = GFX_goal_unknown
+		cost = 8
+		relative_position_id = EOH_psychological_warfare
+		x = 15
+		y = 0
+		prerequisite = {
+			focus = EOH_integration_through_industry
+		}
+		prerequisite = {
+			focus = EOH_thrawn_tactics
+		}
+		available = {
+		}
+		search_filters = {
+			FOCUS_FILTER_NATIONAL_SPIRIT
+			FOCUS_FILTER_INDUSTRY
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			add_ideas = EOH_steel_1
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = EOH_urbanize_nirauan
+		icon = GFX_goal_unknown
+		cost = 8
+		relative_position_id = EOH_empire_of_hand_and_steel
+		x = 0
+		y = 2
+		prerequisite = {
+			focus = EOH_empire_of_hand_and_steel
+		}
+		available = {
+		}
+		search_filters = {
+			FOCUS_FILTER_NATIONAL_SPIRIT
+			FOCUS_FILTER_INDUSTRY
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			#Infrastructure and civ factories
+			remove_ideas = EOH_steel_1
+			add_ideas = EOH_steel_2
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
 
+	focus = {
+		id = EOH_import_labor
+		icon = GFX_goal_unknown
+		cost = 12
+		relative_position_id = EOH_urbanize_nirauan
+		x = 0
+		y = 3
+		prerequisite = {
+			focus = EOH_urbanize_nirauan
+		}
+		available = {
+		}
+		search_filters = {
+			FOCUS_FILTER_NATIONAL_SPIRIT
+			FOCUS_FILTER_INDUSTRY
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			#Take state manpower from some planets
+			remove_ideas = EOH_steel_2
+			add_ideas = EOH_steel_3
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+
+	focus = {
+		id = EOH_planetside_production
+		icon = GFX_goal_unknown
+		cost = 8
+		relative_position_id = EOH_urbanize_nirauan
+		x = 0
+		y = 2
+		prerequisite = {
+			focus = EOH_urbanize_nirauan
+		}
+		available = {
+		}
+		search_filters = {
+			FOCUS_FILTER_NATIONAL_SPIRIT
+			FOCUS_FILTER_INDUSTRY
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			#adds some resources
+			remove_ideas = EOH_steel_3
+			add_ideas = EOH_steel_4
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = EOH_ruthless_logistical_efficiency
+		icon = GFX_goal_unknown
+		cost = 16
+		relative_position_id = EOH_planetside_production
+		x = 0
+		y = 3
+		prerequisite = {
+			focus = EOH_planetside_production
+		}
+		available = {
+		}
+		search_filters = {
+			FOCUS_FILTER_NATIONAL_SPIRIT
+			FOCUS_FILTER_INDUSTRY
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			remove_ideas = EOH_steel_4
+			add_ideas = EOH_steel_5
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
 }
