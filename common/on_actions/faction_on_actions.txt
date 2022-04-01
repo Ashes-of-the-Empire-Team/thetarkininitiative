@@ -2,24 +2,8 @@ on_actions = {
 	on_startup = {
 		effect = {
 			every_country={
-				set_variable = { industrialists_opinion = 50 }
-				set_variable = { inteligentsia_opinion = 50 }
-				set_variable = { nationalists_opinion = 50 }
-				set_variable = { unions_opinion = 50 }
-				set_variable = { militarists_opinion = 50 }
-				set_variable = { globalists_opinion = 50 }
-				set_variable = { industrialists_equilibrium = 50 }
-				set_variable = { inteligentsia_equilibrium = 50 }
-				set_variable = { nationalists_equilibrium = 50 }
-				set_variable = { unions_equilibrium = 50 }
-				set_variable = { militarists_equilibrium = 50 }
-				set_variable = { globalists_equilibrium = 50 }
-				set_variable = { industrialists_influence = 50 }
-				set_variable = { inteligentsia_influence = 50 }
-				set_variable = { nationalists_influence = 50 }
-				set_variable = { unions_influence = 50 }
-				set_variable = { militarists_influence = 50 }
-				set_variable = { globalists_influence = 50 }
+				set_variable = { legitimacy_emp = 0 }
+				set_variable = { legitimacy_emp_equilibrium = 0 }
 			}
 		}
 	}
@@ -27,309 +11,31 @@ on_actions = {
 		effect = {
 			if = {
 				limit = {
-					check_variable = { industrialists_equilibrium > industrialists_opinion }
+					check_variable = { legitimacy_emp_equilibrium < legitimacy_emp }
 				}
-				add_to_variable = { industrialists_opinion = 0.05 }
+				subtract_from_variable = { legitimacy_emp = 0.1 }
 			}
 			if = {
 				limit = {
-					check_variable = { industrialists_equilibrium < industrialists_opinion }
-				}
-				subtract_from_variable = { industrialists_opinion = 0.05 }
-			}
-			if = {
-				limit = {
-					check_variable = { industrialists_equilibrium = industrialists_opinion }
+					check_variable = { legitimacy_emp_equilibrium = legitimacy_emp }
 				}
 			}
 			if = {
 				limit = {
-					check_variable = { inteligentsia_equilibrium > inteligentsia_opinion }
+					check_variable = { legitimacy_emp_equilibrium > legitimacy_emp }
 				}
-				add_to_variable = { inteligentsia_opinion = 0.05 }
-			}
-			if = {
-				limit = {
-					check_variable = { inteligentsia_equilibrium < inteligentsia_opinion }
-				}
-				subtract_from_variable = { inteligentsia_opinion = 0.05 }
-			}
-			if = {
-				limit = {
-					check_variable = { inteligentsia_equilibrium = inteligentsia_opinion }
-				}
-			}
-			if = {
-				limit = {
-					check_variable = { nationalists_equilibrium > nationalists_opinion }
-				}
-				add_to_variable = { nationalists_opinion = 0.05 }
-			}
-			if = {
-				limit = {
-					check_variable = { nationalists_equilibrium < nationalists_opinion }
-				}
-				subtract_from_variable = { nationalists_opinion = 0.05 }
-			}
-			if = {
-				limit = {
-					check_variable = { nationalists_equilibrium = nationalists_opinion }
-				}
-			}
-			if = {
-				limit = {
-					check_variable = { unions_equilibrium > unions_opinion }
-				}
-				add_to_variable = { unions_opinion = 0.05 }
-			}
-			if = {
-				limit = {
-					check_variable = { unions_equilibrium < unions_opinion }
-				}
-				subtract_from_variable = { unions_opinion = 0.05 }
-			}
-			if = {
-				limit = {
-					check_variable = { unions_equilibrium = unions_opinion }
-				}
-			}
-			if = {
-				limit = {
-					check_variable = { militarists_equilibrium > militarists_opinion }
-				}
-				add_to_variable = { militarists_opinion = 0.05 }
-			}
-			if = {
-				limit = {
-					check_variable = { militarists_equilibrium < militarists_opinion }
-				}
-				subtract_from_variable = { militarists_opinion = 0.05 }
-			}
-			if = {
-				limit = {
-					check_variable = { militarists_equilibrium = militarists_opinion }
-				}
-			}
-			if = {
-				limit = {
-					check_variable = { globalists_equilibrium > globalists_opinion }
-				}
-				add_to_variable = { globalists_opinion = 0.05 }
-			}
-			if = {
-				limit = {
-					check_variable = { globalists_equilibrium < globalists_opinion }
-				}
-				subtract_from_variable = { globalists_opinion = 0.05 }
-			}
-			if = {
-				limit = {
-					check_variable = { globalists_equilibrium = globalists_opinion }
-				}
+				add_to_variable = { legitimacy_emp = 0.1 }
 			}
 			clamp_variable = {	
-                var = industrialists_opinion
+                var = legitimacy_emp
                 min = 0
                 max = 100
             }
 			clamp_variable = {	
-                var = inteligentsia_opinion
+                var = legitimacy_emp_equilibrium
                 min = 0
                 max = 100
             }
-			clamp_variable = {	
-                var = nationalists_opinion
-                min = 0
-                max = 100
-            }
-			clamp_variable = {	
-                var = unions_opinion
-                min = 0
-                max = 100
-            }
-			clamp_variable = {	
-                var = militarists_opinion
-                min = 0
-                max = 100
-            }
-			clamp_variable = {	
-                var = globalists_opinion
-                min = 0
-                max = 100
-            }
-			clamp_variable = {	
-                var = industrialists_equilibrium
-                min = 0
-                max = 100
-            }
-			clamp_variable = {	
-                var = inteligentsia_equilibrium
-                min = 0
-                max = 100
-            }
-			clamp_variable = {	
-                var = nationalists_equilibrium
-                min = 0
-                max = 100
-            }
-			clamp_variable = {	
-                var = unions_equilibrium
-                min = 0
-                max = 100
-            }
-			clamp_variable = {	
-                var = militarists_equilibrium
-                min = 0
-                max = 100
-            }
-			clamp_variable = {	
-                var = globalists_equilibrium
-                min = 0
-                max = 100
-            }
-			clamp_variable = {	
-                var = industrialists_influence
-                min = 0
-                max = 100
-            }
-			clamp_variable = {	
-                var = inteligentsia_influence
-                min = 0
-                max = 100
-            }
-			clamp_variable = {	
-                var = nationalists_influence
-                min = 0
-                max = 100
-            }
-			clamp_variable = {	
-                var = industrialists_opinion
-                min = 0
-                max = 100
-            }
-			clamp_variable = {	
-                var = unions_influence
-                min = 0
-                max = 100
-            }
-			clamp_variable = {	
-                var = militarists_influence
-                min = 0
-                max = 100
-            }
-			clamp_variable = {	
-                var = globalists_influence
-                min = 0
-                max = 100
-            }
-			if = {
-				limit = {
-					check_variable = { industrialists_opinion < 31 }
-					NOT = {
-						has_country_flag = indistrualists_oppositions
-					}
-				}
-				set_country_flag = indistrualists_oppositions
-				add_to_variable = { opposition_influence = industrialists_influence }
-			}
-			if = {
-				limit = {
-					check_variable = { inteligentsia_opinion < 31 }
-					NOT = {
-						has_country_flag = inteligentsia_oppositions
-					}
-				}
-				set_country_flag = inteligentsia_oppositions
-				add_to_variable = { opposition_influence = inteligentsia_influence }
-			}
-			if = {
-				limit = {
-					check_variable = { nationalists_opinion < 31 }
-					NOT = {
-						has_country_flag = nationalists_oppositions
-					}
-				}
-				set_country_flag = nationalists_oppositions
-				add_to_variable = { opposition_influence = nationalists_influence }
-			}
-			if = {
-				limit = {
-					check_variable = { unions_opinion < 31 }
-					NOT = {
-						has_country_flag = unions_oppositions
-					}
-				}
-				set_country_flag = unions_oppositions
-				add_to_variable = { opposition_influence = unions_influence }
-			}
-			if = {
-				limit = {
-					check_variable = { militarists_opinion < 31 }
-					NOT = {
-						has_country_flag = militarists_oppositions
-					}
-				}
-				set_country_flag = militarists_oppositions
-				add_to_variable = { opposition_influence = militarists_influence }
-			}
-			if = {
-				limit = {
-					check_variable = { globalists_opinion < 31 }
-					NOT = {
-						has_country_flag = globalists_oppositions
-					}
-				}
-				set_country_flag = globalists_oppositions
-				add_to_variable = { opposition_influence = globalists_influence }
-			}
-			if = {
-				limit = {
-					check_variable = { industrialists_opinion > 50 }
-					has_country_flag = indistrualists_oppositions
-				}
-				clr_country_flag = indistrualists_oppositions
-				subtract_from_variable = { opposition_influence = industrialists_influence }
-			}
-			if = {
-				limit = {
-					check_variable = { inteligentsia_opinion > 50 }
-					has_country_flag = inteligentsia_oppositions
-				}
-				clr_country_flag = inteligentsia_oppositions
-				subtract_from_variable = { opposition_influence = industrialists_influence }
-			}
-			if = {
-				limit = {
-					check_variable = { nationalists_opinion > 50 }
-					has_country_flag = nationalists_oppositions
-				}
-				clr_country_flag = nationalists_oppositions
-				subtract_from_variable = { opposition_influence = industrialists_influence }
-			}
-			if = {
-				limit = {
-					check_variable = { unions_opinion > 50 }
-					has_country_flag = unions_oppositions
-				}
-				clr_country_flag = unions_oppositions
-				subtract_from_variable = { opposition_influence = industrialists_influence }
-			}
-			if = {
-				limit = {
-					check_variable = { militarists_opinion > 50 }
-					has_country_flag = militarists_oppositions
-				}
-				clr_country_flag = militarists_oppositions
-				subtract_from_variable = { opposition_influence = industrialists_influence }
-			}
-			if = {
-				limit = {
-					check_variable = { globalists_opinion > 50 }
-					has_country_flag = globalists_oppositions
-				}
-				clr_country_flag = globalists_oppositions
-				subtract_from_variable = { opposition_influence = industrialists_influence }
-			}
 		}
 	}
 }
