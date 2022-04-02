@@ -15,20 +15,18 @@ focus_tree = {
 
 	#Thrawn in the Unknown Regions
 	focus = {
-		id = EOH_the_ssi_ruuvi_threat
+		id = EOH_legacy_of_outbound_flight
 		icon = GFX_goal_unknown
-		cost = 10
-		x = 11
+		cost = 4
+		x = 8
 		y = 1
 		prerequisite = {
 		}
 		search_filters = {
-			FOCUS_FILTER_EXPANSION
 		}
 		mutually_exclusive = {
 		}
 		completion_reward = {
-			declare_war_on = { target = SSI    type = puppet_wargoal_focus }
 		}
 
 		ai_will_do = {
@@ -36,25 +34,175 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = EOH_learning_from_the_ssi_ruuvi
+		id = EOH_the_ssi_ruuvi_threat
 		icon = GFX_goal_unknown
-		cost = 15
+		cost = 8
+		x = -2
+		y = 1
+		relative_position_id = EOH_legacy_of_outbound_flight
+		prerequisite = {
+			focus = EOH_legacy_of_outbound_flight
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			declare_war_on = { target = SSI    type = puppet_wargoal_focus }
+			##bonuses against ssi-ruuvi to cancel out negatives
+			mark_focus_tree_layout_dirty = yes
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = EOH_promising_officers
+		icon = GFX_goal_unknown
+		cost = 12
 		relative_position_id = EOH_the_ssi_ruuvi_threat
-		x = 2
+		x = -1
 		y = 1
 		prerequisite = {
 			focus = EOH_the_ssi_ruuvi_threat
 		}
 		search_filters = {
-			FOCUS_FILTER_RESEARCH
+			FOCUS_FILTER_MILITARY
 		}
 		mutually_exclusive = {
 		}
 		completion_reward = {
-			custom_effect_tooltip = "Ssi-Ruuvi Tech"
+			## Cheaper generals or something
 		}
-		
-
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = EOH_bakura_retaken
+		icon = GFX_goal_unknown
+		cost = 12
+		relative_position_id = EOH_the_ssi_ruuvi_threat
+		x = 1
+		y = 1
+		available = {
+			## Bakura controls all of Bakura
+		}
+		prerequisite = {
+			focus = EOH_the_ssi_ruuvi_threat
+		}
+		search_filters = {
+			FOCUS_FILTER_MILITARY
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			## Idk
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = EOH_combined_chiss-imperial_offensive
+		icon = GFX_goal_unknown
+		cost = 12
+		relative_position_id = EOH_promising_officers
+		x = 1
+		y = 1
+		available = {
+			## Bakura controls all of Bakura
+		}
+		prerequisite = {
+			focus = EOH_bakura_retaken
+			focus = EOH_promising_officers
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			## Chiss bonuses against ssi-ruuvi
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = EOH_rebuild_bakura
+		icon = GFX_goal_unknown
+		cost = 14
+		relative_position_id = EOH_combined_chiss-imperial_offensive
+		x = 0
+		y = 1
+		available = {
+			## War won
+		}
+		mutually_exclusive = {
+			focus = EOH_negotiate_a_peace
+		}
+		prerequisite = {
+			focus = EOH_combined_chiss-imperial_offensive
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			## Removes ideas against ssi ruuvi, gives bakura repair and construction bonus
+			mark_focus_tree_layout_dirty = yes
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = EOH_leave_lwhekk
+		icon = GFX_goal_unknown
+		cost = 8
+		relative_position_id = EOH_rebuild_bakura
+		x = -1
+		y = 1
+		available = {
+			## War won
+		}
+		prerequisite = {
+			focus = EOH_rebuild_bakura
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+			focus = EOH_prevent_ssi-ruuvi_resurgence
+		}
+		completion_reward = {
+			## removes occupying focus idea from ssi-ruuvi
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = EOH_prevent_ssi-ruuvi_resurgence
+		icon = GFX_goal_unknown
+		cost = 12
+		relative_position_id = EOH_rebuild_bakura
+		x = 1
+		y = 1
+		available = {
+			## War won
+		}
+		prerequisite = {
+			focus = EOH_rebuild_bakura
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+			focus = EOH_leave_lwhekk
+		}
+		completion_reward = {
+			## removes occupying focus idea from ssi-ruuvi, adds idea that lasts a couple years and makes them worse
+		}
 		ai_will_do = {
 			factor = 1
 		}
@@ -62,21 +210,24 @@ focus_tree = {
 	focus = {
 		id = EOH_the_chiss_on_their_own
 		icon = GFX_goal_unknown
-		cost = 8
-		relative_position_id = EOH_the_ssi_ruuvi_threat
-		x = -1
-		y = 2
+		cost = 6
+		relative_position_id = EOH_leave_lwhekk
+		x = 0
+		y = 1
 		prerequisite = {
-			focus = EOH_the_ssi_ruuvi_threat
+			focus = EOH_leave_lwhekk
+			focus = EOH_prevent_ssi-ruuvi_resurgence
 		}
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
 		mutually_exclusive = {
 			focus = EOH_natural_allies
+			focus = EOH_ally_the_ssi-ruuvi
 		}
 		completion_reward = {
 			add_political_power = 50
+			mark_focus_tree_layout_dirty = yes
 		}
 		
 		ai_will_do = {
@@ -87,17 +238,19 @@ focus_tree = {
 		id = EOH_natural_allies
 		icon = GFX_goal_unknown
 		cost = 12
-		relative_position_id = EOH_the_ssi_ruuvi_threat
-		x = 1
-		y = 2
+		relative_position_id = EOH_the_chiss_on_their_own
+		x = 2
+		y = 0
 		prerequisite = {
-			focus = EOH_the_ssi_ruuvi_threat
+			focus = EOH_leave_lwhekk
+			focus = EOH_prevent_ssi-ruuvi_resurgence
 		}
 		search_filters = {
-			FOCUS_FILTER_EXPANSION
+			FOCUS_FILTER_DIPLOMACY
 		}
 		mutually_exclusive = {
 			focus = EOH_the_chiss_on_their_own
+			focus = EOH_ally_the_ssi-ruuvi
 		}
 		completion_reward = {
 			diplomatic_relation = { 
@@ -119,37 +272,257 @@ focus_tree = {
 			factor = 1
 		}
 	}
+
+	##Peace with the Ssi-ruuvi
 	focus = {
-		id = EOH_soontir_fel
+		id = EOH_negotiate_a_peace
 		icon = GFX_goal_unknown
-		cost = 8
-		relative_position_id = EOH_the_chiss_on_their_own
-		x = 1
-		y = 1
+		cost = 12
+		relative_position_id = EOH_rebuild_bakura
+		x = -3
+		y = 0
+		allow_branch = {
+			has_global_flag = tempdateflag
+		}
 		prerequisite = {
-			focus = EOH_the_chiss_on_their_own
-			focus = EOH_natural_allies
+			focus = EOH_the_ssi_ruuvi_threat
 		}
 		search_filters = {
+			FOCUS_FILTER_DIPLOMACY
 		}
 		mutually_exclusive = {
+			focus = EOH_rebuild_bakura
 		}
 		completion_reward = {
-			#country_event = { id = eoh_soontir_fel }
+			## Negotiates a peace
+			mark_focus_tree_layout_dirty = yes
 		}
 		ai_will_do = {
 			factor = 1
 		}
 	}
 	focus = {
-		id = EOH_the_final_expeditions
+		id = EOH_rapprochement_with_the_ssi-ruuvi
 		icon = GFX_goal_unknown
-		cost = 10
-		relative_position_id = EOH_soontir_fel
+		cost = 8
+		relative_position_id = EOH_negotiate_a_peace
 		x = 0
 		y = 1
 		prerequisite = {
-			focus = EOH_soontir_fel
+			focus = EOH_negotiate_a_peace
+		}
+		search_filters = {
+			FOCUS_FILTER_DIPLOMACY
+		}
+		completion_reward = {
+			## Removes negative opinion stuff idk
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = EOH_ally_the_ssi-ruuvi
+		icon = GFX_goal_unknown
+		cost = 12
+		relative_position_id = EOH_the_chiss_on_their_own
+		x = -2
+		y = 0
+		prerequisite = {
+			focus = EOH_rapprochement_with_the_ssi-ruuvi
+		}
+		search_filters = {
+			FOCUS_FILTER_DIPLOMACY
+		}
+		mutually_exclusive = {
+			focus = EOH_the_chiss_on_their_own
+			focus = EOH_natural_allies
+		}
+		completion_reward = {
+			diplomatic_relation = { 
+				country = SSI
+				relation = non_aggression_pact 
+			}
+			custom_effect_tooltip = "This will allow us to bring the Ssi-ruuvi further into our sphere of influence in the future."
+			mark_focus_tree_layout_dirty = yes
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+
+	## Right side of unknown regions
+	focus = {
+		id = EOH_the_twelfth_grand_admiral
+		icon = GFX_goal_unknown
+		cost = 12
+		relative_position_id = EOH_legacy_of_outbound_flight
+		x = 2
+		y = 1
+		prerequisite = {
+			focus = EOH_legacy_of_outbound_flight
+		}
+		search_filters = {
+			FOCUS_FILTER_MILITARY
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			## Slightly reduces debuffs from Zaarin
+			mark_focus_tree_layout_dirty = yes
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = EOH_reconciliation_with_zaarin
+		icon = GFX_goal_unknown
+		cost = 16
+		relative_position_id = EOH_the_twelfth_grand_admiral
+		x = -1
+		y = 1
+		prerequisite = {
+			focus = EOH_the_twelfth_grand_admiral
+		}
+		search_filters = {
+			FOCUS_FILTER_MILITARY
+		}
+		mutually_exclusive = {
+			focus = EOH_none_evade_thrawns_grasp
+		}
+		completion_reward = {
+			## gets rid of debuffs from zaarin, recruits him, tech bonus for w/e he was working on, palpatine likes you less
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = EOH_none_evade_thrawns_grasp
+		icon = GFX_goal_unknown
+		cost = 13
+		relative_position_id = EOH_the_twelfth_grand_admiral
+		x = 1
+		y = 1
+		prerequisite = {
+			focus = EOH_the_twelfth_grand_admiral
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+			focus = EOH_reconciliation_with_zaarin
+		}
+		completion_reward = {
+			## gets rid of debuffs from zaarin, noghri like you less
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = EOH_convince_fel_of_our_cause
+		icon = GFX_goal_unknown
+		cost = 15
+		relative_position_id = EOH_reconciliation_with_zaarin
+		x = 0
+		y = 1
+		prerequisite = {
+			focus = EOH_none_evade_thrawns_grasp
+			focus = EOH_reconciliation_with_zaarin
+		}
+		search_filters = {
+			FOCUS_FILTER_MILITARY
+		}
+		mutually_exclusive = {
+			focus = EOH_death_to_the_traitor
+		}
+		completion_reward = {
+			## gets fel
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = EOH_death_to_the_traitor
+		icon = GFX_goal_unknown
+		cost = 12
+		relative_position_id = EOH_reconciliation_with_zaarin
+		x = 2
+		y = 1
+		prerequisite = {
+			focus = EOH_none_evade_thrawns_grasp
+			focus = EOH_reconciliation_with_zaarin
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+			focus = EOH_convince_fel_of_our_cause
+		}
+		completion_reward = {
+			## kills fel, noghri like you less
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = EOH_ensure_failure_of_peace_talks
+		icon = GFX_goal_unknown
+		cost = 15
+		relative_position_id = EOH_convince_fel_of_our_cause
+		x = 0
+		y = 1
+		prerequisite = {
+			focus = EOH_convince_fel_of_our_cause
+			focus = EOH_death_to_the_traitor
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+			focus = EOH_assasinate_oxtroe
+		}
+		completion_reward = {
+			# ensures failure of peace talks
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = EOH_assasinate_oxtroe
+		icon = GFX_goal_unknown
+		cost = 12
+		relative_position_id = EOH_ensure_failure_of_peace_talks
+		x = 2
+		y = 0
+		prerequisite = {
+			focus = EOH_convince_fel_of_our_cause
+			focus = EOH_death_to_the_traitor
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+			focus = EOH_ensure_failure_of_peace_talks
+		}
+		completion_reward = {
+			# kills oxtroe, noghri like you less
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = EOH_battle_of_quethold
+		icon = GFX_goal_unknown
+		cost = 12
+		relative_position_id = EOH_assasinate_oxtroe
+		x = -1
+		y = 2
+		prerequisite = {
+			focus = EOH_assasinate_oxtroe
+			focus = EOH_ensure_failure_of_peace_talks
 		}
 		search_filters = {
 		}
@@ -158,6 +531,7 @@ focus_tree = {
 		completion_reward = {
 			remove_ideas = EOH_thrawn_unknown_regions
 			add_ideas = EOH_thrawn_unknown_regions_2
+			mark_focus_tree_layout_dirty = yes
 		}
 		ai_will_do = {
 			factor = 1
@@ -167,12 +541,26 @@ focus_tree = {
 	focus = {
 		id = EOH_the_return
 		icon = GFX_goal_unknown
-		cost = 15
-		relative_position_id = EOH_the_final_expeditions
-		x = 0
+		cost = 16
+		relative_position_id = EOH_battle_of_quethold
+		x = -2
 		y = 1
+		allow_branch = {
+			EOH = {
+				AND = {
+					has_completed_focus = EOH_battle_of_quethold
+					OR = {
+						has_completed_focus = EOH_the_chiss_on_their_own
+						OR = {
+							has_completed_focus = EOH_ally_the_ssi-ruuvi
+							has_completed_focus = EOH_natural_allies
+						}
+					}
+				}
+			}
+		}
 		prerequisite = {
-			focus = EOH_the_final_expeditions
+			focus = EOH_legacy_of_outbound_flight
 		}
 		search_filters = {
 		}
@@ -538,21 +926,18 @@ focus_tree = {
 		x = -2
 		y = 1
 		allow_branch = {
-			AND = {
-				OR = {
-					EOH = {
+			EOH = {
+				AND = {
+					OR = {					
 						has_completed_focus = EOH_revitalization_of_the_imperial_military
-					}
-					EOH = {
 						has_completed_focus = EOH_mount_tantiss_campaign
 					}
-				}
-				NOT = {
-					EOH = {
+					NOT = {
 						has_completed_focus = EOH_traditional_warfare
 					}
 				}
-			}	
+			}
+				
 		}
 		prerequisite = {
 			focus = EOH_mount_tantiss_campaign
