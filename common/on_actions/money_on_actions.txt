@@ -9,7 +9,10 @@ on_actions = {
 		#	set_variable = { social_spending_multip = 1 }
 		#	set_variable = { security_spending_multip = 1 }
 		#	set_variable = { space_spending_multip = 1 }
-
+			set_variable = { economy_law_multip_civ = 1 }
+			set_variable = { economy_law_multip_mil = 1 }
+			set_variable = { economy_law_multip_corp = 1 }
+			set_country_flag = corruption_lvl_1
 			}
 			set_variable = { Global.interest_rate = 1.5 }
 		}
@@ -68,6 +71,7 @@ on_actions = {
 			divide_variable = {  cfc  = 20 }
 			set_variable = { tax = max_manpower_k }
 			divide_variable = { tax = 30000 }
+
 
 		#These variables define themselves as equal to the number of the respective resource import
 			set_variable = { chromium_import = resource_imported@chromium}
@@ -157,6 +161,31 @@ on_actions = {
 			}
 			clear_variable = global.total_corporation_aid ### REPLACE_ME, Add corporation money gain from the corporation aid
 ############################ END OF INCOME MODIFIERS ###########################
+			multiply_variable = { cfff = economy_law_multip_civ }
+			multiply_variable = { nf = economy_law_multip_mil }
+			multiply_variable = { cfc = economy_law_multip_corp }
+			if = {
+				limit = {
+					has_country_flag = corruption_lvl_2
+				}
+				multiply_variable = { rubber_export = 1.05 }
+				multiply_variable = { tax = 0.95 }
+			}
+			if = {
+				limit = {
+					has_country_flag = corruption_lvl_3
+				}
+				multiply_variable = { rubber_export = 1.1 }
+				multiply_variable = { tax = 0.90 }
+			}
+			if = {
+				limit = {
+					has_country_flag = corruption_lvl_4
+				}
+				multiply_variable = { rubber_export = 1.15 }
+				multiply_variable = { tax = 0.85 }
+			}
+			#multiply_variable = { cf = economy_law_multip }
 		#At the start of each day, expenses and resource income/expense is set to zero
 			set_variable = { allexpenses = 0 }
 			set_variable = { resourceexpenses = 0 }
