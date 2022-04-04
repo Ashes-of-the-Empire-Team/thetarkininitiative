@@ -1,0 +1,98 @@
+notoriety_change = {
+	for_loop_effect = {
+		start = 1
+		end = global.consortium_countries^num
+		value = v
+		set_temp_variable = { n = v }
+		set_temp_variable = { n_minus = n }
+		subtract_from_temp_variable = { n_minus = 1 }
+		while_loop_effect = {
+			limit = {
+				var:global.consortium_countries^n_minus = {
+					set_temp_variable = { n_minus_notoriety = notoriety }
+				}
+				var:global.consortium_countries^n = {
+					set_temp_variable = { n_notoriety = notoriety }
+				}
+				check_variable = { n > 0 }
+				check_variable = { n_minus_notoriety < n_notoriety }
+			}
+			# swap j-1 with j if value of j-1 < j
+			set_temp_variable = { temp = global.consortium_countries^n }
+			set_variable = { global.consortium_countries^n = global.consortium_countries^n_minus }
+			set_variable = { global.consortium_countries^n_minus = temp }
+			subtract_from_temp_variable = { n = 1 }
+			subtract_from_temp_variable = { n_minus = 1 }
+			}
+		}
+		remove_ideas = notoriety_1
+		remove_ideas = notoriety_2
+		remove_ideas = notoriety_3
+
+		var:global.consortium_countries^0 = {
+			add_ideas = notoriety_1
+		}
+		var:global.consortium_countries^1 = {
+			add_ideas = notoriety_2
+		}
+		var:global.consortium_countries^2 = {
+			add_ideas = notoriety_3
+		}
+}
+corruption_increase = {
+	if = {
+		limit = {
+			has_country_flag = corruption_lvl_1
+		}
+		set_country_flag = corruption_lvl_2
+		clr_country_flag = corruption_lvl_1
+		add_ideas = corruption_lvl_2
+	}
+	else_if = {
+		limit = {
+			has_country_flag = corruption_lvl_2
+		}
+		set_country_flag = corruption_lvl_3
+		clr_country_flag = corruption_lvl_2
+		add_ideas = corruption_lvl_3
+		remove_ideas = corruption_lvl_2
+	}
+	else_if = {
+		limit = {
+			has_country_flag = corruption_lvl_3
+		}
+		set_country_flag = corruption_lvl_4
+		clr_country_flag = corruption_lvl_3
+		add_ideas = corruption_lvl_4
+		remove_ideas = corruption_lvl_4
+	}
+}
+corruption_decrease = {
+	if = {
+		limit = {
+			has_country_flag = corruption_lvl_2
+		}
+		clr_country_flag = corruption_lvl_2
+		set_country_flag = corruption_lvl_1
+		remove_ideas = corruption_lvl_2
+	}
+	else_if = {
+		limit = {
+			has_country_flag = corruption_lvl_3
+		}
+		clr_country_flag = corruption_lvl_3
+		set_country_flag = corruption_lvl_2
+		remove_ideas = corruption_lvl_3
+		add_ideas = corruption_lvl_2
+	}
+	else_if = {
+		limit = {
+			has_country_flag = corruption_lvl_4
+		}
+		clr_country_flag = corruption_lvl_4
+		set_country_flag = corruption_lvl_3
+		add_ideas = corruption_lvl_3
+		remove_ideas = corruption_lvl_4
+	}
+}
+

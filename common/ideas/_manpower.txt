@@ -145,7 +145,16 @@ ideas = {
 				army_core_defence_factor = 0.15
 				conscription = 0.04
 			}
-			
+			on_add = {
+				custom_effect_tooltip = fanatic_loyalists_tt
+				hidden_effect = {
+					set_variable = { volunteer_only_var = party_popularity@ruling_party }
+					multiply_variable = { volunteer_only_var = has_war_support }
+					multiply_variable = { volunteer_only_var = 0.0045 }
+					subtract_from_variable = { volunteer_only_var = 0.015 }
+					add_dynamic_modifier = { modifier = fanatic_loyalists_dyn }
+				}
+			}
 			cancel_if_invalid = no
 		}
 		all_species_allowed = {
