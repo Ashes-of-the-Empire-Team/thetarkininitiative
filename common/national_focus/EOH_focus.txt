@@ -41,6 +41,11 @@ focus_tree = {
 		x = -2
 		y = 1
 		relative_position_id = EOH_legacy_of_outbound_flight
+		available = {
+			SSI = {
+				has_war = yes
+			}
+		}
 		prerequisite = {
 			focus = EOH_legacy_of_outbound_flight
 		}
@@ -49,7 +54,19 @@ focus_tree = {
 		mutually_exclusive = {
 		}
 		completion_reward = {
-			declare_war_on = { target = SSI    type = puppet_wargoal_focus }
+			declare_war_on = { target = SSI    type = topple_government }
+			SSI = {
+				country_event = { id = SSI.1 }
+			}
+			CHS = {
+				country_event = { id = CHS.1 }
+			}
+			MIT = {
+				country_event = { id = MIT.1 }
+			}
+			INR = {
+				country_event = { id = INR.1 }
+			}
 			mark_focus_tree_layout_dirty = yes
 		}
 
@@ -65,7 +82,16 @@ focus_tree = {
 		x = -1
 		y = 1
 		bypass = {
-			##War is over
+			AND = {
+				SSI = {
+					has_war = no
+				}
+				EOH = {
+					NOT = {
+						has_completed_focus = EOH_negotiate_a_peace
+					}
+				}
+			}
 		}
 		prerequisite = {
 			focus = EOH_the_ssi_ruuvi_threat
@@ -93,7 +119,16 @@ focus_tree = {
 		x = 1
 		y = 1
 		bypass = {
-			##War over
+			AND = {
+				SSI = {
+					has_war = no
+				}
+				EOH = {
+					NOT = {
+						has_completed_focus = EOH_negotiate_a_peace
+					}
+				}
+			}
 		}
 		available = {
 			## Bakura controls all of Bakura
@@ -131,11 +166,17 @@ focus_tree = {
 		relative_position_id = EOH_promising_officers
 		x = 1
 		y = 1
-		available = {
-			## Bakura controls all of Bakura
-		}
 		bypass = {
-			## War over
+			AND = {
+				SSI = {
+					has_war = no
+				}
+				EOH = {
+					NOT = {
+						has_completed_focus = EOH_negotiate_a_peace
+					}
+				}
+			}
 		}
 		prerequisite = {
 			focus = EOH_bakura_retaken
@@ -153,22 +194,13 @@ focus_tree = {
 				}
 			}
 			CHS = {
-				add_timed_idea = {
-					idea = EOH_chiss_imperial_offensive
-					days = 180
-				}
+				country_event = { id = CHS.1 }
 			}
 			INR = {
-				add_timed_idea = {
-					idea = EOH_chiss_imperial_offensive
-					days = 180
-				}
+				country_event = { id = INR.1 }
 			}
 			MIT = {
-				add_timed_idea = {
-					idea = EOH_chiss_imperial_offensive
-					days = 180
-				}
+				country_event = { id = MIT.1 }
 			}
 		}
 		ai_will_do = {
@@ -263,6 +295,7 @@ focus_tree = {
 		prerequisite = {
 			focus = EOH_leave_lwhekk
 			focus = EOH_prevent_ssi-ruuvi_resurgence
+			focus = EOH_rapprochement_with_the_ssi-ruuvi
 		}
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
@@ -290,6 +323,7 @@ focus_tree = {
 		prerequisite = {
 			focus = EOH_leave_lwhekk
 			focus = EOH_prevent_ssi-ruuvi_resurgence
+			focus = EOH_rapprochement_with_the_ssi-ruuvi
 		}
 		search_filters = {
 			FOCUS_FILTER_DIPLOMACY
@@ -327,8 +361,8 @@ focus_tree = {
 		relative_position_id = EOH_rebuild_bakura
 		x = -3
 		y = 0
-		allow_branch = {
-			has_global_flag = tempdateflag
+		available = {
+			date > 5.01.01
 		}
 		prerequisite = {
 			focus = EOH_the_ssi_ruuvi_threat
@@ -341,7 +375,6 @@ focus_tree = {
 		}
 		completion_reward = {
 			## Negotiates a peace
-			mark_focus_tree_layout_dirty = yes
 		}
 		ai_will_do = {
 			factor = 1
@@ -405,6 +438,11 @@ focus_tree = {
 		relative_position_id = EOH_legacy_of_outbound_flight
 		x = 2
 		y = 1
+		available = {
+			EOH = {
+				has_completed_focus = EOH_the_ssi_ruuvi_threat
+			}
+		}
 		prerequisite = {
 			focus = EOH_legacy_of_outbound_flight
 		}
@@ -606,7 +644,12 @@ focus_tree = {
 			}
 		}
 		prerequisite = {
-			focus = EOH_legacy_of_outbound_flight
+			focus = EOH_battle_of_quethold
+		}
+		prerequisite = {
+			focus = EOH_ally_the_ssi-ruuvi
+			focus = EOH_the_chiss_on_their_own
+			focus = EOH_natural_allies
 		}
 		search_filters = {
 		}
