@@ -9,14 +9,14 @@ country_event = {
     id = EOH.1 ## the big event
     title = EOH.1
     desc = EOH.1.d
-    picture = GFX_report_event_election_vote
+    picture = GFX_report_event_generic_read_write
     
     trigger = {
         original_tag = EOH
         date > 9.03.01
     }
     mean_time_to_happen = {
-        days = 220
+        days = 200
         modifier = {
             add = 120
             EOH = {
@@ -48,12 +48,115 @@ country_event = {
             }
         }
     }
+    immediate = {
+        kill_country_leader = yes
+    }
     fire_only_once = yes
     option = {
         name = "But... it was so artistically done."
-        effect_tooltip = {
-            kill_country_leader = yes
-        }
+        custom_effect_tooltip = "Thrawn has died."
     }
 
 }
+country_event = {
+    id = EOH.2 ## thrawn's confederation invite
+    title = EOH.2
+    desc = EOH.2.d
+    picture = GFX_report_event_generic_read_write
+    immediate = {
+		hidden_effect = {
+			save_event_target_as = alliance_applicant
+			FROM = {
+				save_event_target_as = alliance_inviter
+			}
+		}
+	}
+    is_triggered_only = yes
+    fire_only_once = yes
+    option = {
+        name = "We will do our part"
+        ai_chance = {
+			base = 100
+			
+			modifier = {
+				add = -5
+				ROOT = {
+                    tag = PEN
+                }
+			}
+			
+            modifier = {
+				add = -40
+				ROOT = {
+                    tag = ZSJ
+                }
+			}
+		}
+        hidden_effect = {
+            set_country_flag = alliance_inviter@ROOT
+			FROM = { set_country_flag = alliance_applicant@ROOT }
+        }
+        effect_tooltip = {
+            FROM = { 
+                faction_leader = {
+                    add_to_faction = ROOT
+                }
+                country_event = { id = EOH.3 hours = 2 }
+            }
+        }
+    }
+    option = {
+        name = "We will take no part in this"
+        ai_chance = {
+			base = 0
+			
+			modifier = {
+				add = 5
+				ROOT = {
+                    tag = PEN
+                }
+			}
+			
+            modifier = {
+				add = 40
+				ROOT = {
+                    tag = ZSJ
+                }
+			}
+		}
+        hidden_effect = {
+            set_country_flag = alliance_inviter@ROOT
+			FROM = { set_country_flag = alliance_applicant@ROOT }
+            country_event = { id = EOH.4 hours = 2 }
+        }
+    }
+}
+
+country_event = {
+    id = EOH.3 ## thrawn's confederation country accepts
+    title = EOH.3
+    desc = EOH.3.d
+
+    picture = GFX_report_event_generic_read_write
+    
+    is_triggered_only = yes
+    fire_only_once = yes
+    option = {
+        name = "The Confederation grows stronger"
+    }
+}
+
+country_event = {
+    id = EOH.4 ## thrawn's confederation country rejects
+    title = EOH.4
+    desc = EOH.4.d
+
+    picture = GFX_report_event_generic_read_write
+    
+    is_triggered_only = yes
+    fire_only_once = yes
+    option = {
+        name = "We will forge on without them"
+    }
+}
+
