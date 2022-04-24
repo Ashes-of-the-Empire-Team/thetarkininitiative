@@ -263,7 +263,7 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = ZSJ_align_the_upper_class
+		id = ZSJ_coproate_espionage
 		icon = GFX_goal_zsinj_basic
 		prerequisite = { focus = ZSJ_the_enemy_we_know }
 		x = 12
@@ -286,10 +286,12 @@ focus_tree = {
 		available_if_capitulated = yes
 
 		completion_reward = {
-			add_stability = 0.1
-			add_popularity = {
-				ideology = democracy
-				popularity = 0.15
+			ZSJ = {
+				create_wargoal = {
+					target = AUT
+					type = take_state_focus
+					generator = { 178 }
+				}
 			}
 		}
 	}
@@ -327,7 +329,7 @@ focus_tree = {
 	focus = {
 		id = ZSJ_remove_political_disidents
 		icon = GFX_goal_zsinj_basic
-		prerequisite = { focus = ZSJ_align_the_upper_class
+		prerequisite = { focus = ZSJ_coproate_espionage
 		focus = ZSJ_pursuade_the_officers
 		focus = ZSJ_gain_the_admirals_admiration
 		 }
@@ -395,7 +397,7 @@ focus_tree = {
 	focus = {
 		id = ZSJ_fuse_the_collective_goals
 		icon = GFX_goal_zsinj_basic
-		prerequisite = { focus = ZSJ_align_the_upper_class 
+		prerequisite = { focus = ZSJ_coproate_espionage 
 		focus = ZSJ_pursuade_the_officers
 		focus = ZSJ_gain_the_admirals_admiration  
 	}
@@ -1097,28 +1099,12 @@ focus_tree = {
 		available_if_capitulated = yes
 
 		completion_reward = {
-			add_opinion_modifier = { 
-				target = DAT 
-				modifier = large_increase
-			}
-			diplomatic_relation = {
-				country = DAT
-				relation = guarantee
-				active = yes
-			}
-			DAT = {
-				diplomatic_relation = {
-					country = ZSJ
-					relation = guarantee
-					active = yes
+			ZSJ = {
+				create_wargoal = {
+					target = DAT
+					type = take_state_focus
+					generator = { 31 }
 				}
-			}
-			DAT = {
-				add_to_faction = ZSJ
-			}
-			add_to_variable = {
-				var = legitimacy_emp
-				value = -10
 			}
 		}
 	}
@@ -3370,7 +3356,7 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = ZSJ_corporate_menace
+		id = ZSJ_backstab_the_republic
 		icon = GFX_goal_zsinj_basic
 		x = 9
 		y = 14
@@ -3400,9 +3386,114 @@ focus_tree = {
 		available_if_capitulated = yes
 
 		completion_reward = {
-			create_wargoal = {
-				type = annex_everything target = AUT
+			diplomatic_relation = { 
+				country = REB 
+				relation = non_aggression_pact 
+				active = no
 			}
+		}
+	}
+	focus = {
+		id = ZSJ_prepare_for_war
+		icon = GFX_goal_zsinj_basic
+		x = 9
+		y = 15
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 1
+		}
+
+		available = {
+			NOT = {
+				country_exists = CAL
+			}
+		}
+		
+		bypass = {
+		}
+
+		prerequisite = {
+			focus = ZSJ_backstab_the_republic
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+
+		completion_reward = {
+			ZSJ = { country_event = { days = 1 id = ZSJ.7 } }
+		}
+	}
+	focus = {
+		id = ZSJ_help_from_thrawn
+		icon = GFX_goal_zsinj_basic
+		x = 9
+		y = 16
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 1
+		}
+
+		available = {
+			NOT = {
+				has_completed_focus = ZSJ_amputate_the_hand
+			}
+			has_opinion = {
+				target = EOH
+				value > 50
+			}
+		}
+		
+		bypass = {
+		}
+
+		prerequisite = {
+			focus = ZSJ_prepare_for_war
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+
+		completion_reward = {
+			EOH = { country_event = { days = 1 id = ZSJ.8 } }
+			ZSJ = {
+				create_faction = "Unholy Alliance"
+			}
+		}
+	}
+	focus = {
+		id = ZSJ_war_prep_nr
+		icon = GFX_goal_zsinj_basic
+		x = 9
+		y = 17
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 1
+		}
+
+		available = {
+		}
+		
+		bypass = {
+		}
+
+		prerequisite = {
+			focus = ZSJ_help_from_thrawn
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+
+		completion_reward = {
+			EOH = { country_event = { days = 1 id = ZSJ.9 } }
 		}
 	}
 	focus = {
