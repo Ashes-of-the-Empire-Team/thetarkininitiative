@@ -37,8 +37,8 @@ focus_tree = {
 	focus = {
 		id = EOH_the_ssi_ruuvi_threat
 		icon = GFX_goal_unknown
-		cost = 8
-		x = -2
+		cost = 6
+		x = -3
 		y = 1
 		relative_position_id = EOH_legacy_of_outbound_flight
 		available = {
@@ -77,7 +77,7 @@ focus_tree = {
 	focus = {
 		id = EOH_promising_officers
 		icon = GFX_goal_unknown
-		cost = 12
+		cost = 10
 		relative_position_id = EOH_the_ssi_ruuvi_threat
 		x = -1
 		y = 1
@@ -114,7 +114,7 @@ focus_tree = {
 	focus = {
 		id = EOH_bakura_retaken
 		icon = GFX_goal_unknown
-		cost = 8
+		cost = 6
 		relative_position_id = EOH_the_ssi_ruuvi_threat
 		x = 1
 		y = 1
@@ -162,7 +162,7 @@ focus_tree = {
 	focus = {
 		id = EOH_combined_chiss-imperial_offensive
 		icon = GFX_goal_unknown
-		cost = 12
+		cost = 10
 		relative_position_id = EOH_promising_officers
 		x = 1
 		y = 1
@@ -210,7 +210,7 @@ focus_tree = {
 	focus = {
 		id = EOH_rebuild_bakura
 		icon = GFX_goal_unknown
-		cost = 14
+		cost = 12
 		relative_position_id = EOH_combined_chiss-imperial_offensive
 		x = 0
 		y = 1
@@ -316,7 +316,7 @@ focus_tree = {
 	focus = {
 		id = EOH_natural_allies
 		icon = GFX_goal_unknown
-		cost = 12
+		cost = 10
 		relative_position_id = EOH_the_chiss_on_their_own
 		x = 2
 		y = 0
@@ -357,7 +357,7 @@ focus_tree = {
 	focus = {
 		id = EOH_negotiate_a_peace
 		icon = GFX_goal_unknown
-		cost = 12
+		cost = 8
 		relative_position_id = EOH_rebuild_bakura
 		x = -3
 		y = 0
@@ -403,7 +403,7 @@ focus_tree = {
 	focus = {
 		id = EOH_ally_the_ssi-ruuvi
 		icon = GFX_goal_unknown
-		cost = 12
+		cost = 8
 		relative_position_id = EOH_the_chiss_on_their_own
 		x = -2
 		y = 0
@@ -434,9 +434,9 @@ focus_tree = {
 	focus = {
 		id = EOH_the_twelfth_grand_admiral
 		icon = GFX_goal_unknown
-		cost = 12
+		cost = 8
 		relative_position_id = EOH_legacy_of_outbound_flight
-		x = 2
+		x = 3
 		y = 1
 		available = {
 			EOH = {
@@ -462,7 +462,7 @@ focus_tree = {
 	focus = {
 		id = EOH_reconciliation_with_zaarin
 		icon = GFX_goal_unknown
-		cost = 16
+		cost = 8
 		relative_position_id = EOH_the_twelfth_grand_admiral
 		x = -1
 		y = 1
@@ -485,7 +485,7 @@ focus_tree = {
 	focus = {
 		id = EOH_none_evade_thrawns_grasp
 		icon = GFX_goal_unknown
-		cost = 13
+		cost = 10
 		relative_position_id = EOH_the_twelfth_grand_admiral
 		x = 1
 		y = 1
@@ -505,15 +505,460 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = EOH_convince_fel_of_our_cause
+		id = EOH_taming_nirauan
 		icon = GFX_goal_unknown
-		cost = 15
+		cost = 8
 		relative_position_id = EOH_reconciliation_with_zaarin
+		x = -1
+		y = 1
+		prerequisite = {
+			focus = EOH_reconciliation_with_zaarin
+			focus = EOH_none_evade_thrawns_grasp
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+			focus = EOH_reconciliation_with_zaarin
+		}
+		completion_reward = {
+			remove_ideas = EOH_nirauan_1
+			add_ideas = EOH_nirauan_2
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = EOH_eradicate_the_vermin
+		icon = GFX_goal_unknown
+		cost = 12
+		relative_position_id = EOH_taming_nirauan
+		x = -2
+		y = 1
+		prerequisite = {
+			focus = EOH_taming_nirauan
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+			focus = EOH_language_of_the_qom_jha
+		}
+		completion_reward = {
+			229 = {
+				add_manpower = -10000
+			}
+			221 = {
+				add_manpower = -10000
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = EOH_eastern_renovation
+		icon = GFX_goal_unknown
+		cost = 12
+		relative_position_id = EOH_eradicate_the_vermin
+		x = 0
+		y = 2
+		prerequisite = {
+			focus = EOH_eradicate_the_vermin
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			EOH = {
+				add_state_core = 229
+				add_state_core = 221
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = EOH_language_of_the_qom_jha
+		icon = GFX_goal_unknown
+		cost = 8
+		relative_position_id = EOH_taming_nirauan
+		x = -1
+		y = 1
+		prerequisite = {
+			focus = EOH_taming_nirauan
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+			focus = EOH_eradicate_the_vermin
+		}
+		completion_reward = {
+			##gives events
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = EOH_gifts_to_the_qom_qae
+		icon = GFX_goal_unknown
+		cost = 8
+		relative_position_id = EOH_language_of_the_qom_jha
 		x = 0
 		y = 1
 		prerequisite = {
-			focus = EOH_none_evade_thrawns_grasp
+			focus = EOH_language_of_the_qom_jha
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			##gives events
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = EOH_peace_in_the_jungle
+		icon = GFX_goal_unknown
+		cost = 6
+		relative_position_id = EOH_gifts_to_the_qom_qae
+		x = 0
+		y = 1
+		prerequisite = {
+			focus = EOH_gifts_to_the_qom_qae
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			##gives celebration event with the Qom Qae and Qom Jha
+			EOH = {
+				add_state_core = 229
+				add_state_core = 221
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = EOH_assistance_and_urbanization
+		icon = GFX_goal_unknown
+		cost = 8
+		relative_position_id = EOH_peace_in_the_jungle
+		x = 0
+		y = 1
+		prerequisite = {
+			focus = EOH_peace_in_the_jungle
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			##victory point wizardry
+			221 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+				add_extra_state_shared_building_slots = 1
+			}
+			229 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+				add_extra_state_shared_building_slots = 1
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = EOH_repurpose_zaarins_operations
+		icon = GFX_goal_unknown
+		cost = 10
+		relative_position_id = EOH_taming_nirauan
+		x = 0
+		y = 1
+		prerequisite = {
+			focus = EOH_taming_nirauan
+		}
+		search_filters = {
+		}
+		completion_reward = {
+			## gives event where you choose what factory/facility to gain in southern state
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = EOH_prospecting_and_exploration
+		icon = GFX_goal_unknown
+		cost = 8
+		relative_position_id = EOH_repurpose_zaarins_operations
+		x = 0
+		y = 1
+		prerequisite = {
+			focus = EOH_repurpose_zaarins_operations
+		}
+		search_filters = {
+		}
+		completion_reward = {
+			#Victory point wizardry
+			239 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = EOH_establish_mining_operations
+		icon = GFX_goal_unknown
+		cost = 9
+		relative_position_id = EOH_prospecting_and_exploration
+		x = 0
+		y = 1
+		prerequisite = {
+			focus = EOH_prospecting_and_exploration
+		}
+		search_filters = {
+		}
+		completion_reward = {
+			#Victory point wizardry
+			239 = {
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+				add_extra_state_shared_building_slots = 1
+			}
+			add_resource = {
+				type = steel
+				amount = 6
+				state = 239
+			}
+			add_resource = {
+				type = tungsten
+				amount = 16
+				state = 239
+			}
+			add_resource = {
+				type = chromium
+				amount = 6
+				state = 239
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = EOH_human_chiss_status_quo
+		icon = GFX_goal_unknown
+		cost = 6
+		relative_position_id = EOH_taming_nirauan
+		x = 2
+		y = 1
+		prerequisite = {
+			focus = EOH_taming_nirauan
+		}
+		mutually_exclusive = {
+			focus = EOH_fund_alien_colonization
+		}
+		search_filters = {
+		}
+		completion_reward = {
+			add_stability = 0.03
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = EOH_import_labor
+		icon = GFX_goal_unknown
+		cost = 12
+		relative_position_id = EOH_human_chiss_status_quo
+		x = 0
+		y = 1
+		prerequisite = {
+			focus = EOH_human_chiss_status_quo
+		}
+		mutually_exclusive = {
+		}
+		search_filters = {
+		}
+		completion_reward = {
+			#subtract manpower from chiss planets, coruscant, entralla
+			215 = {
+				add_manpower = 18000
+			}
+			22 = {
+				add_manpower = 18000
+			}
+			220 = {
+				add_manpower = 18000
+			}
+			213 = {
+				add_manpower = 18000
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = EOH_work
+		icon = GFX_goal_unknown
+		cost = 10
+		relative_position_id = EOH_import_labor
+		x = 0
+		y = 1
+		prerequisite = {
+			focus = EOH_import_labor
+		}
+		mutually_exclusive = {
+		}
+		search_filters = {
+		}
+		completion_reward = {
+			#victory point magic, buildings, and rename this focus
+			215 = {
+				add_manpower = 18000
+			}
+			22 = {
+				add_manpower = 18000
+			}
+			220 = {
+				add_manpower = 18000
+			}
+			213 = {
+				add_manpower = 18000
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = EOH_fund_alien_colonization
+		icon = GFX_goal_unknown
+		cost = 8
+		relative_position_id = EOH_taming_nirauan
+		x = 1
+		y = 1
+		prerequisite = {
+			focus = EOH_taming_nirauan
+		}
+		search_filters = {
+		}
+		completion_reward = {
+			#costs money
+			add_stability = -0.03
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = EOH_a_new_home_for_the_noghri
+		icon = GFX_goal_unknown
+		cost = 8
+		relative_position_id = EOH_fund_alien_colonization
+		x = 0
+		y = 1
+		prerequisite = {
+			focus = EOH_fund_alien_colonization
+		}
+		search_filters = {
+		}
+		completion_reward = {
+			#victory point magic, buildings
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = EOH_new_dathomir
+		icon = GFX_goal_unknown
+		cost = 8
+		relative_position_id = EOH_a_new_home_for_the_noghri
+		x = 0
+		y = 1
+		prerequisite = {
+			focus = EOH_a_new_home_for_the_noghri
+		}
+		search_filters = {
+		}
+		completion_reward = {
+			#victory point magic, buildings
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = EOH_eyes_everywhere
+		icon = GFX_goal_unknown
+		cost = 10
+		relative_position_id = EOH_the_twelfth_grand_admiral
+		x = 4
+		y = 1
+		prerequisite = {
 			focus = EOH_reconciliation_with_zaarin
+			focus = EOH_none_evade_thrawns_grasp
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+			focus = EOH_reconciliation_with_zaarin
+		}
+		completion_reward = {
+			## establishes spy network
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = EOH_convince_fel_of_our_cause
+		icon = GFX_goal_unknown
+		cost = 12
+		relative_position_id = EOH_eyes_everywhere
+		x = -1
+		y = 1
+		prerequisite = {
+			focus = EOH_eyes_everywhere
 		}
 		search_filters = {
 			FOCUS_FILTER_MILITARY
@@ -531,13 +976,12 @@ focus_tree = {
 	focus = {
 		id = EOH_death_to_the_traitor
 		icon = GFX_goal_unknown
-		cost = 12
-		relative_position_id = EOH_reconciliation_with_zaarin
-		x = 2
+		cost = 9
+		relative_position_id = EOH_eyes_everywhere
+		x = 1
 		y = 1
 		prerequisite = {
-			focus = EOH_none_evade_thrawns_grasp
-			focus = EOH_reconciliation_with_zaarin
+			focus = EOH_eyes_everywhere
 		}
 		search_filters = {
 		}
@@ -554,7 +998,7 @@ focus_tree = {
 	focus = {
 		id = EOH_ensure_failure_of_peace_talks
 		icon = GFX_goal_unknown
-		cost = 15
+		cost = 13
 		relative_position_id = EOH_convince_fel_of_our_cause
 		x = 0
 		y = 1
@@ -577,7 +1021,7 @@ focus_tree = {
 	focus = {
 		id = EOH_assasinate_oxtroe
 		icon = GFX_goal_unknown
-		cost = 12
+		cost = 10
 		relative_position_id = EOH_ensure_failure_of_peace_talks
 		x = 2
 		y = 0
@@ -598,9 +1042,36 @@ focus_tree = {
 		}
 	}
 	focus = {
+		id = EOH_hand_of_thrawn
+		icon = GFX_goal_unknown
+		cost = 10
+		relative_position_id = EOH_establish_mining_operations
+		x = 0
+		y = 3
+		prerequisite = {
+			focus = EOH_assistance_and_urbanization
+			focus = EOH_eastern_renovation
+		}
+		prerequisite = {
+			focus = EOH_establish_mining_operations
+		}
+		prerequisite = {
+			focus = EOH_new_dathomir
+			focus = EOH_work
+		}
+		search_filters = {
+		}
+		completion_reward = {
+			#victory point magic, buildings
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
 		id = EOH_battle_of_quethold
 		icon = GFX_goal_unknown
-		cost = 12
+		cost = 10
 		relative_position_id = EOH_assasinate_oxtroe
 		x = -1
 		y = 2
@@ -625,7 +1096,7 @@ focus_tree = {
 	focus = {
 		id = EOH_the_return
 		icon = GFX_goal_unknown
-		cost = 16
+		cost = 12
 		relative_position_id = EOH_battle_of_quethold
 		x = -2
 		y = 1
@@ -642,6 +1113,9 @@ focus_tree = {
 					}
 				}
 			}
+		}
+		prerequisite = {
+			focus = EOH_the_hand
 		}
 		prerequisite = {
 			focus = EOH_battle_of_quethold
@@ -1606,7 +2080,7 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = EOH_hand_of_thrawn
+		id = EOH_the_hand
 		icon = GFX_goal_unknown
 		cost = 8
 		relative_position_id = EOH_new_age_imperial_shipyards
