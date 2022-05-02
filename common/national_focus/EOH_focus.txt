@@ -45,6 +45,7 @@ focus_tree = {
 			SSI = {
 				has_war = yes
 			}
+			##certain amout of army and navy manpower
 		}
 		prerequisite = {
 			focus = EOH_legacy_of_outbound_flight
@@ -54,7 +55,36 @@ focus_tree = {
 		mutually_exclusive = {
 		}
 		completion_reward = {
+			mark_focus_tree_layout_dirty = yes
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = EOH_guardian_of_the_unknown_regions
+		icon = GFX_goal_unknown
+		cost = 6
+		x = -2
+		y = 1
+		relative_position_id = EOH_the_ssi_ruuvi_threat
+		available = {
+			SSI = {
+				has_war = yes
+			}
+		}
+		prerequisite = {
+			focus = EOH_the_ssi_ruuvi_threat
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+			focus = EOH_indirect_involvement
+		}
+		completion_reward = {
 			declare_war_on = { target = SSI    type = topple_government }
+			##add chiss and bakura getting imperial support
 			SSI = {
 				country_event = { id = SSI.1 }
 			}
@@ -75,48 +105,126 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = EOH_promising_officers
+		id = EOH_indirect_involvement
 		icon = GFX_goal_unknown
-		cost = 10
-		relative_position_id = EOH_the_ssi_ruuvi_threat
-		x = -1
+		cost = 6
+		x = 2
 		y = 1
-		bypass = {
-			AND = {
-				SSI = {
-					has_war = no
-				}
-				EOH = {
-					NOT = {
-						has_completed_focus = EOH_negotiate_a_peace
-					}
-				}
+		relative_position_id = EOH_the_ssi_ruuvi_threat
+		available = {
+			SSI = {
+				has_war = yes
 			}
+			##has volunteers sent
 		}
 		prerequisite = {
 			focus = EOH_the_ssi_ruuvi_threat
 		}
 		search_filters = {
-			FOCUS_FILTER_MILITARY
 		}
 		mutually_exclusive = {
+			focus = EOH_guardian_of_the_unknown_regions
 		}
 		completion_reward = {
-			add_timed_idea = {
-				idea = EOH_promising_officers
-				days = 180
-			}
+			##sends money and weapons to combatants
+			mark_focus_tree_layout_dirty = yes
 		}
+
 		ai_will_do = {
 			factor = 1
 		}
 	}
 	focus = {
-		id = EOH_bakura_retaken
+		id = EOH_mediate_a_peace
 		icon = GFX_goal_unknown
-		cost = 6
-		relative_position_id = EOH_the_ssi_ruuvi_threat
+		cost = 12
 		x = 1
+		y = 2
+		relative_position_id = EOH_indirect_involvement
+		available = {
+			SSI = {
+				has_war = yes
+			}
+		}
+		prerequisite = {
+			focus = EOH_indirect_involvement
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+			focus = EOH_dereliction
+		}
+		completion_reward = {
+			##tries to negotiate a peace, works 90% of time
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = EOH_dereliction
+		icon = GFX_goal_unknown
+		cost = 3
+		x = -1
+		y = 2
+		relative_position_id = EOH_indirect_involvement
+		available = {
+			SSI = {
+				has_war = yes
+			}
+			##no volunteers sent
+		}
+		prerequisite = {
+			focus = EOH_indirect_involvement
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+			focus = EOH_dereliction
+		}
+		completion_reward = {
+			##leaves the situation as it is, loses opinion with chiss and such
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = EOH_open_to_chiss_refugees
+		icon = GFX_goal_unknown
+		cost = 8
+		relative_position_id = EOH_guardian_of_the_unknown_regions
+		x = 2
+		y = 2
+		bypass = {
+			SSI = {
+				has_war = no
+			}
+		}
+		prerequisite = {
+			focus = EOH_guardian_of_the_unknown_regions
+			focus = EOH_indirect_involvement
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			#Victory point wizardry
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	
+	focus = {
+		id = EOH_rebuild_bakura
+		icon = GFX_goal_unknown
+		cost = 8
+		relative_position_id = EOH_guardian_of_the_unknown_regions
+		x = -1
 		y = 1
 		bypass = {
 			AND = {
@@ -134,36 +242,60 @@ focus_tree = {
 			## Bakura controls all of Bakura
 		}
 		prerequisite = {
-			focus = EOH_the_ssi_ruuvi_threat
+			focus = EOH_guardian_of_the_unknown_regions
 		}
 		search_filters = {
-			FOCUS_FILTER_MILITARY
 		}
 		mutually_exclusive = {
 		}
 		completion_reward = {
-			EOH = {
-				add_timed_idea = {
-					idea = EOH_bakura_retaken
-					days = 90
-				}
-			}
-			INR = {
-				add_timed_idea = {
-					idea = EOH_bakura_retaken
-					days = 90
-				}
-			}
+			##rebuild bakura or smthn
 		}
 		ai_will_do = {
 			factor = 1
 		}
 	}
 	focus = {
-		id = EOH_combined_chiss-imperial_offensive
+		id = EOH_rebuild_csaus
 		icon = GFX_goal_unknown
-		cost = 10
-		relative_position_id = EOH_promising_officers
+		cost = 8
+		relative_position_id = EOH_guardian_of_the_unknown_regions
+		x = 1
+		y = 1
+		bypass = {
+			AND = {
+				SSI = {
+					has_war = no
+				}
+				EOH = {
+					NOT = {
+						has_completed_focus = EOH_negotiate_a_peace
+					}
+				}
+			}
+		}
+		available = {
+			## Csaus is controlled by whatever the clan is called can't remember
+		}
+		prerequisite = {
+			focus = EOH_guardian_of_the_unknown_regions
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			##rebuild csaus or somethin
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = EOH_allied_invasion_of_lwhekk
+		icon = GFX_goal_unknown
+		cost = 4
+		relative_position_id = EOH_rebuild_bakura
 		x = 1
 		y = 1
 		bypass = {
@@ -179,8 +311,8 @@ focus_tree = {
 			}
 		}
 		prerequisite = {
-			focus = EOH_bakura_retaken
-			focus = EOH_promising_officers
+			focus = EOH_rebuild_bakura
+			focus = EOH_rebuild_csaus
 		}
 		search_filters = {
 		}
@@ -208,45 +340,17 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = EOH_rebuild_bakura
-		icon = GFX_goal_unknown
-		cost = 12
-		relative_position_id = EOH_combined_chiss-imperial_offensive
-		x = 0
-		y = 1
-		available = {
-			## War won
-		}
-		mutually_exclusive = {
-			focus = EOH_negotiate_a_peace
-		}
-		prerequisite = {
-			focus = EOH_combined_chiss-imperial_offensive
-		}
-		search_filters = {
-		}
-		mutually_exclusive = {
-		}
-		completion_reward = {
-			## Removes ideas against ssi ruuvi, gives bakura repair and construction bonus
-			mark_focus_tree_layout_dirty = yes
-		}
-		ai_will_do = {
-			factor = 1
-		}
-	}
-	focus = {
 		id = EOH_leave_lwhekk
 		icon = GFX_goal_unknown
 		cost = 8
-		relative_position_id = EOH_rebuild_bakura
+		relative_position_id = EOH_allied_invasion_of_lwhekk
 		x = -1
 		y = 1
 		available = {
 			## War won
 		}
 		prerequisite = {
-			focus = EOH_rebuild_bakura
+			focus = EOH_allied_invasion_of_lwhekk
 		}
 		search_filters = {
 		}
@@ -264,14 +368,14 @@ focus_tree = {
 		id = EOH_prevent_ssi-ruuvi_resurgence
 		icon = GFX_goal_unknown
 		cost = 12
-		relative_position_id = EOH_rebuild_bakura
+		relative_position_id = EOH_allied_invasion_of_lwhekk
 		x = 1
 		y = 1
 		available = {
 			## War won
 		}
 		prerequisite = {
-			focus = EOH_rebuild_bakura
+			focus = EOH_allied_invasion_of_lwhekk
 		}
 		search_filters = {
 		}
@@ -295,14 +399,13 @@ focus_tree = {
 		prerequisite = {
 			focus = EOH_leave_lwhekk
 			focus = EOH_prevent_ssi-ruuvi_resurgence
-			focus = EOH_rapprochement_with_the_ssi-ruuvi
+			focus = EOH_negotiate_a_peace
 		}
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
 		mutually_exclusive = {
 			focus = EOH_natural_allies
-			focus = EOH_ally_the_ssi-ruuvi
 		}
 		completion_reward = {
 			add_political_power = 50
@@ -323,14 +426,13 @@ focus_tree = {
 		prerequisite = {
 			focus = EOH_leave_lwhekk
 			focus = EOH_prevent_ssi-ruuvi_resurgence
-			focus = EOH_rapprochement_with_the_ssi-ruuvi
+			focus = EOH_negotiate_a_peace
 		}
 		search_filters = {
 			FOCUS_FILTER_DIPLOMACY
 		}
 		mutually_exclusive = {
 			focus = EOH_the_chiss_on_their_own
-			focus = EOH_ally_the_ssi-ruuvi
 		}
 		completion_reward = {
 			diplomatic_relation = { 
@@ -358,20 +460,20 @@ focus_tree = {
 		id = EOH_negotiate_a_peace
 		icon = GFX_goal_unknown
 		cost = 8
-		relative_position_id = EOH_rebuild_bakura
+		relative_position_id = EOH_allied_invasion_of_lwhekk
 		x = -3
-		y = 0
+		y = 1
 		available = {
 			date > 5.01.01
 		}
 		prerequisite = {
-			focus = EOH_the_ssi_ruuvi_threat
+			focus = EOH_guardian_of_the_unknown_regions
 		}
 		search_filters = {
 			FOCUS_FILTER_DIPLOMACY
 		}
 		mutually_exclusive = {
-			focus = EOH_rebuild_bakura
+			focus = EOH_allied_invasion_of_lwhekk
 		}
 		completion_reward = {
 			## Negotiates a peace
@@ -380,51 +482,33 @@ focus_tree = {
 			factor = 1
 		}
 	}
+
 	focus = {
-		id = EOH_rapprochement_with_the_ssi-ruuvi
+		id = EOH_peace_in_the_unknown_regions
 		icon = GFX_goal_unknown
-		cost = 8
-		relative_position_id = EOH_negotiate_a_peace
+		cost = 5
 		x = 0
-		y = 1
+		y = 6
+		relative_position_id = EOH_the_ssi_ruuvi_threat
+		available = {
+			SSI = {
+				has_war = no
+			}
+		}
 		prerequisite = {
-			focus = EOH_negotiate_a_peace
-		}
-		search_filters = {
-			FOCUS_FILTER_DIPLOMACY
-		}
-		completion_reward = {
-			## Removes negative opinion stuff idk
-		}
-		ai_will_do = {
-			factor = 1
-		}
-	}
-	focus = {
-		id = EOH_ally_the_ssi-ruuvi
-		icon = GFX_goal_unknown
-		cost = 8
-		relative_position_id = EOH_the_chiss_on_their_own
-		x = -2
-		y = 0
-		prerequisite = {
-			focus = EOH_rapprochement_with_the_ssi-ruuvi
-		}
-		search_filters = {
-			FOCUS_FILTER_DIPLOMACY
-		}
-		mutually_exclusive = {
+			focus = EOH_mediate_a_peace
+			focus = EOH_dereliction
 			focus = EOH_the_chiss_on_their_own
 			focus = EOH_natural_allies
 		}
-		completion_reward = {
-			diplomatic_relation = { 
-				country = SSI
-				relation = non_aggression_pact 
-			}
-			custom_effect_tooltip = "This will allow us to bring the Ssi-ruuvi further into our sphere of influence in the future."
-			mark_focus_tree_layout_dirty = yes
+		search_filters = {
 		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			##impact on galactic turmoil according to conclusion
+		}
+
 		ai_will_do = {
 			factor = 1
 		}
