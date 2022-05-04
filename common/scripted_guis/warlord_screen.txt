@@ -10,17 +10,124 @@ scripted_gui = {
 			exit_button_click = {
 				clr_country_flag = Warlord_Screen_open
 			}
+			claimant_stance_button_click = {
+				if = {
+					limit = {
+						has_idea = cooperative_stance
+					}
+					remove_ideas  = cooperative_stance
+					add_ideas = claiment_stance
+				}
+ 				else_if = {
+					limit = {
+						has_idea = antagonizing_stance
+					}
+					remove_ideas = antagonizing_stance
+					add_ideas = claiment_stance
+				}
+				else_if = {
+					limit = {
+						has_idea = lip_service_stance
+					}
+					remove_ideas = lip_service_stance
+					add_ideas = claiment_stance
+				}
+				else = {
+					add_ideas = claiment_stance
+				}
+			}
+			cooperative_stance_button_click = {
+				if = {
+					limit = {
+						has_idea = claiment_stance
+					}
+					remove_ideas = claiment_stance
+					add_ideas = cooperative_stance
+				}
+ 				else_if = {
+					limit = {
+						has_idea = antagonizing_stance
+					}
+					remove_ideas = antagonizing_stance
+					add_ideas = cooperative_stance
+				}
+				else_if = {
+					limit = {
+						has_idea = lip_service_stance
+					}
+					remove_ideas = lip_service_stance
+					add_ideas = cooperative_stance
+				}
+				else = {
+					add_ideas = cooperative_stance
+				}
+			}
+			antagonizing_stance_button_click = {
+				if = {
+					limit = {
+						has_idea = cooperative_stance
+					}
+					remove_ideas = cooperative_stance
+					add_ideas = antagonizing_stance
+				}
+ 				else_if = {
+					limit = {
+						has_idea = claiment_stance
+					}
+					remove_ideas = claiment_stance
+					add_ideas = antagonizing_stance
+				}
+				else_if = {
+					limit = {
+						has_idea = lip_service_stance
+					}
+					remove_ideas = lip_service_stance
+					add_ideas = antagonizing_stance
+				}
+				else = {
+					add_ideas = antagonizing_stance
+				}
+			}
+			lip_service_stance_button_click = {
+				if = {
+					limit = {
+						has_idea = cooperative_stance
+					}
+					remove_ideas = cooperative_stance
+					add_ideas = lip_service_stance
+				}
+ 				else_if = {
+					limit = {
+						has_idea = antagonizing_stance
+					}
+					remove_ideas = antagonizing_stance
+					add_ideas = lip_service_stance
+				}
+				else_if = {
+					limit = {
+						has_idea = claiment_stance
+					}
+					remove_ideas = claiment_stance
+					add_ideas = lip_service_stance
+				}
+				else = {
+					add_ideas = lip_service_stance
+				}
+			}
 			leader_empire_click = {
 				if = {
 					limit = {
 						has_country_flag = emperor_potential
+						check_variable = { legitimacy_emp > 70 }
+						has_idea = claiment_stance
 					}
 					set_country_flag = emperor
-					set_global_flag = emperor_proclaimed
 					set_cosmetic_tag = IMP
-				}
-				else = {
-
+					set_variable = { global.emperor_id = THIS.id }
+					country_event = {
+					    id = emperor_deals.6
+					    days = 4
+					}
 				}
 			}
 			warlord_flag_click = {
@@ -89,6 +196,14 @@ scripted_gui = {
 					has_country_flag = voted_for_warlord
 				}
 			}
+			voting_for_border_visible = {
+				THIS = {
+					NOT = {
+						has_country_flag = warlord_imperial
+					}
+					has_country_flag = voted_for_warlord
+				}
+			}
 		}
 		dynamic_lists = {
 			warlord_grid = {
@@ -132,7 +247,7 @@ scripted_gui = {
 			warlord_money_deal_click = {
 				var:ROOT.selected_nation_var = {
 					country_event = {
-					    id = warlord_deals.5
+					    id = emperor_deals.5
 					    hours = 3
 					}
 				}
@@ -140,7 +255,7 @@ scripted_gui = {
 			warlord_civ_deal_click = {
 				var:ROOT.selected_nation_var = {
 					country_event = {
-					    id = warlord_deals.4
+					    id = emperor_deals.4
 					    hours = 3
 					}
 				}
@@ -148,14 +263,99 @@ scripted_gui = {
 			warlord_mil_deal_click = {
 				var:ROOT.selected_nation_var = {
 					country_event = {
-					    id = warlord_deals.3
+					    id = emperor_deals.3
 					    hours = 3
 					}
 				}
 			}
 			warlord_deal_click = {
-					clr_country_flag = voting_for_pen
-					clr_country_flag = voting_for_empire
+					if = { ## gets rid of vote for faction
+						limit = {
+							has_country_flag = voted_for_warlord
+						}
+						if = {
+							limit = {
+								has_country_flag = voting_for_empire
+							}
+							EMP = {
+								add_to_variable = {voted_for_count_emp = -1}
+							}
+						}
+						if = {
+							limit = {
+								has_country_flag = voting_for_pen
+							}
+							PEN = {
+								add_to_variable = {voted_for_count_emp = -1}
+							}
+						}
+						if = {
+							limit = {
+								has_country_flag = voting_for_empire_of_hand
+							}
+							EOH = {
+								add_to_variable = {voted_for_count_emp = -1}
+							}
+						}
+						if = {
+							limit = {
+								has_country_flag = voting_for_f_t_u
+							}
+							FTU = {
+								add_to_variable = {voted_for_count_emp = -1}
+							}
+						}
+						if = {
+							limit = {
+								has_country_flag = voting_for_eri
+							}
+							ERI = {
+								add_to_variable = {voted_for_count_emp = -1}
+							}
+						}
+						if = {
+							limit = {
+								has_country_flag = voting_zero_command
+							}
+							ZER = {
+								add_to_variable = {voted_for_count_emp = -1}
+							}
+						}
+						if = {
+							limit = {
+								has_country_flag = voting_for_kareenth
+							}
+							REE = {
+								add_to_variable = {voted_for_count_emp = -1}
+							}
+						}
+						if = {
+							limit = {
+								has_country_flag = voting_for_zsinj
+							}
+							BES = {
+								add_to_variable = {voted_for_count_emp = -1}
+							}
+						}
+						if = {
+							limit = {
+								has_country_flag = voting_for_zsinj
+							}
+							ZSJ = {
+								add_to_variable = {voted_for_count_emp = -1}
+							}
+						}
+						if = {
+							limit = {
+								has_country_flag = voting_for_rin
+							}
+							RIN = {
+								add_to_variable = {voted_for_count_emp = -1}
+							}
+						}
+					}
+					clr_country_flag = voting_for_pen  #### ALL OF THIS COUNTS WHO IS VOTING FOR WHO FOR USING BUTTON AT BOTTOM OF DEALS, TO ADD NEW FACTION FOR VOTE
+					clr_country_flag = voting_for_empire ## YOU WILL HAVE TO ADD THEM TO ALL OF THIS, FOLLOW SAME EXAMPLE
 					clr_country_flag = voting_for_empire_of_hand
 					clr_country_flag = voting_for_f_t_u
 					clr_country_flag = voting_for_eri
@@ -163,60 +363,96 @@ scripted_gui = {
 					clr_country_flag = voting_for_kareenth
 					clr_country_flag = voting_for_bespin
 					clr_country_flag = voting_for_zsinj
-
+					clr_country_flag = voting_for_rin
 					if = {
 						limit = {
 							check_variable = { ROOT.selected_nation_var = EMP.id }
 						}
 						set_country_flag = voting_for_empire
+						EMP = {
+							add_to_variable = {voted_for_count_emp = 1}
+						}
 					}
 					if = {
 						limit = {
 							check_variable = { ROOT.selected_nation_var = PEN.id }
 						}
 						set_country_flag = voting_for_pen
+						PEN = {
+							add_to_variable = {voted_for_count_emp = 1}
+						}
 					}
 					if = {
 						limit = {
 							check_variable = { ROOT.selected_nation_var = EOH.id }
 						}
 						set_country_flag = voting_for_empire_of_hand
+						EOH = {
+							add_to_variable = {voted_for_count_emp = 1}
+						}
 					}
 					if = {
 						limit = {
 							check_variable = { ROOT.selected_nation_var = FTU.id }
 						}
 						set_country_flag = voting_for_f_t_u
+						FTU = {
+							add_to_variable = {voted_for_count_emp = 1}
+						}
 					}
 					if = {
 						limit = {
 							check_variable = { ROOT.selected_nation_var = ERI.id }
 						}
 						set_country_flag = voting_for_eri
+						ERI = {
+							add_to_variable = {voted_for_count_emp = 1}
+						}
 					}
 					if = {
 						limit = {
 							check_variable = { ROOT.selected_nation_var = ZER.id }
 						}
 						set_country_flag = voting_zero_command
+						ZER = {
+							add_to_variable = {voted_for_count_emp = 1}
+						}
 					}
 					if = {
 						limit = {
 							check_variable = { ROOT.selected_nation_var = REE.id }
 						}
 						set_country_flag = voting_for_kareenth
+						REE = {
+							add_to_variable = {voted_for_count_emp = 1}
+						}
 					}
 					if = {
 						limit = {
 							check_variable = { ROOT.selected_nation_var = BES.id }
 						}
 						set_country_flag = voting_for_bespin
+						BES = {
+							add_to_variable = {voted_for_count_emp = 1}
+						}
 					}
 					if = {
 						limit = {
 							check_variable = { ROOT.selected_nation_var = ZSJ.id }
 						}
 						set_country_flag = voting_for_zsinj
+						ZSJ = {
+							add_to_variable = {voted_for_count_emp = 1}
+						}
+					}
+					if = {
+						limit = {
+							check_variable = { ROOT.selected_nation_var = RIN.id }
+						}
+						set_country_flag = voting_for_zsinj
+						RIN = {
+							add_to_variable = {voted_for_count_emp = 1}
+						}
 					}
 					set_country_flag = voted_for_warlord
 			}

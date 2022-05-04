@@ -1,9 +1,18 @@
 on_actions = {
+
+	#### EMPIRE ON ACTIONS FOR LEGITIMACY ####
 	on_startup = {
 		effect = {
 			every_country={
-				set_variable = { legitimacy_emp = 0 }
-				set_variable = { legitimacy_emp_equilibrium = 0 }
+				set_variable = { legitimacy_emp = 15 }
+				set_variable = { legitimacy_emp_equilibrium = 15 }
+				if = {
+					limit = {
+						original_tag = EMP
+					}
+					set_variable = { legitimacy_emp = 85 }
+					set_country_flag = emperor
+				}
 			}
 		}
 	}
@@ -26,6 +35,14 @@ on_actions = {
 				}
 				add_to_variable = { legitimacy_emp = 0.1 }
 			}
+			if = {
+				limit = {
+					has_country_flag = emperor  ### only way to present legitmacy I think on warlord screen, tried it with scope but didnt work
+				}
+				set_variable  = { global.emperor_legitimacy = legitimacy_emp }
+				add_to_variable  = { global.emperor_legitimacy = 0.2 } 
+			}
+			#### voting legtimacy add
 			clamp_variable = {	
                 var = legitimacy_emp
                 min = 0

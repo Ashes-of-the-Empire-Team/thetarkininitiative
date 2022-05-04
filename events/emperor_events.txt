@@ -1,32 +1,33 @@
+add_namespace = emperor_deals
 country_event = {
-        id = warlord_deals.1 ##ACCEPTS OFFER INFO
-        title = warlord_deals.1.t
-        desc = warlord_deals.1
+        id = emperor_deals.1 ##ACCEPTS OFFER INFO
+        title = emperor_deals.1.t
+        desc = emperor_deals.1.d
         picture = GFX_report_event_election_vote
         is_triggered_only = yes
         option = {
-                name = warlord_deals.1.a
+                name = emperor_deals.1.a
         }
 }
 
 country_event = {
-        id = warlord_deals.2 ## DECLINES OFFER INFO
-        title = warlord_deals.2.t
-        desc = warlord_deals.2
+        id = emperor_deals.2 ## DECLINES OFFER INFO
+        title = emperor_deals.2.t
+        desc = emperor_deals.2.d
         picture = GFX_report_event_election_vote
         is_triggered_only = yes
         option = {
-                name = warlord_deals.2.a
+                name = emperor_deals.2.a
         }
 }
 country_event = {
-	id = warlord_deals.3 ## WARLORD ACCEPTS OFFER FROM EMPEROR MILITARY
-        title = warlord_deals.3.t
-        desc = warlord_deals.3
+	id = emperor_deals.3 ## WARLORD ACCEPTS OFFER MILITARY
+        title = emperor_deals.3.t
+        desc = emperor_deals.3.d
 	picture = GFX_report_event_election_vote
         is_triggered_only = yes
         option = {
-                name = warlord_deals.3.b ## ACCEPT OFFER
+                name = emperor_deals.3.b ## ACCEPT OFFER
                 trigger = {
                         FROM = {
                                 stockpile_ratio = { ## Stops emperor from just not using up equipment in divisions
@@ -40,7 +41,7 @@ country_event = {
                 FROM = {
                         add_to_variable = {legitimacy_emp = temp1}
                         country_event = {
-                               id = warlord_deals.1
+                               id = emperor_deals.1
                         }
                         transfer_units_fraction = {
                                 target = PREV
@@ -57,7 +58,7 @@ country_event = {
                 }
         }
         option = {
-                name = warlord_deals.3.a ## REFUSE OFFER
+                name = emperor_deals.3.a ## REFUSE OFFER
                 trigger = {
                         FROM = {
                                 stockpile_ratio = { ## Stops emperor from just not using up equipment in divisions
@@ -68,7 +69,7 @@ country_event = {
                 }
                 FROM = {
                         country_event = {
-                               id = warlord_deals.2
+                               id = emperor_deals.2
                         }
                 }
         }
@@ -86,19 +87,19 @@ country_event = {
                 name = "A false promise, Emperor has no equipment to give us"
                 FROM = {
                         country_event = {
-                               id = warlord_deals.2
+                               id = emperor_deals.2
                         }
                 }
         }
 }
 country_event = {
-        id = warlord_deals.4 ## WARLORD ACCEPTS OFFER FROM EMPEROR CIVILIAN
-        title = warlord_deals.4.t
-        desc = warlord_deals.4
+        id = emperor_deals.4 ## WARLORD ACCEPTS OFFER FROM EMPEROR CIVILIAN
+        title = emperor_deals.4.t
+        desc = emperor_deals.4.d
         picture = GFX_report_event_election_vote
         is_triggered_only = yes
         option = {
-                name = warlord_deals.4.b ## ACCEPT OFFER
+                name = emperor_deals.4.b ## ACCEPT OFFER
                 trigger = {
                         FROM = {
                                 num_of_civilian_factories_available_for_projects > 20
@@ -109,7 +110,7 @@ country_event = {
                 FROM = {
                         add_to_variable = {legitimacy_emp = temp1}
                         country_event = {
-                               id = warlord_deals.1
+                               id = emperor_deals.1
                         }
                         activate_targeted_decision = {
                             target = PREV
@@ -121,7 +122,7 @@ country_event = {
                 add_offsite_building = { type = industrial_complex level = temp2 }
         }
         option = {
-                name = warlord_deals.4.a ## REFUSE OFFER
+                name = emperor_deals.4.a ## REFUSE OFFER
                 trigger = {
                         FROM = {
                                 num_of_civilian_factories_available_for_projects > 20
@@ -129,7 +130,7 @@ country_event = {
                 }
                 FROM = {
                         country_event = {
-                               id = warlord_deals.2
+                               id = emperor_deals.2
                         }
                 }
         }
@@ -144,19 +145,19 @@ country_event = {
                 name = "A false promise, Emperor has no factories to give us"
                 FROM = {
                         country_event = {
-                               id = warlord_deals.2
+                               id = emperor_deals.2
                         }
                 }
         }
 }
 country_event = {
-        id = warlord_deals.5 ## WARLORD ACCEPTS OFFER FROM EMPEROR MONEY
-        title = warlord_deals.5.t
-        desc = warlord_deals.5
+        id = emperor_deals.5 ## WARLORD ACCEPTS OFFER FROM EMPEROR MONEY
+        title = emperor_deals.5.t
+        desc = emperor_deals.5.d
         picture = GFX_report_event_election_vote
         is_triggered_only = yes
         option = {
-                name = warlord_deals.5.b ## ACCEPT OFFER
+                name = emperor_deals.5.b ## ACCEPT OFFER
                 trigger = {
                         FROM = {
                                 check_variable = {nmn > 10}
@@ -168,7 +169,7 @@ country_event = {
                 FROM = {
                         add_to_variable = {legitimacy_emp = temp1}
                         country_event = {
-                               id = warlord_deals.1
+                               id = emperor_deals.1
                         }
                         activate_targeted_decision = {
                             target = PREV
@@ -189,7 +190,7 @@ country_event = {
                 }
         }
         option = {
-                name = warlord_deals.5.a ## REFUSE OFFER
+                name = emperor_deals.5.a ## REFUSE OFFER
                 trigger = {
                         FROM = {  
                                 check_variable = {nmn > 10}
@@ -197,7 +198,7 @@ country_event = {
                 }
                 FROM = {
                         country_event = {
-                               id = warlord_deals.2
+                               id = emperor_deals.2
                         }
                 }
         }
@@ -212,9 +213,59 @@ country_event = {
                 }
                 FROM = {
                         country_event = {
-                               id = warlord_deals.2
+                               id = emperor_deals.2
                         }
                 }
+        }
+}
+country_event = {
+        id = emperor_deals.6 ## NEW EMPEREOR ELECTED COUNTRY EVENT
+        title = emperor_deals.6.t
+        desc = emperor_deals.6.d
+        picture = GFX_report_event_election_vote
+        is_triggered_only = yes
+        option = {
+                name = emperor_deals.6.a
+        }
+}
+news_event = {
+        id = emperor_deals.7 ## NEW EMPEREOR ELECTED NEWS EVENT
+        title = emperor_deals.7.t
+        desc = emperor_deals.7.d
+        picture = GFX_report_event_election_vote
+        is_triggered_only = yes
+        option = {
+                name = emperor_deals.7.a
+        }
+}
+country_event = {
+        id = emperor_deals.8 ## EMPEREOR FRACTURES AND LOSES CONTROL
+        title = emperor_deals.8.t
+        desc = emperor_deals.8.d
+        picture = GFX_report_event_election_vote
+        is_triggered_only = yes
+        option = {
+                name = emperor_deals.8.a
+        }
+}
+country_event = {
+        id = emperor_deals.9 ## WARLORD ASKS FOR MARSHAL ROLE
+        title = emperor_deals.9.t
+        desc = emperor_deals.9.d
+        picture = GFX_report_event_election_vote
+        is_triggered_only = yes
+        option = {
+                name = emperor_deals.9.a
+        }
+}
+country_event = {
+        id = emperor_deals.9 ## WARLORD ASKS FOR TREASURE ROLE
+        title = emperor_deals.9.t
+        desc = emperor_deals.9.d
+        picture = GFX_report_event_election_vote
+        is_triggered_only = yes
+        option = {
+                name = emperor_deals.9.a
         }
 }
 ############### CURRENTLY NOT FINISHED, TARGETED DISCIONS NEED TO BE CREATED AND RETURNING OF FACTORIES

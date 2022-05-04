@@ -1,0 +1,25 @@
+on_actions = {
+	on_weekly = {
+		effect = {
+			if = {
+				limit {
+					has_variable = global.emperor_id
+				}
+				set_temp_variable = { temp1 = global.cooperative_stance_counter }# Counts whos being cooporative or antagonizsing 
+				multiply_temp_variable = {temp1 = 5}                             # and gives the emperor legitmacy based on that
+				set_temp_variable = { temp2 = global.antagonizing_stance_counter }
+				multiply_temp_variable = {temp2 = 5}
+				var:global.emperor_id = {
+					add_to_variable = {
+						var = legitimacy_emp_equilibrium
+						value = temp1
+					}
+					subtract_from_variable = {
+						var = legitimacy_emp_equilibrium
+						value = temp2
+					}
+				}
+			}
+		}
+	}
+}
