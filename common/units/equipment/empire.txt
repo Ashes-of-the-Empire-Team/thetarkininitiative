@@ -701,8 +701,8 @@ equipments = {
 		fuel_consumption = 15
 
 	}
-#AT AT Emperor Palpatine Refit
-at_at_equipment_2 = {
+	#AT AT Emperor Palpatine Refit
+	at_at_equipment_2 = {
 	year = 4
 
 	archetype = at_at_equipment
@@ -726,8 +726,8 @@ at_at_equipment_2 = {
 	build_cost_ic = 65
 	fuel_consumption = 30
 
-}
-at_st_equipment = {
+	}
+	at_st_equipment = {
 	year = 4
 
 	can_be_produced = {
@@ -775,40 +775,40 @@ at_st_equipment = {
 	}
 
 	fuel_consumption = 2.5
-}
-#at st 
-at_st_equipment_0 = {
+	}
+	#at st 
+	at_st_equipment_0 = {
 	year = 4
 
 	archetype = at_st_equipment
 	priority = 10
 	visual_level = 0
-is_convertable = yes
-}
-#at st assault
-at_st_equipment_1 = {
-year = 4
+	is_convertable = yes
+	}
+	#at st assault
+	at_st_equipment_1 = {
+	year = 4
 
-archetype = at_st_equipment
-parent = at_st_equipment_0
-priority = 20
-visual_level = 0
-is_convertable = yes
+	archetype = at_st_equipment
+	parent = at_st_equipment_0
+	priority = 20
+	visual_level = 0
+	is_convertable = yes
 
-maximum_speed = 10
+	maximum_speed = 10
 
-reliability = 0.8
+	reliability = 0.8
 
-soft_attack = 25
-hard_attack = 10
-ap_attack = 12
-air_attack = 10
+	soft_attack = 25
+	hard_attack = 10
+	ap_attack = 12
+	air_attack = 10
 
-build_cost_ic = 10
-fuel_consumption = 3
+	build_cost_ic = 10
+	fuel_consumption = 3
 
-}
-misc_tank_equipment = {
+	}
+	misc_tank_equipment = {
 	year = 4
 
 	can_be_produced = {
@@ -856,18 +856,18 @@ misc_tank_equipment = {
 	}
 
 	fuel_consumption = 1
-}
-# TIE/C
-misc_tank_equipment_0 = {
+	}
+	# TIE/C
+	misc_tank_equipment_0 = {
 	year = 4
 
 	archetype = misc_tank_equipment
 	priority = 10
 	visual_level = 0
-is_convertable = yes
-}
-#2-M repulsor tank
-misc_tank_equipment_1 = {
+	is_convertable = yes
+	}
+	#2-M repulsor tank
+	misc_tank_equipment_1 = {
 	year = 4
 	
 	archetype = misc_tank_equipment
@@ -887,8 +887,8 @@ misc_tank_equipment_1 = {
 	fuel_consumption = 3
 	
 	}
-#storm trooper
-stormtrooper_equipment = {
+	#storm trooper
+	stormtrooper_equipment = {
 	year = 4
 	is_archetype = yes
 	picture = archetype_infantry_equipment		
@@ -1009,80 +1009,94 @@ stormtrooper_equipment = {
 		module_slots = {
 			fixed_ship_battery_slot = {
 				required = yes
-				allowed_module_categories = { swship_heavy_battery }
+				allowed_module_categories = { 
+					light_turbolaser
+					medium_turbolaser
+					heavy_turbolaser
+				}
 			}
 			fixed_ship_anti_air_slot = {
 				required = yes
-				allowed_module_categories = { swship_anti_air }
+				allowed_module_categories = {
+					starfighters
+					starbombers
+				  }
 			}
 			fixed_ship_fire_control_system_slot = {
 				required = yes
-				allowed_module_categories = { swship_fire_control_system }
+				allowed_module_categories = { targetting_computer }
 			}
 			fixed_ship_radar_slot = {
 				required = no
-				allowed_module_categories = { swship_radar }
+				allowed_module_categories = { sensor_array }
 			}
 			fixed_ship_engine_slot = {
 				required = yes
-				allowed_module_categories = { swheavy_ship_engine }
+				allowed_module_categories = { hyperdrive }
 			}
 			fixed_ship_secondaries_slot = {
 				required = no
-				allowed_module_categories = { swship_secondaries }
+				allowed_module_categories = { 
+					sublight_drive
+			 }
 			}
 			fixed_ship_armor_slot = {
 				required = yes
-				allowed_module_categories = { swship_heavy_armor }	
+				allowed_module_categories = { 
+				light_deflector_shields
+				medium_deflector_shields
+				heavy_deflector_shields
+				super_heavy_deflector_shields }	
 			}
 			front_1_custom_slot = {
 				required = no
 				allowed_module_categories = {
-					swship_anti_air
-					swship_heavy_battery
+					light_blaster_cannon
+					medium_blaster_cannon
+					heavy_blaster_cannon
+					light_laser_cannon
+					medium_laser_cannon
+					heavy_laser_cannon
+					light_turbolaser
+					medium_turbolaser
+					heavy_turbolaser
 				}
 			}
-			mid_1_custom_slot = {
-				required = no
-				allowed_module_categories = {
-					swship_torpedo
-					swship_anti_air
-					swship_secondaries
-				}
-			}
-			mid_2_custom_slot = mid_1_custom_slot
+			front_2_custom_slot = front_1_custom_slot
+			mid_1_custom_slot = front_1_custom_slot
+			mid_2_custom_slot = front_1_custom_slot
+			mid_3_custom_slot = front_1_custom_slot
 			rear_1_custom_slot = {
 				required = no
 				allowed_module_categories = {
-					swship_anti_air
-					swship_heavy_battery
+					upgrades
 				}
-			}
-		}
-		
-		module_count_limit = {
-			category = ship_radar
-			count < 2
+			 }
+			rear_2_custom_slot = rear_1_custom_slot
+			
 		}
 		
 		default_modules = {
-			fixed_ship_battery_slot = empty
-			fixed_ship_anti_air_slot = empty
-			fixed_ship_fire_control_system_slot = empty
-			fixed_ship_radar_slot = empty
-			fixed_ship_engine_slot = swheavy_ship_engine_1
-			fixed_ship_secondaries_slot = empty
-			fixed_ship_armor_slot = swship_armor_bb_1
-			front_1_custom_slot = empty
-			mid_1_custom_slot = empty
+			fixed_ship_battery_slot = medium_turbolaser_2
+			fixed_ship_anti_air_slot = sf_1
+			fixed_ship_fire_control_system_slot = targetting_computer_0
+			fixed_ship_radar_slot = sensor_array_2
+			fixed_ship_engine_slot = hd_2
+			fixed_ship_secondaries_slot = sd_3
+			fixed_ship_armor_slot = sr_150
+			front_1_custom_slot = medium_turbolaser_2
+			front_2_custom_slot = empty
+			mid_1_custom_slot = medium_turbolaser_2
 			mid_2_custom_slot = empty
+			mid_3_custom_slot = empty
 			rear_1_custom_slot = empty
+			rear_2_custom_slot = empty
 		}
 		
 		lg_armor_piercing = 0
 		lg_attack = 0
 		
-		hg_armor_piercing = 0
+		hg_armor_piercing = 5
 		hg_attack = 0
 		
 		torpedo_attack = 0
@@ -1090,14 +1104,14 @@ stormtrooper_equipment = {
 		
 		anti_air_attack = 0
 		
-		armor_value = 0
+		armor_value = 15
 
 		
 		surface_detection = 20
 		sub_detection = 1
 		surface_visibility = 20
-		naval_speed = 20
-		reliability = 0.80
+		naval_speed = 0
+		reliability = 1.2
 		
 		naval_range = 3000
 		
@@ -1108,14 +1122,11 @@ stormtrooper_equipment = {
 		build_cost_ic = 3300
 		resources = {
 			steel = 1
-			chromium = 1
 		}
 
 		manpower = 37360
 	}
-
 	star_destroyer_1 = {
-		abbreviation = "hcc"
 		year = 4
 		archetype = star_destroyer_hull
 		priority = 1500
@@ -1123,85 +1134,100 @@ stormtrooper_equipment = {
 		module_slots = {
 			fixed_ship_battery_slot = {
 				required = yes
-				allowed_module_categories = { swship_heavy_battery }
+				allowed_module_categories = { 
+					light_turbolaser
+					medium_turbolaser
+					heavy_turbolaser
+				}
 			}
 			fixed_ship_anti_air_slot = {
-				required = no
-				allowed_module_categories = { swship_anti_air }
+				required = yes
+				allowed_module_categories = { 
+				starfighters
+				starbombers }
 			}
 			fixed_ship_fire_control_system_slot = {
-				required = no
-				allowed_module_categories = { swship_fire_control_system }
+				required = yes
+				allowed_module_categories = { targetting_computer }
 			}
 			fixed_ship_radar_slot = {
 				required = no
-				allowed_module_categories = { swship_radar }
+				allowed_module_categories = { sensor_array }
 			}
 			fixed_ship_engine_slot = {
 				required = yes
-				allowed_module_categories = { swheavy_ship_engine }
+				allowed_module_categories = { hyperdrive }
 			}
 			fixed_ship_secondaries_slot = {
 				required = no
-				allowed_module_categories = { swship_secondaries }
+				allowed_module_categories = { 
+					
+					sublight_drive
+			 }
 			}
 			fixed_ship_armor_slot = {
 				required = yes
-				allowed_module_categories = { swship_heavy_armor }	
+				allowed_module_categories = { 
+					light_deflector_shields
+					medium_deflector_shields
+					heavy_deflector_shields
+					super_heavy_deflector_shields
+				}	
 			}
 			front_1_custom_slot = {
 				required = no
 				allowed_module_categories = {
-					swship_anti_air
-					swship_heavy_battery
+					light_blaster_cannon
+					medium_blaster_cannon
+					heavy_blaster_cannon
+					light_laser_cannon
+					medium_laser_cannon
+					heavy_laser_cannon
+					light_turbolaser
+					medium_turbolaser
+					heavy_turbolaser
+					starfighters
+					starbombers
 				}
 			}
-			mid_1_custom_slot = {
-				required = no
-				allowed_module_categories = {
-					swship_anti_air
-					swship_secondaries
-					swship_airplane_launcher
-				}
-			}
-			mid_2_custom_slot = {
-				required = no
-				allowed_module_categories = {
-					swship_airplane_launcher
-					swship_anti_air
-					swship_secondaries
-				}
-			}
+			front_2_custom_slot = front_1_custom_slot
+			mid_1_custom_slot = front_1_custom_slot
+			mid_2_custom_slot = front_1_custom_slot
+			mid_3_custom_slot = front_1_custom_slot
 			rear_1_custom_slot = {
 				required = no
 				allowed_module_categories = {
-					swship_anti_air
-					swship_heavy_battery
+					upgrades
 				}
-			}
+			 }
+			rear_2_custom_slot = rear_1_custom_slot
+			
 		}
 		
 		default_modules = {
-			fixed_ship_battery_slot = empty
-			fixed_ship_anti_air_slot = empty
-			fixed_ship_fire_control_system_slot = empty
-			fixed_ship_radar_slot = empty
-			fixed_ship_engine_slot = swheavy_ship_engine_1
-			fixed_ship_secondaries_slot = empty
-			fixed_ship_armor_slot = swship_armor_bb_1
-			front_1_custom_slot = empty
-			mid_1_custom_slot = empty
+			fixed_ship_battery_slot = medium_turbolaser_2
+			fixed_ship_anti_air_slot = sf_1
+			fixed_ship_fire_control_system_slot = targetting_computer_0
+			fixed_ship_radar_slot = sensor_array_2
+			fixed_ship_engine_slot = hd_2
+			fixed_ship_secondaries_slot = sd_3
+			fixed_ship_armor_slot = sr_150
+			front_1_custom_slot = medium_turbolaser_2
+			front_2_custom_slot = empty
+			mid_1_custom_slot = medium_turbolaser_2
 			mid_2_custom_slot = empty
+			mid_3_custom_slot = empty
 			rear_1_custom_slot = empty
+			rear_2_custom_slot = empty
 		}
 
 		naval_range = 3000
 		
 		max_strength = 350
-		reliability = 0.80
+		reliability = 1.5
 		fuel_consumption = 67
 		
-		build_cost_ic = 3300
+		build_cost_ic = 8500
 	}
   ###Arquitens class
   arquitens_class_hull = {
@@ -1213,95 +1239,24 @@ stormtrooper_equipment = {
 	type = screen_ship
 	interface_category = interface_category_screen_ships
 	priority = 1900
-
-	module_slots = {
-		fixed_ship_battery_slot = {
-			required = yes
-			allowed_module_categories = { swship_light_battery ship_medium_battery}
-		}
-		fixed_ship_anti_air_slot = {
-			required = no
-			allowed_module_categories = { swship_anti_air }
-		}
-		fixed_ship_fire_control_system_slot = {
-			required = yes
-			allowed_module_categories = { swship_fire_control_system ship_sonar }
-		}
-		fixed_ship_radar_slot = {
-			required = no
-			allowed_module_categories = { swship_radar ship_sonar }
-		}
-		fixed_ship_engine_slot = {
-			required = yes
-			allowed_module_categories = { swcruiser_ship_engine }
-		}
-		fixed_ship_secondaries_slot = {
-			required = no
-			allowed_module_categories = { swship_secondaries }
-		}
-		fixed_ship_armor_slot = {
-			required = no
-			allowed_module_categories = { swship_cruiser_armor }	
-		}
-		mid_1_custom_slot = {
-			required = no
-			allowed_module_categories = {
-				swship_torpedo
-				swship_anti_air
-				swship_light_battery
-				swship_medium_battery
-				swship_secondaries
-				swship_airplane_launcher
-				swship_mine_layer
-			}
-		}
-		mid_2_custom_slot = mid_1_custom_slot
-		rear_1_custom_slot = {
-			required = no
-			allowed_module_categories = {
-				swship_anti_air
-				swship_light_battery
-				swship_medium_battery
-				swship_airplane_launcher
-				swship_mine_layer
-				swship_depth_charge
-			}
-		}
-	}
+	upgrades = {
+		ship_reliability_upgrade
+		ship_engine_upgrade
+		ship_armor_upgrade
+		ship_gun_upgrade
+	}	
+	lg_armor_piercing = 10
+	lg_attack = 12
 	
-	module_count_limit = {
-		category = ship_radar
-		count < 2
-	}
-	
-	module_count_limit = {
-		category = ship_sonar
-		count < 2
-	}
-	
-	default_modules = {
-		fixed_ship_battery_slot = empty
-		fixed_ship_anti_air_slot = empty
-		fixed_ship_fire_control_system_slot = empty
-		fixed_ship_radar_slot = empty
-		fixed_ship_engine_slot = swcruiser_ship_engine_1
-		mid_1_custom_slot = empty
-		mid_2_custom_slot = empty
-		rear_1_custom_slot = empty
-	}
-	
-	lg_armor_piercing = 0
-	lg_attack = 0
-	
-	hg_armor_piercing = 0
-	hg_attack = 0
+	hg_armor_piercing = 10
+	hg_attack = 8
 	
 	torpedo_attack = 0
 	sub_attack = 0
 	
-	anti_air_attack = 0
+	anti_air_attack = 6
 	
-	armor_value = 0
+	armor_value = 8
 
 	
 	surface_detection = 20
@@ -1310,90 +1265,42 @@ stormtrooper_equipment = {
 	naval_speed = 20
 	reliability = 0.80
 	
-	naval_range = 4000
+	naval_range = 6000
 	
 	max_strength = 100		
 	
 
 	fuel_consumption = 20
 	
-	build_cost_ic = 1800
+	build_cost_ic = 5000
 	resources = {
-		steel = 1
+		steel = 3
+			tungsten = 2
+			chromium = 1
+			oil = 1
 	}
 	
 	manpower = 750
-}
+	}
+	
 
 
-
-arquitens_class_1 = {
-	abbreviation = "hbb"
-	year = 1936
+	arquitens_class_1 = {
+	year = 4
 	visual_level = 1
 	archetype = arquitens_class_hull
 	priority = 1900
 	manpower = 750
 	naval_speed = 25
 	reliability = 0.85
-	build_cost_ic = 1900
-	naval_range = 4000
+	build_cost_ic = 5000
+	naval_range = 6000
 	max_strength = 110
-	resources = {
-		steel = 2
+		resources = {
+			steel = 3
+			tungsten = 2
+			chromium = 1
+			oil = 1
 	}
-	module_slots = {
-		fixed_ship_battery_slot = inherit
-		fixed_ship_anti_air_slot = inherit
-		fixed_ship_fire_control_system_slot = inherit
-		fixed_ship_radar_slot = inherit
-		fixed_ship_engine_slot = inherit
-		fixed_ship_secondaries_slot = inherit
-		fixed_ship_armor_slot = inherit
-		front_1_custom_slot = {
-			required = no
-			allowed_module_categories = {
-				swship_light_battery
-				swship_medium_battery
-				swship_anti_air
-			}
-		}
-		
-		mid_1_custom_slot = {
-			required = no
-			allowed_module_categories = {
-				swship_torpedo
-				swship_anti_air
-				swship_light_battery
-				swship_medium_battery
-				swship_secondaries
-				swship_airplane_launcher
-				swship_mine_layer
-			}
-		}
-		mid_2_custom_slot = mid_1_custom_slot
-		rear_1_custom_slot = {
-			required = no
-			allowed_module_categories = {
-				swship_mine_layer
-				swship_anti_air
-				swship_airplane_launcher
-				swship_depth_charge
-				swship_light_battery
-				swship_medium_battery
-			}
-		}
 	}
-
-	default_modules = {
-		front_1_custom_slot = empty
-		fixed_ship_engine_slot = swcruiser_ship_engine_2
-	}
-}
-
-
-
-
-
-
 }

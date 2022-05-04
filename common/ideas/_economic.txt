@@ -37,6 +37,85 @@ ideas = {
 			default = yes
 			cancel_if_invalid = no
 		}
+		corporate_economy = {
+
+			available = {
+				has_idea = wealth_generation_economy
+			}
+			visible = {
+				has_idea = wealth_generation_economy
+			}
+			cost = 150
+			removal_cost = -1
+
+			modifier = {
+				consumer_goods_factor = 0.40
+				production_speed_industrial_complex_factor = 0.10
+				production_speed_corporate_factory_factor = 0.20
+				production_speed_arms_factory_factor = -0.4
+			}
+			on_add = {
+				set_variable = { economy_law_multip_civ = 1.10 }
+				set_variable = { economy_law_multip_mil = 1.3 }
+				set_variable = { economy_law_multip_corp = 1.3 }
+				add_to_temp_variable = {
+					var = civilian_fac_income #(doesn't matter what)
+					value = 0.10
+					tooltip = increase_civ_tooltip
+				  }
+				  add_to_temp_variable = {
+					var = mil_fac_income #(doesn't matter what)
+					value = 0.3
+					tooltip = increase_mil_tooltip
+				  }
+				  add_to_temp_variable = {
+					var = corporate_fac_income #(doesn't matter what)
+					value = 0.3
+					tooltip = increase_cor_tooltip
+				  }
+			}
+			cancel_if_invalid = no
+		}
+		civilian_economy_focused = {
+
+			available = {
+				has_idea = wealth_generation_economy
+			}
+			visible = {
+				has_idea = wealth_generation_economy
+			}
+
+			cost = 150
+			removal_cost = -1
+
+			modifier = {
+				consumer_goods_factor = 0.25
+				production_speed_industrial_complex_factor = 0.20
+				production_speed_corporate_factory_factor = 0.10
+				production_speed_arms_factory_factor = -0.5
+			}
+			on_add = {
+				set_variable = { economy_law_multip_civ = 1.15 }
+				set_variable = { economy_law_multip_mil = 1.4 }
+				set_variable = { economy_law_multip_corp = 1.2 }
+				add_to_temp_variable = {
+					var = civilian_fac_income #(doesn't matter what)
+					value = 0.15
+					tooltip = increase_civ_tooltip
+				  }
+				  add_to_temp_variable = {
+					var = mil_fac_income #(doesn't matter what)
+					value = 0.4
+					tooltip = increase_mil_tooltip
+				  }
+				  add_to_temp_variable = {
+					var = corporate_fac_income #(doesn't matter what)
+					value = 0.2
+					tooltip = increase_cor_tooltip
+				  }
+			}
+			cancel_if_invalid = no
+		}
 		slave_based_economy = {
 			
 			available = {
@@ -52,7 +131,7 @@ ideas = {
 				production_speed_arms_factory_factor = -0.3
 			}
 			
-			default = yes
+			default = no
 			
 			cancel_if_invalid = no
 		}
@@ -66,6 +145,7 @@ ideas = {
 				consumer_goods_factor = 0.35
 				production_speed_industrial_complex_factor = -0.15
 				production_speed_arms_factory_factor = 0.15
+				production_speed_dockyard_factor = 0.10
 			}
 
 			on_add = {
@@ -89,7 +169,98 @@ ideas = {
 				  }
 			}
 			
-			default = yes
+			default = no
+			
+			cancel_if_invalid = no
+		}
+		naval_economy = {
+			
+			available = {
+				has_idea = war_economy
+			}
+			visible = {
+				has_idea = war_economy
+			}
+
+			cost = 150
+			removal_cost = -1
+			
+			modifier = {
+				consumer_goods_factor = 0.40
+				production_speed_industrial_complex_factor = -0.20
+				production_speed_dockyard_factor = 0.20
+				industrial_capacity_dockyard = 0.1
+				industrial_capacity_factory = -0.1
+			}
+
+			on_add = {
+				set_variable = { economy_law_multip_civ = 0.8 }
+				set_variable = { economy_law_multip_mil = 0.85 }
+				set_variable = { economy_law_multip_corp = 0.7 }
+				add_to_temp_variable = {
+					var = civilian_fac_income #(doesn't matter what)
+					value = -0.20
+					tooltip = increase_civ_tooltip
+				  }
+				  add_to_temp_variable = {
+					var = mil_fac_income #(doesn't matter what)
+					value = -0.15
+					tooltip = increase_mil_tooltip
+				  }
+				  add_to_temp_variable = {
+					var = corporate_fac_income #(doesn't matter what)
+					value = -0.3
+					tooltip = increase_cor_tooltip
+				  }
+			}
+			
+			default = no
+			
+			cancel_if_invalid = no
+		}
+		mil_economy = {
+			
+			available = {
+				has_idea = war_economy
+			}
+			visible = {
+				has_idea = war_economy
+			}
+
+
+			cost = 150
+			removal_cost = -1
+			
+			modifier = {
+				consumer_goods_factor = 0.40
+				production_speed_industrial_complex_factor = -0.25
+				production_speed_arms_factory_factor = 0.25
+				industrial_capacity_dockyard = -0.1
+				industrial_capacity_factory = 0.1
+			}
+
+			on_add = {
+				set_variable = { economy_law_multip_civ = 0.8 }
+				set_variable = { economy_law_multip_mil = 0.85 }
+				set_variable = { economy_law_multip_corp = 0.7 }
+				add_to_temp_variable = {
+					var = civilian_fac_income #(doesn't matter what)
+					value = -0.20
+					tooltip = increase_civ_tooltip
+				  }
+				  add_to_temp_variable = {
+					var = mil_fac_income #(doesn't matter what)
+					value = -0.15
+					tooltip = increase_mil_tooltip
+				  }
+				  add_to_temp_variable = {
+					var = corporate_fac_income #(doesn't matter what)
+					value = -0.3
+					tooltip = increase_cor_tooltip
+				  }
+			}
+			
+			default = no
 			
 			cancel_if_invalid = no
 		}
@@ -103,7 +274,7 @@ ideas = {
 				consumer_goods_factor = 0.35
 				production_speed_industrial_complex_factor = -0.1
 				production_speed_arms_factory_factor = -0.1
-				research_speed_factor = 0.15
+				research_speed_factor = 0.05
 			}
 			on_add = {
 				set_variable = { economy_law_multip_civ = 1.1 }
@@ -126,7 +297,94 @@ ideas = {
 				  }
 			}
 
-			default = yes
+			default = no
+			
+			cancel_if_invalid = no
+		}
+		general_research_based_economy = {
+			
+			available = {
+				has_idea = tech_based_economy
+			}
+			visible = {
+				has_idea = tech_based_economy
+			}
+
+		
+			cost = 150
+			removal_cost = -1
+			
+			modifier = {
+				consumer_goods_factor = 0.40
+				production_speed_industrial_complex_factor = -0.1
+				production_speed_arms_factory_factor = -0.1
+				research_speed_factor = 0.08
+			}
+			on_add = {
+				set_variable = { economy_law_multip_civ = 1.1 }
+				set_variable = { economy_law_multip_mil = 1.1 }
+				set_variable = { economy_law_multip_corp = 1.05 }
+				add_to_temp_variable = {
+					var = civilian_fac_income #(doesn't matter what)
+					value = 0.10
+					tooltip = increase_civ_tooltip
+				  }
+				  add_to_temp_variable = {
+					var = mil_fac_income #(doesn't matter what)
+					value = 0.10
+					tooltip = increase_mil_tooltip
+				  }
+				  add_to_temp_variable = {
+					var = corporate_fac_income #(doesn't matter what)
+					value = 0.05
+					tooltip = increase_cor_tooltip
+				  }
+			}
+
+			default = no
+			
+			cancel_if_invalid = no
+		}
+		shared_research_based_economy = {
+			
+			available = {
+				has_idea = tech_based_economy
+			}
+			visible = {
+				has_idea = tech_based_economy
+			}
+		
+			cost = 150
+			removal_cost = -1
+			
+			modifier = {
+				consumer_goods_factor = 0.40
+				production_speed_industrial_complex_factor = -0.1
+				production_speed_arms_factory_factor = -0.1
+				research_sharing_per_country_bonus = 0.04
+			}
+			on_add = {
+				set_variable = { economy_law_multip_civ = 1.1 }
+				set_variable = { economy_law_multip_mil = 1.1 }
+				set_variable = { economy_law_multip_corp = 1.05 }
+				add_to_temp_variable = {
+					var = civilian_fac_income #(doesn't matter what)
+					value = 0.10
+					tooltip = increase_civ_tooltip
+				  }
+				  add_to_temp_variable = {
+					var = mil_fac_income #(doesn't matter what)
+					value = 0.10
+					tooltip = increase_mil_tooltip
+				  }
+				  add_to_temp_variable = {
+					var = corporate_fac_income #(doesn't matter what)
+					value = 0.05
+					tooltip = increase_cor_tooltip
+				  }
+			}
+
+			default = no
 			
 			cancel_if_invalid = no
 		}
@@ -144,9 +402,9 @@ ideas = {
 				production_speed_industrial_complex_factor = -0.3
 				production_speed_arms_factory_factor = -0.3
 				production_speed_infrastructure_factor = 0.35 
-				max_fuel_factor = 0.15
-				fuel_gain_factor = 0.15
-				local_resources_factor = 0.2
+				max_fuel_factor = 0.25
+				fuel_gain_factor = 0.25
+				local_resources_factor = 0.1
 			}
 			on_add = {
 				add_to_temp_variable = {
@@ -165,12 +423,99 @@ ideas = {
 					tooltip = increase_cor_tooltip
 				  }
 			}
-			default = yes
+			default = no
 			
 			cancel_if_invalid = no
 		}
+
+		extraction_focused_economy = {
+			available = {
+				has_idea = resource_focused_economy
+			}
+			visible = {
+				has_idea = resource_focused_economy
+			}
 		
+			cost = 150
+			removal_cost = -1
+			
+			modifier = {
+				set_variable = { economy_law_multip_civ = 1.2 }
+				set_variable = { economy_law_multip_mil = 1.2 }
+				set_variable = { economy_law_multip_corp = 1.05 }
+				consumer_goods_factor = 0.40
+				production_speed_industrial_complex_factor = -0.3
+				production_speed_arms_factory_factor = -0.3
+				production_speed_infrastructure_factor = 0.35 
+				max_fuel_factor = -0.15
+				fuel_gain_factor = -0.15
+				local_resources_factor = 0.45
+			}
+			on_add = {
+				add_to_temp_variable = {
+					var = civilian_fac_income #(doesn't matter what)
+					value = 0.20
+					tooltip = increase_civ_tooltip
+				  }
+				  add_to_temp_variable = {
+					var = mil_fac_income #(doesn't matter what)
+					value = 0.20
+					tooltip = increase_mil_tooltip
+				  }
+				  add_to_temp_variable = {
+					var = corporate_fac_income #(doesn't matter what)
+					value = 0.05
+					tooltip = increase_cor_tooltip
+				  }
+			}
+			default = no
+			
+			cancel_if_invalid = no
+		}
+		refining_focused_economy = {
+			available = {
+				has_idea = resource_focused_economy
+			}
+			visible = {
+				has_idea = resource_focused_economy
+			}
 		
+			cost = 150
+			removal_cost = -1
+			
+			modifier = {
+				set_variable = { economy_law_multip_civ = 1.2 }
+				set_variable = { economy_law_multip_mil = 1.2 }
+				set_variable = { economy_law_multip_corp = 1.05 }
+				consumer_goods_factor = 0.40
+				production_speed_industrial_complex_factor = -0.35
+				production_speed_arms_factory_factor = -0.3
+				production_speed_infrastructure_factor = 0.35 
+				max_fuel_factor = 0.55
+				fuel_gain_factor = 0.55
+				local_resources_factor = 0.1
+			}
+			on_add = {
+				add_to_temp_variable = {
+					var = civilian_fac_income #(doesn't matter what)
+					value = 0.20
+					tooltip = increase_civ_tooltip
+				  }
+				  add_to_temp_variable = {
+					var = mil_fac_income #(doesn't matter what)
+					value = 0.20
+					tooltip = increase_mil_tooltip
+				  }
+				  add_to_temp_variable = {
+					var = corporate_fac_income #(doesn't matter what)
+					value = 0.05
+					tooltip = increase_cor_tooltip
+				  }
+			}
+			default = no
+			
+			cancel_if_invalid = no
+		}
 	}
 	
 	trade_laws = { 
