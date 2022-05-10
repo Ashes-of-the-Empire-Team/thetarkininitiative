@@ -25,19 +25,6 @@ focus_tree = {
 		}
 	}
 
-	#Silence the ones that can't be convinced
-	focus = {
-		id = kyk_silencetheonesthatcantbeconvinced
-		icon = GFX_goal_unknown
-		x = 11
-		y = 17
-		cost = 6
-		search_filters = {
-			FOCUS_FILTER_POLITICAL
-		}
-		prerequisite = { focus = kyk_handle_opposition_to_the_new_mining_policy  }
-	}
-
 	#A monster of metal and firepower
 	focus = {
 		id = kyk_a_monster_of_metal_and_firepower
@@ -49,6 +36,10 @@ focus_tree = {
 			FOCUS_FILTER_POLITICAL
 		}
 		prerequisite = { focus = kyk_use_parts_of_decommissioned_isds  }
+		available = {
+			not = { has_idea = kyk_tied_up_economy }
+		}
+		
 	}
 
 	#True to the empire
@@ -547,7 +538,7 @@ focus_tree = {
 		}
 		prerequisite = { focus = kyk_aplanetandapeoplebloodiedbutunbroken  }
 		completion_reward = {
-			random_owned_controlled_state = {
+			268 = {
 				add_building_construction = {
 						type = industrial_complex
 						level = 2
@@ -560,6 +551,46 @@ focus_tree = {
 					bonus = 1.0
 					uses = 2
 					category = industry
+				}
+				add_resource = {
+					type = steel
+					amount = 2
+					state = 268 
+				}
+				add_resource = {
+					type = steel
+					amount = 2
+					state = 29
+				}
+				add_resource = {
+					type = steel
+					amount = 2
+					state = 280
+				}
+				add_resource = {
+					type = steel
+					amount = 2
+					state = 284
+				}
+				add_resource = {
+					type = steel
+					amount = 2
+					state = 288
+				}
+				add_resource = {
+					type = aluminium
+					amount = 2
+					state = 262
+				}
+				add_resource = {
+					type = chromium
+					amount = 1
+					state = 304
+				}
+				add_resource = {
+					type = tungsten
+					amount = 2
+					state = 295
 				}
 			}		
 	}
@@ -681,7 +712,7 @@ focus_tree = {
 			FOCUS_FILTER_POLITICAL
 		}
 		prerequisite = { focus = kyk_restarting_the_industry  }
-		mutually_exclusive = { focus = kyk_produce_for_the_moffs_and_admirals  }
+		mutually_exclusive = { focus = kyk_export_to_the_moffs_and_admirals  }
 		completion_reward = {
 	
 			random_owned_controlled_state = {
@@ -692,12 +723,52 @@ focus_tree = {
 					}
 				add_extra_state_shared_building_slots = 4
 				}
+				add_resource = {
+					type = steel
+					amount = 2
+					state = 268 
+				}
+				add_resource = {
+					type = steel
+					amount = 2
+					state = 29
+				}
+				add_resource = {
+					type = steel
+					amount = 2
+					state = 280
+				}
+				add_resource = {
+					type = steel
+					amount = 2
+					state = 284
+				}
+				add_resource = {
+					type = steel
+					amount = 2
+					state = 288
+				}
+				add_resource = {
+					type = aluminium
+					amount = 2
+					state = 262
+				}
+				add_resource = {
+					type = chromium
+					amount = 1
+					state = 304
+				}
+				add_resource = {
+					type = tungsten
+					amount = 2
+					state = 295
+				}
 			}	
 	}
 
 	#Produce for the moffs and admirals (add event for other imps)
 	focus = {
-		id = kyk_produce_for_the_moffs_and_admirals
+		id = kyk_export_to_the_moffs_and_admirals
 		icon = GFX_goal_unknown
 		x = 6
 		y = 9
@@ -717,6 +788,41 @@ focus_tree = {
 					}
 				add_extra_state_shared_building_slots = 2
 				}
+			add_resource = {
+				type = steel
+				amount = -5
+				state = 280
+			}
+			add_resource = {
+				type = steel
+				amount = -5
+				state = 284
+			}
+			add_resource = {
+				type = steel
+				amount = 2
+				state = 180
+			}
+			add_resource = {
+				type = steel
+				amount = 2
+				state = 220
+			}
+			add_resource = {
+				type = steel
+				amount = 2
+				state = 319
+			}
+			add_resource = {
+				type = steel
+				amount = 2
+				state = 589
+			}
+			add_resource = {
+				type = steel
+				amount = 2
+				state = 186
+			}
 		}
 	}
 
@@ -730,7 +836,7 @@ focus_tree = {
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
-		prerequisite = { focus = kyk_produce_for_the_moffs_and_admirals  focus = kyk_industrial_grants  }
+		prerequisite = { focus = kyk_export_to_the_moffs_and_admirals  focus = kyk_industrial_grants  }
 		completion_reward = { 
 			random_owned_controlled_state = {
 				add_building_construction = {
@@ -739,6 +845,58 @@ focus_tree = {
 						instant_build = yes
 					}
 				add_extra_state_shared_building_slots = 2
+				}
+				if = {
+					limit = {
+						has_idea = kyk_naval_industry5
+					}
+					add_timed_idea = { idea = kyk_naval_industrial_boom days = 30 }
+			
+				}
+				else_if = {
+					limit = {
+						has_idea = kyk_naval_industry4
+					}
+					swap_ideas = {
+						remove_idea = kyk_naval_industry4
+						add_idea = kyk_naval_industry5
+					}
+				}
+				else_if = {
+					limit = {
+						has_idea = kyk_naval_industry3
+					}
+					swap_ideas = {
+						remove_idea = kyk_naval_industry3
+						add_idea = kyk_naval_industry4
+					}
+				}
+				else_if = {
+					limit = {
+						has_idea = kyk_naval_industry2
+					}
+					swap_ideas = {
+						remove_idea = kyk_naval_industry2
+						add_idea = kyk_naval_industry3
+					}
+				}
+				else_if = {
+					limit = {
+						has_idea = kyk_naval_industry1
+					}
+					swap_ideas = {
+						remove_idea = kyk_naval_industry1
+						add_idea = kyk_naval_industry2
+					}
+				}
+				else_if = {
+					limit = {
+						has_idea = kyk_naval_industry0
+					}
+					swap_ideas = {
+						remove_idea = kyk_naval_industry0
+						add_idea = kyk_naval_industry1
+					}
 				}
 		}
 	}
@@ -755,7 +913,60 @@ focus_tree = {
 		}
 		prerequisite = { focus = kyk_starship_construction_contracts  }
 		mutually_exclusive = { focus = kyk_kashyyyk_farming_cooperation  }
-		completion_reward = { add_offsite_building = { type = dockyard level = 3 }}
+		completion_reward = { add_offsite_building = { type = dockyard level = 3 }
+		if = {
+			limit = {
+				has_idea = kyk_naval_industry5
+			}
+			add_timed_idea = { idea = kyk_naval_industrial_boom days = 30 }
+	
+		}
+		else_if = {
+			limit = {
+				has_idea = kyk_naval_industry4
+			}
+			swap_ideas = {
+				remove_idea = kyk_naval_industry4
+				add_idea = kyk_naval_industry5
+			}
+		}
+		else_if = {
+			limit = {
+				has_idea = kyk_naval_industry3
+			}
+			swap_ideas = {
+				remove_idea = kyk_naval_industry3
+				add_idea = kyk_naval_industry4
+			}
+		}
+		else_if = {
+			limit = {
+				has_idea = kyk_naval_industry2
+			}
+			swap_ideas = {
+				remove_idea = kyk_naval_industry2
+				add_idea = kyk_naval_industry3
+			}
+		}
+		else_if = {
+			limit = {
+				has_idea = kyk_naval_industry1
+			}
+			swap_ideas = {
+				remove_idea = kyk_naval_industry1
+				add_idea = kyk_naval_industry2
+			}
+		}
+		else_if = {
+			limit = {
+				has_idea = kyk_naval_industry0
+			}
+			swap_ideas = {
+				remove_idea = kyk_naval_industry0
+				add_idea = kyk_naval_industry1
+			}
+		}
+		}
 	}
 
 	#Optimization of Industrial operations
@@ -790,6 +1001,87 @@ focus_tree = {
 				add_idea = kyk_deforestation2
 				remove_idea = kyk_deforestation1
 			}
+			add_resource = {
+				type = steel
+				amount = -5
+				state = 280
+			}
+			add_resource = {
+				type = steel
+				amount = -5
+				state = 284
+			}
+			add_resource = {
+				type = oil
+				amount = -2
+				state = 280
+			}
+			add_resource = {
+				type = oil
+				amount = -2
+				state = 284
+			}
+			if = {
+				limit = {
+					has_idea = kyk_ecological_balance6
+				}
+				add_timed_idea = { idea = kyk_ecological_miracle days = 300 }
+		
+			}
+			else_if = {
+				limit = {
+					has_idea = kyk_ecological_balance5
+				}
+				swap_ideas = {
+					remove_idea = kyk_ecological_balance5
+					add_idea = kyk_ecological_balance6
+				}
+			}
+			else_if = {
+				limit = {
+					has_idea = kyk_ecological_balance4
+				}
+				swap_ideas = {
+					remove_idea = kyk_ecological_balance4
+					add_idea = kyk_ecological_balance5
+				}
+			}
+			else_if = {
+				limit = {
+					has_idea = kyk_ecological_balance3
+				}
+				swap_ideas = {
+					remove_idea = kyk_ecological_balance3
+					add_idea = kyk_ecological_balance4
+				}
+			}
+			else_if = {
+				limit = {
+					has_idea = kyk_ecological_balance2
+				}
+				swap_ideas = {
+					remove_idea = kyk_ecological_balance2
+					add_idea = kyk_ecological_balance3
+				}
+			}
+			else_if = {
+				limit = {
+					has_idea = kyk_ecological_balance1
+				}
+				swap_ideas = {
+					remove_idea = kyk_ecological_balance1
+					add_idea = kyk_ecological_balance2
+				}
+			}
+			else_if = {
+				limit = {
+					has_idea = kyk_ecological_balance0
+				}
+				swap_ideas = {
+					remove_idea = kyk_ecological_balance0
+					add_idea = kyk_ecological_balance1
+				}
+			}
 		}
 	}
 
@@ -813,6 +1105,7 @@ focus_tree = {
 					}
 				
 				add_extra_state_shared_building_slots = 2 }
+				add_ideas = { kyk_hoorrkhukk_mining_disaster }
 		}
 	}
 
@@ -832,6 +1125,27 @@ focus_tree = {
 				add_idea = kyk_deforestation3
 				remove_idea = kyk_deforestation2
 			}
+			add_ideas = { kyk_material_shortages }
+			add_resource = {
+				type = steel
+				amount = -5
+				state = 280
+			}
+			add_resource = {
+				type = steel
+				amount = -5
+				state = 284
+			}
+			add_resource = {
+				type = oil
+				amount = -2
+				state = 280
+			}
+			add_resource = {
+				type = oil
+				amount = -2
+				state = 284
+			}
 		}
 	}
 
@@ -846,6 +1160,10 @@ focus_tree = {
 			FOCUS_FILTER_POLITICAL
 		}
 		prerequisite = { focus = kyk_purchase_more_mining_equipment  focus = kyk_seize_mining_operations_and_pass_new_restrictions  }
+		completion_reward = {
+			remove_ideas = { kyk_material_shortages }
+			remove_ideas = { kyk_hoorrkhukk_mining_disaster }
+		}
 	}
 
 	#sign mining contracts with the corporations
@@ -881,6 +1199,87 @@ focus_tree = {
 		completion_reward = {
 			
 				remove_ideas = kyk_deforestation3
+				add_resource = {
+					type = steel
+					amount = -5
+					state = 280
+				}
+				add_resource = {
+					type = steel
+					amount = -5
+					state = 284
+				}
+				add_resource = {
+					type = oil
+					amount = -2
+					state = 280
+				}
+				add_resource = {
+					type = oil
+					amount = -2
+					state = 284
+				}
+				if = {
+					limit = {
+						has_idea = kyk_ecological_balance6
+					}
+					add_timed_idea = { idea = kyk_ecological_miracle days = 300 }
+			
+				}
+				else_if = {
+					limit = {
+						has_idea = kyk_ecological_balance5
+					}
+					swap_ideas = {
+						remove_idea = kyk_ecological_balance5
+						add_idea = kyk_ecological_balance6
+					}
+				}
+				else_if = {
+					limit = {
+						has_idea = kyk_ecological_balance4
+					}
+					swap_ideas = {
+						remove_idea = kyk_ecological_balance4
+						add_idea = kyk_ecological_balance5
+					}
+				}
+				else_if = {
+					limit = {
+						has_idea = kyk_ecological_balance3
+					}
+					swap_ideas = {
+						remove_idea = kyk_ecological_balance3
+						add_idea = kyk_ecological_balance4
+					}
+				}
+				else_if = {
+					limit = {
+						has_idea = kyk_ecological_balance2
+					}
+					swap_ideas = {
+						remove_idea = kyk_ecological_balance2
+						add_idea = kyk_ecological_balance3
+					}
+				}
+				else_if = {
+					limit = {
+						has_idea = kyk_ecological_balance1
+					}
+					swap_ideas = {
+						remove_idea = kyk_ecological_balance1
+						add_idea = kyk_ecological_balance2
+					}
+				}
+				else_if = {
+					limit = {
+						has_idea = kyk_ecological_balance0
+					}
+					swap_ideas = {
+						remove_idea = kyk_ecological_balance0
+						add_idea = kyk_ecological_balance1
+					}
+				}
 		}
 	}
 
@@ -934,6 +1333,58 @@ focus_tree = {
 		mutually_exclusive = { focus = kyk_army_resource_priority  }
 		completion_reward = {
 			add_ideas = kyk_naval_resource_priority
+			if = {
+				limit = {
+					has_idea = kyk_naval_industry5
+				}
+				add_timed_idea = { idea = kyk_naval_industrial_boom days = 30 }
+		
+			}
+			else_if = {
+				limit = {
+					has_idea = kyk_naval_industry4
+				}
+				swap_ideas = {
+					remove_idea = kyk_naval_industry4
+					add_idea = kyk_naval_industry5
+				}
+			}
+			else_if = {
+				limit = {
+					has_idea = kyk_naval_industry3
+				}
+				swap_ideas = {
+					remove_idea = kyk_naval_industry3
+					add_idea = kyk_naval_industry4
+				}
+			}
+			else_if = {
+				limit = {
+					has_idea = kyk_naval_industry2
+				}
+				swap_ideas = {
+					remove_idea = kyk_naval_industry2
+					add_idea = kyk_naval_industry3
+				}
+			}
+			else_if = {
+				limit = {
+					has_idea = kyk_naval_industry1
+				}
+				swap_ideas = {
+					remove_idea = kyk_naval_industry1
+					add_idea = kyk_naval_industry2
+				}
+			}
+			else_if = {
+				limit = {
+					has_idea = kyk_naval_industry0
+				}
+				swap_ideas = {
+					remove_idea = kyk_naval_industry0
+					add_idea = kyk_naval_industry1
+				}
+			}
 		}
 	}
 
@@ -1030,6 +1481,67 @@ focus_tree = {
 				}
 			every_owned_state = {
 				add_extra_state_shared_building_slots = 2
+			}
+			if = {
+				limit = {
+					has_idea = kyk_ecological_balance0
+				}
+				add_ideas = kyk_ecological_collapse 
+		
+			}
+			else_if = {
+				limit = {
+					has_idea = kyk_ecological_balance1
+				}
+				swap_ideas = {
+					remove_idea = kyk_ecological_balance1
+					add_idea = kyk_ecological_balance0
+				}
+			}
+			else_if = {
+				limit = {
+					has_idea = kyk_ecological_balance2
+				}
+				swap_ideas = {
+					remove_idea = kyk_ecological_balance2
+					add_idea = kyk_ecological_balance1
+				}
+			}
+			else_if = {
+				limit = {
+					has_idea = kyk_ecological_balance3
+				}
+				swap_ideas = {
+					remove_idea = kyk_ecological_balance3
+					add_idea = kyk_ecological_balance2
+				}
+			}
+			else_if = {
+				limit = {
+					has_idea = kyk_ecological_balance4
+				}
+				swap_ideas = {
+					remove_idea = kyk_ecological_balance4
+					add_idea = kyk_ecological_balance3
+				}
+			}
+			else_if = {
+				limit = {
+					has_idea = kyk_ecological_balance5
+				}
+				swap_ideas = {
+					remove_idea = kyk_ecological_balance5
+					add_idea = kyk_ecological_balance4
+				}
+			}
+			else_if = {
+				limit = {
+					has_idea = kyk_ecological_balance6
+				}
+				swap_ideas = {
+					remove_idea = kyk_ecological_balance6
+					add_idea = kyk_ecological_balance5
+				}
 			}
 		}
 	}
@@ -1255,7 +1767,60 @@ focus_tree = {
 			FOCUS_FILTER_POLITICAL
 		}
 		prerequisite = { focus = kyk_navy_resource_priority  }
-		completion_reward = { add_offsite_building = { type = dockyard level = 5 }}
+		completion_reward = { add_offsite_building = { type = dockyard level = 5 }
+		if = {
+			limit = {
+				has_idea = kyk_naval_industry5
+			}
+			add_timed_idea = { idea = kyk_naval_industrial_boom days = 30 }
+	
+		}
+		else_if = {
+			limit = {
+				has_idea = kyk_naval_industry4
+			}
+			swap_ideas = {
+				remove_idea = kyk_naval_industry4
+				add_idea = kyk_naval_industry5
+			}
+		}
+		else_if = {
+			limit = {
+				has_idea = kyk_naval_industry3
+			}
+			swap_ideas = {
+				remove_idea = kyk_naval_industry3
+				add_idea = kyk_naval_industry4
+			}
+		}
+		else_if = {
+			limit = {
+				has_idea = kyk_naval_industry2
+			}
+			swap_ideas = {
+				remove_idea = kyk_naval_industry2
+				add_idea = kyk_naval_industry3
+			}
+		}
+		else_if = {
+			limit = {
+				has_idea = kyk_naval_industry1
+			}
+			swap_ideas = {
+				remove_idea = kyk_naval_industry1
+				add_idea = kyk_naval_industry2
+			}
+		}
+		else_if = {
+			limit = {
+				has_idea = kyk_naval_industry0
+			}
+			swap_ideas = {
+				remove_idea = kyk_naval_industry0
+				add_idea = kyk_naval_industry1
+			}
+		}
+		}
 
 	}
 
@@ -1303,6 +1868,9 @@ focus_tree = {
 		}
 		prerequisite = { focus = kyk_draft_plans_for_a_grand_capital_ship  }
 		mutually_exclusive = { focus = kyk_hire_designers_from_mon_cala  }
+		completion_reward = {
+			add_timed_idea = { idea = kyk_tied_up_economy days = 60 }
+		}
 	}
 
 	#hire designers from Mon Cala
@@ -1317,6 +1885,15 @@ focus_tree = {
 		}
 		prerequisite = { focus = kyk_draft_plans_for_a_grand_capital_ship  }
 		mutually_exclusive = { focus = kyk_use_parts_of_decommissioned_isds  }
+		available = {
+			NOT = {
+				has_war_with = CAL
+			}
+		}
+		completion_reward = {
+			add_timed_idea = { idea = kyk_tied_up_economy days = 120 }
+		}
+		
 	}
 
 	#A superb ship capable of taking any hit
@@ -1330,6 +1907,10 @@ focus_tree = {
 			FOCUS_FILTER_POLITICAL
 		}
 		prerequisite = { focus = kyk_hire_designers_from_mon_cala  }
+		available = {
+			not = { has_idea = kyk_tied_up_economy }
+		}
+		
 	}
 
 	#Pride of the sector
@@ -1509,12 +2090,12 @@ focus_tree = {
 		id = kyk_enforce_existing_trade_regulations
 		icon = GFX_goal_unknown
 		x = 18
-		y = 10
+		y = 9
 		cost = 6
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
-		prerequisite = { focus = kyk_propose_new_trade_regulations  }
+		prerequisite = { focus = kyk_midrim_interests }
 	}
 
 	#propose new trade regulations
@@ -1522,12 +2103,25 @@ focus_tree = {
 		id = kyk_propose_new_trade_regulations
 		icon = GFX_goal_unknown
 		x = 18
-		y = 9
+		y = 10
 		cost = 6
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
-		prerequisite = { focus = kyk_midrim_interests  }
+		prerequisite = { focus =  kyk_enforce_existing_trade_regulations }
+	}
+
+	#Our future in the New Republic
+	focus = {
+		id = kyk_our_future_in_the_new_republic
+		icon = GFX_goal_unknown
+		x = 19
+		y = 11
+		cost = 6
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus =  kyk_propose_new_trade_regulations focus = kyk_demand_dismantlement_of_slaver_governments }
 	}
 
 	#midrim interests
@@ -1841,5 +2435,60 @@ focus_tree = {
 		}
 		prerequisite = { focus = kyk_heavy_support_weapons  }
 	}
+	#Merili's Mission
+	focus = {
+		id = kyk_merilis_mission
+		icon = GFX_goal_unknown
+		x = 5
+		y = 28
+		cost = 6
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = {}
+		available = {
+			has_country_leader =  {
+				character = KYK_Merili
+				ruling_only = yes
+			}
+		}
+	
+	}
+	#Imperial Ambition
+
+	focus = {
+		id = kyk_imperial_ambition
+		icon = GFX_goal_unknown
+		x = 17
+		y = 28
+		cost = 6
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = {}
+		available = {
+			has_government = imperial
+			not = { has_idea = kyk_contested_command }
+		}
+	}
+
+	#The Slavers of kashyyyk
+	focus = {
+		id = kyk_slavers_of_Kashyyyk
+		icon = GFX_goal_unknown
+		x = 24
+		y = 1
+		cost = 6
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = {}
+
+		available = {
+			has_country_flag = slave_economy
+			not = { has_idea = kyk_contested_command }
+		}
+	}
+
 
 }
