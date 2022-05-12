@@ -1,0 +1,1297 @@
+on_actions = {
+	on_startup = {
+		effect = {
+			PEN = {
+				PEN_set_internal_factions = yes
+				add_dynamic_modifier = {
+					modifier = PEN_internal_factions_ardus_dyn
+				}
+				add_dynamic_modifier = {
+					modifier = PEN_internal_factions_elta_dyn
+				}
+				add_dynamic_modifier = {
+					modifier = PEN_internal_factions_wyrn_dyn
+				}
+				add_dynamic_modifier = {
+					modifier = PEN_internal_factions_ib_dyn
+				}
+				add_dynamic_modifier = {
+					modifier = PEN_internal_factions_gregor_dyn
+				}
+			}
+		}
+	}
+	on_daily_PEN = {
+		effect = {
+			#Clear Equilibrium Change Modifiers
+			clear_variable = ardus_influence_equilibrium_change
+			clear_variable = elta_influence_equilibrium_change
+			clear_variable = wyrn_influence_equilibrium_change
+			clear_variable = ib_influence_equilibrium_change
+			clear_variable = gregor_influence_equilibrium_change
+			#Ardus Faction Dominant
+			if = {
+				limit = {
+					AND = {
+						check_variable = { ardus_influence > 80 }
+						check_variable = { ardus_influence > elta_influence }
+						check_variable = { ardus_influence > wyrn_influence }
+						check_variable = { ardus_influence > gregor_influence }
+						check_variable = { ardus_influence > ib_influence }
+					}
+				}
+				set_country_flag = PEN_ardus_faction_dominant
+				add_to_variable = {
+					var = ardus_influence_equilibrium_change
+					value = 10
+				}
+				subtract_from_variable = {
+					var = elta_influence_equilibrium_change
+					value = 15
+				}
+				subtract_from_variable = {
+					var = wyrn_influence_equilibrium_change
+					value = 15
+				}
+				subtract_from_variable = {
+					var = gregor_influence_equilibrium_change
+					value = 15
+				}
+				subtract_from_variable = {
+					var = ib_influence_equilibrium_change
+					value = 15
+				}
+			}
+			if = {
+				limit = {
+					has_country_flag = PEN_ardus_faction_dominant
+				}
+				if = {
+					limit = {
+						NOT = {
+							AND = {
+								check_variable = { ardus_influence > 80 }
+								check_variable = { ardus_influence > elta_influence }
+								check_variable = { ardus_influence > wyrn_influence }
+								check_variable = { ardus_influence > gregor_influence }
+								check_variable = { ardus_influence > ib_influence }
+							}
+						}
+					}
+					clear_country_flag = PEN_ardus_faction_dominant
+					subtract_from_variable = {
+						var = ardus_influence_equilibrium_change
+						value = 10
+					}
+					add_to_variable = {
+						var = elta_influence_equilibrium_change
+						value = 15
+					}
+					add_to_variable = {
+						var = wyrn_influence_equilibrium_change
+						value = 15
+					}
+					add_to_variable = {
+						var = gregor_influence_equilibrium_change
+						value = 15
+					}
+					add_to_variable = {
+						var = ib_influence_equilibrium_change
+						value = 15
+					}
+				}
+			}
+			#Dynamic Automata Faction Dominant
+			if = {
+				limit = {
+					AND = {
+						check_variable = { elta_influence > 80 }
+						check_variable = { elta_influence > ardus_influence }
+						check_variable = { elta_influence > wyrn_influence }
+						check_variable = { elta_influence > gregor_influence }
+						check_variable = { elta_influence > ib_influence }
+					}
+				}
+				set_country_flag = PEN_elta_faction_dominant
+				add_to_variable = {
+					var = elta_influence_equilibrium_change
+					value = 10
+				}
+				subtract_from_variable = {
+					var = ardus_influence_equilibrium_change
+					value = 15
+				}
+				subtract_from_variable = {
+					var = wyrn_influence_equilibrium_change
+					value = 15
+				}
+				subtract_from_variable = {
+					var = gregor_influence_equilibrium_change
+					value = 15
+				}
+				subtract_from_variable = {
+					var = ib_influence_equilibrium_change
+					value = 15
+				}
+			}
+			if = {
+				limit = {
+					has_country_flag = PEN_elta_faction_dominant
+				}
+				if = {
+					limit = {
+						NOT = {
+							AND = {
+								check_variable = { elta_influence > 80 }
+								check_variable = { elta_influence > ardus_influence }
+								check_variable = { elta_influence > wyrn_influence }
+								check_variable = { elta_influence > gregor_influence }
+								check_variable = { elta_influence > ib_influence }
+							}
+						}
+					}
+					clear_country_flag = PEN_elta_faction_dominant
+					subtract_from_variable = {
+						var = elta_influence_equilibrium_change
+						value = 10
+					}
+					add_to_variable = {
+						var = ardus_influence_equilibrium_change
+						value = 15
+					}
+					add_to_variable = {
+						var = wyrn_influence_equilibrium_change
+						value = 15
+					}
+					add_to_variable = {
+						var = gregor_influence_equilibrium_change
+						value = 15
+					}
+					add_to_variable = {
+						var = ib_influence_equilibrium_change
+						value = 15
+					}
+				}
+			}
+			#Galentro Heavy Works Faction Dominant
+			if = {
+				limit = {
+					AND = {
+						check_variable = { wyrn_influence > 80 }
+						check_variable = { wyrn_influence > ardus_influence }
+						check_variable = { wyrn_influence > elta_influence }
+						check_variable = { wyrn_influence > gregor_influence }
+						check_variable = { wyrn_influence > ib_influence }
+					}
+				}
+				set_country_flag = PEN_wyrn_faction_dominant
+				add_to_variable = {
+					var = wyrn_influence_equilibrium_change
+					value = 10
+				}
+				subtract_from_variable = {
+					var = ardus_influence_equilibrium_change
+					value = 15
+				}
+				subtract_from_variable = {
+					var = elta_influence_equilibrium_change
+					value = 15
+				}
+				subtract_from_variable = {
+					var = gregor_influence_equilibrium_change
+					value = 15
+				}
+				subtract_from_variable = {
+					var = ib_influence_equilibrium_change
+					value = 15
+				}
+			}
+			if = {
+				limit = {
+					has_country_flag = PEN_wyrn_faction_dominant
+				}
+				if = {
+					limit = {
+						NOT = {
+							AND = {
+								check_variable = { wyrn_influence > 80 }
+								check_variable = { wyrn_influence > ardus_influence }
+								check_variable = { wyrn_influence > elta_influence }
+								check_variable = { wyrn_influence > gregor_influence }
+								check_variable = { wyrn_influence > ib_influence }
+							}
+						}
+					}
+					clear_country_flag = PEN_wyrn_faction_dominant
+					subtract_from_variable = {
+						var = wyrn_influence_equilibrium_change
+						value = 10
+					}
+					add_to_variable = {
+						var = elta_influence_equilibrium_change
+						value = 15
+					}
+					add_to_variable = {
+						var = ardus_influence_equilibrium_change
+						value = 15
+					}
+					add_to_variable = {
+						var = gregor_influence_equilibrium_change
+						value = 15
+					}
+					add_to_variable = {
+						var = ib_influence_equilibrium_change
+						value = 15
+					}
+				}
+			}
+			#Imperial Governors Faction Dominant
+			if = {
+				limit = {
+					AND = {
+						check_variable = { ib_influence > 80 }
+						check_variable = { ib_influence > ardus_influence }
+						check_variable = { ib_influence > elta_influence }
+						check_variable = { ib_influence > gregor_influence }
+						check_variable = { ib_influence > wyrn_influence }
+					}
+				}
+				set_country_flag = PEN_ib_faction_dominant
+				add_to_variable = {
+					var = ib_influence_equilibrium_change
+					value = 10
+				}
+				subtract_from_variable = {
+					var = ardus_influence_equilibrium_change
+					value = 15
+				}
+				subtract_from_variable = {
+					var = elta_influence_equilibrium_change
+					value = 15
+				}
+				subtract_from_variable = {
+					var = gregor_influence_equilibrium_change
+					value = 15
+				}
+				subtract_from_variable = {
+					var = wyrn_influence_equilibrium_change
+					value = 15
+				}
+			}
+			if = {
+				limit = {
+					has_country_flag = PEN_ib_faction_dominant
+				}
+				if = {
+					limit = {
+						NOT = {
+							AND = {
+								check_variable = { ib_influence > 80 }
+								check_variable = { ib_influence > ardus_influence }
+								check_variable = { ib_influence > elta_influence }
+								check_variable = { ib_influence > gregor_influence }
+								check_variable = { ib_influence > wyrn_influence }
+							}
+						}
+					}
+					clear_country_flag = PEN_ib_faction_dominant
+					subtract_from_variable = {
+						var = ib_influence_equilibrium_change
+						value = 10
+					}
+					add_to_variable = {
+						var = elta_influence_equilibrium_change
+						value = 15
+					}
+					add_to_variable = {
+						var = wyrn_influence_equilibrium_change
+						value = 15
+					}
+					add_to_variable = {
+						var = gregor_influence_equilibrium_change
+						value = 15
+					}
+					add_to_variable = {
+						var = ardus_influence_equilibrium_change
+						value = 15
+					}
+				}
+			}
+			#VFCZ Faction Dominant
+			if = {
+				limit = {
+					AND = {
+						check_variable = { gregor_influence > 80 }
+						check_variable = { gregor_influence > ardus_influence }
+						check_variable = { gregor_influence > elta_influence }
+						check_variable = { gregor_influence > ib_influence }
+						check_variable = { gregor_influence > wyrn_influence }
+					}
+				}
+				set_country_flag = PEN_gregor_faction_dominant
+				add_to_variable = {
+					var = gregor_influence_equilibrium_change
+					value = 10
+				}
+				subtract_from_variable = {
+					var = ardus_influence_equilibrium_change
+					value = 15
+				}
+				subtract_from_variable = {
+					var = elta_influence_equilibrium_change
+					value = 15
+				}
+				subtract_from_variable = {
+					var = ib_influence_equilibrium_change
+					value = 15
+				}
+				subtract_from_variable = {
+					var = wyrn_influence_equilibrium_change
+					value = 15
+				}
+			}
+			if = {
+				limit = {
+					has_country_flag = PEN_gregor_faction_dominant
+				}
+				if = {
+					limit = {
+						NOT = {
+							AND = {
+								check_variable = { gregor_influence > 80 }
+								check_variable = { gregor_influence > ardus_influence }
+								check_variable = { gregor_influence > elta_influence }
+								check_variable = { gregor_influence > ib_influence }
+								check_variable = { gregor_influence > wyrn_influence }
+							}
+						}
+					}
+					clear_country_flag = PEN_gregor_faction_dominant
+					subtract_from_variable = {
+						var = gregor_influence_equilibrium_change
+						value = 10
+					}
+					add_to_variable = {
+						var = elta_influence_equilibrium_change
+						value = 15
+					}
+					add_to_variable = {
+						var = wyrn_influence_equilibrium_change
+						value = 15
+					}
+					add_to_variable = {
+						var = ardus_influence_equilibrium_change
+						value = 15
+					}
+					add_to_variable = {
+						var = ib_influence_equilibrium_change
+						value = 15
+					}
+				}
+			}
+			
+			#Clear Equilibrium and Re-Add Modifiers to keep Up-to-date
+			clear_variable = ardus_influence_equilibrium
+			clear_variable = elta_influence_equilibrium
+			clear_variable = gregor_influence_equilibrium
+			clear_variable = wyrn_influence_equilibrium
+			clear_variable = ib_influence_equilibrium
+			set_variable = {
+				var = ardus_influence_equilibrium
+				value = 50
+			}
+			add_to_variable = {
+				var = ardus_influence_equilibrium
+				value = ardus_influence_equilibrium_change
+			}
+			clamp_variable = {
+				var = ardus_influence_equilibrium
+				min = 0
+				max = pen_loyalty_influence_cap
+			}
+			set_variable = {
+				var = elta_influence_equilibrium
+				value = 50
+			}
+			add_to_variable = {
+				var = elta_influence_equilibrium
+				value = elta_influence_equilibrium_change
+			}
+			clamp_variable = {
+				var = elta_influence_equilibrium
+				min = 0
+				max = pen_loyalty_influence_cap
+			}
+			set_variable = {
+				var = wyrn_influence_equilibrium
+				value = 50
+			}
+			add_to_variable = {
+				var = wyrn_influence_equilibrium
+				value = wyrn_influence_equilibrium_change
+			}
+			clamp_variable = {
+				var = wyrn_influence_equilibrium
+				min = 0
+				max = pen_loyalty_influence_cap
+			}
+			set_variable = {
+				var = ib_influence_equilibrium
+				value = 50
+			}
+			add_to_variable = {
+				var = ib_influence_equilibrium
+				value = ib_influence_equilibrium_change
+			}
+			clamp_variable = {
+				var = ib_influence_equilibrium
+				min = 0
+				max = pen_loyalty_influence_cap
+			}
+			set_variable = {
+				var = gregor_influence_equilibrium
+				value = 50
+			}
+			add_to_variable = {
+				var = gregor_influence_equilibrium
+				value = gregor_influence_equilibrium_change
+			}
+			clamp_variable = {
+				var = gregor_influence_equilibrium
+				min = 0
+				max = pen_loyalty_influence_cap
+			}
+
+			#Loyalty Equilibrium Change
+			if = {
+				limit = {
+					check_variable = { ardus_loyalty > ardus_loyalty_equilibrium }
+				}
+				subtract_from_variable = {
+					var = ardus_loyalty
+					value = 0.25
+				}
+			}
+			if = {
+				limit = {
+					check_variable = { ardus_loyalty < ardus_loyalty_equilibrium }
+				}
+				add_to_variable = {
+					var = ardus_loyalty
+					value = 0.25
+				}
+			}
+			if = {
+				limit = {
+					check_variable = { elta_loyalty > elta_loyalty_equilibrium }
+				}
+				subtract_from_variable = {
+					var = elta_loyalty
+					value = 0.25
+				}
+			}
+			if = {
+				limit = {
+					check_variable = { elta_loyalty < elta_loyalty_equilibrium }
+				}
+				add_to_variable = {
+					var = elta_loyalty
+					value = 0.25
+				}
+			}
+			if = {
+				limit = {
+					check_variable = { wyrn_loyalty > wyrn_loyalty_equilibrium }
+				}
+				subtract_from_variable = {
+					var = wyrn_loyalty
+					value = 0.25
+				}
+			}
+			if = {
+				limit = {
+					check_variable = { wyrn_loyalty < wyrn_loyalty_equilibrium }
+				}
+				add_to_variable = {
+					var = wyrn_loyalty
+					value = 0.25
+				}
+			}
+			if = {
+				limit = {
+					check_variable = { gregor_loyalty > gregor_loyalty_equilibrium }
+				}
+				subtract_from_variable = {
+					var = gregor_loyalty
+					value = 0.25
+				}
+			}
+			if = {
+				limit = {
+					check_variable = { gregor_loyalty < gregor_loyalty_equilibrium }
+				}
+				add_to_variable = {
+					var = gregor_loyalty
+					value = 0.25
+				}
+			}
+			if = {
+				limit = {
+					check_variable = { ib_loyalty > ib_loyalty_equilibrium }
+				}
+				subtract_from_variable = {
+					var = ib_loyalty
+					value = 0.25
+				}
+			}
+			if = {
+				limit = {
+					check_variable = { ib_loyalty < ib_loyalty_equilibrium }
+				}
+				add_to_variable = {
+					var = ib_loyalty
+					value = 0.25
+				}
+			}
+
+			#Influence Equilibrium Change
+			if = {
+				limit = {
+					check_variable = { ardus_influence > ardus_influence_equilibrium }
+				}
+				subtract_from_variable = {
+					var = ardus_influence
+					value = 0.25
+				}
+			}
+			if = {
+				limit = {
+					check_variable = { ardus_influence < ardus_influence_equilibrium }
+				}
+				add_to_variable = {
+					var = ardus_influence
+					value = 0.25
+				}
+			}
+			if = {
+				limit = {
+					check_variable = { elta_influence > elta_influence_equilibrium }
+				}
+				subtract_from_variable = {
+					var = elta_influence
+					value = 0.25
+				}
+			}
+			if = {
+				limit = {
+					check_variable = { elta_influence < elta_influence_equilibrium }
+				}
+				add_to_variable = {
+					var = elta_influence
+					value = 0.25
+				}
+			}
+			if = {
+				limit = {
+					check_variable = { wyrn_influence > wyrn_influence_equilibrium }
+				}
+				subtract_from_variable = {
+					var = wyrn_influence
+					value = 0.25
+				}
+			}
+			if = {
+				limit = {
+					check_variable = { wyrn_influence < wyrn_influence_equilibrium }
+				}
+				add_to_variable = {
+					var = wyrn_influence
+					value = 0.25
+				}
+			}
+			if = {
+				limit = {
+					check_variable = { gregor_influence > gregor_influence_equilibrium }
+				}
+				subtract_from_variable = {
+					var = gregor_influence
+					value = 0.25
+				}
+			}
+			if = {
+				limit = {
+					check_variable = { gregor_influence < gregor_influence_equilibrium }
+				}
+				add_to_variable = {
+					var = gregor_influence
+					value = 0.25
+				}
+			}
+			if = {
+				limit = {
+					check_variable = { ib_influence > ib_influence_equilibrium }
+				}
+				subtract_from_variable = {
+					var = ib_influence
+					value = 0.25
+				}
+			}
+			if = {
+				limit = {
+					check_variable = { ib_influence < ib_influence_equilibrium }
+				}
+				add_to_variable = {
+					var = ib_influence
+					value = 0.25
+				}
+			}
+
+			#Clear Daily Effects Variables
+			clear_variable = daily_ardus_influence
+			clear_variable = daily_ardus_loyalty
+				#Ardus Kaine Faction
+			clear_variable = daily_ardus_pp_gain_max
+			clear_variable = daily_ardus_pp_gain_halving
+			clear_variable = daily_ardus_pp_gain
+			clear_variable = daily_ardus_pp_gain_loc
+
+			clear_variable = daily_ardus_stability_max
+			clear_variable = daily_ardus_stability_halving
+			clear_variable = daily_ardus_stability
+			clear_variable = daily_ardus_stability_loc
+				#Dynamic Automata
+			clear_variable = daily_elta_pp_gain_max
+			clear_variable = daily_elta_pp_gain_halving
+			clear_variable = daily_elta_pp_gain
+			clear_variable = daily_elta_pp_gain_loc
+
+			clear_variable = daily_elta_factory_output_max
+			clear_variable = daily_elta_factory_output_halving
+			clear_variable = daily_elta_factory_output
+			clear_variable = daily_elta_factory_output_loc
+				#Galentro Heavy Works
+			clear_variable = daily_wyrn_pp_gain_max
+			clear_variable = daily_wyrn_pp_gain_halving
+			clear_variable = daily_wyrn_pp_gain
+			clear_variable = daily_wyrn_pp_gain_loc
+
+			clear_variable = daily_wyrn_dockyard_output_max
+			clear_variable = daily_wyrn_dockyard_output_halving
+			clear_variable = daily_wyrn_dockyard_output
+			clear_variable = daily_wyrn_dockyard_output_loc
+				#Imperial Governors
+			clear_variable = daily_ib_pp_gain_max
+			clear_variable = daily_ib_pp_gain_halving
+			clear_variable = daily_ib_pp_gain
+			clear_variable = daily_ib_pp_gain_loc
+
+			clear_variable = daily_ib_conscription_factor_max
+			clear_variable = daily_ib_conscription_factor_halving
+			clear_variable = daily_ib_conscription_factor
+			clear_variable = daily_ib_conscription_factor_loc
+				#Velcar Free Commerce Zone
+			clear_variable = daily_gregor_pp_gain_max
+			clear_variable = daily_gregor_pp_gain_halving
+			clear_variable = daily_gregor_pp_gain
+			clear_variable = daily_gregor_pp_gain_loc
+
+			clear_variable = daily_gregor_trade_opinion_max
+			clear_variable = daily_gregor_trade_opinion_halving
+			clear_variable = daily_gregor_trade_opinion
+			clear_variable = daily_gregor_trade_opinion_loc
+
+			clear_variable = daily_gregor_local_resources_factor_max
+			clear_variable = daily_gregor_local_resources_factor_halving
+			clear_variable = daily_gregor_local_resources_factor
+			clear_variable = daily_gregor_local_resources_factor_loc
+
+			#Influence Affecting Effects Cap
+				#Ardus Kaine Faction Effects
+			set_variable = {
+				var = daily_ardus_influence
+				value = ardus_influence
+			}
+			set_variable = {
+				var = daily_ardus_loyalty
+				value = ardus_loyalty
+			}
+			divide_variable = {
+				var = daily_ardus_influence
+				value = 100
+			}
+			divide_variable = {
+				var = daily_ardus_loyalty
+				value = 100
+			}
+
+					#Political Power Gain
+			set_variable = {
+				var = daily_ardus_pp_gain
+				value = 0
+			}
+			set_variable = {
+				var = daily_ardus_pp_gain_max
+				value = 40
+			}
+
+			multiply_variable = {
+				var = daily_ardus_pp_gain_max
+				value = daily_ardus_influence
+			}
+
+			set_variable = {
+				var = daily_ardus_pp_gain_halving
+				value = daily_ardus_pp_gain_max
+			}
+			divide_variable = {
+				var = daily_ardus_pp_gain_halving
+				value = 2
+			}
+
+			multiply_variable = {
+				var = daily_ardus_pp_gain_max
+				value = daily_ardus_loyalty
+			}
+			add_to_variable = {
+				var = daily_ardus_pp_gain
+				value = daily_ardus_pp_gain_max
+			}
+			subtract_from_variable = {
+				var = daily_ardus_pp_gain
+				value = daily_ardus_pp_gain_halving
+			}
+			set_variable = {
+				var = daily_ardus_pp_gain_loc
+				value = daily_ardus_pp_gain
+			}
+			divide_variable = {
+				var = daily_ardus_pp_gain
+				value = 100
+			}
+
+					#Stability
+			set_variable = {
+				var = daily_ardus_stability
+				value = 0
+			}
+			set_variable = {
+				var = daily_ardus_stability_max
+				value = 40
+			}
+
+			multiply_variable = {
+				var = daily_ardus_stability_max
+				value = daily_ardus_influence
+			}
+
+			set_variable = {
+				var = daily_ardus_stability_halving
+				value = daily_ardus_stability_max
+			}
+			divide_variable = {
+				var = daily_ardus_stability_halving
+				value = 2
+			}
+
+			multiply_variable = {
+				var = daily_ardus_stability_max
+				value = daily_ardus_loyalty
+			}
+			add_to_variable = {
+				var = daily_ardus_stability
+				value = daily_ardus_stability_max
+			}
+			subtract_from_variable = {
+				var = daily_ardus_stability
+				value = daily_ardus_stability_halving
+			}
+			set_variable = {
+				var = daily_ardus_stability_loc
+				value = daily_ardus_stability
+			}
+			divide_variable = {
+				var = daily_ardus_stability
+				value = 100
+			}
+
+			#Dynamic Automata Faction Effects
+			set_variable = {
+				var = daily_elta_influence
+				value = elta_influence
+			}
+			set_variable = {
+				var = daily_elta_loyalty
+				value = elta_loyalty
+			}
+			divide_variable = {
+				var = daily_elta_influence
+				value = 100
+			}
+			divide_variable = {
+				var = daily_elta_loyalty
+				value = 100
+			}
+
+					#Political Power Gain
+			set_variable = {
+				var = daily_elta_pp_gain
+				value = 0
+			}
+			set_variable = {
+				var = daily_elta_pp_gain_max
+				value = 20
+			}
+
+			multiply_variable = {
+				var = daily_elta_pp_gain_max
+				value = daily_elta_influence
+			}
+
+			set_variable = {
+				var = daily_elta_pp_gain_halving
+				value = daily_elta_pp_gain_max
+			}
+			divide_variable = {
+				var = daily_elta_pp_gain_halving
+				value = 2
+			}
+
+			multiply_variable = {
+				var = daily_elta_pp_gain_max
+				value = daily_elta_loyalty
+			}
+			add_to_variable = {
+				var = daily_elta_pp_gain
+				value = daily_elta_pp_gain_max
+			}
+			subtract_from_variable = {
+				var = daily_elta_pp_gain
+				value = daily_elta_pp_gain_halving
+			}
+			set_variable = {
+				var = daily_elta_pp_gain_loc
+				value = daily_elta_pp_gain
+			}
+			divide_variable = {
+				var = daily_elta_pp_gain
+				value = 100
+			}
+
+					#Factory Output
+			set_variable = {
+				var = daily_elta_factory_output
+				value = 0
+			}
+			set_variable = {
+				var = daily_elta_factory_output_max
+				value = 40
+			}
+
+			multiply_variable = {
+				var = daily_elta_factory_output_max
+				value = daily_elta_influence
+			}
+
+			set_variable = {
+				var = daily_elta_factory_output_halving
+				value = daily_elta_factory_output_max
+			}
+			divide_variable = {
+				var = daily_elta_factory_output_halving
+				value = 2
+			}
+
+			multiply_variable = {
+				var = daily_elta_factory_output_max
+				value = daily_elta_loyalty
+			}
+			add_to_variable = {
+				var = daily_elta_factory_output
+				value = daily_elta_factory_output_max
+			}
+			subtract_from_variable = {
+				var = daily_elta_factory_output
+				value = daily_elta_factory_output_halving
+			}
+			set_variable = {
+				var = daily_elta_factory_output_loc
+				value = daily_elta_factory_output
+			}
+			divide_variable = {
+				var = daily_elta_factory_output
+				value = 100
+			}
+
+			#Galentro Heavy Works Faction Effects
+			set_variable = {
+				var = daily_wyrn_influence
+				value = wyrn_influence
+			}
+			set_variable = {
+				var = daily_wyrn_loyalty
+				value = wyrn_loyalty
+			}
+			divide_variable = {
+				var = daily_wyrn_influence
+				value = 100
+			}
+			divide_variable = {
+				var = daily_wyrn_loyalty
+				value = 100
+			}
+
+					#Political Power Gain
+			set_variable = {
+				var = daily_wyrn_pp_gain
+				value = 0
+			}
+			set_variable = {
+				var = daily_wyrn_pp_gain_max
+				value = 20
+			}
+
+			multiply_variable = {
+				var = daily_wyrn_pp_gain_max
+				value = daily_wyrn_influence
+			}
+
+			set_variable = {
+				var = daily_wyrn_pp_gain_halving
+				value = daily_wyrn_pp_gain_max
+			}
+			divide_variable = {
+				var = daily_wyrn_pp_gain_halving
+				value = 2
+			}
+
+			multiply_variable = {
+				var = daily_wyrn_pp_gain_max
+				value = daily_wyrn_loyalty
+			}
+			add_to_variable = {
+				var = daily_wyrn_pp_gain
+				value = daily_wyrn_pp_gain_max
+			}
+			subtract_from_variable = {
+				var = daily_wyrn_pp_gain
+				value = daily_wyrn_pp_gain_halving
+			}
+			set_variable = {
+				var = daily_wyrn_pp_gain_loc
+				value = daily_wyrn_pp_gain
+			}
+			divide_variable = {
+				var = daily_wyrn_pp_gain
+				value = 100
+			}
+
+					#Dockyard Output
+			set_variable = {
+				var = daily_wyrn_dockyard_output
+				value = 0
+			}
+			set_variable = {
+				var = daily_wyrn_dockyard_output_max
+				value = 40
+			}
+
+			multiply_variable = {
+				var = daily_wyrn_dockyard_output_max
+				value = daily_wyrn_influence
+			}
+
+			set_variable = {
+				var = daily_wyrn_dockyard_output_halving
+				value = daily_wyrn_dockyard_output_max
+			}
+			divide_variable = {
+				var = daily_wyrn_dockyard_output_halving
+				value = 2
+			}
+
+			multiply_variable = {
+				var = daily_wyrn_dockyard_output_max
+				value = daily_wyrn_loyalty
+			}
+			add_to_variable = {
+				var = daily_wyrn_dockyard_output
+				value = daily_wyrn_dockyard_output_max
+			}
+			subtract_from_variable = {
+				var = daily_wyrn_dockyard_output
+				value = daily_wyrn_dockyard_output_halving
+			}
+			set_variable = {
+				var = daily_wyrn_dockyard_output_loc
+				value = daily_wyrn_dockyard_output
+			}
+			divide_variable = {
+				var = daily_wyrn_dockyard_output
+				value = 100
+			}
+
+			#Imperial Governors Faction Effects
+			set_variable = {
+				var = daily_ib_influence
+				value = ib_influence
+			}
+			set_variable = {
+				var = daily_ib_loyalty
+				value = ib_loyalty
+			}
+			divide_variable = {
+				var = daily_ib_influence
+				value = 100
+			}
+			divide_variable = {
+				var = daily_ib_loyalty
+				value = 100
+			}
+
+					#Political Power Gain
+			set_variable = {
+				var = daily_ib_pp_gain
+				value = 0
+			}
+			set_variable = {
+				var = daily_ib_pp_gain_max
+				value = 20
+			}
+
+			multiply_variable = {
+				var = daily_ib_pp_gain_max
+				value = daily_ib_influence
+			}
+
+			set_variable = {
+				var = daily_ib_pp_gain_halving
+				value = daily_ib_pp_gain_max
+			}
+			divide_variable = {
+				var = daily_ib_pp_gain_halving
+				value = 2
+			}
+
+			multiply_variable = {
+				var = daily_ib_pp_gain_max
+				value = daily_ib_loyalty
+			}
+			add_to_variable = {
+				var = daily_ib_pp_gain
+				value = daily_ib_pp_gain_max
+			}
+			subtract_from_variable = {
+				var = daily_ib_pp_gain
+				value = daily_ib_pp_gain_halving
+			}
+			set_variable = {
+				var = daily_ib_pp_gain_loc
+				value = daily_ib_pp_gain
+			}
+			divide_variable = {
+				var = daily_ib_pp_gain
+				value = 100
+			}
+
+					#Recruitable Pop
+			set_variable = {
+				var = daily_ib_conscription_factor
+				value = 0
+			}
+			set_variable = {
+				var = daily_ib_conscription_factor_max
+				value = 40
+			}
+
+			multiply_variable = {
+				var = daily_ib_conscription_factor_max
+				value = daily_ib_influence
+			}
+
+			set_variable = {
+				var = daily_ib_conscription_factor_halving
+				value = daily_ib_conscription_factor_max
+			}
+			divide_variable = {
+				var = daily_ib_conscription_factor_halving
+				value = 2
+			}
+
+			multiply_variable = {
+				var = daily_ib_conscription_factor_max
+				value = daily_ib_loyalty
+			}
+			add_to_variable = {
+				var = daily_ib_conscription_factor
+				value = daily_ib_conscription_factor_max
+			}
+			subtract_from_variable = {
+				var = daily_ib_conscription_factor
+				value = daily_ib_conscription_factor_halving
+			}
+			set_variable = {
+				var = daily_ib_conscription_factor_loc
+				value = daily_ib_conscription_factor
+			}
+			divide_variable = {
+				var = daily_ib_conscription_factor
+				value = 100
+			}
+
+			#VFCZ Faction Effects
+			set_variable = {
+				var = daily_gregor_influence
+				value = gregor_influence
+			}
+			set_variable = {
+				var = daily_gregor_loyalty
+				value = gregor_loyalty
+			}
+			divide_variable = {
+				var = daily_gregor_influence
+				value = 100
+			}
+			divide_variable = {
+				var = daily_gregor_loyalty
+				value = 100
+			}
+
+					#Political Power Gain
+			set_variable = {
+				var = daily_gregor_pp_gain
+				value = 0
+			}
+			set_variable = {
+				var = daily_gregor_pp_gain_max
+				value = 20
+			}
+
+			multiply_variable = {
+				var = daily_gregor_pp_gain_max
+				value = daily_gregor_influence
+			}
+
+			set_variable = {
+				var = daily_gregor_pp_gain_halving
+				value = daily_gregor_pp_gain_max
+			}
+			divide_variable = {
+				var = daily_gregor_pp_gain_halving
+				value = 2
+			}
+
+			multiply_variable = {
+				var = daily_gregor_pp_gain_max
+				value = daily_gregor_loyalty
+			}
+			add_to_variable = {
+				var = daily_gregor_pp_gain
+				value = daily_gregor_pp_gain_max
+			}
+			subtract_from_variable = {
+				var = daily_gregor_pp_gain
+				value = daily_gregor_pp_gain_halving
+			}
+			set_variable = {
+				var = daily_gregor_pp_gain_loc
+				value = daily_gregor_pp_gain
+			}
+			divide_variable = {
+				var = daily_gregor_pp_gain
+				value = 100
+			}
+
+					#Trade Opinion
+			set_variable = {
+				var = daily_gregor_trade_opinion
+				value = 0
+			}
+			set_variable = {
+				var = daily_gregor_trade_opinion_max
+				value = 40
+			}
+
+			multiply_variable = {
+				var = daily_gregor_trade_opinion_max
+				value = daily_gregor_influence
+			}
+
+			set_variable = {
+				var = daily_gregor_trade_opinion_halving
+				value = daily_gregor_trade_opinion_max
+			}
+			divide_variable = {
+				var = daily_gregor_trade_opinion_halving
+				value = 2
+			}
+
+			multiply_variable = {
+				var = daily_gregor_trade_opinion_max
+				value = daily_gregor_loyalty
+			}
+			add_to_variable = {
+				var = daily_gregor_trade_opinion
+				value = daily_gregor_trade_opinion_max
+			}
+			subtract_from_variable = {
+				var = daily_gregor_trade_opinion
+				value = daily_gregor_trade_opinion_halving
+			}
+			set_variable = {
+				var = daily_gregor_trade_opinion_loc
+				value = daily_gregor_trade_opinion
+			}
+			divide_variable = {
+				var = daily_gregor_trade_opinion
+				value = 100
+			}
+
+					#Resource Gain Efficiency
+			set_variable = {
+				var = daily_gregor_local_resources_factor
+				value = 0
+			}
+			set_variable = {
+				var = daily_gregor_local_resources_factor_max
+				value = 40
+			}
+
+			multiply_variable = {
+				var = daily_gregor_local_resources_factor_max
+				value = daily_gregor_influence
+			}
+
+			set_variable = {
+				var = daily_gregor_local_resources_factor_halving
+				value = daily_gregor_local_resources_factor_max
+			}
+			divide_variable = {
+				var = daily_gregor_local_resources_factor_halving
+				value = 2
+			}
+
+			multiply_variable = {
+				var = daily_gregor_local_resources_factor_max
+				value = daily_gregor_loyalty
+			}
+			add_to_variable = {
+				var = daily_gregor_local_resources_factor
+				value = daily_gregor_local_resources_factor_max
+			}
+			subtract_from_variable = {
+				var = daily_gregor_local_resources_factor
+				value = daily_gregor_local_resources_factor_halving
+			}
+			set_variable = {
+				var = daily_gregor_local_resources_factor_loc
+				value = daily_gregor_local_resources_factor
+			}
+			divide_variable = {
+				var = daily_gregor_local_resources_factor
+				value = 100
+			}
+
+			
+		}
+	}
+}

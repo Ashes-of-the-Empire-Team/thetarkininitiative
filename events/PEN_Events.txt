@@ -1,0 +1,189 @@
+add_namespace = PEN_piracy
+add_namespace = PEN_formation
+
+#Pentastar Formation Events
+country_event = { #Otro Wryn Introduced
+	id = PEN_formation.2
+    title = PEN_formation.2.t
+    desc = PEN_formation.2.d
+	picture = GFX_report_event_election_vote
+
+	fire_only_once = yes
+
+	trigger = {
+		tag = PEN
+		NOT = { has_completed_focus = PEN_invite_local_leaders }
+		focus_progress = {
+			focus = PEN_invite_local_leaders
+			progress > 0.20
+		}
+	}
+
+	mean_time_to_happen = {
+		days = 1
+	}
+
+	immediate = {
+		hidden_effect = {
+			country_event = { id = PEN_formation.3 days = 7 }
+		}
+	}
+	
+	option = {
+		name = PEN_formation.2.a
+	}
+}
+
+country_event = { #Elta Besk Introduced
+	id = PEN_formation.3
+    title = PEN_formation.3.t
+    desc = PEN_formation.3.d
+	picture = GFX_report_event_election_vote
+
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	immediate = {
+		hidden_effect = {
+			country_event = { id = PEN_formation.4 days = 7 }
+		}
+	}
+	
+	option = {
+		name = PEN_formation.3.a
+	}
+}
+
+country_event = { #Ib Dekeet Introduced
+	id = PEN_formation.4
+    title = PEN_formation.4.t
+    desc = PEN_formation.4.d
+	picture = GFX_report_event_election_vote
+
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	immediate = {
+		hidden_effect = {
+			country_event = { id = PEN_formation.5 days = 7 }
+		}
+	}
+	
+	option = {
+		name = PEN_formation.4.a
+	}
+}
+
+country_event = { #Gregor Raquoran Introduced
+	id = PEN_formation.5
+    title = PEN_formation.5.t
+    desc = PEN_formation.5.d
+	picture = GFX_report_event_election_vote
+
+	is_triggered_only = yes
+
+	fire_only_once = yes
+	
+	option = {
+		name = PEN_formation.5.a
+	}
+}
+
+country_event = { #Alignment Formed (PEN)
+	id = PEN_formation.1
+    title = PEN_formation.1.t
+    desc = PEN_formation.1.d
+	picture = GFX_report_event_election_vote
+
+	is_triggered_only = yes
+
+	fire_only_once = yes
+	
+	option = {
+		name = PEN_formation.1.a
+	}
+}
+
+news_event = { #Alignment Formed (News)
+	id = PEN_formation.0
+    title = PEN_formation.0.t
+    desc = PEN_formation.0.d
+	picture = GFX_report_event_election_vote
+
+	major = yes
+	fire_for_sender = no
+
+	is_triggered_only = yes
+
+	fire_only_once = yes
+	
+	option = {
+		name = PEN_formation.0.a
+		trigger = {
+			has_government = imperial
+		}
+	}
+	option = {
+		name = PEN_formation.0.b
+		trigger = {
+			has_government = democratic
+		}
+	}
+	option = {
+		name = PEN_formation.0.c
+		trigger = {
+			OR = {
+				has_government = corporation
+				has_government = consortium
+				has_government = neutrality
+			}
+		}
+	}
+}
+
+#Piracy Events
+country_event = { #Unlock Piracy Decisions
+	id = PEN_piracy.1
+    title = PEN_piracy.1.t
+    desc = PEN_piracy.1.d
+	picture = GFX_report_event_election_vote
+
+	is_triggered_only = yes
+
+	fire_only_once = yes
+	
+	immediate = {
+		set_country_flag = PEN_piracy_activated_flag
+	}
+
+	option = {
+		name = PEN_piracy.1.a
+		hidden_effect = {
+            activate_mission = PEN_piracy_attacks_grow
+        }
+	}
+}
+
+country_event = { #Pirates Thwarted
+	id = PEN_piracy.2
+    title = PEN_piracy.2.t
+    desc = PEN_piracy.2.d
+	picture = GFX_report_event_election_vote
+
+	is_triggered_only = yes
+
+	fire_only_once = yes
+	
+	immediate = {
+		set_country_flag = PEN_piracy_activated_flag
+	}
+
+	option = {
+		name = PEN_piracy_activate.1.a
+		hidden_effect = {
+            activate_mission = PEN_pirate_attacks_grow
+        }
+	}
+}

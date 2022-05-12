@@ -1,0 +1,917 @@
+PEN_pirate_activity_category = {
+
+    #Looping Piracy Decision
+    PEN_piracy_attacks_grow = {
+        priority = 10
+        icon = eng_ally_imperialist_coup
+        
+        allowed = {
+            always = no
+		}
+
+        available = {
+            hidden_trigger = { always = no }
+        }
+
+        days_remove = 61
+        days_mission_timeout = 60
+
+        remove_effect = {}
+        complete_effect = {}
+
+        timeout_effect = {
+            if = {
+                limit = {
+                    has_idea = PEN_tiny_pirate_activity
+                }
+                custom_effect_tooltip = PEN_pirates_upgrade_1
+                hidden_effect = {
+                    random_list = {
+                        95 = {
+                            swap_ideas = {
+                                remove_idea = PEN_tiny_pirate_activity
+                                add_idea = PEN_limited_pirate_activity
+                            }
+                        }
+                        5 = {
+                            country_event = PEN_piracy.2
+                        }
+                    }
+                }
+            }
+            else_if = {
+                limit = {
+                    has_idea = PEN_limited_pirate_activity
+                }
+                custom_effect_tooltip = PEN_pirates_upgrade_2
+                hidden_effect = {
+                    random_list = {
+                        80 = {
+                            swap_ideas = {
+                                remove_idea = PEN_limited_pirate_activity
+                                add_idea = PEN_moderate_pirate_activity
+                            }
+                        }
+                        20 = {
+                            country_event = PEN_piracy.2
+                        }
+                    }
+                }
+            }
+            else_if = {
+                limit = {
+                    has_idea = PEN_moderate_pirate_activity
+                }
+                custom_effect_tooltip = PEN_pirates_upgrade_3
+                hidden_effect = {
+                    random_list = {
+                        65 = {
+                            swap_ideas = {
+                                remove_idea = PEN_moderate_pirate_activity 
+                                add_idea = PEN_significant_pirate_activity
+                            }
+                        }
+                        35 = {
+                            country_event = PEN_piracy.2
+                        }
+                    }
+                }
+            }
+            else_if = {
+                limit = {
+                    has_idea = PEN_significant_pirate_activity
+                }
+                custom_effect_tooltip = PEN_pirates_upgrade_4
+                hidden_effect = {
+                    random_list = {
+                        45 = {
+                            swap_ideas = {
+                                remove_idea = PEN_significant_pirate_activity
+                                add_idea = PEN_extreme_pirate_activity
+                            }
+                        }
+                        55 = {
+                            country_event = PEN_piracy.2
+                        }
+                    }
+                }
+            }
+            else_if = {
+                limit = {
+                    has_idea = PEN_extreme_pirate_activity
+                }
+                custom_effect_tooltip = PEN_pirates_upgrade_5
+                hidden_effect = {
+                    random_list = {
+                        25 = {
+                            swap_ideas = {
+                                remove_idea = PEN_extreme_pirate_activity
+                                add_idea = PEN_uncontrolled_pirate_activity
+                            }
+                        }
+                        75 = {
+                            country_event = PEN_piracy.2
+                        }
+                    }
+                }
+            }
+            else_if = {
+                limit = {
+                    has_idea = PEN_uncontrolled_pirate_activity
+                }
+                hidden_effect = {
+                    random_list = {
+                        50 = {
+                            swap_ideas = {
+                                remove_idea = PEN_extreme_pirate_activity
+                                add_idea = PEN_uncontrolled_pirate_activity
+                            }
+                        }
+                        10 = {
+                            country_event = PEN_piracy.3
+                        }
+                        10 = {
+                            country_event = PEN_piracy.3
+                        }
+                        10 = {
+                            country_event = PEN_piracy.3
+                        }
+                        10 = {
+                            country_event = PEN_piracy.3
+                        }
+                        10 = {
+                            country_event = PEN_piracy.3
+                        }
+                    }
+                }
+            }
+            hidden_effect = {
+                if = {
+                    limit = {
+                        OR = {    
+                            has_idea = PEN_tiny_pirate_activity
+                            has_idea = PEN_limited_pirate_activity
+                            has_idea = PEN_moderate_pirate_activity
+                            has_idea = PEN_significant_pirate_activity
+                            has_idea = PEN_extreme_pirate_activity
+                            has_idea = PEN_uncontrolled_pirate_activity
+                        }
+                    }
+                    activate_mission = PEN_piracy_attacks_grow
+                }
+                else = {
+                    country_event = PEN_piracy.0
+                }
+            }
+        }
+    }
+
+    #Fight Piracy Decisions
+    PEN_piracy_hunt_pirate_fleets = {
+        priority = 10
+        icon = eng_ally_imperialist_coup
+        
+        available = {
+            has_completed_focus = PEN_enforcement
+        }
+
+        visible = {
+            has_completed_focus = PEN_enforcement
+        }
+
+        cost = 25
+        days_re_enable = 30
+        days_remove = 10
+        removal_effect = {
+            add_days_mission_timeout  = {
+				mission = PEN_piracy_attacks_grow
+				days = 30
+			}
+        }
+    }
+
+    PEN_piracy_raid_pirate_stronghold = {
+        priority = 10
+        icon = eng_ally_imperialist_coup
+        
+        available = {
+            has_completed_focus = PEN_enforcement
+            NOT = {
+                has_idea = PEN_tiny_pirate_activity
+            }
+        }
+
+        visible = {
+            has_completed_focus = PEN_enforcement
+        }
+
+        cost = 75
+        days_re_enable = 180
+        days_remove = 90
+        removal_effect = {
+            if = {
+                limit = {
+                    has_idea = PEN_limited_pirate_activity
+                }
+                swap_ideas = {
+                    remove_idea = PEN_limited_pirate_activity
+                    add_idea = PEN_tiny_pirate_activity
+                }
+            }
+            else_if = {
+                limit = {
+                    has_idea = PEN_moderate_pirate_activity
+                }
+                swap_ideas = {
+                    remove_idea = PEN_moderate_pirate_activity
+                    add_idea = PEN_limited_pirate_activity
+                }
+            }
+            else_if = {
+                limit = {
+                    has_idea = PEN_significant_pirate_activity
+                }
+                swap_ideas = {
+                    remove_idea = PEN_significant_pirate_activity
+                    add_idea = PEN_moderate_pirate_activity
+                }
+            }
+            else_if = {
+                limit = {
+                    has_idea = PEN_extreme_pirate_activity
+                }
+                swap_ideas = {
+                    remove_idea = PEN_extreme_pirate_activity
+                    add_idea = PEN_significant_pirate_activity
+                }
+            }
+            else_if = {
+                limit = {
+                    has_idea = PEN_uncontrolled_pirate_activity
+                }
+                swap_ideas = {
+                    remove_idea = PEN_uncontrolled_pirate_activity
+                    add_idea = PEN_extreme_pirate_activity
+                }
+            }
+        }
+    }
+}
+
+#Internal Factions Decisions
+PEN_internal_factions_category = {
+    #Ardus Kaine Faction Decisions
+    PEN_internal_promote_ardus_faction = {
+        priority = 10
+        icon = eng_ally_imperialist_coup
+
+        visible = {
+            has_country_flag = PEN_ardus_faction_on_flag
+        }
+        
+        available = {
+            original_tag = PEN
+            NOT = {
+                AND = {
+                    check_variable = {
+                        var = ardus_loyalty
+                        value = pen_loyalty_influence_cap
+                        compare = greater_than_or_equals
+                    }
+                    check_variable = {
+                        var = ardus_influence
+                        value = pen_loyalty_influence_cap
+                        compare = greater_than_or_equals
+                    }
+                }
+            }
+        }
+
+        custom_cost_trigger = {
+            AND = {
+                check_variable = {
+                    var = currency_amount^primary_currency
+                    value = 5
+                    compare = greater_than_or_equals
+                }
+                has_political_power > 24
+            }
+        }
+        custom_cost_text = PEN_internal_decision_cost
+        days_remove = 30
+        complete_effect = {
+            hidden_effect = {
+                subtract_from_variable = { currency_amount^primary_currency = 5 }
+                add_political_power = -25
+            }
+            custom_effect_tooltip = PEN_promote_faction_loc
+            add_to_variable = {
+                var = ardus_loyalty
+                value = 10
+            }
+            clamp_variable = {
+                var = ardus_loyalty
+                min = 0
+                max = pen_loyalty_influence_cap
+            }
+            add_to_variable = {
+                var = ardus_influence
+                value = 10
+            }
+            clamp_variable = {
+                var = ardus_influence
+                min = 0
+                max = pen_loyalty_influence_cap
+            }
+        }
+    }
+
+    PEN_internal_discredit_ardus_faction = {
+        priority = 10
+        icon = eng_ally_imperialist_coup
+        
+        visible = {
+            has_country_flag = PEN_ardus_faction_on_flag
+        }
+
+        available = {
+            original_tag = PEN
+            NOT = {
+                AND = {
+                    check_variable = {
+                        var = ardus_loyalty
+                        value = 0
+                        compare = less_than_or_equals
+                    }
+                    check_variable = {
+                        var = ardus_influence
+                        value = 0
+                        compare = less_than_or_equals
+                    }
+                }
+            }
+        }
+
+        custom_cost_trigger = {
+            AND = {
+                check_variable = {
+                    var = currency_amount^primary_currency
+                    value = 5
+                    compare = greater_than_or_equals
+                }
+                has_political_power > 24
+            }
+        }
+        custom_cost_text = PEN_internal_decision_cost
+        days_remove = 30
+        complete_effect = {
+            hidden_effect = {
+                subtract_from_variable = { currency_amount^primary_currency = 5 }
+                add_political_power = -25
+            }
+            custom_effect_tooltip = PEN_discredit_faction_loc
+            subtract_from_variable = {
+                var = ardus_loyalty
+                value = 10
+            }
+            clamp_variable = {
+                var = ardus_loyalty
+                min = 0
+                max = pen_loyalty_influence_cap
+            }
+            subtract_from_variable = {
+                var = ardus_influence
+                value = 10
+            }
+            clamp_variable = {
+                var = ardus_influence
+                min = 0
+                max = pen_loyalty_influence_cap
+            }
+        }
+    }
+
+    #Dynamic Automata Faction Decisions
+    PEN_internal_promote_elta_faction = {
+        priority = 10
+        icon = eng_ally_imperialist_coup
+
+        visible = {
+            has_country_flag = PEN_elta_faction_on_flag
+        }
+        
+        available = {
+            original_tag = PEN
+            NOT = {
+                AND = {
+                    check_variable = {
+                        var = elta_loyalty
+                        value = pen_loyalty_influence_cap
+                        compare = greater_than_or_equals
+                    }
+                    check_variable = {
+                        var = elta_influence
+                        value = pen_loyalty_influence_cap
+                        compare = greater_than_or_equals
+                    }
+                }
+            }
+        }
+
+        custom_cost_trigger = {
+            AND = {
+                check_variable = {
+                    var = currency_amount^primary_currency
+                    value = 5
+                    compare = greater_than_or_equals
+                }
+                has_political_power > 24
+            }
+        }
+        custom_cost_text = PEN_internal_decision_cost
+        days_remove = 30
+        complete_effect = {
+            hidden_effect = {
+                subtract_from_variable = { currency_amount^primary_currency = 5 }
+                add_political_power = -25
+            }
+            custom_effect_tooltip = PEN_promote_faction_loc
+            add_to_variable = {
+                var = elta_loyalty
+                value = 10
+            }
+            clamp_variable = {
+                var = elta_loyalty
+                min = 0
+                max = pen_loyalty_influence_cap
+            }
+            add_to_variable = {
+                var = elta_influence
+                value = 10
+            }
+            clamp_variable = {
+                var = elta_influence
+                min = 0
+                max = pen_loyalty_influence_cap
+            }
+        }
+    }
+
+    PEN_internal_discredit_elta_faction = {
+        priority = 10
+        icon = eng_ally_imperialist_coup
+        
+        visible = {
+            has_country_flag = PEN_elta_faction_on_flag
+        }
+
+        available = {
+            original_tag = PEN
+            NOT = {
+                AND = {
+                    check_variable = {
+                        var = elta_loyalty
+                        value = 0
+                        compare = less_than_or_equals
+                    }
+                    check_variable = {
+                        var = elta_influence
+                        value = 0
+                        compare = less_than_or_equals
+                    }
+                }
+            }
+        }
+
+        custom_cost_trigger = {
+            AND = {
+                check_variable = {
+                    var = currency_amount^primary_currency
+                    value = 5
+                    compare = greater_than_or_equals
+                }
+                has_political_power > 24
+            }
+        }
+        custom_cost_text = PEN_internal_decision_cost
+        days_remove = 30
+        complete_effect = {
+            hidden_effect = {
+                subtract_from_variable = { currency_amount^primary_currency = 5 }
+                add_political_power = -25
+            }
+            custom_effect_tooltip = PEN_discredit_faction_loc
+            subtract_from_variable = {
+                var = elta_loyalty
+                value = 10
+            }
+            clamp_variable = {
+                var = elta_loyalty
+                min = 0
+                max = pen_loyalty_influence_cap
+            }
+            subtract_from_variable = {
+                var = elta_influence
+                value = 10
+            }
+            clamp_variable = {
+                var = elta_influence
+                min = 0
+                max = pen_loyalty_influence_cap
+            }
+        }
+    }
+
+    #Galentro Heavy Works Faction Decisions
+    PEN_internal_promote_wyrn_faction = {
+        priority = 10
+        icon = eng_ally_imperialist_coup
+
+        visible = {
+            has_country_flag = PEN_wyrn_faction_on_flag
+        }
+        
+        available = {
+            original_tag = PEN
+            NOT = {
+                AND = {
+                    check_variable = {
+                        var = wyrn_loyalty
+                        value = pen_loyalty_influence_cap
+                        compare = greater_than_or_equals
+                    }
+                    check_variable = {
+                        var = wyrn_influence
+                        value = pen_loyalty_influence_cap
+                        compare = greater_than_or_equals
+                    }
+                }
+            }
+        }
+
+        custom_cost_trigger = {
+            AND = {
+                check_variable = {
+                    var = currency_amount^primary_currency
+                    value = 5
+                    compare = greater_than_or_equals
+                }
+                has_political_power > 24
+            }
+        }
+        custom_cost_text = PEN_internal_decision_cost
+        days_remove = 30
+        complete_effect = {
+            hidden_effect = {
+                subtract_from_variable = { currency_amount^primary_currency = 5 }
+                add_political_power = -25
+            }
+            custom_effect_tooltip = PEN_promote_faction_loc
+            add_to_variable = {
+                var = wyrn_loyalty
+                value = 10
+            }
+            clamp_variable = {
+                var = wyrn_loyalty
+                min = 0
+                max = pen_loyalty_influence_cap
+            }
+            add_to_variable = {
+                var = wyrn_influence
+                value = 10
+            }
+            clamp_variable = {
+                var = wyrn_influence
+                min = 0
+                max = pen_loyalty_influence_cap
+            }
+        }
+    }
+
+    PEN_internal_discredit_wyrn_faction = {
+        priority = 10
+        icon = eng_ally_imperialist_coup
+        
+        visible = {
+            has_country_flag = PEN_wyrn_faction_on_flag
+        }
+
+        available = {
+            original_tag = PEN
+            NOT = {
+                AND = {
+                    check_variable = {
+                        var = wyrn_loyalty
+                        value = 0
+                        compare = less_than_or_equals
+                    }
+                    check_variable = {
+                        var = wyrn_influence
+                        value = 0
+                        compare = less_than_or_equals
+                    }
+                }
+            }
+        }
+
+        custom_cost_trigger = {
+            AND = {
+                check_variable = {
+                    var = currency_amount^primary_currency
+                    value = 5
+                    compare = greater_than_or_equals
+                }
+                has_political_power > 24
+            }
+        }
+        custom_cost_text = PEN_internal_decision_cost
+        days_remove = 30
+        complete_effect = {
+            hidden_effect = {
+                subtract_from_variable = { currency_amount^primary_currency = 5 }
+                add_political_power = -25
+            }
+            custom_effect_tooltip = PEN_discredit_faction_loc
+            subtract_from_variable = {
+                var = wyrn_loyalty
+                value = 10
+            }
+            clamp_variable = {
+                var = wyrn_loyalty
+                min = 0
+                max = pen_loyalty_influence_cap
+            }
+            subtract_from_variable = {
+                var = wyrn_influence
+                value = 10
+            }
+            clamp_variable = {
+                var = wyrn_influence
+                min = 0
+                max = pen_loyalty_influence_cap
+            }
+        }
+    }
+
+    #VFCZ Faction Decisions
+    PEN_internal_promote_gregor_faction = {
+        priority = 10
+        icon = eng_ally_imperialist_coup
+
+        visible = {
+            has_country_flag = PEN_gregor_faction_on_flag
+        }
+        
+        available = {
+            original_tag = PEN
+            NOT = {
+                AND = {
+                    check_variable = {
+                        var = gregor_loyalty
+                        value = pen_loyalty_influence_cap
+                        compare = greater_than_or_equals
+                    }
+                    check_variable = {
+                        var = gregor_influence
+                        value = pen_loyalty_influence_cap
+                        compare = greater_than_or_equals
+                    }
+                }
+            }
+        }
+
+        custom_cost_trigger = {
+            AND = {
+                check_variable = {
+                    var = currency_amount^primary_currency
+                    value = 5
+                    compare = greater_than_or_equals
+                }
+                has_political_power > 24
+            }
+        }
+        custom_cost_text = PEN_internal_decision_cost
+        days_remove = 30
+        complete_effect = {
+            hidden_effect = {
+                subtract_from_variable = { currency_amount^primary_currency = 5 }
+                add_political_power = -25
+            }
+            custom_effect_tooltip = PEN_promote_faction_loc
+            add_to_variable = {
+                var = gregor_loyalty
+                value = 10
+            }
+            clamp_variable = {
+                var = gregor_loyalty
+                min = 0
+                max = pen_loyalty_influence_cap
+            }
+            add_to_variable = {
+                var = gregor_influence
+                value = 10
+            }
+            clamp_variable = {
+                var = gregor_influence
+                min = 0
+                max = pen_loyalty_influence_cap
+            }
+        }
+    }
+
+    PEN_internal_discredit_gregor_faction = {
+        priority = 10
+        icon = eng_ally_imperialist_coup
+        
+        visible = {
+            has_country_flag = PEN_gregor_faction_on_flag
+        }
+
+        available = {
+            original_tag = PEN
+            NOT = {
+                AND = {
+                    check_variable = {
+                        var = gregor_loyalty
+                        value = 0
+                        compare = less_than_or_equals
+                    }
+                    check_variable = {
+                        var = gregor_influence
+                        value = 0
+                        compare = less_than_or_equals
+                    }
+                }
+            }
+        }
+
+        custom_cost_trigger = {
+            AND = {
+                check_variable = {
+                    var = currency_amount^primary_currency
+                    value = 5
+                    compare = greater_than_or_equals
+                }
+                has_political_power > 24
+            }
+        }
+        custom_cost_text = PEN_internal_decision_cost
+        days_remove = 30
+        complete_effect = {
+            hidden_effect = {
+                subtract_from_variable = { currency_amount^primary_currency = 5 }
+                add_political_power = -25
+            }
+            custom_effect_tooltip = PEN_discredit_faction_loc
+            subtract_from_variable = {
+                var = gregor_loyalty
+                value = 10
+            }
+            clamp_variable = {
+                var = gregor_loyalty
+                min = 0
+                max = pen_loyalty_influence_cap
+            }
+            subtract_from_variable = {
+                var = gregor_influence
+                value = 10
+            }
+            clamp_variable = {
+                var = gregor_influence
+                min = 0
+                max = pen_loyalty_influence_cap
+            }
+        }
+    }
+
+    #Imperial Governors Faction Decisions
+    PEN_internal_promote_ib_faction = {
+        priority = 10
+        icon = eng_ally_imperialist_coup
+
+        visible = {
+            has_country_flag = PEN_ib_faction_on_flag
+        }
+        
+        available = {
+            original_tag = PEN
+            NOT = {
+                AND = {
+                    check_variable = {
+                        var = ib_loyalty
+                        value = pen_loyalty_influence_cap
+                        compare = greater_than_or_equals
+                    }
+                    check_variable = {
+                        var = ib_influence
+                        value = pen_loyalty_influence_cap
+                        compare = greater_than_or_equals
+                    }
+                }
+            }
+        }
+
+        custom_cost_trigger = {
+            AND = {
+                check_variable = {
+                    var = currency_amount^primary_currency
+                    value = 5
+                    compare = greater_than_or_equals
+                }
+                has_political_power > 24
+            }
+        }
+        custom_cost_text = PEN_internal_decision_cost
+        days_remove = 30
+        complete_effect = {
+            hidden_effect = {
+                subtract_from_variable = { currency_amount^primary_currency = 5 }
+                add_political_power = -25
+            }
+            custom_effect_tooltip = PEN_promote_faction_loc
+            add_to_variable = {
+                var = ib_loyalty
+                value = 10
+            }
+            clamp_variable = {
+                var = ib_loyalty
+                min = 0
+                max = pen_loyalty_influence_cap
+            }
+            add_to_variable = {
+                var = ib_influence
+                value = 10
+            }
+            clamp_variable = {
+                var = ib_influence
+                min = 0
+                max = pen_loyalty_influence_cap
+            }
+        }
+    }
+
+    PEN_internal_discredit_ib_faction = {
+        priority = 10
+        icon = eng_ally_imperialist_coup
+        
+        visible = {
+            has_country_flag = PEN_ib_faction_on_flag
+        }
+
+        available = {
+            original_tag = PEN
+            NOT = {
+                AND = {
+                    check_variable = {
+                        var = ib_loyalty
+                        value = 0
+                        compare = less_than_or_equals
+                    }
+                    check_variable = {
+                        var = ib_influence
+                        value = 0
+                        compare = less_than_or_equals
+                    }
+                }
+            }
+        }
+
+        custom_cost_trigger = {
+            AND = {
+                check_variable = {
+                    var = currency_amount^primary_currency
+                    value = 5
+                    compare = greater_than_or_equals
+                }
+                has_political_power > 24
+            }
+        }
+        custom_cost_text = PEN_internal_decision_cost
+        days_remove = 30
+        complete_effect = {
+            hidden_effect = {
+                subtract_from_variable = { currency_amount^primary_currency = 5 }
+                add_political_power = -25
+            }
+            custom_effect_tooltip = PEN_discredit_faction_loc
+            subtract_from_variable = {
+                var = ib_loyalty
+                value = 10
+            }
+            clamp_variable = {
+                var = ib_loyalty
+                min = 0
+                max = pen_loyalty_influence_cap
+            }
+            subtract_from_variable = {
+                var = ib_influence
+                value = 10
+            }
+            clamp_variable = {
+                var = ib_influence
+                min = 0
+                max = pen_loyalty_influence_cap
+            }
+        }
+    }
+}
