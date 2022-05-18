@@ -115,9 +115,10 @@ scripted_gui = {
 				}
 			}
 			leader_empire_click = {
+				imperial_legitimacy_coronate = yes ## checks if a ID is the highest legitimacy
 				if = {
 					limit = {
-						has_country_flag = emperor_potential
+						tag = var:global.emperor_potential
 						check_variable = { legitimacy_emp > 70 }
 						has_idea = claiment_stance
 					}
@@ -221,6 +222,9 @@ scripted_gui = {
 			}
 			voting_for_flag = {
 				image = "[Getvoting_for]"
+			}
+			leader_empire = {
+				image = "[get_emperor_picture]"
 			}
 		}
 	}
@@ -449,7 +453,7 @@ scripted_gui = {
 						limit = {
 							check_variable = { ROOT.selected_nation_var = RIN.id }
 						}
-						set_country_flag = voting_for_zsinj
+						set_country_flag = voting_for_rin
 						RIN = {
 							add_to_variable = {voted_for_count_emp = 1}
 						}

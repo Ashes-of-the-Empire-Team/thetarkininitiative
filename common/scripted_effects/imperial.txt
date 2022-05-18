@@ -1,6 +1,6 @@
 imperial_legitimacy_reset = {
 	set_variable = {global.cooperative_stance_counter = 0}
-	set_variable = {global.antagonizing_stance_count = 0}
+	set_variable = {global.antagonizing_stance_counter = 0}
 	for_each_scope_loop = {
 		array = Global.imperial_warlords
 		# Reset Legitimacy
@@ -101,72 +101,7 @@ imperial_legitimacy_reset = {
 	}
 }
 imperial_legitimacy_vote = {
-	# for_each_scope_loop = { ### NO LONGER NEEDED
-	# 	array = Global.imperial_warlords
-	# 	# Vote
-	# 		if = {
-	# 			limit = {
-	# 				has_country_flag = voting_for_empire
-	# 			}
-	# 			add_to_variable = { EMP.legitimacy_emp = legitimacy_emp }
-	# 		}
-	# 		if = {
-	# 			limit = {
-	# 				has_country_flag = voting_for_pen
-	# 			}
-	# 			add_to_variable = { PEN.legitimacy_emp = legitimacy_emp }
-	# 		}
-	# 		if = {
-	# 			limit = {
-	# 				has_country_flag = voting_for_empire_of_hand
-	# 			}
-	# 			add_to_variable = { EOH.legitimacy_emp = legitimacy_emp }
-	# 		}
-	# 		if = {
-	# 			limit = {
-	# 				has_country_flag = voting_for_f_t_u
-	# 			}
-	# 			add_to_variable = { FTU.legitimacy_emp = legitimacy_emp }
-	# 		}
-	# 		if = {
-	# 			limit = {
-	# 				has_country_flag = voting_for_eri
-	# 			}
-	# 			add_to_variable = { ERI.legitimacy_emp = legitimacy_emp }
-	# 		}
-	# 		if = {
-	# 			limit = {
-	# 				has_country_flag = voting_zero_command
-	# 			}
-	# 			add_to_variable = { ZER.legitimacy_emp = legitimacy_emp }
-	# 		}
-	# 		if = {
-	# 			limit = {
-	# 				has_country_flag = voting_for_kareenth
-	# 			}
-	# 			add_to_variable = { REE.legitimacy_emp = legitimacy_emp }
-	# 		}
-	# 		if = {
-	# 			limit = {
-	# 				has_country_flag = voting_for_bespin
-	# 			}
-	# 			add_to_variable = { BES.legitimacy_emp = legitimacy_emp }
-	# 		}
-	# 		if = {
-	# 			limit = {
-	# 				has_country_flag = voting_for_zsinj
-	# 			}
-	# 			add_to_variable = { ZSJ.legitimacy_emp = legitimacy_emp }
-	# 		}
-	# 		if = {
-	# 			limit = {
-	# 				has_country_flag = voting_for_rin
-	# 			}
-	# 			add_to_variable = { RIN.legitimacy_emp = legitimacy_emp }
-	# 		}
-	# }
-	# Not sure if this event target works. If not use commented out version
-	var:global.emperor_potential = {
+	var:global.emperor_id = {
 		if = {
 			limit = {
 				check_variable = {
@@ -177,45 +112,14 @@ imperial_legitimacy_vote = {
 			}
 			country_event = {
 				id = emperor_deals.8
-				days = 4
 			}
-			clear_country_flag = emperor
+			clr_country_flag = emperor
 			clear_variable = global.emperor_potential
-			imperial_legitimacy_coronate = yes
 		}
 	}
-	# if = {
-	# 	limit = {
-	# 		any_country = {
-	# 			has_country_flag = emperor
-	# 		}
-	# 	}
-	# 	random_scope_in_array = {
-	#	array = Global.imperial_warlords
-	# 		limit = { has_country_flag  = emperor }
-	# 		if = {
-	# 			limit = {
-	# 				check_variable = {
-	# 					var = legitimacy_emp
-	# 					value = 50
-	# 					compare = less_than
-	# 				}
-	# 			}
-	# 			clear_country_flag = emperor
-	# 			clear_global_event_target = emperor_target
-	# 			imperial_legitimacy_coronate = yes
-	# 		}
-	# 	}
-	# }
-	# else = {
-	# 	clear_global_event_target = emperor_target
-	# 	imperial_legitimacy_coronate = yes
-	# }
 }
 
 imperial_legitimacy_coronate = {
-	clear_variable = global.imperial_legitimacy_best
-	clear_variable = global.imperial_legitimacy_best_score
 	for_each_scope_loop = {
 		array = Global.imperial_warlords
 		if = {
@@ -223,7 +127,7 @@ imperial_legitimacy_coronate = {
 				check_variable = {
 					var = legitimacy_emp
 					value = global.imperial_legitimacy_best_score
-					value = greater_than
+					compare = greater_than
 				}
 			}
 			set_variable = {
@@ -234,28 +138,17 @@ imperial_legitimacy_coronate = {
 				var = global.imperial_legitimacy_best_score
 				value = legitimacy_emp
 			}
-			set_variable = { emperor_target = THIS.id }
+			set_variable = { global.emperor_target = THIS.id }
 		}
 	}
 	# Again, unsure if this works
-	var:emperor_target = {
-		set_country_flag = global.emperor_potential
+	var:global.emperor_target = {
+		set_variable = {global.emperor_potential = THIS.id}
 	}
-	# random_scope_in_array = {
-	# 	array = Global.imperial_warlords
-	# 	limit = {
-	# 		check_variable = {
-	# 			var = global.imperial_legitimacy_best
-	# 			value = THIS.id
-	# 		}
-	# 	}
-	# 	set_country_flag = emperor
-	# }
+	clear_variable = global.emperor_target
+	clear_variable = global.imperial_legitimacy_best
+	clear_variable = global.imperial_legitimacy_best_score
 }
-
-
-
-
 
 
 

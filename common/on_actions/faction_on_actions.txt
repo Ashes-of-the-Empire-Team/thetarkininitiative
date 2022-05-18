@@ -4,14 +4,19 @@ on_actions = {
 	on_startup = {
 		effect = {
 			every_country={
-				set_variable = { legitimacy_emp = 15 }
-				set_variable = { legitimacy_emp_equilibrium = 15 }
 				if = {
 					limit = {
-						original_tag = EMP
+						has_government  = imperial
 					}
-					set_variable = { legitimacy_emp = 85 }
-					set_country_flag = emperor
+					set_variable = { legitimacy_emp = 15 }
+					set_variable = { legitimacy_emp_equilibrium = 15 }
+					if = {
+						limit = {
+							original_tag = EMP
+						}
+						set_variable = { legitimacy_emp = 85 }
+						set_country_flag = emperor
+					}
 				}
 			}
 		}
@@ -43,15 +48,20 @@ on_actions = {
 				add_to_variable  = { global.emperor_legitimacy = 0.2 } 
 			}
 			#### voting legtimacy add
-			clamp_variable = {	
-                var = legitimacy_emp
-                min = 0
-                max = 100
-            }
-			clamp_variable = {	
-                var = legitimacy_emp_equilibrium
-                min = 0
-                max = 100
+			if = {
+				limit = {
+					has_government  = imperial
+				}
+				clamp_variable = {	
+	                var = legitimacy_emp
+	                min = 0
+	                max = 100
+	            }
+				clamp_variable = {	
+	                var = legitimacy_emp_equilibrium
+	                min = 0
+	                max = 100
+	            }
             }
 		}
 	}
