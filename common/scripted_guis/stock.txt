@@ -1,0 +1,62 @@
+scripted_gui = {
+	stock_screen = {
+		context_type = player_context
+
+		window_name = "stock_window"
+		parent_window_name = countrypoliticsview
+		visible = {
+			has_government = corporation
+			has_country_flag = stock_screen_open
+		}
+
+		effects = {
+			geonosis_click = {
+				open_corpo_info = yes
+				set_country_flag = zaltin_selected
+				list_for_influencers_or_whatever = yes	
+			}
+		}
+		dynamic_lists = {
+			subsidiary_grid = {
+				array = subsidiary_array
+				entry_container = subsidiary_entry
+				change_scope = yes
+			}
+		}
+	}
+	stock_purchase_screen = {
+		context_type = player_context
+		window_name = "stock_purchase_screen"
+		visible = {
+           has_country_flag = stock_open
+		}
+		effects = {
+			buy_shares_click = {
+				meta_effect = {
+					text = {
+						if = {
+							limit = {
+								has_country_flag = p_1_share
+							}
+							add_to_variable = { shares_held_[Getcompanyname] = shares_being_bought }
+							subtract_from_variable = { global.total_shares_available_[Getcompanyname] = shares_being_bought }
+							ROOT = {
+								subtract_from_variable = { dx = global.share_price_[Getcompanyname] }
+							}
+							set_temp_variable = { share_quantity_calc = global.outstanding_shares_[Getcompanyname] }
+							divide_temp_variable = { shares_being_bought = share_quantity_calc }
+							set_temp_variable = { share_price_calc = share_price_[Getcompanyname] }
+							multiply_temp_variable = { share_price_calc = share_quantity_calc }
+							add_to_variable = { share_price_[Getcompanyname] = share_price_calc }
+						}
+					}
+					Getcompanyname = "[Getcompanyname]"
+				}
+				list_for_influencers_or_whatever = yes
+				percent_calc_corp = yes
+			}
+		}
+		triggers = {
+		}
+	}
+}
