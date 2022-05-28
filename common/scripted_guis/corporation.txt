@@ -106,7 +106,12 @@ scripted_gui = {
 			fighter_category_click = {
 				set_country_flag = fighter_select_category
 			}
-			
+			higher_button_corporate_factory_click = {
+				add_to_variable = { corp_factory_used = 1 }
+			}
+			lower_button_corporate_factory_click = {
+				subtract_from_variable = { corp_factory_used = 1 }
+			}
 			contract_background_click = {
 				set_variable = { ROOT.selected_contract = i }
 				set_variable = { ROOT.current_contract_quantity = i }
@@ -119,8 +124,7 @@ scripted_gui = {
 			send_contract_click = {
 				add_political_power = 1
 				set_variable = { contract_tag = Global.gun_contract^array_index }
-				set_variable = { Global.product_price = product_price }
-				set_variable = { Global.fighter_product_item = fighter_product_item }
+				set_variable = { fighter_product_item = fighter_product_item }
 				  var:contract_tag = {
 					add_to_array = {
 						array = bid_array
@@ -128,7 +132,7 @@ scripted_gui = {
 					}
 					add_to_array = {
 						array = bid_array_price
-						value = Global.product_price
+						value = PREV.product_price
 					}
 					add_to_array = {
 						array = bid_array_delivery_quantity
@@ -136,7 +140,7 @@ scripted_gui = {
 					}
 					add_to_array = {
 						array = bid_array_item
-						value = Global.fighter_product_item
+						value = PREV.fighter_product_item
 					}
 				}
 			}
@@ -193,6 +197,15 @@ scripted_gui = {
 					has_country_flag = fighter_select_category
 				}
 			}
+			lower_button_corporate_factory_click_enabled = {
+				NOT = {
+					check_variable = { ROOT.corp_factory_used = 0 }
+				}
+			higher_button_corporate_factory_click_enabled = {
+				NOT = {
+					check_variable = { ROOT.corp_factory_used > total_corp_factories }
+				}
+			}
 		}
 		properties = {
 			contract_nation = {
@@ -212,6 +225,94 @@ scripted_gui = {
 				array = fighter_product_array
 				entry_container = product_item
 				change_scope = no
+			}
+		}
+	}
+	corp_product_market = {
+		context_type = player_context
+		window_name = "corp_product_market"
+		visible = {
+			has_country_flag = corp_product
+		}
+		effects = {
+			efficiency_red_button_1_click = {
+
+			}
+			fighter_category_click = {
+				set_country_flag = fighter_select_category
+				clr_country_flag = droid_select_category
+				clr_country_flag = ship_select_category
+				clr_country_flag = vehicle_select_category
+			}
+			ship_category_click = {
+				set_country_flag = ship_select_category
+				clr_country_flag = droid_select_category
+				clr_country_flag = fighter_select_category
+				clr_country_flag = vehicle_select_category
+			}
+			vehicle_category_click = {
+				set_country_flag = vehicle_select_category
+				clr_country_flag = droid_select_category
+				clr_country_flag = ship_select_category
+				clr_country_flag = fighter_select_category
+			}
+			droid_category_click = {
+				set_country_flag = droid_select_category
+				clr_country_flag = vehicle_select_category
+				clr_country_flag = ship_select_category
+				clr_country_flag = fighter_select_category
+			}
+		}
+		triggers = {
+			efficiency_red_button_1_click_enabled = {
+				check_variable = { efficiency_item > 0 }
+			}
+			efficiency_red_button_2_click_enabled = {
+				check_variable = { efficiency_item > 1 }
+			}
+			efficiency_red_button_3_click_enabled = {
+				check_variable = { efficiency_item > 2 }
+			}
+			efficiency_red_button_4_click_enabled = {
+				check_variable = { efficiency_item > 3 }
+			}
+			efficiency_red_button_5_click_enabled = {
+				check_variable = { efficiency_item > 4 }
+			}
+			quality_red_button_1_click_enabled = {
+				check_variable = { quality_item > 0 }
+			}
+			quality_red_button_2_click_enabled = {
+				check_variable = { quality_item > 1 }
+			}
+			quality_red_button_3_click_enabled = {
+				check_variable = { quality_item > 2 }
+			}
+			quality_red_button_4_click_enabled = {
+				check_variable = { quality_item > 3 }
+			}
+			quality_red_button_5_click_enabled = {
+				check_variable = { quality_item > 4 }
+			}
+			fighter_category_click_enabled = {
+				NOT = {
+					has_country_flag = fighter_select_category
+				}
+			}
+			ship_category_click_enabled = {
+				NOT = {
+					has_country_flag = ship_select_category
+				}
+			}
+			vehicle_category_click_enabled = {
+				NOT = {
+					has_country_flag = vehicle_select_category
+				}
+			}
+			droid_category_click_enabled = {
+				NOT = {
+					has_country_flag = droid_select_category
+				}
 			}
 		}
 	}
