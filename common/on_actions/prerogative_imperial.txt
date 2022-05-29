@@ -1,0 +1,217 @@
+on_actions = {            ######### DO NOT RENAME OR MOVE THIS IN FILE ORDER, NEEDS MONEY ON ACTION TO BE LOADED FIRST BEFORE THIS
+	on_weekly = { ## Optomisation wise this might have to be on monthly
+		effect = {
+			if = {
+				limit = {
+					OR = {
+						tag = var:global.emperor_war_target_1
+						tag = var:global.emperor_war_target_2 
+						tag = var:global.emperor_war_target_3
+						tag = var:global.emperor_prerogative_decision
+					}
+				}
+				if = {
+					limit  = {
+						NOT = {
+							OR = {
+			    				AND = {
+					    			THIS = {
+					    				has_war_with = var:global.emperor_id
+					    				is_faction_leader = yes
+					    				is_in_faction = yes
+					    			}
+				    			}
+				    			AND = {
+				    				THIS = {
+				    					is_in_faction = no
+				    					has_war_with = var:global.emperor_id
+				    				}
+				    			}
+			    			}
+		    			}
+	    			}
+	    			if = {
+	    				limit = {
+	    					tag = var:global.emperor_war_target_1
+	    				}
+	    				clear_variable = global.emperor_war_target_1
+	    			}
+	    			if = {
+	    				limit = {
+	    					tag = var:global.emperor_war_target_2
+	    				}
+	    				clear_variable = global.emperor_war_target_2
+	    			}
+	    			if = {
+	    				limit = {
+	    					tag = var:global.emperor_war_target_3
+	    				}
+	    				clear_variable = global.emperor_war_target_3
+	    			}
+	    			if = {
+	    				limit = {
+	    					tag = var:global.emperor_prerogative_decision
+	    				}
+	    				clear_variable = global.emperor_prerogative_decision
+	    			}
+				}
+			}
+	    	if = {
+	    		limit = {
+	    			NOT = {
+	    				has_global_flag = imperial_prerogative_defeat_of_warlord
+	    			}
+	    			OR = {
+	    				AND = {
+			    			THIS = {
+			    				has_war_with = var:global.emperor_id
+			    				is_faction_leader = yes
+			    				is_in_faction = yes
+			    			}
+		    			}
+		    			AND = {
+		    				THIS = {
+		    					is_in_faction = no
+		    					has_war_with = var:global.emperor_id
+		    				}
+		    			}
+	    			}
+	    		}
+	    		if = {
+	    			limit = {
+	    				NOT = {has_variable = global.emperor_war_target_1}  ## Bad programming but shut up, should be enough to cover every war
+	    			}
+	    			set_variable = { global.emperor_war_target_1 = THIS.id }
+	    		}else_if = {
+	    			limit = {
+	    				NOT = {has_variable = global.emperor_war_target_2}
+	    			}
+	    			set_variable = { global.emperor_war_target_2 = THIS.id }
+	    		}else_if = {
+	    			limit = {
+	    				NOT = {has_variable = global.emperor_war_target_3}
+	    			}
+	    			set_variable = { global.emperor_war_target_3 = THIS.id }
+	    		}
+	    	}
+	    }
+	}
+	on_monthly = {
+		effect = {
+			if = {
+				limit = {
+					has_government = imperial
+				}
+
+				if = {
+					limit = {
+						has_global_flag = imperial_prerogative_new_shipyards     #### NEW SHIPYARDS PREROGATIVE
+					}
+					if = {
+						limit = {
+							NOT = {has_variable = reach_count_naval_factories}
+						}
+						set_variable = { reach_count_naval_factories = navf } ## optimisation trick so we dont have to work out total number of naval factories again
+						multiply_variable = { reach_count_naval_factories = 20 }
+						add_to_variable = { reach_count_naval_factories = 2 }
+
+					}else = {
+						set_temp_variable = { temp_naval_count = navf }
+						multiply_temp_variable = { temp_naval_count = 20 }
+						if = {
+							limit = {
+								check_variable = {
+									var = reach_count_naval_factories
+									value = temp_naval_count
+									compare = less_than_or_equals
+								}
+							}
+							add_to_variable = { legitimacy_emp = 4}
+							set_variable = { reach_count_naval_factories = navf } 
+							multiply_variable = { reach_count_naval_factories = 20 }
+							add_to_variable = { reach_count_naval_factories = 2 }
+						}
+					}
+				}
+
+
+				if = {
+					limit = {
+						has_global_flag = imperial_prerogative_new_starfighter ## CHANGE_ME, to do this you would have to put it on the technolgies themselves, and add to variable. Not doing it rn since we have got that under wraps yet and subject to changes
+					}
+				}
+				if = {
+					limit = {
+						has_global_flag = imperial_prerogative_defeat_of_warlord
+						has_war_with = var:global.emperor_prerogative_decision
+					}
+					add_to_variable = { legitimacy_emp = 3}
+				}
+				if = {
+					limit = {
+						has_global_flag = imperial_prerogative_defeat_of_republic ## Writing this out after doing the warlord is so fucking stupid holy shit, who ever put that on the drawing board really hated me
+						has_war_with = REP
+					}
+					add_to_variable = { legitimacy_emp = 3}
+				}
+				if = {
+					limit = {
+						has_global_flag = imperial_prerogative_increase_cash_flow
+					}
+					if = {
+						limit = {
+							NOT = {has_variable = reach_count_imperial_cash_flow}
+						}
+						set_variable = { reach_count_imperial_cash_flow = nmn }
+						set_temp_variable = { check_hardest_objective_1 = reach_count_imperial_cash_flow }
+						set_temp_variable = { check_hardest_objective_2 = reach_count_imperial_cash_flow }
+						multiply_temp_variable = { check_hardest_objective_1 = 1.1 }
+						add_to_temp_variable = { check_hardest_objective_2 = 2 }
+						if = {
+							limit = {
+								check_variable = {
+									var = check_hardest_objective_1
+									value = check_hardest_objective_2
+									compare = less_than
+								}
+							}
+							set_variable = { reach_count_imperial_cash_flow = check_hardest_objective_2 }
+						}else = {
+							set_variable = { reach_count_imperial_cash_flow = check_hardest_objective_1 }
+						}
+					}else = {
+						set_temp_variable = { temp_cash_flow = nmn }
+						multiply_temp_variable = { temp_cash_flow = 20 }
+						if = {
+							limit = {
+								check_variable = {
+									var = reach_count_imperial_cash_flow
+									value = temp_cash_flow
+									compare = less_than_or_equals
+								}
+							}
+							add_to_variable = { legitimacy_emp = 8}
+							set_variable = { reach_count_imperial_cash_flow = nmn }
+							set_temp_variable = { check_hardest_objective_1 = reach_count_imperial_cash_flow }
+							set_temp_variable = { check_hardest_objective_2 = reach_count_imperial_cash_flow }
+							multiply_temp_variable = { check_hardest_objective_1 = 1.1 }
+							add_to_temp_variable = { check_hardest_objective_2 = 2 }
+							if = {
+								limit = {
+									check_variable = {
+										var = check_hardest_objective_1
+										value = check_hardest_objective_2
+										compare = less_than
+									}
+								}
+								set_variable = { reach_count_imperial_cash_flow = check_hardest_objective_2 }
+							}else = {
+								set_variable = { reach_count_imperial_cash_flow = check_hardest_objective_1 }
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
