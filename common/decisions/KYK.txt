@@ -1,56 +1,55 @@
 
-KYK_factions1a = {  
-	visible_when_empty = yes
-restore_claatuvac_guild = {
-	allowed = {tag = KYK }
+KYK_factions1 = {  
+	restore_claatuvac_guild = {
+		allowed = { tag = KYK }
 	
-	selectable_mission = yes
-	is_good = yes
-	visible = {
-		has_country_flag = KYK_progressives_unlocked_flag		
-	}
+		selectable_mission = yes
+		is_good = yes
+		visible = {
+			has_country_flag = KYK_progressives_unlocked_flag		
+		}
 	available ={
 		check_variable = {
-			 KYK_progressive_popularity > 24} AND = {
-				check_variable = {
-					KYK_navigator_popularity < 1
-				}
-			 }
-			}
+			KYK_navigator_popularity < 1 
+			} 
+		check_variable = {
+			KYK_progressive_popularity > 24 
+			} 
+		}
 	complete_effect = {
 		set_country_flag = KYK_faction_created_navigator
 		KYK_navigator_low_popularity_increase_effect = yes
 		KYK_progressiveL_low_popularity_decrease_effect = yes
 	}
 	}
+	
 }
-KYK_factions1b = {  
+
+KYK_factions2 = {  
 	restore_claatuvac_guild = {
 		allowed = {tag = KYK }	
 		selectable_mission = yes
 		is_good = yes
 		visible = {
 			has_country_flag = KYK_traditionalist_unlocked_flag
-			
-			
 		}
 		available ={
 			check_variable = {
-				 KYK_traditionalist_popularity > 24 } AND = {
-					check_variable = {
-						KYK_navigator_popularity < 1
-					}
-				 } }
+				KYK_navigator_popularity < 1 
+				} 
+			check_variable = {
+				KYK_traditionalist_popularity > 24 
+				} 
+			}
 		complete_effect = {
 			set_country_flag = KYK_faction_created_navigator
 			KYK_navigator_low_popularity_increase_effect = yes
 			KYK_traditionalistL_low_popularity_decrease_effect = yes
 		}
 	}
-	}
+}
 
-KYK_factions2a = {  
-	scripted_gui = KYK_factions_decision_gui2
+KYK_factions3 = {  
 	Found_a_navigators_guild = {
 		allowed = {tag = KYK }	
 		selectable_mission = yes
@@ -61,39 +60,586 @@ KYK_factions2a = {
         }
 		available ={
 			check_variable = {
-				 KYK_imperial_popularity > 14} AND = {
-					check_variable = {
-						KYK_navigator_popularity < 1
-					}
-				 } }
+				KYK_navigator_popularity < 1 
+				} 
+			check_variable = {
+				KYK_imperial_popularity > 14
+				} 
+			}
 		complete_effect = {
 			set_country_flag = KYK_faction_created_navigator
 			KYK_navigator_low_popularity_increase_effect = yes
 			KYK_imperialL_low_popularity_decrease_effect = yes
 		}
 	}
-
+		
 }
-KYK_factions2b = {  
+KYK_factions4 = {  
 		Found_a_navigators_guild = {
 		allowed = {tag = KYK }	
 		selectable_mission = yes
 		is_good = yes
 		visible = {
             has_country_flag =  KYK_church_unlocked_flag
-		
         }
 		available ={
 			check_variable = {
-				 KYK_church_popularity > 14 } AND = {
-					check_variable = {
-						KYK_navigator_popularity < 1
-					}
-				 } }
+				KYK_navigator_popularity < 1 
+				} 
+			check_variable = {
+				KYK_church_popularity > 14 
+				} 
+			}
 		complete_effect = {
 			set_country_flag = KYK_faction_created_navigator
 			KYK_navigator_low_popularity_increase_effect = yes
 			KYK_churchL_low_popularity_decrease_effect = yes
+		}
+	}
+}
+KYK_progressivesL = {  
+	progressivesL = {
+	allowed = {tag = KYK }	
+	selectable_mission = yes
+	is_good = yes
+	visible = {
+		has_country_flag =  KYK_progressives_unlocked_flag
+	}
+	available ={
+		}
+	complete_effect = {
+		add_manpower = 100
+	}
+}
+}
+KYK_traditional = {  
+	traditional = {
+	allowed = {tag = KYK }	
+	selectable_mission = yes
+	is_good = yes
+	visible = {
+		has_country_flag =  KYK_progressives_unlocked_flag
+	}
+	available ={
+		}
+	complete_effect = {
+		add_manpower = 100
+	}
+}
+}
+KYK_progressives = {  
+	progressives = {
+	allowed = {tag = KYK }	
+	selectable_mission = yes
+	is_good = yes
+	visible = {
+		has_country_flag =  KYK_traditionalist_unlocked_flag
+	}
+	available ={
+		}
+	complete_effect = {
+		add_manpower = 100
+	}
+}
+}
+KYK_traditionalL = {  
+	traditionalL = {
+	allowed = {tag = KYK }	
+	selectable_mission = yes
+	is_good = yes
+	visible = {
+		has_country_flag =  KYK_traditionalist_unlocked_flag
+	}
+	available ={
+		}
+	complete_effect = {
+		add_manpower = 100
+	}
+}
+}
+KYK_churchL = {  
+	mourn_the_emperorL = {
+	allowed = {tag = KYK }	
+	selectable_mission = yes
+	is_good = yes
+	visible = {
+		has_country_flag =  KYK_church_unlocked_flag
+	}
+	available ={
+		check_variable = {
+			KYK_imperial_popularity > 9
+			} 
+		}
+	complete_effect = {
+		add_stability = 0.05
+		add_war_support = 0.05
+		KYK_imperial_low_popularity_decrease_effect = yes
+		KYK_churchL_low_popularity_increase_effect = yes
+		KYK_churchL_low_loyalty_increase_effect = yes
+		set_country_flag = emperor_mourned
+	}
+}
+}
+KYK_imperial = {  
+	fund_empire_day_celebration = {
+		allowed = {tag = KYK }	
+		selectable_mission = yes
+		is_good = yes
+		days_re_enable = 300
+		visible = {
+			has_country_flag =  KYK_church_unlocked_flag
+		}
+		available ={
+			check_variable = {
+				KYK_church_popularity > 14
+				} 
+			}
+		days_remove = 30
+		modifier = {
+			political_power_gain = 0.05
+		}
+		remove_effect = {
+			add_stability = 0.10
+			KYK_imperial_low_loyalty_increase_effect = yes
+			KYK_imperial_low_popularity_increase_effect = yes
+			KYK_churchL_low_popularity_decrease_effect = yes
+		}
+	}
+}
+KYK_church = {  
+	mourn_the_emperor = {
+		allowed = {tag = KYK }	
+		selectable_mission = yes
+		is_good = yes
+		visible = {
+			has_country_flag =  KYK_imperial_unlocked_flag
+		}
+		available ={
+			check_variable = {
+				KYK_imperial_popularity > 14
+				} 
+			}
+		complete_effect = {
+			add_stability = 0.05
+			add_war_support = 0.05
+			KYK_imperialL_low_popularity_decrease_effect = yes
+			KYK_church_low_popularity_increase_effect = yes
+			KYK_church_low_loyalty_increase_effect = yes
+			set_country_flag = emperor_mourned
+		}
+	}
+}
+KYK_imperialL = {  
+	fund_empire_day_celebrationL = {
+	allowed = {tag = KYK }	
+	selectable_mission = yes
+	is_good = yes
+	days_re_enable = 300
+	visible = {
+		has_country_flag =  KYK_imperial_unlocked_flag
+	}
+	available ={
+		check_variable = {
+			KYK_church_popularity > 9
+			} 
+		}
+	days_remove = 30
+	modifier = {
+		political_power_gain = 0.05
+	}
+	remove_effect = {
+		add_stability = 0.10
+		KYK_imperialL_low_loyalty_increase_effect = yes
+		KYK_imperialL_low_popularity_increase_effect = yes
+		KYK_church_low_popularity_decrease_effect = yes
+	}
+}
+}
+
+KYK_merchant_guild = {  
+	economic_investment = {
+		allowed = {tag = KYK }	
+		selectable_mission = yes
+		is_good = yes
+		visible = {
+			has_country_flag =  KYK_faction_exists_merchant
+		}
+		available ={
+			check_variable = {
+				KYK_merchant_loyalty > 89
+				} 
+					}
+			complete_effect = {
+				KYKeconomy_level_up = yes
+				KYK_merchant_high_loyalty_decrease_effect = yes
+			}	
+		}
+	emergency_extortion_tax = {
+	allowed = {tag = KYK }	
+	selectable_mission = yes
+	is_good = yes
+	visible = {
+		has_country_flag =  KYK_faction_exists_merchant
+	}
+	available ={
+				}
+		complete_effect = {
+			KYK_merchant_high_loyalty_decrease_effect = yes
+			KYK_merchant_low_popularity_decrease_effect = yes
+			KYKeconomy_level_down = yes
+			add_stability = -0.20
+		}	
+	}
+	tax_break = {
+		allowed = {tag = KYK }	
+		selectable_mission = yes
+		is_good = yes
+		cost = 25
+		days_re_enable = 200
+		visible = {
+			has_country_flag =  KYK_faction_exists_merchant
+		}
+		available ={
+			check_variable = {
+				KYK_merchant_loyalty < 96
+				} 
+			}
+		modifier = {
+			consumer_goods_factor = 0.1
+		}
+		days_remove = 100
+		remove_effect = {
+			KYK_merchant_low_loyalty_increase_effect = yes
+		}	
+		}
+}
+KYK_navigator_guild = {  
+	fund_new_equipment = {
+	allowed = {tag = KYK }	
+	selectable_mission = yes
+	is_good = yes
+	cost = 25
+	days_re_enable = 200
+	visible = {
+		has_country_flag =  KYK_faction_created_navigator
+	}
+	available ={ }
+	modifier = {
+		industrial_capacity_dockyard = -0.10
+	}
+	days_remove = 15
+	complete_effect = {
+		KYK_navigator_low_loyalty_increase_effect = yes
+	}
+	}
+	support_new_ship_manufactoring_deals = {
+	allowed = {tag = KYK }	
+	selectable_mission = yes
+	is_good = yes
+	cost = 25
+	days_re_enable = 200
+	visible = {
+		has_country_flag =  KYK_faction_created_navigator
+	}
+	available ={ check_variable = {
+		KYK_navigator_loyalty > 79
+		}  }
+	complete_effect = {
+		KYK_navigator_high_loyalty_decrease_effect = yes
+		KYKnaval_industry_level_up = yes
+	}
+		}
+	support_new_ship_manufactoring_deals = {
+	allowed = {tag = KYK }	
+	selectable_mission = yes
+	is_good = yes
+	cost = 25
+	days_re_enable = 200
+	visible = {
+		has_country_flag =  KYK_faction_created_navigator
+	}
+	available ={ check_variable = {
+	KYK_navigator_loyalty > 79
+	}  }
+	complete_effect = {
+		KYK_navigator_high_loyalty_decrease_effect = yes
+		KYKnaval_industry_level_up = yes
+	}
+	}
+	emergency_shipbuilding_measure = {
+		allowed = {tag = KYK }	
+	selectable_mission = yes
+	is_good = yes
+	cost = 150
+	days_re_enable = 200
+	visible = {
+		has_country_flag =  KYK_faction_created_navigator
+	}
+	available ={ check_variable = {
+		KYK_navigator_loyalty > 14
+		}  }
+	modifier = {
+		industrial_capacity_dockyard = 2
+	}
+	days_remove = 100
+	remove_effect = {
+		KYK_navigator_high_loyalty_decrease_effect = yes
+		KYKnaval_industry_level_down = yes
+	}
+	complete_effect = {
+		add_stability = -0.20
+	}
+	}
+}
+
+KYK_cult = {  
+	placate_the_darkside = {
+	allowed = {tag = KYK }	
+	selectable_mission = yes
+	is_good = yes
+	cost = 150
+	days_re_enable = 200
+	visible = {
+		has_country_flag =  KYK_faction_exists_cult 
+	}
+	available ={
+		}
+	complete_effect = {
+		KYK_cult_low_loyalty_increase_effect = yes
+	}
+	}
+	sooth_the_shadowlands = {
+		allowed = {tag = KYK }	
+		selectable_mission = yes
+		is_good = yes
+		cost = 50
+		days_re_enable = 100
+		visible = {
+			has_country_flag =  KYK_faction_exists_cult 
+		}
+		available ={
+			check_variable = {
+				KYK_cult_loyalty > 79
+				} 
+			}
+		complete_effect = {
+			KYKthe_darkside_level_up = yes
+			KYK_cult_high_loyalty_decrease_effect = yes
+		}
+		}
+	create_darkside_artifacts = {
+		allowed = {tag = KYK }	
+		selectable_mission = yes
+		is_good = yes
+		cost = 25
+		days_re_enable = 365
+		visible = {
+			has_country_flag =  KYK_faction_exists_cult 
+		}
+		available ={
+			check_variable = {
+				KYK_cult_loyalty > 69
+				} 
+			}
+		remove_effect = {
+			
+		}
+		modifier = {
+			weekly_manpower = -500
+		}
+		days_remove = 100
+		complete_effect = {
+			KYK_cult_low_loyalty_increase_effect = yes
+		}
+		}
+	recover_the_force_harvester = {
+		allowed = {tag = KYK }	
+		selectable_mission = yes
+		is_good = yes
+		cost = 250
+		visible = {
+			has_country_flag =  KYK_faction_exists_cult 
+		}
+		available ={
+			check_variable = {
+				KYK_cult_loyalty > 80
+				} 
+			}
+		remove_effect = {
+			
+		}
+		modifier = {
+		}
+		days_remove = 20
+		complete_effect = {
+			KYK_cult_low_loyalty_decrease_effect = yes
+		}
+		}
+	root_the_cult_out = {
+		allowed = {tag = KYK }	
+		selectable_mission = yes
+		is_good = yes
+		cost = 500
+		visible = {
+			has_country_flag =  KYK_faction_exists_cult 
+		}
+		available ={
+			check_variable = {
+				KYK_cult_popularity <6
+				} 
+			}
+		days_remove = 100
+		remove_effect = {
+			clr_country_flag = KYK_faction_exists_cult 
+			set_country_flag = KYK_faction_no_cult
+			if = {
+				limit = {
+					has_idea = kyk_the_darkside5
+				}
+				remove_ideas = kyk_the_darkside5
+		
+			}
+			else_if = {
+				limit = {
+					has_idea = kyk_the_darkside4
+				}
+				remove_ideas = kyk_the_darkside4
+			}
+			else_if = {
+				limit = {
+					has_idea = kyk_the_darkside3
+				}
+				remove_ideas = kyk_the_darkside3
+			}
+			else_if = {
+				limit = {
+					has_idea = kyk_the_darkside2
+				}
+				remove_ideas = kyk_the_darkside2
+			}
+			else_if = {
+				limit = {
+					has_idea = kyk_the_darkside1
+				}
+				remove_ideas = kyk_the_darkside1
+			}
+			else_if = {
+				limit = {
+					has_idea = kyk_the_darkside0
+				}
+				remove_ideas = kyk_the_darkside0
+			}
+		}
+		complete_effect = {
+			set_variable = {
+				KYK_cult_loyalty = 0
+			}
+		}
+		}
+	exterminate_the_cult = {
+		allowed = {tag = KYK }	
+		selectable_mission = yes
+			is_good = yes
+		cost = 150
+		visible = {
+			has_country_flag =  KYK_faction_exists_cult 
+		}
+		available ={
+			check_variable = {
+				KYK_cult_popularity <6
+				} 
+			}
+		days_remove = 100
+		remove_effect = {
+			clr_country_flag = KYK_faction_exists_cult 
+			set_country_flag = KYK_faction_no_cult
+			remove_ideas = kyk_darkside_disaster
+			if = {
+				limit = {
+					has_idea = kyk_the_darkside5
+				}
+				remove_ideas = kyk_the_darkside5
+		
+			}
+			else_if = {
+				limit = {
+					has_idea = kyk_the_darkside4
+				}
+				remove_ideas = kyk_the_darkside4
+			}
+			else_if = {
+				limit = {
+					has_idea = kyk_the_darkside3
+				}
+				remove_ideas = kyk_the_darkside3
+			}
+			else_if = {
+				limit = {
+					has_idea = kyk_the_darkside2
+				}
+				remove_ideas = kyk_the_darkside2
+			}
+			else_if = {
+				limit = {
+					has_idea = kyk_the_darkside1
+				}
+				remove_ideas = kyk_the_darkside1
+			}
+			else_if = {
+				limit = {
+					has_idea = kyk_the_darkside0
+				}
+				remove_ideas = kyk_the_darkside0
+			}
+		}
+		complete_effect = {
+			add_ideas = kyk_darkside_disaster
+		}
+		}
+}
+
+KYK_humans = {  
+	humans = {
+	allowed = {tag = KYK }	
+	selectable_mission = yes
+	is_good = yes
+	visible = {
+		has_country_flag =  KYK_faction_exists_human
+	}
+	available ={
+		}
+	complete_effect = {
+		add_manpower = 100
+	}
+}
+}
+KYK_wookiee = {
+	enslavement_campaign = {
+		allowed = {tag = KYK }	
+		selectable_mission = yes
+		is_good = yes
+		visible = {
+			has_country_flag =  KYK_faction_exists_wookiee
+		}
+		available ={
+			}
+		complete_effect = {
+			KYK_Wookiee_low_popularity_decrease_effect = yes
+			KYK_Wookiee_medium_loyalty_decrease_effect = yes
+		}
+	}
+	extermination_campaign = {
+		allowed = {tag = KYK }	
+		selectable_mission = yes
+		is_good = yes
+		visible = {
+			has_country_flag =  KYK_faction_exists_wookiee
+		}
+		available ={
+			}
+		complete_effect = {
+			KYK_Wookiee_medium_popularity_decrease_effect = yes
+			KYK_Wookiee_high_loyalty_decrease_effect = yes
 		}
 	}
 }
