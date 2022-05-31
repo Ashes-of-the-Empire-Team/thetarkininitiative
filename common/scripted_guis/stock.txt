@@ -169,11 +169,11 @@ scripted_gui = {
 			}
 		}
 	}
-	stock_purchase_screen = {
+	stock_info_screen = {
 		context_type = player_context
-		window_name = "stock_purchase_screen"
+		window_name = "stock_info_screen"
 		visible = {
-           has_country_flag = stock_open
+			has_country_flag = stock_info_open
 		}
 		effects = {
 			buy_shares_click = {
@@ -202,16 +202,22 @@ scripted_gui = {
 				list_for_influencers_or_whatever = yes
 				percent_calc_corp = yes
 			}
+			stock_split_click = {
+				meta_effect = {
+					text = {
+							multiply_variable = { global.outstanding_shares_[Getcompanyname] = split_amount }
+							divide_variable = { share_price_[Getcompanyname] = split_amount }
+							every_country = { 
+								ROOT = {
+									multiply_variable = { shares_held_[Getcompanyname] = split_amount } 
+								}
+							}
+						}
+					Getcompanyname = "[Getcompanyname]"
+				}
+				list_for_influencers_or_whatever = yes
+				percent_calc_corp = yes
+			}
 		}
-		triggers = {
-		}
-	}
-	stock_info_screen = {
-		context_type = player_context
-		window_name = "stock_info_screen"
-		visible = {
-           always = yes
-		}
-
 	}
 }
