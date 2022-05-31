@@ -169,6 +169,16 @@ scripted_gui = {
 					clr_country_flag = warlord_deal_open
 				}
 			}
+			imperial_marshal_picture_click = {
+				if = {
+					limit = {
+						has_country_flag = marshal_open
+					}
+					clr_country_flag = marshal_open
+				}else = {
+					set_country_flag = marshal_open	
+				}
+			}
 		}
 		triggers = {
 			warlord_symbol_visible = {
@@ -217,14 +227,14 @@ scripted_gui = {
 			warlord_flag = {
 				image = "[This.GetFlag]"
 			}
-			leader_empire = {
-				image = "[EMP.Getleaderportrait]"
-			}
 			voting_for_flag = {
 				image = "[Getvoting_for]"
 			}
 			leader_empire = {
 				image = "[get_emperor_picture]"
+			}
+			imperial_marshal_picture = {
+				image = "[get_marshal_picture]"
 			}
 		}
 	}
@@ -487,4 +497,41 @@ scripted_gui = {
 				change_scope = yes
 			}
 		}
+	}
+	marshal_contanier_script = {
+		context_type = player_context
+		window_name = "marshal_container"
+		parent_window_name = "Warlord_Screen"
+		visible = {
+           has_country_flag = marshal_open
+		}
+		effects = {
+			marshal_icon_click = {
+				if = {
+					limit = {
+						ROOT = {
+							has_country_flag = emperor
+						}
+					}
+					set_variable = { ROOT.marshal_selected_id = This.id}
+					var:ROOT.marshal_selected_id = {
+						country_event = {
+						    id = emperor_deals.9
+						    days = 5
+						}
+					}
+				}
+			}
+		}
+		properties = {
+			marshal_icon = { image = "[get_Marshal_photo]" }
+		}
+		dynamic_lists = {
+			marshal_grid = {
+				array = Global.imperial_warlords
+				entry_container = marshal_entry
+				change_scope = yes
+			}
+		}
+	}
 }

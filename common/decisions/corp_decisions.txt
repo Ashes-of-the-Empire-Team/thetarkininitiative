@@ -1,0 +1,130 @@
+board_director_category = {
+
+board_of_directors = {
+
+	allowed = { always = yes }
+
+	icon = ger_mefo_bills
+
+	available = {
+		has_government = corporation
+		hidden_trigger = { always = no }
+	}
+
+	#cost = GER_mefo_bill_counter?10
+
+	days_mission_timeout = 180
+	is_good = yes
+	fire_only_once = yes
+
+	cancel_trigger = {
+		#hidden_trigger = {
+		#	OR = {
+		#		NOT = { GER_has_mefo_bills = yes }
+		#		has_idea = GER_mefo_bills_ended
+		#	}
+		#}
+		always = no
+	}
+
+	days_remove = GER_extend_mefo_bills_days?0
+	remove_effect = {
+	}
+
+	complete_effect = {
+	}
+
+	timeout_effect = {
+	}
+
+	ai_will_do = {
+		#factor = 200
+	}
+}
+
+GER_cancel_mefos = {
+
+	icon = ger_mefo_bills
+
+	available = {
+		hidden_trigger = {
+			NOT = { has_country_flag = ger_has_cancelled_mefo }
+			NOT = {
+				OR = {
+					NOT = { GER_has_mefo_bills = yes }
+					has_idea = GER_mefo_bills_ended
+				}
+			}
+		}
+	}
+
+	cost = 0
+
+	fire_only_once = no
+
+	visible = {
+		hidden_trigger = {
+			NOT = { has_country_flag = ger_has_cancelled_mefo }
+			NOT = {
+				OR = {
+					NOT = { GER_has_mefo_bills = yes }
+					has_idea = GER_mefo_bills_ended
+				}
+			}
+		}
+	}
+
+	cancel_if_not_visible = yes
+
+	remove_effect = {
+		set_country_flag = ger_has_cancelled_mefo
+	}
+
+	ai_will_do = {
+		factor = 0
+	}
+}
+
+GER_renew_mefos = {
+
+	icon = ger_mefo_bills
+
+	available = {
+		hidden_trigger = {
+			has_country_flag = ger_has_cancelled_mefo
+			NOT = {
+				OR = {
+					NOT = { GER_has_mefo_bills = yes }
+					has_idea = GER_mefo_bills_ended
+				}
+			}
+		}
+	}
+
+	cost = 0
+
+	fire_only_once = no
+
+	visible = {
+		hidden_trigger = {
+			has_country_flag = ger_has_cancelled_mefo
+			NOT = {
+				OR = {
+					NOT = { GER_has_mefo_bills = yes }
+					has_idea = GER_mefo_bills_ended
+				}
+			}
+		}
+	}
+
+	cancel_if_not_visible = yes
+
+	remove_effect = {
+		clr_country_flag = ger_has_cancelled_mefo
+	}
+
+	ai_will_do = {
+		factor = 200
+	}
+}
+}

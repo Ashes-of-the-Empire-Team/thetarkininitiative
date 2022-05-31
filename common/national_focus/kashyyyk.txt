@@ -12,7 +12,7 @@ focus_tree = {
 	focus = {
 		id = kyk_human_high_culture
 		icon = GFX_goal_unknown
-		x = 4
+		x = 5
 		y = 10
 		cost = 6
 		search_filters = {
@@ -48,7 +48,7 @@ focus_tree = {
 		id = kyk_true_to_the_empire
 		icon = GFX_goal_unknown
 		x = 10
-		y = 1
+		y = 2
 		cost = 1
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
@@ -66,7 +66,7 @@ focus_tree = {
 		id = kyk_liberation_of_kashyyyk
 		icon = GFX_goal_unknown
 		x = 12
-		y = 1
+		y = 2
 		cost = 1
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
@@ -96,7 +96,7 @@ focus_tree = {
 		id = kyk_governance
 		icon = GFX_goal_unknown
 		x = 7
-		y = 2
+		y = 3
 		cost = 6
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
@@ -104,39 +104,12 @@ focus_tree = {
 		prerequisite = { focus = kyk_true_to_the_empire  }
 	}
 
-
-	#building rapport with Admirals and the other moffs
-	focus = {
-		id = kyk_building_rapport_with_admirals_and_the_other_moffs
-		icon = GFX_goal_unknown
-		x = 7
-		y = 3
-		cost = 6
-		search_filters = {
-			FOCUS_FILTER_POLITICAL
-		}
-		prerequisite = { focus = kyk_governance  }
-	}
-
-
-	#Imperial Kashyyyk
-	focus = {
-		id = kyk_imperial_kashyyyk
-		icon = GFX_goal_unknown
-		x = 8
-		y = 4
-		cost = 6
-		search_filters = {
-			FOCUS_FILTER_POLITICAL
-		}
-		prerequisite = { focus = kyk_building_rapport_with_admirals_and_the_other_moffs } prerequisite = { focus = kyk_cooperation focus = kyk_competition  }	}
-
 	#Prophet Merili's garrisons
 	focus = {
 		id = kyk_prophetmerilisgarrisons
 		icon = GFX_goal_unknown
-		x = 4
-		y = 2
+		x = 9
+		y = 3
 		cost = 1
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
@@ -151,8 +124,8 @@ focus_tree = {
 	focus = {
 		id = kyk_cooperation
 		icon = GFX_goal_unknown
-		x = 3
-		y = 3
+		x = 8
+		y = 4
 		cost = 6
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
@@ -165,8 +138,8 @@ focus_tree = {
 	focus = {
 		id = kyk_competition
 		icon = GFX_goal_unknown
-		x = 5
-		y = 3
+		x = 10
+		y = 4
 		cost = 6
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
@@ -180,14 +153,13 @@ focus_tree = {
 		id = kyk_the_trandoshan_question
 		icon = GFX_goal_unknown
 		x = 11
-		y = 2
+		y = 11
 		cost = 6
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
-		prerequisite = { focus = kyk_liberation_of_kashyyyk  focus = kyk_true_to_the_empire  }
-		available = { has_war = no }
-
+		prerequisite = { focus = kyk_starship_construction_contracts  }
+		prerequisite = { focus = kyk_increase_agricultural_yields  }
 	}
 
 	#conquest
@@ -195,7 +167,7 @@ focus_tree = {
 		id = kyk_conquest
 		icon = GFX_goal_unknown
 		x = 10
-		y = 4
+		y = 12
 		cost = 6
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
@@ -210,40 +182,24 @@ focus_tree = {
 		id = kyk_arbitration
 		icon = GFX_goal_unknown
 		x = 12
-		y = 4
+		y = 12
 		cost = 6
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
-		prerequisite = { focus = kyk_the_trandoshan_question  } prerequisite = { focus = kyk_join_the_new_republic  }
+		available = {
+			has_government = democratic
+		}
+		prerequisite = { focus = kyk_the_trandoshan_question  } 
 		mutually_exclusive = { focus = kyk_conquest  }
 		completion_reward = {REB = { country_event = { days = 1 id = KYK.2 } }}
-	}
-
-	#The mytakanor sector
-	focus = {
-		id = kyk_the_mytakanor_sector
-		icon = GFX_goal_unknown
-		x = 11
-		y = 5
-		cost = 6
-		search_filters = {
-			FOCUS_FILTER_POLITICAL
-		}
-		prerequisite = { focus = kyk_conquest  focus = kyk_arbitration  } prerequisite = { focus = kyk_imperial_kashyyyk focus =  kyk_free_kashyyyk }
-		completion_reward = { 
-			swap_ideas = {
-				add_idea = KYK_Systematicdepopulation1
-				remove_idea = KYK_Systematicdepopulation2
-			}
-		}
 	}
 
 	#Church of the Dark Side
 	focus = {
 		id = kyk_church_of_the_dark_side
 		icon = GFX_goal_unknown
-		x = 1
+		x = 2
 		y = 11
 		cost = 6
 		search_filters = {
@@ -259,7 +215,7 @@ focus_tree = {
 	focus = {
 		id = kyk_the_imperial_academy_of_kashyyyk
 		icon = GFX_goal_unknown
-		x = 4
+		x = 5
 		y = 11
 		cost = 6
 		search_filters = {
@@ -276,13 +232,22 @@ focus_tree = {
 		id = kyk_the_future_of_kashyyyk
 		icon = GFX_goal_unknown
 		x = 11
-		y = 6
+		y = 5
 		cost = 6
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
-		prerequisite = { focus = kyk_the_mytakanor_sector  } 
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = kyk_civilwar_over_tt
+			KYY = { exists = no } }
+		}
+		prerequisite = { focus = kyk_cooperation focus =  kyk_competition focus = kyk_democracy focus = kyk_monarchy }
 		completion_reward = {
+			swap_ideas = {
+				add_idea = KYK_Systematicdepopulation1
+				remove_idea = KYK_Systematicdepopulation2
+			}
 			if = {
 				limit = { has_country_flag = KYK_progressive_sided }
 				KYK_set_progressives_faction_values = yes
@@ -311,7 +276,7 @@ focus_tree = {
 		id = kyk_join_the_new_republic
 		icon = GFX_goal_unknown
 		x = 15
-		y = 2
+		y = 3
 		cost = 1
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
@@ -323,38 +288,16 @@ focus_tree = {
 	}
 
 
-	#Start a voting bloc
-	focus = {
-		id = kyk_start_a_voting_bloc
-		icon = GFX_goal_unknown
-		x = 15
-		y = 3
-		cost = 6
-		search_filters = {
-			FOCUS_FILTER_POLITICAL
-		}
-		prerequisite = { focus = kyk_join_the_new_republic  }
-	}
+	
 
 
-	#Free Kashyyyk
-	focus = {
-		id = kyk_free_kashyyyk
-		icon = GFX_goal_unknown
-		x = 14
-		y = 4
-		cost = 6
-		search_filters = {
-			FOCUS_FILTER_POLITICAL
-		}
-		prerequisite = { focus = kyk_start_a_voting_bloc  } prerequisite = { focus = kyk_democracy  focus = kyk_monarchy  } 	}
-
+	
 	#Wookie warriors
 	focus = {
 		id = kyk_wookie_warriors
 		icon = GFX_goal_unknown
-		x = 18
-		y = 2
+		x = 13
+		y = 3
 		cost = 2
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
@@ -369,8 +312,8 @@ focus_tree = {
 	focus = {
 		id = kyk_democracy
 		icon = GFX_goal_unknown
-		x = 17
-		y = 3
+		x = 12
+		y = 4
 		cost = 6
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
@@ -387,8 +330,8 @@ focus_tree = {
 	focus = {
 		id = kyk_monarchy
 		icon = GFX_goal_unknown
-		x = 19
-		y = 3
+		x = 14
+		y = 4
 		cost = 6
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
@@ -405,7 +348,7 @@ focus_tree = {
 	focus = {
 		id = kyk_dark_diciples
 		icon = GFX_goal_unknown
-		x = 1
+		x = 2
 		y = 12
 		cost = 6
 		search_filters = {
@@ -418,19 +361,6 @@ focus_tree = {
 				remove_idea = kyk_church_of_the_dark_side1
 			}
 		}
-	}
-
-	#Life debts
-	focus = {
-		id = kyk_life_debts
-		icon = GFX_goal_unknown
-		x = 13
-		y = 5
-		cost = 6
-		search_filters = {
-			FOCUS_FILTER_POLITICAL
-		}
-		 prerequisite = { focus = kyk_free_kashyyyk }
 	}
 
 	#A planet and a people, bloodied, but unbroken
@@ -449,115 +379,14 @@ focus_tree = {
 		}
 	}
 
-	#Solidifying the administation
-	focus = {
-		id = kyk_solidifying_the_administation
-		icon = GFX_goal_unknown
-		x = 11
-		y = 8
-		cost = 6
-		search_filters = {
-			FOCUS_FILTER_POLITICAL
-		}
-		prerequisite = { focus = kyk_aplanetandapeoplebloodiedbutunbroken  }
-		completion_reward = {
-			add_timed_idea = { idea = kyk_solidifying_the_new_administration days = 70 }		
-		}
-	}
 
-	#freedom
-	focus = {
-		id = kyk_freedom
-		icon = GFX_goal_unknown
-		x = 12
-		y = 9
-		cost = 6
-		search_filters = {
-			FOCUS_FILTER_POLITICAL
-		}
-		prerequisite = { focus = kyk_solidifying_the_administation  }
-		mutually_exclusive = { focus = kyk_dicipline  }
-		completion_reward = {
-		add_ideas = kyk_Freedom1
-		}
-	}
 
-	#dicipline
-	focus = {
-		id = kyk_dicipline
-		icon = GFX_goal_unknown
-		x = 10
-		y = 9
-		cost = 6
-		search_filters = {
-			FOCUS_FILTER_POLITICAL
-		}
-		prerequisite = { focus = kyk_solidifying_the_administation  }
-		mutually_exclusive = { focus = kyk_freedom  }
-		completion_reward = {
-			add_ideas = kyk_Dicipline1
-			}
-	}
-
-	#Divide the machinery
-	focus = {
-		id = kyk_divide_the_machinery
-		icon = GFX_goal_unknown
-		x = 12
-		y = 10
-		cost = 6
-		search_filters = {
-			FOCUS_FILTER_POLITICAL
-		}
-		prerequisite = { focus = kyk_freedom  }
-		completion_reward = {
-		swap_ideas = {
-			add_idea = kyk_Freedom2
-			remove_idea = kyk_Freedom1
-			}
-		} 
-	}
-
-	#Harnass the refineries
-	focus = {
-		id = kyk_harnass_the_refineries
-		icon = GFX_goal_unknown
-		x = 10
-		y = 10
-		cost = 6
-		search_filters = {
-			FOCUS_FILTER_POLITICAL
-		}
-		prerequisite = { focus = kyk_dicipline  }
-		completion_reward = {
-			swap_ideas = {
-				add_idea = kyk_Dicipline2
-				remove_idea = kyk_Dicipline1
-				}
-			} 
-	}
-
-	#Finalize the new administration
-	focus = {
-		id = kyk_finalize_the_new_administration
-		icon = GFX_goal_unknown
-		x = 11
-		y = 11
-		cost = 1
-		search_filters = {
-			FOCUS_FILTER_POLITICAL
-		}
-		prerequisite = { focus = kyk_harnass_the_refineries  focus = kyk_divide_the_machinery  }
-		completion_reward = { 
-			add_political_power = 150
-		 }
-	}
 
 	#Restarting the industry
 	focus = {
 		id = kyk_restarting_the_industry
 		icon = GFX_goal_unknown
-		x = 7
+		x = 8
 		y = 8
 		cost = 6
 		search_filters = {
@@ -626,7 +455,7 @@ focus_tree = {
 	focus = {
 		id = kyk_ending_the_famine
 		icon = GFX_goal_unknown
-		x = 15
+		x = 14
 		y = 8
 		cost = 6
 		search_filters = {
@@ -645,7 +474,7 @@ focus_tree = {
 	focus = {
 		id = kyk_request_new_republic_aid
 		icon = GFX_goal_unknown
-		x = 16
+		x = 15
 		y = 9
 		cost = 1
 		search_filters = {
@@ -666,7 +495,7 @@ focus_tree = {
 	focus = {
 		id = kyk_scramble_for_nutrition
 		icon = GFX_goal_unknown
-		x = 14
+		x = 13
 		y = 9
 		cost = 5
 		search_filters = {
@@ -686,7 +515,7 @@ focus_tree = {
 	focus = {
 		id = kyk_increase_agricultural_yields
 		icon = GFX_goal_unknown
-		x = 15
+		x = 14
 		y = 10
 		cost = 6
 		search_filters = {
@@ -717,8 +546,8 @@ focus_tree = {
 	focus = {
 		id = kyk_kashyyyk_farming_cooperation
 		icon = GFX_goal_unknown
-		x = 15
-		y = 12
+		x = 14
+		y = 13
 		cost = 6
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
@@ -732,7 +561,7 @@ focus_tree = {
 	focus = {
 		id = kyk_industrial_grants
 		icon = GFX_goal_unknown
-		x = 8
+		x = 9
 		y = 9
 		cost = 6
 		search_filters = {
@@ -797,7 +626,7 @@ focus_tree = {
 	focus = {
 		id = kyk_export_to_the_moffs_and_admirals
 		icon = GFX_goal_unknown
-		x = 6
+		x = 7
 		y = 9
 		cost = 3
 		search_filters = {
@@ -857,7 +686,7 @@ focus_tree = {
 	focus = {
 		id = kyk_starship_construction_contracts
 		icon = GFX_goal_unknown
-		x = 7
+		x = 8
 		y = 10
 		cost = 6
 		search_filters = {
@@ -932,8 +761,8 @@ focus_tree = {
 	focus = {
 		id = kyk_kashyyyk_orbital_dockyard
 		icon = GFX_goal_unknown
-		x = 7
-		y = 12
+		x = 8
+		y = 13
 		cost = 6
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
@@ -1024,10 +853,7 @@ focus_tree = {
 		}
 		prerequisite = { focus = kyk_kashyyyk_farming_cooperation  }
 		completion_reward = {
-			swap_ideas = {
-				add_idea = kyk_deforestation2
-				remove_idea = kyk_deforestation1
-			}
+			
 			add_resource = {
 				type = steel
 				amount = -5
@@ -1048,67 +874,7 @@ focus_tree = {
 				amount = -2
 				state = 284
 			}
-			if = {
-				limit = {
-					has_idea = kyk_ecological_balance6
-				}
-				add_timed_idea = { idea = kyk_ecological_miracle days = 300 }
-		
-			}
-			else_if = {
-				limit = {
-					has_idea = kyk_ecological_balance5
-				}
-				swap_ideas = {
-					remove_idea = kyk_ecological_balance5
-					add_idea = kyk_ecological_balance6
-				}
-			}
-			else_if = {
-				limit = {
-					has_idea = kyk_ecological_balance4
-				}
-				swap_ideas = {
-					remove_idea = kyk_ecological_balance4
-					add_idea = kyk_ecological_balance5
-				}
-			}
-			else_if = {
-				limit = {
-					has_idea = kyk_ecological_balance3
-				}
-				swap_ideas = {
-					remove_idea = kyk_ecological_balance3
-					add_idea = kyk_ecological_balance4
-				}
-			}
-			else_if = {
-				limit = {
-					has_idea = kyk_ecological_balance2
-				}
-				swap_ideas = {
-					remove_idea = kyk_ecological_balance2
-					add_idea = kyk_ecological_balance3
-				}
-			}
-			else_if = {
-				limit = {
-					has_idea = kyk_ecological_balance1
-				}
-				swap_ideas = {
-					remove_idea = kyk_ecological_balance1
-					add_idea = kyk_ecological_balance2
-				}
-			}
-			else_if = {
-				limit = {
-					has_idea = kyk_ecological_balance0
-				}
-				swap_ideas = {
-					remove_idea = kyk_ecological_balance0
-					add_idea = kyk_ecological_balance1
-				}
-			}
+			KYKecology_level_up = yes
 		}
 	}
 
@@ -1148,10 +914,7 @@ focus_tree = {
 		}
 		prerequisite = { focus = kyk_the_ecological_restoration_of_kashyyyk  }
 		completion_reward = {
-			swap_ideas = {
-				add_idea = kyk_deforestation3
-				remove_idea = kyk_deforestation2
-			}
+			KYKecology_level_up = yes
 			add_ideas = { kyk_material_shortages }
 			add_resource = {
 				type = steel
@@ -1246,67 +1009,7 @@ focus_tree = {
 					amount = -2
 					state = 284
 				}
-				if = {
-					limit = {
-						has_idea = kyk_ecological_balance6
-					}
-					add_timed_idea = { idea = kyk_ecological_miracle days = 300 }
-			
-				}
-				else_if = {
-					limit = {
-						has_idea = kyk_ecological_balance5
-					}
-					swap_ideas = {
-						remove_idea = kyk_ecological_balance5
-						add_idea = kyk_ecological_balance6
-					}
-				}
-				else_if = {
-					limit = {
-						has_idea = kyk_ecological_balance4
-					}
-					swap_ideas = {
-						remove_idea = kyk_ecological_balance4
-						add_idea = kyk_ecological_balance5
-					}
-				}
-				else_if = {
-					limit = {
-						has_idea = kyk_ecological_balance3
-					}
-					swap_ideas = {
-						remove_idea = kyk_ecological_balance3
-						add_idea = kyk_ecological_balance4
-					}
-				}
-				else_if = {
-					limit = {
-						has_idea = kyk_ecological_balance2
-					}
-					swap_ideas = {
-						remove_idea = kyk_ecological_balance2
-						add_idea = kyk_ecological_balance3
-					}
-				}
-				else_if = {
-					limit = {
-						has_idea = kyk_ecological_balance1
-					}
-					swap_ideas = {
-						remove_idea = kyk_ecological_balance1
-						add_idea = kyk_ecological_balance2
-					}
-				}
-				else_if = {
-					limit = {
-						has_idea = kyk_ecological_balance0
-					}
-					swap_ideas = {
-						remove_idea = kyk_ecological_balance0
-						add_idea = kyk_ecological_balance1
-					}
-				}
+				KYKecology_level_up = yes
 		}
 	}
 
@@ -1442,7 +1145,7 @@ focus_tree = {
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
-		prerequisite = { focus = kyk_building_rapport_with_admirals_and_the_other_moffs  } 
+		prerequisite = { focus = kyk_governance  } 
 	}
 
 	#Contacts in the new republic
@@ -1455,14 +1158,14 @@ focus_tree = {
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
-		prerequisite = { focus = kyk_start_a_voting_bloc  } prerequisite = { focus = kyk_the_future_of_kashyyyk  }
+		prerequisite = { focus = kyk_join_the_new_republic } prerequisite = { focus = kyk_the_future_of_kashyyyk  }
 	}
 
 	#Grand Admiral Syn
 	focus = {
 		id = kyk_grand_admiral_syn
 		icon = GFX_goal_unknown
-		x = 3
+		x = 4
 		y = 8
 		cost = 6
 		search_filters = {
@@ -1480,7 +1183,7 @@ focus_tree = {
 	focus = {
 		id = kyk_prophet_merili
 		icon = GFX_goal_unknown
-		x = 3
+		x = 4
 		y = 7
 		cost = 6
 		search_filters = {
@@ -1493,82 +1196,56 @@ focus_tree = {
 	focus = {
 		id = kyk_advance_the_deforestation
 		icon = GFX_goal_unknown
-		x = 6
+		x = 7
 		y = 15
 		cost = 6
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
-		prerequisite = { focus = kyk_optimization_of_industrial_operations  } prerequisite = { focus = kyk_human_high_culture  }
+		prerequisite = { focus = kyk_optimization_of_industrial_operations  } 
 		completion_reward = {
-		
-				swap_ideas = {
-					add_idea = kyk_deforestation0
-					remove_idea = kyk_deforestation1
-				}
+			KYK_church_high_loyalty_decrease_effect = yes
+			KYK_traditionalist_high_loyalty_decrease_effect = yes
 			every_owned_state = {
 				add_extra_state_shared_building_slots = 2
 			}
+			add_ideas = kyk_ecological_planned_unbalance
 			if = {
 				limit = {
-					has_idea = kyk_ecological_balance0
+					has_idea = kyk_ecological_balance5
 				}
-				add_ideas = kyk_ecological_collapse 
-		
-			}
-			else_if = {
-				limit = {
-					has_idea = kyk_ecological_balance1
-				}
-				swap_ideas = {
-					remove_idea = kyk_ecological_balance1
-					add_idea = kyk_ecological_balance0
-				}
-			}
-			else_if = {
-				limit = {
-					has_idea = kyk_ecological_balance2
-				}
-				swap_ideas = {
-					remove_idea = kyk_ecological_balance2
-					add_idea = kyk_ecological_balance1
-				}
-			}
-			else_if = {
-				limit = {
-					has_idea = kyk_ecological_balance3
-				}
-				swap_ideas = {
-					remove_idea = kyk_ecological_balance3
-					add_idea = kyk_ecological_balance2
-				}
+				remove_ideas = kyk_ecological_balance5
+			
 			}
 			else_if = {
 				limit = {
 					has_idea = kyk_ecological_balance4
 				}
-				swap_ideas = {
-					remove_idea = kyk_ecological_balance4
-					add_idea = kyk_ecological_balance3
-				}
+				remove_ideas = kyk_ecological_balance4
 			}
 			else_if = {
 				limit = {
-					has_idea = kyk_ecological_balance5
+					has_idea = kyk_ecological_balance3
 				}
-				swap_ideas = {
-					remove_idea = kyk_ecological_balance5
-					add_idea = kyk_ecological_balance4
-				}
+				remove_ideas = kyk_ecological_balance3
 			}
 			else_if = {
 				limit = {
-					has_idea = kyk_ecological_balance6
+					has_idea = kyk_ecological_balance2
 				}
-				swap_ideas = {
-					remove_idea = kyk_ecological_balance6
-					add_idea = kyk_ecological_balance5
+				remove_ideas = kyk_ecological_balance2
+			}
+			else_if = {
+				limit = {
+					has_idea = kyk_ecological_balance1
 				}
+				remove_ideas = kyk_ecological_balance1
+			}
+			else_if = {
+				limit = {
+					has_idea = kyk_ecological_balance0
+				}
+				remove_ideas = kyk_ecological_balance0
 			}
 		}
 	}
@@ -1577,7 +1254,7 @@ focus_tree = {
 	focus = {
 		id = kyk_merilisrancors
 		icon = GFX_goal_unknown
-		x = 1
+		x = 2
 		y = 8
 		cost = 6
 		search_filters = {
@@ -1590,7 +1267,7 @@ focus_tree = {
 	focus = {
 		id = kyk_force_wraiths
 		icon = GFX_goal_unknown
-		x = 1
+		x = 2
 		y = 9
 		cost = 6
 		search_filters = {
@@ -1607,7 +1284,7 @@ focus_tree = {
 	focus = {
 		id = kyk_siloothandmerilisfleet
 		icon = GFX_goal_unknown
-		x = 3
+		x = 4
 		y = 9
 		cost = 6
 		search_filters = {
@@ -1620,7 +1297,7 @@ focus_tree = {
 	focus = {
 		id = kyk_meriliscoup
 		icon = GFX_goal_unknown
-		x = 1
+		x = 2
 		y = 10
 		cost = 6
 		search_filters = {
@@ -2103,7 +1780,7 @@ focus_tree = {
 	focus = {
 		id = kyk_anti_slavery_hardliners
 		icon = GFX_goal_unknown
-		x = 20
+		x = 19
 		y = 8
 		cost = 6
 		search_filters = {
@@ -2117,7 +1794,7 @@ focus_tree = {
 	focus = {
 		id = kyk_enforce_existing_trade_regulations
 		icon = GFX_goal_unknown
-		x = 18
+		x = 17
 		y = 9
 		cost = 6
 		search_filters = {
@@ -2130,7 +1807,7 @@ focus_tree = {
 	focus = {
 		id = kyk_propose_new_trade_regulations
 		icon = GFX_goal_unknown
-		x = 18
+		x = 17
 		y = 10
 		cost = 6
 		search_filters = {
@@ -2143,7 +1820,7 @@ focus_tree = {
 	focus = {
 		id = kyk_our_future_in_the_new_republic
 		icon = GFX_goal_unknown
-		x = 19
+		x = 18
 		y = 11
 		cost = 6
 		search_filters = {
@@ -2243,6 +1920,17 @@ focus_tree = {
 		}
 		prerequisite = { focus =  kyk_traditional_agenda }
 	}
+	focus = {
+		id = kyk_restoring_our_culture
+		icon = GFX_goal_unknown
+		x = 19
+		y = 14
+		cost = 6
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus =  kyk_trade_lane_crossroads }
+	}
 
 	#steering commerce
 	focus = {
@@ -2275,7 +1963,7 @@ focus_tree = {
 	focus = {
 		id = kyk_requesting_privileges
 		icon = GFX_goal_unknown
-		x = 22
+		x = 21
 		y = 12
 		cost = 6
 		search_filters = {
@@ -2288,7 +1976,7 @@ focus_tree = {
 	focus = {
 		id = kyk_contribution_to_the_new_republic
 		icon = GFX_goal_unknown
-		x = 23
+		x = 22
 		y = 13
 		cost = 6
 		search_filters = {
@@ -2301,7 +1989,7 @@ focus_tree = {
 	focus = {
 		id = kyk_midrim_interests
 		icon = GFX_goal_unknown
-		x = 18
+		x = 17
 		y = 8
 		cost = 6
 		search_filters = {
@@ -2315,21 +2003,20 @@ focus_tree = {
 	focus = {
 		id = kyk_opening_debate_in_the_new_senate
 		icon = GFX_goal_unknown
-		x = 18
+		x = 17
 		y = 7
 		cost = 6
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		} 
 		prerequisite = { focus = kyk_contacts_in_the_new_republic  }
-		prerequisite = { focus = kyk_the_future_of_kashyyyk  }
 	}
 
 	#Request sanctions against slavers
 	focus = {
 		id = kyk_request_sanctions_against_slavers
 		icon = GFX_goal_unknown
-		x = 20
+		x = 19
 		y = 9
 		cost = 6
 		search_filters = {
@@ -2342,7 +2029,7 @@ focus_tree = {
 	focus = {
 		id = kyk_demand_dismantlement_of_slaver_governments
 		icon = GFX_goal_unknown
-		x = 20
+		x = 19
 		y = 10
 		cost = 6
 		search_filters = {
@@ -2417,7 +2104,7 @@ focus_tree = {
 	focus = {
 		id = kyk_now_the_trandoshans_will_suffer
 		icon = GFX_goal_unknown
-		x = 22
+		x = 21
 		y = 8
 		cost = 6
 		search_filters = {
@@ -2431,7 +2118,7 @@ focus_tree = {
 	focus = {
 		id = kyk_a_colony_for_kashyyyk
 		icon = GFX_goal_unknown
-		x = 24
+		x = 23
 		y = 8
 		cost = 6
 		search_filters = {
@@ -2445,7 +2132,7 @@ focus_tree = {
 	focus = {
 		id = kyk_forced_labor
 		icon = GFX_goal_unknown
-		x = 22
+		x = 21
 		y = 9
 		cost = 6
 		search_filters = {
@@ -2458,7 +2145,7 @@ focus_tree = {
 	focus = {
 		id = kyk_chains_and_collar
 		icon = GFX_goal_unknown
-		x = 22
+		x = 21
 		y = 10
 		cost = 6
 		search_filters = {
@@ -2471,7 +2158,7 @@ focus_tree = {
 	focus = {
 		id = kyk_sellingtheoneswedontneed
 		icon = GFX_goal_unknown
-		x = 22
+		x = 21
 		y = 11
 		cost = 6
 		search_filters = {
@@ -2484,7 +2171,7 @@ focus_tree = {
 	focus = {
 		id = kyk_fund_mining_surveys_on_trandosha
 		icon = GFX_goal_unknown
-		x = 26
+		x = 25
 		y = 9
 		cost = 6
 		search_filters = {
@@ -2497,7 +2184,7 @@ focus_tree = {
 	focus = {
 		id = kyk_enact_a_collective_fine_to_the_trandoshans
 		icon = GFX_goal_unknown
-		x = 24
+		x = 23
 		y = 9
 		cost = 6
 		search_filters = {
@@ -2510,7 +2197,7 @@ focus_tree = {
 	focus = {
 		id = kyk_integrate_local_leaders_into_the_planetary_occupation
 		icon = GFX_goal_unknown
-		x = 24
+		x = 23
 		y = 10
 		cost = 6
 		search_filters = {
@@ -2523,7 +2210,7 @@ focus_tree = {
 	focus = {
 		id = kyk_raise_the_administration_to_kashyyyk_standard
 		icon = GFX_goal_unknown
-		x = 24
+		x = 23
 		y = 11
 		cost = 6
 		search_filters = {
@@ -2536,7 +2223,7 @@ focus_tree = {
 	focus = {
 		id = kyk_start_assimilating_the_trandoshans
 		icon = GFX_goal_unknown
-		x = 24
+		x = 23
 		y = 12
 		cost = 6
 		search_filters = {
@@ -2614,7 +2301,7 @@ focus_tree = {
 		id = kyk_merilis_mission
 		icon = GFX_goal_unknown
 		x = 5
-		y = 28
+		y = 26
 		cost = 6
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
@@ -2626,15 +2313,191 @@ focus_tree = {
 				ruling_only = yes
 			}
 		}
-	
+	}
+	focus = {
+		id = kyk_an_empire_divided
+		icon = GFX_goal_unknown
+		x = 5
+		y = 27
+		cost = 6
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = kyk_merilis_mission }
+		
+	}
+	focus = {
+		id = kyk_must_remain_divided
+		icon = GFX_goal_unknown
+		x = 5
+		y = 28
+		cost = 6
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = kyk_an_empire_divided }
+		
+	}
+	focus = {
+		id = kyk_thrawn
+		icon = GFX_goal_unknown
+		x = 5
+		y = 29
+		cost = 6
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = kyk_must_remain_divided }
+		
+	}
+	focus = {
+		id = kyk_pierce_the_skin
+		icon = GFX_goal_unknown
+		x = 5
+		y = 30
+		cost = 6
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = kyk_thrawn }
+		
+	}
+	focus = {
+		id = kyk_sever_the_hand
+		icon = GFX_goal_unknown
+		x = 5
+		y = 31
+		cost = 6
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = kyk_pierce_the_skin }
+		
+	}
+	focus = {
+		id = kyk_zsinj
+		icon = GFX_goal_unknown
+		x = 7
+		y = 29
+		cost = 6
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = kyk_must_remain_divided }
+		
+	}
+	focus = {
+		id = kyk_infiltrate_the_warband
+		icon = GFX_goal_unknown
+		x = 7
+		y = 30
+		cost = 6
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = kyk_zsinj }
+		
+	}
+	focus = {
+		id = kyk_his_head_on_a_pike
+		icon = GFX_goal_unknown
+		x = 7
+		y = 31
+		cost = 6
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = kyk_infiltrate_the_warband }
+		
+	}
+	focus = {
+		id = kyk_isard
+		icon = GFX_goal_unknown
+		x = 3
+		y = 29
+		cost = 6
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = kyk_must_remain_divided }
+		
+	}
+	focus = {
+		id = kyk_heir_pretender_and_traitor
+		icon = GFX_goal_unknown
+		x = 3
+		y = 30
+		cost = 6
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = kyk_isard }
+		
+	}
+	focus = {
+		id = kyk_vacate_the_throne
+		icon = GFX_goal_unknown
+		x = 3
+		y = 31
+		cost = 6
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = kyk_heir_pretender_and_traitor }
+		
+	}
+	focus = {
+		id = kyk_pretenders_containted
+		icon = GFX_goal_unknown
+		x = 5
+		y = 32
+		cost = 6
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = kyk_vacate_the_throne }
+		prerequisite = { focus = kyk_his_head_on_a_pike }
+		prerequisite = { focus = kyk_sever_the_hand }
+	}
+	focus = {
+		id = kyk_await_his_return
+		icon = GFX_goal_unknown
+		x = 7
+		y = 33
+		cost = 6
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		} 
+		prerequisite = { focus = kyk_pretenders_containted }
+		prerequisite = { focus = kyk_the_new_empire }
+
+		mutually_exclusive = {
+			focus = kyk_allure_of_oppertunity
+		}
+		
+	}
+	focus = {
+		id = kyk_allure_of_oppertunity
+		icon = GFX_goal_unknown
+		x = 9
+		y = 33
+		cost = 6
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = kyk_the_new_empire }
+		prerequisite = { focus = kyk_proclaim_mytakanor_sector_governership }
+		mutually_exclusive = {
+			focus = kyk_await_his_return
+		}
 	}
 	#Imperial Ambition
 
 	focus = {
 		id = kyk_imperial_ambition
 		icon = GFX_goal_unknown
-		x = 17
-		y = 25
+		x = 10
+		y = 29
 		cost = 6
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
@@ -2647,51 +2510,10 @@ focus_tree = {
 	}
 
 	focus = {
-		id = kyk_oppertunity_to_influence
-		icon = GFX_goal_unknown
-		x = 17
-		y = 26
-		cost = 6
-		search_filters = {
-			FOCUS_FILTER_POLITICAL
-		}
-		prerequisite = { focus = kyk_imperial_ambition }
-		
-	}
-	
-	focus = {
-		id = kyk_the_meiloorun
-		icon = GFX_goal_unknown
-		x = 16
-		y = 27
-		cost = 6
-		search_filters = {
-			FOCUS_FILTER_POLITICAL
-		}
-		prerequisite = { focus = kyk_oppertunity_to_influence }
-		mutually_exclusive = { focus = kyk_the_durasteel_fist }
-		
-	}
-
-	focus = {
-		id = kyk_the_durasteel_fist
-		icon = GFX_goal_unknown
-		x = 18
-		y = 27
-		cost = 6
-		search_filters = {
-			FOCUS_FILTER_POLITICAL
-		}
-		prerequisite = { focus = kyk_oppertunity_to_influence }
-		mutually_exclusive = { focus = kyk_the_meiloorun }
-		
-	}
-
-	focus = {
 		id = kyk_reconsider_high_human_culture
 		icon = GFX_goal_unknown
-		x = 14
-		y = 27
+		x = 10
+		y = 30
 		cost = 6
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
@@ -2702,8 +2524,8 @@ focus_tree = {
 	focus = {
 		id = kyk_humanity_first
 		icon = GFX_goal_unknown
-		x = 13
-		y = 28
+		x = 9
+		y = 31
 		cost = 6
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
@@ -2716,8 +2538,8 @@ focus_tree = {
 	focus = {
 		id = kyk_non_human_equality
 		icon = GFX_goal_unknown
-		x = 15
-		y = 28
+		x = 11
+		y = 31
 		cost = 6
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
@@ -2726,17 +2548,71 @@ focus_tree = {
 		mutually_exclusive = { focus = kyk_humanity_first }
 		
 	}
-
 	focus = {
-		id = kyk_proclaim_mytakanor_sector_governership
+		id = kyk_the_new_empire
 		icon = GFX_goal_unknown
-		x = 22
-		y = 30
+		x = 10
+		y = 32
 		cost = 6
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
-		prerequisite = { focus = kyk_imperial_ambition }
+		prerequisite = { focus = kyk_non_human_equality focus = kyk_humanity_first } 
+		completion_reward = {
+			add_stability = 0.05
+		}
+		
+	}
+	focus = {
+		id = kyk_proclaim_mytakanor_sector_governership
+		icon = GFX_goal_unknown
+		x = 12
+		y = 32
+		cost = 6
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		available = { 
+			#Kashyyyk
+			custom_trigger_tooltip = {
+			tooltip = form_sector_Kashyyyk_required_states_tt
+			controls_state = 29
+			controls_state = 262
+			controls_state = 268
+			controls_state = 280
+			controls_state = 284
+			controls_state = 288
+			controls_state = 295
+			controls_state = 304 }
+			OR = {
+			custom_trigger_tooltip = {
+				tooltip = form_sector_Trandosha_required_states_tt
+				controls_state = 258
+				controls_state = 248
+				controls_state = 241
+				controls_state = 231
+				controls_state = 237
+				controls_state = 226
+				controls_state = 23
+				controls_state = 327}	
+			custom_trigger_tooltip = { 
+				tooltip = form_sector_Trandosha_required_puppet_tt
+				TRA = { subject = KYK }	}			
+			}
+			}
+		prerequisite = { focus = kyk_imperial_ambition  }
+		completion_reward = { set_cosmetic_tag = MYTAKANOR 
+		custom_effect_tooltip = form_sector_coring_Trandosha_tt
+		hidden_effect = {
+			258 = { add_core_of = ROOT }
+			248 = { add_core_of = ROOT }
+			241 = { add_core_of = ROOT }
+			231 = { add_core_of = ROOT }
+			237 = { add_core_of = ROOT }
+			226 = { add_core_of = ROOT }
+			23 = { add_core_of = ROOT }
+			327 = { add_core_of = ROOT }
+		} }
 		
 	}
 
@@ -2745,7 +2621,7 @@ focus_tree = {
 		id = kyk_slavers_of_Kashyyyk
 		icon = GFX_goal_unknown
 		x = 24
-		y = 1
+		y = 2
 		cost = 6
 		search_filters = {
 			FOCUS_FILTER_POLITICAL

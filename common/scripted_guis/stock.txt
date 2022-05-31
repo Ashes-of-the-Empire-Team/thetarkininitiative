@@ -1,20 +1,165 @@
 scripted_gui = {
 	stock_screen = {
 		context_type = player_context
-
-		window_name = "stock_window"
-		parent_window_name = countrypoliticsview
+		window_name = "stock_screen"
 		visible = {
 			has_government = corporation
 			has_country_flag = stock_screen_open
 		}
 
 		effects = {
-			geonosis_click = {
+
+			fretek_click = {
+				open_corpo_info = yes
+				set_country_flag = freitek_selected
+				list_for_influencers_or_whatever = yes
+			}
+			galentro_click = {
+				open_corpo_info = yes
+				set_country_flag = gelentro_selected
+				list_for_influencers_or_whatever = yes
+			}
+			incom_click = {
+				open_corpo_info = yes
+				set_country_flag = incom_selected
+				list_for_influencers_or_whatever = yes
+			}
+			merr_click = {
+				open_corpo_info = yes
+				set_country_flag = merr_sonn_selected
+				list_for_influencers_or_whatever = yes
+			}
+			millenium_click = {
+				open_corpo_info = yes
+				set_country_flag = millennium_entertainments_selected
+				list_for_influencers_or_whatever = yes
+			}
+			rendili_click = {
+				open_corpo_info = yes
+				set_country_flag = rendili_selected
+				list_for_influencers_or_whatever = yes
+			}
+			sorosubb_click = {
+				open_corpo_info = yes
+				set_country_flag = sorosuub_selected
+				list_for_influencers_or_whatever = yes
+			}
+			zaltin_click = {
 				open_corpo_info = yes
 				set_country_flag = zaltin_selected
+				list_for_influencers_or_whatever = yes
+			}
+			arakyd_click = {
+				open_corpo_info = yes
+				set_country_flag = arakyd_selected
 				list_for_influencers_or_whatever = yes	
 			}
+			czerka_click = {
+				open_corpo_info = yes
+				set_country_flag = czerka_selected
+				list_for_influencers_or_whatever = yes	
+			}
+			industrial_click = {
+				open_corpo_info = yes
+				set_country_flag = industrial_automaton_selected
+				list_for_influencers_or_whatever = yes	
+			}
+			karflo_click = {
+				open_corpo_info = yes
+				set_country_flag = karflo_selected
+				list_for_influencers_or_whatever = yes	
+			}
+			kuat_click = {
+				open_corpo_info = yes
+				set_country_flag = kuat_selected
+				list_for_influencers_or_whatever = yes	
+			}
+			sienar_click = {
+				open_corpo_info = yes
+				set_country_flag = sienar_selected
+				list_for_influencers_or_whatever = yes	
+			}
+			slayn_click = {
+				open_corpo_info = yes
+				set_country_flag = slayn_and_korpil_selected
+				list_for_influencers_or_whatever = yes	
+			}
+			taggeco_click = {
+				open_corpo_info = yes
+				set_country_flag = taggeco_selected
+				list_for_influencers_or_whatever = yes	
+			}
+			trilon_click = {
+				open_corpo_info = yes
+				set_country_flag = trilon_selected
+				list_for_influencers_or_whatever = yes	
+			}
+			ubrikkian_click = {
+				open_corpo_info = yes
+				set_country_flag = ubrikkian_selected
+				list_for_influencers_or_whatever = yes	
+			}
+			accutronics_click = {
+				open_corpo_info = yes
+				set_country_flag = accutronics_selected
+				list_for_influencers_or_whatever = yes	
+			}
+			ayelixe_click = {
+				open_corpo_info = yes
+				set_country_flag = ayelixe_krongbing_selected
+				list_for_influencers_or_whatever = yes	
+			}
+			bank_of_core_click = {
+				open_corpo_info = yes
+				set_country_flag = bank_of_the_core_selected
+				list_for_influencers_or_whatever = yes	
+			}
+			blastech_click = {
+				open_corpo_info = yes
+				set_country_flag = blastech_selected
+				list_for_influencers_or_whatever = yes	
+			}
+			dynamic_click = {
+				open_corpo_info = yes
+				set_country_flag = dynamic_selected
+				list_for_influencers_or_whatever = yes	
+			}
+			ibc_click = {
+				open_corpo_info = yes
+				set_country_flag = ibc_selected
+				list_for_influencers_or_whatever = yes	
+			}
+			cybot_click = {
+				open_corpo_info = yes
+				set_country_flag = cybot_selected
+				list_for_influencers_or_whatever = yes	
+			}
+			biotech_click = {
+				open_corpo_info = yes
+				set_country_flag = biotech_selected
+				list_for_influencers_or_whatever = yes	
+			}
+			chiewab_click = {
+				open_corpo_info = yes
+				set_country_flag = chiewab_selected
+				list_for_influencers_or_whatever = yes	
+			}
+			corellia_click = {
+				open_corpo_info = yes
+				set_country_flag = corellia_selected
+				list_for_influencers_or_whatever = yes	
+			}
+			athakam_click = {
+				open_corpo_info = yes
+				set_country_flag = athakam_medtech_selected
+				list_for_influencers_or_whatever = yes	
+			}
+			_click = {
+				open_corpo_info = yes
+				set_country_flag = arakyd_selected
+				list_for_influencers_or_whatever = yes	
+			}
+			
 		}
 		dynamic_lists = {
 			subsidiary_grid = {
@@ -48,6 +193,8 @@ scripted_gui = {
 							set_temp_variable = { share_price_calc = share_price_[Getcompanyname] }
 							multiply_temp_variable = { share_price_calc = share_quantity_calc }
 							add_to_variable = { share_price_[Getcompanyname] = share_price_calc }
+							set_variable =  { share_percentage_[Getcompanyname] = shares_held_[Getcompanyname] }
+							divide_variable = { share_percentage_[Getcompanyname] = global.outstanding_shares_[Getcompanyname] }
 						}
 					}
 					Getcompanyname = "[Getcompanyname]"
@@ -58,5 +205,13 @@ scripted_gui = {
 		}
 		triggers = {
 		}
+	}
+	stock_info_screen = {
+		context_type = player_context
+		window_name = "stock_info_screen"
+		visible = {
+           always = yes
+		}
+
 	}
 }
