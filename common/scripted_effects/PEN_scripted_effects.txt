@@ -26,23 +26,112 @@ PEN_set_internal_factions = {
         var = gregor_influence_equilibrium_change
         value = 0
     }
+    #Base Loyalty Equilibrium Change
+    set_variable = {
+        var = ardus_loyalty_equilibrium_change
+        value = 0
+    }
+    set_variable = {
+        var = elta_loyalty_equilibrium_change
+        value = 0
+    }
+    set_variable = {
+        var = wyrn_loyalty_equilibrium_change
+        value = 0
+    }
+    set_variable = {
+        var = ib_loyalty_equilibrium_change
+        value = 0
+    }
+    set_variable = {
+        var = gregor_loyalty_equilibrium_change
+        value = 0
+    }
     
     #Base Faction Loyalty Equilibrium
     set_variable = {
         var = ardus_loyalty_equilibrium
-        value = 100
-    }
-    set_variable = {
-        var = elta_loyalty_equilibrium
         value = 50
     }
-    set_variable = {
-        var = gregor_loyalty_equilibrium
-        value = 50
+    if = {
+        limit = {
+            has_country_flag = PEN_pt_dynamic_flag
+        }
+        set_variable = {
+            var = elta_loyalty_equilibrium
+            value = 55
+        }
     }
-    set_variable = {
-        var = wyrn_loyalty_equilibrium
-        value = 50
+    if = {
+        limit = {
+            NOT = {
+                has_country_flag = PEN_pt_dynamic_flag
+                has_country_flag = PEN_pt_galentro_flag
+            }
+        }
+        set_variable = {
+            var = elta_loyalty_equilibrium
+            value = 50
+        }
+    }
+    if = {
+        limit = {
+            has_country_flag = PEN_pt_galentro_flag
+        }
+        set_variable = {
+            var = elta_loyalty_equilibrium
+            value = 45
+        }
+    }
+    if = {
+        limit = {
+            has_country_flag = PEN_pt_vfcz_flag
+        }
+        set_variable = {
+            var = gregor_loyalty_equilibrium
+            value = 55
+        }
+    }
+    if = {
+        limit = {
+            NOT = {
+                has_country_flag = PEN_pt_vfcz_flag
+            }
+        }
+        set_variable = {
+            var = gregor_loyalty_equilibrium
+            value = 50
+        }
+    }
+    if = {
+        limit = {
+            has_country_flag = PEN_pt_dynamic_flag
+        }
+        set_variable = {
+            var = wyrn_loyalty_equilibrium
+            value = 45
+        }
+    }
+    if = {
+        limit = {
+            NOT = {
+                has_country_flag = PEN_pt_dynamic_flag
+                has_country_flag = PEN_pt_galentro_flag
+            }
+        }
+        set_variable = {
+            var = wyrn_loyalty_equilibrium
+            value = 50
+        }
+    }
+    if = {
+        limit = {
+            has_country_flag = PEN_pt_galentro_flag
+        }
+        set_variable = {
+            var = wyrn_loyalty_equilibrium
+            value = 55
+        }
     }
     set_variable = {
         var = ib_loyalty_equilibrium
@@ -54,17 +143,85 @@ PEN_set_internal_factions = {
         var = ardus_influence_equilibrium
         value = 50
     }
-    set_variable = {
-        var = elta_influence_equilibrium
-        value = 50
+    if = {
+        limit = {
+            has_country_flag = PEN_pt_dynamic_flag
+        }
+        set_variable = {
+            var = elta_influence_equilibrium
+            value = 60
+        }
     }
-    set_variable = {
-        var = gregor_influence_equilibrium
-        value = 50
+    if = {
+        limit = {
+            NOT = {
+                has_country_flag = PEN_pt_dynamic_flag
+                has_country_flag = PEN_pt_galentro_flag
+            }
+        }
+        set_variable = {
+            var = elta_influence_equilibrium
+            value = 50
+        }
     }
-    set_variable = {
-        var = wyrn_influence_equilibrium
-        value = 50
+    if = {
+        limit = {
+            has_country_flag = PEN_pt_galentro_flag
+        }
+        set_variable = {
+            var = elta_influence_equilibrium
+            value = 40
+        }
+    }
+    if = {
+        limit = {
+            has_country_flag = PEN_pt_vfcz_flag
+        }
+        set_variable = {
+            var = gregor_influence_equilibrium
+            value = 60
+        }
+    }
+    if = {
+        limit = {
+            NOT = {
+                has_country_flag = PEN_pt_vfcz_flag
+            }
+        }
+        set_variable = {
+            var = gregor_influence_equilibrium
+            value = 50
+        }
+    }
+    if = {
+        limit = {
+            has_country_flag = PEN_pt_dynamic_flag
+        }
+        set_variable = {
+            var = wyrn_influence_equilibrium
+            value = 40
+        }
+    }
+    if = {
+        limit = {
+            NOT = {
+                has_country_flag = PEN_pt_dynamic_flag
+                has_country_flag = PEN_pt_galentro_flag
+            }
+        }
+        set_variable = {
+            var = wyrn_influence_equilibrium
+            value = 50
+        }
+    }
+    if = {
+        limit = {
+            has_country_flag = PEN_pt_galentro_flag
+        }
+        set_variable = {
+            var = wyrn_influence_equilibrium
+            value = 60
+        }
     }
     set_variable = {
         var = ib_influence_equilibrium
@@ -114,6 +271,84 @@ PEN_set_internal_factions = {
     set_variable = {
         var = ib_influence
         value = 40
+    }
+}
+
+PEN_new_order_spirit_level_up = {
+    if = {
+        limit = {
+            has_idea = PEN_the_new_order4
+        }
+        swap_ideas = {
+            add_idea = PEN_the_new_order5
+            remove_idea = PEN_the_new_order4
+        }
+    }
+    if = {
+        limit = {
+            has_idea = PEN_the_new_order3
+        }
+        swap_ideas = {
+            add_idea = PEN_the_new_order4
+            remove_idea = PEN_the_new_order3
+        }
+    }
+    if = {
+        limit = {
+            has_idea = PEN_the_new_order2
+        }
+        swap_ideas = {
+            add_idea = PEN_the_new_order3
+            remove_idea = PEN_the_new_order2
+        }
+    }
+    if = {
+        limit = {
+            has_idea = PEN_the_new_order1
+        }
+        swap_ideas = {
+            add_idea = PEN_the_new_order2
+            remove_idea = PEN_the_new_order1
+        }
+    }
+}
+
+PEN_new_order_spirit_level_down = {
+    if = {
+        limit = {
+            has_idea = PEN_the_new_order2
+        }
+        swap_ideas = {
+            add_idea = PEN_the_new_order1
+            remove_idea = PEN_the_new_order2
+        }
+    }
+    if = {
+        limit = {
+            has_idea = PEN_the_new_order3
+        }
+        swap_ideas = {
+            add_idea = PEN_the_new_order2
+            remove_idea = PEN_the_new_order3
+        }
+    }
+    if = {
+        limit = {
+            has_idea = PEN_the_new_order4
+        }
+        swap_ideas = {
+            add_idea = PEN_the_new_order3
+            remove_idea = PEN_the_new_order4
+        }
+    }
+    if = {
+        limit = {
+            has_idea = PEN_the_new_order5
+        }
+        swap_ideas = {
+            add_idea = PEN_the_new_order4
+            remove_idea = PEN_the_new_order5
+        }
     }
 }
 

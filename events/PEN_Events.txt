@@ -143,6 +143,164 @@ news_event = { #Alignment Formed (News)
 	}
 }
 
+country_event = { #Pentastar Talks Conflict 1: Industrial Focus
+	id = PEN_formation.6
+    title = PEN_formation.6.t
+    desc = PEN_formation.6.d
+	picture = GFX_report_event_election_vote
+
+	fire_only_once = yes
+
+	trigger = {
+		tag = PEN
+		NOT = { has_completed_focus = PEN_pentastar_talks }
+		focus_progress = {
+			focus = PEN_pentastar_talks
+			progress > 0.1
+		}
+	}
+
+	mean_time_to_happen = {
+		days = 1
+	}
+
+	immediate = {
+		hidden_effect = {
+			country_event = { id = PEN_formation.7 days = 14 }
+		}
+	}
+	
+	option = { #Dynamic Automata
+		name = PEN_formation.6.a
+		set_country_flag = PEN_pt_dynamic_flag
+		custom_effect_tooltip = PEN_pt_dynamic_loc
+	}
+	option = { #Galentro
+		name = PEN_formation.6.b
+		set_country_flag = PEN_pt_galentro_flag
+		custom_effect_tooltip = PEN_pt_galentro_loc
+	}
+	option = { #Neither
+		name = PEN_formation.6.c
+		set_country_flag = PEN_pt_neither_flag
+	}
+}
+
+country_event = { #Pentastar Talks Conflict 2: Pentastar Logo
+	id = PEN_formation.7
+    title = PEN_formation.7.t
+    desc = PEN_formation.7.d
+	picture = GFX_report_event_election_vote
+
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	immediate = {
+		hidden_effect = {
+			country_event = { id = PEN_formation.8 days = 14 }
+		}
+	}
+	
+	option = { #Negotiate Transitionary Period
+		name = PEN_formation.7.a
+		add_timed_idea = {
+			idea = PEN_pt_transitionary_period
+			days = 70
+		}
+	}
+	option = { #Persuade
+		name = PEN_formation.7.b
+		add_political_power = -100
+		add_stability = 0.1
+	}
+}
+
+country_event = { #Pentastar Talks Conflict 3: VFCZ
+	id = PEN_formation.8
+    title = PEN_formation.8.t
+    desc = PEN_formation.8.d
+	picture = GFX_report_event_election_vote
+
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	immediate = {
+		hidden_effect = {
+			country_event = { id = PEN_formation.9 days = 14 }
+		}
+	}
+	
+	option = { #Promise Privileges
+		name = PEN_formation.8.a
+		swap_ideas = {
+			add_idea = PEN_vfcz1
+			remove_idea = PEN_vfcz
+		}
+		set_country_flag = PEN_pt_vfcz_flag
+		custom_effect_tooltip = PEN_pt_vfcz_loc
+	}
+	option = { #Persuade
+		name = PEN_formation.8.b
+		add_political_power = -50
+	}
+}
+
+country_event = { #Pentastar Talks Conflict 4: The New Order
+	id = PEN_formation.9
+    title = PEN_formation.9.t
+    desc = PEN_formation.9.d
+	picture = GFX_report_event_election_vote
+
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	immediate = {
+		hidden_effect = {
+			country_event = { id = PEN_formation.10 days = 14 }
+		}
+	}
+	
+	option = { #Insist on Continuity
+		name = PEN_formation.9.a
+		set_country_flag = PEN_pt_continuity_flag
+		custom_effect_tooltip = PEN_pt_continuity_loc
+	}
+	option = { #Insist on Strict Adherence
+		name = PEN_formation.9.b
+		PEN_new_order_spirit_level_up = yes
+	}
+	option = { #Flexibility
+		name = PEN_formation.9.c
+		PEN_new_order_spirit_level_down = yes
+	}
+}
+
+country_event = { #Pentastar Talks Conflict 5: Kaine's Ambition
+	id = PEN_formation.10
+    title = PEN_formation.10.t
+    desc = PEN_formation.10.d
+	picture = GFX_report_event_election_vote
+	
+	is_triggered_only = yes
+
+	fire_only_once = yes
+	
+	option = { #Deny Emperorship Bid
+		name = PEN_formation.10.a
+		set_country_flag = PEN_pt_deny_emperorship
+		custom_effect_tooltip = PEN_pt_deny_emperorship_loc
+	}
+	option = { #Persuade
+		name = PEN_formation.10.b
+		set_country_flag = PEN_pt_not_deny_emperorship
+		custom_effect_tooltip = PEN_pt_deny_emperorship_loc
+		add_political_power = -150
+	}
+}
+
 #Piracy Events
 country_event = { #Unlock Piracy Decisions
 	id = PEN_piracy.1

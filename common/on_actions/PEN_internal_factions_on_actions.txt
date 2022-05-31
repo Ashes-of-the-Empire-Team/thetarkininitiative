@@ -1,26 +1,4 @@
 on_actions = {
-	on_startup = {
-		effect = {
-			PEN = {
-				PEN_set_internal_factions = yes
-				add_dynamic_modifier = {
-					modifier = PEN_internal_factions_ardus_dyn
-				}
-				add_dynamic_modifier = {
-					modifier = PEN_internal_factions_elta_dyn
-				}
-				add_dynamic_modifier = {
-					modifier = PEN_internal_factions_wyrn_dyn
-				}
-				add_dynamic_modifier = {
-					modifier = PEN_internal_factions_ib_dyn
-				}
-				add_dynamic_modifier = {
-					modifier = PEN_internal_factions_gregor_dyn
-				}
-			}
-		}
-	}
 	on_daily_PEN = {
 		effect = {
 			#Clear Equilibrium Change Modifiers
@@ -29,7 +7,127 @@ on_actions = {
 			clear_variable = wyrn_influence_equilibrium_change
 			clear_variable = ib_influence_equilibrium_change
 			clear_variable = gregor_influence_equilibrium_change
-			#Ardus Faction Dominant
+
+			clear_variable = ardus_loyalty_equilibrium_change
+			clear_variable = elta_loyalty_equilibrium_change
+			clear_variable = wyrn_loyalty_equilibrium_change
+			clear_variable = ib_loyalty_equilibrium_change
+			clear_variable = gregor_loyalty_equilibrium_change
+			#[Influence Eq. Modifier]Kaine Influential Leader
+			if = {
+				limit = {
+					has_country_flag = PEN_kaine_alive_flag
+				}
+				add_to_variable = {
+					var = ardus_influence_equilibrium_change
+					value = 20
+				}
+			}
+			#[Loyalty Eq. Modifier]Ruling Faction
+			if = {
+				limit = {
+					has_country_flag = PEN_ardus_ruling_faction_flag
+				}
+				add_to_variable = {
+					var = ardus_loyalty_equilibrium_change
+					value = 50
+				}
+			}
+			if = {
+				limit = {
+					has_country_flag = PEN_elta_ruling_faction_flag
+				}
+				add_to_variable = {
+					var = elta_loyalty_equilibrium_change
+					value = 50
+				}
+			}
+			if = {
+				limit = {
+					has_country_flag = PEN_wyrn_ruling_faction_flag
+				}
+				add_to_variable = {
+					var = wyrn_loyalty_equilibrium_change
+					value = 50
+				}
+			}
+			if = {
+				limit = {
+					has_country_flag = PEN_ib_ruling_faction_flag
+				}
+				add_to_variable = {
+					var = ib_loyalty_equilibrium_change
+					value = 50
+				}
+			}
+			if = {
+				limit = {
+					has_country_flag = PEN_gregor_ruling_faction_flag
+				}
+				add_to_variable = {
+					var = gregor_loyalty_equilibrium_change
+					value = 50
+				}
+			}
+			#[Influence & Loyalty Eq. Modifier]Dynamic Automata Favored
+			if = {
+				limit = {
+					has_country_flag = PEN_pt_dynamic_flag
+				}
+				add_to_variable = {
+					var = elta_influence_equilibrium_change
+					value = 10
+				}
+				add_to_variable = {
+					var = elta_loyalty_equilibrium_change
+					value = 5
+				}
+				subtract_from_variable = {
+					var = wyrn_influence_equilibrium_change
+					value = 10
+				}
+				subtract_from_variable = {
+					var = wyrn_loyalty_equilibrium_change
+					value = 5
+				}
+			}
+			#[Influence & Loyalty Eq. Modifier]Galentro Favored
+			if = {
+				limit = {
+					has_country_flag = PEN_pt_galentro_flag
+				}
+				add_to_variable = {
+					var = wyrn_influence_equilibrium_change
+					value = 10
+				}
+				add_to_variable = {
+					var = wyrn_loyalty_equilibrium_change
+					value = 5
+				}
+				subtract_from_variable = {
+					var = elta_influence_equilibrium_change
+					value = 10
+				}
+				subtract_from_variable = {
+					var = elta_loyalty_equilibrium_change
+					value = 5
+				}
+			}
+			#[Influence & Loyalty Eq. Modifier]Additional Velcar Privileges
+			if = {
+				limit = {
+					has_country_flag = PEN_pt_vfcz_flag
+				}
+				add_to_variable = {
+					var = gregor_influence_equilibrium_change
+					value = 10
+				}
+				add_to_variable = {
+					var = gregor_loyalty_equilibrium_change
+					value = 5
+				}
+			}
+			#[Influence Eq. Modifier]Ardus Faction Dominant
 			if = {
 				limit = {
 					AND = {
@@ -101,7 +199,7 @@ on_actions = {
 					}
 				}
 			}
-			#Dynamic Automata Faction Dominant
+			#[Influence Eq. Modifier]Dynamic Automata Faction Dominant
 			if = {
 				limit = {
 					AND = {
@@ -173,7 +271,7 @@ on_actions = {
 					}
 				}
 			}
-			#Galentro Heavy Works Faction Dominant
+			#[Influence Eq. Modifier]Galentro Heavy Works Faction Dominant
 			if = {
 				limit = {
 					AND = {
@@ -245,7 +343,7 @@ on_actions = {
 					}
 				}
 			}
-			#Imperial Governors Faction Dominant
+			#[Influence Eq. Modifier]Imperial Governors Faction Dominant
 			if = {
 				limit = {
 					AND = {
@@ -317,7 +415,7 @@ on_actions = {
 					}
 				}
 			}
-			#VFCZ Faction Dominant
+			#[Influence Eq. Modifier]VFCZ Faction Dominant
 			if = {
 				limit = {
 					AND = {
@@ -396,6 +494,14 @@ on_actions = {
 			clear_variable = gregor_influence_equilibrium
 			clear_variable = wyrn_influence_equilibrium
 			clear_variable = ib_influence_equilibrium
+
+			clear_variable = ardus_loyalty_equilibrium
+			clear_variable = elta_loyalty_equilibrium
+			clear_variable = gregor_loyalty_equilibrium
+			clear_variable = wyrn_loyalty_equilibrium
+			clear_variable = ib_loyalty_equilibrium
+
+			#Set, Add to and Clamp Influence Equilibrium
 			set_variable = {
 				var = ardus_influence_equilibrium
 				value = 50
@@ -458,6 +564,73 @@ on_actions = {
 			}
 			clamp_variable = {
 				var = gregor_influence_equilibrium
+				min = 0
+				max = pen_loyalty_influence_cap
+			}
+			
+			#Set, Add to and Clamp Loyalty Equilibrium
+			set_variable = {
+				var = ardus_loyalty_equilibrium
+				value = 50
+			}
+			add_to_variable = {
+				var = ardus_loyalty_equilibrium
+				value = ardus_loyalty_equilibrium_change
+			}
+			clamp_variable = {
+				var = ardus_loyalty_equilibrium
+				min = 0
+				max = pen_loyalty_influence_cap
+			}
+			set_variable = {
+				var = elta_loyalty_equilibrium
+				value = 50
+			}
+			add_to_variable = {
+				var = elta_loyalty_equilibrium
+				value = elta_loyalty_equilibrium_change
+			}
+			clamp_variable = {
+				var = elta_loyalty_equilibrium
+				min = 0
+				max = pen_loyalty_influence_cap
+			}
+			set_variable = {
+				var = wyrn_loyalty_equilibrium
+				value = 50
+			}
+			add_to_variable = {
+				var = wyrn_loyalty_equilibrium
+				value = wyrn_loyalty_equilibrium_change
+			}
+			clamp_variable = {
+				var = wyrn_loyalty_equilibrium
+				min = 0
+				max = pen_loyalty_influence_cap
+			}
+			set_variable = {
+				var = ib_loyalty_equilibrium
+				value = 50
+			}
+			add_to_variable = {
+				var = ib_loyalty_equilibrium
+				value = ib_loyalty_equilibrium_change
+			}
+			clamp_variable = {
+				var = ib_loyalty_equilibrium
+				min = 0
+				max = pen_loyalty_influence_cap
+			}
+			set_variable = {
+				var = gregor_loyalty_equilibrium
+				value = 50
+			}
+			add_to_variable = {
+				var = gregor_loyalty_equilibrium
+				value = gregor_loyalty_equilibrium_change
+			}
+			clamp_variable = {
+				var = gregor_loyalty_equilibrium
 				min = 0
 				max = pen_loyalty_influence_cap
 			}

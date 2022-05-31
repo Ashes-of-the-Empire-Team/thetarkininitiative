@@ -1,3 +1,6 @@
+###########################################################################################################################
+###################################################Piracy Decisions########################################################
+###########################################################################################################################
 PEN_pirate_activity_category = {
 
     #Looping Piracy Decision
@@ -18,6 +21,8 @@ PEN_pirate_activity_category = {
 
         remove_effect = {}
         complete_effect = {}
+
+        fixed_random_seed = no
 
         timeout_effect = {
             if = {
@@ -172,17 +177,18 @@ PEN_pirate_activity_category = {
         icon = eng_ally_imperialist_coup
         
         available = {
-            has_completed_focus = PEN_enforcement
+            original_tag = PEN
+            has_completed_focus = PEN_enforcement_branch
         }
 
         visible = {
-            has_completed_focus = PEN_enforcement
+            original_tag = PEN
+            has_completed_focus = PEN_enforcement_branch
         }
 
         cost = 25
-        days_re_enable = 30
-        days_remove = 10
-        removal_effect = {
+        days_remove = 30
+        complete_effect = {
             add_days_mission_timeout  = {
 				mission = PEN_piracy_attacks_grow
 				days = 30
@@ -195,20 +201,21 @@ PEN_pirate_activity_category = {
         icon = eng_ally_imperialist_coup
         
         available = {
-            has_completed_focus = PEN_enforcement
+            original_tag = PEN
+            has_completed_focus = PEN_enforcement_branch
             NOT = {
                 has_idea = PEN_tiny_pirate_activity
             }
         }
 
         visible = {
-            has_completed_focus = PEN_enforcement
+            original_tag = PEN
+            has_completed_focus = PEN_enforcement_branch
         }
 
         cost = 75
-        days_re_enable = 180
-        days_remove = 90
-        removal_effect = {
+        days_remove = 120
+        complete_effect = {
             if = {
                 limit = {
                     has_idea = PEN_limited_pirate_activity
@@ -258,7 +265,33 @@ PEN_pirate_activity_category = {
     }
 }
 
-#Internal Factions Decisions
+###########################################################################################################################
+########################################Bounty of the Outer Sector Decisions###############################################
+###########################################################################################################################
+PEN_bounty_outer_sector_category = {
+    PEN_bounty_ = {
+        priority = 10
+        icon = eng_ally_imperialist_coup
+        
+        available = {
+            original_tag = PEN
+        }
+
+        visible = {
+            original_tag = PEN
+        }
+
+        cost = 25
+        days_remove = 30
+        complete_effect = {
+            
+        }
+    }
+}
+
+###########################################################################################################################
+########################################Internal Factions Decisions########################################################
+###########################################################################################################################
 PEN_internal_factions_category = {
     #Ardus Kaine Faction Decisions
     PEN_internal_promote_ardus_faction = {

@@ -23,6 +23,9 @@
 #
 #	can be added to countries, states or unit leaders
 #	will only updated daily, unless forced by force_update_dynamic_modifier effect
+
+
+#Internal Factions Effects
 PEN_internal_factions_ardus_dyn = {
 	enable = { always = yes }
 	
@@ -57,4 +60,60 @@ PEN_internal_factions_gregor_dyn = {
 	political_power_factor = daily_gregor_pp_gain
 	trade_opinion_factor = daily_gregor_trade_opinion
 	local_resources_factor = daily_gregor_local_resources_factor
+}
+
+
+#Alignment Military
+PEN_stratagems_dyn = {
+	enable = { always = yes }
+	icon = "GFX_idea_unknown"
+
+	conscription = 0.01
+	army_attack_factor = PEN_stratagems_attack
+	army_defence_factor = PEN_stratagems_defence
+	dig_in_speed_factor = PEN_stratagems_entrench
+	army_artillery_attack_factor = PEN_stratagems_artillery_attack
+	naval_has_potf_in_combat_attack = PEN_stratagems_potf_attack
+	naval_has_potf_in_combat_defense = PEN_stratagems_potf_defence
+	navy_capital_ship_attack_factor = PEN_stratagems_capital_attack
+	positioning = PEN_stratagems_positioning
+}
+
+
+
+#Order Branch Effects
+PEN_politorate_dyn = {
+	enable = { always = yes }
+	icon = "GFX_idea_unknown"
+	#Politorate
+	political_power_factor = 0.1
+	production_factory_max_efficiency_factor = order_max_factory_efficiency
+}
+
+PEN_insurrection_dyn = {
+	enable = { always = yes }
+	icon = "GFX_idea_unknown"
+	#Insurrection
+	compliance_growth = 0.1
+	consumer_goods_factor = order_consumer_goods
+	encryption = order_encryption
+}
+
+PEN_judgment_dyn = {
+	enable = { always = yes }
+	icon = "GFX_idea_unknown"
+	#Judgment
+	operative_slot = order_operative
+	resistance_decay = 0.1
+}
+
+PEN_protectorate_dyn = {
+	enable = { always = yes }
+	icon = "GFX_idea_unknown"
+	#Protectorate
+	experience_gain_army = 0.06
+	training_time_factor = order_training_time
+	conscription = order_recruitable_pop
+	special_forces_cap = order_special_forces
+	army_core_defence_factor = order_core_defence
 }
