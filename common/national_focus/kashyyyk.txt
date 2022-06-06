@@ -1,6 +1,6 @@
 focus_tree = {
 	id = kashyyyk
-	continuous_focus_position = { x = 2000 y = 3000 } 
+	continuous_focus_position = { x = 2000 y = 4000 } 
 	country = {
 		factor = 0
 		modifier = {
@@ -120,32 +120,19 @@ focus_tree = {
 		}
 	}
 
-	#cooperation
-	focus = {
-		id = kyk_cooperation
-		icon = GFX_goal_unknown
-		x = 8
-		y = 4
-		cost = 6
-		search_filters = {
-			FOCUS_FILTER_POLITICAL
-		}
-		prerequisite = { focus = kyk_prophetmerilisgarrisons  }
-		mutually_exclusive = { focus = kyk_competition  }
-	}
+	
 
 	#competition
 	focus = {
-		id = kyk_competition
+		id = kyk_imperial_compromise
 		icon = GFX_goal_unknown
-		x = 10
+		x = 9
 		y = 4
 		cost = 6
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
 		prerequisite = { focus = kyk_prophetmerilisgarrisons  }
-		mutually_exclusive = { focus = kyk_cooperation  }
 	}
 
 	#The Trandoshan Question
@@ -241,13 +228,10 @@ focus_tree = {
 			custom_trigger_tooltip = {
 				tooltip = kyk_civilwar_over_tt
 			KYY = { exists = no } }
+			not = { has_idea = kyk_contested_command }
 		}
-		prerequisite = { focus = kyk_cooperation focus =  kyk_competition focus = kyk_democracy focus = kyk_monarchy }
+		prerequisite = { focus =  kyk_imperial_compromise focus = kyk_the_industrialists focus = kyk_the_chieftains }
 		completion_reward = {
-			swap_ideas = {
-				add_idea = KYK_Systematicdepopulation1
-				remove_idea = KYK_Systematicdepopulation2
-			}
 			if = {
 				limit = { has_country_flag = KYK_progressive_sided }
 				KYK_set_progressives_faction_values = yes
@@ -310,7 +294,7 @@ focus_tree = {
 
 	#democracy
 	focus = {
-		id = kyk_democracy
+		id = kyk_the_industrialists
 		icon = GFX_goal_unknown
 		x = 12
 		y = 4
@@ -319,7 +303,7 @@ focus_tree = {
 			FOCUS_FILTER_POLITICAL
 		}
 		prerequisite = { focus = kyk_wookie_warriors  }
-		mutually_exclusive = { focus = kyk_monarchy  }
+		mutually_exclusive = { focus = kyk_the_chieftains  }
 		completion_reward = {
 			set_country_flag = KYK_progressive_sided
 			add_ideas = kyk_democracy
@@ -328,7 +312,7 @@ focus_tree = {
 
 	#Monarchy
 	focus = {
-		id = kyk_monarchy
+		id = kyk_the_chieftains
 		icon = GFX_goal_unknown
 		x = 14
 		y = 4
@@ -337,7 +321,7 @@ focus_tree = {
 			FOCUS_FILTER_POLITICAL
 		}
 		prerequisite = { focus = kyk_wookie_warriors  }
-		mutually_exclusive = { focus = kyk_democracy  }
+		mutually_exclusive = { focus = kyk_the_industrialists  }
 		completion_reward = {
 			set_country_flag = KYK_traditional_sided
 			add_stability = 0.15
@@ -363,21 +347,7 @@ focus_tree = {
 		}
 	}
 
-	#A planet and a people, bloodied, but unbroken
-	focus = {
-		id = kyk_aplanetandapeoplebloodiedbutunbroken
-		icon = GFX_goal_unknown
-		x = 11
-		y = 7
-		cost = 6
-		search_filters = {
-			FOCUS_FILTER_POLITICAL
-		}
-		prerequisite = { focus = kyk_the_future_of_kashyyyk  }
-		completion_reward = {
-			remove_ideas = KYK_Systematicdepopulation1
-		}
-	}
+	
 
 
 
@@ -387,12 +357,12 @@ focus_tree = {
 		id = kyk_restarting_the_industry
 		icon = GFX_goal_unknown
 		x = 8
-		y = 8
+		y = 7
 		cost = 6
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
-		prerequisite = { focus = kyk_aplanetandapeoplebloodiedbutunbroken  }
+		prerequisite = { focus = kyk_the_future_of_kashyyyk  }
 		completion_reward = {
 			268 = {
 				add_building_construction = {
@@ -456,12 +426,12 @@ focus_tree = {
 		id = kyk_ending_the_famine
 		icon = GFX_goal_unknown
 		x = 14
-		y = 8
+		y = 7
 		cost = 6
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
-		prerequisite = { focus = kyk_aplanetandapeoplebloodiedbutunbroken  }
+		prerequisite = { focus = kyk_the_future_of_kashyyyk  }
 		completion_reward = {
 			swap_ideas = {
 				add_idea = KYK_TheFamineOfKashyyyk2
@@ -475,7 +445,7 @@ focus_tree = {
 		id = kyk_request_new_republic_aid
 		icon = GFX_goal_unknown
 		x = 15
-		y = 9
+		y = 8
 		cost = 1
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
@@ -496,7 +466,7 @@ focus_tree = {
 		id = kyk_scramble_for_nutrition
 		icon = GFX_goal_unknown
 		x = 13
-		y = 9
+		y = 8
 		cost = 5
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
@@ -562,7 +532,7 @@ focus_tree = {
 		id = kyk_industrial_grants
 		icon = GFX_goal_unknown
 		x = 9
-		y = 9
+		y = 8
 		cost = 6
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
@@ -627,7 +597,7 @@ focus_tree = {
 		id = kyk_export_to_the_moffs_and_admirals
 		icon = GFX_goal_unknown
 		x = 7
-		y = 9
+		y = 8
 		cost = 3
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
@@ -1153,12 +1123,12 @@ focus_tree = {
 		id = kyk_contacts_in_the_new_republic
 		icon = GFX_goal_unknown
 		x = 16
-		y = 6
+		y = 5
 		cost = 6
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
-		prerequisite = { focus = kyk_join_the_new_republic } prerequisite = { focus = kyk_the_future_of_kashyyyk  }
+		prerequisite = { focus = kyk_join_the_new_republic } 
 	}
 
 	#Grand Admiral Syn
@@ -1818,7 +1788,7 @@ focus_tree = {
 
 	#Our future in the New Republic
 	focus = {
-		id = kyk_our_future_in_the_new_republic
+		id = kyk_befriend_aligned_senators
 		icon = GFX_goal_unknown
 		x = 18
 		y = 11
@@ -1839,7 +1809,18 @@ focus_tree = {
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
-		prerequisite = { focus =  kyk_our_future_in_the_new_republic }
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = kyk_industrial_agenda
+			check_variable = {
+				KYK_industrialists_popularity >34
+				} 
+			check_variable = {
+				KYK_industrialists_loyalty >59
+				} 
+			}
+		}
+		prerequisite = { focus =  kyk_befriend_aligned_senators }
 	}
 
 	#derugulate corportations
@@ -1852,7 +1833,25 @@ focus_tree = {
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = kyk_industrial_agenda
+			check_variable = {
+				KYK_industrialists_popularity >34
+				} 
+			check_variable = {
+				KYK_industrialists_loyalty >59
+				} 
+			}
+		}
 		prerequisite = { focus =  kyk_progressive_agenda }
+		completion_reward = {
+			add_popularity = {
+				ideology = corporation
+				popularity = 0.05
+			}
+			add_political_power = 50
+		}
 	}
 
 	#trade lande hub
@@ -1864,6 +1863,17 @@ focus_tree = {
 		cost = 6
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
+		}
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = kyk_industrial_agenda
+			check_variable = {
+				KYK_industrialists_popularity >34
+				} 
+			check_variable = {
+				KYK_industrialists_loyalty >59
+				} 
+			}
 		}
 		prerequisite = { focus =  kyk_deregulate_corporations }
 	}
@@ -1878,7 +1888,24 @@ focus_tree = {
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = kyk_industrial_agenda
+			check_variable = {
+				KYK_industrialists_popularity >34
+				} 
+			check_variable = {
+				KYK_industrialists_loyalty >59
+				} 
+			}
+			ROOT = {
+				corporation > 0.04
+			}
+		}
 		prerequisite = { focus =  kyk_deregulate_corporations }
+		completion_reward = {
+			add_research_slot = 1
+		}
 	}
 
 	#droids for our planetary defense force
@@ -1890,6 +1917,20 @@ focus_tree = {
 		cost = 6
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
+		}
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = kyk_industrial_agenda
+			check_variable = {
+				KYK_industrialists_popularity >34
+				} 
+			check_variable = {
+				KYK_industrialists_loyalty >59
+				} 
+			}
+			ROOT = {
+				corporation > 0.14
+			}
 		}
 		prerequisite = { focus =  kyk_technological_sector }
 	}
@@ -1905,7 +1946,18 @@ focus_tree = {
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
-		prerequisite = { focus =  kyk_our_future_in_the_new_republic }
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = kyk_clan_agenda
+			check_variable = {
+				KYK_clans_popularity >34
+				} 
+			check_variable = {
+				KYK_clans_loyalty >59
+				} 
+			}
+		}
+		prerequisite = { focus =  kyk_befriend_aligned_senators }
 	}
 
 	#trade lane crossroads
@@ -1918,10 +1970,21 @@ focus_tree = {
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = kyk_clan_agenda
+			check_variable = {
+				KYK_clans_popularity >34
+				} 
+			check_variable = {
+				KYK_clans_loyalty >59
+				} 
+			}
+		}
 		prerequisite = { focus =  kyk_traditional_agenda }
 	}
 	focus = {
-		id = kyk_restoring_our_culture
+		id = kyk_safeguarding_our_culture
 		icon = GFX_goal_unknown
 		x = 19
 		y = 14
@@ -1929,9 +1992,53 @@ focus_tree = {
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = kyk_clan_agenda
+			check_variable = {
+				KYK_clans_popularity >34
+				} 
+			check_variable = {
+				KYK_clans_loyalty >59
+				} 
+			}
+			ROOT = {
+				neutrality > 0.04
+			}
+		}
 		prerequisite = { focus =  kyk_trade_lane_crossroads }
+		completion_reward = {
+			add_popularity = {
+				ideology = neutrality
+				popularity = 0.05
+			} 
+		}
 	}
-
+	focus = {
+		id = kyk_protecting_chieftain_rights
+		icon = GFX_goal_unknown
+		x = 19
+		y = 15
+		cost = 6
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = kyk_clan_agenda
+			check_variable = {
+				KYK_clans_popularity >34
+				} 
+			check_variable = {
+				KYK_clans_loyalty >59
+				} 
+			}
+			ROOT = {
+				neutrality > 0.09
+			}
+		}
+		prerequisite = { focus =  kyk_safeguarding_our_culture }
+	}
 	#steering commerce
 	focus = {
 		id = kyk_steering_commerce
@@ -1942,13 +2049,24 @@ focus_tree = {
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = kyk_industrial_agenda
+			check_variable = {
+				KYK_industrialists_popularity >34
+				} 
+			check_variable = {
+				KYK_industrialists_loyalty >59
+				} 
+			}
+		}
 		prerequisite = { focus =  kyk_trade_hub }
 	}
 
 
 	#influence the new Republic Senate
 	focus = {
-		id = kyk_influence_the_new_Republic_senate
+		id = kyk_subvert_the_new_Republic_senate
 		icon = GFX_goal_unknown
 		x = 17
 		y = 16
@@ -1956,12 +2074,26 @@ focus_tree = {
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = kyk_industrial_agenda
+			check_variable = {
+				KYK_industrialists_popularity >39
+				} 
+			check_variable = {
+				KYK_industrialists_loyalty >59
+				} 
+			}
+			ROOT = {
+				corporation > 0.09
+			}
+		}
 		prerequisite = { focus =  kyk_steering_commerce }
 	}
 
 	#kyk requesting privileges
 	focus = {
-		id = kyk_requesting_privileges
+		id = kyk_buy_privileges_in_the_senate
 		icon = GFX_goal_unknown
 		x = 21
 		y = 12
@@ -1969,12 +2101,20 @@ focus_tree = {
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
-		prerequisite = { focus =  kyk_our_future_in_the_new_republic }
+		prerequisite = { focus =  kyk_befriend_aligned_senators }
+		completion_reward = {
+			add_popularity = {
+				ideology = corporation
+				popularity = 0.05
+			}
+			add_political_power = 150
+			add_stability = -0.05
+		}
 	}
 
-	#contribution to the New Republic
+	#internal division
 	focus = {
-		id = kyk_contribution_to_the_new_republic
+		id = kyk_internal_division
 		icon = GFX_goal_unknown
 		x = 22
 		y = 13
@@ -1982,9 +2122,389 @@ focus_tree = {
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
-		prerequisite = { focus =  kyk_our_future_in_the_new_republic }
+		prerequisite = { focus =  kyk_befriend_aligned_senators }
+	}
+	focus = {
+		id = kyk_under_the_chieftains_and_the_clans
+		icon = GFX_goal_unknown
+		x = 23
+		y = 14
+		cost = 6
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus =  kyk_internal_division }
+		mutually_exclusive = {	focus = kyk_democracy_and_business }
+	}
+	focus = {
+		id = kyk_democracy_and_business
+		icon = GFX_goal_unknown
+		x = 21
+		y = 14
+		cost = 6
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus =  kyk_internal_division }
+		mutually_exclusive = {	focus = kyk_under_the_chieftains_and_the_clans }
+	}
+	focus = {
+		id = kyk_pro_business_policies
+		icon = GFX_goal_unknown
+		x = 21
+		y = 15
+		cost = 6
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus =  kyk_democracy_and_business }	
+	}
+	focus = {
+		id = kyk_pro_artisan_policies
+		icon = GFX_goal_unknown
+		x = 23
+		y = 15
+		cost = 6
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus =  kyk_under_the_chieftains_and_the_clans }
+	}
+	focus = {
+		id = kyk_the_chenachochan_riots
+		icon = GFX_goal_unknown
+		x = 22
+		y = 16
+		cost = 6
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = kyk_pro_artisan_policies focus = kyk_pro_business_policies }
+	}
+	focus = {
+		id = kyk_republic_approved_planetary_defense_force
+		icon = GFX_goal_unknown
+		x = 20
+		y = 17
+		cost = 6
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = kyk_pro_business_policies }
+		prerequisite = { focus = kyk_the_chenachochan_riots }
+	}
+	focus = {
+		id = kyk_wookiee_weapons_for_a_wookiee_army
+		icon = GFX_goal_unknown
+		x = 24
+		y = 17
+		cost = 6
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = kyk_pro_artisan_policies }
+		prerequisite = { focus = kyk_the_chenachochan_riots }
+	}
+	focus = {
+		id = kyk_interclan_rivalry
+		icon = GFX_goal_unknown
+		x = 23
+		y = 18
+		cost = 6
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = kyk_pro_artisan_policies }
+		prerequisite = { focus = kyk_the_chenachochan_riots }
+	}
+	focus = {
+		id = kyk_corporate_competition
+		icon = GFX_goal_unknown
+		x = 21
+		y = 18
+		cost = 6
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = kyk_pro_business_policies }
+		prerequisite = { focus = kyk_the_chenachochan_riots }
+	}
+	focus = {
+		id = kyk_curbing_extremism
+		icon = GFX_goal_unknown
+		x = 22
+		y = 17
+		cost = 6
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = kyk_the_chenachochan_riots }
+	}
+	focus = {
+		id = kyk_the_assassination
+		icon = GFX_goal_unknown
+		x = 22
+		y = 19
+		cost = 6
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = kyk_corporate_competition focus = kyk_interclan_rivalry }
+	}
+	focus = {
+		id = kyk_moving_forward
+		icon = GFX_goal_unknown
+		x = 21
+		y = 20
+		cost = 6
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = kyk_the_assassination }
+		mutually_exclusive = { focus = kyk_elections }
+	}
+	focus = {
+		id = kyk_integrity
+		icon = GFX_goal_unknown
+		x = 20
+		y = 21
+		cost = 6
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = kyk_moving_forward }
+		
+	}
+	focus = {
+		id = kyk_the_perpetrators
+		icon = GFX_goal_unknown
+		x = 22
+		y = 21
+		cost = 6
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = kyk_moving_forward focus = kyk_elections }
+		
+	}
+	focus = {
+		id = kyk_elections
+		icon = GFX_goal_unknown
+		x = 23
+		y = 20
+		cost = 6
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = kyk_the_assassination }
+		mutually_exclusive = { focus = kyk_moving_forward }
+	}
+	focus = {
+		id = kyk_the_election_results
+		icon = GFX_goal_unknown
+		x = 26
+		y = 21
+		cost = 6
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = kyk_elections }
+		
+	}
+	focus = {
+		id = kyk_republic_candidate
+		icon = GFX_goal_unknown
+		x = 24
+		y = 22
+		cost = 6
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = kyk_the_election_results }
+		mutually_exclusive = { focus = kyk_moderate_candidate focus = kyk_reactionary_candidate focus = kyk_corporate_candidate }
+		
+	}
+	focus = {
+		id = kyk_blame_divisiveness
+		icon = GFX_goal_unknown
+		x = 25
+		y = 23
+		cost = 6
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = kyk_republic_candidate focus = kyk_moderate_candidate }
+		
+	}
+	focus = {
+		id = kyk_new_republic_values
+		icon = GFX_goal_unknown
+		x = 24
+		y = 24
+		cost = 6
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = kyk_republic_candidate }
+		prerequisite = { focus = kyk_blame_divisiveness }
+	}
+	focus = {
+		id = kyk_joint_rnd
+		icon = GFX_goal_unknown
+		x = 24
+		y = 25
+		cost = 6
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = kyk_new_republic_values }
+	}
+	focus = {
+		id = kyk_reunite_the_people
+		icon = GFX_goal_unknown
+		x = 26
+		y = 24
+		cost = 6
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = kyk_moderate_candidate }
+		prerequisite = { focus = kyk_blame_divisiveness }
+	}
+	focus = {
+		id = kyk_attempt_to_find_lasting_peace
+		icon = GFX_goal_unknown
+		x = 26
+		y = 25
+		cost = 6
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = kyk_reunite_the_people }
+	}
+	focus = {
+		id = kyk_moderate_candidate
+		icon = GFX_goal_unknown
+		x = 26
+		y = 22
+		cost = 6
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = kyk_the_election_results }
+		mutually_exclusive = { focus = kyk_republic_candidate focus = kyk_reactionary_candidate focus = kyk_corporate_candidate }
+
+		
+	}
+	focus = {
+		id = kyk_reactionary_candidate
+		icon = GFX_goal_unknown
+		x = 28
+		y = 22
+		cost = 6
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = kyk_the_election_results }
+		mutually_exclusive = { focus = kyk_republic_candidate focus = kyk_moderate_candidate focus = kyk_corporate_candidate }
+
+		
+	}
+	focus = {
+		id = kyk_blame_humans_and_the_republic
+		icon = GFX_goal_unknown
+		x = 28
+		y = 23
+		cost = 6
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = kyk_the_election_results }
+		
+	}
+	focus = {
+		id = kyk_nationalize_the_resources
+		icon = GFX_goal_unknown
+		x = 28
+		y = 25
+		cost = 6
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = kyk_blame_humans_and_the_republic }
+		prerequisite = { focus = kyk_leave_the_republic }
+		
+	}
+	focus = {
+		id = kyk_corportize_the_administration
+		icon = GFX_goal_unknown
+		x = 30
+		y = 25
+		cost = 6
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = kyk_blame_the_bureaucrats }
+		prerequisite = { focus = kyk_leave_the_republic }
+		
+	}
+	focus = {
+		id = kyk_corporate_candidate
+		icon = GFX_goal_unknown
+		x = 30
+		y = 22
+		cost = 6
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = kyk_the_election_results }
+		mutually_exclusive = { focus = kyk_republic_candidate focus = kyk_moderate_candidate focus = kyk_reactionary_candidate }
+	}
+	focus = {
+		id = kyk_blame_the_bureaucrats
+		icon = GFX_goal_unknown
+		x = 30
+		y = 23
+		cost = 6
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = kyk_corporate_candidate }
+	}
+	focus = {
+		id = kyk_leave_the_republic
+		icon = GFX_goal_unknown
+		x = 29
+		y = 24
+		cost = 6
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = kyk_blame_humans_and_the_republic focus = kyk_blame_the_bureaucrats }
+	}
+	focus = {
+		id = kyk_request_to_rejoin_the_republic
+		icon = GFX_goal_unknown
+		x = 29
+		y = 27
+		cost = 6
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = kyk_leave_the_republic }
 	}
 
+	focus = {
+		id = kyk_stable_government
+		icon = GFX_goal_unknown
+		x = 25
+		y = 26
+		cost = 6
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = kyk_joint_rnd focus = kyk_attempt_to_find_lasting_peace focus = kyk_nationalize_the_resources focus = kyk_corportize_the_administration }
+	}
 	#midrim interests
 	focus = {
 		id = kyk_midrim_interests
@@ -2009,7 +2529,7 @@ focus_tree = {
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		} 
-		prerequisite = { focus = kyk_contacts_in_the_new_republic  }
+		prerequisite = { focus = kyk_contacts_in_the_new_republic  } prerequisite = { focus = kyk_the_future_of_kashyyyk  }
 	}
 
 	#Request sanctions against slavers
@@ -2543,6 +3063,17 @@ focus_tree = {
 		cost = 6
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
+		}
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = kyk_military_equality
+			check_variable = {
+				KYK_industrialists_loyalty >59
+				} 
+			check_variable = {
+				KYK_clans_loyalty >59
+				} 
+			}
 		}
 		prerequisite = { focus = kyk_reconsider_high_human_culture }
 		mutually_exclusive = { focus = kyk_humanity_first }
