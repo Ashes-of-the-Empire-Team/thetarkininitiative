@@ -12,3 +12,88 @@ research_complete = {
 		add_to_array = { fighter_product_array = 2 }
 	}
 }
+shares_update = {
+    #Corporation (Country) Scope
+
+    for_each_loop = {
+        array = shares_country
+        index = ii
+        value = country_temp
+        break = brk
+
+        set_variable = { shares_percent@var:country_temp = shares_amount@var:country_temp }
+        divide_variable = { shares_percent@var:country_temp = shares_outstanding }
+    }
+
+    #Sort
+    clear_temp_array = shares_amount_temp_array
+    clear_temp_array = shares_country_temp_array
+    for_each_loop = {
+        array = shares_country
+        index = iii
+        value = cy_temp
+        break = st_brk
+
+        for_each_loop = {
+            array = shares_amount_temp_array
+            index = ii
+            value = vv
+            break = bb
+
+            if = {
+                limit = {
+                    check_variable = { vv < shares_amount@var:country_temp }
+                }
+                add_to_temp_array = { 
+                    array = shares_amount_temp_array 
+                    value = shares_amount@var:country_temp
+                    index = ii
+                }
+                add_to_temp_array = { 
+                    array = shares_country_temp_array 
+                    value = cy_temp
+                    index = ii
+                }
+                set_temp_variable = { bb = 1 }
+            }
+        }
+        if = {
+            limit = {
+                check_variable = { bb = 0 }
+            }
+            add_to_temp_array = { shares_amount_temp_array = shares_amount@var:country_temp }
+            add_to_temp_array = { shares_country_temp_array = cy_temp }
+        }
+    }
+    clear_array = shares_country
+    for_each_loop = {
+        array = shares_country_temp_array
+        index = ii
+        value = cy_temp
+        break = st_brk
+
+        add_to_array = { shares_country = cy_temp }
+    }
+
+    #Localization Variables
+    set_variable = { shares_country1 = shares_country^0 }
+    set_variable = { shares_country2 = shares_country^1 }
+    set_variable = { shares_country3 = shares_country^2 }
+    set_variable = { shares_country4 = shares_country^3 }
+    set_variable = { shares_country5 = shares_country^4 }
+    set_variable = { shares_country6 = shares_country^5 }
+    
+    set_variable = { shares_amount1 = shares_amount@var:shares_country1 }
+    set_variable = { shares_amount2 = shares_amount@var:shares_country2 }
+    set_variable = { shares_amount3 = shares_amount@var:shares_country3 }
+    set_variable = { shares_amount4 = shares_amount@var:shares_country4 }
+    set_variable = { shares_amount5 = shares_amount@var:shares_country5 }
+    set_variable = { shares_amount6 = shares_amount@var:shares_country6 }
+    
+    set_variable = { shares_percent1 = shares_percent@var:shares_country1 }
+    set_variable = { shares_percent2 = shares_percent@var:shares_country2 }
+    set_variable = { shares_percent3 = shares_percent@var:shares_country3 }
+    set_variable = { shares_percent4 = shares_percent@var:shares_country4 }
+    set_variable = { shares_percent5 = shares_percent@var:shares_country5 }
+    set_variable = { shares_percent6 = shares_percent@var:shares_country6 }
+}
