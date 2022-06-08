@@ -20,6 +20,10 @@ focus_tree = {
 		}
 		prerequisite = { focus = REB_the_first_chief_of_state  }
 		mutually_exclusive = { focus = REB_leia_organa_a  } mutually_exclusive = { focus = REB_mon_mothma_a  }
+		completion_reward = {
+			retire_country_leader = yes
+			recruit_character = borsk_feylya
+		}
 	}
 
 	#Mon Mothma
@@ -34,6 +38,9 @@ focus_tree = {
 		}
 		prerequisite = { focus = REB_the_first_chief_of_state  }
 		mutually_exclusive = { focus = REB_leia_organa_a  } mutually_exclusive = { focus = REB_borskfeylya_a  }
+		completion_reward = {
+			add_political_power = 100
+		}
 	}
 
 	#The Republic Reborn
@@ -59,6 +66,13 @@ focus_tree = {
 			FOCUS_FILTER_INDUSTRY
 		}
 		prerequisite = { focus = REB_the_republic_reborn  }
+		completion_reward = {
+			add_timed_idea = {
+				idea = rebuild_coruscant
+				days = 180
+			}
+			subtract_from_variable = { currency_amount^primary_currency = 100 }
+		}
 	}
 
 	#The First Chief of State
@@ -72,6 +86,9 @@ focus_tree = {
 			FOCUS_FILTER_POLITICAL
 		}
 		prerequisite = { focus = REB_the_republic_reborn  }
+		completion_reward = {
+			
+		}
 	}
 
 	#Leia Organa
@@ -86,6 +103,10 @@ focus_tree = {
 		}
 		prerequisite = { focus = REB_the_first_chief_of_state  }
 		mutually_exclusive = { focus = REB_mon_mothma_a  } mutually_exclusive = { focus = REB_borskfeylya_a  }
+		completion_reward = {
+			retire_country_leader = yes
+			recruit_character = leia_organa
+		}
 	}
 
 	#Outside Help
@@ -99,6 +120,14 @@ focus_tree = {
 			FOCUS_FILTER_POLITICAL
 		}
 		prerequisite = { focus = REB_leia_organa_a  }
+		completion_reward = {
+			HAP = {
+				news_event = {
+					id = HAP.1
+					days = 5
+				}
+			}
+		}
 	}
 
 	#The Hapes Consortium
@@ -112,6 +141,14 @@ focus_tree = {
 			FOCUS_FILTER_POLITICAL
 		}
 		prerequisite = { focus = REB_outside_help  }
+		completion_reward = {
+			HAP = {
+				news_event = {
+					id = HAP.2
+					days = 5
+				}
+			}
+		}
 	}
 
 	#Marriage for an Alliance
@@ -125,6 +162,12 @@ focus_tree = {
 			FOCUS_FILTER_POLITICAL
 		}
 		prerequisite = { focus = REB_the_hapes_consortium  }
+		HAP = {
+			news_event = {
+				id = HAP.3
+				days = 5
+			}
+		}
 	}
 
 	#The Civilian Sector
@@ -164,6 +207,9 @@ focus_tree = {
 			FOCUS_FILTER_INDUSTRY
 		}
 		prerequisite = { focus = REB_expand_the_rail_system  }
+		completion_reward = {
+			
+		}
 	}
 
 	#National Rail Company
@@ -190,6 +236,9 @@ focus_tree = {
 			FOCUS_FILTER_POLITICAL
 		}
 		prerequisite = { focus = REB_rebuild_coruscant  }
+		completion_reward = {
+			
+		}
 	}
 
 	#The BoSS code
@@ -217,6 +266,9 @@ focus_tree = {
 		}
 		prerequisite = { focus = REB_csa_stance  }
 		mutually_exclusive = { focus = REB_free_capital  }
+		completion_reward = {
+			set_country_flag = anti_monpoloy_enabled
+		}
 	}
 
 	#Corporate Tax Act
@@ -230,6 +282,9 @@ focus_tree = {
 			FOCUS_FILTER_POLITICAL
 		}
 		prerequisite = { focus = REB_csa_stance  }
+		completion_reward = {
+			set_country_flag = corporate_tax_enabled
+		}
 	}
 
 	#Purchase Bacta
@@ -269,6 +324,10 @@ focus_tree = {
 			FOCUS_FILTER_INDUSTRY
 		}
 		prerequisite = { focus = REB_the_civilian_sector  }
+		news_event = {
+			id = REP_Bacta.1
+			days = 5
+		}
 	}
 
 	#Sanction Imperial Companies
@@ -282,6 +341,9 @@ focus_tree = {
 			FOCUS_FILTER_POLITICAL
 		}
 		prerequisite = { focus = REB_csa_stance  }
+		completion_reward = {
+			set_country_flag = sanction_imperial_enabled
+		}
 	}
 
 	#Free Capital
@@ -309,6 +371,9 @@ focus_tree = {
 			FOCUS_FILTER_POLITICAL
 		}
 		prerequisite = { focus = REB_new_republic_police_force  }
+		completion_reward = {
+			corruption_decrease = yes
+		}
 	}
 
 	#Rights of Sentience
@@ -322,6 +387,9 @@ focus_tree = {
 			FOCUS_FILTER_POLITICAL
 		}
 		prerequisite = { focus = REB_the_boss_code  } prerequisite = { focus = REB_the_civilian_sector  }
+		completion_reward = {
+			set_country_flag = rights_of_sentience_enabled
+		}
 	}
 
 	#Anti-Slavery Sanctions
@@ -335,6 +403,9 @@ focus_tree = {
 			FOCUS_FILTER_POLITICAL
 		}
 		prerequisite = { focus = REB_rights_of_sentience  }
+		completion_reward = {
+			set_country_flag = anti_slavery_sanctions_enabled
+		}
 	}
 
 	#Bacta Imports
@@ -348,6 +419,12 @@ focus_tree = {
 			FOCUS_FILTER_POLITICAL
 		}
 		prerequisite = { focus = REB_secure_a_source_of_bacta  }
+		completion_reward = {
+			news_event = {
+				id = REP_Bacta.2
+				days = 5
+			}
+		}
 	}
 
 	#Pathogen Act
@@ -361,6 +438,9 @@ focus_tree = {
 			FOCUS_FILTER_POLITICAL
 		}
 		prerequisite = { focus = REB_purchase_bacta  } prerequisite = { focus = REB_bacta_imports  }
+		completion_reward = {
+			set_country_flag = pathogen_act_enabled
+		}
 	}
 
 	#Republic Virology Labs
@@ -387,6 +467,9 @@ focus_tree = {
 			FOCUS_FILTER_POLITICAL
 		}
 		prerequisite = { focus = REB_republic_virology_labs  }
+		completion_reward = {
+			set_country_flag = sanination_act_enabled
+		}
 	}
 
 	#Penalize Imperial Companies
@@ -400,6 +483,7 @@ focus_tree = {
 			FOCUS_FILTER_POLITICAL
 		}
 		prerequisite = { focus = REB_the_civilian_sector  }
+		
 	}
 
 	#CSA Stance
@@ -413,6 +497,12 @@ focus_tree = {
 			FOCUS_FILTER_POLITICAL
 		}
 		prerequisite = { focus = REB_penalize_imperial_companies  }
+		completion_reward = {
+			news_event = {
+				id = REP_CSA.1
+				days = 5
+			}
+		}
 	}
 
 	#Offer New Republic Membership
@@ -727,6 +817,9 @@ focus_tree = {
 			FOCUS_FILTER_POLITICAL
 		}
 		prerequisite = { focus = REB_secure_loyalty  }
+		completion_reward = {
+			set_country_flag = reduced_corp_tax
+		}
 	}
 
 	#The New Republic Undercover Police
