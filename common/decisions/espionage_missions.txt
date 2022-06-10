@@ -1,0 +1,132 @@
+espionage_missions = {
+
+	espionage_mission_reshuffle = {
+
+		allowed = { always = yes }
+
+		icon = ger_mefo_bills
+
+		available = {
+			hidden_trigger = { always = no }
+		}
+
+		#cost = GER_mefo_bill_counter?10
+
+		days_mission_timeout = 180
+		is_good = yes
+		fire_only_once = yes
+
+		cancel_trigger = {
+			always = no
+		}
+
+		days_remove = GER_extend_mefo_bills_days?0
+		remove_effect = {
+			
+		}
+
+		complete_effect = {
+			if = {
+				limit = {
+					NOT = {
+						has_country_flag = slot_1_filled
+					}
+				}
+				var:amount_of_bounty_hunters = {
+					33 = {
+						set_country_flag = slot_1_filled
+						set_country_flag = assassinate_slot_1
+						any_enemy_country = {
+							set_variable = { targeted_country_slot_1 = ROOT.id }
+							random_unit_leader = {
+								if = {
+									limit = {
+										NOT = {
+											has_character_flag = important
+											has_character_flag = targeted_by_mission
+										}
+									}
+									set_character_flag = targeted_by_@ROOT_murder
+									set_character_flag = targeted_by_mission
+								}
+							}
+						}
+					}
+					33 = {
+						set_country_flag = slot_1_filled
+						set_country_flag = ransom_slot_1
+						any_enemy_country = {
+							set_variable = { targeted_country_slot_1 = ROOT.id }
+							random_character = {
+								if = {
+									limit = {
+										NOT = {
+											has_character_flag = important
+											has_character_flag = targeted_by_mission
+										}
+									}
+									set_character_flag = targeted_by_@ROOT_kidnap
+								}
+							}
+						}
+					}
+					33 = {
+						set_country_flag = slot_1_filled
+						set_country_flag = army_training_slot_1
+					}
+				}
+				amount_of_smugglers = {
+					16 = {
+						set_country_flag = slot_1_filled
+						set_country_flag = steal_equipment_slot_1
+					}
+					16 = {
+						set_country_flag = slot_1_filled
+						set_country_flag = smuggle_Slaves_slot_1
+						random_country = {
+							if = {
+								limit = {
+									check_variable = { total_slaves > 0 }
+								}
+								set_variable = { slave_raid_target = ROOT.id}
+							}
+						}
+					}
+					16 = {
+						set_country_flag = slot_1_filled
+						set_country_flag = smuggle_slaves_slot_1
+					}
+					16 = {
+						set_country_flag = slot_1_filled
+						set_country_flag = arming_dissadents
+						any_enemy_country = {
+							set_variable = { arming_dissadents_slot_1 = ROOT.id }
+
+						}
+					}
+					16 = {
+						set_country_flag = slot_1_filled
+						set_country_flag = plant_sleeper_agent_slot_1
+					}
+				}
+				amount_of_spies = {
+					
+				}
+				amount_of_enforcers = {
+	
+				}
+				other_missions = {
+	
+				}
+			}
+		}
+
+		timeout_effect = {
+
+		}
+
+		ai_will_do = {
+			#factor = 200
+		}
+	}
+}

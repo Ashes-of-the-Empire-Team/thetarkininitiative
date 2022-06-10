@@ -1,0 +1,128 @@
+assassination = {
+	random_unit_leader = {
+		if = {
+			limit = {
+				NOT = {
+					has_character_flag = important
+					has_character_flag = targeted_by_mission
+				}
+			}
+			set_character_flag = targeted_by_@ROOT_murder
+			set_character_flag = targeted_by_mission
+		}
+	}
+}
+assassination = {
+	chance_of_success_assassination = {
+		any_unit_leader = {
+			if = {
+				limit = {
+					NOT = {
+						has_character_flag = targeted_by_@ROOT_murder
+					}
+				}
+				retire_character = PREV
+			}
+		}
+	}
+	chance_of_failure_assassination = {
+		any_unit_leader = {
+			if = {
+				limit = {
+					NOT = {
+						has_character_flag = targeted_by_@ROOT_murder
+					}
+				}
+				clr_character_flag = targeted_by_@ROOT_murder
+				clr_character_flag = targeted_by_mission
+			}
+		}
+	}
+}
+kidnapping = {
+	random_character = {
+		if = {
+			limit = {
+				NOT = {
+					has_character_flag = important
+					has_character_flag = targeted_by_mission
+				}
+			}
+			set_character_flag = targeted_by_@ROOT_kidnap
+		}
+	}
+}
+kidnapping_success = {
+	random_character = {
+		if = {
+			limit = {
+				has_character_flag = targeted_by_@ROOT_kidnap
+			}
+			add_timed_unit_leader_trait = {
+				trait = kidnapped
+				days = 30
+			}		
+		}
+	}
+}
+steal_equipment = {
+
+}
+steal_blueprint = {
+	steal_random_tech_bonus = {
+		folder = armour_folder
+		folder = artillery_folder
+		folder = infantry_folder
+		folder = support_folder
+		folder = mtgnavalfolder
+		folder = air_techs_folder
+		bonus = 3.0
+		dynamic = yes
+		instant = yes
+		name = operation_steal_tech_army
+		target = targeted_nation_blueprint
+		uses = 1
+	}
+}
+arm_dissidents = {
+
+}
+plant_sleeper_agents = { 
+
+}
+reroute_supply = {
+
+}
+cyber_attack = {
+
+}
+study_blueprint = {
+
+}
+hunt_dissidents = {
+
+}
+counterintelligence = {
+
+}
+propoganda = {
+
+}
+seize_taxes = {
+
+}
+probe_loyalty = {
+
+}
+sabotage = {
+
+}
+infiltrate_military = {
+
+}
+undermine_guild_connections = {
+
+}
+turn_agent = {
+
+}
