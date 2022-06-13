@@ -38,14 +38,16 @@ focus_tree = {
 		id = EOH_the_ssi_ruuvi_threat
 		icon = GFX_goal_unknown
 		cost = 5
-		x = -4
+		x = -5
 		y = 1
 		relative_position_id = EOH_legacy_of_outbound_flight
 		available = {
 			SSI = {
 				has_war = yes
 			}
-			##certain amout of army and navy manpower
+			EOH = {
+				has_navy_manpower = { size > 49999 }
+			}
 		}
 		prerequisite = {
 			focus = EOH_legacy_of_outbound_flight
@@ -55,6 +57,7 @@ focus_tree = {
 		mutually_exclusive = {
 		}
 		completion_reward = {
+			add_war_support = 0.15
 			mark_focus_tree_layout_dirty = yes
 		}
 
@@ -66,7 +69,7 @@ focus_tree = {
 		id = EOH_guardian_of_the_unknown_regions
 		icon = GFX_goal_unknown
 		cost = 7.2
-		x = -2
+		x = -3
 		y = 1
 		relative_position_id = EOH_the_ssi_ruuvi_threat
 		available = {
@@ -108,7 +111,7 @@ focus_tree = {
 		id = EOH_indirect_involvement
 		icon = GFX_goal_unknown
 		cost = 5
-		x = 2
+		x = 3
 		y = 1
 		relative_position_id = EOH_the_ssi_ruuvi_threat
 		available = {
@@ -520,13 +523,8 @@ focus_tree = {
 		icon = GFX_goal_unknown
 		cost = 5
 		relative_position_id = EOH_legacy_of_outbound_flight
-		x = 4
+		x = 5
 		y = 1
-		available = {
-			EOH = {
-				has_completed_focus = EOH_the_ssi_ruuvi_threat
-			}
-		}
 		prerequisite = {
 			focus = EOH_legacy_of_outbound_flight
 		}
@@ -593,7 +591,7 @@ focus_tree = {
 		icon = GFX_goal_unknown
 		cost = 10.8
 		relative_position_id = EOH_reconciliation_with_zaarin
-		x = 4
+		x = 5
 		y = 1
 		prerequisite = {
 			focus = EOH_reconciliation_with_zaarin
@@ -685,35 +683,14 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = EOH_gifts_to_the_qom_qae
-		icon = GFX_goal_unknown
-		cost = 7.2
-		relative_position_id = EOH_language_of_the_qom_jha
-		x = -1
-		y = 1
-		prerequisite = {
-			focus = EOH_language_of_the_qom_jha
-		}
-		search_filters = {
-		}
-		mutually_exclusive = {
-		}
-		completion_reward = {
-			##gives events
-		}
-		ai_will_do = {
-			factor = 1
-		}
-	}
-	focus = {
 		id = EOH_peace_in_the_jungle
 		icon = GFX_goal_unknown
 		cost = 7.2
-		relative_position_id = EOH_gifts_to_the_qom_qae
-		x = 2
-		y = 0
+		relative_position_id = EOH_language_of_the_qom_jha
+		x = 0
+		y = 1
 		prerequisite = {
-			focus = EOH_gifts_to_the_qom_qae
+			focus = EOH_language_of_the_qom_jha
 		}
 		search_filters = {
 		}
@@ -735,7 +712,7 @@ focus_tree = {
 		icon = GFX_goal_unknown
 		cost = 7.2
 		relative_position_id = EOH_peace_in_the_jungle
-		x = -1
+		x = 0
 		y = 1
 		prerequisite = {
 			focus = EOH_peace_in_the_jungle
@@ -928,6 +905,9 @@ focus_tree = {
 		y = 1
 		prerequisite = {
 			focus = EOH_taming_nirauan
+		}
+		mutually_exclusive = {
+			focus = EOH_human_chiss_status_quo
 		}
 		search_filters = {
 		}
