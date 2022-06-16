@@ -1,0 +1,96 @@
+scripted_gui = {
+	espionage_screen = {
+		context_type = player_context
+		window_name = "espionage_screen"
+		parent_window_name = countryintelligenceagencyview
+		visible = {
+            always = yes
+		}
+		effects = {
+			guild_button_click = {
+				set_country_flag = guilds_open
+				clr_country_flag = operations_open
+			}
+			operations_button_click = {
+				set_country_flag = operations_open
+				clr_country_flag = guilds_open
+			}
+		}
+		triggers = {
+			guild_button_click_enabled = {
+				NOT = {
+					has_country_flag = guilds_open
+				}
+			}
+			operations_button_click_enabled = {
+				NOT = {
+					has_country_flag = operations_open
+				}
+			}
+		}
+	}
+	guild_screen = {
+		context_type = player_context
+		window_name = "guild_screen"
+		parent_window_name = countryintelligenceagencyview
+		visible = {
+            has_country_flag = guilds_open
+		}
+		effects = {
+
+		}
+		triggers = {
+			secondary_spies_visible = {
+				OR = {
+					has_government = democratic
+					has_government = imperial
+				}
+			}
+			jedi_visible = {
+				OR = {
+					has_country_flag = jedi_order
+					has_country_flag = sith_order
+				}
+			}
+			secondary_spies_loyalty_visible = {
+				OR = {
+					has_government = democratic
+					has_government = imperial
+				}
+			}
+			jedi_loyalty_visible = {
+				OR = {
+					has_country_flag = jedi_order
+					has_country_flag = sith_order
+				}
+			}
+		}
+		properties = {
+			spys = {
+				image = "[Getspy_guild_pic]"
+			}
+			secondary_spies = {
+				image = "[Get4th_guild_pic]"
+			}
+			jedi = {
+				image = "[Get5th_guild_pic]"
+			}
+		}
+	}
+	operations_missions = {
+		context_type = player_context
+		window_name = "operations_missions"
+		parent_window_name = countryintelligenceagencyview
+		visible = {
+            has_country_flag = operations_open
+		}
+		triggers = {
+		}
+		properties = {
+			espionage_mission_1_target = {
+				image = "[ROOT.GetFlag]"
+			}
+		}
+	}
+}
+

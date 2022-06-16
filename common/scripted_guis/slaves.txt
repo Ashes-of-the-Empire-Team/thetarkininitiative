@@ -4,15 +4,22 @@ scripted_gui = {
 		window_name = "slave_top_bar"
 		parent_window_token = top_bar
 		visible = {
-			check_variable = { total_slaves > 0 }
+			#check_variable = { total_slaves > 0 }
+			always = yes
 		}
 
 		effects = {
-
 			slave_button_click = {
-				set_country_flag = slave_open_click
+				if = {
+					limit = {
+						has_country_flag = slave_open_click
+					}
+					clr_country_flag = slave_open_click
+				}
+				else = {
+					set_country_flag = slave_open_click
+				}
 			}
-			
 		}
 	}
 	slave_auction_screen = {
