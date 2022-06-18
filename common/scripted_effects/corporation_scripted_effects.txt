@@ -1,0 +1,76 @@
+list_for_influencers_or_whatever = {
+    log = "for loop about to start"
+    meta_effect = {
+        text = {
+            set_temp_variable = { lengths = global.[Getcompanyname]^num }
+        }
+        Getcompanyname = "[This.Getcompanyname]"
+    }
+    for_loop_effect = {
+        start = 1
+        end = lengths
+        value = v
+        log = "loop effect"
+        set_temp_variable = { n = v }
+        set_temp_variable = { n_minus = n }
+        subtract_from_temp_variable = { n_minus = 1 }
+        meta_effect = {
+            text = {
+                while_loop_effect = {
+                    limit = {
+						var:global.[Getcompanyname]^n_minus = {
+							set_temp_variable = { n_minus_shares_held = shares_held_[Getcompanyname] }
+						}
+						var:global.[Getcompanyname]^n = {
+							set_temp_variable = { n_shares_held = shares_held_[Getcompanyname] }
+						}
+                        check_variable = { n > 0 }
+                        check_variable = { n_minus_shares_held < n_shares_held }
+                    }
+                    # swap j-1 with j if value of j-1 < j
+                    set_temp_variable = { temp = global.[Getcompanyname]^n }
+                    set_variable = { global.[Getcompanyname]^n = global.[Getcompanyname]^n_minus }
+                    set_variable = { global.[Getcompanyname]^n_minus = temp }
+                    subtract_from_temp_variable = { n = 1 }
+                    subtract_from_temp_variable = { n_minus = 1 }
+                }
+            }
+            Getcompanyname = "[This.Getcompanyname]"
+        }
+    }
+}
+percent_calc_corp = {
+    every_country = {
+        limit = {
+            is_market_corporation = yes
+        }
+    meta_effect = {
+        text = {
+            set_temp_variable = { total_shares_held_percentage = global.total_shares_[Getcompanyname] }
+            set_temp_variable = { shares_held_percent_calc = shares_held_[Getcompanyname] }
+            divide_temp_variable = { shares_held_percent_calc = total_shares_held_percentage }
+            multiply_temp_variable = { shares_held_percent_calc = 100 }
+            set_variable = { buyout_[Getcompanyname] = global.total_shares_[Getcompanyname] }
+            subtract_from_variable = { buyout_[Getcompanyname] = shares_held_[Getcompanyname] }
+            multiply_variable = { buyout_[Getcompanyname] = global.share_price_[Getcompanyname] }
+            set_variable = { shares_held_percent_[Getcompanyname] = shares_held_percent_calc }
+            if = {
+                limit = {
+                    check_variable = { shares_held_percent_[Getcompanyname] > 50 }
+                }
+                set_country_flag = majority_share_holder_[Getcompanyname]
+            }
+            if = {
+                limit = {
+                    check_variable = { shares_held_percent_[Getcompanyname] < 50 }
+                }
+                clr_country_flag = majority_share_holder_[Getcompanyname]
+            }
+        }
+        Getcompanyname = "[This.Getcompanyname]"
+        }
+    }
+}
+
+buyout_effect = {
+}
