@@ -131,7 +131,7 @@ focus_tree = {
 		}
 		available_if_capitulated = yes
 		completion_reward = {
-			custom_effect_tooltip = custom_add_50b
+			custom_effect_tooltip = custom_add_25b
 			add_to_variable = { currency_amount^primary_currency = 25 }
 		}
 	}
@@ -825,14 +825,14 @@ focus_tree = {
 		available_if_capitulated = yes
 		completion_reward = {
 			mark_focus_tree_layout_dirty = yes
-			hidden_effects = {
+			hidden_effect = {
 				swap_ideas = {
 					add_idea = PEN_vfcz2
 					remove_idea = PEN_vfcz
 				}
 			}
 			custom_effect_tooltip = PEN_vfcz_tradeswap1
-			remove_country_flag = PEN_vfcz_1
+			clr_country_flag = PEN_vfcz_1
 			set_country_flag = PEN_vfcz_2
 			custom_effect_tooltip = PEN_unlock_reinforcevfcz
 		}
@@ -865,6 +865,155 @@ focus_tree = {
 		}
 		available_if_capitulated = yes
 		completion_reward = {
+			custom_effect_tooltip = PEN_blind_eyes_loc
+			if = {
+				limit = {
+					controls_state = 186
+				}
+				custom_effect_tooltip = PEN_pen_pop_decrease
+				hidden_effect = {
+					add_to_variable = { currency_amount^primary_currency = 5 }
+					#Entralla
+					186 = {
+						add_manpower = -10000
+					}
+				}
+			}
+			if = {
+				limit = {
+					OR = {
+						BEX = {
+							controls_state = 136
+							is_subject_of = PEN
+						}
+						PEN = {
+							controls_state = 136
+						}
+					}
+				}
+				custom_effect_tooltip = PEN_bex_pop_decrease
+				hidden_effect = {
+					add_to_variable = { currency_amount^primary_currency = 10 }
+					#Bextar
+					136 = {
+						add_manpower = -10000
+					}
+					147 = {
+						add_manpower = -10000
+					}
+					148 = {
+						add_manpower = -10000
+					}
+					138 = {
+						add_manpower = -10000
+					}
+					132 = {
+						add_manpower = -10000
+					}
+				}
+			}
+			if = {
+				limit = {
+					has_country_flag = PEN_increased_vfcz
+					OR = {
+						ORD = {
+							controls_state = 92
+							is_subject_of = PEN
+						}
+						PEN = {
+							controls_state = 92
+						}
+					}
+				}
+				custom_effect_tooltip = PEN_ord_pop_decrease
+				hidden_effect = {
+					add_to_variable = { currency_amount^primary_currency = 10 }
+					#Bastion
+					92 = {
+						add_manpower = -10000
+					}
+					104 = {
+						add_manpower = -10000
+					}
+					110 = {
+						add_manpower = -10000
+					}
+					82 = {
+						add_manpower = -10000
+					}
+					86 = {
+						add_manpower = -10000
+					}
+				}
+			}
+			if = {
+				limit = {
+					has_country_flag = PEN_increased_vfcz
+					OR = {
+						JAE = {
+							controls_state = 95
+							is_subject_of = PEN
+						}
+						PEN = {
+							controls_state = 95
+						}
+					}
+				}
+				custom_effect_tooltip = PEN_jae_pop_decrease
+				hidden_effect = {
+					add_to_variable = { currency_amount^primary_currency = 10 }
+					#Bescane
+					95 = {
+						add_manpower = -10000
+					}
+					115 = {
+						add_manpower = -10000
+					}
+					100 = {
+						add_manpower = -10000
+					}
+					120 = {
+						add_manpower = -10000
+					}
+					88 = {
+						add_manpower = -10000
+					}
+				}
+			}
+			if = {
+				limit = {
+					has_country_flag = PEN_increased_vfcz
+					OR = {
+						IBC = {
+							controls_state = 5
+							is_subject_of = PEN
+						}
+						PEN = {
+							controls_state = 5
+						}
+					}
+				}
+				custom_effect_tooltip = PEN_ibc_pop_decrease
+				hidden_effect = {
+					add_to_variable = { currency_amount^primary_currency = 10 }
+					#Muunilist
+					5 = {
+						add_manpower = -10000
+					}
+					123 = {
+						add_manpower = -10000
+					}
+					106 = {
+						add_manpower = -10000
+					}
+					118 = {
+						add_manpower = -10000
+					}
+					89 = {
+						add_manpower = -10000
+					}
+				}
+			}
 				
 		}
 	}
@@ -890,7 +1039,7 @@ focus_tree = {
 		}
 		available_if_capitulated = yes
 		completion_reward = {
-				
+			add_political_power = 50
 		}
 	}
 
@@ -915,7 +1064,213 @@ focus_tree = {
 		}
 		available_if_capitulated = yes
 		completion_reward = {
-				
+			custom_effect_tooltip = PEN_vfcz_sector_loc
+			#Entralla
+			if = {
+				limit = {
+					controls_state = 186
+				}
+				custom_effect_tooltip = PEN_vfcz_sector_entralla
+				hidden_effect = {
+					186 = {
+						add_building_construction = {
+							type = infrastructure
+							level = 1
+							instant_build = yes
+						}
+						add_building_construction = {
+							type = industrial_complex
+							level = 1
+							instant_build = yes
+						}
+						add_extra_state_shared_building_slots = 1
+					}
+				}
+			}
+			#Bextar
+			if = {
+				limit = {
+					OR = {
+						BEX = {
+							is_subject_of = PEN
+							controls_state = 136
+							controls_state = 147
+						}
+						PEN = {
+							controls_state = 136
+							controls_state = 147
+						}
+					}
+				}
+				custom_effect_tooltip = PEN_vfcz_sector_bextar
+				hidden_effect = {
+					136 = {
+						add_building_construction = {
+							type = infrastructure
+							level = 1
+							instant_build = yes
+						}
+						add_building_construction = {
+							type = industrial_complex
+							level = 1
+							instant_build = yes
+						}
+						add_extra_state_shared_building_slots = 1
+					}
+					147 = {
+						add_building_construction = {
+							type = infrastructure
+							level = 1
+							instant_build = yes
+						}
+						add_building_construction = {
+							type = industrial_complex
+							level = 1
+							instant_build = yes
+						}
+						add_extra_state_shared_building_slots = 1
+					}
+			}
+			}
+			#Bastion
+			if = {
+				limit = {
+					has_country_flag = PEN_increased_vfcz
+					OR = {
+						ORD = {
+							is_subject_of = PEN
+							controls_state = 104
+							controls_state = 92
+						}
+						PEN = {
+							controls_state = 104
+							controls_state = 92
+						}
+					}
+				}
+				custom_effect_tooltip = PEN_vfcz_sector_bastion
+				hidden_effect = {
+					104 = {
+						add_building_construction = {
+							type = infrastructure
+							level = 1
+							instant_build = yes
+						}
+						add_building_construction = {
+							type = industrial_complex
+							level = 1
+							instant_build = yes
+						}
+						add_extra_state_shared_building_slots = 1
+					}
+					92 = {
+						add_building_construction = {
+							type = infrastructure
+							level = 1
+							instant_build = yes
+						}
+						add_building_construction = {
+							type = industrial_complex
+							level = 1
+							instant_build = yes
+						}
+						add_extra_state_shared_building_slots = 1
+					}
+				}
+			}
+			#Bescane
+			if = {
+				limit = {
+					has_country_flag = PEN_increased_vfcz
+					OR = {
+						JAE = {
+							is_subject_of = PEN
+							controls_state = 95
+							controls_state = 120
+						}
+						PEN = {
+							controls_state = 95
+							controls_state = 120
+						}
+					}
+				}
+				custom_effect_tooltip = PEN_vfcz_sector_bescane
+				hidden_effect = {
+					95 = {
+						add_building_construction = {
+							type = infrastructure
+							level = 1
+							instant_build = yes
+						}
+						add_building_construction = {
+							type = industrial_complex
+							level = 1
+							instant_build = yes
+						}
+						add_extra_state_shared_building_slots = 1
+					}
+					120 = {
+						add_building_construction = {
+							type = infrastructure
+							level = 1
+							instant_build = yes
+						}
+						add_building_construction = {
+							type = industrial_complex
+							level = 1
+							instant_build = yes
+						}
+						add_extra_state_shared_building_slots = 1
+					}
+				}
+			}
+			#Muunilist
+			if = {
+				limit = {
+					has_country_flag = PEN_increased_vfcz
+					OR = {
+						IBC = {
+							is_subject_of = PEN
+							controls_state = 5
+							controls_state = 123
+						}
+						PEN = {
+							controls_state = 5
+							controls_state = 123
+						}
+					}
+				}
+				custom_effect_tooltip = PEN_vfcz_sector_muunilist
+				hidden_effect = {
+					5 = {
+						add_building_construction = {
+							type = infrastructure
+							level = 1
+							instant_build = yes
+						}
+						add_building_construction = {
+							type = industrial_complex
+							level = 1
+							instant_build = yes
+						}
+						add_extra_state_shared_building_slots = 1
+					}
+					123 = {
+						add_building_construction = {
+							type = infrastructure
+							level = 1
+							instant_build = yes
+						}
+						add_building_construction = {
+							type = industrial_complex
+							level = 1
+							instant_build = yes
+						}
+						add_extra_state_shared_building_slots = 1
+					}
+				}
+			}
+			
 		}
 	}
 
@@ -930,7 +1285,26 @@ focus_tree = {
 		ai_will_do = {factor = 1}
 			
 		available = {
-
+			OR = {
+				BEX = {
+					is_subject_of = PEN
+					controls_state = 8
+					controls_state = 147
+				}
+				PEN = {
+					controls_state = 8
+					controls_state = 147
+				}
+			}
+			OR = {
+				JAE = {
+					is_subject_of = PEN
+					controls_state = 102
+				}
+				PEN = {
+					controls_state = 102
+				}
+			}
 		}
 		bypass = {
 
@@ -940,7 +1314,30 @@ focus_tree = {
 		}
 		available_if_capitulated = yes
 		completion_reward = {
-				
+			8 = {
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+				add_extra_state_shared_building_slots = 1
+			}
+			147 = {
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+				add_extra_state_shared_building_slots = 2
+			}
+			102 = {
+				add_building_construction = {
+					type = industrial_complex
+					level = 3
+					instant_build = yes
+				}
+				add_extra_state_shared_building_slots = 3
+			}
 		}
 	}
 
@@ -2807,6 +3204,9 @@ focus_tree = {
 		}
 		bypass = {
 		}
+		mutually_exclusive = {
+			focus = PEN_non_negotiable_doctrine
+		}
 		prerequisite = {
 			focus = PEN_manipulate_the_populace
 		}
@@ -3155,6 +3555,9 @@ focus_tree = {
 		available = {
 		}
 		bypass = {
+		}
+		mutually_exclusive = {
+			focus = PEN_subordinate_protectors
 		}
 		prerequisite = {
 			focus = PEN_relaxed_standards
