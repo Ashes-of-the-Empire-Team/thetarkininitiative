@@ -33,7 +33,9 @@ country_event = {
 
     option = {
         name = "Alea Iacta Est."
+
 			EMP = { add_to_faction = ZSJ }
+
     }
 
 }
@@ -50,7 +52,9 @@ country_event = {
 
     option = {
         name = "Alea Iacta Est."
-			EMP = { add_to_faction = ZSJ }
+
+            EMP = { add_to_faction = ZSJ }
+
     }
 
 }
@@ -83,21 +87,27 @@ country_event = {
 
     option = {
         name = "He is the next galactic emperor!"
+
         add_political_power = 150
         add_war_support = 0.15
         add_stability = -0.1
+
     }
     option = {
         name = "Maybe he is a bit ambitious..."
+
         add_political_power = -100
         add_stability = 0.2
         add_war_support = -0.1
+
     }
     option = {
         name = "Such treason against the imperial remnant shall not be tolerated!"
+
         add_stability = 0.3
         add_political_power = -200
         add_war_support = -0.2
+
     }
 
 }
@@ -130,10 +140,12 @@ country_event = {
 
     option = {
         name = "Veni, Vidi, Vici!"
+
         add_war_support = 0.2
         add_ideas = {
             ZSJ_war_prep_nr
         }
+
     }
 
 }
@@ -150,13 +162,17 @@ country_event = {
 
     option = {
         name = "Mutually Beneficial Indeed..."
+
         ZSJ = {
             add_to_faction = EOH
         }
+
     }
     option = {
         name = "What a ridiculous proposition"
+
         add_stability = 0.05
+
     }
 
 }
@@ -173,8 +189,284 @@ country_event = {
 
     option = {
         name = "Veni, Vidi, Vici!"
+
         ZSJ = {
             declare_war_on = { type = annex_everything    target = REB }
         }
+
     }
+}
+
+country_event = {
+    id = ZSJ.10 ## Zsinj hunts down her mother
+        title = "Mme. Maarisa Zsinj Goes Rogue!"
+        desc = "In a move completely out of left field, leaving both her son and the rest of the universe stunned as she refuses to return her Venator class Star Destroyer to port, against the direct orders of the (ex) emperor and her son Warlord Zsinj. She has announced the Zsinj administration as corrupt and is now on the run from the Iron Fleet."
+        picture = GFX_report_event_election_vote
+
+    is_triggered_only = yes
+
+    fire_only_once = yes
+
+    option = {
+        name = "After Her!"
+
+        ZSJ = {
+            add_ideas = {
+            ZSJ_Maarisa_Loose
+            }
+            ZSJ = { country_event = { days = 1 id = ZSJ.11 } }
+        }
+
+    }
+    option = {
+        name = "Let her be. She is but an old woman, and she is my mother."
+
+        ZSJ = {
+            add_political_power = -100
+            add_stability = -0.1
+            add_ideas = {
+                ZSJ_Maarisa_Loose
+            }
+        }
+
+    }
+}
+
+country_event = {
+    id = ZSJ.11 ## chase 1
+        title = "Maarisa Zsinj retreats into the Maw"
+        desc = "After a long, close chase, Maarisa Zsinj has retreated into the Maw, a cluster of black holes in the Outer Rim Territories. What Should the great leader do now?"
+        picture = GFX_report_event_election_vote
+
+    is_triggered_only = yes
+
+    fire_only_once = yes
+
+    option = {
+        name = "Set up a perimeter on all surrounding hyperspace lanes."
+
+        ZSJ = {
+            ZSJ = { country_event = { days = 1 id = ZSJ.12 } }
+        }
+
+    }
+    option = {
+        name = "Chase her through the supercluster."
+
+        ZSJ = {
+            ZSJ = { country_event = { days = 1 id = ZSJ.13 } }
+        }
+
+    }
+}
+
+country_event = {
+    id = ZSJ.12 ## chase 2
+        title = "Slow and Steady Loses The Race."
+        desc = "Maarisa is on the loose, dangerous and stirring up dangerous political opinions among my citizens."
+        picture = GFX_report_event_election_vote
+
+    is_triggered_only = yes
+
+    fire_only_once = yes
+
+    option = {
+        name = "How will this affect the political and economic state of Zsinj's Empire?"
+    }
+}
+
+country_event = {
+    id = ZSJ.13 ## chase 3
+        title = "Slow and Steady Loses The Race."
+        desc = "Instead of waiting, we have chosen to pursue her into the supercluster. She was planning to escape through a little known hyperspace lane within the Maw that she discovered decades ago on campaign, however due to your quick thinking and decisiveness, you are able to track her down and renew the chase, endign all possibility of early escape."
+        picture = GFX_report_event_election_vote
+
+    is_triggered_only = yes
+
+    fire_only_once = yes
+
+    option = {
+        name = "How will this affect the political and economic state of Zsinj's Empire?"
+
+            ZSJ = { country_event = { days = 1 id = ZSJ.15 } }
+
+    }
+}
+
+country_event = {
+    id = ZSJ.13 ## chase 3
+        title = "To Board or to Wait?"
+        desc = "Instead of waiting, we have chosen to pursue her into the supercluster. She was planning to escape through a little known hyperspace lane within the Maw that she discovered decades ago on campaign, however due to your quick thinking and decisiveness, you are able to track her down and renew the chase, endign all possibility of early escape."
+        picture = GFX_report_event_election_vote
+
+    is_triggered_only = yes
+
+    fire_only_once = yes
+
+    option = {
+        name = "We wait!"
+
+            ZSJ = { country_event = { days = 1 id = ZSJ.14 } }
+
+    }
+    option = {
+        name = "Board Her!"
+            ZSJ = { country_event = { days = 1 id = ZSJ.16 } }
+
+    }
+}
+
+country_event = {
+    id = ZSJ.14 ## chase 4
+        title = "Thwarted!"
+        desc = "Instead of rushing in, we have decided to wait out her limited shields in her antiquated vessal of puny strength and speed, but through a series of quick maneuvers, she managed to slip into a black hole, and while she will no longer threaten the integrity of my empire, it was embarrasing to have her escape so easily."
+        picture = GFX_report_event_election_vote
+
+    is_triggered_only = yes
+
+    fire_only_once = yes
+
+    option = {
+        name = "Surely she is dead now."
+            ZSJ = {
+                add_political_power = -200
+                remove_ideas = {
+                    ZSJ_Maarisa_Loose
+                }
+            }
+    }
+}
+
+country_event = {
+    id = ZSJ.16 ## chase 2
+        title = "The Final Moments"
+        desc = "Maarisa's ship is now completely under my control. My mother is lying on the cold metal of the command centre, begging for her life. 'Please my boy, spare me. Spare meeeeee. I raised you from-' I look to one of my generals next to me. 'Put her head on a spike outside my palace.'"
+        picture = GFX_report_event_election_vote
+
+    is_triggered_only = yes
+
+    fire_only_once = yes
+
+    option = {
+        name = "Bitches be crazy"
+            ZSJ = {
+                add_political_power = 200
+                remove_ideas = {
+                    ZSJ_Maarisa_Loose
+                }
+            }
+    }
+}
+
+country_event = {
+    id = ZSJ.100 ## Recurring Han Event
+        title = "A Skirmish!"
+        desc = "A rebel fleet, assumedly under the command of Han Solo, my sworn rival has intercepted my flagship fleet. His small strike force consists of a few x-wing fighters and the Millenium Falcon. This pesky human and his wookie are a constant thorn in my side and seem hell-bent on sinking my prized Iron Dreadnought."
+        picture = GFX_report_event_election_vote
+
+    is_triggered_only = no
+
+    fire_only_once = no
+
+    mean_time_to_happen = {
+        days = 180
+    }
+
+    trigger = {
+        original_tag = ZSJ
+        has_completed_focus = ZSJ_question_of_loyalty
+    }
+
+    option = {
+        name = "Deus Vult"
+        random_list = {
+            49 = { 
+                add_to_variable = {
+	            var = solofight
+	            value = 5
+                }
+                add_political_power = 20
+            }
+            49.95 = { 
+                add_to_variable = {
+	            var = solofight
+	            value = -5
+                }
+                add_war_support = -0.03
+            }
+            0.05 = {
+                kill_country_leader = yes
+                ZSJ = { country_event = { days = 1 id = ZSJ.101 } }
+                create_country_leader = {
+			    name = "Maarisa Zsinj"
+			    picture = "unknown"
+			    ideology = imperial
+				traits = {
+				    }
+	        	}
+            }
+        }
+    }
+}
+
+country_event = {
+    id = ZSJ.101 ## Maarisa Swoops In
+        title = "Zsinj Dead at Hand of Solo!"
+        desc = "Our heroic and once larger than life leader Admiral Zsinj has died. This is a tragic day for the people of his empire. Billions are in mourning. This will be a day remembered in history. Black *instert name here before print*. Memento Mori"
+        picture = GFX_report_event_election_vote
+
+    is_triggered_only = yes
+
+    fire_only_once = yes
+
+    option = {
+        name = "Memento mori."
+    }
+
+}
+
+country_event = {
+    id = ZSJ.102 ## Han Victory
+        title = "Zsinj Dead at Hands of Solo!"
+        desc = "Our heroic and once larger than life leader Admiral Zsinj has died. This is a tragic day for the people of his empire. Billions are in mourning. This will be a day remembered in history. Black *instert name here before print*. Memento Mori"
+        picture = GFX_report_event_election_vote
+
+    is_triggered_only = yes
+
+    fire_only_once = yes
+
+    option = {
+        name = "I'll Be Ba-"
+        kill_country_leader = yes
+                ZSJ = { country_event = { days = 1 id = ZSJ.101 } }
+                create_country_leader = {
+			    name = "Maarisa Zsinj"
+			    picture = "unknown"
+			    ideology = imperial
+				traits = {
+				    }
+	        	}
+    }
+
+}
+
+country_event = {
+    id = ZSJ.103 ## Zsinj Victory
+        title = "Solo shot down"
+        desc = "Personal Nemisis of our Great Leader and Savior, Zsinj, Han Solo was finally killed in personal combat today by Zsinj when his ship was boarded by our emperors finest. Finally."
+        picture = GFX_report_event_election_vote
+
+    is_triggered_only = yes
+
+    fire_only_once = yes
+
+    option = {
+        name = "Scoreboard, Solo."
+        REB = {
+            remove_unit_leader = Han Solo
+            add_war_support = -0.05
+        }
+        add_political_power = 300
+    }
+
 }

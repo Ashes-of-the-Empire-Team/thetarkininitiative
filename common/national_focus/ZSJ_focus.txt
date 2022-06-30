@@ -14,7 +14,7 @@ focus_tree = {
 
 	continuous_focus_position = { x = 500 y = 3000 }
 
-	focus = {
+	focus = { #Negative Shit for zsinj to start
 		id = ZSJ_fallout_from_endor
 		icon = GFX_goal_zsinj_basic
 		x = 20
@@ -43,7 +43,7 @@ focus_tree = {
 		}
 	}
 
-	focus = {
+	focus = { ##Zsinj mother escapes
 		id = ZSJ_question_of_loyalty
 		icon = GFX_goal_zsinj_basic
 		prerequisite = { focus = ZSJ_fallout_from_endor }
@@ -67,17 +67,23 @@ focus_tree = {
 		available_if_capitulated = yes
 
 		completion_reward = {
-			add_political_power = 150
+			ZSJ = { country_event = { days = 1 id = ZSJ.10 } }
+			set_variable = {
+				var = solofight
+				value = 50
+			}
 		}
 	}
 
 	focus = {
+		###republic path
 		id = ZSJ_the_enemy_we_know
 		icon = GFX_goal_zsinj_basic
 		prerequisite = { focus = ZSJ_question_of_loyalty }
-		mutually_exclusive = { focus = ZSJ_the_lone_wolf 
-		focus = ZSJ_loyalty_to_the_empire
-	}
+		mutually_exclusive = { 
+			focus = ZSJ_the_lone_wolf 
+			focus = ZSJ_loyalty_to_the_empire
+		}
 		x = 10
 		y = 3
 
@@ -98,10 +104,6 @@ focus_tree = {
 		available_if_capitulated = yes
 
 		completion_reward = {
-			add_popularity = {
-				ideology = democracy
-				popularity = 0.15
-			}
 			add_political_power = 50
 			add_to_variable = {
 				var = legitimacy_emp
@@ -116,7 +118,7 @@ focus_tree = {
 		}
 	}
 
-	focus = {
+	focus = { ###Independant Path
 		id = ZSJ_the_lone_wolf
 		icon = GFX_goal_zsinj_basic
 		prerequisite = { focus = ZSJ_question_of_loyalty }
@@ -147,7 +149,7 @@ focus_tree = {
 			add_war_support = 0.15
 		}
 	}
-	focus = {
+	focus = { ###Empire Path
 		id = ZSJ_loyalty_to_the_empire
 		icon = GFX_goal_zsinj_basic
 		prerequisite = { focus = ZSJ_question_of_loyalty }
@@ -188,7 +190,7 @@ focus_tree = {
 			}
 		}
 	}
-	focus = {
+	focus = { ###Builds inf on serannoa
 		id = ZSJ_invest_in_serranoan_infrastructure
 		icon = GFX_goal_zsinj_basic
 		prerequisite = { focus = ZSJ_the_enemy_we_know }
@@ -262,7 +264,7 @@ focus_tree = {
 			}
 		}
 	}
-	focus = {
+	focus = { ###wargoals
 		id = ZSJ_coproate_espionage
 		icon = GFX_goal_zsinj_basic
 		prerequisite = { focus = ZSJ_the_enemy_we_know }
@@ -295,8 +297,8 @@ focus_tree = {
 			}
 		}
 	}
-	focus = {
-		id = ZSJ_pursuade_the_officers
+	focus = { ##i dont even know what this is
+		id = ZSJ_Mapping_The_Maw
 		icon = GFX_goal_zsinj_basic
 		prerequisite = { focus = ZSJ_the_enemy_we_know }
 		x = 14
@@ -319,14 +321,12 @@ focus_tree = {
 		available_if_capitulated = yes
 
 		completion_reward = {
-			add_war_support = 0.1
-			add_popularity = {
-				ideology = imperial
-				popularity = 0.05
+			add_ideas = {
+				Mapping_Maw_Idea
 			}
 		}
 	}
-	focus = {
+	focus = { ###removes huge negative debuff
 		id = ZSJ_remove_political_disidents
 		icon = GFX_goal_zsinj_basic
 		prerequisite = { focus = ZSJ_coproate_espionage
@@ -363,8 +363,8 @@ focus_tree = {
 			}
 		}
 	}
-	focus = {
-		id = ZSJ_gain_the_admirals_admiration
+	focus = { ###again i dont even know what this is
+		id = ZSJ_clones_Thrawn
 		icon = GFX_goal_zsinj_basic
 		prerequisite = { focus = ZSJ_the_enemy_we_know }
 		x = 16
@@ -377,6 +377,8 @@ focus_tree = {
 		}
 
 		available = {
+			EOH = { has_completed_focus = EOH_cloning_on_nirauan }
+			is_in_faction = { EOH }
 		}
 		
 		bypass = {
@@ -387,20 +389,16 @@ focus_tree = {
 		available_if_capitulated = yes
 
 		completion_reward = {
-			add_political_power = 100
-			add_popularity = {
-				ideology = imperial
-				popularity = 0.05
-			}
+			###Clones and shit for Zsinj hehe
 		}
 	}
-	focus = {
-		id = ZSJ_fuse_the_collective_goals
+	focus = { ###Movement speed idea for filler
+		id = ZSJ_To_Infinity_And_Beyond
 		icon = GFX_goal_zsinj_basic
-		prerequisite = { focus = ZSJ_coproate_espionage 
-		focus = ZSJ_pursuade_the_officers
-		focus = ZSJ_gain_the_admirals_admiration  
-	}
+		prerequisite = { 
+			focus = ZSJ_coproate_espionage 
+			focus = ZSJ_Mapping_The_Maw  
+		}
 		x = 14
 		y = 5
 
@@ -421,12 +419,15 @@ focus_tree = {
 		available_if_capitulated = yes
 
 		completion_reward = {
-			add_political_power = 100
-			add_war_support = 0.1
-			add_stability = 0.1
+			remove_ideas = {
+				Mapping_Maw_Idea
+			}
+			add_ideas = {
+				ZSJ_Mapped_Maw_Idea
+			}
 		}
 	}
-	focus = {
+	focus = { ###maybe a bills gui custom made for zsinj
 		id = ZSJ_short_term_military_bill
 		icon = GFX_goal_zsinj_basic
 		prerequisite = { focus = ZSJ_the_enemy_we_know }
@@ -460,7 +461,7 @@ focus_tree = {
 			}
 		}
 	}
-	focus = {
+	focus = { ###More bill shit
 		id = ZSJ_civilian_manufacturing_bill
 		icon = GFX_goal_zsinj_basic
 		prerequisite = { focus = ZSJ_the_enemy_we_know }
@@ -493,7 +494,7 @@ focus_tree = {
 			}
 		}
 	}
-	focus = {
+	focus = { ##stockstandard factory focus
 		id = ZSJ_restore_confederate_shipyards
 		icon = GFX_goal_zsinj_basic
 		prerequisite = { focus = ZSJ_short_term_military_bill }
@@ -555,7 +556,6 @@ focus_tree = {
 				traits = {  }
 				skill = 5
 			}
-			add_war_support = 0.1
 			add_to_variable = {
 				var = legitimacy_emp
 				value = 10
@@ -591,13 +591,14 @@ focus_tree = {
 				var = legitimacy_emp
 				value = -10
 			}
+			###research bonus for "Zsinj" doctrines
 		}
 	}
-	focus = {
+	focus = { ###wargoals
 		id = ZSJ_the_korriban_conquest
 		icon = GFX_goal_zsinj_basic
 		prerequisite = {
-			focus = ZSJ_fuse_the_collective_goals
+			focus = ZSJ_To_Infinity_And_Beyond
 		}
 		x = 14
 		y = 6
@@ -628,7 +629,7 @@ focus_tree = {
 			}
 		}
 	}
-	focus = {
+	focus = { ###Bills gui?
 		id = ZSJ_the_factory_act
 		icon = GFX_goal_zsinj_basic
 		prerequisite = {
@@ -660,7 +661,7 @@ focus_tree = {
 			}
 		}
 	}
-	focus = {
+	focus = { ###Bills GUI
 		id = ZSJ_the_conscript_act
 		icon = GFX_goal_zsinj_basic
 		prerequisite = {
@@ -691,7 +692,7 @@ focus_tree = {
 			}
 		}
 	}
-	focus = {
+	focus = { ###Bills GUI
 		id = ZSJ_air_superiority_act
 		icon = GFX_goal_zsinj_basic
 		prerequisite = {
@@ -720,7 +721,7 @@ focus_tree = {
 			###research bonuses
 		}
 	}
-	focus = {
+	focus = { ###remove endor spirit
 		id = ZSJ_ignavi_sexcenties_moriuntur_ante_mortem_suam
 		icon = GFX_goal_zsinj_basic
 		prerequisite = {
@@ -762,7 +763,7 @@ focus_tree = {
 			}
 		}
 	}
-	focus = {
+	focus = { ###xp focus
 		id = ZSJ_invest_in_our_high_command
 		icon = GFX_goal_zsinj_basic
 		prerequisite = {
@@ -2169,7 +2170,7 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			add_political_power = 150
+			
 		}
 	}
 	focus = {
@@ -2375,6 +2376,12 @@ focus_tree = {
 		y = 11
 
 		cost = 10
+
+		allow_branch = {
+			has_completed_focus = ZSJ_proclaim_the_second_galactic_empire
+		}
+
+		mark_focus_tree_layout_dirty = yes
 
 		ai_will_do = {
 			factor = 1
@@ -3073,6 +3080,12 @@ focus_tree = {
 
 		cost = 10
 
+		allow_branch = {
+			has_completed_focus = ZSJ_the_korriban_conquest
+		}
+
+		mark_focus_tree_layout_dirty = yes
+
 		ai_will_do = {
 			factor = 1
 		}
@@ -3504,6 +3517,12 @@ focus_tree = {
 
 		cost = 10
 
+		allow_branch = {
+			has_completed_focus = ZSJ_use_collective_resources
+		}
+
+		mark_focus_tree_layout_dirty = yes
+
 		ai_will_do = {
 			factor = 1
 		}
@@ -3695,6 +3714,12 @@ focus_tree = {
 		y = 9
 
 		cost = 10
+
+		allow_branch = {
+			has_completed_focus = ZSJ_befriend_kosh_teradoc
+		}
+
+		mark_focus_tree_layout_dirty = yes
 
 		ai_will_do = {
 			factor = 1
