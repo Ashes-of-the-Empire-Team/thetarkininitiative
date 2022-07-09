@@ -27,7 +27,9 @@ focus_tree = {
 		mutually_exclusive = {
 		}
 		completion_reward = {
-
+			EOH = {
+				country_event = { id = EOH.5 }
+			}
 		}
 
 		ai_will_do = {
@@ -42,11 +44,11 @@ focus_tree = {
 		y = 1
 		relative_position_id = EOH_legacy_of_outbound_flight
 		available = {
+			has_navy_size = {
+    			size > 24
+			}
 			SSI = {
 				has_war = yes
-			}
-			EOH = {
-				has_navy_manpower = { size > 49999 }
 			}
 		}
 		prerequisite = {
@@ -93,12 +95,24 @@ focus_tree = {
 			}
 			CHS = {
 				country_event = { id = CHS.1 }
+				add_timed_idea = {
+					idea = EOH_thrawn_guardian
+					days = 365
+				}
 			}
 			MIT = {
 				country_event = { id = MIT.1 }
+				add_timed_idea = {
+					idea = EOH_thrawn_guardian
+					days = 365
+				}
 			}
 			INR = {
 				country_event = { id = INR.1 }
+				add_timed_idea = {
+					idea = EOH_thrawn_guardian
+					days = 365
+				}
 			}
 			mark_focus_tree_layout_dirty = yes
 		}
@@ -602,8 +616,11 @@ focus_tree = {
 		mutually_exclusive = {
 		}
 		completion_reward = {
-			remove_ideas = EOH_nirauan_1
-			add_ideas = EOH_nirauan_2
+			swap_ideas = {
+				remove_idea = EOH_nirauan_1
+				add_idea = EOH_nirauan_2
+			}
+			
 		}
 		ai_will_do = {
 			factor = 1
@@ -1113,8 +1130,10 @@ focus_tree = {
 		mutually_exclusive = {
 		}
 		completion_reward = {
-			remove_ideas = EOH_thrawn_unknown_regions
-			add_ideas = EOH_thrawn_unknown_regions_2
+			swap_ideas = {
+				remove_idea = EOH_thrawn_unknown_regions
+				add_idea = EOH_thrawn_unknown_regions_2
+			}
 			mark_focus_tree_layout_dirty = yes
 		}
 		ai_will_do = {
