@@ -13,6 +13,8 @@ on_actions = {
 			set_variable = { economy_law_multip_mil = 1 }
 			set_variable = { economy_law_multip_corp = 1 }
 			set_country_flag = corruption_lvl_1
+			set_variable = { resource_income_modifier = 1 }
+			set_variable = { resource_expense_modifier = 1 }
 			}
 			set_variable = { Global.interest_rate = 1.5 }
 		}
@@ -233,17 +235,13 @@ on_actions = {
 			add_to_variable = {  resourceexpenses  = steel_import}
 			add_to_variable = {  resourceexpenses  = oil_import}
 			add_to_variable = {  resourceexpenses  = aluminum_import} 
+			multiply_variable = { resourceexpenses = resource_expense_modifier }
 		#All expenses are added up here to calculate today's total expenses
 			add_to_variable = { allexpenses = no }
 			add_to_variable = { allexpenses = tax_to_overlord }
 			add_to_variable = { allexpenses = depression }
 			add_to_variable = { allexpenses = nc }
-			add_to_variable = { allexpenses = rubber_import }
-			add_to_variable = { allexpenses = chromium_import }
-			add_to_variable = { allexpenses = tungsten_import }
-			add_to_variable = { allexpenses = steel_import }
-			add_to_variable = { allexpenses = oil_import }
-			add_to_variable = { allexpenses = aluminum_import }
+			add_to_variable = { allexpenses = resourceexpenses }
 			add_to_variable = { allexpenses = nf }
 			add_to_variable = { allexpenses = navf }
 			add_to_variable = { allexpenses = debtexp }
@@ -252,122 +250,6 @@ on_actions = {
 			add_to_variable = { allexpenses = bio_maintenace_cal }
 			add_to_variable = { allexpenses = space_maintenace_cal }
 			add_to_variable = { allexpenses = ms }
-
-		#	if = {
-		#		limit = {
-		#			has_country_flag = defense_low_spending
-		#		}
-		#		divide_variable = { ms = 20 }
-		#		add_to_variable = { allexpenses = ms }
-		#	}
-		#	if = {
-		#		limit = {
-		#			has_country_flag = defense_moderate_spending
-		#		}
-		#		divide_variable = { ms = 40 }
-		#		add_to_variable = { allexpenses = ms }
-		#	}
-		#	if = {
-		#		limit = {
-		#			has_country_flag = defense_high_spending
-		#		}
-		#		divide_variable = { ms = 60 }
-		#		add_to_variable = { allexpenses = ms }
-		#	}
-		#	if = {
-		#		limit = {
-		#			has_country_flag = education_low_spending
-		#		}
-		#		set_variable = { education_spending = max_manpower_k }
-		#		divide_variable = { education_spending = 40000 }
-		#		add_to_variable = { allexpenses = education_spending }
-		#	}
-		#	if = {
-		#		limit = {
-		#			has_country_flag = education_moderate_spending
-		#		}
-		#		set_variable = { education_spending = max_manpower_k }
-		#		divide_variable = { education_spending = 35000 }
-		#		add_to_variable = { allexpenses = education_spending }
-		#	}
-		#	if = {
-		#		limit = {
-		#			has_country_flag = education_high_spending
-		#		}
-		#		set_variable = { education_spending = max_manpower_k }
-		#		divide_variable = { education_spending = 30000 }
-		#		add_to_variable = { allexpenses = education_spending }
-		#	}
-		#	if = {
-		#		limit = {
-		#			has_country_flag = social_low_spending
-		#		}
-		#		set_variable = { social_spending = max_manpower_k }
-		#		divide_variable = { social_spending = 40000 }
-		#		add_to_variable = { allexpenses = social_spending }
-		#	}
-		#	if = {
-		#		limit = {
-		#			has_country_flag = social_moderate_spending
-		#		}
-		#		set_variable = { social_spending = max_manpower_k }
-		#		divide_variable = { social_spending = 35000 }
-		#		add_to_variable = { allexpenses = social_spending }
-#
-		#	}
-		#	if = {
-		#		limit = {
-		#			has_country_flag = social_high_spending
-		#		}
-		#		set_variable = { social_spending = max_manpower_k }
-		#		divide_variable = { social_spending = 30000 }
-		#		add_to_variable = { allexpenses = social_spending }
-		#	}
-		#	if = {
-		#		limit = {
-		#			has_country_flag = security_low_spending
-		#		}
-		#		set_variable = { security_spending = max_manpower_k }
-		#		divide_variable = { security_spending = 40000 }
-		#		add_to_variable = { allexpenses = security_spending }
-		#	}
-		#	if = {
-		#		limit = {
-		#			has_country_flag = security_moderate_spending
-		#		}
-		#		set_variable = { security_spending = max_manpower_k }
-		#		divide_variable = { security_spending = 35000 }
-		#		add_to_variable = { allexpenses = security_spending }
-		#	}
-		#	if = {
-		#		limit = {
-		#			has_country_flag = security_high_spending
-		#		}
-		#		set_variable = { security_spending = max_manpower_k }
-		#		divide_variable = { security_spending = 30000 }
-		#		add_to_variable = { allexpenses = security_spending }
-		#	}
-		#	if = {
-		#		limit = {
-		#			has_country_flag = space_low_spending
-		#		}
-		#		set_variable = { space_spending = space_maintenance }
-		#		add_to_variable = { allexpenses = space_spending }
-		#	}
-		#	if = {
-		#		limit = {
-		#			has_country_flag = space_moderate_spending
-		#		}
-		#		set_variable = { space_spending = space_maintenance }
-		#		add_to_variable = { allexpenses = space_spending }
-		#	}
-		#	if = {
-		#		limit = {
-		#			has_country_flag = space_high_spending
-		#		}
-		#		set_variable = { space_spending = space_maintenance }
-		#		add_to_variable = { allexpenses = space_spending }
-		#	}
 
 	############### Policies #########################
 	#	if = {
@@ -379,6 +261,7 @@ on_actions = {
 
 
 		#Income is added up
+			multiply_variable = { resourceincome = resource_income_modifier }
 			add_to_variable = { income = tax }
 			add_to_variable = { income = resourceincome }
 			add_to_variable = { income = cfff }
