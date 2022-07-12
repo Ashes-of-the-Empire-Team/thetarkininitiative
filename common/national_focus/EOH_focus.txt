@@ -229,6 +229,30 @@ focus_tree = {
 		mutually_exclusive = {
 		}
 		completion_reward = {
+			224 = {
+				if = {
+					limit = { is_controlled_by = ROOT }
+					add_victory_points = {
+						province = 1983
+						value = 7
+					}
+					add_victory_points = {
+						province = 3667
+						value = 5
+					}
+					add_victory_points = {
+						province = 9101
+						value = 5
+					}
+					add_building_construction = {
+						type = industrial_complex
+						level = 2
+						instant_build = yes
+					}
+					add_extra_state_shared_building_slots = 2
+					add_manpower = 145000
+				}
+			}
 			#Victory point wizardry
 		}
 		ai_will_do = {
@@ -633,6 +657,10 @@ focus_tree = {
 		relative_position_id = EOH_taming_nirauan
 		x = -4
 		y = 1
+		available = {
+			NOT = { army_manpower_in_state = { state = 221 amount < 100000 } }
+			NOT = { army_manpower_in_state = { state = 229 amount < 100000 } }
+		}
 		prerequisite = {
 			focus = EOH_taming_nirauan
 		}
@@ -644,9 +672,15 @@ focus_tree = {
 		completion_reward = {
 			229 = {
 				add_manpower = -10000
+				add_state_modifier = {
+					modifier = {attrition_for_controller = -1.0}
+				}
 			}
 			221 = {
 				add_manpower = -10000
+				add_state_modifier = {
+					modifier = {attrition_for_controller = -1.0}
+				}
 			}
 		}
 		ai_will_do = {
@@ -804,11 +838,26 @@ focus_tree = {
 		}
 		completion_reward = {
 			#Victory point wizardry
-			239 = {
-				add_building_construction = {
-					type = infrastructure
-					level = 1
-					instant_build = yes
+			228 = {
+				if = {
+					limit = { is_controlled_by = ROOT }
+					add_victory_points = {
+						province = 9208
+						value = 1
+					}
+					add_victory_points = {
+						province = 9177
+						value = 1
+					}
+					add_victory_points = {
+						province = 9103
+						value = 1
+					}
+					add_building_construction = {
+						type = infrastructure
+						level = 1
+						instant_build = yes
+					}
 				}
 			}
 		}
@@ -830,28 +879,35 @@ focus_tree = {
 		}
 		completion_reward = {
 			#Victory point wizardry
-			239 = {
-				add_building_construction = {
-					type = industrial_complex
-					level = 1
-					instant_build = yes
+			228 = {
+				if = {
+					limit = { is_controlled_by = ROOT }
+					add_victory_points = {
+						province = 9102
+						value = 10
+					}
+					add_building_construction = {
+						type = industrial_complex
+						level = 2
+						instant_build = yes
+					}
+					add_extra_state_shared_building_slots = 2
 				}
-				add_extra_state_shared_building_slots = 1
 			}
 			add_resource = {
 				type = steel
 				amount = 6
-				state = 239
+				state = 228
 			}
 			add_resource = {
 				type = tungsten
 				amount = 16
-				state = 239
+				state = 228
 			}
 			add_resource = {
 				type = chromium
 				amount = 6
-				state = 239
+				state = 228
 			}
 		}
 		ai_will_do = {
@@ -949,6 +1005,13 @@ focus_tree = {
 		search_filters = {
 		}
 		completion_reward = {
+			22 = {
+				add_victory_points = {
+					province = 4725
+					value = 5
+				}
+			}
+			
 			#victory point magic, buildings
 		}
 		ai_will_do = {
@@ -968,6 +1031,23 @@ focus_tree = {
 		search_filters = {
 		}
 		completion_reward = {
+			213 = {
+				if = {
+					limit = { is_controlled_by = ROOT }
+					add_victory_points = {
+						province = 8866
+						value = 5
+					}
+					add_building_construction = {
+						type = naval_base
+						level = 2
+						province = 8866
+						instant_build = yes
+					}
+					set_state_flag = FRA_colonial_naval_bases
+				}
+			}
+			
 			#victory point magic, buildings
 		}
 		ai_will_do = {
