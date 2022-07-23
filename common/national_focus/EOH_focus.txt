@@ -27,7 +27,9 @@ focus_tree = {
 		mutually_exclusive = {
 		}
 		completion_reward = {
-
+			EOH = {
+				country_event = { id = EOH.5 }
+			}
 		}
 
 		ai_will_do = {
@@ -42,11 +44,11 @@ focus_tree = {
 		y = 1
 		relative_position_id = EOH_legacy_of_outbound_flight
 		available = {
+			has_navy_size = {
+    			size > 24
+			}
 			SSI = {
 				has_war = yes
-			}
-			EOH = {
-				has_navy_manpower = { size > 49999 }
 			}
 		}
 		prerequisite = {
@@ -87,18 +89,22 @@ focus_tree = {
 		}
 		completion_reward = {
 			declare_war_on = { target = SSI    type = topple_government }
+			add_ideas = EOH_thrawn_guardian
 			##add chiss and bakura getting imperial support
 			SSI = {
 				country_event = { id = SSI.1 }
 			}
 			CHS = {
-				country_event = { id = CHS.1 }
+				country_event = { id = CHISS.1 }
 			}
 			MIT = {
-				country_event = { id = MIT.1 }
+				country_event = { id = CHISS.1 }
 			}
 			INR = {
-				country_event = { id = INR.1 }
+				country_event = { id = CHISS.1 }
+			}
+			BAK = {
+				country_event = { id = CHISS.1 }
 			}
 			mark_focus_tree_layout_dirty = yes
 		}
@@ -215,6 +221,30 @@ focus_tree = {
 		mutually_exclusive = {
 		}
 		completion_reward = {
+			224 = {
+				if = {
+					limit = { is_controlled_by = ROOT }
+					add_victory_points = {
+						province = 1983
+						value = 7
+					}
+					add_victory_points = {
+						province = 3667
+						value = 5
+					}
+					add_victory_points = {
+						province = 9101
+						value = 5
+					}
+					add_building_construction = {
+						type = industrial_complex
+						level = 2
+						instant_build = yes
+					}
+					add_extra_state_shared_building_slots = 2
+					add_manpower = 145000
+				}
+			}
 			#Victory point wizardry
 		}
 		ai_will_do = {
@@ -535,6 +565,10 @@ focus_tree = {
 		}
 		completion_reward = {
 			## Slightly reduces debuffs from Zaarin
+			swap_ideas = {
+				remove_idea = EOH_demetrius_zaarin_1
+				add_idea = EOH_demetrius_zaarin_2
+			}
 			mark_focus_tree_layout_dirty = yes
 		}
 		ai_will_do = {
@@ -559,6 +593,10 @@ focus_tree = {
 		}
 		completion_reward = {
 			## gets rid of debuffs from zaarin, recruits him, tech bonus for w/e he was working on, palpatine likes you less
+			annex_country = {
+				target = ZAA
+			}
+			remove_idea = EOH_demetrius_zaarin_2
 		}
 		ai_will_do = {
 			factor = 1
@@ -581,6 +619,11 @@ focus_tree = {
 		}
 		completion_reward = {
 			## gets rid of debuffs from zaarin, noghri like you less
+			custom_effect_tooltip = EOH_order_noghri_tt
+			annex_country = {
+				target = ZAA
+			}
+			remove_idea = EOH_demetrius_zaarin_2
 		}
 		ai_will_do = {
 			factor = 1
@@ -602,8 +645,11 @@ focus_tree = {
 		mutually_exclusive = {
 		}
 		completion_reward = {
-			remove_ideas = EOH_nirauan_1
-			add_ideas = EOH_nirauan_2
+			swap_ideas = {
+				remove_idea = EOH_nirauan_1
+				add_idea = EOH_nirauan_2
+			}
+			
 		}
 		ai_will_do = {
 			factor = 1
@@ -616,6 +662,10 @@ focus_tree = {
 		relative_position_id = EOH_taming_nirauan
 		x = -4
 		y = 1
+		available = {
+			NOT = { army_manpower_in_state = { state = 221 amount < 100000 } }
+			NOT = { army_manpower_in_state = { state = 229 amount < 100000 } }
+		}
 		prerequisite = {
 			focus = EOH_taming_nirauan
 		}
@@ -627,9 +677,15 @@ focus_tree = {
 		completion_reward = {
 			229 = {
 				add_manpower = -10000
+				add_state_modifier = {
+					modifier = {attrition_for_controller = -1.0}
+				}
 			}
 			221 = {
 				add_manpower = -10000
+				add_state_modifier = {
+					modifier = {attrition_for_controller = -1.0}
+				}
 			}
 		}
 		ai_will_do = {
@@ -787,11 +843,26 @@ focus_tree = {
 		}
 		completion_reward = {
 			#Victory point wizardry
-			239 = {
-				add_building_construction = {
-					type = infrastructure
-					level = 1
-					instant_build = yes
+			228 = {
+				if = {
+					limit = { is_controlled_by = ROOT }
+					add_victory_points = {
+						province = 9208
+						value = 1
+					}
+					add_victory_points = {
+						province = 9177
+						value = 1
+					}
+					add_victory_points = {
+						province = 9103
+						value = 1
+					}
+					add_building_construction = {
+						type = infrastructure
+						level = 1
+						instant_build = yes
+					}
 				}
 			}
 		}
@@ -813,28 +884,35 @@ focus_tree = {
 		}
 		completion_reward = {
 			#Victory point wizardry
-			239 = {
-				add_building_construction = {
-					type = industrial_complex
-					level = 1
-					instant_build = yes
+			228 = {
+				if = {
+					limit = { is_controlled_by = ROOT }
+					add_victory_points = {
+						province = 9102
+						value = 10
+					}
+					add_building_construction = {
+						type = industrial_complex
+						level = 2
+						instant_build = yes
+					}
+					add_extra_state_shared_building_slots = 2
 				}
-				add_extra_state_shared_building_slots = 1
 			}
 			add_resource = {
 				type = steel
 				amount = 6
-				state = 239
+				state = 228
 			}
 			add_resource = {
 				type = tungsten
 				amount = 16
-				state = 239
+				state = 228
 			}
 			add_resource = {
 				type = chromium
 				amount = 6
-				state = 239
+				state = 228
 			}
 		}
 		ai_will_do = {
@@ -932,6 +1010,13 @@ focus_tree = {
 		search_filters = {
 		}
 		completion_reward = {
+			22 = {
+				add_victory_points = {
+					province = 4725
+					value = 5
+				}
+			}
+			
 			#victory point magic, buildings
 		}
 		ai_will_do = {
@@ -951,6 +1036,23 @@ focus_tree = {
 		search_filters = {
 		}
 		completion_reward = {
+			213 = {
+				if = {
+					limit = { is_controlled_by = ROOT }
+					add_victory_points = {
+						province = 8866
+						value = 5
+					}
+					add_building_construction = {
+						type = naval_base
+						level = 2
+						province = 8866
+						instant_build = yes
+					}
+					set_state_flag = FRA_colonial_naval_bases
+				}
+			}
+			
 			#victory point magic, buildings
 		}
 		ai_will_do = {
@@ -1019,6 +1121,7 @@ focus_tree = {
 		}
 		completion_reward = {
 			## kills fel, noghri like you less
+			custom_effect_tooltip = EOH_order_noghri_tt
 		}
 		ai_will_do = {
 			factor = 1
@@ -1065,6 +1168,7 @@ focus_tree = {
 		}
 		completion_reward = {
 			# kills oxtroe, noghri like you less
+			custom_effect_tooltip = EOH_order_noghri_tt
 		}
 		ai_will_do = {
 			factor = 1
@@ -1091,6 +1195,17 @@ focus_tree = {
 		search_filters = {
 		}
 		completion_reward = {
+			220 = {
+				if = {
+					limit = { is_controlled_by = ROOT }
+					add_building_construction = {
+						type = industrial_complex
+						level = 2
+						instant_build = yes
+					}
+					add_extra_state_shared_building_slots = 5
+				}
+			}
 			#victory point magic, buildings
 		}
 		ai_will_do = {
@@ -1113,8 +1228,10 @@ focus_tree = {
 		mutually_exclusive = {
 		}
 		completion_reward = {
-			remove_ideas = EOH_thrawn_unknown_regions
-			add_ideas = EOH_thrawn_unknown_regions_2
+			swap_ideas = {
+				remove_idea = EOH_thrawn_unknown_regions
+				add_idea = EOH_thrawn_unknown_regions_2
+			}
 			mark_focus_tree_layout_dirty = yes
 		}
 		ai_will_do = {
@@ -1160,6 +1277,7 @@ focus_tree = {
 		}
 		completion_reward = {
 			remove_ideas = EOH_thrawn_unknown_regions_2
+			remove_ideas = EOH_thrawn_guardian
 			mark_focus_tree_layout_dirty = yes
 		}
 		ai_will_do = {

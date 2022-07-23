@@ -1,6 +1,31 @@
 ideas = { #test
 
 	country = {
+		EOH_thrawn_guardian= {
+			allowed = {
+				always = no
+			}
+			allowed_civil_war = {
+				always = yes
+			}
+			removal_cost = -1
+			modifier = {
+				ai_badass_factor = 0.5
+				conscription_factor = 0.2
+			}
+		}
+		EOH_thrawn_guardian_external= {
+			allowed = {
+				always = no
+			}
+			allowed_civil_war = {
+				always = yes
+			}
+			removal_cost = -1
+			modifier = {
+				imperial_drift = 0.05
+			}
+		}
 		EOH_nirauan_1= {			
 			allowed = {
 				always = no
@@ -10,7 +35,10 @@ ideas = { #test
 			}
 			removal_cost = -1
 			modifier = {
-				##some negatives bc wild planet
+				local_resources_factor = -0.2
+				production_speed_infrastructure_factor = -0.2
+				global_building_slots_factor = -0.2
+				production_speed_buildings_factor = -0.25
 			}
 		}
 		EOH_nirauan_2= {			
@@ -22,7 +50,24 @@ ideas = { #test
 			}
 			removal_cost = -1
 			modifier = {
+				local_resources_factor = -0.2
+				global_building_slots = -0.2
+				production_speed_buildings_factor = -0.25
 				production_speed_infrastructure_factor = 0.1
+			}
+		}
+		EOH_nirauan_3= {			
+			allowed = {
+				always = no
+			}
+			allowed_civil_war = {
+				always = yes
+			}
+			removal_cost = -1
+			modifier = {
+				EOH = {
+					set_variable = {legitimacy_emp_equillibrium = legitimacy_emp_equillibrium+5}
+				}
 			}
 		}
 		EOH_demetrius_zaarin_1= {			
@@ -33,8 +78,17 @@ ideas = { #test
 				always = yes
 			}
 			removal_cost = -1
+			on_add = {
+				add_to_variable = { legitimacy_emp_equillibrium = -10 }
+				add_to_variable = { resource_income_modifier = -0.05 }
+				add_to_temp_variable = {
+					var = resource_income #(doesn't matter what)
+					value = -0.05
+					tooltip = increase_trade_export_tooltip
+				  }
+			}
 			modifier = {
-				## Trade income lower
+				supply_factor = -0.2
 			}
 		}
 		EOH_demetrius_zaarin_2= {			
@@ -45,8 +99,17 @@ ideas = { #test
 				always = yes
 			}
 			removal_cost = -1
+			on_add = {
+				add_to_variable = { legitimacy_emp_equillibrium = 5 }
+				add_to_variable = { resource_income_modifier = 0.05 }
+				add_to_temp_variable = {
+					var = resource_income #(doesn't matter what)
+					value = 0.05
+					tooltip = increase_trade_export_tooltip
+				}
+			}
 			modifier = {
-				## Trade income slightly less low
+				supply_factor = -0.1
 			}
 		}
 		EOH_chiss_imperial_offensive= {			
@@ -284,7 +347,7 @@ ideas = { #test
 			removal_cost = -1
 			modifier = {
 				political_power_gain = 0.1
-				fascism_drift = -0.05
+				imperial_drift = -0.05
 			}
 		}
 		EOH_dark_hand_2= {			
@@ -297,7 +360,7 @@ ideas = { #test
 			removal_cost = -1
 			modifier = {
 				political_power_gain = 0.2
-				fascism_drift = -0.1
+				imperial_drift = -0.1
 				war_support_weekly = -0.035
 				stability_weekly = -0.035
 			}
