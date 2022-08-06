@@ -1,6 +1,6 @@
 focus_tree = {
 	id = NEW
-	continuous_focus_position = { x = 0 y = 1000 } 
+	continuous_focus_position = { x = 0 y = 1800 } 
 	country = {
 		factor = 0
 		modifier = {
@@ -21,8 +21,12 @@ focus_tree = {
 		prerequisite = { focus = REB_the_first_chief_of_state  }
 		mutually_exclusive = { focus = REB_leia_organa_a  } mutually_exclusive = { focus = REB_mon_mothma_a  }
 		completion_reward = {
-			retire_country_leader = yes
-			recruit_character = borsk_feylya
+			recruit_character = REB_borsk_feylya
+			promote_character = {
+				character = REB_borsk_feylya
+				ideology = rebel_ideology
+			}	
+			retire_character = REB_mon_mothma
 		}
 	}
 
@@ -104,8 +108,17 @@ focus_tree = {
 		prerequisite = { focus = REB_the_first_chief_of_state  }
 		mutually_exclusive = { focus = REB_mon_mothma_a  } mutually_exclusive = { focus = REB_borskfeylya_a  }
 		completion_reward = {
-			retire_country_leader = yes
-			recruit_character = leia_organa
+			promote_character = {
+				character = REB_leia
+				ideology = rebel_ideology
+			}
+			hidden_effect = {
+				promote_character = {
+					character = REB_leia
+					ideology = rebel_ideology
+				}
+				retire_character = REB_mon_mothma
+			}
 		}
 	}
 
