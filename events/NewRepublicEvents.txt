@@ -4,70 +4,167 @@
 
 add_namespace = newrepevent
 add_namespace = newrepleg
+add_namespace = new_rep_black
+
 
 add_namespace = new_republic_focus
 
 ### COUTNRY EVENTS ###
 
 country_event = {
-	id = new_republic_focus.2
-	title = new_republic_focus.2.t
+	id = new_rep_black.1
+	title = "Breaking out the Captives"
+	desc = new_rep_black.1.desc
+	picture = GFX_report_event
+	is_triggered_only = yes
+
+    option = {
+		name = "Recruit the Captives"
+		trigger = {
+            has_country_flag = ties_with_criminals
+        }
+		set_country_flag = taxation_laws_discussion
+		custom_effect_tooltip = new_republic_focus_tt_2
+	}
+	option = {
+		name = "Let them cause chaos"
+		EMP = {
+			add_stability = -0.05
+			add_timed_idea = {
+				idea = chaos_in_the_streets
+				days = 365
+			}
+		}
+	}
+}
+country_event = {
+	id = new_rep_black.2
+	title = "A favour for a favour"
 	desc = new_republic_focus.2.desc
 	picture = GFX_report_event
 	is_triggered_only = yes
 
     option = {
-		name = new_republic_focus.2.a
+		name = "Ask for weapons"
+		add_equipment_to_stockpile = {
+			type = infantry_equipment
+			amount = 5000
+			producer = BLA
+		}
+	}
+	option = {
+		name = "Ask for troops"
+		trigger = {
+            has_country_flag = ties_with_criminals
+        }
+	}
+	option = {
+		name = "Ask for more disruptions"
+		EMP = {
+			add_stability = -0.05
+			add_timed_idea = {
+				idea = chaos_in_the_streets_2
+				days = 365
+			}
+		}
+	}
+}
+
+country_event = {
+	id = new_republic_focus.2
+	title = "Our Taxation Policy"
+	desc = new_republic_focus.2.desc
+	picture = GFX_report_event
+	is_triggered_only = yes
+
+    option = {
+		name = "Implement new taxs"
 		set_country_flag = taxation_laws_discussion
 		custom_effect_tooltip = new_republic_focus_tt_2
-		add_stability = 0.03
-		add_popularity = {
-			ideology = corporation
-			popularity = 0.02
+		add_stability = -0.05
+		add_ideas = new_tax_laws_new_rep
+		add_to_temp_variable = {
+			var = tax_income_increase #(doesn't matter what)
+			value = 0.10
+			tooltip = tax_income_tooltip
 		}
-		custom_effect_tooltip = new_republic_focus_tt_8
-		set_country_flag = new_republic_taxation_focus
 	}
 	option = {
-		name = new_republic_focus.2.b
-		set_country_flag = administration_laws_discussion
-		custom_effect_tooltip = new_republic_focus_tt_3
+		name = "Cut down on tax laws"
+		set_country_flag = taxation_laws_discussion
+		custom_effect_tooltip = new_republic_focus_tt_2
 		add_stability = 0.05
-		add_war_support = -0.02
-		custom_effect_tooltip = new_republic_focus_tt_7
-		hidden_effect = {
-			add_ideas = {
-				new_republic_advisor_cost_boost
-			}
+		add_ideas = cut_down_tax_new_rep
+		add_to_temp_variable = {
+			var = tax_income_increase #(doesn't matter what)
+			value = -0.10
+			tooltip = tax_income_tooltip
+		}
+	}
+}
+country_event = {
+	id = new_republic_focus.3
+	title = "Our Administration Policy"
+	desc = new_republic_focus.3.desc
+	picture = GFX_report_event
+	is_triggered_only = yes
+
+    option = {
+		name = "Streamline the bureaucracy"
+		add_stability = -0.05
+		subtract_from_variable = { bureaucracy = 0.10 }
+		add_to_temp_variable = {
+			var = bureaucracy_temp #(doesn't matter what)
+			value = -0.10
+			tooltip = bureaucracy_increase_tooltip
 		}
 	}
 	option = {
-		name = new_republic_focus.2.c
-		set_country_flag = judicial_laws_discussion
-		custom_effect_tooltip = new_republic_focus_tt_4
-		add_stability = 0.03
-		custom_effect_tooltip = new_republic_focus_tt_6
-		hidden_effect = {
-			add_ideas = {
-				new_republic_political_power_boost
-			}
+		name = "Bring back the laws of the Republic"
+		add_stability = 0.05
+		add_to_variable = { bureaucracy = 0.10 }
+		add_to_temp_variable = {
+			var = bureaucracy_temp #(doesn't matter what)
+			value = 0.10
+			tooltip = bureaucracy_increase_tooltip
 		}
 	}
+}
+country_event = {
+	id = new_republic_focus.4
+	title = "Our Adjudication Policy"
+	desc = new_republic_focus.4.desc
+	picture = GFX_report_event
+	is_triggered_only = yes
+
+    option = {
+		name = "Crack down on crime"
+		add_stability = -0.05
+		add_ideas = new_tax_laws_new_rep
+	}
 	option = {
-		name = new_republic_focus.2.d
-		set_country_flag = military_laws_discussion
-		custom_effect_tooltip = new_republic_focus_tt_5
-		add_war_support = 0.05
-		add_popularity = {
-			ideology = neutrality
-			popularity = 0.02
-		}
-		custom_effect_tooltip = new_republic_focus_tt_9
-		hidden_effect = {
-			add_ideas = {
-				new_republic_organisation_boost
-			}
-		}
+		name = "Further ties with criminals"
+		set_country_flag = ties_with_criminals
+		corruption_increase = yes
+		add_stability = 0.05
+	}
+}
+country_event = {
+	id = new_republic_focus.5
+	title = "Our Military Policy"
+	desc = new_republic_focus.5.desc
+	picture = GFX_report_event
+	is_triggered_only = yes
+
+    option = {
+		name = "Invest more into the military"
+		set_country_flag = taxation_laws_discussion
+		add_ideas = military_rep_focus
+	}
+	option = {
+		name = "More funding for the navy"
+		set_country_flag = taxation_laws_discussion
+		add_ideas = navy_rep_focus
 	}
 }
 
