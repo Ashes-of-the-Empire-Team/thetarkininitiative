@@ -35,15 +35,7 @@ ideas = {
 			removal_cost = -1
 			
 			modifier = {
-
-			}
-			on_add = {
-				add_to_variable = { tax_multip = 0.10 }
-				add_to_temp_variable = {
-					var = tax_income_increase #(doesn't matter what)
-					value = 0.10
-					tooltip = tax_income_tooltip
-				  }
+				tax_modifier = 0.10
 			}
 		}
 		cut_down_tax_new_rep = {
@@ -55,15 +47,33 @@ ideas = {
 			removal_cost = -1
 			
 			modifier = {
-
+				tax_modifier = -0.10
 			}
-			on_add = {
-				subtract_from_variable = { tax_multip = 0.10 }
-				add_to_temp_variable = {
-					var = tax_income_increase #(doesn't matter what)
-					value = -0.10
-					tooltip = tax_income_tooltip
-				}
+		}
+		corp_cut_tax = {
+			picture = unknown
+			allowed = {
+				always = yes
+			}
+
+			removal_cost = -1
+			
+			modifier = {
+				tax_modifier = -0.10
+				corp_factory_income_modifier = 0.10
+			}
+		}
+		corp_cut_tax_2 = {
+			picture = unknown
+			allowed = {
+				always = yes
+			}
+
+			removal_cost = -1
+			
+			modifier = {
+				tax_modifier = -0.15
+				corp_factory_income_modifier = 0.20
 			}
 		}
 		military_rep_focus = {
@@ -130,6 +140,20 @@ ideas = {
 			
 			modifier = {
 				army_org_factor = 0.05
+			}
+		}
+		bacta_crisis = {
+			picture = unknown
+			allowed = {
+				always = yes
+			}
+
+			removal_cost = -1
+			
+			modifier = {
+				monthly_population = -0.4
+				consumer_goods_factor = 0.05
+				political_power_cost = 0.15
 			}
 		}
 	}
