@@ -77,7 +77,11 @@ focus_tree = {
 				idea = rebuild_coruscant
 				days = 180
 			}
-			subtract_from_variable = { currency_amount^primary_currency = 100 }
+			add_to_variable = {
+				var = currency_amount^primary_currency #(doesn't matter what)
+				value = -100
+				tooltip = cost_focus_tooltip
+			  } 
 		}
 	}
 
@@ -197,6 +201,17 @@ focus_tree = {
 			FOCUS_FILTER_INDUSTRY
 		}
 		prerequisite = { focus = REB_rebuild_coruscant  }
+		completion_reward = {
+			add_timed_idea = {
+				idea = the_civilian_sector
+				days = 180
+			}
+			add_to_variable = {
+				var = currency_amount^primary_currency #(doesn't matter what)
+				value = -100
+				tooltip = cost_focus_tooltip
+			  } 
+		}
 	}
 
 	#Expand the Rail System
@@ -223,6 +238,8 @@ focus_tree = {
 			FOCUS_FILTER_INDUSTRY
 		}
 		prerequisite = { focus = REB_expand_the_rail_system  }
+		mutually_exclusive = { focus = REB_national_rail_company  }
+
 		completion_reward = {
 			
 		}
@@ -239,6 +256,7 @@ focus_tree = {
 			FOCUS_FILTER_INDUSTRY
 		}
 		prerequisite = { focus = REB_expand_the_rail_system  }
+		mutually_exclusive = { focus = REB_foreign_experts  }
 	}
 
 	#The War on Crime
@@ -253,7 +271,7 @@ focus_tree = {
 		}
 		prerequisite = { focus = REB_rebuild_coruscant  }
 		completion_reward = {
-			
+			unlock_decision_category_tooltip = REB_the_war_on_crime_decisions
 		}
 	}
 
@@ -314,6 +332,13 @@ focus_tree = {
 			FOCUS_FILTER_INDUSTRY
 		}
 		prerequisite = { focus = REB_secure_a_source_of_bacta  }
+		completion_reward = {
+			add_to_variable = {
+				var = currency_amount^primary_currency #(doesn't matter what)
+				value = -250
+				tooltip = cost_focus_tooltip
+			  } 
+		}
 	}
 
 	#New Republic Police Force
@@ -540,7 +565,7 @@ focus_tree = {
 		id = REB_no_more_corrupt_governing
 		icon = GFX_goal_unknown
 		x = 13
-		y = 10
+		y = 10 
 		cost = 7.2
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
@@ -573,6 +598,9 @@ focus_tree = {
 			FOCUS_FILTER_POLITICAL
 		}
 		prerequisite = { focus = REB_restoration_of_the_jedi_temple  }
+		completion_reward = {
+			country_event = new_republic_focus.6
+		}
 	}
 
 	#The Beacon of Hope
@@ -677,6 +705,13 @@ focus_tree = {
 			FOCUS_FILTER_INDUSTRY
 		}
 		prerequisite = { focus = REB_members_of_the_new_republic  }
+		completion_reward = {
+			add_to_variable = {
+				var = currency_amount^primary_currency #(doesn't matter what)
+				value = -100
+				tooltip = cost_focus_tooltip
+			  } 
+		}
 	}
 
 	#Prepare Coruscant
