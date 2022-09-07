@@ -1,5 +1,5 @@
 ###########################################################################################################################
-###################################################Piracy Decisions########################################################
+################################################## Piracy Decisions #######################################################
 ###########################################################################################################################
 PEN_pirate_activity_category = {
 
@@ -266,7 +266,7 @@ PEN_pirate_activity_category = {
 }
 
 ###########################################################################################################################
-########################################Bounty of the Outer Sector Decisions###############################################
+####################################### Bounty of the Outer Sector Decisions ##############################################
 ###########################################################################################################################
 PEN_bounty_outer_sector_category = {
     PEN_bounty_ = {
@@ -290,7 +290,7 @@ PEN_bounty_outer_sector_category = {
 }
 
 ###########################################################################################################################
-########################################Internal Factions Decisions########################################################
+####################################### Internal Factions Decisions #######################################################
 ###########################################################################################################################
 PEN_internal_factions_category = {
     #Ardus Kaine Faction Decisions
@@ -308,12 +308,12 @@ PEN_internal_factions_category = {
                 AND = {
                     check_variable = {
                         var = ardus_loyalty
-                        value = pen_loyalty_influence_cap
+                        value = PEN_ardus_loyalty_max_cap
                         compare = greater_than_or_equals
                     }
                     check_variable = {
                         var = ardus_influence
-                        value = pen_loyalty_influence_cap
+                        value = PEN_ardus_influence_max_cap
                         compare = greater_than_or_equals
                     }
                 }
@@ -340,21 +340,21 @@ PEN_internal_factions_category = {
             custom_effect_tooltip = PEN_promote_faction_loc
             add_to_variable = {
                 var = ardus_loyalty
-                value = 10
+                value = 5
             }
             clamp_variable = {
                 var = ardus_loyalty
-                min = 0
-                max = pen_loyalty_influence_cap
+                min = PEN_ardus_loyalty_min_cap
+                max = PEN_ardus_loyalty_max_cap
             }
             add_to_variable = {
                 var = ardus_influence
-                value = 10
+                value = 5
             }
             clamp_variable = {
                 var = ardus_influence
                 min = 0
-                max = pen_loyalty_influence_cap
+                max = PEN_ardus_influence_max_cap
             }
         }
     }
@@ -373,7 +373,7 @@ PEN_internal_factions_category = {
                 AND = {
                     check_variable = {
                         var = ardus_loyalty
-                        value = 0
+                        value = PEN_ardus_loyalty_min_cap
                         compare = less_than_or_equals
                     }
                     check_variable = {
@@ -405,27 +405,27 @@ PEN_internal_factions_category = {
             custom_effect_tooltip = PEN_discredit_faction_loc
             subtract_from_variable = {
                 var = ardus_loyalty
-                value = 10
+                value = 5
             }
             clamp_variable = {
                 var = ardus_loyalty
-                min = 0
-                max = pen_loyalty_influence_cap
+                min = PEN_ardus_loyalty_min_cap
+                max = PEN_ardus_loyalty_max_cap
             }
             subtract_from_variable = {
                 var = ardus_influence
-                value = 10
+                value = 5
             }
             clamp_variable = {
                 var = ardus_influence
                 min = 0
-                max = pen_loyalty_influence_cap
+                max = PEN_ardus_influence_max_cap
             }
         }
     }
 
     #Dynamic Automata Faction Decisions
-    PEN_internal_promote_elta_faction = {
+    PEN_internal_promote_automata_faction = {
         priority = 10
         icon = eng_ally_imperialist_coup
 
@@ -438,13 +438,13 @@ PEN_internal_factions_category = {
             NOT = {
                 AND = {
                     check_variable = {
-                        var = elta_loyalty
-                        value = pen_loyalty_influence_cap
+                        var = automata_loyalty
+                        value = PEN_automata_loyalty_max_cap
                         compare = greater_than_or_equals
                     }
                     check_variable = {
-                        var = elta_influence
-                        value = pen_loyalty_influence_cap
+                        var = automata_influence
+                        value = PEN_automata_influence_max_cap
                         compare = greater_than_or_equals
                     }
                 }
@@ -470,27 +470,27 @@ PEN_internal_factions_category = {
             }
             custom_effect_tooltip = PEN_promote_faction_loc
             add_to_variable = {
-                var = elta_loyalty
-                value = 10
+                var = automata_loyalty
+                value = 5
             }
             clamp_variable = {
-                var = elta_loyalty
-                min = 0
-                max = pen_loyalty_influence_cap
+                var = automata_loyalty
+                min = PEN_automata_loyalty_min_cap
+                max = PEN_automata_loyalty_max_cap
             }
             add_to_variable = {
-                var = elta_influence
-                value = 10
+                var = automata_influence
+                value = 5
             }
             clamp_variable = {
-                var = elta_influence
+                var = automata_influence
                 min = 0
-                max = pen_loyalty_influence_cap
+                max = PEN_automata_influence_max_cap
             }
         }
     }
 
-    PEN_internal_discredit_elta_faction = {
+    PEN_internal_discredit_automata_faction = {
         priority = 10
         icon = eng_ally_imperialist_coup
         
@@ -503,12 +503,12 @@ PEN_internal_factions_category = {
             NOT = {
                 AND = {
                     check_variable = {
-                        var = elta_loyalty
-                        value = 0
+                        var = automata_loyalty
+                        value = PEN_automata_loyalty_min_cap
                         compare = less_than_or_equals
                     }
                     check_variable = {
-                        var = elta_influence
+                        var = automata_influence
                         value = 0
                         compare = less_than_or_equals
                     }
@@ -535,28 +535,28 @@ PEN_internal_factions_category = {
             }
             custom_effect_tooltip = PEN_discredit_faction_loc
             subtract_from_variable = {
-                var = elta_loyalty
-                value = 10
+                var = automata_loyalty
+                value = 5
             }
             clamp_variable = {
-                var = elta_loyalty
-                min = 0
-                max = pen_loyalty_influence_cap
+                var = automata_loyalty
+                min = PEN_automata_loyalty_min_cap
+                max = PEN_automata_loyalty_max_cap
             }
             subtract_from_variable = {
-                var = elta_influence
-                value = 10
+                var = automata_influence
+                value = 5
             }
             clamp_variable = {
-                var = elta_influence
+                var = automata_influence
                 min = 0
-                max = pen_loyalty_influence_cap
+                max = PEN_automata_influence_max_cap
             }
         }
     }
 
     #Galentro Heavy Works Faction Decisions
-    PEN_internal_promote_wyrn_faction = {
+    PEN_internal_promote_galentro_faction = {
         priority = 10
         icon = eng_ally_imperialist_coup
 
@@ -569,13 +569,13 @@ PEN_internal_factions_category = {
             NOT = {
                 AND = {
                     check_variable = {
-                        var = wyrn_loyalty
-                        value = pen_loyalty_influence_cap
+                        var = galentro_loyalty
+                        value = PEN_galentro_loyalty_max_cap
                         compare = greater_than_or_equals
                     }
                     check_variable = {
-                        var = wyrn_influence
-                        value = pen_loyalty_influence_cap
+                        var = galentro_influence
+                        value = PEN_galentro_influence_max_cap
                         compare = greater_than_or_equals
                     }
                 }
@@ -601,27 +601,27 @@ PEN_internal_factions_category = {
             }
             custom_effect_tooltip = PEN_promote_faction_loc
             add_to_variable = {
-                var = wyrn_loyalty
-                value = 10
+                var = galentro_loyalty
+                value = 5
             }
             clamp_variable = {
-                var = wyrn_loyalty
-                min = 0
-                max = pen_loyalty_influence_cap
+                var = galentro_loyalty
+                min = PEN_galentro_loyalty_min_cap
+                max = PEN_galentro_loyalty_max_cap
             }
             add_to_variable = {
-                var = wyrn_influence
-                value = 10
+                var = galentro_influence
+                value = 5
             }
             clamp_variable = {
-                var = wyrn_influence
+                var = galentro_influence
                 min = 0
-                max = pen_loyalty_influence_cap
+                max = PEN_galentro_influence_max_cap
             }
         }
     }
 
-    PEN_internal_discredit_wyrn_faction = {
+    PEN_internal_discredit_galentro_faction = {
         priority = 10
         icon = eng_ally_imperialist_coup
         
@@ -634,12 +634,12 @@ PEN_internal_factions_category = {
             NOT = {
                 AND = {
                     check_variable = {
-                        var = wyrn_loyalty
-                        value = 0
+                        var = galentro_loyalty
+                        value = PEN_galentro_loyalty_min_cap
                         compare = less_than_or_equals
                     }
                     check_variable = {
-                        var = wyrn_influence
+                        var = galentro_influence
                         value = 0
                         compare = less_than_or_equals
                     }
@@ -666,28 +666,28 @@ PEN_internal_factions_category = {
             }
             custom_effect_tooltip = PEN_discredit_faction_loc
             subtract_from_variable = {
-                var = wyrn_loyalty
-                value = 10
+                var = galentro_loyalty
+                value = 5
             }
             clamp_variable = {
-                var = wyrn_loyalty
-                min = 0
-                max = pen_loyalty_influence_cap
+                var = galentro_loyalty
+                min = PEN_galentro_loyalty_min_cap
+                max = PEN_galentro_loyalty_max_cap
             }
             subtract_from_variable = {
-                var = wyrn_influence
-                value = 10
+                var = galentro_influence
+                value = 5
             }
             clamp_variable = {
-                var = wyrn_influence
+                var = galentro_influence
                 min = 0
-                max = pen_loyalty_influence_cap
+                max = PEN_galentro_influence_max_cap
             }
         }
     }
 
     #VFCZ Faction Decisions
-    PEN_internal_promote_gregor_faction = {
+    PEN_internal_promote_vfcz_faction = {
         priority = 10
         icon = eng_ally_imperialist_coup
 
@@ -700,13 +700,13 @@ PEN_internal_factions_category = {
             NOT = {
                 AND = {
                     check_variable = {
-                        var = gregor_loyalty
-                        value = pen_loyalty_influence_cap
+                        var = vfcz_loyalty
+                        value = PEN_vfcz_loyalty_max_cap
                         compare = greater_than_or_equals
                     }
                     check_variable = {
-                        var = gregor_influence
-                        value = pen_loyalty_influence_cap
+                        var = vfcz_influence
+                        value = PEN_vfcz_influence_max_cap
                         compare = greater_than_or_equals
                     }
                 }
@@ -732,27 +732,27 @@ PEN_internal_factions_category = {
             }
             custom_effect_tooltip = PEN_promote_faction_loc
             add_to_variable = {
-                var = gregor_loyalty
-                value = 10
+                var = vfcz_loyalty
+                value = 5
             }
             clamp_variable = {
-                var = gregor_loyalty
-                min = 0
-                max = pen_loyalty_influence_cap
+                var = vfcz_loyalty
+                min = PEN_vfcz_loyalty_min_cap
+                max = PEN_vfcz_loyalty_max_cap
             }
             add_to_variable = {
-                var = gregor_influence
-                value = 10
+                var = vfcz_influence
+                value = 5
             }
             clamp_variable = {
-                var = gregor_influence
+                var = vfcz_influence
                 min = 0
-                max = pen_loyalty_influence_cap
+                max = PEN_vfcz_influence_max_cap
             }
         }
     }
 
-    PEN_internal_discredit_gregor_faction = {
+    PEN_internal_discredit_vfcz_faction = {
         priority = 10
         icon = eng_ally_imperialist_coup
         
@@ -765,12 +765,12 @@ PEN_internal_factions_category = {
             NOT = {
                 AND = {
                     check_variable = {
-                        var = gregor_loyalty
-                        value = 0
+                        var = vfcz_loyalty
+                        value = PEN_vfcz_loyalty_min_cap
                         compare = less_than_or_equals
                     }
                     check_variable = {
-                        var = gregor_influence
+                        var = vfcz_influence
                         value = 0
                         compare = less_than_or_equals
                     }
@@ -797,28 +797,28 @@ PEN_internal_factions_category = {
             }
             custom_effect_tooltip = PEN_discredit_faction_loc
             subtract_from_variable = {
-                var = gregor_loyalty
-                value = 10
+                var = vfcz_loyalty
+                value = 5
             }
             clamp_variable = {
-                var = gregor_loyalty
-                min = 0
-                max = pen_loyalty_influence_cap
+                var = vfcz_loyalty
+                min = PEN_vfcz_loyalty_min_cap
+                max = PEN_vfcz_loyalty_max_cap
             }
             subtract_from_variable = {
-                var = gregor_influence
-                value = 10
+                var = vfcz_influence
+                value = 5
             }
             clamp_variable = {
-                var = gregor_influence
+                var = vfcz_influence
                 min = 0
-                max = pen_loyalty_influence_cap
+                max = PEN_vfcz_influence_max_cap
             }
         }
     }
 
     #Imperial Governors Faction Decisions
-    PEN_internal_promote_ib_faction = {
+    PEN_internal_promote_governors_faction = {
         priority = 10
         icon = eng_ally_imperialist_coup
 
@@ -831,13 +831,13 @@ PEN_internal_factions_category = {
             NOT = {
                 AND = {
                     check_variable = {
-                        var = ib_loyalty
-                        value = pen_loyalty_influence_cap
+                        var = governors_loyalty
+                        value = PEN_governors_loyalty_max_cap
                         compare = greater_than_or_equals
                     }
                     check_variable = {
-                        var = ib_influence
-                        value = pen_loyalty_influence_cap
+                        var = governors_influence
+                        value = PEN_governors_influence_max_cap
                         compare = greater_than_or_equals
                     }
                 }
@@ -863,27 +863,27 @@ PEN_internal_factions_category = {
             }
             custom_effect_tooltip = PEN_promote_faction_loc
             add_to_variable = {
-                var = ib_loyalty
-                value = 10
+                var = governors_loyalty
+                value = 5
             }
             clamp_variable = {
-                var = ib_loyalty
-                min = 0
-                max = pen_loyalty_influence_cap
+                var = governors_loyalty
+                min = PEN_governors_loyalty_min_cap
+                max = PEN_governors_loyalty_max_cap
             }
             add_to_variable = {
-                var = ib_influence
-                value = 10
+                var = governors_influence
+                value = 5
             }
             clamp_variable = {
-                var = ib_influence
+                var = governors_influence
                 min = 0
-                max = pen_loyalty_influence_cap
+                max = PEN_governors_influence_max_cap
             }
         }
     }
 
-    PEN_internal_discredit_ib_faction = {
+    PEN_internal_discredit_governors_faction = {
         priority = 10
         icon = eng_ally_imperialist_coup
         
@@ -896,12 +896,12 @@ PEN_internal_factions_category = {
             NOT = {
                 AND = {
                     check_variable = {
-                        var = ib_loyalty
-                        value = 0
+                        var = governors_loyalty
+                        value = PEN_governors_loyalty_min_cap
                         compare = less_than_or_equals
                     }
                     check_variable = {
-                        var = ib_influence
+                        var = governors_influence
                         value = 0
                         compare = less_than_or_equals
                     }
@@ -928,22 +928,22 @@ PEN_internal_factions_category = {
             }
             custom_effect_tooltip = PEN_discredit_faction_loc
             subtract_from_variable = {
-                var = ib_loyalty
-                value = 10
+                var = governors_loyalty
+                value = 5
             }
             clamp_variable = {
-                var = ib_loyalty
-                min = 0
-                max = pen_loyalty_influence_cap
+                var = governors_loyalty
+                min = PEN_governors_loyalty_min_cap
+                max = PEN_governors_loyalty_max_cap
             }
             subtract_from_variable = {
-                var = ib_influence
-                value = 10
+                var = governors_influence
+                value = 5
             }
             clamp_variable = {
-                var = ib_influence
+                var = governors_influence
                 min = 0
-                max = pen_loyalty_influence_cap
+                max = PEN_governors_influence_max_cap
             }
         }
     }
