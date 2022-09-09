@@ -72,6 +72,18 @@ list_for_influencers_or_whatever = {
         }
     }
 }
+test_corp_efficiency = {
+    if = {
+        limit = {
+            check_variable = { production_output_efficiency_1 < production_output_1 }
+        }
+        set_temp_variable = { production_output_1_calc = production_output_1 }
+        multiply_temp_variable = { production_output_1_calc = production_output_1_calc}
+        divide_temp_variable = { production_output_1_calc = production_output_growth }
+        multiply_temp_variable = { production_output_1_calc = 0.001 }
+        add_to_variable = { production_output_efficiency_1 = production_output_1_calc }
+    }
+}
 percent_calc_corp = {
     every_country = {
         limit = {
