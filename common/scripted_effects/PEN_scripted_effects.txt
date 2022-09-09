@@ -1,276 +1,1086 @@
-PEN_set_internal_factions = {
-    #Loyalty and Influence Cap
+##########################################################
+################# Ardus Kaine Faction ####################
+##########################################################
+PEN_update_ardus_effects = {
+    ###### Clear Variables ######
+    #Not Necessary*
+
+    ###### Loyalty Bar ######
+    #Box 1
+    if = {
+        limit = {
+            OR = {
+                check_variable = { ardus_loyalty = 0}
+                check_variable = { ardus_loyalty > 0 }
+                check_variable = { ardus_loyalty = 20 }
+            }
+        }
+        set_variable = {
+            var = PEN_ardus_loyalty_bar
+            value = -2
+        }
+    }
+    #Box 2
+    if = {
+        limit = {
+            OR = {
+                check_variable = { ardus_loyalty > 20}
+                check_variable = { ardus_loyalty = 40 }
+            }
+        }
+        set_variable = {
+            var = PEN_ardus_loyalty_bar
+            value = -1
+        }
+    }
+    #Box 3
+    if = {
+        limit = {
+            OR = {
+                check_variable = { ardus_loyalty > 40}
+                check_variable = { ardus_loyalty = 60 }
+            }
+        }
+        set_variable = {
+            var = PEN_ardus_loyalty_bar
+            value = 0
+        }
+    }
+    #Box 4
+    if = {
+        limit = {
+            OR = {
+                check_variable = { ardus_loyalty > 60}
+                check_variable = { ardus_loyalty = 80 }
+            }
+        }
+        set_variable = {
+            var = PEN_ardus_loyalty_bar
+            value = 1
+        }
+    }
+    #Box 5
+    if = {
+        limit = {
+            OR = {
+                check_variable = { ardus_loyalty > 80}
+                check_variable = { ardus_loyalty = 100 }
+            }
+        }
+        set_variable = {
+            var = PEN_ardus_loyalty_bar
+            value = 2
+        }
+    }
+
+    ###### Influence Bar ######
+    #Box 1
+    if = {
+        limit = {
+            OR = {
+                check_variable = { ardus_influence = 0}
+                check_variable = { ardus_influence > 0 }
+                check_variable = { ardus_influence = 20 }
+            }
+        }
+        set_variable = {
+            var = PEN_ardus_influence_bar
+            value = 0
+        }
+    }
+    #Box 2
+    if = {
+        limit = {
+            OR = {
+                check_variable = { ardus_influence > 20}
+                check_variable = { ardus_influence = 40 }
+            }
+        }
+        set_variable = {
+            var = PEN_ardus_influence_bar
+            value = 0.25
+        }
+    }
+    #Box 3
+    if = {
+        limit = {
+            OR = {
+                check_variable = { ardus_influence > 40}
+                check_variable = { ardus_influence = 60 }
+            }
+        }
+        set_variable = {
+            var = PEN_ardus_influence_bar
+            value = 0.5
+        }
+    }
+    #Box 4
+    if = {
+        limit = {
+            OR = {
+                check_variable = { ardus_influence > 60}
+                check_variable = { ardus_influence = 80 }
+            }
+        }
+        set_variable = {
+            var = PEN_ardus_influence_bar
+            value = 0.75
+        }
+    }
+    #Box 5
+    if = {
+        limit = {
+            OR = {
+                check_variable = { ardus_influence > 80}
+                check_variable = { ardus_influence = 100 }
+            }
+        }
+        set_variable = {
+            var = PEN_ardus_influence_bar
+            value = 1
+        }
+    }
+
+    ###### Calculation ######
+    #Political Power Gain
     set_variable = {
-        var = pen_loyalty_influence_cap
+        var = PEN_ardus_pp_gain
+        value = 0.15
+    }
+    multiply_variable = {
+        var = PEN_ardus_pp_gain
+        value = PEN_ardus_influence_bar
+    }
+    multiply_variable = {
+        var = PEN_ardus_pp_gain
+        value = PEN_ardus_loyalty_bar
+    }
+    set_variable = {
+       var = PEN_ardus_pp_gain_loc
+       value = PEN_ardus_pp_gain 
+    }
+    multiply_variable = {
+        var = PEN_ardus_pp_gain_loc
         value = 100
     }
+    #Stability
+    set_variable = {
+        var = PEN_ardus_stability
+        value = 0.1
+    }
+    multiply_variable = {
+        var = PEN_ardus_stability
+        value = PEN_ardus_influence_bar
+    }
+    multiply_variable = {
+        var = PEN_ardus_stability
+        value = PEN_ardus_loyalty_bar
+    }
+    set_variable = {
+       var = PEN_ardus_stability_loc
+       value = PEN_ardus_stability 
+    }
+    multiply_variable = {
+        var = PEN_ardus_stability_loc
+        value = 100
+    }
+}
 
-    #Base Influence Equilibrium Change
+##########################################################
+################# Galentro Heavy Works ###################
+##########################################################
+PEN_update_galentro_effects = {
+    ###### Loyalty Bar ######
+    #Box 1
+    if = {
+        limit = {
+            OR = {
+                check_variable = { galentro_loyalty = 0}
+                check_variable = { galentro_loyalty > 0 }
+                check_variable = { galentro_loyalty = 20 }
+            }
+        }
+        set_variable = {
+            var = PEN_galentro_loyalty_bar
+            value = -2
+        }
+    }
+    #Box 2
+    if = {
+        limit = {
+            OR = {
+                check_variable = { galentro_loyalty > 20}
+                check_variable = { galentro_loyalty = 40 }
+            }
+        }
+        set_variable = {
+            var = PEN_galentro_loyalty_bar
+            value = -1
+        }
+    }
+    #Box 3
+    if = {
+        limit = {
+            OR = {
+                check_variable = { galentro_loyalty > 40}
+                check_variable = { galentro_loyalty = 60 }
+            }
+        }
+        set_variable = {
+            var = PEN_galentro_loyalty_bar
+            value = 0
+        }
+    }
+    #Box 4
+    if = {
+        limit = {
+            OR = {
+                check_variable = { galentro_loyalty > 60}
+                check_variable = { galentro_loyalty = 80 }
+            }
+        }
+        set_variable = {
+            var = PEN_galentro_loyalty_bar
+            value = 1
+        }
+    }
+    #Box 5
+    if = {
+        limit = {
+            OR = {
+                check_variable = { galentro_loyalty > 80}
+                check_variable = { galentro_loyalty = 100 }
+            }
+        }
+        set_variable = {
+            var = PEN_galentro_loyalty_bar
+            value = 2
+        }
+    }
+
+    ###### Influence Bar ######
+    #Box 1
+    if = {
+        limit = {
+            OR = {
+                check_variable = { galentro_influence = 0}
+                check_variable = { galentro_influence > 0 }
+                check_variable = { galentro_influence = 20 }
+            }
+        }
+        set_variable = {
+            var = PEN_galentro_influence_bar
+            value = 0
+        }
+    }
+    #Box 2
+    if = {
+        limit = {
+            OR = {
+                check_variable = { galentro_influence > 20}
+                check_variable = { galentro_influence = 40 }
+            }
+        }
+        set_variable = {
+            var = PEN_galentro_influence_bar
+            value = 0.25
+        }
+    }
+    #Box 3
+    if = {
+        limit = {
+            OR = {
+                check_variable = { galentro_influence > 40}
+                check_variable = { galentro_influence = 60 }
+            }
+        }
+        set_variable = {
+            var = PEN_galentro_influence_bar
+            value = 0.5
+        }
+    }
+    #Box 4
+    if = {
+        limit = {
+            OR = {
+                check_variable = { galentro_influence > 60}
+                check_variable = { galentro_influence = 80 }
+            }
+        }
+        set_variable = {
+            var = PEN_galentro_influence_bar
+            value = 0.75
+        }
+    }
+    #Box 5
+    if = {
+        limit = {
+            OR = {
+                check_variable = { galentro_influence > 80}
+                check_variable = { galentro_influence = 100 }
+            }
+        }
+        set_variable = {
+            var = PEN_galentro_influence_bar
+            value = 1
+        }
+    }
+
+    ###### Calculation ######
+    #Political Power Gain
     set_variable = {
-        var = ardus_influence_equilibrium_change
-        value = 0
+        var = PEN_galentro_pp_gain
+        value = 0.1
+    }
+    multiply_variable = {
+        var = PEN_galentro_pp_gain
+        value = PEN_galentro_influence_bar
+    }
+    multiply_variable = {
+        var = PEN_galentro_pp_gain
+        value = PEN_galentro_loyalty_bar
     }
     set_variable = {
-        var = elta_influence_equilibrium_change
-        value = 0
+       var = PEN_galentro_pp_gain_loc
+       value = PEN_galentro_pp_gain 
+    }
+    multiply_variable = {
+        var = PEN_galentro_pp_gain_loc
+        value = 100
+    }
+    #Dockyard Output
+    set_variable = {
+        var = PEN_galentro_dockyard_output
+        value = 0.15
+    }
+    multiply_variable = {
+        var = PEN_galentro_dockyard_output
+        value = PEN_galentro_influence_bar
+    }
+    multiply_variable = {
+        var = PEN_galentro_dockyard_output
+        value = PEN_galentro_loyalty_bar
     }
     set_variable = {
-        var = wyrn_influence_equilibrium_change
-        value = 0
+       var = PEN_galentro_dockyard_output_loc
+       value = PEN_galentro_dockyard_output
+    }
+    multiply_variable = {
+        var = PEN_galentro_dockyard_output_loc
+        value = 100
+    }
+}
+
+##########################################################
+################### Dynamic Automata #####################
+##########################################################
+PEN_update_automata_effects = {
+    ###### Loyalty Bar ######
+    #Box 1
+    if = {
+        limit = {
+            OR = {
+                check_variable = { automata_loyalty = 0}
+                check_variable = { automata_loyalty > 0 }
+                check_variable = { automata_loyalty = 20 }
+            }
+        }
+        set_variable = {
+            var = PEN_automata_loyalty_bar
+            value = -2
+        }
+    }
+    #Box 2
+    if = {
+        limit = {
+            OR = {
+                check_variable = { automata_loyalty > 20}
+                check_variable = { automata_loyalty = 40 }
+            }
+        }
+        set_variable = {
+            var = PEN_automata_loyalty_bar
+            value = -1
+        }
+    }
+    #Box 3
+    if = {
+        limit = {
+            OR = {
+                check_variable = { automata_loyalty > 40}
+                check_variable = { automata_loyalty = 60 }
+            }
+        }
+        set_variable = {
+            var = PEN_automata_loyalty_bar
+            value = 0
+        }
+    }
+    #Box 4
+    if = {
+        limit = {
+            OR = {
+                check_variable = { automata_loyalty > 60}
+                check_variable = { automata_loyalty = 80 }
+            }
+        }
+        set_variable = {
+            var = PEN_automata_loyalty_bar
+            value = 1
+        }
+    }
+    #Box 5
+    if = {
+        limit = {
+            OR = {
+                check_variable = { automata_loyalty > 80}
+                check_variable = { automata_loyalty = 100 }
+            }
+        }
+        set_variable = {
+            var = PEN_automata_loyalty_bar
+            value = 2
+        }
+    }
+
+    ###### Influence Bar ######
+    #Box 1
+    if = {
+        limit = {
+            OR = {
+                check_variable = { automata_influence = 0}
+                check_variable = { automata_influence > 0 }
+                check_variable = { automata_influence = 20 }
+            }
+        }
+        set_variable = {
+            var = PEN_automata_influence_bar
+            value = 0
+        }
+    }
+    #Box 2
+    if = {
+        limit = {
+            OR = {
+                check_variable = { automata_influence > 20}
+                check_variable = { automata_influence = 40 }
+            }
+        }
+        set_variable = {
+            var = PEN_automata_influence_bar
+            value = 0.25
+        }
+    }
+    #Box 3
+    if = {
+        limit = {
+            OR = {
+                check_variable = { automata_influence > 40}
+                check_variable = { automata_influence = 60 }
+            }
+        }
+        set_variable = {
+            var = PEN_automata_influence_bar
+            value = 0.5
+        }
+    }
+    #Box 4
+    if = {
+        limit = {
+            OR = {
+                check_variable = { automata_influence > 60}
+                check_variable = { automata_influence = 80 }
+            }
+        }
+        set_variable = {
+            var = PEN_automata_influence_bar
+            value = 0.75
+        }
+    }
+    #Box 5
+    if = {
+        limit = {
+            OR = {
+                check_variable = { automata_influence > 80}
+                check_variable = { automata_influence = 100 }
+            }
+        }
+        set_variable = {
+            var = PEN_automata_influence_bar
+            value = 1
+        }
+    }
+
+    ###### Calculation ######
+    #Political Power Gain
+    set_variable = {
+        var = PEN_automata_pp_gain
+        value = 0.1
+    }
+    multiply_variable = {
+        var = PEN_automata_pp_gain
+        value = PEN_automata_influence_bar
+    }
+    multiply_variable = {
+        var = PEN_automata_pp_gain
+        value = PEN_automata_loyalty_bar
     }
     set_variable = {
-        var = ib_influence_equilibrium_change
-        value = 0
+       var = PEN_automata_pp_gain_loc
+       value = PEN_automata_pp_gain 
+    }
+    multiply_variable = {
+        var = PEN_automata_pp_gain_loc
+        value = 100
+    }
+    #Factory Output
+    set_variable = {
+        var = PEN_automata_factory_output
+        value = 0.15
+    }
+    multiply_variable = {
+        var = PEN_automata_factory_output
+        value = PEN_automata_influence_bar
+    }
+    multiply_variable = {
+        var = PEN_automata_factory_output
+        value = PEN_automata_loyalty_bar
     }
     set_variable = {
-        var = gregor_influence_equilibrium_change
-        value = 0
+       var = PEN_automata_factory_output_loc
+       value = PEN_automata_factory_output
     }
-    #Base Loyalty Equilibrium Change
+    multiply_variable = {
+        var = PEN_automata_factory_output_loc
+        value = 100
+    }
+}
+
+##########################################################
+################### Imperial Governors ###################
+##########################################################
+PEN_update_governors_effects = {
+    ###### Loyalty Bar ######
+    #Box 1
+    if = {
+        limit = {
+            OR = {
+                check_variable = { governors_loyalty = 0}
+                check_variable = { governors_loyalty > 0 }
+                check_variable = { governors_loyalty = 20 }
+            }
+        }
+        set_variable = {
+            var = PEN_governors_loyalty_bar
+            value = -2
+        }
+    }
+    #Box 2
+    if = {
+        limit = {
+            OR = {
+                check_variable = { governors_loyalty > 20}
+                check_variable = { governors_loyalty = 40 }
+            }
+        }
+        set_variable = {
+            var = PEN_governors_loyalty_bar
+            value = -1
+        }
+    }
+    #Box 3
+    if = {
+        limit = {
+            OR = {
+                check_variable = { governors_loyalty > 40}
+                check_variable = { governors_loyalty = 60 }
+            }
+        }
+        set_variable = {
+            var = PEN_governors_loyalty_bar
+            value = 0
+        }
+    }
+    #Box 4
+    if = {
+        limit = {
+            OR = {
+                check_variable = { governors_loyalty > 60}
+                check_variable = { governors_loyalty = 80 }
+            }
+        }
+        set_variable = {
+            var = PEN_governors_loyalty_bar
+            value = 1
+        }
+    }
+    #Box 5
+    if = {
+        limit = {
+            OR = {
+                check_variable = { governors_loyalty > 80}
+                check_variable = { governors_loyalty = 100 }
+            }
+        }
+        set_variable = {
+            var = PEN_governors_loyalty_bar
+            value = 2
+        }
+    }
+
+    ###### Influence Bar ######
+    #Box 1
+    if = {
+        limit = {
+            OR = {
+                check_variable = { governors_influence = 0}
+                check_variable = { governors_influence > 0 }
+                check_variable = { governors_influence = 20 }
+            }
+        }
+        set_variable = {
+            var = PEN_governors_influence_bar
+            value = 0
+        }
+    }
+    #Box 2
+    if = {
+        limit = {
+            OR = {
+                check_variable = { governors_influence > 20}
+                check_variable = { governors_influence = 40 }
+            }
+        }
+        set_variable = {
+            var = PEN_governors_influence_bar
+            value = 0.25
+        }
+    }
+    #Box 3
+    if = {
+        limit = {
+            OR = {
+                check_variable = { governors_influence > 40}
+                check_variable = { governors_influence = 60 }
+            }
+        }
+        set_variable = {
+            var = PEN_governors_influence_bar
+            value = 0.5
+        }
+    }
+    #Box 4
+    if = {
+        limit = {
+            OR = {
+                check_variable = { governors_influence > 60}
+                check_variable = { governors_influence = 80 }
+            }
+        }
+        set_variable = {
+            var = PEN_governors_influence_bar
+            value = 0.75
+        }
+    }
+    #Box 5
+    if = {
+        limit = {
+            OR = {
+                check_variable = { governors_influence > 80}
+                check_variable = { governors_influence = 100 }
+            }
+        }
+        set_variable = {
+            var = PEN_governors_influence_bar
+            value = 1
+        }
+    }
+
+    ###### Calculation ######
+    #Political Power Gain
     set_variable = {
-        var = ardus_loyalty_equilibrium_change
-        value = 0
+        var = PEN_governors_pp_gain
+        value = 0.1
+    }
+    multiply_variable = {
+        var = PEN_governors_pp_gain
+        value = PEN_governors_influence_bar
+    }
+    multiply_variable = {
+        var = PEN_governors_pp_gain
+        value = PEN_governors_loyalty_bar
     }
     set_variable = {
-        var = elta_loyalty_equilibrium_change
-        value = 0
+       var = PEN_governors_pp_gain_loc
+       value = PEN_governors_pp_gain 
+    }
+    multiply_variable = {
+        var = PEN_governors_pp_gain_loc
+        value = 100
+    }
+    #War Support
+    set_variable = {
+        var = PEN_governors_war_support
+        value = 0.1
+    }
+    multiply_variable = {
+        var = PEN_governors_war_support
+        value = PEN_governors_influence_bar
+    }
+    multiply_variable = {
+        var = PEN_governors_war_support
+        value = PEN_governors_loyalty_bar
     }
     set_variable = {
-        var = wyrn_loyalty_equilibrium_change
-        value = 0
+       var = PEN_governors_war_support_loc
+       value = PEN_governors_war_support
+    }
+    multiply_variable = {
+        var = PEN_governors_war_support_loc
+        value = 100
+    }
+    #Conscription Factor
+    set_variable = {
+        var = PEN_governors_conscription_factor
+        value = 0.1
+    }
+    multiply_variable = {
+        var = PEN_governors_conscription_factor
+        value = PEN_governors_influence_bar
+    }
+    multiply_variable = {
+        var = PEN_governors_conscription_factor
+        value = PEN_governors_loyalty_bar
     }
     set_variable = {
-        var = ib_loyalty_equilibrium_change
-        value = 0
+       var = PEN_governors_conscription_factor_loc
+       value = PEN_governors_conscription_factor
+    }
+    multiply_variable = {
+        var = PEN_governors_conscription_factor_loc
+        value = 100
+    }
+}
+
+##########################################################
+############### Velcar Free Commerce Zone ################
+##########################################################
+PEN_update_vfcz_effects = {
+    ###### Loyalty Bar ######
+    #Box 1
+    if = {
+        limit = {
+            OR = {
+                check_variable = { vfcz_loyalty = 0}
+                check_variable = { vfcz_loyalty > 0 }
+                check_variable = { vfcz_loyalty = 20 }
+            }
+        }
+        set_variable = {
+            var = PEN_vfcz_loyalty_bar
+            value = -2
+        }
+    }
+    #Box 2
+    if = {
+        limit = {
+            OR = {
+                check_variable = { vfcz_loyalty > 20}
+                check_variable = { vfcz_loyalty = 40 }
+            }
+        }
+        set_variable = {
+            var = PEN_vfcz_loyalty_bar
+            value = -1
+        }
+    }
+    #Box 3
+    if = {
+        limit = {
+            OR = {
+                check_variable = { vfcz_loyalty > 40}
+                check_variable = { vfcz_loyalty = 60 }
+            }
+        }
+        set_variable = {
+            var = PEN_vfcz_loyalty_bar
+            value = 0
+        }
+    }
+    #Box 4
+    if = {
+        limit = {
+            OR = {
+                check_variable = { vfcz_loyalty > 60}
+                check_variable = { vfcz_loyalty = 80 }
+            }
+        }
+        set_variable = {
+            var = PEN_vfcz_loyalty_bar
+            value = 1
+        }
+    }
+    #Box 5
+    if = {
+        limit = {
+            OR = {
+                check_variable = { vfcz_loyalty > 80}
+                check_variable = { vfcz_loyalty = 100 }
+            }
+        }
+        set_variable = {
+            var = PEN_vfcz_loyalty_bar
+            value = 2
+        }
+    }
+
+    ###### Influence Bar ######
+    #Box 1
+    if = {
+        limit = {
+            OR = {
+                check_variable = { vfcz_influence = 0}
+                check_variable = { vfcz_influence > 0 }
+                check_variable = { vfcz_influence = 20 }
+            }
+        }
+        set_variable = {
+            var = PEN_vfcz_influence_bar
+            value = 0
+        }
+    }
+    #Box 2
+    if = {
+        limit = {
+            OR = {
+                check_variable = { vfcz_influence > 20}
+                check_variable = { vfcz_influence = 40 }
+            }
+        }
+        set_variable = {
+            var = PEN_vfcz_influence_bar
+            value = 0.25
+        }
+    }
+    #Box 3
+    if = {
+        limit = {
+            OR = {
+                check_variable = { vfcz_influence > 40}
+                check_variable = { vfcz_influence = 60 }
+            }
+        }
+        set_variable = {
+            var = PEN_vfcz_influence_bar
+            value = 0.5
+        }
+    }
+    #Box 4
+    if = {
+        limit = {
+            OR = {
+                check_variable = { vfcz_influence > 60}
+                check_variable = { vfcz_influence = 80 }
+            }
+        }
+        set_variable = {
+            var = PEN_vfcz_influence_bar
+            value = 0.75
+        }
+    }
+    #Box 5
+    if = {
+        limit = {
+            OR = {
+                check_variable = { vfcz_influence > 80}
+                check_variable = { vfcz_influence = 100 }
+            }
+        }
+        set_variable = {
+            var = PEN_vfcz_influence_bar
+            value = 1
+        }
+    }
+
+    ###### Calculation ######
+    #Political Power Gain
+    set_variable = {
+        var = PEN_vfcz_pp_gain
+        value = 0.1
+    }
+    multiply_variable = {
+        var = PEN_vfcz_pp_gain
+        value = PEN_vfcz_influence_bar
+    }
+    multiply_variable = {
+        var = PEN_vfcz_pp_gain
+        value = PEN_vfcz_loyalty_bar
     }
     set_variable = {
-        var = gregor_loyalty_equilibrium_change
-        value = 0
+       var = PEN_vfcz_pp_gain_loc
+       value = PEN_vfcz_pp_gain 
     }
+    multiply_variable = {
+        var = PEN_vfcz_pp_gain_loc
+        value = 100
+    }
+    #Trade Opinion
+    set_variable = {
+        var = PEN_vfcz_trade_opinion
+        value = 0.15
+    }
+    multiply_variable = {
+        var = PEN_vfcz_trade_opinion
+        value = PEN_vfcz_influence_bar
+    }
+    multiply_variable = {
+        var = PEN_vfcz_trade_opinion
+        value = PEN_vfcz_loyalty_bar
+    }
+    set_variable = {
+       var = PEN_vfcz_trade_opinion_loc
+       value = PEN_vfcz_trade_opinion
+    }
+    multiply_variable = {
+        var = PEN_vfcz_trade_opinion_loc
+        value = 100
+    }
+    #Resource Gain Efficiency
+    set_variable = {
+        var = PEN_vfcz_resource_gain_efficiency
+        value = 0.1
+    }
+    multiply_variable = {
+        var = PEN_vfcz_resource_gain_efficiency
+        value = PEN_vfcz_influence_bar
+    }
+    multiply_variable = {
+        var = PEN_vfcz_resource_gain_efficiency
+        value = PEN_vfcz_loyalty_bar
+    }
+    set_variable = {
+       var = PEN_vfcz_resource_gain_efficiency_loc
+       value = PEN_vfcz_resource_gain_efficiency
+    }
+    multiply_variable = {
+        var = PEN_vfcz_resource_gain_efficiency_loc
+        value = 100
+    }
+}
+
+
+################################
+#Internal Factions Setup (Initial setup when unlocked)
+PEN_setup_internal_factions = {
     
-    #Base Faction Loyalty Equilibrium
+    #Ardus Kaine Faction
     set_variable = {
-        var = ardus_loyalty_equilibrium
-        value = 50
-    }
-    if = {
-        limit = {
-            has_country_flag = PEN_pt_dynamic_flag
-        }
-        set_variable = {
-            var = elta_loyalty_equilibrium
-            value = 55
-        }
-    }
-    if = {
-        limit = {
-            NOT = {
-                has_country_flag = PEN_pt_dynamic_flag
-                has_country_flag = PEN_pt_galentro_flag
-            }
-        }
-        set_variable = {
-            var = elta_loyalty_equilibrium
-            value = 50
-        }
-    }
-    if = {
-        limit = {
-            has_country_flag = PEN_pt_galentro_flag
-        }
-        set_variable = {
-            var = elta_loyalty_equilibrium
-            value = 45
-        }
-    }
-    if = {
-        limit = {
-            has_country_flag = PEN_pt_vfcz_flag
-        }
-        set_variable = {
-            var = gregor_loyalty_equilibrium
-            value = 55
-        }
-    }
-    if = {
-        limit = {
-            NOT = {
-                has_country_flag = PEN_pt_vfcz_flag
-            }
-        }
-        set_variable = {
-            var = gregor_loyalty_equilibrium
-            value = 50
-        }
-    }
-    if = {
-        limit = {
-            has_country_flag = PEN_pt_dynamic_flag
-        }
-        set_variable = {
-            var = wyrn_loyalty_equilibrium
-            value = 45
-        }
-    }
-    if = {
-        limit = {
-            NOT = {
-                has_country_flag = PEN_pt_dynamic_flag
-                has_country_flag = PEN_pt_galentro_flag
-            }
-        }
-        set_variable = {
-            var = wyrn_loyalty_equilibrium
-            value = 50
-        }
-    }
-    if = {
-        limit = {
-            has_country_flag = PEN_pt_galentro_flag
-        }
-        set_variable = {
-            var = wyrn_loyalty_equilibrium
-            value = 55
-        }
+        var = PEN_ardus_loyalty_max_cap
+        value = 100
     }
     set_variable = {
-        var = ib_loyalty_equilibrium
-        value = 50
-    }
-
-    #Base Faction Influence Equilibrium
-    set_variable = {
-        var = ardus_influence_equilibrium
-        value = 50
-    }
-    if = {
-        limit = {
-            has_country_flag = PEN_pt_dynamic_flag
-        }
-        set_variable = {
-            var = elta_influence_equilibrium
-            value = 60
-        }
-    }
-    if = {
-        limit = {
-            NOT = {
-                has_country_flag = PEN_pt_dynamic_flag
-                has_country_flag = PEN_pt_galentro_flag
-            }
-        }
-        set_variable = {
-            var = elta_influence_equilibrium
-            value = 50
-        }
-    }
-    if = {
-        limit = {
-            has_country_flag = PEN_pt_galentro_flag
-        }
-        set_variable = {
-            var = elta_influence_equilibrium
-            value = 40
-        }
-    }
-    if = {
-        limit = {
-            has_country_flag = PEN_pt_vfcz_flag
-        }
-        set_variable = {
-            var = gregor_influence_equilibrium
-            value = 60
-        }
-    }
-    if = {
-        limit = {
-            NOT = {
-                has_country_flag = PEN_pt_vfcz_flag
-            }
-        }
-        set_variable = {
-            var = gregor_influence_equilibrium
-            value = 50
-        }
-    }
-    if = {
-        limit = {
-            has_country_flag = PEN_pt_dynamic_flag
-        }
-        set_variable = {
-            var = wyrn_influence_equilibrium
-            value = 40
-        }
-    }
-    if = {
-        limit = {
-            NOT = {
-                has_country_flag = PEN_pt_dynamic_flag
-                has_country_flag = PEN_pt_galentro_flag
-            }
-        }
-        set_variable = {
-            var = wyrn_influence_equilibrium
-            value = 50
-        }
-    }
-    if = {
-        limit = {
-            has_country_flag = PEN_pt_galentro_flag
-        }
-        set_variable = {
-            var = wyrn_influence_equilibrium
-            value = 60
-        }
+        var = PEN_ardus_loyalty_min_cap
+        value = 0
     }
     set_variable = {
-        var = ib_influence_equilibrium
-        value = 50
+        var = PEN_ardus_influence_max_cap
+        value = 100
     }
-
-
-    #Base Faction Loyalty
     set_variable = {
         var = ardus_loyalty
+        value = 90
+    }
+    set_variable = {
+        var = ardus_influence
+        value = 65
+    }
+
+    #Galentro Heavyworks
+    set_variable = {
+        var = PEN_galentro_loyalty_max_cap
         value = 100
     }
     set_variable = {
-        var = elta_loyalty
-        value = 80
+        var = PEN_galentro_loyalty_min_cap
+        value = 0
     }
     set_variable = {
-        var = gregor_loyalty
-        value = 60
+        var = PEN_galentro_influence_max_cap
+        value = 100
     }
     set_variable = {
-        var = wyrn_loyalty
-        value = 40
-    }
-    set_variable = {
-        var = ib_loyalty
-        value = 30
-    }
-
-    #Base Faction Influence
-    set_variable = {
-        var = ardus_influence
-        value = 80
-    }
-    set_variable = {
-        var = elta_influence
-        value = 70
-    }
-    set_variable = {
-        var = gregor_influence
+        var = galentro_loyalty
         value = 50
     }
     set_variable = {
-        var = wyrn_influence
-        value = 60
+        var = galentro_influence
+        value = 50
+    }
+
+    #Dynamic Automata
+    set_variable = {
+        var = PEN_automata_loyalty_max_cap
+        value = 100
     }
     set_variable = {
-        var = ib_influence
-        value = 40
+        var = PEN_automata_loyalty_min_cap
+        value = 0
+    }
+    set_variable = {
+        var = PEN_automata_influence_max_cap
+        value = 100
+    }
+    set_variable = {
+        var = automata_loyalty
+        value = 50
+    }
+    set_variable = {
+        var = automata_influence
+        value = 50
+    }
+
+    #Imperial Governors
+    set_variable = {
+        var = PEN_governors_loyalty_max_cap
+        value = 100
+    }
+    set_variable = {
+        var = PEN_governors_loyalty_min_cap
+        value = 0
+    }
+    set_variable = {
+        var = PEN_governors_influence_max_cap
+        value = 100
+    }
+    set_variable = {
+        var = governors_loyalty
+        value = 50
+    }
+    set_variable = {
+        var = governors_influence
+        value = 50
+    }
+
+    #VFCZ
+    set_variable = {
+        var = PEN_vfcz_loyalty_max_cap
+        value = 100
+    }
+    set_variable = {
+        var = PEN_vfcz_loyalty_min_cap
+        value = 0
+    }
+    set_variable = {
+        var = PEN_vfcz_influence_max_cap
+        value = 100
+    }
+    set_variable = {
+        var = vfcz_loyalty
+        value = 50
+    }
+    set_variable = {
+        var = vfcz_influence
+        value = 50
     }
 }
 

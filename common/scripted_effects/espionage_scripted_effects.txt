@@ -1,128 +1,151 @@
-assassination = {
-	random_unit_leader = {
-		if = {
-			limit = {
-				NOT = {
-					has_character_flag = important
-					has_character_flag = targeted_by_mission
-				}
-			}
-			set_character_flag = targeted_by_@ROOT_murder
-			set_character_flag = targeted_by_mission
+grab_semi_hostile_nation = {
+	if = {
+		limit = {
+			has_variable = higher_chance_espionage_target
+		}
+		random = {
+		    chance = 33
+		    set_var = {targeted_country_slot_1 = higher_chance_espionage_target}
 		}
 	}
+	while_loop_effect = {
+	    break = temp_break
+	    limit = {
+	    	NOT = {
+	        	has_variable = targeted_country_slot_1
+	        }
+	    }
+	    random_country = {
+	    	if = {
+	    		limit = {
+	    			OR = {
+		    			AND = {
+		    				has_opinion = {
+							    target = ROOT
+							    value < 0
+							}
+							NOT = {has_government = ROOT}
+		    			}
+		    			AND = {
+		    				has_opinion = {
+							    target = ROOT
+							    value < -50
+							}
+							has_government = ROOT
+		    			}
+	    			}
+	    		}
+	    		targeted_country_slot_1 = ROOT.id
+	    	}
+	    }
+	}
 }
-assassination = {
-	chance_of_success_assassination = {
-		any_unit_leader = {
+slave_raid_selector = {
+	find_highest_in_array = {
+	     array = slaves
+	     value = check_if_slaves_equal_zero
+	}
+	if = {
+		limit = {
+			has_variable = higher_chance_espionage_target
+			check_variable = { check_if_slaves_equal_zero > 0 }
+		}
+		random = {
+		    chance = 33
+		    set_var = {targeted_country_slot_1 = higher_chance_espionage_target}
+		}
+	}
+	if = {
+		limit = {
+			has_war = yes
+		}
+		for_loop_effect = {
+		    start = 0
+		    end = 11
+		    compare_type = less_than_or_equals
+		    add = 1
+		    value = time_checker
+		    break = break_name
+			any_enemy_country = {
+				if = {
+					limit = {
+						check_variable = { check_if_slaves_equal_zero > 0 }
+					}
+					set_variable = { targeted_country_slot_1 = ROOT.id }
+				}
+			}
 			if = {
 				limit = {
-					NOT = {
-						has_character_flag = targeted_by_@ROOT_murder
-					}
+					check_variable = {time_checker = 10}
 				}
-				retire_character = PREV
-			}
-		}
-	}
-	chance_of_failure_assassination = {
-		any_unit_leader = {
-			if = {
-				limit = {
-					NOT = {
-						has_character_flag = targeted_by_@ROOT_murder
-					}
+				while_loop_effect = {
+				    break = temp_break
+				    limit = {
+				    	NOT = {
+				        	has_variable = targeted_country_slot_1
+				        }
+				    }
+				    random_country = {
+				    	if = {
+				    		limit = {
+				    			OR = {
+					    			AND = {
+					    				has_opinion = {
+										    target = ROOT
+										    value < 0
+										}
+										NOT = {has_government = ROOT}
+										check_variable = { check_if_slaves_equal_zero > 0 }
+					    			}
+					    			AND = {
+					    				has_opinion = {
+										    target = ROOT
+										    value < -50
+										}
+										has_government = ROOT
+										check_variable = { check_if_slaves_equal_zero > 0 }
+					    			}
+				    			}
+				    		}
+				    		targeted_country_slot_1 = ROOT.id
+				    	}
+				    }
 				}
-				clr_character_flag = targeted_by_@ROOT_murder
-				clr_character_flag = targeted_by_mission
 			}
 		}
-	}
-}
-kidnapping = {
-	random_character = {
-		if = {
-			limit = {
-				NOT = {
-					has_character_flag = important
-					has_character_flag = targeted_by_mission
-				}
-			}
-			set_character_flag = targeted_by_@ROOT_kidnap
+	}else = {
+		while_loop_effect = {
+		    break = temp_break
+		    limit = {
+		    	NOT = {
+		        	has_variable = targeted_country_slot_1
+		        }
+		    }
+		    random_country = {
+		    	if = {
+		    		limit = {
+		    			OR = {
+			    			AND = {
+			    				has_opinion = {
+								    target = ROOT
+								    value < 0
+								}
+								NOT = {has_government = ROOT}
+								check_variable = { check_if_slaves_equal_zero > 0 }
+			    			}
+			    			AND = {
+			    				has_opinion = {
+								    target = ROOT
+								    value < -50
+								}
+								has_government = ROOT
+								check_variable = { check_if_slaves_equal_zero > 0 }
+			    			}
+		    			}
+		    		}
+		    		targeted_country_slot_1 = ROOT.id
+		    	}
+		    }
 		}
 	}
-}
-kidnapping_success = {
-	random_character = {
-		if = {
-			limit = {
-				has_character_flag = targeted_by_@ROOT_kidnap
-			}
-			add_timed_unit_leader_trait = {
-				trait = kidnapped
-				days = 30
-			}		
-		}
-	}
-}
-steal_equipment = {
-
-}
-steal_blueprint = {
-	steal_random_tech_bonus = {
-		folder = armour_folder
-		folder = artillery_folder
-		folder = infantry_folder
-		folder = support_folder
-		folder = mtgnavalfolder
-		folder = air_techs_folder
-		bonus = 3.0
-		dynamic = yes
-		instant = yes
-		name = operation_steal_tech_army
-		target = targeted_nation_blueprint
-		uses = 1
-	}
-}
-arm_dissidents = {
-
-}
-plant_sleeper_agents = { 
-
-}
-reroute_supply = {
-
-}
-cyber_attack = {
-
-}
-study_blueprint = {
-
-}
-hunt_dissidents = {
-
-}
-counterintelligence = {
-
-}
-propoganda = {
-
-}
-seize_taxes = {
-
-}
-probe_loyalty = {
-
-}
-sabotage = {
-
-}
-infiltrate_military = {
-
-}
-undermine_guild_connections = {
-
-}
-turn_agent = {
-
 }
