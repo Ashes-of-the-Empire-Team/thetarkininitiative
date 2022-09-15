@@ -1,0 +1,194 @@
+evaluate_fighting_outcomes = {
+	### CURRENT SCOPE IGNORING ENEMY, THIS EFFECT DETERMINES HEALTH AND STAMINA DAMAGE AND COST FOR BOTH SIDES, IF LIST BECOMES TOO LONG ASSIGN COUNTRY FLAG TO SPECIFY IF NORMAL SPECIAL ATTACK OR SO ON AND PUT IFS WITHIN IF LIMITS TO MAKE SEARCH TIME SMALLER
+	if = {
+		limit = {
+			has_country_flag = heavy_attack
+		}
+		subtract_from_variable = { total_stamina = 20 }
+		var:rival_dueling_nation = {
+			subtract_from_variable = {bout_health = 20}
+		}
+	}else_if = {
+		limit = {
+			has_country_flag = normal_attack
+		}
+		subtract_from_variable = { total_stamina = 10 }
+		var:rival_dueling_nation = {
+			if = {
+				limit = {
+					has_country_flag = block_attack
+				}	
+				subtract_from_variable = {bout_health = 3}
+			}else = {
+				subtract_from_variable = {bout_health = 12}
+			}
+		}
+	}else_if = {
+		limit = {
+			has_country_flag = do_nothing_attack
+		}
+	}else_if = {
+		limit = {
+			has_country_flag = block_attack
+		}
+		subtract_from_variable = { total_stamina = 5 }
+	}
+
+	var:rival_dueling_nation = { ### RIVALS ACTIONS
+		if = {
+			limit = {
+				has_country_flag = heavy_attack
+			}
+			subtract_from_variable = { total_stamina = 20 }
+			ROOT = {
+				subtract_from_variable = {bout_health = 20}
+			}
+		}else_if = {
+			limit = {
+				has_country_flag = normal_attack
+			}
+			subtract_from_variable = { total_stamina = 10 }
+			ROOT = {
+				if = {
+					limit = {
+						has_country_flag = block_attack
+					}	
+					subtract_from_variable = {bout_health = 3}
+				}else = {
+					subtract_from_variable = {bout_health = 12}
+				}
+			}
+		}else_if = {
+			limit = {
+				has_country_flag = do_nothing_attack
+			}
+		}else_if = {
+			limit = {
+				has_country_flag = block_attack
+			}
+			subtract_from_variable = { total_stamina = 5 }
+		}else_if = {
+			limit = {
+				has_country_flag = end_actions_duel
+			}
+		}
+		if = {
+			limit = {
+				has_country_flag = duel_action_ready
+			}
+			clr_country_flag = duel_action_ready
+		}
+	}
+	if = {
+		limit = {
+			has_country_flag = duel_action_ready
+		}
+		clr_country_flag = duel_action_ready
+	}
+}
+remove_all_current_actions = { ## add any new attacks to this, just a reset so you can pick a new action
+	if = {
+		limit = {
+			has_country_flag = heavy_attack
+		}
+		clr_country_flag = heavy_attack
+	}else_if = {
+		limit = {
+			has_country_flag = normal_attack
+		}
+		clr_country_flag = normal_attack
+	}else_if = {
+		limit = {
+			has_country_flag = do_nothing_attack
+		}
+		clr_country_flag = do_nothing_attack
+	}else_if = {
+		limit = {
+			has_country_flag = block_attack
+		}
+		clr_country_flag = block_attack
+	}else_if = {
+		limit = {
+			has_country_flag = end_actions_duel_start
+		}
+		clr_country_flag = end_actions_duel_start
+	}
+}
+reset_bout_health_and_actions = { ## resets health back to 0, and calculates the win for which person
+	if = {
+		limit = {
+			has_variable = bout_total_counter
+		}
+		add_to_variable = {bout_total_counter = 1}
+	}else = {
+		var:rival_dueling_nation = {
+			add_to_variable = {bout_total_counter = 1}
+		}
+	}
+	if = {
+		limit = {
+			has_variable = bout_total_counter ## stored on one person, didnt want to use global so anyone can have concurrent duels
+			check_variable = {bout_total_counter = 4}
+		}
+	}else_if = {
+		limit = {
+			var:rival_dueling_nation = {
+				has_variable = bout_total_counter
+				check_variable = {bout_total_counter = 4}
+			}
+		}
+		calculate_win = yes
+	}else = {
+		if = {
+			limit = {
+				check_variable = { bout_health > var:rival_dueling_nation.bout_health }
+				has_variable =  bout_wins  #################### ASSUMPTION IS BOUT WINS ONLY NEEDS TO BE ON ONE PERSON, IF THEY DONT HAVE WINS ABOVE 1 THEY LOSE
+			}
+			add_to_variable = {bout_wins = 1}
+		}else_if = {
+			limit = {
+				check_variable = { bout_health < var:rival_dueling_nation.bout_health }
+				var:rival_dueling_nation = {
+					has_variable = bout_wins
+				}
+			}
+			var:rival_dueling_nation = {
+				add_to_variable = {bout_wins = 1}
+			}
+		}
+		clr_country_flag = end_all_actions_duel
+		set_variable = {bout_health = 0}
+		var:rival_dueling_nation = {
+			clr_country_flag = end_all_actions_duel
+			set_variable = {bout_health = 0}
+		}
+	}
+}
+calculate_win = {
+	if = {
+		limit = {
+			check_variable = {bout_wins < 2} # works on standard that to win you would need to be above 2
+		}
+		var:rival_dueling_nation = {
+			country_event = {
+			    id = duel_event.1 ## lose event
+			    days = 2
+			}
+		}
+		country_event = {
+		    id = duel_event.2
+		    days = 2
+		}
+	}else = {
+		country_event = {
+		    id = duel_event.1
+		    days = 2
+		}
+		var:rival_dueling_nation = {
+			country_event = {
+			    id = duel_event.2 ## win event
+			    days = 2
+			}
+		}
+	}
+}
