@@ -24,7 +24,7 @@ espionage_missions = {
 		timeout_effect = {
 			#reset character flags
 			var:targeted_country_slot_1 = {
-				all_unit_leader = {
+				every_unit_leader = {
 					if = {
 						limit = {
 						 	has_character_flag = targeted_by_mission
@@ -44,11 +44,13 @@ espionage_missions = {
 					} 
 				}
 			}
-			if = {
-				limit = {
-					has_character_flag = targeted_by_training
-				}								
+			every_unit_leader = {
+				if = {
+					limit = {
+						has_character_flag = targeted_by_training
+					}								
 					clr_character_flag = targeted_by_training
+				}
 			}
 			if = {
 				limit = {
@@ -66,7 +68,7 @@ espionage_missions = {
 									limit = {
 										has_war = yes
 									}
-									any_enemy_country = {
+									random_enemy_country = {
 										set_variable = { targeted_country_slot_1 = ROOT.id }
 									}
 								}else = {
@@ -94,7 +96,7 @@ espionage_missions = {
 									limit = {
 										has_war = yes
 									}
-									any_enemy_country = {
+									random_enemy_country = {
 										set_variable = { targeted_country_slot_1 = ROOT.id }
 									}
 								}else = {
@@ -134,213 +136,217 @@ espionage_missions = {
 						}
 					}
 					var:amount_of_smugglers = {
-						16 = {
-							if = {
-								limit = {
-									has_war = yes
+						random_list = {
+							16 = {
+								if = {
+									limit = {
+										has_war = yes
+									}
+									random_enemy_country = {
+										set_variable = { targeted_country_slot_1 = ROOT.id }
+									}
+								}else = {
+									grab_semi_hostile_nation = yes
 								}
-								any_enemy_country = {
-									set_variable = { targeted_country_slot_1 = ROOT.id }
-								}
-							}else = {
-								grab_semi_hostile_nation = yes
+								set_country_flag = slot_1_filled
+								set_country_flag = steal_equipment_slot_1
 							}
-							set_country_flag = slot_1_filled
-							set_country_flag = steal_equipment_slot_1
-						}
-						16 = {
-							set_country_flag = slot_1_filled
-							set_country_flag = set_Slaves_free_slot_1
-							slave_raid_selector = yes
-						}
-						16 = {
-							set_country_flag = slot_1_filled
-							set_country_flag = smuggle_slaves_slot_1
-							slave_raid_selector = yes
-						}
-						16 = {
-							set_country_flag = slot_1_filled
-							set_country_flag = arming_dissadents_slot_1
-							if = {
-								limit = {
-									has_war = yes
-								}
-								any_enemy_country = {
-									set_variable = { targeted_country_slot_1 = ROOT.id }
-								}
-							}else = {
-								grab_semi_hostile_nation = yes
+							16 = {
+								set_country_flag = slot_1_filled
+								set_country_flag = set_Slaves_free_slot_1
+								slave_raid_selector = yes
 							}
-						}
-						16 = {
-							set_country_flag = slot_1_filled
-							set_country_flag = provoke_slave_revolt_slot_1
-							slave_raid_selector = yes
-						}
-						16 = {
-							set_country_flag = slot_1_filled
-							set_country_flag = plant_sleeper_agent_slot_1
-							if = {
-								limit = {
-									has_war = yes
+							16 = {
+								set_country_flag = slot_1_filled
+								set_country_flag = smuggle_slaves_slot_1
+								slave_raid_selector = yes
+							}
+							16 = {
+								set_country_flag = slot_1_filled
+								set_country_flag = arming_dissadents_slot_1
+								if = {
+									limit = {
+										has_war = yes
+									}
+									random_enemy_country = {
+										set_variable = { targeted_country_slot_1 = ROOT.id }
+									}
+								}else = {
+									grab_semi_hostile_nation = yes
 								}
-								any_enemy_country = {
-									set_variable = { targeted_country_slot_1 = ROOT.id }
+							}
+							16 = {
+								set_country_flag = slot_1_filled
+								set_country_flag = provoke_slave_revolt_slot_1
+								slave_raid_selector = yes
+							}
+							16 = {
+								set_country_flag = slot_1_filled
+								set_country_flag = plant_sleeper_agent_slot_1
+								if = {
+									limit = {
+										has_war = yes
+									}
+									random_enemy_country = {
+										set_variable = { targeted_country_slot_1 = ROOT.id }
+									}
+								}else = {
+									grab_semi_hostile_nation = yes
 								}
-							}else = {
-								grab_semi_hostile_nation = yes
 							}
 						}
 					}
 					var:amount_of_spies = {
-						16 = {
-							set_country_flag = slot_1_filled
-							set_country_flag = capitial_ship_target_slot_1
-							if = {
-								limit = {
-									has_war = yes
+						random_list = {
+							16 = {
+								set_country_flag = slot_1_filled
+								set_country_flag = capitial_ship_target_slot_1
+								if = {
+									limit = {
+										has_war = yes
+									}
+									random_enemy_country = {
+										set_variable = { targeted_country_slot_1 = ROOT.id }
+									}
+								}else = {
+									grab_semi_hostile_nation = yes
 								}
-								any_enemy_country = {
-									set_variable = { targeted_country_slot_1 = ROOT.id }
-								}
-							}else = {
-								grab_semi_hostile_nation = yes
 							}
-						}
-						16 = {
-							set_country_flag = slot_1_filled
-							set_country_flag = sabotage_target_slot_1
-							if = {
-								limit = {
-									has_war = yes
+							16 = {
+								set_country_flag = slot_1_filled
+								set_country_flag = sabotage_target_slot_1
+								if = {
+									limit = {
+										has_war = yes
+									}
+									random_enemy_country = {
+										set_variable = { targeted_country_slot_1 = ROOT.id }
+									}
+								}else = {
+									grab_semi_hostile_nation = yes
 								}
-								any_enemy_country = {
-									set_variable = { targeted_country_slot_1 = ROOT.id }
-								}
-							}else = {
-								grab_semi_hostile_nation = yes
 							}
-						}
-						16 = {
-							set_country_flag = slot_1_filled
-							set_country_flag = infilitrate_military_target_slot_1
-							if = {
-								limit = {
-									has_war = yes
+							16 = {
+								set_country_flag = slot_1_filled
+								set_country_flag = infilitrate_military_target_slot_1
+								if = {
+									limit = {
+										has_war = yes
+									}
+									random_enemy_country = {
+										set_variable = { targeted_country_slot_1 = ROOT.id }
+									}
+								}else = {
+									grab_semi_hostile_nation = yes
 								}
-								any_enemy_country = {
-									set_variable = { targeted_country_slot_1 = ROOT.id }
-								}
-							}else = {
-								grab_semi_hostile_nation = yes
 							}
-						}
-						16 = {
-							set_country_flag = slot_1_filled
-							set_country_flag = undermind_guild_connections_target_slot_1
-							if = {
-								limit = {
-									has_war = yes
+							16 = {
+								set_country_flag = slot_1_filled
+								set_country_flag = undermind_guild_connections_target_slot_1
+								if = {
+									limit = {
+										has_war = yes
+									}
+									random_enemy_country = {
+										set_variable = { targeted_country_slot_1 = ROOT.id }
+									}
+								}else = {
+									grab_semi_hostile_nation = yes
 								}
-								any_enemy_country = {
-									set_variable = { targeted_country_slot_1 = ROOT.id }
-								}
-							}else = {
-								grab_semi_hostile_nation = yes
 							}
-						}
-						16 = {
-							set_country_flag = slot_1_filled
-							set_country_flag = turn_agent_target_slot_1
-							if = {
-								limit = {
-									has_war = yes
+							16 = {
+								set_country_flag = slot_1_filled
+								set_country_flag = turn_agent_target_slot_1
+								if = {
+									limit = {
+										has_war = yes
+									}
+									random_enemy_country = {
+										set_variable = { targeted_country_slot_1 = ROOT.id }
+									}
+								}else = {
+									grab_semi_hostile_nation = yes
 								}
-								any_enemy_country = {
-									set_variable = { targeted_country_slot_1 = ROOT.id }
-								}
-							}else = {
-								grab_semi_hostile_nation = yes
 							}
-						}
-						16 = {
-							set_country_flag = slot_1_filled
-							set_country_flag = steal_blueprint_target_slot_1
-							if = {
-								limit = {
-									has_war = yes
+							16 = {
+								set_country_flag = slot_1_filled
+								set_country_flag = steal_blueprint_target_slot_1
+								if = {
+									limit = {
+										has_war = yes
+									}
+									random_enemy_country = {
+										set_variable = { targeted_country_slot_1 = ROOT.id }
+									}
+								}else = {
+									grab_semi_hostile_nation = yes
 								}
-								any_enemy_country = {
-									set_variable = { targeted_country_slot_1 = ROOT.id }
-								}
-							}else = {
-								grab_semi_hostile_nation = yes
 							}
 						}
 					}
 					var:amount_of_technicians = {
-						25 = {
-							set_country_flag = slot_1_filled
-							set_country_flag = cyber_attack_target_slot_1
-							if = {
-								limit = {
-									has_war = yes
+						random_list = {
+							25 = {
+								set_country_flag = slot_1_filled
+								set_country_flag = cyber_attack_target_slot_1
+								if = {
+									limit = {
+										has_war = yes
+									}
+									random_enemy_country = {
+										set_variable = { targeted_country_slot_1 = ROOT.id }
+									}
+								}else = {
+									grab_semi_hostile_nation = yes
 								}
-								any_enemy_country = {
-									set_variable = { targeted_country_slot_1 = ROOT.id }
-								}
-							}else = {
-								grab_semi_hostile_nation = yes
 							}
-						}
-						25 = {
-							set_country_flag = slot_1_filled
-							set_country_flag = steal_blueprint_target_slot_1
-							if = {
-								limit = {
-									has_war = yes
+							25 = {
+								set_country_flag = slot_1_filled
+								set_country_flag = steal_blueprint_target_slot_1
+								if = {
+									limit = {
+										has_war = yes
+									}
+									random_enemy_country = {
+										set_variable = { targeted_country_slot_1 = ROOT.id }
+									}
+								}else = {
+									grab_semi_hostile_nation = yes
 								}
-								any_enemy_country = {
-									set_variable = { targeted_country_slot_1 = ROOT.id }
-								}
-							}else = {
-								grab_semi_hostile_nation = yes
 							}
-						}
-						25 = {
-							set_country_flag = slot_1_filled
-							set_country_flag = sprout_disease_target_slot_1
-							if = {
-								limit = {
-									has_war = yes
+							25 = {
+								set_country_flag = slot_1_filled
+								set_country_flag = sprout_disease_target_slot_1
+								if = {
+									limit = {
+										has_war = yes
+									}
+									random_enemy_country = {
+										set_variable = { targeted_country_slot_1 = ROOT.id }
+									}
+								}else = {
+									grab_semi_hostile_nation = yes
 								}
-								any_enemy_country = {
-									set_variable = { targeted_country_slot_1 = ROOT.id }
-								}
-							}else = {
-								grab_semi_hostile_nation = yes
 							}
-						}
-						25 = {
-							set_country_flag = slot_1_filled
-							set_country_flag = logistics_sabotage_target_slot_1
-							if = {
-								limit = {
-									has_war = yes
+							25 = {
+								set_country_flag = slot_1_filled
+								set_country_flag = logistics_sabotage_target_slot_1
+								if = {
+									limit = {
+										has_war = yes
+									}
+									random_enemy_country = {
+										set_variable = { targeted_country_slot_1 = ROOT.id }
+									}
+								}else = {
+									grab_semi_hostile_nation = yes
 								}
-								any_enemy_country = {
-									set_variable = { targeted_country_slot_1 = ROOT.id }
-								}
-							}else = {
-								grab_semi_hostile_nation = yes
 							}
 						}
 					}
 					var:other_missions = {
-						probe_loyality = {
 							set_country_flag = slot_1_filled
 							set_country_flag = probe_loyality_target_slot_1
-						}
 					} ### SLOT 1 SELECTOR
 				}
 				random_list = {
@@ -353,7 +359,7 @@ espionage_missions = {
 									limit = {
 										has_war = yes
 									}
-									any_enemy_country = {
+									random_enemy_country = {
 										set_variable = { targeted_country_slot_2 = ROOT.id }
 									}
 								}else = {
@@ -381,7 +387,7 @@ espionage_missions = {
 									limit = {
 										has_war = yes
 									}
-									any_enemy_country = {
+									random_enemy_country = {
 										set_variable = { targeted_country_slot_2 = ROOT.id }
 									}
 								}else = {
@@ -421,213 +427,217 @@ espionage_missions = {
 						}
 					}
 					var:amount_of_smugglers = {
-						16 = {
-							if = {
-								limit = {
-									has_war = yes
+						random_list = {
+							16 = {
+								if = {
+									limit = {
+										has_war = yes
+									}
+									random_enemy_country = {
+										set_variable = { targeted_country_slot_2 = ROOT.id }
+									}
+								}else = {
+									grab_semi_hostile_nation = yes
 								}
-								any_enemy_country = {
-									set_variable = { targeted_country_slot_2 = ROOT.id }
-								}
-							}else = {
-								grab_semi_hostile_nation = yes
+								set_country_flag = slot_2_filled
+								set_country_flag = steal_equipment_slot_2
 							}
-							set_country_flag = slot_2_filled
-							set_country_flag = steal_equipment_slot_2
-						}
-						16 = {
-							set_country_flag = slot_2_filled
-							set_country_flag = set_Slaves_free_slot_2
-							slave_raid_selector = yes
-						}
-						16 = {
-							set_country_flag = slot_2_filled
-							set_country_flag = smuggle_slaves_slot_2
-							slave_raid_selector = yes
-						}
-						16 = {
-							set_country_flag = slot_2_filled
-							set_country_flag = arming_dissadents_slot_2
-							if = {
-								limit = {
-									has_war = yes
-								}
-								any_enemy_country = {
-									set_variable = { targeted_country_slot_2 = ROOT.id }
-								}
-							}else = {
-								grab_semi_hostile_nation = yes
+							16 = {
+								set_country_flag = slot_2_filled
+								set_country_flag = set_Slaves_free_slot_2
+								slave_raid_selector = yes
 							}
-						}
-						16 = {
-							set_country_flag = slot_2_filled
-							set_country_flag = provoke_slave_revolt_slot_2
-							slave_raid_selector = yes
-						}
-						16 = {
-							set_country_flag = slot_2_filled
-							set_country_flag = plant_sleeper_agent_slot_2
-							if = {
-								limit = {
-									has_war = yes
+							16 = {
+								set_country_flag = slot_2_filled
+								set_country_flag = smuggle_slaves_slot_2
+								slave_raid_selector = yes
+							}
+							16 = {
+								set_country_flag = slot_2_filled
+								set_country_flag = arming_dissadents_slot_2
+								if = {
+									limit = {
+										has_war = yes
+									}
+									random_enemy_country = {
+										set_variable = { targeted_country_slot_2 = ROOT.id }
+									}
+								}else = {
+									grab_semi_hostile_nation = yes
 								}
-								any_enemy_country = {
-									set_variable = { targeted_country_slot_2 = ROOT.id }
+							}
+							16 = {
+								set_country_flag = slot_2_filled
+								set_country_flag = provoke_slave_revolt_slot_2
+								slave_raid_selector = yes
+							}
+							16 = {
+								set_country_flag = slot_2_filled
+								set_country_flag = plant_sleeper_agent_slot_2
+								if = {
+									limit = {
+										has_war = yes
+									}
+									random_enemy_country = {
+										set_variable = { targeted_country_slot_2 = ROOT.id }
+									}
+								}else = {
+									grab_semi_hostile_nation = yes
 								}
-							}else = {
-								grab_semi_hostile_nation = yes
 							}
 						}
 					}
 					var:amount_of_spies = {
-						16 = {
-							set_country_flag = slot_2_filled
-							set_country_flag = capitial_ship_target_slot_2
-							if = {
-								limit = {
-									has_war = yes
+						random_list = {
+							16 = {
+								set_country_flag = slot_2_filled
+								set_country_flag = capitial_ship_target_slot_2
+								if = {
+									limit = {
+										has_war = yes
+									}
+									random_enemy_country = {
+										set_variable = { targeted_country_slot_2 = ROOT.id }
+									}
+								}else = {
+									grab_semi_hostile_nation = yes
 								}
-								any_enemy_country = {
-									set_variable = { targeted_country_slot_2 = ROOT.id }
-								}
-							}else = {
-								grab_semi_hostile_nation = yes
 							}
-						}
-						16 = {
-							set_country_flag = slot_2_filled
-							set_country_flag = sabotage_target_slot_2
-							if = {
-								limit = {
-									has_war = yes
+							16 = {
+								set_country_flag = slot_2_filled
+								set_country_flag = sabotage_target_slot_2
+								if = {
+									limit = {
+										has_war = yes
+									}
+									random_enemy_country = {
+										set_variable = { targeted_country_slot_2 = ROOT.id }
+									}
+								}else = {
+									grab_semi_hostile_nation = yes
 								}
-								any_enemy_country = {
-									set_variable = { targeted_country_slot_2 = ROOT.id }
-								}
-							}else = {
-								grab_semi_hostile_nation = yes
 							}
-						}
-						16 = {
-							set_country_flag = slot_2_filled
-							set_country_flag = infilitrate_military_target_slot_2
-							if = {
-								limit = {
-									has_war = yes
+							16 = {
+								set_country_flag = slot_2_filled
+								set_country_flag = infilitrate_military_target_slot_2
+								if = {
+									limit = {
+										has_war = yes
+									}
+									random_enemy_country = {
+										set_variable = { targeted_country_slot_2 = ROOT.id }
+									}
+								}else = {
+									grab_semi_hostile_nation = yes
 								}
-								any_enemy_country = {
-									set_variable = { targeted_country_slot_2 = ROOT.id }
-								}
-							}else = {
-								grab_semi_hostile_nation = yes
 							}
-						}
-						16 = {
-							set_country_flag = slot_2_filled
-							set_country_flag = undermind_guild_connections_target_slot_2
-							if = {
-								limit = {
-									has_war = yes
+							16 = {
+								set_country_flag = slot_2_filled
+								set_country_flag = undermind_guild_connections_target_slot_2
+								if = {
+									limit = {
+										has_war = yes
+									}
+									random_enemy_country = {
+										set_variable = { targeted_country_slot_2 = ROOT.id }
+									}
+								}else = {
+									grab_semi_hostile_nation = yes
 								}
-								any_enemy_country = {
-									set_variable = { targeted_country_slot_2 = ROOT.id }
-								}
-							}else = {
-								grab_semi_hostile_nation = yes
 							}
-						}
-						16 = {
-							set_country_flag = slot_2_filled
-							set_country_flag = turn_agent_target_slot_2
-							if = {
-								limit = {
-									has_war = yes
+							16 = {
+								set_country_flag = slot_2_filled
+								set_country_flag = turn_agent_target_slot_2
+								if = {
+									limit = {
+										has_war = yes
+									}
+									random_enemy_country = {
+										set_variable = { targeted_country_slot_2 = ROOT.id }
+									}
+								}else = {
+									grab_semi_hostile_nation = yes
 								}
-								any_enemy_country = {
-									set_variable = { targeted_country_slot_2 = ROOT.id }
-								}
-							}else = {
-								grab_semi_hostile_nation = yes
 							}
-						}
-						16 = {
-							set_country_flag = slot_2_filled
-							set_country_flag = steal_blueprint_target_slot_2
-							if = {
-								limit = {
-									has_war = yes
+							16 = {
+								set_country_flag = slot_2_filled
+								set_country_flag = steal_blueprint_target_slot_2
+								if = {
+									limit = {
+										has_war = yes
+									}
+									random_enemy_country = {
+										set_variable = { targeted_country_slot_2 = ROOT.id }
+									}
+								}else = {
+									grab_semi_hostile_nation = yes
 								}
-								any_enemy_country = {
-									set_variable = { targeted_country_slot_2 = ROOT.id }
-								}
-							}else = {
-								grab_semi_hostile_nation = yes
 							}
 						}
 					}
 					var:amount_of_technicians = {
-						25 = {
-							set_country_flag = slot_2_filled
-							set_country_flag = cyber_attack_target_slot_2
-							if = {
-								limit = {
-									has_war = yes
+						random_list = {
+							25 = {
+								set_country_flag = slot_2_filled
+								set_country_flag = cyber_attack_target_slot_2
+								if = {
+									limit = {
+										has_war = yes
+									}
+									random_enemy_country = {
+										set_variable = { targeted_country_slot_2 = ROOT.id }
+									}
+								}else = {
+									grab_semi_hostile_nation = yes
 								}
-								any_enemy_country = {
-									set_variable = { targeted_country_slot_2 = ROOT.id }
-								}
-							}else = {
-								grab_semi_hostile_nation = yes
 							}
-						}
-						25 = {
-							set_country_flag = slot_2_filled
-							set_country_flag = steal_blueprint_target_slot_2
-							if = {
-								limit = {
-									has_war = yes
+							25 = {
+								set_country_flag = slot_2_filled
+								set_country_flag = steal_blueprint_target_slot_2
+								if = {
+									limit = {
+										has_war = yes
+									}
+									random_enemy_country = {
+										set_variable = { targeted_country_slot_2 = ROOT.id }
+									}
+								}else = {
+									grab_semi_hostile_nation = yes
 								}
-								any_enemy_country = {
-									set_variable = { targeted_country_slot_2 = ROOT.id }
-								}
-							}else = {
-								grab_semi_hostile_nation = yes
 							}
-						}
-						25 = {
-							set_country_flag = slot_2_filled
-							set_country_flag = sprout_disease_target_slot_2
-							if = {
-								limit = {
-									has_war = yes
+							25 = {
+								set_country_flag = slot_2_filled
+								set_country_flag = sprout_disease_target_slot_2
+								if = {
+									limit = {
+										has_war = yes
+									}
+									random_enemy_country = {
+										set_variable = { targeted_country_slot_2 = ROOT.id }
+									}
+								}else = {
+									grab_semi_hostile_nation = yes
 								}
-								any_enemy_country = {
-									set_variable = { targeted_country_slot_2 = ROOT.id }
-								}
-							}else = {
-								grab_semi_hostile_nation = yes
 							}
-						}
-						25 = {
-							set_country_flag = slot_2_filled
-							set_country_flag = logistics_sabotage_target_slot_2
-							if = {
-								limit = {
-									has_war = yes
+							25 = {
+								set_country_flag = slot_2_filled
+								set_country_flag = logistics_sabotage_target_slot_2
+								if = {
+									limit = {
+										has_war = yes
+									}
+									random_enemy_country = {
+										set_variable = { targeted_country_slot_2 = ROOT.id }
+									}
+								}else = {
+									grab_semi_hostile_nation = yes
 								}
-								any_enemy_country = {
-									set_variable = { targeted_country_slot_2 = ROOT.id }
-								}
-							}else = {
-								grab_semi_hostile_nation = yes
 							}
 						}
 					}
 					var:other_missions = {
-						probe_loyality = {
-							set_country_flag = slot_2_filled
-							set_country_flag = probe_loyality_target_slot_2
-						}
+						set_country_flag = slot_2_filled
+						set_country_flag = probe_loyality_target_slot_2
 					} ### SLOT 1 SELECTOR
 				}
 				random_list = {
@@ -640,7 +650,7 @@ espionage_missions = {
 									limit = {
 										has_war = yes
 									}
-									any_enemy_country = {
+									random_enemy_country = {
 										set_variable = { targeted_country_slot_3 = ROOT.id }
 									}
 								}else = {
@@ -668,7 +678,7 @@ espionage_missions = {
 									limit = {
 										has_war = yes
 									}
-									any_enemy_country = {
+									random_enemy_country = {
 										set_variable = { targeted_country_slot_3 = ROOT.id }
 									}
 								}else = {
@@ -708,214 +718,218 @@ espionage_missions = {
 						}
 					}
 					var:amount_of_smugglers = {
-						16 = {
-							if = {
-								limit = {
-									has_war = yes
+						random_list = {
+							16 = {
+								if = {
+									limit = {
+										has_war = yes
+									}
+									random_enemy_country = {
+										set_variable = { targeted_country_slot_3 = ROOT.id }
+									}
+								}else = {
+									grab_semi_hostile_nation = yes
 								}
-								any_enemy_country = {
-									set_variable = { targeted_country_slot_3 = ROOT.id }
-								}
-							}else = {
-								grab_semi_hostile_nation = yes
+								set_country_flag = slot_3_filled
+								set_country_flag = steal_equipment_slot_3
 							}
-							set_country_flag = slot_3_filled
-							set_country_flag = steal_equipment_slot_3
-						}
-						16 = {
-							set_country_flag = slot_3_filled
-							set_country_flag = set_Slaves_free_slot_3
-							slave_raid_selector = yes
-						}
-						16 = {
-							set_country_flag = slot_3_filled
-							set_country_flag = smuggle_slaves_slot_3
-							slave_raid_selector = yes
-						}
-						16 = {
-							set_country_flag = slot_3_filled
-							set_country_flag = arming_dissadents_slot_3
-							if = {
-								limit = {
-									has_war = yes
-								}
-								any_enemy_country = {
-									set_variable = { targeted_country_slot_3 = ROOT.id }
-								}
-							}else = {
-								grab_semi_hostile_nation = yes
+							16 = {
+								set_country_flag = slot_3_filled
+								set_country_flag = set_Slaves_free_slot_3
+								slave_raid_selector = yes
 							}
-						}
-						16 = {
-							set_country_flag = slot_3_filled
-							set_country_flag = provoke_slave_revolt_slot_3
-							slave_raid_selector = yes
-						}
-						16 = {
-							set_country_flag = slot_3_filled
-							set_country_flag = plant_sleeper_agent_slot_3
-							if = {
-								limit = {
-									has_war = yes
+							16 = {
+								set_country_flag = slot_3_filled
+								set_country_flag = smuggle_slaves_slot_3
+								slave_raid_selector = yes
+							}
+							16 = {
+								set_country_flag = slot_3_filled
+								set_country_flag = arming_dissadents_slot_3
+								if = {
+									limit = {
+										has_war = yes
+									}
+									random_enemy_country = {
+										set_variable = { targeted_country_slot_3 = ROOT.id }
+									}
+								}else = {
+									grab_semi_hostile_nation = yes
 								}
-								any_enemy_country = {
-									set_variable = { targeted_country_slot_3 = ROOT.id }
+							}
+							16 = {
+								set_country_flag = slot_3_filled
+								set_country_flag = provoke_slave_revolt_slot_3
+								slave_raid_selector = yes
+							}
+							16 = {
+								set_country_flag = slot_3_filled
+								set_country_flag = plant_sleeper_agent_slot_3
+								if = {
+									limit = {
+										has_war = yes
+									}
+									random_enemy_country = {
+										set_variable = { targeted_country_slot_3 = ROOT.id }
+									}
+								}else = {
+									grab_semi_hostile_nation = yes
 								}
-							}else = {
-								grab_semi_hostile_nation = yes
 							}
 						}
 					}
 					var:amount_of_spies = {
-						16 = {
-							set_country_flag = slot_3_filled
-							set_country_flag = capitial_ship_target_slot_3
-							if = {
-								limit = {
-									has_war = yes
+						random_list = {
+							16 = {
+								set_country_flag = slot_3_filled
+								set_country_flag = capitial_ship_target_slot_3
+								if = {
+									limit = {
+										has_war = yes
+									}
+									random_enemy_country = {
+										set_variable = { targeted_country_slot_3 = ROOT.id }
+									}
+								}else = {
+									grab_semi_hostile_nation = yes
 								}
-								any_enemy_country = {
-									set_variable = { targeted_country_slot_3 = ROOT.id }
-								}
-							}else = {
-								grab_semi_hostile_nation = yes
 							}
-						}
-						16 = {
-							set_country_flag = slot_3_filled
-							set_country_flag = sabotage_target_slot_3
-							if = {
-								limit = {
-									has_war = yes
+							16 = {
+								set_country_flag = slot_3_filled
+								set_country_flag = sabotage_target_slot_3
+								if = {
+									limit = {
+										has_war = yes
+									}
+									random_enemy_country = {
+										set_variable = { targeted_country_slot_3 = ROOT.id }
+									}
+								}else = {
+									grab_semi_hostile_nation = yes
 								}
-								any_enemy_country = {
-									set_variable = { targeted_country_slot_3 = ROOT.id }
-								}
-							}else = {
-								grab_semi_hostile_nation = yes
 							}
-						}
-						16 = {
-							set_country_flag = slot_3_filled
-							set_country_flag = infilitrate_military_target_slot_3
-							if = {
-								limit = {
-									has_war = yes
+							16 = {
+								set_country_flag = slot_3_filled
+								set_country_flag = infilitrate_military_target_slot_3
+								if = {
+									limit = {
+										has_war = yes
+									}
+									random_enemy_country = {
+										set_variable = { targeted_country_slot_3 = ROOT.id }
+									}
+								}else = {
+									grab_semi_hostile_nation = yes
 								}
-								any_enemy_country = {
-									set_variable = { targeted_country_slot_3 = ROOT.id }
-								}
-							}else = {
-								grab_semi_hostile_nation = yes
 							}
-						}
-						16 = {
-							set_country_flag = slot_3_filled
-							set_country_flag = undermind_guild_connections_target_slot_3
-							if = {
-								limit = {
-									has_war = yes
+							16 = {
+								set_country_flag = slot_3_filled
+								set_country_flag = undermind_guild_connections_target_slot_3
+								if = {
+									limit = {
+										has_war = yes
+									}
+									random_enemy_country = {
+										set_variable = { targeted_country_slot_3 = ROOT.id }
+									}
+								}else = {
+									grab_semi_hostile_nation = yes
 								}
-								any_enemy_country = {
-									set_variable = { targeted_country_slot_3 = ROOT.id }
-								}
-							}else = {
-								grab_semi_hostile_nation = yes
 							}
-						}
-						16 = {
-							set_country_flag = slot_3_filled
-							set_country_flag = turn_agent_target_slot_3
-							if = {
-								limit = {
-									has_war = yes
+							16 = {
+								set_country_flag = slot_3_filled
+								set_country_flag = turn_agent_target_slot_3
+								if = {
+									limit = {
+										has_war = yes
+									}
+									random_enemy_country = {
+										set_variable = { targeted_country_slot_3 = ROOT.id }
+									}
+								}else = {
+									grab_semi_hostile_nation = yes
 								}
-								any_enemy_country = {
-									set_variable = { targeted_country_slot_3 = ROOT.id }
-								}
-							}else = {
-								grab_semi_hostile_nation = yes
 							}
-						}
-						16 = {
-							set_country_flag = slot_3_filled
-							set_country_flag = steal_blueprint_target_slot_3
-							if = {
-								limit = {
-									has_war = yes
+							16 = {
+								set_country_flag = slot_3_filled
+								set_country_flag = steal_blueprint_target_slot_3
+								if = {
+									limit = {
+										has_war = yes
+									}
+									random_enemy_country = {
+										set_variable = { targeted_country_slot_3 = ROOT.id }
+									}
+								}else = {
+									grab_semi_hostile_nation = yes
 								}
-								any_enemy_country = {
-									set_variable = { targeted_country_slot_3 = ROOT.id }
-								}
-							}else = {
-								grab_semi_hostile_nation = yes
 							}
 						}
 					}
 					var:amount_of_technicians = {
-						25 = {
-							set_country_flag = slot_3_filled
-							set_country_flag = cyber_attack_target_slot_3
-							if = {
-								limit = {
-									has_war = yes
+						random_list = {
+							25 = {
+								set_country_flag = slot_3_filled
+								set_country_flag = cyber_attack_target_slot_3
+								if = {
+									limit = {
+										has_war = yes
+									}
+									random_enemy_country = {
+										set_variable = { targeted_country_slot_3 = ROOT.id }
+									}
+								}else = {
+									grab_semi_hostile_nation = yes
 								}
-								any_enemy_country = {
-									set_variable = { targeted_country_slot_3 = ROOT.id }
-								}
-							}else = {
-								grab_semi_hostile_nation = yes
 							}
-						}
-						25 = {
-							set_country_flag = slot_3_filled
-							set_country_flag = steal_blueprint_target_slot_3
-							if = {
-								limit = {
-									has_war = yes
+							25 = {
+								set_country_flag = slot_3_filled
+								set_country_flag = steal_blueprint_target_slot_3
+								if = {
+									limit = {
+										has_war = yes
+									}
+									random_enemy_country = {
+										set_variable = { targeted_country_slot_3 = ROOT.id }
+									}
+								}else = {
+									grab_semi_hostile_nation = yes
 								}
-								any_enemy_country = {
-									set_variable = { targeted_country_slot_3 = ROOT.id }
-								}
-							}else = {
-								grab_semi_hostile_nation = yes
 							}
-						}
-						25 = {
-							set_country_flag = slot_3_filled
-							set_country_flag = sprout_disease_target_slot_3
-							if = {
-								limit = {
-									has_war = yes
+							25 = {
+								set_country_flag = slot_3_filled
+								set_country_flag = sprout_disease_target_slot_3
+								if = {
+									limit = {
+										has_war = yes
+									}
+									random_enemy_country = {
+										set_variable = { targeted_country_slot_3 = ROOT.id }
+									}
+								}else = {
+									grab_semi_hostile_nation = yes
 								}
-								any_enemy_country = {
-									set_variable = { targeted_country_slot_3 = ROOT.id }
-								}
-							}else = {
-								grab_semi_hostile_nation = yes
 							}
-						}
-						25 = {
-							set_country_flag = slot_3_filled
-							set_country_flag = logistics_sabotage_target_slot_3
-							if = {
-								limit = {
-									has_war = yes
+							25 = {
+								set_country_flag = slot_3_filled
+								set_country_flag = logistics_sabotage_target_slot_3
+								if = {
+									limit = {
+										has_war = yes
+									}
+									random_enemy_country = {
+										set_variable = { targeted_country_slot_3 = ROOT.id }
+									}
+								}else = {
+									grab_semi_hostile_nation = yes
 								}
-								any_enemy_country = {
-									set_variable = { targeted_country_slot_3 = ROOT.id }
-								}
-							}else = {
-								grab_semi_hostile_nation = yes
 							}
 						}
 					}
 					var:other_missions = {
-						probe_loyality = {
 							set_country_flag = slot_3_filled
-							set_country_flag = probe_loyality_target_slot_3
-						}
-					} ### SLOT 1 SELECTOR
+							set_country_flag = probe_loyality_target_slot_3					
+					} ### SLOT 3 SELECTOR
 				}
 			}
 		}
@@ -939,7 +953,7 @@ espionage_missions = {
 		days_remove  = 130
 		is_good = yes
 		fire_only_once = no
-		remove_effect  = {
+		timeout_effect  = {
 			if = {
 					### EXAMPLE SKILL CHECK ###
 					# set_variable = { agent_operation_slot_1 = ### GRABS OPERATIVE FROM PALPYS GRIDBOX}
@@ -966,14 +980,18 @@ espionage_missions = {
 					multiply_temp_variable = { tempAverage = 6 } ## 6 factor
 					if = {
 						limit = {
-							check_variable = {chance_of_success_1 >= tempMartial}
+							check_variable = {
+								var = chance_of_success_1
+								value = tempAverage
+								compare = less_than_or_equals
+							}
 						}
 						if = {
 							limit = {
 								check_variable = {chance_of_success_1 > 10}
 							}
 							var:targeted_country_slot_1 = {
-								all_unit_leader = {
+								every_unit_leader = {
 									limit = {
 										has_character_flag = targeted_by_mission
 										has_character_flag = targeted_by_@ROOT_murder
@@ -987,12 +1005,12 @@ espionage_missions = {
 							}
 						}else = {														 ### CRITICAL SUCCESSS
 							var:targeted_country_slot_1 = { ### ASSASSIN KILLS TARGET
-								all_unit_leader = {
+								every_unit_leader = {
 									limit = {
 										has_character_flag = targeted_by_mission
 										has_character_flag = targeted_by_@ROOT_murder
 									}
-									retire_character = THIS
+									retire = yes
 									unit_leader_event = {id = espionage.2}
 								}
 							}
@@ -1012,7 +1030,11 @@ espionage_missions = {
 					multiply_temp_variable = { tempAverage = 5 }
 					if = {
 						limit = {
-							check_variable = {chance_of_success_1 >= tempAverage}
+							check_variable = {
+								var = chance_of_success_1
+								value = tempAverage
+								compare = less_than_or_equals
+							}
 						}
 						var:targeted_country_slot_1 = {
 							country_event = {
@@ -1035,16 +1057,22 @@ espionage_missions = {
 					multiply_temp_variable = { tempAverage = 10 }
 					if = {
 						limit = {
-							check_variable = {chance_of_success_1 >= tempAverage}
+							check_variable = {
+								var = chance_of_success_1
+								value = tempAverage
+								compare = less_than_or_equals
+							}
 						}
-						add_random_trait = {
-							organizer
-							cavalry_leader
-							infantry_leader
-							skilled_staffer
-							trickster
-							infantry_officer
-							armor_officer
+						random_unit_leader = {
+							add_random_trait = {
+								organizer
+								cavalry_leader
+								infantry_leader
+								skilled_staffer
+								trickster
+								infantry_officer
+								armor_officer
+							}
 						}
 					}
 					clr_country_flag = army_training_slot_1
@@ -1061,7 +1089,11 @@ espionage_missions = {
 					multiply_temp_variable = { tempAverage = 10 }
 					if = {
 						limit = {
-							check_variable = {chance_of_success_1 >= tempAverage}
+							check_variable = {
+								var = chance_of_success_1
+								value = tempAverage
+								compare = less_than_or_equals
+							}
 						}
 					}
 					clr_country_flag = intimidate_senator_slot_1
@@ -1077,7 +1109,11 @@ espionage_missions = {
 					multiply_temp_variable = { tempAverage = 5 }
 					if = {
 						limit = {
-							check_variable = {chance_of_success_1 >= tempAverage}
+							check_variable = {
+								var = chance_of_success_1
+								value = tempAverage
+								compare = less_than_or_equals
+							}
 						}
 						var:targeted_country_slot_1 = {
 							add_timed_idea = {
@@ -1100,7 +1136,11 @@ espionage_missions = {
 					multiply_temp_variable = { tempAverage = 8 }
 					if = {
 						limit = {
-							check_variable = {chance_of_success_1 >= tempAverage}
+							check_variable = {
+								var = chance_of_success_1
+								value = tempAverage
+								compare = less_than_or_equals
+							}
 						}
 						var:targeted_country_slot_1 = {
 							steal_random_tech_bonus = {
@@ -1129,7 +1169,11 @@ espionage_missions = {
 					multiply_temp_variable = { tempAverage = 5 }
 					if = {
 						limit = {
-							check_variable = {chance_of_success_1 >= tempAverage}
+							check_variable = {
+								var = chance_of_success_1
+								value = tempAverage
+								compare = less_than_or_equals
+							}
 						}
 						var:targeted_country_slot_1 = {
 							capital_scope = {
@@ -1151,7 +1195,11 @@ espionage_missions = {
 					multiply_temp_variable = { tempAverage = 8 }
 					if = {
 						limit = {
-							check_variable = {chance_of_success_1 >= tempAverage}
+							check_variable = {
+								var = chance_of_success_1
+								value = tempAverage
+								compare = less_than_or_equals
+							}
 						}
 						var:targeted_country_slot_1 = {
 							add_timed_idea = {
@@ -1175,7 +1223,11 @@ espionage_missions = {
 					multiply_temp_variable = { tempAverage = 12 }
 					if = {
 						limit = {
-							check_variable = {chance_of_success_1 >= tempAverage}
+							check_variable = {
+								var = chance_of_success_1
+								value = tempAverage
+								compare = less_than_or_equals
+							}
 						}
 						var:targeted_country_slot_1 = {
 							while_loop_effect = {
@@ -1223,7 +1275,11 @@ espionage_missions = {
 					multiply_temp_variable = { tempAverage = 6 }
 					if = {
 						limit = {
-							check_variable = {chance_of_success_1 >= tempAverage}
+							check_variable = {
+								var = chance_of_success_1
+								value = tempAverage
+								compare = less_than_or_equals
+							}
 						}
 						add_intel = {
 						    target = var:targeted_country_slot_1
@@ -1246,7 +1302,11 @@ espionage_missions = {
 					multiply_temp_variable = { tempAverage = 8 }
 					if = {
 						limit = {
-							check_variable = {chance_of_success_1 >= tempAverage}
+							check_variable = {
+								var = chance_of_success_1
+								value = tempAverage
+								compare = less_than_or_equals
+							}
 						}
 					}
 					clr_country_flag = undermine_guild_connections_slot_1
@@ -1263,7 +1323,11 @@ espionage_missions = {
 					multiply_temp_variable = { tempAverage = 6 }
 					if = {
 						limit = {
-							check_variable = {chance_of_success_1 >= tempAverage}
+							check_variable = {
+								var = chance_of_success_1
+								value = tempAverage
+								compare = less_than_or_equals
+							}
 						}
 					}
 					clr_country_flag = turn_agent_slot_1
@@ -1279,7 +1343,11 @@ espionage_missions = {
 					multiply_temp_variable = { tempAverage = 5 }
 					if = {
 						limit = {
-							check_variable = {chance_of_success_1 >= tempAverage}
+							check_variable = {
+								var = chance_of_success_1
+								value = tempAverage
+								compare = less_than_or_equals
+							}
 						}
 						var:targeted_country_slot_1 = {
 							if = {
@@ -1289,12 +1357,11 @@ espionage_missions = {
 										value = 1
 										compare = greater_than
 									}
-									destroy_ships = {
-									    type = carrier
-									    count = 1
-									}
 								}
-
+								destroy_ships = {
+								    type = carrier
+								    count = 1
+								}
 							}else_if = {
 								limit = {
 									check_variable = {
@@ -1302,11 +1369,11 @@ espionage_missions = {
 										value = 1
 										compare = greater_than
 									}
-									destroy_ships = {
-									    type = battleship
-									    count = 1
-									}
-								}		
+								}
+								destroy_ships = {
+								    type = battleship
+								    count = 1
+								}
 							}
 						}
 					}
@@ -1325,7 +1392,11 @@ espionage_missions = {
 					multiply_temp_variable = { tempAverage = 10 }
 					if = {
 						limit = {
-							check_variable = {chance_of_success_1 >= tempAverage}
+							check_variable = {
+								var = chance_of_success_1
+								value = tempAverage
+								compare = less_than_or_equals
+							}
 						}
 						var:targeted_country_slot_1 = {
 							send_equipment_fraction = {
@@ -1348,7 +1419,11 @@ espionage_missions = {
 					multiply_temp_variable = { tempAverage = 8 }
 					if = {
 						limit = {
-							check_variable = {chance_of_success_1 >= tempAverage}
+							check_variable = {
+								var = chance_of_success_1
+								value = tempAverage
+								compare = less_than_or_equals
+							}
 						}
 						var:targeted_country_slot_1 = {
 							find_highest_in_array = { 
@@ -1377,7 +1452,11 @@ espionage_missions = {
 					multiply_temp_variable = { tempAverage = 10 }
 					if = {
 						limit = {
-							check_variable = {chance_of_success_1 >= tempAverage}
+							check_variable = {
+								var = chance_of_success_1
+								value = tempAverage
+								compare = less_than_or_equals
+							}
 						}
 						var:targeted_country_slot_1 = {
 							find_highest_in_array = { 
@@ -1405,7 +1484,11 @@ espionage_missions = {
 					multiply_temp_variable = { tempAverage = 4 }
 					if = {
 						limit = {
-							check_variable = {chance_of_success_1 >= tempAverage}
+							check_variable = {
+								var = chance_of_success_1
+								value = tempAverage
+								compare = less_than_or_equals
+							}
 						}
 						var:targeted_country_slot_1 = {
 							set_temp_variable = { slave_total_count_temp = 0 }
@@ -1425,8 +1508,8 @@ espionage_missions = {
 							    size = slave_total_count_temp
 							    capital = var:core_temp_state
 							    navy_ratio = 0
-							    states = {
-							        var:core_temp_state
+							    states_filter = {
+							    	check_variable = {var:core_temp_state = THIS.id}
 							    }
 							    keep_unit_leaders_trigger = {
 							    	always = yes
@@ -1450,7 +1533,11 @@ espionage_missions = {
 					multiply_temp_variable = { tempAverage = 10 }
 					if = {
 						limit = {
-							check_variable = {chance_of_success_1 >= tempAverage}
+							check_variable = {
+								var = chance_of_success_1
+								value = tempAverage
+								compare = less_than_or_equals
+							}
 						}
 						var:targeted_country_slot_1 = {
 							every_controlled_state = {
@@ -1475,7 +1562,11 @@ espionage_missions = {
 					multiply_temp_variable = { tempAverage = 12 }
 					if = {
 						limit = {
-							check_variable = {chance_of_success_1 >= tempAverage}
+							check_variable = {
+								var = chance_of_success_1
+								value = tempAverage
+								compare = less_than_or_equals
+							}
 						}
 						set_variable = {higher_chance_espionage_target = var:targeted_country_slot_1.id }
 					}
@@ -1493,7 +1584,11 @@ espionage_missions = {
 					multiply_temp_variable = { tempAverage = 8 }
 					if = {
 						limit = {
-							check_variable = {chance_of_success_1 >= tempAverage}
+							check_variable = {
+								var = chance_of_success_1
+								value = tempAverage
+								compare = less_than_or_equals
+							}
 						}
 						var:targeted_country_slot_1 = {
 							subtract_from_variable = { currency_amount^primary_currency = 1000 }
@@ -1513,15 +1608,14 @@ espionage_missions = {
 					multiply_temp_variable = { tempAverage = 8 }
 					if = {
 						limit = {
-							check_variable = {chance_of_success_1 >= tempAverage}
+							check_variable = {
+								var = chance_of_success_1
+								value = tempAverage
+								compare = less_than_or_equals
+							}
 						}
 						var:targeted_country_slot_1 = {
-							capital_scope = {
-								give_resource_rights = { receiver = ROOT state = THIS }
-								every_neighbor_state = {
-									give_resource_rights = { receiver = ROOT state = THIS }
-								}
-							}
+							give_resource_rights = { receiver = ROOT state = capital }
 							country_event = {
 							    id = espionage.4
 							    days = 80
@@ -1550,7 +1644,7 @@ espionage_missions = {
 		days_remove  = 130
 		is_good = yes
 		fire_only_once = no
-		remove_effect  = {
+		timeout_effect  = {
 			if = {
 				limit = {
 					has_country_flag = slot_2_filled
@@ -1570,14 +1664,18 @@ espionage_missions = {
 					multiply_temp_variable = { tempAverage = 6 } ## 6 factor
 					if = {
 						limit = {
-							check_variable = {chance_of_success_2 >= tempMartial}
+							check_variable = {
+								var = chance_of_success_2
+								value = tempAverage
+								compare = less_than_or_equals
+							}
 						}
 						if = {
 							limit = {
 								check_variable = {chance_of_success_2 > 10}
 							}
 							var:targeted_country_slot_2 = {
-								all_unit_leader = {
+								every_unit_leader = {
 									limit = {
 										has_character_flag = targeted_by_mission
 										has_character_flag = targeted_by_@ROOT_murder
@@ -1591,12 +1689,12 @@ espionage_missions = {
 							}
 						}else = {														 ### CRITICAL SUCCESSS
 							var:targeted_country_slot_2 = { ### ASSASSIN KILLS TARGET
-								all_unit_leader = {
+								every_unit_leader = {
 									limit = {
 										has_character_flag = targeted_by_mission
 										has_character_flag = targeted_by_@ROOT_murder
 									}
-									retire_character = THIS
+									retire = yes
 									unit_leader_event = {id = espionage.2}
 								}
 							}
@@ -1616,7 +1714,11 @@ espionage_missions = {
 					multiply_temp_variable = { tempAverage = 5 }
 					if = {
 						limit = {
-							check_variable = {chance_of_success_2 >= tempAverage}
+							check_variable = {
+								var = chance_of_success_2
+								value = tempAverage
+								compare = less_than_or_equals
+							}
 						}
 						var:targeted_country_slot_2 = {
 							country_event = {
@@ -1639,16 +1741,22 @@ espionage_missions = {
 					multiply_temp_variable = { tempAverage = 10 }
 					if = {
 						limit = {
-							check_variable = {chance_of_success_2 >= tempAverage}
+							check_variable = {
+								var = chance_of_success_2
+								value = tempAverage
+								compare = less_than_or_equals
+							}
 						}
-						add_random_trait = {
-							organizer
-							cavalry_leader
-							infantry_leader
-							skilled_staffer
-							trickster
-							infantry_officer
-							armor_officer
+                        random_unit_leader = {
+							add_random_trait = {
+								organizer
+								cavalry_leader
+								infantry_leader
+								skilled_staffer
+								trickster
+								infantry_officer
+								armor_officer
+							}
 						}
 					}
 					clr_country_flag = army_training_slot_2
@@ -1665,7 +1773,11 @@ espionage_missions = {
 					multiply_temp_variable = { tempAverage = 10 }
 					if = {
 						limit = {
-							check_variable = {chance_of_success_2 >= tempAverage}
+							check_variable = {
+								var = chance_of_success_2
+								value = tempAverage
+								compare = less_than_or_equals
+							}
 						}
 					}
 					clr_country_flag = intimidate_senator_slot_2
@@ -1681,7 +1793,11 @@ espionage_missions = {
 					multiply_temp_variable = { tempAverage = 5 }
 					if = {
 						limit = {
-							check_variable = {chance_of_success_2 >= tempAverage}
+							check_variable = {
+								var = chance_of_success_2
+								value = tempAverage
+								compare = less_than_or_equals
+							}
 						}
 						var:targeted_country_slot_2 = {
 							add_timed_idea = {
@@ -1704,7 +1820,11 @@ espionage_missions = {
 					multiply_temp_variable = { tempAverage = 8 }
 					if = {
 						limit = {
-							check_variable = {chance_of_success_2 >= tempAverage}
+							check_variable = {
+								var = chance_of_success_2
+								value = tempAverage
+								compare = less_than_or_equals
+							}
 						}
 						var:targeted_country_slot_2 = {
 							steal_random_tech_bonus = {
@@ -1733,7 +1853,11 @@ espionage_missions = {
 					multiply_temp_variable = { tempAverage = 5 }
 					if = {
 						limit = {
-							check_variable = {chance_of_success_2 >= tempAverage}
+							check_variable = {
+								var = chance_of_success_2
+								value = tempAverage
+								compare = less_than_or_equals
+							}
 						}
 						var:targeted_country_slot_2 = {
 							capital_scope = {
@@ -1755,7 +1879,11 @@ espionage_missions = {
 					multiply_temp_variable = { tempAverage = 8 }
 					if = {
 						limit = {
-							check_variable = {chance_of_success_2 >= tempAverage}
+							check_variable = {
+								var = chance_of_success_2
+								value = tempAverage
+								compare = less_than_or_equals
+							}
 						}
 						var:targeted_country_slot_2 = {
 							add_timed_idea = {
@@ -1779,7 +1907,11 @@ espionage_missions = {
 					multiply_temp_variable = { tempAverage = 12 }
 					if = {
 						limit = {
-							check_variable = {chance_of_success_2 >= tempAverage}
+							check_variable = {
+								var = chance_of_success_2
+								value = tempAverage
+								compare = less_than_or_equals
+							}
 						}
 						var:targeted_country_slot_2 = {
 							while_loop_effect = {
@@ -1827,7 +1959,11 @@ espionage_missions = {
 					multiply_temp_variable = { tempAverage = 6 }
 					if = {
 						limit = {
-							check_variable = {chance_of_success_2 >= tempAverage}
+							check_variable = {
+								var = chance_of_success_2
+								value = tempAverage
+								compare = less_than_or_equals
+							}
 						}
 						add_intel = {
 						    target = var:targeted_country_slot_2
@@ -1850,7 +1986,11 @@ espionage_missions = {
 					multiply_temp_variable = { tempAverage = 8 }
 					if = {
 						limit = {
-							check_variable = {chance_of_success_2 >= tempAverage}
+							check_variable = {
+								var = chance_of_success_2
+								value = tempAverage
+								compare = less_than_or_equals
+							}
 						}
 					}
 					clr_country_flag = undermine_guild_connections_slot_2
@@ -1867,7 +2007,11 @@ espionage_missions = {
 					multiply_temp_variable = { tempAverage = 6 }
 					if = {
 						limit = {
-							check_variable = {chance_of_success_2 >= tempAverage}
+							check_variable = {
+								var = chance_of_success_2
+								value = tempAverage
+								compare = less_than_or_equals
+							}
 						}
 					}
 					clr_country_flag = turn_agent_slot_2
@@ -1883,7 +2027,11 @@ espionage_missions = {
 					multiply_temp_variable = { tempAverage = 5 }
 					if = {
 						limit = {
-							check_variable = {chance_of_success_2 >= tempAverage}
+							check_variable = {
+								var = chance_of_success_2
+								value = tempAverage
+								compare = less_than_or_equals
+							}
 						}
 						var:targeted_country_slot_2 = {
 							if = {
@@ -1893,12 +2041,11 @@ espionage_missions = {
 										value = 1
 										compare = greater_than
 									}
-									destroy_ships = {
-									    type = carrier
-									    count = 1
-									}
 								}
-
+								destroy_ships = {
+								    type = carrier
+								    count = 1
+								}
 							}else_if = {
 								limit = {
 									check_variable = {
@@ -1906,11 +2053,11 @@ espionage_missions = {
 										value = 1
 										compare = greater_than
 									}
-									destroy_ships = {
-									    type = battleship
-									    count = 1
-									}
-								}		
+								}
+								destroy_ships = {
+								    type = battleship
+								    count = 1
+								}
 							}
 						}
 					}
@@ -1929,7 +2076,11 @@ espionage_missions = {
 					multiply_temp_variable = { tempAverage = 10 }
 					if = {
 						limit = {
-							check_variable = {chance_of_success_2 >= tempAverage}
+							check_variable = {
+								var = chance_of_success_2
+								value = tempAverage
+								compare = less_than_or_equals
+							}
 						}
 						var:targeted_country_slot_2 = {
 							send_equipment_fraction = {
@@ -1952,7 +2103,11 @@ espionage_missions = {
 					multiply_temp_variable = { tempAverage = 8 }
 					if = {
 						limit = {
-							check_variable = {chance_of_success_2 >= tempAverage}
+							check_variable = {
+								var = chance_of_success_2
+								value = tempAverage
+								compare = less_than_or_equals
+							}
 						}
 						var:targeted_country_slot_2 = {
 							find_highest_in_array = { 
@@ -1981,7 +2136,11 @@ espionage_missions = {
 					multiply_temp_variable = { tempAverage = 10 }
 					if = {
 						limit = {
-							check_variable = {chance_of_success_2 >= tempAverage}
+							check_variable = {
+								var = chance_of_success_2
+								value = tempAverage
+								compare = less_than_or_equals
+							}
 						}
 						var:targeted_country_slot_2 = {
 							find_highest_in_array = { 
@@ -2009,7 +2168,11 @@ espionage_missions = {
 					multiply_temp_variable = { tempAverage = 4 }
 					if = {
 						limit = {
-							check_variable = {chance_of_success_2 >= tempAverage}
+							check_variable = {
+								var = chance_of_success_2
+								value = tempAverage
+								compare = less_than_or_equals
+							}
 						}
 						var:targeted_country_slot_2 = {
 							set_temp_variable = { slave_total_count_temp = 0 }
@@ -2029,8 +2192,8 @@ espionage_missions = {
 							    size = slave_total_count_temp
 							    capital = var:core_temp_state
 							    navy_ratio = 0
-							    states = {
-							        var:core_temp_state
+							    states_filter = {
+							    	check_variable = {var:core_temp_state = THIS.id}
 							    }
 							    keep_unit_leaders_trigger = {
 							    	always = yes
@@ -2054,7 +2217,11 @@ espionage_missions = {
 					multiply_temp_variable = { tempAverage = 10 }
 					if = {
 						limit = {
-							check_variable = {chance_of_success_2 >= tempAverage}
+							check_variable = {
+								var = chance_of_success_2
+								value = tempAverage
+								compare = less_than_or_equals
+							}
 						}
 						var:targeted_country_slot_2 = {
 							every_controlled_state = {
@@ -2079,7 +2246,11 @@ espionage_missions = {
 					multiply_temp_variable = { tempAverage = 12 }
 					if = {
 						limit = {
-							check_variable = {chance_of_success_2 >= tempAverage}
+							check_variable = {
+								var = chance_of_success_2
+								value = tempAverage
+								compare = less_than_or_equals
+							}
 						}
 						set_variable = {higher_chance_espionage_target = var:targeted_country_slot_2.id }
 					}
@@ -2097,7 +2268,11 @@ espionage_missions = {
 					multiply_temp_variable = { tempAverage = 8 }
 					if = {
 						limit = {
-							check_variable = {chance_of_success_2 >= tempAverage}
+							check_variable = {
+								var = chance_of_success_2
+								value = tempAverage
+								compare = less_than_or_equals
+							}
 						}
 						var:targeted_country_slot_2 = {
 							subtract_from_variable = { currency_amount^primary_currency = 1000 }
@@ -2117,15 +2292,14 @@ espionage_missions = {
 					multiply_temp_variable = { tempAverage = 8 }
 					if = {
 						limit = {
-							check_variable = {chance_of_success_2 >= tempAverage}
+							check_variable = {
+								var = chance_of_success_2
+								value = tempAverage
+								compare = less_than_or_equals
+							}
 						}
 						var:targeted_country_slot_2 = {
-							capital_scope = {
-								give_resource_rights = { receiver = ROOT state = THIS }
-								every_neighbor_state = {
-									give_resource_rights = { receiver = ROOT state = THIS }
-								}
-							}
+							give_resource_rights = { receiver = ROOT state = capital }
 							country_event = {
 							    id = espionage.4
 							    days = 80
@@ -2154,7 +2328,7 @@ espionage_missions = {
 		days_remove  = 130
 		is_good = yes
 		fire_only_once = no
-		remove_effect  = {
+		timeout_effect  = {
 			if = {
 				limit = {
 					has_country_flag = slot_3_filled
@@ -2174,14 +2348,18 @@ espionage_missions = {
 					multiply_temp_variable = { tempAverage = 6 } ## 6 factor
 					if = {
 						limit = {
-							check_variable = {chance_of_success_3 >= tempMartial}
+							check_variable = {
+								var = chance_of_success_3
+								value = tempAverage
+								compare = less_than_or_equals
+							}
 						}
 						if = {
 							limit = {
 								check_variable = {chance_of_success_3 > 10}
 							}
 							var:targeted_country_slot_3 = {
-								all_unit_leader = {
+								every_unit_leader = {
 									limit = {
 										has_character_flag = targeted_by_mission
 										has_character_flag = targeted_by_@ROOT_murder
@@ -2195,12 +2373,12 @@ espionage_missions = {
 							}
 						}else = {														 ### CRITICAL SUCCESSS
 							var:targeted_country_slot_3 = { ### ASSASSIN KILLS TARGET
-								all_unit_leader = {
+								every_unit_leader = {
 									limit = {
 										has_character_flag = targeted_by_mission
 										has_character_flag = targeted_by_@ROOT_murder
 									}
-									retire_character = THIS
+									retire = yes
 									unit_leader_event = {id = espionage.2}
 								}
 							}
@@ -2220,7 +2398,11 @@ espionage_missions = {
 					multiply_temp_variable = { tempAverage = 5 }
 					if = {
 						limit = {
-							check_variable = {chance_of_success_3 >= tempAverage}
+							check_variable = {
+								var = chance_of_success_3
+								value = tempAverage
+								compare = less_than_or_equals
+							}
 						}
 						var:targeted_country_slot_3 = {
 							country_event = {
@@ -2243,16 +2425,22 @@ espionage_missions = {
 					multiply_temp_variable = { tempAverage = 10 }
 					if = {
 						limit = {
-							check_variable = {chance_of_success_3 >= tempAverage}
+							check_variable = {
+								var = chance_of_success_3
+								value = tempAverage
+								compare = less_than_or_equals
+							}
 						}
-						add_random_trait = {
-							organizer
-							cavalry_leader
-							infantry_leader
-							skilled_staffer
-							trickster
-							infantry_officer
-							armor_officer
+                        random_unit_leader = {
+							add_random_trait = {
+								organizer
+								cavalry_leader
+								infantry_leader
+								skilled_staffer
+								trickster
+								infantry_officer
+								armor_officer
+							}
 						}
 					}
 					clr_country_flag = army_training_slot_3
@@ -2269,7 +2457,11 @@ espionage_missions = {
 					multiply_temp_variable = { tempAverage = 10 }
 					if = {
 						limit = {
-							check_variable = {chance_of_success_3 >= tempAverage}
+							check_variable = {
+								var = chance_of_success_3
+								value = tempAverage
+								compare = less_than_or_equals
+							}
 						}
 					}
 					clr_country_flag = intimidate_senator_slot_3
@@ -2285,7 +2477,11 @@ espionage_missions = {
 					multiply_temp_variable = { tempAverage = 5 }
 					if = {
 						limit = {
-							check_variable = {chance_of_success_3 >= tempAverage}
+							check_variable = {
+								var = chance_of_success_3
+								value = tempAverage
+								compare = less_than_or_equals
+							}
 						}
 						var:targeted_country_slot_3 = {
 							add_timed_idea = {
@@ -2308,7 +2504,11 @@ espionage_missions = {
 					multiply_temp_variable = { tempAverage = 8 }
 					if = {
 						limit = {
-							check_variable = {chance_of_success_3 >= tempAverage}
+							check_variable = {
+								var = chance_of_success_3
+								value = tempAverage
+								compare = less_than_or_equals
+							}
 						}
 						var:targeted_country_slot_3 = {
 							steal_random_tech_bonus = {
@@ -2337,7 +2537,11 @@ espionage_missions = {
 					multiply_temp_variable = { tempAverage = 5 }
 					if = {
 						limit = {
-							check_variable = {chance_of_success_3 >= tempAverage}
+							check_variable = {
+								var = chance_of_success_3
+								value = tempAverage
+								compare = less_than_or_equals
+							}
 						}
 						var:targeted_country_slot_3 = {
 							capital_scope = {
@@ -2359,7 +2563,11 @@ espionage_missions = {
 					multiply_temp_variable = { tempAverage = 8 }
 					if = {
 						limit = {
-							check_variable = {chance_of_success_3 >= tempAverage}
+							check_variable = {
+								var = chance_of_success_3
+								value = tempAverage
+								compare = less_than_or_equals
+							}
 						}
 						var:targeted_country_slot_3 = {
 							add_timed_idea = {
@@ -2383,7 +2591,11 @@ espionage_missions = {
 					multiply_temp_variable = { tempAverage = 12 }
 					if = {
 						limit = {
-							check_variable = {chance_of_success_3 >= tempAverage}
+							check_variable = {
+								var = chance_of_success_3
+								value = tempAverage
+								compare = less_than_or_equals
+							}
 						}
 						var:targeted_country_slot_3 = {
 							while_loop_effect = {
@@ -2431,7 +2643,11 @@ espionage_missions = {
 					multiply_temp_variable = { tempAverage = 6 }
 					if = {
 						limit = {
-							check_variable = {chance_of_success_3 >= tempAverage}
+							check_variable = {
+								var = chance_of_success_3
+								value = tempAverage
+								compare = less_than_or_equals
+							}
 						}
 						add_intel = {
 						    target = var:targeted_country_slot_3
@@ -2454,7 +2670,11 @@ espionage_missions = {
 					multiply_temp_variable = { tempAverage = 8 }
 					if = {
 						limit = {
-							check_variable = {chance_of_success_3 >= tempAverage}
+							check_variable = {
+								var = chance_of_success_3
+								value = tempAverage
+								compare = less_than_or_equals
+							}
 						}
 					}
 					clr_country_flag = undermine_guild_connections_slot_3
@@ -2471,7 +2691,11 @@ espionage_missions = {
 					multiply_temp_variable = { tempAverage = 6 }
 					if = {
 						limit = {
-							check_variable = {chance_of_success_3 >= tempAverage}
+							check_variable = {
+								var = chance_of_success_3
+								value = tempAverage
+								compare = less_than_or_equals
+							}
 						}
 					}
 					clr_country_flag = turn_agent_slot_3
@@ -2487,7 +2711,11 @@ espionage_missions = {
 					multiply_temp_variable = { tempAverage = 5 }
 					if = {
 						limit = {
-							check_variable = {chance_of_success_3 >= tempAverage}
+							check_variable = {
+								var = chance_of_success_3
+								value = tempAverage
+								compare = less_than_or_equals
+							}
 						}
 						var:targeted_country_slot_3 = {
 							if = {
@@ -2497,12 +2725,11 @@ espionage_missions = {
 										value = 1
 										compare = greater_than
 									}
-									destroy_ships = {
-									    type = carrier
-									    count = 1
-									}
 								}
-
+								destroy_ships = {
+								    type = carrier
+								    count = 1
+								}
 							}else_if = {
 								limit = {
 									check_variable = {
@@ -2510,11 +2737,11 @@ espionage_missions = {
 										value = 1
 										compare = greater_than
 									}
-									destroy_ships = {
-									    type = battleship
-									    count = 1
-									}
-								}		
+								}
+								destroy_ships = {
+								    type = battleship
+								    count = 1
+								}	
 							}
 						}
 					}
@@ -2533,7 +2760,11 @@ espionage_missions = {
 					multiply_temp_variable = { tempAverage = 10 }
 					if = {
 						limit = {
-							check_variable = {chance_of_success_3 >= tempAverage}
+							check_variable = {
+								var = chance_of_success_3
+								value = tempAverage
+								compare = less_than_or_equals
+							}
 						}
 						var:targeted_country_slot_3 = {
 							send_equipment_fraction = {
@@ -2556,7 +2787,11 @@ espionage_missions = {
 					multiply_temp_variable = { tempAverage = 8 }
 					if = {
 						limit = {
-							check_variable = {chance_of_success_3 >= tempAverage}
+							check_variable = {
+								var = chance_of_success_3
+								value = tempAverage
+								compare = less_than_or_equals
+							}
 						}
 						var:targeted_country_slot_3 = {
 							find_highest_in_array = { 
@@ -2585,7 +2820,11 @@ espionage_missions = {
 					multiply_temp_variable = { tempAverage = 10 }
 					if = {
 						limit = {
-							check_variable = {chance_of_success_3 >= tempAverage}
+							check_variable = {
+								var = chance_of_success_3
+								value = tempAverage
+								compare = less_than_or_equals
+							}
 						}
 						var:targeted_country_slot_3 = {
 							find_highest_in_array = { 
@@ -2613,7 +2852,11 @@ espionage_missions = {
 					multiply_temp_variable = { tempAverage = 4 }
 					if = {
 						limit = {
-							check_variable = {chance_of_success_3 >= tempAverage}
+							check_variable = {
+								var = chance_of_success_3
+								value = tempAverage
+								compare = less_than_or_equals
+							}
 						}
 						var:targeted_country_slot_3 = {
 							set_temp_variable = { slave_total_count_temp = 0 }
@@ -2633,8 +2876,8 @@ espionage_missions = {
 							    size = slave_total_count_temp
 							    capital = var:core_temp_state
 							    navy_ratio = 0
-							    states = {
-							        var:core_temp_state
+							    states_filter = {
+							    	check_variable = {var:core_temp_state = THIS.id}
 							    }
 							    keep_unit_leaders_trigger = {
 							    	always = yes
@@ -2658,7 +2901,11 @@ espionage_missions = {
 					multiply_temp_variable = { tempAverage = 10 }
 					if = {
 						limit = {
-							check_variable = {chance_of_success_3 >= tempAverage}
+							check_variable = {
+								var = chance_of_success_3
+								value = tempAverage
+								compare = less_than_or_equals
+							}
 						}
 						var:targeted_country_slot_3 = {
 							every_controlled_state = {
@@ -2683,7 +2930,11 @@ espionage_missions = {
 					multiply_temp_variable = { tempAverage = 12 }
 					if = {
 						limit = {
-							check_variable = {chance_of_success_3 >= tempAverage}
+							check_variable = {
+								var = chance_of_success_3
+								value = tempAverage
+								compare = less_than_or_equals
+							}
 						}
 						set_variable = {higher_chance_espionage_target = var:targeted_country_slot_3.id }
 					}
@@ -2701,7 +2952,11 @@ espionage_missions = {
 					multiply_temp_variable = { tempAverage = 8 }
 					if = {
 						limit = {
-							check_variable = {chance_of_success_3 >= tempAverage}
+							check_variable = {
+								var = chance_of_success_3
+								value = tempAverage
+								compare = less_than_or_equals
+							}
 						}
 						var:targeted_country_slot_3 = {
 							subtract_from_variable = { currency_amount^primary_currency = 1000 }
@@ -2721,15 +2976,14 @@ espionage_missions = {
 					multiply_temp_variable = { tempAverage = 8 }
 					if = {
 						limit = {
-							check_variable = {chance_of_success_3 >= tempAverage}
+							check_variable = {
+								var = chance_of_success_3
+								value = tempAverage
+								compare = less_than_or_equals
+							}
 						}
 						var:targeted_country_slot_3 = {
-							capital_scope = {
-								give_resource_rights = { receiver = ROOT state = THIS }
-								every_neighbor_state = {
-									give_resource_rights = { receiver = ROOT state = THIS }
-								}
-							}
+							give_resource_rights = { receiver = ROOT state = capital }
 							country_event = {
 							    id = espionage.4
 							    days = 80
