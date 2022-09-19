@@ -11,7 +11,7 @@ focus_tree = {
 		}
 	}
 	default = no
-	continuous_focus_position = { x = 2200 y = 100 }
+	continuous_focus_position = { x = 2400 y = 000 }
 
 	#Thrawn in the Unknown Regions
 	focus = {
@@ -71,7 +71,7 @@ focus_tree = {
 		id = EOH_guardian_of_the_unknown_regions
 		icon = GFX_goal_unknown
 		cost = 7.2
-		x = -3
+		x = 5
 		y = 1
 		relative_position_id = EOH_the_ssi_ruuvi_threat
 		available = {
@@ -85,7 +85,7 @@ focus_tree = {
 		search_filters = {
 		}
 		mutually_exclusive = {
-			focus = EOH_indirect_involvement
+			focus = EOH_greater_issues
 		}
 		completion_reward = {
 			declare_war_on = { target = SSI    type = topple_government }
@@ -114,10 +114,10 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = EOH_indirect_involvement
+		id = EOH_greater_issues
 		icon = GFX_goal_unknown
 		cost = 5
-		x = 3
+		x = -7
 		y = 1
 		relative_position_id = EOH_the_ssi_ruuvi_threat
 		available = {
@@ -135,7 +135,6 @@ focus_tree = {
 			focus = EOH_guardian_of_the_unknown_regions
 		}
 		completion_reward = {
-			##sends money and weapons to combatants
 			mark_focus_tree_layout_dirty = yes
 		}
 
@@ -144,27 +143,26 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = EOH_mediate_a_peace
+		id = EOH_a_helping_hand
 		icon = GFX_goal_unknown
-		cost = 14.3
-		x = 1
-		y = 2
-		relative_position_id = EOH_indirect_involvement
+		cost = 5
+		x = -3
+		y = 1
+		relative_position_id = EOH_greater_issues
 		available = {
 			SSI = {
 				has_war = yes
 			}
 		}
 		prerequisite = {
-			focus = EOH_indirect_involvement
+			focus = EOH_greater_issues
 		}
 		search_filters = {
 		}
 		mutually_exclusive = {
-			focus = EOH_dereliction
+			focus = EOH_abandon_the_chiss
 		}
 		completion_reward = {
-			##tries to negotiate a peace, works 90% of time
 		}
 
 		ai_will_do = {
@@ -172,12 +170,221 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = EOH_dereliction
+		id = EOH_advisors_to_the_chiss
 		icon = GFX_goal_unknown
 		cost = 5
-		x = -1
-		y = 2
-		relative_position_id = EOH_indirect_involvement
+		x = -2
+		y = 1
+		relative_position_id = EOH_a_helping_hand
+		available = {
+			SSI = {
+				has_war = yes
+			}
+		}
+		prerequisite = {
+			focus = EOH_a_helping_hand
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			##Chiss nations get spirit
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = EOH_bolster_chiss_unity
+		icon = GFX_goal_unknown
+		cost = 5
+		x = 0
+		y = 1
+		relative_position_id = EOH_advisors_to_the_chiss
+		available = {
+			SSI = {
+				has_war = yes
+			}
+		}
+		prerequisite = {
+			focus = EOH_advisors_to_the_chiss
+		}
+		prerequisite = {
+			focus = EOH_advisors_to_bakura
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			##Chiss nations get units
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = EOH_fund_chiss_arms
+		icon = GFX_goal_unknown
+		cost = 5
+		x = 2
+		y = 0
+		relative_position_id = EOH_bolster_chiss_unity
+		available = {
+			SSI = {
+				has_war = yes
+			}
+		}
+		prerequisite = {
+			focus = EOH_bolster_chiss_unity
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			##Chiss nations get industry
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = EOH_advisors_to_bakura
+		icon = GFX_goal_unknown
+		cost = 5
+		x = 0
+		y = 1
+		relative_position_id = EOH_a_helping_hand
+		available = {
+			SSI = {
+				has_war = yes
+			}
+		}
+		prerequisite = {
+			focus = EOH_a_helping_hand
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			##Bakura gets spirit
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = EOH_contact_ardus_kaine
+		icon = GFX_goal_unknown
+		cost = 5
+		x = 2
+		y = 1
+		relative_position_id = EOH_a_helping_hand
+		available = {
+		}
+		prerequisite = {
+			focus = EOH_a_helping_hand
+			focus = EOH_abandon_the_chiss
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			##establish something with kaine faction ig
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = EOH_mutual_development_assurances
+		icon = GFX_goal_unknown
+		cost = 5
+		x = 0
+		y = 1
+		relative_position_id = EOH_contact_ardus_kaine
+		available = {
+		}
+		prerequisite = {
+			focus = EOH_contact_ardus_kaine
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			##both get industry
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = EOH_connect_to_the_criminal_underworld
+		icon = GFX_goal_unknown
+		cost = 5
+		x = 2
+		y = 0
+		relative_position_id = EOH_contact_ardus_kaine
+		available = {
+		}
+		prerequisite = {
+			focus = EOH_a_helping_hand
+			focus = EOH_abandon_the_chiss
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			##establish with black sun, spice income idk
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = EOH_begin_smuggling_operations
+		icon = GFX_goal_unknown
+		cost = 5
+		x = 0
+		y = 1
+		relative_position_id = EOH_connect_to_the_criminal_underworld
+		available = {
+		}
+		prerequisite = {
+			focus = EOH_connect_to_the_criminal_underworld
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			##relations with smugglers guild, or add smuggler, also add bounty hunter focus choice later
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = EOH_abandon_the_chiss
+		icon = GFX_goal_unknown
+		cost = 5
+		x = 3
+		y = 1
+		relative_position_id = EOH_greater_issues
 		available = {
 			SSI = {
 				has_war = yes
@@ -185,15 +392,143 @@ focus_tree = {
 			##no volunteers sent
 		}
 		prerequisite = {
-			focus = EOH_indirect_involvement
+			focus = EOH_greater_issues
 		}
 		search_filters = {
 		}
 		mutually_exclusive = {
-			focus = EOH_dereliction
+			focus = EOH_a_helping_hand
 		}
 		completion_reward = {
 			##leaves the situation as it is, loses opinion with chiss and such
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = EOH_there_are_no_unknown_regions
+		icon = GFX_goal_unknown
+		cost = 5
+		x = 0
+		y = 1
+		relative_position_id = EOH_abandon_the_chiss
+		available = {
+		}
+		prerequisite = {
+			focus = EOH_abandon_the_chiss
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+			focus = EOH_secret_transmissions_to_the_shreeftut
+		}
+		completion_reward = {
+			##unknown regions nations get restricted diplomacy
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = EOH_edge_of_the_galaxy
+		icon = GFX_goal_unknown
+		cost = 5
+		x = 0
+		y = 1
+		relative_position_id = EOH_there_are_no_unknown_regions
+		available = {
+		}
+		prerequisite = {
+			focus = EOH_there_are_no_unknown_regions
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			##travel to unknown regions banned? development in southern reach, research bonuses? forts? idk
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = EOH_secret_transmissions_to_the_shreeftut
+		icon = GFX_goal_unknown
+		cost = 5
+		x = 2
+		y = 0
+		relative_position_id = EOH_there_are_no_unknown_regions
+		available = {
+		}
+		prerequisite = {
+			focus = EOH_abandon_the_chiss
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+			focus = EOH_there_are_no_unknown_regions
+		}
+		completion_reward = {
+			##relations with ssi ruuvi
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = EOH_the_phantom_menace
+		icon = GFX_goal_unknown
+		cost = 5
+		x = 0
+		y = 1
+		relative_position_id = EOH_secret_transmissions_to_the_shreeftut
+		available = {
+		}
+		prerequisite = {
+			focus = EOH_secret_transmissions_to_the_shreeftut
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			##ssi-ruuvi imperium gets major bonuses allow further relations with ssi ruuvi just like with the chiss thingy
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = EOH_our_own_security
+		icon = GFX_goal_unknown
+		cost = 5
+		x = 0
+		y = 4
+		relative_position_id = EOH_greater_issues
+		available = {
+		}
+		prerequisite = {
+			focus = EOH_mutual_development_assurances
+			focus = EOH_begin_smuggling_operations
+		}
+		prerequisite = {
+			focus = EOH_edge_of_the_galaxy
+			focus = EOH_the_phantom_menace
+			focus = EOH_fund_chiss_arms
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			##forts ig?
 		}
 
 		ai_will_do = {
@@ -205,8 +540,8 @@ focus_tree = {
 		icon = GFX_goal_unknown
 		cost = 7.2
 		relative_position_id = EOH_guardian_of_the_unknown_regions
-		x = 2
-		y = 2
+		x = -5
+		y = 1
 		bypass = {
 			SSI = {
 				has_war = no
@@ -214,13 +549,14 @@ focus_tree = {
 		}
 		prerequisite = {
 			focus = EOH_guardian_of_the_unknown_regions
-			focus = EOH_indirect_involvement
+			focus = EOH_greater_issues
 		}
 		search_filters = {
 		}
 		mutually_exclusive = {
 		}
 		completion_reward = {
+			add_stability = -0.1
 			224 = {
 				if = {
 					limit = { is_controlled_by = ROOT }
@@ -236,16 +572,47 @@ focus_tree = {
 						province = 9101
 						value = 5
 					}
+					add_manpower = 145000
+				}
+			}
+			#Victory point wizardry
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = EOH_industrious_integration
+		icon = GFX_goal_unknown
+		cost = 7.2
+		relative_position_id = EOH_open_to_chiss_refugees
+		x = 0
+		y = 1
+		bypass = {
+			SSI = {
+				has_war = no
+			}
+		}
+		prerequisite = {
+			focus = EOH_open_to_chiss_refugees
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			224 = {
+				if = {
+					limit = { is_controlled_by = ROOT }
 					add_building_construction = {
 						type = industrial_complex
 						level = 2
 						instant_build = yes
 					}
 					add_extra_state_shared_building_slots = 2
-					add_manpower = 145000
 				}
 			}
-			#Victory point wizardry
+			##Add railroads pls 
 		}
 		ai_will_do = {
 			factor = 1
@@ -529,8 +896,7 @@ focus_tree = {
 			}
 		}
 		prerequisite = {
-			focus = EOH_mediate_a_peace
-			focus = EOH_dereliction
+			focus = EOH_our_own_security
 			focus = EOH_the_chiss_on_their_own
 			focus = EOH_natural_allies
 		}
@@ -634,7 +1000,7 @@ focus_tree = {
 		icon = GFX_goal_unknown
 		cost = 10.8
 		relative_position_id = EOH_reconciliation_with_zaarin
-		x = 5
+		x = 6
 		y = 1
 		prerequisite = {
 			focus = EOH_reconciliation_with_zaarin
@@ -1036,7 +1402,7 @@ focus_tree = {
 		search_filters = {
 		}
 		completion_reward = {
-			22 = {
+			213 = {
 				add_victory_points = {
 					province = 4725
 					value = 5
@@ -1090,7 +1456,7 @@ focus_tree = {
 		icon = GFX_goal_unknown
 		cost = 10.8
 		relative_position_id = EOH_the_twelfth_grand_admiral
-		x = -3
+		x = -2
 		y = 2
 		prerequisite = {
 			focus = EOH_reconciliation_with_zaarin
