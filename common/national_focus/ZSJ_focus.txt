@@ -111,7 +111,7 @@ focus_tree = {
 			}
 			ZSJ = { country_event = { days = 1 id = ZSJ.1 } }
 			diplomatic_relation = {
-				country = REP
+				country = REB
 				relation = non_aggression_pact
 				active = no
 			}
@@ -329,10 +329,9 @@ focus_tree = {
 	focus = { ###removes huge negative debuff
 		id = ZSJ_remove_political_disidents
 		icon = GFX_goal_zsinj_basic
-		prerequisite = { focus = ZSJ_coproate_espionage
-		focus = ZSJ_pursuade_the_officers
-		focus = ZSJ_gain_the_admirals_admiration
-		 }
+		prerequisite = { 
+			focus = ZSJ_coproate_espionage
+		}
 
 		x = 12
 		y = 5
@@ -378,7 +377,7 @@ focus_tree = {
 
 		available = {
 			EOH = { has_completed_focus = EOH_cloning_on_nirauan }
-			is_in_faction = EOH
+			is_in_faction_with = EOH
 		}
 		
 		bypass = {
@@ -847,7 +846,7 @@ focus_tree = {
 		}
 
 		available = {
-			add_to_variable = {
+			check_variable = {
 				var = legitimacy_emp
 				value = 15
 			}
@@ -1128,7 +1127,7 @@ focus_tree = {
 		}
 
 		available = {
-			has_political_power = 100
+			has_political_power > 99
 		}
 		
 		bypass = {
@@ -1176,6 +1175,7 @@ focus_tree = {
 
 		completion_reward = {
 			add_fuel = 100000
+			mark_focus_tree_layout_dirty = yes
 			### adds guns, and adds a capital ship liberated from someone somwehre idk yet
 		}
 	}
@@ -1554,49 +1554,49 @@ focus_tree = {
 			180 = {
 				add_building_construction = {
 					type = infrastructure
-					level = 5
+					level = 2
 				}
 			}
 			195 = {
 				add_building_construction = {
 					type = infrastructure
-					level = 5
+					level = 2
 				}
 			}
 			199 = {
 				add_building_construction = {
 					type = infrastructure
-					level = 5
+					level = 2
 				}
 			}
 			191 = {
 				add_building_construction = {
 					type = infrastructure
-					level = 5
+					level = 2
 				}
 			}
 			171 = {
 				add_building_construction = {
 					type = infrastructure
-					level = 5
+					level = 2
 				}
 			}
 			15 = {
 				add_building_construction = {
 					type = infrastructure
-					level = 5
+					level = 2
 				}
 			}
 			185 = {
 				add_building_construction = {
 					type = infrastructure
-					level = 5
+					level = 2
 				}
 			}
 			168 = {
 				add_building_construction = {
 					type = infrastructure
-					level = 5
+					level = 2
 				}
 			}
 		}
@@ -1855,13 +1855,7 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			EOH = {
-				diplomatic_relation = 30
-				guarantee = yes
-			}
-			ZSJ = {
-				EOH = { guarantee = yes }
-			}
+			give_guarantee = EOH
 			add_to_variable = {
 				var = legitimacy_emp
 				value = 5
@@ -1895,13 +1889,7 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			PEN = {
-				diplomatic_relation = 30
-				guarantee = yes
-			}
-			ZSJ = {
-				PEN = { guarantee = yes }
-			}
+			give_guarantee = PEN
 			add_to_variable = {
 				var = legitimacy_emp
 				value = 5
@@ -1935,13 +1923,7 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			TER = {
-				diplomatic_relation = 30
-				guarantee = yes
-			}
-			ZSJ = {
-				TER = { guarantee = yes }
-			}
+			give_guarantee = FTU
 			add_to_variable = {
 				var = legitimacy_emp
 				value = 5
@@ -2200,7 +2182,7 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			add_war_support = 0.2
+			add_war_support = 0.15
 		}
 	}
 	focus = {
@@ -2264,7 +2246,7 @@ focus_tree = {
 		completion_reward = {
 			add_popularity = {
 				ideology = imperial
-				popularity = 25
+				popularity = 0.25
 			}
 		}
 	}
@@ -2381,8 +2363,6 @@ focus_tree = {
 			has_completed_focus = ZSJ_proclaim_the_second_galactic_empire
 		}
 
-		mark_focus_tree_layout_dirty = yes
-
 		ai_will_do = {
 			factor = 1
 		}
@@ -2404,6 +2384,7 @@ focus_tree = {
 
 		completion_reward = {
 			add_political_power = 150
+			mark_focus_tree_layout_dirty = yes
 		}
 	}
 	focus = {
@@ -3084,8 +3065,6 @@ focus_tree = {
 			has_completed_focus = ZSJ_the_korriban_conquest
 		}
 
-		mark_focus_tree_layout_dirty = yes
-
 		ai_will_do = {
 			factor = 1
 		}
@@ -3113,6 +3092,7 @@ focus_tree = {
 			create_wargoal = { 
 				type = annex_everything target = FEL
 			}
+			mark_focus_tree_layout_dirty = yes
 		}
 	}
 	focus = {
@@ -3521,8 +3501,6 @@ focus_tree = {
 			has_completed_focus = ZSJ_use_collective_resources
 		}
 
-		mark_focus_tree_layout_dirty = yes
-
 		ai_will_do = {
 			factor = 1
 		}
@@ -3551,6 +3529,7 @@ focus_tree = {
 					}
 				add_extra_state_shared_building_slots = 2
 			}
+			mark_focus_tree_layout_dirty = yes
 		}
 	}
 	focus = {
@@ -3580,8 +3559,12 @@ focus_tree = {
 		available_if_capitulated = yes
 
 		completion_reward = {
-			###bonuses for doctrines
-			research_bonus = { star_destroyer = 3.00 }
+			add_tech_bonus = {
+				name = ZSJ_revive_iron_fist
+				bonus = 3.0
+				uses = 1
+				category = heavy_vessel
+			}
 		}
 	}
 	focus = {
@@ -3611,7 +3594,7 @@ focus_tree = {
 		available_if_capitulated = yes
 
 		completion_reward = {
-			research_bonus = { naval_equipment = 1.00 }
+			#research_bonus = { naval_equipment = 1.00 }
 		}
 	}
 	focus = {
@@ -3641,7 +3624,7 @@ focus_tree = {
 		available_if_capitulated = yes
 
 		completion_reward = {
-			research_bonus = { star_destroyer = 3.00 }
+			#research_bonus = { star_destroyer = 3.00 }
 			###gives 2 heavy ships (idk what yet tech tree not done)
 		}
 	}
@@ -3719,8 +3702,6 @@ focus_tree = {
 			has_completed_focus = ZSJ_befriend_kosh_teradoc
 		}
 
-		mark_focus_tree_layout_dirty = yes
-
 		ai_will_do = {
 			factor = 1
 		}
@@ -3744,12 +3725,13 @@ focus_tree = {
 		completion_reward = {
 			random_owned_controlled_state = {
 				add_building_construction = {
-						type = arms_factory
-						level = 2
-						instant_build = yes
-					}
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
 				add_extra_state_shared_building_slots = 2
 			}
+			mark_focus_tree_layout_dirty = yes
 		}
 	}
 	focus = {
@@ -3780,7 +3762,7 @@ focus_tree = {
 
 		completion_reward = {
 			###gives infantry equipment, or a decison to do so cheaper than the market
-			research_bonus = { infantry_tech = 1.50 }
+			#research_bonus = { infantry_tech = 1.50 }
 		}
 	}
 	focus = {
@@ -3810,9 +3792,7 @@ focus_tree = {
 		available_if_capitulated = yes
 
 		completion_reward = {
-			add_ideas = {
-				ZSJ_empire_lessons
-			}
+			add_ideas = ZSJ_empire_lessons
 			###add to max cp too....
 		}
 	}
@@ -3872,9 +3852,9 @@ focus_tree = {
 		continue_if_invalid = no
 		available_if_capitulated = yes
 
-		add_ideas = {
-				ZSJ_deal_new_idea
-			}
+		completion_reward = {
+			add_ideas = ZSJ_deal_new_idea
+		}
 	}
 	focus = {
 		id = ZSJ_a_new_way_of_warfare
@@ -3903,7 +3883,7 @@ focus_tree = {
 		available_if_capitulated = yes
 
 		completion_reward = {
-			research_bonus = { armor = 2.00 }
+			#research_bonus = { armor = 2.00 }
 		}
 	}
 	focus = {
@@ -3934,9 +3914,7 @@ focus_tree = {
 
 		completion_reward = {
 			add_political_power = 200
-			add_ideas = {
-				ZSJ_faith_idea
-			}
+			add_ideas = ZSJ_faith_idea
 		}
 	}
 	focus = {
@@ -3966,9 +3944,7 @@ focus_tree = {
 		available_if_capitulated = yes
 
 		completion_reward = {
-			add_ideas = {
-				ZSJ_national_reserve_idea
-			}
+			add_ideas = ZSJ_national_reserve_idea
 			add_to_variable = { currency_amount^primary_currency = -100 }
 			###loan acceptance is higher ask Palpy
 		}
@@ -4007,13 +3983,12 @@ focus_tree = {
 		completion_reward = {
 			EMP = {
 				annex_country = { target = ZSJ transfer_troops = yes }
-		}
+			}
 			EMP = {
 				add_political_power = -250
-				add_ideas ={
-					ZSJ_forced_merge_idea
-				}
+				add_ideas = ZSJ_forced_merge_idea
 			}
+		}
 	}
 	focus = {
 		id = ZSJ_independence
@@ -4049,5 +4024,4 @@ focus_tree = {
 			###leader trait for zsinj
 		}
 	}
-}
 }
