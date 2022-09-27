@@ -162,8 +162,8 @@ PixelShader =
 
 VertexStruct VS_INPUT_TERRAIN_NOTEXTURE
 {
-    float4 position			: POSITION;
-	float2 height			: TEXCOORD0;
+    int4 position			: POSITION;
+	int2 height				: TEXCOORD0;
 };
 
 VertexStruct VS_OUTPUT_TERRAIN
@@ -229,7 +229,7 @@ PixelShader =
 		float4 main( VS_OUTPUT_TERRAIN Input ) : PDX_COLOR
 		{
 			//return float4( 0, 1.0f, 0, 1.0f );
-			clip( Input.prepos.y + TERRAIN_WATER_CLIP_HEIGHT - WATER_HEIGHT );
+			//clip( Input.prepos.y + TERRAIN_WATER_CLIP_HEIGHT - WATER_HEIGHT );
 		
 			float2 vOffsets = float2( -0.5f / MAP_SIZE_X, -0.5f / MAP_SIZE_Y );
 			
@@ -316,11 +316,9 @@ PixelShader =
 			float vSnowAlpha = 1-vSpec;
 			diffuse.rgb = GetOverlay( diffuse.rgb, TerrainColor.rgb, COLORMAP_OVERLAY_STRENGTH );
 
-		#ifndef LOW_END_GFX
 			float4 vMudSnow = GetMudSnowColor( Input.prepos, SnowMudData );	
 			diffuse.rgb = ApplySnow( diffuse.rgb, Input.prepos, normal, vMudSnow, SnowTexture, CityLightsAndSnowNoise, vGlossiness, vSnowAlpha );
 			diffuse.rgb = GetMudColor( diffuse.rgb, vMudSnow, Input.prepos, normal, vGlossiness, vSpec, MudDiffuseGloss, MudNormalSpec );
-		#endif
 							
 			// Gradient Borders
 			float vBloomAlpha = 0.0f;
@@ -438,7 +436,7 @@ PixelShader =
 			lightingProperties._Diffuse = diffuse;
 
 			lightingProperties._Glossiness = vGlossiness;
-			lightingProperties._SpecularColor = SunDiffuseIntensity.rgb * 0.000005f;
+			lightingProperties._SpecularColor = SunDiffuseIntensity.rgb * 0.1f;
 			lightingProperties._NonLinearGlossiness = GetNonLinearGlossiness(vGlossiness);
 			
 			float3 diffuseLight = vec3(0.0);

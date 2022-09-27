@@ -26,9 +26,10 @@ ConstantBuffer( 0, 0 )
 	float3		AmbientPosZ;
 	float3		AmbientNegZ;
 	float		CubemapIntensity;
-	float4		SunDiffuseIntensity
-	float4		MoonDiffuseIntensity
+	float4		SunDiffuseIntensity;
+	float4		MoonDiffuseIntensity;
 	float		GB_TextureHeight;
+	float		SunSpecularIntensity;
 };
 
 
@@ -233,13 +234,14 @@ PixelShader =
 	}
 
 	
-	float3 GetMudColor( in float3 vResult, in float4 vMudSnowColor, in float3 vPos, inout float3 vNormal, inout float vGlossiness, inout float vSpec, in sampler2D MudDiffuseGloss, in sampler2D MudNormalSpec )
+	float3 GetMudColor( in float3 vResult, in float4 vMudSnowColor, in float3 vPos, inout float3 vNormal, inout float vGlossiness, inout float vSpec,
+						 in sampler2D MudDiffuseGlossSampler, in sampler2D MudNormalSpecSampler )
 	{
 		float vMudCurrent = lerp( vMudSnowColor.r, vMudSnowColor.a, vFoWOpacity_FoWTime_SnowMudFade_MaxGameSpeed.z );
 		vMudCurrent *= 1.0 - saturate( saturate( vNormal.y - MUD_NORMAL_CUTOFF ) * ( ( 1.0 - MUD_NORMAL_CUTOFF ) * 1000.0 ) );
 		vMudCurrent = saturate( vMudCurrent * MUD_STRENGHTEN );
-		float4 vMudDiffuseGloss = tex2D( MudDiffuseGloss, vPos.xz * MUD_TILING );
-		float4 vMudNormalSpec = tex2D( MudNormalSpec, vPos.xz * MUD_TILING );
+		float4 vMudDiffuseGloss = tex2D( MudDiffuseGlossSampler, vPos.xz * MUD_TILING );
+		float4 vMudNormalSpec = tex2D( MudNormalSpecSampler, vPos.xz * MUD_TILING );
 		
 		float3 vMudNormal = normalize( vMudNormalSpec.rbg - 0.5 );
 		vMudNormal = normalize( RotateVectorByVector( vMudNormal, vNormal ) );
@@ -255,11 +257,12 @@ PixelShader =
 		return lerp( vMudSnowColor.b, vMudSnowColor.g, vFoWOpacity_FoWTime_SnowMudFade_MaxGameSpeed.z ); //Get winter;
 	}
 
-	float3 ApplySnow( float3 vColor, float3 vPos, inout float3 vNormal, float4 vMudSnowColor, in sampler2D SnowTexture, in sampler2D SnowNoise, inout float vGlossiness, inout float vSnowAlphaOut )
+	float3 ApplySnow( float3 vColor, float3 vPos, inout float3 vNormal, float4 vMudSnowColor, in sampler2D SnowTextureSampler,
+					 in sampler2D SnowNoise, inout float vGlossiness, inout float vSnowAlphaOut )
 	{
 		float vSnowFade = saturate( vPos.y - SNOW_START_HEIGHT );
 		float vNormalFade = saturate( saturate( vNormal.y - SNOW_NORMAL_START ) * SNOW_CLIFFS );
-		float4 vSnowTexture = tex2D( SnowTexture, vPos.xz * SNOW_TILING );
+		float4 vSnowTexture = tex2D( SnowTextureSampler, vPos.xz * SNOW_TILING );
 		float vNoise = tex2D( SnowNoise, vPos.xz * SNOW_NOISE_TILING ).a;
 		
 		float vIsSnow = GetSnow( vMudSnowColor );
@@ -499,14 +502,14 @@ PixelShader =
 		return SpecularColor + (max(vec3(Smoothness), SpecularColor) - SpecularColor) * pow(1.0 - saturate(dot(E, N)), 5.0);
 	}
 
-	float3 MetalnessToDiffuse(float Metalness, float3 Diffuse)
+	float3 MetalnessToDiffuse(float Metalness, float3 DiffuseValue)
 	{
-		return lerp(Diffuse, vec3(0.0), Metalness);
+		return lerp(DiffuseValue, vec3(0.0), Metalness);
 	}
 
-	float3 MetalnessToSpec(float Metalness, float3 Diffuse, float Spec)
+	float3 MetalnessToSpec(float Metalness, float3 DiffuseValue, float Spec)
 	{
-		return lerp(vec3(Spec), Diffuse, Metalness);
+		return lerp(vec3(Spec), DiffuseValue, Metalness);
 	}
 
 	//------------------------------
@@ -641,8 +644,9 @@ PixelShader =
 
 		float3 sunIntensity = 
 			SunDiffuseIntensity.rgb * SunDiffuseIntensity.a * aShadowTerm * vDayFactor
-			+ MoonDiffuseIntensity.rgb * MoonDiffuseIntensity.a * aShadowTerm * vNightFactor;	
+			+ MoonDiffuseIntensity.rgb * MoonDiffuseIntensity.a * aShadowTerm * vNightFactor;
 		//sunIntensity += 0.6f * (1.0f - (vDayFactor  * aShadowTerm + vNightFactor));
+
 
 	#ifdef PDX_IMPROVED_BLINN_PHONG
 		ImprovedBlinnPhong(sunIntensity, -vLightSourceDirection, aProperties, aDiffuseLightOut, aSpecularLightOut);
@@ -650,6 +654,7 @@ PixelShader =
 		aDiffuseLightOut = CalculateLight(aProperties._Normal, vLightSourceDirection, sunIntensity);
 		aSpecularLightOut = CalculatePBRSpecularPower(aProperties._WorldSpacePos, aProperties._Normal, aProperties._SpecularColor, aProperties._Glossiness, sunIntensity, vLightSourceDirection);
 	#endif
+		aSpecularLightOut *= SunSpecularIntensity;
 	}
 
 	void CalculateSunLight(LightingProperties aProperties, float aShadowTerm, out float3 aDiffuseLightOut, out float3 aSpecularLightOut )
@@ -971,9 +976,9 @@ PixelShader =
 		return stripeVal;
 	}	
 	
-	void secondary_color_mask( inout float3 vColor, float3 vNormal, float2 vUV, in sampler2D TexMask, inout float vBloomAlpha )
+	void secondary_color_mask( inout float3 vColor, float3 vNormal, float2 vUV, in sampler2D TexMaskSampler, inout float vBloomAlpha )
 	{
-		float4 vColorMask = tex2D( TexMask, vUV ).rgba;
+		float4 vColorMask = tex2D( TexMaskSampler, vUV ).rgba;
 
 		float vOccupationMask = CalculateOccupationMask( vUV );
 		vOccupationMask *= vColorMask.a;
@@ -1096,14 +1101,14 @@ PixelShader =
 		Mout.z = M1.z*t2 + M2.z*u2 + t*u*B1.x*B2.y + t*u*B1.y*B2.x;
 	}
 
-	void SampleLEAN( float2 uv, out float2 Bout, out float3 Mout, in sampler2D LeanTexture1, in sampler2D LeanTexture2 )
+	void SampleLEAN( float2 uv, out float2 Bout, out float3 Mout, in sampler2D LeanTexture1Sampler, in sampler2D LeanTexture2Sampler )
 	{
-		float4 lean1 = tex2D( LeanTexture1, uv );
-		float4 lean2 = tex2D( LeanTexture2, uv );
+		float4 lean1 = tex2D( LeanTexture1Sampler, uv );
+		float4 lean2 = tex2D( LeanTexture2Sampler, uv );
 
 		float vScale = 1.7f;
 		Bout = ( 2*lean2.xy - 1 ) * vScale;
-		Mout = float3( lean2.zw, 2*lean1.w - 1 ) * vScale * vScale;
+		Mout = float3( lean2.zw, ( 2*lean1.w - 1 ) * 0.5) * vScale * vScale;
 	}
 
 	void SampleBlendLEAN( float t, float2 uv1, float2 uv2, out float2 Bout, out float3 Mout, in sampler2D Lean1, in sampler2D Lean2 )
