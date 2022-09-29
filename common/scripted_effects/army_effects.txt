@@ -1,0 +1,24 @@
+army_calculation = {
+	set_temp_variable = { militia_cap_calc = 1 }
+	multiply_temp_variable = { militia_cap_calc = militia_cap_modifier }
+	if = {
+		limit = {
+			NOT = {
+				check_variable = { militia_cap_calc = militia_cap }
+			}
+		}
+		set_variable = { militia_cap = militia_cap_calc }
+		set_division_template_cap = {  division_template = "Rebel Battalion" division_cap = militia_cap }
+	}
+	set_temp_variable = { regular_cap_calc = 1 }
+	multiply_temp_variable = { regular_cap_calc = regular_cap_modifier }
+	if = {
+		limit = {
+			NOT = {
+				check_variable = { regular_cap_calc = regular_cap }
+			}
+		}
+		set_variable = { regular_cap = regular_cap_calc }
+		set_division_template_cap = {  division_template = "Rebel Battalion" division_cap = regular_cap }
+	}
+}
