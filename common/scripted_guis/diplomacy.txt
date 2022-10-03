@@ -1,219 +1,220 @@
-scripted_gui = {
-	diplomatic_offer_screen = {
-		context_type = player_context
-		window_name = "diplomatic_offer_screen"
-		visible = {
-			has_country_flag = diplomatic_offer_screen
-		}
-
-		effects = {
-			sender_diplo_action_click = {
-				if ={
-					limit = {
-						check_variable = { i = 0 }
-					}
-					set_country_flag = money_being_sent
-				}
-				if = {
-					limit = {
-						check_variable = { i = 1 }
-						NOT = {
-							has_country_flag = non_aggression_pact
-						}
-					}
-					set_country_flag = non_aggression_pact
-				}
-				else_if = {
-					limit = {
-						check_variable = { i = 1 }
-						has_country_flag = non_aggression_pact
-					}
-					clr_country_flag = non_aggression_pact
-				}
-				if = {
-					limit = {
-						check_variable = { i = 2 }
-					}
-					set_country_flag = subsidies_offered
-				}
-				if = {
-					limit = {
-						check_variable = { i = 3 }
-						has_government = imperial
-					}
-					set_country_flag = offered_backing
-				}
-			}
-			receive_diplo_action_click = {
-				if ={
-					limit = {
-						check_variable = { i = 0 }
-					}
-					set_country_flag = money_being_received
-				}
-				if = {
-					limit = {
-						check_variable = { i = 1 }
-					}
-					set_country_flag = subsidies_demanded
-				}
-				if = {
-					limit = {
-						check_variable = { i = 2 }
-						has_government = imperial
-					}
-					set_country_flag = receiving_backing
-				}
-			}
-			send_offer = {
-				var:targeted_nation_diplomacy = {
-					set_country_flag = diplomatic_offer_made
-					set_variable = { deal_sender_diplomacy = PREV.id }
-					if = {
-						limit = {
-							PREV = {
-								has_country_flag = money_being_sent
-							}
-						}
-						set_variable = { money_being_received = PREV.money_proposed_send }
-						set_country_flag = money_being_received
-					}
-					if = {
-						limit = {
-							has_country_flag = non_aggression_pact
-						}
-						PREV = {
-							set_country_flag = non_aggression_pact
-						}
-					}
-					if = {
-						limit = {
-							has_country_flag = subsidies_offered
-						}
-						PREV = {
-							set_country_flag = subsidies_demanded
-						}
-					}
-					if = {
-						limit = {
-							has_country_flag = offered_backing
-						}
-						PREV = {
-							set_country_flag = receiving_backing
-						}
-					}
-					if = {
-						limit = {
-							has_country_flag = money_being_received
-						}
-						PREV = {
-							set_variable = { money_being_sent = PREV.money_proposed_receive }
-							set_country_flag = money_being_sent
-						}
-					}
-					if = {
-						limit = {
-							has_country_flag = subsidies_demanded
-						}
-						PREV = {
-							set_country_flag = subsidies_offered
-						}
-					}
-					if = {
-						limit = {
-							has_country_flag = receiving_backing
-						}
-						PREV = {
-							set_country_flag = offered_backing
-						}
-					}
-				}
-			}
-			send_money_larger_click = {
-				add_to_variable = { money_proposed_send = 1 }
-			}
-			send_money_much_larger_click = {
-				add_to_variable = { money_proposed_send = 10 }
-			}
-			send_money_smaller_click = {
-				subtract_from_variable = { money_proposed_send = 1 }
-			}
-			send_money_much_smaller_click = {
-				subtract_from_variable = { money_proposed_send = 10 }
-			}
-			receive_money_larger_click = {
-				add_to_variable = { money_proposed_receive = 1 }
-			}
-			receive_money_much_larger_click = {
-				add_to_variable = { money_proposed_receive = 10 }
-			}
-			receive_money_smaller_click = {
-				subtract_from_variable = { money_proposed_receive = 1 }
-			}
-			receive_money_much_smaller_click = {
-				subtract_from_variable = { money_proposed_receive = 10 }
-			}
-			money_close = {
-				clr_country_flag = money_being_sent
-			}
-		}
-		dynamic_lists = {
-			subsidiary_grid = {
-				array = subsidiary_array
-				entry_container = subsidiary_entry
-				change_scope = yes
-			}
-		}
-	}
-	diplomatic_offer_screen_receive = {
-		context_type = player_context
-		window_name = "diplomatic_offer_screen_receive"
-		visible = {
-			has_country_flag = diplomatic_offer_made
-		}
-		effects = {
-			accept_click = {
-				var:deal_sender_diplomacy = {
-					add_to_variable = { currency_amount^primary_currency = money_proposed_receive }
-					subtract_from_variable = { currency_amount^primary_currency = money_proposed_send }
-					if = {
-						limit = {
-							has_country_flag = offered_backing
-						}
-						
-					}
-				}
-				add_to_variable = { currency_amount^primary_currency = money_proposed_receive }
-				subtract_from_variable = { currency_amount^primary_currency = money_proposed_send }
-				if = {
-					limit = {
-						has_country_flag = non_aggression_pact
-					}
-					diplomatic_relation = {
-						country = deal_sender_diplomacy
-						relation = non_aggression_pact
-						active = no
-					}
-				}
-				if = {
-					limit = {
-						has_country_flag = subsidies_demanded
-					}
-					
-				}
-				if = {
-					limit = {
-						has_country_flag = subsidies_offered
-					}
-					
-				}
-				if = {
-					limit = {
-						has_country_flag = offered_backing
-					}
-					
-				}
-			}
-		}
-	}
-}
+#scripted_gui = {
+#	diplomatic_offer_screen = {
+#		context_type = player_context
+#		window_name = "diplomatic_offer_screen"
+#		visible = {
+#			#has_country_flag = diplomatic_offer_screen
+#			always = no
+#		}
+#
+#		effects = {
+#			sender_diplo_action_click = {
+#				if ={
+#					limit = {
+#						check_variable = { i = 0 }
+#					}
+#					set_country_flag = money_being_sent
+#				}
+#				if = {
+#					limit = {
+#						check_variable = { i = 1 }
+#						NOT = {
+#							has_country_flag = non_aggression_pact
+#						}
+#					}
+#					set_country_flag = non_aggression_pact
+#				}
+#				else_if = {
+#					limit = {
+#						check_variable = { i = 1 }
+#						has_country_flag = non_aggression_pact
+#					}
+#					clr_country_flag = non_aggression_pact
+#				}
+#				if = {
+#					limit = {
+#						check_variable = { i = 2 }
+#					}
+#					set_country_flag = subsidies_offered
+#				}
+#				if = {
+#					limit = {
+#						check_variable = { i = 3 }
+#						has_government = imperial
+#					}
+#					set_country_flag = offered_backing
+#				}
+#			}
+#			receive_diplo_action_click = {
+#				if ={
+#					limit = {
+#						check_variable = { i = 0 }
+#					}
+#					set_country_flag = money_being_received
+#				}
+#				if = {
+#					limit = {
+#						check_variable = { i = 1 }
+#					}
+#					set_country_flag = subsidies_demanded
+#				}
+#				if = {
+#					limit = {
+#						check_variable = { i = 2 }
+#						has_government = imperial
+#					}
+#					set_country_flag = receiving_backing
+#				}
+#			}
+#			send_offer = {
+#				var:targeted_nation_diplomacy = {
+#					set_country_flag = diplomatic_offer_made
+#					set_variable = { deal_sender_diplomacy = PREV.id }
+#					if = {
+#						limit = {
+#							PREV = {
+#								has_country_flag = money_being_sent
+#							}
+#						}
+#						set_variable = { money_being_received = PREV.money_proposed_send }
+#						set_country_flag = money_being_received
+#					}
+#					if = {
+#						limit = {
+#							has_country_flag = non_aggression_pact
+#						}
+#						PREV = {
+#							set_country_flag = non_aggression_pact
+#						}
+#					}
+#					if = {
+#						limit = {
+#							has_country_flag = subsidies_offered
+#						}
+#						PREV = {
+#							set_country_flag = subsidies_demanded
+#						}
+#					}
+#					if = {
+#						limit = {
+#							has_country_flag = offered_backing
+#						}
+#						PREV = {
+#							set_country_flag = receiving_backing
+#						}
+#					}
+#					if = {
+#						limit = {
+#							has_country_flag = money_being_received
+#						}
+#						PREV = {
+#							set_variable = { money_being_sent = PREV.money_proposed_receive }
+#							set_country_flag = money_being_sent
+#						}
+#					}
+#					if = {
+#						limit = {
+#							has_country_flag = subsidies_demanded
+#						}
+#						PREV = {
+#							set_country_flag = subsidies_offered
+#						}
+#					}
+#					if = {
+#						limit = {
+#							has_country_flag = receiving_backing
+#						}
+#						PREV = {
+#							set_country_flag = offered_backing
+#						}
+#					}
+#				}
+#			}
+#			send_money_larger_click = {
+#				add_to_variable = { money_proposed_send = 1 }
+#			}
+#			send_money_much_larger_click = {
+#				add_to_variable = { money_proposed_send = 10 }
+#			}
+#			send_money_smaller_click = {
+#				subtract_from_variable = { money_proposed_send = 1 }
+#			}
+#			send_money_much_smaller_click = {
+#				subtract_from_variable = { money_proposed_send = 10 }
+#			}
+#			receive_money_larger_click = {
+#				add_to_variable = { money_proposed_receive = 1 }
+#			}
+#			receive_money_much_larger_click = {
+#				add_to_variable = { money_proposed_receive = 10 }
+#			}
+#			receive_money_smaller_click = {
+#				subtract_from_variable = { money_proposed_receive = 1 }
+#			}
+#			receive_money_much_smaller_click = {
+#				subtract_from_variable = { money_proposed_receive = 10 }
+#			}
+#			money_close = {
+#				clr_country_flag = money_being_sent
+#			}
+#		}
+#		dynamic_lists = {
+#			subsidiary_grid = {
+#				array = subsidiary_array
+#				entry_container = subsidiary_entry
+#				change_scope = yes
+#			}
+#		}
+#	}
+#	diplomatic_offer_screen_receive = {
+#		context_type = player_context
+#		window_name = "diplomatic_offer_screen_receive"
+#		visible = {
+#			has_country_flag = diplomatic_offer_made
+#		}
+#		effects = {
+#			accept_click = {
+#				var:deal_sender_diplomacy = {
+#					add_to_variable = { currency_amount^primary_currency = money_proposed_receive }
+#					subtract_from_variable = { currency_amount^primary_currency = money_proposed_send }
+#					if = {
+#						limit = {
+#							has_country_flag = offered_backing
+#						}
+#						
+#					}
+#				}
+#				add_to_variable = { currency_amount^primary_currency = money_proposed_receive }
+#				subtract_from_variable = { currency_amount^primary_currency = money_proposed_send }
+#				if = {
+#					limit = {
+#						has_country_flag = non_aggression_pact
+#					}
+#					diplomatic_relation = {
+#						country = deal_sender_diplomacy
+#						relation = non_aggression_pact
+#						active = no
+#					}
+#				}
+#				if = {
+#					limit = {
+#						has_country_flag = subsidies_demanded
+#					}
+#					
+#				}
+#				if = {
+#					limit = {
+#						has_country_flag = subsidies_offered
+#					}
+#					
+#				}
+#				if = {
+#					limit = {
+#						has_country_flag = offered_backing
+#					}
+#					
+#				}
+#			}
+#		}
+#	}
+#}

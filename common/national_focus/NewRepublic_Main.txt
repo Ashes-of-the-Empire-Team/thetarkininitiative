@@ -1,6 +1,6 @@
 focus_tree = {
 	id = NEW
-	continuous_focus_position = { x = 0 y = 1000 } 
+	continuous_focus_position = { x = 0 y = 1800 } 
 	country = {
 		factor = 0
 		modifier = {
@@ -14,15 +14,21 @@ focus_tree = {
 		icon = GFX_borsk
 		x = 26
 		y = 2
-		cost = 7
+		cost = 7.2
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
 		prerequisite = { focus = REB_the_first_chief_of_state  }
 		mutually_exclusive = { focus = REB_leia_organa_a  } mutually_exclusive = { focus = REB_mon_mothma_a  }
 		completion_reward = {
-			retire_country_leader = yes
-			recruit_character = borsk_feylya
+			recruit_character = REB_borsk_feylya
+			promote_character = {
+				character = REB_borsk_feylya
+				ideology = rebel_ideology
+			}	
+			hidden_effect = {
+				retire_character = REB_mon_mothma
+			}
 		}
 	}
 
@@ -32,7 +38,7 @@ focus_tree = {
 		icon = GFX_mon_mothma
 		x = 21
 		y = 2
-		cost = 7
+		cost = 7.2
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
@@ -49,7 +55,7 @@ focus_tree = {
 		icon = GFX_goal_unknown
 		x = 18
 		y = 0
-		cost = 8
+		cost = 7.2
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
@@ -61,7 +67,7 @@ focus_tree = {
 		icon = GFX_goal_unknown
 		x = 8
 		y = 1
-		cost = 8
+		cost = 7.2
 		search_filters = {
 			FOCUS_FILTER_INDUSTRY
 		}
@@ -71,7 +77,11 @@ focus_tree = {
 				idea = rebuild_coruscant
 				days = 180
 			}
-			subtract_from_variable = { currency_amount^primary_currency = 100 }
+			add_to_variable = {
+				var = currency_amount^primary_currency #(doesn't matter what)
+				value = -100
+				tooltip = cost_focus_tooltip
+			  } 
 		}
 	}
 
@@ -81,13 +91,14 @@ focus_tree = {
 		icon = GFX_goal_unknown
 		x = 21
 		y = 1
-		cost = 7
+		cost = 7.2
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
 		prerequisite = { focus = REB_the_republic_reborn  }
 		completion_reward = {
-			
+			add_political_power = 50
+			add_stability = 0.05
 		}
 	}
 
@@ -97,15 +108,24 @@ focus_tree = {
 		icon = GFX_princess_leia
 		x = 17
 		y = 2
-		cost = 7
+		cost = 7.2
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
 		prerequisite = { focus = REB_the_first_chief_of_state  }
 		mutually_exclusive = { focus = REB_mon_mothma_a  } mutually_exclusive = { focus = REB_borskfeylya_a  }
 		completion_reward = {
-			retire_country_leader = yes
-			recruit_character = leia_organa
+			promote_character = {
+				character = REB_leia
+				ideology = rebel_ideology
+			}
+			hidden_effect = {
+				promote_character = {
+					character = REB_leia
+					ideology = rebel_ideology
+				}
+				retire_character = REB_mon_mothma
+			}
 		}
 	}
 
@@ -115,7 +135,7 @@ focus_tree = {
 		icon = GFX_goal_unknown
 		x = 17
 		y = 3
-		cost = 7
+		cost = 7.2
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
@@ -136,7 +156,7 @@ focus_tree = {
 		icon = GFX_goal_unknown
 		x = 14
 		y = 4
-		cost = 8
+		cost = 7.2
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
@@ -157,7 +177,7 @@ focus_tree = {
 		icon = GFX_goal_unknown
 		x = 14
 		y = 5
-		cost = 7
+		cost = 7.2
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
@@ -176,11 +196,22 @@ focus_tree = {
 		icon = GFX_goal_unknown
 		x = 8
 		y = 2
-		cost = 7
+		cost = 7.2
 		search_filters = {
 			FOCUS_FILTER_INDUSTRY
 		}
 		prerequisite = { focus = REB_rebuild_coruscant  }
+		completion_reward = {
+			add_timed_idea = {
+				idea = the_civilian_sector
+				days = 180
+			}
+			add_to_variable = {
+				var = currency_amount^primary_currency #(doesn't matter what)
+				value = -100
+				tooltip = cost_focus_tooltip
+			  } 
+		}
 	}
 
 	#Expand the Rail System
@@ -189,7 +220,7 @@ focus_tree = {
 		icon = GFX_goal_unknown
 		x = 12
 		y = 5
-		cost = 8
+		cost = 7.2
 		search_filters = {
 			FOCUS_FILTER_INDUSTRY
 		}
@@ -202,11 +233,13 @@ focus_tree = {
 		icon = GFX_goal_unknown
 		x = 11
 		y = 7
-		cost = 8
+		cost = 7.2
 		search_filters = {
 			FOCUS_FILTER_INDUSTRY
 		}
 		prerequisite = { focus = REB_expand_the_rail_system  }
+		mutually_exclusive = { focus = REB_national_rail_company  }
+
 		completion_reward = {
 			
 		}
@@ -223,6 +256,7 @@ focus_tree = {
 			FOCUS_FILTER_INDUSTRY
 		}
 		prerequisite = { focus = REB_expand_the_rail_system  }
+		mutually_exclusive = { focus = REB_foreign_experts  }
 	}
 
 	#The War on Crime
@@ -231,13 +265,13 @@ focus_tree = {
 		icon = GFX_goal_unknown
 		x = 2
 		y = 2
-		cost = 8
+		cost = 7.2
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
 		prerequisite = { focus = REB_rebuild_coruscant  }
 		completion_reward = {
-			
+			unlock_decision_category_tooltip = REB_the_war_on_crime_decisions
 		}
 	}
 
@@ -247,7 +281,7 @@ focus_tree = {
 		icon = GFX_goal_unknown
 		x = 4
 		y = 3
-		cost = 8
+		cost = 7.2
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
@@ -260,7 +294,7 @@ focus_tree = {
 		icon = GFX_goal_unknown
 		x = 9
 		y = 10
-		cost = 8
+		cost = 7.2
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
@@ -277,7 +311,7 @@ focus_tree = {
 		icon = GFX_goal_unknown
 		x = 12
 		y = 9
-		cost = 8
+		cost = 7.2
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
@@ -293,11 +327,18 @@ focus_tree = {
 		icon = GFX_goal_unknown
 		x = 7
 		y = 4
-		cost = 8
+		cost = 7.2
 		search_filters = {
 			FOCUS_FILTER_INDUSTRY
 		}
 		prerequisite = { focus = REB_secure_a_source_of_bacta  }
+		completion_reward = {
+			add_to_variable = {
+				var = currency_amount^primary_currency #(doesn't matter what)
+				value = -250
+				tooltip = cost_focus_tooltip
+			  } 
+		}
 	}
 
 	#New Republic Police Force
@@ -319,7 +360,7 @@ focus_tree = {
 		icon = GFX_goal_unknown
 		x = 8
 		y = 3
-		cost = 6
+		cost = 7.2
 		search_filters = {
 			FOCUS_FILTER_INDUSTRY
 		}
@@ -352,7 +393,7 @@ focus_tree = {
 		icon = GFX_goal_unknown
 		x = 7
 		y = 10
-		cost = 8
+		cost = 7.2
 		search_filters = {
 			FOCUS_FILTER_INDUSTRY
 		}
@@ -366,7 +407,7 @@ focus_tree = {
 		icon = GFX_goal_unknown
 		x = 1
 		y = 4
-		cost = 6
+		cost = 7.2
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
@@ -382,7 +423,7 @@ focus_tree = {
 		icon = GFX_goal_unknown
 		x = 5
 		y = 4
-		cost = 7
+		cost = 7.2
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
@@ -398,7 +439,7 @@ focus_tree = {
 		icon = GFX_goal_unknown
 		x = 5
 		y = 5
-		cost = 8
+		cost = 7.2
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
@@ -414,7 +455,7 @@ focus_tree = {
 		icon = GFX_goal_unknown
 		x = 9
 		y = 4
-		cost = 7
+		cost = 7.2
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
@@ -433,7 +474,7 @@ focus_tree = {
 		icon = GFX_goal_unknown
 		x = 8
 		y = 5
-		cost = 8
+		cost = 7.2
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
@@ -449,7 +490,7 @@ focus_tree = {
 		icon = GFX_goal_unknown
 		x = 8
 		y = 6
-		cost = 9
+		cost = 7.2
 		search_filters = {
 			FOCUS_FILTER_RESEARCH
 		}
@@ -478,7 +519,7 @@ focus_tree = {
 		icon = GFX_goal_unknown
 		x = 10
 		y = 6
-		cost = 8
+		cost = 7.2
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
@@ -492,7 +533,7 @@ focus_tree = {
 		icon = GFX_goal_unknown
 		x = 10
 		y = 8
-		cost = 8
+		cost = 3.7
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
@@ -511,7 +552,7 @@ focus_tree = {
 		icon = GFX_goal_unknown
 		x = 11
 		y = 10
-		cost = 8
+		cost = 7.2
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
@@ -524,8 +565,8 @@ focus_tree = {
 		id = REB_no_more_corrupt_governing
 		icon = GFX_goal_unknown
 		x = 13
-		y = 10
-		cost = 4
+		y = 10 
+		cost = 7.2
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
@@ -552,11 +593,14 @@ focus_tree = {
 		icon = GFX_goal_unknown
 		x = 16
 		y = 5
-		cost = 8
+		cost = 7.2
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
 		prerequisite = { focus = REB_restoration_of_the_jedi_temple  }
+		completion_reward = {
+			country_event = new_republic_focus.6
+		}
 	}
 
 	#The Beacon of Hope
@@ -578,7 +622,7 @@ focus_tree = {
 		icon = GFX_goal_unknown
 		x = 21
 		y = 5
-		cost = 8
+		cost = 7.2
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
@@ -591,7 +635,7 @@ focus_tree = {
 		icon = GFX_goal_unknown
 		x = 18
 		y = 4
-		cost = 8
+		cost = 7.2
 		search_filters = {
 			FOCUS_FILTER_WAR_SUPPORT
 		}
@@ -604,7 +648,7 @@ focus_tree = {
 		icon = GFX_goal_unknown
 		x = 18
 		y = 5
-		cost = 8
+		cost = 7.2
 		search_filters = {
 			FOCUS_FILTER_WAR_SUPPORT
 		}
@@ -643,7 +687,7 @@ focus_tree = {
 		icon = GFX_goal_unknown
 		x = 22
 		y = 4
-		cost = 8
+		cost = 7.2
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
@@ -656,11 +700,18 @@ focus_tree = {
 		icon = GFX_goal_unknown
 		x = 20
 		y = 4
-		cost = 8
+		cost = 7.2
 		search_filters = {
 			FOCUS_FILTER_INDUSTRY
 		}
 		prerequisite = { focus = REB_members_of_the_new_republic  }
+		completion_reward = {
+			add_to_variable = {
+				var = currency_amount^primary_currency #(doesn't matter what)
+				value = -100
+				tooltip = cost_focus_tooltip
+			  } 
+		}
 	}
 
 	#Prepare Coruscant
@@ -682,7 +733,7 @@ focus_tree = {
 		icon = GFX_goal_unknown
 		x = 20
 		y = 14
-		cost = 6
+		cost = 7.2
 		search_filters = {
 			FOCUS_FILTER_WAR_SUPPORT
 		}
@@ -695,7 +746,7 @@ focus_tree = {
 		icon = GFX_goal_unknown
 		x = 22
 		y = 14
-		cost = 8
+		cost = 7.2
 		search_filters = {
 			FOCUS_FILTER_WAR_SUPPORT
 		}
@@ -747,7 +798,7 @@ focus_tree = {
 		icon = GFX_goal_unknown
 		x = 23
 		y = 3
-		cost = 8
+		cost = 7.2
 		search_filters = {
 			FOCUS_FILTER_MANPOWER
 		}
@@ -760,7 +811,7 @@ focus_tree = {
 		icon = GFX_goal_unknown
 		x = 23
 		y = 5
-		cost = 8
+		cost = 7.2
 		search_filters = {
 			FOCUS_FILTER_MANPOWER
 		}
@@ -786,7 +837,7 @@ focus_tree = {
 		icon = GFX_goal_unknown
 		x = 26
 		y = 4
-		cost = 8
+		cost = 7.2
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
@@ -799,7 +850,7 @@ focus_tree = {
 		icon = GFX_goal_unknown
 		x = 25
 		y = 5
-		cost = 8
+		cost = 7.2
 		search_filters = {
 			FOCUS_FILTER_INDUSTRY
 		}
@@ -812,13 +863,24 @@ focus_tree = {
 		icon = GFX_goal_unknown
 		x = 27
 		y = 5
-		cost = 8
+		cost = 7.2
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
 		prerequisite = { focus = REB_secure_loyalty  }
 		completion_reward = {
-			set_country_flag = reduced_corp_tax
+			if = {
+				limit = {
+					has_idea = cut_down_tax_new_rep
+				}
+				swap_ideas = {
+					remove_idea = cut_down_tax_new_rep
+					add_idea = corp_cut_tax_2
+				}
+			}
+			else = {
+				add_idea = corp_cut_tax
+			}
 		}
 	}
 
@@ -854,7 +916,7 @@ focus_tree = {
 		icon = GFX_goal_unknown
 		x = 29
 		y = 5
-		cost = 8
+		cost = 7.2
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
@@ -867,7 +929,7 @@ focus_tree = {
 		icon = GFX_goal_unknown
 		x = 28
 		y = 6
-		cost = 9
+		cost = 7.2
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
@@ -880,6 +942,7 @@ focus_tree = {
 		icon = GFX_goal_unknown
 		x = 30
 		y = 6
+		cost = 7.2
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
@@ -892,7 +955,7 @@ focus_tree = {
 		icon = GFX_goal_unknown
 		x = 31
 		y = 13
-		cost = 8
+		cost = 7.2
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
@@ -905,7 +968,7 @@ focus_tree = {
 		icon = GFX_goal_unknown
 		x = 34
 		y = 1
-		cost = 8
+		cost = 7.2
 		search_filters = {
 			FOCUS_FILTER_WAR_SUPPORT
 		}
@@ -917,7 +980,7 @@ focus_tree = {
 		icon = GFX_goal_unknown
 		x = 32
 		y = 2
-		cost = 8
+		cost = 7.2
 		search_filters = {
 			FOCUS_FILTER_WAR_SUPPORT
 		}
@@ -931,7 +994,7 @@ focus_tree = {
 		icon = GFX_goal_unknown
 		x = 36
 		y = 2
-		cost = 7
+		cost = 7.2
 		search_filters = {
 			FOCUS_FILTER_WAR_SUPPORT
 		}
@@ -945,26 +1008,50 @@ focus_tree = {
 		icon = GFX_goal_unknown
 		x = 33
 		y = 3
-		cost = 6
+		cost = 7.2
 		search_filters = {
 			FOCUS_FILTER_WAR_SUPPORT
 		}
 		prerequisite = { focus = REB_flexibility_of_command  focus = REB_maintain_a_hierarchy  }
 		mutually_exclusive = { focus = REB_militias_of_the_republic  }
-	}
+		completion_reward = {
+			add_units_to_division_template = {
+				template_name = "Rebel Battalion" 
+				regiments = {
+					infantry = 1 
+					infantry = 1 
+					infantry = 1
+				}
+			}
+			add_to_variable = { regular_cap = 5 }
+			set_division_template_cap = {  division_template = "Rebel Battalion" division_cap = regular_cap }
+		}
+	} 
 
 	#Militias of the Republic
 	focus = {
 		id = REB_militias_of_the_republic
 		icon = GFX_goal_unknown
-		x = 35
+		x = 35 
 		y = 3
-		cost = 6
+		cost = 7.2
 		search_filters = {
 			FOCUS_FILTER_WAR_SUPPORT
 		}
 		prerequisite = { focus = REB_maintain_a_hierarchy  focus = REB_flexibility_of_command  }
 		mutually_exclusive = { focus = REB_professional_miliary  }
+		completion_reward = {
+			add_units_to_division_template = {
+				template_name = "Rebel Insurgent" 
+				regiments = {
+					infantry = 1 
+					infantry = 1 
+					infantry = 1
+				}
+			}
+			add_to_variable = { militia_cap = 5 }
+			set_division_template_cap = {  division_template = "Rebel Insurgent" division_cap = militia_cap }
+		}
 	}
 
 	#Republic Engineering Corporation
@@ -973,7 +1060,7 @@ focus_tree = {
 		icon = GFX_goal_unknown
 		x = 34
 		y = 4
-		cost = 6
+		cost = 7.2
 		search_filters = {
 			FOCUS_FILTER_WAR_SUPPORT
 		}
@@ -986,7 +1073,7 @@ focus_tree = {
 		icon = GFX_goal_unknown
 		x = 34
 		y = 5
-		cost = 6
+		cost = 7.2
 		search_filters = {
 			FOCUS_FILTER_WAR_SUPPORT
 		}
@@ -1012,7 +1099,7 @@ focus_tree = {
 		icon = GFX_goal_unknown
 		x = 26
 		y = 9
-		cost = 8
+		cost = 7.2
 		available = {
 			has_global_flag = warlord_crisis
 		}
@@ -1027,7 +1114,7 @@ focus_tree = {
 		icon = GFX_goal_unknown
 		x = 26
 		y = 10
-		cost = 8
+		cost = 7.2
 		search_filters = {
 			FOCUS_FILTER_WAR_SUPPORT
 		}
@@ -1040,7 +1127,7 @@ focus_tree = {
 		icon = GFX_goal_unknown
 		x = 26
 		y = 11
-		cost = 8
+		cost = 7.2
 		search_filters = {
 			FOCUS_FILTER_MANPOWER
 		}
@@ -1053,7 +1140,7 @@ focus_tree = {
 		icon = GFX_goal_unknown
 		x = 21
 		y = 12
-		cost = 6
+		cost = 7.2
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
@@ -1066,7 +1153,7 @@ focus_tree = {
 		icon = GFX_goal_unknown
 		x = 21
 		y = 13
-		cost = 8
+		cost = 7.2
 		search_filters = {
 			FOCUS_FILTER_WAR_SUPPORT
 		}
@@ -1079,7 +1166,7 @@ focus_tree = {
 		icon = GFX_goal_unknown
 		x = 26
 		y = 12
-		cost = 6
+		cost = 7.2
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
@@ -1092,7 +1179,7 @@ focus_tree = {
 		icon = GFX_goal_unknown
 		x = 30
 		y = 12
-		cost = 6
+		cost = 7.2
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
@@ -1105,7 +1192,7 @@ focus_tree = {
 		icon = GFX_goal_unknown
 		x = 23
 		y = 13
-		cost = 8
+		cost = 7.2
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
@@ -1118,7 +1205,7 @@ focus_tree = {
 		icon = GFX_goal_unknown
 		x = 25
 		y = 13
-		cost = 8
+		cost = 7.2
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
@@ -1131,7 +1218,7 @@ focus_tree = {
 		icon = GFX_goal_unknown
 		x = 27
 		y = 13
-		cost = 8
+		cost = 7.2
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
@@ -1144,7 +1231,7 @@ focus_tree = {
 		icon = GFX_goal_unknown
 		x = 25
 		y = 14
-		cost = 6
+		cost = 7.2
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
@@ -1157,7 +1244,7 @@ focus_tree = {
 		icon = GFX_goal_unknown
 		x = 27
 		y = 14
-		cost = 8
+		cost = 7.2
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
@@ -1170,7 +1257,7 @@ focus_tree = {
 		icon = GFX_goal_unknown
 		x = 26
 		y = 15
-		cost = 6
+		cost = 7.2
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
@@ -1183,7 +1270,7 @@ focus_tree = {
 		icon = GFX_goal_unknown
 		x = 26
 		y = 16
-		cost = 8
+		cost = 7.2
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
@@ -1196,7 +1283,7 @@ focus_tree = {
 		icon = GFX_goal_unknown
 		x = 21
 		y = 15
-		cost = 8
+		cost = 7.2
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
@@ -1209,7 +1296,7 @@ focus_tree = {
 		icon = GFX_goal_unknown
 		x = 21
 		y = 16
-		cost = 8
+		cost = 7.2
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
@@ -1222,7 +1309,7 @@ focus_tree = {
 		icon = GFX_goal_unknown
 		x = 29
 		y = 13
-		cost = 8
+		cost = 7.2
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
@@ -1235,7 +1322,7 @@ focus_tree = {
 		icon = GFX_goal_unknown
 		x = 29
 		y = 14
-		cost = 6
+		cost = 7.2
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
@@ -1248,7 +1335,7 @@ focus_tree = {
 		icon = GFX_goal_unknown
 		x = 31
 		y = 14
-		cost = 6
+		cost = 7.2
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
@@ -1261,7 +1348,7 @@ focus_tree = {
 		icon = GFX_goal_unknown
 		x = 30
 		y = 15
-		cost = 8
+		cost = 7.2
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
@@ -1273,7 +1360,7 @@ focus_tree = {
 		icon = GFX_goal_unknown
 		x = 30
 		y = 16
-		cost = 8
+		cost = 7.2
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}

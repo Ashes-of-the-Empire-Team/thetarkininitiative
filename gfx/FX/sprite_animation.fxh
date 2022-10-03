@@ -116,9 +116,9 @@ PixelShader = {
 Code 
 [[
 
-float4 Animate(float4 BaseColor, in sampler2D MaskTexture_, float2 MaskTexcoord, in sampler2D AnimatedTexture_, float2 AnimatedTexcoord, AnimationData Data)
+float4 Animate(float4 BaseColor, in sampler2D MaskTextureSampler, float2 MaskTexcoord, in sampler2D AnimatedTextureSampler, float2 AnimatedTexcoord, AnimationData Data)
 {
-    float4 Mask = tex2D( MaskTexture_, MaskTexcoord );
+    float4 Mask = tex2D( MaskTextureSampler, MaskTexcoord );
 	float4 Anim = vec4(0.0);
 			
 	if (Data.Type == 3) // Pulse
@@ -127,7 +127,7 @@ float4 Animate(float4 BaseColor, in sampler2D MaskTexture_, float2 MaskTexcoord,
 	}
 	else
 	{
-		Anim = tex2D( AnimatedTexture_, AnimatedTexcoord );
+		Anim = tex2D( AnimatedTextureSampler, AnimatedTexcoord );
 		
 		if ((Data.ClampAnimation > 0.0f) && (AnimatedTexcoord.y < 0.0 || AnimatedTexcoord.y > 1.0))
 			Mask.a = 0.0;
@@ -139,16 +139,17 @@ float4 Animate(float4 BaseColor, in sampler2D MaskTexture_, float2 MaskTexcoord,
 	return Blended;
 }
 
-float4 Animate(float4 BaseColor, float2 MaskTexcoord, float4 AnimatedTexcoord, in sampler2D MaskTexture_, in sampler2D AnimatedTexture_, in sampler2D MaskTexture2_, in sampler2D AnimatedTexture2_)
+float4 Animate(float4 BaseColor, float2 MaskTexcoord, float4 AnimatedTexcoord, in sampler2D MaskTextureSampler, in sampler2D AnimatedTextureSampler,
+				 in sampler2D MaskTexture2Sampler, in sampler2D AnimatedTexture2Sampler)
 {
 	AnimationData data = GetAnimationData(0);
 	
 	float4 color = BaseColor;
-	color = Animate(color, MaskTexture_, MaskTexcoord, AnimatedTexture_, AnimatedTexcoord.xy, data);
+	color = Animate(color, MaskTextureSampler, MaskTexcoord, AnimatedTextureSampler, AnimatedTexcoord.xy, data);
 	
 #ifdef NUM_ANIMATIONS_2
 	data = GetAnimationData(1);
-	color = Animate(color, MaskTexture2_, MaskTexcoord, AnimatedTexture2_, AnimatedTexcoord.zw, data);
+	color = Animate(color, MaskTexture2Sampler, MaskTexcoord, AnimatedTexture2Sampler, AnimatedTexcoord.zw, data);
 #endif	
 	
 	return color;

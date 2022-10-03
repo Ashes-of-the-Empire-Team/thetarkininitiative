@@ -1,69 +1,74 @@
 ideas = {	
-	trade_laws = { 
-		law = yes
-		use_list_view = yes
-
-		empire_free_trade = {
-
-			available = {
-			}
-						
-			cost = 150
-			removal_cost = -1
-			
-			modifier = {
-				min_export = 0.7
-				industrial_capacity_factory = 0.15
-				industrial_capacity_dockyard = 0.15
-				production_speed_buildings_factor = 0.12
-				research_speed_factor = 0.10
-				civilian_intel_to_others = 30
-				navy_intel_to_others = 15
-			}
-			allowed_to_remove = {
-			}		
-			cancel_if_invalid = no
-
-			ai_will_do = {
-   				factor = 1
-   			}
-		}
-		empire_protectionism = {
-
-			available = {
-			}
-						
-			cost = 150
-			removal_cost = -1
-			
-			modifier = {
-				min_export = 0.10
-				industrial_capacity_factory = 0.05
-				industrial_capacity_dockyard = 0.05
-				production_speed_buildings_factor = 0.05
-				research_speed_factor = 0.01
-				civilian_intel_to_others = 10.0
-				navy_intel_to_others = 5
-			}
-			allowed_to_remove = {
-			}
-			cancel_if_invalid = no
-
-			ai_will_do = {
-   				factor = 1
-   			}
-		}
-	}
-	country = {
+	#trade_laws = { 
+	#	law = yes
+	#	use_list_view = yes
+#
+	#	empire_free_trade = {
+#
+	#		available = {
+	#		}
+	#					
+	#		cost = 150
+	#		removal_cost = -1
+	#		
+	#		modifier = {
+	#			min_export = 0.7
+	#			industrial_capacity_factory = 0.15
+	#			industrial_capacity_dockyard = 0.15
+	#			production_speed_buildings_factor = 0.12
+	#			research_speed_factor = 0.10
+	#			civilian_intel_to_others = 30
+	#			navy_intel_to_others = 15
+	#		}
+	#		allowed_to_remove = {
+	#		}		
+	#		cancel_if_invalid = no
+#
+	#		ai_will_do = {
+   	#			factor = 1
+   	#		}
+	#	}
+	#	empire_protectionism = {
+#
+	#		available = {
+	#		}
+	#					
+	#		cost = 150
+	#		removal_cost = -1
+	#		
+	#		modifier = {
+	#			min_export = 0.10
+	#			industrial_capacity_factory = 0.05
+	#			industrial_capacity_dockyard = 0.05
+	#			production_speed_buildings_factor = 0.05
+	#			research_speed_factor = 0.01
+	#			civilian_intel_to_others = 10.0
+	#			navy_intel_to_others = 5
+	#		}
+	#		allowed_to_remove = {
+	#		}
+	#		cancel_if_invalid = no
+#
+	#		ai_will_do = {
+   	#			factor = 1
+   	#		}
+	#	}
+	#}
+	hidden_ideas = {
 		##### EMPIRE STANCE ####
-		claiment_stance = {
+		claimant_stance = {
 
 			allowed = {
 				always = yes
 			}
 
 			removal_cost = -1
-
+			on_add = {
+				
+			}
+			on_remove = {
+				
+			}
 			picture = unknown
 
 			modifier = {
@@ -76,7 +81,18 @@ ideas = {
 			}
 
 			removal_cost = -1
-
+			on_add = {
+				add_to_variable = {
+					var = legitimacy_emp_equilibrium
+					value = -5
+				}
+			}
+			on_remove = {
+				add_to_variable = {
+					var = legitimacy_emp_equilibrium
+					value = 5
+				}
+			}
 			picture = unknown
 
 			modifier = {
@@ -91,7 +107,20 @@ ideas = {
 			}
 
 			removal_cost = -1
-
+			on_add = {
+				add_to_variable = {
+					var = legitimacy_emp_equilibrium
+					value = 3
+				}
+				##effect on emperor is calculated elsewhere
+			}
+			on_remove = {
+				add_to_variable = {
+					var = legitimacy_emp_equilibrium
+					value = -3
+				}
+				##effect on emperor is calculated elsewhere
+			}
 			picture = unknown
 
 			modifier = {
@@ -104,12 +133,27 @@ ideas = {
 			}
 
 			removal_cost = -1
-
+			on_add = {
+				add_to_variable = {
+					var = legitimacy_emp_equilibrium
+					value = -3
+				}
+				##effect on emperor is calculated elsewhere
+			}
+			on_remove = {
+				add_to_variable = {
+					var = legitimacy_emp_equilibrium
+					value = 3
+				}
+				##effect on emperor is calculated elsewhere
+			}
 			picture = unknown
 
 			modifier = {
 			}
 	}
+	}
+	country = {
 		##### EMPIRE DOCTRINE ####
 		human_first_positive = {
 

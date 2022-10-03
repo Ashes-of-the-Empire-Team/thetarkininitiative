@@ -1,0 +1,116 @@
+Isard_remnant_loyalty = {
+	custom_effect_tooltip = Isard_remnant_loyalty_tooltip
+	
+	add_to_variable = {
+		var = Isard_remnant_loyalty_var
+		value = Isard_remnant_loyalty_var_temp
+	}
+	
+	clamp_variable = {
+		var = Isard_remnant_loyalty_var
+		min = 0
+		max = 1
+	}
+	
+	hidden_effect = {
+		remove_ideas = Isard_remnant_loyalty_very_low
+		remove_ideas = Isard_remnant_loyalty_low
+		remove_ideas = Isard_remnant_loyalty_med
+		remove_ideas = Isard_remnant_loyalty_high
+		if = {
+			limit = {
+				check_variable = { Isard_remnant_loyalty_var < 0.25 }
+			}
+			add_ideas = Isard_remnant_loyalty_very_low
+		}
+		else_if = {
+            limit = {
+                check_variable = { Isard_remnant_loyalty_var > 0.25 }
+                check_variable = { Isard_remnant_loyalty_var < 0.50 }
+            }
+            add_ideas = Isard_remnant_loyalty_low
+        }
+		else_if = {
+            limit = {
+                check_variable = { Isard_remnant_loyalty_var > 0.50 }
+                check_variable = { Isard_remnant_loyalty_var < 0.75 }
+            }
+            add_ideas = Isard_remnant_loyalty_med
+        }
+		else_if = {
+            limit = {
+                check_variable = { Isard_remnant_loyalty_var > 0.75 }
+            }
+            add_ideas = Isard_remnant_loyalty_high
+        }
+	}
+}
+
+Isard_remnant_strength = {
+	set_variable = {
+		var = THY_imperial_strength_var
+		value = party_popularity@imperial
+	}
+	
+	clamp_variable = {
+		var = THY_imperial_strength_var
+		min = 0
+		max = 100
+	}
+	
+	set_variable = {
+		var = THY_imperial_strength_dynamic_var
+		value = THY_imperial_strength_var
+	}
+}
+
+
+
+
+Isard_ashern_strength = {
+	custom_effect_tooltip = Isard_ashern_strength_tooltip
+	
+	add_to_variable = {
+		var = Isard_ashern_strength_var
+		value = Isard_ashern_strength_var_temp
+	}
+	
+	clamp_variable = {
+		var = Isard_ashern_strength_var
+		min = 0
+		max = 1
+	}
+	
+	hidden_effect = {
+		remove_ideas = Isard_ashern_strength_very_low
+		remove_ideas = Isard_ashern_strength_low
+		remove_ideas = Isard_ashern_strength_med
+		remove_ideas = Isard_ashern_strength_high
+		if = {
+			limit = {
+				check_variable = { Isard_ashern_strength_var < 0.25 }
+			}
+			add_ideas = Isard_ashern_strength_very_low
+		}
+		else_if = {
+            limit = {
+                check_variable = { Isard_ashern_strength_var > 0.25 }
+                check_variable = { Isard_ashern_strength_var < 0.50 }
+            }
+            add_ideas = Isard_ashern_strength_low
+        }
+		else_if = {
+            limit = {
+                check_variable = { Isard_ashern_strength_var > 0.50 }
+                check_variable = { Isard_ashern_strength_var < 0.75 }
+            }
+            add_ideas = Isard_ashern_strength_med
+        }
+		else_if = {
+            limit = {
+                check_variable = { Isard_ashern_strength_var > 0.75 }
+            }
+            add_ideas = Isard_ashern_strength_high
+        }
+	}
+}

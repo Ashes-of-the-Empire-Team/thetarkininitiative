@@ -1,0 +1,61 @@
+scripted_gui = {
+	slave_top_bar = {
+		context_type = player_context
+		window_name = "slave_top_bar"
+		parent_window_token = top_bar
+		visible = {
+			#check_variable = { total_slaves > 0 }
+			OR = {
+				has_government = consortium
+				has_country_flag = slaves
+			}
+		}
+
+		effects = {
+			slave_button_click = {
+				if = {
+					limit = {
+						has_country_flag = slave_open_click
+					}
+					clr_country_flag = slave_open_click
+				}
+				else = {
+					set_country_flag = slave_open_click
+				}
+			}
+		}
+	}
+	slave_auction_screen = {
+		context_type = player_context
+		window_name = "slave_auction_screen"
+		visible = {
+			has_country_flag = slave_open_click
+		}
+		effects = {
+			auction_click = {
+				add_to_array = { Global.slave_market = slaves_being_sold }
+				add_to_array = { Global.slave_market_type = slaves_being_sold_type }
+				add_to_array = { Global.slave_market_country = ROOT.id }
+			}
+
+			increase_bid_click = {
+				add_to_variable = { increased_bid_amount = 10 }
+			}
+			decrease_bid_click = {
+				subtract_from_variable = { increased_bid_amount = 10 }
+			}
+			bid_click = {
+				add_to_variable = { Global.slave_bid = increased_bid_amount }
+				set_variable = { Global.slave_bid_leader = ROOT.id }
+			}
+		}
+		triggers = {
+			increase_bid_click_enabled = {
+				check_variable = { increased_bid_amount > 0}
+			}
+			decrease_bid_click_enabled = {
+				check_variable = { currency_amount^primary_currency > Global.slave_bid }
+			}
+		}
+	}
+}

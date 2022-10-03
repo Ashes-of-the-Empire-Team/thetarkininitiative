@@ -916,11 +916,12 @@ tactic_masterful_blitz = { #Improved version of Blitz for Soviets
 	attacker = 0.2
 	defender = -0.2
 }
-tactic_AT_AT_assault = { #AT AT tarkin assault tactic
+################################################################## OUR ADDED TACTICS  ##################################################################
+tactic_heavy_vechicle_assault = { #AT AT tarkin assault tactic
 	is_attacker = yes
 	trigger = {
 		is_attacker = yes
-		hardness > 0.5
+		hardness > 0.4
 		phase = no
 	}
 	
@@ -936,10 +937,10 @@ tactic_AT_AT_assault = { #AT AT tarkin assault tactic
 	combat_width = 0.30
 	attacker_movement_speed = -0.3
 }
-tactic_unconventional_defensive = { #
-	is_attacker = no
+tactic_off_handed_attack = { #
+	is_attacker = yes
 	trigger = {
-		is_attacker = no
+		is_attacker = yes
 		phase = no
 	}
 	
@@ -951,7 +952,8 @@ tactic_unconventional_defensive = { #
 	picture = tactic_barrage
 	
 	attacker = -0.2
-	defender = 0.3
+	defender = -0.4
+	combat_width = -0.3
 }
 tactic_creeping_barrage = { ##
 	is_attacker = yes
@@ -971,7 +973,7 @@ tactic_creeping_barrage = { ##
 	defender = 0.05
 	combat_width = -0.25
 }
-tactic_supply_strike = { ##
+tactic_drop_squads = { ##
 	is_attacker = yes
 	trigger = {
 		is_attacker = yes
@@ -985,10 +987,10 @@ tactic_supply_strike = { ##
 	}
 	picture = tactic_barrage
 	
-	attacker = 0.28
-	defender = 0.1
-	combat_width = -0.50
-	attacker_movement_speed = 0.4
+	attacker = 0
+	defender = 0.2
+	combat_width = 0.80
+	attacker_movement_speed = 0.2
 }
 tactic_stronghold_based_defence = { ##
 	is_attacker = no
@@ -1006,5 +1008,60 @@ tactic_stronghold_based_defence = { ##
 	
 	attacker = -0.05
 	defender = 0.12
-	combat_width = 0.2
+	combat_width = -0.2
+	attacker_movement_speed = -0.4
+}
+tactic_lure_them_in = { ##
+	is_attacker = no
+	trigger = {
+		is_attacker = no
+		phase = no
+	}
+	countered_by = tactic_breakthrough
+	active = no
+	
+	base =  {
+		factor = 4
+	}
+	picture = tactic_barrage
+	
+	attacker = -0.1
+	defender = 0.15
+	combat_width = 0.5
+}
+tactic_breach_and_go = {
+	is_attacker = yes
+	trigger = {
+		is_attacker = yes
+		phase = no
+	}
+	countered_by = tactic_breakthrough
+	active = no
+	
+	base =  {
+		factor = 4
+	}
+	picture = tactic_barrage
+	phase = close_combat
+	attacker = 0.2
+	attacker_movement_speed = 0.2
+	combat_width = -0.2
+}
+tactic_lighting_strike = {
+	is_attacker = yes
+	trigger = {
+		is_attacker = yes
+		phase = no
+	}
+	countered_by = tactic_encirclement
+	active = no
+	
+	base =  {
+		factor = 4
+	}
+	picture = tactic_barrage
+	attacker = 0.2
+	defender = 0.3
+	attacker_movement_speed = 0.6
+	combat_width = 0.3
 }

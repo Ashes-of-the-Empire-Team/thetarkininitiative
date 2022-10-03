@@ -1,0 +1,137 @@
+scripted_gui = {
+	duel_interface_container = {
+		window_name = "duel_interface"
+		visible = {
+           has_country_flag = duel_interface_open
+		}
+		effects = {
+			confirm_button_click = {
+				if = {
+					limit = {
+						has_country_flag = end_actions_duel_start
+					}
+					set_country_flag = end_all_actions_duel   ####### FLAG TO SIGNIFY MOVE TO NEXT BOUT
+					clr_country_flag = end_actions_duel_start  ######## JUST HERE TO CONFIRM IT
+				}
+
+				if = {
+					limit = {
+						AND ={
+							has_country_flag = end_all_actions_duel ##### IF EVERYONE HAS WANTED TO END, MOVE TO NEXT BOUT
+							var:rival_dueling_nation = {
+								has_country_flag = end_all_actions_duel
+							}
+						} 
+					}
+					reset_bout_health_and_actions = yes
+				}else_if ={
+					limit = {
+						var:rival_dueling_nation = { ## rival_dueling_nation is assigned before hand, evaluates fighting outcome of this particular action series
+							has_country_flag =  duel_action_ready
+						}
+					}
+					evaluate_fighting_outcomes = yes
+				}else = {
+					set_country_flag = duel_action_ready 
+				}
+			}
+			attack_button_click = {
+				if = {
+					limit = {
+						has_country_flag = attack_options_open
+					}
+					clr_country_flag = attack_options_open
+				}else = {
+					set_country_flag = attack_options_open
+				}
+			}
+			defence_button_click = {
+				if = {
+					limit = {
+						has_country_flag = defence_options_open
+					}
+					clr_country_flag = defence_options_open
+				}else = {
+					set_country_flag = defence_options_open
+				}
+			}
+			special_options = {
+				if = {
+					limit = {
+						has_country_flag = special_options_open
+					}
+					clr_country_flag = special_options_open
+				}else = {
+					set_country_flag = special_options_open
+				}
+			}
+			exit_button_click_click = {
+				clr_country_flag = duel_interface_open
+			}
+		}
+	}
+	attack_options_ = {
+		window_name = "attack_slide"
+		parent_window_name = "duel_interface"
+		visible = {
+           has_country_flag = attack_options_open 
+		}
+		effects = {
+			heavy_attack_button_click = {
+				remove_all_current_actions = yes
+				set_country_flag = heavy_attack
+			}
+			attack_button_click = {
+				remove_all_current_actions = yes
+				set_country_flag = normal_attack
+			}
+		}
+		triggers = {
+			heavy_attack_button_click_enabled = {
+				NOT = {has_country_flag = end_all_actions_duel}
+			}
+			attack_button_click_enabled = {
+				NOT = {has_country_flag = end_all_actions_duel}
+			}
+		}
+	}
+	defence_options = {
+		window_name = "defence_slide"
+		parent_window_name = "duel_interface"
+		visible = {
+           has_country_flag = defence_options_open
+		}
+		effects = {
+			block_button_click = {
+				remove_all_current_actions = yes
+				set_country_flag = block_attack
+			}
+			do_nothing_button_click = {
+				remove_all_current_actions = yes
+				set_country_flag = do_nothing_attack
+			}
+			end_actions_button_click = {
+				remove_all_current_actions = yes
+				set_country_flag = end_actions_duel_start
+			}
+		}
+		triggers = {
+			block_button_click_enabled = {
+				NOT = {has_country_flag = end_all_actions_duel}
+			}
+			do_nothing_button_click_enabled = {
+				NOT = {has_country_flag = end_all_actions_duel}
+			}
+			end_actions_click_enabled = {
+				NOT = {has_country_flag = end_all_actions_duel}
+			}
+		}
+	}
+	special_options = {
+		window_name = "special_slide"
+		parent_window_name = "duel_interface"
+		visible = {
+           has_country_flag = special_options_open
+		}
+	}
+}

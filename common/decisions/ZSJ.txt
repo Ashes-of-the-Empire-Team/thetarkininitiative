@@ -1,9 +1,5 @@
 ZSJ_political_propaganda = {
-
 	your_country_needs_you = {
-		icon = GFX_decision_hol_attract_foreign_investors
-        fire_only_once = no
-		allowed = { tag = ZSJ }
 		complete_effect = {
 			random_list = {
 				33 = {
@@ -19,9 +15,6 @@ ZSJ_political_propaganda = {
 	   }
 	}
 	republic_menace = {
-		icon = GFX_decision_hol_attract_foreign_investors
-        fire_only_once = no
-		allowed = { tag = ZSJ }
 		complete_effect = {
 			add_popularity = {
 				ideology = imperial
@@ -31,9 +24,6 @@ ZSJ_political_propaganda = {
 		}
 	}
 	the_empire_neglects_you = {
-		icon = GFX_decision_hol_attract_foreign_investors
-        fire_only_once = no
-		allowed = { tag = ZSJ }
 		complete_effect = {
 			add_popularity = {
 				ideology = democratic
@@ -42,6 +32,95 @@ ZSJ_political_propaganda = {
 		}
 	}
 }
-
-
-
+ZSJ_jaguar_decisions = {
+	ZSJ_spawn_jaguars = {
+		fire_only_once = no
+		days_remove = 10
+		ai_will_do = {
+			factor = 0
+		}
+		available = {
+			has_manpower > 100
+			ZSJ_has_1_available_jaguars = yes
+		}
+		complete_effect = {
+			add_manpower = -100
+		}
+		modifier = {
+		}
+		remove_effect = {
+			add_to_variable = {
+				var = ZSJ_paladins_ready
+				value = -1
+			}
+			add_to_variable = {
+				var = ZSJ_jaguars_deployed
+				value = 1
+			}
+			if = {
+				limit = {
+					NOT = {
+						has_template_containing_unit = Jaguar_unit
+					}
+				}
+				division_template = {
+					name = "Jaguar Stalkers"					#CW Tools - False positive? Wiki says that "name" is correct here and not "division name"
+					is_locked = yes
+					division_names_group = ZSJ_DIV_1
+					priority = 2
+					template_counter = 0
+					regiments = {
+						jaguar_unit = {
+							x = 0
+							y = 0
+						}
+						jaguar_unit = {
+							x = 0
+							y = 1
+						}
+						jaguar_unit = {
+							x = 1
+							y = 0
+						}
+						jaguar_unit = {
+							x = 1
+							y = 1
+						}
+						jaguar_anti_opposition_taskforce = {
+							x = 2
+							y = 0
+						}
+						jaguar_anti_opposition_taskforce = {
+							x = 2
+							y = 1
+						}
+						advance_jaguar_recon_team = {
+							x = 0
+							y = 2
+						}
+						advance_jaguar_recon_team = {
+							x = 1
+							y = 2
+						}
+					}
+					support = {
+						jaguar_support_unit = {
+							x = 0
+							y = 0
+						}
+						jaguar_support_unit = {
+							x = 1
+							y = 0
+						}
+					}
+				}
+				}
+				}
+			}
+			random_owned_controlled_state = {
+				create_unit = {
+					division = "name = \"Jaguars\" division_template = \"Jaguar Stalkers\" start_experience_factor = 0.75 start_equipment_factor = 0"
+					owner = ZSJ
+				}
+			}
+		}

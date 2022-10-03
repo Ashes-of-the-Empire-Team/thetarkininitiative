@@ -1,0 +1,150 @@
+grab_semi_hostile_nation = {
+	if = {
+		limit = {
+			has_variable = higher_chance_espionage_target
+		}
+		random = {
+		    chance = 33
+		    set_variable = {targeted_country_slot_1 = higher_chance_espionage_target}
+		}
+	}
+	while_loop_effect = {
+	    break = temp_break
+	    limit = {
+	    	NOT = {
+	        	has_variable = targeted_country_slot_1
+	        }
+	    }
+	    random_country = {
+	    	if = {
+	    		limit = {
+	    			OR = {
+		    			AND = {
+		    				has_opinion = {
+							    target = ROOT
+							    value < 0
+							}
+							NOT = {has_government = ROOT}
+		    			}
+		    			AND = {
+		    				has_opinion = {
+							    target = ROOT
+							    value < -50
+							}
+							has_government = ROOT
+		    			}
+	    			}
+	    		}
+	    		set_variable = {targeted_country_slot_1 = ROOT.id}
+	    	}
+	    }
+	}
+}
+slave_raid_selector = {
+	find_highest_in_array = {
+	     array = slaves
+	     value = check_if_slaves_equal_zero
+	}
+	if = {
+		limit = {
+			has_variable = higher_chance_espionage_target
+			check_variable = { check_if_slaves_equal_zero > 0 }
+		}
+		random = {
+		    chance = 33
+		    set_variable = {targeted_country_slot_1 = higher_chance_espionage_target}
+		}
+	}
+	if = {
+		limit = {
+			has_war = yes
+		}
+		for_loop_effect = {
+		    start = 0
+		    end = 11
+		    add = 1
+		    value = time_checker
+		    break = break_name
+			random_enemy_country = {
+				if = {
+					limit = {
+						check_variable = { check_if_slaves_equal_zero > 0 }
+					}
+					set_variable = { targeted_country_slot_1 = ROOT.id }
+				}
+			}
+			if = {
+				limit = {
+					check_variable = {time_checker = 10}
+				}
+				while_loop_effect = {
+				    break = temp_break
+				    limit = {
+				    	NOT = {
+				        	has_variable = targeted_country_slot_1
+				        }
+				    }
+				    random_country = {
+				    	if = {
+				    		limit = {
+				    			OR = {
+					    			AND = {
+					    				has_opinion = {
+										    target = ROOT
+										    value < 0
+										}
+										NOT = {has_government = ROOT}
+										check_variable = { check_if_slaves_equal_zero > 0 }
+					    			}
+					    			AND = {
+					    				has_opinion = {
+										    target = ROOT
+										    value < -50
+										}
+										has_government = ROOT
+										check_variable = { check_if_slaves_equal_zero > 0 }
+					    			}
+				    			}
+				    		}
+				    		set_variable = {targeted_country_slot_1 = ROOT.id}
+				    	}
+				    }
+				}
+			}
+		}
+	}else = {
+		while_loop_effect = {
+		    break = temp_break
+		    limit = {
+		    	NOT = {
+		        	has_variable = targeted_country_slot_1
+		        }
+		    }
+		    random_country = {
+		    	if = {
+		    		limit = {
+		    			OR = {
+			    			AND = {
+			    				has_opinion = {
+								    target = ROOT
+								    value < 0
+								}
+								NOT = {has_government = ROOT}
+								check_variable = { check_if_slaves_equal_zero > 0 }
+			    			}
+			    			AND = {
+			    				has_opinion = {
+								    target = ROOT
+								    value < -50
+								}
+								has_government = ROOT
+								check_variable = { check_if_slaves_equal_zero > 0 }
+			    			}
+		    			}
+		    		}
+		    		set_variable = {targeted_country_slot_1 = ROOT.id}
+		    	}
+		    }
+		}
+	}
+}

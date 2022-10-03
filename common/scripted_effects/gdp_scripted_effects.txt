@@ -1,135 +1,37 @@
-GDP_change = {
-	for_loop_effect = {
-		start = 1
-		end = global.all_countries_gdp^num
-		value = v
-		set_temp_variable = { n = v }
-		set_temp_variable = { n_minus = n }
-		subtract_from_temp_variable = { n_minus = 1 }
-		while_loop_effect = {
-			limit = {
-				var:global.all_countries_gdp^n_minus = {
-					set_temp_variable = { n_minus_GDP = GDP }
-				}
-				var:global.all_countries_gdp^n = {
-					set_temp_variable = { n_GDP = GDP }
-				}
-				check_variable = { n > 0 }
-				check_variable = { n_minus_GDP < n_GDP }
-			}
-			# swap j-1 with j if value of j-1 < j
-			set_temp_variable = { temp = global.all_countries_gdp^n }
-			set_variable = { global.all_countries_gdp^n = global.all_countries_gdp^n_minus }
-			set_variable = { global.all_countries_gdp^n_minus = temp }
-			subtract_from_temp_variable = { n = 1 }
-			subtract_from_temp_variable = { n_minus = 1 }
-			}
-		}
 
-		every_country = {
-			clr_country_flag = great_power
-			clr_country_flag = secondary_power
-		}
-		remove_ideas = GDP_1
-		remove_ideas = GDP_2
-		remove_ideas = GDP_3
-		remove_ideas = GDP_4
-		remove_ideas = GDP_5
-		remove_ideas = GDP_6
-		remove_ideas = GDP_7
-		remove_ideas = GDP_8
 
-		var:global.all_countries_gdp^0 = {
-			add_ideas = GDP_1
-			set_country_flag = great_power
-		}
-		var:global.all_countries_gdp^1 = {
-			add_ideas = GDP_2
-			set_country_flag = great_power
-		}
-		var:global.all_countries_gdp^2 = {
-			add_ideas = GDP_3
-			set_country_flag = great_power
-		}
-		var:global.all_countries_gdp^3 = {
-			add_ideas = GDP_4
-			set_country_flag = great_power
-		}
-		var:global.all_countries_gdp^4 = {
-			add_ideas = GDP_5
-			set_country_flag = great_power
-		}
-		var:global.all_countries_gdp^5 = {
-			add_ideas = GDP_6
-			set_country_flag = great_power
-		}
-		var:global.all_countries_gdp^6 = {
-			add_ideas = GDP_7
-			set_country_flag = great_power
-		}
-		var:global.all_countries_gdp^7 = {
-			add_ideas = GDP_8
-			set_country_flag = great_power
-		}
-
-		var:global.all_countries_gdp^8 = {
-			set_country_flag = secondary_power
-		}
-		var:global.all_countries_gdp^9 = {
-			set_country_flag = secondary_power
-		}
-		var:global.all_countries_gdp^10 = {
-			set_country_flag = secondary_power
-		}
-		var:global.all_countries_gdp^11 = {
-			set_country_flag = secondary_power
-		}
-		var:global.all_countries_gdp^12 = {
-			set_country_flag = secondary_power
-		}
-		var:global.all_countries_gdp^13 = {
-			set_country_flag = secondary_power
-		}
-		var:global.all_countries_gdp^14 = {
-			set_country_flag = secondary_power
-		}
-		var:global.all_countries_gdp^15 = {
-			set_country_flag = secondary_power
-		}
-}
-
-money_sort = {
-	clear_array = global.sorted_currency_array
-	for_each_loop = {
-		array = global.currency_exchange_rate
-		index = i
-		value = v
-		break = b
-	
-		for_each_loop = {
-			array = global.sorted_currency_array
-			index = ii
-			value = vv
-			break = bb
-	
-			if = {
-				limit = {
-					check_variable = { global.currency_exchange_rate^vv < v }
-				}
-				add_to_array = { 
-					array = global.sorted_currency_array 
-					value = i
-					index = ii
-				}
-				set_temp_variable = { bb = 1 }
-			}
-		}
-		if = {
-			limit = {
-				check_variable = { bb = 0 }
-			}
-			add_to_array = { global.sorted_currency_array = i }
-		}
-	}
-	remove_from_array = { array = global.sorted_currency_array value = 0 }
-}
+#money_sort = {
+#	clear_array = global.sorted_currency_array
+#	for_each_loop = {
+#		array = global.currency_exchange_rate
+#		index = i
+#		value = v
+#		break = b
+#	
+#		for_each_loop = {
+#			array = global.sorted_currency_array
+#			index = ii
+#			value = vv
+#			break = bb
+#	
+#			if = {
+#				limit = {
+#					check_variable = { global.currency_exchange_rate^vv < v }
+#				}
+#				add_to_array = { 
+#					array = global.sorted_currency_array 
+#					value = i
+#					index = ii
+#				}
+#				set_temp_variable = { bb = 1 }
+#			}
+#		}
+#		if = {
+#			limit = {
+#				check_variable = { bb = 0 }
+#			}
+#			add_to_array = { global.sorted_currency_array = i }
+#		}
+#	}
+#	remove_from_array = { array = global.sorted_currency_array value = 0 }
+#}

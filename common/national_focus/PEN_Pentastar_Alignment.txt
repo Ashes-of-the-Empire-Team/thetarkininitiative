@@ -14,11 +14,11 @@ focus_tree = {
 
 	#Pentastar Talks
 	focus = {
-		id = PEN_prepare_entralla_hq
+		id = PEN_aboard_the_reaper
 		icon = GFX_goal_unknown
-		x = 7
+		x = 8
 		y = 1
-		cost = 5
+		cost = 1.5
 
 		ai_will_do = {factor=1}
 			
@@ -31,21 +31,108 @@ focus_tree = {
 				}
 			}
 		}
-		offset = {
-			x = -3
-			y = 0
-			trigger = {
-				PEN = {
-					OR = {
-						has_completed_focus = PEN_kaines_kingdom
-						has_completed_focus = PEN_the_fools_gamble
-					}
-				}
-			}
-		}
 
 		bypass = {
 
+		}
+		available_if_capitulated = yes
+		completion_reward = {
+			country_event = PEN_beginning.0
+		}
+	}
+
+	focus = {
+		id = PEN_inspect_entralla
+		icon = GFX_goal_unknown
+		x = -3
+		y = 1
+		cost = 1.5
+		relative_position_id = PEN_aboard_the_reaper
+
+		ai_will_do = {factor=1}
+
+		bypass = {
+
+		}
+		prerequisite = {
+			focus = PEN_aboard_the_reaper
+		}
+		available_if_capitulated = yes
+		completion_reward = {
+			country_event = PEN_beginning.1
+		}
+	}
+
+	focus = {
+		id = PEN_recall_scourge_squadron
+		icon = unknown
+		x = -1
+		y = 1
+		relative_position_id = PEN_aboard_the_reaper
+		cost = 1.5
+
+		ai_will_do = {factor = 1}
+			
+		bypass = {
+
+		}
+		prerequisite = {
+			focus = PEN_aboard_the_reaper
+		}
+		available_if_capitulated = yes
+		completion_reward = {
+			country_event = PEN_beginning.2
+		}
+	}
+
+	focus = {
+		id = PEN_accomodate_personnel
+		icon = GFX_goal_unknown
+		x = -1
+		y = 1
+		relative_position_id = PEN_recall_scourge_squadron
+		cost = 5
+
+		ai_will_do = {factor = 1}
+			
+		bypass = {
+
+		}
+		prerequisite = {
+			focus = PEN_inspect_entralla
+		}
+		prerequisite = {
+			focus = PEN_recall_scourge_squadron
+		}
+		available_if_capitulated = yes
+		completion_reward = {
+			186 = {
+				add_manpower = 15000
+			}
+			203 = {
+				add_manpower = 10000
+			}
+			176 = {
+				add_manpower = 10000
+			}
+		}
+	}
+
+	focus = {
+		id = PEN_prepare_nexus_hq
+		icon = GFX_goal_unknown
+		x = -1
+		y = 1
+		cost = 5
+		relative_position_id = PEN_inspect_entralla
+
+		ai_will_do = {factor=1}
+
+		bypass = {
+
+		}
+		prerequisite = {
+			focus = PEN_inspect_entralla
 		}
 		available_if_capitulated = yes
 		completion_reward = {
@@ -66,59 +153,84 @@ focus_tree = {
 	}
 
 	focus = {
-		id = PEN_recall_scourge_squadron
-		icon = unknown
-		x = 2
-		y = 0
-		relative_position_id = PEN_prepare_entralla_hq
-		cost = 5
-
-		ai_will_do = {factor = 1}
-			
-		bypass = {
-
-		}
-		available_if_capitulated = yes
-		completion_reward = {
-		}
-	}
-
-	focus = {
-		id = PEN_accomodate_personnel
+		id = PEN_shedding_skin
 		icon = GFX_goal_unknown
-		x = -1
+		x = 1
 		y = 1
-		relative_position_id = PEN_prepare_entralla_hq
 		cost = 5
+		relative_position_id = PEN_accomodate_personnel
 
-		ai_will_do = {factor = 1}
-			
+		ai_will_do = {factor=1}
+
 		bypass = {
 
 		}
 		prerequisite = {
-			focus = PEN_prepare_entralla_hq
+			focus = PEN_prepare_nexus_hq
+		}
+		prerequisite = {
+			focus = PEN_accomodate_personnel
 		}
 		available_if_capitulated = yes
 		completion_reward = {
-			186 = {
-				add_manpower = 15000
+			custom_effect_tooltip = PEN_shedding_skin_loc
+			remove_trait = {
+				character = PEN_ardus_kaine
+				ideology = imperial
+				trait = grand_moff
 			}
-			203 = {
-				add_manpower = 10000
+			country_event = PEN_beginning.4
+			hidden_effect = {
+				if = {
+					limit = {
+						has_idea = PEN_oversector_in_disarray
+					}
+					swap_ideas = {
+						add_idea = PEN_oversector_in_disarray3
+						remove_idea = PEN_oversector_in_disarray
+					}
+				}
+				if = {
+					limit = {
+						has_idea = PEN_oversector_in_disarray2
+					}
+					swap_ideas = {
+						add_idea = PEN_oversector_in_disarray4
+						remove_idea = PEN_oversector_in_disarray2
+					}
+				}
 			}
-			176 = {
-				add_manpower = 10000
-			}
+		}
+	}
+
+	focus = {
+		id = PEN_check_the_balance
+		icon = unknown
+		x = 2
+		y = 1
+		relative_position_id = PEN_aboard_the_reaper
+		cost = 1.5
+
+		ai_will_do = {factor = 1}
+		
+		bypass = {
+
+		}
+		prerequisite = {
+			focus = PEN_aboard_the_reaper
+		}
+		available_if_capitulated = yes
+		completion_reward = {
+			country_event = PEN_beginning.3
 		}
 	}
 
 	focus = {
 		id = PEN_withdraw_personal_accounts
 		icon = unknown
-		x = 1
+		x = 0
 		y = 1
-		relative_position_id = PEN_recall_scourge_squadron
+		relative_position_id = PEN_check_the_balance
 		cost = 5
 
 		ai_will_do = {factor = 1}
@@ -127,21 +239,68 @@ focus_tree = {
 
 		}
 		prerequisite = {
-			focus = PEN_recall_scourge_squadron
+			focus = PEN_check_the_balance
 		}
 		available_if_capitulated = yes
 		completion_reward = {
-			custom_effect_tooltip = custom_add_50b
-			add_to_variable = { currency_amount^primary_currency = 25 }
+			add_stability = -0.05
+			custom_effect_tooltip = custom_add_29_64b
+			add_to_variable = { currency_amount^primary_currency = 29.64 }
+		}
+	}
+
+	focus = {
+		id = PEN_refiguring_our_economy
+		icon = unknown
+		x = -1
+		y = 1
+		relative_position_id = PEN_withdraw_personal_accounts
+		cost = 5
+
+		ai_will_do = {factor = 1}
+		
+		bypass = {
+
+		}
+		prerequisite = {
+			focus = PEN_withdraw_personal_accounts
+		}
+		available_if_capitulated = yes
+		completion_reward = {
+			custom_effect_tooltip = PEN_refiguring_economy
+			country_event = PEN_beginning.5
+			hidden_effect = {
+				custom_effect_tooltip = custom_lose_30b
+				subtract_from_variable = { currency_amount^primary_currency = 30 }
+				add_ideas = PEN_vfcz
+				if = {
+					limit = {
+						has_idea = PEN_oversector_in_disarray
+					}
+					swap_ideas = {
+						add_idea = PEN_oversector_in_disarray2
+						remove_idea = PEN_oversector_in_disarray
+					}
+				}
+				if = {
+					limit = {
+						has_idea = PEN_oversector_in_disarray3
+					}
+					swap_ideas = {
+						add_idea = PEN_oversector_in_disarray4
+						remove_idea = PEN_oversector_in_disarray3
+					}
+				}
+			}
 		}
 	}
 	
 	focus = {
 		id = PEN_invite_local_leaders
 		icon = unknown
-		x = 1
-		y = 1
-		relative_position_id = PEN_prepare_entralla_hq
+		x = 0
+		y = 2
+		relative_position_id = PEN_aboard_the_reaper
 		cost = 5
 
 		ai_will_do = {factor = 1}
@@ -150,24 +309,21 @@ focus_tree = {
 
 		}
 		prerequisite = {
-			focus = PEN_prepare_entralla_hq
-		}
-		prerequisite = {
-			focus = PEN_recall_scourge_squadron
+			focus = PEN_aboard_the_reaper
 		}
 		available_if_capitulated = yes
 		completion_reward = {
-			add_political_power = 50
 			custom_effect_tooltip = PEN_invite_local_leaders_loc
+			add_political_power = 20
 		}
 	}
 		
 	focus = {
 		id = PEN_pentastar_talks
 		icon = unknown
-		x = 1
+		x = 0
 		y = 2
-		relative_position_id = PEN_prepare_entralla_hq
+		relative_position_id = PEN_invite_local_leaders
 		cost = 10
 		ai_will_do = {factor = 1}
 		bypass = {
@@ -176,10 +332,10 @@ focus_tree = {
 			focus = PEN_invite_local_leaders
 		}
 		prerequisite = {
-			focus = PEN_accomodate_personnel
+			focus = PEN_shedding_skin
 		}
 		prerequisite = {
-			focus = PEN_withdraw_personal_accounts
+			focus = PEN_refiguring_our_economy
 		}
 		available_if_capitulated = yes
 
@@ -245,9 +401,9 @@ focus_tree = {
 	focus = {
 		id = PEN_pentastar_alignment_treaty
 		icon = unknown
-		x = 1
-		y = 3
-		relative_position_id = PEN_prepare_entralla_hq
+		x = 0
+		y = 1
+		relative_position_id = PEN_pentastar_talks
 		cost = 5
 		ai_will_do = {factor = 1}
 		bypass = {
@@ -258,33 +414,36 @@ focus_tree = {
 		available_if_capitulated = yes
 
 		completion_reward = {
-			set_cosmetic_tag = PEN_formed
+
+			custom_effect_tooltip = PEN_pentastar_subjects_loc
 			country_event = PEN_formation.1
+			mark_focus_tree_layout_dirty = yes
+			set_cosmetic_tag = PEN_formed
+			add_ideas = PEN_government_reorganisation1
+			remove_ideas = PEN_oversector_in_disarray4
+			custom_effect_tooltip = PEN_unlock
+
 			hidden_effect = {
 				country_event = { id = PEN_piracy.1 days = 35 }
 				news_event = PEN_formation.0
 			}
-			mark_focus_tree_layout_dirty = yes
-			PEN = {
-				puppet = ORD
+			hidden_effect = {
+				PEN = {
+					puppet = ORD
+				}
+				set_autonomy = {
+					target = BEX
+					autonomy_state = autonomy_pen_corporate_puppet
+					end_wars = no
+					end_civil_wars = no
+				}
+				set_autonomy = {
+					target = JAE
+					autonomy_state = autonomy_pen_corporate_puppet
+					end_wars = no
+					end_civil_wars = no
+				}
 			}
-			set_autonomy = {
-				target = BEX
-				autonomy_state = autonomy_pen_corporate_puppet
-				end_wars = no
-				end_civil_wars = no
-			}
-			set_autonomy = {
-				target = JAE
-				autonomy_state = autonomy_pen_corporate_puppet
-				end_wars = no
-				end_civil_wars = no
-			}
-			swap_ideas = {
-				add_idea = PEN_government_reorganisation1
-				remove_idea = PEN_uncertain_future
-			}
-			custom_effect_tooltip = PEN_unlock
 			hidden_effect = {
 				BEX = {
 					set_politics = {
@@ -326,8 +485,6 @@ focus_tree = {
 					}
 				}
 				set_country_flag = PEN_internal_factions_activated_flag
-				set_country_flag = PEN_ardus_ruling_faction_flag
-				PEN_set_internal_factions = yes
 				add_dynamic_modifier = {
 					modifier = PEN_internal_factions_ardus_dyn
 				}
@@ -343,394 +500,54 @@ focus_tree = {
 				add_dynamic_modifier = {
 					modifier = PEN_internal_factions_gregor_dyn
 				}
+				PEN_setup_internal_factions = yes
+				PEN_update_ardus_effects = yes
+				PEN_update_galentro_effects = yes
+				PEN_update_automata_effects = yes
+				PEN_update_governors_effects = yes
+				PEN_update_vfcz_effects = yes
 			}
 		}
 	}
 
 	#Industrial Branch (Corporations, Velcar)
 	focus = {
-		id = PEN_amber_sun_resource_tax
-		icon = unknown
-		x = 0
-		y = 1
-		relative_position_id = PEN_bextar_gas
-		cost = 5
-
-		ai_will_do = {factor = 1}
-			
-		available = {
-
-		}
-		bypass = {
-
-		}
-		prerequisite = {
-			focus = PEN_bextar_gas
-		}
-		available_if_capitulated = yes
-		completion_reward = {
-				
-		}
-	}
-
-	focus = {
-		id = PEN_bextar_gas
-		icon = unknown
-		x = -1
-		y = 1
-		relative_position_id = PEN_invest_in_dynamic_automata
-		cost = 5
-
-		ai_will_do = {factor = 1}
-			
-		available = {
-
-		}
-		bypass = {
-
-		}
-		prerequisite = {
-			focus = PEN_invest_in_dynamic_automata
-		}
-		available_if_capitulated = yes
-		completion_reward = {
-				
-		}
-	}
-
-	focus = {
-		id = PEN_invest_in_dynamic_automata
-		icon = unknown
-		x = 4
-		y = 6
-		cost = 5
-
-		ai_will_do = {factor = 1}
-			
-		available = {
-
-		}
-		bypass = {
-
-		}
-		prerequisite = {
-			focus = PEN_facilitate_corporate_headquarters
-		}
-		available_if_capitulated = yes
-		completion_reward = {
-				
-		}
-	}
-
-	focus = {
-		id = PEN_increase_bextar_resource_extraction
-		icon = unknown
-		x = 5
-		y = 7
-		cost = 5
-
-		ai_will_do = {factor = 1}
-			
-		available = {
-
-		}
-		bypass = {
-
-		}
-		prerequisite = {
-			focus = PEN_invest_in_dynamic_automata
-		}
-		available_if_capitulated = yes
-		completion_reward = {
-				
-		}
-	}
-
-	focus = {
-		id = PEN_facilitate_corporate_headquarters
-		icon = unknown
-		x = 6
-		y = 5
-		cost = 5
-
-		ai_will_do = {factor = 1}
-			
-		available = {
-
-		}
-		bypass = {
-
-		}
-		prerequisite = {
-			focus = PEN_bounty_of_the_outer_sector
-		}
-		available_if_capitulated = yes
-		completion_reward = {
-				
-		}
-	}
-
-	focus = {
-		id = PEN_invest_in_galentro_heavyworks
-		icon = unknown
-		x = 8
-		y = 6
-		cost = 5
-
-		ai_will_do = {factor = 1}
-			
-		available = {
-
-		}
-		bypass = {
-
-		}
-		prerequisite = {
-			focus = PEN_facilitate_corporate_headquarters
-		}
-		available_if_capitulated = yes
-		completion_reward = {
-				
-		}
-	}
-
-	focus = {
-		id = PEN_expand_the_bescane_factory_lines
-		icon = unknown
-		x = 7
-		y = 7
-		cost = 5
-
-		ai_will_do = {factor = 1}
-			
-		available = {
-
-		}
-			bypass = {
-
-		}
-		prerequisite = {
-			focus = PEN_invest_in_galentro_heavyworks
-		}
-		available_if_capitulated = yes
-		completion_reward = {
-				
-		}
-	}
-		
-	focus = {
-		id = PEN_mandate_ship_production
-		icon = unknown
-		x = 0
-		y = 1
-		relative_position_id = PEN_jaemus_dockyards
-		cost = 5
-
-		ai_will_do = {factor = 1}
-			
-		available = {
-
-		}
-		bypass = {
-
-		}
-		prerequisite = {
-			focus = PEN_jaemus_dockyards
-		}
-		available_if_capitulated = yes
-		completion_reward = {
-				
-		}
-	}
-
-	focus = {
-		id = PEN_jaemus_dockyards
-		icon = unknown
-		x = 1
-		y = 1
-		relative_position_id = PEN_invest_in_galentro_heavyworks
-		cost = 5
-
-		ai_will_do = {factor = 1}
-			
-		available = {
-
-		}
-		bypass = {
-
-		}
-		prerequisite = {
-			focus = PEN_invest_in_galentro_heavyworks
-		}
-		available_if_capitulated = yes
-		completion_reward = {
-				
-		}
-	}
-
-	focus = {
-		id = PEN_integrated_corporate_structure
-		icon = unknown
-		x = 1
-		y = 1
-		relative_position_id = PEN_increase_bextar_resource_extraction
-		cost = 5
-
-		ai_will_do = {factor = 1}
-			
-		available = {
-
-		}
-		bypass = {
-
-		}
-		prerequisite = {
-			focus = PEN_increase_bextar_resource_extraction
-		}
-		prerequisite = {	
-			focus = PEN_expand_the_bescane_factory_lines
-		}
-		available_if_capitulated = yes
-		completion_reward = {
-				
-		}
-	}
-
-	focus = {
-		id = PEN_entralla_infrastructure
-		icon = unknown
-		x = 13
-		y = 7
-		cost = 5
-
-		ai_will_do = {factor = 1}
-			
-		available = {
-
-		}
-		bypass = {
-
-		}
-		prerequisite = {
-			focus = PEN_increase_advanced_manufacturing_capabilities
-		}
-		available_if_capitulated = yes
-		completion_reward = {
-				
-		}
-	}
-
-	focus = {
-		id = PEN_entralla_public_transport
-		icon = unknown
-		x = 0
-		y = 1
-		relative_position_id = PEN_entralla_infrastructure
-		cost = 5
-
-		ai_will_do = {factor = 1}
-			
-		available = {
-
-		}
-		bypass = {
-
-		}
-		prerequisite = {
-			focus = PEN_entralla_infrastructure
-		}
-		available_if_capitulated = yes
-		completion_reward = {
-				
-		}
-	}
-	
-	focus = {
-		id = PEN_increase_advanced_manufacturing_capabilities
-		icon = unknown
-		x = 12
-		y = 6
-		cost = 5
-
-		ai_will_do = {factor = 1}
-			
-		available = {
-
-		}
-		bypass = {
-
-		}
-		prerequisite = {
-			focus = PEN_merchant_insight
-		}
-		available_if_capitulated = yes
-		completion_reward = {
-				
-		}
-	}
-
-	focus = {
-		id = PEN_entralla_armories
-		icon = unknown
-		x = 11
-		y = 7
-		cost = 5
-
-		ai_will_do = {factor = 1}
-			
-		available = {
-
-		}
-		bypass = {
-
-		}
-		prerequisite = {
-			focus = PEN_increase_advanced_manufacturing_capabilities
-		}
-		available_if_capitulated = yes
-		completion_reward = {
-				
-		}
-	}
-
-	focus = {
-		id = PEN_install_rhydonium_refineries
-		icon = unknown
-		x = 0
-		y = 4
-		relative_position_id = PEN_increase_advanced_manufacturing_capabilities
-		cost = 5
-
-		ai_will_do = {factor = 1}
-			
-		available = {
-
-		}
-		bypass = {
-
-		}
-		prerequisite = {
-			focus = PEN_increase_advanced_manufacturing_capabilities
-		}
-		prerequisite = {
-			focus = PEN_capza_resort
-		}
-		available_if_capitulated = yes
-		completion_reward = {
-				
-		}
-	}
-
-	focus = {
 		id = PEN_bounty_of_the_outer_sector
 		icon = unknown
-		x = 15
-		y = 4
+		x = -13
+		y = 1
+		relative_position_id = PEN_pentastar_alignment_treaty
 		cost = 10
 		
 		allow_branch = {
 			PEN = {
 				has_completed_focus = PEN_pentastar_alignment_treaty
+			}
+		}
+		offset = {
+			x = -3
+			y = 0
+			trigger = {
+				PEN = {
+					OR = {
+						has_completed_focus = PEN_kaines_kingdom
+						has_completed_focus = PEN_the_fools_gamble
+					}
+					has_completed_focus = PEN_reform_velcar_privileges
+				}
+			}
+		}
+		offset = {
+			x = -1
+			y = 0
+			trigger = {
+				PEN = {
+					OR = {
+						has_completed_focus = PEN_kaines_kingdom
+						has_completed_focus = PEN_the_fools_gamble
+					}
+					has_completed_focus = PEN_reinforce_velcar_privileges
+				}
 			}
 		}
 
@@ -755,8 +572,9 @@ focus_tree = {
 	focus = {
 		id = PEN_merchant_insight
 		icon = unknown
-		x = 15
-		y = 5
+		x = 3
+		y = 1
+		relative_position_id = PEN_bounty_of_the_outer_sector
 		cost = 5
 
 		ai_will_do = {factor = 1}
@@ -772,15 +590,51 @@ focus_tree = {
 		}
 		available_if_capitulated = yes
 		completion_reward = {
-				
+			add_tech_bonus = {
+				name = PEN_merchant_insight_bonus
+				bonus = 1.0
+				uses = 1
+				category = construction_tech
+			}	
+		}
+	}
+
+	focus = {
+		id = PEN_infrastructure_program
+		icon = unknown
+		x = 0
+		y = 1
+		relative_position_id = PEN_merchant_insight
+		cost = 5
+
+		ai_will_do = {factor = 1}
+			
+		available = {
+
+		}
+		bypass = {
+
+		}
+		prerequisite = {
+			focus = PEN_bounty_of_the_outer_sector
+		}
+		available_if_capitulated = yes
+		completion_reward = {
+			add_tech_bonus = {
+				name = PEN_merchant_insight_bonus
+				bonus = 1.0
+				uses = 1
+				category = construction_tech
+			}	
 		}
 	}
 
 	focus = {
 		id = PEN_vfcz_techniques
 		icon = unknown
-		x = 18
-		y = 6
+		x = 2
+		y = 1
+		relative_position_id = PEN_merchant_insight
 		cost = 5
 
 		ai_will_do = {factor = 1}
@@ -800,12 +654,936 @@ focus_tree = {
 		}
 	}
 
+	focus = {
+		id = PEN_facilitate_corporate_headquarters
+		icon = unknown
+		x = -5
+		y = 1
+		relative_position_id = PEN_bounty_of_the_outer_sector
+		cost = 5
+
+		ai_will_do = {factor = 1}
+			
+		available = {
+
+		}
+		bypass = {
+
+		}
+		prerequisite = {
+			focus = PEN_bounty_of_the_outer_sector
+		}
+		available_if_capitulated = yes
+		completion_reward = {
+			186 = {
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+				add_extra_state_shared_building_slots = 1
+			}
+			custom_effect_tooltip = custom_add_25b
+			add_to_variable = { currency_amount^primary_currency = 25 }
+		}
+	}
+
+	focus = {
+		id = PEN_invest_in_smaller_companies
+		icon = unknown
+		x = 0
+		y = 1
+		relative_position_id = PEN_facilitate_corporate_headquarters
+		cost = 5
+
+		ai_will_do = {factor = 1}
+			
+		available = {
+
+		}
+		bypass = {
+
+		}
+		prerequisite = {
+			focus = PEN_facilitate_corporate_headquarters
+		}
+		available_if_capitulated = yes
+		completion_reward = {
+			
+		}
+	}
+
+	focus = {
+		id = PEN_invest_in_smaller_companiesss
+		icon = unknown
+		x = -1
+		y = 1
+		relative_position_id = PEN_invest_in_smaller_companies
+		cost = 5
+
+		ai_will_do = {factor = 1}
+			
+		available = {
+
+		}
+		bypass = {
+
+		}
+		prerequisite = {
+			focus = PEN_invest_in_smaller_companies
+		}
+		available_if_capitulated = yes
+		completion_reward = {
+			
+		}
+	}
+
+
+
+	focus = {
+		id = PEN_invest_in_dynamic_automata
+		icon = unknown
+		x = 2
+		y = 1
+		relative_position_id = PEN_facilitate_corporate_headquarters
+		cost = 5
+
+		ai_will_do = {factor = 1}
+			
+		available = {
+
+		}
+		bypass = {
+
+		}
+		prerequisite = {
+			focus = PEN_facilitate_corporate_headquarters
+		}
+		available_if_capitulated = yes
+		completion_reward = {
+			custom_effect_tooltip = custom_lose_25b
+			subtract_from_variable = { currency_amount^primary_currency = 25 }
+		}
+	}
+
+	focus = {
+		id = PEN_increase_bextar_resource_extraction
+		icon = unknown
+		x = 1
+		y = 1
+		relative_position_id = PEN_invest_in_dynamic_automata
+		cost = 5
+
+		ai_will_do = {factor = 1}
+			
+		available = {
+
+		}
+		bypass = {
+
+		}
+		prerequisite = {
+			focus = PEN_invest_in_dynamic_automata
+		}
+		available_if_capitulated = yes
+		completion_reward = {
+			8 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			131 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			132 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			136 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			138 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			140 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			147 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			148 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = PEN_invest_in_galentro_heavyworks
+		icon = unknown
+		x = -2
+		y = 1
+		relative_position_id = PEN_facilitate_corporate_headquarters
+		cost = 5
+
+		ai_will_do = {factor = 1}
+			
+		available = {
+
+		}
+		bypass = {
+
+		}
+		prerequisite = {
+			focus = PEN_facilitate_corporate_headquarters
+		}
+		available_if_capitulated = yes
+		completion_reward = {
+			custom_effect_tooltip = custom_lose_25b
+			subtract_from_variable = { currency_amount^primary_currency = 25 }
+		}
+	}
+
+	focus = {
+		id = PEN_expand_the_bescane_factory_lines
+		icon = unknown
+		x = -1
+		y = 1
+		relative_position_id = PEN_invest_in_galentro_heavyworks
+		cost = 5
+
+		ai_will_do = {factor = 1}
+			
+		available = {
+
+		}
+		bypass = {
+
+		}
+		prerequisite = {
+			focus = PEN_invest_in_galentro_heavyworks
+		}
+		available_if_capitulated = yes
+		completion_reward = {
+				
+		}
+	}
+
+	focus = {
+		id = PEN_corporate_schools
+		icon = unknown
+		x = 1
+		y = 1
+		relative_position_id = PEN_invest_in_smaller_companies
+		cost = 5
+
+		ai_will_do = {factor = 1}
+			
+		available = {
+
+		}
+		bypass = {
+
+		}
+		prerequisite = {
+			focus = PEN_invest_in_smaller_companies
+		}
+		available_if_capitulated = yes
+		completion_reward = {
+			add_research_slot = 1
+		}
+	}
+
+	focus = {
+		id = PEN_favor_neither
+		icon = unknown
+		x = -1
+		y = 1
+		relative_position_id = PEN_corporate_schools
+		cost = 5
+
+		ai_will_do = {factor = 1}
+			
+		available = {
+
+		}
+		bypass = {
+
+		}
+		prerequisite = {
+			focus = PEN_corporate_schools
+		}
+		prerequisite = {
+			focus = PEN_invest_in_smaller_companiesss
+		}
+		mutually_exclusive = {
+			focus = PEN_favor_dynamic
+			focus = PEN_favor_galentro
+		}
+		available_if_capitulated = yes
+		completion_reward = {
+			mark_focus_tree_layout_dirty = yes
+		}
+	}
+
+	focus = {
+		id = PEN_set_differences_aside
+		icon = GFX_goal_unknown
+		x = 0
+		y = 1
+		relative_position_id = PEN_favor_neither
+		cost = 5
+
+		allow_branch = {
+			PEN = {
+				has_completed_focus = PEN_pentastar_alignment_treaty
+				has_completed_focus = PEN_favor_neither
+			}
+		}
+
+		ai_will_do = {factor = 1}
+			
+		available = {
+
+		}
+		bypass = {
+
+		}
+		prerequisite = {
+			focus = PEN_favor_neither
+		}
+		available_if_capitulated = yes
+		completion_reward = {
+				
+		}
+	}
+
+	focus = {
+		id = PEN_solidify_corporation_tax
+		icon = unknown
+		x = -2
+		y = 1
+		relative_position_id = PEN_set_differences_aside
+		cost = 5
+
+		ai_will_do = {factor = 1}
+			
+		available = {
+
+		}
+		bypass = {
+
+		}
+		prerequisite = {
+			focus = PEN_set_differences_aside
+		}
+		available_if_capitulated = yes
+		completion_reward = {
+				
+		}
+	}
+
+	focus = {
+		id = PEN_core_business_exemptions
+		icon = unknown
+		x = -1
+		y = 1
+		relative_position_id = PEN_solidify_corporation_tax
+		cost = 5
+
+		ai_will_do = {factor = 1}
+			
+		available = {
+
+		}
+		bypass = {
+
+		}
+		prerequisite = {
+			focus = PEN_solidify_corporation_tax
+		}
+		mutually_exclusive = {
+			focus = PEN_tax_major_businesses
+		}
+		available_if_capitulated = yes
+		completion_reward = {
+				
+		}
+	}
+
+	focus = {
+		id = PEN_tax_major_businesses
+		icon = unknown
+		x = 1
+		y = 1
+		relative_position_id = PEN_solidify_corporation_tax
+		cost = 5
+
+		ai_will_do = {factor = 1}
+			
+		available = {
+
+		}
+		bypass = {
+
+		}
+		prerequisite = {
+			focus = PEN_solidify_corporation_tax
+		}
+		mutually_exclusive = {
+			focus = PEN_core_business_exemptions
+		}
+		available_if_capitulated = yes
+		completion_reward = {
+				
+		}
+	}
+
+	focus = {
+		id = PEN_limit_foreign_business_burdens
+		icon = unknown
+		x = 0
+		y = 1
+		relative_position_id = PEN_core_business_exemptions
+		cost = 5
+
+		ai_will_do = {factor = 1}
+			
+		available = {
+
+		}
+		bypass = {
+
+		}
+		prerequisite = {
+			focus = PEN_core_business_exemptions
+			focus = PEN_tax_major_businesses
+		}
+		mutually_exclusive = {
+			focus = PEN_tax_foreign_businesses
+		}
+		available_if_capitulated = yes
+		completion_reward = {
+				
+		}
+	}
+
+	focus = {
+		id = PEN_tax_foreign_businesses
+		icon = unknown
+		x = 0
+		y = 1
+		relative_position_id = PEN_tax_major_businesses
+		cost = 5
+
+		ai_will_do = {factor = 1}
+			
+		available = {
+
+		}
+		bypass = {
+
+		}
+		prerequisite = {
+			focus = PEN_core_business_exemptions
+			focus = PEN_tax_major_businesses
+		}
+		mutually_exclusive = {
+			focus = PEN_limit_foreign_business_burdens
+		}
+		available_if_capitulated = yes
+		completion_reward = {
+				
+		}
+	}
+
+	focus = {
+		id = PEN_company_advisors
+		icon = unknown
+		x = 1
+		y = 1
+		relative_position_id = PEN_set_differences_aside
+		cost = 5
+
+		ai_will_do = {factor = 1}
+			
+		available = {
+
+		}
+		bypass = {
+
+		}
+		prerequisite = {
+			focus = PEN_set_differences_aside
+		}
+		available_if_capitulated = yes
+		completion_reward = {
+				
+		}
+	}
+
+	focus = {
+		id = PEN_economic_expansion_plan
+		icon = unknown
+		x = 1
+		y = 1
+		relative_position_id = PEN_company_advisors
+		cost = 5
+
+		ai_will_do = {factor = 1}
+			
+		available = {
+
+		}
+		bypass = {
+
+		}
+		prerequisite = {
+			focus = PEN_company_advisors
+		}
+		available_if_capitulated = yes
+		completion_reward = {
+				
+		}
+	}
+
+	focus = {
+		id = PEN_corpocracy_neither
+		icon = unknown
+		x = 1
+		y = 1
+		relative_position_id = PEN_tax_foreign_businesses
+		cost = 5
+
+		ai_will_do = {factor = 1}
+			
+		available = {
+
+		}
+		bypass = {
+
+		}
+		prerequisite = {
+			focus = PEN_tax_foreign_businesses
+			focus = PEN_limit_foreign_business_burdens
+		}
+		prerequisite = {
+			focus = PEN_economic_expansion_plan
+		}
+		available_if_capitulated = yes
+		completion_reward = {
+				
+		}
+	}
+
+	focus = {
+		id = PEN_increase_advanced_manufacturing_capabilities
+		icon = unknown
+		x = -2
+		y = 1
+		relative_position_id = PEN_merchant_insight
+		cost = 5
+
+		ai_will_do = {factor = 1}
+			
+		available = {
+
+		}
+		bypass = {
+
+		}
+		prerequisite = {
+			focus = PEN_merchant_insight
+		}
+		available_if_capitulated = yes
+		completion_reward = {
+			random_owned_controlled_state = {
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+				add_extra_state_shared_building_slots = 2
+			}
+		}
+	}
+
+	focus = {
+		id = PEN_entralla_armories
+		icon = unknown
+		x = -1
+		y = 1
+		relative_position_id = PEN_increase_advanced_manufacturing_capabilities
+		cost = 5
+
+		ai_will_do = {factor = 1}
+			
+		available = {
+
+		}
+		bypass = {
+
+		}
+		prerequisite = {
+			focus = PEN_increase_advanced_manufacturing_capabilities
+		}
+		available_if_capitulated = yes
+		completion_reward = {
+			random_owned_controlled_state = {
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+				add_extra_state_shared_building_slots = 1
+			}
+			random_owned_controlled_state = {
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+				add_extra_state_shared_building_slots = 1
+			}
+		}
+	}
+
+	focus = {
+		id = PEN_sign_military_contracts
+		icon = unknown
+		x = 0
+		y = 2
+		relative_position_id = PEN_entralla_armories
+		cost = 5
+
+		ai_will_do = {factor = 1}
+			
+		available = {
+
+		}
+		bypass = {
+
+		}
+		prerequisite = {
+			focus = PEN_entralla_armories
+		}
+		prerequisite = {
+			focus = PEN_favor_dynamic
+			focus = PEN_favor_galentro
+			focus = PEN_favor_neither
+		}
+		available_if_capitulated = yes
+		completion_reward = {
+			
+		}
+	}
+
+	focus = {
+		id = PEN_minor_arms_manufacturers
+		icon = unknown
+		x = -1
+		y = 1
+		relative_position_id = PEN_sign_military_contracts
+		cost = 5
+
+		ai_will_do = {factor = 1}
+			
+		available = {
+
+		}
+		bypass = {
+
+		}
+		prerequisite = {
+			focus = PEN_set_differences_aside
+		}
+		prerequisite = {
+			focus = PEN_sign_military_contracts
+		}
+		available_if_capitulated = yes
+		completion_reward = {
+				
+		}
+	}
+
+	focus = {
+		id = PEN_decentralised_production
+		icon = unknown
+		x = 0
+		y = 2
+		relative_position_id = PEN_minor_arms_manufacturers
+		cost = 5
+
+		ai_will_do = {factor = 1}
+			
+		available = {
+
+		}
+		bypass = {
+
+		}
+		prerequisite = {
+			focus = PEN_minor_arms_manufacturers
+		}
+		prerequisite = {
+			focus = PEN_economic_expansion_plan
+		}
+		available_if_capitulated = yes
+		completion_reward = {
+				
+		}
+	}
+
+	focus = {
+		id = PEN_favor_dynamic
+		icon = unknown
+		x = -1
+		y = 1
+		relative_position_id = PEN_increase_bextar_resource_extraction
+		cost = 5
+
+		ai_will_do = {factor = 1}
+			
+		available = {
+
+		}
+		bypass = {
+
+		}
+		prerequisite = {
+			focus = PEN_increase_bextar_resource_extraction
+		}
+		mutually_exclusive = {
+			focus = PEN_favor_galentro
+			focus = PEN_favor_neither
+		}
+		available_if_capitulated = yes
+		completion_reward = {
+				
+		}
+	}
+
+	focus = {
+		id = PEN_favor_galentro
+		icon = unknown
+		x = 1
+		y = 1
+		relative_position_id = PEN_expand_the_bescane_factory_lines
+		cost = 5
+
+		ai_will_do = {factor = 1}
+			
+		available = {
+
+		}
+		bypass = {
+
+		}
+		prerequisite = {
+			focus = PEN_expand_the_bescane_factory_lines
+		}
+		mutually_exclusive = {
+			focus = PEN_favor_dynamic
+			focus = PEN_favor_neither
+		}
+		available_if_capitulated = yes
+		completion_reward = {
+				
+		}
+	}
+
+	focus = {
+		id = PEN_public_transportation
+		icon = unknown
+		x = 1
+		y = 1
+		relative_position_id = PEN_increase_advanced_manufacturing_capabilities
+		cost = 5
+
+		ai_will_do = {factor = 1}
+			
+		available = {
+
+		}
+		bypass = {
+
+		}
+		prerequisite = {
+			focus = PEN_increase_advanced_manufacturing_capabilities
+			focus = PEN_vfcz_techniques
+		}
+		prerequisite = {
+			focus = PEN_infrastructure_program
+		}
+		available_if_capitulated = yes
+		completion_reward = {
+			17 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			189 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			192 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			202 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			214 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}	
+		}
+	}
+
+	focus = {
+		id = PEN_install_rhydonium_refineries
+		icon = unknown
+		x = 0
+		y = 1
+		relative_position_id = PEN_public_transportation
+		cost = 5
+
+		allow_branch = {
+			PEN = {
+				has_completed_focus = PEN_reinforce_velcar_privileges
+			}
+		}
+
+		ai_will_do = {factor = 1}
+			
+		available = {
+
+		}
+		bypass = {
+
+		}
+		prerequisite = {
+			focus = PEN_increase_advanced_manufacturing_capabilities
+		}
+		prerequisite = {
+			focus = PEN_reinforce_velcar_privileges
+		}
+		available_if_capitulated = yes
+		completion_reward = {
+			random_owned_controlled_state = {
+				add_building_construction = {
+					type = synthetic_refinery
+					level = 2
+					instant_build = yes
+				}
+				add_extra_state_shared_building_slots = 2
+			}
+		}
+	}
+
+	focus = {
+		id = PEN_entrallan_arms
+		icon = unknown
+		x = 0
+		y = 2
+		relative_position_id = PEN_install_rhydonium_refineries
+		cost = 5
+
+		ai_will_do = {factor = 1}
+
+		available = {
+
+		}
+		bypass = {
+
+		}
+		prerequisite = {
+			focus = PEN_install_rhydonium_refineries
+		}
+		available_if_capitulated = yes
+		completion_reward = {
+			custom_effect_tooltip = PEN_unlock
+		}
+	}
+
+	focus = {
+		id = PEN_sector_armouries
+		icon = unknown
+		x = 0
+		y = 1
+		relative_position_id = PEN_entrallan_arms
+		cost = 5
+
+		ai_will_do = {factor = 1}
+
+		available = {
+
+		}
+		bypass = {
+
+		}
+		prerequisite = {
+			focus = PEN_sector_wide_infrastructure
+		}
+		prerequisite = {
+			focus = PEN_entrallan_arms
+		}
+		available_if_capitulated = yes
+		completion_reward = {
+			custom_effect_tooltip = PEN_unlock
+		}
+	}
+
 	#Reinforce VFCZ
 	focus = {
 		id = PEN_reinforce_velcar_privileges
 		icon = unknown
-		x = 15
-		y = 7
+		x = -1
+		y = 1
+		relative_position_id = PEN_vfcz_techniques
 		cost = 5
 
 		ai_will_do = {factor = 1}
@@ -820,19 +1598,19 @@ focus_tree = {
 			focus = PEN_reform_velcar_privileges
 		}
 		prerequisite = {
-			focus = PEN_vfcz_techniques	
+			focus = PEN_vfcz_techniques
 		}
 		available_if_capitulated = yes
 		completion_reward = {
 			mark_focus_tree_layout_dirty = yes
-			hidden_effects = {
+			hidden_effect = {
 				swap_ideas = {
 					add_idea = PEN_vfcz2
 					remove_idea = PEN_vfcz
 				}
 			}
 			custom_effect_tooltip = PEN_vfcz_tradeswap1
-			remove_country_flag = PEN_vfcz_1
+			clr_country_flag = PEN_vfcz_1
 			set_country_flag = PEN_vfcz_2
 			custom_effect_tooltip = PEN_unlock_reinforcevfcz
 		}
@@ -841,7 +1619,7 @@ focus_tree = {
 	focus = {
 		id = PEN_blind_eyes
 		icon = unknown
-		x = 0
+		x = 1
 		y = 1
 		relative_position_id = PEN_reinforce_velcar_privileges
 		cost = 5
@@ -865,6 +1643,155 @@ focus_tree = {
 		}
 		available_if_capitulated = yes
 		completion_reward = {
+			custom_effect_tooltip = PEN_blind_eyes_loc
+			if = {
+				limit = {
+					controls_state = 186
+				}
+				custom_effect_tooltip = PEN_pen_pop_decrease
+				hidden_effect = {
+					add_to_variable = { currency_amount^primary_currency = 5 }
+					#Entralla
+					186 = {
+						add_manpower = -10000
+					}
+				}
+			}
+			if = {
+				limit = {
+					OR = {
+						BEX = {
+							controls_state = 136
+							is_subject_of = PEN
+						}
+						PEN = {
+							controls_state = 136
+						}
+					}
+				}
+				custom_effect_tooltip = PEN_bex_pop_decrease
+				hidden_effect = {
+					add_to_variable = { currency_amount^primary_currency = 10 }
+					#Bextar
+					136 = {
+						add_manpower = -10000
+					}
+					147 = {
+						add_manpower = -10000
+					}
+					148 = {
+						add_manpower = -10000
+					}
+					138 = {
+						add_manpower = -10000
+					}
+					132 = {
+						add_manpower = -10000
+					}
+				}
+			}
+			if = {
+				limit = {
+					has_country_flag = PEN_increased_vfcz
+					OR = {
+						ORD = {
+							controls_state = 92
+							is_subject_of = PEN
+						}
+						PEN = {
+							controls_state = 92
+						}
+					}
+				}
+				custom_effect_tooltip = PEN_ord_pop_decrease
+				hidden_effect = {
+					add_to_variable = { currency_amount^primary_currency = 10 }
+					#Bastion
+					92 = {
+						add_manpower = -10000
+					}
+					104 = {
+						add_manpower = -10000
+					}
+					110 = {
+						add_manpower = -10000
+					}
+					82 = {
+						add_manpower = -10000
+					}
+					86 = {
+						add_manpower = -10000
+					}
+				}
+			}
+			if = {
+				limit = {
+					has_country_flag = PEN_increased_vfcz
+					OR = {
+						JAE = {
+							controls_state = 95
+							is_subject_of = PEN
+						}
+						PEN = {
+							controls_state = 95
+						}
+					}
+				}
+				custom_effect_tooltip = PEN_jae_pop_decrease
+				hidden_effect = {
+					add_to_variable = { currency_amount^primary_currency = 10 }
+					#Bescane
+					95 = {
+						add_manpower = -10000
+					}
+					115 = {
+						add_manpower = -10000
+					}
+					100 = {
+						add_manpower = -10000
+					}
+					120 = {
+						add_manpower = -10000
+					}
+					88 = {
+						add_manpower = -10000
+					}
+				}
+			}
+			if = {
+				limit = {
+					has_country_flag = PEN_increased_vfcz
+					OR = {
+						IBC = {
+							controls_state = 5
+							is_subject_of = PEN
+						}
+						PEN = {
+							controls_state = 5
+						}
+					}
+				}
+				custom_effect_tooltip = PEN_ibc_pop_decrease
+				hidden_effect = {
+					add_to_variable = { currency_amount^primary_currency = 10 }
+					#Muunilist
+					5 = {
+						add_manpower = -10000
+					}
+					123 = {
+						add_manpower = -10000
+					}
+					106 = {
+						add_manpower = -10000
+					}
+					118 = {
+						add_manpower = -10000
+					}
+					89 = {
+						add_manpower = -10000
+					}
+				}
+			}
 				
 		}
 	}
@@ -890,7 +1817,7 @@ focus_tree = {
 		}
 		available_if_capitulated = yes
 		completion_reward = {
-				
+			add_political_power = 50
 		}
 	}
 
@@ -915,7 +1842,213 @@ focus_tree = {
 		}
 		available_if_capitulated = yes
 		completion_reward = {
-				
+			custom_effect_tooltip = PEN_vfcz_sector_loc
+			#Entralla
+			if = {
+				limit = {
+					controls_state = 186
+				}
+				custom_effect_tooltip = PEN_vfcz_sector_entralla
+				hidden_effect = {
+					186 = {
+						add_building_construction = {
+							type = infrastructure
+							level = 1
+							instant_build = yes
+						}
+						add_building_construction = {
+							type = industrial_complex
+							level = 1
+							instant_build = yes
+						}
+						add_extra_state_shared_building_slots = 1
+					}
+				}
+			}
+			#Bextar
+			if = {
+				limit = {
+					OR = {
+						BEX = {
+							is_subject_of = PEN
+							controls_state = 136
+							controls_state = 147
+						}
+						PEN = {
+							controls_state = 136
+							controls_state = 147
+						}
+					}
+				}
+				custom_effect_tooltip = PEN_vfcz_sector_bextar
+				hidden_effect = {
+					136 = {
+						add_building_construction = {
+							type = infrastructure
+							level = 1
+							instant_build = yes
+						}
+						add_building_construction = {
+							type = industrial_complex
+							level = 1
+							instant_build = yes
+						}
+						add_extra_state_shared_building_slots = 1
+					}
+					147 = {
+						add_building_construction = {
+							type = infrastructure
+							level = 1
+							instant_build = yes
+						}
+						add_building_construction = {
+							type = industrial_complex
+							level = 1
+							instant_build = yes
+						}
+						add_extra_state_shared_building_slots = 1
+					}
+			}
+			}
+			#Bastion
+			if = {
+				limit = {
+					has_country_flag = PEN_increased_vfcz
+					OR = {
+						ORD = {
+							is_subject_of = PEN
+							controls_state = 104
+							controls_state = 92
+						}
+						PEN = {
+							controls_state = 104
+							controls_state = 92
+						}
+					}
+				}
+				custom_effect_tooltip = PEN_vfcz_sector_bastion
+				hidden_effect = {
+					104 = {
+						add_building_construction = {
+							type = infrastructure
+							level = 1
+							instant_build = yes
+						}
+						add_building_construction = {
+							type = industrial_complex
+							level = 1
+							instant_build = yes
+						}
+						add_extra_state_shared_building_slots = 1
+					}
+					92 = {
+						add_building_construction = {
+							type = infrastructure
+							level = 1
+							instant_build = yes
+						}
+						add_building_construction = {
+							type = industrial_complex
+							level = 1
+							instant_build = yes
+						}
+						add_extra_state_shared_building_slots = 1
+					}
+				}
+			}
+			#Bescane
+			if = {
+				limit = {
+					has_country_flag = PEN_increased_vfcz
+					OR = {
+						JAE = {
+							is_subject_of = PEN
+							controls_state = 95
+							controls_state = 120
+						}
+						PEN = {
+							controls_state = 95
+							controls_state = 120
+						}
+					}
+				}
+				custom_effect_tooltip = PEN_vfcz_sector_bescane
+				hidden_effect = {
+					95 = {
+						add_building_construction = {
+							type = infrastructure
+							level = 1
+							instant_build = yes
+						}
+						add_building_construction = {
+							type = industrial_complex
+							level = 1
+							instant_build = yes
+						}
+						add_extra_state_shared_building_slots = 1
+					}
+					120 = {
+						add_building_construction = {
+							type = infrastructure
+							level = 1
+							instant_build = yes
+						}
+						add_building_construction = {
+							type = industrial_complex
+							level = 1
+							instant_build = yes
+						}
+						add_extra_state_shared_building_slots = 1
+					}
+				}
+			}
+			#Muunilist
+			if = {
+				limit = {
+					has_country_flag = PEN_increased_vfcz
+					OR = {
+						IBC = {
+							is_subject_of = PEN
+							controls_state = 5
+							controls_state = 123
+						}
+						PEN = {
+							controls_state = 5
+							controls_state = 123
+						}
+					}
+				}
+				custom_effect_tooltip = PEN_vfcz_sector_muunilist
+				hidden_effect = {
+					5 = {
+						add_building_construction = {
+							type = infrastructure
+							level = 1
+							instant_build = yes
+						}
+						add_building_construction = {
+							type = industrial_complex
+							level = 1
+							instant_build = yes
+						}
+						add_extra_state_shared_building_slots = 1
+					}
+					123 = {
+						add_building_construction = {
+							type = infrastructure
+							level = 1
+							instant_build = yes
+						}
+						add_building_construction = {
+							type = industrial_complex
+							level = 1
+							instant_build = yes
+						}
+						add_extra_state_shared_building_slots = 1
+					}
+				}
+			}
+			
 		}
 	}
 
@@ -930,7 +2063,26 @@ focus_tree = {
 		ai_will_do = {factor = 1}
 			
 		available = {
-
+			OR = {
+				BEX = {
+					is_subject_of = PEN
+					controls_state = 8
+					controls_state = 147
+				}
+				PEN = {
+					controls_state = 8
+					controls_state = 147
+				}
+			}
+			OR = {
+				JAE = {
+					is_subject_of = PEN
+					controls_state = 102
+				}
+				PEN = {
+					controls_state = 102
+				}
+			}
 		}
 		bypass = {
 
@@ -940,7 +2092,30 @@ focus_tree = {
 		}
 		available_if_capitulated = yes
 		completion_reward = {
-				
+			8 = {
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+				add_extra_state_shared_building_slots = 1
+			}
+			147 = {
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+				add_extra_state_shared_building_slots = 2
+			}
+			102 = {
+				add_building_construction = {
+					type = industrial_complex
+					level = 3
+					instant_build = yes
+				}
+				add_extra_state_shared_building_slots = 3
+			}
 		}
 	}
 
@@ -995,9 +2170,34 @@ focus_tree = {
 	}
 
 	focus = {
+		id = PEN_shade_of_the_overhang
+		icon = unknown
+		x = 0
+		y = 1
+		relative_position_id = PEN_introduce_rapid_development_schemes
+		cost = 5
+
+		ai_will_do = {factor = 1}
+			
+		available = {
+
+		}
+		bypass = {
+
+		}
+		prerequisite = {
+			focus = PEN_introduce_rapid_development_schemes
+		}
+		available_if_capitulated = yes
+		completion_reward = {
+				
+		}
+	}
+
+	focus = {
 		id = PEN_maintain_economic_status_quo
 		icon = unknown
-		x = -1
+		x = 2
 		y = 6
 		relative_position_id = PEN_vfcz_techniques
 		cost = 5
@@ -1026,8 +2226,9 @@ focus_tree = {
 	focus = {
 		id = PEN_reform_velcar_privileges
 		icon = unknown
-		x = 17
-		y = 7
+		x = 1
+		y = 1
+		relative_position_id = PEN_vfcz_techniques
 		cost = 5
 
 		ai_will_do = {factor = 1}
@@ -1058,7 +2259,7 @@ focus_tree = {
 	focus = {
 		id = PEN_enforce_anti_slavery_laws
 		icon = unknown
-		x = 0
+		x = -1
 		y = 1
 		relative_position_id = PEN_reform_velcar_privileges
 		cost = 5
@@ -1085,11 +2286,11 @@ focus_tree = {
 			
 		}
 	}
-
+	
 	focus = {
 		id = PEN_build_a_true_capital
 		icon = unknown
-		x = -2
+		x = 2
 		y = 1
 		relative_position_id = PEN_enforce_anti_slavery_laws
 		cost = 5
@@ -1105,8 +2306,37 @@ focus_tree = {
 		prerequisite = {
 			focus = PEN_enforce_anti_slavery_laws
 		}
+		available_if_capitulated = yes
+		completion_reward = {
+			
+		}
+	}
+
+	focus = {
+		id = PEN_home_sweet_home2
+		icon = unknown
+		x = 2
+		y = 0
+		relative_position_id = PEN_build_a_true_capital
+		cost = 5
+
+		allow_branch = {
+			PEN = {
+				has_completed_focus = PEN_reform_velcar_privileges
+			}
+		}
+
+		ai_will_do = {factor = 1}
+			
+		available = {
+
+		}
+		bypass = {
+
+		}
 		prerequisite = {
-			focus = PEN_entralla_infrastructure
+			focus = PEN_bastion_development_effort
+			focus = PEN_wealth_of_sartinaynian
 		}
 		available_if_capitulated = yes
 		completion_reward = {
@@ -1115,9 +2345,62 @@ focus_tree = {
 	}
 
 	focus = {
-		id = PEN_the_light_of_nexus_city
+		id = PEN_the_braxant_run
 		icon = unknown
-		x = -1
+		x = 2
+		y = 1
+		relative_position_id = PEN_home_sweet_home2
+		cost = 5
+
+		ai_will_do = {factor = 1}
+			
+		available = {
+
+		}
+		bypass = {
+
+		}
+		prerequisite = {
+			focus = PEN_home_sweet_home2
+		}
+		available_if_capitulated = yes
+		completion_reward = {
+			
+		}
+	}
+
+	focus = {
+		id = PEN_permanent_administrative_centres
+		icon = unknown
+		x = 0
+		y = 1
+		relative_position_id = PEN_the_braxant_run
+		cost = 5
+
+		ai_will_do = {factor = 1}
+			
+		available = {
+
+		}
+		bypass = {
+
+		}
+		prerequisite = {
+			focus = PEN_the_braxant_run
+		}
+		prerequisite = {
+			focus = PEN_new_capital_old_home
+		}
+		available_if_capitulated = yes
+		completion_reward = {
+			
+		}
+	}
+
+	focus = {
+		id = PEN_the_capital_in_making
+		icon = unknown
+		x = 0
 		y = 1
 		relative_position_id = PEN_build_a_true_capital
 		cost = 5
@@ -1130,8 +2413,14 @@ focus_tree = {
 		bypass = {
 
 		}
+		mutually_exclusive = {
+			focus = PEN_new_capital_old_home
+		}
 		prerequisite = {
 			focus = PEN_build_a_true_capital
+		}
+		prerequisite = {
+			focus = PEN_home_sweet_home2
 		}
 		available_if_capitulated = yes
 		completion_reward = {
@@ -1140,11 +2429,42 @@ focus_tree = {
 	}
 
 	focus = {
-		id = PEN_a_pentastar_festivity
+		id = PEN_new_capital_old_home
 		icon = unknown
-		x = 1
+		x = 0
 		y = 1
-		relative_position_id = PEN_build_a_true_capital
+		relative_position_id = PEN_home_sweet_home2
+		cost = 5
+
+		ai_will_do = {factor = 1}
+			
+		available = {
+
+		}
+		bypass = {
+
+		}
+		mutually_exclusive = {
+			focus = PEN_the_capital_in_making
+		}
+		prerequisite = {
+			focus = PEN_build_a_true_capital
+		}
+		prerequisite = {
+			focus = PEN_home_sweet_home2
+		}
+		available_if_capitulated = yes
+		completion_reward = {
+			
+		}
+	}
+
+	focus = {
+		id = PEN_soaring_industry
+		icon = unknown
+		x = 0
+		y = 1
+		relative_position_id = PEN_the_capital_in_making
 		cost = 5
 
 		ai_will_do = {factor = 1}
@@ -1156,7 +2476,8 @@ focus_tree = {
 
 		}
 		prerequisite = {
-			focus = PEN_build_a_true_capital
+			focus = PEN_the_capital_in_making
+			focus = PEN_new_capital_old_home
 		}
 		available_if_capitulated = yes
 		completion_reward = {
@@ -1165,59 +2486,63 @@ focus_tree = {
 	}
 
 	focus = {
-		id = PEN_nexus_ports
+		id = PEN_make_way
+		icon = unknown
+		x = 0
+		y = 1
+		relative_position_id = PEN_new_capital_old_home
+		cost = 5
+
+		ai_will_do = {factor = 1}
+			
+		available = {
+
+		}
+		bypass = {
+
+		}
+		prerequisite = {
+			focus = PEN_the_capital_in_making
+			focus = PEN_new_capital_old_home
+		}
+		available_if_capitulated = yes
+		completion_reward = {
+			
+		}
+	}
+
+	focus = {
+		id = PEN_jewel_of_the_alignment
+		icon = unknown
+		x = 1
+		y = 1
+		relative_position_id = PEN_soaring_industry
+		cost = 5
+
+		ai_will_do = {factor = 1}
+			
+		available = {
+
+		}
+		bypass = {
+
+		}
+		prerequisite = {
+			focus = PEN_soaring_industry
+		}
+		prerequisite = {
+			focus = PEN_make_way
+		}
+		available_if_capitulated = yes
+		completion_reward = {
+			
+		}
+	}
+
+	focus = {
+		id = PEN_species_protection_act
 		icon = unknown
 		x = -1
-		y = 1
-		relative_position_id = PEN_the_light_of_nexus_city
-		cost = 5
-
-		ai_will_do = {factor = 1}
-			
-		available = {
-
-		}
-		bypass = {
-
-		}
-		prerequisite = {
-			focus = PEN_the_light_of_nexus_city
-		}
-		available_if_capitulated = yes
-		completion_reward = {
-			
-		}
-	}
-
-	focus = {
-		id = PEN_the_shade_of_the_overhang
-		icon = unknown
-		x = 1
-		y = 1
-		relative_position_id = PEN_the_light_of_nexus_city
-		cost = 5
-
-		ai_will_do = {factor = 1}
-			
-		available = {
-
-		}
-		bypass = {
-
-		}
-		prerequisite = {
-			focus = PEN_the_light_of_nexus_city
-		}
-		available_if_capitulated = yes
-		completion_reward = {
-			
-		}
-	}
-
-	focus = {
-		id = PEN_break_the_monopolies
-		icon = unknown
-		x = 1
 		y = 1
 		relative_position_id = PEN_enforce_anti_slavery_laws
 		cost = 5
@@ -1244,7 +2569,7 @@ focus_tree = {
 		icon = unknown
 		x = 0
 		y = 1
-		relative_position_id = PEN_break_the_monopolies
+		relative_position_id = PEN_species_protection_act
 		cost = 5
 
 		ai_will_do = {factor = 1}
@@ -1256,7 +2581,35 @@ focus_tree = {
 
 		}
 		prerequisite = {
-			focus = PEN_break_the_monopolies
+			focus = PEN_species_protection_act
+		}
+		available_if_capitulated = yes
+		completion_reward = {
+			
+		}
+	}
+	
+	focus = {
+		id = PEN_a_pentastar_festivity
+		icon = unknown
+		x = 1
+		y = 1
+		relative_position_id = PEN_promote_competitive_enterprise
+		cost = 5
+
+		ai_will_do = {factor = 1}
+			
+		available = {
+
+		}
+		bypass = {
+
+		}
+		prerequisite = {
+			focus = PEN_promote_competitive_enterprise
+		}
+		prerequisite = {
+			focus = PEN_the_capital_in_making
 		}
 		available_if_capitulated = yes
 		completion_reward = {
@@ -1265,33 +2618,114 @@ focus_tree = {
 	}
 
 	focus = {
-		id = PEN_maintain_economic_status_quo2
+		id = PEN_stricter_transit_laws
 		icon = unknown
-		x = -2
-		y = 0
-		relative_position_id = PEN_commerce_zone_regulations
+		x = 0
+		y = 1
+		relative_position_id = PEN_public_transportation
 		cost = 5
 
-		ai_will_do = {factor = 1}
+		allow_branch = {
+			PEN = {
+				has_completed_focus = PEN_reform_velcar_privileges
+			}
+		}
 
+		ai_will_do = {factor = 1}
+			
 		available = {
 
 		}
 		bypass = {
 
 		}
-		mutually_exclusive = {
-			focus = PEN_commerce_zone_regulations
+		prerequisite = {
+			focus = PEN_public_transportation
 		}
 		prerequisite = {
-			focus = PEN_nexus_ports
-		}
-		prerequisite = {
-			focus = PEN_the_shade_of_the_overhang
+			focus = PEN_reform_velcar_privileges
 		}
 		available_if_capitulated = yes
 		completion_reward = {
-				
+			
+		}
+	}
+
+	focus = {
+		id = PEN_the_nexus_constabulary
+		icon = unknown
+		x = 0
+		y = 2
+		relative_position_id = PEN_stricter_transit_laws
+		cost = 5
+
+		ai_will_do = {factor = 1}
+			
+		available = {
+
+		}
+		bypass = {
+
+		}
+		prerequisite = {
+			focus = PEN_stricter_transit_laws
+		}
+		available_if_capitulated = yes
+		completion_reward = {
+			
+		}
+	}
+
+	focus = {
+		id = PEN_establish_monitored_trading_lanes
+		icon = unknown
+		x = -1
+		y = 1
+		relative_position_id = PEN_promote_competitive_enterprise
+		cost = 5
+
+		ai_will_do = {factor = 1}
+			
+		available = {
+
+		}
+		bypass = {
+
+		}
+		prerequisite = {
+			focus = PEN_promote_competitive_enterprise
+		}
+		prerequisite = {
+			focus = PEN_the_nexus_constabulary
+		}
+		available_if_capitulated = yes
+		completion_reward = {
+			
+		}
+	}
+
+	focus = {
+		id = PEN_break_the_monopolies
+		icon = unknown
+		x = 1
+		y = 1
+		relative_position_id = PEN_establish_monitored_trading_lanes
+		cost = 5
+
+		ai_will_do = {factor = 1}
+			
+		available = {
+
+		}
+		bypass = {
+
+		}
+		prerequisite = {
+			focus = PEN_establish_monitored_trading_lanes
+		}
+		available_if_capitulated = yes
+		completion_reward = {
+			
 		}
 	}
 
@@ -1329,9 +2763,9 @@ focus_tree = {
 	focus = {
 		id = PEN_commerce_zone_regulations
 		icon = unknown
-		x = -1
-		y = 2
-		relative_position_id = PEN_promote_competitive_enterprise
+		x = 1
+		y = 1
+		relative_position_id = PEN_break_the_monopolies
 		cost = 5
 
 		ai_will_do = {factor = 1}
@@ -1346,35 +2780,35 @@ focus_tree = {
 			focus = PEN_maintain_economic_status_quo2
 		}
 		prerequisite = {
-			focus = PEN_promote_competitive_enterprise
+			focus = PEN_break_the_monopolies
 		}
 		available_if_capitulated = yes
 		completion_reward = {
 			custom_effect_tooltip = PEN_unlock
 		}
 	}
-
+	
 	focus = {
-		id = PEN_wealth_of_sartinaynian
+		id = PEN_maintain_economic_status_quo2
 		icon = unknown
-		x = -2
-		y = 0
-		relative_position_id = PEN_create_dockyard_facilities
+		x = -1
+		y = 1
+		relative_position_id = PEN_jewel_of_the_alignment
 		cost = 5
 
 		ai_will_do = {factor = 1}
-			
+
 		available = {
 
 		}
 		bypass = {
 
 		}
-		prerequisite = {
-			focus = PEN_vfcz_techniques
+		mutually_exclusive = {
+			focus = PEN_commerce_zone_regulations
 		}
 		prerequisite = {
-			focus = PEN_direct_supervision_bastion
+			focus = PEN_jewel_of_the_alignment
 		}
 		available_if_capitulated = yes
 		completion_reward = {
@@ -1382,12 +2816,47 @@ focus_tree = {
 		}
 	}
 
+	
+
+	#Main Political Branch
 	focus = {
-		id = PEN_corporate_schools
+		id = PEN_a_star_born
 		icon = unknown
 		x = 0
 		y = 1
-		relative_position_id = PEN_integrated_corporate_structure
+		relative_position_id = PEN_pentastar_alignment_treaty
+		cost = 5
+
+		allow_branch = {
+			PEN = {
+				has_completed_focus = PEN_pentastar_alignment_treaty
+			}
+		}
+
+		ai_will_do = {factor = 1}
+			
+		available = {
+			has_idea = PEN_government_reorganisation4
+		}
+		bypass = {
+
+		}
+		prerequisite = {
+			focus = PEN_pentastar_alignment_treaty
+		}
+		available_if_capitulated = yes
+		completion_reward = {
+			add_political_power = 50
+			remove_ideas = PEN_government_reorganisation4
+		}
+	}
+
+	focus = {
+		id = PEN_direct_supervision_bastion
+		icon = unknown
+		x = -3
+		y = 1
+		relative_position_id = PEN_a_star_born
 		cost = 5
 
 		ai_will_do = {factor = 1}
@@ -1399,7 +2868,65 @@ focus_tree = {
 
 		}
 		prerequisite = {
-			focus = PEN_integrated_corporate_structure
+			focus = PEN_a_star_born
+		}
+		available_if_capitulated = yes
+		completion_reward = {
+			annex_country = {
+				target = ORD
+				transfer_troops = yes
+			}
+			custom_effect_tooltip = PEN_bastion_set_compliance
+			hidden_effect = {
+				2 = {
+					set_compliance = 10
+				}
+				82 = {
+					set_compliance = 10
+				}
+				86 = {
+					set_compliance = 10
+				}
+				92 = {
+					set_compliance = 10
+				}
+				94 = {
+					set_compliance = 10
+				}
+				104 = {
+					set_compliance = 10
+				}
+				110 = {
+					set_compliance = 10
+				}
+				124 = {
+					set_compliance = 10
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = PEN_pentastar_research_facilities
+		icon = unknown
+		x = 3
+		y = 1
+		relative_position_id = PEN_direct_supervision_bastion
+		cost = 5
+
+		ai_will_do = {factor = 1}
+			
+		available = {
+
+		}
+		bypass = {
+
+		}
+		prerequisite = {
+			focus = PEN_negotiate_with_the_ibc
+		}
+		prerequisite = {
+			focus = PEN_direct_supervision_bastion
 		}
 		available_if_capitulated = yes
 		completion_reward = {
@@ -1410,7 +2937,7 @@ focus_tree = {
 	focus = {
 		id = PEN_lay_the_groundworks
 		icon = unknown
-		x = -1
+		x = 1
 		y = 1
 		relative_position_id = PEN_direct_supervision_bastion
 		cost = 5
@@ -1431,60 +2958,71 @@ focus_tree = {
 		}
 		available_if_capitulated = yes
 		completion_reward = {
-			86 = {
-				add_building_construction = {
-					type = infrastructure
-					level = 1
-					instant_build = yes
+			custom_effect_tooltip = PEN_lay_the_groundworks_loc
+			hidden_effect = {
+				2 = {
+					add_compliance = 10
+					add_building_construction = {
+						type = infrastructure
+						level = 1
+						instant_build = yes
+					}
 				}
-			}
-			104 = {
-				add_building_construction = {
-					type = infrastructure
-					level = 1
-					instant_build = yes
+				82 = {
+					add_compliance = 10
+					add_building_construction = {
+						type = infrastructure
+						level = 1
+						instant_build = yes
+					}
 				}
-			}
-			92 = {
-				add_building_construction = {
-					type = infrastructure
-					level = 1
-					instant_build = yes
+				86 = {
+					add_compliance = 10
+					add_building_construction = {
+						type = infrastructure
+						level = 1
+						instant_build = yes
+					}
 				}
-			}
-			2 = {
-				add_building_construction = {
-					type = infrastructure
-					level = 1
-					instant_build = yes
+				92 = {
+					add_compliance = 10
+					add_building_construction = {
+						type = infrastructure
+						level = 1
+						instant_build = yes
+					}
 				}
-			}
-			82 = {
-				add_building_construction = {
-					type = infrastructure
-					level = 1
-					instant_build = yes
+				94 = {
+					add_compliance = 10
+					add_building_construction = {
+						type = infrastructure
+						level = 1
+						instant_build = yes
+					}
 				}
-			}
-			94 = {
-				add_building_construction = {
-					type = infrastructure
-					level = 1
-					instant_build = yes
+				104 = {
+					add_compliance = 10
+					add_building_construction = {
+						type = infrastructure
+						level = 1
+						instant_build = yes
+					}
 				}
-			}
-			110 = {
-				add_building_construction = {
-					type = infrastructure
-					level = 1
-					instant_build = yes
+				110 = {
+					add_compliance = 10
+					add_building_construction = {
+						type = infrastructure
+						level = 1
+						instant_build = yes
+					}
 				}
-			}
-			124 = {
-				add_building_construction = {
-					type = infrastructure
-					level = 1
-					instant_build = yes
+				124 = {
+					add_compliance = 10
+					add_building_construction = {
+						type = infrastructure
+						level = 1
+						instant_build = yes
+					}
 				}
 			}
 		}
@@ -1535,6 +3073,33 @@ focus_tree = {
 				}
 				add_extra_state_shared_building_slots = 1
 			}
+			custom_effect_tooltip = PEN_bastion_compliance
+			hidden_effect = {
+				2 = {
+					add_compliance = 10
+				}
+				82 = {
+					add_compliance = 10
+				}
+				86 = {
+					add_compliance = 10
+				}
+				92 = {
+					add_compliance = 10
+				}
+				94 = {
+					add_compliance = 10
+				}
+				104 = {
+					add_compliance = 10
+				}
+				110 = {
+					add_compliance = 10
+				}
+				124 = {
+					add_compliance = 10
+				}
+			}
 		}
 	}
 
@@ -1576,6 +3141,7 @@ focus_tree = {
 				add_extra_state_shared_building_slots = 1
 			}
 			custom_effect_tooltip = PEN_fortress_ind_loc
+			custom_effect_tooltip = PEN_bastion_compliance
 			hidden_effect = {
 				2 = {
 					add_state_modifier = {
@@ -1626,61 +3192,40 @@ focus_tree = {
 						}
 					}
 				}
-			}
-		}
-	}
-
-	#Main Political Branch
-	focus = {
-		id = PEN_a_star_born
-		icon = unknown
-		x = 27
-		y = 4
-		cost = 5
-
-		allow_branch = {
-			PEN = {
-				has_completed_focus = PEN_pentastar_alignment_treaty
-			}
-		}
-		offset = {
-			x = -3
-			y = 0
-			trigger = {
-				PEN = {
-					OR = {
-						has_completed_focus = PEN_kaines_kingdom
-						has_completed_focus = PEN_the_fools_gamble
-					}
+				2 = {
+					add_compliance = 10
+				}
+				82 = {
+					add_compliance = 10
+				}
+				86 = {
+					add_compliance = 10
+				}
+				92 = {
+					add_compliance = 10
+				}
+				94 = {
+					add_compliance = 10
+				}
+				104 = {
+					add_compliance = 10
+				}
+				110 = {
+					add_compliance = 10
+				}
+				124 = {
+					add_compliance = 10
 				}
 			}
 		}
-
-
-		ai_will_do = {factor = 1}
-			
-		available = {
-			has_idea = PEN_government_reorganisation4
-		}
-		bypass = {
-
-		}
-		prerequisite = {
-			focus = PEN_pentastar_alignment_treaty
-		}
-		available_if_capitulated = yes
-		completion_reward = {
-			add_political_power = 50
-			remove_ideas = PEN_government_reorganisation4
-		}
 	}
 
 	focus = {
-		id = PEN_direct_supervision_bastion
+		id = PEN_wealth_of_sartinaynian
 		icon = unknown
-		x = -1
-		y = 1
-		relative_position_id = PEN_a_star_born
+		x = -2
+		y = 2
+		relative_position_id = PEN_direct_supervision_bastion
 		cost = 5
 
 		ai_will_do = {factor = 1}
@@ -1692,21 +3237,205 @@ focus_tree = {
 
 		}
 		prerequisite = {
-			focus = PEN_a_star_born
+			focus = PEN_vfcz_techniques
+		}
+		prerequisite = {
+			focus = PEN_direct_supervision_bastion
 		}
 		available_if_capitulated = yes
 		completion_reward = {
-			annex_country = {
-				target = ORD
-				transfer_troops = yes
+			104 = {
+				add_resource = {
+					type = chromium
+					amount = 8
+				}
+				add_resource = {
+					type = steel
+					amount = 16
+				}
 			}
+			124 = {
+				add_resource = {
+					type = chromium
+					amount = 10
+				}
+				add_resource = {
+					type = steel
+					amount = 12
+				}
+			}
+			custom_effect_tooltip = PEN_bastion_compliance
+			hidden_effect = {
+				
+				2 = {
+					add_compliance = 10
+
+				}
+				82 = {
+					add_compliance = 10
+				}
+				86 = {
+					add_compliance = 10
+				}
+				92 = {
+					add_compliance = 10
+				}
+				94 = {
+					add_compliance = 10
+				}
+				104 = {
+					add_compliance = 10
+				}
+				110 = {
+					add_compliance = 10
+				}
+				124 = {
+					add_compliance = 10
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = PEN_bastion_development_effort
+		icon = unknown
+		x = 1
+		y = 1
+		relative_position_id = PEN_create_dockyard_facilities
+		cost = 5
+
+		ai_will_do = {factor = 1}
+			
+		available = {
+			core_compliance = {
+				occupied_country_tag = ORD
+				value > 90
+			}
+		}
+		bypass = {
+
+		}
+		prerequisite = {
+			focus = PEN_create_dockyard_facilities
+			focus = PEN_wealth_of_sartinaynian
+			focus = PEN_fortress_industries
+		}
+		available_if_capitulated = yes
+		completion_reward = {
+			country_event = PEN_bastion.1
+			add_state_core = 2
+			add_state_core = 82
+			add_state_core = 86
+			add_state_core = 92
+			add_state_core = 94
+			add_state_core = 104
+			add_state_core = 110
+			add_state_core = 124
+		}
+	}
+
+	focus = {
+		id = PEN_home_sweet_home1
+		icon = unknown
+		x = 3
+		y = 0
+		relative_position_id = PEN_uninhibited_monopolies
+		cost = 5
+
+		ai_will_do = {factor = 1}
+			
+		available = {
+			core_compliance = {
+				occupied_country_tag = ORD
+				value > 90
+			}
+		}
+		bypass = {
+
+		}
+		prerequisite = {
+			focus = PEN_bastion_development_effort
+		}
+		prerequisite = {
+			focus = PEN_wealth_of_sartinaynian
+		}
+		prerequisite = {
+			focus = PEN_blind_eyes
+		}
+		available_if_capitulated = yes
+		completion_reward = {
+			country_event = PEN_bastion.1
+			add_state_core = 2
+			add_state_core = 82
+			add_state_core = 86
+			add_state_core = 92
+			add_state_core = 94
+			add_state_core = 104
+			add_state_core = 110
+			add_state_core = 124
+		}
+	}
+
+	focus = {
+		id = PEN_ripe_for_harvest
+		icon = unknown
+		x = -1
+		y = 1
+		relative_position_id = PEN_home_sweet_home1
+		cost = 5
+
+		ai_will_do = {factor = 1}
+
+		available = {
+
+		}
+		bypass = {
+
+		}
+		prerequisite = {
+			focus = PEN_uninhibited_monopolies
+		}
+		prerequisite = {
+			focus = PEN_home_sweet_home1
+		}
+		available_if_capitulated = yes
+		completion_reward = {
+			custom_effect_tooltip = PEN_unlock
+		}
+	}
+
+	focus = {
+		id = PEN_a_true_bastion
+		icon = unknown
+		x = 0
+		y = 2
+		relative_position_id = PEN_home_sweet_home1
+		cost = 5
+
+		ai_will_do = {factor = 1}
+
+		available = {
+
+		}
+		bypass = {
+
+		}
+		prerequisite = {
+			focus = PEN_introduce_rapid_development_schemes
+		}
+		prerequisite = {
+			focus = PEN_home_sweet_home1
+		}
+		available_if_capitulated = yes
+		completion_reward = {
+			custom_effect_tooltip = PEN_unlock
 		}
 	}
 
 	focus = {
 		id = PEN_negotiate_with_the_ibc
 		icon = unknown
-		x = 1
+		x = 3
 		y = 1
 		relative_position_id = PEN_a_star_born
 		cost = 5
@@ -1724,14 +3453,14 @@ focus_tree = {
 		}
 		available_if_capitulated = yes
 		completion_reward = {
-				
+			country_event = PEN_ibc.1
 		}
 	}
 
 	focus = {
 		id = PEN_autonomy_for_rights
 		icon = unknown
-		x = 1
+		x = -1
 		y = 1
 		relative_position_id = PEN_negotiate_with_the_ibc
 		cost = 5
@@ -1759,7 +3488,7 @@ focus_tree = {
 	focus = {
 		id = PEN_rights_for_promises
 		icon = unknown
-		x = 3
+		x = 1
 		y = 1
 		relative_position_id = PEN_negotiate_with_the_ibc
 		cost = 5
@@ -1785,9 +3514,9 @@ focus_tree = {
 	}
 
 	focus = {
-		id = PEN_the_hexastar_alignment
+		id = PEN_muunilist_corporations
 		icon = unknown
-		x = 0
+		x = -1
 		y = 1
 		relative_position_id = PEN_rights_for_promises
 		cost = 5
@@ -1802,6 +3531,7 @@ focus_tree = {
 		}
 		prerequisite = {
 			focus = PEN_rights_for_promises
+			focus = PEN_autonomy_for_rights
 		}
 		available_if_capitulated = yes
 		completion_reward = {
@@ -1810,30 +3540,12 @@ focus_tree = {
 	}
 
 	focus = {
-		id = PEN_kaines_kingdom
+		id = PEN_deals_with_ibc
 		icon = unknown
-		x = -4
+		x = -1
 		y = 1
-		relative_position_id = PEN_observe_the_warlords
-		cost = 10
-
-		allow_branch = {
-			PEN = {
-				NOT = {
-					has_completed_focus = PEN_the_fools_gamble
-				}
-				has_completed_focus = PEN_pentastar_alignment_treaty
-			}
-		}
-		offset = {
-			x = 4
-			y = 0
-			trigger = {
-				PEN = {
-					has_completed_focus = PEN_kaines_kingdom
-				}
-			}
-		}
+		relative_position_id = PEN_muunilist_corporations
+		cost = 5
 
 		ai_will_do = {factor = 1}
 			
@@ -1844,27 +3556,55 @@ focus_tree = {
 
 		}
 		mutually_exclusive = {
-			focus = PEN_the_fools_gamble
+			focus = PEN_the_hexastar_alignment
 		}
 		prerequisite = {
-			focus = PEN_observe_the_warlords
+			focus = PEN_muunilist_corporations
 		}
 		available_if_capitulated = yes
 		completion_reward = {
-			mark_focus_tree_layout_dirty = yes
+				
 		}
 	}
 
 	focus = {
-		id = PEN_expedition_to_the_valley_jedi
+		id = PEN_the_hexastar_alignment
 		icon = unknown
 		x = 1
-		y = 2
-		relative_position_id = PEN_kaines_kingdom
+		y = 1
+		relative_position_id = PEN_muunilist_corporations
 		cost = 5
 
 		ai_will_do = {factor = 1}
+			
+		available = {
 
+		}
+		bypass = {
+
+		}
+		mutually_exclusive = {
+			focus = PEN_deals_with_ibc
+		}
+		prerequisite = {
+			focus = PEN_muunilist_corporations
+		}
+		available_if_capitulated = yes
+		completion_reward = {
+				
+		}
+	}
+
+	focus = {
+		id = PEN_adjust_pentastar_treaty
+		icon = unknown
+		x = 0
+		y = 1
+		relative_position_id = PEN_the_hexastar_alignment
+		cost = 5
+
+		ai_will_do = {factor = 1}
+			
 		available = {
 
 		}
@@ -1872,7 +3612,7 @@ focus_tree = {
 
 		}
 		prerequisite = {
-			focus = PEN_kaines_kingdom
+			focus = PEN_the_hexastar_alignment
 		}
 		available_if_capitulated = yes
 		completion_reward = {
@@ -1906,12 +3646,67 @@ focus_tree = {
 	}
 
 	focus = {
-		id = PEN_a_safe_haven
+		id = PEN_kaines_kingdom
 		icon = unknown
-		x = 2
-		y = 3
+		x = -1
+		y = 1
+		relative_position_id = PEN_observe_the_warlords
+		cost = 10
+
+		allow_branch = {
+			PEN = {
+				NOT = {
+					has_completed_focus = PEN_the_fools_gamble
+				}
+				has_completed_focus = PEN_pentastar_alignment_treaty
+			}
+		}
+		offset = {
+			x = 1
+			y = 0
+			trigger = {
+				PEN = {
+					has_completed_focus = PEN_kaines_kingdom
+				}
+			}
+		}
+
+		ai_will_do = {factor = 1}
+			
+		available = {
+
+		}
+		bypass = {
+
+		}
+		mutually_exclusive = {
+			focus = PEN_the_fools_gamble
+		}
+		prerequisite = {
+			focus = PEN_observe_the_warlords
+		}
+		prerequisite = {
+			focus = PEN_bastion_development_effort
+		}
+		available_if_capitulated = yes
+		completion_reward = {
+			mark_focus_tree_layout_dirty = yes
+		}
+	}
+
+	focus = {
+		id = PEN_our_borders
+		icon = unknown
+		x = 3
+		y = 1
 		relative_position_id = PEN_kaines_kingdom
 		cost = 5
+
+		allow_branch = {
+			PEN = {
+				has_completed_focus = PEN_kaines_kingdom
+			}
+		}
 
 		ai_will_do = {factor = 1}
 
@@ -1931,12 +3726,124 @@ focus_tree = {
 	}
 
 	focus = {
+		id = PEN_shelter_wayward_officers
+		icon = unknown
+		x = 0
+		y = 1
+		relative_position_id = PEN_our_borders
+		cost = 5
+
+		ai_will_do = {factor = 1}
+
+		available = {
+
+		}
+		bypass = {
+
+		}
+		prerequisite = {
+			focus = PEN_our_borders
+		}
+		available_if_capitulated = yes
+		completion_reward = {
+				
+		}
+	}
+
+	focus = {
+		id = PEN_visiting_an_old_friend
+		icon = unknown
+		x = 2
+		y = 1
+		relative_position_id = PEN_our_borders
+		cost = 5
+
+		ai_will_do = {factor = 1}
+
+		available = {
+
+		}
+		bypass = {
+
+		}
+		prerequisite = {
+			focus = PEN_our_borders
+		}
+		available_if_capitulated = yes
+		completion_reward = {
+				
+		}
+	}
+
+	focus = {
+		id = PEN_a_safe_haven
+		icon = unknown
+		x = 0
+		y = 1
+		relative_position_id = PEN_shelter_wayward_officers
+		cost = 5
+
+		ai_will_do = {factor = 1}
+
+		available = {
+
+		}
+		bypass = {
+
+		}
+		mutually_exclusive = {
+			focus = PEN_a_little_excursion
+		}
+		prerequisite = {
+			focus = PEN_shelter_wayward_officers
+		}
+		available_if_capitulated = yes
+		completion_reward = {
+				
+		}
+	}
+	
+	focus = {
+		id = PEN_a_little_excursion
+		icon = unknown
+		x = 0
+		y = 1
+		relative_position_id = PEN_visiting_an_old_friend
+		cost = 5
+
+		ai_will_do = {factor = 1}
+
+		available = {
+
+		}
+		bypass = {
+
+		}
+		mutually_exclusive = {
+			focus = PEN_a_safe_haven
+		}
+		prerequisite = {
+			focus = PEN_visiting_an_old_friend
+		}
+		available_if_capitulated = yes
+		completion_reward = {
+				
+		}
+	}
+
+	focus = {
 		id = PEN_silent_interference
 		icon = unknown
-		x = -1
+		x = 0
 		y = 1
 		relative_position_id = PEN_kaines_kingdom
 		cost = 5
+
+		allow_branch = {
+			PEN = {
+				has_completed_focus = PEN_kaines_kingdom
+			}
+		}
 
 		ai_will_do = {factor = 1}
 
@@ -1961,7 +3868,7 @@ focus_tree = {
 	focus = {
 		id = PEN_listening_posts
 		icon = unknown
-		x = 0
+		x = 1
 		y = 1
 		relative_position_id = PEN_silent_interference
 		cost = 5
@@ -1986,10 +3893,16 @@ focus_tree = {
 	focus = {
 		id = PEN_inward_perfection
 		icon = unknown
-		x = -3
+		x = -2
 		y = 1
 		relative_position_id = PEN_kaines_kingdom
 		cost = 5
+
+		allow_branch = {
+			PEN = {
+				has_completed_focus = PEN_kaines_kingdom
+			}
+		}
 
 		ai_will_do = {factor = 1}
 
@@ -2014,7 +3927,7 @@ focus_tree = {
 	focus = {
 		id = PEN_our_many_stars
 		icon = unknown
-		x = 0
+		x = -1
 		y = 1
 		relative_position_id = PEN_inward_perfection
 		cost = 5
@@ -2039,7 +3952,7 @@ focus_tree = {
 	focus = {
 		id = PEN_internal_development
 		icon = unknown
-		x = -1
+		x = 1
 		y = 1
 		relative_position_id = PEN_our_many_stars
 		cost = 5
@@ -2066,7 +3979,7 @@ focus_tree = {
 		icon = unknown
 		x = 1
 		y = 1
-		relative_position_id = PEN_our_many_stars
+		relative_position_id = PEN_inward_perfection
 		cost = 5
 
 		ai_will_do = {factor = 1}
@@ -2078,8 +3991,8 @@ focus_tree = {
 
 		}
 		prerequisite = {
-			focus = PEN_our_many_stars
-			focus = PEN_listening_posts
+			focus = PEN_inward_perfection
+			focus = PEN_silent_interference
 		}
 		available_if_capitulated = yes
 		completion_reward = {
@@ -2090,7 +4003,7 @@ focus_tree = {
 	focus = {
 		id = PEN_the_black_corps
 		icon = unknown
-		x = 1
+		x = -1
 		y = 1
 		relative_position_id = PEN_listening_posts
 		cost = 5
@@ -2115,7 +4028,7 @@ focus_tree = {
 	focus = {
 		id = PEN_kaines_peace
 		icon = unknown
-		x = 0
+		x = -1
 		y = 1
 		relative_position_id = PEN_the_black_corps
 		cost = 5
@@ -2132,9 +4045,6 @@ focus_tree = {
 			focus = PEN_internal_development
 			focus = PEN_the_black_corps
 		}
-		prerequisite = {
-			focus = PEN_a_safe_haven
-		}
 		available_if_capitulated = yes
 		completion_reward = {
 			custom_effect_tooltip = PEN_unlock
@@ -2144,7 +4054,7 @@ focus_tree = {
 	focus = {
 		id = PEN_the_fools_gamble
 		icon = unknown
-		x = 4
+		x = 1
 		y = 1
 		relative_position_id = PEN_observe_the_warlords
 		cost = 5
@@ -2158,7 +4068,7 @@ focus_tree = {
 			}
 		}
 		offset = {
-			x = -4
+			x = -1
 			y = 0
 			trigger = {
 				PEN = {
@@ -2183,6 +4093,7 @@ focus_tree = {
 		}
 		prerequisite = {
 			focus = PEN_the_hexastar_alignment
+			focus = PEN_deals_with_ibc
 		}
 		available_if_capitulated = yes
 		completion_reward = {
@@ -2193,10 +4104,16 @@ focus_tree = {
 	focus = {
 		id = PEN_denounce_new_rep
 		icon = unknown
-		x = 0
+		x = -2
 		y = 1
 		relative_position_id = PEN_the_fools_gamble
 		cost = 5
+
+		allow_branch = {
+			PEN = {
+				has_completed_focus = PEN_the_fools_gamble
+			}
+		}
 
 		ai_will_do = {factor = 1}
 		
@@ -2218,10 +4135,16 @@ focus_tree = {
 	focus = {
 		id = PEN_reel_in_the_corporations
 		icon = unknown
-		x = -1
+		x = 2
 		y = 1
-		relative_position_id = PEN_denounce_new_rep
+		relative_position_id = PEN_the_fools_gamble
 		cost = 5
+
+		allow_branch = {
+			PEN = {
+				has_completed_focus = PEN_the_fools_gamble
+			}
+		}
 
 		ai_will_do = {factor = 1}
 		
@@ -2232,7 +4155,7 @@ focus_tree = {
 
 		}
 		prerequisite = {
-			focus = PEN_denounce_new_rep
+			focus = PEN_the_fools_gamble
 		}
 		available_if_capitulated = yes
 		completion_reward = {
@@ -2243,10 +4166,16 @@ focus_tree = {
 	focus = {
 		id = PEN_win_the_governors
 		icon = unknown
-		x = -3
+		x = 0
 		y = 1
-		relative_position_id = PEN_denounce_new_rep
+		relative_position_id = PEN_the_fools_gamble
 		cost = 5
+
+		allow_branch = {
+			PEN = {
+				has_completed_focus = PEN_the_fools_gamble
+			}
+		}
 
 		ai_will_do = {factor = 1}
 		
@@ -2257,7 +4186,7 @@ focus_tree = {
 
 		}
 		prerequisite = {
-			focus = PEN_denounce_new_rep
+			focus = PEN_the_fools_gamble
 		}
 		available_if_capitulated = yes
 		completion_reward = {
@@ -2294,6 +4223,84 @@ focus_tree = {
 	}
 
 	focus = {
+		id = PEN_reallocate_assets
+		icon = unknown
+		x = 0
+		y = 1
+		relative_position_id = PEN_tax_the_vfcz
+		cost = 5
+
+		ai_will_do = {factor = 1}
+			
+		available = {
+
+		}
+		bypass = {
+
+		}
+		prerequisite = {
+			focus = PEN_tax_the_vfcz
+		}
+		available_if_capitulated = yes
+		completion_reward = {
+				
+		}
+	}
+
+	focus = {
+		id = PEN_forced_contracts
+		icon = unknown
+		x = 1
+		y = 1
+		relative_position_id = PEN_reel_in_the_corporations
+		cost = 5
+
+		ai_will_do = {factor = 1}
+			
+		available = {
+
+		}
+		bypass = {
+
+		}
+		prerequisite = {
+			focus = PEN_reel_in_the_corporations
+		}
+		available_if_capitulated = yes
+		completion_reward = {
+				
+		}
+	}
+
+	focus = {
+		id = PEN_short_term_growth
+		icon = unknown
+		x = 0
+		y = 1
+		relative_position_id = PEN_forced_contracts
+		cost = 5
+
+		ai_will_do = {factor = 1}
+			
+		available = {
+
+		}
+		bypass = {
+
+		}
+		prerequisite = {
+			focus = PEN_forced_contracts
+		}
+		prerequisite = {
+			focus = PEN_tax_the_vfcz
+		}
+		available_if_capitulated = yes
+		completion_reward = {
+				
+		}
+	}
+
+	focus = {
 		id = PEN_the_silvertongued_warlord
 		icon = unknown
 		x = 1
@@ -2319,11 +4326,36 @@ focus_tree = {
 	}
 
 	focus = {
+		id = PEN_diplomacy
+		icon = unknown
+		x = 0
+		y = 1
+		relative_position_id = PEN_the_silvertongued_warlord
+		cost = 5
+
+		ai_will_do = {factor = 1}
+
+		available = {
+
+		}
+		bypass = {
+
+		}
+		prerequisite = {
+			focus = PEN_the_silvertongued_warlord
+		}
+		available_if_capitulated = yes
+		completion_reward = {
+				
+		}
+	}
+
+	focus = {
 		id = PEN_jump_start_the_military
 		icon = unknown
 		x = -1
 		y = 1
-		relative_position_id = PEN_the_silvertongued_warlord
+		relative_position_id = PEN_denounce_new_rep
 		cost = 5
 
 		ai_will_do = {factor = 1}
@@ -2335,7 +4367,7 @@ focus_tree = {
 
 		}
 		prerequisite = {
-			focus = PEN_the_silvertongued_warlord
+			focus = PEN_denounce_new_rep
 		}
 		available_if_capitulated = yes
 		completion_reward = {
@@ -2345,31 +4377,6 @@ focus_tree = {
 
 	focus = {
 		id = PEN_supremacy
-		icon = unknown
-		x = 1
-		y = 1
-		relative_position_id = PEN_the_silvertongued_warlord
-		cost = 5
-
-		ai_will_do = {factor = 1}
-
-		available = {
-
-		}
-		bypass = {
-
-		}
-		prerequisite = {
-			focus = PEN_the_silvertongued_warlord
-		}
-		available_if_capitulated = yes
-		completion_reward = {
-				
-		}
-	}
-
-	focus = {
-		id = PEN_go_all_in
 		icon = unknown
 		x = 0
 		y = 1
@@ -2387,8 +4394,32 @@ focus_tree = {
 		prerequisite = {
 			focus = PEN_jump_start_the_military
 		}
+		available_if_capitulated = yes
+		completion_reward = {
+				
+		}
+	}
+
+	focus = {
+		id = PEN_go_all_in
+		icon = unknown
+		x = 1
+		y = 1
+		relative_position_id = PEN_diplomacy
+		cost = 5
+
+		ai_will_do = {factor = 1}
+
+		available = {
+
+		}
+		bypass = {
+
+		}
 		prerequisite = {
+			focus = PEN_tax_the_vfcz
 			focus = PEN_supremacy
+			focus = PEN_diplomacy
 		}
 		available_if_capitulated = yes
 		completion_reward = {
@@ -2396,19 +4427,22 @@ focus_tree = {
 		}
 	}
 
+	###################################
+	#         THRAWN BRANCH           #
+	###################################
 	focus = {
 		id = PEN_an_unexpected_party
 		icon = unknown
 		x = 0
-		y = 4
-		relative_position_id = PEN_kaines_peace
+		y = 7
+		relative_position_id = PEN_observe_the_warlords
 		cost = 5
 
 		ai_will_do = {factor = 1}
 
 		allow_branch = {
 			PEN = {
-				has_completed_focus = PEN_kaines_kingdom
+				has_country_flag = thrawn_returns
 			}
 		}
 
@@ -2419,7 +4453,6 @@ focus_tree = {
 
 		}
 		prerequisite = {
-			focus = PEN_kaines_peace
 		}
 		available_if_capitulated = yes
 		completion_reward = {
@@ -2428,42 +4461,98 @@ focus_tree = {
 	}
 
 	focus = {
-		id = PEN_an_unexpected_party2
-		icon = unknown
-		x = 0
-		y = 4
-		relative_position_id = PEN_go_all_in
-		cost = 5
-
-		ai_will_do = {factor = 1}
-
-		allow_branch = {
-			PEN = {
-				has_completed_focus = PEN_the_fools_gamble
-			}
-		}
-
-		available = {
-
-		}
-		bypass = {
-
-		}
-		prerequisite = {
-			focus = PEN_go_all_in
-		}
-		available_if_capitulated = yes
-		completion_reward = {
-				
-		}
-	}
-	
-	focus = {
-		id = PEN_an_unexpected_party3
+		id = PEN_pledge_nominal_support
 		icon = unknown
 		x = -4
-		y = 4
-		relative_position_id = PEN_go_all_in
+		y = 1
+		relative_position_id = PEN_an_unexpected_party
+		cost = 5
+
+		ai_will_do = {factor = 1}
+
+		available = {
+
+		}
+		bypass = {
+
+		}
+		mutually_exclusive = {
+			focus = PEN_commit_to_thrawn
+			focus = PEN_matter_of_hierarchy
+		}
+		prerequisite = {
+			focus = PEN_an_unexpected_party
+		}
+		available_if_capitulated = yes
+		completion_reward = {
+			
+		}
+	}
+
+	focus = {
+		id = PEN_commit_to_thrawn
+		icon = unknown
+		x = 0
+		y = 1
+		relative_position_id = PEN_an_unexpected_party
+		cost = 5
+
+		ai_will_do = {factor = 1}
+
+		available = {
+
+		}
+		bypass = {
+
+		}
+		mutually_exclusive = {
+			focus = PEN_pledge_nominal_support
+			focus = PEN_matter_of_hierarchy
+		}
+		prerequisite = {
+			focus = PEN_an_unexpected_party
+		}
+		available_if_capitulated = yes
+		completion_reward = {
+			
+		}
+	}
+
+	focus = {
+		id = PEN_matter_of_hierarchy
+		icon = unknown
+		x = 4
+		y = 1
+		relative_position_id = PEN_an_unexpected_party
+		cost = 5
+
+		ai_will_do = {factor = 1}
+
+		available = {
+
+		}
+		bypass = {
+
+		}
+		mutually_exclusive = {
+			focus = PEN_commit_to_thrawn
+			focus = PEN_pledge_nominal_support
+		}
+		prerequisite = {
+			focus = PEN_an_unexpected_party
+		}
+		available_if_capitulated = yes
+		completion_reward = {
+			
+		}
+	}
+
+	focus = {
+		id = PEN_send_ships
+		icon = unknown
+		x = 0
+		y = 1
+		relative_position_id = PEN_pledge_nominal_support
 		cost = 5
 
 		ai_will_do = {factor = 1}
@@ -2475,8 +4564,367 @@ focus_tree = {
 
 		}
 		prerequisite = {
-			focus = PEN_go_all_in
-			focus = PEN_kaines_peace
+			focus = PEN_pledge_nominal_support
+			focus = PEN_commit_to_thrawn
+		}
+		available_if_capitulated = yes
+		completion_reward = {
+				
+		}
+	}
+
+	focus = {
+		id = PEN_send_equipment
+		icon = unknown
+		x = 2
+		y = 1
+		relative_position_id = PEN_pledge_nominal_support
+		cost = 5
+
+		ai_will_do = {factor = 1}
+
+		available = {
+
+		}
+		bypass = {
+
+		}
+		prerequisite = {
+			focus = PEN_pledge_nominal_support
+			focus = PEN_commit_to_thrawn
+		}
+		available_if_capitulated = yes
+		completion_reward = {
+				
+		}
+	}
+
+	focus = {
+		id = PEN_send_financial_aid
+		icon = unknown
+		x = 4
+		y = 1
+		relative_position_id = PEN_pledge_nominal_support
+		cost = 5
+
+		ai_will_do = {factor = 1}
+
+		available = {
+
+		}
+		bypass = {
+
+		}
+		prerequisite = {
+			focus = PEN_pledge_nominal_support
+			focus = PEN_commit_to_thrawn
+		}
+		available_if_capitulated = yes
+		completion_reward = {
+				
+		}
+	}
+
+	focus = {
+		id = PEN_apprehensive_militarization
+		icon = unknown
+		x = 0
+		y = 2
+		relative_position_id = PEN_pledge_nominal_support
+		cost = 5
+
+		ai_will_do = {factor = 1}
+
+		available = {
+			has_completed_focus = PEN_pledge_nominal_support
+		}
+		bypass = {
+
+		}
+		prerequisite = {
+			focus = PEN_send_ships
+			focus = PEN_send_equipment
+			focus = PEN_send_financial_aid
+		}
+		available_if_capitulated = yes
+		completion_reward = {
+				
+		}
+	}
+
+	focus = {
+		id = PEN_defensive_preparations
+		icon = unknown
+		x = -1
+		y = 1
+		relative_position_id = PEN_apprehensive_militarization
+		cost = 5
+
+		ai_will_do = {factor = 1}
+
+		available = {
+		}
+		bypass = {
+
+		}
+		prerequisite = {
+			focus = PEN_apprehensive_militarization
+		}
+		available_if_capitulated = yes
+		completion_reward = {
+				
+		}
+	}
+
+	focus = {
+		id = PEN_offensive_preparations
+		icon = unknown
+		x = 1
+		y = 1
+		relative_position_id = PEN_apprehensive_militarization
+		cost = 5
+
+		ai_will_do = {factor = 1}
+
+		available = {
+		}
+		bypass = {
+
+		}
+		prerequisite = {
+			focus = PEN_apprehensive_militarization
+		}
+		available_if_capitulated = yes
+		completion_reward = {
+				
+		}
+	}
+
+	focus = {
+		id = PEN_stepping_out_of_isolation
+		icon = unknown
+		x = 0
+		y = 2
+		relative_position_id = PEN_commit_to_thrawn
+		cost = 5
+
+		ai_will_do = {factor = 1}
+
+		available = {
+			has_completed_focus = PEN_pledge_nominal_support
+		}
+		bypass = {
+
+		}
+		prerequisite = {
+			focus = PEN_send_ships
+			focus = PEN_send_equipment
+			focus = PEN_send_financial_aid
+		}
+		available_if_capitulated = yes
+		completion_reward = {
+				
+		}
+	}
+
+	focus = {
+		id = PEN_shifting_gears
+		icon = unknown
+		x = -1
+		y = 1
+		relative_position_id = PEN_stepping_out_of_isolation
+		cost = 5
+
+		ai_will_do = {factor = 1}
+
+		available = {
+		}
+		bypass = {
+
+		}
+		prerequisite = {
+			focus = PEN_stepping_out_of_isolation
+		}
+		available_if_capitulated = yes
+		completion_reward = {
+				
+		}
+	}
+
+	focus = {
+		id = PEN_full_throttle
+		icon = unknown
+		x = 1
+		y = 1
+		relative_position_id = PEN_stepping_out_of_isolation
+		cost = 5
+
+		ai_will_do = {factor = 1}
+
+		available = {
+		}
+		bypass = {
+
+		}
+		prerequisite = {
+			focus = PEN_stepping_out_of_isolation
+		}
+		available_if_capitulated = yes
+		completion_reward = {
+				
+		}
+	}
+
+	focus = {
+		id = PEN_thrawns_invasion
+		icon = unknown
+		x = 1
+		y = 1
+		relative_position_id = PEN_offensive_preparations
+		cost = 5
+
+		ai_will_do = {factor = 1}
+
+		available = {
+		}
+		bypass = {
+
+		}
+		prerequisite = {
+			focus = PEN_defensive_preparations
+			focus = PEN_offensive_preparations
+		}
+		prerequisite = {
+			focus = PEN_shifting_gears
+			focus = PEN_full_throttle
+		}
+		available_if_capitulated = yes
+		completion_reward = {
+				
+		}
+	}
+
+	focus = {
+		id = PEN_a_gentle_hand
+		icon = unknown
+		x = -1
+		y = 1
+		relative_position_id = PEN_matter_of_hierarchy
+		cost = 5
+
+		ai_will_do = {factor = 1}
+
+		available = {
+		}
+		bypass = {
+
+		}
+		mutually_exclusive = {
+			focus = PEN_an_iron_fist
+		}
+		prerequisite = {
+			focus = PEN_matter_of_hierarchy
+		}
+		available_if_capitulated = yes
+		completion_reward = {
+				
+		}
+	}
+
+	focus = {
+		id = PEN_an_iron_fist
+		icon = unknown
+		x = 1
+		y = 1
+		relative_position_id = PEN_matter_of_hierarchy
+		cost = 5
+
+		ai_will_do = {factor = 1}
+
+		available = {
+		}
+		bypass = {
+
+		}
+		mutually_exclusive = {
+			focus = PEN_a_gentle_hand
+		}
+		prerequisite = {
+			focus = PEN_matter_of_hierarchy
+		}
+		available_if_capitulated = yes
+		completion_reward = {
+				
+		}
+	}
+
+	focus = {
+		id = PEN_a_close_connection
+		icon = unknown
+		x = 0
+		y = 1
+		relative_position_id = PEN_an_iron_fist
+		cost = 5
+
+		ai_will_do = {factor = 1}
+
+		available = {
+		}
+		bypass = {
+
+		}
+		prerequisite = {
+			focus = PEN_a_gentle_hand
+			focus = PEN_an_iron_fist
+		}
+		available_if_capitulated = yes
+		completion_reward = {
+				
+		}
+	}
+
+	focus = {
+		id = PEN_our_empire_our_war
+		icon = unknown
+		x = 1
+		y = 2
+		relative_position_id = PEN_a_gentle_hand
+		cost = 5
+
+		ai_will_do = {factor = 1}
+
+		available = {
+		}
+		bypass = {
+
+		}
+		prerequisite = {
+			focus = PEN_a_gentle_hand
+			focus = PEN_an_iron_fist
+		}
+		available_if_capitulated = yes
+		completion_reward = {
+				
+		}
+	}
+
+	focus = {
+		id = PEN_thrawns_invasion2
+		icon = unknown
+		x = 0
+		y = 1
+		relative_position_id = PEN_our_empire_our_war
+		cost = 5
+
+		ai_will_do = {factor = 1}
+
+		available = {
+		}
+		bypass = {
+
+		}
+		prerequisite = {
+			focus = PEN_our_empire_our_war
 		}
 		available_if_capitulated = yes
 		completion_reward = {
@@ -2490,62 +4938,14 @@ focus_tree = {
 	focus = {
 		id = PEN_chamber_of_order
 		icon = unknown
-		x = 44
-		y = 4
+		x = 17
+		y = 1
+		relative_position_id = PEN_pentastar_alignment_treaty
 		cost = 5
 
 		allow_branch = {
 			PEN = {
 				has_completed_focus = PEN_pentastar_alignment_treaty
-			}
-		}
-		offset = {
-			x = -2
-			y = 0
-			trigger = {
-				PEN = {
-					OR = {
-						has_completed_focus = PEN_kaines_kingdom
-						has_completed_focus = PEN_the_fools_gamble
-					}
-				}
-			}
-		}
-		offset = {
-			x = 5
-			y = 0
-			trigger = {
-				PEN = {
-					has_completed_focus = PEN_invent_pentastar_stratagems
-					NOT = {
-						OR = {
-							has_completed_focus = PEN_kaines_kingdom
-							has_completed_focus = PEN_the_fools_gamble
-						}
-					}
-				}
-			}
-		}
-		offset = {
-			x = 1
-			y = 0
-			trigger = {
-				PEN = {
-					has_completed_focus = PEN_invent_pentastar_stratagems
-					OR = {
-						has_completed_focus = PEN_kaines_kingdom
-						has_completed_focus = PEN_the_fools_gamble
-					}
-				}
-			}
-		}
-		offset = {
-			x = 3
-			y = 0
-			trigger = {
-				PEN = {
-					has_completed_focus = PEN_the_imperial_handbook
-				}
 			}
 		}
 
@@ -2571,7 +4971,7 @@ focus_tree = {
 	focus = {
 		id = PEN_order_branch
 		icon = unknown
-		x = 5
+		x = -4
 		y = 1
 		relative_position_id = PEN_chamber_of_order
 		cost = 5
@@ -2806,6 +5206,9 @@ focus_tree = {
 		available = {
 		}
 		bypass = {
+		}
+		mutually_exclusive = {
+			focus = PEN_non_negotiable_doctrine
 		}
 		prerequisite = {
 			focus = PEN_manipulate_the_populace
@@ -3156,6 +5559,9 @@ focus_tree = {
 		}
 		bypass = {
 		}
+		mutually_exclusive = {
+			focus = PEN_subordinate_protectors
+		}
 		prerequisite = {
 			focus = PEN_relaxed_standards
 			focus = PEN_compforce_recruits
@@ -3220,7 +5626,7 @@ focus_tree = {
 	focus = {
 		id = PEN_enforcement_branch
 		icon = unknown
-		x = -5
+		x = 6
 		y = 1
 		relative_position_id = PEN_chamber_of_order
 		cost = 5
@@ -3273,7 +5679,7 @@ focus_tree = {
 	focus = {
 		id = PEN_enforce_new_order_patrol
 		icon = unknown
-		x = -1
+		x = 1
 		y = 1
 		relative_position_id = PEN_enforcement_branch
 		cost = 5
@@ -3299,7 +5705,7 @@ focus_tree = {
 	focus = {
 		id = PEN_tolerate_alien_patrolmen
 		icon = unknown
-		x = 1
+		x = -1
 		y = 1
 		relative_position_id = PEN_enforcement_branch
 		cost = 5
@@ -3325,7 +5731,7 @@ focus_tree = {
 	focus = {
 		id = PEN_focus_patrol_on_enforcement_duties
 		icon = unknown
-		x = -1
+		x = 1
 		y = 1
 		relative_position_id = PEN_tolerate_alien_patrolmen
 		cost = 5
@@ -3352,7 +5758,7 @@ focus_tree = {
 	focus = {
 		id = PEN_pentastar_patrol_military_integration
 		icon = unknown
-		x = -2
+		x = 2
 		y = 0
 		relative_position_id = PEN_focus_patrol_on_enforcement_duties
 		cost = 5
@@ -3371,7 +5777,7 @@ focus_tree = {
 			focus = PEN_enforce_new_order_patrol
 		}
 		prerequisite = {
-			focus = PEN_the_alignment_military
+			focus = PEN_the_broken_army
 		}
 		available_if_capitulated = yes
 		completion_reward = {
@@ -3382,7 +5788,7 @@ focus_tree = {
 	focus = {
 		id = PEN_cueball_regiments
 		icon = unknown
-		x = -1
+		x = 1
 		y = 1
 		relative_position_id = PEN_pentastar_patrol_military_integration
 		cost = 5
@@ -3492,49 +5898,14 @@ focus_tree = {
 	focus = {
 		id = PEN_the_alignment_military
 		icon = unknown
-		x = 34
-		y = 5
+		x = 28
+		y = 1
+		relative_position_id = PEN_pentastar_alignment_treaty
 		cost = 5
 
 		allow_branch = {
 			PEN = {
 				has_completed_focus = PEN_pentastar_alignment_treaty
-			}
-		}
-		offset = {
-			x = -2
-			y = 0
-			trigger = {
-				PEN = {
-					OR = {
-						has_completed_focus = PEN_kaines_kingdom
-						has_completed_focus = PEN_the_fools_gamble
-					}
-				}
-			}
-		}
-		offset = {
-			x = 4
-			y = 0
-			trigger = {
-				PEN = {
-					has_completed_focus = PEN_invent_pentastar_stratagems
-					NOT = {
-						OR = {
-							has_completed_focus = PEN_kaines_kingdom
-							has_completed_focus = PEN_the_fools_gamble
-						}
-					}
-				}
-			}
-		}
-		offset = {
-			x = 2
-			y = 0
-			trigger = {
-				PEN = {
-					has_completed_focus = PEN_the_imperial_handbook
-				}
 			}
 		}
 
@@ -3556,11 +5927,11 @@ focus_tree = {
 	}
 
 	focus = {
-		id = PEN_pentastar_research_facilities
+		id = PEN_the_broken_army
 		icon = unknown
-		x = 1
+		x = 0
 		y = 1
-		relative_position_id = PEN_direct_supervision_bastion
+		relative_position_id = PEN_the_alignment_military
 		cost = 5
 
 		ai_will_do = {factor = 1}
@@ -3572,14 +5943,11 @@ focus_tree = {
 
 		}
 		prerequisite = {
-			focus = PEN_negotiate_with_the_ibc
-		}
-		prerequisite = {
-			focus = PEN_direct_supervision_bastion
+			focus = PEN_the_alignment_military
 		}
 		available_if_capitulated = yes
 		completion_reward = {
-			add_research_slot = 1
+			army_experience = 20
 		}
 	}
 
@@ -3589,7 +5957,7 @@ focus_tree = {
 		icon = unknown
 		x = -1
 		y = 1
-		relative_position_id = PEN_the_alignment_military
+		relative_position_id = PEN_the_broken_army
 		cost = 5
 
 		offset = {
@@ -3612,7 +5980,7 @@ focus_tree = {
 			focus = PEN_the_imperial_handbook
 		}
 		prerequisite = {
-			focus = PEN_the_alignment_military
+			focus = PEN_the_broken_army
 		}
 		available_if_capitulated = yes
 		completion_reward = {
@@ -3773,29 +6141,6 @@ focus_tree = {
 	}
 
 	focus = {
-		id = PEN_tie_fighters
-		icon = unknown
-		x = 0
-		y = 1
-		relative_position_id = PEN_at_at
-		cost = 5
-
-		ai_will_do = {factor = 1}
-			
-		available = {
-		}
-		bypass = {
-		}
-		prerequisite = {
-			focus = PEN_at_at
-		}
-		available_if_capitulated = yes
-		completion_reward = {
-			
-		}
-	}
-
-	focus = {
 		id = PEN_at_at
 		icon = unknown
 		x = 2
@@ -3811,6 +6156,29 @@ focus_tree = {
 		}
 		prerequisite = {
 			focus = PEN_superior_firepower
+		}
+		available_if_capitulated = yes
+		completion_reward = {
+			
+		}
+	}
+
+	focus = {
+		id = PEN_tie_fighters
+		icon = unknown
+		x = 0
+		y = 1
+		relative_position_id = PEN_at_at
+		cost = 5
+
+		ai_will_do = {factor = 1}
+			
+		available = {
+		}
+		bypass = {
+		}
+		prerequisite = {
+			focus = PEN_at_at
 		}
 		available_if_capitulated = yes
 		completion_reward = {
@@ -4047,7 +6415,7 @@ focus_tree = {
 		icon = unknown
 		x = 1
 		y = 1
-		relative_position_id = PEN_the_alignment_military
+		relative_position_id = PEN_the_broken_army
 		cost = 5
 
 		offset = {
@@ -4070,7 +6438,7 @@ focus_tree = {
 			focus = PEN_invent_pentastar_stratagems
 		}
 		prerequisite = {
-			focus = PEN_the_alignment_military
+			focus = PEN_the_broken_army
 		}
 		available_if_capitulated = yes
 		completion_reward = {

@@ -1,7 +1,93 @@
 add_namespace = PEN_piracy
 add_namespace = PEN_formation
+add_namespace = PEN_bastion
+add_namespace = PEN_ibc
+add_namespace = PEN_beginning
 
-#Pentastar Formation Events
+##################################
+######## Beginning Events ########
+##################################
+country_event = { #Aboard the Reaper
+	id = PEN_beginning.0
+    title = PEN_beginning.0.t
+    desc = PEN_beginning.0.d
+	picture = GFX_report_event_election_vote
+
+	fire_only_once = yes
+	
+	option = {
+		name = PEN_beginning.0.a
+	}
+}
+country_event = { #Inspect Entralla
+	id = PEN_beginning.1
+    title = PEN_beginning.1.t
+    desc = PEN_beginning.1.d
+	picture = GFX_report_event_election_vote
+
+	fire_only_once = yes
+	
+	option = {
+		name = PEN_beginning.1.a
+	}
+}
+country_event = { #Recall Scourge Squadron
+	id = PEN_beginning.2
+    title = PEN_beginning.2.t
+    desc = PEN_beginning.2.d
+	picture = GFX_report_event_election_vote
+
+	fire_only_once = yes
+	
+	option = {
+		name = PEN_beginning.2.a
+	}
+}
+country_event = { #Check the Balance
+	id = PEN_beginning.3
+    title = PEN_beginning.3.t
+    desc = PEN_beginning.3.d
+	picture = GFX_report_event_election_vote
+
+	fire_only_once = yes
+	
+	option = {
+		name = PEN_beginning.3.a
+		swap_ideas = {
+			add_idea = PEN_inflated_economy2
+			remove_idea = PEN_inflated_economy
+		}
+	}
+}
+country_event = { #Shedding Skin
+	id = PEN_beginning.4
+    title = PEN_beginning.4.t
+    desc = PEN_beginning.4.d
+	picture = GFX_report_event_election_vote
+
+	fire_only_once = yes
+	
+	option = {
+		name = PEN_beginning.4.a
+	}
+}
+country_event = { #Refiguring our Economy
+	id = PEN_beginning.5
+    title = PEN_beginning.5.t
+    desc = PEN_beginning.5.d
+	picture = GFX_report_event_election_vote
+
+	fire_only_once = yes
+	
+	option = {
+		name = PEN_beginning.5.a
+		remove_ideas = PEN_inflated_economy2
+		add_ideas = PEN_vfcz
+	}
+}
+##################################
+### Pentastar Formation Events ###
+##################################
 country_event = { #Otro Wryn Introduced
 	id = PEN_formation.2
     title = PEN_formation.2.t
@@ -117,7 +203,7 @@ news_event = { #Alignment Formed (News)
 
 	is_triggered_only = yes
 
-	fire_only_once = yes
+	fire_only_once = no
 	
 	option = {
 		name = PEN_formation.0.a
@@ -301,7 +387,9 @@ country_event = { #Pentastar Talks Conflict 5: Kaine's Ambition
 	}
 }
 
+###############################
 #Piracy Events
+################################
 country_event = { #Unlock Piracy Decisions
 	id = PEN_piracy.1
     title = PEN_piracy.1.t
@@ -339,9 +427,196 @@ country_event = { #Pirates Thwarted
 	}
 
 	option = {
-		name = PEN_piracy_activate.1.a
+		name = PEN_piracy.2.a
 		hidden_effect = {
-            activate_mission = PEN_pirate_attacks_grow
+            activate_mission = PEN_piracy_attacks_grow
         }
+	}
+}
+
+#################################
+#IBC Events
+#################################
+country_event = { #Negotiate with the IBC (Send Offer)
+	id = PEN_ibc.1
+    title = PEN_ibc.1.t
+    desc = PEN_ibc.1.d
+	picture = GFX_report_event_election_vote
+
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	immediate = {
+		hidden_effect = {
+			IBC = {
+				country_event = { id = PEN_ibc.2 days = 14 }
+			}
+		}
+	}
+
+	option = {
+		name = PEN_ibc.1.a
+	}
+}
+
+country_event = { #Negotiate with the IBC (IBC Chooses)
+	id = PEN_ibc.2
+    title = PEN_ibc.2.t
+    desc = PEN_ibc.2.d
+	picture = GFX_report_event_election_vote
+
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	option = {
+		name = PEN_ibc.2.a #Accept
+		ai_chance = {
+			base = 5
+		}
+		hidden_effect = {
+			PEN = {
+				country_event = { id = PEN_ibc.3 days = 14 }
+			}
+		}
+	}
+	option = {
+		name = PEN_ibc.2.b #Deny
+		ai_chance = {
+			base = 95
+		}
+		hidden_effect = {
+			PEN = {
+				country_event = { id = PEN_ibc.4 days = 14 }
+			}
+		}
+	}
+}
+
+country_event = { #Negotiate with the IBC (IBC Accepts)
+	id = PEN_ibc.3
+    title = PEN_ibc.3.t
+    desc = PEN_ibc.3.d
+	picture = GFX_report_event_election_vote
+
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	option = {
+		name = PEN_ibc.3.a
+		PEN = {
+			puppet = IBC
+		}
+	}
+}
+
+country_event = { #Negotiate with the IBC (IBC Denies)
+	id = PEN_ibc.4
+    title = PEN_ibc.4.t
+    desc = PEN_ibc.4.d
+	picture = GFX_report_event_election_vote
+
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	option = {
+		name = PEN_ibc.4.a
+		create_wargoal = {
+			type = puppet_wargoal_focus
+			target = IBC
+		}
+	}
+}
+
+country_event = { #IBC Defeated (IBC)
+	id = PEN_ibc.5
+    title = PEN_ibc.5.t
+    desc = PEN_ibc.5.d
+	picture = GFX_report_event_election_vote
+
+	trigger = {
+		IBC = {
+			has_war_with = PEN
+			surrender_progress > 0.75
+		}
+	}
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	immediate = {
+		hidden_effect = {
+			PEN = {
+				country_event = { id = PEN_ibc.6 days = 1 }
+			}
+		}
+	}
+
+	option = {
+		name = PEN_ibc.5.a
+	}
+}
+
+country_event = { #IBC Defeated (PEN)
+	id = PEN_ibc.6
+    title = PEN_ibc.6.t
+    desc = PEN_ibc.6.d
+	picture = GFX_report_event_election_vote
+
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	option = {
+		name = PEN_ibc.6.a
+		PEN = {
+			white_peace = IBC
+			puppet = IBC
+		}
+		IBC = {
+			country_event = { id = PEN_ibc.7 days = 1 }
+		}
+	}
+}
+
+country_event = { #IBC Defeated (Explanation to IBC if player)
+	id = PEN_ibc.7
+    title = PEN_ibc.7.t
+    desc = PEN_ibc.7.d
+	picture = GFX_report_event_election_vote
+
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	option = {
+		name = PEN_ibc.7.a
+	}
+}
+
+###############################
+#Bastion Events
+################################
+country_event = { #Home Sweet Home (Moving Capital)
+	id = PEN_bastion.1
+    title = PEN_bastion.1.t
+    desc = PEN_bastion.1.d
+	picture = GFX_report_event_election_vote
+
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	option = {
+		name = PEN_bastion.1.a
+		set_capital = {
+			state = 92
+		}
+	}
+	option = {
+		name = PEN_bastion.1.b
 	}
 }

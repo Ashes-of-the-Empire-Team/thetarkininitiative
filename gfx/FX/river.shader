@@ -406,12 +406,10 @@ PixelShader =
 			float vDesiredFade = (lerp( vFadeValue * 2.0f, 0.0f, saturate( waterSideAlpha.x * 4.0f ) ));
 			float vAlphaMultiplier = saturate(lerp( vDesiredFade, 1.0f, vFastFade ));
 			
-			float vOpacity = 1.0f - cam_distance( GB_CAM_MIN, GB_CAM_MAX );
-			float vRiverAlpha = smoothstep( 0.0f, 1.0f, saturate( vOpacity * 1.7 ) );
 
 			DebugReturn(vOut, lightingProperties, fShadowTerm);
 
-			return float4( vOut, waterSideAlpha.y * vAlphaMultiplier * Input.vTransp * vRiverAlpha );
+			return float4( vOut, waterSideAlpha.y * vAlphaMultiplier * Input.vTransp );
 		}
 	]]
 }
