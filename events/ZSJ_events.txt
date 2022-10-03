@@ -292,6 +292,7 @@ country_event = {
 
     }
 }
+<<<<<<< Updated upstream
 ## Needs to be fixed ##
 #country_event = {
 #    id = ZSJ.13 ## chase 3
@@ -315,6 +316,31 @@ country_event = {
 #
 #    }
 #}
+=======
+
+country_event = {
+    id = ZSJ.15 ## chase 3
+        title = "To Board or to Wait?"
+        desc = "Instead of waiting, we have chosen to pursue her into the supercluster. She was planning to escape through a little known hyperspace lane within the Maw that she discovered decades ago on campaign, however due to your quick thinking and decisiveness, you are able to track her down and renew the chase, endign all possibility of early escape."
+        picture = GFX_report_event_election_vote
+
+    is_triggered_only = yes
+
+    fire_only_once = yes
+
+    option = {
+        name = "We wait!"
+
+            ZSJ = { country_event = { days = 1 id = ZSJ.14 } }
+
+    }
+    option = {
+        name = "Board Her!"
+            ZSJ = { country_event = { days = 1 id = ZSJ.16 } }
+
+    }
+}
+>>>>>>> Stashed changes
 
 country_event = {
     id = ZSJ.14 ## chase 4
@@ -475,6 +501,331 @@ country_event = {
             add_war_support = -0.05
         }
         add_political_power = 300
+    }
+
+}
+
+country_event = {
+    id = ZSJ.100
+        title = "The Fallout from Endor"
+        desc = "Endor was a personal catastrophe for the Empire as a whole. It saw the allaince to restore the Republic shatter the rule of the fair and mighty empire, as well as the complete destruction of the DS-2 Death Star II Mobile Battle Station. Our fearless leaders Darth Vader and the emperor himself were both struck down in an untimely and disgusting display of pure cowardice and jealosy presented by Luke Skywalker in an attempt to push his own agenda and that possessed by the rebel alliance. However this battle set a precedent for the destruction of the empire, and as such it has now fragmented. Choas rules the galaxy. I, Warlord Zsinj, the emperors chosen, must persevere. Deus Vault."
+        picture = GFX_report_event_election_vote
+
+    is_triggered_only = yes
+
+    fire_only_once = yes
+
+    trigger = {
+        solofight = 100
+    }
+
+    option = {
+        name = "Deus Vault"
+        add_political_power = 100
+    }
+
+}
+
+country_event = {
+    id = ZSJ.101
+        title = "Political Propaganda Campaigns - Zsinj"
+        desc = "Zsinj, in a decisive and brilliantly calculated move, has begun to indoctrinate his already loving populace, in the hope of completely securing their loyalty through his many planned improvements for the galaxy."
+        picture = GFX_report_event_election_vote
+
+    is_triggered_only = yes
+
+    fire_only_once = yes
+
+    trigger = {
+        solofight = 100
+    }
+
+    option = {
+        name = "No One is More Deserved Than He"
+        add_political_power = 150
+        add_war_support = 0.1
+    }
+
+}
+
+country_event = {
+    id = ZSJ.666
+        title = "Zsinj Suffers a Hemmorhage!"
+        desc = "As a result of the inherent pressures of a position such as Warlord of the free galaxy, his imperial majesty Zsinj has unofortunately suffered from an intacranial hemmorhage. His brain is literally leaking out through his nose, and only the universe could know how much time he has left. As always, our thoughts go towards our benevolent leader, whom we hope for a speedy recovery. "
+        picture = GFX_report_event_election_vote
+
+    is_triggered_only = yes
+
+    fire_only_once = yes
+
+    trigger = {
+        date < 01.01.7
+    }
+
+    option = {
+        name = "Woe is me!"
+        add_trait = {
+            zsj_intacranial_hemorrhage
+        }
+    }
+
+}
+
+country_event = {
+    id = ZSJ.200
+        title = "Zsinj chooses external surgery"
+        desc = "Zsinj has chosen to "
+        picture = GFX_report_event_election_vote
+
+    is_triggered_only = yes
+
+    fire_only_once = yes
+
+    option = {
+        name = "Woe is me!"
+       random_list = {
+        80 = {
+            remove_trait = {
+                zsj_intacranial_hemorrhage
+            }
+        }
+        20 = {
+             kill_country_leader = yes
+                create_country_leader = {
+			    name = "Intermediary Council"
+			    picture = "unknown"
+			    ideology = imperial
+				traits = {
+                    intermediary_council
+				    }
+	        	}
+        }
+       }
+    }
+
+}
+country_event = {
+    id = ZSJ.201
+        title = "Zsinj chooses internal surgery"
+        desc = "Zsinj has elected to choose internal surgery"
+        picture = GFX_report_event_election_vote
+
+    is_triggered_only = yes
+
+    fire_only_once = yes
+
+
+    option = {
+        name = "Woe is me!"
+       random_list = {
+        70 = {
+            remove_trait = {
+                zsj_intacranial_hemorrhage
+            }
+        }
+        30 = {
+             kill_country_leader = yes
+                create_country_leader = {
+			    name = "Intermediary Council"
+			    picture = "unknown"
+			    ideology = imperial
+				traits = {
+                    intermediary_council
+				    }
+	        	}
+        }
+       }
+    }
+
+}
+
+country_event = {
+    id = ZSJ.202
+        title = "A Promising Wunderkind"
+        desc = "At one of Zsinj's latest formal functions celebrating his recent recovery from his intacranial hemmorhage, a doctor appraoched Zsinj. He quickly introduced himself as Dr Dread, indubitably a pseudonym, yet Zsinj did not care. What he was proposing was far too interesting. Accoridng to this young buck, numerous advancements in the feild of human-cyberware have been made, which would allow Zsinj to once again function at his full strength after the crippling effects of the hemmorhage."
+        picture = GFX_report_event_election_vote
+
+    is_triggered_only = yes
+
+    fire_only_once = yes
+
+
+    option = {
+        name = "An intriguing possibility indeed."
+        add_political_power = 150
+    }
+
+}
+
+country_event = {
+    id = ZSJ.203
+        title = "A slight problem..."
+        desc = "'Hello, my lord' peeps my young physician Dr. Dread, 'it appears that there may be a slight problem with your psychi. It is rapidly devolving at an unprecedented rate. I beleive it is as a result of the recent body modifications that I have placed upon your person."
+        picture = GFX_report_event_election_vote
+
+    is_triggered_only = yes
+
+    fire_only_once = yes
+
+
+    option = {
+        name = "I am no longer alone in my own mind..."
+    }
+
+}
+
+country_event = {
+    id = ZSJ.204
+        title = "Descent"
+        desc = "'Hello, my lord' peeps my young physician Dr. Dread, 'it appears that there may be a slight problem with your psychi. It is rapidly devolving at an unprecedented rate. I beleive it is as a result of the recent body modifications that I have placed upon your person."
+        picture = GFX_report_event_election_vote
+
+    is_triggered_only = yes
+
+    fire_only_once = yes
+
+    trigger = {
+        zsj_psycho = 50
+    }
+
+    option = {
+        name = "Somebody make them stop!!!"
+        add_ideas = {
+            zsj_corrupted_spirit_1
+        }
+
+    }
+
+}
+
+country_event = {
+    id = ZSJ.205
+        title = "Reality Fades"
+        desc = "Zsinj falls further into madness, im sure some good localisation is in order here."
+        picture = GFX_report_event_election_vote
+
+    is_triggered_only = yes
+
+    fire_only_once = yes
+
+    trigger = {
+        zsj_psycho = 100
+    }
+
+    option = {
+        name = "The voices... they are drowning me!!!"
+        add_ideas = {
+            zsj_corrupted_spirit_2
+        }
+    }
+
+}
+
+country_event = {
+    id = ZSJ.206
+        title = "Splitting Personalities"
+        desc = "Within Zsinj, there are now two perosnailities. Our majestic leader and the computer that he relies upon for his survival. At this point, no one is sure who is leading us..."
+        picture = GFX_report_event_election_vote
+
+    is_triggered_only = yes
+
+    fire_only_once = yes
+
+    trigger = {
+        zsj_psycho = 150
+    }
+
+    option = {
+        name = "Attack here... Wait no?"
+        add_ideas = {
+            zsj_corrupted_spirit_3
+        }
+    }
+
+}
+
+country_event = {
+    id = ZSJ.207
+        title = "The sickness splits him so!"
+        desc = "Zsinj has now spent the last few weeks lone, in solitude. Passers by hear screams of anguish and frustration, as the great man who once ruled our nation is diminished so."
+        picture = GFX_report_event_election_vote
+
+    is_triggered_only = yes
+
+    fire_only_once = yes
+
+    trigger = {
+        zsj_psycho = 250
+    }
+
+    option = {
+        name = "Who steps forward?"
+        random_list = {
+            49 = {
+                complete_focus = { focus = ZSJ_the_warrior }            }
+            49 = {
+                complete_focus = { focus = ZSJ_the_architect }
+            }
+            2 = {
+               kill_country_leader = yes
+                create_country_leader = {
+			    name = "Gynasistan-52X"
+			    picture = "unknown"
+			    ideology = imperial
+				traits = {
+                    cyborg droid zsj_speedware ZSJ_muscle_enhancement zsj_chrome_arteries ZSJ_improved_eyes ZSJ_skeleton_implants
+				    }
+	        	}
+            }
+        }
+    }
+}
+
+country_event = {
+    id = ZSJ.208
+        title = "The Syndicate Question"
+        desc = ""
+        picture = GFX_report_event_election_vote
+
+    is_triggered_only = yes
+
+    fire_only_once = yes
+
+    option = {
+        name = "Destroy the Syndicates!"
+        complete_focus = { focus = ZSJ_eradication }
+    }
+    option = {
+        name = "Deal With the Syndicates"
+        complete_focus = { focus = ZSJ_salvation }
+    }
+
+}
+
+country_event = {
+    id = ZSJ.209
+        title = "An invitation to the Empire!"
+        desc = "Facilitated by Warolord Zsinj, we have been invited to join the empire..."
+        picture = GFX_report_event_election_vote
+
+    is_triggered_only = yes
+
+    fire_only_once = yes
+
+    option = {
+        name = "All for one"
+            add_opinion_modifier = {
+				target = {
+					ZSJ
+				}
+				modifier = { medium_decrease }
+        }
+    }
+    option = {
+        name = "One for all"
+        add_to_faction = {
+            EMP
+        }
     }
 
 }
