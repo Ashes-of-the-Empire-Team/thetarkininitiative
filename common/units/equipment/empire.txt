@@ -1,6 +1,358 @@
 equipments = {
 #### Imperial
 #### StarFighters
+tie_fighter_airframe = {
+	year = 4
+	is_archetype = yes
+	is_convertable = yes
+	picture = archetype_fighter_equipment
+	is_buildable = no
+	type = fighter
+	type_override = fixed_main_weapon_slot
+	allowed_types = {
+		fighter
+		interceptor
+		cas
+		naval_bomber
+	}
+	allow_mission_type = training
+	group_by = archetype
+	sprite = light_plane
+	carrier_capable = yes
+	air_map_icon_frame = 1
+	interface_category = interface_category_air
+	
+	interface_overview_category_index = 1
+	air_superiority = 1
+	reliability = 0.8
+	naval_strike_attack = 1
+	naval_strike_targetting = 1
+	lend_lease_cost = 2
+	air_range = 3000
+	maximum_speed = 0
+	air_agility = 45
+	air_defence = 3
+	weight = 3
+	build_cost_ic = 4.5
+		resources = {
+			aluminium = 2
+			steel = 1
+		}
+		
+		manpower = 5
+		fuel_consumption = 0.20
+
+	module_slots = {
+		fixed_main_weapon_slot = {
+			required = yes
+			allowed_module_categories = {
+				starfighter_weapon
+				starbomber_weapon
+			}
+		}
+
+		fixed_auxiliary_weapon_slot_1 = { 
+			required = no
+			allowed_module_categories = {
+				starfighter_weapon
+				starbomber_weapon
+			}
+		}
+
+		engine_type_slot = {
+			required = yes
+			allowed_module_categories = {
+				starfighter_engine
+			}
+		}
+
+		special_type_slot_1 = {
+			required = no
+			allowed_module_categories = {
+				starfighter_hyperdrive
+			}
+		}
+
+		special_type_slot_2 = {
+			required = no
+			allowed_module_categories = {
+				starfighter_shields
+			}
+		}
+		special_type_slot_3 = {
+			required = yes
+			allowed_module_categories = {
+				tie_wings
+			}
+		}
+	}
+
+	
+
+	default_modules = {
+		fixed_main_weapon_slot = light_laser_mounts
+		fixed_auxiliary_weapon_slot_1 = empty
+		engine_type_slot = twin_ion_engine_1
+		special_type_slot_1 = empty
+		special_type_slot_2 = empty
+		special_type_slot_3 = tie_ln_wings
+	}
+}
+
+tie_fighter_airframe_0 = { #Inter-War
+	abbreviation = "afs0"
+	year = 4
+
+	archetype = tie_fighter_airframe
+	module_slots = inherit
+	priority = 5
+}
+tie_fighter_airframe_1 = { #Inter-War
+	abbreviation = "afs0"
+	year = 6
+
+	archetype = tie_fighter_airframe
+	parent = tie_fighter_airframe_0
+	module_slots = inherit
+	priority = 5
+	reliability = 0.8
+	naval_strike_attack = 1
+	naval_strike_targetting = 1
+	lend_lease_cost = 2
+	air_range = 3000
+	maximum_speed = 10
+	air_agility = 50
+	air_defence = 4
+	weight = 3
+	build_cost_ic = 5
+}
+tie_fighter_airframe_2 = { #Inter-War
+	abbreviation = "afs0"
+	year = 6
+
+	archetype = tie_fighter_airframe
+	parent = tie_fighter_airframe_1
+	module_slots = inherit
+	priority = 5
+	reliability = 0.85
+	naval_strike_attack = 1
+	naval_strike_targetting = 1
+	lend_lease_cost = 2
+	air_range = 3000
+	maximum_speed = 20
+	air_agility = 55
+	air_defence = 5
+	weight = 3
+	build_cost_ic = 6
+}
+tie_interceptor_airframe_0 = { #Inter-War
+	abbreviation = "afs0"
+	year = 4
+
+	archetype = tie_fighter_airframe
+	parent = tie_fighter_airframe_0
+	module_slots = inherit
+	priority = 5
+	default_modules = {
+		fixed_main_weapon_slot = light_laser_mounts
+		fixed_auxiliary_weapon_slot_1 = light_laser_mounts
+		engine_type_slot = twin_ion_engine_2
+		special_type_slot_1 = empty
+		special_type_slot_2 = empty
+		special_type_slot_3 = tie_in_wings
+	}
+}
+tie_interceptor_airframe_1 = { #Inter-War
+	abbreviation = "afs0"
+	year = 4
+
+	archetype = tie_fighter_airframe
+	parent = tie_fighter_airframe_1
+	module_slots = inherit
+	priority = 5
+	default_modules = {
+		fixed_main_weapon_slot = light_laser_mounts
+		fixed_auxiliary_weapon_slot_1 = light_laser_mounts
+		engine_type_slot = twin_ion_engine_2
+		special_type_slot_1 = starfighter_hyperdrive_cl5
+		special_type_slot_2 = starfighter_sr5
+		special_type_slot_3 = tie_in_wings
+	}
+}
+tie_interceptor_airframe_2 = { #Inter-War
+	abbreviation = "afs0"
+	year = 4
+
+	archetype = tie_fighter_airframe
+	parent = tie_fighter_airframe_2
+	module_slots = inherit
+	priority = 5
+	default_modules = {
+		fixed_main_weapon_slot = light_laser_mounts
+		fixed_auxiliary_weapon_slot_1 = light_laser_mounts
+		engine_type_slot = twin_ion_engine_2
+		special_type_slot_1 = starfighter_hyperdrive_cl5
+		special_type_slot_2 = starfighter_sr5
+		special_type_slot_3 = tie_in_wings
+	}
+}
+tie_bomber_airframe_0 = { #Inter-War
+	abbreviation = "afs0"
+	year = 4
+
+	archetype = tie_fighter_airframe
+	parent = tie_fighter_airframe_0
+	module_slots = inherit
+	priority = 5
+	default_modules = {
+		fixed_main_weapon_slot = light_laser_mounts
+		fixed_auxiliary_weapon_slot_1 = proton_torpedo_bomb_pod
+		engine_type_slot = twin_ion_engine_1
+		special_type_slot_1 = empty
+		special_type_slot_2 = empty
+		special_type_slot_3 = tie_sa_wings
+	}
+}
+
+tie_hunter_airframe_0 = { #Inter-War
+	abbreviation = "afs0"
+	year = 4
+
+	archetype = tie_fighter_airframe
+	parent = tie_fighter_airframe_1
+	module_slots = inherit
+	priority = 5
+	default_modules = {
+		fixed_main_weapon_slot = heavy_laser_mounts
+		fixed_auxiliary_weapon_slot_1 = heavy_laser_mounts
+		engine_type_slot = twin_ion_engine_2
+		special_type_slot_1 = starfighter_hyperdrive_cl4
+		special_type_slot_2 = starfighter_sr10
+		special_type_slot_3 = tie_hu_wings
+	}
+}
+tie_hunter_airframe_1 = { #Inter-War
+	abbreviation = "afs0"
+	year = 4
+
+	archetype = tie_fighter_airframe
+	parent = tie_fighter_airframe_2
+	module_slots = inherit
+	priority = 5
+	default_modules = {
+		fixed_main_weapon_slot = heavy_laser_mounts
+		fixed_auxiliary_weapon_slot_1 = heavy_laser_mounts
+		engine_type_slot = twin_ion_engine_3
+		special_type_slot_1 = starfighter_hyperdrive_cl4
+		special_type_slot_2 = starfighter_sr15
+		special_type_slot_3 = tie_hu_wings
+	}
+}
+sie_bomber_airframe = {
+	year = 4
+	is_archetype = yes
+	is_convertable = yes
+	picture = sie_bomber_equipment
+	is_buildable = no
+	type = fighter
+	type_override = fixed_main_weapon_slot
+	allowed_types = {
+		cas
+		naval_bomber
+	}
+	allow_mission_type = training
+	group_by = archetype
+	sprite = light_plane
+	carrier_capable = yes
+	air_map_icon_frame = 1
+	interface_category = interface_category_air
+	
+	interface_overview_category_index = 1
+	air_superiority = 1
+	reliability = 0.8
+	naval_strike_attack = 1
+	naval_strike_targetting = 1
+	lend_lease_cost = 2
+	air_range = 3000
+	maximum_speed = 0
+	air_agility = 45
+	air_defence = 3
+	weight = 3
+	build_cost_ic = 4.5
+		resources = {
+			aluminium = 2
+			steel = 1
+		}
+		
+		manpower = 5
+		fuel_consumption = 0.20
+
+	module_slots = {
+		fixed_main_weapon_slot = {
+			required = yes
+			allowed_module_categories = {
+				starbomber_weapon
+			}
+		}
+
+		fixed_auxiliary_weapon_slot_1 = { 
+			required = no
+			allowed_module_categories = {
+				starbomber_weapon
+			}
+		}
+		fixed_auxiliary_weapon_slot_2 = fixed_auxiliary_weapon_slot_1
+		fixed_auxiliary_weapon_slot_3 = fixed_auxiliary_weapon_slot_1
+		engine_type_slot = {
+			required = yes
+			allowed_module_categories = {
+				starbomber_engine
+			}
+		}
+
+		special_type_slot_1 = {
+			required = no
+			allowed_module_categories = {
+				starfighter_hyperdrive
+			}
+		}
+
+		special_type_slot_2 = {
+			required = no
+			allowed_module_categories = {
+				starfighter_shields
+			}
+		}
+		special_type_slot_3 = {
+			required = yes
+			allowed_module_categories = {
+				tie_wings
+			}
+		}
+	}
+
+	
+
+	default_modules = {
+		fixed_main_weapon_slot = proton_torpedo_bomb_pod
+		fixed_auxiliary_weapon_slot_1 = proton_torpedo_bomb_pod
+		fixed_auxiliary_weapon_slot_2 = empty
+		fixed_auxiliary_weapon_slot_3 = empty
+		engine_type_slot = single_ion_engine_1
+		special_type_slot_1 = empty
+		special_type_slot_2 = empty
+		special_type_slot_3 = tie_sa_wings
+	}
+}
+
+sie_bomber_airframe_0 = { #Inter-War
+	abbreviation = "afs0"
+	year = 4
+
+	archetype = sie_bomber_airframe
+	module_slots = inherit
+	priority = 5
+}
 	tie_equipment = {
 		year = 4
 
@@ -636,24 +988,24 @@ equipments = {
 			main_armament_slot = {
 				required = yes
 				allowed_module_categories = {
-				light_blaster_cannon
-				medium_blaster_cannon
-				heavy_blaster_cannon
-				light_laser_cannon
-				medium_laser_cannon
-				heavy_laser_cannon
+				light_blaster_gun
+				medium_blaster_gun
+				heavy_blaster_gun
+				light_laser_gun
+				medium_laser_gun
+				heavy_laser_gun
 				}
 			}
 
 			turret_type_slot = {
 				required = no
 				allowed_module_categories = {
-				light_blaster_cannon
-				medium_blaster_cannon
-				heavy_blaster_cannon
-				light_laser_cannon
-				medium_laser_cannon
-				heavy_laser_cannon
+				light_blaster_gun
+				medium_blaster_gun
+				heavy_blaster_gun
+				light_laser_gun
+				medium_laser_gun
+				heavy_laser_gun
 				}
 			}
 			suspension_type_slot = {
@@ -722,8 +1074,8 @@ equipments = {
 			count < 2
 		}
 		default_modules = {
-			main_armament_slot = heavy_laser_cannon_1
-			turret_type_slot = medium_blaster_cannon_1
+			main_armament_slot = heavy_laser_gun_1
+			turret_type_slot = medium_blaster_gun_1
 			suspension_type_slot = vehicle_4_leg_walker
 			armor_type_slot = empty
 			engine_type_slot = vehicle_reactor
@@ -774,19 +1126,19 @@ equipments = {
 			main_armament_slot = {
 				required = yes
 				allowed_module_categories = {
-				light_blaster_cannon
-				medium_blaster_cannon
-				heavy_blaster_cannon
-				light_laser_cannon
+				light_blaster_gun
+				medium_blaster_gun
+				heavy_blaster_gun
+				light_laser_gun
 				}
 			}
 	
 			turret_type_slot = {
 				required = no
 				allowed_module_categories = {
-				light_blaster_cannon
-				medium_blaster_cannon
-				heavy_blaster_cannon
+				light_blaster_gun
+				medium_blaster_gun
+				heavy_blaster_gun
 				}
 			}
 			suspension_type_slot = {
@@ -855,7 +1207,7 @@ equipments = {
 			count < 2
 		}
 		default_modules = {
-			main_armament_slot = heavy_blaster_cannon_1
+			main_armament_slot = heavy_blaster_gun_1
 			turret_type_slot = empty
 			suspension_type_slot = vehicle_2_leg_walker
 			armor_type_slot = empty
@@ -906,15 +1258,15 @@ equipments = {
 			main_armament_slot = {
 				required = yes
 				allowed_module_categories = {
-				light_blaster_cannon
-				medium_blaster_cannon
+				light_blaster_gun
+				medium_blaster_gun
 				}
 			}
 	
 			turret_type_slot = {
 				required = no
 				allowed_module_categories = {
-				light_blaster_cannon
+				light_blaster_gun
 				}
 			}
 			suspension_type_slot = {
@@ -983,7 +1335,7 @@ equipments = {
 			count < 2
 		}
 		default_modules = {
-			main_armament_slot = medium_blaster_cannon_1
+			main_armament_slot = medium_blaster_gun_1
 			turret_type_slot = empty
 			suspension_type_slot = vehicle_2_leg_walker
 			armor_type_slot = empty
