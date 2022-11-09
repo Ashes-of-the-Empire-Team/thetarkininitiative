@@ -2,90 +2,25 @@ evaluate_fighting_outcomes = {
 	### CURRENT SCOPE IGNORING ENEMY, THIS EFFECT DETERMINES HEALTH AND STAMINA DAMAGE AND COST FOR BOTH SIDES, IF LIST BECOMES TOO LONG ASSIGN COUNTRY FLAG TO SPECIFY IF NORMAL SPECIAL ATTACK OR SO ON AND PUT IFS WITHIN IF LIMITS TO MAKE SEARCH TIME SMALLER
 	if = {
 		limit = {
-			has_country_flag = heavy_attack
+			has_variable = bout_total_counter ### WHO EVER HAS THIS VARIABLE IS ALWAYS FIRST
 		}
-		subtract_from_variable = { total_stamina = 20 }
+		past_actions_array_remover = yes
+		read_off_actions_list = yes
 		var:rival_dueling_nation = {
-			subtract_from_variable = {bout_health = 20}
+			read_off_actions_list = yes
 		}
-	}else_if = {
-		limit = {
-			has_country_flag = normal_attack
-		}
-		subtract_from_variable = { total_stamina = 10 }
+	}else = {
 		var:rival_dueling_nation = {
-			if = {
-				limit = {
-					has_country_flag = block_attack
-				}	
-				subtract_from_variable = {bout_health = 3}
-			}else = {
-				subtract_from_variable = {bout_health = 12}
-			}
+			read_off_actions_list = yes
 		}
-	}else_if = {
-		limit = {
-			has_country_flag = do_nothing_attack
-		}
-	}else_if = {
-		limit = {
-			has_country_flag = block_attack
-		}
-		subtract_from_variable = { total_stamina = 5 }
+		read_off_actions_list = yes
 	}
-
-	var:rival_dueling_nation = { ### RIVALS ACTIONS
-		if = {
-			limit = {
-				has_country_flag = heavy_attack
-			}
-			subtract_from_variable = { total_stamina = 20 }
-			ROOT = {
-				subtract_from_variable = {bout_health = 20}
-			}
-		}else_if = {
-			limit = {
-				has_country_flag = normal_attack
-			}
-			subtract_from_variable = { total_stamina = 10 }
-			ROOT = {
-				if = {
-					limit = {
-						has_country_flag = block_attack
-					}	
-					subtract_from_variable = {bout_health = 3}
-				}else = {
-					subtract_from_variable = {bout_health = 12}
-				}
-			}
-		}else_if = {
-			limit = {
-				has_country_flag = do_nothing_attack
-			}
-		}else_if = {
-			limit = {
-				has_country_flag = block_attack
-			}
-			subtract_from_variable = { total_stamina = 5 }
-		}else_if = {
-			limit = {
-				has_country_flag = end_actions_duel
-			}
-		}
-		if = {
-			limit = {
-				has_country_flag = duel_action_ready
-			}
-			clr_country_flag = duel_action_ready
-		}
-	}
-	if = {
-		limit = {
-			has_country_flag = duel_action_ready
-		}
+	clr_country_flag = duel_action_ready
+	var:rival_dueling_nation = {
 		clr_country_flag = duel_action_ready
 	}
 }
+
 remove_all_current_actions = { ## add any new attacks to this, just a reset so you can pick a new action
 	if = {
 		limit = {
@@ -191,4 +126,83 @@ calculate_win = {
 			}
 		}
 	}
+}
+past_actions_array_remover = {
+	if = {
+		limit = {
+			has_variable = bout_total_counter
+		}
+		set_temp_variable = {array_size_counter = damage_array_holder^num}
+		if = {
+			limit = {
+				check_variable = {
+					check_variable = {
+					    var = bout_total_counter
+					    value = 4
+					    compare = greater_than_or_equals
+					}
+				}
+			}
+			remove_from_array = {
+				array = damage_array_holder
+				index = 0
+			}
+			remove_from_array = {
+				array = attack_array_holder
+				index = 0
+			}
+		}
+	}
+}
+read_off_actions_list = {
+	if = {
+		limit = {
+			has_country_flag = heavy_attack
+		}
+		subtract_from_variable = { total_stamina = 20 }
+		set_temp_variable = { damage_effect_temp_var = agent_martial@var:agent_dueling_martial} ### DAMAGE EFFECT VAR HELPS TO DISTINGUISH WHAT EFFECT THE DAMAGE IS DOING FOR LOCALISATION PURPOSES, EASILY MODDABLE
+		add_to_temp_variable = { damage_effect_temp_var = 10 }
+		set_temp_variable = { action_name_temp_var = 0 } ## SETS LOCALISATION FOR THE ATTACK NAME, EACH NUMBER IN ARRAY CORROPSONDS TO A SCRIPTED LOCALISATION, THIS WAS HORRIBLE 
+	}else_if = {
+		limit = {
+			has_country_flag = normal_attack
+		}
+		subtract_from_variable = { total_stamina = 10 }
+		if = {
+			limit = {
+				var:rival_dueling_nation = {
+					has_country_flag = block_attack
+				}
+			}	
+			subtract_from_variable = {bout_health = 2 }
+			set_temp_variable = { damage_effect_var = 2 }
+		}else = {
+			add_to_temp_variable = {damage_effect_temp_var = agent_martial@var:agent_dueling_martial}
+			add_to_temp_variable = {damage_effect_temp_var = agent_intelligence@var:agent_dueling_martial}
+			clamp_temp_variable = {
+			    var = damage_effect_temp_var
+			    max = 14
+			}
+		}
+	}else_if = {
+		limit = {
+			has_country_flag = do_nothing_attack
+			set_temp_variable = { damage_effect_var = 0 }
+		}
+	}else_if = {
+		limit = {
+			has_country_flag = block_attack
+		}
+		subtract_from_variable = { total_stamina = 5 }
+		set_temp_variable = { damage_effect_var = 0 }
+	}
+
+	############################ END OF POSSIBLE ATTACKS #########################
+	var:rival_dueling_nation = {
+		subtract_from_variable = {bout_health = damage_effect_var}
+	}
+	add_to_array = {
+	    array = damage_array_holder
+	    value = damage_effect_var
+	}	
 }

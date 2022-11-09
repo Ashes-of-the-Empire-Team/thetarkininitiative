@@ -6,7 +6,85 @@ guiTypes = {
 		moveable = yes
 		background = {
 			name = "Background"
-			quadTextureSprite ="GFX_warlord_screen"
+			quadTextureSprite ="GFX_duel_screen_background"
+		}
+		instantTextBoxType = {
+			name = "player_agent_name"
+			text = "player_name_handler"
+			position = { x = 100 y = 40 }
+			alwaystransparent = yes
+		}
+		instantTextBoxType = {
+			name = "enemy_agent_name"
+			text = "enemy_name_handler"
+			position = { x = 560 y = 40 }
+			alwaystransparent = yes
+		}
+		iconType = {
+			name = "player_health_bar"
+			quadTextureSprite = "GFX_duel_health_bar"
+			position = { x = 106 y = 293 }
+			alwaystransparent = yes
+		}
+		iconType = {
+			name = "player_stamina_bar"
+			quadTextureSprite = "GFX_duel_stamina_bar"
+			position = { x = 106 y = 336 }
+			alwaystransparent = yes
+		}
+		iconType = {
+			name = "enemy_health_bar"
+			quadTextureSprite = "GFX_duel_health_bar"
+			position = { x = 561 y = 293 }
+			alwaystransparent = yes
+		}
+		iconType = {
+			name = "enemy_stamina_bar"
+			quadTextureSprite = "GFX_duel_stamina_bar"
+			position = { x = 561 y = 336 }
+			alwaystransparent = yes
+		}
+		buttonType = {
+			name = "open_attack_slide" 
+			position = { x = 14 y = 65 }
+			spriteType = "GFX_duel_small_button"
+			orientation = UPPER_LEFT
+			shortcut = "A"
+			buttonText = "Attack"
+			buttonFont = "russo_one16"
+		}
+		buttonType = {
+			name = "open_defence_slide" 
+			position = { x = 14 y = 116 }
+			spriteType = "GFX_duel_small_button"
+			orientation = UPPER_LEFT
+			shortcut = "D"
+			buttonText = "Defend"
+			buttonFont = "russo_one16"
+		}
+		buttonType = {
+			name = "open_special_slide" 
+			position = { x = 14 y = 167 }
+			spriteType = "GFX_duel_small_button"
+			orientation = UPPER_LEFT
+			shortcut = "S"
+			buttonText = "Special"
+			buttonFont = "russo_one16"
+		}
+		buttonType = {
+			name = "end_turn_button" 
+			position = { x = 14 y = 219 }
+			spriteType = "GFX_duel_small_button"
+			orientation = UPPER_LEFT
+			buttonText = "End"
+			buttonFont = "russo_one16"
+		}
+		buttonType = {
+			name = "confirm_button" 
+			position = { x = -480 y = -100 }
+			spriteType = "GFX_exit_button"
+			orientation = LOWER_LEFT
+			shortcut = "ENTER"
 		}
 		buttonType = {
 			name = "exit_button" 
@@ -15,93 +93,111 @@ guiTypes = {
 			orientation = UPPER_RIGHT
 			shortcut = "ESCAPE"
 		}
-		buttonType = {
-			name = "open_attack_slide" 
-			position = { x = 20 y = 10 }
-			spriteType = "GFX_exit_button"
-			orientation = UPPER_LEFT
-			shortcut = "A"
+		containerWindowType = {
+			name = "past_actions_container"
+			position = { x= 310 y=202 }
+			size = { width=183 height=128 } 
+			Orientation = UPPER_LEFT
+			background = {
+				name = "Background"
+				spriteType ="GFX_tiled_window_transparent"
+			}
+			gridboxtype = {
+				name = "past_actions_grid"
+				Orientation = UPPER_LEFT
+				position = { x = 0 y = 0 }
+				slotsize = { width = 183 height = 128 }
+				max_slots_horizontal = 1
+				add_horizontal = no
+			}
 		}
-		buttonType = {
-			name = "open_defence_slide" 
-			position = { x = 20 y = 30 }
-			spriteType = "GFX_exit_button"
-			orientation = UPPER_LEFT
-			shortcut = "D"
+	}
+	containerWindowType = {
+		name = "past_actions_entry"
+		position = { x=0 y=0 }	
+		size = { width=183 height=25 } 
+		margin = { top = 10 bottom = 10 }
+		Orientation = upper_left
+		iconType = {
+			name = "past_actions_backing" 
+			position = {x=0 y=0}	
+			spriteType = "GFX_duel_past_actions_box"
 		}
-		buttonType = {
-			name = "open_special_slide" 
-			position = { x = 20 y = 50 }
-			spriteType = "GFX_exit_button"
-			orientation = UPPER_LEFT
-			shortcut = "S"
-		}
-		buttonType = {
-			name = "confirm_button" 
-			position = { x = 80 y = 10 }
-			spriteType = "GFX_exit_button"
-			orientation = LOWER_LEFT
-			shortcut = "ENTER"
+		instantTextBoxType = {
+			name = "past_actions_text"
+			text = "past_actions_handler"
+			position = { x = 0 y = 0 }
+			alwaystransparent = yes
 		}
 	}
 	containerWindowType = {
 		name = "attack_slide"
-		position = { x = 0 y = 0 }
+		position = { x = 76 y = 65 }
 		size = { width=800 height=200 }
 		moveable = no
+        show_position = {x=0 y=-65}
+        show_animation_type = decelerated
+        hide_animation_type = accelerated
+        animation_time = 300
 		background = {
 			name = "Background"
-			quadTextureSprite ="GFX_warlord_screen"
+			quadTextureSprite ="GFX_duel_actions_slider_open"
 		}
 		buttonType = {
 			name = "attack_button" 
-			position = { x = 20 y = 50 }
-			spriteType = "GFX_exit_button"
+			position = { x = 20 y = 3 }
+			spriteType = "GFX_duel_circle_grid"
 			orientation = UPPER_LEFT
 		}
 		buttonType = {
 			name = "heavy_attack_button" 
-			position = { x = 80 y = 10 }
-			spriteType = "GFX_exit_button"
-			orientation = LOWER_LEFT
+			position = { x = 80 y = 3 }
+			spriteType = "GFX_duel_circle_grid"
+			orientation = UPPER_LEFT
+		}
+		buttonType = {
+			name = "inspect_button" 
+			position = { x = 140 y = 3 }
+			spriteType = "GFX_duel_circle_grid"
+			orientation = UPPER_LEFT
 		}
 	}
 	containerWindowType = {
 		name = "defence_slide"
-		position = { x = 0 y = 0 }
+		position = { x = 76 y = 117 }
 		size = { width=800 height=200 }
 		moveable = no
 		background = {
 			name = "Background"
-			quadTextureSprite ="GFX_warlord_screen"
+			quadTextureSprite ="GFX_duel_actions_slider_open"
 		}
 		buttonType = {
 			name = "block_button" 
-			position = { x = 20 y = 50 }
-			spriteType = "GFX_exit_button"
+			position = { x = 20 y = 3 }
+			spriteType = "GFX_duel_circle_grid"
 			orientation = UPPER_LEFT
 		}
 		buttonType = {
 			name = "do_nothing_button" 
-			position = { x = 80 y = 10 }
-			spriteType = "GFX_exit_button"
-			orientation = LOWER_LEFT
+			position = { x = 80 y = 3 }
+			spriteType = "GFX_duel_circle_grid"
+			orientation = UPPER_LEFT
 		}
 		buttonType = {
-			name = "end_actions_button" 
-			position = { x = 80 y = 10 }
-			spriteType = "GFX_exit_button"
-			orientation = LOWER_LEFT
+			name = "disguise_intentions_button" 
+			position = { x = 140 y = 3 }
+			spriteType = "GFX_duel_circle_grid"
+			orientation = UPPER_LEFT
 		}
 	}
 	containerWindowType = {
 		name = "special_slide"
-		position = { x = 0 y = 0 }
+		position = { x = 76 y = 167 }
 		size = { width=800 height=200 }
 		moveable = no
 		background = {
 			name = "Background"
-			quadTextureSprite ="GFX_warlord_screen"
+			quadTextureSprite ="GFX_duel_actions_slider_open"
 		}
 	}
 }
