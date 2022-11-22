@@ -14,6 +14,18 @@ scripted_gui = {
 						limit = {
 							has_country_flag = fighter_select
 						}
+						if = {
+							limit = {
+								has_government = imperial
+							}
+							add_to_array = { Global.fighter_type = 0 }
+						}
+						if = {
+							limit = {
+								has_government = democratic
+							}
+							add_to_array = { Global.fighter_type = 1 }
+						}
 						add_to_array = { Global.gun_contract = ROOT.id }
 						add_to_array = { Global.contract_quantity = quantity_ordered }
 					}
@@ -40,6 +52,7 @@ scripted_gui = {
 			}
 			fighter_order_click = {
 				set_country_flag = fighter_select
+				add_to_array = { fighter_array = 0 }
 			}
 			bid_item_background_click = {
 				set_variable = { company_rating = var:bid_array.company_rating }
@@ -68,9 +81,9 @@ scripted_gui = {
 		}
 		triggers = {
 			fighter_order_click_enabled = {
-				NOT = {
-					has_country_flag = fighter_select
-				}
+				#NOT = {
+				#	has_country_flag = fighter_select
+				#}
 			}
 			bid_item_background_click_enabled = {
 				NOT = {
@@ -79,6 +92,9 @@ scripted_gui = {
 			}
 		}
 		properties = {
+			contract_background = {
+				image = "[GetFighterBackground]"
+			}
 			product_nation = {
 				image = "[This.GetFlag]"
 			}
@@ -87,9 +103,9 @@ scripted_gui = {
 			}
 		}
 		dynamic_lists = {
-			bid_item_grid = {
-				array = bid_array
-				entry_container = bid_item
+			fighter_grid = {
+				array = fighter_array
+				entry_container = fighter_item_entry
 				change_scope = yes
 			}
 		}
@@ -147,6 +163,7 @@ scripted_gui = {
 			item_background_click = {
 
 			}
+
 			item_button_click = {
 				set_variable = { ROOT.selected_product = i }
 				if = {
@@ -155,7 +172,7 @@ scripted_gui = {
 					}
 					set_country_flag = fighter_selected
 					set_variable = { product_price = 100 }
-					set_variable = { fighter_product_item = 0 }
+					set_variable = { fighter_product_item = token:tie_fighter_airframe_0 }
 				}
 				if = {
 					limit = {
@@ -207,6 +224,7 @@ scripted_gui = {
 				}
 			}
 		}
+	}
 		properties = {
 			contract_nation = {
 				image = "[This.GetFlag]" 
@@ -243,6 +261,7 @@ scripted_gui = {
 				clr_country_flag = droid_select_category
 				clr_country_flag = ship_select_category
 				clr_country_flag = vehicle_select_category
+				add_to_array = { product_dev_array = token:tie_fighter_airframe_0 }
 			}
 			ship_category_click = {
 				set_country_flag = ship_select_category
@@ -261,6 +280,9 @@ scripted_gui = {
 				clr_country_flag = vehicle_select_category
 				clr_country_flag = ship_select_category
 				clr_country_flag = fighter_select_category
+			}
+			product_item_select_click = {
+				set_variable = { selected_item = ROOT }
 			}
 		}
 		triggers = {
@@ -295,9 +317,9 @@ scripted_gui = {
 				check_variable = { quality_item > 4 }
 			}
 			fighter_category_click_enabled = {
-				NOT = {
-					has_country_flag = fighter_select_category
-				}
+				#NOT = {
+				#	has_country_flag = fighter_select_category
+				#}
 			}
 			ship_category_click_enabled = {
 				NOT = {
@@ -312,6 +334,48 @@ scripted_gui = {
 			droid_category_click_enabled = {
 				NOT = {
 					has_country_flag = droid_select_category
+				}
+			}
+		}
+		#dynamic_lists = {
+		#	product_dev_grid = {
+		#		array = product_dev_array
+		#		entry_container = product_item_entry
+		#		change_scope = yes
+		#	}
+		#}
+		properties = {
+			product_selected_imperial = {
+				image = "[Getimperialfighter]" 
+				}
+			}
+	}
+	imperial_fighters = {
+		context_type = player_context
+		window_name = "imperial_fighters"
+		parent_window_name = "corp_product_market"
+		visible = {
+			has_country_flag = fighter_select_category
+		}
+		effects = {
+			tie_fighter_click = {
+				set_country_flag = tie_fighter_selected
+				clr_country_flag = tie_bomber_selected
+			}
+			tie_bomber_click = {
+				clr_country_flag = tie_fighter_selected
+				set_country_flag = tie_bomber_selected
+			}
+		}
+		triggers = {
+			tie_fighter_click_enabled = {
+				NOT = {
+					has_country_flag = tie_fighter_selected
+				}
+			}
+			tie_bomber_click_enabled = {
+				NOT = {
+					has_country_flag = tie_bomber_selected
 				}
 			}
 		}
