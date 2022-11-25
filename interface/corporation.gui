@@ -23,25 +23,20 @@ guiTypes = {
 			spriteType = "GFX_higher_button"
 		}
 		buttonType = {
-			name = "place_order" 
-			position = { x = 586 y = 491 }
-			spriteType = "GFX_place_order"
-		}
-		buttonType = {
 			name = "lower_button" 
 			position = { x = 350 y = 488 }
 			spriteType = "GFX_lower_button"
 		}
 		buttonType = {
 			name = "fighter_order" 
-			position = { x = 185 y = 22 }
+			position = { x = 185 y = 52 }
 			spriteType = "GFX_fighters_button"
 		}
 		instantTextboxType = {
 			name = "quantity"
 			position = { x = 340 y = 503 }
 			font = "russo_one16_outline"
-			text = "[?quantity_to_be_bought]" 
+			text = "[?quantity_ordered]" 
 			maxWidth = 240
 			maxHeight = 30
 			format = center
@@ -50,7 +45,7 @@ guiTypes = {
 			name = "price"
 			position = { x = 340 y = 547 }
 			font = "russo_one16_outline"
-			text = "[?total_current_price]" 
+			text = "[?quantity_price]" 
 			maxWidth = 240
 			maxHeight = 30
 			format = center
@@ -104,16 +99,53 @@ guiTypes = {
 			name = "Background"
 			quadTextureSprite ="GFX_corp_screen_sell"
 		}
-
+		buttonType = {
+			name = "send_contract" 
+			position = { x = 598 y = 458 }
+			spriteType = "GFX_bid"
+		}
+		buttonType = {
+			name = "fighter_category" 
+			position = { x = 10 y = 204 }
+			spriteType = "GFX_fighters_button"
+		}
 		buttonType = {
 			name = "fighter_add" 
-			position = { x = 110 y = 04 }
+			position = { x = 110 y = 204 }
 			spriteType = "GFX_fighters_button"
+		}
+		buttonType = {
+			name = "higher_button_corporate_factory" 
+			position = { x = 228 y = 505 }
+			spriteType = "GFX_higher_button"
+		}
+		buttonType = {
+			name = "lower_button_corporate_factory" 
+			position = { x = 50 y = 505 }
+			spriteType = "GFX_lower_button"
+		}
+		instantTextboxType = {
+			name = "price_markup"
+			position = { x = 240 y = 230 }
+			font = "russo_one14"
+			text = "[?product_price]" 
+			maxWidth = 240
+			maxHeight = 30
+			format = center
+		}
+		instantTextboxType = {
+			name = "fighter_desc"
+			position = { x = 240 y = 330 }
+			font = "russo_one14"
+			text = "[GetFighterDesc]"
+			maxWidth = 240
+			maxHeight = 30
+			format = center
 		}
 		containerWindowType = {
 			name = "contract_grid_container"
-			position = { x=10 y=73 }
-			size = { width=385 height=456 } 
+			position = { x=21 y=73 }
+			size = { width=452 height=189 } 
 			margin = { top = 10 bottom = 10 }
 	
 			verticalScrollbar = "right_vertical_slider"
@@ -126,9 +158,24 @@ guiTypes = {
 	
 			gridboxtype = {
 				name = "contract_grid"
-				position = { x = 41 y = 0 }
-				slotsize = { width = 80 height = 64 }
-				max_slots_horizontal = 1
+				position = { x = 33 y = 0 }
+				slotsize = { width = 80 height = 84 }
+				max_slots_horizontal = 5
+			}
+		}
+		containerWindowType = {
+			name = "product_item"
+			position = { x = 37 y = 290 } #990
+	
+			buttonType = {
+				name = "item_background" 
+				position = { x = 0 y = 0 }
+				spriteType = "GFX_item_background"
+			}
+			buttonType = {
+				name = "item_button" 
+				position = { x = -9 y = 15 }
+				spriteType = "GFX_tie_fighter_medium"
 			}
 		}
 	}
@@ -141,16 +188,6 @@ guiTypes = {
 		background = {
 			name = "Background"
 			quadTextureSprite ="GFX_product_screen"
-		}
-		buttonType = {
-			name = "higher_button_product" 
-			position = { x = 478 y = 325 }
-			spriteType = "GFX_higher_button"
-		}
-		buttonType = {
-			name = "lower_button_product" 
-			position = { x = 275 y = 325 }
-			spriteType = "GFX_lower_button"
 		}
 		buttonType = {
 			name = "empire_button" 
@@ -213,16 +250,6 @@ guiTypes = {
 			quadTextureSprite = "GFX_vehicle_category"
 		}
 		buttonType = {
-			name = "research_button" 
-			position = { x = 265 y = 456 }
-			quadTextureSprite = "GFX_research_product"
-		}
-		buttonType = {
-			name = "flagship_button" 
-			position = { x = 549 y = 222 }
-			quadTextureSprite = "GFX_flagship_product"
-		}
-		buttonType = {
 			name = "production_choice" 
 			position = { x = 320 y = 159 }
 			quadTextureSprite = "GFX_big_button_production"
@@ -231,7 +258,7 @@ guiTypes = {
 			name = "product"
 			position = { x = 280 y = 50 }
 			font = "russo_one16_outline"
-			text = "[Getimperialfighter_name]" 
+			text = "Tie Defender" 
 			maxWidth = 240
 			maxHeight = 30
 			format = center
@@ -256,27 +283,9 @@ guiTypes = {
 		}
 		instantTextboxType = {
 			name = "price"
-			position = { x = 278 y = 341 }
+			position = { x = 280 y = 348 }
 			font = "russo_one16_outline"
-			text = "[Getimperialfighter_price]" 
-			maxWidth = 240
-			maxHeight = 30
-			format = center
-		}
-		instantTextboxType = {
-			name = "markup"
-			position = { x = 278 y = 328 }
-			font = "russo_one16_outline"
-			text = "Markup: [?product_set_markup|%]" 
-			maxWidth = 240
-			maxHeight = 30
-			format = center
-		}
-		instantTextboxType = {
-			name = "price_developed"
-			position = { x = 278 y = 350 }
-			font = "russo_one16_outline"
-			text = "Price: [?actual_price] ([?base_price])" 
+			text = "Price: 1000$" 
 			maxWidth = 240
 			maxHeight = 30
 			format = center
@@ -341,43 +350,42 @@ guiTypes = {
 		}
 	}
 	containerWindowType = {
-		name = "contract_item"
+		name = "bid_item"
 		position = { x = 0 y = 0 } #990
 		
 		buttonType = {
 			name = "bid_item_background" 
 			position = { x = 0 y = 0 }
-			spriteType = "GFX_corp_contract_empty"
+			spriteType = "GFX_corp_entry"
 		}
 		buttonType = {
 			name = "product_nation" 
-			position = { x = 300 y = 18 }
+			position = { x = 10 y = 10 }
 			quadTextureSprite = "GFX_flag_small2"
 		}
 		iconType = {
 			name = "member_flag_border"
 			quadTextureSprite = "GFX_diplo_countrylist_flag_frame"
-			position = { x = 295 y = 15 }
+			position = { x = 5 y = 6 }
 			alwaystransparent = yes
 		}
 		instantTextboxType = {
 			name = "price"
-			position = { x = 110 y = 13 }
+			position = { x = 60 y = 13 }
 			font = "russo_one14"
-			text = "Value: [?ROOT.bid_array_price^i]" 
+			text = "Price: [?ROOT.bid_array_price^i]" 
+			maxWidth = 240
+			maxHeight = 30
 			format = left
 		}
 		instantTextboxType = {
 			name = "delivery_date"
-			position = { x = 110 y = 35 }
+			position = { x = 145 y = 13 }
 			font = "russo_one14"
 			text = "Time: [?ROOT.bid_array_item^i]" 
+			maxWidth = 240
+			maxHeight = 30
 			format = left
-		}
-		buttonType = {
-			name = "contract_item_icon"
-			quadTextureSprite = "GFX_tie_interceptor_medium"
-			position = { x = -10 y = 10 }
 		}
 	}
 	containerWindowType = {
@@ -393,33 +401,32 @@ guiTypes = {
 			name = "item_name"
 			position = { x = -46 y = 69 }
 			font = "russo_one16_outline"
-			text = "[GetFighteNameMarket]" 
+			text = "TIE Fighter" 
 			maxWidth = 240
 			maxHeight = 30
 			format = center
 		}
 		buttonType = {
 			name = "contract_nation" 
-			position = { x = 52 y = 85 }
+			position = { x = 53 y = 85 }
 			quadTextureSprite = "GFX_flag_small2"
 		}
 		buttonType = {
 			name = "overlay" 
 			position = { x = 47 y = 82 }
 			quadTextureSprite = "GFX_flag_overlay_product"
-			pdx_tooltip = "[This.GetName]"
 		}
 		instantTextboxType = {
 			name = "price"
 			position = { x = -49 y = 123 }
 			font = "russo_one16_outline"
-			text = "[?Global.imperial_fighters_price_per_unit_array^i]" 
+			text = "7" 
 			maxWidth = 240
 			maxHeight = 30
 			format = center
 		}
 		buttonType = {
-			name = "fighter_type" 
+			name = "tie_fighter" 
 			position = { x = 25 y = 17 }
 			spriteType = "GFX_tie_fighter_medium"
 		}

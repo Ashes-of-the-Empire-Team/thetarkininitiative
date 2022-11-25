@@ -7,71 +7,104 @@ scripted_gui = {
            has_country_flag = corp_buy
 		}
 		effects = {
-			fighter_background_click = {
-				ROOT = { 
-					set_variable = { selected_item = i }
-					set_variable = { total_current_price = Global.imperial_fighters_price_per_unit_array^i }
-					set_variable = { calc_price = total_current_price }
-					multiply_variable = { total_current_price = quantity_to_be_bought }
-				}
-			}
-			higher_button_click = {
-				add_to_variable = { quantity_to_be_bought = 100 }
-				set_variable = { calc_price_math = calc_price }
-				set_variable = { total_current_price = 0 }
-				multiply_variable = { calc_price_math = quantity_to_be_bought }
-				set_variable = { total_current_price = calc_price_math }
-			}
-			lower_button_click = {
-				subtract_from_variable = { quantity_to_be_bought = 100 }
-				set_variable = { calc_price_math = calc_price }
-				set_variable = { total_current_price = 0 }
-				multiply_variable = { calc_price_math = quantity_to_be_bought }
-				set_variable = { total_current_price = calc_price_math }
-			}
-			overlay_click = {
-				capital_scope = {
-					ROOT = {
-						goto_state = PREV
+			issue_order_click = {
+				log ="quantity ordered: [?quantity_ordered]"
+				ROOT = {
+					if = {
+						limit = {
+							has_country_flag = fighter_select
+						}
+						if = {
+							limit = {
+								has_government = imperial
+							}
+							add_to_array = { Global.fighter_type = 0 }
+						}
+						if = {
+							limit = {
+								has_government = democratic
+							}
+							add_to_array = { Global.fighter_type = 1 }
+						}
+						add_to_array = { Global.gun_contract = ROOT.id }
+						add_to_array = { Global.contract_quantity = quantity_ordered }
 					}
 				}
+				add_political_power = 1
+				log ="quantity ordered: [?quantity_ordered]"
 			}
-			place_order_click = {
-				ROOT = {
-					subtract_from_variable = { currency_amount^primary_currency = total_current_price }
+			buy_order_click = {
+				add_to_array = { var:bid_array.active_fighter_contracts = ROOT.id }
+				add_to_array = { var:bid_array.fighter_type_contract = ROOT.selected_fighter }
+				add_to_array = { var:bid_array.fighter_contract_quantity = bid_array_delivery_quantity^i }
+				add_to_variable = { var:bid_array.currency_amount^primary_currency = bid_array_price^i }
+			}
+			exit_button_click = {
+				clear_array = bid_array
+				clear_array = bid_array_price
+				clear_array = bid_array_item
+			}
+			higher_button_click = {
+				add_to_variable = { quantity_ordered = 100 }
+			}
+			lower_button_click = {
+				subtract_from_variable = { quantity_ordered = 100 }
+			}
+			fighter_order_click = {
+				set_country_flag = fighter_select
+				add_to_array = { fighter_array = 0 }
+			}
+			bid_item_background_click = {
+				set_variable = { company_rating = var:bid_array.company_rating }
+				set_variable = { ROOT.selected_bid = i }
+				set_variable = { contract_tag = bid_array^selected_bid }
+				set_variable = { company_rating = var:contract_tag.company_rating }
+				if = {
+					limit = {
+						check_variable = { ROOT.bid_array_item^i = 0 }
+					}
+					set_variable = { ROOT.selected_fighter = 0 }
 				}
-				THIS = {
-					add_to_variable = { currency_amount^primary_currency = total_current_price }
-					add_to_array = { current_contracts_quantity = PREV.quantity_to_be_bought }
-					add_to_array = { current_contracts_tag = PREV.id }
-					add_to_array = { current_contracts_item = PREV.Global.imperial_fighters_array^i }
+				if = {
+					limit = {
+						check_variable = { ROOT.bid_array_item^i = 1 }
+					}
+					set_variable = { ROOT.selected_fighter = 1 }
+				}
+				if = {
+					limit = {
+						check_variable = { ROOT.bid_array_item^i = 2 }
+					}
+					set_variable = { ROOT.selected_fighter = 2 }
 				}
 			}
 		}
 		triggers = {
-			fighter_background_click_enabled = {
-				NOT = {
-					check_variable = { Root.selected_item = i }
-				}
+			fighter_order_click_enabled = {
+				#NOT = {
+				#	has_country_flag = fighter_select
+				#}
 			}
-			lower_button_click_enabled = {
-				check_variable = { quantity_to_be_bought > 0 }
+			bid_item_background_click_enabled = {
+				NOT = {
+					check_variable = { ROOT.selected_bid = i }
+				}
 			}
 		}
 		properties = {
 			contract_background = {
 				image = "[GetFighterBackground]"
 			}
-			contract_nation = {
+			product_nation = {
 				image = "[This.GetFlag]"
 			}
-			fighter_type = {
-				image = "[GetFighterProduct]"
+			item_showcase = {
+				image = "[GetFighterShowcase]"
 			}
 		}
 		dynamic_lists = {
 			fighter_grid = {
-				array = Global.imperial_fighters_tag_array
+				array = fighter_array
 				entry_container = fighter_item_entry
 				change_scope = yes
 			}
@@ -84,16 +117,117 @@ scripted_gui = {
 			has_country_flag = corp_sell
 		}
 		effects = {
+			exit_button_click = {
+			}
+			fighter_category_click = {
+				set_country_flag = fighter_select_category
+			}
+			higher_button_corporate_factory_click = {
+				add_to_variable = { corp_factory_used = 1 }
+			}
+			lower_button_corporate_factory_click = {
+				subtract_from_variable = { corp_factory_used = 1 }
+			}
+			contract_background_click = {
+				set_variable = { ROOT.selected_contract = i }
+				set_variable = { ROOT.current_contract_quantity = i }
+				set_variable = { ROOT.array_index = i }
+				set_variable = { contract_quantity = Global.contract_quantity^i }
+			}
+			price_up_click = {
+				add_to_variable = { contract_price = 100 }
+			}
+			send_contract_click = {
+				add_political_power = 1
+				set_variable = { contract_tag = Global.gun_contract^array_index }
+				set_variable = { fighter_product_item = fighter_product_item }
+				  var:contract_tag = {
+					add_to_array = {
+						array = bid_array
+						value = ROOT.id
+					}
+					add_to_array = {
+						array = bid_array_price
+						value = PREV.product_price
+					}
+					add_to_array = {
+						array = bid_array_delivery_quantity
+						value = contract_quantity
+					}
+					add_to_array = {
+						array = bid_array_item
+						value = PREV.fighter_product_item
+					}
+				}
+			}
+			item_background_click = {
+
+			}
+
+			item_button_click = {
+				set_variable = { ROOT.selected_product = i }
+				if = {
+					limit = {
+						check_variable = { fighter_product_array^i = 0 }
+					}
+					set_country_flag = fighter_selected
+					set_variable = { product_price = 100 }
+					set_variable = { fighter_product_item = token:tie_fighter_airframe_0 }
+				}
+				if = {
+					limit = {
+						check_variable = { fighter_product_array^i = 1 }
+					}
+					set_country_flag = fighter_selected
+					set_variable = { product_price = 120 }
+					set_variable = { fighter_product_item = 1 }
+				}
+				if = {
+					limit = {
+						check_variable = { fighter_product_array^i = 2 }
+					}
+					set_country_flag = fighter_selected
+					set_variable = { product_price = 150 }
+					set_variable = { fighter_product_item = 2 }
+				}
+			}
 			fighter_add_click = {
+				clear_array = fighter_product_array
 				add_to_array = { fighter_product_array = 0 }
+				add_to_array = { fighter_product_array = 1 }
+				add_to_array = { fighter_product_array = 2 }
 			}
 		}
 		triggers = {
+			contract_nation_click_enabled = {
+				NOT = {
+					check_variable = { ROOT.selected_contract = i }
+				}
+			}
+			item_button_click_enabled = {
+				NOT = {
+					check_variable = { ROOT.selected_product = i }
+				}
+			}
+			fighter_category_click_enabled = {
+				NOT = {
+					has_country_flag = fighter_select_category
+				}
+			}
+			lower_button_corporate_factory_click_enabled = {
+				NOT = {
+					check_variable = { ROOT.corp_factory_used = 0 }
+				}
+			higher_button_corporate_factory_click_enabled = {
+				NOT = {
+					check_variable = { ROOT.corp_factory_used > total_corp_factories }
+				}
+			}
 		}
-
+	}
 		properties = {
 			contract_nation = {
-				image = "[?v.GetFlag]" 
+				image = "[This.GetFlag]" 
 				}
 			item_button = {
 				image = "[GetFighterProduct]" 
@@ -101,9 +235,14 @@ scripted_gui = {
 			}
 		dynamic_lists = {
 			contract_grid = {
-				array = fighter_product_array
+				array = Global.gun_contract
 				entry_container = contract_item
 				change_scope = yes
+			}
+			contract_item_sell_grid = {
+				array = fighter_product_array
+				entry_container = product_item
+				change_scope = no
 			}
 		}
 	}
@@ -145,111 +284,8 @@ scripted_gui = {
 			product_item_select_click = {
 				set_variable = { selected_item = ROOT }
 			}
-			research_button_click = {
-				if = {
-					limit = {
-						has_country_flag = tie_fighter_selected
-					}
-					set_country_flag = {
-						flag = tie_fighter_development
-						days = 180
-					}
-					set_country_flag = tie_fighter_researched
-				}
-				if = {
-					limit = {
-						has_country_flag = tie_bomber_selected
-					}
-					set_country_flag = {
-						flag = tie_bomber
-						days = 180
-					}
-					set_country_flag = tie_bomber_researched
-				}
-			}
-			flagship_button_click = {
-				if = {
-					limit = {
-						has_country_flag = tie_fighter_selected
-					}
-					for_each_loop = {
-						array = global.imperial_fighters_tag_array
-						value = v
-							if = {
-							 		limit = { tag = var:v }
-							  remove_from_array = {
-								array = Global.imperial_fighters_tag_array
-								index = i
-							}
-							remove_from_array = {
-								array = Global.imperial_fighters_array
-								index = i
-							}
-							remove_from_array = {
-								array = Global.imperial_fighters_price_per_unit_array
-								index = i
-							}
-						}
-					}
-					add_to_array = { Global.imperial_fighters_tag_array = ROOT.id }
-					add_to_array = { Global.imperial_fighters_array = 0 }
-					add_to_array = { Global.imperial_fighters_price_per_unit_array = actual_price }
-				}
-				if = {
-					limit = {
-						has_country_flag = tie_bomber_selected
-					}
-					for_each_loop = {
-						array = global.imperial_fighters_tag_array
-						value = v
-							if = {
-							 	limit = { tag = var:v }
-							  remove_from_array = {
-								array = Global.imperial_fighters_tag_array
-								index = i
-							}
-							remove_from_array = {
-								array = Global.imperial_fighters_array
-								index = i
-							}
-							remove_from_array = {
-								array = Global.imperial_fighters_price_per_unit_array
-								index = i
-							}
-						}
-					}
-					add_to_array = { Global.imperial_fighters_tag_array = ROOT.id }
-					add_to_array = { Global.imperial_fighters_array = 1 }
-					add_to_array = { Global.imperial_fighters_price_per_unit_array = actual_price }
-				}
-			}
-			higher_button_product_click = {
-				add_to_variable = { product_set_markup = 0.1 }
-				set_variable = { actual_price = base_price }
-				set_variable = { product_markup = product_set_markup }
-				add_to_variable = { product_markup = 1 }
-				multiply_variable = { actual_price = product_markup }
-			}
-			lower_button_product_click = {
-				subtract_from_variable = { product_set_markup = 0.1 }
-				set_variable = { actual_price = base_price }
-				set_variable = { product_markup = product_set_markup }
-				add_to_variable = { product_markup = 1 }
-				multiply_variable = { actual_price = product_markup }
-			}
 		}
 		triggers = {
-			price_visible = {
-				has_country_flag = not_developed
-			}
-			markup_visible = {
-				NOT = {
-					has_country_flag = not_developed
-				}
-			}
-			lower_button_product_click_enabled = {
-				check_variable = { actual_price > 1 }
-			}
 			efficiency_red_button_1_click_enabled = {
 				check_variable = { efficiency_item > 0 }
 			}
@@ -323,12 +359,10 @@ scripted_gui = {
 		}
 		effects = {
 			tie_fighter_click = {
-				set_variable = { base_price = 5 }
 				set_country_flag = tie_fighter_selected
 				clr_country_flag = tie_bomber_selected
 			}
 			tie_bomber_click = {
-				set_variable = { base_price = 7 }
 				clr_country_flag = tie_fighter_selected
 				set_country_flag = tie_bomber_selected
 			}
