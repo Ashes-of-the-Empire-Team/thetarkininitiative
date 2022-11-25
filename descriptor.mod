@@ -14,9 +14,6 @@ tags={
 	"Technologies"
 	"Utilities"
 }
-replace_path="common/technologies"
-replace_path="common/units"
-replace_path="common/units/equipment"
 replace_path="common/ai_equipment"
 replace_path="common/ai_focuses"
 replace_path="common/ai_strategy"
