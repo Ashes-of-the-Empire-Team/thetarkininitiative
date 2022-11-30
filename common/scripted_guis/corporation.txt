@@ -7,28 +7,12 @@ scripted_gui = {
            has_country_flag = corp_buy
 		}
 		effects = {
-			issue_order_click = {
-				log ="quantity ordered: [?quantity_ordered]"
+			fighter_background_click = {
 				ROOT = {
-					if = {
-						limit = {
-							has_country_flag = fighter_select
-						}
-						if = {
-							limit = {
-								has_government = imperial
-							}
-							add_to_array = { Global.fighter_type = 0 }
-						}
-						if = {
-							limit = {
-								has_government = democratic
-							}
-							add_to_array = { Global.fighter_type = 1 }
-						}
-						add_to_array = { Global.gun_contract = ROOT.id }
-						add_to_array = { Global.contract_quantity = quantity_ordered }
-					}
+					set_variable = { selected_item = i }
+					set_variable = { total_current_price = Global.imperial_fighters_price_per_unit_array^i }
+					set_variable = { calc_price = total_current_price }
+					multiply_variable = { total_current_price = quantity_to_be_bought }
 				}
 				add_political_power = 1
 				log ="quantity ordered: [?quantity_ordered]"
@@ -317,9 +301,9 @@ scripted_gui = {
 				check_variable = { quality_item > 4 }
 			}
 			fighter_category_click_enabled = {
-				#NOT = {
-				#	has_country_flag = fighter_select_category
-				#}
+				NOT = {
+					has_country_flag = fighter_select_category
+				}
 			}
 			ship_category_click_enabled = {
 				NOT = {
