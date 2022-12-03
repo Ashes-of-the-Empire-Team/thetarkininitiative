@@ -82,17 +82,25 @@ class UI(tkinter.Frame):
 		self.manual_provinces_box.grid(row = 7, column = 0, sticky = "w", padx = 160)
 
 		self.enter_terrain_label = tkinter.Label(self)
-		self.enter_terrain_label["text"] = "Continent:"
+		self.enter_terrain_label["text"] = "Terrain Type:"
 		self.enter_terrain_label.grid(row = 8, column = 0, sticky = "w", pady = 0, padx = 0)
 
 		self.enter_terrain_box = tkinter.Entry(self, width=50)
 		self.enter_terrain_box.insert(0, "")
 		self.enter_terrain_box.grid(row = 8, column = 0, sticky = "w", padx = 160)
 
+		self.enter_continent_label = tkinter.Label(self)
+		self.enter_continent_label["text"] = "Continent #:"
+		self.enter_continent_label.grid(row = 9, column = 0, sticky = "w", pady = 0, padx = 0)
+
+		self.enter_continent_box = tkinter.Entry(self, width=50)
+		self.enter_continent_box.insert(0, "")
+		self.enter_continent_box.grid(row = 9, column = 0, sticky = "w", padx = 160)
+
 		self.modify_terrain_file_output = tkinter.Button(self)
 		self.modify_terrain_file_output["text"] = "Modify Terrain File"
 		self.modify_terrain_file_output["command"] = self.modify_terrain_file
-		self.modify_terrain_file_output.grid(row = 9, column = 0, sticky = "w", padx = 0)
+		self.modify_terrain_file_output.grid(row = 10, column = 0, sticky = "w", padx = 0)
 
 	def modify_terrain_file(self):
 
@@ -163,7 +171,9 @@ class UI(tkinter.Frame):
 					elif semicolon_count == 6 and line[f] == ";":
 
 						new_line += self.enter_terrain_box.get()
-						new_line += ";1\n"
+						new_line += ";"
+						new_line += self.enter_continent_box.get()
+						new_line += "\n"
 						break
 				
 				terrain_file_write.write(new_line)
@@ -357,7 +367,7 @@ class UI(tkinter.Frame):
 
 
 root = tkinter.Tk()
-root.geometry("750x375")
+root.geometry("750x395")
 root.title("HOI4 Terrain Editor v2.0")
 #root.call('wm', 'iconphoto', root._w, tkinter.PhotoImage(file='/Users/Miles/Documents/HOI4 Terrain Editor v2.0/icon.png'))
 app = UI(master=root)
