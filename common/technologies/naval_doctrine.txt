@@ -150,7 +150,7 @@ technologies = {
 		naval_morale_factor = 0.2
 		convoy_escort_efficiency = 0.2
 		path = {
-			leads_to_tech = departmental_oversight
+			leads_to_tech = one_fleet_one_chance
 			research_cost_coeff = 1
 		}
 		doctrine = yes
@@ -197,6 +197,10 @@ technologies = {
 			leads_to_tech = departmental_oversight
 			research_cost_coeff = 1
 		}
+		path = {
+			leads_to_tech = a_veterans_navy
+			research_cost_coeff = 1
+		}
 		doctrine = yes
 		xp_research_type = navy
 		xp_unlock_cost = 100
@@ -229,7 +233,7 @@ technologies = {
 		}
 		folder = {
 			name = naval_doctrine_folder
-			position = { x = -4 y = 13 }
+			position = { x = -5 y = 13 }
 		}
 	}
 	independant_operations = { ## spotting chance and org bonuses 
@@ -242,12 +246,8 @@ technologies = {
 		heavy_cruiser = {
 			max_organisation = 10			
 		}
-		strike_force_movement_org_loss = 0.3
+		strike_force_movement_org_loss = 0.1
 		spotting_chance = 0.1
-		path = {
-			leads_to_tech = a_veterans_navy
-			research_cost_coeff = 1
-		}
 		doctrine = yes
 		xp_research_type = navy
 		xp_unlock_cost = 100
@@ -259,7 +259,7 @@ technologies = {
 		}
 		folder = {
 			name = naval_doctrine_folder
-			position = { x = -4 y = 15 }
+			position = { x = -5 y = 15 }
 		}
 	}
 	a_veterans_navy = { ## experiance gain, small ships org
@@ -288,7 +288,7 @@ technologies = {
 		}
 		folder = {
 			name = naval_doctrine_folder
-			position = { x = -4 y = 17 }
+			position = { x = -3 y = 13 }
 		}
 	}
 	off_balance_their_defences = { ## port_strike_gain, capital_ship org
@@ -309,7 +309,7 @@ technologies = {
 		}
 		folder = {
 			name = naval_doctrine_folder
-			position = { x = -4 y = 19 }
+			position = { x = -3 y = 15 }
 		}
 	}
 	### STATELESS AND SUBSURSIVE NAVY
@@ -358,7 +358,7 @@ technologies = {
 	modulearised_components = { 
 		air_equipment_upgrade_xp_cost = -0.3
 		naval_equipment_upgrade_xp_cost = -0.3
-		navy_refit_speed = 0.2
+		navy_refit_ic_cost = 0.2
 		path = {
 			leads_to_tech = make_the_cost_too_great
 			research_cost_coeff = 1
@@ -711,6 +711,10 @@ technologies = {
 			leads_to_tech = snubfighter_superemcy
 			research_cost_coeff = 1
 		}
+		path = {
+			leads_to_tech = simplified_communication_protocols
+			research_cost_coeff = 1
+		}
 		doctrine = yes
 		xp_research_type = navy
 		xp_unlock_cost = 100
@@ -730,7 +734,7 @@ technologies = {
 		air_superiority_detect_factor = 0.05
 		air_superiority_efficiency = 0.15
 		path = {
-			leads_to_tech = simplified_communication_protocols
+			leads_to_tech = light_torpedo_ships
 			research_cost_coeff = 1
 		}
 		doctrine = yes
@@ -745,7 +749,7 @@ technologies = {
 		
 		folder = {
 			name = naval_doctrine_folder
-			position = { x = 2 y = 8 }
+			position = { x = 1 y = 8 }
 		}
 	}
 	simplified_communication_protocols = { 
@@ -768,7 +772,7 @@ technologies = {
 		
 		folder = {
 			name = naval_doctrine_folder
-			position = { x = 2 y = 10 }
+			position = { x = 3 y = 8 }
 		}
 	}
 	light_torpedo_ships = {
@@ -790,7 +794,7 @@ technologies = {
 		
 		folder = {
 			name = naval_doctrine_folder
-			position = { x = 2 y = 12 }
+			position = { x = 2 y = 10 }
 		}
 	}
 	critical_subsystem_protection = {
@@ -812,14 +816,13 @@ technologies = {
 		
 		folder = {
 			name = naval_doctrine_folder
-			position = { x = 2 y = 14 }
+			position = { x = 2 y = 12 }
 		}
 	}
 	promoted_air_and_naval_academies = {
 		experience_gain_navy_unit_factor = 0.3
 		air_ace_generation_chance_factor = 0.25
-		air_agility_factor = 0.2
-		positioning = 0.2
+		air_agility_factor = 0.10
 
 		doctrine = yes
 		xp_research_type = navy
@@ -833,7 +836,7 @@ technologies = {
 		
 		folder = {
 			name = naval_doctrine_folder
-			position = { x = 2 y = 16 }
+			position = { x = 2 y = 14 }
 		}
 	}
 	## OBSIDO DOCTRINE AND REPUBLIC
@@ -1181,7 +1184,7 @@ technologies = {
 			max_organisation = 10
 		}
 		path = {
-			leads_to_tech = quantity_based_quotas
+			leads_to_tech = combined_tractor_beam_operations
 			research_cost_coeff = 1
 		}
 		doctrine = yes
@@ -1199,27 +1202,6 @@ technologies = {
 			position = {x = 14 y = 8 }
 		}
 	} 
-	quantity_based_quotas = {  ## CHANGE_ME, need to figure out money and IC to change
-				
-		path = {
-			leads_to_tech = combined_tractor_beam_operations
-			research_cost_coeff = 1
-		}
-		doctrine = yes
-		xp_research_type = navy
-		xp_unlock_cost = 100
-
-		research_cost = 3
-		
-		categories = {
-			naval_doctrine
-		}
-		
-		folder = {
-			name = naval_doctrine_folder
-			position = {x = 14 y = 10 }
-		}
-	}
 	combined_tractor_beam_operations = { 
 		convoy_raiding_efficiency_factor = 0.20
 		light_cruiser = {
@@ -1229,6 +1211,10 @@ technologies = {
 		destroyer = {
 			max_organisation = 10
 			surface_detection = 0.05
+		}
+		path = {
+			leads_to_tech = conservation_of_materials
+			research_cost_coeff = 1
 		}
 		path = {
 			leads_to_tech = massed_air_strikes
@@ -1246,20 +1232,14 @@ technologies = {
 		
 		folder = {
 			name = naval_doctrine_folder
-			position = {x = 14 y = 12 }
+			position = {x = 14 y = 10 }
 		}
 	}
 	massed_air_strikes = { 
 		air_superiority_efficiency = 0.15
 		air_mission_xp_gain_factor = 0.05
-		battleship = {
-			max_organisation = 8	
-		}
-		battle_cruiser = {
-			max_organisation = 8			
-		}
 		path = {
-			leads_to_tech = conservation_of_materials
+			leads_to_tech = quantity_based_quotas
 			research_cost_coeff = 1
 		}
 		doctrine = yes
@@ -1274,7 +1254,7 @@ technologies = {
 		
 		folder = {
 			name = naval_doctrine_folder
-			position = {x = 14 y = 14 }
+			position = {x = 15 y = 12 }
 		}
 	}
 	conservation_of_materials = { 
@@ -1285,6 +1265,31 @@ technologies = {
 		}
 		battle_cruiser = {
 			max_organisation = 8			
+		}
+		path = {
+			leads_to_tech = quantity_based_quotas
+			research_cost_coeff = 1
+		}
+		doctrine = yes
+		xp_research_type = navy
+		xp_unlock_cost = 100
+
+		research_cost = 3
+		
+		categories = {
+			naval_doctrine
+		}
+		
+		folder = {
+			name = naval_doctrine_folder
+			position = {x = 13 y = 12 }
+		}
+	}
+	quantity_based_quotas = {  ## CHANGE_ME, need to figure out money and IC to change
+				
+		path = {
+			leads_to_tech = combined_tractor_beam_operations
+			research_cost_coeff = 1
 		}
 		doctrine = yes
 		xp_research_type = navy
@@ -1332,7 +1337,7 @@ technologies = {
 		
 		folder = {
 			name = naval_doctrine_folder
-			position = { x = 10 y = 20 }
+			position = { x = 0 y = 20 }
 		}
 	}
 	######## AIR TREE #############
@@ -1517,7 +1522,7 @@ technologies = {
 		
 		folder = {
 			name = naval_doctrine_folder
-			position = { x = 4 y = 24 }
+			position = { x = 7 y = 24 }
 		}
 	}
 	intentional_lack_of_stability = {
@@ -1616,7 +1621,7 @@ technologies = {
 		
 		folder = {
 			name = naval_doctrine_folder
-			position = { x = -4 y = 24 }
+			position = { x = -4 y = 22 }
 		}
 	}
 	### SPLIT 1 ###
@@ -1648,7 +1653,7 @@ technologies = {
 		
 		folder = {
 			name = naval_doctrine_folder
-			position = { x = -1 y = 24 }
+			position = { x = -7 y = 24 }
 		}
 	}
 	forward_shield_specalised_recon = {
@@ -1658,6 +1663,7 @@ technologies = {
 		}
 		light_cruiser = {
 			surface_detection = 0.10
+		}
 		destroyer = {
 			surface_detection = 0.10
 		}
@@ -1677,7 +1683,7 @@ technologies = {
 		
 		folder = {
 			name = naval_doctrine_folder
-			position = { x = -1 y = 26 }
+			position = { x = -7 y = 26 }
 		}
 	}
 	way_station_patrols = {
@@ -1702,7 +1708,7 @@ technologies = {
 		
 		folder = {
 			name = naval_doctrine_folder
-			position = { x = -1 y = 28 }
+			position = { x = -7 y = 28 }
 		}
 	}
 	### SPLIT 2 ###

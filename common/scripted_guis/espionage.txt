@@ -1,0 +1,166 @@
+scripted_gui = {
+	operations_missions = {            ########## THIS ENTIRE THING IS UNNEEDSLY COMPLICATED, IF YOU WANT TO CHANGE THIS GOOD LUCK
+		context_type = player_context
+		window_name = "operations_missions"
+		parent_window_name = countryintelligenceagencyview
+		visible = {
+            has_country_flag = operations_open
+		}
+		triggers = {
+            operative_1_portrait_visible = {
+                has_country_flag = selected_operative_1_espionage
+            }
+            operative_2_portrait_visible = {
+                has_country_flag = selected_operative_2_espionage
+            }
+            operative_3_portrait_visible = {
+                has_country_flag = selected_operative_3_espionage
+            }
+		}
+		effects = {
+			select_operative_increase_1_button_click = {
+				if = {
+					limit = {
+						check_variable = {Selected_operative_1 = 3}
+					}
+					set_variable = {Selected_operative_1 = 1}
+				}else = {
+					add_to_variable = {Selected_operative_1 = 1}
+				}
+			}
+			select_operative_decrease_1_button_click = {
+				if = {
+					limit = {
+						check_variable = {Selected_operative_1 = 1}
+					}
+					set_variable = {Selected_operative_1 = 3}
+				}else = {
+					subtract_from_variable = {selected_operative_1 = 1}
+				}
+			}
+			select_operative_increase_2_button_click = {
+				if = {
+					limit = {
+						check_variable = {Selected_operative_2 = 3}
+					}
+					set_variable = {Selected_operative_2 = 1}
+				}else = {
+					add_to_variable  = {selected_operative_2 = 1}
+				}
+			}
+			select_operative_decrease_2_button_click = {
+				if = {
+					limit = {
+						check_variable = {Selected_operative_2 = 1}
+					}
+					set_variable = {Selected_operative_2 = 3}
+				}else = {
+					subtract_from_variable = {selected_operative_2 = 1}
+				}
+			}
+			select_operative_increase_3_button_click = {
+				if = {
+					limit = {
+						check_variable = {Selected_operative_3 = 3}
+					}
+					set_variable = {Selected_operative_3 = 1}
+				}else = {
+					add_to_variable  = {selected_operative_3 = 1}
+				}
+			}
+			select_operative_decrease_3_button_click = {
+				if = {
+					limit = {
+						check_variable = {Selected_operative_3= 1}
+					}
+					set_variable = {Selected_operative_3 = 3}
+				}else = {
+					subtract_from_variable = {selected_operative_3 = 1}
+				}
+			}
+			espionage_missions_1_initiate = {
+				if = {
+					limit = {
+						check_variable = {Selected_operative_1 = 1}
+					}
+					set_variable = {agent_in_mission_1 = agent_operation_slot_1}
+				}else_if = {
+					limit = {
+						check_variable = {Selected_operative_1 = 2}
+					}
+					set_variable = {agent_in_mission_1 = agent_operation_slot_2}
+				}else_if = {
+					limit = {
+						check_variable = {Selected_operative_1 = 3}
+					}
+					set_variable = {agent_in_mission_1 = agent_operation_slot_3}
+				}
+			}
+			espionage_missions_2_initiate = {
+				if = {
+					limit = {
+						has_country_flag =  selected_operative_1_espionage
+					}
+					set_variable = {agent_in_mission_2 = agent_operation_slot_1}
+				}else_if = {
+					limit = {
+						has_country_flag =  selected_operative_2_espionage
+					}
+					set_variable = {agent_in_mission_2 = agent_operation_slot_2}
+				}else_if = {
+					limit = {
+						has_country_flag =  selected_operative_3_espionage
+					}
+					set_variable = {agent_in_mission_2 = agent_operation_slot_3}
+				}
+			}
+			espionage_missions_3_initiate = {
+				if = {
+					limit = {
+						has_country_flag =  selected_operative_1_espionage
+					}
+					set_variable = {agent_in_mission_3 = agent_operation_slot_1}
+				}else_if = {
+					limit = {
+						has_country_flag =  selected_operative_2_espionage
+					}
+					set_variable = {agent_in_mission_3 = agent_operation_slot_2}
+				}else_if = {
+					limit = {
+						has_country_flag =  selected_operative_3_espionage
+					}
+					set_variable = {agent_in_mission_3 = agent_operation_slot_3}
+				}
+			}
+		}
+		properties = {
+			espionage_mission_1_target = {
+				image = "[?targeted_country_slot_1.GetFlag]"
+			}
+			espionage_mission_2_target = {
+				image = "[?targeted_country_slot_2.GetFlag]"
+			}
+			espionage_mission_3_target = {
+				image = "[?targeted_country_slot_3.GetFlag]"
+			}
+			character_portrait_1 = {
+				image = "[get_espionage_agent_portrait_1_main_key]"
+			}
+			character_portrait_2 = {
+				image = "[get_espionage_agent_portrait_2_main_key]"
+			}
+			character_portrait_3 = {
+				image = "[get_espionage_agent_portrait_3_main_key]"
+			}
+			mission_progress_1 = {
+				frame = mission_1_progress_var
+			}
+			mission_progress_2 = {
+				frame = mission_2_progress_var
+			}
+			mission_progress_3 = {
+				frame = mission_3_progress_var
+			}
+		}
+	}
+}

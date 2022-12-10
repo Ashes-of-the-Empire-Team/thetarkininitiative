@@ -1,4 +1,4 @@
-grab_semi_hostile_nation = {
+grab_semi_hostile_nation_1 = {
 	if = {
 		limit = {
 			has_variable = higher_chance_espionage_target
@@ -15,7 +15,7 @@ grab_semi_hostile_nation = {
 	        	has_variable = targeted_country_slot_1
 	        }
 	    }
-	    random_country = {
+	    random_other_country = {
 	    	if = {
 	    		limit = {
 	    			OR = {
@@ -35,12 +35,96 @@ grab_semi_hostile_nation = {
 		    			}
 	    			}
 	    		}
-	    		set_variable = {targeted_country_slot_1 = ROOT.id}
+	    		set_variable = {ROOT.targeted_country_slot_1 = THIS.id}
 	    	}
 	    }
 	}
 }
-slave_raid_selector = {
+grab_semi_hostile_nation_2 = {
+	if = {
+		limit = {
+			has_variable = higher_chance_espionage_target
+		}
+		random = {
+		    chance = 33
+		    set_variable = {targeted_country_slot_2 = higher_chance_espionage_target}
+		}
+	}
+	while_loop_effect = {
+	    break = temp_break
+	    limit = {
+	    	NOT = {
+	        	has_variable = targeted_country_slot_2
+	        }
+	    }
+	    random_other_country = {
+	    	if = {
+	    		limit = {
+	    			OR = {
+		    			AND = {
+		    				has_opinion = {
+							    target = ROOT
+							    value < 0
+							}
+							NOT = {has_government = ROOT}
+		    			}
+		    			AND = {
+		    				has_opinion = {
+							    target = ROOT
+							    value < -50
+							}
+							has_government = ROOT
+		    			}
+	    			}
+	    		}
+	    		set_variable = {ROOT.targeted_country_slot_2 = THIS.id}
+	    	}
+	    }
+	}
+}
+grab_semi_hostile_nation_3 = {
+	if = {
+		limit = {
+			has_variable = higher_chance_espionage_target
+		}
+		random = {
+		    chance = 33
+		    set_variable = {targeted_country_slot_3 = higher_chance_espionage_target}
+		}
+	}
+	while_loop_effect = {
+	    break = temp_break
+	    limit = {
+	    	NOT = {
+	        	has_variable = targeted_country_slot_3
+	        }
+	    }
+	    random_other_country = {
+	    	if = {
+	    		limit = {
+	    			OR = {
+		    			AND = {
+		    				has_opinion = {
+							    target = ROOT
+							    value < 0
+							}
+							NOT = {has_government = ROOT}
+		    			}
+		    			AND = {
+		    				has_opinion = {
+							    target = ROOT
+							    value < -50
+							}
+							has_government = ROOT
+		    			}
+	    			}
+	    		}
+	    		set_variable = {ROOT.targeted_country_slot_3 = THIS.id}
+	    	}
+	    }
+	}
+}
+slave_raid_selector_1 = {
 	find_highest_in_array = {
 	     array = slaves
 	     value = check_if_slaves_equal_zero
@@ -70,7 +154,7 @@ slave_raid_selector = {
 					limit = {
 						check_variable = { check_if_slaves_equal_zero > 0 }
 					}
-					set_variable = { targeted_country_slot_1 = ROOT.id }
+					set_variable = { targeted_country_slot_1 = THIS.id }
 				}
 			}
 			if = {
@@ -106,7 +190,7 @@ slave_raid_selector = {
 					    			}
 				    			}
 				    		}
-				    		set_variable = {targeted_country_slot_1 = ROOT.id}
+				    		set_variable = {targeted_country_slot_1 = THIS.id}
 				    	}
 				    }
 				}
@@ -142,9 +226,584 @@ slave_raid_selector = {
 			    			}
 		    			}
 		    		}
-		    		set_variable = {targeted_country_slot_1 = ROOT.id}
+		    		set_variable = {targeted_country_slot_1 = THIS.id}
 		    	}
 		    }
 		}
 	}
+}
+slave_raid_selector_2 = {
+	find_highest_in_array = {
+	     array = slaves
+	     value = check_if_slaves_equal_zero
+	}
+	if = {
+		limit = {
+			has_variable = higher_chance_espionage_target
+			check_variable = { check_if_slaves_equal_zero > 0 }
+		}
+		random = {
+		    chance = 33
+		    set_variable = {targeted_country_slot_2 = higher_chance_espionage_target}
+		}
+	}
+	if = {
+		limit = {
+			has_war = yes
+		}
+		for_loop_effect = {
+		    start = 0
+		    end = 11
+		    add = 1
+		    value = time_checker
+		    break = break_name
+			random_enemy_country = {
+				if = {
+					limit = {
+						check_variable = { check_if_slaves_equal_zero > 0 }
+					}
+					set_variable = { targeted_country_slot_2 = THIS.id }
+				}
+			}
+			if = {
+				limit = {
+					check_variable = {time_checker = 10}
+				}
+				while_loop_effect = {
+				    break = temp_break
+				    limit = {
+				    	NOT = {
+				        	has_variable = targeted_country_slot_2
+				        }
+				    }
+				    random_country = {
+				    	if = {
+				    		limit = {
+				    			OR = {
+					    			AND = {
+					    				has_opinion = {
+										    target = ROOT
+										    value < 0
+										}
+										NOT = {has_government = ROOT}
+										check_variable = { check_if_slaves_equal_zero > 0 }
+					    			}
+					    			AND = {
+					    				has_opinion = {
+										    target = ROOT
+										    value < -50
+										}
+										has_government = ROOT
+										check_variable = { check_if_slaves_equal_zero > 0 }
+					    			}
+				    			}
+				    		}
+				    		set_variable = {targeted_country_slot_2 = THIS.id}
+				    	}
+				    }
+				}
+			}
+		}
+	}else = {
+		while_loop_effect = {
+		    break = temp_break
+		    limit = {
+		    	NOT = {
+		        	has_variable = targeted_country_slot_2
+		        }
+		    }
+		    random_country = {
+		    	if = {
+		    		limit = {
+		    			OR = {
+			    			AND = {
+			    				has_opinion = {
+								    target = ROOT
+								    value < 0
+								}
+								NOT = {has_government = ROOT}
+								check_variable = { check_if_slaves_equal_zero > 0 }
+			    			}
+			    			AND = {
+			    				has_opinion = {
+								    target = ROOT
+								    value < -50
+								}
+								has_government = ROOT
+								check_variable = { check_if_slaves_equal_zero > 0 }
+			    			}
+		    			}
+		    		}
+		    		set_variable = {targeted_country_slot_2 = THIS.id}
+		    	}
+		    }
+		}
+	}
+}
+slave_raid_selector_1 = {
+	find_highest_in_array = {
+	     array = slaves
+	     value = check_if_slaves_equal_zero
+	}
+	if = {
+		limit = {
+			has_variable = higher_chance_espionage_target
+			check_variable = { check_if_slaves_equal_zero > 0 }
+		}
+		random = {
+		    chance = 33
+		    set_variable = {targeted_country_slot_3 = higher_chance_espionage_target}
+		}
+	}
+	if = {
+		limit = {
+			has_war = yes
+		}
+		for_loop_effect = {
+		    start = 0
+		    end = 11
+		    add = 1
+		    value = time_checker
+		    break = break_name
+			random_enemy_country = {
+				if = {
+					limit = {
+						check_variable = { check_if_slaves_equal_zero > 0 }
+					}
+					set_variable = { targeted_country_slot_3 = THIS.id }
+				}
+			}
+			if = {
+				limit = {
+					check_variable = {time_checker = 10}
+				}
+				while_loop_effect = {
+				    break = temp_break
+				    limit = {
+				    	NOT = {
+				        	has_variable = targeted_country_slot_3
+				        }
+				    }
+				    random_country = {
+				    	if = {
+				    		limit = {
+				    			OR = {
+					    			AND = {
+					    				has_opinion = {
+										    target = ROOT
+										    value < 0
+										}
+										NOT = {has_government = ROOT}
+										check_variable = { check_if_slaves_equal_zero > 0 }
+					    			}
+					    			AND = {
+					    				has_opinion = {
+										    target = ROOT
+										    value < -50
+										}
+										has_government = ROOT
+										check_variable = { check_if_slaves_equal_zero > 0 }
+					    			}
+				    			}
+				    		}
+				    		set_variable = {targeted_country_slot_3 = THIS.id}
+				    	}
+				    }
+				}
+			}
+		}
+	}else = {
+		while_loop_effect = {
+		    break = temp_break
+		    limit = {
+		    	NOT = {
+		        	has_variable = targeted_country_slot_3
+		        }
+		    }
+		    random_country = {
+		    	if = {
+		    		limit = {
+		    			OR = {
+			    			AND = {
+			    				has_opinion = {
+								    target = ROOT
+								    value < 0
+								}
+								NOT = {has_government = ROOT}
+								check_variable = { check_if_slaves_equal_zero > 0 }
+			    			}
+			    			AND = {
+			    				has_opinion = {
+								    target = ROOT
+								    value < -50
+								}
+								has_government = ROOT
+								check_variable = { check_if_slaves_equal_zero > 0 }
+			    			}
+		    			}
+		    		}
+		    		set_variable = {targeted_country_slot_3 = THIS.id}
+		    	}
+		    }
+		}
+	}
+}
+clear_side_guild_screen_flags = {
+	if = {
+		limit = {
+			has_country_flag = bounty_hunter_side_screen
+		}
+		clr_country_flag = bounty_hunter_side_screen
+	}else_if = {
+		limit = {
+			has_country_flag = smugglers_side_screen
+		}
+		clr_country_flag = smugglers_side_screen	
+	}else_if = {
+		limit = {
+			has_country_flag = technicians_side_screen
+		}
+		clr_country_flag = technicians_side_screen	
+	}else_if = {
+		limit = {
+			has_country_flag = spynet_side_screen
+		}
+		clr_country_flag = spynet_side_screen	
+	}else_if = {
+		limit = {
+			has_country_flag = counter_intelligence_side_screen
+		}
+		clr_country_flag = counter_intelligence_side_screen	
+	}
+		
+}
+Agent_generator_main = {   ### BASIC AGENT GENERATOR
+	if = {
+		limit = {
+			NOT = {
+				has_variable = agent_operation_slot_1
+			}
+		}
+		while_loop_effect = {
+		    break = name_unique
+		    limit = {
+		    	NOT = {
+		    		has_variable = agent_operation_slot_1
+		    	}
+		        OR = {
+		        	check_variable = {                          ########### MAKES SURE NAME IS UNIQUE TO THIS COUNTRY, ALLOWS PULLING OF THE NAME
+					    var = agent_operation_slot_1
+					    value = agent_operation_slot_2
+					    compare = equals
+					}
+					check_variable = {
+					    var = agent_operation_slot_1
+					    value = agent_operation_slot_3	
+					    compare = equals
+					}
+					NOT = {
+						has_variable = agent_operation_slot_1
+					}
+				}
+		    }
+			set_variable_to_random = {
+			    var = agent_operation_slot_1  #### ASSIGNS NUMBER TO AGENT OPERATION SLOT FOR USE IN LATER PULLS, THIS DECIDES NAMES
+			    max = 20
+			    min = 1
+			    integer = yes
+			}
+			set_variable = {current_agent_recruitment = agent_operation_slot_1}
+		}
+	}else_if = {
+		limit = {
+			NOT = {
+				has_variable = agent_operation_slot_2
+			}
+		}
+		while_loop_effect = {
+		    break = name_unique
+		    limit = {
+		        OR = {
+		        	check_variable = {                          ########### MAKES SURE NAME IS UNIQUE TO THIS COUNTRY, ALLOWS PULLING OF THE NAME
+					    var = agent_operation_slot_2
+					    value = agent_operation_slot_1
+					    compare = equals
+					}
+					check_variable = {
+					    var = agent_operation_slot_2
+					    value = agent_operation_slot_3	
+					    compare = equals
+					}
+					NOT = {
+						has_variable = agent_operation_slot_2
+					}
+				}
+		    }
+			set_variable_to_random = {
+			    var = agent_operation_slot_2  #### ASSIGNS NUMBER TO AGENT OPERATION SLOT FOR USE IN LATER PULLS, THIS DECIDES NAMES
+			    max = 20
+			    min = 1
+			    integer = yes
+			}
+			set_variable = {current_agent_recruitment = agent_operation_slot_2}
+		}
+	}else_if = {
+		limit = {
+			NOT = {
+				has_variable = agent_operation_slot_3
+			}
+		}
+		log = "test"
+		while_loop_effect = {
+		    break = name_unique
+		    limit = {
+		        OR = {
+		        	check_variable = {                          ########### MAKES SURE NAME IS UNIQUE TO THIS COUNTRY, ALLOWS PULLING OF THE NAME
+					    var = agent_operation_slot_3
+					    value = agent_operation_slot_2
+					    compare = equals
+					}
+					check_variable = {
+					    var = agent_operation_slot_3
+					    value = agent_operation_slot_1
+					    compare = equals
+					}
+					NOT = {
+						has_variable = agent_operation_slot_3
+					}
+				}
+		    }
+		    log = "test"
+			set_variable_to_random = {
+			    var = agent_operation_slot_3  #### ASSIGNS NUMBER TO AGENT OPERATION SLOT FOR USE IN LATER PULLS, THIS DECIDES NAMES
+			    max = 20
+			    min = 1
+			    integer = yes
+			}
+			set_variable = {current_agent_recruitment = agent_operation_slot_3}
+		}
+	}
+	if = {
+		limit = {
+			has_country_flag = bounty_hunter_side_screen           ######################## TELLS WHICH GUILD IS THE AGENT
+		}
+        bounty_hunter_recruitment = yes
+	}else_if = {
+		limit = {
+			has_country_flag = smugglers_side_screen
+		}
+		smugglers_recruitment = yes
+	}else_if = {
+		limit = {
+			has_country_flag = technicians_side_screen
+		}
+		technicians_recruitment = yes
+	}else_if = {
+		limit = {
+			has_country_flag = spynet_side_screen
+		}
+		spynet_recruitment = yes
+	}else_if = {
+		limit = {
+			has_country_flag = counter_intelligence_side_screen
+		}
+		counter_intelligence_recruitment = yes
+	}
+}
+bounty_hunter_recruitment = {
+	set_variable_to_random = {
+	    var = agent_portrait@var:current_agent_recruitment  #### ASSIGNS NUMBER AS AGENT PORTRAIT, SCRIPTED LOCALISATION PULLS PORTRAIT FROM NUMBER
+	    max = 8
+	    min = 0
+	    integer = yes
+	}
+
+	set_variable =  { bounty_hunter_agent_portrait = agent_portrait@var:current_agent_recruitment}
+
+	set_variable_to_random = {
+	    var = agent_loyality@var:current_agent_recruitment
+	    max = 20
+	    min = 5
+	    integer = yes
+	}
+	set_variable_to_random = {
+	    var = agent_martial@var:current_agent_recruitment 
+	    max = 20
+	    min = 12
+	    integer = yes
+	}
+	set_variable_to_random = {
+	    var = agent_charisma@var:current_agent_recruitment
+	    max = 20
+	    min = 5
+	    integer = yes
+	}
+	set_variable_to_random = {
+	    var = agent_intelligence@var:current_agent_recruitment
+	    max = 20
+	    min = 5
+	    integer = yes
+	}
+	clear_variable = current_agent_recruitment
+}
+smugglers_recruitment = {
+	set_variable_to_random = {
+	    var = agent_portrait@var:current_agent_recruitment  #### ASSIGNS NUMBER AS AGENT PORTRAIT, SCRIPTED LOCALISATION PULLS PORTRAIT FROM NUMBER
+	    max = 27
+	    min = 24
+	    integer = yes
+	}
+
+	set_variable =  { smugglers_agent_portrait = agent_portrait@var:current_agent_recruitment}
+
+	set_variable_to_random = {
+	    var = agent_loyality@var:current_agent_recruitment
+	    max = 20
+	    min = 5
+	    integer = yes
+	}
+	set_variable_to_random = {
+	    var = agent_martial@var:current_agent_recruitment 
+	    max = 20
+	    min = 12
+	    integer = yes
+	}
+	set_variable_to_random = {
+	    var = agent_charisma@var:current_agent_recruitment
+	    max = 20
+	    min = 5
+	    integer = yes
+	}
+	set_variable_to_random = {
+	    var = agent_intelligence@var:current_agent_recruitment
+	    max = 20
+	    min = 5
+	    integer = yes
+	}
+	clear_variable = current_agent_recruitment
+}
+technicians_recruitment = {
+	set_variable_to_random = {
+	    var = agent_portrait@var:current_agent_recruitment  #### ASSIGNS NUMBER AS AGENT PORTRAIT, SCRIPTED LOCALISATION PULLS PORTRAIT FROM NUMBER
+	    max = 31
+	    min = 28
+	    integer = yes
+	}
+	set_variable =  { technicians_agent_portrait = agent_portrait@var:current_agent_recruitment}
+
+	set_variable_to_random = {
+	    var = agent_loyality@var:current_agent_recruitment
+	    max = 20
+	    min = 5
+	    integer = yes
+	}
+	set_variable_to_random = {
+	    var = agent_martial@var:current_agent_recruitment 
+	    max = 20
+	    min = 12
+	    integer = yes
+	}
+	set_variable_to_random = {
+	    var = agent_charisma@var:current_agent_recruitment
+	    max = 20
+	    min = 5
+	    integer = yes
+	}
+	set_variable_to_random = {
+	    var = agent_intelligence@var:current_agent_recruitment
+	    max = 20
+	    min = 5
+	    integer = yes
+	}
+	clear_variable = current_agent_recruitment
+}
+spynet_recruitment = {
+	if = {
+		limit = {
+			has_government = imperial 
+		}
+		set_variable_to_random = {
+		    var = agent_portrait@var:current_agent_recruitment  #### ASSIGNS NUMBER AS AGENT PORTRAIT, SCRIPTED LOCALISATION PULLS PORTRAIT FROM NUMBER
+		    max = 17
+		    min = 12
+		    integer = yes
+		}
+	}else = {
+		set_variable_to_random = {
+		    var = agent_portrait@var:current_agent_recruitment  #### ASSIGNS NUMBER AS AGENT PORTRAIT, SCRIPTED LOCALISATION PULLS PORTRAIT FROM NUMBER
+		    max = 24
+		    min = 18
+		    integer = yes
+		}
+	}
+	set_variable_to_random = {
+	    var = agent_portrait@var:current_agent_recruitment  #### ASSIGNS NUMBER AS AGENT PORTRAIT, SCRIPTED LOCALISATION PULLS PORTRAIT FROM NUMBER
+	    max = 23
+	    min = 12
+	    integer = yes
+	}
+
+	set_variable =  { spynet_agent_portrait = agent_portrait@var:current_agent_recruitment}
+
+	set_variable_to_random = {
+	    var = agent_loyality@var:current_agent_recruitment
+	    max = 20
+	    min = 5
+	    integer = yes
+	}
+	set_variable_to_random = {
+	    var = agent_martial@var:current_agent_recruitment 
+	    max = 20
+	    min = 12
+	    integer = yes
+	}
+	set_variable_to_random = {
+	    var = agent_charisma@var:current_agent_recruitment
+	    max = 20
+	    min = 5
+	    integer = yes
+	}
+	set_variable_to_random = {
+	    var = agent_intelligence@var:current_agent_recruitment
+	    max = 20
+	    min = 5
+	    integer = yes
+	}
+	clear_variable = current_agent_recruitment
+}
+counter_intelligence_recruitment = {
+	set_variable_to_random = {
+	    var = agent_portrait@var:current_agent_recruitment  #### ASSIGNS NUMBER AS AGENT PORTRAIT, SCRIPTED LOCALISATION PULLS PORTRAIT FROM NUMBER
+	    max = 12
+	    min = 9
+	    integer = yes
+	}
+
+	set_variable =  { counter_intelligence_agent_portrait = agent_portrait@var:current_agent_recruitment}
+
+	set_variable_to_random = {
+	    var = agent_loyality@var:current_agent_recruitment
+	    max = 20
+	    min = 5
+	    integer = yes
+	}
+	set_variable_to_random = {
+	    var = agent_martial@var:current_agent_recruitment 
+	    max = 20
+	    min = 12
+	    integer = yes
+	}
+	set_variable_to_random = {
+	    var = agent_charisma@var:current_agent_recruitment
+	    max = 20
+	    min = 5
+	    integer = yes
+	}
+	set_variable_to_random = {
+	    var = agent_intelligence@var:current_agent_recruitment
+	    max = 20
+	    min = 5
+	    integer = yes
+	}
+	clear_variable = current_agent_recruitment
 }
