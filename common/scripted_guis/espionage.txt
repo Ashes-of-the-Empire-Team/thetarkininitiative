@@ -7,17 +7,101 @@ scripted_gui = {
             has_country_flag = operations_open
 		}
 		triggers = {
-            operative_1_portrait_visible = {
-                has_country_flag = selected_operative_1_espionage
-            }
-            operative_2_portrait_visible = {
-                has_country_flag = selected_operative_2_espionage
-            }
-            operative_3_portrait_visible = {
-                has_country_flag = selected_operative_3_espionage
+			espionage_missions_1_initiate_click_enabled = {
+            	NOT = {
+            		OR = {
+            			has_variable = agent_in_mission_1
+            			AND = {
+            				check_variable = {Selected_operative_1 = 1}
+		            		OR = {
+			            		check_variable = {agent_operation_slot_1 = agent_in_mission_1}
+			            		check_variable = {agent_operation_slot_1 = agent_in_mission_2}
+			            	}
+            			}
+            			AND =  {
+            				check_variable = {Selected_operative_1 = 2}
+		            		OR = {
+			            		check_variable = {agent_operation_slot_2 = agent_in_mission_1}
+			            		check_variable = {agent_operation_slot_2 = agent_in_mission_2}
+			            	}
+            			}
+            			AND = {
+            				check_variable = {Selected_operative_1 = 3}
+            				OR = {
+			            		check_variable = {agent_operation_slot_3 = agent_in_mission_1}
+			            		check_variable = {agent_operation_slot_3 = agent_in_mission_2}
+			            	}
+            			}
+	            	}
+            	}
+			}
+			espionage_missions_2_initiate_click_enabled = {
+            	NOT = {
+            		OR = {
+            			has_variable = agent_in_mission_2
+            			AND = {
+            				check_variable = {Selected_operative_2 = 1}
+		            		OR = {
+			            		check_variable = {agent_operation_slot_1 = agent_in_mission_1}
+			            		check_variable = {agent_operation_slot_1 = agent_in_mission_2}
+			            	}
+            			}
+            			AND =  {
+            				check_variable = {Selected_operative_2 = 2}
+		            		OR = {
+			            		check_variable = {agent_operation_slot_2 = agent_in_mission_1}
+			            		check_variable = {agent_operation_slot_2 = agent_in_mission_2}
+			            	}
+            			}
+            			AND = {
+            				check_variable = {Selected_operative_2 = 3}
+            				OR = {
+			            		check_variable = {agent_operation_slot_3 = agent_in_mission_1}
+			            		check_variable = {agent_operation_slot_3 = agent_in_mission_2}
+			            	}
+            			}
+	            	}
+            	}
+			}
+            espionage_missions_3_initiate_click_enabled = {
+            	NOT = {
+            		OR = {
+            			has_variable = agent_in_mission_3
+            			AND = {
+            				check_variable = {Selected_operative_3 = 1}
+		            		OR = {
+			            		check_variable = {agent_operation_slot_1 = agent_in_mission_1}
+			            		check_variable = {agent_operation_slot_1 = agent_in_mission_2}
+			            	}
+            			}
+            			AND =  {
+            				check_variable = {Selected_operative_3 = 2}
+		            		OR = {
+			            		check_variable = {agent_operation_slot_2 = agent_in_mission_1}
+			            		check_variable = {agent_operation_slot_2 = agent_in_mission_2}
+			            	}
+            			}
+            			AND = {
+            				check_variable = {Selected_operative_3 = 3}
+            				OR = {
+			            		check_variable = {agent_operation_slot_3 = agent_in_mission_1}
+			            		check_variable = {agent_operation_slot_3 = agent_in_mission_2}
+			            	}
+            			}
+	            	}
+            	}
             }
 		}
 		effects = {
+			espionage_missions_1_scrap_click = {
+				scrap_espionage_mission_1 = yes
+			}
+			espionage_missions_2_scrap_click = {
+				scrap_espionage_mission_2 = yes
+			}
+			espionage_missions_3_scrap_click = {
+				scrap_espionage_mission_3 = yes
+			}
 			select_operative_increase_1_button_click = {
 				if = {
 					limit = {
@@ -35,7 +119,7 @@ scripted_gui = {
 					}
 					set_variable = {Selected_operative_1 = 3}
 				}else = {
-					subtract_from_variable = {selected_operative_1 = 1}
+					subtract_from_variable = {Selected_operative_1 = 1}
 				}
 			}
 			select_operative_increase_2_button_click = {
@@ -45,7 +129,7 @@ scripted_gui = {
 					}
 					set_variable = {Selected_operative_2 = 1}
 				}else = {
-					add_to_variable  = {selected_operative_2 = 1}
+					add_to_variable  = {Selected_operative_2 = 1}
 				}
 			}
 			select_operative_decrease_2_button_click = {
@@ -55,7 +139,7 @@ scripted_gui = {
 					}
 					set_variable = {Selected_operative_2 = 3}
 				}else = {
-					subtract_from_variable = {selected_operative_2 = 1}
+					subtract_from_variable = {Selected_operative_2 = 1}
 				}
 			}
 			select_operative_increase_3_button_click = {
@@ -65,7 +149,7 @@ scripted_gui = {
 					}
 					set_variable = {Selected_operative_3 = 1}
 				}else = {
-					add_to_variable  = {selected_operative_3 = 1}
+					add_to_variable  = {Selected_operative_3 = 1}
 				}
 			}
 			select_operative_decrease_3_button_click = {
@@ -75,61 +159,97 @@ scripted_gui = {
 					}
 					set_variable = {Selected_operative_3 = 3}
 				}else = {
-					subtract_from_variable = {selected_operative_3 = 1}
+					subtract_from_variable = {Selected_operative_3 = 1}
 				}
 			}
-			espionage_missions_1_initiate = {
+			espionage_missions_1_initiate_click = {
 				if = {
 					limit = {
 						check_variable = {Selected_operative_1 = 1}
 					}
 					set_variable = {agent_in_mission_1 = agent_operation_slot_1}
+					add_timed_idea = {
+						idea = espionage_mission_1_progress
+						days = 120
+					}
 				}else_if = {
 					limit = {
 						check_variable = {Selected_operative_1 = 2}
 					}
 					set_variable = {agent_in_mission_1 = agent_operation_slot_2}
+					add_timed_idea = {
+						idea = espionage_mission_1_progress
+						days = 120
+					}
 				}else_if = {
 					limit = {
 						check_variable = {Selected_operative_1 = 3}
 					}
 					set_variable = {agent_in_mission_1 = agent_operation_slot_3}
+					add_timed_idea = {
+						idea = espionage_mission_1_progress
+						days = 120
+					}
 				}
 			}
-			espionage_missions_2_initiate = {
+			espionage_missions_2_initiate_click = {
 				if = {
 					limit = {
-						has_country_flag =  selected_operative_1_espionage
+						check_variable = {Selected_operative_2 = 1}
 					}
 					set_variable = {agent_in_mission_2 = agent_operation_slot_1}
+					add_timed_idea = {
+						idea = espionage_mission_2_progress
+						days = 120
+					}
 				}else_if = {
 					limit = {
-						has_country_flag =  selected_operative_2_espionage
+						check_variable = {Selected_operative_2 = 2}
 					}
 					set_variable = {agent_in_mission_2 = agent_operation_slot_2}
+					add_timed_idea = {
+						idea = espionage_mission_2_progress
+						days = 120
+					}
 				}else_if = {
 					limit = {
-						has_country_flag =  selected_operative_3_espionage
+						check_variable = {Selected_operative_2 = 3}
 					}
 					set_variable = {agent_in_mission_2 = agent_operation_slot_3}
+					add_timed_idea = {
+						idea = espionage_mission_2_progress
+						days = 120
+					}
 				}
 			}
-			espionage_missions_3_initiate = {
+			espionage_missions_3_initiate_click = {
 				if = {
 					limit = {
-						has_country_flag =  selected_operative_1_espionage
+						check_variable = {Selected_operative_3 = 1}
 					}
 					set_variable = {agent_in_mission_3 = agent_operation_slot_1}
+					add_timed_idea = {
+						idea = espionage_mission_3_progress
+						days = 120
+					}
 				}else_if = {
 					limit = {
-						has_country_flag =  selected_operative_2_espionage
+						check_variable = {Selected_operative_3 = 2}
 					}
 					set_variable = {agent_in_mission_3 = agent_operation_slot_2}
+					add_timed_idea = {
+						idea = espionage_mission_3_progress
+						days = 120
+					}
 				}else_if = {
 					limit = {
-						has_country_flag =  selected_operative_3_espionage
+						check_variable = {Selected_operative_3 = 3}
 					}
 					set_variable = {agent_in_mission_3 = agent_operation_slot_3}
+					add_timed_idea = {
+						idea = espionage_mission_3_progress
+						days = 120
+					}
 				}
 			}
 		}
