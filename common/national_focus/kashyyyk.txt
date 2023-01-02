@@ -53,11 +53,13 @@ focus_tree = {
 		search_filters = {
 			FOCUS_FILTER_MANPOWER
 		}
+		available = {
+			has_government = imperial
+		}
 		prerequisite = { } prerequisite = { }
 		mutually_exclusive = { focus = kyk_liberation_of_kashyyyk  }
 		completion_reward = {
-			set_country_flag = KYK_imperial_sided
-			KYK = { country_event = { days = 1 id = KYK.7 } }		
+			set_country_flag = KYK_imperial_sided	
 		}
 	}
 
@@ -71,31 +73,12 @@ focus_tree = {
 		search_filters = {
 			FOCUS_FILTER_MANPOWER
 		}
+		available = {
+			has_government = democratic
+		}
 		mutually_exclusive = { focus = kyk_true_to_the_empire  }
 		completion_reward = {
-			set_power_balance = {
-				id = KYK_power_balance
-				left_side = KYK_traditionalist_side
-				right_side = KYK_industrialists_side
-			}
 			set_country_flag = KYK_republic_sided
-			set_politics = {
-
-				ruling_party = democratic
-			}
-			KYK = { country_event = { days = 1 id = KYK.5 } }
-			add_timed_idea = { idea = KYK_Victory days = 20 }
-			add_power_balance_value = {
-				id = KYK_power_balance
-				value = 0.35
-			}
-			set_popularities = {
-				democratic = 60
-        		consortium = 0
-        		imperial = 0
-        		neutrality = 40
-        		corporation = 0
-			}
 		}
 	}
 
@@ -295,8 +278,10 @@ focus_tree = {
 		mutually_exclusive = { focus = kyk_the_chieftains  }
 		completion_reward = {
 			remove_ideas = kyk_contested_command
-			set_country_flag = KYK_progressive_sided
-			add_ideas = kyk_democracy
+			add_power_balance_value = {
+				id = KYK_power_balance
+				value = 0.35
+			}
 		}
 	}
 
@@ -314,8 +299,10 @@ focus_tree = {
 		mutually_exclusive = { focus = kyk_the_industrialists  }
 		completion_reward = {
 			remove_ideas = kyk_contested_command
-			set_country_flag = KYK_traditional_sided
-			add_stability = 0.15
+			add_power_balance_value = {
+				id = KYK_power_balance
+				value = -0.35
+			}
 		}
 	}
 
