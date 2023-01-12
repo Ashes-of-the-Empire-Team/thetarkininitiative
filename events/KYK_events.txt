@@ -55,7 +55,7 @@ country_event = {
 
 country_event = {
     id = KYK.3 ## general event detailing the current situtaion in the universe
-        title = "The Republic demans we submit to occupation"
+        title = "The Republic demands we submit to occupation"
         desc = "lol"
         picture = GFX_report_event_election_vote
 
@@ -88,61 +88,13 @@ country_event = {
 
     option = {
         name = "REEEEEE"
-			REB = { create_wargoal = { type = puppet_wargoal_focus target = TRA } }
-			KYK = { create_wargoal = { type = puppet_wargoal_focus target = TRA } }
+			ROOT = { create_wargoal = { type = puppet_wargoal_focus target = TRA } }
     }
 
 }
 country_event = {
-    id = KYK.5
-    title = KYK.5.t
-    desc = KYK.5.d
-    picture = report_event_equipment
-
-    fire_only_once = yes
-    is_triggered_only = yes
-
-    immediate = {
-        hidden_effect = {
-            KYK = { 
-                load_oob = "KYK_4B"
-                KYK = { country_event = { days = 1 id = KYK.6 } }
-            }
-            KYY = { 
-                set_politics = {
-                 ruling_party = imperial
-                }
-                set_popularities = {
-                    democratic = 0
-                    consortium = 0
-                    imperial = 80
-                    neutrality = 20
-                    corporation = 0
-                }
-                add_state_core = 280
-                transfer_state = 280
-                add_state_core = 284
-                transfer_state = 284
-                load_oob = "KYK_4A"
-            }
-        }
-    }
-
-
-    option = {
-        name = "xxxx"
-        effect_tooltip = {
-            KYY = {
-                transfer_state = 280
-                transfer_state = 284
-            }
-        }
-    }
-}
-
-country_event = {
-    id = KYK.6 
-        title = "The Kashyyyk war"
+    id = KYK.5 
+        title = "Unexpected troop movements to Kashyyyk"
         desc = "lol"
         picture = GFX_report_event_election_vote
 
@@ -151,12 +103,79 @@ country_event = {
     fire_only_once = yes
 
     option = {
-        name = "We do what we must"
-        KYK = { 
-            declare_war_on = { type = annex_everything    target = KYY }
+        name = "Who ordered those troop movements?"
+        trigger = {
+            NOT= { has_war_with = KYY }
+        }
+        REB = { 
+            add_to_war = {
+                targeted_alliance = KYK
+                enemy = KYY
+                hostility_reason = asked_to_join
+            }
+        }
+    }
+    option = {
+        name = "Move in those reinforcements"
+        trigger = {
+          has_war_with = KYY
+        }
+        REB = { 
+            add_to_war = {
+                targeted_alliance = KYK
+                enemy = KYY
+                hostility_reason = asked_to_join
+            }
         }
     }
 
+}
+
+
+country_event = {
+    id = KYK.6 
+        title = "Kashyyyk Proposes new Trade agreements"
+        desc = "Kashyyyk has been reaching out to members of the New Republic with the intent to ensure it's economic stability"
+        picture = GFX_report_event_election_vote
+
+    is_triggered_only = yes
+
+    fire_only_once = yes
+
+    option = {
+        name = "This is unfavorable, but acceptable"
+        trigger = {
+            NOT = { TAG = KYK }
+            NOT = { TAG = SUL }
+        }
+        ROOT = { 
+            add_ideas = alaris_agreement1
+            set_country_flag = alaris
+        }
+    }
+    option = {
+        name = "This is a ripoff, but we'll have to hear them out"
+        trigger = {
+            NOT = { TAG = KYK }
+            NOT = { TAG = SUL }
+        }
+        ROOT = { 
+            add_political_power = -25
+        }
+    }
+    option = {
+        name = "These benifits will help our economy in many ways"
+        trigger = {
+        OR = {
+            TAG = KYK 
+            TAG = SUL
+            }
+         }
+        ROOT = { 
+            add_ideas = alaris_agreementb1
+            set_country_flag = alarisb
+        }
+    }
 }
 
 country_event = {
@@ -279,26 +298,7 @@ country_event = {
             }
     }
     option = {
-        name = "A tragic day"
-			promote_character = KYK_Kashyyyk_assembly
-            retire_character = KYK_Kerrithrarr
-            trigger = {
-                ROOT = {
-                    has_country_leader =  {
-                        character = KYK_Kerrithrarr
-                        ruling_only = yes
-                    }
-                }
-            }
-    }
-    option = {
         name = "A close call"
-        trigger = {
-            ROOT = {
-				neutrality < 0.1 
-                corporation < 0.1
-			}
-        }
     }
 
 }
@@ -350,8 +350,100 @@ country_event = {
     }
 
 }
+country_event = {
+    id = KYK.21
+        title = "The election results are in"
+        desc = "lol"
+        picture = GFX_report_event_election_vote
 
+    is_triggered_only = yes
 
+    fire_only_once = yes
+
+    option = {
+        name = "The radical Republic Candidate has won"
+        custom_effect_tooltip = "Kerrithrarr wins the election"
+        hidden_effect = { complete_national_focus = kyk_republic_candidate }
+    }
+    option = {
+        name = "The moderate Republic Candidate has won"
+        custom_effect_tooltip = "Ruttarrka wins the election"
+        hidden_effect = {  complete_national_focus = kyk_moderate_candidate }
+    }
+    option = {
+        name = "The reactionary Candidate has won"
+        custom_effect_tooltip = "Salporin wins the election"
+        hidden_effect = {  complete_national_focus = kyk_reactionary_candidate }
+    }
+    option = {
+        name = "The pro business Candidate has won"
+        custom_effect_tooltip = "Weebacca wins the election"
+           hidden_effect = { complete_national_focus = kyk_corporate_candidate }
+    }
+}
+country_event = {
+    id = KYK.31
+        title = "The investigation has begon"
+        desc = "lol"
+        picture = GFX_report_event_election_vote
+
+    is_triggered_only = yes
+
+    fire_only_once = yes
+
+    option = {
+        name = "There is a looming shadow over all this"
+    }
+}
+country_event = {
+    id = KYK.32
+        title = "There's no leads"
+        desc = "lol"
+        picture = GFX_report_event_election_vote
+
+    is_triggered_only = yes
+
+    fire_only_once = yes
+
+    option = {
+        name = "We'll be honest"
+        ROOT = { add_stability = -5 add_political_power = -300 }
+    }
+    option = {
+        name = "It was the Empire"
+        create_wargoal = {
+            type = topple_government
+            target = GMA
+        }
+        create_wargoal = {
+            type = topple_government
+            target = TUN
+        }
+    }
+    option = {
+        name = "It was the Mandalorians"
+        create_wargoal = {
+            type = topple_government
+            target = PRO
+        }
+        create_wargoal = {
+            type = topple_government
+            target = ROK
+        }
+        create_wargoal = {
+            type = topple_government
+            target = ELD
+        }
+        create_wargoal = {
+            type = topple_government
+            target = AWA
+        }
+        create_wargoal = {
+            type = topple_government
+            target = KRY
+        }
+    }
+}
 news_event = {
 	id = KYK.98 ## general event detailing the current situtaion in the universe
 	title = "Kashyyyk test event"
