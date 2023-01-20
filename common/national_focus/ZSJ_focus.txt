@@ -211,9 +211,6 @@ focus_tree = {
 		}
 
 		available = {
-			has_completed_focus = { focus = ZSJ_the_enemy_we_know 
-									focus = ZSJ_the_lone_wolf 
-								}
 		}
 		
 		bypass = {
@@ -274,6 +271,7 @@ focus_tree = {
 			}
 		}
 	}
+
 	focus = { ###wargoals
 		id = ZSJ_coproate_espionage
 		icon = GFX_goal_zsinj_basic
@@ -287,10 +285,7 @@ focus_tree = {
 		}
 
 		available = {
-			has_completed_focus = { focus = ZSJ_the_enemy_we_know 
-									focus = ZSJ_the_lone_wolf 
-									focus = ZSJ_loyalty_to_the_empire 
-								}
+
 		}
 		
 		bypass = {
@@ -323,10 +318,7 @@ focus_tree = {
 		}
 
 		available = {
-			has_completed_focus = { focus = ZSJ_the_enemy_we_know 
-									focus = ZSJ_the_lone_wolf 
-									focus = ZSJ_loyalty_to_the_empire 
-								}
+
 		}
 		
 		bypass = {
@@ -393,11 +385,6 @@ focus_tree = {
 		available = {
 			EOH = { has_completed_focus = EOH_cloning_on_nirauan }
 			is_in_faction_with = EOH
-
-			has_completed_focus = { focus = ZSJ_the_enemy_we_know 
-									focus = ZSJ_the_lone_wolf 
-									focus = ZSJ_loyalty_to_the_empire 
-								}
 		}
 		
 		bypass = {
@@ -833,9 +820,7 @@ focus_tree = {
 		}
 
 		available = {
-			has_completed_focus = { focus = ZSJ_the_enemy_we_know 
-									focus = ZSJ_the_lone_wolf 
-								}
+			
 		}
 		
 		bypass = {
@@ -870,11 +855,6 @@ focus_tree = {
 				var = legitimacy_emp
 				value = 15
 			}
-
-			has_completed_focus = {
-									focus = ZSJ_the_lone_wolf 
-									focus = ZSJ_loyalty_to_the_empire 
-								}
 		}
 		
 		bypass = {
@@ -1366,10 +1346,7 @@ focus_tree = {
 		}
 
 		available = {
-			has_completed_focus = { focus = ZSJ_the_enemy_we_know 
-									focus = ZSJ_the_lone_wolf 
-									focus = ZSJ_loyalty_to_the_empire 
-								}
+
 		}
 		
 		bypass = {
@@ -1397,9 +1374,7 @@ focus_tree = {
 		}
 
 		available = {
-			has_completed_focus = {
-									focus = ZSJ_the_lone_wolf 
-								}
+
 		}
 		
 		bypass = {
@@ -1841,10 +1816,6 @@ focus_tree = {
 
 		completion_reward = {
 			EMP = {
-				add_opinion_modifier = {
-					target = EMP
-					modifier = POR_iberian_communism
-				}
 			}
 			add_to_variable = {
 				var = legitimacy_emp
@@ -1990,24 +1961,6 @@ focus_tree = {
 				value = 10
 			}
 			add_to_faction = EMP
-			if = {
-				has_completed_focus = {
-					focus = ZSJ_befriend_thrawn
-				}
-				EOH = { country_event = { days = 1 id = ZSJ.209 } }
-			}
-			if = {
-				has_completed_focus = {
-					focus = ZSJ_befriend_ardus_kaine
-				}
-				PEN = { country_event = { days = 1 id = ZSJ.209 } }
-			}
-			if = {
-				has_completed_focus = {
-					focus = ZSJ_befriend_kosh_teradoc
-				}
-				ERI = { country_event = { days = 1 id = ZSJ.209 } }
-			}
 		}
 	}
 	focus = {
@@ -2129,18 +2082,7 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			if = {
-				has_completed_focus = { focus = ZSJ_befriend_ardus_kaine }
-				add_research_slot = 1 
-			}
-			if = {
-				has_completed_focus = { focus = ZSJ_befriend_kosh_teradoc }
-				add_research_slot = 1
-			}
-			if ={
-				has_completed_focus = { focus = ZSJ_befriend_thrawn }
-				add_research_slot = 1
-			}
+			add_research_slot = 1
 
 		}
 	}
@@ -2191,10 +2133,7 @@ focus_tree = {
 		}
 
 		available = {
-			has_completed_focus = {
-									focus = ZSJ_the_lone_wolf 
-									focus = ZSJ_loyalty_to_the_empire 
-								}
+
 		}
 		
 		bypass = {
@@ -2206,7 +2145,8 @@ focus_tree = {
 
 
 		completion_reward = {
-			ZSJ = { country_event = { days = 1 id = ZSJ.101 } }
+			add_political_power = 100
+			###another good propaganda campiagn
 		}
 	}
 	focus = {
@@ -2222,9 +2162,7 @@ focus_tree = {
 		}
 
 		available = {
-			has_completed_focus = {
-				focus = ZSJ_loyalty_to_the_empire 
-			}
+
 		}
 		
 		bypass = {
@@ -2471,12 +2409,6 @@ focus_tree = {
 		available_if_capitulated = yes
 
 		completion_reward = {
-			add_opinion_modifier = {
-				target = {
-					ideology = consortium
-				}
-				modifier = { large_decrease }
-			}
 			add_command_power = 100
 		}
 	}
@@ -2511,12 +2443,7 @@ focus_tree = {
 		available_if_capitulated = yes
 
 		completion_reward = {
-			add_opinion_modifier = {
-				target = {
-					ideology = consortium
-				}
-				modifier = { large_increase }
-			}
+
 			add_to_variable = {
 				var = legitimacy_emp
 				value = -25
@@ -2536,7 +2463,7 @@ focus_tree = {
 		}
 
 		available = {
-			currency_amount^primary_currency > 20
+			check_variable = { currency_amount^primary_currency > 20}
 		}
 		
 		bypass = {
@@ -2558,10 +2485,6 @@ focus_tree = {
 				add_to_variable = {
 					curency_amount^primary_currency = 20
 				}
-				add_opinion_modifier = {
-				target = ZSJ
-				modifier = { medium_increase }
-			}
 			}
 
 			subtract_from_variable = {
@@ -2570,10 +2493,6 @@ focus_tree = {
 			add_to_variable = {
 				var = legitimacy_emp
 				value = -10
-			}
-			add_opinion_modifier = {
-				target = PYK
-				modifier = { medium_increase }
 			}
 		}
 	}
@@ -2609,16 +2528,6 @@ focus_tree = {
 			}
 			HUT = {
 				add_to_variable = { currency_amount^primary_currency = 200 }
-			}
-			HUT = {
-				add_opinion_modifier = {
-				target = ZSJ
-				modifier = { medium_increase }
-				}
-			}
-			add_opinion_modifier = {
-				target = HUT
-				modifier = { medium_increase }
 			}
 			add_to_variable = {
 				var = legitimacy_emp
@@ -3542,12 +3451,6 @@ focus_tree = {
 
 		completion_reward = {
 			if = {
-				ZSJ = {
-					is_in_faction = false
-				}
-				EOH = {
-					is_in_faction = false
-				}
 				EOH = { country_event = { days = 1 id = ZSJ.8 } }
 				ZSJ = {
 				create_faction = "Hand and Body"
@@ -4138,7 +4041,7 @@ focus_tree = {
 		}
 
 		available = {
-			has_completed_focus = { focus = ZSJ_question_of_loyalty }
+			
 		}
 
 		cancel_if_invalid = yes
@@ -4203,7 +4106,7 @@ focus_tree = {
 
 		completion_reward = {
 			set_temp_variable = { ZSJ_train_jaguars_number = 1 }
-			ZSJ_train_jaguars = yes
+			set_variable = { SJ_train_jaguars = yes }
 		}
 	}
 	focus = {
@@ -4232,7 +4135,7 @@ focus_tree = {
 
 		completion_reward = {
 			set_temp_variable = { ZSJ_train_jaguars_number = 1 }
-			ZSJ_train_jaguars = yes
+			set_variable = { SJ_train_jaguars = yes }
 			###event for exomplanation of support troops
 		}
 	}
@@ -4262,7 +4165,7 @@ focus_tree = {
 
 		completion_reward = {
 			set_temp_variable = { ZSJ_train_jaguars_number = 1 }
-			ZSJ_train_jaguars = yes
+			set_variable = { SJ_train_jaguars = yes }
 			###event for expplanation of support comapnies
 		}
 	}
@@ -4338,10 +4241,6 @@ focus_tree = {
 
 		available = {
 			date < 01.01.7
-			has_completed_focus = { focus = ZSJ_proclaim_the_second_galactic_empire 
-									focus = ZSJ_join_the_imperial_cause
-									focus = ZSJ_invest_in_our_high_command
-								}
 		}
 		
 		bypass = {
@@ -4358,7 +4257,7 @@ focus_tree = {
 
 		completion_reward = {
 			set_temp_variable = { ZSJ_train_jaguars_number = 3 }
-			ZSJ_train_jaguars = yes
+			set_variable = { SJ_train_jaguars = yes }
 			remove_ideas = {
 				ZSJ_rapidly_diminishing_clones_idea
 			}
@@ -4378,10 +4277,6 @@ focus_tree = {
 		}
 
 		available = {
-			has_completed_focus = { focus = ZSJ_the_enemy_we_know 
-									focus = ZSJ_the_lone_wolf 
-									focus = ZSJ_loyalty_to_the_empire 
-								}
 		}
 		
 		bypass = {
@@ -4411,10 +4306,6 @@ focus_tree = {
 		}
 
 		available = {
-			has_completed_focus = { focus = ZSJ_the_enemy_we_know 
-									focus = ZSJ_the_lone_wolf 
-									focus = ZSJ_loyalty_to_the_empire 
-								}
 		}
 		
 		bypass = {
@@ -4444,10 +4335,7 @@ focus_tree = {
 		}
 
 		available = {
-			has_completed_focus = { focus = ZSJ_the_enemy_we_know 
-									focus = ZSJ_the_lone_wolf 
-									focus = ZSJ_loyalty_to_the_empire 
-								}
+
 		}
 		
 		bypass = {
@@ -4477,10 +4365,7 @@ focus_tree = {
 		}
 
 		available = {
-			has_completed_focus = { focus = ZSJ_the_enemy_we_know 
-									focus = ZSJ_the_lone_wolf 
-									focus = ZSJ_loyalty_to_the_empire 
-								}
+
 			ZSJ = {
 				has_trait = zsj_intacranial_hemorrhage
 			}
@@ -4886,7 +4771,6 @@ focus_tree = {
 		}
 
 		available = {
-			always_true = no
 		}
 		
 		bypass = {
@@ -4918,7 +4802,6 @@ focus_tree = {
 		}
 
 		available = {
-			always_true = no
 		}
 		
 		bypass = {
@@ -4950,7 +4833,6 @@ focus_tree = {
 		}
 
 		available = {
-			always_true = no
 		}
 		
 		bypass = {
