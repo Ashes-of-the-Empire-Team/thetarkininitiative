@@ -20,6 +20,12 @@ espionage_missions = {
 		days_remove = 1
 		fixed_random_seed = no
 		timeout_effect = {
+			if = { ############################### THIS IS JUST TO ESTABLISH A TEMP VARIABLE FOR RANDOM LIST, MEANS WE DONT HAVE TO STORE A VARIABLE FOREVER AND ONLY DO IT ON LIST COMMENCE
+				limit = {
+					has_country_flag = market_flood_avaliable
+				}
+				set_temp_variable = { var:market_flood_decision_temp_chance = 25}
+			}
 			if = {
 				limit = {
 					NOT = {
@@ -131,7 +137,7 @@ espionage_missions = {
 							}
 							16 = {
 								set_country_flag = slot_1_filled
-								set_country_flag = arming_dissadents_slot_1
+								set_country_flag = arming_dissidents_slot_1
 								if = {
 									limit = {
 										has_war = yes
@@ -296,6 +302,34 @@ espionage_missions = {
 									grab_semi_hostile_nation_1 = yes
 								}
 							}
+							25 = {
+								set_country_flag = slot_1_filled
+								set_country_flag = logistics_sabotage_target_slot_1
+								if = {
+									limit = {
+										has_war = yes
+									}
+									random_enemy_country = {
+										set_variable = { targeted_country_slot_1 = THIS.id }
+									}
+								}else = {
+									grab_semi_hostile_nation_1 = yes
+								}
+							}
+							var:market_flood_decision_temp_chance = {
+								set_country_flag = slot_1_filled
+								set_country_flag = market_flood_slot_1
+								if = {
+									limit = {
+										has_war = yes
+									}
+									random_enemy_country = {
+										set_variable = { targeted_country_slot_1 = THIS.id }
+									}
+								}else = {
+									grab_semi_hostile_nation_1 = yes
+								}	
+							}
 						}
 					}
 					var:other_missions = {
@@ -415,7 +449,7 @@ espionage_missions = {
 							}
 							16 = {
 								set_country_flag = slot_2_filled
-								set_country_flag = arming_dissadents_slot_2
+								set_country_flag = arming_dissidents_slot_2
 								if = {
 									limit = {
 										has_war = yes
@@ -594,6 +628,20 @@ espionage_missions = {
 									grab_semi_hostile_nation_2 = yes
 								}
 							}
+							var:market_flood_decision_temp_chance = {
+								set_country_flag = slot_2_filled
+								set_country_flag = market_flood_slot_2
+								if = {
+									limit = {
+										has_war = yes
+									}
+									random_enemy_country = {
+										set_variable = { targeted_country_slot_2 = THIS.id }
+									}
+								}else = {
+									grab_semi_hostile_nation_2 = yes
+								}	
+							}
 						}
 					}
 					var:other_missions = {
@@ -713,7 +761,7 @@ espionage_missions = {
 							}
 							16 = {
 								set_country_flag = slot_3_filled
-								set_country_flag = arming_dissadents_slot_3
+								set_country_flag = arming_dissidents_slot_3
 								if = {
 									limit = {
 										has_war = yes
@@ -891,6 +939,20 @@ espionage_missions = {
 								}else = {
 									grab_semi_hostile_nation_3 = yes
 								}
+							}
+							var:market_flood_decision_temp_chance = {
+								set_country_flag = slot_3_filled
+								set_country_flag = market_flood_slot_3
+								if = {
+									limit = {
+										has_war = yes
+									}
+									random_enemy_country = {
+										set_variable = { targeted_country_slot_3 = THIS.id }
+									}
+								}else = {
+									grab_semi_hostile_nation_3 = yes
+								}	
 							}
 						}
 					}

@@ -51,7 +51,7 @@ static const float CITY_LIGHTS_INTENSITY 		= 5.5;
 static const float CITY_LIGHTS_BLOOM_FACTOR 	= 0.3;
 
 static const float TERRAIN_TILE_FREQ 			= 128.0f;
-static const float MAP_NUM_TILES 				= 4.0f;
+static const float MAP_NUM_TILES 				= 5.0f;
 static const float TEXELS_PER_TILE 				= 512.0f;
 static const float ATLAS_TEXEL_POW2_EXPONENT	= 11.0f;
 static const float TERRAIN_WATER_CLIP_HEIGHT    = 3.0f;
@@ -88,7 +88,7 @@ static const float 	ICE_NOISE_TILING  			= 0.1f; //0.068f;
 static const float WATER_COLOR_LIGHTNESS = 0.5;
 static const float WATER_RIPPLE_EFFECT = 0.0025;
 
-static const float COLORMAP_OVERLAY_STRENGTH 	= 0.75f; //0.7f;
+static const float COLORMAP_OVERLAY_STRENGTH 	= 0.5f; //0.7f;
 static const float3 FAKE_CUBEMAP_COLOR 			= float3(0.0f, 0.0f, 0.0f);
 
 // MILD_WINTER_VALUE = ###,						defines.lua   (reload defines)
@@ -96,7 +96,7 @@ static const float3 FAKE_CUBEMAP_COLOR 			= float3(0.0f, 0.0f, 0.0f);
 // SEVERE_WINTER_VALUE = ###,					defines.lua   (reload defines)
 
 
-static const float 	BORDER_TILE					= 0.4f;
+static const float 	BORDER_TILE					= 0.5;
 // BORDER_WIDTH		= ###						defines.lua   (reload defines)
 
 
