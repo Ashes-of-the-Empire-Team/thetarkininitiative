@@ -474,3 +474,88 @@ country_event = {
     }
 
 }
+country_event = {
+    id = KYK.201 ## general event detailing the current situtaion in the universe
+        title = "An Imperial freighter has left hyperspace."
+        desc = "it is unmanned and all its escape pods have been ejected. What should we do with it?"
+        picture = GFX_report_event_election_vote
+    trigger = {
+        tag = KYK
+        date > 5.03.07
+    }
+    fire_only_once = yes
+
+    option = {
+        name = "Fling it into the Star"
+        hidden_effect = {
+            country_event = {
+                id = KYK.202
+                days = 40
+            }
+        }
+           add_political_power = 5
+    }
+    option = {
+        name = "Refit it and put it to use"
+        hidden_effect = {
+            country_event = {
+                id = KYK.203
+                days = 40
+            }
+        }
+        add_equipment_to_stockpile = {
+            type = convoy
+            amount = 1
+        }
+    }
+}
+country_event = {
+    id = KYK.202 ## general event detailing the current situtaion in the universe
+        title = "We have received a transmission..."
+        desc = "Broadcast on a open channel orginating from one of the jump points in the system we received a message of an Imperial freighter wishing to surrender, neither scans nor physical inspection revealed anything. Whilst it was orignally decided to attribute this event to some Imperial scare tactic, when it was logged in a intelligence database we realized the freighter had the same name as the empty one that arrived last month..."
+        picture = GFX_report_event_election_vote
+    is_triggered_only = yes
+    fire_only_once = yes
+
+    option = {
+        name = "We will never speak about this again..."
+        # might make this a prerequisit for shadow lands branch 
+    }
+}
+country_event = {
+    id = KYK.203 ## general event detailing the current situtaion in the universe
+        title = "We have lost a shipment of weapons."
+        desc = "Earlier this rotation one of our freighters carrying weapons for a joint military exercise went silent, disapeared and reappeared after an hour with its crew unware of their disapearance and its cargo missing..."
+        picture = GFX_report_event_election_vote
+    is_triggered_only = yes
+    fire_only_once = yes
+
+    option = {
+        name = "How did this happen?"
+        add_equipment_to_stockpile = {
+            type = infantry_equipment
+            amount = -100
+        }
+        REB = { country_event = {
+            id = KYK.204
+            days = 1
+        }
+        }
+    }
+}
+country_event = {
+    id = KYK.204 ## general event detailing the current situtaion in the universe
+        title = "We have received bad news from the Kashyyyk system."
+        desc = "Last rotation one of the freighters used to carry weapons and other equipment for a joint military exercise had its cargo stolen, the freighter in question was a seized Imperial vessel and an inquiry has started to rule out foul play."
+        picture = GFX_report_event_election_vote
+    is_triggered_only = yes
+    fire_only_once = yes
+
+    option = {
+        name = "This incident couldn't have come at a worse time."
+        add_equipment_to_stockpile = {
+            type = infantry_equipment
+            amount = -900
+        }
+    }
+}
