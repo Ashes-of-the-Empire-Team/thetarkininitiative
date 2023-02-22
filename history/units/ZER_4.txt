@@ -1,20 +1,163 @@
 division_template = {
-	name = "Stormtrooper Regiment"			
+	name = "Stormtrooper Regiment"
+
+	#division_names_group = ZER_STORM_1
 
 	regiments = {
 		stormtrooper = { x = 0 y = 0 }
 		stormtrooper = { x = 0 y = 1 }
-		stormtrooper = { x = 0 y = 2 }
    		stormtrooper = { x = 1 y = 0 }
 		stormtrooper = { x = 1 y = 1 }
-		stormtrooper = { x = 1 y = 2 }
+		at_st = { x = 2 y = 0 }
+	}
+	priority = 1
+}
+
+division_template = {
+	name = "Stormtrooper Garrison Regiment"
+
+	#division_names_group = ZER_STORM_GARR_1
+
+	regiments = {
+		stormtrooper = { x = 0 y = 0 }
+		stormtrooper = { x = 0 y = 1 }
+   		stormtrooper = { x = 1 y = 0 }
+		stormtrooper = { x = 1 y = 1 }
+	}
+	priority = 1
+}
+
+division_template = {
+	name = "AT-AT Regiment"
+
+	#division_names_group = ZER_ATAT_1
+
+	regiments = {
+		at_at = { x = 0 y = 0 }
+		at_at = { x = 0 y = 1 }
+   		at_st = { x = 1 y = 0 }
+		at_st = { x = 1 y = 1 }
   		stormtrooper = { x = 2 y = 0 }
 		stormtrooper = { x = 2 y = 1 }
-		stormtrooper = { x = 2 y = 2 }
+	}
+	priority = 2
+}
+
+units = {
+	# Zero Command Starting Forces
+	division = {
+		name = "156th 'Last Stand' Infantry"
+		location = 8955
+		division_template = "Stormtrooper Regiment"
+		start_equipment_factor = 0.9
+		start_experience_factor = 0.5
+	}
+
+	division = {
+		name = "197th Infantry"
+		location = 8955
+		division_template = "Stormtrooper Regiment"
+		start_equipment_factor = 0.8
+		start_experience_factor = 0.3
+	}
+
+	division = {
+		name = "201st 'Survivor' Infantry"
+		location = 8955
+		division_template = "Stormtrooper Regiment"
+		start_equipment_factor = 0.8
+		start_experience_factor = 0.3
+	}
+
+	division = {
+		name = "1st Garrison"
+		location = 8955
+		division_template = "Stormtrooper Garrison Regiment"
+		start_equipment_factor = 0.7
+		start_experience_factor = 0.2
+	}
+
+	division = {
+		name = "2nd Garrison"
+		location = 8955
+		division_template = "Stormtrooper Garrison Regiment"
+		start_equipment_factor = 0.7
+		start_experience_factor = 0.2
+	}
+
+	division = {
+		name = "3rd Garrison"
+		location = 8955
+		division_template = "Stormtrooper Garrison Regiment"
+		start_equipment_factor = 0.7
+		start_experience_factor = 0.2
+	}
+
+	division = {
+		name = "4th Garrison"
+		location = 8955
+		division_template = "Stormtrooper Garrison Regiment"
+		start_equipment_factor = 0.7
+		start_experience_factor = 0.2
+	}
+
+	division = {
+		name = "238th Assault Wing"
+		location = 8955
+		division_template = "AT-AT Regiment"
+		start_equipment_factor = 1.0
+		start_experience_factor = 0.3
 	}
 }
 
+air_wings = {
+	
+	325 = {
+		tie_fighter_airframe_0 =  {
+			owner = "ZER" 
+			amount = 22
+		}
+		tie_fighter_airframe_0 =  {
+			owner = "ZER" 
+			amount = 14
+		}
+		tie_bomber_airframe_0 =  {
+			owner = "ZER" 
+			amount = 12
+		}
+	}
+}
 
+## Starting Production ###
+instant_effect = {
+	add_equipment_production = {
+		equipment = {
+			type = stormtrooper_equipment_0
+			creator = "ZER"
+		}
+		requested_factories = 1
+		progress = 0.40
+		efficiency = 100
+	}
+	add_equipment_production = {
+		equipment = {
+			type = infantry_equipment_0
+			creator = "ZER"
+		}
+		requested_factories = 1
+		progress = 0.86
+		efficiency = 100
+	}
+	add_equipment_production = {
+		equipment = {
+			type = at_st_chassis_0
+			creator = "ZER"
+		}
+		requested_factories = 1
+		progress = 0.86
+		efficiency = 100
+	}
+}
 
 
 ###########################################UNITS###########################################
