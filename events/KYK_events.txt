@@ -477,7 +477,7 @@ country_event = {
 country_event = {
     id = KYK.201 ## general event detailing the current situtaion in the universe
         title = "An Imperial freighter has left hyperspace."
-        desc = "it is unmanned and all its escape pods have been ejected. What should we do with it?"
+        desc = "it is unmanned, its logs have been scrubbbed its cargo ditched and all its escape pods have been ejected. What should we do with it?"
         picture = GFX_report_event_election_vote
     trigger = {
         tag = KYK
@@ -520,6 +520,13 @@ country_event = {
     option = {
         name = "We will never speak about this again..."
         # might make this a prerequisit for shadow lands branch 
+        hidden_effect = {
+            ZSJ = { country_event = {
+                id = KYK.205
+                days = 20
+            }
+        }
+        }
     }
 }
 country_event = {
@@ -556,6 +563,45 @@ country_event = {
         add_equipment_to_stockpile = {
             type = infantry_equipment
             amount = -900
+        }
+    }
+}
+country_event = {
+    id = KYK.205 ## general event detailing the current situtaion in the universe
+        title = "We've lost a shipment of weapons."
+        desc = "Last rotation one of the freighters used to carry shipments of weapons exploded without warning minutes after leaving the spaceport. After initial investigation it has become appearant we have no record of the freighter having ever been ours..."
+        picture = GFX_report_event_election_vote
+    is_triggered_only = yes
+    fire_only_once = yes
+
+    option = {
+        name = "Sabotage by the enemy..."
+        add_equipment_to_stockpile = {
+            type = infantry_equipment
+            amount = -500
+        }
+        hidden_effect = {
+            EOH = { country_event = {
+                id = KYK.206
+                days = 20
+            }
+        }
+        }
+    }
+}
+country_event = {
+    id = KYK.206 ## general event detailing the current situtaion in the universe
+        title = "We've lost a shipment of weapons."
+        desc = "Last rotation one of the freighters used to carry shipments of weapons exploded without warning minutes after leaving the spaceport. After initial investigation it has become appearant we have no record of the freighter having ever been ours..."
+        picture = GFX_report_event_election_vote
+    is_triggered_only = yes
+    fire_only_once = yes
+
+    option = {
+        name = "A most clever tactic."
+        add_equipment_to_stockpile = {
+            type = infantry_equipment
+            amount = -500
         }
     }
 }
