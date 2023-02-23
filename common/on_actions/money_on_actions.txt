@@ -92,8 +92,8 @@ on_actions = {
 			divide_variable = { nf = 40 }
 			set_variable = { navf = num_of_naval_factories}
 			divide_variable = { navf = 20 }
-			set_variable = { ms = num_divisions}
-			divide_variable = { ms = 60 }
+
+
 			set_variable = { bio_maintenace_cal = bio_maintenace }
 			set_variable = { space_maintenace_cal = space_maintenace }
 			multiply_variable = { bio_maintenace_cal = 3 }
@@ -335,6 +335,41 @@ on_actions = {
 				}
 				set_country_flag = default_on_debt
 			}
+			#set_temp_variable = { militia_temp = 0 }
+			#set_temp_variable = { droid_ = 0 }
+
+			add_to_temp_variable = { militia_temp = num_battalions_with_type@militia }
+
+			add_to_temp_variable = { professional_forces_temp = num_battalions_with_type@stormtrooper }
+			add_to_temp_variable = { professional_forces_temp = num_battalions_with_type@infantry }
+
+
+			add_to_temp_variable = { mercenary_temp = num_battalions_with_type@mercenary }
+
+			add_to_temp_variable = { pirate_temp = num_battalions_with_type@mercenary }
+
+			add_to_temp_variable = { clone_temp = num_battalions_with_type@clone }
+
+			add_to_temp_variable = { security_temp = num_battalions_with_type@security }
+
+			divide_temp_variable = { militia_temp = 80 }
+			divide_temp_variable = { professional_forces_temp = 50 }
+			divide_temp_variable = { mercenary_temp = 40 }
+			divide_temp_variable = { pirate_temp = 40 }
+			divide_temp_variable = { clone_temp = 35 }
+			divide_temp_variable = { security_temp = 30 }
+
+			add_to_variable = { ms = military_expenses }
+			add_to_variable = { ms = professional_forces_temp }
+			add_to_variable = { ms = mercenary_temp }
+			add_to_variable = { ms = pirate_temp }
+			add_to_variable = { ms = clone_temp }
+			add_to_variable = { ms = security_temp }
+
+			#add_to_temp_variable = { droid_temp = num_equipment_in_armies@battle_droid }
+
+
+			set_variable = { militia_upkeep = militia_temp }
 		}
 	}
 }
