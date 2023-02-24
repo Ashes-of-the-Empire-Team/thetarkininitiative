@@ -3,7 +3,194 @@
 ###########################
 
 add_namespace = ZER
+add_namespace = ZER_start
+add_namespace = ZER_news
 
+news_event = { # Harrsk becomes Lord High Admiral
+    id = ZER_news.1
+    title = ZER_news.1.t
+    desc = ZER_news.1.d
+    picture = GFX_report_event_election_vote
+
+    is_triggered_only = yes
+
+    major = yes
+
+    option = {
+        name = ZER_news.1.a
+    }
+
+}
+
+country_event = { # Fleet Modifications
+    id = ZER_start.1
+    title = ZER_start.1.t
+    desc = ZER_start.1.d
+    picture = GFX_report_event_election_vote
+
+    is_triggered_only = yes
+
+    fire_only_once = yes
+
+    option = {
+        name = ZER_start.1.a
+        add_stability = -0.03
+        custom_effect_tooltip = tt_zer_large_control_increase
+        add_to_variable = { zer_harrsk_government_control = 10 }
+        custom_effect_tooltip = tt_zer_kill_rice_desyk
+        hidden_effect = {
+            retire_character = ZER_rice_desyk
+        }
+    }
+
+    option = {
+        name = ZER_start.1.b
+        add_political_power = 100
+        add_stability = 0.05
+        custom_effect_tooltip = tt_zer_medium_control_increase
+        add_to_variable = { zer_harrsk_government_control = 5 }
+        custom_effect_tooltip = tt_zer_imprison_rice_desyk
+        hidden_effect = {
+            retire_character = ZER_rice_desyk
+        }
+    }
+
+}
+
+country_event = { # Fleet Modifications
+    id = ZER_start.2
+    title = ZER_start.2.t
+    desc = ZER_start.2.d
+    picture = GFX_report_event_election_vote
+
+    is_triggered_only = yes
+
+    fire_only_once = yes
+
+    option = {
+        name = ZER_start.2.a
+        add_war_support = -0.05
+        add_political_power = -100
+        remove_idea = {
+            ZER_government_under_investigation
+        }
+    }
+
+    option = {
+        name = ZER_start.2.b
+    }
+
+}
+
+country_event = { # Fighting on the Home Front
+    id = ZER_start.3
+    title = ZER_start.3.t
+    desc = ZER_start.3.d
+    picture = GFX_report_event_election_vote
+
+    is_triggered_only = yes
+
+    fire_only_once = yes
+
+    option = {
+        name = ZER_start.3.a
+        add_political_power = 100
+    }
+
+    option = {
+        name = ZER_start.3.b
+        add_war_support = 0.03
+    }
+
+}
+
+country_event = { # Fighting on the Home Front
+    id = ZER_start.4
+    title = ZER_start.4.t
+    desc = ZER_start.4.d
+    picture = GFX_report_event_election_vote
+
+    is_triggered_only = yes
+
+    fire_only_once = yes
+
+    option = {
+        name = ZER_start.4.a
+        add_political_power = -25
+        ZER = {
+            country_event = ZER_start.5
+        }
+    }
+
+    option = {
+        name = ZER_start.4.b
+        add_stability = -0.03
+        ZER = {
+            country_event = ZER_start.6
+            add_opinion_modifier = {
+                target = ZER
+                modifier = faction_traitor
+            }
+        }
+    }
+
+}
+
+country_event = { # Fighting on the Home Front
+    id = ZER_start.5
+    title = ZER_start.5.t
+    desc = ZER_start.5.d
+    picture = GFX_report_event_election_vote
+
+    is_triggered_only = yes
+
+    fire_only_once = yes
+
+    option = {
+        name = ZER_start.5.a
+        custom_effect_tooltip = tt_zer_gain_1000_credits
+		add_to_variable = { currency_amount^primary_currency = 1000 }
+        add_equipment_to_stockpile = {
+            type = infantry_equipment_0
+            amount = 2500
+        }
+    }
+
+}
+
+country_event = { # Fighting on the Home Front
+    id = ZER_start.6
+    title = ZER_start.6.t
+    desc = ZER_start.6.d
+    picture = GFX_report_event_election_vote
+
+    is_triggered_only = yes
+
+    fire_only_once = yes
+
+    option = {
+        name = ZER_start.6.a
+        add_political_power = -10
+    }
+
+}
+
+country_event = { # Fighting on the Home Front
+    id = ZER_start.7
+    title = ZER_start.7.t
+    desc = ZER_start.7.d
+    picture = GFX_report_event_election_vote
+
+    is_triggered_only = yes
+
+    fire_only_once = yes
+
+    option = {
+        name = ZER_start.7.a
+        add_stability = 0.05
+    }
+
+}
 
 country_event = { # Fleet Modifications
     id = ZER.1

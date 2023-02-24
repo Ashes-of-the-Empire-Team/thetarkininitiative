@@ -253,3 +253,149 @@ ZER_upgrading_the_shockwave = {
         }
     }
 }
+
+
+ZER_controlling_the_government = {
+	ZER_gathering_support_from_civilians = {
+        priority = 10
+        icon = eng_ally_imperialist_coup
+        
+        available = {
+            original_tag = ZER
+			custom_trigger_tooltip = {
+				tooltip = tt_zer_harrsk_campaigning
+				check_variable = { zer_harrsk_campaigning < 1 }
+			}
+        }
+
+        visible = {
+            original_tag = ZER
+			has_completed_focus = ZER_consolidate_government_control
+        }
+
+        cost = 25
+        days_remove = 21
+		fire_only_once = no
+		modifier = {
+			political_power_gain = -0.5
+		}
+
+		complete_effect = {
+			set_variable = { zer_harrsk_campaigning = 1 }
+		}
+
+        remove_effect = {
+            custom_effect_tooltip = tt_zer_medium_control_increase
+			add_to_variable = { zer_harrsk_government_control = 5 }
+			set_variable = { zer_harrsk_campaigning = 0 }
+        }
+    }
+
+	ZER_preventing_dissension = {
+        priority = 10
+        icon = eng_ally_imperialist_coup
+        
+        available = {
+            original_tag = ZER
+			custom_trigger_tooltip = {
+				tooltip = tt_zer_harrsk_campaigning
+				check_variable = { zer_harrsk_campaigning < 1 }
+			}
+        }
+
+        visible = {
+            original_tag = ZER
+			has_completed_focus = ZER_consolidate_government_control
+        }
+
+        cost = 50
+        days_remove = 7
+		fire_only_once = no
+		modifier = {
+			consumer_goods_factor = 0.1
+		}
+
+		complete_effect = {
+			set_variable = { zer_harrsk_campaigning = 1 }
+		}
+
+        remove_effect = {
+            custom_effect_tooltip = tt_zer_warning
+			custom_effect_tooltip = tt_zer_large_control_increase
+			add_stability = -0.05
+			add_manpower = -2000
+			add_to_variable = { zer_harrsk_government_control = 10 }
+			set_variable = { zer_harrsk_campaigning = 0 }
+        }
+    }
+
+	ZER_purge_officers = {
+        priority = 10
+        icon = eng_ally_imperialist_coup
+        
+        available = {
+            original_tag = ZER
+			custom_trigger_tooltip = {
+				tooltip = tt_zer_harrsk_campaigning
+				check_variable = { zer_harrsk_campaigning < 1 }
+			}
+        }
+
+        visible = {
+            original_tag = ZER
+			has_completed_focus = ZER_consolidate_government_control
+        }
+
+        cost = 50
+        days_remove = 70
+		fire_only_once = yes
+		modifier = {
+			army_org_factor = -0.2
+		}
+
+		complete_effect = {
+			set_variable = { zer_harrsk_campaigning = 1 }
+		}
+
+        remove_effect = {
+            country_event = ZER_start.1
+			set_variable = { zer_harrsk_campaigning = 0 }
+        }
+    }
+
+	ZER_show_kindness_to_kalist_iv = {
+        priority = 10
+        icon = eng_ally_imperialist_coup
+        
+        available = {
+            original_tag = ZER
+			custom_trigger_tooltip = {
+				tooltip = tt_zer_harrsk_campaigning
+				check_variable = { zer_harrsk_campaigning < 1 }
+			}
+        }
+
+        visible = {
+            original_tag = ZER
+			has_completed_focus = ZER_consolidate_government_control
+        }
+
+        cost = 25
+        days_remove = 14
+		fire_only_once = yes
+		modifier = {
+			#army_org_factor = -0.2
+		}
+
+		complete_effect = {
+			set_variable = { zer_harrsk_campaigning = 1 }
+		}
+
+        remove_effect = {
+            custom_effect_tooltip = tt_zer_small_control_increase
+			add_war_support = -0.02
+			add_to_variable = { zer_harrsk_government_control = 3 }
+			set_variable = { zer_harrsk_campaigning = 0 }
+        }
+    }
+}

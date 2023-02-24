@@ -1,6 +1,6 @@
 focus_tree = {
 	id = zer
-	continuous_focus_position = { x = 1190 y = 1000 } 
+	continuous_focus_position = { x = 50 y = 1000 } 
 	country = {
 		factor = 0
 		modifier = {
@@ -362,9 +362,9 @@ focus_tree = {
 		}
 	}
 	
-	# Modifying the fleet?
+	# Lord High Admiral
 	focus = {
-		id = ZER_lord_high_admiral
+		id = ZER_support_admiral_harrsk
 		icon = GFX_outbound_flight
 		cost = 5
 		x = 6
@@ -374,7 +374,33 @@ focus_tree = {
 		search_filters = {
 		}
 		mutually_exclusive = {
-			focus = ZER_kalist_iv_freedom
+			focus = ZER_oppose_admiral_harrsk
+		}
+		completion_reward = {
+			add_stability = 0.1
+			custom_effect_tooltip = tt_zer_keep_harrsk
+			custom_effect_tooltip = tt_zer_medium_control_increase
+        	add_to_variable = { zer_harrsk_government_control = 5 }
+		}
+
+		ai_will_do = {
+			factor = 100
+		}
+	}
+
+	# Lord High Admiral
+	focus = {
+		id = ZER_oppose_admiral_harrsk
+		icon = GFX_outbound_flight
+		cost = 5
+		x = 12
+		y = 0
+		prerequisite = {
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+			focus = ZER_support_admiral_harrsk
 		}
 		completion_reward = {
 			add_stability = 0.1
@@ -386,26 +412,24 @@ focus_tree = {
 		}
 	}
 
-	# Modifying the fleet?
+	# Consolidate Government Control
 	focus = {
-		id = ZER_for_the_empire
+		id = ZER_consolidate_government_control
 		icon = GFX_outbound_flight
 		cost = 5
-		x = 4
+		x = 5
 		y = 1
 		prerequisite = {
-			focus = ZER_lord_high_admiral
+			focus = ZER_support_admiral_harrsk
 		}
 		search_filters = {
 		}
 		mutually_exclusive = {
-			focus = ZER_we_will_not_make_the_same_mistakes
 		}
 		completion_reward = {
-			custom_effect_tooltip = tt_zer_increase_legitimacy
-			add_to_variable = { legitimacy_emp = 20 }
-			add_war_support = 0.1
-			country_event = ZER.8
+			custom_effect_tooltip = tt_zer_large_control_increase
+        	add_to_variable = { zer_harrsk_government_control = 10 }
+			custom_effect_tooltip = tt_zer_unlock_control_decisions
 		}
 
 		ai_will_do = {
@@ -413,79 +437,100 @@ focus_tree = {
 		}
 	}
 
-	# Modifying the fleet?
+	# Remove disloyal officers
 	focus = {
-		id = ZER_support_current_emperor
+		id = ZER_no_one_can_be_trusted
 		icon = GFX_outbound_flight
 		cost = 5
-		x = 3
-		y = 2
+		x = 7
+		y = 1
 		prerequisite = {
-			focus = ZER_for_the_empire
+			focus = ZER_support_admiral_harrsk
 		}
 		search_filters = {
 		}
 		mutually_exclusive = {
 		}
 		completion_reward = {
-			custom_effect_tooltip = tt_zer_increase_empire_legitimacy
-			var:global.emperor_id = { add_to_variable = { legitimacy_emp = 10 } }
+			country_event = { id = ZER_start.2 days = 30 }
+			add_timed_idea = {
+				idea = ZER_government_under_investigation
+				days = 180
+			}
+		}
+
+		ai_will_do = {
+			factor = 100
+		}
+	}
+
+	# Lord High Admiral
+	focus = {
+		id = ZER_lord_high_admiral
+		icon = GFX_outbound_flight
+		cost = 5
+		x = 6
+		y = 2
+		prerequisite = {
+			focus = ZER_no_one_can_be_trusted
+		}
+		prerequisite = {
+			focus = ZER_consolidate_government_control
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+
+		}
+		completion_reward = {
+			add_trait = {
+				character = ZER_blitzer_harrsk
+				ideology = imperial_ideology
+				trait = zer_lord_high_admiral
+			}
+			hidden_effect = {
+				news_event = ZER_news.1
+			}
+		}
+
+		ai_will_do = {
+			factor = 100
+		}
+	}
+
+	# The First Warlord - START OF HARRSK WARLORD PATH
+	focus = {
+		id = ZER_the_first_warlord
+		icon = GFX_outbound_flight
+		cost = 5
+		x = 4
+		y = 3
+		prerequisite = {
+			focus = ZER_lord_high_admiral
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+			focus = ZER_galaxy_in_turmoil
+		}
+		completion_reward = {
+			add_ideas = {
+				ZER_the_first_warlord_idea
+			}
 			var:global.emperor_id = {
-				add_relation_modifier = {
+				add_opinion_modifier = {
 					target = ZER
-					modifier = supported_as_emperor
+					modifier = faction_traitor
 				}
 			}
-			add_political_power = -100
-		}
-
-		ai_will_do = {
-			factor = 100
-		}
-	}
-
-	# Modifying the fleet?
-	focus = {
-		id = ZER_solidifying_control
-		icon = GFX_outbound_flight
-		cost = 5
-		x = 5
-		y = 2
-		prerequisite = {
-			focus = ZER_for_the_empire
-		}
-		search_filters = {
-		}
-		mutually_exclusive = {
-		}
-		completion_reward = {
-			# Decreases stability
-			# Adds idea that suppresses resistance
-		}
-
-		ai_will_do = {
-			factor = 100
-		}
-	}
-
-	# Modifying the fleet?
-	focus = {
-		id = ZER_imperial_collaboration
-		icon = GFX_outbound_flight
-		cost = 5
-		x = 3
-		y = 3
-		prerequisite = {
-			focus = ZER_support_current_emperor
-		}
-		search_filters = {
-		}
-		mutually_exclusive = {
-		}
-		completion_reward = {
-			add_ideas = IMP_collaboration_level_1
-			EMP = {
-				add_ideas = IMP_collaboration_level_1
+			custom_effect_tooltip = tt_zer_decrease_legitimacy
+			add_to_variable = { legitimacy_emp = -10 }
+			custom_effect_tooltip = tt_zer_increase_corp_influence
+			hidden_effect = {
+				swap_ideas = {
+					remove_idea = corp_influence_1
+					add_idea = corp_influence_2
+				}
 			}
 		}
 
@@ -494,23 +539,23 @@ focus_tree = {
 		}
 	}
 
-	# Modifying the fleet?
 	focus = {
-		id = ZER_form_friendships
+		id = ZER_gearing_for_war
 		icon = GFX_outbound_flight
 		cost = 5
-		x = 5
-		y = 3
+		x = 2
+		y = 4
 		prerequisite = {
-			focus = ZER_solidifying_control
+			focus = ZER_the_first_warlord
 		}
 		search_filters = {
 		}
 		mutually_exclusive = {
+
 		}
 		completion_reward = {
-			# Decreases stability
-			# Adds idea that suppresses resistance
+			add_stability = 0.1
+			custom_effect_tooltip = tt_zer_keep_harrsk
 		}
 
 		ai_will_do = {
@@ -518,28 +563,223 @@ focus_tree = {
 		}
 	}
 
-	# Modifying the fleet?
 	focus = {
-		id = ZER_expand_factories
+		id = ZER_a_call_to_arms
+		icon = GFX_outbound_flight
+		cost = 5
+		x = 1
+		y = 5
+		prerequisite = {
+			focus = ZER_gearing_for_war
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+
+		}
+		completion_reward = {
+			add_stability = 0.1
+			custom_effect_tooltip = tt_zer_keep_harrsk
+		}
+
+		ai_will_do = {
+			factor = 100
+		}
+	}
+
+	focus = {
+		id = ZER_jamaaran_industry
+		icon = GFX_outbound_flight
+		cost = 5
+		x = 0
+		y = 6
+		prerequisite = {
+			focus = ZER_a_call_to_arms
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+
+		}
+		completion_reward = {
+			327 = {
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 2
+					instant_build = yes
+				}
+				add_state_modifier = {
+					modifier = {
+						production_speed_buildings_factor = 0.25
+						local_building_slots = 2
+					}
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 100
+		}
+	}
+
+	focus = {
+		id = ZER_capital_factories
+		icon = GFX_outbound_flight
+		cost = 5
+		x = 0
+		y = 8
+		prerequisite = {
+			focus = ZER_jamaaran_industry
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+
+		}
+		completion_reward = {
+			325 = {
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 2
+					instant_build = yes
+				}
+				add_state_modifier = {
+					modifier = {
+						production_speed_buildings_factor = 0.25
+						local_building_slots = 2
+					}
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 100
+		}
+	}
+
+	focus = {
+		id = ZER_total_war
+		icon = GFX_outbound_flight
+		cost = 5
+		x = 1
+		y = 7
+		prerequisite = {
+			focus = ZER_a_call_to_arms
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+
+		}
+		completion_reward = {
+			add_stability = 0.1
+			custom_effect_tooltip = tt_zer_keep_harrsk
+		}
+
+		ai_will_do = {
+			factor = 100
+		}
+	}
+
+	focus = {
+		id = ZER_harrsk_doctrine
+		icon = GFX_outbound_flight
+		cost = 5
+		x = 2
+		y = 6
+		prerequisite = {
+			focus = ZER_gearing_for_war
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+			
+		}
+		completion_reward = {
+			add_stability = 0.1
+			custom_effect_tooltip = tt_zer_keep_harrsk
+		}
+
+		ai_will_do = {
+			factor = 100
+		}
+	}
+
+	focus = {
+		id = ZER_expand_or_perish
+		icon = GFX_outbound_flight
+		cost = 5
+		x = 3
+		y = 7
+		will_lead_to_war_with = ABR
+		prerequisite = {
+			focus = ZER_harrsk_doctrine
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+			
+		}
+		completion_reward = {
+			create_wargoal = {
+				type = annex_everything
+				target = ABR
+			}
+		}
+
+		ai_will_do = {
+			factor = 100
+		}
+	}
+
+	focus = {
+		id = ZER_defend_our_planet
 		icon = GFX_outbound_flight
 		cost = 5
 		x = 4
 		y = 4
 		prerequisite = {
-			focus = ZER_develop_defensive_doctrines
-			focus = ZER_form_friendships
-		}
-		prerequisite = {
-			focus = ZER_imperial_collaboration
-			focus = ZER_new_suppliers
+			focus = ZER_the_first_warlord
 		}
 		search_filters = {
 		}
 		mutually_exclusive = {
+
 		}
 		completion_reward = {
-			# Decreases stability
-			# Adds idea that suppresses resistance
+			swap_ideas = {
+				remove_idea = ZER_the_first_warlord_idea
+				add_idea = ZER_the_first_warlord_idea_2
+			}
+			capital_scope = { 
+				add_building_construction = {
+					type = anti_air_building
+					level = 2
+					instant_build = yes
+				}
+			}
+			add_building_construction = {
+				type = bunker
+				level = 1
+				instant_build = yes
+				province = 4287
+			}
+			add_building_construction = {
+				type = bunker
+				level = 3
+				instant_build = yes
+				province = 8955
+			}
 		}
 
 		ai_will_do = {
@@ -547,27 +787,39 @@ focus_tree = {
 		}
 	}
 
-	# Modifying the fleet?
 	focus = {
-		id = ZER_expand_dockyards
+		id = ZER_develop_harrsks_fortress
 		icon = GFX_outbound_flight
 		cost = 5
-		x = 8
-		y = 4
+		x = 4
+		y = 6
 		prerequisite = {
-			focus = ZER_develop_defensive_doctrines
-			focus = ZER_form_friendships
-		}
-		prerequisite = {
-			focus = ZER_imperial_collaboration
-			focus = ZER_new_suppliers
+			focus = ZER_defend_our_planet
 		}
 		search_filters = {
 		}
 		mutually_exclusive = {
+
 		}
 		completion_reward = {
-			
+			country_event = ZER_start.8
+			331 = {
+				add_building_construction = {
+					type = anti_air_building
+					level = 5
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = bunker
+					level = 8
+					instant_build = yes
+					province = 9036
+				}
+				add_victory_points = {
+					province = 9036
+					value = 5
+				}
+			}
 		}
 
 		ai_will_do = {
@@ -575,392 +827,229 @@ focus_tree = {
 		}
 	}
 
-	# Modifying the fleet?
 	focus = {
-		id = ZER_we_will_not_make_the_same_mistakes
+		id = ZER_old_friends
+		icon = GFX_outbound_flight
+		cost = 5
+		x = 3
+		y = 5
+		prerequisite = {
+			focus = ZER_defend_our_planet
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+
+		}
+		completion_reward = {
+			TAP = {
+				country_event = ZER_start.4
+			}
+		}
+
+		ai_will_do = {
+			factor = 100
+		}
+	}
+
+	focus = {
+		id = ZER_fighting_on_the_homefront
+		icon = GFX_outbound_flight
+		cost = 5
+		x = 5
+		y = 5
+		prerequisite = {
+			focus = ZER_defend_our_planet
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+
+		}
+		completion_reward = {
+			country_event = ZER_start.3
+			swap_ideas = {
+				remove_idea = ZER_the_first_warlord_idea_2
+				add_idea = ZER_the_first_warlord_idea_3
+			}
+		}
+
+		ai_will_do = {
+			factor = 100
+		}
+	}
+
+	focus = {
+		id = ZER_controlling_the_lawless_planet
+		icon = GFX_outbound_flight
+		cost = 5
+		x = 2
+		y = 8
+		prerequisite = {
+			focus = ZER_expand_or_perish
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+
+		}
+		completion_reward = {
+			337 = {
+				add_state_modifier = {
+					modifier = {
+						resistance_target = -0.3
+					}
+				}
+			}
+			336 = {
+				add_state_modifier = {
+					modifier = {
+						resistance_target = -0.3
+					}
+				}
+			}
+			344 = {
+				add_state_modifier = {
+					modifier = {
+						resistance_target = -0.3
+					}
+				}
+			}
+			76 = {
+				add_state_modifier = {
+					modifier = {
+						resistance_target = -0.3
+					}
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 100
+		}
+	}
+
+	focus = {
+		id = ZER_promises_of_representation
+		icon = GFX_outbound_flight
+		cost = 5
+		x = 4
+		y = 8
+		prerequisite = {
+			focus = ZER_expand_or_perish
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+
+		}
+		completion_reward = {
+			add_political_power = -100
+			country_event = ZER_start.7
+			337 = {
+				add_state_modifier = {
+					modifier = {
+						compliance_growth = 0.2
+					}
+				}
+			}
+			336 = {
+				add_state_modifier = {
+					modifier = {
+						compliance_growth = 0.2
+					}
+				}
+			}
+			344 = {
+				add_state_modifier = {
+					modifier = {
+						compliance_growth = 0.2
+					}
+				}
+			}
+			76 = {
+				add_state_modifier = {
+					modifier = {
+						compliance_growth = 0.2
+					}
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 100
+		}
+	}
+
+	focus = {
+		id = ZER_consolidate_our_territory
+		icon = GFX_outbound_flight
+		cost = 5
+		x = 3
+		y = 9
+		prerequisite = {
+			focus = ZER_promises_of_representation
+		}
+		prerequisite = {
+			focus = ZER_controlling_the_lawless_planet
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+
+		}
+		completion_reward = {
+			add_stability = 0.1
+			custom_effect_tooltip = tt_zer_keep_harrsk
+		}
+
+		ai_will_do = {
+			factor = 100
+		}
+	}
+
+	focus = {
+		id = ZER_constructing_deep_3
+		icon = GFX_outbound_flight
+		cost = 5
+		x = 6
+		y = 7
+		prerequisite = {
+			focus = ZER_develop_harrsks_fortress
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+
+		}
+		completion_reward = {
+			add_stability = 0.1
+			custom_effect_tooltip = tt_zer_keep_harrsk
+		}
+
+		ai_will_do = {
+			factor = 100
+		}
+	}
+
+	# Galaxy in Turmoil - START OF HARRSK EMPIRE PATH
+	focus = {
+		id = ZER_galaxy_in_turmoil
 		icon = GFX_outbound_flight
 		cost = 5
 		x = 8
-		y = 1
+		y = 3
 		prerequisite = {
 			focus = ZER_lord_high_admiral
 		}
 		search_filters = {
 		}
 		mutually_exclusive = {
-			focus = ZER_for_the_empire
+			focus = ZER_the_first_warlord
 		}
 		completion_reward = {
-			# Remove legitimacy
-			# Gain stability
-			# Gain bad opinion from empire
-		}
-
-		ai_will_do = {
-			factor = 100
-		}
-	}
-
-	# Modifying the fleet?
-	focus = {
-		id = ZER_the_independent_protectorate
-		icon = GFX_outbound_flight
-		cost = 5
-		x = 7
-		y = 2
-		prerequisite = {
-			focus = ZER_we_will_not_make_the_same_mistakes
-		}
-		search_filters = {
-		}
-		mutually_exclusive = {
-		}
-		completion_reward = {
-			# Remove legitimacy
-			# Gain stability
-			# Gain bad opinion from empire
-		}
-
-		ai_will_do = {
-			factor = 100
-		}
-	}
-
-	# Modifying the fleet?
-	focus = {
-		id = ZER_the_imperial_throne
-		icon = GFX_outbound_flight
-		cost = 5
-		x = 9
-		y = 2
-		prerequisite = {
-			focus = ZER_we_will_not_make_the_same_mistakes
-		}
-		search_filters = {
-		}
-		mutually_exclusive = {
-		}
-		completion_reward = {
-			# Remove legitimacy
-			# Gain stability
-			# Gain bad opinion from empire
-		}
-
-		ai_will_do = {
-			factor = 100
-		}
-	}
-
-	# Modifying the fleet?
-	focus = {
-		id = ZER_develop_defensive_doctrines
-		icon = GFX_outbound_flight
-		cost = 5
-		x = 7
-		y = 3
-		prerequisite = {
-			focus = ZER_the_independent_protectorate
-		}
-		search_filters = {
-		}
-		mutually_exclusive = {
-		}
-		completion_reward = {
-			# Remove legitimacy
-			# Gain stability
-			# Gain bad opinion from empire
-		}
-
-		ai_will_do = {
-			factor = 100
-		}
-	}
-
-	# Modifying the fleet?
-	focus = {
-		id = ZER_new_suppliers
-		icon = GFX_outbound_flight
-		cost = 5
-		x = 9
-		y = 3
-		prerequisite = {
-			focus = ZER_the_imperial_throne
-		}
-		search_filters = {
-		}
-		mutually_exclusive = {
-		}
-		completion_reward = {
-			# Remove legitimacy
-			# Gain stability
-			# Gain bad opinion from empire
-		}
-
-		ai_will_do = {
-			factor = 100
-		}
-	}
-
-	# Modifying the fleet?
-	focus = {
-		id = ZER_kalist_iv_freedom
-		icon = GFX_outbound_flight
-		cost = 5
-		x = 14
-		y = 0
-		prerequisite = {
-		}
-		search_filters = {
-		}
-		mutually_exclusive = {
-			focus = ZER_lord_high_admiral
-		}
-		completion_reward = {
-			
-		}
-
-		ai_will_do = {
-			factor = 100
-		}
-	}
-
-	# Modifying the fleet?
-	focus = {
-		id = ZER_expanding_our_realm
-		icon = GFX_outbound_flight
-		cost = 5
-		x = 6
-		y = 4
-		prerequisite = {
-			focus = ZER_develop_defensive_doctrines
-			focus = ZER_form_friendships
-		}
-		prerequisite = {
-			focus = ZER_imperial_collaboration
-			focus = ZER_new_suppliers
-		}
-		search_filters = {
-		}
-		mutually_exclusive = {
-		}
-		completion_reward = {
-			# Decreases stability
-			# Adds idea that suppresses resistance
-		}
-
-		ai_will_do = {
-			factor = 100
-		}
-	}
-
-	# Modifying the fleet?
-	focus = {
-		id = ZER_research_slot
-		icon = GFX_outbound_flight
-		cost = 5
-		x = 3
-		y = 5
-		prerequisite = {
-			focus = ZER_expanding_our_realm
-		}
-		search_filters = {
-		}
-		mutually_exclusive = {
-		}
-		completion_reward = {
-			# Decreases stability
-			# Adds idea that suppresses resistance
-		}
-
-		ai_will_do = {
-			factor = 100
-		}
-	}
-
-	focus = {
-		id = ZER_prioritise_the_army
-		icon = GFX_outbound_flight
-		cost = 5
-		x = 5
-		y = 5
-		prerequisite = {
-			focus = ZER_expanding_our_realm
-		}
-		search_filters = {
-		}
-		mutually_exclusive = {
-			focus = ZER_prioritise_the_navy
-		}
-		completion_reward = {
-			# Decreases stability
-			# Adds idea that suppresses resistance
-		}
-
-		ai_will_do = {
-			factor = 100
-		}
-	}
-
-	focus = {
-		id = ZER_prioritise_the_navy
-		icon = GFX_outbound_flight
-		cost = 5
-		x = 7
-		y = 5
-		prerequisite = {
-			focus = ZER_expanding_our_realm
-		}
-		search_filters = {
-		}
-		mutually_exclusive = {
-			focus = ZER_prioritise_the_army
-		}
-		completion_reward = {
-			# Decreases stability
-			# Adds idea that suppresses resistance
-		}
-
-		ai_will_do = {
-			factor = 100
-		}
-	}
-
-	# Modifying the fleet?
-	focus = {
-		id = ZER_exploit_our_resources
-		icon = GFX_outbound_flight
-		cost = 5
-		x = 9
-		y = 5
-		prerequisite = {
-			focus = ZER_expanding_our_realm
-		}
-		search_filters = {
-		}
-		mutually_exclusive = {
-		}
-		completion_reward = {
-			# Decreases stability
-			# Adds idea that suppresses resistance
-		}
-
-		ai_will_do = {
-			factor = 100
-		}
-	}
-
-	# Modifying the fleet?
-	focus = {
-		id = ZER_new_fuel_refineries
-		icon = GFX_outbound_flight
-		cost = 5
-		x = 9
-		y = 6
-		prerequisite = {
-			focus = ZER_exploit_our_resources
-		}
-		search_filters = {
-		}
-		mutually_exclusive = {
-		}
-		completion_reward = {
-			# Decreases stability
-			# Adds idea that suppresses resistance
-		}
-
-		ai_will_do = {
-			factor = 100
-		}
-	}
-
-	# Modifying the fleet?
-	focus = {
-		id = ZER_secret_dockyards
-		icon = GFX_outbound_flight
-		cost = 5
-		x = 3
-		y = 6
-		prerequisite = {
-			focus = ZER_research_slot
-		}
-		search_filters = {
-		}
-		mutually_exclusive = {
-		}
-		completion_reward = {
-			# Decreases stability
-			# Adds idea that suppresses resistance
-		}
-
-		ai_will_do = {
-			factor = 100
-		}
-	}
-
-	# Modifying the fleet?
-	focus = {
-		id = ZER_take_abregado_rae
-		icon = GFX_outbound_flight
-		cost = 5
-		x = 6
-		y = 6
-		prerequisite = {
-			focus = ZER_prioritise_the_army
-			focus = ZER_prioritise_the_navy
-		}
-		search_filters = {
-		}
-		mutually_exclusive = {
-		}
-		completion_reward = {
-			# Decreases stability
-			# Adds idea that suppresses resistance
-		}
-
-		ai_will_do = {
-			factor = 100
-		}
-	}
-
-	focus = {
-		id = ZER_develop_abregado_rae
-		icon = GFX_outbound_flight
-		cost = 5
-		x = 5
-		y = 7
-		prerequisite = {
-			focus = ZER_take_abregado_rae
-		}
-		search_filters = {
-		}
-		mutually_exclusive = {
-		}
-		completion_reward = {
-			# Decreases stability
-			# Adds idea that suppresses resistance
-		}
-
-		ai_will_do = {
-			factor = 100
-		}
-	}
-
-	focus = {
-		id = ZER_indoctrinate_abregado_rae
-		icon = GFX_outbound_flight
-		cost = 5
-		x = 7
-		y = 7
-		prerequisite = {
-			focus = ZER_take_abregado_rae
-		}
-		search_filters = {
-		}
-		mutually_exclusive = {
-		}
-		completion_reward = {
-			# Decreases stability
-			# Adds idea that suppresses resistance
+			add_stability = 0.1
+			custom_effect_tooltip = tt_zer_keep_harrsk
 		}
 
 		ai_will_do = {
