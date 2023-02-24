@@ -163,12 +163,12 @@ static const float  FOW_CAMERA_MAX				= 500;
 // --------------------------------------------------------------
 
 
-static const float  SHADOW_WEIGHT_TERRAIN    	= 0.7f;
-static const float  SHADOW_WEIGHT_MAP    		= 0.7f;
-static const float  SHADOW_WEIGHT_BORDER   		= 0.7f;
-static const float  SHADOW_WEIGHT_WATER   		= 0.5f;
-static const float  SHADOW_WEIGHT_RIVER   		= 0.4f;
-static const float  SHADOW_WEIGHT_TREE   		= 0.7f;
+static const float  SHADOW_WEIGHT_TERRAIN    	= 0.0f;
+static const float  SHADOW_WEIGHT_MAP    		= 0.0f;
+static const float  SHADOW_WEIGHT_BORDER   		= 0.0f;
+static const float  SHADOW_WEIGHT_WATER   		= 0.0f;
+static const float  SHADOW_WEIGHT_RIVER   		= 0.0f;
+static const float  SHADOW_WEIGHT_TREE   		= 0.0f;
 
 // LIGHT_SHADOW_DIRECTION_X = -8.0				defines.lua   (reload defines)
 // LIGHT_SHADOW_DIRECTION_Y = -8.0				defines.lua   (reload defines)
