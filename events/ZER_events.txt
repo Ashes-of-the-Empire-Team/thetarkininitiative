@@ -4,7 +4,55 @@
 
 add_namespace = ZER
 add_namespace = ZER_start
+add_namespace = ZER_empire_reformation
 add_namespace = ZER_news
+
+country_event = { # Harrsk Becoming Emperor
+    id = ZER_empire_reformation.1
+    title = ZER_empire_reformation.1.t
+    desc = ZER_empire_reformation.1.d
+    picture = GFX_report_event_election_vote
+
+    is_triggered_only = yes
+
+    #fire_only_once = yes
+
+    option = {
+        name = ZER_empire_reformation.1.a
+        custom_effect_tooltip = tt_zer_harrsk_become_emperor
+        add_trait = {
+            character = ZER_blitzer_harrsk
+            ideology = imperial_ideology
+            trait = zer_emperor
+        }
+        set_variable = { global.previous_emperor = var:global.emperor_id } 
+        if = {
+            limit = {
+                ZER_blitzer_harrsk = {
+                    has_trait = zer_lord_high_admiral
+                }
+            }
+            remove_trait = {
+                character = ZER_blitzer_harrsk
+                ideology = imperial_ideology
+                trait = zer_lord_high_admiral
+            }
+        }
+        set_cosmetic_tag = ZER_IMPERIAL_REMNANT
+        hidden_effect = {
+            new_event = ZER_news.2
+        }
+        var:global.emperor_id = {
+            clr_country_flag = emperor
+        }
+        set_variable = { global.emperor_id = ROOT }
+        set_country_flag = emperor
+        set_country_flag = imperial_remnant
+        log = "Previous Emperor: [?global.previous_emperor.GetTag]"
+        log = "New Emperor: [?global.emperor_id.GetTag]"
+    }
+
+}
 
 news_event = { # Harrsk becomes Lord High Admiral
     id = ZER_news.1
@@ -18,6 +66,59 @@ news_event = { # Harrsk becomes Lord High Admiral
 
     option = {
         name = ZER_news.1.a
+    }
+
+}
+
+news_event = { # Harrsk becomes Emperor
+    id = ZER_news.2
+    title = ZER_news.2.t
+    desc = ZER_news.2.desc
+    picture = GFX_news_event_harrsk_becomes_emperor
+
+    is_triggered_only = yes
+
+    major = yes
+    
+    option = {
+        name = ZER_news.2.a
+        trigger = {
+            AND = {
+                NOT = { original_tag = ZER }
+                has_government = imperial
+                has_opinion = {
+                    target = ZER
+                    value > 50
+                }
+            }
+		}
+    }
+
+    option = {
+        name = ZER_news.2.b
+        trigger = {
+            AND = {
+                NOT = { original_tag = ZER }
+                has_government = imperial
+            }
+		}
+    }
+
+    option = {
+        name = ZER_news.2.c
+        trigger = {
+            AND = {
+                NOT = { original_tag = ZER }
+                NOT = { has_government = imperial }
+            }
+		}
+    }
+
+    option = {
+        name = ZER_news.2.d
+        trigger = {
+            tag = ZER
+		}
     }
 
 }
