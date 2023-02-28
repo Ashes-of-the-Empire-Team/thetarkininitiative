@@ -1,0 +1,1219 @@
+focus_tree = {
+	id = trandosha
+	continuous_focus_position = { x = 200 y = 730 }
+	country = {
+		factor = 0
+		modifier = {
+			add = 10
+			tag = tra
+		}
+	} 
+	#The day the payments stopped
+	focus = {
+		id = TRA_the_day_the_payments_stopped
+		icon = GFX_goal_unknown
+		x = 12
+		y = 0
+		cost = 0.5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			add_political_power = -150
+			
+		}
+	}
+
+	#Consult the generals
+	focus = {
+		id = TRA_consult_the_generals
+		icon = GFX_goal_unknown
+		x = 12
+		y = 1
+		cost = 1.8
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = TRA_the_day_the_payments_stopped  }
+		completion_reward = {
+			add_stability = 0.1
+			ROOT = { country_event = { days = 1 id = TRA.1 } }
+		}
+	}
+	###########################
+	#The bounty hunters and slavers
+	focus = {
+		id = TRA_the_bounty_hunters_and_slavers
+		icon = GFX_goal_unknown
+		x = 10
+		y = 2
+		cost = 2.2
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		available = { NOT = { has_country_flag = TRA_n_middle } }
+		prerequisite = { focus = TRA_consult_the_generals  }
+		completion_reward = {
+			add_stability = 0.05
+			set_country_flag = TRA_middle
+			if = {
+				limit = { has_country_flag = TRA_lower }
+				set_country_flag = TRA_n_upper
+				add_ideas = { TRA_angry_upper }
+			}
+			if = {
+				limit = { has_country_flag = TRA_upper }
+				set_country_flag = TRA_n_lower
+				add_ideas = { TRA_angry_lower }
+			}
+		}
+	}
+	#lock down the warehouses
+	focus = {
+		id = TRA_lock_down_the_warehouses
+		icon = GFX_goal_unknown
+		x = 10
+		y = 3
+		cost = 2.2
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = TRA_the_bounty_hunters_and_slavers   }
+		completion_reward = {
+		if = {
+			limit = { has_idea = TRA_shortages }
+			add_stability = 0.05	
+			swap_ideas = {
+				remove_idea = TRA_shortages
+				add_idea = TRA_rationing
+			}
+			}
+		else_if = {
+			limit = { has_idea = TRA_rationing }
+			add_stability = 0.05
+			swap_ideas = {
+				remove_idea = TRA_rationing
+				add_idea = TRA_purchase_limits
+			}
+		}
+		else_if = {
+			limit = { has_idea = TRA_purchase_limits }
+			add_stability = 0.05
+				remove_ideas = TRA_purchase_limits
+		}
+		else = {
+			add_stability = 0.15
+		}
+		}
+	}
+	#state compensation
+	focus = {
+		id = TRA_state_compensation
+		icon = GFX_goal_unknown
+		x = 10
+		y = 4
+		cost = 2.2
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = TRA_lock_down_the_warehouses  }
+		completion_reward = {
+			if = {
+				limit = { has_idea = TRA_market_crash }
+				add_stability = 0.05	
+				swap_ideas = {
+					remove_idea = TRA_market_crash
+					add_idea = TRA_market_stabilization
+				}
+				}
+			else_if = {
+				limit = { has_idea = TRA_market_stabilization }
+				add_stability = 0.05
+					remove_ideas = TRA_market_stabilization
+			}
+			else = {
+				add_stability = 0.15
+			}
+		}
+	}
+	###########################
+	#The clergy and aristocracy 
+	focus = {
+		id = TRA_The_clergy_and_aristocracy 
+		icon = GFX_goal_unknown
+		x = 12
+		y = 2
+		cost = 2.2
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = TRA_consult_the_generals   }
+		available = { NOT = { has_country_flag = TRA_n_upper } }
+		completion_reward = {
+			add_stability = 0.05
+			set_country_flag = TRA_upper
+			if = {
+				limit = { has_country_flag = TRA_lower }
+				set_country_flag = TRA_n_middle
+				add_ideas = { TRA_angry_middle }
+			}
+			if = {
+				limit = { has_country_flag = TRA_middle }
+				set_country_flag = TRA_n_lower
+				add_ideas = { TRA_angry_lower }
+			}
+		}
+	}
+	#protect the palaces
+	focus = {
+		id = TRA_protect_the_palaces
+		icon = GFX_goal_unknown
+		x = 12
+		y = 3
+		cost = 2.2
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = TRA_The_clergy_and_aristocracy   }
+		completion_reward = {
+			if = {
+				limit = { has_idea = TRA_rampant_crime }
+				add_stability = 0.05	
+				swap_ideas = {
+					remove_idea = TRA_rampant_crime
+					add_idea = TRA_managable_crime
+				}
+				}
+			else_if = {
+				limit = { has_idea = TRA_managable_crime }
+				add_stability = 0.05
+				swap_ideas = {
+					remove_idea = TRA_managable_crime
+					add_idea = TRA_above_average_crime
+				}
+			}
+			else_if = {
+				limit = { has_idea = TRA_above_average_crime }
+				add_stability = 0.05
+					remove_ideas = TRA_above_average_crime
+			}
+			else = {
+				add_stability = 0.15
+			}
+		}
+	}
+	#tax relief
+	focus = {
+		id = TRA_tax_relief
+		icon = GFX_goal_unknown
+		x = 12
+		y = 4
+		cost = 2.2
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = TRA_protect_the_palaces  }
+		completion_reward = {
+			if = {
+				limit = { has_idea = TRA_market_crash }
+				add_stability = 0.05	
+				swap_ideas = {
+					remove_idea = TRA_market_crash
+					add_idea = TRA_market_stabilization
+				}
+				}
+			else_if = {
+				limit = { has_idea = TRA_market_stabilization }
+				add_stability = 0.05
+					remove_ideas = TRA_market_stabilization
+			}
+			else = {
+				add_stability = 0.15
+			}
+		}
+	}
+	###########################
+	#The hungry masses
+	focus = {
+		id = TRA_the_hungry_masses
+		icon = GFX_goal_unknown
+		x = 14
+		y = 2
+		cost = 2.2
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		available = { NOT = { has_country_flag = TRA_n_lower } }
+		prerequisite = { focus = TRA_consult_the_generals   }
+		completion_reward = {
+			add_stability = 0.05
+			set_country_flag = TRA_lower
+			if = {
+				limit = { has_country_flag = TRA_middle }
+				set_country_flag = TRA_n_upper
+				add_ideas = { TRA_angry_upper }
+			}
+			if = {
+				limit = { has_country_flag = TRA_upper }
+				set_country_flag = TRA_n_middle
+				add_ideas = { TRA_angry_middle }
+			}
+		}
+	}
+	#Fight the bandits
+	focus = {
+		id = TRA_fight_the_bandits
+		icon = GFX_goal_unknown
+		x = 14
+		y = 3
+		cost = 2.2
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = TRA_the_hungry_masses   }
+		completion_reward = {
+			if = {
+				limit = { has_idea = TRA_rampant_crime }
+				add_stability = 0.05	
+				swap_ideas = {
+					remove_idea = TRA_rampant_crime
+					add_idea = TRA_managable_crime
+				}
+				}
+			else_if = {
+				limit = { has_idea = TRA_managable_crime }
+				add_stability = 0.05
+				swap_ideas = {
+					remove_idea = TRA_managable_crime
+					add_idea = TRA_above_average_crime
+				}
+			}
+			else_if = {
+				limit = { has_idea = TRA_above_average_crime }
+				add_stability = 0.05
+					remove_ideas = TRA_above_average_crime
+			}
+			else = {
+				add_stability = 0.15
+			}
+			
+		}
+	}
+	#bread and games
+	focus = {
+		id = TRA_bread_and_games
+		icon = GFX_goal_unknown
+		x = 14
+		y = 4
+		cost = 2.2
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = TRA_fight_the_bandits  }
+		completion_reward = {
+			if = {
+				limit = { has_idea = TRA_shortages }
+				add_stability = 0.1	
+				swap_ideas = {
+					remove_idea = TRA_shortages
+					add_idea = TRA_rationing
+				}
+				}
+			else_if = {
+				limit = { has_idea = TRA_rationing }
+				add_stability = 0.1
+				swap_ideas = {
+					remove_idea = TRA_rationing
+					add_idea = TRA_purchase_limits
+				}
+			}
+			else_if = {
+				limit = { has_idea = TRA_purchase_limits }
+				add_stability = 0.1
+					remove_ideas = TRA_purchase_limits
+			}
+			else = {
+				add_stability = 0.2
+			}
+		}
+	}
+	###########################
+	#Raise the planetary defense force reserves
+	focus = {
+		id = TRA_raise_the_planetary_defense_force_reserves
+		icon = GFX_goal_unknown
+		x = 18
+		y = 2
+		cost = 2.2
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = TRA_consult_the_generals   }
+		completion_reward = {
+			add_stability = 0.1
+		}
+	}
+	###########################
+	#Seize weapons on planet
+	focus = {
+		id = TRA_seize_weapons_on_planet
+		icon = GFX_goal_unknown
+		x = 19
+		y = 3
+		cost = 2.2
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = TRA_raise_the_planetary_defense_force_reserves}
+		completion_reward = {
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = 2000
+			}
+		}
+	}
+	#arm aligned militias
+	focus = {
+		id = TRA_arm_aligned_militias
+		icon = GFX_goal_unknown
+		x = 19
+		y = 5
+		cost = 2.2
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = TRA_seize_weapons_on_planet  }
+		completion_reward = {
+			add_stability = 0.1
+		}
+	}
+	#secure vital postions
+	focus = {
+		id = TRA_secure_vital_postions
+		icon = GFX_goal_unknown
+		x = 19
+		y = 7
+		cost = 2.2
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = TRA_arm_aligned_militias  }
+		completion_reward = {
+			add_stability = 0.1
+		}
+	}
+	###########################
+	#open emergency arms factories
+	focus = {
+		id = TRA_open_emergency_arms_factories
+		icon = GFX_goal_unknown
+		x = 17
+		y = 3
+		cost = 2.2
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = TRA_raise_the_planetary_defense_force_reserves}
+		completion_reward = {
+			add_stability = 0.1
+			add_offsite_building = { type = arms_factory level = 2 }
+		}
+	}
+	#Raise new divisions
+	focus = {
+		id = TRA_raise_new_divisions
+		icon = GFX_goal_unknown
+		x = 17
+		y = 5
+		cost = 2.2
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = TRA_open_emergency_arms_factories  }
+		completion_reward = {
+			add_stability = 0.1
+		}
+	}
+	#Assert a new Government
+	focus = {
+		id = TRA_assert_a_new_Government
+		icon = GFX_goal_unknown
+		x = 17
+		y = 7
+		cost = 2.2
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = TRA_raise_new_divisions  }
+		completion_reward = {
+			add_stability = 0.1
+		}
+	}
+	###########################
+	#reckoning
+	focus = {
+		id = TRA_reckoning
+		icon = GFX_goal_unknown
+		x = 12
+		y = 5
+		cost = 2.2
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = TRA_tax_relief focus = TRA_state_compensation focus = TRA_bread_and_games }
+		completion_reward = {
+			add_stability = 0.05
+		}
+	}
+	###########################
+	#revoke licenses to carry modern arms
+	focus = {
+		id = TRA_revoke_licenses_to_carry_modern_arms
+		icon = GFX_goal_unknown
+		x = 10
+		y = 6
+		cost = 2.2
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		available = {  has_country_flag = TRA_n_middle }
+		prerequisite = { focus = TRA_reckoning }
+		completion_reward = {
+			if = {
+				limit = { has_idea = TRA_rampant_crime }
+				add_stability = 0.05	
+				swap_ideas = {
+					remove_idea = TRA_rampant_crime
+					add_idea = TRA_managable_crime
+				}
+				}
+			else_if = {
+				limit = { has_idea = TRA_managable_crime }
+				add_stability = 0.05
+				swap_ideas = {
+					remove_idea = TRA_managable_crime
+					add_idea = TRA_above_average_crime
+				}
+			}
+			else_if = {
+				limit = { has_idea = TRA_above_average_crime }
+				add_stability = 0.05
+					remove_ideas = TRA_above_average_crime
+			}
+			else = {
+				add_stability = 0.15
+			}
+		}
+	}
+	#purge the slave pits
+	focus = {
+		id = TRA_purge_the_slave_pits
+		icon = GFX_goal_unknown
+		x = 10
+		y = 7
+		cost = 2.2
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = TRA_revoke_licenses_to_carry_modern_arms }
+		completion_reward = {
+			add_stability = 0.05
+			remove_ideas = { TRA_angry_middle }
+			remove_ideas = { TRA_overflowing_slavepits }
+		}
+	}
+	###########################
+	#seize the vaults
+	focus = {
+		id = TRA_seize_the_vaults
+		icon = GFX_goal_unknown
+		x = 12
+		y = 6
+		cost = 2.2
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		available = { has_country_flag = TRA_n_upper  }
+		prerequisite = { focus = TRA_reckoning }
+		completion_reward = {
+			if = {
+				limit = { has_idea = TRA_shortages }
+				add_stability = 0.05	
+				swap_ideas = {
+					remove_idea = TRA_shortages
+					add_idea = TRA_rationing
+				}
+				}
+			else_if = {
+				limit = { has_idea = TRA_rationing }
+				add_stability = 0.05
+				swap_ideas = {
+					remove_idea = TRA_rationing
+					add_idea = TRA_purchase_limits
+				}
+			}
+			else_if = {
+				limit = { has_idea = TRA_purchase_limits }
+				add_stability = 0.05
+					remove_ideas = TRA_purchase_limits 
+				}
+			else = {
+				add_stability = 0.15
+			}
+		}
+	}
+	#Arrest those previously protected from the law
+	focus = {
+		id = TRA_arrest_those_previously_protected_from_the_law
+		icon = GFX_goal_unknown
+		x = 12
+		y = 7
+		cost = 2.2
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = TRA_seize_the_vaults }
+		completion_reward = {
+			remove_ideas = { TRA_angry_upper }
+			if = {
+				limit = { has_idea = TRA_rampant_crime }
+				add_stability = 0.05	
+				swap_ideas = {
+					remove_idea = TRA_rampant_crime
+					add_idea = TRA_managable_crime
+				}
+				}
+			else_if = {
+				limit = { has_idea = TRA_managable_crime }
+				add_stability = 0.05
+				swap_ideas = {
+					remove_idea = TRA_managable_crime
+					add_idea = TRA_above_average_crime
+				}
+			}
+			else_if = {
+				limit = { has_idea = TRA_above_average_crime }
+				add_stability = 0.05
+					remove_ideas = TRA_above_average_crime
+			}
+			else = {
+				add_stability = 0.15
+			}
+		}
+	}
+	###########################
+	#Enact temporary serfdom
+	focus = {
+		id = TRA_Enact_temporary_serfdom
+		icon = GFX_goal_unknown
+		x = 14
+		y = 6
+		cost = 2.2
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		available = { has_country_flag = TRA_n_lower  }
+		prerequisite = { focus = TRA_reckoning }
+		completion_reward = {
+			if = {
+				limit = { has_idea = TRA_overflowing_slavepits }
+				add_stability = 0.05	
+				swap_ideas = {
+					remove_idea = TRA_overflowing_slavepits
+					add_idea = TRA_housed_slaves
+				}
+				}
+			else_if = {
+				limit = { has_idea = TRA_housed_slaves  }
+				add_stability = 0.05
+				remove_ideas = TRA_housed_slaves 
+			}
+			else = {
+				add_stability = 0.15
+			}
+		}
+	}
+	#Kill the provocateurs
+	focus = {
+		id = TRA_kill_the_provocateurs
+		icon = GFX_goal_unknown
+		x = 14
+		y = 7
+		cost = 2.2
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = TRA_Enact_temporary_serfdom }
+		completion_reward = {
+			remove_ideas = { TRA_angry_lower }
+			if = {
+				limit = { has_idea = TRA_rampant_crime }
+				add_stability = 0.05	
+				swap_ideas = {
+					remove_idea = TRA_rampant_crime
+					add_idea = TRA_managable_crime
+				}
+				}
+			else_if = {
+				limit = { has_idea = TRA_managable_crime }
+				add_stability = 0.05
+				swap_ideas = {
+					remove_idea = TRA_managable_crime
+					add_idea = TRA_above_average_crime
+				}
+			}
+			else_if = {
+				limit = { has_idea = TRA_above_average_crime }
+				add_stability = 0.05
+					remove_ideas = TRA_above_average_crime
+			}
+			else = {
+				add_stability = 0.15
+			}
+		}
+	}
+	###########################
+	#civil war
+	focus = {
+		id = TRA_civil_war
+		icon = GFX_goal_unknown
+		x = 12
+		y = 8
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = TRA_purge_the_slave_pits focus = TRA_arrest_those_previously_protected_from_the_law focus = TRA_kill_the_provocateurs }
+		mutually_exclusive = { focus = TRA_peaceful_resolution }
+		bypass = {
+			has_completed_focus = TRA_peaceful_resolution 
+		}
+		completion_reward = {
+			start_civil_war = {
+				ideology = neutrality
+				size = 0.4
+				army_ratio = 0.3
+				navy_ratio = 0
+				air_ratio = 0
+			}
+		}
+	}
+	#peaceful resolution
+	focus = {
+		id = TRA_peaceful_resolution
+		icon = GFX_goal_unknown
+		x = 18
+		y = 8
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = TRA_secure_vital_postions}
+		prerequisite = { focus = TRA_assert_a_new_Government}
+		mutually_exclusive = { focus = TRA_civil_war }
+		completion_reward = {
+			set_stability = 0.6
+		}
+	}
+	###########################
+	#Divine mandate
+	focus = {
+		id = TRA_divine_mandate
+		icon = GFX_goal_unknown
+		x = 6
+		y = 9
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		available = { NOT = { has_country_flag = TRA_n_middle } }
+		prerequisite = { focus = TRA_civil_war }
+		completion_reward = {
+			add_stability = 0.05
+		}
+	}
+	###########################
+	#Declare_Neutrality
+	focus = {
+		id = TRA_declare_neutrality
+		icon = GFX_goal_unknown
+		x = 5
+		y = 10
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = TRA_divine_mandate }
+		completion_reward = {
+			add_stability = 0.05
+		}
+	}
+	#The Scorekeeper's Laws
+	focus = {
+		id = TRA_the_scorekeepers_Laws
+		icon = GFX_goal_unknown
+		x = 5
+		y = 11
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = TRA_declare_neutrality }
+		completion_reward = {
+			add_stability = 0.05
+		}
+	}
+	#The Great Hunt
+	focus = {
+		id = TRA_the_great_hunt
+		icon = GFX_goal_unknown
+		x = 5
+		y = 12
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = TRA_the_scorekeepers_Laws }
+		completion_reward = {
+			add_stability = 0.05
+		}
+	}
+	###########################
+	#Adapt to life without slave dependency
+	focus = {
+		id = TRA_adapt_to_life_without_slave_dependency
+		icon = GFX_goal_unknown
+		x = 7
+		y = 10
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = TRA_divine_mandate }
+		completion_reward = {
+			add_stability = 0.05
+		}
+	}
+	#citizen levies
+	focus = {
+		id = TRA_citizen_levies
+		icon = GFX_goal_unknown
+		x = 7
+		y = 11
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = TRA_adapt_to_life_without_slave_dependency }
+		completion_reward = {
+			add_stability = 0.05
+		}
+	}
+	#The Holy guard
+	focus = {
+		id = TRA_the_holy_guard
+		icon = GFX_goal_unknown
+		x = 7
+		y = 12
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = TRA_citizen_levies }
+		completion_reward = {
+			add_stability = 0.05
+		}
+	}
+	###########################
+	#The Transhoshan Crusade
+	focus = {
+		id = TRA_the_transhoshan_crusade
+		icon = GFX_goal_unknown
+		x = 6
+		y = 13
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = TRA_the_great_hunt }
+		prerequisite = { focus = TRA_the_holy_guard }
+		completion_reward = {
+			add_stability = 0.05
+		}
+	}
+	###########################
+	#position, status and rights through purchase
+	focus = {
+		id = TRA_position_status_and_rights_through_purchase
+		icon = GFX_goal_unknown
+		x = 12
+		y = 9
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		available = { NOT = { has_country_flag = TRA_n_upper } }
+		prerequisite = { focus = TRA_civil_war }
+		completion_reward = {
+			add_stability = 0.05
+		}
+	}
+	###########################
+	#Treaties with the new Republic
+	focus = {
+		id = TRA_treaties_with_the_new_republic
+		icon = GFX_goal_unknown
+		x = 11
+		y = 10
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = TRA_position_status_and_rights_through_purchase }
+		completion_reward = {
+			add_stability = 0.05
+		}
+	}
+	#business with the Imperials
+	focus = {
+		id = TRA_business_with_the_imperials
+		icon = GFX_goal_unknown
+		x = 11
+		y = 11
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = TRA_treaties_with_the_new_republic }
+		completion_reward = {
+			add_stability = 0.05
+		}
+	}
+	#Planet Sponsored Mercenary Companies
+	focus = {
+		id = TRA_planet_sponsored_mercenary_companies
+		icon = GFX_goal_unknown
+		x = 11
+		y = 12
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = TRA_business_with_the_imperials }
+		completion_reward = {
+			add_stability = 0.05
+		}
+	}
+	###########################
+	#Construction of new slave ships
+	focus = {
+		id = TRA_construction_of_new_slave_ships
+		icon = GFX_goal_unknown
+		x = 13
+		y = 10
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = TRA_position_status_and_rights_through_purchase }
+		completion_reward = {
+			add_stability = 0.05
+		}
+	}
+	#A slave for every citizen
+	focus = {
+		id = TRA_a_slave_for_every_citizen
+		icon = GFX_goal_unknown
+		x = 13
+		y = 11
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = TRA_construction_of_new_slave_ships }
+		completion_reward = {
+			add_stability = 0.05
+		}
+	}
+	#Entering new markets
+	focus = {
+		id = TRA_entering_new_markets
+		icon = GFX_goal_unknown
+		x = 13
+		y = 12
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = TRA_a_slave_for_every_citizen }
+		completion_reward = {
+			add_stability = 0.05
+		}
+	}
+	###########################
+	#The Trandoshan Market
+	focus = {
+		id = TRA_the_trandoshan_market
+		icon = GFX_goal_unknown
+		x = 12
+		y = 13
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = TRA_planet_sponsored_mercenary_companies }
+		prerequisite = { focus = TRA_entering_new_markets }
+		completion_reward = {
+			add_stability = 0.05
+		}
+	}
+	###########################
+	#Might makes right
+	focus = {
+		id = TRA_might_makes_right
+		icon = GFX_goal_unknown
+		x = 18
+		y = 9
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		available = { NOT = { has_country_flag = TRA_n_lower } }
+		prerequisite = { focus = TRA_civil_war }
+		completion_reward = {
+			add_stability = 0.05
+		}
+	}
+	###########################
+	#Affirm Imperial commitment
+	focus = {
+		id = TRA_affirm_imperial_commitment
+		icon = GFX_goal_unknown
+		x = 17
+		y = 10
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = TRA_might_makes_right }
+		completion_reward = {
+			add_stability = 0.05
+		}
+	}
+	#Continue the export of Wookiees
+	focus = {
+		id = TRA_continue_the_export_of_wookiees
+		icon = GFX_goal_unknown
+		x = 17
+		y = 11
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = TRA_affirm_imperial_commitment }
+		completion_reward = {
+			add_stability = 0.05
+		}
+	}
+	#Invasion of Kashyyyk
+	focus = {
+		id = TRA_invasion_of_kashyyyk
+		icon = GFX_goal_unknown
+		x = 17
+		y = 12
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = TRA_continue_the_export_of_wookiees }
+		completion_reward = {
+			add_stability = 0.05
+		}
+	}
+	###########################
+	#Permanent Serfdom
+	focus = {
+		id = TRA_permanent_serfdom
+		icon = GFX_goal_unknown
+		x = 19
+		y = 10
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = TRA_might_makes_right }
+		completion_reward = {
+			add_stability = 0.05
+		}
+	}
+	#Slave Armies
+	focus = {
+		id = TRA_slave_armies
+		icon = GFX_goal_unknown
+		x = 19
+		y = 11
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = TRA_permanent_serfdom }
+		completion_reward = {
+			add_stability = 0.05
+		}
+	}
+	#Stolen Tech
+	focus = {
+		id = TRA_stolen_tech
+		icon = GFX_goal_unknown
+		x = 19
+		y = 12
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = TRA_slave_armies }
+		completion_reward = {
+			add_stability = 0.05
+		}
+	}
+	###########################
+	#The Trandoshan Empire
+	focus = {
+		id = TRA_the_trandoshan_empire
+		icon = GFX_goal_unknown
+		x = 18
+		y = 13
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = TRA_invasion_of_kashyyyk }
+		prerequisite = { focus = TRA_stolen_tech }
+		completion_reward = {
+			add_stability = 0.05
+		}
+	}
+	###########################
+	#Assembly rights
+	focus = {
+		id = TRA_assembly_rights
+		icon = GFX_goal_unknown
+		x = 9
+		y = 10
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = TRA_divine_mandate focus = TRA_position_status_and_rights_through_purchase }
+		completion_reward = {
+			add_stability = 0.05
+		}
+	}
+	#The Grand Council
+	focus = {
+		id = TRA_the_grand_council
+		icon = GFX_goal_unknown
+		x = 9
+		y = 11
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = TRA_assembly_rights }
+		completion_reward = {
+			add_stability = 0.05
+		}
+	}
+	#Legeslative powers
+	focus = {
+		id = TRA_legeslative_powers
+		icon = GFX_goal_unknown
+		x = 9
+		y = 12
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = TRA_the_grand_council }
+		completion_reward = {
+			add_stability = 0.05
+		}
+	}
+	#conscription
+	focus = {
+		id = TRA_conscription
+		icon = GFX_goal_unknown
+		x = 9
+		y = 13
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = TRA_legeslative_powers }
+		completion_reward = {
+			add_stability = 0.05
+		}
+	}
+	###########################
+	#Expand slavers rights
+	focus = {
+		id = TRA_expand_slavers_rights
+		icon = GFX_goal_unknown
+		x = 15
+		y = 10
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = TRA_position_status_and_rights_through_purchase focus = TRA_might_makes_right }
+		completion_reward = {
+			add_stability = 0.05
+		}
+	}
+	#create slave only work laws
+	focus = {
+		id = TRA_create_slave_only_work_laws
+		icon = GFX_goal_unknown
+		x = 15
+		y = 11
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = TRA_expand_slavers_rights }
+		completion_reward = {
+			add_stability = 0.05
+		}
+	}
+	#Expand the Slave pens
+	focus = {
+		id = TRA_expand_the_slave_pens
+		icon = GFX_goal_unknown
+		x = 15
+		y = 12
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = TRA_create_slave_only_work_laws }
+		completion_reward = {
+			add_stability = 0.05
+		}
+	}
+	#The pact of Slavers
+	focus = {
+		id = TRA_the_pact_of_slavers
+		icon = GFX_goal_unknown
+		x = 15
+		y = 13
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = TRA_expand_the_slave_pens }
+		completion_reward = {
+			add_stability = 0.05
+		}
+	}
+	###########################
+}
