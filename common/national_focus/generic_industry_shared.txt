@@ -1,0 +1,689 @@
+﻿shared_focus = {
+	id = ae_fires_of_industry
+	icon = GFX_unknown
+	x = 17
+	y = 0
+	cost = 10.8
+
+	allow_branch = {
+        always = yes
+    }
+
+	completion_reward = {
+		add_tech_bonus = {
+			name = ae_fires_of_industry
+			bonus = 0.5
+			uses = 2
+			category = construction_tech
+		}
+	}
+}
+
+shared_focus = {
+	id = ae_construction_droids
+	icon = GFX_unknown
+	x = -1
+	y = 1
+	relative_position_id = ae_fires_of_industry
+	cost = 10.8
+
+	prerequisite = {
+		focus = ae_fires_of_industry
+	}
+
+	completion_reward = {
+		random_owned_controlled_state = {
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+			add_extra_state_shared_building_slots = 1
+		}
+	}
+}
+
+shared_focus = {
+	id = ae_increased_computing_power
+	icon = GFX_unknown
+	x = -2
+	y = 1
+	relative_position_id = ae_construction_droids
+	cost = 10.8
+
+	prerequisite = {
+		focus = ae_construction_droids
+	}
+
+	completion_reward = {
+		add_tech_bonus = {
+			name = ae_increased_computing_tech
+			bonus = 1
+			uses = 1
+			category = construction_tech
+		}
+	}
+}
+
+shared_focus = {
+	id = ae_heavy_duty_lifting_robots
+	icon = GFX_unknown
+	x = 0
+	y = 1
+	relative_position_id = ae_increased_computing_power
+	cost = 10.8
+
+	prerequisite = {
+		focus = ae_increased_computing_power
+	}
+
+	completion_reward = {
+		random_owned_controlled_state = {
+			add_building_construction = {
+				type = industrial_complex
+				level = 2
+				instant_build = yes
+			}
+			add_extra_state_shared_building_slots = 2
+		}
+	}
+}
+
+shared_focus = {
+	id = ae_small_arms_industries
+	icon = GFX_unknown
+	x = 1
+	y = 1
+	relative_position_id = ae_fires_of_industry
+	cost = 10.8
+
+	prerequisite = {
+		focus = ae_fires_of_industry
+	}
+
+	completion_reward = {
+		random_owned_controlled_state = {
+			add_building_construction = {
+				type = arms_factory
+				level = 1
+				instant_build = yes
+			}
+			add_extra_state_shared_building_slots = 1
+		}
+	}
+}
+
+shared_focus = {
+	id = ae_speeder_engineering
+	icon = GFX_unknown
+	x = 2
+	y = 1
+	relative_position_id = ae_small_arms_industries
+	cost = 10.8
+
+	prerequisite = {
+		focus = ae_small_arms_industries
+	}
+
+	completion_reward = {
+		add_tech_bonus = {
+			name = ae_speeder_tech
+			bonus = 1
+			uses = 1
+			category = speeder_bike
+			category = motorized_equipment
+		}
+	}
+}
+
+shared_focus = {
+	id = ae_heavy_weapons_development
+	icon = GFX_unknown
+	x = 0
+	y = 1
+	relative_position_id = ae_speeder_engineering
+	cost = 10.8
+
+	prerequisite = {
+		focus = ae_speeder_engineering
+	}
+
+	completion_reward = {
+		random_owned_controlled_state = {
+			add_building_construction = {
+				type = arms_factory
+				level = 2
+				instant_build = yes
+			}
+			add_extra_state_shared_building_slots = 2
+		}
+	}
+}
+
+shared_focus = {
+	id = ae_construction_program
+	icon = GFX_unknown
+	x = 0
+	y = 1
+	relative_position_id = ae_construction_droids
+	cost = 10.8
+
+	prerequisite = {
+		focus = ae_construction_droids
+		focus = ae_small_arms_industries
+	}
+	mutually_exclusive = {
+		focus = ae_armaments_program
+	}
+
+	completion_reward = {
+		add_timed_idea = {
+			idea = ae_construction_program_idea
+			days = 365
+		}
+	}
+}
+
+shared_focus = {
+	id = ae_armaments_program
+	icon = GFX_unknown
+	x = 2
+	y = 1
+	relative_position_id = ae_construction_droids	
+	cost = 10.8
+
+	prerequisite = {
+		focus = ae_construction_droids
+		focus = ae_small_arms_industries
+	}
+	mutually_exclusive = {
+		focus = ae_construction_program
+	}
+
+	completion_reward = {
+		add_timed_idea = {
+			idea = ae_armaments_program_idea
+			days = 365
+		}
+	}
+}
+
+shared_focus = {
+	id = ae_university_of_science_and_robotics
+	icon = GFX_unknown
+	x = 1
+	y = 1
+	relative_position_id = ae_construction_program
+	cost = 10.8
+
+	prerequisite = {
+		focus = ae_construction_program
+		focus = ae_armaments_program
+	}
+
+	completion_reward = {
+		add_research_slot = 1
+	}
+}
+
+shared_focus = {
+	id = ae_pristine_development
+	icon = GFX_unknown
+	x = 1
+	y = 1
+	relative_position_id = ae_heavy_duty_lifting_robots
+	cost = 10.8
+
+	prerequisite = {
+		focus = ae_heavy_duty_lifting_robots
+	}
+	prerequisite = {
+		focus = ae_construction_program
+	}
+
+	completion_reward = {
+		random_owned_controlled_state = {
+			add_building_construction = {
+				type = industrial_complex
+				level = 2
+				instant_build = yes
+			}
+			add_extra_state_shared_building_slots = 2
+		}
+	}
+}
+
+shared_focus = {
+	id = ae_foundries_of_war
+	icon = GFX_unknown
+	x = -1
+	y = 1
+	relative_position_id = ae_heavy_weapons_development
+	cost = 10.8
+
+	prerequisite = {
+		focus = ae_heavy_weapons_development
+	}
+	prerequisite = {
+		focus = ae_armaments_program
+	}
+
+	completion_reward = {
+		random_owned_controlled_state = {
+			add_building_construction = {
+				type = arms_factory
+				level = 2
+				instant_build = yes
+			}
+			add_extra_state_shared_building_slots = 2
+		}
+	}
+}
+
+shared_focus = {
+	id = ae_infrastructure_development
+	icon = GFX_unknown
+	x = -2
+	y = 1
+	relative_position_id = ae_increased_computing_power
+	cost = 10.8
+
+	prerequisite = {
+		focus = ae_increased_computing_power
+	}
+
+	completion_reward = {
+		random_owned_controlled_state = {
+			add_building_construction = {
+				type = infrastructure
+				level = 1
+				instant_build = yes
+			}
+		}
+		random_owned_controlled_state = {
+			add_building_construction = {
+				type = infrastructure
+				level = 1
+				instant_build = yes
+			}
+		}
+		random_owned_controlled_state = {
+			add_building_construction = {
+				type = infrastructure
+				level = 1
+				instant_build = yes
+			}
+		}
+	}
+}
+
+shared_focus = {
+	id = ae_prioritise_public_transportation
+	icon = GFX_unknown
+	x = -1
+	y = 1
+	relative_position_id = ae_infrastructure_development
+	cost = 10.8
+
+	prerequisite = {
+		focus = ae_infrastructure_development
+	}
+	mutually_exclusive = {
+		focus = ae_prioritise_military_infrastructure
+	}
+
+	completion_reward = {
+		add_stability = 0.05
+		add_timed_idea = {
+			idea = ae_prio_public_idea
+			days = 365
+		}
+		random_owned_controlled_state = {
+			add_building_construction = {
+				type = infrastructure
+				level = 1
+				instant_build = yes
+			}
+		}
+		random_owned_controlled_state = {
+			add_building_construction = {
+				type = infrastructure
+				level = 1
+				instant_build = yes
+			}
+		}
+		random_owned_controlled_state = {
+			add_building_construction = {
+				type = infrastructure
+				level = 1
+				instant_build = yes
+			}
+		}
+	}
+}
+
+shared_focus = {
+	id = ae_prioritise_military_infrastructure
+	icon = GFX_unknown
+	x = 1
+	y = 1
+	relative_position_id = ae_infrastructure_development
+	cost = 10.8
+
+	prerequisite = {
+		focus = ae_infrastructure_development
+	}
+	mutually_exclusive = {
+		focus = ae_prioritise_public_transportation
+	}
+
+	completion_reward = {
+		add_timed_idea = {
+			idea = ae_prio_military_idea
+			days = 365
+		}
+		add_equipment_to_stockpile = {
+			type = motorized_equipment
+			amount = 200
+			producer = ROOT
+		}
+	}
+}
+
+shared_focus = {
+	id = ae_spirit_outer_rim
+	icon = GFX_unknown
+	x = 0
+	y = 2
+	relative_position_id = ae_university_of_science_and_robotics
+	cost = 10.8
+
+	allow_branch = {
+		OR = {
+			has_country_flag = ae_outer_rim_capital
+			has_country_flag = ae_unknown_regions_capital
+			has_country_flag = ae_wild_space_capital
+		}
+	}
+	prerequisite = {
+		focus = ae_foundries_of_war
+		focus = ae_pristine_development
+	}
+
+	completion_reward = {
+		add_ideas = ae_spirit_outer_rim_idea
+	}
+}
+
+shared_focus = {
+	id = ae_deep_mining
+	icon = GFX_unknown
+	x = -1
+	y = 1
+	relative_position_id = ae_spirit_outer_rim
+	cost = 10.8
+
+	prerequisite = {
+		focus = ae_spirit_outer_rim
+	}
+
+	completion_reward = {
+		random_owned_controlled_state = {
+			add_resource = {
+				type = steel
+				amount = 10
+			}
+		}
+		random_owned_controlled_state = {
+			add_resource = {
+				type = steel
+				amount = 5
+			}
+		}
+	}
+}
+
+shared_focus = {
+	id = ae_home_of_the_corsairs
+	icon = GFX_unknown
+	x = 1
+	y = 1
+	relative_position_id = ae_spirit_outer_rim
+	cost = 10.8
+
+	prerequisite = {
+		focus = ae_spirit_outer_rim
+	}
+
+	completion_reward = {
+		swap_ideas = {
+			remove_idea = ae_spirit_outer_rim_idea
+			add_idea = ae_spirit_outer_rim_idea2
+		}
+	}
+}
+
+shared_focus = {
+	id = ae_the_wayward_ports
+	icon = GFX_unknown
+	x = 0
+	y = 2
+	relative_position_id = ae_spirit_outer_rim
+	cost = 10.8
+
+	prerequisite = {
+		focus = ae_deep_mining
+	}
+	prerequisite = {
+		focus = ae_home_of_the_corsairs
+	}
+
+	completion_reward = {
+		random_owned_controlled_state = {
+			add_building_construction = {
+				type = dockyard
+				level = 2
+				instant_build = yes
+			}
+			add_extra_state_shared_building_slots = 2
+		}
+	}
+}
+
+shared_focus = {
+	id = ae_spirit_mid_rim
+	icon = GFX_unknown
+	x = 0
+	y = 2
+	relative_position_id = ae_university_of_science_and_robotics
+	cost = 10.8
+
+	allow_branch = {
+		OR = {
+			has_country_flag = ae_mid_rim_capital
+			has_country_flag = ae_expansion_region_capital
+			has_country_flag = ae_inner_rim_capital
+		}
+	}
+	prerequisite = {
+		focus = ae_foundries_of_war
+		focus = ae_pristine_development
+	}
+
+	completion_reward = {
+		add_ideas = ae_spirit_mid_rim_idea
+	}
+}
+
+shared_focus = {
+	id = ae_midst_of_war
+	icon = GFX_unknown
+	x = -1
+	y = 1
+	relative_position_id = ae_spirit_mid_rim
+	cost = 10.8
+
+	prerequisite = {
+		focus = ae_spirit_mid_rim
+	}
+
+	completion_reward = {
+		random_owned_controlled_state = {
+			add_building_construction = {
+				type = arms_factory
+				level = 1
+				instant_build = yes
+			}
+			add_extra_state_shared_building_slots = 1
+		}
+		random_owned_controlled_state = {
+			add_building_construction = {
+				type = arms_factory
+				level = 1
+				instant_build = yes
+			}
+			add_extra_state_shared_building_slots = 1
+		}
+	}
+}
+
+shared_focus = {
+	id = ae_unmatched_work_ethic
+	icon = GFX_unknown
+	x = 1
+	y = 1
+	relative_position_id = ae_spirit_mid_rim
+	cost = 10.8
+
+	prerequisite = {
+		focus = ae_spirit_mid_rim
+	}
+
+	completion_reward = {
+		swap_ideas = {
+			remove_idea = ae_spirit_mid_rim_idea
+			add_idea = ae_spirit_mid_rim_idea2
+		}
+	}
+}
+
+shared_focus = {
+	id = ae_backbone_of_the_economy
+	icon = GFX_unknown
+	x = 0
+	y = 2
+	relative_position_id = ae_spirit_mid_rim
+	cost = 10.8
+
+	prerequisite = {
+		focus = ae_unmatched_work_ethic
+	}
+	prerequisite = {
+		focus = ae_midst_of_war
+	}
+
+	completion_reward = {
+		random_owned_controlled_state = {
+			add_building_construction = {
+				type = industrial_complex
+				level = 2
+				instant_build = yes
+			}
+			add_extra_state_shared_building_slots = 2
+		}
+	}
+}
+
+shared_focus = {
+	id = ae_spirit_core
+	icon = GFX_unknown
+	x = 0
+	y = 2
+	relative_position_id = ae_university_of_science_and_robotics
+	cost = 10.8
+
+	allow_branch = {
+		OR = {
+			has_country_flag = ae_core_capital
+			has_country_flag = ae_colonies_capital
+			has_country_flag = ae_deep_core_capital
+		}
+	}
+	prerequisite = {
+		focus = ae_foundries_of_war
+		focus = ae_pristine_development
+	}
+
+	completion_reward = {
+		set_country_flag = ae_spirit_core_tax
+		add_ideas = ae_spirit_core_idea
+	}
+}
+
+shared_focus = {
+	id = ae_hub_of_finance
+	icon = GFX_unknown
+	x = -1
+	y = 1
+	relative_position_id = ae_spirit_core
+	cost = 10.8
+
+	prerequisite = {
+		focus = ae_spirit_core
+	}
+
+	completion_reward = {
+		custom_effect_tooltip = custom_add_25b
+		add_to_variable = { currency_amount^primary_currency = 25 }
+	}
+}
+
+shared_focus = {
+	id = ae_galaxywide_influence
+	icon = GFX_unknown
+	x = 1
+	y = 1
+	relative_position_id = ae_spirit_core
+	cost = 10.8
+
+	prerequisite = {
+		focus = ae_spirit_core
+	}
+
+	completion_reward = {
+		swap_ideas = {
+			remove_idea = ae_spirit_core_idea
+			add_idea = ae_spirit_core_idea2
+		}
+	}
+}
+
+shared_focus = {
+	id = ae_rejuvenated_population
+	icon = GFX_unknown
+	x = 0
+	y = 2
+	relative_position_id = ae_spirit_core
+	cost = 10.8
+
+	prerequisite = {
+		focus = ae_hub_of_finance
+	}
+	prerequisite = {
+		focus = ae_galaxywide_influence
+	}
+
+	completion_reward = {
+		random_owned_controlled_state = {
+			add_manpower = 30000
+		}
+		random_owned_controlled_state = {
+			add_manpower = 15000
+		}
+		random_owned_controlled_state = {
+			add_manpower = 15000
+		}
+	}
+}
+
+

@@ -1,0 +1,1692 @@
+focus_tree = {
+	id = zer
+	continuous_focus_position = { x = 50 y = 1000 } 
+	country = {
+		factor = 0
+		modifier = {
+			add = 10
+			tag = ZER
+		}
+	}
+
+	##############################
+	# Sections of the focus tree #
+	#							 #
+	# 1. Modifying the fleet     # (90%)
+	# 2. Deep 3 + Shipyards      # (0%)
+	# 3. Conquer Abregado Rae    # (0%)
+	# 4. Conquer Atravis System  # (0%)
+	# 5. Deal with Atravis       # (0%)
+	# 6. Army tree               # (90%)
+	# 7. Navy/Fighter tree		 # (100%)
+	# 8. Economy tree			 # (0%)
+	##############################
+
+	# Modifying the fleet?
+	focus = {
+		id = ZER_ground_military
+		icon = GFX_outbound_flight
+		cost = 5
+		x = 25
+		y = 0
+		prerequisite = {
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			army_experience = 25
+			country_event = ZER.9
+		}
+
+		ai_will_do = {
+			factor = 100
+		}
+	}
+
+	focus = {
+		id = ZER_small_mechanised_military
+		icon = GFX_outbound_flight
+		cost = 5
+		x = 23
+		y = 1
+		prerequisite = {
+			focus = ZER_ground_military
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+			focus = ZER_large_military
+		}
+		completion_reward = {
+			custom_effect_tooltip = tt_zer_small_mechanised_military
+			army_experience = 10
+			add_ideas = ZER_small_military
+		}
+
+		ai_will_do = {
+			factor = 100
+		}
+	}
+
+	focus = {
+		id = ZER_invest_in_at_at
+		icon = GFX_outbound_flight
+		cost = 5
+		x = 21
+		y = 2
+		prerequisite = {
+			focus = ZER_small_mechanised_military
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 1.0
+				uses = 1
+				category = at_at
+			}
+		}
+
+		ai_will_do = {
+			factor = 100
+		}
+	}
+
+	focus = {
+		id = ZER_establish_specialist_units
+		icon = GFX_outbound_flight
+		cost = 5
+		x = 23
+		y = 2
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = tt_zer_money_500
+				check_variable = { currency_amount^primary_currency > 500 }
+			}
+		}
+		prerequisite = {
+			focus = ZER_small_mechanised_military
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			custom_effect_tooltip = tt_zer_spend_500_credits
+			subtract_from_variable = { currency_amount^primary_currency = 500 }
+			if = {
+				limit = {
+					NOT = { has_tech = stormtrooper_2 }
+				}
+
+				set_technology = {
+					stormtrooper_2 = 1
+				}
+			}
+			create_unit = {
+				division = "name = \"Stormtrooper Regiment\" division_template = \"Stormtrooper Regiment\" start_experience_factor = 0.2"
+				owner = ZER
+			}
+			create_unit = {
+				division = "name = \"Stormtrooper Regiment\" division_template = \"Stormtrooper Regiment\" start_experience_factor = 0.2"
+				owner = ZER
+			}
+		}
+
+		ai_will_do = {
+			factor = 100
+		}
+	}
+
+	focus = {
+		id = ZER_focus_on_tactics
+		icon = GFX_outbound_flight
+		cost = 5
+		x = 25
+		y = 2
+		prerequisite = {
+			focus = ZER_small_mechanised_military
+			focus = ZER_large_military
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			country_event = ZER.10
+			add_tech_bonus = {
+				bonus = 0.5
+				uses = 2
+				category = land_doctrine
+			}
+			if = {
+				limit = {
+					has_completed_focus = ZER_lord_high_admiral
+				}
+				var:global.emperor_id = { country_event = ZER.11 }
+			}
+		}
+
+		ai_will_do = {
+			factor = 100
+		}
+	}
+
+	focus = {
+		id = ZER_invest_in_arms_factories
+		icon = GFX_outbound_flight
+		cost = 5
+		x = 25
+		y = 3
+		prerequisite = {
+			focus = ZER_focus_on_tactics
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			random_owned_state = {
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 100
+		}
+	}
+
+	focus = {
+		id = ZER_recruit_generals
+		icon = GFX_outbound_flight
+		cost = 5
+		x = 25
+		y = 4
+		prerequisite = {
+			focus = ZER_invest_in_arms_factories
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			#recruit_character = ZER_alandr_naresse
+			#recruit_character = ZER_buch_corpulon
+			#recruit_character = ZER_marc_norr
+		}
+
+		ai_will_do = {
+			factor = 100
+		}
+	}
+
+	focus = {
+		id = ZER_invest_in_speeder_bikes
+		icon = GFX_outbound_flight
+		cost = 5
+		x = 23
+		y = 3
+		prerequisite = {
+			focus = ZER_establish_specialist_units
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 1.0
+				uses = 1
+				category = speeder_bike
+			}
+		}
+
+		ai_will_do = {
+			factor = 100
+		}
+	}
+
+	focus = {
+		id = ZER_large_military
+		icon = GFX_outbound_flight
+		cost = 5
+		x = 27
+		y = 1
+		prerequisite = {
+			focus = ZER_ground_military
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+			focus = ZER_small_mechanised_military
+		}
+		completion_reward = {
+			custom_effect_tooltip = tt_zer_large_military
+			army_experience = 10
+			add_ideas = ZER_large_military
+		}
+
+		ai_will_do = {
+			factor = 100
+		}
+	}
+
+	focus = {
+		id = ZER_research_infantry_weapons
+		icon = GFX_outbound_flight
+		cost = 5
+		x = 27
+		y = 2
+		prerequisite = {
+			focus = ZER_large_military
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 1.0
+				uses = 1
+				category = infantry_weapons
+			}
+		}
+
+		ai_will_do = {
+			factor = 100
+		}
+	}
+
+	focus = {
+		id = ZER_factories_for_equipment
+		icon = GFX_outbound_flight
+		cost = 5
+		x = 27
+		y = 3
+		prerequisite = {
+			focus = ZER_research_infantry_weapons
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			random_owned_state = {
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 100
+		}
+	}
+
+	focus = {
+		id = ZER_mass_recruitment
+		icon = GFX_outbound_flight
+		cost = 5
+		x = 29
+		y = 2
+		prerequisite = {
+			focus = ZER_large_military
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			add_ideas = ZER_mass_recruitment
+		}
+
+		ai_will_do = {
+			factor = 100
+		}
+	}
+	
+	# Lord High Admiral
+	focus = {
+		id = ZER_support_admiral_harrsk
+		icon = GFX_outbound_flight
+		cost = 5
+		x = 6
+		y = 0
+		prerequisite = {
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+			focus = ZER_oppose_admiral_harrsk
+		}
+		completion_reward = {
+			add_stability = 0.1
+			custom_effect_tooltip = tt_zer_keep_harrsk
+			custom_effect_tooltip = tt_zer_medium_control_increase
+        	add_to_variable = { zer_harrsk_government_control = 5 }
+		}
+
+		ai_will_do = {
+			factor = 100
+		}
+	}
+
+	# Lord High Admiral
+	focus = {
+		id = ZER_oppose_admiral_harrsk
+		icon = GFX_outbound_flight
+		cost = 5
+		x = 12
+		y = 0
+		prerequisite = {
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+			focus = ZER_support_admiral_harrsk
+		}
+		completion_reward = {
+			
+		}
+
+		ai_will_do = {
+			factor = 100
+		}
+	}
+
+	# Consolidate Government Control
+	focus = {
+		id = ZER_consolidate_government_control
+		icon = GFX_outbound_flight
+		cost = 5
+		x = 5
+		y = 1
+		prerequisite = {
+			focus = ZER_support_admiral_harrsk
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			custom_effect_tooltip = tt_zer_large_control_increase
+        	add_to_variable = { zer_harrsk_government_control = 10 }
+			custom_effect_tooltip = tt_zer_unlock_control_decisions
+		}
+
+		ai_will_do = {
+			factor = 100
+		}
+	}
+
+	# Remove disloyal officers
+	focus = {
+		id = ZER_no_one_can_be_trusted
+		icon = GFX_outbound_flight
+		cost = 5
+		x = 7
+		y = 1
+		prerequisite = {
+			focus = ZER_support_admiral_harrsk
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			country_event = { id = ZER_start.2 days = 30 }
+			add_timed_idea = {
+				idea = ZER_government_under_investigation
+				days = 180
+			}
+		}
+
+		ai_will_do = {
+			factor = 100
+		}
+	}
+
+	# Lord High Admiral
+	focus = {
+		id = ZER_lord_high_admiral
+		icon = GFX_outbound_flight
+		cost = 5
+		x = 6
+		y = 2
+		prerequisite = {
+			focus = ZER_no_one_can_be_trusted
+		}
+		prerequisite = {
+			focus = ZER_consolidate_government_control
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+
+		}
+		completion_reward = {
+			add_trait = {
+				character = ZER_blitzer_harrsk
+				ideology = imperial_ideology
+				trait = zer_lord_high_admiral
+			}
+			hidden_effect = {
+				news_event = ZER_news.1
+			}
+		}
+
+		ai_will_do = {
+			factor = 100
+		}
+	}
+
+	# The First Warlord - START OF HARRSK WARLORD PATH
+	focus = {
+		id = ZER_the_first_warlord
+		icon = GFX_outbound_flight
+		cost = 5
+		x = 4
+		y = 3
+		prerequisite = {
+			focus = ZER_lord_high_admiral
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+			focus = ZER_galaxy_in_turmoil
+		}
+		completion_reward = {
+			add_ideas = {
+				ZER_the_first_warlord_idea
+			}
+			var:global.emperor_id = {
+				add_opinion_modifier = {
+					target = ZER
+					modifier = faction_traitor
+				}
+			}
+			custom_effect_tooltip = tt_zer_decrease_legitimacy
+			add_to_variable = { legitimacy_emp = -10 }
+			custom_effect_tooltip = tt_zer_increase_corp_influence
+			hidden_effect = {
+				swap_ideas = {
+					remove_idea = corp_influence_1
+					add_idea = corp_influence_2
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 100
+		}
+	}
+
+	focus = {
+		id = ZER_gearing_for_war
+		icon = GFX_outbound_flight
+		cost = 5
+		x = 2
+		y = 4
+		prerequisite = {
+			focus = ZER_the_first_warlord
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+
+		}
+		completion_reward = {
+			add_stability = 0.1
+			custom_effect_tooltip = tt_zer_keep_harrsk
+		}
+
+		ai_will_do = {
+			factor = 100
+		}
+	}
+
+	focus = {
+		id = ZER_a_call_to_arms
+		icon = GFX_outbound_flight
+		cost = 5
+		x = 1
+		y = 5
+		prerequisite = {
+			focus = ZER_gearing_for_war
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+
+		}
+		completion_reward = {
+			add_stability = 0.1
+			custom_effect_tooltip = tt_zer_keep_harrsk
+		}
+
+		ai_will_do = {
+			factor = 100
+		}
+	}
+
+	focus = {
+		id = ZER_jamaaran_industry
+		icon = GFX_outbound_flight
+		cost = 5
+		x = 0
+		y = 6
+		prerequisite = {
+			focus = ZER_a_call_to_arms
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+
+		}
+		completion_reward = {
+			327 = {
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 2
+					instant_build = yes
+				}
+				add_state_modifier = {
+					modifier = {
+						production_speed_buildings_factor = 0.25
+						local_building_slots = 2
+					}
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 100
+		}
+	}
+
+	focus = {
+		id = ZER_capital_factories
+		icon = GFX_outbound_flight
+		cost = 5
+		x = 0
+		y = 8
+		prerequisite = {
+			focus = ZER_jamaaran_industry
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+
+		}
+		completion_reward = {
+			325 = {
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 2
+					instant_build = yes
+				}
+				add_state_modifier = {
+					modifier = {
+						production_speed_buildings_factor = 0.25
+						local_building_slots = 2
+					}
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 100
+		}
+	}
+
+	focus = {
+		id = ZER_total_war
+		icon = GFX_outbound_flight
+		cost = 5
+		x = 1
+		y = 7
+		prerequisite = {
+			focus = ZER_a_call_to_arms
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+
+		}
+		completion_reward = {
+			add_stability = 0.1
+			custom_effect_tooltip = tt_zer_keep_harrsk
+		}
+
+		ai_will_do = {
+			factor = 100
+		}
+	}
+
+	focus = {
+		id = ZER_harrsk_doctrine
+		icon = GFX_outbound_flight
+		cost = 5
+		x = 2
+		y = 6
+		prerequisite = {
+			focus = ZER_gearing_for_war
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+			
+		}
+		completion_reward = {
+			add_stability = 0.1
+			custom_effect_tooltip = tt_zer_keep_harrsk
+		}
+
+		ai_will_do = {
+			factor = 100
+		}
+	}
+
+	focus = {
+		id = ZER_expand_or_perish
+		icon = GFX_outbound_flight
+		cost = 5
+		x = 3
+		y = 7
+		will_lead_to_war_with = ABR
+		prerequisite = {
+			focus = ZER_harrsk_doctrine
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+			
+		}
+		completion_reward = {
+			create_wargoal = {
+				type = annex_everything
+				target = ABR
+			}
+		}
+
+		ai_will_do = {
+			factor = 100
+		}
+	}
+
+	focus = {
+		id = ZER_defend_our_planet
+		icon = GFX_outbound_flight
+		cost = 5
+		x = 4
+		y = 4
+		prerequisite = {
+			focus = ZER_the_first_warlord
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+
+		}
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = ZER_the_first_warlord_idea
+				add_idea = ZER_the_first_warlord_idea_2
+			}
+			capital_scope = { 
+				add_building_construction = {
+					type = anti_air_building
+					level = 2
+					instant_build = yes
+				}
+			}
+			add_building_construction = {
+				type = bunker
+				level = 1
+				instant_build = yes
+				province = 4287
+			}
+			add_building_construction = {
+				type = bunker
+				level = 3
+				instant_build = yes
+				province = 8955
+			}
+		}
+
+		ai_will_do = {
+			factor = 100
+		}
+	}
+
+	focus = {
+		id = ZER_develop_harrsks_fortress
+		icon = GFX_outbound_flight
+		cost = 5
+		x = 4
+		y = 6
+		prerequisite = {
+			focus = ZER_defend_our_planet
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+
+		}
+		completion_reward = {
+			country_event = ZER_start.8
+			331 = {
+				add_building_construction = {
+					type = anti_air_building
+					level = 5
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = bunker
+					level = 8
+					instant_build = yes
+					province = 9036
+				}
+				add_victory_points = {
+					province = 9036
+					value = 5
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 100
+		}
+	}
+
+	focus = {
+		id = ZER_old_friends
+		icon = GFX_outbound_flight
+		cost = 5
+		x = 3
+		y = 5
+		prerequisite = {
+			focus = ZER_defend_our_planet
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+
+		}
+		completion_reward = {
+			TAP = {
+				country_event = ZER_start.4
+			}
+		}
+
+		ai_will_do = {
+			factor = 100
+		}
+	}
+
+	focus = {
+		id = ZER_fighting_on_the_homefront
+		icon = GFX_outbound_flight
+		cost = 5
+		x = 5
+		y = 5
+		prerequisite = {
+			focus = ZER_defend_our_planet
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+
+		}
+		completion_reward = {
+			country_event = ZER_start.3
+			swap_ideas = {
+				remove_idea = ZER_the_first_warlord_idea_2
+				add_idea = ZER_the_first_warlord_idea_3
+			}
+		}
+
+		ai_will_do = {
+			factor = 100
+		}
+	}
+
+	focus = {
+		id = ZER_controlling_the_lawless_planet
+		icon = GFX_outbound_flight
+		cost = 5
+		x = 2
+		y = 8
+		prerequisite = {
+			focus = ZER_expand_or_perish
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+
+		}
+		completion_reward = {
+			337 = {
+				add_state_modifier = {
+					modifier = {
+						resistance_target = -0.3
+					}
+				}
+			}
+			336 = {
+				add_state_modifier = {
+					modifier = {
+						resistance_target = -0.3
+					}
+				}
+			}
+			344 = {
+				add_state_modifier = {
+					modifier = {
+						resistance_target = -0.3
+					}
+				}
+			}
+			76 = {
+				add_state_modifier = {
+					modifier = {
+						resistance_target = -0.3
+					}
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 100
+		}
+	}
+
+	focus = {
+		id = ZER_promises_of_representation
+		icon = GFX_outbound_flight
+		cost = 5
+		x = 4
+		y = 8
+		prerequisite = {
+			focus = ZER_expand_or_perish
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+
+		}
+		completion_reward = {
+			add_political_power = -100
+			country_event = ZER_start.7
+			337 = {
+				add_state_modifier = {
+					modifier = {
+						compliance_growth = 0.2
+					}
+				}
+			}
+			336 = {
+				add_state_modifier = {
+					modifier = {
+						compliance_growth = 0.2
+					}
+				}
+			}
+			344 = {
+				add_state_modifier = {
+					modifier = {
+						compliance_growth = 0.2
+					}
+				}
+			}
+			76 = {
+				add_state_modifier = {
+					modifier = {
+						compliance_growth = 0.2
+					}
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 100
+		}
+	}
+
+	focus = {
+		id = ZER_consolidate_our_territory
+		icon = GFX_outbound_flight
+		cost = 5
+		x = 3
+		y = 9
+		prerequisite = {
+			focus = ZER_promises_of_representation
+		}
+		prerequisite = {
+			focus = ZER_controlling_the_lawless_planet
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+
+		}
+		completion_reward = {
+			add_stability = 0.1
+			custom_effect_tooltip = tt_zer_keep_harrsk
+		}
+
+		ai_will_do = {
+			factor = 100
+		}
+	}
+
+	focus = {
+		id = ZER_constructing_deep_3
+		icon = GFX_outbound_flight
+		cost = 5
+		x = 6
+		y = 7
+		prerequisite = {
+			focus = ZER_develop_harrsks_fortress
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+
+		}
+		completion_reward = {
+			add_stability = 0.1
+			custom_effect_tooltip = tt_zer_keep_harrsk
+		}
+
+		ai_will_do = {
+			factor = 100
+		}
+	}
+
+	# Galaxy in Turmoil - START OF HARRSK EMPIRE PATH
+	focus = {
+		id = ZER_galaxy_in_turmoil
+		icon = GFX_outbound_flight
+		cost = 5
+		x = 8
+		y = 3
+		prerequisite = {
+			focus = ZER_lord_high_admiral
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+			focus = ZER_the_first_warlord
+		}
+		completion_reward = {
+			add_stability = 0.1
+			custom_effect_tooltip = tt_zer_keep_harrsk
+		}
+
+		ai_will_do = {
+			factor = 100
+		}
+	}
+
+	# Modifying the fleet?
+	focus = {
+		id = ZER_fleet_modifications
+		icon = GFX_outbound_flight
+		cost = 5
+		x = -9
+		y = 0
+		prerequisite = {
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			country_event = ZER.1
+			add_ideas = ZER_reconfiguring_the_fleet
+		}
+
+		ai_will_do = {
+			factor = 100
+		}
+	}
+
+	# Will modify the fleet
+	focus = {
+		id = ZER_technological_innovations
+		icon = GFX_outbound_flight
+		cost = 0
+		x = -13
+		y = 1
+		available = {
+			always = no
+		}
+		prerequisite = {
+			focus = ZER_fleet_modifications
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+			focus = ZER_standard_star_destroyers
+		}
+		completion_reward = {
+			custom_effect_tooltip = tt_zer_technological_innovations
+		}
+
+		ai_will_do = {
+			factor = 80
+		}
+	}
+
+	# Constructing the shockwave capital ship
+	focus = {
+		id = ZER_constructing_shockwave
+		icon = GFX_outbound_flight
+		cost = 5
+		x = -15
+		y = 2
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = tt_zer_money_3000
+				check_variable = { currency_amount^primary_currency > 3000 }
+			}
+		}
+		prerequisite = {
+			focus = ZER_technological_innovations
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			custom_effect_tooltip = tt_zer_spend_3000_credits
+			subtract_from_variable = { currency_amount^primary_currency = 3000 }
+			custom_effect_tooltip = tt_zer_shockwave_construction_begins
+			custom_effect_tooltip = tt_zer_shockwave_decisions_unlocked
+			set_variable = { zer_shockwave_progress = 1 }
+			set_variable = { zer_shockwave_working = 0 }
+		}
+
+		ai_will_do = {
+			factor = 80
+		}
+	}
+
+	# Equiping the shockwave with high-energy weaponry
+	focus = {
+		id = ZER_equiping_high_energy_weaponry
+		icon = GFX_outbound_flight
+		cost = 5
+		x = -16
+		y = 3
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = tt_zer_money_1500
+				check_variable = { currency_amount^primary_currency > 1500 }
+			}
+		}
+		prerequisite = {
+			focus = ZER_constructing_shockwave
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			custom_effect_tooltip = tt_zer_spend_1500_credits
+			subtract_from_variable = { currency_amount^primary_currency = 1500 }
+			custom_effect_tooltip = tt_zer_unlock_high_energy_weapon_decision
+		}
+
+		ai_will_do = {
+			factor = 50
+		}
+	}
+
+	# Developing improved hyperdrives
+	focus = {
+		id = ZER_developing_improved_hyperdrives
+		icon = GFX_outbound_flight
+		cost = 5
+		x = -14
+		y = 3
+		prerequisite = {
+			focus = ZER_constructing_shockwave
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			custom_effect_tooltip = tt_zer_equip_hyperdrive
+			add_tech_bonus = {
+				bonus = 1.0
+				uses = 1
+				category = electronics
+			}
+			# Equips a class 5 sublight drive on the shockwave
+		}
+
+		ai_will_do = {
+			factor = 50
+		}
+	}
+
+	# The Pride of the Fleet
+	focus = {
+		id = ZER_pride_of_the_fleet
+		icon = GFX_outbound_flight
+		cost = 5
+		x = -15
+		y = 4
+		prerequisite = {
+			focus = ZER_equiping_high_energy_weaponry
+		}
+		prerequisite = {
+			focus = ZER_developing_improved_hyperdrives
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = tt_zer_shockwave_finished
+				check_variable = { zer_shockwave_progress > 15 }
+			}
+		}
+		completion_reward = {
+			custom_effect_tooltip = tt_zer_shockwave_project_ended
+			create_ship = {
+				type = star_destroyer_1
+				equipment_variant = "Modified Star Destroyer"
+				creator = ZER
+				name = "Shockwave"
+			}
+			hidden_effect = {
+				country_event = ZER.5
+			}
+		}
+
+		ai_will_do = {
+			factor = 100
+		}
+	}
+
+	# Advanced Tie Fighters
+	focus = {
+		id = ZER_advanced_tie_fighters
+		icon = GFX_outbound_flight
+		cost = 5
+		x = -11
+		y = 2
+		prerequisite = {
+			focus = ZER_technological_innovations
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			random_owned_state = {
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+			add_tech_bonus = {
+				bonus = 1.0
+				uses = 2
+				category = tie_line
+			}
+		}
+
+		ai_will_do = {
+			factor = 20
+		}
+	}
+
+	# Robotic Tie Fighters
+	focus = {
+		id = ZER_robotic_tie_fighters
+		icon = GFX_outbound_flight
+		cost = 5
+		x = -12
+		y = 3
+		prerequisite = {
+			focus = ZER_advanced_tie_fighters
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			country_event = ZER.2
+		}
+
+		ai_will_do = {
+			factor = 80
+		}
+	}
+
+	# Improved Shielding
+	focus = {
+		id = ZER_improved_shielding
+		icon = GFX_outbound_flight
+		cost = 5
+		x = -10
+		y = 3
+		prerequisite = {
+			focus = ZER_advanced_tie_fighters
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			air_experience = 25
+			add_tech_bonus = {
+				bonus = 0.5
+				uses = 1
+				category = electronics
+			}
+		}
+
+		ai_will_do = {
+			factor = 80
+		}
+	}
+
+	# Improved Targeting Systems
+	focus = {
+		id = ZER_elite_tie_fighter_corps
+		icon = GFX_outbound_flight
+		cost = 5
+		x = -11
+		y = 4
+		prerequisite = {
+			focus = ZER_robotic_tie_fighters
+		}
+		prerequisite = {
+			focus = ZER_improved_shielding
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			add_ideas = ZER_elite_tie_fighter_corps
+		}
+
+		ai_will_do = {
+			factor = 100
+		}
+	}
+
+	# Technological Advantage
+	focus = {
+		id = ZER_technological_advantage
+		icon = GFX_outbound_flight
+		cost = 5
+		x = -13
+		y = 5
+		prerequisite = {
+			focus = ZER_pride_of_the_fleet
+		}
+		prerequisite = {
+			focus = ZER_elite_tie_fighter_corps
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			add_ideas = ZER_technologically_advanced_fleet
+			remove_ideas = ZER_reconfiguring_the_fleet
+		}
+
+		ai_will_do = {
+			factor = 300
+		}
+	}
+
+	# Focus on mass production
+	focus = {
+		id = ZER_standard_star_destroyers
+		icon = GFX_outbound_flight
+		cost = 0
+		x = -5
+		y = 1
+		available = {
+			always = no
+		}
+		prerequisite = {
+			focus = ZER_fleet_modifications
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+			focus = ZER_technological_innovations
+		}
+		completion_reward = {
+			custom_effect_tooltip = tt_zer_standardised_warships
+		}
+
+		ai_will_do = {
+			factor = 20
+		}
+	}
+
+	# Focus on mass production
+	focus = {
+		id = ZER_improving_production_efficiency
+		icon = GFX_outbound_flight
+		cost = 5
+		x = -7
+		y = 2
+		prerequisite = {
+			focus = ZER_standard_star_destroyers
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			add_ideas = ZER_owning_the_means_of_production
+		}
+
+		ai_will_do = {
+			factor = 80
+		}
+	}
+
+	# Focus on mass production
+	focus = {
+		id = ZER_using_standardised_parts
+		icon = GFX_outbound_flight
+		cost = 5
+		x = -8
+		y = 3
+		prerequisite = {
+			focus = ZER_improving_production_efficiency
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = ZER_owning_the_means_of_production
+				add_idea = ZER_owning_the_means_of_production_2
+			}
+		}
+
+		ai_will_do = {
+			factor = 80
+		}
+	}
+
+	# Focus on mass production
+	focus = {
+		id = ZER_production_line
+		icon = GFX_outbound_flight
+		cost = 5
+		x = -6
+		y = 3
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = tt_zer_money_500
+				check_variable = { currency_amount^primary_currency > 500 }
+			}
+		}
+		prerequisite = {
+			focus = ZER_improving_production_efficiency
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			custom_effect_tooltip = tt_zer_spend_500_credits
+			subtract_from_variable = { currency_amount^primary_currency = 500 }
+			random_owned_state = {
+				add_building_construction = {
+					type = dockyard
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 80
+		}
+	}
+
+	# Focus on mass production
+	focus = {
+		id = ZER_large_production_capabilities
+		icon = GFX_outbound_flight
+		cost = 5
+		x = -7
+		y = 4
+		prerequisite = {
+			focus = ZER_using_standardised_parts
+		}
+		prerequisite = {
+			focus = ZER_production_line
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			create_ship = {
+				type = star_destroyer_1
+				equipment_variant = "Imperial Star Destroyer"
+				creator = ZER
+				name = "Kalista"
+			}
+			create_ship = {
+				type = star_destroyer_1
+				equipment_variant = "Imperial Star Destroyer"
+				creator = ZER
+				name = "Imperial Steel"
+			}
+			create_ship = {
+				type = star_destroyer_1
+				equipment_variant = "Imperial Star Destroyer"
+				creator = ZER
+				name = "Harrsk's Jewel"
+			}
+		}
+
+		ai_will_do = {
+			factor = 300
+		}
+	}
+
+	# Focus on mass production
+	focus = {
+		id = ZER_improving_tie_effectiveness
+		icon = GFX_outbound_flight
+		cost = 5
+		x = -3
+		y = 2
+		prerequisite = {
+			focus = ZER_standard_star_destroyers
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			custom_effect_tooltip = tt_zer_develop_tie_fighters
+			add_ideas = naval_simulators
+			country_event = ZER.7
+		}
+
+		ai_will_do = {
+			factor = 80
+		}
+	}
+
+	# Focus on mass production
+	focus = {
+		id = ZER_improved_targeting_systems
+		icon = GFX_outbound_flight
+		cost = 5
+		x = -4
+		y = 3
+		prerequisite = {
+			focus = ZER_improving_tie_effectiveness
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			air_experience = 10
+			add_tech_bonus = {
+				bonus = 1.0
+				uses = 1
+				category = tie_line
+			}
+		}
+
+		ai_will_do = {
+			factor = 80
+		}
+	}
+
+	# Focus on mass production
+	focus = {
+		id = ZER_tie_production_efficiency
+		icon = GFX_outbound_flight
+		cost = 5
+		x = -2
+		y = 3
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = tt_zer_money_500
+				check_variable = { currency_amount^primary_currency > 500 }
+			}
+		}
+		prerequisite = {
+			focus = ZER_improving_tie_effectiveness
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			custom_effect_tooltip = tt_zer_spend_500_credits
+			subtract_from_variable = { currency_amount^primary_currency = 500 }
+			random_owned_state = {
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
+			custom_effect_tooltip = tt_zer_unlock_production_company
+			# NEED TO ACTUALLY UNLOCK PRODUCTION COMPANY #
+		}
+
+		ai_will_do = {
+			factor = 80
+		}
+	}
+
+	# Focus on mass production
+	focus = {
+		id = ZER_standard_and_effective_fighter
+		icon = GFX_outbound_flight
+		cost = 5
+		x = -3
+		y = 4
+		prerequisite = {
+			focus = ZER_improved_targeting_systems
+		}
+		prerequisite = {
+			focus = ZER_tie_production_efficiency
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 1.0
+				uses = 1
+				category = naval_doctrine
+			}
+			add_equipment_to_stockpile = {
+				type = tie_fighter_airframe_0
+				amount = 50
+				producer = ZER
+			}
+		}
+
+		ai_will_do = {
+			factor = 80
+		}
+	}
+
+	# Focus on mass production
+	focus = {
+		id = ZER_a_fleet_to_be_feared
+		icon = GFX_outbound_flight
+		cost = 5
+		x = -5
+		y = 5
+		prerequisite = {
+			focus = ZER_large_production_capabilities
+		}
+		prerequisite = {
+			focus = ZER_standard_and_effective_fighter
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			remove_ideas = ZER_reconfiguring_the_fleet
+			add_ideas = ZER_large_fleet
+		}
+
+		ai_will_do = {
+			factor = 300
+		}
+	}
+
+}
