@@ -322,6 +322,7 @@ on_actions = {
 	}
 	on_weekly = {
 		effect = {
+			set_variable = { ms = 0}
 			GDP_change = yes
 			set_temp_variable = { default_check = nmn }
 			multiply_variable = { default_check = 2 }
@@ -338,38 +339,55 @@ on_actions = {
 			#set_temp_variable = { militia_temp = 0 }
 			#set_temp_variable = { droid_ = 0 }
 
-			add_to_temp_variable = { militia_temp = num_battalions_with_type@militia }
-
-			add_to_temp_variable = { professional_forces_temp = num_battalions_with_type@stormtrooper }
-			add_to_temp_variable = { professional_forces_temp = num_battalions_with_type@infantry }
-
-
-			add_to_temp_variable = { mercenary_temp = num_battalions_with_type@mercenary }
-
-			add_to_temp_variable = { pirate_temp = num_battalions_with_type@mercenary }
-
-			add_to_temp_variable = { clone_temp = num_battalions_with_type@clone }
-
-			add_to_temp_variable = { security_temp = num_battalions_with_type@security }
-
-			divide_temp_variable = { militia_temp = 80 }
-			divide_temp_variable = { professional_forces_temp = 50 }
-			divide_temp_variable = { mercenary_temp = 40 }
-			divide_temp_variable = { pirate_temp = 40 }
-			divide_temp_variable = { clone_temp = 35 }
-			divide_temp_variable = { security_temp = 30 }
-
-			add_to_variable = { ms = military_expenses }
-			add_to_variable = { ms = professional_forces_temp }
-			add_to_variable = { ms = mercenary_temp }
-			add_to_variable = { ms = pirate_temp }
-			add_to_variable = { ms = clone_temp }
-			add_to_variable = { ms = security_temp }
-
 			#add_to_temp_variable = { droid_temp = num_equipment_in_armies@battle_droid }
 
+			add_to_temp_variable = { militia_upkeep_temp = num_battalions_with_type@bith }
+			add_to_temp_variable = { militia_upkeep_temp = num_battalions_with_type@chiss }
+			add_to_temp_variable = { militia_upkeep_temp = num_battalions_with_type@dug }
+			add_to_temp_variable = { militia_upkeep_temp = num_battalions_with_type@falleen }
+			add_to_temp_variable = { militia_upkeep_temp = num_battalions_with_type@gamorreans }
+			add_to_temp_variable = { militia_upkeep_temp = num_battalions_with_type@givins }
+			add_to_temp_variable = { militia_upkeep_temp = num_battalions_with_type@gungans }
+			add_to_temp_variable = { militia_upkeep_temp = num_battalions_with_type@gran }
+			add_to_temp_variable = { militia_upkeep_temp = num_battalions_with_type@mon_calamari }
+			add_to_temp_variable = { militia_upkeep_temp = num_battalions_with_type@mustafarian }
+			add_to_temp_variable = { militia_upkeep_temp = num_battalions_with_type@myneyrsh }
+			add_to_temp_variable = { militia_upkeep_temp = num_battalions_with_type@pauan }
+			add_to_temp_variable = { militia_upkeep_temp = num_battalions_with_type@pantorans }
+			add_to_temp_variable = { militia_upkeep_temp = num_battalions_with_type@pykes }
+			add_to_temp_variable = { militia_upkeep_temp = num_battalions_with_type@rodians }
+			add_to_temp_variable = { militia_upkeep_temp = num_battalions_with_type@sluissi }
+			add_to_temp_variable = { militia_upkeep_temp = num_battalions_with_type@sullustans }
+			add_to_temp_variable = { militia_upkeep_temp = num_battalions_with_type@trandoshans }
+			add_to_temp_variable = { militia_upkeep_temp = num_battalions_with_type@twileks }
+			add_to_temp_variable = { militia_upkeep_temp = num_battalions_with_type@wookiees }
+			add_to_temp_variable = { militia_upkeep_temp = num_battalions_with_type@yevethans }
+			add_to_temp_variable = { militia_upkeep_temp = num_battalions_with_type@zeltron }
+			add_to_temp_variable = { militia_upkeep_temp = num_battalions_with_type@zygerrians }
 
-			set_variable = { militia_upkeep = militia_temp }
+			set_temp_variable = { militia_multiplier = modifier@milita_cost_modifier }
+			add_to_temp_variable = { militia_multiplier = 1 }
+			multiply_temp_variable = { militia_upkeep_temp = militia_multiplier }
+
+			set_variable = { militia_upkeep = militia_upkeep_temp }
+			divide_variable = { militia_upkeep = 60 }
+
+			add_to_variable = { ms = militia_upkeep }
+
+			add_to_temp_variable = { soldiers_upkeep = num_battalions_with_type@infantry }
+			add_to_temp_variable = { soldiers_upkeep = num_battalions_with_type@marine }
+			add_to_temp_variable = { soldiers_upkeep = num_battalions_with_type@stormtroopers }
+
+			set_temp_variable = { infantry_multiplier = modifier@infantry_cost_modifier }
+			add_to_temp_variable = { infantry_multiplier = 1 }
+			multiply_temp_variable = { soldiers_upkeep = infantry_multiplier }
+
+			set_variable = { infantry_upkeep = soldiers_upkeep }
+			divide_variable = { infantry_upkeep = 80 }
+
+
+			add_to_variable = { ms = infantry_upkeep }
+
 		}
 	}
 }
