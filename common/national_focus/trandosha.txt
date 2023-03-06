@@ -1,6 +1,6 @@
 focus_tree = {
 	id = trandosha
-	continuous_focus_position = { x = 200 y = 730 }
+	continuous_focus_position = { x = 200 y = 630 }
 	country = {
 		factor = 0
 		modifier = {
@@ -1216,4 +1216,225 @@ focus_tree = {
 		}
 	}
 	###########################
+	#Prioritize non sentient hunting
+	focus = {
+		id = TRA_prioritize_non_sentient_hunting
+		icon = GFX_goal_unknown
+		x = 9
+		y = 14
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = TRA_the_transhoshan_crusade focus = TRA_the_trandoshan_market focus= TRA_the_trandoshan_empire }
+		prerequisite = { focus = TRA_conscription focus = TRA_the_pact_of_slavers	}
+		mutually_exclusive = {	focus = TRA_prioritize_sentient_hunting	}
+		completion_reward = {
+			add_stability = 0.05
+		}
+	}
+	#Secure animal import routes
+	focus = {
+		id = TRA_secure_animal_import_routes
+		icon = GFX_goal_unknown
+		x = 9
+		y = 15
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = TRA_prioritize_non_sentient_hunting  }
+		completion_reward = {
+			add_stability = 0.05
+		}
+	}
+###########################
+#Advertize the hunting zone
+focus = {
+	id = TRA_advertize_the_hunting_zone
+	icon = GFX_goal_unknown
+	x = 7
+	y = 16
+	cost = 5
+	search_filters = {
+		FOCUS_FILTER_POLITICAL
+	}
+	prerequisite = { focus = TRA_secure_animal_import_routes  }
+	completion_reward = {
+		add_stability = 0.05
+	}
+}
+#Directed hunts
+focus = {
+	id = TRA_directed_hunts
+	icon = GFX_goal_unknown
+	x = 7
+	y = 17
+	cost = 5
+	search_filters = {
+		FOCUS_FILTER_POLITICAL
+	}
+	prerequisite = { focus = TRA_advertize_the_hunting_zone  }
+	completion_reward = {
+		add_stability = 0.05
+	}
+}
+#Diplomatic occasions
+focus = {
+	id = TRA_diplomatic_occasions
+	icon = GFX_goal_unknown
+	x = 7
+	y = 18
+	cost = 5
+	search_filters = {
+		FOCUS_FILTER_POLITICAL
+	}
+	prerequisite = { focus = TRA_directed_hunts }
+	completion_reward = {
+		add_stability = 0.05
+	}
+}
+###########################
+	#Opening the hunting zone to outsiders
+	focus = {
+		id = TRA_opening_the_hunting_zone_to_outsiders
+		icon = GFX_goal_unknown
+		x = 9
+		y = 16
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = TRA_secure_animal_import_routes  }
+		completion_reward = {
+			add_stability = 0.05
+		}
+	}
+	#Build hotels in the zone
+	focus = {
+		id = TRA_build_hotels_in_the_zone
+		icon = GFX_goal_unknown
+		x = 9
+		y = 17
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = TRA_opening_the_hunting_zone_to_outsiders  }
+		completion_reward = {
+			add_stability = 0.05
+		}
+	}
+	#Commercial ties to corporations
+	focus = {
+		id = TRA_commercial_ties_to_corporations
+		icon = GFX_goal_unknown
+		x = 9
+		y = 18
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = TRA_build_hotels_in_the_zone  }
+		completion_reward = {
+			add_stability = 0.05
+		}
+	}
+###########################
+#Ban sentient sacrefices
+focus = {
+	id = TRA_ban_sentient_sacrefices
+	icon = GFX_goal_unknown
+	x = 11
+	y = 16
+	cost = 5
+	search_filters = {
+		FOCUS_FILTER_POLITICAL
+	}
+	prerequisite = { focus = TRA_secure_animal_import_routes  }
+	completion_reward = {
+		add_stability = 0.05
+	}
+}
+#Mounted forces
+focus = {
+	id = TRA_mounted_forces
+	icon = GFX_goal_unknown
+	x = 11
+	y = 17
+	cost = 5
+	search_filters = {
+		FOCUS_FILTER_POLITICAL
+	}
+	prerequisite = { focus = TRA_ban_sentient_sacrefices }
+	completion_reward = {
+		add_stability = 0.05
+	}
+}
+#Promote exotic animal breeding
+focus = {
+	id = TRA_promote_exotic_animal_breeding
+	icon = GFX_goal_unknown
+	x = 11
+	y = 18
+	cost = 5
+	search_filters = {
+		FOCUS_FILTER_POLITICAL
+	}
+	prerequisite = { focus = TRA_mounted_forces  }
+	completion_reward = {
+		add_stability = 0.05
+	}
+}
+###########################
+#The board of directors conference
+focus = {
+	id = TRA_the_board_of_directors_conference
+	icon = GFX_goal_unknown
+	x = 9
+	y = 19
+	cost = 5
+	search_filters = {
+		FOCUS_FILTER_POLITICAL
+	}
+	prerequisite = { focus = TRA_diplomatic_occasions  }
+	prerequisite = { focus = TRA_commercial_ties_to_corporations  }
+	prerequisite = { focus = TRA_promote_exotic_animal_breeding }
+	completion_reward = {
+		add_stability = 0.05
+	}
+}
+#Building zones on other planets
+focus = {
+	id = TRA_building_zones_on_other_planets
+	icon = GFX_goal_unknown
+	x = 9
+	y = 20
+	cost = 5
+	search_filters = {
+		FOCUS_FILTER_POLITICAL
+	}
+	prerequisite = { focus = TRA_the_board_of_directors_conference  }
+	completion_reward = {
+		add_stability = 0.05
+	}
+}
+###########################
+	#Prioritize sentient hunting
+	focus = {
+		id = TRA_prioritize_sentient_hunting
+		icon = GFX_goal_unknown
+		x = 15
+		y = 14
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = TRA_the_transhoshan_crusade focus = TRA_the_trandoshan_market focus= TRA_the_trandoshan_empire }
+		prerequisite = { focus = TRA_conscription focus = TRA_the_pact_of_slavers	}
+		mutually_exclusive = { focus = TRA_prioritize_non_sentient_hunting		}
+		completion_reward = {
+			add_stability = 0.05
+		}
+	}
 }
