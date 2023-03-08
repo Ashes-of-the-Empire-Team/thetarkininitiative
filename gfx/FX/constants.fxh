@@ -153,7 +153,7 @@ static const float 	FOG_MAX 					= 0.35f;
 //static const float 	FOG_MAX 					= 1000.7f;
 
 // Fog of war
-static const float 	FOW_MAX 					= 0.5f;
+static const float 	FOW_MAX 					= 0.2f;
 static const float  FOW_CAMERA_MIN				= 200;
 static const float  FOW_CAMERA_MAX				= 500;
 
