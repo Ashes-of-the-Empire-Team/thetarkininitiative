@@ -20,12 +20,30 @@ on_actions = {
 					set_variable = { shares_amount@THIS = shares_percent@THIS }
 					multiply_variable= { shares_amount@THIS = outstanding_shares }
 				}
+				set_variable = { light_ship_production = 2.5 }
 			}
 		}
 	}
-	on_daily = {
+	on_weekly = {
 		effect = {
-			
+			if = {
+				limit = {
+					check_variable = { light_ship_1_lvl_imp > 0 }
+				}
+				set_temp_variable = { production_output_weekly = 2.5 }
+				multiply_temp_variable = { production_output_weekly = light_ship_1_lvl_imp }
+				subtract_from_variable = { production_remaining_light_ship_1_lvl_imp = production_output_weekly }
+
+				if = {
+					limit = {
+						check_variable = { production_remaining_light_ship_1_lvl_imp < 1 }
+					}
+					set_variable = { production_remaining_light_ship_1_lvl_imp = 30 }
+					add_to_variable = { lvl1_imp_light = 1 }
+				}
+				multiply_temp_variable = { light_ship_1_imp_production = light_ship_production_output }
+
+			}
 		}
 	}
 }
