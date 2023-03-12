@@ -743,7 +743,7 @@ focus_tree = {
 			controls_state = 284
 		}
 		completion_reward = {
-			
+				add_ideas = guided_by_the_trees
 				remove_ideas = kyk_deforestation3
 				add_resource = {
 					type = steel
@@ -766,6 +766,8 @@ focus_tree = {
 					state = 284
 				}
 				KYKecology_level_up = yes
+				set_country_flag = KYK_guided
+				
 		}
 	}
 
@@ -1370,13 +1372,13 @@ focus_tree = {
 	focus = {
 		id = kyk_propose_the_alaris_agreements
 		icon = GFX_KYK_Frame
-		x = 17
-		y = 9
+		x = 23
+		y = 10
 		cost = 6
 		search_filters = {
 			FOCUS_FILTER_MANPOWER
 		}
-		prerequisite = { focus =  kyk_midrim_interests }
+		prerequisite = { focus =  kyk_aligned_the_public }
 		completion_reward = {
 			every_other_country = {
 				limit = {
@@ -1395,270 +1397,19 @@ focus_tree = {
 	focus = {
 		id = kyk_aligned_the_public
 		icon = GFX_KYK_Frame
-		x = 18
-		y = 11
+		x = 22
+		y = 7
 		cost = 6
 		search_filters = {
 			FOCUS_FILTER_MANPOWER
 		}
-		prerequisite = { focus =  kyk_propose_the_alaris_agreements }
+		prerequisite = { focus =  kyk_contacts_in_the_new_republic }
 		completion_reward = {
 			add_popularity = {
 				ideology = democratic
 				popularity = 0.05
 			} 
 		}
-	}
-
-	#Progressive Agenda
-	focus = {
-		id = kyk_progressive_agenda
-		icon = GFX_KYK_Frame
-		x = 17
-		y = 12
-		cost = 6
-		search_filters = {
-			FOCUS_FILTER_MANPOWER
-		}
-	
-		available = {
-			is_power_balance_in_range = {
-				id = KYK_power_balance
-				range > KYK_industrialists_low_control_range
-			}			
-		}
-		
-		prerequisite = { focus =  kyk_aligned_the_public }
-		mutually_exclusive = {	focus = kyk_traditional_agenda }
-		completion_reward = {
-			add_power_balance_value = {
-				id = KYK_power_balance
-				value = 0.10
-			}
-		}
-	}
-
-	#derugulate corportations
-	focus = {
-		id = kyk_deregulate_corporations
-		icon = GFX_KYK_Frame
-		x = 17
-		y = 13
-		cost = 6
-		search_filters = {
-			FOCUS_FILTER_MANPOWER
-		}
-		available = {
-			is_power_balance_in_range = {
-				id = KYK_power_balance
-				range > KYK_industrialists_low_control_range
-			}			
-		}
-		prerequisite = { focus =  kyk_progressive_agenda }
-		completion_reward = {
-			add_popularity = {
-				ideology = corporation
-				popularity = 0.05
-			}
-			add_power_balance_value = {
-				id = KYK_power_balance
-				value = 0.10
-			}
-			add_political_power = 50
-		}
-	}
-
-	#trade lande hub
-	focus = {
-		id = kyk_trade_hub
-		icon = GFX_KYK_Frame
-		x = 17
-		y = 14
-		cost = 6
-		search_filters = {
-			FOCUS_FILTER_MANPOWER
-		}
-		available = {
-			is_power_balance_in_range = {
-				id = KYK_power_balance
-				range > KYK_industrialists_low_control_range
-			}			
-		}
-		prerequisite = { focus =  kyk_deregulate_corporations }
-	}
-
-	#technological sector
-	focus = {
-		id = kyk_technological_sector
-		icon = GFX_KYK_Frame
-		x = 15
-		y = 14
-		cost = 6
-		search_filters = {
-			FOCUS_FILTER_MANPOWER
-		}
-		available = {
-			is_power_balance_in_range = {
-				id = KYK_power_balance
-				range > KYK_industrialists_low_control_range
-			}			
-		}
-		prerequisite = { focus =  kyk_deregulate_corporations }
-		completion_reward = {
-			add_research_slot = 1
-		}
-	}
-
-	#droids for our planetary defense force
-	focus = {
-		id = kyk_droids_for_our_planetary_defense_force
-		icon = GFX_KYK_Frame
-		x = 15
-		y = 15
-		cost = 6
-		search_filters = {
-			FOCUS_FILTER_MANPOWER
-		}
-		available = {
-			is_power_balance_in_range = {
-				id = KYK_power_balance
-				range > KYK_industrialists_low_control_range
-			}			
-		}
-		prerequisite = { focus =  kyk_technological_sector }
-	}
-
-
-	#Traditional Agenda
-	focus = {
-		id = kyk_traditional_agenda
-		icon = GFX_KYK_Frame
-		x = 19
-		y = 12
-		cost = 6
-		search_filters = {
-			FOCUS_FILTER_MANPOWER
-		}
-		available = {
-			is_power_balance_in_range = {
-				id = KYK_power_balance
-				range < KYK_traditionalist_low_control_range
-			}			
-		}
-		prerequisite = { focus =  kyk_aligned_the_public }
-		mutually_exclusive = {	focus = kyk_progressive_agenda }
-		completion_reward = {
-			add_popularity = {
-				ideology = democratic
-				popularity = 0.05
-			} 
-			add_power_balance_value = {
-				id = KYK_power_balance
-				value = -0.10
-			}
-		}
-	}
-
-	#trade lane crossroads
-	focus = {
-		id = kyk_trade_lane_crossroads
-		icon = GFX_KYK_Frame
-		x = 19
-		y = 13
-		cost = 6
-		search_filters = {
-			FOCUS_FILTER_MANPOWER
-		}
-		available = {
-			is_power_balance_in_range = {
-				id = KYK_power_balance
-				range < KYK_traditionalist_low_control_range
-			}			
-		}
-		prerequisite = { focus =  kyk_traditional_agenda }
-	}
-	focus = {
-		id = kyk_safeguarding_our_culture
-		icon = GFX_KYK_Frame
-		x = 19
-		y = 14
-		cost = 6
-		search_filters = {
-			FOCUS_FILTER_MANPOWER
-		}
-		available = {
-			is_power_balance_in_range = {
-				id = KYK_power_balance
-				range < KYK_traditionalist_low_control_range
-			}			
-		}
-		prerequisite = { focus =  kyk_trade_lane_crossroads }
-		completion_reward = {
-			add_power_balance_value = {
-				id = KYK_power_balance
-				value = -0.10
-			}
-		}
-	}
-	focus = {
-		id = kyk_protecting_chieftain_rights
-		icon = GFX_KYK_Frame
-		x = 19
-		y = 15
-		cost = 6
-		search_filters = {
-			FOCUS_FILTER_MANPOWER
-		}
-		available = {
-			is_power_balance_in_range = {
-				id = KYK_power_balance
-				range < KYK_traditionalist_low_control_range
-			}			
-		}
-		prerequisite = { focus =  kyk_safeguarding_our_culture }
-		completion_reward = { add_power_balance_value = {
-			id = KYK_power_balance
-			value = -0.10
-		}
-	}
-	}
-	#steering commerce
-	focus = {
-		id = kyk_steering_commerce
-		icon = GFX_KYK_Frame
-		x = 17
-		y = 15
-		cost = 6
-		search_filters = {
-			FOCUS_FILTER_MANPOWER
-		}
-		available = {
-			is_power_balance_in_range = {
-				id = KYK_power_balance
-				range > KYK_industrialists_low_control_range
-			}			
-		}
-		prerequisite = { focus =  kyk_trade_hub }
-	}
-
-
-	#influence the new Republic Senate
-	focus = {
-		id = kyk_subvert_the_new_Republic_senate
-		icon = GFX_KYK_Frame
-		x = 17
-		y = 16
-		cost = 6
-		search_filters = {
-			FOCUS_FILTER_MANPOWER
-		}
-		available = {
-			is_power_balance_in_range = {
-				id = KYK_power_balance
-				range > KYK_industrialists_low_control_range
-			}			
-		}
-		prerequisite = { focus =  kyk_steering_commerce }
 	}
 	#internal division
 	focus = {
@@ -1670,7 +1421,8 @@ focus_tree = {
 		search_filters = {
 			FOCUS_FILTER_MANPOWER
 		}
-		prerequisite = { focus =  kyk_aligned_the_public }
+		prerequisite = { focus =  kyk_midrim_interests}
+		prerequisite = { focus =  kyk_propose_the_alaris_agreements}
 	}
 	focus = {
 		id = kyk_under_the_chieftains_and_the_clans
@@ -1922,7 +1674,7 @@ focus_tree = {
 		
 	}
 	focus = {
-		id = kyk_dead_end
+		id = kyk_found_the_kdi
 		icon = GFX_KYK_Frame
 		x = 22
 		y = 24
@@ -2135,7 +1887,7 @@ focus_tree = {
 			FOCUS_FILTER_MANPOWER
 		}
 		prerequisite = { focus = kyk_corportize_the_administration focus = kyk_nationalize_the_resources focus = kyk_attempt_to_find_midrim_peace }
-		completion_reward = { add_stability = -0.30 }
+		completion_reward = { add_stability = -0.70 }
 	}
 	focus = {
 		id = kyk_corporate_candidate
@@ -2195,7 +1947,7 @@ focus_tree = {
 		search_filters = {
 			FOCUS_FILTER_MANPOWER
 		}
-		prerequisite = { focus = kyk_dead_end }
+		prerequisite = { focus = kyk_found_the_kdi }
 		prerequisite = { focus = kyk_rework_the_justice_system focus = kyk_joint_rnd focus = kyk_attempt_to_find_midrim_peace focus = kyk_nationalize_the_resources focus = kyk_corportize_the_administration }
 	}
 	focus = {
@@ -2380,13 +2132,13 @@ focus_tree = {
 	focus = {
 		id = kyk_midrim_interests
 		icon = GFX_KYK_Frame
-		x = 17
-		y = 7
+		x = 21
+		y = 10
 		cost = 6
 		search_filters = {
 			FOCUS_FILTER_MANPOWER
 		}
-		prerequisite = { focus = kyk_contacts_in_the_new_republic  }
+		prerequisite = { focus = kyk_aligned_the_public  }
 		available = {
 			custom_trigger_tooltip = {
 				tooltip = kyk_civilwar_over_tt
@@ -2476,23 +2228,5 @@ focus_tree = {
 		}
 		prerequisite = { focus = kyk_heavy_support_weapons  }
 	}
-	#The Slavers of kashyyyk
-	focus = {
-		id = kyk_slavers_of_Kashyyyk
-		icon = GFX_KYK_Frame
-		x = 24
-		y = 2
-		cost = 6
-		search_filters = {
-			FOCUS_FILTER_MANPOWER
-		}
-		prerequisite = {}
-
-		available = {
-			has_country_flag = slave_economy
-			not = { has_idea = kyk_contested_command }
-		}
-	}
-
 
 }
