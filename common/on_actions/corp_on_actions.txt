@@ -2,6 +2,9 @@ on_actions = {
 	on_startup = {
 		effect = {
 			every_country = {
+				## ENTERTAINMENT INDUSTRY - NEVERFIRE
+
+				##
 				add_to_array = { product_array = 0 } # Tie Fighter
 				add_to_array = { product_array = 0 } # Tie Defender
 				add_to_array = { product_array = 0 } # Tie Dagger
@@ -19,6 +22,11 @@ on_actions = {
 					set_variable = { shares_percent@THIS = 0.4 }
 					set_variable = { shares_amount@THIS = shares_percent@THIS }
 					multiply_variable= { shares_amount@THIS = outstanding_shares }
+					## ENTERTAINMENT INDUSTRY - NEVERFIRE
+					set_variable = {censorship = 50}
+					set_variable = {drama = 50}
+					set_variable = {tonality = 50}
+					##
 				}
 				set_variable = { light_ship_production = 2.5 }
 			}
@@ -43,6 +51,112 @@ on_actions = {
 				}
 				multiply_temp_variable = { light_ship_1_imp_production = light_ship_production_output }
 
+			}
+			### ECONOMIC SHIT FOR CORPS - NEVERFIRE
+			### ENTERTAINMENT
+			if = {
+				limit = {
+					has_variable = has_company_deal_with
+				}
+				var:has_company_deal_with = {
+					### CALCULATING INFLUENCE NUMBERS
+					if = {
+						limit = {
+							ROOT = {
+								has_idea = reb_influence_1
+							}
+						}
+						set_temp_variable = {republic_influence_number = 1}
+					}else_if = {
+						limit = {
+							ROOT = {
+								has_idea = reb_influence_2
+							}
+						}
+						set_temp_variable = {republic_influence_number = 2}
+					}else_if = {
+						limit = {
+							ROOT = {
+								has_idea = reb_influence_3
+							}
+						}
+						set_temp_variable = {republic_influence_number = 3}
+					}
+					if = {
+						limit = {
+							ROOT = {
+								has_idea = emp_influence_1
+							}
+						}
+						set_temp_variable = {imperial_influence_number = 1}
+					}else_if = {
+						limit = {
+							ROOT = {
+								has_idea = emp_influence_2
+							}
+						}
+						set_temp_variable = {imperial_influence_number = 2}
+					}else_if = {
+						limit = {
+							ROOT = {
+								has_idea = emp_influence_3
+							}
+						}
+						set_temp_variable = {imperial_influence_number = 3}
+					}
+					if = {
+						limit = {
+							ROOT = {
+								has_idea = con_influence_1
+							}
+						}
+						set_temp_variable = {consortium_influence_number = 1}
+					}else_if = {
+						limit = {
+							ROOT = {
+								has_idea = con_influence_2
+							}
+						}
+						set_temp_variable = {consortium_influence_number = 2}
+					}else_if = {
+						limit = {
+							ROOT = {
+								has_idea = con_influence_3
+							}
+						}
+						set_temp_variable = {consortium_influence_number = 3}
+					}
+					if = {
+						limit = {
+							ROOT = {
+								has_idea = corp_influence_1
+							}
+						}
+						set_temp_variable = {corporate_influence_number = 1}
+					}else_if = {
+						limit = {
+							ROOT = {
+								has_idea = corp_influence_2
+							}
+						}
+						set_temp_variable = {corporate_influence_number = 2}
+					}else_if = {
+						limit = {
+							ROOT = {
+								has_idea = corp_influence_3
+							}
+						}
+						set_temp_variable = {corporate_influence_number = 3}
+					}
+					set_temp_variable = { population_entertainment = max_manpower_k }
+					divide_temp_variable = { population_entertainment = 300000 }
+					set_temp_variable = { entertainment_profit_overall =  0}
+
+					calculate_censorship_total = yes
+					calculate_drama_v_comedy = yes
+					calculate_tonality = yes
+					add_to_variable = { currency_amount^primary_currency = entertainment_profit_overall }
+				}
 			}
 		}
 	}
