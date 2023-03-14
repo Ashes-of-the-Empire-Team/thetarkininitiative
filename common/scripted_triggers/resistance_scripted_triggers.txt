@@ -1,0 +1,75 @@
+can_core_nation_through_compliance = {
+	OR = {
+		any_of_scopes = {
+			array = potential_cores
+			original_tag = FROM
+		}
+		any_of_scopes = {
+			array = potential_original_cores
+			original_tag = FROM
+		}
+	}
+}
+
+can_core_nation_through_compliance_state = {
+	# has_resistance = yes
+	NOT = { is_core_of = FROM }
+	OR = {
+		any_of_scopes = {
+			array = FROM.potential_cores
+			original_tag = FROM.FROM
+		}
+		OR = {
+			any_of_scopes = {
+				array = core_countries
+				is_in_array = {
+					FROM.potential_cores = original_tag
+				}
+			}
+			any_of_scopes = {
+				array = state_original_cores 
+				is_in_array = {
+					FROM.potential_original_cores = original_tag
+				}
+			}
+		}
+	}
+}
+
+can_core_nation_through_compliance_state_ROOT = {
+	# has_resistance = yes
+	NOT = { is_core_of = ROOT }
+	OR = {
+		any_of_scopes = {
+			array = state_original_cores
+			is_in_array = {
+				ROOT.potential_original_cores = original_tag
+			}
+		}
+		any_of_scopes = {
+			array = core_countries
+			is_in_array = {
+				ROOT.potential_cores = original_tag
+			}
+		}
+	}
+}
+
+can_core_nation_through_compliance_state_PREV = {
+	# has_resistance = yes
+	NOT = { is_core_of = PREV }
+	OR = {
+		any_of_scopes = {
+			array = state_original_cores
+			is_in_array = {
+				PREV.potential_original_cores = original_tag
+			}
+		}
+		any_of_scopes = {
+			array = core_countries
+			is_in_array = {
+				PREV.potential_cores = original_tag
+			}
+		}
+	}
+}

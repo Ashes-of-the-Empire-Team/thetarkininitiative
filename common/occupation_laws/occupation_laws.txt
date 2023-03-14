@@ -432,6 +432,38 @@ harsh_quotas_occupation = {
 	}
 }
 
+integration_occupation = {
+	icon = 13
+	sound_effect = "Martial_Law_Interface_Autonomous_Occupation_Unique_DEM"
+	
+	visible = {
+		OR = {
+			check_variable = { potential_cores^num > 0 }
+			check_variable = { potential_original_cores^num > 0 }
+		}
+		can_core_nation_through_compliance = yes
+	}
+
+	available = {
+		
+	}
+
+	fallback_law = foreign_civilian_oversight
+	
+	state_modifier = {
+		resistance_target 				= -0.20
+		required_garrison_factor 		= 0.40	
+		resistance_damage_to_garrison 	= -0.25	
+		compliance_gain 				= 0.03
+		local_factories 				= 0.00
+		local_resources 				= 0.00
+	}
+	
+	ai_will_do = {
+		base = 9000
+	}
+}
+
 #brutally_oppressive_occupation = {
 #	icon = 10
 #	sound_effect = "Martial_Law_Interface_Brutally_Oppressive_Occupation_Unique_FAS"

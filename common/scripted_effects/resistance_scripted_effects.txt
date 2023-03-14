@@ -1,0 +1,149 @@
+force_potential_core_resistance_on_state = {
+	if = {
+		limit = { has_resistance = yes }
+
+		clear_variable = potential_core
+		clear_variable = potential_core_already_occupying
+		for_each_loop = {
+			array = core_countries
+			if = {
+				limit = {
+					is_in_array = { PREV.potential_cores = v }
+				}
+				set_variable = { potential_core = v }
+				if = {
+					limit = {
+						occupied_country_tag = v
+					}
+					set_variable = { potential_core_already_occupying = 1 }
+				}
+				set_temp_variable = { break = 1 }
+			}
+			else_if = {
+				limit = {
+					is_in_array = { PREV.potential_original_cores = v }
+					is_in_array = { state_original_cores = v }
+				}
+				set_variable = { potential_core = v }
+				if = {
+					limit = {
+						occupied_country_tag = v
+					}
+					set_variable = { potential_core_already_occupying = 1 }
+				}
+				set_temp_variable = { break = 1 }
+			}
+		}
+		if = {
+			limit = {
+				NOT = { has_variable = potential_core_already_occupying }
+				has_variable = potential_core
+			}
+			set_variable = {
+				target_occupied_country = potential_core
+			}
+			set_variable = {
+				compliance_old = compliance
+			}
+			set_variable = {
+				resistance_old = resistance
+			}
+			log = "force_potential_core_resistance_on_state: [?this.GetName] forcing [?potential_core.GetTag], compliance [?compliance_old] resistance [?resistance_old]"
+			start_resistance = yes
+			clear_variable = target_occupied_country
+			set_compliance = var:compliance_old
+			set_resistance = var:resistance_old
+
+			# This should never happen
+			if = {
+				limit = { has_resistance = no }
+				log = "force_potential_core_resistance_on_state: [?this.GetName] [?potential_core.GetTag] couldn't be forced, resetting"
+				start_resistance = yes
+				set_compliance = var:compliance_old
+				set_resistance = var:resistance_old
+			}
+
+			clear_variable = compliance_old
+			clear_variable = resistance_old
+		}
+		clear_variable = potential_core
+		clear_variable = potential_core_already_occupying
+	}
+}
+
+force_potential_core_resistance_on_all_states = {
+	every_controlled_state = {
+		force_potential_core_resistance_on_state = yes
+	}
+}
+
+add_to_ROOT_potential_original_cores = {
+	custom_effect_tooltip = add_to_ROOT_potential_original_cores_TT
+	hidden_effect = {
+		add_to_array = {
+			ROOT.potential_original_cores = var:original_tag
+		}
+		ROOT = {
+			force_potential_core_resistance_on_all_states = yes
+		}
+	}
+}
+
+add_to_ROOT_potential_cores = {
+	custom_effect_tooltip = add_to_ROOT_potential_cores_TT
+	hidden_effect = {
+		add_to_array = {
+			ROOT.potential_cores = var:original_tag
+		}
+		ROOT = {
+			force_potential_core_resistance_on_all_states = yes
+		}
+	}
+}
+
+add_to_PREV_potential_original_cores = {
+	custom_effect_tooltip = add_to_PREV_potential_original_cores_TT
+	hidden_effect = {
+		add_to_array = {
+			PREV.potential_original_cores = var:original_tag
+		}
+		PREV = {
+			force_potential_core_resistance_on_all_states = yes
+		}
+	}
+}
+
+add_to_PREV_potential_cores = {
+	custom_effect_tooltip = add_to_PREV_potential_cores_TT
+	hidden_effect = {
+		add_to_array = {
+			PREV.potential_cores = var:original_tag
+		}
+		PREV = {
+			force_potential_core_resistance_on_all_states = yes
+		}
+	}
+}
+
+# Expects occupied variable to be set
+core_occupied_through_compliance = {
+	log = "core_occupied_through_compliance root: [Root.GetName] from: [From.GetName]"
+	every_owned_state = {
+		limit = {
+			occupied_country_tag = var:occupied
+			can_core_nation_through_compliance_state_ROOT = yes
+		}
+		add_core_of = ROOT
+	}
+}
+
+core_all_occupied_through_compliance = {
+	log = "core_all_occupied_through_compliance root: [Root.GetName] from: [From.GetName] fromfrom [FromFrom.GetName]"
+	every_owned_state = {
+		limit = {
+			NOT = { compliance < 40 }
+			can_core_nation_through_compliance_state_ROOT = yes
+		}
+		add_core_of = ROOT
+	}
+}
