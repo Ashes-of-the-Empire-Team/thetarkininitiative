@@ -1,0 +1,265 @@
+Marketplace_buying_ships = {
+	context_type = player_context
+	window_name = "Marketplace_buying_ships"
+	visible = {
+	   always = false
+	}
+	effects = {
+		select_corvette_button = {
+			set_country_flag = corvette_buying_market_open
+		}
+		select_corvette_republic_button = {
+			set_country_flag = corvette_republic_market_open ## assign at start if idelogy
+		}
+		select_corvette_imperial_button = {
+			set_country_flag = corvette_imperial_market_open 
+		}
+		select_corvette_neutral_button = {
+			set_country_flag = corvette_neutral_market_open
+		}
+		select_frigate_button = {
+			set_country_flag = frigate_buying_market_open
+		}
+		select_frigate_republic_button = {
+			set_country_flag = frigate_republic_market_open
+		}
+		select_frigate_imperial_button = {
+			set_country_flag = frigate_imperial_market_open 
+		}
+		select_frigate_neutral_button = {
+			set_country_flag = frigate_neutral_market_open
+		}
+		select_cruiser_button = {
+			set_country_flag = cruiser_buying_market_open
+		}
+		select_cruiser_republic_button = {
+			set_country_flag = cruiser_republic_market_open
+		}
+		select_cruiser_imperial_button = {
+			set_country_flag = cruiser_imperial_market_open 
+		}
+		select_cruiser_neutral_button = {
+			set_country_flag = cruiser_neutral_market_open
+		}
+		select_star_destroyer_button = {
+			set_country_flag = star_destroyer_buying_market_open
+		}
+		select_star_destroyer_republic_button = {
+			set_country_flag = star_destroyer_republic_market_open
+		}
+		select_star_destroyer_imperial_button = {
+			set_country_flag = star_destroyer_imperial_market_open 
+		}
+		select_star_destroyer_neutral_button = {
+			set_country_flag = star_destroyer_neutral_market_open
+		}
+	}
+}
+Marketplace_buying_corvettes_republic_menu = {
+	context_type = player_context
+	window_name = "Marketplace_buying_corvettes_republic_menu"
+	visible = {
+	   has_country_flag = corvette_republic_market_open
+	   has_country_flag = corvette_buying_market_open
+	}
+	effects = {
+		buy_one_price_of_equipment_product_number = {
+			if = {
+				limit = {
+					NOT = {
+						has_tech = name_of_equipment_tech
+					}
+					check_variable = {global.market_ship_holder@price_of_equipment > 0}
+				}
+				set_technology = {
+					name_of_equipment_tech = 1
+				}
+				add_equipment_production = {
+					equipment = {
+						type = name_of_equipment_1
+					}
+					requested_factories = 1
+					progress = 1.00
+					amount = 1
+				}
+			}else = {
+				add_equipment_production = {
+					equipment = {
+						type = name_of_equipment_1
+					}
+					requested_factories = 1
+					progress = 1.00
+					amount = 1
+				}
+			}
+		}
+		auto_buy_price_of_equipment_product_number = {
+			set_country_flag = price_of_equipment_auto_buy_enabled
+		}
+		buy_as_variant_product_number = {
+			if = {
+				limit = {
+					NOT = {
+						has_tech = name_of_equipment_tech
+					}
+					check_variable = {global.market_ship_holder@price_of_equipment > 0}
+				}
+				set_technology = {
+					name_of_equipment_variant_tech = 1
+				}
+				add_equipment_production = {
+					equipment = {
+						type = name_of_equipment_1_variant
+					}
+					requested_factories = 1
+					progress = 1.00
+					amount = 1
+				}
+			}else = {
+				add_equipment_production = {
+					equipment = {
+						type = name_of_equipment_1_variant
+					}
+					requested_factories = 1
+					progress = 1.00
+					amount = 1
+				}
+			}
+		}
+		###AAA###
+		## ABOVE COMMENT IS FOR PYTHON SCRIPT DO NOT REMOVE ##
+	}
+}
+Marketplace_buying_corvettes_imperial_menu = {
+	context_type = player_context
+	window_name = "Marketplace_buying_corvettes_imperial_menu"
+	visible = {
+		has_country_flag = corvette_imperial_market_open
+		has_country_flag = corvette_buying_market_open
+	}
+	effects = {
+		###AAB###
+		## ABOVE COMMENT IS FOR PYTHON SCRIPT DO NOT REMOVE ##
+	}
+}
+Marketplace_buying_corvettes_neutral_menu = {
+	context_type = player_context
+	window_name = "Marketplace_buying_corvettes_neutral_menu"
+	visible = {
+		has_country_flag = corvette_neutral_market_open
+		has_country_flag = corvette_buying_market_open
+	}
+	effects = {
+		###ABB###
+		## ABOVE COMMENT IS FOR PYTHON SCRIPT DO NOT REMOVE ##
+	}
+}
+Marketplace_buying_frigates_republic_menu = {
+	context_type = player_context
+	window_name = "Marketplace_buying_frigates_republic_menu"
+	visible = {
+		has_country_flag = frigate_republic_market_open
+		has_country_flag = frigate_buying_market_open
+	}
+	effects = {
+		###BBB###
+		## ABOVE COMMENT IS FOR PYTHON SCRIPT DO NOT REMOVE ##
+	}
+}
+Marketplace_buying_frigates_imperial_menu = {
+	context_type = player_context
+	window_name = "Marketplace_buying_frigates_imperial_menu"
+	visible = {
+		has_country_flag = frigate_imperial_market_open
+		has_country_flag = frigate_buying_market_open
+	}
+	effects = {
+		###BBC###
+		## ABOVE COMMENT IS FOR PYTHON SCRIPT DO NOT REMOVE ##
+	}
+}
+Marketplace_buying_frigates_neutral_menu = {
+	context_type = player_context
+	window_name = "Marketplace_buying_frigates_neutral_menu"
+	visible = {
+		has_country_flag = frigate_neutral_market_open
+		has_country_flag = frigate_buying_market_open
+	}
+	effects = {
+		###BCC###
+		## ABOVE COMMENT IS FOR PYTHON SCRIPT DO NOT REMOVE ##
+	}
+}
+Marketplace_buying_cruisers_republic_menu = {
+	context_type = player_context
+	window_name = "Marketplace_buying_cruisers_republic_menu"
+	visible = {
+		has_country_flag = cruiser_republic_market_open
+		has_country_flag = cruiser_buying_market_open
+	}
+	effects = {
+		###CCC###
+		## ABOVE COMMENT IS FOR PYTHON SCRIPT DO NOT REMOVE ##
+	}
+}
+Marketplace_buying_cruisers_imperial_menu = {
+	context_type = player_context
+	window_name = "Marketplace_buying_cruisers_imperial_menu"
+	visible = {
+		has_country_flag = cruiser_imperial_market_open
+		has_country_flag = cruiser_buying_market_open
+	}
+	effects = {
+		###CCD###
+		## ABOVE COMMENT IS FOR PYTHON SCRIPT DO NOT REMOVE ##
+	}
+}
+Marketplace_buying_cruisers_neutral_menu = {
+	context_type = player_context
+	window_name = "Marketplace_buying_cruisers_neutral_menu"
+	visible = {
+		has_country_flag = cruiser_neutral_market_open
+		has_country_flag = cruiser_buying_market_open
+	}
+	effects = {
+		###CDD###
+		## ABOVE COMMENT IS FOR PYTHON SCRIPT DO NOT REMOVE ##
+	}
+}
+Marketplace_buying_star_destoyers_republic_menu = {
+	context_type = player_context
+	window_name = "Marketplace_buying_star_destoyers_republic_menu"
+	visible = {
+		has_country_flag = star_destroyer_republic_market_open
+		has_country_flag = star_destroyer_buying_market_open
+	}
+	effects = {
+		###DDD###
+		## ABOVE COMMENT IS FOR PYTHON SCRIPT DO NOT REMOVE ##
+	}
+}
+Marketplace_buying_star_destoyers_imperial_menu = {
+	context_type = player_context
+	window_name = "Marketplace_buying_star_destoyers_imperial_menu"
+	visible = {
+		has_country_flag = star_destroyer_imperial_market_open
+		has_country_flag = star_destroyer_buying_market_open
+	}
+	effects = {
+		###DDE###
+		## ABOVE COMMENT IS FOR PYTHON SCRIPT DO NOT REMOVE ##
+	}
+}
+Marketplace_buying_star_destoyers_neutral_menu = {
+	context_type = player_context
+	window_name = "Marketplace_buying_star_destoyers_neutral_menu"
+	visible = {
+		has_country_flag = star_destroyer_neutral_market_open
+		has_country_flag = star_destroyer_buying_market_open
+	}
+	effects = {
+		###DEE###
+		## ABOVE COMMENT IS FOR PYTHON SCRIPT DO NOT REMOVE ##
+	}
+}
+################################################################################## BUYING SHIPS END #########################################################################
