@@ -269,22 +269,379 @@ PEN_pirate_activity_category = {
 ####################################### Bounty of the Outer Sector Decisions ##############################################
 ###########################################################################################################################
 PEN_bounty_outer_sector_category = {
-    PEN_bounty_ = {
+    #Entralla
+    PEN_bounty_entralla1 = {
         priority = 10
         icon = eng_ally_imperialist_coup
         
         available = {
-            original_tag = PEN
+            has_country_flag = PEN_bounty_outer_sector_activated_flag
+            has_tech = excavation2
+			num_of_civilian_factories_available_for_projects > 2
+            owns_state = 177
+            controls_state = 177
         }
 
         visible = {
-            original_tag = PEN
+            has_country_flag = PEN_bounty_outer_sector_activated_flag
+            owns_state = 177
+            controls_state = 177
+            NOT = { has_state_flag = bounty_entralla_dev1 }
         }
 
+        highlight_states = {
+			highlight_state_targets = {
+                state = 177
+			}
+		}
+
         cost = 25
-        days_remove = 30
-        complete_effect = {
-            
+        days_remove = 60
+
+        modifier = {
+			civilian_factory_use = 2
+		}
+
+        remove_effect = {
+            177 = { set_state_flag = bounty_entralla_dev1 }
+			177 = {
+				add_resource = {
+					type = steel
+					amount = 6
+				}
+			}
+        }
+    }
+    PEN_bounty_entralla2 = {
+        priority = 10
+        icon = eng_ally_imperialist_coup
+        
+        available = {
+            has_country_flag = PEN_bounty_outer_sector_activated_flag
+            has_tech = excavation2
+			num_of_civilian_factories_available_for_projects > 2
+            owns_state = 189
+            controls_state = 189
+        }
+
+        visible = {
+            has_country_flag = PEN_bounty_outer_sector_activated_flag
+            owns_state = 189
+            controls_state = 189
+            NOT = { has_state_flag = bounty_entralla_dev2 }
+        }
+
+        highlight_states = {
+			highlight_state_targets = {
+                state = 189
+			}
+		}
+
+        cost = 25
+        days_remove = 60
+
+        modifier = {
+			civilian_factory_use = 2
+		}
+
+        remove_effect = {
+            189 = { set_state_flag = bounty_entralla_dev2 }
+			189 = {
+				add_resource = {
+					type = steel
+					amount = 6
+				}
+			}
+        }
+    }
+    #Bastion
+    PEN_bounty_bastion1 = {
+        priority = 10
+        icon = eng_ally_imperialist_coup
+        
+        available = {
+            has_country_flag = PEN_bounty_outer_sector_activated_flag
+            has_tech = excavation2
+			num_of_civilian_factories_available_for_projects > 2
+            OR = {
+                AND = {
+                    owns_state = 104
+                    controls_state = 104
+                    owns_state = 124
+                    controls_state = 124
+                }
+                AND = {
+                    ORD = {
+                        owns_state = 104
+                        controls_state = 104
+                        owns_state = 124
+                        controls_state = 124
+                    }
+                    ORD = {
+                        is_subject_of = PEN
+                    }
+                }
+            }
+        }
+
+        visible = {
+            has_country_flag = PEN_bounty_outer_sector_activated_flag
+            OR = {
+                AND = {
+                    owns_state = 104
+                    controls_state = 104
+                    owns_state = 124
+                    controls_state = 124
+                }
+                AND = {
+                    ORD = {
+                        owns_state = 104
+                        controls_state = 104
+                        owns_state = 124
+                        controls_state = 124
+                    }
+                    ORD = {
+                        is_subject_of = PEN
+                    }
+                }
+            }
+            NOT = { has_state_flag = bounty_bastion_dev1 }
+        }
+
+        highlight_states = {
+			highlight_state_targets = {
+				state = 104
+                state = 124
+			}
+		}
+
+        cost = 25
+        days_remove = 60
+
+        modifier = {
+			civilian_factory_use = 3
+		}
+
+        remove_effect = {
+            104 = { set_state_flag = bounty_bastion_dev1 }
+			104 = {
+				add_resource = {
+					type = steel
+					amount = 8
+				}
+			}
+            124 = { set_state_flag = bounty_bastion_dev1 }
+			124 = {
+				add_resource = {
+					type = steel
+					amount = 6
+				}
+			}
+        }
+    }
+    PEN_bounty_bastion2 = {
+        priority = 10
+        icon = eng_ally_imperialist_coup
+        
+        available = {
+            has_country_flag = PEN_bounty_outer_sector_activated_flag
+            has_tech = excavation2
+			num_of_civilian_factories_available_for_projects > 2
+            OR = {
+                AND = {
+                    owns_state = 124
+                    controls_state = 124
+                }
+                AND = {
+                    ORD = {
+                        owns_state = 124
+                        controls_state = 124
+                    }
+                    ORD = {
+                        is_subject_of = PEN
+                    }
+                }
+            }
+        }
+
+        visible = {
+            has_country_flag = PEN_bounty_outer_sector_activated_flag
+            OR = {
+                AND = {
+                    owns_state = 124
+                    controls_state = 124
+                }
+                AND = {
+                    ORD = {
+                        owns_state = 124
+                        controls_state = 124
+                    }
+                    ORD = {
+                        is_subject_of = PEN
+                    }
+                }
+            }
+            NOT = { has_state_flag = bounty_bastion_dev2 }
+        }
+
+        highlight_states = {
+			highlight_state_targets = {
+				state = 124
+			}
+		}
+
+        cost = 25
+        days_remove = 60
+
+        modifier = {
+			civilian_factory_use = 2
+		}
+
+        remove_effect = {
+            124 = { set_state_flag = bounty_bastion_dev2 }
+			124 = {
+				add_resource = {
+					type = aluminium
+					amount = 8
+				}
+			}
+        }
+    }
+    #Bextar
+    PEN_bounty_bextar1 = {
+        priority = 10
+        icon = eng_ally_imperialist_coup
+        
+        available = {
+            has_country_flag = PEN_bounty_outer_sector_activated_flag
+            has_tech = excavation2
+			num_of_civilian_factories_available_for_projects > 2
+            OR = {
+                AND = {
+                    owns_state = 147
+                    controls_state = 147
+                }
+                AND = {
+                    BEX = {
+                        owns_state = 147
+                        controls_state = 147
+                    }
+                    BEX = {
+                        is_subject_of = PEN
+                    }
+                }
+            }
+        }
+
+        visible = {
+            has_country_flag = PEN_bounty_outer_sector_activated_flag
+            OR = {
+                AND = {
+                    owns_state = 147
+                    controls_state = 147
+                }
+                AND = {
+                    BEX = {
+                        owns_state = 147
+                        controls_state = 147
+                    }
+                    BEX = {
+                        is_subject_of = PEN
+                    }
+                }
+            }
+            NOT = { has_state_flag = bounty_bextar_dev1 }
+        }
+
+        highlight_states = {
+			highlight_state_targets = {
+				state = 147
+			}
+		}
+
+        cost = 25
+        days_remove = 60
+
+        modifier = {
+			civilian_factory_use = 2
+		}
+
+        remove_effect = {
+            147 = { set_state_flag = bounty_bextar_dev1 }
+			147 = {
+				add_resource = {
+					type = oil
+					amount = 8
+				}
+			}
+        }
+    }
+    PEN_bounty_bextar2 = {
+        priority = 10
+        icon = eng_ally_imperialist_coup
+        
+        available = {
+            has_country_flag = PEN_bounty_outer_sector_activated_flag
+            has_tech = excavation2
+			num_of_civilian_factories_available_for_projects > 2
+            OR = {
+                AND = {
+                    owns_state = 148
+                    controls_state = 148
+                }
+                AND = {
+                    BEX = {
+                        owns_state = 148
+                        controls_state = 148
+                    }
+                    BEX = {
+                        is_subject_of = PEN
+                    }
+                }
+            }
+        }
+
+        visible = {
+            has_country_flag = PEN_bounty_outer_sector_activated_flag
+            OR = {
+                AND = {
+                    owns_state = 148
+                    controls_state = 148
+                }
+                AND = {
+                    BEX = {
+                        owns_state = 148
+                        controls_state = 148
+                    }
+                    BEX = {
+                        is_subject_of = PEN
+                    }
+                }
+            }
+            NOT = { has_state_flag = bounty_bextar_dev2 }
+        }
+
+        highlight_states = {
+			highlight_state_targets = {
+				state = 148
+			}
+		}
+
+        cost = 25
+        days_remove = 60
+
+        modifier = {
+			civilian_factory_use = 2
+		}
+
+        remove_effect = {
+            148 = { set_state_flag = bounty_bextar_dev2 }
+			148 = {
+				add_resource = {
+					type = oil
+					amount = 8
+				}
+			}
         }
     }
 }
@@ -303,7 +660,6 @@ PEN_internal_factions_category = {
         }
         
         available = {
-            original_tag = PEN
             NOT = {
                 AND = {
                     check_variable = {
@@ -368,7 +724,6 @@ PEN_internal_factions_category = {
         }
 
         available = {
-            original_tag = PEN
             NOT = {
                 AND = {
                     check_variable = {
@@ -434,7 +789,6 @@ PEN_internal_factions_category = {
         }
         
         available = {
-            original_tag = PEN
             NOT = {
                 AND = {
                     check_variable = {
@@ -499,7 +853,6 @@ PEN_internal_factions_category = {
         }
 
         available = {
-            original_tag = PEN
             NOT = {
                 AND = {
                     check_variable = {
@@ -565,7 +918,6 @@ PEN_internal_factions_category = {
         }
         
         available = {
-            original_tag = PEN
             NOT = {
                 AND = {
                     check_variable = {
@@ -630,7 +982,6 @@ PEN_internal_factions_category = {
         }
 
         available = {
-            original_tag = PEN
             NOT = {
                 AND = {
                     check_variable = {
@@ -696,7 +1047,6 @@ PEN_internal_factions_category = {
         }
         
         available = {
-            original_tag = PEN
             NOT = {
                 AND = {
                     check_variable = {
@@ -761,7 +1111,6 @@ PEN_internal_factions_category = {
         }
 
         available = {
-            original_tag = PEN
             NOT = {
                 AND = {
                     check_variable = {
@@ -827,7 +1176,6 @@ PEN_internal_factions_category = {
         }
         
         available = {
-            original_tag = PEN
             NOT = {
                 AND = {
                     check_variable = {
@@ -892,7 +1240,6 @@ PEN_internal_factions_category = {
         }
 
         available = {
-            original_tag = PEN
             NOT = {
                 AND = {
                     check_variable = {
