@@ -9,9 +9,10 @@ focus_tree = {
 		}
 	}
 
-	#Ashes of an Empire
+
+	#Grand Vizier of the Empire
 	focus = {
-		id = EMP_ashes_of_an_empire
+		id = EMP_grand_vizier_of_the_empire
 		icon = GFX_outbound_flight
 		cost = 2.9
 		x = 0
@@ -23,29 +24,9 @@ focus_tree = {
 		mutually_exclusive = {
 		}
 		completion_reward = {
-		}
-
-		ai_will_do = {
-			factor = 1
-		}
-	}
-
-	#Grand Vizier of the Empire
-	focus = {
-		id = EMP_grand_vizier_of_the_empire
-		icon = GFX_outbound_flight
-		relative_position_id = EMP_ashes_of_an_empire
-		cost = 2.9
-		x = 0
-		y = 1
-		prerequisite = {
-			focus = EMP_ashes_of_an_empire
-		}
-		search_filters = {
-		}
-		mutually_exclusive = {
-		}
-		completion_reward = {
+			EMP = {
+				country_event = { id = EMP.1 }
+			}
 		}
 
 		ai_will_do = {
@@ -72,7 +53,7 @@ focus_tree = {
 			focus = EMP_council_of_entralla
 		}
 		completion_reward = {
-			#war goal
+			#unlocks decisions to vassalize core worlds
 		}
 
 		ai_will_do = {
@@ -98,6 +79,19 @@ focus_tree = {
 			focus = EMP_consolidate_imperial_center
 		}
 		completion_reward = {
+			every_country = {
+				if = {
+					limit = {
+						has_government = imperial
+					}
+					country_event = { id = EMP.2}
+				}
+			}
+			add_to_variable = {
+				legitimacy_emp = -5
+			}
+			#tooltip
+			
 		}
 
 		ai_will_do = {
@@ -112,7 +106,7 @@ focus_tree = {
 		relative_position_id = EMP_church_of_the_dark_side
 		cost = 2.9
 		x = 0
-		y = 1
+		y = 2
 		prerequisite = {
 			focus = EMP_church_of_the_dark_side
 		}
@@ -124,6 +118,7 @@ focus_tree = {
 		mutually_exclusive = {
 		}
 		completion_reward = {
+			#tooltip
 		}
 
 		ai_will_do = {
@@ -139,11 +134,9 @@ focus_tree = {
 		relative_position_id = EMP_consolidate_imperial_center
 		cost = 2.9
 		x = -2
-		y = 2
+		y = 1
 		prerequisite = {
 			focus = EMP_consolidate_imperial_center
-		}
-		prerequisite = {
 			focus = EMP_council_of_entralla
 		}
 		search_filters = {
@@ -151,6 +144,7 @@ focus_tree = {
 		mutually_exclusive = {
 		}
 		completion_reward = {
+			add_ideas = EOH_church_1
 		}
 
 		ai_will_do = {
@@ -310,11 +304,9 @@ focus_tree = {
 		relative_position_id = EMP_integrate_the_lower_levels
 		cost = 2.9
 		x = -5
-		y = 3
+		y = 1
 		prerequisite = {
 			focus = EMP_surface_level_subsidies
-		}
-		prerequisite = {
 			focus = EMP_integrate_the_lower_levels
 		}
 		search_filters = {
@@ -461,8 +453,6 @@ focus_tree = {
 		y = 1
 		prerequisite = {
 			focus = EMP_consolidate_imperial_center
-		}
-		prerequisite = {
 			focus = EMP_council_of_entralla
 		}
 		search_filters = {
@@ -560,8 +550,6 @@ focus_tree = {
 		y = 1
 		prerequisite = {
 			focus = EMP_isb_primacy
-		}
-		prerequisite = {
 			focus = EMP_strengthen_imperial_intelligence
 		}
 		search_filters = {
@@ -849,8 +837,6 @@ focus_tree = {
 		y = 1
 		prerequisite = {
 			focus = EMP_appoint_isard
-		}
-		prerequisite = {
 			focus = EMP_empress_isard
 		}
 		search_filters = {
