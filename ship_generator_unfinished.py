@@ -1,5 +1,5 @@
 import fileinput
-from webbrowser import open as text_opener
+import webbrowser
 ### CORVETTE = 0 - 2000 PRODUCTION UNITS, FRIGATE 2001 - 4500, CRUISER 4501 - 8000, STAR DESTROYER, 8000 - ONWARDS
 ### CORVETTE, 3000 COST FRIGATES ARE LIGHT, over 3000 frigates and 6000 cost cruisers medium, star destroyers and other cruisers heavy
 LIGHT_MAX_COST = 3000
@@ -41,16 +41,16 @@ else:
     type_of_ship = 3
 print("Now what is the ship name, this is the user presented name and the name for equipment and technology. Uses spaces, underscore _ is added automatically where spaces are used")
 name_of_equipment_user_name = input()
-name_of_equipment_game_name = name_of_equipment_user_name.replace(' ','_')
+name_of_equipment_game_name = name_of_equipment_user_name.replace(' ','_').lower()
 
-print("Now what is the gfx key you want it to be (i.e. GFX_ship_1_destroyer). you will manually have to input the location of the ship gfx in corporation.gfx file, the new gfx text will be at the end of the file")
-gfx_key = input()
+gfx_key = name_of_equipment_game_name+'_icon'
 
 print("Does this have a variant type, type 1 for yes, 2 for no")
 correct_input = False
 while correct_input == False:
     is_it_variant = input()
-    if is_it_variant == "1" or is_it_variant == "2":
+    is_it_variant = int(is_it_variant)
+    if is_it_variant == 1 or is_it_variant == 2:
         correct_input = True
     else :
         print("Incorrect Input")
@@ -59,1431 +59,1317 @@ print("Republic or Imperial? 1 for Republic 2 for Imperial")
 correct_input = False
 while correct_input == False:
     imperial_or_republic = input()
-    if imperial_or_republic == "1" or imperial_or_republic == "2":
+    imperial_or_republic = int(imperial_or_republic)
+    if imperial_or_republic == 1 or imperial_or_republic == 2:
         correct_input = True
     else :
         print("Incorrect Input")
 ### WRITING PRODUCTION SHIP CODE ###
 if type_of_ship == 1:
-    for line in fileinput.input('test.txt', inplace=1): #common\scripted_localisation\00_scripted_localisation_market.txt
+    for line in fileinput.input('00_scripted_localisation_market.txt', inplace=1): #common\scripted_localisation\00_scripted_localisation_market.txt
         if line.startswith('	###AAA###'):
-            print("	text = {\n		trigger = {\n			light_ship_production_array = "+price_of_equipment+"\n		}\n		localization_key = \""+gfx_key+"\" \n	}") 
+            print('	text = {\n		trigger = {\n			light_ship_production_array = '+str(price_of_equipment)+'\n		}\n		localization_key = '+gfx_key+' \n	}') 
             print("	###AAA###")
         elif line.startswith('	###AAB###'):
-            print("	text = {\n		trigger = {\n			light_ship_production_array = "+price_of_equipment+"\n		}\n		localization_key = \""+name_of_equipment+"\" \n	}")
+            print("	text = {\n		trigger = {\n			light_ship_production_array = "+str(price_of_equipment)+"\n		}\n		localization_key = \""+name_of_equipment_game_name+"\" \n	}")
             print("	###AAB###")
         elif line.startswith('	###AAC###'):
-            print("	text = {\n		trigger = {\n			check_variable = {selected_ship_production_cost = "+price_of_equipment+"}\n		}\n		localization_key = \""+name_of_equipment+"\" \n	}")
+            print("	text = {\n		trigger = {\n			check_variable = {selected_ship_production_cost = "+str(price_of_equipment)+"}\n		}\n		localization_key = \""+gfx_key+"\" \n	}")
             print("	###ABB###")
         else:
             print(line, end ="")
 elif type_of_ship == 2:
-    for line in fileinput.input('test.txt', inplace=1): #common\scripted_localisation\00_scripted_localisation_market.txt
+    for line in fileinput.input('00_scripted_localisation_market.txt', inplace=1): #common\scripted_localisation\00_scripted_localisation_market.txt
         if line.startswith('	###BBB###'):
-            print("	text = {\n		trigger = {\n			medium_ship_production_array = "+price_of_equipment+"\n		}\n		localization_key = \""+gfx_key+"\" \n	}")
+            print("	text = {\n		trigger = {\n			medium_ship_production_array = "+str(price_of_equipment)+"\n		}\n		localization_key = \""+gfx_key+"\" \n	}")
             print("	###BBB###")
         elif line.startswith('	###BBC###'):
-            print("	text = {\n		trigger = {\n			medium_ship_production_array = "+price_of_equipment+"\n		}\n		localization_key = \""+name_of_equipment+"\" \n	}")
+            print("	text = {\n		trigger = {\n			medium_ship_production_array = "+str(price_of_equipment)+"\n		}\n		localization_key = \""+name_of_equipment_game_name+"\" \n	}")
             print("	###BBC###")
         elif line.startswith('	###BCC###'):
-            print("	text = {\n		trigger = {\n			check_variable = {selected_ship_production_cost = "+price_of_equipment+"}\n		}\n		localization_key = \""+name_of_equipment+"\" \n	}")
+            print("	text = {\n		trigger = {\n			check_variable = {selected_ship_production_cost = "+str(price_of_equipment)+"}\n		}\n		localization_key = \""+name_of_equipment_game_name+"\" \n	}")
             print("	###BCC###")
         else:
             print(line, end ="")
 elif type_of_ship == 3:
-    for line in fileinput.input('test.txt', inplace=1): #common\scripted_localisation\00_scripted_localisation_market.txt
+    for line in fileinput.input('00_scripted_localisation_market.txt', inplace=1): #common\scripted_localisation\00_scripted_localisation_market.txt
         if line.startswith('	###CCC###'):
-            print("	text = {\n		trigger = {\n			heavy_production_array = "+price_of_equipment+"\n		}\n		localization_key = \""+gfx_key+"\" \n	}")
+            print("	text = {\n		trigger = {\n			heavy_production_array = "+str(price_of_equipment)+"\n		}\n		localization_key = \""+gfx_key+"\" \n	}")
             print("	###CCC###")
         elif line.startswith('	###CCD###'):
-            print("	text = {\n		trigger = {\n			heavy_production_array = "+price_of_equipment+"\n		}\n		localization_key = \""+name_of_equipment+"\" \n	}")
+            print("	text = {\n		trigger = {\n			heavy_production_array = "+str(price_of_equipment)+"\n		}\n		localization_key = \""+name_of_equipment_game_name+"\" \n	}")
             print("	###CCD###")
         elif line.startswith('	###CDD###'):
-            print("	text = {\n		trigger = {\n			check_variable = {selected_ship_production_cost = "+price_of_equipment+"}\n		}\n		localization_key = \""+name_of_equipment+"\" \n	}")
+            print("	text = {\n		trigger = {\n			check_variable = {selected_ship_production_cost = "+str(price_of_equipment)+"}\n		}\n		localization_key = \""+name_of_equipment_game_name+"\" \n	}")
             print("	###CDD###")
         else:
             print(line, end ="")
+fileinput.close()
 #### WRITING BUYING MARKET CODE ###
 if imperial_or_republic == 1:
-    if classifaction == "1":
-        for line in fileinput.input('test.gui', inplace=1): #interface\buying_market.gui
+    if classifaction == 1:
+        for line in fileinput.input('buying_market.gui', inplace=1): #interface\buying_market.gui
             if line.startswith('		###AAA###'):
                 print('''
             iconType = {
-                name = "product_background_box_'''+price_of_equipment+'''"
-                spriteType = "GFX_circle_button"
+                name = "product_background_box_'''+str(price_of_equipment)+'''"
+                spriteType = "GFX_market_product_background_box"
                 position = { x = 120 y = 120 }
                 orientation = UPPER_LEFT
             }
             instantTextBoxType = {
-                name = "product_quantity_'''+price_of_equipment+'''"
+                name = "product_name_'''+str(price_of_equipment)+'''"
                 position = {x = 0 y = 0}
-                text = "'''+price_of_equipment+'''_marketplace_name"
+                text = "'''+str(price_of_equipment)+'''_marketplace_name"
             }
             iconType = {
-                name = "product_image_display_'''+price_of_equipment+'''"
+                name = "product_image_display_'''+str(price_of_equipment)+'''"
                 position = { x = 530 y = 488 }
                 spriteType = "'''+gfx_key+'''"
             }
             instantTextBoxType = {
-                name = "product_quantity_'''+price_of_equipment+'''"
+                name = "product_quantity_'''+str(price_of_equipment)+'''"
                 position = {x = 0 y = 0}
-                text = "'''+price_of_equipment+'''_marketplace_quantity"
+                text = "'''+str(price_of_equipment)+'''_marketplace_quantity"
             }
             buttonType = {
-                name = "product_buy_one_'''+price_of_equipment+'''"
+                name = "product_buy_one_'''+str(price_of_equipment)+'''"
                 position = { x = 530 y = 488 }
-                spriteType = "GFX_circle_button"
+                spriteType = "GFX_buy_one_button"
             }
             buttonType = {
-                name = "product_auto_buy_'''+price_of_equipment+'''"
+                name = "product_auto_buy_'''+str(price_of_equipment)+'''"
                 position = { x = 530 y = 488 }
-                spriteType = "GFX_circle_button"
+                spriteType = "GFX_auto_buy_button"
             }''')
-                if is_it_variant == "1":
+                if is_it_variant == 1:
                     print('''            buttonType = {
-                name = "product_variant_type_'''+price_of_equipment+'''"
+                name = "product_variant_type_'''+str(price_of_equipment)+'''"
                 position = { x = 530 y = 488 }
-                spriteType = "GFX_circle_button"
+                spriteType = "GFX_market_variant_button"
             }''')
                 print("		###AAA###")
             else:
                 print(line, end ="")
-    elif classifaction == "2":
-        for line in fileinput.input('test.txt', inplace=1): #interface\buying_market.gui
-            if line.startswith('	###BBB###'):
+    elif classifaction == 2:
+        for line in fileinput.input('buying_market.gui', inplace=1): #interface\buying_market.gui
+            if line.startswith('		###BBB###'):
                 print('''
             iconType = {
-                name = "product_background_box_'''+price_of_equipment+'''"
-                spriteType = "GFX_circle_button"
+                name = "product_background_box_'''+str(price_of_equipment)+'''"
+                spriteType = "GFX_market_product_background_box"
                 position = { x = 120 y = 120 }
                 orientation = UPPER_LEFT
             }
             instantTextBoxType = {
-                name = "product_quantity_'''+price_of_equipment+'''"
+                name = "product_name_'''+str(price_of_equipment)+'''"
                 position = {x = 0 y = 0}
-                text = "'''+price_of_equipment+'''_marketplace_name"
+                text = "'''+str(price_of_equipment)+'''_marketplace_name"
             }
             iconType = {
-                name = "product_image_display_'''+price_of_equipment+'''"
+                name = "product_image_display_'''+str(price_of_equipment)+'''"
                 position = { x = 530 y = 488 }
                 spriteType = "'''+gfx_key+'''"
             }
             instantTextBoxType = {
-                name = "product_quantity_'''+price_of_equipment+'''"
+                name = "product_quantity_'''+str(price_of_equipment)+'''"
                 position = {x = 0 y = 0}
-                text = "'''+price_of_equipment+'''_marketplace_quantity"
+                text = "'''+str(price_of_equipment)+'''_marketplace_quantity"
             }
             buttonType = {
-                name = "product_buy_one_'''+price_of_equipment+'''"
+                name = "product_buy_one_'''+str(price_of_equipment)+'''"
                 position = { x = 530 y = 488 }
-                spriteType = "GFX_circle_button"
+                spriteType = "GFX_buy_one_button"
             }
             buttonType = {
-                name = "product_auto_buy_'''+price_of_equipment+'''"
+                name = "product_auto_buy_'''+str(price_of_equipment)+'''"
                 position = { x = 530 y = 488 }
-                spriteType = "GFX_circle_button"
+                spriteType = "GFX_auto_buy_button"
             }''')
-                if is_it_variant == "1":
+                if is_it_variant == 1:
                     print('''            buttonType = {
-                name = "product_variant_type_'''+price_of_equipment+'''"
+                name = "product_variant_type_'''+str(price_of_equipment)+'''"
                 position = { x = 530 y = 488 }
-                spriteType = "GFX_circle_button"
+                spriteType = "GFX_market_variant_button"
             }''')
-                print("	###BBB###")
+                print("		###BBB###")
             else:
                 print(line, end ="")
-    elif classifaction == "3":
-        for line in fileinput.input('test.txt', inplace=1): #interface\buying_market.gui
-            if line.startswith('	###CCC###'):
+    elif classifaction == 3:
+        for line in fileinput.input('buying_market.gui', inplace=1): #interface\buying_market.gui
+            if line.startswith('		###CCC###'):
                 print('''
             iconType = {
-                name = "product_background_box_'''+price_of_equipment+'''"
-                spriteType = "GFX_circle_button"
+                name = "product_background_box_'''+str(price_of_equipment)+'''"
+                spriteType = "GFX_market_product_background_box"
                 position = { x = 120 y = 120 }
                 orientation = UPPER_LEFT
             }
             instantTextBoxType = {
-                name = "product_quantity_'''+price_of_equipment+'''"
+                name = "product_name_'''+str(price_of_equipment)+'''"
                 position = {x = 0 y = 0}
-                text = "'''+price_of_equipment+'''_marketplace_name"
+                text = "'''+str(price_of_equipment)+'''_marketplace_name"
             }
             iconType = {
-                name = "product_image_display_'''+price_of_equipment+'''"
+                name = "product_image_display_'''+str(price_of_equipment)+'''"
                 position = { x = 530 y = 488 }
                 spriteType = "'''+gfx_key+'''"
             }
             instantTextBoxType = {
-                name = "product_quantity_'''+price_of_equipment+'''"
+                name = "product_quantity_'''+str(price_of_equipment)+'''"
                 position = {x = 0 y = 0}
-                text = "'''+price_of_equipment+'''_marketplace_quantity"
+                text = "'''+str(price_of_equipment)+'''_marketplace_quantity"
             }
             buttonType = {
-                name = "product_buy_one_'''+price_of_equipment+'''"
+                name = "product_buy_one_'''+str(price_of_equipment)+'''"
                 position = { x = 530 y = 488 }
-                spriteType = "GFX_circle_button"
+                spriteType = "GFX_buy_one_button"
             }
             buttonType = {
-                name = "product_auto_buy_'''+price_of_equipment+'''"
+                name = "product_auto_buy_'''+str(price_of_equipment)+'''"
                 position = { x = 530 y = 488 }
-                spriteType = "GFX_circle_button"
+                spriteType = "GFX_auto_buy_button"
             }''')
-                if is_it_variant == "1":
+                if is_it_variant == 1:
                     print('''            buttonType = {
-                name = "product_variant_type_'''+price_of_equipment+'''"
+                name = "product_variant_type_'''+str(price_of_equipment)+'''"
                 position = { x = 530 y = 488 }
-                spriteType = "GFX_circle_button"
+                spriteType = "GFX_market_variant_button"
             }''')
-                print("	###CCC###")
+                print("		###CCC###")
             else:
                 print(line, end ="")
-    elif classifaction == "4":
-        for line in fileinput.input('test.txt', inplace=1): #interface\buying_market.gui
-            if line.startswith('	###DDD###'):
+    elif classifaction == 4:
+        for line in fileinput.input('buying_market.gui', inplace=1): #interface\buying_market.gui
+            if line.startswith('		###DDD###'):
                 print('''
             iconType = {
-                name = "product_background_box_'''+price_of_equipment+'''"
-                spriteType = "GFX_circle_button"
+                name = "product_background_box_'''+str(price_of_equipment)+'''"
+                spriteType = "GFX_market_product_background_box"
                 position = { x = 120 y = 120 }
                 orientation = UPPER_LEFT
             }
             instantTextBoxType = {
-                name = "product_quantity_'''+price_of_equipment+'''"
+                name = "product_name_'''+str(price_of_equipment)+'''"
                 position = {x = 0 y = 0}
-                text = "'''+price_of_equipment+'''_marketplace_name"
+                text = "'''+str(price_of_equipment)+'''_marketplace_name"
             }
             iconType = {
-                name = "product_image_display_'''+price_of_equipment+'''"
+                name = "product_image_display_'''+str(price_of_equipment)+'''"
                 position = { x = 530 y = 488 }
                 spriteType = "'''+gfx_key+'''"
             }
             instantTextBoxType = {
-                name = "product_quantity_'''+price_of_equipment+'''"
+                name = "product_quantity_'''+str(price_of_equipment)+'''"
                 position = {x = 0 y = 0}
-                text = "'''+price_of_equipment+'''_marketplace_quantity"
+                text = "'''+str(price_of_equipment)+'''_marketplace_quantity"
             }
             buttonType = {
-                name = "product_buy_one_'''+price_of_equipment+'''"
+                name = "product_buy_one_'''+str(price_of_equipment)+'''"
                 position = { x = 530 y = 488 }
-                spriteType = "GFX_circle_button"
+                spriteType = "GFX_buy_one_button"
             }
             buttonType = {
-                name = "product_auto_buy_'''+price_of_equipment+'''"
+                name = "product_auto_buy_'''+str(price_of_equipment)+'''"
                 position = { x = 530 y = 488 }
-                spriteType = "GFX_circle_button"
+                spriteType = "GFX_auto_buy_button"
             }''')
-                if is_it_variant == "1":
+                if is_it_variant == 1:
                     print('''            buttonType = {
-                name = "product_variant_type_'''+price_of_equipment+'''"
+                name = "product_variant_type_'''+str(price_of_equipment)+'''"
                 position = { x = 530 y = 488 }
-                spriteType = "GFX_circle_button"
+                spriteType = "GFX_market_variant_button"
             }''')
-                print("	###DDD###")
+                print("		###DDD###")
             else:
                 print(line, end ="")
 elif imperial_or_republic == 2:
-    if classifaction == "1":
-        for line in fileinput.input('test.gui', inplace=1): #interface\buying_market.gui
+    if classifaction == 1:
+        for line in fileinput.input('buying_market.gui', inplace=1): #interface\buying_market.gui
             if line.startswith('		###AAB###'):
                 print('''
             iconType = {
-                name = "product_background_box_'''+price_of_equipment+'''"
-                spriteType = "GFX_circle_button"
+                name = "product_background_box_'''+str(price_of_equipment)+'''"
+                spriteType = "GFX_market_product_background_box"
                 position = { x = 120 y = 120 }
                 orientation = UPPER_LEFT
             }
             instantTextBoxType = {
-                name = "product_quantity_'''+price_of_equipment+'''"
+                name = "product_name_'''+str(price_of_equipment)+'''"
                 position = {x = 0 y = 0}
-                text = "'''+price_of_equipment+'''_marketplace_name"
+                text = "'''+str(price_of_equipment)+'''_marketplace_name"
             }
             iconType = {
-                name = "product_image_display_'''+price_of_equipment+'''"
+                name = "product_image_display_'''+str(price_of_equipment)+'''"
                 position = { x = 530 y = 488 }
                 spriteType = "'''+gfx_key+'''"
             }
             instantTextBoxType = {
-                name = "product_quantity_'''+price_of_equipment+'''"
+                name = "product_quantity_'''+str(price_of_equipment)+'''"
                 position = {x = 0 y = 0}
-                text = "'''+price_of_equipment+'''_marketplace_quantity"
+                text = "'''+str(price_of_equipment)+'''_marketplace_quantity"
             }
             buttonType = {
-                name = "product_buy_one_'''+price_of_equipment+'''"
+                name = "product_buy_one_'''+str(price_of_equipment)+'''"
                 position = { x = 530 y = 488 }
-                spriteType = "GFX_circle_button"
+                spriteType = "GFX_buy_one_button"
             }
             buttonType = {
-                name = "product_auto_buy_'''+price_of_equipment+'''"
+                name = "product_auto_buy_'''+str(price_of_equipment)+'''"
                 position = { x = 530 y = 488 }
-                spriteType = "GFX_circle_button"
+                spriteType = "GFX_auto_buy_button"
             }''')
-                if is_it_variant == "1":
+                if is_it_variant == 1:
                     print('''            buttonType = {
-                name = "product_variant_type_'''+price_of_equipment+'''"
+                name = "product_variant_type_'''+str(price_of_equipment)+'''"
                 position = { x = 530 y = 488 }
-                spriteType = "GFX_circle_button"
+                spriteType = "GFX_market_variant_button"
             }''')
                 print("		###AAB###")
             else:
                 print(line, end ="")
-    elif classifaction == "2":
-        for line in fileinput.input('test.txt', inplace=1): #interface\buying_market.gui
-            if line.startswith('	###BBC###'):
+    elif classifaction == 2:
+        for line in fileinput.input('buying_market.gui', inplace=1): #interface\buying_market.gui
+            if line.startswith('		###BBC###'):
                 print('''
             iconType = {
-                name = "product_background_box_'''+price_of_equipment+'''"
-                spriteType = "GFX_circle_button"
+                name = "product_background_box_'''+str(price_of_equipment)+'''"
+                spriteType = "GFX_market_product_background_box"
                 position = { x = 120 y = 120 }
                 orientation = UPPER_LEFT
             }
             instantTextBoxType = {
-                name = "product_quantity_'''+price_of_equipment+'''"
+                name = "product_name_'''+str(price_of_equipment)+'''"
                 position = {x = 0 y = 0}
-                text = "'''+price_of_equipment+'''_marketplace_name"
+                text = "'''+str(price_of_equipment)+'''_marketplace_name"
             }
             iconType = {
-                name = "product_image_display_'''+price_of_equipment+'''"
+                name = "product_image_display_'''+str(price_of_equipment)+'''"
                 position = { x = 530 y = 488 }
                 spriteType = "'''+gfx_key+'''"
             }
             instantTextBoxType = {
-                name = "product_quantity_'''+price_of_equipment+'''"
+                name = "product_quantity_'''+str(price_of_equipment)+'''"
                 position = {x = 0 y = 0}
-                text = "'''+price_of_equipment+'''_marketplace_quantity"
+                text = "'''+str(price_of_equipment)+'''_marketplace_quantity"
             }
             buttonType = {
-                name = "product_buy_one_'''+price_of_equipment+'''"
+                name = "product_buy_one_'''+str(price_of_equipment)+'''"
                 position = { x = 530 y = 488 }
-                spriteType = "GFX_circle_button"
+                spriteType = "GFX_buy_one_button"
             }
             buttonType = {
-                name = "product_auto_buy_'''+price_of_equipment+'''"
+                name = "product_auto_buy_'''+str(price_of_equipment)+'''"
                 position = { x = 530 y = 488 }
-                spriteType = "GFX_circle_button"
+                spriteType = "GFX_auto_buy_button"
             }''')
-                if is_it_variant == "1":
+                if is_it_variant == 1:
                     print('''            buttonType = {
-                name = "product_variant_type_'''+price_of_equipment+'''"
+                name = "product_variant_type_'''+str(price_of_equipment)+'''"
                 position = { x = 530 y = 488 }
-                spriteType = "GFX_circle_button"
+                spriteType = "GFX_market_variant_button"
             }''')
-                print("	###BBC###")
+                print("		###BBC###")
             else:
                 print(line, end ="")
-    elif classifaction == "3":
-        for line in fileinput.input('test.txt', inplace=1): #interface\buying_market.gui
-            if line.startswith('	###CCD###'):
+    elif classifaction == 3:
+        for line in fileinput.input('buying_market.gui', inplace=1): #interface\buying_market.gui
+            if line.startswith('		###CCD###'):
                 print('''
             iconType = {
-                name = "product_background_box_'''+price_of_equipment+'''"
-                spriteType = "GFX_circle_button"
+                name = "product_background_box_'''+str(price_of_equipment)+'''"
+                spriteType = "GFX_market_product_background_box"
                 position = { x = 120 y = 120 }
                 orientation = UPPER_LEFT
             }
             instantTextBoxType = {
-                name = "product_quantity_'''+price_of_equipment+'''"
+                name = "product_name_'''+str(price_of_equipment)+'''"
                 position = {x = 0 y = 0}
-                text = "'''+price_of_equipment+'''_marketplace_name"
+                text = "'''+str(price_of_equipment)+'''_marketplace_name"
             }
             iconType = {
-                name = "product_image_display_'''+price_of_equipment+'''"
+                name = "product_image_display_'''+str(price_of_equipment)+'''"
                 position = { x = 530 y = 488 }
                 spriteType = "'''+gfx_key+'''"
             }
             instantTextBoxType = {
-                name = "product_quantity_'''+price_of_equipment+'''"
+                name = "product_quantity_'''+str(price_of_equipment)+'''"
                 position = {x = 0 y = 0}
-                text = "'''+price_of_equipment+'''_marketplace_quantity"
+                text = "'''+str(price_of_equipment)+'''_marketplace_quantity"
             }
             buttonType = {
-                name = "product_buy_one_'''+price_of_equipment+'''"
+                name = "product_buy_one_'''+str(price_of_equipment)+'''"
                 position = { x = 530 y = 488 }
-                spriteType = "GFX_circle_button"
+                spriteType = "GFX_buy_one_button"
             }
             buttonType = {
-                name = "product_auto_buy_'''+price_of_equipment+'''"
+                name = "product_auto_buy_'''+str(price_of_equipment)+'''"
                 position = { x = 530 y = 488 }
-                spriteType = "GFX_circle_button"
+                spriteType = "GFX_auto_buy_button"
             }''')
-                if is_it_variant == "1":
+                if is_it_variant == 1:
                     print('''            buttonType = {
-                name = "product_variant_type_'''+price_of_equipment+'''"
+                name = "product_variant_type_'''+str(price_of_equipment)+'''"
                 position = { x = 530 y = 488 }
-                spriteType = "GFX_circle_button"
+                spriteType = "GFX_market_variant_button"
             }''')
-                print("	###CCD###")
+                print("		###CCD###")
             else:
                 print(line, end ="")
-    elif classifaction == "4":
-        for line in fileinput.input('test.txt', inplace=1): #interface\buying_market.gui
-            if line.startswith('	###DDE###'):
+    elif classifaction == 4:
+        for line in fileinput.input('buying_market.gui', inplace=1): #interface\buying_market.gui
+            if line.startswith('		###DDE###'):
                 print('''
             iconType = {
-                name = "product_background_box_'''+price_of_equipment+'''"
-                spriteType = "GFX_circle_button"
+                name = "product_background_box_'''+str(price_of_equipment)+'''"
+                spriteType = "GFX_market_product_background_box"
                 position = { x = 120 y = 120 }
                 orientation = UPPER_LEFT
             }
             instantTextBoxType = {
-                name = "product_quantity_'''+price_of_equipment+'''"
+                name = "product_name_'''+str(price_of_equipment)+'''"
                 position = {x = 0 y = 0}
-                text = "'''+price_of_equipment+'''_marketplace_name"
+                text = "'''+str(price_of_equipment)+'''_marketplace_name"
             }
             iconType = {
-                name = "product_image_display_'''+price_of_equipment+'''"
+                name = "product_image_display_'''+str(price_of_equipment)+'''"
                 position = { x = 530 y = 488 }
                 spriteType = "'''+gfx_key+'''"
             }
             instantTextBoxType = {
-                name = "product_quantity_'''+price_of_equipment+'''"
+                name = "product_quantity_'''+str(price_of_equipment)+'''"
                 position = {x = 0 y = 0}
-                text = "'''+price_of_equipment+'''_marketplace_quantity"
+                text = "'''+str(price_of_equipment)+'''_marketplace_quantity"
             }
             buttonType = {
-                name = "product_buy_one_'''+price_of_equipment+'''"
+                name = "product_buy_one_'''+str(price_of_equipment)+'''"
                 position = { x = 530 y = 488 }
-                spriteType = "GFX_circle_button"
+                spriteType = "GFX_buy_one_button"
             }
             buttonType = {
-                name = "product_auto_buy_'''+price_of_equipment+'''"
+                name = "product_auto_buy_'''+str(price_of_equipment)+'''"
                 position = { x = 530 y = 488 }
-                spriteType = "GFX_circle_button"
+                spriteType = "GFX_auto_buy_button"
             }''')
-                if is_it_variant == "1":
+                if is_it_variant == 1:
                     print('''            buttonType = {
-                name = "product_variant_type_'''+price_of_equipment+'''"
+                name = "product_variant_type_'''+str(price_of_equipment)+'''"
                 position = { x = 530 y = 488 }
-                spriteType = "GFX_circle_button"
+                spriteType = "GFX_market_variant_button"
             }''')
-                print("	###DDE###")
+                print("		###DDE###")
             else:
                 print(line, end ="")
 elif imperial_or_republic == 3:
-    if classifaction == "1":
-        for line in fileinput.input('test.gui', inplace=1): #interface\buying_market.gui
+    if classifaction == 1:
+        for line in fileinput.input('buying_market.gui', inplace=1): #interface\buying_market.gui
             if line.startswith('		###ABB###'):
                 print('''
             iconType = {
-                name = "product_background_box_'''+price_of_equipment+'''"
-                spriteType = "GFX_circle_button"
+                name = "product_background_box_'''+str(price_of_equipment)+'''"
+                spriteType = "GFX_market_product_background_box"
                 position = { x = 120 y = 120 }
                 orientation = UPPER_LEFT
             }
             instantTextBoxType = {
-                name = "product_quantity_'''+price_of_equipment+'''"
+                name = "product_name_'''+str(price_of_equipment)+'''"
                 position = {x = 0 y = 0}
-                text = "'''+price_of_equipment+'''_marketplace_name"
+                text = "'''+str(price_of_equipment)+'''_marketplace_name"
             }
             iconType = {
-                name = "product_image_display_'''+price_of_equipment+'''"
+                name = "product_image_display_'''+str(price_of_equipment)+'''"
                 position = { x = 530 y = 488 }
                 spriteType = "'''+gfx_key+'''"
             }
             instantTextBoxType = {
-                name = "product_quantity_'''+price_of_equipment+'''"
+                name = "product_quantity_'''+str(price_of_equipment)+'''"
                 position = {x = 0 y = 0}
-                text = "'''+price_of_equipment+'''_marketplace_quantity"
+                text = "'''+str(price_of_equipment)+'''_marketplace_quantity"
             }
             buttonType = {
-                name = "product_buy_one_'''+price_of_equipment+'''"
+                name = "product_buy_one_'''+str(price_of_equipment)+'''"
                 position = { x = 530 y = 488 }
-                spriteType = "GFX_circle_button"
+                spriteType = "GFX_buy_one_button"
             }
             buttonType = {
-                name = "product_auto_buy_'''+price_of_equipment+'''"
+                name = "product_auto_buy_'''+str(price_of_equipment)+'''"
                 position = { x = 530 y = 488 }
-                spriteType = "GFX_circle_button"
+                spriteType = "GFX_auto_buy_button"
             }''')
-                if is_it_variant == "1":
+                if is_it_variant == 1:
                     print('''            buttonType = {
-                name = "product_variant_type_'''+price_of_equipment+'''"
+                name = "product_variant_type_'''+str(price_of_equipment)+'''"
                 position = { x = 530 y = 488 }
-                spriteType = "GFX_circle_button"
+                spriteType = "GFX_market_variant_button"
             }''')
                 print("		###ABB###")
             else:
                 print(line, end ="")
-    elif classifaction == "2":
-        for line in fileinput.input('test.txt', inplace=1): #interface\buying_market.gui
-            if line.startswith('	###BCC###'):
+    elif classifaction == 2:
+        for line in fileinput.input('buying_market.gui', inplace=1): #interface\buying_market.gui
+            if line.startswith('		###BCC###'):
                 print('''
             iconType = {
-                name = "product_background_box_'''+price_of_equipment+'''"
-                spriteType = "GFX_circle_button"
+                name = "product_background_box_'''+str(price_of_equipment)+'''"
+                spriteType = "GFX_market_product_background_box"
                 position = { x = 120 y = 120 }
                 orientation = UPPER_LEFT
             }
             instantTextBoxType = {
-                name = "product_quantity_'''+price_of_equipment+'''"
+                name = "product_name_'''+str(price_of_equipment)+'''"
                 position = {x = 0 y = 0}
-                text = "'''+price_of_equipment+'''_marketplace_name"
+                text = "'''+str(price_of_equipment)+'''_marketplace_name"
             }
             iconType = {
-                name = "product_image_display_'''+price_of_equipment+'''"
+                name = "product_image_display_'''+str(price_of_equipment)+'''"
                 position = { x = 530 y = 488 }
                 spriteType = "'''+gfx_key+'''"
             }
             instantTextBoxType = {
-                name = "product_quantity_'''+price_of_equipment+'''"
+                name = "product_quantity_'''+str(price_of_equipment)+'''"
                 position = {x = 0 y = 0}
-                text = "'''+price_of_equipment+'''_marketplace_quantity"
+                text = "'''+str(price_of_equipment)+'''_marketplace_quantity"
             }
             buttonType = {
-                name = "product_buy_one_'''+price_of_equipment+'''"
+                name = "product_buy_one_'''+str(price_of_equipment)+'''"
                 position = { x = 530 y = 488 }
-                spriteType = "GFX_circle_button"
+                spriteType = "GFX_buy_one_button"
             }
             buttonType = {
-                name = "product_auto_buy_'''+price_of_equipment+'''"
+                name = "product_auto_buy_'''+str(price_of_equipment)+'''"
                 position = { x = 530 y = 488 }
-                spriteType = "GFX_circle_button"
+                spriteType = "GFX_auto_buy_button"
             }''')
-                if is_it_variant == "1":
+                if is_it_variant == 1:
                     print('''            buttonType = {
-                name = "product_variant_type_'''+price_of_equipment+'''"
+                name = "product_variant_type_'''+str(price_of_equipment)+'''"
                 position = { x = 530 y = 488 }
-                spriteType = "GFX_circle_button"
+                spriteType = "GFX_market_variant_button"
             }''')
-                print("	###BCC###")
+                print("		###BCC###")
             else:
                 print(line, end ="")
-    elif classifaction == "3":
-        for line in fileinput.input('test.txt', inplace=1): #interface\buying_market.gui
-            if line.startswith('	###CDD###'):
+    elif classifaction == 3:
+        for line in fileinput.input('buying_market.gui', inplace=1): #interface\buying_market.gui
+            if line.startswith('		###CDD###'):
                 print('''
             iconType = {
-                name = "product_background_box_'''+price_of_equipment+'''"
-                spriteType = "GFX_circle_button"
+                name = "product_background_box_'''+str(price_of_equipment)+'''"
+                spriteType = "GFX_market_product_background_box"
                 position = { x = 120 y = 120 }
                 orientation = UPPER_LEFT
             }
             instantTextBoxType = {
-                name = "product_quantity_'''+price_of_equipment+'''"
+                name = "product_name_'''+str(price_of_equipment)+'''"
                 position = {x = 0 y = 0}
-                text = "'''+price_of_equipment+'''_marketplace_name"
+                text = "'''+str(price_of_equipment)+'''_marketplace_name"
             }
             iconType = {
-                name = "product_image_display_'''+price_of_equipment+'''"
+                name = "product_image_display_'''+str(price_of_equipment)+'''"
                 position = { x = 530 y = 488 }
                 spriteType = "'''+gfx_key+'''"
             }
             instantTextBoxType = {
-                name = "product_quantity_'''+price_of_equipment+'''"
+                name = "product_quantity_'''+str(price_of_equipment)+'''"
                 position = {x = 0 y = 0}
-                text = "'''+price_of_equipment+'''_marketplace_quantity"
+                text = "'''+str(price_of_equipment)+'''_marketplace_quantity"
             }
             buttonType = {
-                name = "product_buy_one_'''+price_of_equipment+'''"
+                name = "product_buy_one_'''+str(price_of_equipment)+'''"
                 position = { x = 530 y = 488 }
-                spriteType = "GFX_circle_button"
+                spriteType = "GFX_buy_one_button"
             }
             buttonType = {
-                name = "product_auto_buy_'''+price_of_equipment+'''"
+                name = "product_auto_buy_'''+str(price_of_equipment)+'''"
                 position = { x = 530 y = 488 }
-                spriteType = "GFX_circle_button"
+                spriteType = "GFX_auto_buy_button"
             }''')
-                if is_it_variant == "1":
+                if is_it_variant == 1:
                     print('''            buttonType = {
-                name = "product_variant_type_'''+price_of_equipment+'''"
+                name = "product_variant_type_'''+str(price_of_equipment)+'''"
                 position = { x = 530 y = 488 }
-                spriteType = "GFX_circle_button"
+                spriteType = "GFX_market_variant_button"
             }''')
-                print("	###CDD###")
+                print("		###CDD###")
             else:
                 print(line, end ="")
-    elif classifaction == "4":
-        for line in fileinput.input('test.txt', inplace=1): #interface\buying_market.gui
-            if line.startswith('	###DEE###'):
+    elif classifaction == 4:
+        for line in fileinput.input('buying_market.gui', inplace=1): #interface\buying_market.gui
+            if line.startswith('		###DEE###'):
                 print('''
             iconType = {
-                name = "product_background_box_'''+price_of_equipment+'''"
-                spriteType = "GFX_circle_button"
+                name = "product_background_box_'''+str(price_of_equipment)+'''"
+                spriteType = "GFX_market_product_background_box"
                 position = { x = 120 y = 120 }
                 orientation = UPPER_LEFT
             }
             instantTextBoxType = {
-                name = "product_quantity_'''+price_of_equipment+'''"
+                name = "product_name_'''+str(price_of_equipment)+'''"
                 position = {x = 0 y = 0}
-                text = "'''+price_of_equipment+'''_marketplace_name"
+                text = "'''+str(price_of_equipment)+'''_marketplace_name"
             }
             iconType = {
-                name = "product_image_display_'''+price_of_equipment+'''"
+                name = "product_image_display_'''+str(price_of_equipment)+'''"
                 position = { x = 530 y = 488 }
                 spriteType = "'''+gfx_key+'''"
             }
             instantTextBoxType = {
-                name = "product_quantity_'''+price_of_equipment+'''"
+                name = "product_quantity_'''+str(price_of_equipment)+'''"
                 position = {x = 0 y = 0}
-                text = "'''+price_of_equipment+'''_marketplace_quantity"
+                text = "'''+str(price_of_equipment)+'''_marketplace_quantity"
             }
             buttonType = {
-                name = "product_buy_one_'''+price_of_equipment+'''"
+                name = "product_buy_one_'''+str(price_of_equipment)+'''"
                 position = { x = 530 y = 488 }
-                spriteType = "GFX_circle_button"
+                spriteType = "GFX_buy_one_button"
             }
             buttonType = {
-                name = "product_auto_buy_'''+price_of_equipment+'''"
+                name = "product_auto_buy_'''+str(price_of_equipment)+'''"
                 position = { x = 530 y = 488 }
-                spriteType = "GFX_circle_button"
+                spriteType = "GFX_auto_buy_button"
             }''')
-                if is_it_variant == "1":
+                if is_it_variant == 1:
                     print('''            buttonType = {
-                name = "product_variant_type_'''+price_of_equipment+'''"
+                name = "product_variant_type_'''+str(price_of_equipment)+'''"
                 position = { x = 530 y = 488 }
-                spriteType = "GFX_circle_button"
+                spriteType = "GFX_market_variant_button"
             }''')
-                print("	###DEE###")
+                print("		###DEE###")
             else:
                 print(line, end ="")               
 fileinput.close()
 if imperial_or_republic == 1:
-    if classifaction == "1":
-        for line in fileinput.input('test.gui', inplace=1): #interface\buying_market.gui
+    if classifaction == 1:
+        for line in fileinput.input('buying_market.txt', inplace=1): #interface\buying_market.gui
             if line.startswith('		###AAA###'):
-                print('''		buy_one_'''+price_of_equipment+'''_product_number = {
+                print('''		product_buy_one_'''+str(price_of_equipment)+''' = {
 			if = {
 				limit = {
-					NOT = {
-						has_tech = '''+name_of_equipment_game_name+'''_tech
-					}
-					check_variable = {global.market_ship_holder@'''+price_of_equipment+''' > 0}
+					check_variable = {global.market_ship_holder@'''+str(price_of_equipment)+''' > 0}
 				}
-				set_technology = {
-					'''+name_of_equipment_game_name+'''_tech = 1
-				}
-				add_equipment_production = {
-					equipment = {
-						type = '''+name_of_equipment_game_name+'''_1
-					}
-					requested_factories = 1
-					progress = 1.00
-					amount = 1
-				}
-			}else = {
-				add_equipment_production = {
-					equipment = {
-						type = '''+name_of_equipment_game_name+'''_1
-					}
-					requested_factories = 1
-					progress = 1.00
-					amount = 1
-				}
-			}
-		}
-		auto_buy_'''+price_of_equipment+'''_product_number = {
-			set_country_flag = "'''+price_of_equipment+'''_auto_buy_enabled
-		}''')
-            if is_it_variant == 1:
-                print('''		buy_as_variant_product_number = {
-                    if = {
-                        limit = {
-                            NOT = {
-                                has_tech = '''+name_of_equipment_game_name+'''_tech
-                            }
-                            check_variable = {global.market_ship_holder@'''+price_of_equipment+''' > 0}
-                        }
-                        set_technology = {
-                            '''+name_of_equipment_game_name+'''_variant_tech = 1
-                        }
-                        add_equipment_production = {
-                            equipment = {
-                                type = '''+name_of_equipment_game_name+'''_1_variant
-                            }
-                            requested_factories = 1
-                            progress = 1.00
-                            amount = 1
-                        }
-                    }else = {
-                        add_equipment_production = {
-                            equipment = {
-                                type = '''+name_of_equipment_game_name+'''_1_variant
-                            }
-                            requested_factories = 1
-                            progress = 1.00
-                            amount = 1
+                if = {
+                    limit = {
+                        NOT = {
+                            has_country_flag = brought_out
                         }
                     }
-                }''')
+                    create_ship = {
+                        type = '''+name_of_equipment_game_name+'''
+                        equipment_variant = "'''+name_of_equipment_user_name+'''"
+                        creator = EMP
+                    }
+                }else = {
+                    create_ship = {
+                        type = '''+name_of_equipment_game_name+'''
+                        equipment_variant = "'''+name_of_equipment_user_name+'''"
+                        creator = var:global.'''+name_of_equipment_game_name+'''_holder
+                    }
+                }
+            }
+		}
+		product_auto_buy_'''+str(price_of_equipment)+''' = {
+			set_country_flag = "'''+str(price_of_equipment)+'''_auto_buy_enabled"
+		}''')
+                if is_it_variant == 1:
+                    print('''		product_variant_type_'''+str(price_of_equipment)+''' = {
+            if = {
+                limit = {
+                    check_variable = {global.market_ship_holder@'''+str(price_of_equipment)+''' > 0}
+                }
+                if = {
+                    limit = {
+                        NOT = {
+                            has_country_flag = brought_out
+                        }
+                    }
+                    create_ship = {
+                        type = '''+name_of_equipment_game_name+'''_variant
+                        equipment_variant = "'''+name_of_equipment_user_name+'''"
+                        creator = EMP
+                    }
+                }else = {
+                    create_ship = {
+                        type = '''+name_of_equipment_game_name+'''_variant
+                        equipment_variant = "'''+name_of_equipment_user_name+'''"
+                        creator = var:global.'''+name_of_equipment_game_name+'''_holder
+                    }
+                }
+            }
+        }''')
                 print("		###AAA###")
             else:
                 print(line, end ="")
-    elif classifaction == "2":
-        for line in fileinput.input('test.txt', inplace=1): #interface\buying_market.gui
-            if line.startswith('	###BBB###'):
-                print('''		buy_one_'''+price_of_equipment+'''_product_number = {
+    elif classifaction == 2:
+        for line in fileinput.input('buying_market.txt', inplace=1): #interface\buying_market.gui
+            if line.startswith('		###BBB###'):
+                print('''		product_buy_one_'''+str(price_of_equipment)+''' = {
 			if = {
 				limit = {
-					NOT = {
-						has_tech = '''+name_of_equipment_game_name+'''_tech
-					}
-					check_variable = {global.market_ship_holder@'''+price_of_equipment+''' > 0}
+					check_variable = {global.market_ship_holder@'''+str(price_of_equipment)+''' > 0}
 				}
-				set_technology = {
-					'''+name_of_equipment_game_name+'''_tech = 1
-				}
-				add_equipment_production = {
-					equipment = {
-						type = '''+name_of_equipment_game_name+'''_1
-					}
-					requested_factories = 1
-					progress = 1.00
-					amount = 1
-				}
-			}else = {
-				add_equipment_production = {
-					equipment = {
-						type = '''+name_of_equipment_game_name+'''_1
-					}
-					requested_factories = 1
-					progress = 1.00
-					amount = 1
-				}
-			}
-		}
-		auto_buy_'''+price_of_equipment+'''_product_number = {
-			set_country_flag = "'''+price_of_equipment+'''_auto_buy_enabled
-		}''')
-            if is_it_variant == 1:
-                print('''		buy_as_variant_product_number = {
-                    if = {
-                        limit = {
-                            NOT = {
-                                has_tech = '''+name_of_equipment_game_name+'''_tech
-                            }
-                            check_variable = {global.market_ship_holder@'''+price_of_equipment+''' > 0}
-                        }
-                        set_technology = {
-                            '''+name_of_equipment_game_name+'''_variant_tech = 1
-                        }
-                        add_equipment_production = {
-                            equipment = {
-                                type = '''+name_of_equipment_game_name+'''_1_variant
-                            }
-                            requested_factories = 1
-                            progress = 1.00
-                            amount = 1
-                        }
-                    }else = {
-                        add_equipment_production = {
-                            equipment = {
-                                type = '''+name_of_equipment_game_name+'''_1_variant
-                            }
-                            requested_factories = 1
-                            progress = 1.00
-                            amount = 1
+                if = {
+                    limit = {
+                        NOT = {
+                            has_country_flag = brought_out
                         }
                     }
-                }''')
-                print("	###BBB###")
+                    create_ship = {
+                        type = '''+name_of_equipment_game_name+'''
+                        equipment_variant = "'''+name_of_equipment_user_name+'''"
+                        creator = EMP
+                    }
+                }else = {
+                    create_ship = {
+                        type = '''+name_of_equipment_game_name+'''
+                        equipment_variant = "'''+name_of_equipment_user_name+'''"
+                        creator = var:global.'''+name_of_equipment_game_name+'''_holder
+                    }
+                }
+            }
+		}
+		product_auto_buy_'''+str(price_of_equipment)+''' = {
+			set_country_flag = "'''+str(price_of_equipment)+'''_auto_buy_enabled"
+		}''')
+                if is_it_variant == 1:
+                    print('''		product_variant_type_'''+str(price_of_equipment)+''' = {
+            if = {
+                limit = {
+                    check_variable = {global.market_ship_holder@'''+str(price_of_equipment)+''' > 0}
+                }
+                if = {
+                    limit = {
+                        NOT = {
+                            has_country_flag = brought_out
+                        }
+                    }
+                    create_ship = {
+                        type = '''+name_of_equipment_game_name+'''_variant
+                        equipment_variant = "'''+name_of_equipment_user_name+'''"
+                        creator = EMP
+                    }
+                }else = {
+                    create_ship = {
+                        type = '''+name_of_equipment_game_name+'''_variant
+                        equipment_variant = "'''+name_of_equipment_user_name+'''"
+                        creator = var:global.'''+name_of_equipment_game_name+'''_holder
+                    }
+                }
+            }
+        }''')
+                print("		###BBB###")
             else:
                 print(line, end ="")
-    elif classifaction == "3":
-        for line in fileinput.input('test.txt', inplace=1): #interface\buying_market.gui
-            if line.startswith('	###CCC###'):
-                print('''		buy_one_'''+price_of_equipment+'''_product_number = {
+    elif classifaction == 3:
+        for line in fileinput.input('buying_market.txt', inplace=1): #interface\buying_market.gui
+            if line.startswith('		###CCC###'):
+                print('''		product_buy_one_'''+str(price_of_equipment)+''' = {
 			if = {
 				limit = {
-					NOT = {
-						has_tech = '''+name_of_equipment_game_name+'''_tech
-					}
-					check_variable = {global.market_ship_holder@'''+price_of_equipment+''' > 0}
+					check_variable = {global.market_ship_holder@'''+str(price_of_equipment)+''' > 0}
 				}
-				set_technology = {
-					'''+name_of_equipment_game_name+'''_tech = 1
-				}
-				add_equipment_production = {
-					equipment = {
-						type = '''+name_of_equipment_game_name+'''_1
-					}
-					requested_factories = 1
-					progress = 1.00
-					amount = 1
-				}
-			}else = {
-				add_equipment_production = {
-					equipment = {
-						type = '''+name_of_equipment_game_name+'''_1
-					}
-					requested_factories = 1
-					progress = 1.00
-					amount = 1
-				}
-			}
-		}
-		auto_buy_'''+price_of_equipment+'''_product_number = {
-			set_country_flag = "'''+price_of_equipment+'''_auto_buy_enabled
-		}''')
-            if is_it_variant == 1:
-                print('''		buy_as_variant_product_number = {
-                    if = {
-                        limit = {
-                            NOT = {
-                                has_tech = '''+name_of_equipment_game_name+'''_tech
-                            }
-                            check_variable = {global.market_ship_holder@'''+price_of_equipment+''' > 0}
-                        }
-                        set_technology = {
-                            '''+name_of_equipment_game_name+'''_variant_tech = 1
-                        }
-                        add_equipment_production = {
-                            equipment = {
-                                type = '''+name_of_equipment_game_name+'''_1_variant
-                            }
-                            requested_factories = 1
-                            progress = 1.00
-                            amount = 1
-                        }
-                    }else = {
-                        add_equipment_production = {
-                            equipment = {
-                                type = '''+name_of_equipment_game_name+'''_1_variant
-                            }
-                            requested_factories = 1
-                            progress = 1.00
-                            amount = 1
+                if = {
+                    limit = {
+                        NOT = {
+                            has_country_flag = brought_out
                         }
                     }
-                }''')
-                print("	###CCC###")
+                    create_ship = {
+                        type = '''+name_of_equipment_game_name+'''
+                        equipment_variant = "'''+name_of_equipment_user_name+'''"
+                        creator = EMP
+                    }
+                }else = {
+                    create_ship = {
+                        type = '''+name_of_equipment_game_name+'''
+                        equipment_variant = "'''+name_of_equipment_user_name+'''"
+                        creator = var:global.'''+name_of_equipment_game_name+'''_holder
+                    }
+                }
+            }
+		}
+		product_auto_buy_'''+str(price_of_equipment)+''' = {
+			set_country_flag = "'''+str(price_of_equipment)+'''_auto_buy_enabled"
+		}''')
+                if is_it_variant == 1:
+                    print('''		product_variant_type_'''+str(price_of_equipment)+''' = {
+            if = {
+                limit = {
+                    check_variable = {global.market_ship_holder@'''+str(price_of_equipment)+''' > 0}
+                }
+                if = {
+                    limit = {
+                        NOT = {
+                            has_country_flag = brought_out
+                        }
+                    }
+                    create_ship = {
+                        type = '''+name_of_equipment_game_name+'''_variant
+                        equipment_variant = "'''+name_of_equipment_user_name+'''"
+                        creator = EMP
+                    }
+                }else = {
+                    create_ship = {
+                        type = '''+name_of_equipment_game_name+'''_variant
+                        equipment_variant = "'''+name_of_equipment_user_name+'''"
+                        creator = var:global.'''+name_of_equipment_game_name+'''_holder
+                    }
+                }
+            }
+        }''')
+                print("		###CCC###")
             else:
                 print(line, end ="")
-    elif classifaction == "4":
-        for line in fileinput.input('test.txt', inplace=1): #interface\buying_market.gui
-            if line.startswith('	###DDD###'):
-                print('''		buy_one_'''+price_of_equipment+'''_product_number = {
+    elif classifaction == 4:
+        for line in fileinput.input('buying_market.txt', inplace=1): #interface\buying_market.gui
+            if line.startswith('		###DDD###'):
+                print('''		product_buy_one_'''+str(price_of_equipment)+''' = {
 			if = {
 				limit = {
-					NOT = {
-						has_tech = '''+name_of_equipment_game_name+'''_tech
-					}
-					check_variable = {global.market_ship_holder@'''+price_of_equipment+''' > 0}
+					check_variable = {global.market_ship_holder@'''+str(price_of_equipment)+''' > 0}
 				}
-				set_technology = {
-					'''+name_of_equipment_game_name+'''_tech = 1
-				}
-				add_equipment_production = {
-					equipment = {
-						type = '''+name_of_equipment_game_name+'''_1
-					}
-					requested_factories = 1
-					progress = 1.00
-					amount = 1
-				}
-			}else = {
-				add_equipment_production = {
-					equipment = {
-						type = '''+name_of_equipment_game_name+'''_1
-					}
-					requested_factories = 1
-					progress = 1.00
-					amount = 1
-				}
-			}
-		}
-		auto_buy_'''+price_of_equipment+'''_product_number = {
-			set_country_flag = "'''+price_of_equipment+'''_auto_buy_enabled
-		}''')
-            if is_it_variant == 1:
-                print('''		buy_as_variant_product_number = {
-                    if = {
-                        limit = {
-                            NOT = {
-                                has_tech = '''+name_of_equipment_game_name+'''_tech
-                            }
-                            check_variable = {global.market_ship_holder@'''+price_of_equipment+''' > 0}
-                        }
-                        set_technology = {
-                            '''+name_of_equipment_game_name+'''_variant_tech = 1
-                        }
-                        add_equipment_production = {
-                            equipment = {
-                                type = '''+name_of_equipment_game_name+'''_1_variant
-                            }
-                            requested_factories = 1
-                            progress = 1.00
-                            amount = 1
-                        }
-                    }else = {
-                        add_equipment_production = {
-                            equipment = {
-                                type = '''+name_of_equipment_game_name+'''_1_variant
-                            }
-                            requested_factories = 1
-                            progress = 1.00
-                            amount = 1
+                if = {
+                    limit = {
+                        NOT = {
+                            has_country_flag = brought_out
                         }
                     }
-                }''')
-                print("	###DDD###")
+                    create_ship = {
+                        type = '''+name_of_equipment_game_name+'''
+                        equipment_variant = "'''+name_of_equipment_user_name+'''"
+                        creator = EMP
+                    }
+                }else = {
+                    create_ship = {
+                        type = '''+name_of_equipment_game_name+'''
+                        equipment_variant = "'''+name_of_equipment_user_name+'''"
+                        creator = var:global.'''+name_of_equipment_game_name+'''_holder
+                    }
+                }
+            }
+		}
+		product_auto_buy_'''+str(price_of_equipment)+''' = {
+			set_country_flag = "'''+str(price_of_equipment)+'''_auto_buy_enabled"
+		}''')
+                if is_it_variant == 1:
+                    print('''		product_variant_type_'''+str(price_of_equipment)+''' = {
+            if = {
+                limit = {
+                    check_variable = {global.market_ship_holder@'''+str(price_of_equipment)+''' > 0}
+                }
+                if = {
+                    limit = {
+                        NOT = {
+                            has_country_flag = brought_out
+                        }
+                    }
+                    create_ship = {
+                        type = '''+name_of_equipment_game_name+'''_variant
+                        equipment_variant = "'''+name_of_equipment_user_name+'''"
+                        creator = EMP
+                    }
+                }else = {
+                    create_ship = {
+                        type = '''+name_of_equipment_game_name+'''_variant
+                        equipment_variant = "'''+name_of_equipment_user_name+'''"
+                        creator = var:global.'''+name_of_equipment_game_name+'''_holder
+                    }
+                }
+            }
+        }''')
+                print("		###DDD###")
             else:
                 print(line, end ="")
 elif imperial_or_republic == 2:
-    if classifaction == "1":
-        for line in fileinput.input('test.gui', inplace=1): #interface\buying_market.gui
+    if classifaction == 1:
+        for line in fileinput.input('buying_market.txt', inplace=1): #interface\buying_market.gui
             if line.startswith('		###AAB###'):
-                print('''		buy_one_'''+price_of_equipment+'''_product_number = {
+                print('''		product_buy_one_'''+str(price_of_equipment)+''' = {
 			if = {
 				limit = {
-					NOT = {
-						has_tech = '''+name_of_equipment_game_name+'''_tech
-					}
-					check_variable = {global.market_ship_holder@'''+price_of_equipment+''' > 0}
+					check_variable = {global.market_ship_holder@'''+str(price_of_equipment)+''' > 0}
 				}
-				set_technology = {
-					'''+name_of_equipment_game_name+'''_tech = 1
-				}
-				add_equipment_production = {
-					equipment = {
-						type = '''+name_of_equipment_game_name+'''_1
-					}
-					requested_factories = 1
-					progress = 1.00
-					amount = 1
-				}
-			}else = {
-				add_equipment_production = {
-					equipment = {
-						type = '''+name_of_equipment_game_name+'''_1
-					}
-					requested_factories = 1
-					progress = 1.00
-					amount = 1
-				}
-			}
-		}
-		auto_buy_'''+price_of_equipment+'''_product_number = {
-			set_country_flag = "'''+price_of_equipment+'''_auto_buy_enabled
-		}''')
-            if is_it_variant == 1:
-                print('''		buy_as_variant_product_number = {
-                    if = {
-                        limit = {
-                            NOT = {
-                                has_tech = '''+name_of_equipment_game_name+'''_tech
-                            }
-                            check_variable = {global.market_ship_holder@'''+price_of_equipment+''' > 0}
-                        }
-                        set_technology = {
-                            '''+name_of_equipment_game_name+'''_variant_tech = 1
-                        }
-                        add_equipment_production = {
-                            equipment = {
-                                type = '''+name_of_equipment_game_name+'''_1_variant
-                            }
-                            requested_factories = 1
-                            progress = 1.00
-                            amount = 1
-                        }
-                    }else = {
-                        add_equipment_production = {
-                            equipment = {
-                                type = '''+name_of_equipment_game_name+'''_1_variant
-                            }
-                            requested_factories = 1
-                            progress = 1.00
-                            amount = 1
+                if = {
+                    limit = {
+                        NOT = {
+                            has_country_flag = brought_out
                         }
                     }
-                }''')
+                    create_ship = {
+                        type = '''+name_of_equipment_game_name+'''
+                        equipment_variant = "'''+name_of_equipment_user_name+'''"
+                        creator = EMP
+                    }
+                }else = {
+                    create_ship = {
+                        type = '''+name_of_equipment_game_name+'''
+                        equipment_variant = "'''+name_of_equipment_user_name+'''"
+                        creator = var:global.'''+name_of_equipment_game_name+'''_holder
+                    }
+                }
+            }
+		}
+		product_auto_buy_'''+str(price_of_equipment)+''' = {
+			set_country_flag = "'''+str(price_of_equipment)+'''_auto_buy_enabled"
+		}''')
+                if is_it_variant == 1:
+                    print('''		product_variant_type_'''+str(price_of_equipment)+''' = {
+            if = {
+                limit = {
+                    check_variable = {global.market_ship_holder@'''+str(price_of_equipment)+''' > 0}
+                }
+                if = {
+                    limit = {
+                        NOT = {
+                            has_country_flag = brought_out
+                        }
+                    }
+                    create_ship = {
+                        type = '''+name_of_equipment_game_name+'''_variant
+                        equipment_variant = "'''+name_of_equipment_user_name+'''"
+                        creator = EMP
+                    }
+                }else = {
+                    create_ship = {
+                        type = '''+name_of_equipment_game_name+'''_variant
+                        equipment_variant = "'''+name_of_equipment_user_name+'''"
+                        creator = var:global.'''+name_of_equipment_game_name+'''_holder
+                    }
+                }
+            }
+        }''')
                 print("		###AAB###")
             else:
                 print(line, end ="")
-    elif classifaction == "2":
-        for line in fileinput.input('test.txt', inplace=1): #interface\buying_market.gui
-            if line.startswith('	###BBC###'):
-                print('''		buy_one_'''+price_of_equipment+'''_product_number = {
+    elif classifaction == 2:
+        for line in fileinput.input('buying_market.txt', inplace=1): #interface\buying_market.gui
+            if line.startswith('		###BBC###'):
+                print('''		product_buy_one_'''+str(price_of_equipment)+''' = {
 			if = {
 				limit = {
-					NOT = {
-						has_tech = '''+name_of_equipment_game_name+'''_tech
-					}
-					check_variable = {global.market_ship_holder@'''+price_of_equipment+''' > 0}
+					check_variable = {global.market_ship_holder@'''+str(price_of_equipment)+''' > 0}
 				}
-				set_technology = {
-					'''+name_of_equipment_game_name+'''_tech = 1
-				}
-				add_equipment_production = {
-					equipment = {
-						type = '''+name_of_equipment_game_name+'''_1
-					}
-					requested_factories = 1
-					progress = 1.00
-					amount = 1
-				}
-			}else = {
-				add_equipment_production = {
-					equipment = {
-						type = '''+name_of_equipment_game_name+'''_1
-					}
-					requested_factories = 1
-					progress = 1.00
-					amount = 1
-				}
-			}
-		}
-		auto_buy_'''+price_of_equipment+'''_product_number = {
-			set_country_flag = "'''+price_of_equipment+'''_auto_buy_enabled
-		}''')
-            if is_it_variant == 1:
-                print('''		buy_as_variant_product_number = {
-                    if = {
-                        limit = {
-                            NOT = {
-                                has_tech = '''+name_of_equipment_game_name+'''_tech
-                            }
-                            check_variable = {global.market_ship_holder@'''+price_of_equipment+''' > 0}
-                        }
-                        set_technology = {
-                            '''+name_of_equipment_game_name+'''_variant_tech = 1
-                        }
-                        add_equipment_production = {
-                            equipment = {
-                                type = '''+name_of_equipment_game_name+'''_1_variant
-                            }
-                            requested_factories = 1
-                            progress = 1.00
-                            amount = 1
-                        }
-                    }else = {
-                        add_equipment_production = {
-                            equipment = {
-                                type = '''+name_of_equipment_game_name+'''_1_variant
-                            }
-                            requested_factories = 1
-                            progress = 1.00
-                            amount = 1
+                if = {
+                    limit = {
+                        NOT = {
+                            has_country_flag = brought_out
                         }
                     }
-                }''')
-                print("	###BBC###")
+                    create_ship = {
+                        type = '''+name_of_equipment_game_name+'''
+                        equipment_variant = "'''+name_of_equipment_user_name+'''"
+                        creator = EMP
+                    }
+                }else = {
+                    create_ship = {
+                        type = '''+name_of_equipment_game_name+'''
+                        equipment_variant = "'''+name_of_equipment_user_name+'''"
+                        creator = var:global.'''+name_of_equipment_game_name+'''_holder
+                    }
+                }
+            }
+		}
+		product_auto_buy_'''+str(price_of_equipment)+''' = {
+			set_country_flag = "'''+str(price_of_equipment)+'''_auto_buy_enabled"
+		}''')
+                if is_it_variant == 1:
+                    print('''		product_variant_type_'''+str(price_of_equipment)+''' = {
+            if = {
+                limit = {
+                    check_variable = {global.market_ship_holder@'''+str(price_of_equipment)+''' > 0}
+                }
+                if = {
+                    limit = {
+                        NOT = {
+                            has_country_flag = brought_out
+                        }
+                    }
+                    create_ship = {
+                        type = '''+name_of_equipment_game_name+'''_variant
+                        equipment_variant = "'''+name_of_equipment_user_name+'''"
+                        creator = EMP
+                    }
+                }else = {
+                    create_ship = {
+                        type = '''+name_of_equipment_game_name+'''_variant
+                        equipment_variant = "'''+name_of_equipment_user_name+'''"
+                        creator = var:global.'''+name_of_equipment_game_name+'''_holder
+                    }
+                }
+            }
+        }''')
+                print("		###BBC###")
             else:
                 print(line, end ="")
-    elif classifaction == "3":
-        for line in fileinput.input('test.txt', inplace=1): #interface\buying_market.gui
-            if line.startswith('	###CCD###'):
-                print('''		buy_one_'''+price_of_equipment+'''_product_number = {
+    elif classifaction == 3:
+        for line in fileinput.input('buying_market.txt', inplace=1): #interface\buying_market.gui
+            if line.startswith('		###CCD###'):
+                print('''		product_buy_one_'''+str(price_of_equipment)+''' = {
 			if = {
 				limit = {
-					NOT = {
-						has_tech = '''+name_of_equipment_game_name+'''_tech
-					}
-					check_variable = {global.market_ship_holder@'''+price_of_equipment+''' > 0}
+					check_variable = {global.market_ship_holder@'''+str(price_of_equipment)+''' > 0}
 				}
-				set_technology = {
-					'''+name_of_equipment_game_name+'''_tech = 1
-				}
-				add_equipment_production = {
-					equipment = {
-						type = '''+name_of_equipment_game_name+'''_1
-					}
-					requested_factories = 1
-					progress = 1.00
-					amount = 1
-				}
-			}else = {
-				add_equipment_production = {
-					equipment = {
-						type = '''+name_of_equipment_game_name+'''_1
-					}
-					requested_factories = 1
-					progress = 1.00
-					amount = 1
-				}
-			}
-		}
-		auto_buy_'''+price_of_equipment+'''_product_number = {
-			set_country_flag = "'''+price_of_equipment+'''_auto_buy_enabled
-		}''')
-            if is_it_variant == 1:
-                print('''		buy_as_variant_product_number = {
-                    if = {
-                        limit = {
-                            NOT = {
-                                has_tech = '''+name_of_equipment_game_name+'''_tech
-                            }
-                            check_variable = {global.market_ship_holder@'''+price_of_equipment+''' > 0}
-                        }
-                        set_technology = {
-                            '''+name_of_equipment_game_name+'''_variant_tech = 1
-                        }
-                        add_equipment_production = {
-                            equipment = {
-                                type = '''+name_of_equipment_game_name+'''_1_variant
-                            }
-                            requested_factories = 1
-                            progress = 1.00
-                            amount = 1
-                        }
-                    }else = {
-                        add_equipment_production = {
-                            equipment = {
-                                type = '''+name_of_equipment_game_name+'''_1_variant
-                            }
-                            requested_factories = 1
-                            progress = 1.00
-                            amount = 1
+                if = {
+                    limit = {
+                        NOT = {
+                            has_country_flag = brought_out
                         }
                     }
-                }''')
-                print("	###CCD###")
+                    create_ship = {
+                        type = '''+name_of_equipment_game_name+'''
+                        equipment_variant = "'''+name_of_equipment_user_name+'''"
+                        creator = EMP
+                    }
+                }else = {
+                    create_ship = {
+                        type = '''+name_of_equipment_game_name+'''
+                        equipment_variant = "'''+name_of_equipment_user_name+'''"
+                        creator = var:global.'''+name_of_equipment_game_name+'''_holder
+                    }
+                }
+            }
+		}
+		product_auto_buy_'''+str(price_of_equipment)+''' = {
+			set_country_flag = "'''+str(price_of_equipment)+'''_auto_buy_enabled"
+		}''')
+                if is_it_variant == 1:
+                    print('''		product_variant_type_'''+str(price_of_equipment)+''' = {
+            if = {
+                limit = {
+                    check_variable = {global.market_ship_holder@'''+str(price_of_equipment)+''' > 0}
+                }
+                if = {
+                    limit = {
+                        NOT = {
+                            has_country_flag = brought_out
+                        }
+                    }
+                    create_ship = {
+                        type = '''+name_of_equipment_game_name+'''_variant
+                        equipment_variant = "'''+name_of_equipment_user_name+'''"
+                        creator = EMP
+                    }
+                }else = {
+                    create_ship = {
+                        type = '''+name_of_equipment_game_name+'''_variant
+                        equipment_variant = "'''+name_of_equipment_user_name+'''"
+                        creator = var:global.'''+name_of_equipment_game_name+'''_holder
+                    }
+                }
+            }
+        }''')
+                print("		###CCD###")
             else:
                 print(line, end ="")
-    elif classifaction == "4":
-        for line in fileinput.input('test.txt', inplace=1): #interface\buying_market.gui
-            if line.startswith('	###DDE###'):
-                print('''		buy_one_'''+price_of_equipment+'''_product_number = {
+    elif classifaction == 4:
+        for line in fileinput.input('buying_market.txt', inplace=1): #interface\buying_market.gui
+            if line.startswith('		###DDE###'):
+                print('''		product_buy_one_'''+str(price_of_equipment)+''' = {
 			if = {
 				limit = {
-					NOT = {
-						has_tech = '''+name_of_equipment_game_name+'''_tech
-					}
-					check_variable = {global.market_ship_holder@'''+price_of_equipment+''' > 0}
+					check_variable = {global.market_ship_holder@'''+str(price_of_equipment)+''' > 0}
 				}
-				set_technology = {
-					'''+name_of_equipment_game_name+'''_tech = 1
-				}
-				add_equipment_production = {
-					equipment = {
-						type = '''+name_of_equipment_game_name+'''_1
-					}
-					requested_factories = 1
-					progress = 1.00
-					amount = 1
-				}
-			}else = {
-				add_equipment_production = {
-					equipment = {
-						type = '''+name_of_equipment_game_name+'''_1
-					}
-					requested_factories = 1
-					progress = 1.00
-					amount = 1
-				}
-			}
-		}
-		auto_buy_'''+price_of_equipment+'''_product_number = {
-			set_country_flag = "'''+price_of_equipment+'''_auto_buy_enabled
-		}''')
-            if is_it_variant == 1:
-                print('''		buy_as_variant_product_number = {
-                    if = {
-                        limit = {
-                            NOT = {
-                                has_tech = '''+name_of_equipment_game_name+'''_tech
-                            }
-                            check_variable = {global.market_ship_holder@'''+price_of_equipment+''' > 0}
-                        }
-                        set_technology = {
-                            '''+name_of_equipment_game_name+'''_variant_tech = 1
-                        }
-                        add_equipment_production = {
-                            equipment = {
-                                type = '''+name_of_equipment_game_name+'''_1_variant
-                            }
-                            requested_factories = 1
-                            progress = 1.00
-                            amount = 1
-                        }
-                    }else = {
-                        add_equipment_production = {
-                            equipment = {
-                                type = '''+name_of_equipment_game_name+'''_1_variant
-                            }
-                            requested_factories = 1
-                            progress = 1.00
-                            amount = 1
+                if = {
+                    limit = {
+                        NOT = {
+                            has_country_flag = brought_out
                         }
                     }
-                }''')
-                print("	###DDE###")
+                    create_ship = {
+                        type = '''+name_of_equipment_game_name+'''
+                        equipment_variant = "'''+name_of_equipment_user_name+'''"
+                        creator = EMP
+                    }
+                }else = {
+                    create_ship = {
+                        type = '''+name_of_equipment_game_name+'''
+                        equipment_variant = "'''+name_of_equipment_user_name+'''"
+                        creator = var:global.'''+name_of_equipment_game_name+'''_holder
+                    }
+                }
+            }
+		}
+		product_auto_buy_'''+str(price_of_equipment)+''' = {
+			set_country_flag = "'''+str(price_of_equipment)+'''_auto_buy_enabled"
+		}''')
+                if is_it_variant == 1:
+                    print('''		product_variant_type_'''+str(price_of_equipment)+''' = {
+            if = {
+                limit = {
+                    check_variable = {global.market_ship_holder@'''+str(price_of_equipment)+''' > 0}
+                }
+                if = {
+                    limit = {
+                        NOT = {
+                            has_country_flag = brought_out
+                        }
+                    }
+                    create_ship = {
+                        type = '''+name_of_equipment_game_name+'''_variant
+                        equipment_variant = "'''+name_of_equipment_user_name+'''"
+                        creator = EMP
+                    }
+                }else = {
+                    create_ship = {
+                        type = '''+name_of_equipment_game_name+'''_variant
+                        equipment_variant = "'''+name_of_equipment_user_name+'''"
+                        creator = var:global.'''+name_of_equipment_game_name+'''_holder
+                    }
+                }
+            }
+        }''')
+                print("		###DDE###")
             else:
                 print(line, end ="")
 elif imperial_or_republic == 3:
-    if classifaction == "1":
-        for line in fileinput.input('test.gui', inplace=1): #interface\buying_market.gui
+    if classifaction == 1:
+        for line in fileinput.input('buying_market.txt', inplace=1): #interface\buying_market.gui
             if line.startswith('		###ABB###'):
-                print('''		buy_one_'''+price_of_equipment+'''_product_number = {
+                print('''		product_buy_one_'''+str(price_of_equipment)+''' = {
 			if = {
 				limit = {
-					NOT = {
-						has_tech = '''+name_of_equipment_game_name+'''_tech
-					}
-					check_variable = {global.market_ship_holder@'''+price_of_equipment+''' > 0}
+					check_variable = {global.market_ship_holder@'''+str(price_of_equipment)+''' > 0}
 				}
-				set_technology = {
-					'''+name_of_equipment_game_name+'''_tech = 1
-				}
-				add_equipment_production = {
-					equipment = {
-						type = '''+name_of_equipment_game_name+'''_1
-					}
-					requested_factories = 1
-					progress = 1.00
-					amount = 1
-				}
-			}else = {
-				add_equipment_production = {
-					equipment = {
-						type = '''+name_of_equipment_game_name+'''_1
-					}
-					requested_factories = 1
-					progress = 1.00
-					amount = 1
-				}
-			}
-		}
-		auto_buy_'''+price_of_equipment+'''_product_number = {
-			set_country_flag = "'''+price_of_equipment+'''_auto_buy_enabled
-		}''')
-            if is_it_variant == 1:
-                print('''		buy_as_variant_product_number = {
-                    if = {
-                        limit = {
-                            NOT = {
-                                has_tech = '''+name_of_equipment_game_name+'''_tech
-                            }
-                            check_variable = {global.market_ship_holder@'''+price_of_equipment+''' > 0}
-                        }
-                        set_technology = {
-                            '''+name_of_equipment_game_name+'''_variant_tech = 1
-                        }
-                        add_equipment_production = {
-                            equipment = {
-                                type = '''+name_of_equipment_game_name+'''_1_variant
-                            }
-                            requested_factories = 1
-                            progress = 1.00
-                            amount = 1
-                        }
-                    }else = {
-                        add_equipment_production = {
-                            equipment = {
-                                type = '''+name_of_equipment_game_name+'''_1_variant
-                            }
-                            requested_factories = 1
-                            progress = 1.00
-                            amount = 1
+                if = {
+                    limit = {
+                        NOT = {
+                            has_country_flag = brought_out
                         }
                     }
-                }''')
+                    create_ship = {
+                        type = '''+name_of_equipment_game_name+'''
+                        equipment_variant = "'''+name_of_equipment_user_name+'''"
+                        creator = EMP
+                    }
+                }else = {
+                    create_ship = {
+                        type = '''+name_of_equipment_game_name+'''
+                        equipment_variant = "'''+name_of_equipment_user_name+'''"
+                        creator = var:global.'''+name_of_equipment_game_name+'''_holder
+                    }
+                }
+            }
+		}
+		product_auto_buy_'''+str(price_of_equipment)+''' = {
+			set_country_flag = "'''+str(price_of_equipment)+'''_auto_buy_enabled"
+		}''')
+                if is_it_variant == 1:
+                    print('''		product_variant_type_'''+str(price_of_equipment)+''' = {
+            if = {
+                limit = {
+                    check_variable = {global.market_ship_holder@'''+str(price_of_equipment)+''' > 0}
+                }
+                if = {
+                    limit = {
+                        NOT = {
+                            has_country_flag = brought_out
+                        }
+                    }
+                    create_ship = {
+                        type = '''+name_of_equipment_game_name+'''_variant
+                        equipment_variant = "'''+name_of_equipment_user_name+'''"
+                        creator = EMP
+                    }
+                }else = {
+                    create_ship = {
+                        type = '''+name_of_equipment_game_name+'''_variant
+                        equipment_variant = "'''+name_of_equipment_user_name+'''"
+                        creator = var:global.'''+name_of_equipment_game_name+'''_holder
+                    }
+                }
+            }
+        }''')
                 print("		###ABB###")
             else:
                 print(line, end ="")
-    elif classifaction == "2":
-        for line in fileinput.input('test.txt', inplace=1): #interface\buying_market.gui
-            if line.startswith('	###BCC###'):
-                print('''		buy_one_'''+price_of_equipment+'''_product_number = {
+    elif classifaction == 2:
+        for line in fileinput.input('buying_market.txt', inplace=1): #interface\buying_market.gui
+            if line.startswith('		###BCC###'):
+                print('''		product_buy_one_'''+str(price_of_equipment)+''' = {
 			if = {
 				limit = {
-					NOT = {
-						has_tech = '''+name_of_equipment_game_name+'''_tech
-					}
-					check_variable = {global.market_ship_holder@'''+price_of_equipment+''' > 0}
+					check_variable = {global.market_ship_holder@'''+str(price_of_equipment)+''' > 0}
 				}
-				set_technology = {
-					'''+name_of_equipment_game_name+'''_tech = 1
-				}
-				add_equipment_production = {
-					equipment = {
-						type = '''+name_of_equipment_game_name+'''_1
-					}
-					requested_factories = 1
-					progress = 1.00
-					amount = 1
-				}
-			}else = {
-				add_equipment_production = {
-					equipment = {
-						type = '''+name_of_equipment_game_name+'''_1
-					}
-					requested_factories = 1
-					progress = 1.00
-					amount = 1
-				}
-			}
-		}
-		auto_buy_'''+price_of_equipment+'''_product_number = {
-			set_country_flag = "'''+price_of_equipment+'''_auto_buy_enabled
-		}''')
-            if is_it_variant == 1:
-                print('''		buy_as_variant_product_number = {
-                    if = {
-                        limit = {
-                            NOT = {
-                                has_tech = '''+name_of_equipment_game_name+'''_tech
-                            }
-                            check_variable = {global.market_ship_holder@'''+price_of_equipment+''' > 0}
-                        }
-                        set_technology = {
-                            '''+name_of_equipment_game_name+'''_variant_tech = 1
-                        }
-                        add_equipment_production = {
-                            equipment = {
-                                type = '''+name_of_equipment_game_name+'''_1_variant
-                            }
-                            requested_factories = 1
-                            progress = 1.00
-                            amount = 1
-                        }
-                    }else = {
-                        add_equipment_production = {
-                            equipment = {
-                                type = '''+name_of_equipment_game_name+'''_1_variant
-                            }
-                            requested_factories = 1
-                            progress = 1.00
-                            amount = 1
+                if = {
+                    limit = {
+                        NOT = {
+                            has_country_flag = brought_out
                         }
                     }
-                }''')
-                print("	###BCC###")
+                    create_ship = {
+                        type = '''+name_of_equipment_game_name+'''
+                        equipment_variant = "'''+name_of_equipment_user_name+'''"
+                        creator = EMP
+                    }
+                }else = {
+                    create_ship = {
+                        type = '''+name_of_equipment_game_name+'''
+                        equipment_variant = "'''+name_of_equipment_user_name+'''"
+                        creator = var:global.'''+name_of_equipment_game_name+'''_holder
+                    }
+                }
+            }
+		}
+		product_auto_buy_'''+str(price_of_equipment)+''' = {
+			set_country_flag = "'''+str(price_of_equipment)+'''_auto_buy_enabled"
+		}''')
+                if is_it_variant == 1:
+                    print('''		product_variant_type_'''+str(price_of_equipment)+''' = {
+            if = {
+                limit = {
+                    check_variable = {global.market_ship_holder@'''+str(price_of_equipment)+''' > 0}
+                }
+                if = {
+                    limit = {
+                        NOT = {
+                            has_country_flag = brought_out
+                        }
+                    }
+                    create_ship = {
+                        type = '''+name_of_equipment_game_name+'''_variant
+                        equipment_variant = "'''+name_of_equipment_user_name+'''"
+                        creator = EMP
+                    }
+                }else = {
+                    create_ship = {
+                        type = '''+name_of_equipment_game_name+'''_variant
+                        equipment_variant = "'''+name_of_equipment_user_name+'''"
+                        creator = var:global.'''+name_of_equipment_game_name+'''_holder
+                    }
+                }
+            }
+        }''')
+                print("		###BCC###")
             else:
                 print(line, end ="")
-    elif classifaction == "3":
-        for line in fileinput.input('test.txt', inplace=1): #interface\buying_market.gui
-            if line.startswith('	###CDD###'):
-                print('''		buy_one_'''+price_of_equipment+'''_product_number = {
+    elif classifaction == 3:
+        for line in fileinput.input('buying_market.txt', inplace=1): #interface\buying_market.gui
+            if line.startswith('		###CDD###'):
+                print('''		product_buy_one_'''+str(price_of_equipment)+''' = {
 			if = {
 				limit = {
-					NOT = {
-						has_tech = '''+name_of_equipment_game_name+'''_tech
-					}
-					check_variable = {global.market_ship_holder@'''+price_of_equipment+''' > 0}
+					check_variable = {global.market_ship_holder@'''+str(price_of_equipment)+''' > 0}
 				}
-				set_technology = {
-					'''+name_of_equipment_game_name+'''_tech = 1
-				}
-				add_equipment_production = {
-					equipment = {
-						type = '''+name_of_equipment_game_name+'''_1
-					}
-					requested_factories = 1
-					progress = 1.00
-					amount = 1
-				}
-			}else = {
-				add_equipment_production = {
-					equipment = {
-						type = '''+name_of_equipment_game_name+'''_1
-					}
-					requested_factories = 1
-					progress = 1.00
-					amount = 1
-				}
-			}
-		}
-		auto_buy_'''+price_of_equipment+'''_product_number = {
-			set_country_flag = "'''+price_of_equipment+'''_auto_buy_enabled
-		}''')
-            if is_it_variant == 1:
-                print('''		buy_as_variant_product_number = {
-                    if = {
-                        limit = {
-                            NOT = {
-                                has_tech = '''+name_of_equipment_game_name+'''_tech
-                            }
-                            check_variable = {global.market_ship_holder@'''+price_of_equipment+''' > 0}
-                        }
-                        set_technology = {
-                            '''+name_of_equipment_game_name+'''_variant_tech = 1
-                        }
-                        add_equipment_production = {
-                            equipment = {
-                                type = '''+name_of_equipment_game_name+'''_1_variant
-                            }
-                            requested_factories = 1
-                            progress = 1.00
-                            amount = 1
-                        }
-                    }else = {
-                        add_equipment_production = {
-                            equipment = {
-                                type = '''+name_of_equipment_game_name+'''_1_variant
-                            }
-                            requested_factories = 1
-                            progress = 1.00
-                            amount = 1
+                if = {
+                    limit = {
+                        NOT = {
+                            has_country_flag = brought_out
                         }
                     }
-                }''')
-                print("	###CDD###")
+                    create_ship = {
+                        type = '''+name_of_equipment_game_name+'''
+                        equipment_variant = "'''+name_of_equipment_user_name+'''"
+                        creator = EMP
+                    }
+                }else = {
+                    create_ship = {
+                        type = '''+name_of_equipment_game_name+'''
+                        equipment_variant = "'''+name_of_equipment_user_name+'''"
+                        creator = var:global.'''+name_of_equipment_game_name+'''_holder
+                    }
+                }
+            }
+		}
+		product_auto_buy_'''+str(price_of_equipment)+''' = {
+			set_country_flag = "'''+str(price_of_equipment)+'''_auto_buy_enabled"
+		}''')
+                if is_it_variant == 1:
+                    print('''		product_variant_type_'''+str(price_of_equipment)+''' = {
+            if = {
+                limit = {
+                    check_variable = {global.market_ship_holder@'''+str(price_of_equipment)+''' > 0}
+                }
+                if = {
+                    limit = {
+                        NOT = {
+                            has_country_flag = brought_out
+                        }
+                    }
+                    create_ship = {
+                        type = '''+name_of_equipment_game_name+'''_variant
+                        equipment_variant = "'''+name_of_equipment_user_name+'''"
+                        creator = EMP
+                    }
+                }else = {
+                    create_ship = {
+                        type = '''+name_of_equipment_game_name+'''_variant
+                        equipment_variant = "'''+name_of_equipment_user_name+'''"
+                        creator = var:global.'''+name_of_equipment_game_name+'''_holder
+                    }
+                }
+            }
+        }''')
+                print("		###CDD###")
             else:
                 print(line, end ="")
-    elif classifaction == "4":
-        for line in fileinput.input('test.txt', inplace=1): #interface\buying_market.gui
-            if line.startswith('	###DEE###'):
-                print('''		buy_one_'''+price_of_equipment+'''_product_number = {
+    elif classifaction == 4:
+        for line in fileinput.input('buying_market.txt', inplace=1): #interface\buying_market.gui
+            if line.startswith('		###DEE###'):
+                print('''		product_buy_one_'''+str(price_of_equipment)+''' = {
 			if = {
 				limit = {
-					NOT = {
-						has_tech = '''+name_of_equipment_game_name+'''_tech
-					}
-					check_variable = {global.market_ship_holder@'''+price_of_equipment+''' > 0}
+					check_variable = {global.market_ship_holder@'''+str(price_of_equipment)+''' > 0}
 				}
-				set_technology = {
-					'''+name_of_equipment_game_name+'''_tech = 1
-				}
-				add_equipment_production = {
-					equipment = {
-						type = '''+name_of_equipment_game_name+'''_1
-					}
-					requested_factories = 1
-					progress = 1.00
-					amount = 1
-				}
-			}else = {
-				add_equipment_production = {
-					equipment = {
-						type = '''+name_of_equipment_game_name+'''_1
-					}
-					requested_factories = 1
-					progress = 1.00
-					amount = 1
-				}
-			}
-		}
-		auto_buy_'''+price_of_equipment+'''_product_number = {
-			set_country_flag = "'''+price_of_equipment+'''_auto_buy_enabled
-		}''')
-            if is_it_variant == 1:
-                print('''		buy_as_variant_product_number = {
-                    if = {
-                        limit = {
-                            NOT = {
-                                has_tech = '''+name_of_equipment_game_name+'''_tech
-                            }
-                            check_variable = {global.market_ship_holder@'''+price_of_equipment+''' > 0}
-                        }
-                        set_technology = {
-                            '''+name_of_equipment_game_name+'''_variant_tech = 1
-                        }
-                        add_equipment_production = {
-                            equipment = {
-                                type = '''+name_of_equipment_game_name+'''_1_variant
-                            }
-                            requested_factories = 1
-                            progress = 1.00
-                            amount = 1
-                        }
-                    }else = {
-                        add_equipment_production = {
-                            equipment = {
-                                type = '''+name_of_equipment_game_name+'''_1_variant
-                            }
-                            requested_factories = 1
-                            progress = 1.00
-                            amount = 1
+                if = {
+                    limit = {
+                        NOT = {
+                            has_country_flag = brought_out
                         }
                     }
-                }''')
-                print("	###DEE###")
+                    create_ship = {
+                        type = '''+name_of_equipment_game_name+'''
+                        equipment_variant = "'''+name_of_equipment_user_name+'''"
+                        creator = EMP
+                    }
+                }else = {
+                    create_ship = {
+                        type = '''+name_of_equipment_game_name+'''
+                        equipment_variant = "'''+name_of_equipment_user_name+'''"
+                        creator = var:global.'''+name_of_equipment_game_name+'''_holder
+                    }
+                }
+            }
+		}
+		product_auto_buy_'''+str(price_of_equipment)+''' = {
+			set_country_flag = "'''+str(price_of_equipment)+'''_auto_buy_enabled"
+		}''')
+                if is_it_variant == 1:
+                    print('''		product_variant_type_'''+str(price_of_equipment)+''' = {
+            if = {
+                limit = {
+                    check_variable = {global.market_ship_holder@'''+str(price_of_equipment)+''' > 0}
+                }
+                if = {
+                    limit = {
+                        NOT = {
+                            has_country_flag = brought_out
+                        }
+                    }
+                    create_ship = {
+                        type = '''+name_of_equipment_game_name+'''_variant
+                        equipment_variant = "'''+name_of_equipment_user_name+'''"
+                        creator = EMP
+                    }
+                }else = {
+                    create_ship = {
+                        type = '''+name_of_equipment_game_name+'''_variant
+                        equipment_variant = "'''+name_of_equipment_user_name+'''"
+                        creator = var:global.'''+name_of_equipment_game_name+'''_holder
+                    }
+                }
+            }
+        }''')
+                print("		###DEE###")
             else:
                 print(line, end ="")
 fileinput.close()
 
 f = open("test.gfx", "a")
-f.write("	spriteType = {\n		name = \""+gfx_key+"\"		texturefile = ""	}")
+f.write('\n	spriteType = {\n		name = \''+gfx_key+'\'		texturefile = ""	\n	}')
 f.close()
-
-input("The program has completed all of its tasks, it will now open the files you will need to edit manually with your native text editor, press enter to acknowledge this")
-text_opener.open("test.gfx") ## GFX SPRITE
+f = open("localisation.yml", "a")
+f.write('\n'+str(price_of_equipment)+'_marketplace_quantity:0 "[global.market_ship_holder@'+str(price_of_equipment)+']"\n'+str(price_of_equipment)+'_marketplace_name:0 "'+name_of_equipment_user_name+'"')
+f.write('\n'+name_of_equipment_game_name+'_unit:0 ""\n'+name_of_equipment_game_name+'_unit_desc:0 ""')
+f.write('\n'+name_of_equipment_game_name+':0 ""\n'+name_of_equipment_game_name+'_desc:0 ""\n'+name_of_equipment_game_name+'_short:0 ""')
+f.close()
+#input("The program has completed all of its tasks, it will now open the files you will need to edit manually with your native text editor, press enter to acknowledge this")
+#webbrowser.open("test.gfx") ## GFX SPRITE
