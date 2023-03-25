@@ -119,6 +119,9 @@ focus_tree = {
 		}
 		completion_reward = {
 			#tooltip
+			BYS = {
+				add_ideas = BYS_droga_1
+			}
 		}
 
 		ai_will_do = {
@@ -144,7 +147,7 @@ focus_tree = {
 		mutually_exclusive = {
 		}
 		completion_reward = {
-			add_ideas = EOH_church_1
+			add_ideas = EMP_church_1
 		}
 
 		ai_will_do = {
@@ -168,6 +171,13 @@ focus_tree = {
 		mutually_exclusive = {
 		}
 		completion_reward = {
+			add_tech_bonus = {
+				name = navy_bonus
+				bonus = 0.5
+				ahead_reduction = 0
+				uses = 2
+				category = naval_equipment
+			}
 		}
 
 		ai_will_do = {
@@ -192,6 +202,41 @@ focus_tree = {
 			focus = EMP_integrate_the_lower_levels
 		}
 		completion_reward = {
+			#Tooltip
+			subtract_from_variable = { currency_amount^primary_currency = 10 }
+			230 = {
+				if = {
+					limit = { is_controlled_by = ROOT }
+					add_extra_state_shared_building_slots = 1
+					add_building_construction = {
+						type = industrial_complex
+						level = 1
+						instant_build = yes
+					}
+				}
+			}
+			315 = {
+				if = {
+					limit = { is_controlled_by = ROOT }
+					add_extra_state_shared_building_slots = 1
+					add_building_construction = {
+						type = dockyard
+						level = 1
+						instant_build = yes
+					}
+				}
+			}
+			57 = {
+				if = {
+					limit = { is_controlled_by = ROOT }
+					add_extra_state_shared_building_slots = 1
+					add_building_construction = {
+						type = dockyard
+						level = 1
+						instant_build = yes
+					}
+				}
+			}
 		}
 
 		ai_will_do = {
@@ -216,6 +261,7 @@ focus_tree = {
 			focus = EMP_integrate_the_lower_levels
 		}
 		completion_reward = {
+			#tooltip, remove state ideas
 		}
 
 		ai_will_do = {
@@ -242,6 +288,15 @@ focus_tree = {
 		mutually_exclusive = {
 		}
 		completion_reward = {
+			#add admirals
+			#recruit_character
+			add_tech_bonus = {
+				name = navy_doctrine_bonus
+				bonus = 0.5
+				ahead_reduction = 0
+				uses = 2
+				category = naval_doctrine
+			}
 		}
 
 		ai_will_do = {
@@ -266,6 +321,8 @@ focus_tree = {
 			focus = EMP_the_imperial_veterans
 		}
 		completion_reward = {
+			#switch laws
+			#add idea
 		}
 
 		ai_will_do = {
@@ -290,6 +347,7 @@ focus_tree = {
 			focus = EMP_new_recruitment_propaganda
 		}
 		completion_reward = {
+			#change stormtrooper division template, add some equipment
 		}
 
 		ai_will_do = {
@@ -314,6 +372,17 @@ focus_tree = {
 		mutually_exclusive = {
 		}
 		completion_reward = {
+			235 = {
+				if = {
+					limit = { is_controlled_by = ROOT }
+					add_extra_state_shared_building_slots = 3
+					add_building_construction = {
+						type = bunker
+							province = 2969
+						level = 5
+					}
+				}
+			}
 		}
 
 		ai_will_do = {
@@ -338,6 +407,11 @@ focus_tree = {
 			focus = EMP_coruscant_a_fortress_world
 		}
 		completion_reward = {
+			add_ideas = EMP_coruscant_ruined_1
+			add_stability = -0.1
+			EMP = {
+				country_event = {id= EMP.3}
+			}
 		}
 
 		ai_will_do = {
@@ -361,6 +435,10 @@ focus_tree = {
 		mutually_exclusive = {
 		}
 		completion_reward = {
+			swap_ideas = {
+				remove_idea = EMP_coruscant_ruined_1
+				add_idea = EMP_coruscant_ruined_2
+			}
 		}
 
 		ai_will_do = {
@@ -384,6 +462,26 @@ focus_tree = {
 		mutually_exclusive = {
 		}
 		completion_reward = {
+			240 = {
+				if = {
+					limit = { is_controlled_by = ROOT }
+					remove_building = {
+						type = industrial_complex
+						level = 6
+					}
+					remove_building = {
+						type = dockyard
+						level = 4
+					}
+					remove_building = {
+						type = arms_factory
+						level = 4
+					}
+				}
+			}
+			EMP = {
+				country_event = {id= EMP.4}
+			}
 		}
 
 		ai_will_do = {
@@ -407,6 +505,17 @@ focus_tree = {
 		mutually_exclusive = {
 		}
 		completion_reward = {
+			
+			EMP = {
+				country_event = {id= EMP.5}
+			}
+			start_civil_war = {
+				ideology = democratic
+				size = 0.25
+			}
+			hidden_effect = {
+				remove_ideas = EMP_coruscant_ruined_2
+			}
 		}
 
 		ai_will_do = {
@@ -431,6 +540,126 @@ focus_tree = {
 			focus = EMP_coruscant_a_ruined_world
 		}
 		completion_reward = {
+			235 = {
+				if = {
+					limit = { is_controlled_by = ROOT }
+					add_building_construction = {
+						type = bunker
+							province = 7247
+						level = 4
+					}
+					add_building_construction = {
+						type = bunker
+							province = 4961
+						level = 4
+					}
+				}
+			}
+			230 = {
+				if = {
+					limit = { is_controlled_by = ROOT }
+					add_building_construction = {
+						type = bunker
+							province = 7272
+						level = 4
+					}
+					add_building_construction = {
+						type = bunker
+							province = 7196
+						level = 3
+					}
+					add_building_construction = {
+						type = bunker
+							province = 7177
+						level = 3
+					}
+				}
+			}
+			240 = {
+				if = {
+					limit = { is_controlled_by = ROOT }
+					add_building_construction = {
+						type = bunker
+							province = 7376
+						level = 3
+					}
+					add_building_construction = {
+						type = bunker
+							province = 2358
+						level = 3
+					}
+				}
+			}
+			39 = {
+				if = {
+					limit = { is_controlled_by = ROOT }
+					add_building_construction = {
+						type = bunker
+							province = 166
+						level = 3
+					}
+				}
+			}
+			57 = {
+				if = {
+					limit = { is_controlled_by = ROOT }
+					add_building_construction = {
+						type = bunker
+							province = 3980
+						level = 3
+					}
+					add_building_construction = {
+						type = bunker
+							province = 2310
+						level = 3
+					}
+					add_building_construction = {
+						type = bunker
+							province = 7336
+						level = 3
+					}
+				}
+			}
+			315 = {
+				if = {
+					limit = { is_controlled_by = ROOT }
+					add_building_construction = {
+						type = bunker
+							province = 4105
+						level = 3
+					}
+					add_building_construction = {
+						type = bunker
+							province = 7170
+						level = 3
+					}
+					add_building_construction = {
+						type = bunker
+							province = 7133
+						level = 3
+					}
+				}
+			}
+			189 = {
+				if = {
+					limit = { is_controlled_by = ROOT }
+					add_building_construction = {
+						type = bunker
+							province = 7070
+						level = 3
+					}
+				}
+			}
+			40 = {
+				if = {
+					limit = { is_controlled_by = ROOT }
+					add_building_construction = {
+						type = bunker
+							province = 1024
+						level = 3
+					}
+				}
+			}
 		}
 
 		ai_will_do = {
@@ -443,9 +672,9 @@ focus_tree = {
 
 
 
-	#Reevaluate Galactic Politics
+	#Imperial appointments
 	focus = {
-		id = EMP_reevaluate_galactic_politics
+		id = EMP_imperial_appointments
 		icon = GFX_outbound_flight
 		relative_position_id = EMP_consolidate_imperial_center
 		cost = 2.9
@@ -471,18 +700,24 @@ focus_tree = {
 	focus = {
 		id = EMP_evacuate_chandrila
 		icon = GFX_outbound_flight
-		relative_position_id = EMP_reevaluate_galactic_politics
+		relative_position_id = EMP_imperial_appointments
 		cost = 2.9
 		x = 0
 		y = 1
 		prerequisite = {
-			focus = EMP_reevaluate_galactic_politics
+			focus = EMP_imperial_appointments
 		}
 		search_filters = {
 		}
 		mutually_exclusive = {
 		}
 		completion_reward = {
+			EMP = {
+				country_event = {id=EMP.6}
+			}
+			CHA = {
+				remove_ideas = CHA_imperial_garrison_1
+			}
 		}
 
 		ai_will_do = {
@@ -507,6 +742,8 @@ focus_tree = {
 			focus = EMP_strengthen_imperial_intelligence
 		}
 		completion_reward = {
+			#tooltip
+			add_ideas = isb_government
 		}
 
 		ai_will_do = {
@@ -531,6 +768,8 @@ focus_tree = {
 			focus = EMP_isb_primacy
 		}
 		completion_reward = {
+			#tooltip
+			add_ideas = imperial_intelligence
 		}
 
 		ai_will_do = {
