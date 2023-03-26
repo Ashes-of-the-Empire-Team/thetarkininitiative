@@ -672,7 +672,7 @@ scripted_gui = {
 		context_type = player_context
 		window_name = "Marketplace_production_ships"
 		visible = {
-           always = false
+           has_country_flag = market_ships_open
 		}
 		effects = {
 			light_ship_button_click = {
@@ -697,19 +697,40 @@ scripted_gui = {
 				light_ship_creation_effect = yes
 			}
 			light_ship_auto_renew_button_click = {
-				set_country_flag = light_ship_auto_renew
+				if = {
+					limit = {
+						has_country_flag = light_ship_auto_renew
+					}
+					clr_country_flag = light_ship_auto_renew
+				}else = {
+					set_country_flag = light_ship_auto_renew
+				}
 			}
 			medium_ship_create_button_click = {
 				medium_ship_creation_effect = yes
 			}
 			medium_ship_auto_renew_button_click = {
-				set_country_flag = medium_ship_auto_renew
+				if = {
+					limit = {
+						has_country_flag = medium_ship_auto_renew
+					}
+					clr_country_flag = medium_ship_auto_renew
+				}else = {
+					set_country_flag = medium_ship_auto_renew
+				}
 			}
 			heavy_ship_create_button_click = {
 				heavy_ship_creation_effect = yes
 			}
 			heavy_ship_auto_renew_button_click = {
-				set_country_flag = heavy_ship_auto_renew
+				if = {
+					limit = {
+						has_country_flag = heavy_ship_auto_renew
+					}
+					clr_country_flag = heavy_ship_auto_renew
+				}else = {
+					set_country_flag = heavy_ship_auto_renew
+				}
 			}
 			light_workers_add_button_click = {
 				add_to_variable = {light_ship_workers = 1000}
@@ -731,27 +752,51 @@ scripted_gui = {
 			}
 			light_dockyards_add_button_click = {
 				add_to_variable = {light_dockyards = 1}
+				subtract_from_variable = {total_dockyards = 1}
 				add_to_variable = {max_light_workers = 1000}
 			}
 			medium_dockyards_add_button_click = {
 				add_to_variable = {medium_dockyards = 1}
+				subtract_from_variable = {total_dockyards = 1}
 				add_to_variable = {max_medium_workers = 1000}
 			}
 			heavy_dockyards_add_button_click = {
 				add_to_variable = {heavy_dockyards = 1}
+				subtract_from_variable = {total_dockyards = 1}
 				add_to_variable = {max_heavy_workers = 1000}
 			}
 			light_dockyards_subtract_button_click = {
 				subtract_from_variable = {light_dockyards = 1}
+				add_to_variable = {total_dockyards = 1}
 				subtract_from_variable = {max_light_workers = 1000}
+				if = {
+					limit = {
+						check_variable = {light_ship_workers > max_light_workers}
+					}
+					subtract_from_variable = {light_ship_workers = 1000}
+				}
 			}
 			medium_dockyards_subtract_button_click = {
 				subtract_from_variable = {medium_dockyards = 1}
+				add_to_variable = {total_dockyards = 1}
 				subtract_from_variable = {max_medium_workers = 1000}
+				if = {
+					limit = {
+						check_variable = {medium_ship_workers > max_medium_workers}
+					}
+					subtract_from_variable = {medium_ship_workers = 1000}
+				}
 			}
 			heavy_dockyards_subtract_button_click = {
 				subtract_from_variable = {heavy_dockyards = 1}
+				add_to_variable = {total_dockyards = 1}
 				subtract_from_variable = {max_heavy_workers = 1000}
+				if = {
+					limit = {
+						check_variable = {heavy_ship_workers > max_heavy_workers}
+					}
+					subtract_from_variable = {heavy_ship_workers = 1000}
+				}
 			}
 		}
 		triggers ={
@@ -760,6 +805,7 @@ scripted_gui = {
 					has_idea = light_ship_idea_holder
 				}
 				has_manpower > 999
+				check_variable = {max_light_workers > light_ship_workers}
 			}
 			light_workers_subtract_button_click_enabled = {
 				NOT = {
@@ -772,6 +818,7 @@ scripted_gui = {
 					has_idea = medium_ship_idea_holder
 				}
 				has_manpower > 999
+				check_variable = {max_medium_workers > medium_ship_workers}
 			}
 			medium_workers_subtract_button_click_enabled = {
 				NOT = {
@@ -784,6 +831,7 @@ scripted_gui = {
 					has_idea = heavy_ship_idea_holder
 				}
 				has_manpower > 999
+				check_variable = {max_heavy_workers > heavy_ship_workers}
 			}
 			heavy_workers_subtract_button_click_enabled = {
 				NOT = {
@@ -792,7 +840,7 @@ scripted_gui = {
 				check_variable = {heavy_ship_workers > 999}
 			}
 			light_dockyards_add_button_click_enabled = {
-				OR = {
+				AND = {
 					check_variable = {total_dockyards > 0}
 					NOT = {
 						has_idea = light_ship_idea_holder
@@ -800,7 +848,7 @@ scripted_gui = {
 				}
 			}
 			medium_dockyards_add_button_click_enabled = {
-				OR = {
+				AND = {
 					check_variable = {total_dockyards > 0}
 					NOT = {
 						has_idea = medium_ship_idea_holder
@@ -808,7 +856,7 @@ scripted_gui = {
 				}
 			}
 			heavy_dockyards_add_button_click_enabled = {
-				OR = {
+				AND = {
 					check_variable = {total_dockyards > 0}
 					NOT = {
 						has_idea = heavy_ship_idea_holder
@@ -816,7 +864,7 @@ scripted_gui = {
 				}
 			}
 			light_dockyards_subtract_button_click_enabled = {
-				OR = {
+				AND = {
 					check_variable = {light_dockyards > 0}
 					NOT = {
 						has_idea = light_ship_idea_holder
@@ -824,7 +872,7 @@ scripted_gui = {
 				}
 			}
 			medium_dockyards_subtract_button_click_enabled = {
-				OR = {
+				AND = {
 					check_variable = {medium_dockyards > 0}
 					NOT = {
 						has_idea = medium_ship_idea_holder
@@ -832,7 +880,7 @@ scripted_gui = {
 				}
 			}
 			heavy_dockyards_subtract_button_click_enabled = {
-				OR = {
+				AND = {
 					check_variable = {heavy_dockyards > 0}
 					NOT = {
 						has_idea = heavy_ship_idea_holder
@@ -854,6 +902,15 @@ scripted_gui = {
 					check_variable = {heavy_dockyards > 8}
 				}
 			}
+			light_ship_auto_buy_display_visible = {
+				has_country_flag = light_ship_auto_renew
+			}
+			medium_ship_auto_buy_display_visible = {
+				has_country_flag = medium_ship_auto_renew
+			}
+			heavy_ship_auto_buy_display_visible = {
+				has_country_flag = heavy_ship_auto_renew
+			}
 		}
 		properties = {
 			selected_light_ship = {image = "[get_light_ship_selected_photo]"}
@@ -862,6 +919,9 @@ scripted_gui = {
 			light_ship_button = { image = "[get_light_ship_photo]" }
 			medium_ship_button = { image = "[get_medium_ship_photo]" }
 			heavy_ship_button = { image = "[get_heavy_ship_photo]" }
+			light_shipyard = { image = "[get_light_shipyard]" }
+			medium_shipyard = { image = "[get_medium_shipyard]" }
+			large_shipyard = { image = "[get_heavy_shipyard]" }
 		}
 		dynamic_lists = {
 			light_ship_gridbox = {
