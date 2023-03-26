@@ -4,10 +4,10 @@
 
 add_namespace = super
 
-news_event = {        #Clone Wars
+news_event = {        #Why is this here
     id = super.1
-    title = "The Battle of Geonosis"
-    desc = "Begun, the Clone Wars have."
+    title = super.1.t
+    desc = super.1.d
     hidden = yes
     major = yes
 
@@ -16,8 +16,6 @@ news_event = {        #Clone Wars
     immediate = {
         play_song = "Clone Wars Begin"
         set_country_flag = Super_Event_Visible
-        set_country_flag = REP_clone_wars_begun
-        set_global_flag = the_clone_wars
     }
 	option = {
 		name = "random"
@@ -59,5 +57,46 @@ news_event = {        #Clone Wars
 	option = {
 		name = "finish"
 		destroy_entity = 123
+	}
+}
+
+news_event = {        #Pestage
+    id = super.2
+    title = super.2.t
+    desc = super.2.d
+    hidden = yes
+    major = yes
+
+    is_triggered_only = yes
+
+    immediate = {
+        play_song = "Clone Wars Begin"
+        set_country_flag = Super_Event_Visible
+    }
+	option = {
+		name = "Long may he reign!"
+		trigger = {
+			has_government = imperial
+		}
+	}
+	option = {
+		name = "Let him have his coronation, his Empire will soon crumble!"
+		trigger = {
+			has_government = democratic
+		}
+	}
+	option = {
+		name = "Interesting."
+		trigger = {
+			AND = {
+				NOT ={
+					has_government = democratic
+				}
+				NOT ={
+					has_government = imperial
+				}
+			}
+			
+		}
 	}
 }

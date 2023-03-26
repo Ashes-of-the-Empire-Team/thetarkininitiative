@@ -1,5 +1,5 @@
 focus_tree = {
-	id = emp
+	id = EMP
 	continuous_focus_position = { x = 2290 y = 0 } 
 	country = {
 		factor = 0
@@ -10,9 +10,9 @@ focus_tree = {
 	}
 
 
-	#Grand Vizier of the Empire
+	#The Coronation
 	focus = {
-		id = EMP_grand_vizier_of_the_empire
+		id = EMP_the_coronation
 		icon = GFX_outbound_flight
 		cost = 2.9
 		x = 0
@@ -24,9 +24,8 @@ focus_tree = {
 		mutually_exclusive = {
 		}
 		completion_reward = {
-			EMP = {
-				country_event = { id = EMP.1 }
-			}
+			news_event = { hours = 12 id = super.2 }
+			
 		}
 
 		ai_will_do = {
@@ -40,12 +39,12 @@ focus_tree = {
 	focus = {
 		id = EMP_consolidate_imperial_center
 		icon = GFX_outbound_flight
-		relative_position_id = EMP_grand_vizier_of_the_empire
+		relative_position_id = EMP_the_coronation
 		cost = 2.9
 		x = -2
 		y = 1
 		prerequisite = {
-			focus = EMP_grand_vizier_of_the_empire
+			focus = EMP_the_coronation
 		}
 		search_filters = {
 		}
@@ -53,7 +52,20 @@ focus_tree = {
 			focus = EMP_council_of_entralla
 		}
 		completion_reward = {
-			#unlocks decisions to vassalize core worlds
+			#tooltip
+			every_country = {
+				if = {
+					limit = {
+						has_government = imperial
+						capital = {
+							is_on_continent = core
+						}
+						is_ai = yes
+					}
+					country_event = { id = EMP.7}
+				}
+			}
+
 		}
 
 		ai_will_do = {
@@ -66,12 +78,12 @@ focus_tree = {
 	focus = {
 		id = EMP_council_of_entralla
 		icon = GFX_outbound_flight
-		relative_position_id = EMP_grand_vizier_of_the_empire
+		relative_position_id = EMP_the_coronation
 		cost = 2.9
 		x = 2
 		y = 1
 		prerequisite = {
-			focus = EMP_grand_vizier_of_the_empire
+			focus = EMP_the_coronation
 		}
 		search_filters = {
 		}
@@ -109,9 +121,6 @@ focus_tree = {
 		y = 2
 		prerequisite = {
 			focus = EMP_church_of_the_dark_side
-		}
-		prerequisite = {
-			focus = EMP_council_of_entralla
 		}
 		search_filters = {
 		}
@@ -678,8 +687,8 @@ focus_tree = {
 		icon = GFX_outbound_flight
 		relative_position_id = EMP_consolidate_imperial_center
 		cost = 2.9
-		x = 2
-		y = 1
+		x = 1
+		y = 2
 		prerequisite = {
 			focus = EMP_consolidate_imperial_center
 			focus = EMP_council_of_entralla
@@ -700,12 +709,13 @@ focus_tree = {
 	focus = {
 		id = EMP_evacuate_chandrila
 		icon = GFX_outbound_flight
-		relative_position_id = EMP_imperial_appointments
+		relative_position_id = EMP_consolidate_imperial_center
 		cost = 2.9
-		x = 0
-		y = 1
+		x = 3
+		y = 2
 		prerequisite = {
-			focus = EMP_imperial_appointments
+			focus = EMP_consolidate_imperial_center
+			focus = EMP_council_of_entralla
 		}
 		search_filters = {
 		}
@@ -731,10 +741,13 @@ focus_tree = {
 		icon = GFX_outbound_flight
 		relative_position_id = EMP_evacuate_chandrila
 		cost = 2.9
-		x = -2
+		x = -3
 		y = 1
 		prerequisite = {
 			focus = EMP_evacuate_chandrila
+		}
+		prerequisite = {
+			focus = EMP_imperial_appointments
 		}
 		search_filters = {
 		}
@@ -757,10 +770,13 @@ focus_tree = {
 		icon = GFX_outbound_flight
 		relative_position_id = EMP_evacuate_chandrila
 		cost = 2.9
-		x = 2
+		x = 1
 		y = 1
 		prerequisite = {
 			focus = EMP_evacuate_chandrila
+		}
+		prerequisite = {
+			focus = EMP_imperial_appointments
 		}
 		search_filters = {
 		}
@@ -791,11 +807,17 @@ focus_tree = {
 			focus = EMP_isb_primacy
 			focus = EMP_strengthen_imperial_intelligence
 		}
+		prerequisite = {
+			focus = EMP_find_jeng_droga
+		}
 		search_filters = {
 		}
 		mutually_exclusive = {
 		}
 		completion_reward = {
+			KUA = {
+				country_event = {id=EMP.7}
+			}
 		}
 
 		ai_will_do = {
@@ -817,9 +839,16 @@ focus_tree = {
 		search_filters = {
 		}
 		mutually_exclusive = {
-			focus = EMP_renewal
+			focus = EMP_clamp_down
 		}
 		completion_reward = {
+			#tooltip
+			EMP = {
+				country_event = {id=EMP.8}
+			}
+			add_to_variable = {
+				legitimacy_emp = -5
+			}
 		}
 
 		ai_will_do = {
@@ -828,9 +857,9 @@ focus_tree = {
 	}
 
 
-	#Renewal
+	#Clamp Down
 	focus = {
-		id = EMP_renewal
+		id = EMP_clamp_down
 		icon = GFX_outbound_flight
 		relative_position_id = EMP_the_kuat_plot
 		cost = 2.9
@@ -845,6 +874,8 @@ focus_tree = {
 			focus = EMP_the_great_escape
 		}
 		completion_reward = {
+			#guild relations down
+
 		}
 
 		ai_will_do = {
@@ -852,16 +883,16 @@ focus_tree = {
 		}
 	}
 
-	#Foiled
+	#Close the Fist
 	focus = {
-		id = EMP_foiled
+		id = EMP_close_the_fist
 		icon = GFX_outbound_flight
-		relative_position_id = EMP_renewal
+		relative_position_id = EMP_clamp_down
 		cost = 2.9
 		x = 4
 		y = 1
 		prerequisite = {
-			focus = EMP_renewal
+			focus = EMP_clamp_down
 		}
 		search_filters = {
 		}
@@ -880,12 +911,12 @@ focus_tree = {
 	focus = {
 		id = EMP_one_man_show
 		icon = GFX_outbound_flight
-		relative_position_id = EMP_foiled
+		relative_position_id = EMP_close_the_fist
 		cost = 2.9
 		x = 0
 		y = 1
 		prerequisite = {
-			focus = EMP_foiled
+			focus = EMP_close_the_fist
 		}
 		search_filters = {
 		}
@@ -999,19 +1030,23 @@ focus_tree = {
 	focus = {
 		id = EMP_the_conspiracy
 		icon = GFX_outbound_flight
-		relative_position_id = EMP_renewal
+		relative_position_id = EMP_clamp_down
 		cost = 2.9
 		x = -4
 		y = 1
 		prerequisite = {
-			focus = EMP_renewal
+			focus = EMP_clamp_down
 		}
 		search_filters = {
 		}
 		mutually_exclusive = {
-			focus = EMP_foiled
+			focus = EMP_close_the_fist
 		}
 		completion_reward = {
+			#Tooltip
+			EMP = {
+				country_event = {id=EMP.12}
+			}
 		}
 
 		ai_will_do = {
@@ -1216,8 +1251,6 @@ focus_tree = {
 		y = 3
 		prerequisite = {
 			focus = EMP_betrayal
-		}
-		prerequisite = {
 			focus = EMP_the_great_escape
 		}
 		search_filters = {
@@ -1362,6 +1395,16 @@ focus_tree = {
 		cost = 2.9
 		x = -2
 		y = 3
+		available = {
+			BOR = {
+				has_war = yes
+			}
+		}
+		#allow_branch = {
+			#BOR = {
+				#has_war = yes
+			#}
+		#}
 		prerequisite = {
 		}
 		search_filters = {
