@@ -24,7 +24,7 @@ focus_tree = {
 		mutually_exclusive = {
 		}
 		completion_reward = {
-			news_event = { hours = 12 id = super.2 }
+			news_event = { hours = 12 id = news.1 }
 			
 		}
 
@@ -54,17 +54,18 @@ focus_tree = {
 		completion_reward = {
 			#tooltip
 			every_country = {
-				if = {
-					limit = {
-						has_government = imperial
-						capital = {
+                    limit = {
+                        has_government = imperial
+                        capital_scope = {
 							is_on_continent = core
+							
 						}
-						is_ai = yes
-					}
-					country_event = { id = EMP.7}
-				}
-			}
+                        is_ai = yes
+                    }
+                    
+                    country_event = { id = EMP.7}
+                    
+            }
 
 		}
 
@@ -92,12 +93,10 @@ focus_tree = {
 		}
 		completion_reward = {
 			every_country = {
-				if = {
-					limit = {
-						has_government = imperial
-					}
-					country_event = { id = EMP.2}
+				limit = {
+					has_government = imperial
 				}
+				country_event = { id = EMP.2}
 			}
 			add_to_variable = {
 				legitimacy_emp = -5
@@ -270,7 +269,79 @@ focus_tree = {
 			focus = EMP_integrate_the_lower_levels
 		}
 		completion_reward = {
-			#tooltip, remove state ideas
+			#tooltip
+			235 = {
+				remove_dynamic_modifier = {
+					modifier = lower_levels_1
+				}
+				add_dynamic_modifier = {
+					modifier = lower_levels_2
+				}
+			}
+			230 = {
+				remove_dynamic_modifier = {
+					modifier = lower_levels_1
+				}
+				add_dynamic_modifier = {
+					modifier = lower_levels_2
+				}
+			}
+			189 = {
+				remove_dynamic_modifier = {
+					modifier = lower_levels_1
+				}
+				add_dynamic_modifier = {
+					modifier = lower_levels_2
+				}
+			}
+			315 = {
+				remove_dynamic_modifier = {
+					modifier = lower_levels_1
+				}
+				add_dynamic_modifier = {
+					modifier = lower_levels_2
+				}
+			}
+			229 = {
+				remove_dynamic_modifier = {
+					modifier = lower_levels_1
+				}
+				add_dynamic_modifier = {
+					modifier = lower_levels_2
+				}
+			}
+			57 = {
+				remove_dynamic_modifier = {
+					modifier = lower_levels_1
+				}
+				add_dynamic_modifier = {
+					modifier = lower_levels_2
+				}
+			}
+			39 = {
+				remove_dynamic_modifier = {
+					modifier = lower_levels_1
+				}
+				add_dynamic_modifier = {
+					modifier = lower_levels_2
+				}
+			}
+			60 = {
+				remove_dynamic_modifier = {
+					modifier = lower_levels_1
+				}
+				add_dynamic_modifier = {
+					modifier = lower_levels_2
+				}
+			}
+			240 = {
+				remove_dynamic_modifier = {
+					modifier = lower_levels_1
+				}
+				add_dynamic_modifier = {
+					modifier = lower_levels_2
+				}
+			}
 		}
 
 		ai_will_do = {
@@ -698,6 +769,9 @@ focus_tree = {
 		mutually_exclusive = {
 		}
 		completion_reward = {
+			EMP = {
+				country_event = EMP.13
+			}
 		}
 
 		ai_will_do = {
@@ -1095,6 +1169,9 @@ focus_tree = {
 			focus = EMP_purge_intelligence_leaders
 		}
 		completion_reward = {
+			EMP = {
+				country_event = {id=EMP.15}
+			}
 		}
 
 		ai_will_do = {
@@ -1258,6 +1335,10 @@ focus_tree = {
 		mutually_exclusive = {
 		}
 		completion_reward = {
+			swap_ideas = {
+				remove_idea = EMP_church_1
+				add_idea = EMP_church_2
+			}
 		}
 
 		ai_will_do = {
@@ -1281,6 +1362,7 @@ focus_tree = {
 		mutually_exclusive = {
 		}
 		completion_reward = {
+			remove_ideas = EMP_church_2
 		}
 
 		ai_will_do = {
@@ -1395,6 +1477,11 @@ focus_tree = {
 		cost = 2.9
 		x = -2
 		y = 3
+		bypass = {
+			BOR = {
+				has_war = yes
+			}
+		}
 		available = {
 			BOR = {
 				has_war = yes
