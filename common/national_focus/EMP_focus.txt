@@ -113,6 +113,31 @@ focus_tree = {
 		}
 	}
 
+
+	#Church of the Dark Side
+	focus = {
+		id = EMP_church_of_the_dark_side
+		icon = GFX_outbound_flight
+		relative_position_id = EMP_the_coronation
+		cost = 7.2
+		x = 4
+		y = 1
+		prerequisite = {
+			focus = EMP_the_coronation
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			add_ideas = EMP_church_1
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+
 	#Find Jeng Droga
 	focus = {
 		id = EMP_find_jeng_droga
@@ -139,31 +164,6 @@ focus_tree = {
 			factor = 1
 		}
 	}	
-
-
-	#Church of the Dark Side
-	focus = {
-		id = EMP_church_of_the_dark_side
-		icon = GFX_outbound_flight
-		relative_position_id = EMP_the_coronation
-		cost = 7.2
-		x = 4
-		y = 1
-		prerequisite = {
-			focus = EMP_the_coronation
-		}
-		search_filters = {
-		}
-		mutually_exclusive = {
-		}
-		completion_reward = {
-			add_ideas = EMP_church_1
-		}
-
-		ai_will_do = {
-			factor = 1
-		}
-	}
 	
 	#Access the Archives
 	focus = {
@@ -171,7 +171,7 @@ focus_tree = {
 		icon = GFX_outbound_flight
 		relative_position_id = EMP_find_jeng_droga
 		cost = 7.2
-		x = 6
+		x = 8
 		y = 1
 		prerequisite = {
 			focus = EMP_find_jeng_droga
@@ -268,7 +268,7 @@ focus_tree = {
 		search_filters = {
 		}
 		mutually_exclusive = {
-			focus = EMP_integrate_the_lower_levels
+			focus = EMP_surface_level_subsidies
 		}
 		completion_reward = {
 			#tooltip
@@ -750,7 +750,32 @@ focus_tree = {
 	}
 
 
+#The Kuat Plot
+focus = {
+	id = EMP_the_kuat_plot
+	icon = GFX_outbound_flight
+	relative_position_id = EMP_consolidate_imperial_center
+	cost = 2.9
+	x = 2
+	y = 1
+	prerequisite = {
+		focus = EMP_consolidate_imperial_center
+		focus = EMP_council_of_entralla
+	}
+	search_filters = {
+	}
+	mutually_exclusive = {
+	}
+	completion_reward = {
+		KUA = {
+			country_event = {id=EMP.7}
+		}
+	}
 
+	ai_will_do = {
+		factor = 1
+	}
+}
 
 
 
@@ -868,34 +893,6 @@ focus_tree = {
 	}
 
 
-
-	#The Kuat Plot
-	focus = {
-		id = EMP_the_kuat_plot
-		icon = GFX_outbound_flight
-		relative_position_id = EMP_consolidate_imperial_center
-		cost = 2.9
-		x = 2
-		y = 1
-		prerequisite = {
-			focus = EMP_consolidate_imperial_center
-			focus = EMP_council_of_entralla
-		}
-		search_filters = {
-		}
-		mutually_exclusive = {
-		}
-		completion_reward = {
-			KUA = {
-				country_event = {id=EMP.7}
-			}
-		}
-
-		ai_will_do = {
-			factor = 1
-		}
-	}
-
 #Failed Censure
 focus = {
 	id = EMP_failed_censure
@@ -914,7 +911,6 @@ focus = {
 	search_filters = {
 	}
 	mutually_exclusive = {
-		focus = EMP_clamp_down
 	}
 	completion_reward = {
 		#tooltip
@@ -1534,15 +1530,19 @@ focus = {
 		}
 		completion_reward = {
 			EMP = {
-				limit = {
-					NOT = {
-						has_completed_focus = EMP_the_conspiracy
+				if = {
+					limit = {
+						NOT = {
+							has_completed_focus = EMP_the_conspiracy
+						}
 					}
+					swap_ideas = {
+						remove_idea = EMP_church_1
+						add_idea = EMP_church_2
+					}
+					
 				}
-				swap_ideas = {
-					remove_idea = EMP_church_1
-					add_idea = EMP_church_2
-				}
+				
 			}
 			remove_ideas = EMP_complacent_bureaucracy
 			
@@ -2191,6 +2191,7 @@ focus = {
 		search_filters = {
 		}
 		mutually_exclusive = {
+			focus = EMP_join_the_alignment
 		}
 		completion_reward = {
 			set_cosmetic_tag = CRIMSON
