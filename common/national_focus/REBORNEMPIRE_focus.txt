@@ -1,0 +1,1072 @@
+# Reborn Empire Tree
+# Made by Basil Stein
+
+focus_tree = {
+	id = REBORNEMPIRE
+	continuous_focus_position = { x = 2290 y = 0 } 
+	country = {
+		factor = 0
+	}
+
+	#The Empire Reborn
+	focus = {
+		id = IMP_the_empire_reborn
+		icon = GFX_outbound_flight
+		cost = 2.9
+		x = 0
+		y = 0
+		prerequisite = {
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			country_event = {id=IMP.1}
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+
+	#The Imperial Army
+	focus = {
+		id = IMP_the_imperial_army
+		icon = GFX_outbound_flight
+		relative_position_id = IMP_the_empire_reborn
+		cost = 2.9
+		x = -6
+		y = 1
+		prerequisite = {
+			focus = IMP_the_empire_reborn
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			add_tech_bonus = {
+				name = army_doctrine_bonus
+				bonus = 1.0
+				ahead_reduction = 0
+				uses = 3
+				category = land_doctrine
+			}
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+
+	#Study the Kaminoans
+	focus = {
+		id = IMP_study_the_kaminoans
+		icon = GFX_outbound_flight
+		relative_position_id = IMP_the_imperial_army
+		cost = 2.9
+		x = -1
+		y = 1
+		prerequisite = {
+			focus = IMP_the_imperial_army
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+			focus = IMP_second_coming_of_the_stormtrooper
+		}
+		completion_reward = {
+			add_timed_idea = {
+				idea = IMP_studying_the_kaminoans
+				days = 180
+			}
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+
+	#Bring Back Cloning
+	focus = {
+		id = IMP_bring_back_cloning
+		icon = GFX_outbound_flight
+		relative_position_id = IMP_study_the_kaminoans
+		cost = 2.9
+		x = 0
+		y = 2
+		available = {
+			NOT = {
+				has_idea = IMP_studying_the_kaminoans
+			}
+		}
+		prerequisite = {
+			focus = IMP_study_the_kaminoans
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			add_ideas = clone_army
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+
+	#Second Coming of the Stormtrooper
+	focus = {
+		id = IMP_second_coming_of_the_stormtrooper
+		icon = GFX_outbound_flight
+		relative_position_id = IMP_the_imperial_army
+		cost = 2.9
+		x = 1
+		y = 1
+		prerequisite = {
+			focus = IMP_the_imperial_army
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+			focus = IMP_study_the_kaminoans
+		}
+		completion_reward = {
+			add_ideas = IMP_the_new_stormtrooper_1
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+
+	#Only the Best
+	focus = {
+		id = IMP_only_the_best
+		icon = GFX_outbound_flight
+		relative_position_id = IMP_second_coming_of_the_stormtrooper
+		cost = 2.9
+		x = 0
+		y = 2
+		prerequisite = {
+			focus = IMP_second_coming_of_the_stormtrooper
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = IMP_the_new_stormtrooper_1
+				add_idea = IMP_the_new_stormtrooper_2
+			}
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+
+	#Adaptive Command Structure
+	focus = {
+		id = IMP_adaptive_command_structure
+		icon = GFX_outbound_flight
+		relative_position_id = IMP_the_imperial_army
+		cost = 2.9
+		x = 0
+		y = 2
+		prerequisite = {
+			focus = IMP_the_imperial_army
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			army_experience = 25
+			add_tech_bonus = {
+				name = army_doctrine_bonus
+				bonus = 1.0
+				ahead_reduction = 0
+				uses = 1
+				category = land_doctrine
+			}
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	#Ideological Army
+	focus = {
+		id = IMP_ideological_army
+		icon = GFX_outbound_flight
+		relative_position_id = IMP_adaptive_command_structure
+		cost = 2.9
+		x = 0
+		y = 3
+		prerequisite = {
+			focus = IMP_adaptive_command_structure
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			add_political_power = 100
+			country_event = {id=IMP.2}
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+
+
+	#The Imperial Navy
+	focus = {
+		id = IMP_the_imperial_navy
+		icon = GFX_outbound_flight
+		relative_position_id = IMP_the_empire_reborn
+		cost = 2.9
+		x = 6
+		y = 1
+		prerequisite = {
+			focus = IMP_the_empire_reborn
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			add_tech_bonus = {
+				name = navy_doctrine_bonus
+				bonus = 1.0
+				ahead_reduction = 0
+				uses = 2
+				category = naval_doctrine
+			}
+			add_tech_bonus = {
+				name = air_doctrine_bonus
+				bonus = 1.0
+				ahead_reduction = 0
+				uses = 1
+				category = air_doctrine
+			}
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	
+	#Colossal Fleets
+	focus = {
+		id = IMP_colossal_fleets
+		icon = GFX_outbound_flight
+		relative_position_id = IMP_the_imperial_navy
+		cost = 2.9
+		x = -1
+		y = 1
+		prerequisite = {
+			focus = IMP_the_imperial_navy
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+			focus = IMP_colossal_ships
+		}
+		completion_reward = {
+			add_tech_bonus = {
+				name = navy_bonus
+				bonus = 1.0
+				ahead_reduction = 0
+				uses = 1
+				category = naval_equipment
+			}
+			add_ideas = IMP_an_imperial_horizon_1
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	#Size Matters Not
+	focus = {
+		id = IMP_size_matters_not
+		icon = GFX_outbound_flight
+		relative_position_id = IMP_colossal_fleets
+		cost = 2.9
+		x = 0
+		y = 1
+		prerequisite = {
+			focus = IMP_colossal_fleets
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			add_tech_bonus = {
+				name = tie_bonus
+				bonus = 1.0
+				ahead_reduction = 0
+				uses = 2
+				category = air_equipment
+			}
+			swap_ideas = {
+				remove_idea = IMP_an_imperial_horizon_1
+				add_idea = IMP_an_imperial_horizon_2
+			}
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	#Imperial Spirit
+	focus = {
+		id = IMP_imperial_spirit
+		icon = GFX_outbound_flight
+		relative_position_id = IMP_size_matters_not
+		cost = 2.9
+		x = 0
+		y = 1
+		prerequisite = {
+			focus = IMP_size_matters_not
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			navy_experience = 25
+			swap_ideas = {
+				remove_idea = IMP_an_imperial_horizon_2
+				add_idea = IMP_an_imperial_horizon_3
+			}
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	#Victory from Below
+	focus = {
+		id = IMP_victory_from_below
+		icon = GFX_outbound_flight
+		relative_position_id = IMP_imperial_spirit
+		cost = 2.9
+		x = 0
+		y = 2
+		prerequisite = {
+			focus = IMP_imperial_spirit
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = IMP_an_imperial_horizon_3
+				add_idea = IMP_an_imperial_horizon_4
+			}
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+
+	#Colossal Ships
+	focus = {
+		id = IMP_colossal_ships
+		icon = GFX_outbound_flight
+		relative_position_id = IMP_the_imperial_navy
+		cost = 2.9
+		x = 1
+		y = 1
+		prerequisite = {
+			focus = IMP_the_imperial_navy
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+			focus = IMP_colossal_fleets
+		}
+		completion_reward = {
+			add_war_support = -0.05
+			add_timed_idea = {
+				idea = IMP_shipyard_retrofitting
+				days = 180
+			}
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	#Subdue the Shipwrights
+	focus = {
+		id = IMP_subdue_the_shipwrights
+		icon = GFX_outbound_flight
+		relative_position_id = IMP_colossal_ships
+		cost = 2.9
+		x = 0
+		y = 1
+		available = {
+			NOT = {
+				has_idea = IMP_shipyard_retrofitting
+			}
+		}
+		prerequisite = {
+			focus = IMP_the_imperial_navy
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			create_wargoal = {
+				target = KUA
+				type = annex_everything
+			}
+			create_wargoal = {
+				target = COR
+				type = annex_everything
+			}
+			create_wargoal = {
+				target = HOS
+				type = annex_everything
+			}
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	#Super Star Destroyers
+	focus = {
+		id = IMP_super_star_destroyers
+		icon = GFX_outbound_flight
+		relative_position_id = IMP_subdue_the_shipwrights
+		cost = 2.9
+		x = 0
+		y = 1
+		prerequisite = {
+			focus = IMP_subdue_the_shipwrights
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			#give super star destroyers
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	#Third Time's the Charm
+	focus = {
+		id = IMP_third_times_the_charm
+		icon = GFX_outbound_flight
+		relative_position_id = IMP_super_star_destroyers
+		cost = 2.9
+		x = 0
+		y = 2
+		prerequisite = {
+			focus = IMP_super_star_destroyers
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			#give idea? actual death star?
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+
+	#Reform the Imperial Core
+	focus = {
+		id = IMP_reform_the_imperial_core
+		icon = GFX_outbound_flight
+		relative_position_id = IMP_the_empire_reborn
+		cost = 2.9
+		x = 0
+		y = 2
+		prerequisite = {
+			focus = IMP_the_empire_reborn
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			every_country = {
+				limit = {
+					has_government = imperial
+					capital_scope = {
+						is_on_continent = core
+						
+					}
+				}
+				country_event = { id = IMP.3}
+				
+			}
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	#Squash the Rebels
+	focus = {
+		id = IMP_squash_the_rebels
+		icon = GFX_outbound_flight
+		relative_position_id = IMP_reform_the_imperial_core
+		cost = 2.9
+		x = 2
+		y = 1
+		prerequisite = {
+			focus = IMP_reform_the_imperial_core
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			create_wargoal = {
+				target = REB
+				type = annex_everything
+			}
+			create_wargoal = {
+				target = CHA
+				type = annex_everything
+			}
+			create_wargoal = {
+				target = BOT
+				type = annex_everything
+			}
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	#Second Invasion of Chandrila
+	focus = {
+		id = IMP_second_invasion_of_chandrila
+		icon = GFX_outbound_flight
+		relative_position_id = IMP_squash_the_rebels
+		cost = 2.9
+		x = 0
+		y = 1
+		prerequisite = {
+			focus = IMP_squash_the_rebels
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			add_ideas = IMP_second_invasion_of_chandrila
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	#Second Battle of Yavin
+	focus = {
+		id = IMP_second_battle_of_yavin
+		icon = GFX_outbound_flight
+		relative_position_id = IMP_second_invasion_of_chandrila
+		cost = 2.9
+		x = -1
+		y = 1
+		prerequisite = {
+			focus = IMP_second_invasion_of_chandrila
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			remove_ideas = IMP_second_invasion_of_chandrila
+			add_ideas = IMP_second_battle_of_yavin
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	#Silence the Bothans
+	focus = {
+		id = IMP_silence_the_bothans
+		icon = GFX_outbound_flight
+		relative_position_id = IMP_second_invasion_of_chandrila
+		cost = 2.9
+		x = 1
+		y = 1
+		prerequisite = {
+			focus = IMP_second_invasion_of_chandrila
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			remove_ideas = IMP_second_invasion_of_chandrila
+			add_ideas = IMP_invasion_of_bothawui
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+
+	#Imperial Expansion
+	focus = {
+		id = IMP_imperial_expansion
+		icon = GFX_outbound_flight
+		relative_position_id = IMP_reform_the_imperial_core
+		cost = 2.9
+		x = -2
+		y = 1
+		prerequisite = {
+			focus = IMP_reform_the_imperial_core
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			add_timed_idea = {
+				idea = IMP_military_buildup
+				days = 180
+			}
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	#Attack the Mid Rim
+	focus = {
+		id = IMP_attack_the_mid_rim
+		icon = GFX_outbound_flight
+		relative_position_id = IMP_imperial_expansion
+		cost = 2.9
+		x = -1
+		y = 1
+		prerequisite = {
+			focus = IMP_imperial_expansion
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			every_country = {
+				limit = {
+					NOT = {
+						has_government = imperial
+					}
+					
+					capital_scope = {
+						is_on_continent = mid_rim
+						
+					}
+				}
+				country_event = { id = IMP.4}
+				
+			}
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	#Cleanse the Core
+	focus = {
+		id = IMP_cleanse_the_core
+		icon = GFX_outbound_flight
+		relative_position_id = IMP_imperial_expansion
+		cost = 2.9
+		x = 1
+		y = 1
+		prerequisite = {
+			focus = IMP_imperial_expansion
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			every_country = {
+				limit = {
+					NOT = {
+						has_government = imperial
+					}
+					NOT = {
+						has_government = corporation
+					}
+					
+					capital_scope = {
+						is_on_continent = core
+						
+					}
+				}
+				country_event = { id = IMP.4}
+				
+			}
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	#Condone the Warlords
+	focus = {
+		id = IMP_condone_the_warlords
+		icon = GFX_outbound_flight
+		relative_position_id = IMP_attack_the_mid_rim
+		cost = 2.9
+		x = 0
+		y = 1
+		prerequisite = {
+			focus = IMP_attack_the_mid_rim
+		}
+		prerequisite = {
+			focus = IMP_cleanse_the_core
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+			focus = IMP_the_imperial_civil_war
+		}
+		completion_reward = {
+			create_faction = "Imperial Pact"
+			every_country = {
+				limit = {
+					has_government = imperial
+					
+				}
+				country_event = { id = IMP.5}
+				
+			}
+
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	#The Imperial Civil War
+	focus = {
+		id = IMP_the_imperial_civil_war
+		icon = GFX_outbound_flight
+		relative_position_id = IMP_attack_the_mid_rim
+		cost = 2.9
+		x = 2
+		y = 1
+		prerequisite = {
+			focus = IMP_attack_the_mid_rim
+		}
+		prerequisite = {
+			focus = IMP_cleanse_the_core
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+			focus = IMP_condone_the_warlords
+		}
+		completion_reward = {
+			#Tooltip
+			every_country = {
+				limit = {
+					has_government = imperial
+					is_major = yes
+				}
+				country_event = { id = IMP.6}
+				
+			}
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+
+	#Imperial Reform
+	focus = {
+		id = IMP_imperial_reform
+		icon = GFX_outbound_flight
+		relative_position_id = IMP_the_imperial_civil_war
+		cost = 2.9
+		x = 1
+		y = 1
+		prerequisite = {
+			focus = IMP_condone_the_warlords
+			focus = IMP_the_imperial_civil_war
+		}
+		prerequisite = {
+			focus = IMP_silence_the_bothans
+		}
+		prerequisite = {
+			focus = IMP_second_battle_of_yavin
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			remove_ideas = IMP_second_battle_of_yavin
+			remove_ideas = IMP_invasion_of_bothawui
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+
+	#The Sith Empire
+	focus = {
+		id = IMP_the_sith_empire
+		icon = GFX_outbound_flight
+		relative_position_id = IMP_imperial_reform
+		cost = 2.9
+		x = -3
+		y = 1
+		prerequisite = {
+			focus = IMP_imperial_reform
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+			focus = IMP_pord_20
+			focus = IMP_reinstate_the_senate
+		}
+		completion_reward = {
+			load_focus_tree = SITH
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+
+	#P.O.R.D. 2.0
+	focus = {
+		id = IMP_pord_20
+		icon = GFX_outbound_flight
+		relative_position_id = IMP_imperial_reform
+		cost = 2.9
+		x = 0
+		y = 1
+		prerequisite = {
+			focus = IMP_imperial_reform
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+			focus = IMP_the_sith_empire
+			focus = IMP_reinstate_the_senate
+		}
+		completion_reward = {
+			add_ideas = IMP_pord_1
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	#Censor the Holonet
+	focus = {
+		id = IMP_censor_the_holonet
+		icon = GFX_outbound_flight
+		relative_position_id = IMP_pord_20
+		cost = 2.9
+		x = 0
+		y = 1
+		prerequisite = {
+			focus = IMP_pord_20
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			add_stability = 0.1
+			swap_ideas = {
+				remove_idea = IMP_pord_1
+				add_idea = IMP_pord_2
+			}
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	#Human High Culture
+	focus = {
+		id = IMP_human_high_culture
+		icon = GFX_outbound_flight
+		relative_position_id = IMP_censor_the_holonet
+		cost = 2.9
+		x = 0
+		y = 1
+		prerequisite = {
+			focus = IMP_censor_the_holonet
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			add_ideas = IMP_human_high_culture_idea
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+
+	#Reinstate the Senate
+	focus = {
+		id = IMP_reinstate_the_senate
+		icon = GFX_outbound_flight
+		relative_position_id = IMP_imperial_reform
+		cost = 2.9
+		x = 3
+		y = 1
+		prerequisite = {
+			focus = IMP_imperial_reform
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+			focus = IMP_the_sith_empire
+			focus = IMP_pord_20
+		}
+		completion_reward = {
+			add_ideas = IMP_new_imperial_senate
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	#Open the Holonet
+	focus = {
+		id = IMP_open_the_holonet
+		icon = GFX_outbound_flight
+		relative_position_id = IMP_reinstate_the_senate
+		cost = 2.9
+		x = 0
+		y = 1
+		prerequisite = {
+			focus = IMP_reinstate_the_senate
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			add_ideas = IMP_open_holonet
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	#Repeal Anti-Alien Policies
+	focus = {
+		id = IMP_repeal_anti_alien_policies
+		icon = GFX_outbound_flight
+		relative_position_id = IMP_open_the_holonet
+		cost = 2.9
+		x = 0
+		y = 1
+		available = {
+			has_political_power = 100
+		}
+		prerequisite = {
+			focus = IMP_open_the_holonet
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			add_political_power = -100
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+
+	#Formal Apology to the Wookies
+	focus = {
+		id = IMP_formal_apology_to_the_wookies
+		icon = GFX_outbound_flight
+		relative_position_id = IMP_repeal_anti_alien_policies
+		cost = 2.9
+		x = 0
+		y = 1
+		available = {
+			has_political_power = 200
+		}
+		prerequisite = {
+			focus = IMP_repeal_anti_alien_policies
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			add_political_power = -200
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	#The Republic
+	focus = {
+		id = IMP_the_republic
+		icon = GFX_outbound_flight
+		relative_position_id = IMP_formal_apology_to_the_wookies
+		cost = 2.9
+		x = 0
+		y = 1
+		prerequisite = {
+			focus = IMP_formal_apology_to_the_wookies
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			load_focus_tree = NEW
+			hidden_effect = {
+				remove_ideas = IMP_open_holonet
+				remove_ideas = IMP_new_imperial_senate
+			}
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+
+}

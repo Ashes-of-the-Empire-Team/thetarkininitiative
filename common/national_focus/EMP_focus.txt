@@ -1,3 +1,6 @@
+# Imperial(Pestage + Isard + Ruling Council) Focus Tree
+# Made by Basil Stein
+
 focus_tree = {
 	id = EMP
 	continuous_focus_position = { x = 2290 y = 0 } 
@@ -168,7 +171,7 @@ focus_tree = {
 		icon = GFX_outbound_flight
 		relative_position_id = EMP_find_jeng_droga
 		cost = 7.2
-		x = 5
+		x = 6
 		y = 1
 		prerequisite = {
 			focus = EMP_find_jeng_droga
@@ -755,13 +758,12 @@ focus_tree = {
 	focus = {
 		id = EMP_imperial_appointments
 		icon = GFX_outbound_flight
-		relative_position_id = EMP_consolidate_imperial_center
+		relative_position_id = EMP_the_kuat_plot
 		cost = 5
-		x = 1
-		y = 2
+		x = -1
+		y = 1
 		prerequisite = {
-			focus = EMP_consolidate_imperial_center
-			focus = EMP_council_of_entralla
+			focus = EMP_the_kuat_plot
 		}
 		search_filters = {
 		}
@@ -782,13 +784,12 @@ focus_tree = {
 	focus = {
 		id = EMP_evacuate_chandrila
 		icon = GFX_outbound_flight
-		relative_position_id = EMP_consolidate_imperial_center
+		relative_position_id = EMP_the_kuat_plot
 		cost = 5
-		x = 3
-		y = 2
+		x = 1
+		y = 1
 		prerequisite = {
-			focus = EMP_consolidate_imperial_center
-			focus = EMP_council_of_entralla
+			focus = EMP_the_kuat_plot
 		}
 		search_filters = {
 		}
@@ -872,16 +873,13 @@ focus_tree = {
 	focus = {
 		id = EMP_the_kuat_plot
 		icon = GFX_outbound_flight
-		relative_position_id = EMP_isb_primacy
+		relative_position_id = EMP_consolidate_imperial_center
 		cost = 2.9
 		x = 2
 		y = 1
 		prerequisite = {
-			focus = EMP_isb_primacy
-			focus = EMP_strengthen_imperial_intelligence
-		}
-		prerequisite = {
-			focus = EMP_find_jeng_droga
+			focus = EMP_consolidate_imperial_center
+			focus = EMP_council_of_entralla
 		}
 		search_filters = {
 		}
@@ -898,16 +896,51 @@ focus_tree = {
 		}
 	}
 
+#Failed Censure
+focus = {
+	id = EMP_failed_censure
+	icon = GFX_outbound_flight
+	relative_position_id = EMP_isb_primacy
+	cost = 5
+	x = 2
+	y = 1
+	prerequisite = {
+		focus = EMP_isb_primacy
+		focus = EMP_strengthen_imperial_intelligence
+	}
+	prerequisite = {
+		focus = EMP_find_jeng_droga
+	}
+	search_filters = {
+	}
+	mutually_exclusive = {
+		focus = EMP_clamp_down
+	}
+	completion_reward = {
+		#tooltip
+		EMP = {
+			country_event = {id=EMP.8}
+		}
+		add_to_variable = {
+			legitimacy_emp = -5
+		}
+	}
+
+	ai_will_do = {
+		factor = 1
+	}
+}
+
 	#The Great Escape
 	focus = {
 		id = EMP_the_great_escape
 		icon = GFX_outbound_flight
-		relative_position_id = EMP_the_kuat_plot
+		relative_position_id = EMP_failed_censure
 		cost = 5
-		x = -5
+		x = -6
 		y = 1
 		prerequisite = {
-			focus = EMP_the_kuat_plot
+			focus = EMP_failed_censure
 		}
 		search_filters = {
 		}
@@ -934,12 +967,12 @@ focus_tree = {
 	focus = {
 		id = EMP_clamp_down
 		icon = GFX_outbound_flight
-		relative_position_id = EMP_the_kuat_plot
+		relative_position_id = EMP_failed_censure
 		cost = 7.2
-		x = 2
+		x = 3
 		y = 1
 		prerequisite = {
-			focus = EMP_the_kuat_plot
+			focus = EMP_failed_censure
 		}
 		search_filters = {
 		}
@@ -1008,7 +1041,7 @@ focus_tree = {
 		icon = GFX_outbound_flight
 		relative_position_id = EMP_one_man_show
 		cost = 7.2
-		x = 0
+		x = -2
 		y = 1
 		prerequisite = {
 			focus = EMP_one_man_show
@@ -1079,13 +1112,89 @@ focus_tree = {
 		icon = GFX_outbound_flight
 		relative_position_id = EMP_assist_the_cloning_process
 		cost = 7.2
+		x = 3
+		y = 2
+		prerequisite = {
+			focus = EMP_assist_the_cloning_process
+			focus = EMP_request_aid
+		}
+		prerequisite = {
+			focus = EMP_divert_funds
+		}
+		prerequisite = {
+			focus = EMP_idmr_oversight
+		}
+		prerequisite = {
+			focus = EMP_fall_of_borleias
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+			focus = EMP_abandon_the_populace
+			focus = EMP_the_defense_of_coruscant
+			focus = EMP_rescue_evir_derricote
+		}
+		completion_reward = {
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	#Eidolon Base
+	focus = {
+		id = EMP_eidolon_base
+		icon = GFX_outbound_flight
+		relative_position_id = EMP_one_man_show
+		cost = 7.2
+		x = 2
+		y = 1
+		prerequisite = {
+			focus = EMP_one_man_show
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	#Divert Funds
+	focus = {
+		id = EMP_divert_funds
+		icon = GFX_outbound_flight
+		relative_position_id = EMP_eidolon_base
+		cost = 7.2
+		x = -1
+		y = 1
+		prerequisite = {
+			focus = EMP_eidolon_base
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	#IDMR Oversight
+	focus = {
+		id = EMP_idmr_oversight
+		icon = GFX_outbound_flight
+		relative_position_id = EMP_eidolon_base
+		cost = 7.2
 		x = 1
 		y = 1
 		prerequisite = {
-			focus = EMP_assist_the_cloning_process
-		}
-		prerequisite = {
-			focus = EMP_request_aid
+			focus = EMP_eidolon_base
 		}
 		search_filters = {
 		}
@@ -1137,7 +1246,7 @@ focus_tree = {
 		icon = GFX_outbound_flight
 		relative_position_id = EMP_the_conspiracy
 		cost = 10.8
-		x = 3
+		x = 2
 		y = 1
 		prerequisite = {
 			focus = EMP_the_conspiracy
@@ -1184,7 +1293,7 @@ focus_tree = {
 	}
 	#Eyes of the Empire
 	focus = {
-		id = EMP_eyes_of_the_empire
+		id = EMP_eyes_of_the_empire_1
 		icon = GFX_outbound_flight
 		relative_position_id = EMP_appoint_isard
 		cost = 2.9
@@ -1192,7 +1301,6 @@ focus_tree = {
 		y = 1
 		prerequisite = {
 			focus = EMP_appoint_isard
-			focus = EMP_empress_isard
 		}
 		search_filters = {
 		}
@@ -1238,9 +1346,111 @@ focus_tree = {
 		icon = GFX_outbound_flight
 		relative_position_id = EMP_purge_intelligence_leaders
 		cost = 7.2
+		x = 1
+		y = 1
+		prerequisite = {
+			focus = EMP_purge_intelligence_leaders
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+
+	#Internal Council Politics
+	focus = {
+		id = EMP_internal_council_politics
+		icon = GFX_outbound_flight
+		relative_position_id = EMP_oligarchy
+		cost = 5
+		x = -1
+		y = 2
+		prerequisite = {
+			focus = EMP_oligarchy
+		}
+		prerequisite = {
+			focus = EMP_appoint_isard
+			focus = EMP_purge_intelligence_leaders
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+
+	#The New Generation
+	focus = {
+		id = EMP_the_new_generation
+		icon = GFX_outbound_flight
+		relative_position_id = EMP_internal_council_politics
+		cost = 5
+		x = -2
+		y = 1
+		prerequisite = {
+			focus = EMP_internal_council_politics
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+			focus = EMP_the_old_guard
+		}
+		completion_reward = {
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+
+	#The Old Guard
+	focus = {
+		id = EMP_the_old_guard
+		icon = GFX_outbound_flight
+		relative_position_id = EMP_internal_council_politics
+		cost = 5
 		x = 0
 		y = 1
 		prerequisite = {
+			focus = EMP_internal_council_politics
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+			focus = EMP_the_new_generation
+		}
+		completion_reward = {
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+
+	#Divert Imperial Resources
+	focus = {
+		id = EMP_divert_imperial_resources
+		icon = GFX_outbound_flight
+		relative_position_id = EMP_oligarchy
+		cost = 5
+		x = 1
+		y = 2
+		prerequisite = {
+			focus = EMP_oligarchy
+		}
+		prerequisite = {
+			focus = EMP_appoint_isard
 			focus = EMP_purge_intelligence_leaders
 		}
 		search_filters = {
@@ -1259,41 +1469,19 @@ focus_tree = {
 	focus = {
 		id = EMP_contact_ardus_kaine
 		icon = GFX_outbound_flight
-		relative_position_id = EMP_oligarchy
+		relative_position_id = EMP_divert_imperial_resources
 		cost = 5
-		x = 0
-		y = 2
-		prerequisite = {
-			focus = EMP_oligarchy
-		}
-		search_filters = {
-		}
-		mutually_exclusive = {
-		}
-		completion_reward = {
-		}
-
-		ai_will_do = {
-			factor = 1
-		}
-	}
-
-	#Protection on Ord Cantrell
-	focus = {
-		id = EMP_protection_on_ord_cantrell
-		icon = GFX_outbound_flight
-		relative_position_id = EMP_contact_ardus_kaine
-		cost = 7.2
 		x = 0
 		y = 1
 		prerequisite = {
-			focus = EMP_contact_ardus_kaine
+			focus = EMP_divert_imperial_resources
 		}
 		search_filters = {
 		}
 		mutually_exclusive = {
 		}
 		completion_reward = {
+			
 		}
 
 		ai_will_do = {
@@ -1364,6 +1552,54 @@ focus_tree = {
 			factor = 1
 		}
 	}
+	#Contact Grand Admiral Thrawn
+	focus = {
+		id = EMP_contact_grand_admiral_thrawn
+		icon = GFX_outbound_flight
+		relative_position_id = EMP_empress_isard
+		cost = 10.8
+		x = -2
+		y = 1
+		prerequisite = {
+			focus = EMP_empress_isard
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			
+			
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	#Sabotage Rogue Squadron
+	focus = {
+		id = EMP_sabotage_rogue_squadron
+		icon = GFX_outbound_flight
+		relative_position_id = EMP_contact_grand_admiral_thrawn
+		cost = 10.8
+		x = 0
+		y = 1
+		prerequisite = {
+			focus = EMP_contact_grand_admiral_thrawn
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			
+			
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
 
 	#Eliminate the Prophets
 	focus = {
@@ -1371,7 +1607,7 @@ focus_tree = {
 		icon = GFX_outbound_flight
 		relative_position_id = EMP_empress_isard
 		cost = 7.2
-		x = -1
+		x = 2
 		y = 1
 		prerequisite = {
 			focus = EMP_empress_isard
@@ -1389,16 +1625,60 @@ focus_tree = {
 		}
 	}
 
-	#Sleeper Agents
+	#The Isard Family
 	focus = {
-		id = EMP_sleeper_agents
+		id = EMP_the_isard_family
 		icon = GFX_outbound_flight
 		relative_position_id = EMP_empress_isard
 		cost = 5
-		x = 1
+		x = 0
 		y = 1
 		prerequisite = {
 			focus = EMP_empress_isard
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	#Eyes of the Empire(2)
+	focus = {
+		id = EMP_eyes_of_the_empire_2
+		icon = GFX_outbound_flight
+		relative_position_id = EMP_the_isard_family
+		cost = 5
+		x = 0
+		y = 1
+		prerequisite = {
+			focus = EMP_the_isard_family
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	#Palpatine Counter-Insurgency Front
+	focus = {
+		id = EMP_palpatine_counter_insurgency_front
+		icon = GFX_outbound_flight
+		relative_position_id = EMP_eyes_of_the_empire_2
+		cost = 5
+		x = 0
+		y = 1
+		prerequisite = {
+			focus = EMP_eyes_of_the_empire_2
 		}
 		search_filters = {
 		}
@@ -1417,13 +1697,10 @@ focus_tree = {
 		icon = GFX_outbound_flight
 		relative_position_id = EMP_eliminate_the_prophets
 		cost = 7.2
-		x = 1
+		x = 0
 		y = 1
 		prerequisite = {
 			focus = EMP_eliminate_the_prophets
-		}
-		prerequisite = {
-			focus = EMP_sleeper_agents
 		}
 		search_filters = {
 		}
@@ -1443,12 +1720,15 @@ focus_tree = {
 	focus = {
 		id = EMP_take_thyferra
 		icon = GFX_outbound_flight
-		relative_position_id = EMP_zorba
+		relative_position_id = EMP_sabotage_rogue_squadron
 		cost = 7.2
 		x = 0
 		y = 1
 		prerequisite = {
-			focus = EMP_zorba
+			focus = EMP_sabotage_rogue_squadron
+		}
+		prerequisite = {
+			focus = EMP_eyes_of_the_empire_2
 		}
 		search_filters = {
 		}
@@ -1469,7 +1749,7 @@ focus_tree = {
 		relative_position_id = EMP_take_thyferra
 		cost = 1.5
 		x = 0
-		y = 1
+		y = 2
 		prerequisite = {
 			focus = EMP_take_thyferra
 		}
@@ -1543,7 +1823,7 @@ focus_tree = {
 		}
 		mutually_exclusive = {
 			focus = EMP_abandon_the_populace
-			focus = EMP_move_operations_to_byss
+			focus = EMP_retreat_to_the_deep_core
 			focus = EMP_rescue_evir_derricote
 		}
 		completion_reward = {
@@ -1720,15 +2000,10 @@ focus_tree = {
 		prerequisite = {
 			focus = EMP_retreat_to_the_deep_core
 		}
-		prerequisite = {
-			focus = EMP_fall_of_borleias
-		}
 		search_filters = {
 		}
 		mutually_exclusive = {
-			focus = EMP_abandon_the_populace
-			focus = EMP_the_defense_of_coruscant
-			focus = EMP_rescue_evir_derricote
+			
 		}
 		completion_reward = {
 		}
@@ -1738,62 +2013,40 @@ focus_tree = {
 		}
 	}
 
-	#Take Industry(Pestage)
+	#We'll Be Back(Pestage) 
 	focus = {
-		id = EMP_take_industry
+		id = EMP_well_be_back
 		icon = GFX_outbound_flight
 		relative_position_id = EMP_move_operations_to_byss
-		cost = 10.8
-		x = 0
-		y = 1
-		prerequisite = {
-			focus = EMP_move_operations_to_byss
-		}
-		search_filters = {
-		}
-		mutually_exclusive = {
-		}
-		completion_reward = {
-		}
-
-		ai_will_do = {
-			factor = 1
-		}
-	}
-
-	#Take Personell(Pestage)
-	focus = {
-		id = EMP_take_personell
-		icon = GFX_outbound_flight
-		relative_position_id = EMP_take_industry
-		cost = 10.8
-		x = 0
-		y = 1
-		prerequisite = {
-			focus = EMP_take_industry
-		}
-		search_filters = {
-		}
-		mutually_exclusive = {
-		}
-		completion_reward = {
-		}
-
-		ai_will_do = {
-			factor = 1
-		}
-	}
-
-	#Abandon the Populace(Ruling Council)
-	focus = {
-		id = EMP_abandon_the_populace
-		icon = GFX_outbound_flight
-		relative_position_id = EMP_protection_on_ord_cantrell
 		cost = 7.2
 		x = 0
 		y = 1
 		prerequisite = {
-			focus = EMP_protection_on_ord_cantrell
+			focus = EMP_move_operations_to_byss
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+			
+		}
+		completion_reward = {
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+
+	#A Contingency(Ruling Council)
+	focus = {
+		id = EMP_abandon_the_populace
+		icon = GFX_outbound_flight
+		relative_position_id = EMP_contact_ardus_kaine
+		cost = 7.2
+		x = 0
+		y = 1
+		prerequisite = {
+			focus = EMP_contact_ardus_kaine
 		}
 		prerequisite = {
 			focus = EMP_fall_of_borleias
@@ -1802,7 +2055,7 @@ focus_tree = {
 		}
 		mutually_exclusive = {
 			focus = EMP_the_defense_of_coruscant
-			focus = EMP_move_operations_to_byss
+			focus = EMP_retreat_to_the_deep_core
 			focus = EMP_rescue_evir_derricote
 		}
 		completion_reward = {
@@ -1819,7 +2072,7 @@ focus_tree = {
 		icon = GFX_outbound_flight
 		relative_position_id = EMP_abandon_the_populace
 		cost = 7.2
-		x = 0
+		x = -1
 		y = 1
 		prerequisite = {
 			focus = EMP_abandon_the_populace
@@ -1835,22 +2088,112 @@ focus_tree = {
 			factor = 1
 		}
 	}
-	#Save the Nobility(Ruling Council)
+	#Save the Admiralty(Ruling Council)
 	focus = {
 		id = EMP_save_the_admiralty
 		icon = GFX_outbound_flight
-		relative_position_id = EMP_save_the_nobility
+		relative_position_id = EMP_abandon_the_populace
 		cost = 7.2
-		x = 0
+		x = 1
 		y = 1
 		prerequisite = {
-			focus = EMP_save_the_nobility
+			focus = EMP_abandon_the_populace
 		}
 		search_filters = {
 		}
 		mutually_exclusive = {
 		}
 		completion_reward = {
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	#Protection from Kaine(Ruling Council)
+	focus = {
+		id = EMP_protection_from_kaine
+		icon = GFX_outbound_flight
+		relative_position_id = EMP_abandon_the_populace
+		cost = 7.2
+		x = 0
+		y = 2
+		prerequisite = {
+			focus = EMP_abandon_the_populace
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	#Setting up on Ord Cantrell(Ruling Council)
+	focus = {
+		id = EMP_setting_up_on_ord_cantrell
+		icon = GFX_outbound_flight
+		relative_position_id = EMP_protection_from_kaine
+		cost = 7.2
+		x = 0
+		y = 1
+		prerequisite = {
+			focus = EMP_protection_from_kaine
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	#Join the Alignment(Ruling Council)
+	focus = {
+		id = EMP_join_the_alignment
+		icon = GFX_outbound_flight
+		relative_position_id = EMP_setting_up_on_ord_cantrell
+		cost = 7.2
+		x = -1
+		y = 1
+		prerequisite = {
+			focus = EMP_setting_up_on_ord_cantrell
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+			focus = EMP_the_royal_guard_coup
+		}
+		completion_reward = {
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	#The Royal Guard Coup(Ruling Council)
+	focus = {
+		id = EMP_the_royal_guard_coup
+		icon = GFX_outbound_flight
+		relative_position_id = EMP_setting_up_on_ord_cantrell
+		cost = 7.2
+		x = 1
+		y = 1
+		prerequisite = {
+			focus = EMP_setting_up_on_ord_cantrell
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			set_cosmetic_tag = CRIMSON
 		}
 
 		ai_will_do = {
@@ -1864,10 +2207,13 @@ focus_tree = {
 		icon = GFX_outbound_flight
 		relative_position_id = EMP_zorba
 		cost = 7.2
-		x = 2
+		x = 0
 		y = 1
 		prerequisite = {
 			focus = EMP_zorba
+		}
+		prerequisite = {
+			focus = EMP_eyes_of_the_empire_2
 		}
 		prerequisite = {
 			focus = EMP_fall_of_borleias
@@ -1876,7 +2222,7 @@ focus_tree = {
 		}
 		mutually_exclusive = {
 			focus = EMP_the_defense_of_coruscant
-			focus = EMP_move_operations_to_byss
+			focus = EMP_retreat_to_the_deep_core
 			focus = EMP_abandon_the_populace
 		}
 		completion_reward = {
@@ -1957,6 +2303,38 @@ focus_tree = {
 			240 = {
 				add_dynamic_modifier = { modifier = krytos_virus_1 }
 			}
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+
+	#Peace Through Strength
+	focus = {
+		id = EMP_peace_through_strength
+		icon = GFX_outbound_flight
+		relative_position_id = EMP_fall_of_borleias
+		cost = 10.8
+		x = 0
+		y = 4
+		prerequisite = {
+			focus = EMP_fall_of_borleias
+		}
+		available = {
+			#controls all of coruscant
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			load_focus_tree = {
+				tree = REBORNEMPIRE
+				keep_completed = no
+			}
+			#tooltip
+			#peacout with new rep
 		}
 
 		ai_will_do = {
