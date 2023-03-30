@@ -13,7 +13,13 @@ on_actions = {
 			set_variable = { resource_income_modifier = 1 }
 			set_variable = { resource_expense_modifier = 1 }
 			}
-			set_variable = { Global.interest_rate = 1.5 }
+			set_variable = { Global.ibc_interest_loan = 7 }
+			set_variable = { Global.bank_of_core_loan = 9 }
+			set_variable = { Global.bank_of_aargau_loan = 6 }
+			
+			set_variable = { Global.ibc_interest_investment = 2 }
+			set_variable = { Global.bank_of_core_investment = 3 }
+			set_variable = { Global.bank_of_aargau_investment = 2 }
 		}
 	}
 	#on_state_control_changed = { 
@@ -116,10 +122,51 @@ on_actions = {
 			set_variable = { steel_export = resource_exported@steel}
 			divide_variable = {  steel_export  = 800 }
 			
-			set_variable = { debtexp = debttotal }
-			multiply_variable = { debtexp = Global.interest_rate }
-			divide_variable = { debtexp = 1000 }
-			add_to_variable = { Global.debtexp = debtexp }
+			set_variable = { investment_income = 0 }
+			set_variable = { interest_payments = 0 }
+			
+			set_variable = { ibc_debt_calc = ibc_debt }
+			set_temp_variable = { ibc_interest = Global.ibc_interest_loan }
+			multiply_temp_variable = { ibc_interest = 0.01}
+			multiply_variable = { ibc_debt_calc = ibc_interest }
+			add_to_variable = { interest_payments = ibc_debt_calc }
+
+			set_variable = { bank_of_core_calc = bank_of_core_debt }
+			set_temp_variable = { bank_of_core_interest = Global.bank_of_core_loan }
+			multiply_temp_variable = { bank_of_core_interest = 0.01}
+			multiply_variable = { bank_of_core_calc = bank_of_core_interest }
+			add_to_variable = { interest_payments = bank_of_core_debt_calc }
+
+			set_variable = { bank_of_aargau_debt_calc = bank_of_aargau_debt }
+			set_temp_variable = { bank_of_aargau_interest = Global.bank_of_aargau_loan }
+			multiply_temp_variable = { bank_of_aargau_interest = 0.01}
+			multiply_variable = { bank_of_aargau_debt_calc = bank_of_aargau_interest }
+			add_to_variable = { interest_payments = bank_of_aargau_debt_calc }
+
+			set_variable = { ibc_investment_calc_invest = ibc_investment }
+			set_temp_variable = { ibc_interest_invest = Global.ibc_interest_investment }
+			multiply_temp_variable = { ibc_interest_invest = 0.01}
+			multiply_variable = { ibc_investment_calc_invest = ibc_interest_invest }
+			add_to_variable = { investment_income = ibc_investment_calc_invest }
+
+			set_variable = { bank_of_core_calc_invest = bank_of_core_investment }
+			set_temp_variable = { bank_of_core_interest_invest = Global.bank_of_core_investment }
+			multiply_temp_variable = { bank_of_core_interest_invest = 0.01}
+			multiply_variable = { bank_of_core_calc_invest = bank_of_core_interest_invest }
+			add_to_variable = { investment_income = bank_of_core_investment_calc_invest }
+
+			set_variable = { bank_of_aargau_investment_calc_invest = bank_of_aargau_investment }
+			set_temp_variable = { bank_of_aargau_interest_invest = Global.bank_of_aargau_investment }
+			multiply_temp_variable = { bank_of_aargau_interest_invest = 0.01}
+			multiply_variable = { bank_of_aargau_investment_calc_invest = bank_of_aargau_interest_invest }
+			add_to_variable = { investment_income = bank_of_aargau_investment_calc_invest }
+
+
+
+			#set_variable = { debtexp = debttotal }
+			#multiply_variable = { debtexp = Global.interest_rate }
+			#divide_variable = { debtexp = 1000 }
+			#add_to_variable = { Global.debtexp = debtexp }
 
 
 			clear_array = Global.nation_list
@@ -255,7 +302,7 @@ on_actions = {
 			add_to_variable = { allexpenses = resourceexpenses }
 			add_to_variable = { allexpenses = nf }
 			add_to_variable = { allexpenses = navf }
-			add_to_variable = { allexpenses = debtexp }
+			add_to_variable = { allexpenses = interest_payments }
 			add_to_variable = { allexpenses = bounty_upkeep }
 			add_to_variable = { allexpenses = corruptioncost }
 			add_to_variable = { allexpenses = bio_maintenace_cal }
@@ -286,8 +333,9 @@ on_actions = {
 			add_to_variable = { nmn = resourceincome }
 			add_to_variable = { nmn = cfff }
 			add_to_variable = { nmn = cfc }
+			add_to_variable = { nmn = investment_income }
 			subtract_from_variable = { nmn = allexpenses }
-			multiply_variable = { nmn = 0.75 }
+			#multiply_variable = { nmn = 0.75 }
 
 			set_variable = { overcome = nmn }
 
