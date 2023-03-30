@@ -39,24 +39,42 @@ country_event = {
     fire_only_once = yes
     is_triggered_only = yes
     option = {
-        name = "Centralised leadership is needed!"
-        #tooltip
-    }
-    option = {
         name = "Pestage is a fool! The Warlords will protect us!"
         #tooltip
+        add_to_variable = {
+            ce_warlords = 1
+        }
+        add_political_power = -400
+        ai_chance = { factor = 70 }
     }
     option = {
         name = "We must protect our trade!"
         #tooltip
+        add_to_variable = {
+            ce_trade = 1
+        }
+        add_political_power = -300
+        ai_chance = { factor = 10 }
+        
     }
     option = {
         name = "Our technological superiority must be upheld!"
         #tooltip
+        add_to_variable = {
+            ce_research = 1
+        }
+        set_stabil
+        ai_chance = { factor = 10 }
+        
     }
     option = {
         name = "Reform? Have they lost their minds? We will take no part in this."
         #tooltip
+        add_to_variable = {
+            ce_ignore = 1
+        }
+        add_political_power = -100
+        ai_chance = { factor = 10 }
     }
 }
 
@@ -509,6 +527,107 @@ country_event = {
         add_equipment_to_stockpile = {
             type = x_wing_airframe_0
             amount = -10
+        }
+    }
+}
+
+country_event = {
+    id = EMP.21 ##
+    title = EMP.21
+    desc = EMP.21.d
+    picture = GFX_report_event_generic_read_write
+    
+    trigger = {
+    }
+    mean_time_to_happen = {
+        
+    }
+    immediate = {
+    }
+    fire_only_once = yes
+    is_triggered_only = yes
+    option = {
+        name = "Well?"
+        #tooltip
+        if = {
+            limit = {
+                check_variable = {
+                    var = ce_ignore
+                    value = ce_trade
+                    compare = greater_than_or_equals
+                }
+                check_variable = {
+                    var = ce_ignore
+                    value = ce_research
+                    compare = greater_than_or_equals
+                }
+                check_variable = {
+                    var = ce_ignore
+                    value = ce_warlords
+                    compare = greater_than_or_equals
+                }
+            }
+            custom_effect_tooltip = "IGNORE"
+        }
+        if = {
+            limit = {
+                check_variable = {
+                    var = ce_trade
+                    value = ce_research
+                    compare = greater_than_or_equals
+                }
+                check_variable = {
+                    var = ce_trade
+                    value = ce_warlords
+                    compare = greater_than_or_equals
+                }
+                check_variable = {
+                    var = ce_trade
+                    value = ce_ignore
+                    compare = greater_than_or_equals
+                }
+            }
+            custom_effect_tooltip = "TRADE"
+        }
+        if = {
+            limit = {
+                check_variable = {
+                    var = ce_research
+                    value = ce_trade
+                    compare = greater_than_or_equals
+                }
+                check_variable = {
+                    var = ce_research
+                    value = ce_warlords
+                    compare = greater_than_or_equals
+                }
+                check_variable = {
+                    var = ce_research
+                    value = ce_ignore
+                    compare = greater_than_or_equals
+                }
+            }
+            custom_effect_tooltip = "RESEARCH"
+        }
+        if = {
+            limit = {
+                check_variable = {
+                    var = ce_warlords
+                    value = ce_trade
+                    compare = greater_than_or_equals
+                }
+                check_variable = {
+                    var = ce_warlords
+                    value = ce_research
+                    compare = greater_than_or_equals
+                }
+                check_variable = {
+                    var = ce_warlords
+                    value = ce_ignore
+                    compare = greater_than_or_equals
+                }
+            }
+            custom_effect_tooltip = "WARLORDS"
         }
     }
 }
