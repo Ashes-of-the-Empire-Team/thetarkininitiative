@@ -27,6 +27,7 @@ focus_tree = {
 		mutually_exclusive = {
 		}
 		completion_reward = {
+			#tooltip
 			news_event = { hours = 12 id = news.1 }
 			
 		}
@@ -55,7 +56,7 @@ focus_tree = {
 			focus = EMP_council_of_entralla
 		}
 		completion_reward = {
-			#tooltip
+			custom_effect_tooltip = EMP_consolidation_tt
 			every_country = {
                     limit = {
                         has_government = imperial
@@ -95,6 +96,7 @@ focus_tree = {
 			focus = EMP_consolidate_imperial_center
 		}
 		completion_reward = {
+			custom_effect_tooltip = EMP_council_ent_tt
 			every_country = {
 				limit = {
 					has_government = imperial
@@ -104,7 +106,6 @@ focus_tree = {
 			add_to_variable = {
 				legitimacy_emp = -5
 			}
-			#tooltip
 			
 		}
 
@@ -154,7 +155,7 @@ focus_tree = {
 		mutually_exclusive = {
 		}
 		completion_reward = {
-			#tooltip
+			custom_effect_tooltip = EMP_droga_tt
 			BYS = {
 				add_ideas = BYS_droga_1
 			}
@@ -181,6 +182,7 @@ focus_tree = {
 		mutually_exclusive = {
 		}
 		completion_reward = {
+			#tooltip
 			add_tech_bonus = {
 				name = navy_bonus
 				bonus = 0.5
@@ -212,7 +214,6 @@ focus_tree = {
 			focus = EMP_integrate_the_lower_levels
 		}
 		completion_reward = {
-			#Tooltip
 			subtract_from_variable = { currency_amount^primary_currency = 10 }
 			230 = {
 				if = {
@@ -271,7 +272,7 @@ focus_tree = {
 			focus = EMP_surface_level_subsidies
 		}
 		completion_reward = {
-			#tooltip
+			custom_effect_tooltip = EMP_rid_of_lower_tt
 			235 = {
 				remove_dynamic_modifier = {
 					modifier = lower_levels_1
@@ -489,6 +490,7 @@ focus_tree = {
 			focus = EMP_coruscant_a_fortress_world
 		}
 		completion_reward = {
+			#tooltip
 			add_ideas = EMP_coruscant_ruined_1
 			add_stability = -0.1
 			EMP = {
@@ -622,6 +624,7 @@ focus_tree = {
 			focus = EMP_coruscant_a_ruined_world
 		}
 		completion_reward = {
+			#tooltip
 			235 = {
 				if = {
 					limit = { is_controlled_by = ROOT }
@@ -795,6 +798,7 @@ focus = {
 		mutually_exclusive = {
 		}
 		completion_reward = {
+			#tooltip
 			EMP = {
 				country_event = EMP.13
 			}
@@ -854,7 +858,7 @@ focus = {
 			focus = EMP_strengthen_imperial_intelligence
 		}
 		completion_reward = {
-			#tooltip
+			custom_effect_tooltip = EMP_may_have_tt
 			add_ideas = isb_government
 		}
 
@@ -883,7 +887,7 @@ focus = {
 			focus = EMP_isb_primacy
 		}
 		completion_reward = {
-			#tooltip
+			custom_effect_tooltip = EMP_may_have_tt
 			add_ideas = imperial_intelligence
 		}
 
@@ -913,13 +917,14 @@ focus = {
 	mutually_exclusive = {
 	}
 	completion_reward = {
-		#tooltip
-		EMP = {
-			country_event = {id=EMP.8}
-		}
+		custom_effect_tooltip = EMP_important_tt
+		
+		country_event = {id=EMP.17}
+		add_ideas = EMP_leadership_crisis_1
 		add_to_variable = {
 			legitimacy_emp = -5
 		}
+		add_political_power = -100
 	}
 
 	ai_will_do = {
@@ -932,9 +937,12 @@ focus = {
 		id = EMP_the_great_escape
 		icon = GFX_outbound_flight
 		relative_position_id = EMP_failed_censure
-		cost = 5
+		cost = 1.5
 		x = -6
 		y = 1
+		available = {
+			always = no
+		}
 		prerequisite = {
 			focus = EMP_failed_censure
 		}
@@ -944,13 +952,8 @@ focus = {
 			focus = EMP_clamp_down
 		}
 		completion_reward = {
-			#tooltip
-			EMP = {
-				country_event = {id=EMP.8}
-			}
-			add_to_variable = {
-				legitimacy_emp = -5
-			}
+			custom_effect_tooltip = EMP_can_only_tt
+			
 		}
 
 		ai_will_do = {
@@ -976,8 +979,13 @@ focus = {
 			focus = EMP_the_great_escape
 		}
 		completion_reward = {
+			custom_effect_tooltip = EMP_important_tt
 			#guild relations down
-
+			imperial_intelligence_loyalty = -10
+			imperial_security_bureau_loyalty = -10
+			country_event= {
+				id = EMP.18
+			}
 		}
 
 		ai_will_do = {
@@ -990,9 +998,12 @@ focus = {
 		id = EMP_close_the_fist
 		icon = GFX_outbound_flight
 		relative_position_id = EMP_clamp_down
-		cost = 10.8
+		cost = 1.5
 		x = 4
 		y = 1
+		available = {
+			always = no
+		}
 		prerequisite = {
 			focus = EMP_clamp_down
 		}
@@ -1002,6 +1013,7 @@ focus = {
 			focus = EMP_the_conspiracy
 		}
 		completion_reward = {
+			custom_effect_tooltip = EMP_can_only_tt
 		}
 
 		ai_will_do = {
@@ -1025,6 +1037,7 @@ focus = {
 		mutually_exclusive = {
 		}
 		completion_reward = {
+			remove_ideas = EMP_leadership_crisis_1
 		}
 
 		ai_will_do = {
@@ -1209,9 +1222,12 @@ focus = {
 		id = EMP_the_conspiracy
 		icon = GFX_outbound_flight
 		relative_position_id = EMP_clamp_down
-		cost = 10.8
+		cost = 1.5
 		x = -4
 		y = 1
+		available = {
+			always = no
+		}
 		prerequisite = {
 			focus = EMP_clamp_down
 		}
@@ -1221,14 +1237,7 @@ focus = {
 			focus = EMP_close_the_fist
 		}
 		completion_reward = {
-			swap_ideas = {
-				remove_idea = EMP_church_1
-				add_idea = EMP_church_2
-			}
-			#Tooltip
-			EMP = {
-				country_event = {id=EMP.12}
-			}
+			custom_effect_tooltip = EMP_can_only_tt
 		}
 
 		ai_will_do = {
@@ -1254,6 +1263,7 @@ focus = {
 		}
 		completion_reward = {
 			remove_ideas = EMP_complacent_bureaucracy
+			remove_ideas = EMP_leadership_crisis_1
 		}
 
 		ai_will_do = {
@@ -1303,9 +1313,7 @@ focus = {
 		mutually_exclusive = {
 		}
 		completion_reward = {
-			add_trait = {
-				trait = eyes_of_the_empire
-			}
+			add_ideas = eyes_of_the_empire_1
 		}
 
 		ai_will_do = {
@@ -1485,7 +1493,7 @@ focus = {
 		}
 	}
 
-	#Night of the Long Blasters
+	#Isard's Betrayal
 	focus = {
 		id = EMP_betrayal
 		icon = GFX_outbound_flight
@@ -1502,9 +1510,11 @@ focus = {
 			focus = EMP_oligarchy
 		}
 		completion_reward = {
+			#tooltip
 			EMP = {
 				country_event = {id=EMP.16}
 			}
+			kill_country_leader = yes
 		}
 
 		ai_will_do = {
@@ -1529,22 +1539,16 @@ focus = {
 		mutually_exclusive = {
 		}
 		completion_reward = {
-			EMP = {
-				if = {
-					limit = {
-						NOT = {
-							has_completed_focus = EMP_the_conspiracy
-						}
-					}
-					swap_ideas = {
-						remove_idea = EMP_church_1
-						add_idea = EMP_church_2
-					}
-					
-				}
-				
-			}
+			#tooltip
+			#news event
 			remove_ideas = EMP_complacent_bureaucracy
+			remove_ideas = EMP_leadership_crisis_1
+			swap_ideas = {
+				remove_idea = EMP_church_1
+				add_idea = EMP_church_2
+			}
+			add_ideas = EMP_trioculus_palpatines_son
+			
 			
 		}
 
@@ -1568,6 +1572,16 @@ focus = {
 		mutually_exclusive = {
 		}
 		completion_reward = {
+			EOH = {
+				country_event = EMP.19
+			}
+			add_tech_bonus = {
+				name = navy_doctrine_bonus
+				bonus = 1
+				ahead_reduction = 0
+				uses = 2
+				category = naval_doctrine
+			}
 			
 			
 		}
@@ -1592,6 +1606,9 @@ focus = {
 		mutually_exclusive = {
 		}
 		completion_reward = {
+			REB = {
+				country_event = {id=EMP.20}
+			}
 			
 			
 		}
@@ -1641,6 +1658,7 @@ focus = {
 		mutually_exclusive = {
 		}
 		completion_reward = {
+			add_ideas = EMP_legacy_of_armand_isard
 		}
 
 		ai_will_do = {
@@ -1663,6 +1681,10 @@ focus = {
 		mutually_exclusive = {
 		}
 		completion_reward = {
+			swap_ruler_traits = {
+				remove = eyes_of_the_empire_1
+				add = eyes_of_the_empire_2
+			}
 		}
 
 		ai_will_do = {
@@ -1707,6 +1729,11 @@ focus = {
 		mutually_exclusive = {
 		}
 		completion_reward = {
+			#tooltip
+			#event
+			add_to_variable = {
+				legitimacy_emp = 10
+			}
 		}
 
 		ai_will_do = {
@@ -2227,7 +2254,7 @@ focus = {
 			focus = EMP_abandon_the_populace
 		}
 		completion_reward = {
-			#tooltip
+			custom_effect_tooltip = EMP_derricote_tt
 			#add operative
 		}
 
@@ -2252,7 +2279,6 @@ focus = {
 		mutually_exclusive = {
 		}
 		completion_reward = {
-			#tooltip
 		}
 
 		ai_will_do = {
@@ -2276,7 +2302,7 @@ focus = {
 		mutually_exclusive = {
 		}
 		completion_reward = {
-			#tooltip
+			custom_effect_tooltip = EMP_unleashed_krytos_tt
 			235 = {
 				add_dynamic_modifier = { modifier = krytos_virus_1 }
 			}
@@ -2330,12 +2356,17 @@ focus = {
 		mutually_exclusive = {
 		}
 		completion_reward = {
+			custom_effect_tooltip = EMP_victory_tree_tt
+			white_peace = REB
+			white_peace = CHA
+			white_peace = BOT
+			white_peace = CAL
+			#peacout with new rep
 			load_focus_tree = {
-				tree = REBORNEMPIRE
+				tree = EMPIRE
 				keep_completed = no
 			}
-			#tooltip
-			#peacout with new rep
+			
 		}
 
 		ai_will_do = {

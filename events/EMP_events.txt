@@ -408,7 +408,107 @@ country_event = {
     fire_only_once = yes
     is_triggered_only = yes
     option = {
-        name = "Interesting"
+        name = "Let us bide our time..."
+    }
+    option = {
+        name = "Interesting."
         #tooltip
+        complete_national_focus = EMP_the_great_escape
+        EMP = {
+            country_event = {id=EMP.8}
+        }
+        add_to_variable = {
+            legitimacy_emp = -5
+        }
+    }
+}
+
+country_event = {
+    id = EMP.18 ##Clamping Down(choice)
+    title = EMP.18
+    desc = EMP.18.d
+    picture = GFX_report_event_generic_read_write
+    
+    trigger = {
+    }
+    mean_time_to_happen = {
+        
+    }
+    immediate = {
+    }
+    fire_only_once = yes
+    is_triggered_only = yes
+    option = {
+        name = "Yes! The mad Emperor must go!"
+        complete_national_focus = EMP_the_conspiracy
+        country_event = {id=EMP.12}
+        kill_country_leader = yes
+        #Tooltip
+    }
+    option = {
+        name = "No! Crush the traitorous council!"
+        complete_national_focus = EMP_close_the_fist
+        
+			start_civil_war = {
+				ideology = imperial
+				size = 0.1
+			}
+        #tooltip
+    }
+}
+
+country_event = {
+    id = EMP.19 ##Contacting Thrawn
+    title = EMP.19
+    desc = EMP.19.d
+    picture = GFX_report_event_generic_read_write
+    
+    trigger = {
+    }
+    mean_time_to_happen = {
+        
+    }
+    immediate = {
+    }
+    fire_only_once = yes
+    is_triggered_only = yes
+    option = {
+        name = "Very well... I agree."
+        add_tech_bonus = {
+            name = navy_doctrine_bonus
+            bonus = 1
+            ahead_reduction = 0
+            uses = 1
+            category = naval_doctrine
+        }
+    }
+    option = {
+        name = "I find your lack of faith disturbing."
+        add_command_power = -25
+        
+    }
+}
+
+country_event = {
+    id = EMP.20 ##Rogue Squadron
+    title = EMP.20
+    desc = EMP.20.d
+    picture = GFX_report_event_generic_read_write
+    
+    trigger = {
+    }
+    mean_time_to_happen = {
+        
+    }
+    immediate = {
+    }
+    fire_only_once = yes
+    is_triggered_only = yes
+    option = {
+        name = "Curse her!"
+        add_equipment_to_stockpile = {
+            type = x_wing_airframe_0
+            amount = -10
+        }
     }
 }
