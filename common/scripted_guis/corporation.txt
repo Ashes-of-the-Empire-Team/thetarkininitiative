@@ -1,5 +1,20 @@
 scripted_gui = {
-
+	after_intel_agency_button = {	
+		context_type = player_context
+		window_name = "Market_top_bar_button"
+		effects = {
+			market_opener_button_click = {
+				if = {
+					limit = {
+						has_country_flag = open_buy_market
+					}
+					clr_country_flag = open_buy_market
+				}else = {
+					set_country_flag = open_buy_market
+				}
+			}	
+		}
+	}
 	corporation_buy_market = {
 		context_type = player_context
 		window_name = "corporation_buy_market"
@@ -676,22 +691,46 @@ scripted_gui = {
 		}
 		effects = {
 			light_ship_button_click = {
-				set_variable = { Root.light_selected_ship_production_cost = i }
-				set_variable = {light_ship_production_time = light_selected_ship_production_cost}
-				divide_variable = {light_ship_production_time = light_ship_workers }
-				multiply_variable = {light_ship_production_time = 100 }
+				set_variable = { Root.light_selected_ship_production_cost = light_ship_production_array^i }
+				recalculate_light_ship_creation_time = yes
 			}
 			medium_ship_button_click = {
-				set_variable = { Root.medium_selected_ship_production_cost = i }
-				set_variable = {medium_ship_production_time = medium_selected_ship_production_cost}
-				divide_variable = {medium_ship_production_time = medium_ship_workers }
-				multiply_variable = {medium_ship_production_time = 100 }
+				set_variable = { Root.medium_selected_ship_production_cost = medium_ship_production_array^i }
+				recalculate_medium_ship_creation_time = yes
 			}
 			heavy_ship_button_click = {
-				set_variable = { Root.heavy_selected_ship_production_cost = i }
-				set_variable = {heavy_ship_production_time = heavy_selected_ship_production_cost}
-				divide_variable = {heavy_ship_production_time = heavy_ship_workers }
-				multiply_variable = {heavy_ship_production_time = 100 }
+				set_variable = { Root.heavy_selected_ship_production_cost = heavy_ship_production_array^i }
+				recalculate_heavy_ship_creation_time = yes
+			}
+			selected_light_ship_click = {
+				if = {
+					limit = {
+						has_country_flag = light_ship_selection_open
+					}
+					clr_country_flag = light_ship_selection_open
+				}else = {
+					set_country_flag = light_ship_selection_open
+				}
+			}
+			selected_medium_ship_click = {
+				if = {
+					limit = {
+						has_country_flag = medium_ship_selection_open
+					}
+					clr_country_flag = medium_ship_selection_open
+				}else = {
+					set_country_flag = medium_ship_selection_open
+				}
+			}
+			selected_heavy_ship_click = {
+				if = {
+					limit = {
+						has_country_flag = heavy_ship_selection_open
+					}
+					clr_country_flag = heavy_ship_selection_open
+				}else = {
+					set_country_flag = heavy_ship_selection_open
+				}
 			}
 			light_ship_create_button_click = {
 				light_ship_creation_effect = yes
@@ -734,21 +773,27 @@ scripted_gui = {
 			}
 			light_workers_add_button_click = {
 				add_to_variable = {light_ship_workers = 1000}
+				recalculate_light_ship_creation_time = yes
 			}
 			medium_workers_add_button_click = {
 				add_to_variable = {medium_ship_workers = 1000}
+				recalculate_medium_ship_creation_time = yes
 			}
 			heavy_workers_add_button_click = {
 				add_to_variable = {heavy_ship_workers = 1000}
+				recalculate_heavy_ship_creation_time = yes
 			}
 			light_workers_subtract_button_click = {
 				subtract_from_variable = {light_ship_workers = 1000}
+				recalculate_light_ship_creation_time = yes
 			}
 			medium_workers_subtract_button_click = {
 				subtract_from_variable = {medium_ship_workers = 1000}
+				recalculate_medium_ship_creation_time = yes
 			}
 			heavy_workers_subtract_button_click = {
 				subtract_from_variable = {heavy_ship_workers = 1000}
+				recalculate_heavy_ship_creation_time = yes
 			}
 			light_dockyards_add_button_click = {
 				add_to_variable = {light_dockyards = 1}
@@ -800,6 +845,15 @@ scripted_gui = {
 			}
 		}
 		triggers ={
+			selected_light_ship_click_enabled = {
+				check_variable = {light_ship_workers > 999}
+			}
+			selected_medium_ship_click_enabled = {
+				check_variable = {medium_ship_workers > 999}
+			}
+			selected_heavy_ship_click_enabled = {
+				check_variable = {heavy_ship_workers > 999}
+			}
 			light_workers_add_button_click_enabled = {
 				NOT = {
 					has_idea = light_ship_idea_holder
@@ -911,11 +965,38 @@ scripted_gui = {
 			heavy_ship_auto_buy_display_visible = {
 				has_country_flag = heavy_ship_auto_renew
 			}
+			light_ship_button_visible = {
+				has_country_flag = light_ship_selection_open
+			}
+			light_entry_background_visible = {
+				has_country_flag = light_ship_selection_open
+			}
+			light_ship_name_visible = {
+				has_country_flag = light_ship_selection_open
+			}
+			medium_ship_button_visible = {
+				has_country_flag = medium_ship_selection_open
+			}
+			medium_entry_background_visible = {
+				has_country_flag = medium_ship_selection_open
+			}
+			medium_ship_name_visible = {
+				has_country_flag = medium_ship_selection_open
+			}
+			heavy_ship_button_visible = {
+				has_country_flag = heavy_ship_selection_open
+			}
+			heavy_entry_background_visible = {
+				has_country_flag = heavy_ship_selection_open
+			}
+			heavy_ship_name_visible = {
+				has_country_flag = heavy_ship_selection_open
+			}
 		}
 		properties = {
 			selected_light_ship = {image = "[get_light_ship_selected_photo]"}
-			selected_medium_ship = {image = "[get_medium_ship_photo]"}
-			selected_heavy_ship = {image = "[get_heavy_ship_photo]"}
+			selected_medium_ship = {image = "[get_medium_ship_selected_photo]"}
+			selected_heavy_ship = {image = "[get_heavy_ship_selected_photo]"}
 			light_ship_button = { image = "[get_light_ship_photo]" }
 			medium_ship_button = { image = "[get_medium_ship_photo]" }
 			heavy_ship_button = { image = "[get_heavy_ship_photo]" }
@@ -927,17 +1008,14 @@ scripted_gui = {
 			light_ship_gridbox = {
 				array = light_ship_production_array
 				entry_container = light_ship_entry_box
-				change_scope = yes
 			}
 			medium_ship_gridbox = {
 				array = medium_ship_production_array
 				entry_container = medium_ship_entry_box
-				change_scope = yes
-			}
+			} 
 			heavy_ship_gridbox = {
 				array = heavy_production_array
 				entry_container = heavy_ship_entry_box
-				change_scope = yes
 			}
 		}
 	}

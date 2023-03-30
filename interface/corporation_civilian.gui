@@ -1,5 +1,16 @@
 guiTypes = {
 	containerWindowType = {
+		name = "Market_top_bar_button"
+		buttonType = {
+			name = "market_opener_button" 
+			position = { x = 650 y = 30 }
+			spriteType = "GFX_market_button"
+			orientation = UPPER_LEFT
+			oversound = ui_menu_over
+			clicksound = click_close
+		}
+	}
+	containerWindowType = {
 		name = "Marketplace_backend"
 		position = { x = 620 y = 100 } #990
 		size = { width=946 height=982 }
@@ -794,50 +805,65 @@ guiTypes = {
 	}
 	containerWindowType = {
 		name = "light_ship_entry_box"
-		position = { x = 620 y = 100 } #990
-		size = { width=946 height=982 }
+		position = { x = 100 y = 100 } #990
+		size = { width=300 height=300 }
+		iconType = {
+			name = light_entry_background
+			position = {x = 20 y = 0}
+			spriteType = "GFX_ship_market_entry"
+		}
 		buttonType = {
 			name = light_ship_button
-			position = { x = 0 y=0 }
-			spriteType = "standard_ship_gfx"
+			position = { x = 0 y=30 }
+			spriteType = "GFX_raider_1_medium"
 		}
 		instantTextBoxType = {
 			name = light_ship_name
-			position = {x = 100 y =30}
+			position = {x =120 y =8}
 			font = "hoi_18mbs"
-			text = "grab_ship_production_name"
+			text = "grab_light_ship_production_name"
 		}
 	}
 	containerWindowType = {
 		name = "medium_ship_entry_box"
 		position = { x = 620 y = 100 } #990
 		size = { width=946 height=982 }
+		iconType = {
+			name = medium_entry_background
+			position = {x = 0 y = 0}
+			spriteType = "GFX_ship_market_entry"
+		}
 		buttonType = {
 			name = medium_ship_button
 			position = { x = 0 y=0 }
-			spriteType = "standard_ship_gfx"
+			spriteType = "GFX_raider_1_medium"
 		}
 		instantTextBoxType = {
 			name = medium_ship_name
 			position = {x = 100 y =30}
 			font = "hoi_18mbs"
-			text = "grab_ship_production_name"
+			text = "grab_medium_ship_production_name"
 		}
 	}
 	containerWindowType = {
 		name = "heavy_ship_entry_box"
 		position = { x = 620 y = 100 } #990
 		size = { width=946 height=982 }
+		iconType = {
+			name = heavy_entry_background
+			position = {x = 0 y = 0}
+			spriteType = "GFX_ship_market_entry"
+		}
 		buttonType = {
 			name = heavy_ship_button
 			position = { x = 0 y=0 }
-			spriteType = "standard_ship_gfx"
+			spriteType = "GFX_raider_1_medium"
 		}
 		instantTextBoxType = {
 			name = heavy_ship_name
-			position = {x = 100 y =30}
+			position = {x = 0 y = 30}
 			font = "hoi_18mbs"
-			text = "grab_ship_production_name"
+			text = "grab_heavy_ship_production_name"
 		}
 	}
 	containerWindowType = {
@@ -1076,19 +1102,40 @@ guiTypes = {
 			spriteType = "GFX_lower_button"
 			pdx_tooltip = "dockyard_subtract_tooltip"
 		}
-		iconType = {
+		buttonType = {
 			name = "selected_light_ship"
 			spriteType = "GFX_raider_1_medium"
 			position = { x = -5 y = 150 }
 			orientation = UPPER_LEFT
 		}
-		iconType = {
+		instantTextBoxType = {
+			name = "light_ship_production_time"
+			text = "light_ship_production_time_loc"
+			font = deathstar_32
+			position = { x = -5 y = 150 }
+			orientation = UPPER_LEFT
+		}
+		instantTextBoxType = {
+			name = "medium_ship_production_time"
+			text = "medium_ship_production_time_loc"
+			font = deathstar_32
+			position = { x = -5 y = 150 }
+			orientation = UPPER_LEFT
+		}
+		instantTextBoxType = {
+			name = "heavy_ship_production_time"
+			text = "heavy_ship_production_time_loc"
+			font = deathstar_32
+			position = { x = -5 y = 150 }
+			orientation = UPPER_LEFT
+		}
+		buttonType = {
 			name = "selected_medium_ship"
 			spriteType = "GFX_victory_2_medium"
 			position = { x = 253 y = 150 }
 			orientation = UPPER_LEFT
 		}
-		iconType = {
+		buttonType = {
 			name = "selected_heavy_ship"
 			spriteType = "GFX_praetor_1_medium"
 			position = { x = 510 y = 150 }
@@ -1096,10 +1143,10 @@ guiTypes = {
 		}
 		gridBoxType = {
 			name = light_ship_gridbox
-			position = { x = 0 y = 0}
-			slotsize= {width = 200 height = 70}
+			position = { x = 15 y = 150}
+			slotsize= {width = 237 height = 120}
 			max_slots_horizontal = 2
-			add_horizontal = no
+			add_horizontal = yes
 		}
 		gridBoxType = {
 			name = medium_ship_gridbox
@@ -1111,7 +1158,7 @@ guiTypes = {
 		gridBoxType = {
 			name = heavy_ship_gridbox
 			position = { x = 0 y = 0}
-			slotsize= {width = 200 height = 70}
+			slotsize= {width = 500 height = 70}
 			max_slots_horizontal = 2
 			add_horizontal = no
 		}
