@@ -29,6 +29,10 @@ focus_tree = {
 		completion_reward = {
 			#tooltip
 			news_event = { hours = 12 id = empnews.1 }
+			custom_effect_tooltip = EMP_plus5legit
+			add_to_variable = {
+				legitimacy_emp = 5
+			}
 			
 		}
 
@@ -195,6 +199,8 @@ focus_tree = {
 		}
 		completion_reward = {
 			#tooltip
+			add_to_variable = {currency_amount^primary_currency = 50}
+			custom_effect_tooltip = plus50credits_tt
 			add_tech_bonus = {
 				name = navy_bonus
 				bonus = 0.5
@@ -226,7 +232,8 @@ focus_tree = {
 			focus = EMP_integrate_the_lower_levels
 		}
 		completion_reward = {
-			subtract_from_variable = { currency_amount^primary_currency = 10 }
+			subtract_from_variable = { currency_amount^primary_currency = 200 }
+			custom_effect_tooltip = minus200credits_tt
 			230 = {
 				if = {
 					limit = { is_controlled_by = ROOT }
@@ -284,6 +291,8 @@ focus_tree = {
 			focus = EMP_surface_level_subsidies
 		}
 		completion_reward = {
+			subtract_from_variable = { currency_amount^primary_currency = 200 }
+			custom_effect_tooltip = minus200credits_tt
 			custom_effect_tooltip = EMP_rid_of_lower_tt
 			235 = {
 				remove_dynamic_modifier = {
@@ -872,6 +881,10 @@ focus = {
 			EMP = {
 				country_event = EMP.13
 			}
+			custom_effect_tooltip = EMP_plus2legit
+			add_to_variable = {
+				legitimacy_emp = 2
+			}
 		}
 
 		ai_will_do = {
@@ -900,6 +913,10 @@ focus = {
 			}
 			CHA = {
 				remove_ideas = CHA_imperial_garrison_1
+			}
+			custom_effect_tooltip = EMP_minus5legit
+			add_to_variable = {
+				legitimacy_emp = -5
 			}
 		}
 
@@ -930,6 +947,10 @@ focus = {
 		completion_reward = {
 			custom_effect_tooltip = EMP_may_have_tt
 			add_ideas = isb_government
+			custom_effect_tooltip = EMP_plus2legit
+			add_to_variable = {
+				legitimacy_emp = 2
+			}
 		}
 
 		ai_will_do = {
@@ -1335,6 +1356,10 @@ focus = {
 		completion_reward = {
 			remove_ideas = EMP_complacent_bureaucracy
 			remove_ideas = EMP_leadership_crisis_1
+			custom_effect_tooltip = EMP_minus2legit
+			add_to_variable = {
+				legitimacy_emp = -2
+			}
 		}
 
 		ai_will_do = {
@@ -1361,6 +1386,10 @@ focus = {
 		completion_reward = {
 			EMP = {
 				country_event = {id=EMP.15}
+			}
+			custom_effect_tooltip = EMP_plus2legit
+			add_to_variable = {
+				legitimacy_emp = 2
 			}
 		}
 
@@ -1506,6 +1535,10 @@ focus = {
 			focus = EMP_the_new_generation
 		}
 		completion_reward = {
+			custom_effect_tooltip = EMP_plus2legit
+			add_to_variable = {
+				legitimacy_emp = 2
+			}
 		}
 
 		ai_will_do = {
@@ -1531,8 +1564,23 @@ focus = {
 		search_filters = {
 		}
 		mutually_exclusive = {
-		}
+		} 
 		completion_reward = {
+			every_other_country = {
+				limit = {
+					AND = {
+						has_government = imperial
+						is_major = no 
+					}
+				}
+				country_event = { id = EMP.22 hours = 4}    
+            }
+			add_to_variable = {currency_amount^primary_currency = 400}
+			custom_effect_tooltip = plus400credits_tt
+			custom_effect_tooltip = EMP_minus2legit
+			add_to_variable = {
+				legitimacy_emp = -2
+			}
 		}
 
 		ai_will_do = {
@@ -1586,6 +1634,10 @@ focus = {
 				country_event = {id=EMP.16}
 			}
 			kill_country_leader = yes
+			custom_effect_tooltip = EMP_minus5legit
+			add_to_variable = {
+				legitimacy_emp = -5
+			}
 		}
 
 		ai_will_do = {
@@ -1620,13 +1672,15 @@ focus = {
 			else = {
 				news_event = { hours = 12 id = empnews.6 }
 			}
+			#set_country_le
 			remove_ideas = EMP_complacent_bureaucracy
 			remove_ideas = EMP_leadership_crisis_1
+			add_ideas = EMP_trioculus_palpatines_son
 			swap_ideas = {
 				remove_idea = EMP_church_1
 				add_idea = EMP_church_2
 			}
-			add_ideas = EMP_trioculus_palpatines_son
+			
 			
 			
 		}
@@ -1714,6 +1768,10 @@ focus = {
 		}
 		completion_reward = {
 			remove_ideas = EMP_church_2
+			custom_effect_tooltip = EMP_plus5legit
+			add_to_variable = {
+				legitimacy_emp = 5
+			}
 		}
 
 		ai_will_do = {
@@ -1848,9 +1906,9 @@ focus = {
 			#tooltip
 			#event
 			remove_ideas = EMP_trioculus_palpatines_son
-			custom_effect_tooltip = EMP_plus10legit
+			custom_effect_tooltip = EMP_plus5legit
 			add_to_variable = {
-				legitimacy_emp = 10
+				legitimacy_emp = 5
 			}
 		}
 
@@ -2204,6 +2262,10 @@ focus = {
 			focus = EMP_rescue_evir_derricote
 		}
 		completion_reward = {
+			custom_effect_tooltip = EMP_minus5legit
+			add_to_variable = {
+				legitimacy_emp = -5
+			}
 		}
 
 		ai_will_do = {
@@ -2227,6 +2289,10 @@ focus = {
 		mutually_exclusive = {
 		}
 		completion_reward = {
+			custom_effect_tooltip = EMP_minus2legit
+			add_to_variable = {
+				legitimacy_emp = -2
+			}
 		}
 
 		ai_will_do = {
@@ -2249,6 +2315,10 @@ focus = {
 		mutually_exclusive = {
 		}
 		completion_reward = {
+			custom_effect_tooltip = EMP_minus2legit
+			add_to_variable = {
+				legitimacy_emp = -2
+			}
 		}
 
 		ai_will_do = {
@@ -2263,7 +2333,7 @@ focus = {
 		cost = 7.2
 		x = 0
 		y = 2
-		prerequisite = {
+		prerequisite = { 
 			focus = EMP_abandon_the_populace
 		}
 		search_filters = {
@@ -2271,6 +2341,9 @@ focus = {
 		mutually_exclusive = {
 		}
 		completion_reward = {
+			clr_country_flag = emperor
+			clr_global_flag = emperor_proclaimed
+			set_cosmetic_tag = COUNCIL
 		}
 
 		ai_will_do = {
@@ -2381,7 +2454,7 @@ focus = {
 		}
 	}
 
-	#Prepare the Virus(Isard)
+	#Experiments on Non-Humans(Isard) 
 	focus = {
 		id = EMP_prepare_the_virus
 		icon = GFX_sate_pestage
@@ -2397,6 +2470,11 @@ focus = {
 		mutually_exclusive = {
 		}
 		completion_reward = {
+			add_political_power = -50
+			custom_effect_tooltip = EMP_minus2legit
+			add_to_variable = {
+				legitimacy_emp = -2
+			}
 		}
 
 		ai_will_do = {
@@ -2422,39 +2500,48 @@ focus = {
 		completion_reward = {
 			custom_effect_tooltip = EMP_unleashed_krytos_tt
 			235 = {
-				add_manpower = -3000000
+				add_manpower = -2000000
+				add_manpower = -2000000
 				add_dynamic_modifier = { modifier = krytos_virus_1 }
 			}
 			230 = {
-				add_manpower = -3000000
+				add_manpower = -2000000
+				add_manpower = -2000000
 				add_dynamic_modifier = { modifier = krytos_virus_1 }
 			}
 			189 = {
-				add_manpower = -3000000
+				add_manpower = -2000000
+				add_manpower = -2000000
 				add_dynamic_modifier = { modifier = krytos_virus_1 }
 			}
 			315 = {
-				add_manpower = -3000000
+				add_manpower = -2000000
+				add_manpower = -2000000
 				add_dynamic_modifier = { modifier = krytos_virus_1 }
 			}
 			229 = {
-				add_manpower = -3000000
+				add_manpower = -2000000
+				add_manpower = -2000000
 				add_dynamic_modifier = { modifier = krytos_virus_1 }
 			}
 			57 = {
-				add_manpower = -3000000
+				add_manpower = -2000000
+				add_manpower = -2000000
 				add_dynamic_modifier = { modifier = krytos_virus_1 }
 			}
 			39 = {
-				add_manpower = -3000000
+				add_manpower = -2000000
+				add_manpower = -2000000
 				add_dynamic_modifier = { modifier = krytos_virus_1 }
 			}
 			60 = {
-				add_manpower = -3000000
+				add_manpower = -2000000
+				add_manpower = -2000000
 				add_dynamic_modifier = { modifier = krytos_virus_1 }
 			}
 			240 = {
-				add_manpower = -3000000
+				add_manpower = -2000000
+				add_manpower = -2000000
 				add_dynamic_modifier = { modifier = krytos_virus_1 }
 			}
 		}
