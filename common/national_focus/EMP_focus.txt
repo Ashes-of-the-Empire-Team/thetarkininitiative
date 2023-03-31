@@ -59,10 +59,12 @@ focus_tree = {
 			custom_effect_tooltip = EMP_consolidation_tt
 			every_other_country = {
 				limit = {
-					has_government = imperial
-					capital_scope = {
-						is_on_continent = core
-					} 
+					AND = {
+						has_government = imperial
+						capital_scope = {
+							is_on_continent = core
+						} 
+					}
 				}
 				country_event = { id = EMP.7 hours = 4}    
             }
@@ -181,7 +183,7 @@ focus_tree = {
 		icon = GFX_sate_pestage
 		relative_position_id = EMP_find_jeng_droga
 		cost = 7.2
-		x = 8
+		x = 10
 		y = 1
 		prerequisite = {
 			focus = EMP_find_jeng_droga
@@ -368,7 +370,7 @@ focus_tree = {
 		relative_position_id = EMP_integrate_the_lower_levels
 		cost = 10.8
 		x = 3
-		y = 2
+		y = 1
 		prerequisite = {
 			focus = EMP_integrate_the_lower_levels
 		}
@@ -440,6 +442,64 @@ focus_tree = {
 		}
 		completion_reward = {
 			#change stormtrooper division template, add some equipment
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+
+	#The Imperial Navy Academy
+	focus = {
+		id = EMP_the_imperial_navy_academy
+		icon = GFX_sate_pestage
+		relative_position_id = EMP_new_recruitment_propaganda
+		cost = 2.9
+		x = 0
+		y = 1
+		prerequisite = {
+			focus = EMP_new_recruitment_propaganda
+			focus = EMP_the_imperial_veterans
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+			focus = EMP_core_defence_forces
+		}
+		completion_reward = {
+			#something else
+			add_tech_bonus = {
+				name = navy_doctrine_bonus
+				bonus = 1
+				ahead_reduction = 0
+				uses = 2
+				category = naval_doctrine
+			}
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	#Core Defence Forces Mobilization 
+	focus = {
+		id = EMP_core_defence_forces
+		icon = GFX_sate_pestage
+		relative_position_id = EMP_new_recruitment_propaganda
+		cost = 2.9
+		x = 2
+		y = 1
+		prerequisite = {
+			focus = EMP_new_recruitment_propaganda
+			focus = EMP_the_imperial_veterans
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+			focus = EMP_the_imperial_navy_academy
+		}
+		completion_reward = {
+			#Build some small ships
 		}
 
 		ai_will_do = {
@@ -1008,7 +1068,7 @@ focus = {
 		icon = GFX_sate_pestage
 		relative_position_id = EMP_clamp_down
 		cost = 1.5
-		x = 4
+		x = 6
 		y = 1
 		available = {
 			always = no
@@ -1531,7 +1591,7 @@ focus = {
 		}
 	}
 
-	#Empress Isard
+	#Long Live the Empress
 	focus = {
 		id = EMP_empress_isard
 		icon = GFX_sate_pestage
@@ -1549,7 +1609,15 @@ focus = {
 		}
 		completion_reward = {
 			#tooltip
-			#news event
+			if = {
+				limit = {
+					has_completed_focus = EMP_betrayal
+				}
+				news_event = { hours = 12 id = empnews.7 }
+			}
+			else = {
+				news_event = { hours = 12 id = empnews.6 }
+			}
 			remove_ideas = EMP_complacent_bureaucracy
 			remove_ideas = EMP_leadership_crisis_1
 			swap_ideas = {
