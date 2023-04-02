@@ -1,6 +1,38 @@
 on_actions = {
 	on_startup = {
 		effect = {
+			every_country = {
+				limit = {
+					has_government = imperial
+					NOT = {
+						original_tag = EMP
+						original_tag = EOH
+						original_tag = ZER
+					}
+				}
+				EMP = {
+					set_autonomy = {
+						target = PREV
+						autonomy_state = autonomy_imperial_sector
+						end_wars = no
+						end_civil_wars = no
+					}
+				}
+			}
+			EMP = {
+				news_event = {
+					id = empnews.9
+					hours = 12
+				}
+			}
+			EMP = {
+				country_event = {
+					id = EMP.24
+					hours = 168
+				}
+			}
+		}
+		effect = {
 			# Imperial Warlords Setup
 				EMP = {
 					add_to_array = { Global.imperial_warlords = THIS.id }

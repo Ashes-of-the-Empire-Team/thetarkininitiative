@@ -744,3 +744,34 @@ country_event = {
         name = "They were not to be trusted."
     }
 }
+
+country_event = {
+    id = EMP.24 ##Imperial Warlords
+    title = EMP.24
+    desc = EMP.24.d
+    picture = GFX_report_event_generic_read_write
+        
+    trigger = {
+    }
+    immediate = {
+        every_other_country = {
+            limit = {
+                has_government = imperial
+                is_major = yes
+            }
+            EMP = {
+                end_puppet = PREV
+            }
+        }
+    }
+    fire_only_once = no
+    is_triggered_only = yes
+    option = {
+        ai_chance = { factor = 100 }
+        name = "Those Bastards!"
+        news_event = {
+            id = empnews.10
+            hours = 12
+        }
+    }
+}
