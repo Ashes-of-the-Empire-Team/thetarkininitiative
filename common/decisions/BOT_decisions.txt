@@ -1,0 +1,875 @@
+###########################################################################################################################
+####################################### Bothan Clans Decisions #######################################################
+###########################################################################################################################
+BOT_clans_category = {
+    #Bothan Clans Decisions 
+    BOT_clan_ilya_decision = {
+        priority = 10
+        icon = eng_ally_imperialist_coup
+
+        allowed = {
+            original_tag = BOT
+            has_political_power = 24
+            has_stability = 0.05
+        }
+        visible = {
+            always=yes
+        }
+        
+        available = {
+            NOT = {
+                OR = {
+                    has_decision = BOT_clan_ilya_decision
+                    has_decision = BOT_clan_ojia_decision
+                    has_decision = BOT_clan_onel_decision
+                    has_decision = BOT_clan_nial_decision
+                    has_decision = BOT_clan_askar_decision
+                    has_decision = BOT_clan_alya_decision
+                }
+            }
+        }
+        custom_cost_trigger = {
+            AND = {
+                has_stability = 0.25
+                has_political_power > 25
+            }
+        }
+        custom_cost_text = BOT_clan_decision_cost
+        days_remove = 5
+        complete_effect = {
+            add_political_power = -25
+            add_stability = -0.05
+            add_ideas = BOT_clan_ilya
+            if ={limit={has_idea=BOT_corruption}remove_ideas=BOT_corruption}
+            if ={limit={has_idea=BOT_nepotism}remove_ideas=BOT_nepotism}
+            if ={limit={has_idea=BOT_clan_ojia}remove_ideas=BOT_clan_ojia}
+            if ={limit={has_idea=BOT_clan_onel}remove_ideas=BOT_clan_onel}
+            if ={limit={has_idea=BOT_clan_nial}remove_ideas=BOT_clan_nial}
+            if ={limit={has_idea=BOT_clan_askar}remove_ideas=BOT_clan_askar}
+            if ={limit={has_idea=BOT_clan_alya}remove_ideas=BOT_clan_alya}
+            if ={limit={has_idea=BOT_clan_equality}remove_ideas=BOT_clan_equality}
+            477 ={
+                if={limit={has_dynamic_modifier={modifier = BOT_ignored_1}}remove_dynamic_modifier={modifier = BOT_ignored_1}}
+                if={limit={has_dynamic_modifier={modifier = BOT_ignored_2}}remove_dynamic_modifier={modifier = BOT_ignored_2}}
+                if={limit={has_dynamic_modifier={modifier = BOT_ignored_3}}remove_dynamic_modifier={modifier = BOT_ignored_3}}
+                if={limit={has_dynamic_modifier={modifier = BOT_ignored_4}}remove_dynamic_modifier={modifier = BOT_ignored_4}}
+                if={limit={has_dynamic_modifier={modifier = BOT_ignored_5}}remove_dynamic_modifier={modifier = BOT_ignored_5}}
+                if={limit={has_dynamic_modifier={modifier = BOT_ignored_6}}remove_dynamic_modifier={modifier = BOT_ignored_6}}
+                if={limit={has_dynamic_modifier={modifier = BOT_ignored_7}}remove_dynamic_modifier={modifier = BOT_ignored_7}}
+                if={limit={has_dynamic_modifier={modifier = BOT_ignored_8}}remove_dynamic_modifier={modifier = BOT_ignored_8}}
+            }
+            478 ={
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_8}}remove_core_of = BOT}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_7}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_7}}add_dynamic_modifier = {modifier = BOT_ignored_8}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_6}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_6}}add_dynamic_modifier = {modifier = BOT_ignored_7}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_5}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_5}}add_dynamic_modifier = {modifier = BOT_ignored_6}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_4}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_4}}add_dynamic_modifier = {modifier = BOT_ignored_5}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_3}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_3}}add_dynamic_modifier = {modifier = BOT_ignored_4}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_2}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_2}}add_dynamic_modifier = {modifier = BOT_ignored_3}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_1}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_1}}add_dynamic_modifier = {modifier = BOT_ignored_2}}
+                if = {limit = {NOT = {OR = {
+                                has_dynamic_modifier = {modifier = BOT_ignored_1}
+                                has_dynamic_modifier = {modifier = BOT_ignored_2}
+                                has_dynamic_modifier = {modifier = BOT_ignored_3}
+                                has_dynamic_modifier = {modifier = BOT_ignored_4}
+                                has_dynamic_modifier = {modifier = BOT_ignored_5}
+                                has_dynamic_modifier = {modifier = BOT_ignored_6}
+                                has_dynamic_modifier = {modifier = BOT_ignored_7}
+                                has_dynamic_modifier = {modifier = BOT_ignored_8}}}}
+                    add_dynamic_modifier = {modifier = BOT_ignored_1}
+                }
+            }
+            377 ={
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_8}}remove_core_of = BOT}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_7}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_7}}add_dynamic_modifier = {modifier = BOT_ignored_8}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_6}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_6}}add_dynamic_modifier = {modifier = BOT_ignored_7}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_5}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_5}}add_dynamic_modifier = {modifier = BOT_ignored_6}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_4}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_4}}add_dynamic_modifier = {modifier = BOT_ignored_5}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_3}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_3}}add_dynamic_modifier = {modifier = BOT_ignored_4}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_2}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_2}}add_dynamic_modifier = {modifier = BOT_ignored_3}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_1}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_1}}add_dynamic_modifier = {modifier = BOT_ignored_2}}
+                if = {limit = {NOT = {OR = {
+                                has_dynamic_modifier = {modifier = BOT_ignored_1}
+                                has_dynamic_modifier = {modifier = BOT_ignored_2}
+                                has_dynamic_modifier = {modifier = BOT_ignored_3}
+                                has_dynamic_modifier = {modifier = BOT_ignored_4}
+                                has_dynamic_modifier = {modifier = BOT_ignored_5}
+                                has_dynamic_modifier = {modifier = BOT_ignored_6}
+                                has_dynamic_modifier = {modifier = BOT_ignored_7}
+                                has_dynamic_modifier = {modifier = BOT_ignored_8}}}}
+                    add_dynamic_modifier = {modifier = BOT_ignored_1}
+                }
+            }
+            479 ={
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_8}}remove_core_of = BOT}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_7}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_7}}add_dynamic_modifier = {modifier = BOT_ignored_8}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_6}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_6}}add_dynamic_modifier = {modifier = BOT_ignored_7}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_5}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_5}}add_dynamic_modifier = {modifier = BOT_ignored_6}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_4}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_4}}add_dynamic_modifier = {modifier = BOT_ignored_5}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_3}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_3}}add_dynamic_modifier = {modifier = BOT_ignored_4}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_2}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_2}}add_dynamic_modifier = {modifier = BOT_ignored_3}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_1}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_1}}add_dynamic_modifier = {modifier = BOT_ignored_2}}
+                if = {limit = {NOT = {OR = {
+                                has_dynamic_modifier = {modifier = BOT_ignored_1}
+                                has_dynamic_modifier = {modifier = BOT_ignored_2}
+                                has_dynamic_modifier = {modifier = BOT_ignored_3}
+                                has_dynamic_modifier = {modifier = BOT_ignored_4}
+                                has_dynamic_modifier = {modifier = BOT_ignored_5}
+                                has_dynamic_modifier = {modifier = BOT_ignored_6}
+                                has_dynamic_modifier = {modifier = BOT_ignored_7}
+                                has_dynamic_modifier = {modifier = BOT_ignored_8}}}}
+                    add_dynamic_modifier = {modifier = BOT_ignored_1}
+                }
+            }
+            476 ={
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_8}}remove_core_of = BOT}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_7}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_7}}add_dynamic_modifier = {modifier = BOT_ignored_8}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_6}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_6}}add_dynamic_modifier = {modifier = BOT_ignored_7}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_5}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_5}}add_dynamic_modifier = {modifier = BOT_ignored_6}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_4}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_4}}add_dynamic_modifier = {modifier = BOT_ignored_5}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_3}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_3}}add_dynamic_modifier = {modifier = BOT_ignored_4}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_2}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_2}}add_dynamic_modifier = {modifier = BOT_ignored_3}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_1}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_1}}add_dynamic_modifier = {modifier = BOT_ignored_2}}
+                if = {limit = {NOT = {OR = {
+                                has_dynamic_modifier = {modifier = BOT_ignored_1}
+                                has_dynamic_modifier = {modifier = BOT_ignored_2}
+                                has_dynamic_modifier = {modifier = BOT_ignored_3}
+                                has_dynamic_modifier = {modifier = BOT_ignored_4}
+                                has_dynamic_modifier = {modifier = BOT_ignored_5}
+                                has_dynamic_modifier = {modifier = BOT_ignored_6}
+                                has_dynamic_modifier = {modifier = BOT_ignored_7}
+                                has_dynamic_modifier = {modifier = BOT_ignored_8}}}}
+                    add_dynamic_modifier = {modifier = BOT_ignored_1}
+                }
+            }
+        }
+        remove_effect = {
+            country_event = {id=BOT.1}
+        }
+    }
+
+    BOT_clan_ojia_decision = {
+        priority = 10
+        icon = eng_ally_imperialist_coup
+
+        allowed = {
+            original_tag = BOT
+            has_political_power = 24
+            has_stability = 0.05
+        }
+        visible = {
+            always=yes
+        }
+        
+        available = {
+            NOT = {
+                OR = {
+                    has_decision = BOT_clan_ilya_decision
+                    has_decision = BOT_clan_ojia_decision
+                    has_decision = BOT_clan_onel_decision
+                    has_decision = BOT_clan_nial_decision
+                    has_decision = BOT_clan_askar_decision
+                    has_decision = BOT_clan_alya_decision
+                }
+            }
+        }
+        custom_cost_trigger = {
+            AND = {
+                has_stability = 0.25
+                has_political_power > 25
+            }
+        }
+        custom_cost_text = BOT_clan_decision_cost
+        days_remove = 5
+        complete_effect = {
+            add_political_power = -25
+            add_stability = -0.05
+            add_ideas = BOT_clan_ojia
+            if ={limit={has_idea=BOT_corruption}remove_ideas=BOT_corruption}
+            if ={limit={has_idea=BOT_nepotism}remove_ideas=BOT_nepotism}
+            if ={limit={has_idea=BOT_clan_ilya}remove_ideas=BOT_clan_ilya}
+            if ={limit={has_idea=BOT_clan_onel}remove_ideas=BOT_clan_onel}
+            if ={limit={has_idea=BOT_clan_nial}remove_ideas=BOT_clan_nial}
+            if ={limit={has_idea=BOT_clan_askar}remove_ideas=BOT_clan_askar}
+            if ={limit={has_idea=BOT_clan_alya}remove_ideas=BOT_clan_alya}
+            if ={limit={has_idea=BOT_clan_equality}remove_ideas=BOT_clan_equality}
+            478 ={
+                if={limit={has_dynamic_modifier={modifier = BOT_ignored_1}}remove_dynamic_modifier={modifier = BOT_ignored_1}}
+                if={limit={has_dynamic_modifier={modifier = BOT_ignored_2}}remove_dynamic_modifier={modifier = BOT_ignored_2}}
+                if={limit={has_dynamic_modifier={modifier = BOT_ignored_3}}remove_dynamic_modifier={modifier = BOT_ignored_3}}
+                if={limit={has_dynamic_modifier={modifier = BOT_ignored_4}}remove_dynamic_modifier={modifier = BOT_ignored_4}}
+                if={limit={has_dynamic_modifier={modifier = BOT_ignored_5}}remove_dynamic_modifier={modifier = BOT_ignored_5}}
+                if={limit={has_dynamic_modifier={modifier = BOT_ignored_6}}remove_dynamic_modifier={modifier = BOT_ignored_6}}
+                if={limit={has_dynamic_modifier={modifier = BOT_ignored_7}}remove_dynamic_modifier={modifier = BOT_ignored_7}}
+                if={limit={has_dynamic_modifier={modifier = BOT_ignored_8}}remove_dynamic_modifier={modifier = BOT_ignored_8}}
+            }
+            477 ={
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_8}}remove_core_of = BOT}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_7}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_7}}add_dynamic_modifier = {modifier = BOT_ignored_8}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_6}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_6}}add_dynamic_modifier = {modifier = BOT_ignored_7}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_5}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_5}}add_dynamic_modifier = {modifier = BOT_ignored_6}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_4}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_4}}add_dynamic_modifier = {modifier = BOT_ignored_5}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_3}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_3}}add_dynamic_modifier = {modifier = BOT_ignored_4}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_2}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_2}}add_dynamic_modifier = {modifier = BOT_ignored_3}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_1}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_1}}add_dynamic_modifier = {modifier = BOT_ignored_2}}
+                if = {limit = {NOT = {OR = {
+                                has_dynamic_modifier = {modifier = BOT_ignored_1}
+                                has_dynamic_modifier = {modifier = BOT_ignored_2}
+                                has_dynamic_modifier = {modifier = BOT_ignored_3}
+                                has_dynamic_modifier = {modifier = BOT_ignored_4}
+                                has_dynamic_modifier = {modifier = BOT_ignored_5}
+                                has_dynamic_modifier = {modifier = BOT_ignored_6}
+                                has_dynamic_modifier = {modifier = BOT_ignored_7}
+                                has_dynamic_modifier = {modifier = BOT_ignored_8}}}}
+                    add_dynamic_modifier = {modifier = BOT_ignored_1}
+                }
+            }
+            377 ={
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_8}}remove_core_of = BOT}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_7}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_7}}add_dynamic_modifier = {modifier = BOT_ignored_8}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_6}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_6}}add_dynamic_modifier = {modifier = BOT_ignored_7}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_5}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_5}}add_dynamic_modifier = {modifier = BOT_ignored_6}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_4}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_4}}add_dynamic_modifier = {modifier = BOT_ignored_5}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_3}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_3}}add_dynamic_modifier = {modifier = BOT_ignored_4}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_2}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_2}}add_dynamic_modifier = {modifier = BOT_ignored_3}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_1}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_1}}add_dynamic_modifier = {modifier = BOT_ignored_2}}
+                if = {limit = {NOT = {OR = {
+                                has_dynamic_modifier = {modifier = BOT_ignored_1}
+                                has_dynamic_modifier = {modifier = BOT_ignored_2}
+                                has_dynamic_modifier = {modifier = BOT_ignored_3}
+                                has_dynamic_modifier = {modifier = BOT_ignored_4}
+                                has_dynamic_modifier = {modifier = BOT_ignored_5}
+                                has_dynamic_modifier = {modifier = BOT_ignored_6}
+                                has_dynamic_modifier = {modifier = BOT_ignored_7}
+                                has_dynamic_modifier = {modifier = BOT_ignored_8}}}}
+                    add_dynamic_modifier = {modifier = BOT_ignored_1}
+                }
+            }
+            479 ={
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_8}}remove_core_of = BOT}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_7}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_7}}add_dynamic_modifier = {modifier = BOT_ignored_8}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_6}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_6}}add_dynamic_modifier = {modifier = BOT_ignored_7}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_5}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_5}}add_dynamic_modifier = {modifier = BOT_ignored_6}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_4}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_4}}add_dynamic_modifier = {modifier = BOT_ignored_5}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_3}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_3}}add_dynamic_modifier = {modifier = BOT_ignored_4}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_2}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_2}}add_dynamic_modifier = {modifier = BOT_ignored_3}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_1}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_1}}add_dynamic_modifier = {modifier = BOT_ignored_2}}
+                if = {limit = {NOT = {OR = {
+                                has_dynamic_modifier = {modifier = BOT_ignored_1}
+                                has_dynamic_modifier = {modifier = BOT_ignored_2}
+                                has_dynamic_modifier = {modifier = BOT_ignored_3}
+                                has_dynamic_modifier = {modifier = BOT_ignored_4}
+                                has_dynamic_modifier = {modifier = BOT_ignored_5}
+                                has_dynamic_modifier = {modifier = BOT_ignored_6}
+                                has_dynamic_modifier = {modifier = BOT_ignored_7}
+                                has_dynamic_modifier = {modifier = BOT_ignored_8}}}}
+                    add_dynamic_modifier = {modifier = BOT_ignored_1}
+                }
+            }
+            476 ={
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_8}}remove_core_of = BOT}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_7}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_7}}add_dynamic_modifier = {modifier = BOT_ignored_8}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_6}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_6}}add_dynamic_modifier = {modifier = BOT_ignored_7}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_5}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_5}}add_dynamic_modifier = {modifier = BOT_ignored_6}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_4}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_4}}add_dynamic_modifier = {modifier = BOT_ignored_5}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_3}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_3}}add_dynamic_modifier = {modifier = BOT_ignored_4}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_2}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_2}}add_dynamic_modifier = {modifier = BOT_ignored_3}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_1}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_1}}add_dynamic_modifier = {modifier = BOT_ignored_2}}
+                if = {limit = {NOT = {OR = {
+                                has_dynamic_modifier = {modifier = BOT_ignored_1}
+                                has_dynamic_modifier = {modifier = BOT_ignored_2}
+                                has_dynamic_modifier = {modifier = BOT_ignored_3}
+                                has_dynamic_modifier = {modifier = BOT_ignored_4}
+                                has_dynamic_modifier = {modifier = BOT_ignored_5}
+                                has_dynamic_modifier = {modifier = BOT_ignored_6}
+                                has_dynamic_modifier = {modifier = BOT_ignored_7}
+                                has_dynamic_modifier = {modifier = BOT_ignored_8}}}}
+                    add_dynamic_modifier = {modifier = BOT_ignored_1}
+                }
+            }
+        }
+        remove_effect = {
+            country_event = {id=BOT.1}
+        }
+    }
+
+    BOT_clan_onel_decision = {
+        priority = 10
+        icon = eng_ally_imperialist_coup
+
+        allowed = {
+            original_tag = BOT
+            has_political_power = 24
+            has_stability = 0.05
+        }
+        visible = {
+            always=yes
+        }
+        
+        available = {
+            NOT = {
+                OR = {
+                    has_decision = BOT_clan_ilya_decision
+                    has_decision = BOT_clan_ojia_decision
+                    has_decision = BOT_clan_onel_decision
+                    has_decision = BOT_clan_nial_decision
+                    has_decision = BOT_clan_askar_decision
+                    has_decision = BOT_clan_alya_decision
+                }
+            }
+        }
+        custom_cost_trigger = {
+            AND = {
+                has_stability = 0.25
+                has_political_power > 25
+            }
+        }
+        custom_cost_text = BOT_clan_decision_cost
+        days_remove = 5
+        complete_effect = {
+            add_political_power = -25
+            add_stability = -0.05
+            add_ideas = BOT_clan_onel
+            if ={limit={has_idea=BOT_corruption}remove_ideas=BOT_corruption}
+            if ={limit={has_idea=BOT_nepotism}remove_ideas=BOT_nepotism}
+            if ={limit={has_idea=BOT_clan_ojia}remove_ideas=BOT_clan_ojia}
+            if ={limit={has_idea=BOT_clan_ilya}remove_ideas=BOT_clan_ilya}
+            if ={limit={has_idea=BOT_clan_nial}remove_ideas=BOT_clan_nial}
+            if ={limit={has_idea=BOT_clan_askar}remove_ideas=BOT_clan_askar}
+            if ={limit={has_idea=BOT_clan_alya}remove_ideas=BOT_clan_alya}
+            if ={limit={has_idea=BOT_clan_equality}remove_ideas=BOT_clan_equality}
+            377 ={
+                if={limit={has_dynamic_modifier={modifier = BOT_ignored_1}}remove_dynamic_modifier={modifier = BOT_ignored_1}}
+                if={limit={has_dynamic_modifier={modifier = BOT_ignored_2}}remove_dynamic_modifier={modifier = BOT_ignored_2}}
+                if={limit={has_dynamic_modifier={modifier = BOT_ignored_3}}remove_dynamic_modifier={modifier = BOT_ignored_3}}
+                if={limit={has_dynamic_modifier={modifier = BOT_ignored_4}}remove_dynamic_modifier={modifier = BOT_ignored_4}}
+                if={limit={has_dynamic_modifier={modifier = BOT_ignored_5}}remove_dynamic_modifier={modifier = BOT_ignored_5}}
+                if={limit={has_dynamic_modifier={modifier = BOT_ignored_6}}remove_dynamic_modifier={modifier = BOT_ignored_6}}
+                if={limit={has_dynamic_modifier={modifier = BOT_ignored_7}}remove_dynamic_modifier={modifier = BOT_ignored_7}}
+                if={limit={has_dynamic_modifier={modifier = BOT_ignored_8}}remove_dynamic_modifier={modifier = BOT_ignored_8}}
+            }
+            478 ={
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_8}}remove_core_of = BOT}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_7}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_7}}add_dynamic_modifier = {modifier = BOT_ignored_8}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_6}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_6}}add_dynamic_modifier = {modifier = BOT_ignored_7}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_5}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_5}}add_dynamic_modifier = {modifier = BOT_ignored_6}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_4}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_4}}add_dynamic_modifier = {modifier = BOT_ignored_5}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_3}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_3}}add_dynamic_modifier = {modifier = BOT_ignored_4}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_2}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_2}}add_dynamic_modifier = {modifier = BOT_ignored_3}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_1}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_1}}add_dynamic_modifier = {modifier = BOT_ignored_2}}
+                if = {limit = {NOT = {OR = {
+                                has_dynamic_modifier = {modifier = BOT_ignored_1}
+                                has_dynamic_modifier = {modifier = BOT_ignored_2}
+                                has_dynamic_modifier = {modifier = BOT_ignored_3}
+                                has_dynamic_modifier = {modifier = BOT_ignored_4}
+                                has_dynamic_modifier = {modifier = BOT_ignored_5}
+                                has_dynamic_modifier = {modifier = BOT_ignored_6}
+                                has_dynamic_modifier = {modifier = BOT_ignored_7}
+                                has_dynamic_modifier = {modifier = BOT_ignored_8}}}}
+                    add_dynamic_modifier = {modifier = BOT_ignored_1}
+                }
+            }
+            477 ={
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_8}}remove_core_of = BOT}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_7}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_7}}add_dynamic_modifier = {modifier = BOT_ignored_8}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_6}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_6}}add_dynamic_modifier = {modifier = BOT_ignored_7}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_5}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_5}}add_dynamic_modifier = {modifier = BOT_ignored_6}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_4}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_4}}add_dynamic_modifier = {modifier = BOT_ignored_5}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_3}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_3}}add_dynamic_modifier = {modifier = BOT_ignored_4}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_2}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_2}}add_dynamic_modifier = {modifier = BOT_ignored_3}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_1}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_1}}add_dynamic_modifier = {modifier = BOT_ignored_2}}
+                if = {limit = {NOT = {OR = {
+                                has_dynamic_modifier = {modifier = BOT_ignored_1}
+                                has_dynamic_modifier = {modifier = BOT_ignored_2}
+                                has_dynamic_modifier = {modifier = BOT_ignored_3}
+                                has_dynamic_modifier = {modifier = BOT_ignored_4}
+                                has_dynamic_modifier = {modifier = BOT_ignored_5}
+                                has_dynamic_modifier = {modifier = BOT_ignored_6}
+                                has_dynamic_modifier = {modifier = BOT_ignored_7}
+                                has_dynamic_modifier = {modifier = BOT_ignored_8}}}}
+                    add_dynamic_modifier = {modifier = BOT_ignored_1}
+                }
+            }
+            479 ={
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_8}}remove_core_of = BOT}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_7}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_7}}add_dynamic_modifier = {modifier = BOT_ignored_8}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_6}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_6}}add_dynamic_modifier = {modifier = BOT_ignored_7}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_5}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_5}}add_dynamic_modifier = {modifier = BOT_ignored_6}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_4}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_4}}add_dynamic_modifier = {modifier = BOT_ignored_5}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_3}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_3}}add_dynamic_modifier = {modifier = BOT_ignored_4}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_2}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_2}}add_dynamic_modifier = {modifier = BOT_ignored_3}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_1}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_1}}add_dynamic_modifier = {modifier = BOT_ignored_2}}
+                if = {limit = {NOT = {OR = {
+                                has_dynamic_modifier = {modifier = BOT_ignored_1}
+                                has_dynamic_modifier = {modifier = BOT_ignored_2}
+                                has_dynamic_modifier = {modifier = BOT_ignored_3}
+                                has_dynamic_modifier = {modifier = BOT_ignored_4}
+                                has_dynamic_modifier = {modifier = BOT_ignored_5}
+                                has_dynamic_modifier = {modifier = BOT_ignored_6}
+                                has_dynamic_modifier = {modifier = BOT_ignored_7}
+                                has_dynamic_modifier = {modifier = BOT_ignored_8}}}}
+                    add_dynamic_modifier = {modifier = BOT_ignored_1}
+                }
+            }
+            476 ={
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_8}}remove_core_of = BOT}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_7}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_7}}add_dynamic_modifier = {modifier = BOT_ignored_8}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_6}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_6}}add_dynamic_modifier = {modifier = BOT_ignored_7}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_5}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_5}}add_dynamic_modifier = {modifier = BOT_ignored_6}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_4}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_4}}add_dynamic_modifier = {modifier = BOT_ignored_5}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_3}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_3}}add_dynamic_modifier = {modifier = BOT_ignored_4}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_2}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_2}}add_dynamic_modifier = {modifier = BOT_ignored_3}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_1}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_1}}add_dynamic_modifier = {modifier = BOT_ignored_2}}
+                if = {limit = {NOT = {OR = {
+                                has_dynamic_modifier = {modifier = BOT_ignored_1}
+                                has_dynamic_modifier = {modifier = BOT_ignored_2}
+                                has_dynamic_modifier = {modifier = BOT_ignored_3}
+                                has_dynamic_modifier = {modifier = BOT_ignored_4}
+                                has_dynamic_modifier = {modifier = BOT_ignored_5}
+                                has_dynamic_modifier = {modifier = BOT_ignored_6}
+                                has_dynamic_modifier = {modifier = BOT_ignored_7}
+                                has_dynamic_modifier = {modifier = BOT_ignored_8}}}}
+                    add_dynamic_modifier = {modifier = BOT_ignored_1}
+                }
+            }
+        }
+        remove_effect = {
+            country_event = {id=BOT.1}
+        }
+    }
+
+    BOT_clan_nial_decision = {
+        priority = 10
+        icon = eng_ally_imperialist_coup
+
+        allowed = {
+            original_tag = BOT
+            has_political_power = 24
+            has_stability = 0.05
+        }
+        visible = {
+            always=yes
+        }
+        
+        available = {
+            NOT = {
+                OR = {
+                    has_decision = BOT_clan_ilya_decision
+                    has_decision = BOT_clan_ojia_decision
+                    has_decision = BOT_clan_onel_decision
+                    has_decision = BOT_clan_nial_decision
+                    has_decision = BOT_clan_askar_decision
+                    has_decision = BOT_clan_alya_decision
+                }
+            }
+        }
+        custom_cost_trigger = {
+            AND = {
+                has_stability = 0.25
+                has_political_power > 25
+            }
+        }
+        custom_cost_text = BOT_clan_decision_cost
+        days_remove = 5
+        complete_effect = {
+            add_political_power = -25
+            add_stability = -0.05
+            add_ideas = BOT_clan_nial
+            if ={limit={has_idea=BOT_corruption}remove_ideas=BOT_corruption}
+            if ={limit={has_idea=BOT_nepotism}remove_ideas=BOT_nepotism}
+            if ={limit={has_idea=BOT_clan_ilya}remove_ideas=BOT_clan_ilya}
+            if ={limit={has_idea=BOT_clan_ojia}remove_ideas=BOT_clan_ojia}
+            if ={limit={has_idea=BOT_clan_onel}remove_ideas=BOT_clan_onel}
+            if ={limit={has_idea=BOT_clan_askar}remove_ideas=BOT_clan_askar}
+            if ={limit={has_idea=BOT_clan_alya}remove_ideas=BOT_clan_alya}
+            if ={limit={has_idea=BOT_clan_equality}remove_ideas=BOT_clan_equality}
+            479 ={
+                if={limit={has_dynamic_modifier={modifier = BOT_ignored_1}}remove_dynamic_modifier={modifier = BOT_ignored_1}}
+                if={limit={has_dynamic_modifier={modifier = BOT_ignored_2}}remove_dynamic_modifier={modifier = BOT_ignored_2}}
+                if={limit={has_dynamic_modifier={modifier = BOT_ignored_3}}remove_dynamic_modifier={modifier = BOT_ignored_3}}
+                if={limit={has_dynamic_modifier={modifier = BOT_ignored_4}}remove_dynamic_modifier={modifier = BOT_ignored_4}}
+                if={limit={has_dynamic_modifier={modifier = BOT_ignored_5}}remove_dynamic_modifier={modifier = BOT_ignored_5}}
+                if={limit={has_dynamic_modifier={modifier = BOT_ignored_6}}remove_dynamic_modifier={modifier = BOT_ignored_6}}
+                if={limit={has_dynamic_modifier={modifier = BOT_ignored_7}}remove_dynamic_modifier={modifier = BOT_ignored_7}}
+                if={limit={has_dynamic_modifier={modifier = BOT_ignored_8}}remove_dynamic_modifier={modifier = BOT_ignored_8}}
+            }
+            478 ={
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_8}}remove_core_of = BOT}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_7}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_7}}add_dynamic_modifier = {modifier = BOT_ignored_8}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_6}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_6}}add_dynamic_modifier = {modifier = BOT_ignored_7}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_5}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_5}}add_dynamic_modifier = {modifier = BOT_ignored_6}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_4}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_4}}add_dynamic_modifier = {modifier = BOT_ignored_5}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_3}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_3}}add_dynamic_modifier = {modifier = BOT_ignored_4}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_2}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_2}}add_dynamic_modifier = {modifier = BOT_ignored_3}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_1}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_1}}add_dynamic_modifier = {modifier = BOT_ignored_2}}
+                if = {limit = {NOT = {OR = {
+                                has_dynamic_modifier = {modifier = BOT_ignored_1}
+                                has_dynamic_modifier = {modifier = BOT_ignored_2}
+                                has_dynamic_modifier = {modifier = BOT_ignored_3}
+                                has_dynamic_modifier = {modifier = BOT_ignored_4}
+                                has_dynamic_modifier = {modifier = BOT_ignored_5}
+                                has_dynamic_modifier = {modifier = BOT_ignored_6}
+                                has_dynamic_modifier = {modifier = BOT_ignored_7}
+                                has_dynamic_modifier = {modifier = BOT_ignored_8}}}}
+                    add_dynamic_modifier = {modifier = BOT_ignored_1}
+                }
+            }
+            377 ={
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_8}}remove_core_of = BOT}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_7}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_7}}add_dynamic_modifier = {modifier = BOT_ignored_8}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_6}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_6}}add_dynamic_modifier = {modifier = BOT_ignored_7}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_5}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_5}}add_dynamic_modifier = {modifier = BOT_ignored_6}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_4}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_4}}add_dynamic_modifier = {modifier = BOT_ignored_5}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_3}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_3}}add_dynamic_modifier = {modifier = BOT_ignored_4}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_2}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_2}}add_dynamic_modifier = {modifier = BOT_ignored_3}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_1}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_1}}add_dynamic_modifier = {modifier = BOT_ignored_2}}
+                if = {limit = {NOT = {OR = {
+                                has_dynamic_modifier = {modifier = BOT_ignored_1}
+                                has_dynamic_modifier = {modifier = BOT_ignored_2}
+                                has_dynamic_modifier = {modifier = BOT_ignored_3}
+                                has_dynamic_modifier = {modifier = BOT_ignored_4}
+                                has_dynamic_modifier = {modifier = BOT_ignored_5}
+                                has_dynamic_modifier = {modifier = BOT_ignored_6}
+                                has_dynamic_modifier = {modifier = BOT_ignored_7}
+                                has_dynamic_modifier = {modifier = BOT_ignored_8}}}}
+                    add_dynamic_modifier = {modifier = BOT_ignored_1}
+                }
+            }
+            477 ={
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_8}}remove_core_of = BOT}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_7}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_7}}add_dynamic_modifier = {modifier = BOT_ignored_8}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_6}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_6}}add_dynamic_modifier = {modifier = BOT_ignored_7}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_5}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_5}}add_dynamic_modifier = {modifier = BOT_ignored_6}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_4}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_4}}add_dynamic_modifier = {modifier = BOT_ignored_5}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_3}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_3}}add_dynamic_modifier = {modifier = BOT_ignored_4}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_2}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_2}}add_dynamic_modifier = {modifier = BOT_ignored_3}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_1}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_1}}add_dynamic_modifier = {modifier = BOT_ignored_2}}
+                if = {limit = {NOT = {OR = {
+                                has_dynamic_modifier = {modifier = BOT_ignored_1}
+                                has_dynamic_modifier = {modifier = BOT_ignored_2}
+                                has_dynamic_modifier = {modifier = BOT_ignored_3}
+                                has_dynamic_modifier = {modifier = BOT_ignored_4}
+                                has_dynamic_modifier = {modifier = BOT_ignored_5}
+                                has_dynamic_modifier = {modifier = BOT_ignored_6}
+                                has_dynamic_modifier = {modifier = BOT_ignored_7}
+                                has_dynamic_modifier = {modifier = BOT_ignored_8}}}}
+                    add_dynamic_modifier = {modifier = BOT_ignored_1}
+                }
+            }
+            476 ={
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_8}}remove_core_of = BOT}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_7}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_7}}add_dynamic_modifier = {modifier = BOT_ignored_8}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_6}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_6}}add_dynamic_modifier = {modifier = BOT_ignored_7}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_5}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_5}}add_dynamic_modifier = {modifier = BOT_ignored_6}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_4}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_4}}add_dynamic_modifier = {modifier = BOT_ignored_5}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_3}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_3}}add_dynamic_modifier = {modifier = BOT_ignored_4}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_2}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_2}}add_dynamic_modifier = {modifier = BOT_ignored_3}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_1}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_1}}add_dynamic_modifier = {modifier = BOT_ignored_2}}
+                if = {limit = {NOT = {OR = {
+                                has_dynamic_modifier = {modifier = BOT_ignored_1}
+                                has_dynamic_modifier = {modifier = BOT_ignored_2}
+                                has_dynamic_modifier = {modifier = BOT_ignored_3}
+                                has_dynamic_modifier = {modifier = BOT_ignored_4}
+                                has_dynamic_modifier = {modifier = BOT_ignored_5}
+                                has_dynamic_modifier = {modifier = BOT_ignored_6}
+                                has_dynamic_modifier = {modifier = BOT_ignored_7}
+                                has_dynamic_modifier = {modifier = BOT_ignored_8}}}}
+                    add_dynamic_modifier = {modifier = BOT_ignored_1}
+                }
+            }
+        }
+        remove_effect = {
+            country_event = {id=BOT.1}
+        }
+    }
+
+    BOT_clan_askar_decision = {
+        priority = 10
+        icon = eng_ally_imperialist_coup
+
+        allowed = {
+            original_tag = BOT
+            has_political_power = 24
+            has_stability = 0.05
+        }
+        visible = {
+            always=yes
+        }
+        
+        available = {
+            NOT = {
+                OR = {
+                    has_decision = BOT_clan_ilya_decision
+                    has_decision = BOT_clan_ojia_decision
+                    has_decision = BOT_clan_onel_decision
+                    has_decision = BOT_clan_nial_decision
+                    has_decision = BOT_clan_askar_decision
+                    has_decision = BOT_clan_alya_decision
+                }
+            }
+        }
+        custom_cost_trigger = {
+            AND = {
+                has_stability = 0.25
+                has_political_power > 25
+            }
+        }
+        custom_cost_text = BOT_clan_decision_cost
+        days_remove = 5
+        complete_effect = {
+            add_political_power = -25
+            add_stability = -0.05
+            add_ideas = BOT_clan_askar
+            if ={limit={has_idea=BOT_corruption}remove_ideas=BOT_corruption}
+            if ={limit={has_idea=BOT_nepotism}remove_ideas=BOT_nepotism}
+            if ={limit={has_idea=BOT_clan_ojia}remove_ideas=BOT_clan_ojia}
+            if ={limit={has_idea=BOT_clan_onel}remove_ideas=BOT_clan_onel}
+            if ={limit={has_idea=BOT_clan_nial}remove_ideas=BOT_clan_nial}
+            if ={limit={has_idea=BOT_clan_ilya}remove_ideas=BOT_clan_ilya}
+            if ={limit={has_idea=BOT_clan_alya}remove_ideas=BOT_clan_alya}
+            if ={limit={has_idea=BOT_clan_equality}remove_ideas=BOT_clan_equality}
+            476 ={
+                if={limit={has_dynamic_modifier={modifier = BOT_ignored_1}}remove_dynamic_modifier={modifier = BOT_ignored_1}}
+                if={limit={has_dynamic_modifier={modifier = BOT_ignored_2}}remove_dynamic_modifier={modifier = BOT_ignored_2}}
+                if={limit={has_dynamic_modifier={modifier = BOT_ignored_3}}remove_dynamic_modifier={modifier = BOT_ignored_3}}
+                if={limit={has_dynamic_modifier={modifier = BOT_ignored_4}}remove_dynamic_modifier={modifier = BOT_ignored_4}}
+                if={limit={has_dynamic_modifier={modifier = BOT_ignored_5}}remove_dynamic_modifier={modifier = BOT_ignored_5}}
+                if={limit={has_dynamic_modifier={modifier = BOT_ignored_6}}remove_dynamic_modifier={modifier = BOT_ignored_6}}
+                if={limit={has_dynamic_modifier={modifier = BOT_ignored_7}}remove_dynamic_modifier={modifier = BOT_ignored_7}}
+                if={limit={has_dynamic_modifier={modifier = BOT_ignored_8}}remove_dynamic_modifier={modifier = BOT_ignored_8}}
+            }
+            478 ={
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_8}}remove_core_of = BOT}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_7}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_7}}add_dynamic_modifier = {modifier = BOT_ignored_8}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_6}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_6}}add_dynamic_modifier = {modifier = BOT_ignored_7}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_5}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_5}}add_dynamic_modifier = {modifier = BOT_ignored_6}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_4}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_4}}add_dynamic_modifier = {modifier = BOT_ignored_5}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_3}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_3}}add_dynamic_modifier = {modifier = BOT_ignored_4}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_2}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_2}}add_dynamic_modifier = {modifier = BOT_ignored_3}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_1}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_1}}add_dynamic_modifier = {modifier = BOT_ignored_2}}
+                if = {limit = {NOT = {OR = {
+                                has_dynamic_modifier = {modifier = BOT_ignored_1}
+                                has_dynamic_modifier = {modifier = BOT_ignored_2}
+                                has_dynamic_modifier = {modifier = BOT_ignored_3}
+                                has_dynamic_modifier = {modifier = BOT_ignored_4}
+                                has_dynamic_modifier = {modifier = BOT_ignored_5}
+                                has_dynamic_modifier = {modifier = BOT_ignored_6}
+                                has_dynamic_modifier = {modifier = BOT_ignored_7}
+                                has_dynamic_modifier = {modifier = BOT_ignored_8}}}}
+                    add_dynamic_modifier = {modifier = BOT_ignored_1}
+                }
+            }
+            377 ={
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_8}}remove_core_of = BOT}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_7}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_7}}add_dynamic_modifier = {modifier = BOT_ignored_8}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_6}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_6}}add_dynamic_modifier = {modifier = BOT_ignored_7}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_5}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_5}}add_dynamic_modifier = {modifier = BOT_ignored_6}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_4}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_4}}add_dynamic_modifier = {modifier = BOT_ignored_5}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_3}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_3}}add_dynamic_modifier = {modifier = BOT_ignored_4}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_2}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_2}}add_dynamic_modifier = {modifier = BOT_ignored_3}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_1}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_1}}add_dynamic_modifier = {modifier = BOT_ignored_2}}
+                if = {limit = {NOT = {OR = {
+                                has_dynamic_modifier = {modifier = BOT_ignored_1}
+                                has_dynamic_modifier = {modifier = BOT_ignored_2}
+                                has_dynamic_modifier = {modifier = BOT_ignored_3}
+                                has_dynamic_modifier = {modifier = BOT_ignored_4}
+                                has_dynamic_modifier = {modifier = BOT_ignored_5}
+                                has_dynamic_modifier = {modifier = BOT_ignored_6}
+                                has_dynamic_modifier = {modifier = BOT_ignored_7}
+                                has_dynamic_modifier = {modifier = BOT_ignored_8}}}}
+                    add_dynamic_modifier = {modifier = BOT_ignored_1}
+                }
+            }
+            479 ={
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_8}}remove_core_of = BOT}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_7}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_7}}add_dynamic_modifier = {modifier = BOT_ignored_8}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_6}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_6}}add_dynamic_modifier = {modifier = BOT_ignored_7}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_5}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_5}}add_dynamic_modifier = {modifier = BOT_ignored_6}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_4}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_4}}add_dynamic_modifier = {modifier = BOT_ignored_5}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_3}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_3}}add_dynamic_modifier = {modifier = BOT_ignored_4}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_2}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_2}}add_dynamic_modifier = {modifier = BOT_ignored_3}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_1}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_1}}add_dynamic_modifier = {modifier = BOT_ignored_2}}
+                if = {limit = {NOT = {OR = {
+                                has_dynamic_modifier = {modifier = BOT_ignored_1}
+                                has_dynamic_modifier = {modifier = BOT_ignored_2}
+                                has_dynamic_modifier = {modifier = BOT_ignored_3}
+                                has_dynamic_modifier = {modifier = BOT_ignored_4}
+                                has_dynamic_modifier = {modifier = BOT_ignored_5}
+                                has_dynamic_modifier = {modifier = BOT_ignored_6}
+                                has_dynamic_modifier = {modifier = BOT_ignored_7}
+                                has_dynamic_modifier = {modifier = BOT_ignored_8}}}}
+                    add_dynamic_modifier = {modifier = BOT_ignored_1}
+                }
+            }
+            477 ={
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_8}}remove_core_of = BOT}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_7}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_7}}add_dynamic_modifier = {modifier = BOT_ignored_8}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_6}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_6}}add_dynamic_modifier = {modifier = BOT_ignored_7}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_5}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_5}}add_dynamic_modifier = {modifier = BOT_ignored_6}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_4}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_4}}add_dynamic_modifier = {modifier = BOT_ignored_5}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_3}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_3}}add_dynamic_modifier = {modifier = BOT_ignored_4}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_2}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_2}}add_dynamic_modifier = {modifier = BOT_ignored_3}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_1}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_1}}add_dynamic_modifier = {modifier = BOT_ignored_2}}
+                if = {limit = {NOT = {OR = {
+                                has_dynamic_modifier = {modifier = BOT_ignored_1}
+                                has_dynamic_modifier = {modifier = BOT_ignored_2}
+                                has_dynamic_modifier = {modifier = BOT_ignored_3}
+                                has_dynamic_modifier = {modifier = BOT_ignored_4}
+                                has_dynamic_modifier = {modifier = BOT_ignored_5}
+                                has_dynamic_modifier = {modifier = BOT_ignored_6}
+                                has_dynamic_modifier = {modifier = BOT_ignored_7}
+                                has_dynamic_modifier = {modifier = BOT_ignored_8}}}}
+                    add_dynamic_modifier = {modifier = BOT_ignored_1}
+                }
+            }
+        }
+        remove_effect = {
+            country_event = {id=BOT.1}
+        }
+    }
+
+    BOT_clan_alya_decision = {
+        priority = 10
+        icon = eng_ally_imperialist_coup
+
+        allowed = {
+            original_tag = BOT
+            has_political_power = 24
+            has_stability = 0.05
+        }
+        visible = {
+            always=yes
+        }
+        
+        available = {
+            NOT = {
+                OR = {
+                    has_decision = BOT_clan_ilya_decision
+                    has_decision = BOT_clan_ojia_decision
+                    has_decision = BOT_clan_onel_decision
+                    has_decision = BOT_clan_nial_decision
+                    has_decision = BOT_clan_askar_decision
+                    has_decision = BOT_clan_alya_decision
+                }
+            }
+        }
+        custom_cost_trigger = {
+            AND = {
+                has_stability = 0.25
+                has_political_power > 25
+            }
+        }
+        custom_cost_text = BOT_clan_decision_cost
+        days_remove = 5
+        complete_effect = {
+            add_political_power = -25
+            add_stability = -0.05
+            add_ideas = BOT_clan_alya
+            add_ideas = BOT_nepotism
+            if ={limit={has_idea=BOT_corruption}remove_ideas=BOT_corruption}
+            if ={limit={has_idea=BOT_clan_ojia}remove_ideas=BOT_clan_ojia}
+            if ={limit={has_idea=BOT_clan_onel}remove_ideas=BOT_clan_onel}
+            if ={limit={has_idea=BOT_clan_nial}remove_ideas=BOT_clan_nial}
+            if ={limit={has_idea=BOT_clan_askar}remove_ideas=BOT_clan_askar}
+            if ={limit={has_idea=BOT_clan_ilya}remove_ideas=BOT_clan_ilya}
+            if ={limit={has_idea=BOT_clan_equality}remove_ideas=BOT_clan_equality}
+            476 ={
+                if={limit={has_dynamic_modifier={modifier = BOT_ignored_1}}remove_dynamic_modifier={modifier = BOT_ignored_1}}
+                if={limit={has_dynamic_modifier={modifier = BOT_ignored_2}}remove_dynamic_modifier={modifier = BOT_ignored_2}}
+                if={limit={has_dynamic_modifier={modifier = BOT_ignored_3}}remove_dynamic_modifier={modifier = BOT_ignored_3}}
+                if={limit={has_dynamic_modifier={modifier = BOT_ignored_4}}remove_dynamic_modifier={modifier = BOT_ignored_4}}
+                if={limit={has_dynamic_modifier={modifier = BOT_ignored_5}}remove_dynamic_modifier={modifier = BOT_ignored_5}}
+                if={limit={has_dynamic_modifier={modifier = BOT_ignored_6}}remove_dynamic_modifier={modifier = BOT_ignored_6}}
+                if={limit={has_dynamic_modifier={modifier = BOT_ignored_7}}remove_dynamic_modifier={modifier = BOT_ignored_7}}
+                if={limit={has_dynamic_modifier={modifier = BOT_ignored_8}}remove_dynamic_modifier={modifier = BOT_ignored_8}}
+            }
+            478 ={
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_8}}remove_core_of = BOT}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_7}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_7}}add_dynamic_modifier = {modifier = BOT_ignored_8}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_6}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_6}}add_dynamic_modifier = {modifier = BOT_ignored_7}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_5}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_5}}add_dynamic_modifier = {modifier = BOT_ignored_6}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_4}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_4}}add_dynamic_modifier = {modifier = BOT_ignored_5}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_3}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_3}}add_dynamic_modifier = {modifier = BOT_ignored_4}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_2}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_2}}add_dynamic_modifier = {modifier = BOT_ignored_3}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_1}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_1}}add_dynamic_modifier = {modifier = BOT_ignored_2}}
+                if = {limit = {NOT = {OR = {
+                                has_dynamic_modifier = {modifier = BOT_ignored_1}
+                                has_dynamic_modifier = {modifier = BOT_ignored_2}
+                                has_dynamic_modifier = {modifier = BOT_ignored_3}
+                                has_dynamic_modifier = {modifier = BOT_ignored_4}
+                                has_dynamic_modifier = {modifier = BOT_ignored_5}
+                                has_dynamic_modifier = {modifier = BOT_ignored_6}
+                                has_dynamic_modifier = {modifier = BOT_ignored_7}
+                                has_dynamic_modifier = {modifier = BOT_ignored_8}}}}
+                    add_dynamic_modifier = {modifier = BOT_ignored_1}
+                }
+            }
+            377 ={
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_8}}remove_core_of = BOT}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_7}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_7}}add_dynamic_modifier = {modifier = BOT_ignored_8}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_6}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_6}}add_dynamic_modifier = {modifier = BOT_ignored_7}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_5}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_5}}add_dynamic_modifier = {modifier = BOT_ignored_6}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_4}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_4}}add_dynamic_modifier = {modifier = BOT_ignored_5}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_3}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_3}}add_dynamic_modifier = {modifier = BOT_ignored_4}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_2}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_2}}add_dynamic_modifier = {modifier = BOT_ignored_3}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_1}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_1}}add_dynamic_modifier = {modifier = BOT_ignored_2}}
+                if = {limit = {NOT = {OR = {
+                                has_dynamic_modifier = {modifier = BOT_ignored_1}
+                                has_dynamic_modifier = {modifier = BOT_ignored_2}
+                                has_dynamic_modifier = {modifier = BOT_ignored_3}
+                                has_dynamic_modifier = {modifier = BOT_ignored_4}
+                                has_dynamic_modifier = {modifier = BOT_ignored_5}
+                                has_dynamic_modifier = {modifier = BOT_ignored_6}
+                                has_dynamic_modifier = {modifier = BOT_ignored_7}
+                                has_dynamic_modifier = {modifier = BOT_ignored_8}}}}
+                    add_dynamic_modifier = {modifier = BOT_ignored_1}
+                }
+            }
+            479 ={
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_8}}remove_core_of = BOT}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_7}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_7}}add_dynamic_modifier = {modifier = BOT_ignored_8}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_6}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_6}}add_dynamic_modifier = {modifier = BOT_ignored_7}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_5}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_5}}add_dynamic_modifier = {modifier = BOT_ignored_6}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_4}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_4}}add_dynamic_modifier = {modifier = BOT_ignored_5}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_3}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_3}}add_dynamic_modifier = {modifier = BOT_ignored_4}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_2}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_2}}add_dynamic_modifier = {modifier = BOT_ignored_3}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_1}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_1}}add_dynamic_modifier = {modifier = BOT_ignored_2}}
+                if = {limit = {NOT = {OR = {
+                                has_dynamic_modifier = {modifier = BOT_ignored_1}
+                                has_dynamic_modifier = {modifier = BOT_ignored_2}
+                                has_dynamic_modifier = {modifier = BOT_ignored_3}
+                                has_dynamic_modifier = {modifier = BOT_ignored_4}
+                                has_dynamic_modifier = {modifier = BOT_ignored_5}
+                                has_dynamic_modifier = {modifier = BOT_ignored_6}
+                                has_dynamic_modifier = {modifier = BOT_ignored_7}
+                                has_dynamic_modifier = {modifier = BOT_ignored_8}}}}
+                    add_dynamic_modifier = {modifier = BOT_ignored_1}
+                }
+            }
+            477 ={
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_8}}remove_core_of = BOT}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_7}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_7}}add_dynamic_modifier = {modifier = BOT_ignored_8}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_6}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_6}}add_dynamic_modifier = {modifier = BOT_ignored_7}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_5}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_5}}add_dynamic_modifier = {modifier = BOT_ignored_6}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_4}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_4}}add_dynamic_modifier = {modifier = BOT_ignored_5}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_3}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_3}}add_dynamic_modifier = {modifier = BOT_ignored_4}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_2}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_2}}add_dynamic_modifier = {modifier = BOT_ignored_3}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_1}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_1}}add_dynamic_modifier = {modifier = BOT_ignored_2}}
+                if = {limit = {NOT = {OR = {
+                                has_dynamic_modifier = {modifier = BOT_ignored_1}
+                                has_dynamic_modifier = {modifier = BOT_ignored_2}
+                                has_dynamic_modifier = {modifier = BOT_ignored_3}
+                                has_dynamic_modifier = {modifier = BOT_ignored_4}
+                                has_dynamic_modifier = {modifier = BOT_ignored_5}
+                                has_dynamic_modifier = {modifier = BOT_ignored_6}
+                                has_dynamic_modifier = {modifier = BOT_ignored_7}
+                                has_dynamic_modifier = {modifier = BOT_ignored_8}}}}
+                    add_dynamic_modifier = {modifier = BOT_ignored_1}
+                }
+            }
+        }
+        remove_effect = {
+            country_event = {id=BOT.1}
+        }
+    }
+}
