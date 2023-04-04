@@ -1,1285 +1,1329 @@
-Marketplace_buying_ships = {
-	context_type = player_context
-	window_name = "Marketplace_buying_ships"
-	visible = {
-	   always = false
-	}
-	effects = {
-		select_corvette_button = {
-			set_country_flag = corvette_buying_market_open
-		}
-		select_corvette_republic_button = {
-			set_country_flag = corvette_republic_market_open ## assign at start if idelogy
-		}
-		select_corvette_imperial_button = {
-			set_country_flag = corvette_imperial_market_open 
-		}
-		select_corvette_neutral_button = {
-			set_country_flag = corvette_neutral_market_open
-		}
-		select_frigate_button = {
-			set_country_flag = frigate_buying_market_open
-		}
-		select_frigate_republic_button = {
-			set_country_flag = frigate_republic_market_open
-		}
-		select_frigate_imperial_button = {
-			set_country_flag = frigate_imperial_market_open 
-		}
-		select_frigate_neutral_button = {
-			set_country_flag = frigate_neutral_market_open
-		}
-		select_cruiser_button = {
-			set_country_flag = cruiser_buying_market_open
-		}
-		select_cruiser_republic_button = {
-			set_country_flag = cruiser_republic_market_open
-		}
-		select_cruiser_imperial_button = {
-			set_country_flag = cruiser_imperial_market_open 
-		}
-		select_cruiser_neutral_button = {
-			set_country_flag = cruiser_neutral_market_open
-		}
-		select_star_destroyer_button = {
-			set_country_flag = star_destroyer_buying_market_open
-		}
-		select_star_destroyer_republic_button = {
-			set_country_flag = star_destroyer_republic_market_open
-		}
-		select_star_destroyer_imperial_button = {
-			set_country_flag = star_destroyer_imperial_market_open 
-		}
-		select_star_destroyer_neutral_button = {
-			set_country_flag = star_destroyer_neutral_market_open
-		}
-	}
-}
-Marketplace_buying_corvettes_republic_menu = {
-	context_type = player_context
-	window_name = "Marketplace_buying_corvettes_republic_menu"
-	visible = {
-	   has_country_flag = corvette_republic_market_open
-	   has_country_flag = corvette_buying_market_open
-	}
-	effects = {
-		product_buy_one913_product_number = {
-			if = {
-				limit = {
-					check_variable = {global.market_ship_holder@913 > 0}
-				}
-                if = {
-                    limit = {
-                        NOT = {
-                            has_country_flag = brought_out
-                        }
-                    }
-                    create_ship = {
-                        type = cr70
-                        equipment_variant = "CR70"
-                        creator = EMP
-                    }
-                }else = {
-                    create_ship = {
-                        type = cr70
-                        equipment_variant = "CR70"
-                        creator = var:global.cr70_holder
-                    }
-                }
+scripted_gui = {
+    Marketplace_main_selection = {
+        context_type = player_context
+        window_name = "Marketplace_buying_menu"
+        visible = {
+            has_country_flag = open_buy_market
+        }
+        effects = {
+            select_ground_forces_click = {
+                erase_previous_buying_market_selection = yes
+                set_country_flag = open_market_ground_forces
             }
-		}
-		product_auto_buy_913 = {
-			set_country_flag = "913_auto_buy_enabled"
-		}
-		product_buy_one990_product_number = {
-			if = {
-				limit = {
-					check_variable = {global.market_ship_holder@990 > 0}
-				}
-                if = {
-                    limit = {
-                        NOT = {
-                            has_country_flag = brought_out
-                        }
-                    }
-                    create_ship = {
-                        type = cr70_2
-                        equipment_variant = "CR70 2"
-                        creator = EMP
-                    }
-                }else = {
-                    create_ship = {
-                        type = cr70_2
-                        equipment_variant = "CR70 2"
-                        creator = var:global.cr70_2_holder
-                    }
-                }
+            select_starfighters_click = {
+                erase_previous_buying_market_selection = yes
+                set_country_flag = open_market_starfighters
             }
-		}
-		product_auto_buy_990 = {
-			set_country_flag = "990_auto_buy_enabled"
-		}
-		product_buy_one1530_product_number = {
-			if = {
-				limit = {
-					check_variable = {global.market_ship_holder@1530 > 0}
-				}
-                if = {
-                    limit = {
-                        NOT = {
-                            has_country_flag = brought_out
-                        }
-                    }
-                    create_ship = {
-                        type = warrior
-                        equipment_variant = "Warrior"
-                        creator = EMP
-                    }
-                }else = {
-                    create_ship = {
-                        type = warrior
-                        equipment_variant = "Warrior"
-                        creator = var:global.warrior_holder
-                    }
-                }
+            select_ships_click = {
+                erase_previous_buying_market_selection = yes
+                set_country_flag = open_market_ships
             }
-		}
-		product_auto_buy_1530 = {
-			set_country_flag = "1530_auto_buy_enabled"
-		}
-		###AAA###
-		## ABOVE COMMENT IS FOR PYTHON SCRIPT DO NOT REMOVE ##
-	}
-}
-Marketplace_buying_corvettes_imperial_menu = {
-	context_type = player_context
-	window_name = "Marketplace_buying_corvettes_imperial_menu"
-	visible = {
-		has_country_flag = corvette_imperial_market_open
-		has_country_flag = corvette_buying_market_open
-	}
-	effects = {
-		product_buy_one_950 = {
-			if = {
-				limit = {
-					check_variable = {global.market_ship_holder@950 > 0}
-				}
-                if = {
-                    limit = {
-                        NOT = {
-                            has_country_flag = brought_out
-                        }
-                    }
-                    create_ship = {
-                        type = ipv_1
-                        equipment_variant = "IPV 1"
-                        creator = EMP
-                    }
-                }else = {
-                    create_ship = {
-                        type = ipv_1
-                        equipment_variant = "IPV 1"
-                        creator = var:global.ipv_1_holder
-                    }
-                }
+            select_droids_click = {
+                erase_previous_buying_market_selection = yes
+                set_country_flag = open_market_droids
             }
-		}
-		product_auto_buy_950 = {
-			set_country_flag = "950_auto_buy_enabled"
-		}
-		product_buy_one_1260 = {
-			if = {
-				limit = {
-					check_variable = {global.market_ship_holder@1260 > 0}
-				}
-                if = {
-                    limit = {
-                        NOT = {
-                            has_country_flag = brought_out
-                        }
-                    }
-                    create_ship = {
-                        type = gozanti
-                        equipment_variant = "Gozanti"
-                        creator = EMP
-                    }
-                }else = {
-                    create_ship = {
-                        type = gozanti
-                        equipment_variant = "Gozanti"
-                        creator = var:global.gozanti_holder
-                    }
-                }
+            select_mercs_click = {
+                erase_previous_buying_market_selection = yes
+                set_country_flag = open_market_mercs
             }
-		}
-		product_auto_buy_1260 = {
-			set_country_flag = "1260_auto_buy_enabled"
-		}
-		product_buy_one_1925 = {
-			if = {
-				limit = {
-					check_variable = {global.market_ship_holder@1925 > 0}
-				}
-                if = {
-                    limit = {
-                        NOT = {
-                            has_country_flag = brought_out
-                        }
-                    }
-                    create_ship = {
-                        type = raider
-                        equipment_variant = "Raider"
-                        creator = EMP
-                    }
-                }else = {
-                    create_ship = {
-                        type = raider
-                        equipment_variant = "Raider"
-                        creator = var:global.raider_holder
-                    }
-                }
+            select_medical_click = {
+                erase_previous_buying_market_selection = yes
+                set_country_flag = open_market_medical
             }
-		}
-		product_auto_buy_1925 = {
-			set_country_flag = "1925_auto_buy_enabled"
-		}
-		product_buy_one_1990 = {
-			if = {
-				limit = {
-					check_variable = {global.market_ship_holder@1990 > 0}
-				}
-                if = {
-                    limit = {
-                        NOT = {
-                            has_country_flag = brought_out
-                        }
-                    }
-                    create_ship = {
-                        type = raider_2
-                        equipment_variant = "Raider 2"
-                        creator = EMP
-                    }
-                }else = {
-                    create_ship = {
-                        type = raider_2
-                        equipment_variant = "Raider 2"
-                        creator = var:global.raider_2_holder
-                    }
-                }
+            select_entertainment_click = {
+                erase_previous_buying_market_selection = yes
+                set_country_flag = open_market_entertainment
             }
-		}
-		product_auto_buy_1990 = {
-			set_country_flag = "1990_auto_buy_enabled"
-		}
-		###AAB###
-		## ABOVE COMMENT IS FOR PYTHON SCRIPT DO NOT REMOVE ##
-	}
-}
-Marketplace_buying_corvettes_neutral_menu = {
-	context_type = player_context
-	window_name = "Marketplace_buying_corvettes_neutral_menu"
-	visible = {
-		has_country_flag = corvette_neutral_market_open
-		has_country_flag = corvette_buying_market_open
-	}
-	effects = {
-		###ABB###
-		## ABOVE COMMENT IS FOR PYTHON SCRIPT DO NOT REMOVE ##
-	}
-}
-Marketplace_buying_frigates_republic_menu = {
-	context_type = player_context
-	window_name = "Marketplace_buying_frigates_republic_menu"
-	visible = {
-		has_country_flag = frigate_republic_market_open
-		has_country_flag = frigate_buying_market_open
-	}
-	effects = {
-		product_buy_one3200_product_number = {
-			if = {
-				limit = {
-					check_variable = {global.market_ship_holder@3200 > 0}
-				}
-                if = {
-                    limit = {
-                        NOT = {
-                            has_country_flag = brought_out
-                        }
-                    }
-                    create_ship = {
-                        type = pelta
-                        equipment_variant = "Pelta"
-                        creator = EMP
-                    }
-                }else = {
-                    create_ship = {
-                        type = pelta
-                        equipment_variant = "Pelta"
-                        creator = var:global.pelta_holder
-                    }
-                }
+            select_resource_extraction_click = {
+                erase_previous_buying_market_selection = yes
+                set_country_flag = open_market_resource_extraction
             }
-		}
-		product_auto_buy_3200 = {
-			set_country_flag = "3200_auto_buy_enabled"
-		}
-		product_buy_one4262_product_number = {
-			if = {
-				limit = {
-					check_variable = {global.market_ship_holder@4262 > 0}
-				}
-                if = {
-                    limit = {
-                        NOT = {
-                            has_country_flag = brought_out
-                        }
-                    }
-                    create_ship = {
-                        type = mc30
-                        equipment_variant = "MC30"
-                        creator = EMP
-                    }
-                }else = {
-                    create_ship = {
-                        type = mc30
-                        equipment_variant = "MC30"
-                        creator = var:global.mc30_holder
-                    }
-                }
-            }
-		}
-		product_auto_buy_4262 = {
-			set_country_flag = "4262_auto_buy_enabled"
-		}
-		product_buy_one2829_product_number = {
-			if = {
-				limit = {
-					check_variable = {global.market_ship_holder@2829 > 0}
-				}
-                if = {
-                    limit = {
-                        NOT = {
-                            has_country_flag = brought_out
-                        }
-                    }
-                    create_ship = {
-                        type = nebulon
-                        equipment_variant = "Nebulon"
-                        creator = EMP
-                    }
-                }else = {
-                    create_ship = {
-                        type = nebulon
-                        equipment_variant = "Nebulon"
-                        creator = var:global.nebulon_holder
-                    }
-                }
-            }
-		}
-		product_auto_buy_2829 = {
-			set_country_flag = "2829_auto_buy_enabled"
-		}
-		product_buy_one2943_product_number = {
-			if = {
-				limit = {
-					check_variable = {global.market_ship_holder@2943 > 0}
-				}
-                if = {
-                    limit = {
-                        NOT = {
-                            has_country_flag = brought_out
-                        }
-                    }
-                    create_ship = {
-                        type = nebulon_2
-                        equipment_variant = "Nebulon 2"
-                        creator = EMP
-                    }
-                }else = {
-                    create_ship = {
-                        type = nebulon_2
-                        equipment_variant = "Nebulon 2"
-                        creator = var:global.nebulon_2_holder
-                    }
-                }
-            }
-		}
-		product_auto_buy_2943 = {
-			set_country_flag = "2943_auto_buy_enabled"
-		}
-		product_buy_one2980_product_number = {
-			if = {
-				limit = {
-					check_variable = {global.market_ship_holder@2980 > 0}
-				}
-                if = {
-                    limit = {
-                        NOT = {
-                            has_country_flag = brought_out
-                        }
-                    }
-                    create_ship = {
-                        type = corona
-                        equipment_variant = "Corona"
-                        creator = EMP
-                    }
-                }else = {
-                    create_ship = {
-                        type = corona
-                        equipment_variant = "Corona"
-                        creator = var:global.corona_holder
-                    }
-                }
-            }
-		}
-		product_auto_buy_2980 = {
-			set_country_flag = "2980_auto_buy_enabled"
-		}
-		product_buy_one4300_product_number = {
-			if = {
-				limit = {
-					check_variable = {global.market_ship_holder@4300 > 0}
-				}
-                if = {
-                    limit = {
-                        NOT = {
-                            has_country_flag = brought_out
-                        }
-                    }
-                    create_ship = {
-                        type = quaser
-                        equipment_variant = "Quaser"
-                        creator = EMP
-                    }
-                }else = {
-                    create_ship = {
-                        type = quaser
-                        equipment_variant = "Quaser"
-                        creator = var:global.quaser_holder
-                    }
-                }
-            }
-		}
-		product_auto_buy_4300 = {
-			set_country_flag = "4300_auto_buy_enabled"
-		}
-		product_buy_one4430_product_number = {
-			if = {
-				limit = {
-					check_variable = {global.market_ship_holder@4430 > 0}
-				}
-                if = {
-                    limit = {
-                        NOT = {
-                            has_country_flag = brought_out
-                        }
-                    }
-                    create_ship = {
-                        type = quaser_2
-                        equipment_variant = "Quaser 2"
-                        creator = EMP
-                    }
-                }else = {
-                    create_ship = {
-                        type = quaser_2
-                        equipment_variant = "Quaser 2"
-                        creator = var:global.quaser_2_holder
-                    }
-                }
-            }
-		}
-		product_auto_buy_4430 = {
-			set_country_flag = "4430_auto_buy_enabled"
-		}
-		###BBB###
-		## ABOVE COMMENT IS FOR PYTHON SCRIPT DO NOT REMOVE ##
-	}
-}
-Marketplace_buying_frigates_imperial_menu = {
-	context_type = player_context
-	window_name = "Marketplace_buying_frigates_imperial_menu"
-	visible = {
-		has_country_flag = frigate_imperial_market_open
-		has_country_flag = frigate_buying_market_open
-	}
-	effects = {
-		product_buy_one_2700 = {
-			if = {
-				limit = {
-					check_variable = {global.market_ship_holder@2700 > 0}
-				}
-                if = {
-                    limit = {
-                        NOT = {
-                            has_country_flag = brought_out
-                        }
-                    }
-                    create_ship = {
-                        type = lancer
-                        equipment_variant = "Lancer"
-                        creator = EMP
-                    }
-                }else = {
-                    create_ship = {
-                        type = lancer
-                        equipment_variant = "Lancer"
-                        creator = var:global.lancer_holder
-                    }
-                }
-            }
-		}
-		product_auto_buy_2700 = {
-			set_country_flag = "2700_auto_buy_enabled"
-		}
-		###BBC###
-		## ABOVE COMMENT IS FOR PYTHON SCRIPT DO NOT REMOVE ##
-	}
-}
-Marketplace_buying_frigates_neutral_menu = {
-	context_type = player_context
-	window_name = "Marketplace_buying_frigates_neutral_menu"
-	visible = {
-		has_country_flag = frigate_neutral_market_open
-		has_country_flag = frigate_buying_market_open
-	}
-	effects = {
-		###BCC###
-		## ABOVE COMMENT IS FOR PYTHON SCRIPT DO NOT REMOVE ##
-	}
-}
-Marketplace_buying_cruisers_republic_menu = {
-	context_type = player_context
-	window_name = "Marketplace_buying_cruisers_republic_menu"
-	visible = {
-		has_country_flag = cruiser_republic_market_open
-		has_country_flag = cruiser_buying_market_open
-	}
-	effects = {
-		product_buy_one5421_product_number = {
-			if = {
-				limit = {
-					check_variable = {global.market_ship_holder@5421 > 0}
-				}
-                if = {
-                    limit = {
-                        NOT = {
-                            has_country_flag = brought_out
-                        }
-                    }
-                    create_ship = {
-                        type = assaut
-                        equipment_variant = "Assaut"
-                        creator = EMP
-                    }
-                }else = {
-                    create_ship = {
-                        type = assaut
-                        equipment_variant = "Assaut"
-                        creator = var:global.assaut_holder
-                    }
-                }
-            }
-		}
-		product_auto_buy_5421 = {
-			set_country_flag = "5421_auto_buy_enabled"
-		}
-		product_buy_one5600_product_number = {
-			if = {
-				limit = {
-					check_variable = {global.market_ship_holder@5600 > 0}
-				}
-                if = {
-                    limit = {
-                        NOT = {
-                            has_country_flag = brought_out
-                        }
-                    }
-                    create_ship = {
-                        type = assault_2
-                        equipment_variant = "Assault 2"
-                        creator = EMP
-                    }
-                }else = {
-                    create_ship = {
-                        type = assault_2
-                        equipment_variant = "Assault 2"
-                        creator = var:global.assault_2_holder
-                    }
-                }
-            }
-		}
-		product_auto_buy_5600 = {
-			set_country_flag = "5600_auto_buy_enabled"
-		}
-		product_buy_one7340_product_number = {
-			if = {
-				limit = {
-					check_variable = {global.market_ship_holder@7340 > 0}
-				}
-                if = {
-                    limit = {
-                        NOT = {
-                            has_country_flag = brought_out
-                        }
-                    }
-                    create_ship = {
-                        type = bothan_assault
-                        equipment_variant = "Bothan Assault"
-                        creator = EMP
-                    }
-                }else = {
-                    create_ship = {
-                        type = bothan_assault
-                        equipment_variant = "Bothan Assault"
-                        creator = var:global.bothan_assault_holder
-                    }
-                }
-            }
-		}
-		product_auto_buy_7340 = {
-			set_country_flag = "7340_auto_buy_enabled"
-		}
-		product_buy_one5830_product_number = {
-			if = {
-				limit = {
-					check_variable = {global.market_ship_holder@5830 > 0}
-				}
-                if = {
-                    limit = {
-                        NOT = {
-                            has_country_flag = brought_out
-                        }
-                    }
-                    create_ship = {
-                        type = mc40
-                        equipment_variant = "MC40"
-                        creator = EMP
-                    }
-                }else = {
-                    create_ship = {
-                        type = mc40
-                        equipment_variant = "MC40"
-                        creator = var:global.mc40_holder
-                    }
-                }
-            }
-		}
-		product_auto_buy_5830 = {
-			set_country_flag = "5830_auto_buy_enabled"
-		}
-		###CCC###
-		## ABOVE COMMENT IS FOR PYTHON SCRIPT DO NOT REMOVE ##
-	}
-}
-Marketplace_buying_cruisers_imperial_menu = {
-	context_type = player_context
-	window_name = "Marketplace_buying_cruisers_imperial_menu"
-	visible = {
-		has_country_flag = cruiser_imperial_market_open
-		has_country_flag = cruiser_buying_market_open
-	}
-	effects = {
-		product_buy_one_4800 = {
-			if = {
-				limit = {
-					check_variable = {global.market_ship_holder@4800 > 0}
-				}
-                if = {
-                    limit = {
-                        NOT = {
-                            has_country_flag = brought_out
-                        }
-                    }
-                    create_ship = {
-                        type = arquitens
-                        equipment_variant = "Arquitens"
-                        creator = EMP
-                    }
-                }else = {
-                    create_ship = {
-                        type = arquitens
-                        equipment_variant = "Arquitens"
-                        creator = var:global.arquitens_holder
-                    }
-                }
-            }
-		}
-		product_auto_buy_4800 = {
-			set_country_flag = "4800_auto_buy_enabled"
-		}
-		product_buy_one_5950 = {
-			if = {
-				limit = {
-					check_variable = {global.market_ship_holder@5950 > 0}
-				}
-                if = {
-                    limit = {
-                        NOT = {
-                            has_country_flag = brought_out
-                        }
-                    }
-                    create_ship = {
-                        type = interdictor
-                        equipment_variant = "interdictor"
-                        creator = EMP
-                    }
-                }else = {
-                    create_ship = {
-                        type = interdictor
-                        equipment_variant = "interdictor"
-                        creator = var:global.interdictor_holder
-                    }
-                }
-            }
-		}
-		product_auto_buy_5950 = {
-			set_country_flag = "5950_auto_buy_enabled"
-		}
-		product_buy_one_5200 = {
-			if = {
-				limit = {
-					check_variable = {global.market_ship_holder@5200 > 0}
-				}
-                if = {
-                    limit = {
-                        NOT = {
-                            has_country_flag = brought_out
-                        }
-                    }
-                    create_ship = {
-                        type = dreadnaught
-                        equipment_variant = "Dreadnaught"
-                        creator = EMP
-                    }
-                }else = {
-                    create_ship = {
-                        type = dreadnaught
-                        equipment_variant = "Dreadnaught"
-                        creator = var:global.dreadnaught_holder
-                    }
-                }
-            }
-		}
-		product_auto_buy_5200 = {
-			set_country_flag = "5200_auto_buy_enabled"
-		}
-		product_buy_one_7400 = {
-			if = {
-				limit = {
-					check_variable = {global.market_ship_holder@7400 > 0}
-				}
-                if = {
-                    limit = {
-                        NOT = {
-                            has_country_flag = brought_out
-                        }
-                    }
-                    create_ship = {
-                        type = victory
-                        equipment_variant = "Victory"
-                        creator = EMP
-                    }
-                }else = {
-                    create_ship = {
-                        type = victory
-                        equipment_variant = "Victory"
-                        creator = var:global.victory_holder
-                    }
-                }
-            }
-		}
-		product_auto_buy_7400 = {
-			set_country_flag = "7400_auto_buy_enabled"
-		}
-		product_buy_one_7940 = {
-			if = {
-				limit = {
-					check_variable = {global.market_ship_holder@7940 > 0}
-				}
-                if = {
-                    limit = {
-                        NOT = {
-                            has_country_flag = brought_out
-                        }
-                    }
-                    create_ship = {
-                        type = victory_2
-                        equipment_variant = "Victory 2"
-                        creator = EMP
-                    }
-                }else = {
-                    create_ship = {
-                        type = victory_2
-                        equipment_variant = "Victory 2"
-                        creator = var:global.victory_2_holder
-                    }
-                }
-            }
-		}
-		product_auto_buy_7940 = {
-			set_country_flag = "7940_auto_buy_enabled"
-		}
-		###CCD###
-		## ABOVE COMMENT IS FOR PYTHON SCRIPT DO NOT REMOVE ##
-	}
-}
-Marketplace_buying_cruisers_neutral_menu = {
-	context_type = player_context
-	window_name = "Marketplace_buying_cruisers_neutral_menu"
-	visible = {
-		has_country_flag = cruiser_neutral_market_open
-		has_country_flag = cruiser_buying_market_open
-	}
-	effects = {
-		###CDD###
-		## ABOVE COMMENT IS FOR PYTHON SCRIPT DO NOT REMOVE ##
-	}
-}
-Marketplace_buying_star_destoyers_republic_menu = {
-	context_type = player_context
-	window_name = "Marketplace_buying_star_destoyers_republic_menu"
-	visible = {
-		has_country_flag = star_destroyer_republic_market_open
-		has_country_flag = star_destroyer_buying_market_open
-	}
-	effects = {
-		product_buy_one10080_product_number = {
-			if = {
-				limit = {
-					check_variable = {global.market_ship_holder@10080 > 0}
-				}
-                if = {
-                    limit = {
-                        NOT = {
-                            has_country_flag = brought_out
-                        }
-                    }
-                    create_ship = {
-                        type = mc80_liberty
-                        equipment_variant = "MC80 Liberty"
-                        creator = EMP
-                    }
-                }else = {
-                    create_ship = {
-                        type = mc80_liberty
-                        equipment_variant = "MC80 Liberty"
-                        creator = var:global.mc80_liberty_holder
-                    }
-                }
-            }
-		}
-		product_auto_buy_10080 = {
-			set_country_flag = "10080_auto_buy_enabled"
-		}
-		product_buy_one12400_product_number = {
-			if = {
-				limit = {
-					check_variable = {global.market_ship_holder@12400 > 0}
-				}
-                if = {
-                    limit = {
-                        NOT = {
-                            has_country_flag = brought_out
-                        }
-                    }
-                    create_ship = {
-                        type = starhawk
-                        equipment_variant = "Starhawk"
-                        creator = EMP
-                    }
-                }else = {
-                    create_ship = {
-                        type = starhawk
-                        equipment_variant = "Starhawk"
-                        creator = var:global.starhawk_holder
-                    }
-                }
-            }
-		}
-		product_auto_buy_12400 = {
-			set_country_flag = "12400_auto_buy_enabled"
-		}
-		product_buy_one9120_product_number = {
-			if = {
-				limit = {
-					check_variable = {global.market_ship_holder@9120 > 0}
-				}
-                if = {
-                    limit = {
-                        NOT = {
-                            has_country_flag = brought_out
-                        }
-                    }
-                    create_ship = {
-                        type = mc75
-                        equipment_variant = "MC75"
-                        creator = EMP
-                    }
-                }else = {
-                    create_ship = {
-                        type = mc75
-                        equipment_variant = "MC75"
-                        creator = var:global.mc75_holder
-                    }
-                }
-            }
-		}
-		product_auto_buy_9120 = {
-			set_country_flag = "9120_auto_buy_enabled"
-		}
-		product_buy_one13450_product_number = {
-			if = {
-				limit = {
-					check_variable = {global.market_ship_holder@13450 > 0}
-				}
-                if = {
-                    limit = {
-                        NOT = {
-                            has_country_flag = brought_out
-                        }
-                    }
-                    create_ship = {
-                        type = dauntless
-                        equipment_variant = "Dauntless"
-                        creator = EMP
-                    }
-                }else = {
-                    create_ship = {
-                        type = dauntless
-                        equipment_variant = "Dauntless"
-                        creator = var:global.dauntless_holder
-                    }
-                }
-            }
-		}
-		product_auto_buy_13450 = {
-			set_country_flag = "13450_auto_buy_enabled"
-		}
-		product_buy_one13200_product_number = {
-			if = {
-				limit = {
-					check_variable = {global.market_ship_holder@13200 > 0}
-				}
-                if = {
-                    limit = {
-                        NOT = {
-                            has_country_flag = brought_out
-                        }
-                    }
-                    create_ship = {
-                        type = mc80_home_one
-                        equipment_variant = "MC80 Home One"
-                        creator = EMP
-                    }
-                }else = {
-                    create_ship = {
-                        type = mc80_home_one
-                        equipment_variant = "MC80 Home One"
-                        creator = var:global.mc80_home_one_holder
-                    }
-                }
-            }
-		}
-		product_auto_buy_13200 = {
-			set_country_flag = "13200_auto_buy_enabled"
-		}
-		product_buy_one10630_product_number = {
-			if = {
-				limit = {
-					check_variable = {global.market_ship_holder@10630 > 0}
-				}
-                if = {
-                    limit = {
-                        NOT = {
-                            has_country_flag = brought_out
-                        }
-                    }
-                    create_ship = {
-                        type = mc85
-                        equipment_variant = "MC85"
-                        creator = EMP
-                    }
-                }else = {
-                    create_ship = {
-                        type = mc85
-                        equipment_variant = "MC85"
-                        creator = var:global.mc85_holder
-                    }
-                }
-            }
-		}
-		product_auto_buy_10630 = {
-			set_country_flag = "10630_auto_buy_enabled"
-		}
-		product_buy_one14400_product_number = {
-			if = {
-				limit = {
-					check_variable = {global.market_ship_holder@14400 > 0}
-				}
-                if = {
-                    limit = {
-                        NOT = {
-                            has_country_flag = brought_out
-                        }
-                    }
-                    create_ship = {
-                        type = nebula
-                        equipment_variant = "Nebula"
-                        creator = EMP
-                    }
-                }else = {
-                    create_ship = {
-                        type = nebula
-                        equipment_variant = "Nebula"
-                        creator = var:global.nebula_holder
-                    }
-                }
-            }
-		}
-		product_auto_buy_14400 = {
-			set_country_flag = "14400_auto_buy_enabled"
-		}
-		product_variant_type_14400 = {
-            if = {
-                limit = {
-                    check_variable = {global.market_ship_holder@14400 > 0}
-                }
-                if = {
-                    limit = {
-                        NOT = {
-                            has_country_flag = brought_out
-                        }
-                    }
-                    create_ship = {
-                        type = nebula_variant
-                        equipment_variant = "Nebula"
-                        creator = EMP
-                    }
-                }else = {
-                    create_ship = {
-                        type = nebula_variant
-                        equipment_variant = "Nebula"
-                        creator = var:global.nebula_holder
-                    }
-                }
+            select_raw_goods_click = {
+                erase_previous_buying_market_selection = yes
+                set_country_flag = open_market_raw_goods
             }
         }
-		product_buy_one13430_product_number = {
-			if = {
-				limit = {
-					check_variable = {global.market_ship_holder@13430 > 0}
-				}
-                if = {
-                    limit = {
-                        NOT = {
-                            has_country_flag = brought_out
-                        }
-                    }
-                    create_ship = {
-                        type = republic_star
-                        equipment_variant = "Republic star"
-                        creator = EMP
-                    }
-                }else = {
-                    create_ship = {
-                        type = republic_star
-                        equipment_variant = "Republic star"
-                        creator = var:global.republic_star_holder
-                    }
-                }
+    }
+    Marketplace_buying_ships_main = {
+        context_type = player_context
+        parent_window_name = "Marketplace_buying_menu"
+        window_name = "Marketplace_buying_ships"
+        visible = {
+            has_country_flag = open_buy_market
+            has_country_flag = open_market_ships
+        }
+        effects = {
+            select_corvettes_button_click = {
+                erase_previous_ship_menu_selection = yes
+                set_country_flag = corvette_buying_market_open
             }
-		}
-		product_auto_buy_13430 = {
-			set_country_flag = "13430_auto_buy_enabled"
-		}
-		###DDD###
-		## ABOVE COMMENT IS FOR PYTHON SCRIPT DO NOT REMOVE ##
-	}
-}
-Marketplace_buying_star_destoyers_imperial_menu = {
-	context_type = player_context
-	window_name = "Marketplace_buying_star_destoyers_imperial_menu"
-	visible = {
-		has_country_flag = star_destroyer_imperial_market_open
-		has_country_flag = star_destroyer_buying_market_open
-	}
-	effects = {
-		product_buy_one_11005 = {
-			if = {
-				limit = {
-					check_variable = {global.market_ship_holder@11005 > 0}
-				}
-                if = {
-                    limit = {
-                        NOT = {
-                            has_country_flag = brought_out
-                        }
-                    }
-                    create_ship = {
-                        type = isd
-                        equipment_variant = "ISD"
-                        creator = EMP
-                    }
-                }else = {
-                    create_ship = {
-                        type = isd
-                        equipment_variant = "ISD"
-                        creator = var:global.isd_holder
-                    }
-                }
+            select_frigates_button_click = {
+                erase_previous_ship_menu_selection = yes
+                set_country_flag = frigate_buying_market_open
             }
-		}
-		product_auto_buy_11005 = {
-			set_country_flag = "11005_auto_buy_enabled"
-		}
-		product_variant_type_11005 = {
-            if = {
-                limit = {
-                    check_variable = {global.market_ship_holder@11005 > 0}
-                }
-                if = {
-                    limit = {
-                        NOT = {
-                            has_country_flag = brought_out
-                        }
-                    }
-                    create_ship = {
-                        type = isd_variant
-                        equipment_variant = "ISD"
-                        creator = EMP
-                    }
-                }else = {
-                    create_ship = {
-                        type = isd_variant
-                        equipment_variant = "ISD"
-                        creator = var:global.isd_holder
-                    }
-                }
+            select_cruisers_button_click = {
+                erase_previous_ship_menu_selection = yes
+                set_country_flag = cruiser_buying_market_open
+            }
+            select_star_destroyers_button_click = {
+                erase_previous_ship_menu_selection = yes
+                set_country_flag = star_destroyer_buying_market_open
+            }
+            select_republic_button_click = {
+                erase_previous_ship_menu_faction_selection = yes
+                set_country_flag = republic_market_open
+            }
+            select_neutral_button_click = {
+                erase_previous_ship_menu_faction_selection = yes
+                set_country_flag = neutral_market_open
+            }
+            select_imperial_button_click = {
+                erase_previous_ship_menu_faction_selection = yes
+                set_country_flag = imperial_market_open
             }
         }
-		product_buy_one_11850 = {
-			if = {
-				limit = {
-					check_variable = {global.market_ship_holder@11850 > 0}
-				}
+    }
+    Marketplace_buying_corvettes_republic_menu = {
+        context_type = player_context
+        parent_window_name = "Marketplace_buying_menu"
+        window_name = "Marketplace_buying_corvettes_republic_menu"
+        visible = {
+            has_country_flag = open_market_ships
+            has_country_flag = republic_market_open
+            has_country_flag = corvette_buying_market_open
+        }
+        effects = {
+            product_buy_one_913 = {
                 if = {
                     limit = {
-                        NOT = {
-                            has_country_flag = brought_out
+                        check_variable = {global.market_ship_holder@913 > 0}
+                    }
+                    if = {
+                        limit = {
+                            NOT = {
+                                has_country_flag = brought_out
+                            }
                         }
-                    }
-                    create_ship = {
-                        type = isd_2
-                        equipment_variant = "ISD 2"
-                        creator = EMP
-                    }
-                }else = {
-                    create_ship = {
-                        type = isd_2
-                        equipment_variant = "ISD 2"
-                        creator = var:global.isd_2_holder
+                        create_ship = {
+                            type = cr70
+                            equipment_variant = "CR70"
+                            creator = EMP
+                        }
+                    }else = {
+                        create_ship = {
+                            type = cr70
+                            equipment_variant = "CR70"
+                            creator = var:global.cr70_holder
+                        }
                     }
                 }
             }
-		}
-		product_auto_buy_11850 = {
-			set_country_flag = "11850_auto_buy_enabled"
-		}
-		product_variant_type_11005 = {
-            if = {
-                limit = {
-                    check_variable = {global.market_ship_holder@11850 > 0}
-                }
+            product_auto_buy_913 = {
+                set_country_flag = auto_buy_enabled_913
+            }
+            product_buy_one_990 = {
                 if = {
                     limit = {
-                        NOT = {
-                            has_country_flag = brought_out
+                        check_variable = {global.market_ship_holder@990 > 0}
+                    }
+                    if = {
+                        limit = {
+                            NOT = {
+                                has_country_flag = brought_out
+                            }
+                        }
+                        create_ship = {
+                            type = cr70_2
+                            equipment_variant = "CR70 2"
+                            creator = EMP
+                        }
+                    }else = {
+                        create_ship = {
+                            type = cr70_2
+                            equipment_variant = "CR70 2"
+                            creator = var:global.cr70_2_holder
                         }
                     }
-                    create_ship = {
-                        type = isd_2_variant
-                        equipment_variant = "ISD 2"
-                        creator = EMP
+                }
+            }
+            product_auto_buy_990 = {
+                set_country_flag = auto_buy_enabled_990
+            }
+            product_buy_one_1530 = {
+                if = {
+                    limit = {
+                        check_variable = {global.market_ship_holder@1530 > 0}
                     }
-                }else = {
-                    create_ship = {
-                        type = isd_2_variant
-                        equipment_variant = "ISD 2"
-                        creator = var:global.isd_2_holder
+                    if = {
+                        limit = {
+                            NOT = {
+                                has_country_flag = brought_out
+                            }
+                        }
+                        create_ship = {
+                            type = warrior
+                            equipment_variant = "Warrior"
+                            creator = EMP
+                        }
+                    }else = {
+                        create_ship = {
+                            type = warrior
+                            equipment_variant = "Warrior"
+                            creator = var:global.warrior_holder
+                        }
                     }
                 }
+            }
+            product_auto_buy_1530 = {
+                set_country_flag = auto_buy_enabled_1530
+            }
+            ###AAA###
+            ## ABOVE COMMENT IS FOR PYTHON SCRIPT DO NOT REMOVE ##
+        }
+    }
+    Marketplace_buying_corvettes_imperial_menu = {
+        context_type = player_context
+        window_name = "Marketplace_buying_corvettes_imperial_menu"
+        parent_window_name = "Marketplace_buying_menu"
+        visible = {
+            has_country_flag = imperial_market_open
+            has_country_flag = corvette_buying_market_open
+        }
+        effects = {
+            product_buy_one_950 = {
+                if = {
+                    limit = {
+                        check_variable = {global.market_ship_holder@950 > 0}
+                    }
+                    if = {
+                        limit = {
+                            NOT = {
+                                has_country_flag = brought_out
+                            }
+                        }
+                        create_ship = {
+                            type = ipv_1
+                            equipment_variant = "IPV 1"
+                            creator = EMP
+                        }
+                    }else = {
+                        create_ship = {
+                            type = ipv_1
+                            equipment_variant = "IPV 1"
+                            creator = var:global.ipv_1_holder
+                        }
+                    }
+                }
+            }
+            product_auto_buy_950 = {
+                set_country_flag = auto_buy_enabled_950
+            }
+            product_buy_one_1260 = {
+                if = {
+                    limit = {
+                        check_variable = {global.market_ship_holder@1260 > 0}
+                    }
+                    if = {
+                        limit = {
+                            NOT = {
+                                has_country_flag = brought_out
+                            }
+                        }
+                        create_ship = {
+                            type = gozanti
+                            equipment_variant = "Gozanti"
+                            creator = EMP
+                        }
+                    }else = {
+                        create_ship = {
+                            type = gozanti
+                            equipment_variant = "Gozanti"
+                            creator = var:global.gozanti_holder
+                        }
+                    }
+                }
+            }
+            product_auto_buy_1260 = {
+                set_country_flag = auto_buy_enabled_1260
+            }
+            product_buy_one_1925 = {
+                if = {
+                    limit = {
+                        check_variable = {global.market_ship_holder@1925 > 0}
+                    }
+                    if = {
+                        limit = {
+                            NOT = {
+                                has_country_flag = brought_out
+                            }
+                        }
+                        create_ship = {
+                            type = raider
+                            equipment_variant = "Raider"
+                            creator = EMP
+                        }
+                    }else = {
+                        create_ship = {
+                            type = raider
+                            equipment_variant = "Raider"
+                            creator = var:global.raider_holder
+                        }
+                    }
+                }
+            }
+            product_auto_buy_1925 = {
+                set_country_flag = auto_buy_enabled_1925
+            }
+            product_buy_one_1990 = {
+                if = {
+                    limit = {
+                        check_variable = {global.market_ship_holder@1990 > 0}
+                    }
+                    if = {
+                        limit = {
+                            NOT = {
+                                has_country_flag = brought_out
+                            }
+                        }
+                        create_ship = {
+                            type = raider_2
+                            equipment_variant = "Raider 2"
+                            creator = EMP
+                        }
+                    }else = {
+                        create_ship = {
+                            type = raider_2
+                            equipment_variant = "Raider 2"
+                            creator = var:global.raider_2_holder
+                        }
+                    }
+                }
+            }
+            product_auto_buy_1990 = {
+                set_country_flag = auto_buy_enabled_1990
+            }
+            ###AAB###
+            ## ABOVE COMMENT IS FOR PYTHON SCRIPT DO NOT REMOVE ##
+        }
+    }
+    Marketplace_buying_corvettes_neutral_menu = {
+        context_type = player_context
+        window_name = "Marketplace_buying_corvettes_neutral_menu"
+        parent_window_name = "Marketplace_buying_menu"
+        visible = {
+            has_country_flag = neutral_market_open
+            has_country_flag = corvette_buying_market_open
+        }
+        effects = {
+            ###ABB###
+            ## ABOVE COMMENT IS FOR PYTHON SCRIPT DO NOT REMOVE ##
+        }
+    }
+    Marketplace_buying_frigates_republic_menu = {
+        context_type = player_context
+        window_name = "Marketplace_buying_frigates_republic_menu"
+        parent_window_name = "Marketplace_buying_menu"
+        visible = {
+            has_country_flag = republic_market_open
+            has_country_flag = frigate_buying_market_open
+        }
+        effects = {
+            product_buy_one_3200 = {
+                if = {
+                    limit = {
+                        check_variable = {global.market_ship_holder@3200 > 0}
+                    }
+                    if = {
+                        limit = {
+                            NOT = {
+                                has_country_flag = brought_out
+                            }
+                        }
+                        create_ship = {
+                            type = pelta
+                            equipment_variant = "Pelta"
+                            creator = EMP
+                        }
+                    }else = {
+                        create_ship = {
+                            type = pelta
+                            equipment_variant = "Pelta"
+                            creator = var:global.pelta_holder
+                        }
+                    }
+                }
+            }
+            product_auto_buy_3200 = {
+                set_country_flag = auto_buy_enabled_3200
+            }
+            product_buy_one_4262 = {
+                if = {
+                    limit = {
+                        check_variable = {global.market_ship_holder@4262 > 0}
+                    }
+                    if = {
+                        limit = {
+                            NOT = {
+                                has_country_flag = brought_out
+                            }
+                        }
+                        create_ship = {
+                            type = mc30
+                            equipment_variant = "MC30"
+                            creator = EMP
+                        }
+                    }else = {
+                        create_ship = {
+                            type = mc30
+                            equipment_variant = "MC30"
+                            creator = var:global.mc30_holder
+                        }
+                    }
+                }
+            }
+            product_auto_buy_4262 = {
+                set_country_flag = auto_buy_enabled_4262
+            }
+            product_buy_one_2829 = {
+                if = {
+                    limit = {
+                        check_variable = {global.market_ship_holder@2829 > 0}
+                    }
+                    if = {
+                        limit = {
+                            NOT = {
+                                has_country_flag = brought_out
+                            }
+                        }
+                        create_ship = {
+                            type = nebulon
+                            equipment_variant = "Nebulon"
+                            creator = EMP
+                        }
+                    }else = {
+                        create_ship = {
+                            type = nebulon
+                            equipment_variant = "Nebulon"
+                            creator = var:global.nebulon_holder
+                        }
+                    }
+                }
+            }
+            product_auto_buy_2829 = {
+                set_country_flag = auto_buy_enabled_2829
+            }
+            product_buy_one_2943 = {
+                if = {
+                    limit = {
+                        check_variable = {global.market_ship_holder@2943 > 0}
+                    }
+                    if = {
+                        limit = {
+                            NOT = {
+                                has_country_flag = brought_out
+                            }
+                        }
+                        create_ship = {
+                            type = nebulon_2
+                            equipment_variant = "Nebulon 2"
+                            creator = EMP
+                        }
+                    }else = {
+                        create_ship = {
+                            type = nebulon_2
+                            equipment_variant = "Nebulon 2"
+                            creator = var:global.nebulon_2_holder
+                        }
+                    }
+                }
+            }
+            product_auto_buy_2943 = {
+                set_country_flag = auto_buy_enabled_2943
+            }
+            product_buy_one_2980 = {
+                if = {
+                    limit = {
+                        check_variable = {global.market_ship_holder@2980 > 0}
+                    }
+                    if = {
+                        limit = {
+                            NOT = {
+                                has_country_flag = brought_out
+                            }
+                        }
+                        create_ship = {
+                            type = corona
+                            equipment_variant = "Corona"
+                            creator = EMP
+                        }
+                    }else = {
+                        create_ship = {
+                            type = corona
+                            equipment_variant = "Corona"
+                            creator = var:global.corona_holder
+                        }
+                    }
+                }
+            }
+            product_auto_buy_2980 = {
+                set_country_flag = auto_buy_enabled_2980
+            }
+            product_buy_one_4300 = {
+                if = {
+                    limit = {
+                        check_variable = {global.market_ship_holder@4300 > 0}
+                    }
+                    if = {
+                        limit = {
+                            NOT = {
+                                has_country_flag = brought_out
+                            }
+                        }
+                        create_ship = {
+                            type = quaser
+                            equipment_variant = "Quaser"
+                            creator = EMP
+                        }
+                    }else = {
+                        create_ship = {
+                            type = quaser
+                            equipment_variant = "Quaser"
+                            creator = var:global.quaser_holder
+                        }
+                    }
+                }
+            }
+            product_auto_buy_4300 = {
+                set_country_flag = auto_buy_enabled_4300
+            }
+            product_buy_one_4430 = {
+                if = {
+                    limit = {
+                        check_variable = {global.market_ship_holder@4430 > 0}
+                    }
+                    if = {
+                        limit = {
+                            NOT = {
+                                has_country_flag = brought_out
+                            }
+                        }
+                        create_ship = {
+                            type = quaser_2
+                            equipment_variant = "Quaser 2"
+                            creator = EMP
+                        }
+                    }else = {
+                        create_ship = {
+                            type = quaser_2
+                            equipment_variant = "Quaser 2"
+                            creator = var:global.quaser_2_holder
+                        }
+                    }
+                }
+            }
+            product_auto_buy_4430 = {
+                set_country_flag = auto_buy_enabled_4430
+            }
+            ###BBB###
+            ## ABOVE COMMENT IS FOR PYTHON SCRIPT DO NOT REMOVE ##
+        }
+    }
+    Marketplace_buying_frigates_imperial_menu = {
+        context_type = player_context
+        window_name = "Marketplace_buying_frigates_imperial_menu"
+        parent_window_name = "Marketplace_buying_menu"
+        visible = {
+            has_country_flag = imperial_market_open
+            has_country_flag = frigate_buying_market_open
+        }
+        effects = {
+            product_buy_one_2700 = {
+                if = {
+                    limit = {
+                        check_variable = {global.market_ship_holder@2700 > 0}
+                    }
+                    if = {
+                        limit = {
+                            NOT = {
+                                has_country_flag = brought_out
+                            }
+                        }
+                        create_ship = {
+                            type = lancer
+                            equipment_variant = "Lancer"
+                            creator = EMP
+                        }
+                    }else = {
+                        create_ship = {
+                            type = lancer
+                            equipment_variant = "Lancer"
+                            creator = var:global.lancer_holder
+                        }
+                    }
+                }
+            }
+            product_auto_buy_2700 = {
+                set_country_flag = auto_buy_enabled_2700
+            }
+            ###BBC###
+            ## ABOVE COMMENT IS FOR PYTHON SCRIPT DO NOT REMOVE ##
+        }
+    }
+    Marketplace_buying_frigates_neutral_menu = {
+        context_type = player_context
+        window_name = "Marketplace_buying_frigates_neutral_menu"
+        parent_window_name = "Marketplace_buying_menu"
+        visible = {
+            has_country_flag = neutral_market_open
+            has_country_flag = frigate_buying_market_open
+        }
+        effects = {
+            ###BCC###
+            ## ABOVE COMMENT IS FOR PYTHON SCRIPT DO NOT REMOVE ##
+        }
+    }
+    Marketplace_buying_cruisers_republic_menu = {
+        context_type = player_context
+        window_name = "Marketplace_buying_cruisers_republic_menu"
+        parent_window_name = "Marketplace_buying_menu"
+        visible = {
+            has_country_flag = republic_market_open
+            has_country_flag = cruiser_buying_market_open
+        }
+        effects = {
+            product_buy_one_5421 = {
+                if = {
+                    limit = {
+                        check_variable = {global.market_ship_holder@5421 > 0}
+                    }
+                    if = {
+                        limit = {
+                            NOT = {
+                                has_country_flag = brought_out
+                            }
+                        }
+                        create_ship = {
+                            type = assaut
+                            equipment_variant = "Assaut"
+                            creator = EMP
+                        }
+                    }else = {
+                        create_ship = {
+                            type = assaut
+                            equipment_variant = "Assaut"
+                            creator = var:global.assaut_holder
+                        }
+                    }
+                }
+            }
+            product_auto_buy_5421 = {
+                set_country_flag = auto_buy_enabled_5421
+            }
+            product_buy_one_5600 = {
+                if = {
+                    limit = {
+                        check_variable = {global.market_ship_holder@5600 > 0}
+                    }
+                    if = {
+                        limit = {
+                            NOT = {
+                                has_country_flag = brought_out
+                            }
+                        }
+                        create_ship = {
+                            type = assault_2
+                            equipment_variant = "Assault 2"
+                            creator = EMP
+                        }
+                    }else = {
+                        create_ship = {
+                            type = assault_2
+                            equipment_variant = "Assault 2"
+                            creator = var:global.assault_2_holder
+                        }
+                    }
+                }
+            }
+            product_auto_buy_5600 = {
+                set_country_flag = auto_buy_enabled_5600
+            }
+            product_buy_one_7340 = {
+                if = {
+                    limit = {
+                        check_variable = {global.market_ship_holder@7340 > 0}
+                    }
+                    if = {
+                        limit = {
+                            NOT = {
+                                has_country_flag = brought_out
+                            }
+                        }
+                        create_ship = {
+                            type = bothan_assault
+                            equipment_variant = "Bothan Assault"
+                            creator = EMP
+                        }
+                    }else = {
+                        create_ship = {
+                            type = bothan_assault
+                            equipment_variant = "Bothan Assault"
+                            creator = var:global.bothan_assault_holder
+                        }
+                    }
+                }
+            }
+            product_auto_buy_7340 = {
+                set_country_flag = auto_buy_enabled_7340
+            }
+            product_buy_one_5830 = {
+                if = {
+                    limit = {
+                        check_variable = {global.market_ship_holder@5830 > 0}
+                    }
+                    if = {
+                        limit = {
+                            NOT = {
+                                has_country_flag = brought_out
+                            }
+                        }
+                        create_ship = {
+                            type = mc40
+                            equipment_variant = "MC40"
+                            creator = EMP
+                        }
+                    }else = {
+                        create_ship = {
+                            type = mc40
+                            equipment_variant = "MC40"
+                            creator = var:global.mc40_holder
+                        }
+                    }
+                }
+            }
+            product_auto_buy_5830 = {
+                set_country_flag = auto_buy_enabled_5830
+            }
+            ###CCC###
+            ## ABOVE COMMENT IS FOR PYTHON SCRIPT DO NOT REMOVE ##
+        }
+    }
+    Marketplace_buying_cruisers_imperial_menu = {
+        context_type = player_context
+        window_name = "Marketplace_buying_cruisers_imperial_menu"
+        parent_window_name = "Marketplace_buying_menu"
+        visible = {
+            has_country_flag = imperial_market_open
+            has_country_flag = cruiser_buying_market_open
+        }
+        effects = {
+            product_buy_one_4800 = {
+                if = {
+                    limit = {
+                        check_variable = {global.market_ship_holder@4800 > 0}
+                    }
+                    if = {
+                        limit = {
+                            NOT = {
+                                has_country_flag = brought_out
+                            }
+                        }
+                        create_ship = {
+                            type = arquitens
+                            equipment_variant = "Arquitens"
+                            creator = EMP
+                        }
+                    }else = {
+                        create_ship = {
+                            type = arquitens
+                            equipment_variant = "Arquitens"
+                            creator = var:global.arquitens_holder
+                        }
+                    }
+                }
+            }
+            product_auto_buy_4800 = {
+                set_country_flag = auto_buy_enabled_4800
+            }
+            product_buy_one_5950 = {
+                if = {
+                    limit = {
+                        check_variable = {global.market_ship_holder@5950 > 0}
+                    }
+                    if = {
+                        limit = {
+                            NOT = {
+                                has_country_flag = brought_out
+                            }
+                        }
+                        create_ship = {
+                            type = interdictor
+                            equipment_variant = "interdictor"
+                            creator = EMP
+                        }
+                    }else = {
+                        create_ship = {
+                            type = interdictor
+                            equipment_variant = "interdictor"
+                            creator = var:global.interdictor_holder
+                        }
+                    }
+                }
+            }
+            product_auto_buy_5950 = {
+                set_country_flag = auto_buy_enabled_5950
+            }
+            product_buy_one_5200 = {
+                if = {
+                    limit = {
+                        check_variable = {global.market_ship_holder@5200 > 0}
+                    }
+                    if = {
+                        limit = {
+                            NOT = {
+                                has_country_flag = brought_out
+                            }
+                        }
+                        create_ship = {
+                            type = dreadnaught
+                            equipment_variant = "Dreadnaught"
+                            creator = EMP
+                        }
+                    }else = {
+                        create_ship = {
+                            type = dreadnaught
+                            equipment_variant = "Dreadnaught"
+                            creator = var:global.dreadnaught_holder
+                        }
+                    }
+                }
+            }
+            product_auto_buy_5200 = {
+                set_country_flag = auto_buy_enabled_5200
+            }
+            product_buy_one_7400 = {
+                if = {
+                    limit = {
+                        check_variable = {global.market_ship_holder@7400 > 0}
+                    }
+                    if = {
+                        limit = {
+                            NOT = {
+                                has_country_flag = brought_out
+                            }
+                        }
+                        create_ship = {
+                            type = victory
+                            equipment_variant = "Victory"
+                            creator = EMP
+                        }
+                    }else = {
+                        create_ship = {
+                            type = victory
+                            equipment_variant = "Victory"
+                            creator = var:global.victory_holder
+                        }
+                    }
+                }
+            }
+            product_auto_buy_7400 = {
+                set_country_flag = auto_buy_enabled_7400
+            }
+            product_buy_one_7940 = {
+                if = {
+                    limit = {
+                        check_variable = {global.market_ship_holder@7940 > 0}
+                    }
+                    if = {
+                        limit = {
+                            NOT = {
+                                has_country_flag = brought_out
+                            }
+                        }
+                        create_ship = {
+                            type = victory_2
+                            equipment_variant = "Victory 2"
+                            creator = EMP
+                        }
+                    }else = {
+                        create_ship = {
+                            type = victory_2
+                            equipment_variant = "Victory 2"
+                            creator = var:global.victory_2_holder
+                        }
+                    }
+                }
+            }
+            product_auto_buy_7940 = {
+                set_country_flag = auto_buy_enabled_7940
+            }
+            ###CCD###
+            ## ABOVE COMMENT IS FOR PYTHON SCRIPT DO NOT REMOVE ##
+        }
+    }
+    Marketplace_buying_cruisers_neutral_menu = {
+        context_type = player_context
+        window_name = "Marketplace_buying_cruisers_neutral_menu"
+        parent_window_name = "Marketplace_buying_menu"
+        visible = {
+            has_country_flag = neutral_market_open
+            has_country_flag = cruiser_buying_market_open
+        }
+        effects = {
+            ###CDD###
+            ## ABOVE COMMENT IS FOR PYTHON SCRIPT DO NOT REMOVE ##
+        }
+    }
+    Marketplace_buying_star_destoyers_republic_menu = {
+        context_type = player_context
+        window_name = "Marketplace_buying_star_destoyers_republic_menu"
+        parent_window_name = "Marketplace_buying_menu"
+        visible = {
+            has_country_flag = republic_market_open
+            has_country_flag = star_destroyer_buying_market_open
+        }
+        effects = {
+            product_buy_one_10080 = {
+                if = {
+                    limit = {
+                        check_variable = {global.market_ship_holder@10080 > 0}
+                    }
+                    if = {
+                        limit = {
+                            NOT = {
+                                has_country_flag = brought_out
+                            }
+                        }
+                        create_ship = {
+                            type = mc80_liberty
+                            equipment_variant = "MC80 Liberty"
+                            creator = EMP
+                        }
+                    }else = {
+                        create_ship = {
+                            type = mc80_liberty
+                            equipment_variant = "MC80 Liberty"
+                            creator = var:global.mc80_liberty_holder
+                        }
+                    }
+                }
+            }
+            product_auto_buy_10080 = {
+                set_country_flag = auto_buy_enabled_10080
+            }
+            product_buy_one_12400 = {
+                if = {
+                    limit = {
+                        check_variable = {global.market_ship_holder@12400 > 0}
+                    }
+                    if = {
+                        limit = {
+                            NOT = {
+                                has_country_flag = brought_out
+                            }
+                        }
+                        create_ship = {
+                            type = starhawk
+                            equipment_variant = "Starhawk"
+                            creator = EMP
+                        }
+                    }else = {
+                        create_ship = {
+                            type = starhawk
+                            equipment_variant = "Starhawk"
+                            creator = var:global.starhawk_holder
+                        }
+                    }
+                }
+            }
+            product_auto_buy_12400 = {
+                set_country_flag = auto_buy_enabled_12400
+            }
+            product_buy_one_9120 = {
+                if = {
+                    limit = {
+                        check_variable = {global.market_ship_holder@9120 > 0}
+                    }
+                    if = {
+                        limit = {
+                            NOT = {
+                                has_country_flag = brought_out
+                            }
+                        }
+                        create_ship = {
+                            type = mc75
+                            equipment_variant = "MC75"
+                            creator = EMP
+                        }
+                    }else = {
+                        create_ship = {
+                            type = mc75
+                            equipment_variant = "MC75"
+                            creator = var:global.mc75_holder
+                        }
+                    }
+                }
+            }
+            product_auto_buy_9120 = {
+                set_country_flag = auto_buy_enabled_9120
+            }
+            product_buy_one_13450 = {
+                if = {
+                    limit = {
+                        check_variable = {global.market_ship_holder@13450 > 0}
+                    }
+                    if = {
+                        limit = {
+                            NOT = {
+                                has_country_flag = brought_out
+                            }
+                        }
+                        create_ship = {
+                            type = dauntless
+                            equipment_variant = "Dauntless"
+                            creator = EMP
+                        }
+                    }else = {
+                        create_ship = {
+                            type = dauntless
+                            equipment_variant = "Dauntless"
+                            creator = var:global.dauntless_holder
+                        }
+                    }
+                }
+            }
+            product_auto_buy_13450 = {
+                set_country_flag = auto_buy_enabled_13450
+            }
+            product_buy_one_13200 = {
+                if = {
+                    limit = {
+                        check_variable = {global.market_ship_holder@13200 > 0}
+                    }
+                    if = {
+                        limit = {
+                            NOT = {
+                                has_country_flag = brought_out
+                            }
+                        }
+                        create_ship = {
+                            type = mc80_home_one
+                            equipment_variant = "MC80 Home One"
+                            creator = EMP
+                        }
+                    }else = {
+                        create_ship = {
+                            type = mc80_home_one
+                            equipment_variant = "MC80 Home One"
+                            creator = var:global.mc80_home_one_holder
+                        }
+                    }
+                }
+            }
+            product_auto_buy_13200 = {
+                set_country_flag = auto_buy_enabled_13200
+            }
+            product_buy_one_10630 = {
+                if = {
+                    limit = {
+                        check_variable = {global.market_ship_holder@10630 > 0}
+                    }
+                    if = {
+                        limit = {
+                            NOT = {
+                                has_country_flag = brought_out
+                            }
+                        }
+                        create_ship = {
+                            type = mc85
+                            equipment_variant = "MC85"
+                            creator = EMP
+                        }
+                    }else = {
+                        create_ship = {
+                            type = mc85
+                            equipment_variant = "MC85"
+                            creator = var:global.mc85_holder
+                        }
+                    }
+                }
+            }
+            product_auto_buy_10630 = {
+                set_country_flag = auto_buy_enabled_10630
+            }
+            product_buy_one_14400 = {
+                if = {
+                    limit = {
+                        check_variable = {global.market_ship_holder@14400 > 0}
+                    }
+                    if = {
+                        limit = {
+                            NOT = {
+                                has_country_flag = brought_out
+                            }
+                        }
+                        create_ship = {
+                            type = nebula
+                            equipment_variant = "Nebula"
+                            creator = EMP
+                        }
+                    }else = {
+                        create_ship = {
+                            type = nebula
+                            equipment_variant = "Nebula"
+                            creator = var:global.nebula_holder
+                        }
+                    }
+                }
+            }
+            product_auto_buy_14400 = {
+                set_country_flag = auto_buy_enabled_14400
+            }
+            product_variant_type_14400 = {
+                if = {
+                    limit = {
+                        check_variable = {global.market_ship_holder@14400 > 0}
+                    }
+                    if = {
+                        limit = {
+                            NOT = {
+                                has_country_flag = brought_out
+                            }
+                        }
+                        create_ship = {
+                            type = nebula_variant
+                            equipment_variant = "Nebula"
+                            creator = EMP
+                        }
+                    }else = {
+                        create_ship = {
+                            type = nebula_variant
+                            equipment_variant = "Nebula"
+                            creator = var:global.nebula_holder
+                        }
+                    }
+                }
+            }
+            product_buy_one_13430 = {
+                if = {
+                    limit = {
+                        check_variable = {global.market_ship_holder@13430 > 0}
+                    }
+                    if = {
+                        limit = {
+                            NOT = {
+                                has_country_flag = brought_out
+                            }
+                        }
+                        create_ship = {
+                            type = republic_star
+                            equipment_variant = "Republic star"
+                            creator = EMP
+                        }
+                    }else = {
+                        create_ship = {
+                            type = republic_star
+                            equipment_variant = "Republic star"
+                            creator = var:global.republic_star_holder
+                        }
+                    }
+                }
+            }
+            product_auto_buy_13430 = {
+                set_country_flag = auto_buy_enabled_13430
+            }
+            ###DDD###
+            ## ABOVE COMMENT IS FOR PYTHON SCRIPT DO NOT REMOVE ##
+        }
+    }
+    Marketplace_buying_star_destoyers_imperial_menu = {
+        context_type = player_context
+        window_name = "Marketplace_buying_star_destoyers_imperial_menu"
+        parent_window_name = "Marketplace_buying_menu"
+        visible = {
+            AND = {
+                has_country_flag = imperial_market_open
+                has_country_flag = star_destroyer_buying_market_open
             }
         }
-		product_buy_one_14503 = {
-			if = {
-				limit = {
-					check_variable = {global.market_ship_holder@14503 > 0}
-				}
+        effects = {
+            product_buy_one_11005 = {
                 if = {
                     limit = {
-                        NOT = {
-                            has_country_flag = brought_out
+                        check_variable = {global.market_ship_holder@11005 > 0}
+                    }
+                    if = {
+                        limit = {
+                            NOT = {
+                                has_country_flag = brought_out
+                            }
                         }
-                    }
-                    create_ship = {
-                        type = resurgent
-                        equipment_variant = "Resurgent"
-                        creator = EMP
-                    }
-                }else = {
-                    create_ship = {
-                        type = resurgent
-                        equipment_variant = "Resurgent"
-                        creator = var:global.resurgent_holder
+                        create_ship = {
+                            type = isd
+                            equipment_variant = "ISD"
+                            creator = EMP
+                        }
+                    }else = {
+                        create_ship = {
+                            type = isd
+                            equipment_variant = "ISD"
+                            creator = var:global.isd_holder
+                        }
                     }
                 }
             }
-		}
-		product_auto_buy_14503 = {
-			set_country_flag = "14503_auto_buy_enabled"
-		}
-		product_buy_one_14030 = {
-			if = {
-				limit = {
-					check_variable = {global.market_ship_holder@14030 > 0}
-				}
+            product_auto_buy_11005 = {
+                set_country_flag = auto_buy_enabled_11005
+            }
+            product_variant_type_11005 = {
                 if = {
                     limit = {
-                        NOT = {
-                            has_country_flag = brought_out
+                        check_variable = {global.market_ship_holder@11005 > 0}
+                    }
+                    if = {
+                        limit = {
+                            NOT = {
+                                has_country_flag = brought_out
+                            }
                         }
-                    }
-                    create_ship = {
-                        type = praetor
-                        equipment_variant = "Praetor"
-                        creator = EMP
-                    }
-                }else = {
-                    create_ship = {
-                        type = praetor
-                        equipment_variant = "Praetor"
-                        creator = var:global.praetor_holder
+                        create_ship = {
+                            type = isd_variant
+                            equipment_variant = "ISD"
+                            creator = EMP
+                        }
+                    }else = {
+                        create_ship = {
+                            type = isd_variant
+                            equipment_variant = "ISD"
+                            creator = var:global.isd_holder
+                        }
                     }
                 }
             }
-		}
-		product_auto_buy_14030 = {
-			set_country_flag = "14030_auto_buy_enabled"
-		}
-		###DDE###
-		## ABOVE COMMENT IS FOR PYTHON SCRIPT DO NOT REMOVE ##
-	}
+            product_buy_one_11850 = {
+                if = {
+                    limit = {
+                        check_variable = {global.market_ship_holder@11850 > 0}
+                    }
+                    if = {
+                        limit = {
+                            NOT = {
+                                has_country_flag = brought_out
+                            }
+                        }
+                        create_ship = {
+                            type = isd_2
+                            equipment_variant = "ISD 2"
+                            creator = EMP
+                        }
+                    }else = {
+                        create_ship = {
+                            type = isd_2
+                            equipment_variant = "ISD 2"
+                            creator = var:global.isd_2_holder
+                        }
+                    }
+                }
+            }
+            product_auto_buy_11850 = {
+                set_country_flag = auto_buy_enabled_11850
+            }
+            product_variant_type_11005 = {
+                if = {
+                    limit = {
+                        check_variable = {global.market_ship_holder@11850 > 0}
+                    }
+                    if = {
+                        limit = {
+                            NOT = {
+                                has_country_flag = brought_out
+                            }
+                        }
+                        create_ship = {
+                            type = isd_2_variant
+                            equipment_variant = "ISD 2"
+                            creator = EMP
+                        }
+                    }else = {
+                        create_ship = {
+                            type = isd_2_variant
+                            equipment_variant = "ISD 2"
+                            creator = var:global.isd_2_holder
+                        }
+                    }
+                }
+            }
+            product_buy_one_14503 = {
+                if = {
+                    limit = {
+                        check_variable = {global.market_ship_holder@14503 > 0}
+                    }
+                    if = {
+                        limit = {
+                            NOT = {
+                                has_country_flag = brought_out
+                            }
+                        }
+                        create_ship = {
+                            type = resurgent
+                            equipment_variant = "Resurgent"
+                            creator = EMP
+                        }
+                    }else = {
+                        create_ship = {
+                            type = resurgent
+                            equipment_variant = "Resurgent"
+                            creator = var:global.resurgent_holder
+                        }
+                    }
+                }
+            }
+            product_auto_buy_14503 = {
+                set_country_flag = auto_buy_enabled_14503
+            }
+            product_buy_one_14030 = {
+                if = {
+                    limit = {
+                        check_variable = {global.market_ship_holder@14030 > 0}
+                    }
+                    if = {
+                        limit = {
+                            NOT = {
+                                has_country_flag = brought_out
+                            }
+                        }
+                        create_ship = {
+                            type = praetor
+                            equipment_variant = "Praetor"
+                            creator = EMP
+                        }
+                    }else = {
+                        create_ship = {
+                            type = praetor
+                            equipment_variant = "Praetor"
+                            creator = var:global.praetor_holder
+                        }
+                    }
+                }
+            }
+            product_auto_buy_14030 = {
+                set_country_flag = auto_buy_enabled_14030
+            }
+            ###DDE###
+            ## ABOVE COMMENT IS FOR PYTHON SCRIPT DO NOT REMOVE ##
+        }
+    }
+    Marketplace_buying_star_destoyers_neutral_menu = {
+        context_type = player_context
+        window_name = "Marketplace_buying_star_destoyers_neutral_menu"
+        parent_window_name = "Marketplace_buying_menu"
+        visible = {
+            has_country_flag = neutral_market_open
+            has_country_flag = star_destroyer_buying_market_open
+        }
+        effects = {
+            ###DEE###
+            ## ABOVE COMMENT IS FOR PYTHON SCRIPT DO NOT REMOVE ##
+        }
+    }
 }
-Marketplace_buying_star_destoyers_neutral_menu = {
-	context_type = player_context
-	window_name = "Marketplace_buying_star_destoyers_neutral_menu"
-	visible = {
-		has_country_flag = star_destroyer_neutral_market_open
-		has_country_flag = star_destroyer_buying_market_open
-	}
-	effects = {
-		###DEE###
-		## ABOVE COMMENT IS FOR PYTHON SCRIPT DO NOT REMOVE ##
-	}
-}
-################################################################################## BUYING SHIPS END #########################################################################
+    ################################################################################## BUYING SHIPS END #########################################################################
