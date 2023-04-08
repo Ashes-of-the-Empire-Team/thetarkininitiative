@@ -1,77 +1,77 @@
-scripted_gui = {
-
-	research_slots = {
-		context_type = player_context
-		window_name = "research_slots_cover"
-		parent_window_name = "research_slots"
-		visible = {
-           always = yes
-		}
-		effects = {
-			research_slot_overlay_click = {
-				set_variable = { Root.selected_research_slot = i }
-				if = {
-					limit = {
-						has_variable = cloning_slot
-						check_variable = { i = cloning_slot }
-					}
-					clr_country_flag = droid_tech_viewable
-					clr_country_flag = disease_tech_viewable
-					set_country_flag = cloning_tech_viewable
-				}
-				else_if = {
-					limit = {
-						has_variable = disease_slot
-						check_variable = { i = disease_slot }
-					}
-					clr_country_flag = droid_tech_viewable
-					set_country_flag = disease_tech_viewable
-					clr_country_flag = cloning_tech_viewable
-						}
-				else_if = {
-					limit = {
-						has_variable = droid_slot
-						check_variable = { i = droid_slot }
-					}
-					set_country_flag = droid_tech_viewable
-					clr_country_flag = disease_tech_viewable
-					clr_country_flag = cloning_tech_viewable
-						}
-						else = {
-							clr_country_flag = droid_tech_viewable
-							clr_country_flag = disease_tech_viewable
-							clr_country_flag = cloning_tech_viewable
-						}
-					}
-				}
-
-
-		dynamic_lists = {
-			research_slot_list = {
-				array = research_slots
-				change_scope = yes
-				entry_container = "research_slot_container"
-			}
-		}
-		triggers = {
-			research_slot_overlay_visible = {
-				NOT = {
-					check_variable = { Root.selected_research_slot = i }
-				}
-			}
-			research_slot_lost_overlay_visible = {
-				NOT = {
-					CONTROLLER = {
-						OR = {
-							tag = ROOT 
-							is_ally_with = ROOT 
-						}
-					}
-				}
-			}
-		}
-		properties = {
-			research_tech_group = { image = "[Gettechslot]" }
-		}
-	}
-}
+#scripted_gui = {
+#
+#	research_slots = {
+#		context_type = player_context
+#		window_name = "research_slots_cover"
+#		parent_window_name = "research_slots"
+#		visible = {
+#           always = yes
+#		}
+#		effects = {
+#			research_slot_overlay_click = {
+#				set_variable = { Root.selected_research_slot = i }
+#				if = {
+#					limit = {
+#						has_variable = cloning_slot
+#						check_variable = { i = cloning_slot }
+#					}
+#					clr_country_flag = droid_tech_viewable
+#					clr_country_flag = disease_tech_viewable
+#					set_country_flag = cloning_tech_viewable
+#				}
+#				else_if = {
+#					limit = {
+#						has_variable = disease_slot
+#						check_variable = { i = disease_slot }
+#					}
+#					clr_country_flag = droid_tech_viewable
+#					set_country_flag = disease_tech_viewable
+#					clr_country_flag = cloning_tech_viewable
+#						}
+#				else_if = {
+#					limit = {
+#						has_variable = droid_slot
+#						check_variable = { i = droid_slot }
+#					}
+#					set_country_flag = droid_tech_viewable
+#					clr_country_flag = disease_tech_viewable
+#					clr_country_flag = cloning_tech_viewable
+#						}
+#						else = {
+#							clr_country_flag = droid_tech_viewable
+#							clr_country_flag = disease_tech_viewable
+#							clr_country_flag = cloning_tech_viewable
+#						}
+#					}
+#				}
+#
+#
+#		dynamic_lists = {
+#			research_slot_list = {
+#				array = research_slots
+#				change_scope = yes
+#				entry_container = "research_slot_container"
+#			}
+#		}
+#		triggers = {
+#			research_slot_overlay_visible = {
+#				NOT = {
+#					check_variable = { Root.selected_research_slot = i }
+#				}
+#			}
+#			research_slot_lost_overlay_visible = {
+#				NOT = {
+#					CONTROLLER = {
+#						OR = {
+#							tag = ROOT 
+#							is_ally_with = ROOT 
+#						}
+#					}
+#				}
+#			}
+#		}
+#		properties = {
+#			research_tech_group = { image = "[Gettechslot]" }
+#		}
+#	}
+#}
