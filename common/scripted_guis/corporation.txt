@@ -7,21 +7,28 @@ scripted_gui = {
 			market_opener_button_click = {
 				if = {
 					limit = {
-						has_country_flag = open_buy_market
+						check_variable = { open_market_click = 2}
 					}
-					clr_country_flag = open_buy_market
-				}else = {
+					set_variable = { open_market_click = 1 }
+				}
+				else = {
+					set_variable = { open_market_click = 2}
 					set_country_flag = open_buy_market
 					set_country_flag = open_market_ships
 				}
 			}	
+		}
+		properties = {
+			market_opener_button = {
+				frame = open_market_click
+			}
 		}
 	}
 	corporation_buy_market = {
 		context_type = player_context
 		window_name = "corporation_buy_market"
 		visible = {
-           has_country_flag = corp_buy
+			check_variable = { open_market_click = 2}
 		}
 		effects = {
 			fighter_background_click = {
