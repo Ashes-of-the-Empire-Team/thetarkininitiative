@@ -1,0 +1,34 @@
+duplicate_archetypes = {
+
+	# light_tank
+
+	light_tank_aa_chassis = {
+		archetype = light_tank_chassis
+		type = { armor anti_air }
+
+		for_each = {
+			# For each duplicated equipment type (excluding the archetype), set variant_name by taking what would be
+			# used as the localization key (the name of the type) and run a find-and-replace on it.
+			# Example: light_tank_aa_chassis_1 gets variant_name light_tank_aa_equipment_1.
+			variant_name = { find_and_replace = { "chassis" "equipment" } }
+			hardness = { set = 0.5 }
+		}
+	}
+
+	light_tank_artillery_chassis = {
+		archetype = light_tank_chassis
+		type = { armor artillery }
+		for_each = {
+			variant_name = { find_and_replace = { "chassis" "equipment" } }
+			hardness = { set = 0.5 }
+		}
+	}
+
+	light_tank_destroyer_chassis = {
+		archetype = light_tank_chassis
+		type = { armor anti_tank }
+		for_each = {
+			variant_name = { find_and_replace = { "chassis" "equipment" } }
+		}
+	}
+} 
