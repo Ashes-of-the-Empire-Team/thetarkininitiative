@@ -1,11 +1,12 @@
 ###########################
-# Zsinj Empire events
+# Zero Command events
 ###########################
 
 add_namespace = ZER
 add_namespace = ZER_start
 add_namespace = ZER_empire_reformation
 add_namespace = ZER_news
+add_namespace = ZER_warlord
 
 country_event = { # Harrsk Becoming Emperor
     id = ZER_empire_reformation.1
@@ -516,25 +517,6 @@ country_event = { # Fighting on the Home Front
         ai_chance = {
             base = 40
         }
-        if = {
-            limit = {
-                ZER = { is_in_faction = yes }
-            }
-
-            ZER = {
-                add_to_faction = ROOT
-            }
-        }
-        if = {
-            limit = {
-                ZER = { is_in_faction = no }
-            }
-
-            ZER = {
-                create_faction = IMPERIAL_RECLAMATION_ARMY
-                add_to_faction = ROOT
-            }
-        }
         custom_effect_tooltip = tt_zer_increase_10_legitimacy_foreign
         hidden_effect = {
             ZER = {
@@ -629,6 +611,54 @@ country_event = { # DEEP 3 completed
     }
 }
 
+country_event = { # DEEP 3 completed
+    id = ZER_start.16
+    title = ZER_start.16.t
+    desc = ZER_start.16.d
+    picture = GFX_report_event_conference_room
+
+    is_triggered_only = yes
+
+    fire_only_once = yes
+
+    option = {
+        name = ZER_start.16.a
+        ai_chance = {
+            base = 50
+        }
+        add_political_power = 100
+    }
+    option = {
+        name = ZER_start.16.b
+        ai_chance = {
+            base = 50
+        }
+        ZER = { country_event = ZER_start.17 } 
+        custom_effect_tooltip = tt_zer_spend_250_credits
+		subtract_from_variable = { currency_amount^primary_currency = 250 }
+    }
+}
+
+country_event = { # DEEP 3 completed
+    id = ZER_start.17
+    title = ZER_start.17.t
+    desc = ZER_start.17.d
+    picture = GFX_report_event_conference_room
+
+    is_triggered_only = yes
+
+    fire_only_once = yes
+
+    option = {
+        name = ZER_start.17.a
+        ai_chance = {
+            base = 50
+        }
+        add_political_power = -50
+        custom_effect_tooltip = tt_zer_gain_250_credits
+		add_to_variable = { currency_amount^primary_currency = 250 }
+    }
+}
 country_event = { # Fleet Modifications
     id = ZER.1
     title = ZER.1.t
@@ -845,4 +875,95 @@ country_event = { # Harrsk speaks to his commanders
     option = {
         name = ZER.11.b
     }
+}
+
+country_event = { # Fighting on the Home Front
+    id = ZER_warlord.1
+    title = ZER_warlord.1.t
+    desc = ZER_warlord.1.d
+    picture = GFX_report_event_star_destroyers
+
+    is_triggered_only = yes
+
+    fire_only_once = yes
+
+    option = {
+        name = ZER_warlord.1.a
+        ai_chance = {
+            base = 80
+        }
+        add_political_power = 50
+    }
+
+    option = {
+        name = ZER_warlord.1.b
+        ai_chance = {
+            base = 20
+        }
+        add_ideas = everyone_has_a_part
+        add_stability = -0.1
+    }
+
+}
+
+country_event = { # Fighting on the Home Front
+    id = ZER_warlord.2
+    title = ZER_warlord.2.t
+    desc = ZER_warlord.2.d
+    picture = GFX_report_event_conference_room
+
+    is_triggered_only = yes
+
+    fire_only_once = yes
+
+    option = {
+        name = ZER_warlord.2.a # Independent Bank
+        ai_chance = {
+            base = 20
+        }
+        add_political_power = 50
+        add_stability = 0.05
+        add_ideas = ZER_independent_bank
+    }
+
+    option = {
+        name = ZER_warlord.2.b # State-owned Bank
+        ai_chance = {
+            base = 80
+        }
+        add_political_power = -50
+        custom_effect_tooltip = tt_zer_spend_50_credits
+		subtract_from_variable = { currency_amount^primary_currency = 50 }
+        add_ideas = ZER_state_owned_bank
+    }
+
+}
+
+country_event = { # Fighting on the Home Front
+    id = ZER_warlord.3
+    title = ZER_warlord.3.t
+    desc = ZER_warlord.3.d
+    picture = GFX_report_event_conference_room
+
+    is_triggered_only = yes
+
+    fire_only_once = yes
+
+    option = {
+        name = ZER_warlord.3.a # Merciful Execution
+        ai_chance = {
+            base = 50
+        }
+        add_political_power = 50
+        add_stability = 0.03
+    }
+
+    option = {
+        name = ZER_warlord.3.b # Rancor Execution
+        ai_chance = {
+            base = 50
+        }
+        add_war_support = 0.1
+    }
+
 }
