@@ -569,8 +569,8 @@ focus_tree = {
 		}
 		completion_reward = {
 			swap_ideas = {
-				remove_idea = ZER_warlord_economy_idea
-    			add_idea = ZER_warlord_economy_idea2
+				remove_idea = economic_collapse_emp
+    			add_idea = ZER_economic_collapse_emp
 			}
 		}
 
@@ -823,8 +823,224 @@ focus_tree = {
 		}
 		completion_reward = {
 			swap_ideas = {
-				remove_idea = ZER_warlord_economy_idea2
+				remove_idea = ZER_economic_collapse_emp
     			add_idea = ZER_vulnerable_economy_idea
+			}
+		}
+
+		ai_will_do = {
+			factor = 100
+		}
+	}
+
+	# Modifying the fleet?
+	focus = {
+		id = ZER_factories_for_the_people
+		icon = GFX_outbound_flight
+		cost = 5
+		x = 4
+		y = 8
+		prerequisite = {
+			focus = ZER_self_sufficient_economy
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			325 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 100
+		}
+	}
+
+	# Modifying the fleet?
+	focus = {
+		id = ZER_durasteel_foundries
+		icon = GFX_outbound_flight
+		cost = 5
+		x = 6
+		y = 8
+		prerequisite = {
+			focus = ZER_self_sufficient_economy
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			add_resource = {
+				type = steel
+				amount = 24
+				state = 327
+			}
+		}
+
+		ai_will_do = {
+			factor = 100
+		}
+	}
+
+	# Modifying the fleet?
+	focus = {
+		id = ZER_kalist_arms_company
+		icon = GFX_outbound_flight
+		cost = 5
+		x = 8
+		y = 8
+		prerequisite = {
+			focus = ZER_self_sufficient_economy
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			325 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 100
+		}
+	}
+
+	# Modifying the fleet?
+	focus = {
+		id = ZER_underground_foundries
+		icon = GFX_outbound_flight
+		cost = 5
+		x = 4
+		y = 9
+		prerequisite = {
+			focus = ZER_factories_for_the_people
+		}
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = tt_zer_money_50
+				check_variable = { currency_amount^primary_currency > 50 }
+			}
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			add_offsite_building = { type = arms_factory level = 2 }
+			custom_effect_tooltip = tt_zer_spend_50_credits
+			subtract_from_variable = { currency_amount^primary_currency = 50 }
+		}
+
+		ai_will_do = {
+			factor = 100
+		}
+	}
+
+	# Modifying the fleet?
+	focus = {
+		id = ZER_fuel_for_the_fleet
+		icon = GFX_outbound_flight
+		cost = 5
+		x = 6
+		y = 9
+		prerequisite = {
+			focus = ZER_durasteel_foundries
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			add_resource = {
+				type = oil
+				amount = 10
+				state = 334
+			}
+			add_resource = {
+				type = oil
+				amount = 16
+				state = 320
+			}
+		}
+
+		ai_will_do = {
+			factor = 100
+		}
+	}
+
+	# Modifying the fleet?
+	focus = {
+		id = ZER_future_expansion
+		icon = GFX_outbound_flight
+		cost = 5
+		x = 8
+		y = 9
+		prerequisite = {
+			focus = ZER_kalist_arms_company
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			325 = {
+				add_extra_state_shared_building_slots = 2
+			}
+			74 = {
+				add_extra_state_shared_building_slots = 1
+			}
+			331 = {
+				add_extra_state_shared_building_slots = 1
+			}
+			327 = {
+				add_extra_state_shared_building_slots = 1
+			}
+		}
+
+		ai_will_do = {
+			factor = 100
+		}
+	}
+
+	# Modifying the fleet?
+	focus = {
+		id = ZER_industrial_powerhouse
+		icon = GFX_outbound_flight
+		cost = 5
+		x = 6
+		y = 10
+		prerequisite = {
+			focus = ZER_underground_foundries
+		}
+		prerequisite = {
+			focus = ZER_fuel_for_the_fleet
+		}
+		prerequisite = {
+			focus = ZER_future_expansion
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = ZER_vulnerable_economy_idea
+				add_idea = ZER_industrial_powerhouse
 			}
 		}
 
@@ -842,6 +1058,7 @@ focus_tree = {
 		y = 3
 		available = {
 			has_country_flag = ZER_empire_path
+			has_completed_focus = ZER_strong_but_steady_hand
 		}
 		prerequisite = {
 			focus = ZER_crossroads_of_destiny
@@ -851,7 +1068,10 @@ focus_tree = {
 		mutually_exclusive = {
 		}
 		completion_reward = {
-			
+			add_timed_idea = {
+				idea = ZER_the_warmachine_unleashed
+				days = 180
+			}
 		}
 
 		ai_will_do = {
@@ -874,7 +1094,10 @@ focus_tree = {
 		mutually_exclusive = {
 		}
 		completion_reward = {
-			
+			declare_war_on = {
+                target = FTU
+                type = annex_everything
+            }
 		}
 
 		ai_will_do = {
@@ -897,7 +1120,10 @@ focus_tree = {
 		mutually_exclusive = {
 		}
 		completion_reward = {
-			
+			declare_war_on = {
+                target = COR
+                type = annex_everything
+            }
 		}
 
 		ai_will_do = {
@@ -923,7 +1149,10 @@ focus_tree = {
 		mutually_exclusive = {
 		}
 		completion_reward = {
-			
+			declare_war_on = {
+                target = NUB
+                type = annex_everything
+            }
 		}
 
 		ai_will_do = {
@@ -946,7 +1175,10 @@ focus_tree = {
 		mutually_exclusive = {
 		}
 		completion_reward = {
-			
+			declare_war_on = {
+                target = AAR
+                type = annex_everything
+            }
 		}
 
 		ai_will_do = {
@@ -964,16 +1196,72 @@ focus_tree = {
 		prerequisite = {
 			focus = ZER_conquest_of_nubia
 		}
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = controls_core_states_of_ftu
+				AND = {
+					306 = {
+						is_controlled_by_ROOT_or_ally = yes
+					}
+					295 = {
+						is_controlled_by_ROOT_or_ally = yes
+					}
+					64 = {
+						is_controlled_by_ROOT_or_ally = yes
+					}
+					292 = {
+						is_controlled_by_ROOT_or_ally = yes
+					}
+				}
+			}
+			custom_trigger_tooltip = {
+				tooltip = controls_core_states_of_cor
+				AND = {
+					454 = {
+						is_controlled_by_ROOT_or_ally = yes
+					}
+					330 = {
+						is_controlled_by_ROOT_or_ally = yes
+					}
+					324 = {
+						is_controlled_by_ROOT_or_ally = yes
+					}
+					192 = {
+						is_controlled_by_ROOT_or_ally = yes
+					}
+					72 = {
+						is_controlled_by_ROOT_or_ally = yes
+					}
+				}
+			}
+
+			custom_trigger_tooltip = {
+				tooltip = controls_core_states_of_nub
+				AND = {
+					332 = {
+						is_controlled_by_ROOT_or_ally = yes
+					}
+					333 = {
+						is_controlled_by_ROOT_or_ally = yes
+					}
+					77 = {
+						is_controlled_by_ROOT_or_ally = yes
+					}
+				}
+			}
+		}
 		search_filters = {
 		}
 		mutually_exclusive = {
 		}
 		completion_reward = {
-			
+			FTU = { add_to_ROOT_potential_cores = yes } 
+			COR = { add_to_ROOT_potential_cores = yes } 
+			NUB = { add_to_ROOT_potential_cores = yes } 
 		}
 
 		ai_will_do = {
-			factor = 100
+			factor = 4000
 		}
 	}
 
@@ -992,7 +1280,9 @@ focus_tree = {
 		mutually_exclusive = {
 		}
 		completion_reward = {
-			
+			add_ideas = {
+				ZER_the_final_push
+			}
 		}
 
 		ai_will_do = {
@@ -1021,7 +1311,17 @@ focus_tree = {
 		mutually_exclusive = {
 		}
 		completion_reward = {
-			
+			235 = {
+				controller = { 
+					ROOT = {
+						create_wargoal = {
+							target = PREV
+							type = annex_everything
+						}
+					}
+				}
+			}
+			remove_ideas = death_of_the_emperor_emp
 		}
 
 		ai_will_do = {
@@ -1306,7 +1606,30 @@ focus_tree = {
 		mutually_exclusive = {
 		}
 		completion_reward = {
-			
+			add_stability = -0.05
+			custom_effect_tooltip = tt_zer_increase_10_legitimacy
+			add_to_variable = { legitimacy_emp = 10 }
+        	add_to_variable = { legitimacy_emp_equilibirum = 10 }
+			create_unit = {
+				division = "name = \"Stormtrooper Regiment\" division_template = \"Stormtrooper Regiment\" start_experience_factor = 0.2"
+				owner = ZER
+			}
+			create_unit = {
+				division = "name = \"Stormtrooper Regiment\" division_template = \"Stormtrooper Regiment\" start_experience_factor = 0.2"
+				owner = ZER
+			}
+			create_unit = {
+				division = "name = \"Stormtrooper Regiment\" division_template = \"Stormtrooper Regiment\" start_experience_factor = 0.2"
+				owner = ZER
+			}
+			create_unit = {
+				division = "name = \"Stormtrooper Regiment\" division_template = \"Stormtrooper Regiment\" start_experience_factor = 0.2"
+				owner = ZER
+			}
+			create_unit = {
+				division = "name = \"Stormtrooper Regiment\" division_template = \"Stormtrooper Regiment\" start_experience_factor = 0.2"
+				owner = ZER
+			}
 		}
 
 		ai_will_do = {
@@ -1329,7 +1652,10 @@ focus_tree = {
 		mutually_exclusive = {
 		}
 		completion_reward = {
-			
+			country_event = ZER_start.14
+			custom_effect_tooltip = tt_zer_increase_10_legitimacy
+			add_to_variable = { legitimacy_emp = 10 }
+        	add_to_variable = { legitimacy_emp_equilibirum = 10 }
 		}
 
 		ai_will_do = {
@@ -1411,6 +1737,211 @@ focus_tree = {
 
 	# Modifying the fleet?
 	focus = {
+		id = ZER_developing_our_science_base
+		icon = GFX_outbound_flight
+		cost = 5
+		x = 0
+		y = 3
+		available = {
+			has_country_flag = ZER_warlord_path
+			custom_trigger_tooltip = {
+				tooltip = tt_zer_money_250
+				check_variable = { currency_amount^primary_currency > 250 }
+			}
+		}
+		prerequisite = {
+			focus = ZER_crossroads_of_destiny
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			custom_effect_tooltip = tt_zer_spend_250_credits
+			subtract_from_variable = { currency_amount^primary_currency = 250 }
+			add_political_power = 150
+			custom_effect_tooltip = tt_zer_unlocks_advisors # TODO
+		}
+
+		ai_will_do = {
+			factor = 100
+		}
+	}
+
+	# Modifying the fleet?
+	focus = {
+		id = ZER_increase_research_funding
+		icon = GFX_outbound_flight
+		cost = 5
+		x = -1
+		y = 4
+		prerequisite = {
+			focus = ZER_developing_our_science_base
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			add_research_slot = 1
+		}
+
+		ai_will_do = {
+			factor = 100
+		}
+	}
+
+	# Modifying the fleet?
+	focus = {
+		id = ZER_seek_out_gifted_individuals
+		icon = GFX_outbound_flight
+		cost = 5
+		x = 1
+		y = 4
+		prerequisite = {
+			focus = ZER_developing_our_science_base
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			add_ideas = ZER_strong_scientific_community
+		}
+
+		ai_will_do = {
+			factor = 100
+		}
+	}
+
+	# Modifying the fleet?
+	focus = {
+		id = ZER_deep_3
+		icon = GFX_outbound_flight
+		cost = 10
+		x = 0
+		y = 5
+		prerequisite = {
+			focus = ZER_increase_research_funding
+		}
+		prerequisite = {
+			focus = ZER_seek_out_gifted_individuals
+		}
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = tt_zer_money_100
+				check_variable = { currency_amount^primary_currency > 100 }
+			}
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		select_effect = {
+			log = "Non-Cancellable"
+		}
+		completion_reward = {
+			add_offsite_building = { type = arms_factory level = 2 }
+			add_ideas = ZER_deep_3_completed
+			country_event = ZER_start.15
+			custom_effect_tooltip = tt_zer_spend_100_credits
+			subtract_from_variable = { currency_amount^primary_currency = 100 }
+		}
+
+		ai_will_do = {
+			factor = 100
+		}
+	}
+
+	# Modifying the fleet?
+	focus = {
+		id = ZER_maintain_secrecy
+		icon = GFX_outbound_flight
+		cost = 5
+		x = -2
+		y = 6
+		prerequisite = {
+			focus = ZER_deep_3
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+			focus = ZER_public_research
+		}
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = ZER_deep_3_completed
+				add_idea = ZER_deep_3_completed_secret
+			}
+		}
+
+		ai_will_do = {
+			factor = 100
+		}
+	}
+
+	# Modifying the fleet?
+	focus = {
+		id = ZER_public_research
+		icon = GFX_outbound_flight
+		cost = 5
+		x = 2
+		y = 6
+		prerequisite = {
+			focus = ZER_deep_3
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+			focus = ZER_maintain_secrecy
+		}
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = ZER_deep_3_completed
+				add_idea = ZER_deep_3_completed_public
+			}
+		}
+
+		ai_will_do = {
+			factor = 100
+		}
+	}
+
+	# Modifying the fleet?
+	focus = {
+		id = ZER_advanced_research_methods
+		icon = GFX_outbound_flight
+		cost = 10
+		x = 0
+		y = 7
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = tt_zer_money_50
+				check_variable = { currency_amount^primary_currency > 50 }
+			}
+		}
+		prerequisite = {
+			focus = ZER_maintain_secrecy
+			focus = ZER_public_research
+		}
+		search_filters = {
+		}
+		select_effect = {
+			log = "Non-Cancellable"
+		}
+		completion_reward = {
+			add_research_slot = 1
+			custom_effect_tooltip = tt_zer_spend_50_credits
+			subtract_from_variable = { currency_amount^primary_currency = 50 }
+		}
+
+		ai_will_do = {
+			factor = 100
+		}
+	}
+
+	# Modifying the fleet?
+	focus = {
 		id = ZER_fleet_modifications
 		icon = GFX_outbound_flight
 		cost = 5
@@ -1468,8 +1999,8 @@ focus_tree = {
 		y = 2
 		available = {
 			custom_trigger_tooltip = {
-				tooltip = tt_zer_money_3000
-				check_variable = { currency_amount^primary_currency > 3000 }
+				tooltip = tt_zer_money_250
+				check_variable = { currency_amount^primary_currency > 250 }
 			}
 		}
 		prerequisite = {
@@ -1480,8 +2011,8 @@ focus_tree = {
 		mutually_exclusive = {
 		}
 		completion_reward = {
-			custom_effect_tooltip = tt_zer_spend_3000_credits
-			subtract_from_variable = { currency_amount^primary_currency = 3000 }
+			custom_effect_tooltip = tt_zer_spend_250_credits
+			subtract_from_variable = { currency_amount^primary_currency = 250 }
 			custom_effect_tooltip = tt_zer_shockwave_construction_begins
 			custom_effect_tooltip = tt_zer_shockwave_decisions_unlocked
 			set_variable = { zer_shockwave_progress = 1 }
@@ -1502,8 +2033,8 @@ focus_tree = {
 		y = 3
 		available = {
 			custom_trigger_tooltip = {
-				tooltip = tt_zer_money_1500
-				check_variable = { currency_amount^primary_currency > 1500 }
+				tooltip = tt_zer_money_100
+				check_variable = { currency_amount^primary_currency > 100 }
 			}
 		}
 		prerequisite = {
@@ -1514,8 +2045,8 @@ focus_tree = {
 		mutually_exclusive = {
 		}
 		completion_reward = {
-			custom_effect_tooltip = tt_zer_spend_1500_credits
-			subtract_from_variable = { currency_amount^primary_currency = 1500 }
+			custom_effect_tooltip = tt_zer_spend_100_credits
+			subtract_from_variable = { currency_amount^primary_currency = 100 }
 			custom_effect_tooltip = tt_zer_unlock_high_energy_weapon_decision
 		}
 
@@ -1579,7 +2110,7 @@ focus_tree = {
 		completion_reward = {
 			custom_effect_tooltip = tt_zer_shockwave_project_ended
 			create_ship = {
-				type = isd_hull
+				type = isd_2
 				equipment_variant = "Modified Star Destroyer"
 				creator = ZER
 				name = "Shockwave"
@@ -1817,8 +2348,8 @@ focus_tree = {
 		y = 3
 		available = {
 			custom_trigger_tooltip = {
-				tooltip = tt_zer_money_500
-				check_variable = { currency_amount^primary_currency > 500 }
+				tooltip = tt_zer_money_50
+				check_variable = { currency_amount^primary_currency > 50 }
 			}
 		}
 		prerequisite = {
@@ -1829,8 +2360,8 @@ focus_tree = {
 		mutually_exclusive = {
 		}
 		completion_reward = {
-			custom_effect_tooltip = tt_zer_spend_500_credits
-			subtract_from_variable = { currency_amount^primary_currency = 500 }
+			custom_effect_tooltip = tt_zer_spend_50_credits
+			subtract_from_variable = { currency_amount^primary_currency = 50 }
 			random_owned_state = {
 				add_building_construction = {
 					type = dockyard
@@ -1950,8 +2481,8 @@ focus_tree = {
 		y = 3
 		available = {
 			custom_trigger_tooltip = {
-				tooltip = tt_zer_money_500
-				check_variable = { currency_amount^primary_currency > 500 }
+				tooltip = tt_zer_money_50
+				check_variable = { currency_amount^primary_currency > 50 }
 			}
 		}
 		prerequisite = {
@@ -1962,8 +2493,8 @@ focus_tree = {
 		mutually_exclusive = {
 		}
 		completion_reward = {
-			custom_effect_tooltip = tt_zer_spend_500_credits
-			subtract_from_variable = { currency_amount^primary_currency = 500 }
+			custom_effect_tooltip = tt_zer_spend_50_credits
+			subtract_from_variable = { currency_amount^primary_currency = 50 }
 			random_owned_state = {
 				add_building_construction = {
 					type = arms_factory
