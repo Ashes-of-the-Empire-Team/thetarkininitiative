@@ -127,13 +127,15 @@ focus_tree = {
 					stormtrooper_2 = 1
 				}
 			}
-			create_unit = {
-				division = "name = \"Stormtrooper Regiment\" division_template = \"Stormtrooper Regiment\" start_experience_factor = 0.2"
-				owner = ZER
-			}
-			create_unit = {
-				division = "name = \"Stormtrooper Regiment\" division_template = \"Stormtrooper Regiment\" start_experience_factor = 0.2"
-				owner = ZER
+			325 = {
+				create_unit = {
+					division = "name = \"Stormtrooper Regiment\" division_template = \"Stormtrooper Regiment\" start_experience_factor = 0.2"
+					owner = ZER
+				}
+				create_unit = {
+					division = "name = \"Stormtrooper Regiment\" division_template = \"Stormtrooper Regiment\" start_experience_factor = 0.2"
+					owner = ZER
+				}
 			}
 		}
 
@@ -204,30 +206,6 @@ focus_tree = {
 					instant_build = yes
 				}
 			}
-		}
-
-		ai_will_do = {
-			factor = 100
-		}
-	}
-
-	focus = {
-		id = ZER_recruit_generals
-		icon = GFX_outbound_flight
-		cost = 5
-		x = 25
-		y = 4
-		prerequisite = {
-			focus = ZER_invest_in_arms_factories
-		}
-		search_filters = {
-		}
-		mutually_exclusive = {
-		}
-		completion_reward = {
-			#recruit_character = ZER_alandr_naresse
-			#recruit_character = ZER_buch_corpulon
-			#recruit_character = ZER_marc_norr
 		}
 
 		ai_will_do = {
@@ -1458,12 +1436,28 @@ focus_tree = {
 		prerequisite = {
 			focus = ZER_spreading_propaganda
 		}
+		available = {
+			FON = {
+				has_government = imperial
+				exists = yes
+			}
+		}
+		bypass = {
+			NOT = {
+				FON = {
+					has_government = imperial
+					exists = yes
+				}
+			}
+		}
 		search_filters = {
 		}
 		mutually_exclusive = {
 		}
 		completion_reward = {
-			
+			FON = {
+				country_event = ZER_start.20
+			}
 		}
 
 		ai_will_do = {
@@ -1524,7 +1518,17 @@ focus_tree = {
 		mutually_exclusive = {
 		}
 		completion_reward = {
-			
+			custom_effect_tooltip = tt_zer_decrease_empire_legitimacy
+			var:global.emperor_id = {
+				add_opinion_modifier = {
+					target = ZER
+					modifier = wants_to_dethrone_us
+				}
+				subtract_from_variable = { legitimacy_emp = 10 }
+        		subtract_from_variable = { legitimacy_emp_equilibirum = 10 }
+			}
+			country_event = ZER_start.19
+
 		}
 
 		ai_will_do = {
@@ -1536,7 +1540,7 @@ focus_tree = {
 	focus = {
 		id = ZER_imperial_symbology
 		icon = GFX_outbound_flight
-		cost = 5
+		cost = 10
 		x = 18
 		y = 6
 		prerequisite = {
@@ -1550,7 +1554,13 @@ focus_tree = {
 		mutually_exclusive = {
 		}
 		completion_reward = {
-			
+			custom_effect_tooltip = tt_zer_increase_10_legitimacy
+			add_to_variable = { legitimacy_emp = 10 }
+        	add_to_variable = { legitimacy_emp_equilibirum = 10 }
+			custom_effect_tooltip = tt_zer_adopt_imperial_sigil
+			hidden_effect = {
+				set_cosmetic_tag = ZER_EMPIRE_FLAG
+			}
 		}
 
 		ai_will_do = {
@@ -1576,7 +1586,10 @@ focus_tree = {
 		mutually_exclusive = {
 		}
 		completion_reward = {
-			
+			swap_ideas = {
+				remove_idea = ZER_strike_back_idea
+				add_idea = ZER_strike_back_idea2
+			}
 		}
 
 		ai_will_do = {
@@ -1603,25 +1616,30 @@ focus_tree = {
 			custom_effect_tooltip = tt_zer_increase_10_legitimacy
 			add_to_variable = { legitimacy_emp = 10 }
         	add_to_variable = { legitimacy_emp_equilibirum = 10 }
-			create_unit = {
-				division = "name = \"Stormtrooper Regiment\" division_template = \"Stormtrooper Regiment\" start_experience_factor = 0.2"
-				owner = ZER
-			}
-			create_unit = {
-				division = "name = \"Stormtrooper Regiment\" division_template = \"Stormtrooper Regiment\" start_experience_factor = 0.2"
-				owner = ZER
-			}
-			create_unit = {
-				division = "name = \"Stormtrooper Regiment\" division_template = \"Stormtrooper Regiment\" start_experience_factor = 0.2"
-				owner = ZER
-			}
-			create_unit = {
-				division = "name = \"Stormtrooper Regiment\" division_template = \"Stormtrooper Regiment\" start_experience_factor = 0.2"
-				owner = ZER
-			}
-			create_unit = {
-				division = "name = \"Stormtrooper Regiment\" division_template = \"Stormtrooper Regiment\" start_experience_factor = 0.2"
-				owner = ZER
+			custom_effect_tooltip = tt_zer_5_stormtrooper_divisions
+			hidden_effect = {
+				325 = {
+					create_unit = {
+						division = "name = \"Stormtrooper Regiment\" division_template = \"Stormtrooper Regiment\" start_experience_factor = 0.2"
+						owner = ZER
+					}
+					create_unit = {
+						division = "name = \"Stormtrooper Regiment\" division_template = \"Stormtrooper Regiment\" start_experience_factor = 0.2"
+						owner = ZER
+					}
+					create_unit = {
+						division = "name = \"Stormtrooper Regiment\" division_template = \"Stormtrooper Regiment\" start_experience_factor = 0.2"
+						owner = ZER
+					}
+					create_unit = {
+						division = "name = \"Stormtrooper Regiment\" division_template = \"Stormtrooper Regiment\" start_experience_factor = 0.2"
+						owner = ZER
+					}
+					create_unit = {
+						division = "name = \"Stormtrooper Regiment\" division_template = \"Stormtrooper Regiment\" start_experience_factor = 0.2"
+						owner = ZER
+					}
+				}
 			}
 		}
 
@@ -1639,6 +1657,10 @@ focus_tree = {
 		y = 7
 		prerequisite = {
 			focus = ZER_defaming_the_emperor
+		}
+		available = {
+			has_completed_focus = ZER_self_sufficient_economy
+			num_of_factories > 30
 		}
 		search_filters = {
 		}
@@ -1666,12 +1688,20 @@ focus_tree = {
 		prerequisite = {
 			focus = ZER_supporters_across_the_galaxy
 		}
+		available = {
+			has_army_manpower = {
+				size > 200000
+			}
+		}
 		search_filters = {
 		}
 		mutually_exclusive = {
 		}
 		completion_reward = {
-			
+			country_event = ZER_start.18
+			custom_effect_tooltip = tt_zer_increase_10_legitimacy
+			add_to_variable = { legitimacy_emp = 10 }
+        	add_to_variable = { legitimacy_emp_equilibirum = 10 }
 		}
 
 		ai_will_do = {
@@ -1689,12 +1719,33 @@ focus_tree = {
 		prerequisite = {
 			focus = ZER_supporters_across_the_galaxy
 		}
+		available = {
+			NOT = { has_war_with = REB }
+			REB = {
+				has_opinion = {
+					target = ZER
+					value > 9
+				}
+			}
+		}
 		search_filters = {
 		}
 		mutually_exclusive = {
 		}
 		completion_reward = {
-			
+			add_stability = 0.1
+			diplomatic_relation = {
+					country = REB
+					relation = non_aggression_pact
+					active = yes
+				}
+			REB = {
+				diplomatic_relation = {
+					country = ZER
+					relation = non_aggression_pact
+					active = yes
+				}
+			}
 		}
 
 		ai_will_do = {
@@ -1720,7 +1771,11 @@ focus_tree = {
 		mutually_exclusive = {
 		}
 		completion_reward = {
-			
+			add_trait = {
+				character = ZER_blitzer_harrsk
+				ideology = imperial_ideology
+				trait = zer_just_emperor
+			}
 		}
 
 		ai_will_do = {

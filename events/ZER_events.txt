@@ -659,6 +659,145 @@ country_event = { # DEEP 3 completed
 		add_to_variable = { currency_amount^primary_currency = 250 }
     }
 }
+
+country_event = { # DEEP 3 completed
+    id = ZER_start.18
+    title = ZER_start.18.t
+    desc = ZER_start.18.d
+    picture = GFX_report_event_conference_room
+
+    is_triggered_only = yes
+
+    fire_only_once = yes
+
+    option = {
+        name = ZER_start.18.a
+        ai_chance = {
+            base = 50
+        }
+        add_manpower = 50000
+        325 = {
+            create_unit = {
+                division = "name = \"Stormtrooper Regiment\"
+                division_template = \"Stormtrooper Regiment\"
+                start_experience_factor = 0.2"
+                owner = ZER
+            }
+            create_unit = {
+                division = "name = \"Stormtrooper Regiment\"
+                division_template = \"Stormtrooper Regiment\"
+                start_experience_factor = 0.2"
+                owner = ZER
+            }
+        }
+    }
+}
+
+country_event = { # Forboding Transmission
+    id = ZER_start.19
+    title = ZER_start.19.t
+    desc = ZER_start.19.d
+    picture = GFX_report_event_conference_room
+
+    is_triggered_only = yes
+
+    fire_only_once = yes
+
+    option = {
+        name = ZER_start.19.a
+        ai_chance = {
+            base = 50
+        }
+        add_political_power = -50
+    }
+}
+
+country_event = { # Forboding Transmission
+    id = ZER_start.20
+    title = ZER_start.20.t
+    desc = ZER_start.20.d
+    picture = GFX_report_event_conference_room
+
+    is_triggered_only = yes
+
+    fire_only_once = yes
+
+    option = {
+        name = ZER_start.20.a
+        ai_chance = {
+            base = 60
+        }
+        ZER = { country_event = ZER_start.21 }
+    }
+
+    option = {
+        name = ZER_start.20.b
+        ai_chance = {
+            base = 40
+            modifier = {
+                factor = 20
+                ZER = {
+                    has_army_manpower = {
+                        size > 200000
+                    }
+                }
+            }
+            modifier = {
+                factor = 40
+                ZER = {
+                    has_army_manpower = {
+                        size > 300000
+                    }
+                }
+            }
+        }
+        ZER = {
+            annex_country = {
+                target = FON
+                transfer_troops = yes
+            }
+        }
+        366 = {
+            add_core_of = ZER
+        }
+        357 = {
+            add_core_of = ZER
+        }
+        82 = {
+            add_core_of = ZER
+        }
+        359 = {
+            add_core_of = ZER
+        }
+    }
+}
+
+country_event = { # Forboding Transmission
+    id = ZER_start.21
+    title = ZER_start.21.t
+    desc = ZER_start.21.d
+    picture = GFX_report_event_conference_room
+
+    is_triggered_only = yes
+
+    fire_only_once = yes
+
+    option = {
+        name = ZER_start.21.a
+        ai_chance = {
+            base = 50
+        }
+        declare_war_on = {
+            target = FON
+            type = annex_everything
+        }
+        transfer_state = 359
+        load_oob = "ZER_FON"
+        FON = { add_to_ROOT_potential_cores = yes } 
+    }
+}
+
+
 country_event = { # Fleet Modifications
     id = ZER.1
     title = ZER.1.t
