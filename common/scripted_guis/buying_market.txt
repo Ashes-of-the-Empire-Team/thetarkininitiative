@@ -82,6 +82,43 @@ scripted_gui = {
                 set_country_flag = imperial_market_open
             }
         }
+        triggers = {
+            select_corvettes_button_click_enabled = {
+                NOT = {
+                    has_country_flag = corvette_buying_market_open
+                }
+            }
+            select_frigates_button_click = {
+                NOT = {
+                    has_country_flag = frigate_buying_market_open
+                }
+            }
+            select_cruisers_button_click = {
+                NOT = {
+                    has_country_flag = cruiser_buying_market_open
+                }
+            }
+            select_star_destroyers_button_click = {
+                NOT = {
+                    has_country_flag = star_destroyer_buying_market_open
+                }
+            }
+            select_republic_button_click = {
+                NOT = {
+                    has_country_flag = republic_market_open
+                }
+            }
+            select_neutral_button_click = {
+                NOT = {
+                    has_country_flag = neutral_market_open
+                }
+            }
+            select_imperial_button_click = {
+                NOT = {
+                    has_country_flag = imperial_market_open
+                }
+            }
+        }
     }
     Marketplace_buying_corvettes_republic_menu = {
         context_type = player_context
@@ -3394,6 +3431,766 @@ scripted_gui = {
             }
             level_1_tie_crawler = {
                 set_country_flag = level_1_tie_crawler_active
+            }
+        }
+    }
+    Marketplace_buying_soft_imperial_menu = {
+        context_type = player_context
+        window_name = "Marketplace_buying_soft_imperial_menu"
+        parent_window_name = "Marketplace_buying_menu"
+        visible = {
+            has_country_flag = imperial_market_open
+            has_country_flag = soft_buying_market_open
+        }
+        effects = {
+            product_buy_one_E-11_blaster = {
+                if = {
+                    limit = {
+                        check_variable = {global.market_soft_holder@1 > 0}
+                    }
+                    if = {
+                        limit = {
+                            EMP = {
+                                NOT = {
+                                    has_country_flag = brought_out
+                                }
+                            }
+                        }
+                        if = {
+                            limit = {
+                                has_country_flag = level_0_E-11_blaster_active
+                            }
+                            add_equipment_to_stockpile = {
+                                producer = EMP
+                                type = E-11_blaster_0
+                                amount = 100
+                            }
+                        }else_if = {
+                            limit = {
+                                has_country_flag = level_1_E-11_blaster_active
+                            }
+                            add_equipment_to_stockpile = {
+                                producer = emp
+                                type = E-11_blaster_1
+                                amount = 100
+                            }
+                        }
+                    }else = {
+                        if = {
+                            limit = {
+                                has_country_flag = level_0_E-11_blaster_active
+                            }
+                            add_equipment_to_stockpile = {
+                                producer = var:global.E-11_blaster_holder
+                                type = E-11_blaster_0
+                                amount = 100
+                            }
+                        }else_if = {
+                            limit = {
+                                has_country_flag = level_1_E-11_blaster_active
+                            }
+                            add_equipment_to_stockpile = {
+                                producer = emp
+                                type = E-11_blaster_1
+                                amount = 100
+                            }
+                        }
+                    }
+                }
+            }
+            product_auto_buy_E-11_blaster = {
+                set_country_flag = auto_buy_enabled_E-11_blaster
+            }
+            level_0_E-11_blaster = {
+                set_country_flag = level_0_E-11_blaster_active
+            }
+            level_1_E-11_blaster = {
+                set_country_flag = level_1_E-11_blaster_active
+            }
+            product_buy_one_EE-4_carbine = {
+                if = {
+                    limit = {
+                        check_variable = {global.market_soft_holder@2 > 0}
+                    }
+                    if = {
+                        limit = {
+                            EMP = {
+                                NOT = {
+                                    has_country_flag = brought_out
+                                }
+                            }
+                        }
+                        if = {
+                            limit = {
+                                has_country_flag = level_0_EE-4_carbine_active
+                            }
+                            add_equipment_to_stockpile = {
+                                producer = EMP
+                                type = EE-4_carbine_0
+                                amount = 100
+                            }
+                        }else_if = {
+                            limit = {
+                                has_country_flag = level_1_EE-4_carbine_active
+                            }
+                            add_equipment_to_stockpile = {
+                                producer = emp
+                                type = EE-4_carbine_1
+                                amount = 100
+                            }
+                        }
+                    }else = {
+                        if = {
+                            limit = {
+                                has_country_flag = level_0_EE-4_carbine_active
+                            }
+                            add_equipment_to_stockpile = {
+                                producer = var:global.EE-4_carbine_holder
+                                type = EE-4_carbine_0
+                                amount = 100
+                            }
+                        }else_if = {
+                            limit = {
+                                has_country_flag = level_1_EE-4_carbine_active
+                            }
+                            add_equipment_to_stockpile = {
+                                producer = emp
+                                type = EE-4_carbine_1
+                                amount = 100
+                            }
+                        }
+                    }
+                }
+            }
+            product_auto_buy_EE-4_carbine = {
+                set_country_flag = auto_buy_enabled_EE-4_carbine
+            }
+            level_0_EE-4_carbine = {
+                set_country_flag = level_0_EE-4_carbine_active
+            }
+            level_1_EE-4_carbine = {
+                set_country_flag = level_1_EE-4_carbine_active
+            }
+            product_buy_one_smart_rocket = {
+                if = {
+                    limit = {
+                        check_variable = {global.market_soft_holder@3 > 0}
+                    }
+                    if = {
+                        limit = {
+                            EMP = {
+                                NOT = {
+                                    has_country_flag = brought_out
+                                }
+                            }
+                        }
+                        if = {
+                            limit = {
+                                has_country_flag = level_0_smart_rocket_active
+                            }
+                            add_equipment_to_stockpile = {
+                                producer = EMP
+                                type = smart_rocket_0
+                                amount = 100
+                            }
+                        }else_if = {
+                            limit = {
+                                has_country_flag = level_1_smart_rocket_active
+                            }
+                            add_equipment_to_stockpile = {
+                                producer = emp
+                                type = smart_rocket_1
+                                amount = 100
+                            }
+                        }
+                    }else = {
+                        if = {
+                            limit = {
+                                has_country_flag = level_0_smart_rocket_active
+                            }
+                            add_equipment_to_stockpile = {
+                                producer = var:global.smart_rocket_holder
+                                type = smart_rocket_0
+                                amount = 100
+                            }
+                        }else_if = {
+                            limit = {
+                                has_country_flag = level_1_smart_rocket_active
+                            }
+                            add_equipment_to_stockpile = {
+                                producer = emp
+                                type = smart_rocket_1
+                                amount = 100
+                            }
+                        }
+                    }
+                }
+            }
+            product_auto_buy_smart_rocket = {
+                set_country_flag = auto_buy_enabled_smart_rocket
+            }
+            level_0_smart_rocket = {
+                set_country_flag = level_0_smart_rocket_active
+            }
+            level_1_smart_rocket = {
+                set_country_flag = level_1_smart_rocket_active
+            }
+            product_buy_one_K79-S80 = {
+                if = {
+                    limit = {
+                        check_variable = {global.market_soft_holder@4 > 0}
+                    }
+                    if = {
+                        limit = {
+                            EMP = {
+                                NOT = {
+                                    has_country_flag = brought_out
+                                }
+                            }
+                        }
+                        if = {
+                            limit = {
+                                has_country_flag = level_0_K79-S80_active
+                            }
+                            add_equipment_to_stockpile = {
+                                producer = EMP
+                                type = K79-S80_0
+                                amount = 100
+                            }
+                        }else_if = {
+                            limit = {
+                                has_country_flag = level_1_K79-S80_active
+                            }
+                            add_equipment_to_stockpile = {
+                                producer = emp
+                                type = K79-S80_1
+                                amount = 100
+                            }
+                        }
+                    }else = {
+                        if = {
+                            limit = {
+                                has_country_flag = level_0_K79-S80_active
+                            }
+                            add_equipment_to_stockpile = {
+                                producer = var:global.K79-S80_holder
+                                type = K79-S80_0
+                                amount = 100
+                            }
+                        }else_if = {
+                            limit = {
+                                has_country_flag = level_1_K79-S80_active
+                            }
+                            add_equipment_to_stockpile = {
+                                producer = emp
+                                type = K79-S80_1
+                                amount = 100
+                            }
+                        }
+                    }
+                }
+            }
+            product_auto_buy_K79-S80 = {
+                set_country_flag = auto_buy_enabled_K79-S80
+            }
+            level_0_K79-S80 = {
+                set_country_flag = level_0_K79-S80_active
+            }
+            level_1_K79-S80 = {
+                set_country_flag = level_1_K79-S80_active
+            }
+            product_buy_one_SPHA = {
+                if = {
+                    limit = {
+                        check_variable = {global.market_soft_holder@5 > 0}
+                    }
+                    if = {
+                        limit = {
+                            EMP = {
+                                NOT = {
+                                    has_country_flag = brought_out
+                                }
+                            }
+                        }
+                        if = {
+                            limit = {
+                                has_country_flag = level_0_SPHA_active
+                            }
+                            add_equipment_to_stockpile = {
+                                producer = EMP
+                                type = SPHA_0
+                                amount = 100
+                            }
+                        }else_if = {
+                            limit = {
+                                has_country_flag = level_1_SPHA_active
+                            }
+                            add_equipment_to_stockpile = {
+                                producer = emp
+                                type = SPHA_1
+                                amount = 100
+                            }
+                        }
+                    }else = {
+                        if = {
+                            limit = {
+                                has_country_flag = level_0_SPHA_active
+                            }
+                            add_equipment_to_stockpile = {
+                                producer = var:global.SPHA_holder
+                                type = SPHA_0
+                                amount = 100
+                            }
+                        }else_if = {
+                            limit = {
+                                has_country_flag = level_1_SPHA_active
+                            }
+                            add_equipment_to_stockpile = {
+                                producer = emp
+                                type = SPHA_1
+                                amount = 100
+                            }
+                        }
+                    }
+                }
+            }
+            product_auto_buy_SPHA = {
+                set_country_flag = auto_buy_enabled_SPHA
+            }
+            level_0_SPHA = {
+                set_country_flag = level_0_SPHA_active
+            }
+            level_1_SPHA = {
+                set_country_flag = level_1_SPHA_active
+            }
+            product_buy_one_imperial_supply_equipment = {
+                if = {
+                    limit = {
+                        check_variable = {global.market_soft_holder@6 > 0}
+                    }
+                    if = {
+                        limit = {
+                            EMP = {
+                                NOT = {
+                                    has_country_flag = brought_out
+                                }
+                            }
+                        }
+                        if = {
+                            limit = {
+                                has_country_flag = level_0_imperial_supply_equipment_active
+                            }
+                            add_equipment_to_stockpile = {
+                                producer = EMP
+                                type = imperial_supply_equipment
+                                amount = 100
+                            }
+                        }
+                    }else = {
+                        if = {
+                            limit = {
+                                has_country_flag = level_0_imperial_supply_equipment_active
+                            }
+                            add_equipment_to_stockpile = {
+                                producer = var:global.imperial_supply_equipment_holder
+                                type = imperial_supply_equipment
+                                amount = 100
+                            }
+                        }
+                    }
+                }
+            }
+            product_auto_buy_imperial_supply_equipment = {
+                set_country_flag = auto_buy_enabled_imperial_supply_equipment
+            }
+        }
+    }
+    Marketplace_buying_soft_republic_menu = {
+        context_type = player_context
+        window_name = "Marketplace_buying_soft_republic_menu"
+        parent_window_name = "Marketplace_buying_menu"
+        visible = {
+            has_country_flag = republic_market_open
+            has_country_flag = soft_buying_market_open
+        }
+        effects = {
+            product_buy_one_freedom_one_blaster = {
+                if = {
+                    limit = {
+                        check_variable = {global.market_soft_holder@7 > 0}
+                    }
+                    if = {
+                        limit = {
+                            EMP = {
+                                NOT = {
+                                    has_country_flag = brought_out
+                                }
+                            }
+                        }
+                        if = {
+                            limit = {
+                                has_country_flag = level_0_freedom_one_blaster_active
+                            }
+                            add_equipment_to_stockpile = {
+                                producer = EMP
+                                type = freedom_one_blaster_0
+                                amount = 100
+                            }
+                        }else_if = {
+                            limit = {
+                                has_country_flag = level_1_freedom_one_blaster_active
+                            }
+                            add_equipment_to_stockpile = {
+                                producer = emp
+                                type = freedom_one_blaster_1
+                                amount = 100
+                            }
+                        }
+                    }else = {
+                        if = {
+                            limit = {
+                                has_country_flag = level_0_freedom_one_blaster_active
+                            }
+                            add_equipment_to_stockpile = {
+                                producer = var:global.freedom_one_blaster_holder
+                                type = freedom_one_blaster_0
+                                amount = 100
+                            }
+                        }else_if = {
+                            limit = {
+                                has_country_flag = level_1_freedom_one_blaster_active
+                            }
+                            add_equipment_to_stockpile = {
+                                producer = emp
+                                type = freedom_one_blaster_1
+                                amount = 100
+                            }
+                        }
+                    }
+                }
+            }
+            product_auto_buy_freedom_one_blaster = {
+                set_country_flag = auto_buy_enabled_freedom_one_blaster
+            }
+            level_0_freedom_one_blaster = {
+                set_country_flag = level_0_freedom_one_blaster_active
+            }
+            level_1_freedom_one_blaster = {
+                set_country_flag = level_1_freedom_one_blaster_active
+            }
+            product_buy_one_A280_blaster = {
+                if = {
+                    limit = {
+                        check_variable = {global.market_soft_holder@8 > 0}
+                    }
+                    if = {
+                        limit = {
+                            EMP = {
+                                NOT = {
+                                    has_country_flag = brought_out
+                                }
+                            }
+                        }
+                        if = {
+                            limit = {
+                                has_country_flag = level_0_A280_blaster_active
+                            }
+                            add_equipment_to_stockpile = {
+                                producer = EMP
+                                type = A280_blaster_0
+                                amount = 100
+                            }
+                        }else_if = {
+                            limit = {
+                                has_country_flag = level_1_A280_blaster_active
+                            }
+                            add_equipment_to_stockpile = {
+                                producer = emp
+                                type = A280_blaster_1
+                                amount = 100
+                            }
+                        }
+                    }else = {
+                        if = {
+                            limit = {
+                                has_country_flag = level_0_A280_blaster_active
+                            }
+                            add_equipment_to_stockpile = {
+                                producer = var:global.A280_blaster_holder
+                                type = A280_blaster_0
+                                amount = 100
+                            }
+                        }else_if = {
+                            limit = {
+                                has_country_flag = level_1_A280_blaster_active
+                            }
+                            add_equipment_to_stockpile = {
+                                producer = emp
+                                type = A280_blaster_1
+                                amount = 100
+                            }
+                        }
+                    }
+                }
+            }
+            product_auto_buy_A280_blaster = {
+                set_country_flag = auto_buy_enabled_A280_blaster
+            }
+            level_0_A280_blaster = {
+                set_country_flag = level_0_A280_blaster_active
+            }
+            level_1_A280_blaster = {
+                set_country_flag = level_1_A280_blaster_active
+            }
+            product_buy_one_republic_supply_equipment = {
+                if = {
+                    limit = {
+                        check_variable = {global.market_soft_holder@9 > 0}
+                    }
+                    if = {
+                        limit = {
+                            EMP = {
+                                NOT = {
+                                    has_country_flag = brought_out
+                                }
+                            }
+                        }
+                        if = {
+                            limit = {
+                                has_country_flag = level_0_republic_supply_equipment_active
+                            }
+                            add_equipment_to_stockpile = {
+                                producer = EMP
+                                type = republic_supply_equipment_0
+                                amount = 100
+                            }
+                        }else_if = {
+                            limit = {
+                                has_country_flag = level_1_republic_supply_equipment_active
+                            }
+                            add_equipment_to_stockpile = {
+                                producer = emp
+                                type = republic_supply_equipment_1
+                                amount = 100
+                            }
+                        }
+                    }else = {
+                        if = {
+                            limit = {
+                                has_country_flag = level_0_republic_supply_equipment_active
+                            }
+                            add_equipment_to_stockpile = {
+                                producer = var:global.republic_supply_equipment_holder
+                                type = republic_supply_equipment_0
+                                amount = 100
+                            }
+                        }else_if = {
+                            limit = {
+                                has_country_flag = level_1_republic_supply_equipment_active
+                            }
+                            add_equipment_to_stockpile = {
+                                producer = emp
+                                type = republic_supply_equipment_1
+                                amount = 100
+                            }
+                        }
+                    }
+                }
+            }
+            product_auto_buy_republic_supply_equipment = {
+                set_country_flag = auto_buy_enabled_republic_supply_equipment
+            }
+            product_buy_one_T1-S = {
+                if = {
+                    limit = {
+                        check_variable = {global.market_soft_holder@10 > 0}
+                    }
+                    if = {
+                        limit = {
+                            EMP = {
+                                NOT = {
+                                    has_country_flag = brought_out
+                                }
+                            }
+                        }
+                        if = {
+                            limit = {
+                                has_country_flag = level_0_T1-S_active
+                            }
+                            add_equipment_to_stockpile = {
+                                producer = EMP
+                                type = T1-S_0
+                                amount = 100
+                            }
+                        }else_if = {
+                            limit = {
+                                has_country_flag = level_1_T1-S_active
+                            }
+                            add_equipment_to_stockpile = {
+                                producer = emp
+                                type = T1-S_1
+                                amount = 100
+                            }
+                        }
+                    }else = {
+                        if = {
+                            limit = {
+                                has_country_flag = level_0_T1-S_active
+                            }
+                            add_equipment_to_stockpile = {
+                                producer = var:global.T1-S_holder
+                                type = T1-S_0
+                                amount = 100
+                            }
+                        }else_if = {
+                            limit = {
+                                has_country_flag = level_1_T1-S_active
+                            }
+                            add_equipment_to_stockpile = {
+                                producer = emp
+                                type = T1-S_1
+                                amount = 100
+                            }
+                        }
+                    }
+                }
+            }
+            product_auto_buy_T1-S = {
+                set_country_flag = auto_buy_enabled_T1-S
+            }
+            level_0_T1-S = {
+                set_country_flag = level_0_T1-S_active
+            }
+            level_1_T1-S = {
+                set_country_flag = level_1_T1-S_active
+            }
+            product_buy_one_MPTL-2a = {
+                if = {
+                    limit = {
+                        check_variable = {global.market_soft_holder@11 > 0}
+                    }
+                    if = {
+                        limit = {
+                            EMP = {
+                                NOT = {
+                                    has_country_flag = brought_out
+                                }
+                            }
+                        }
+                        if = {
+                            limit = {
+                                has_country_flag = level_0_MPTL-2a_active
+                            }
+                            add_equipment_to_stockpile = {
+                                producer = EMP
+                                type = MPTL-2a_0
+                                amount = 100
+                            }
+                        }else_if = {
+                            limit = {
+                                has_country_flag = level_1_MPTL-2a_active
+                            }
+                            add_equipment_to_stockpile = {
+                                producer = emp
+                                type = MPTL-2a_1
+                                amount = 100
+                            }
+                        }
+                    }else = {
+                        if = {
+                            limit = {
+                                has_country_flag = level_0_MPTL-2a_active
+                            }
+                            add_equipment_to_stockpile = {
+                                producer = var:global.MPTL-2a_holder
+                                type = MPTL-2a_0
+                                amount = 100
+                            }
+                        }else_if = {
+                            limit = {
+                                has_country_flag = level_1_MPTL-2a_active
+                            }
+                            add_equipment_to_stockpile = {
+                                producer = emp
+                                type = MPTL-2a_1
+                                amount = 100
+                            }
+                        }
+                    }
+                }
+            }
+            product_auto_buy_MPTL-2a = {
+                set_country_flag = auto_buy_enabled_MPTL-2a
+            }
+            level_0_MPTL-2a = {
+                set_country_flag = level_0_MPTL-2a_active
+            }
+            level_1_MPTL-2a = {
+                set_country_flag = level_1_MPTL-2a_active
+            }
+            product_buy_one_HH-12 = {
+                if = {
+                    limit = {
+                        check_variable = {global.market_soft_holder@12 > 0}
+                    }
+                    if = {
+                        limit = {
+                            EMP = {
+                                NOT = {
+                                    has_country_flag = brought_out
+                                }
+                            }
+                        }
+                        if = {
+                            limit = {
+                                has_country_flag = level_0_HH-12_active
+                            }
+                            add_equipment_to_stockpile = {
+                                producer = EMP
+                                type = HH-12_0
+                                amount = 100
+                            }
+                        }else_if = {
+                            limit = {
+                                has_country_flag = level_1_HH-12_active
+                            }
+                            add_equipment_to_stockpile = {
+                                producer = emp
+                                type = HH-12_1
+                                amount = 100
+                            }
+                        }
+                    }else = {
+                        if = {
+                            limit = {
+                                has_country_flag = level_0_HH-12_active
+                            }
+                            add_equipment_to_stockpile = {
+                                producer = var:global.HH-12_holder
+                                type = HH-12_0
+                                amount = 100
+                            }
+                        }else_if = {
+                            limit = {
+                                has_country_flag = level_1_HH-12_active
+                            }
+                            add_equipment_to_stockpile = {
+                                producer = emp
+                                type = HH-12_1
+                                amount = 100
+                            }
+                        }
+                    }
+                }
+            }
+            product_auto_buy_HH-12 = {
+                set_country_flag = auto_buy_enabled_HH-12
+            }
+            level_0_HH-12 = {
+                set_country_flag = level_0_HH-12_active
+            }
+            level_1_HH-12 = {
+                set_country_flag = level_1_HH-12_active
             }
         }
     }
