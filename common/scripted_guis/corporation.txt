@@ -1036,11 +1036,11 @@ scripted_gui = {
 		}
 		effects = {
 			air_1_button_click = {
-				set_variable = { Root.air_1_production_cost = air_production_array^i }
+				set_variable = { Root.air_1_production_selected_fighter = air_production_array^i }
 				recalculate_air_1_creation_amount = yes
 			}
 			air_2_button_click = {
-				set_variable = { Root.air_2_production_cost = air_production_array^i }
+				set_variable = { Root.air_2_production_selected_fighter = air_production_array^i }
 				recalculate_air_2_creation_amount = yes
 			}
 			selected_air_1_click = {
@@ -1154,7 +1154,7 @@ scripted_gui = {
 			air_1_button_visible = {
 				has_country_flag = air_1_selection_open
 			}
-			light_entry_background_visible = {
+			air_1_entry_background_visible = {
 				has_country_flag = air_1_selection_open
 			}
 			air_1_name_visible = {
@@ -1163,7 +1163,7 @@ scripted_gui = {
 			air_2_button_visible = {
 				has_country_flag = air_2_selection_open
 			}
-			medium_entry_background_visible = {
+			air_2_entry_background_visible = {
 				has_country_flag = air_2_selection_open
 			}
 			air_2_name_visible = {
@@ -1173,16 +1173,16 @@ scripted_gui = {
 		properties = {
 			selected_air_1 = {image = "[get_air_1_selected_photo]"}
 			selected_air_2 = {image = "[get_air_2_selected_photo]"}
-			air_1_button = { image = "[get_air_1_photo]" }
-			air_2_button = { image = "[get_air_2_photo]" }
+			air_1_button = { image = "[get_air_photo]" }
+			air_2_button = { image = "[get_air_photo]" }
 		}
 		dynamic_lists = {
 			air_1_gridbox = {
-				array = air_1_production_array
+				array = air_production_array
 				entry_container = air_1_entry_box
 			}
 			air_2_gridbox = {
-				array = air_2_production_array
+				array = air_production_array
 				entry_container = air_2_entry_box
 			} 
 		}
@@ -1195,11 +1195,11 @@ scripted_gui = {
 		}
 		effects = {
 			land_1_button_click = {
-				set_variable = { Root.land_1_production_cost = land_production_array^i }
+				set_variable = { Root.land_1_selected_item = land_production_array^i }
 				recalculate_land_1_creation_amount = yes
 			}
 			land_2_button_click = {
-				set_variable = { Root.land_2_production_cost = land_production_array^i }
+				set_variable = { Root.land_2_selected_item = land_production_array^i }
 				recalculate_land_2_creation_amount = yes
 			}
 			selected_land_1_click = {
@@ -1313,7 +1313,7 @@ scripted_gui = {
 			land_1_button_visible = {
 				has_country_flag = land_1_selection_open
 			}
-			light_entry_background_visible = {
+			land_1_entry_background_visible = {
 				has_country_flag = land_1_selection_open
 			}
 			land_1_name_visible = {
@@ -1322,7 +1322,7 @@ scripted_gui = {
 			land_2_button_visible = {
 				has_country_flag = land_2_selection_open
 			}
-			medium_entry_background_visible = {
+			land_2_entry_background_visible = {
 				has_country_flag = land_2_selection_open
 			}
 			land_2_name_visible = {
@@ -1337,12 +1337,171 @@ scripted_gui = {
 		}
 		dynamic_lists = {
 			land_1_gridbox = {
-				array = land_1_production_array
+				array = land_production_array
 				entry_container = land_1_entry_box
 			}
 			land_2_gridbox = {
-				array = land_2_production_array
+				array = land_production_array
 				entry_container = land_2_entry_box
+			} 
+		}
+	}
+	Marketplace_production_inf_equip = {
+		context_type = player_context
+		window_name = "Marketplace_production_inf_equip"
+		visible = {
+		   has_country_flag = market_inf_equip_open
+		}
+		effects = {
+			inf_equip_1_button_click = {
+				set_variable = { Root.inf_equip_1_selected_item = inf_equip_production_array^i }
+				recalculate_inf_equip_1_creation_amount = yes
+			}
+			inf_equip_2_button_click = {
+				set_variable = { Root.inf_equip_2_selected_item = inf_equip_production_array^i }
+				recalculate_inf_equip_2_creation_amount = yes
+			}
+			selected_inf_equip_1_click = {
+				if = {
+					limit = {
+						has_country_flag = inf_equip_1_selection_open
+					}
+					clr_country_flag = inf_equip_1_selection_open
+				}else = {
+					set_country_flag = inf_equip_1_selection_open
+				}
+			}
+			selected_inf_equip_2_click = {
+				if = {
+					limit = {
+						has_country_flag = inf_equip_2_selection_open
+					}
+					clr_country_flag = inf_equip_2_selection_open
+				}else = {
+					set_country_flag = inf_equip_2_selection_open
+				}
+			}
+			inf_equip_1_add_button_click = {
+				add_to_variable = {inf_equip_1_workers = 1000}
+				recalculate_inf_equip_1_creation_amount = yes
+			}
+			inf_equip_2_add_button_click = {
+				add_to_variable = {inf_equip_2_workers = 1000}
+				recalculate_inf_equip_2_creation_amount = yes
+			}
+			inf_equip_1_subtract_button_click = {
+				subtract_from_variable = {inf_equip_1_workers = 1000}
+				recalculate_inf_equip_1_creation_amount = yes
+			}
+			inf_equip_2_subtract_button_click = {
+				subtract_from_variable = {inf_equip_2_workers = 1000}
+				recalculate_inf_equip_2_creation_amount = yes
+			}
+			inf_equip_1_factory_add_button_click = {
+				add_to_variable = {inf_equip_1_factory = 1}
+				subtract_from_variable = {total_dockyards = 1}
+				add_to_variable = {max_inf_equip_1_workers = 1000}
+			}
+			inf_equip_2_factory_add_button_click = {
+				add_to_variable = {inf_equip_2_factory = 1}
+				subtract_from_variable = {total_dockyards = 1}
+				add_to_variable = {max_inf_equip_2_workers = 1000}
+			}
+			inf_equip_1_factory_subtract_button_click = {
+				subtract_from_variable = {inf_equip_1_factory = 1}
+				add_to_variable = {total_dockyards = 1}
+				subtract_from_variable = {max_inf_equip_1_workers = 1000}
+				if = {
+					limit = {
+						check_variable = {inf_equip_1_workers > max_inf_equip_1}
+					}
+					subtract_from_variable = {inf_equip_1_workers = 1000}
+				}
+			}
+			inf_equip_2_factory_subtract_button_click = {
+				subtract_from_variable = {inf_equip_2_factory = 1}
+				add_to_variable = {total_dockyards = 1}
+				subtract_from_variable = {max_inf_equip_2_workers = 1000}
+				if = {
+					limit = {
+						check_variable = {inf_equip_2_workers > max_inf_equip_2}
+					}
+					subtract_from_variable = {inf_equip_2_workers = 1000}
+				}
+			}
+		}
+		triggers ={
+			selected_inf_equip_1_click_enabled = {
+				check_variable = {inf_equip_1_workers > 999}
+			}
+			selected_inf_equip_2_click_enabled = {
+				check_variable = {inf_equip_2_workers > 999}
+			}
+			inf_equip_1_add_button_click_enabled = {
+				has_manpower > 999
+				check_variable = {max_inf_equip_1_workers > inf_equip_1_workers}
+			}
+			inf_equip_1_subtract_button_click_enabled = {
+				check_variable = {inf_equip_1_workers > 999}
+			}
+			inf_equip_2_add_button_click_enabled = {
+				has_manpower > 999
+				check_variable = {max_inf_equip_2_workers > inf_equip_2_workers}
+			}
+			inf_equip_2_subtract_button_click_enabled = {
+				check_variable = {inf_equip_2_workers > 999}
+			}
+			inf_equip_1_factory_add_button_click_enabled = {
+				check_variable = {total_dockyards > 0}
+			}
+			inf_equip_2_factory_add_button_click_enabled = {
+				check_variable = {total_dockyards > 0}
+			}
+			inf_equip_1_factory_subtract_button_click_enabled = {
+				check_variable = {inf_equip_1_factory > 0}
+			}
+			inf_equip_2_factory_subtract_button_click_enabled = {
+				check_variable = {inf_equip_2_factory > 0}
+			}
+			inf_equip_1_create_button_click_enabled = {
+				check_variable = {inf_equip_1_workers > 0}
+			}
+			inf_equip_2_create_button_click_enabled = {
+				check_variable = {inf_equip_2_workers > 0}
+			}
+			inf_equip_1_button_visible = {
+				has_country_flag = inf_equip_1_selection_open
+			}
+			inf_equip_1_entry_background_visible = {
+				has_country_flag = inf_equip_1_selection_open
+			}
+			inf_equip_1_name_visible = {
+				has_country_flag = inf_equip_1_selection_open
+			}
+			inf_equip_2_button_visible = {
+				has_country_flag = inf_equip_2_selection_open
+			}
+			inf_equip_2_entry_background_visible = {
+				has_country_flag = inf_equip_2_selection_open
+			}
+			inf_equip_2_name_visible = {
+				has_country_flag = inf_equip_2_selection_open
+			}
+		}
+		properties = {
+			selected_inf_equip_1 = {image = "[get_inf_equip_1_selected_photo]"}
+			selected_inf_equip_2 = {image = "[get_inf_equip_2_selected_photo]"}
+			inf_equip_1_button = { image = "[get_inf_equip_1_photo]" }
+			inf_equip_2_button = { image = "[get_inf_equip_2_photo]" }
+		}
+		dynamic_lists = {
+			inf_equip_1_gridbox = {
+				array = inf_equip_production_array
+				entry_container = inf_equip_1_entry_box
+			}
+			inf_equip_2_gridbox = {
+				array = inf_equip_production_array
+				entry_container = inf_equip_2_entry_box
 			} 
 		}
 	}
