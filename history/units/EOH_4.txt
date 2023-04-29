@@ -12,6 +12,7 @@ division_template = {
 		stormtrooper = { x = 2 y = 1 }
 		stormtrooper = { x = 2 y = 2 }
 	}
+	priority = 1
 }
 
 division_template = {
@@ -27,9 +28,155 @@ division_template = {
 		infantry = { x = 1 y = 2 }
 		infantry = { x = 1 y = 3 }
 	}
+	priority = 2
+}
+division_template = {
+	name = "AT-AT Regiment"
+
+	#division_names_group = ZER_ATAT_1
+
+	regiments = {
+		at_at = { x = 0 y = 0 }
+		at_at = { x = 0 y = 1 }
+   		at_st = { x = 1 y = 0 }
+		at_st = { x = 1 y = 1 }
+		stormtrooper = { x = 2 y = 0 }
+		stormtrooper = { x = 2 y = 1 }
+	}
+	priority = 3
 }
 
+units = {
+	# EOH Starting Forces
+	division = {
+		name = "1st Unknown Regions Expeditionary Regiment"
+		location = 3974
+		division_template = "Stormtrooper Regiment"
+		start_equipment_factor = 1.0
+		start_experience_factor = 0.5
+	}
+	division = {
+		name = "2nd Unknown Regions Expeditionary Regiment"
+		location = 6338
+		division_template = "Stormtrooper Regiment"
+		start_equipment_factor = 1.0
+		start_experience_factor = 0.5
+	}
+	division = {
+		name = "3rd Unknown Regions Expeditionary Regiment"
+		location = 82
+		division_template = "Stormtrooper Regiment"
+		start_equipment_factor = 1.0
+		start_experience_factor = 0.48
+	}
+	division = {
+		name = "4th Unknown Regions Expeditionary Regiment"
+		location = 4026
+		division_template = "Stormtrooper Regiment"
+		start_equipment_factor = 1.0
+		start_experience_factor = 0.5
+	}
+	division = {
+		name = "5th Unknown Regions Expeditionary Regiment"
+		location = 4133
+		division_template = "Stormtrooper Regiment"
+		start_equipment_factor = 1.0
+		start_experience_factor = 0.52
+	}
 
+	division = {
+		name = "1st Chiss Advanced Guard"
+		location = 3974
+		division_template = "House Phalanx"
+		start_equipment_factor = 1.0
+		start_experience_factor = 0.56
+	}
+	division = {
+		name = "2nd Chiss Advanced Guard"
+		location = 3847
+		division_template = "House Phalanx"
+		start_equipment_factor = 1.0
+		start_experience_factor = 0.53
+	}
+	division = {
+		name = "3rd Chiss Advanced Guard"
+		location = 4071
+		division_template = "House Phalanx"
+		start_equipment_factor = 1.0
+		start_experience_factor = 0.53
+	}
+
+	division = {
+		name = "238th Assault Wing"
+		location = 3575
+		division_template = "AT-AT Regiment"
+		start_equipment_factor = 1.0
+		start_experience_factor = 0.37
+	}
+
+
+	fleet = {
+		name = "Unknown Regions Command Fleet"			
+		naval_base = 6223
+		task_force = {
+			name = "Home Fleet"
+			location = 6223
+			ship = { name = "IC Genesis" definition = heavy_ship equipment = { arquitens_1 = { amount = 1 owner = EOH version_name = "Thrawn Class" } } }
+		}
+	}
+}
+
+air_wings = {
+	
+	203 = {
+		tie_fighter_airframe_0 =  {
+			owner = "EOH" 
+			amount = 20
+		}
+		name = "1st TIE Squadron"
+		tie_fighter_airframe_0 =  {
+			owner = "EOH" 
+			amount = 20
+		}
+		name = "2nd TIE Squadron"
+		tie_bomber_airframe_0 =  {
+			owner = "EOH" 
+			amount = 12
+		}
+		name = "1st Bomber Squadron"
+	}
+}
+
+## Starting Production ###
+instant_effect = {
+	add_equipment_production = {
+		equipment = {
+			type = stormtrooper_equipment_0
+			creator = "EOH"
+		}
+		requested_factories = 2
+		progress = 0.40
+		efficiency = 84
+	}
+	add_equipment_production = {
+		equipment = {
+			type = infantry_equipment_0
+			creator = "EOH"
+		}
+		requested_factories = 2
+		progress = 0.86
+		efficiency = 73
+	}
+	add_equipment_production = {
+		equipment = {
+			type = at_st_chassis_0
+			creator = "EOH"
+		}
+		requested_factories = 1
+		progress = 0.86
+		efficiency = 62
+	}
+}
 
 
 ###########################################UNITS###########################################
