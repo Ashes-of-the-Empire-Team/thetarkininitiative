@@ -238,7 +238,29 @@ secret_police_oversight = {
 #		base = 200
 #	}
 #}
+retaliatory_strikes = {
+	icon = 6
+	sound_effect = "Martial_Law_Interface_Secret_Police_Oversight"
 
+	state_modifier = {
+		resistance_target 				= -0.40
+		compliance_gain 				= -0.030
+		required_garrison_factor 		= -0.20
+		resistance_damage_to_garrison	= -0.5
+		local_factories 				= 0.00
+		local_resources 				= 0.00
+	}
+	visible = {
+		has_tech = retaliatory_strikes
+	}
+	ai_will_do = {
+		base = 100
+		modifier = {
+			check_variable  = { resistance_target_without_law > 0.55}
+			add = 400
+		}
+	}
+}
 military_governor_occupation = {
 	icon = 6
 	sound_effect = "Martial_Law_Interface_Military_Governor_Occupation"
