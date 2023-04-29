@@ -5,9 +5,11 @@ scripted_gui = {
 		window_name = "Warlord_Screen_policies"
 		visible = {
            has_country_flag = policy_screen_open
+		   has_country_flag = Warlord_Screen_open
 		}
 		effects = { 
 			velcar_commerce_click = {
+				clr_country_flag = policy_screen_open
 				if = {
 					limit = {
 						has_country_flag = policy_screen_open_1
@@ -74,6 +76,7 @@ scripted_gui = {
 				}
 			}
 			slavery_banned_click = {
+				clr_country_flag = policy_screen_open
 				if = {
 					limit = {
 						has_country_flag = policy_screen_open_1
@@ -140,6 +143,7 @@ scripted_gui = {
 				}
 			}
 			indentured_servitude_click = {
+				clr_country_flag = policy_screen_open
 				if = {
 					limit = {
 						has_country_flag = policy_screen_open_1
@@ -206,6 +210,7 @@ scripted_gui = {
 				}
 			}
 			criminal_connections_click = {
+				clr_country_flag = policy_screen_open
 				if = {
 					limit = {
 						has_country_flag = policy_screen_open_1
@@ -272,6 +277,7 @@ scripted_gui = {
 				}
 			}
 			indiscriminate_testing_click = {
+				clr_country_flag = policy_screen_open
 				if = {
 					limit = {
 						has_country_flag = policy_screen_open_1
@@ -338,6 +344,7 @@ scripted_gui = {
 				}
 			}
 			human_supremacy_click = {
+				clr_country_flag = policy_screen_open
 				if = {
 					limit = {
 						has_country_flag = policy_screen_open_1
@@ -404,6 +411,7 @@ scripted_gui = {
 				}
 			}
 			imperial_knights_click = {
+				clr_country_flag = policy_screen_open
 				if = {
 					limit = {
 						has_country_flag = policy_screen_open_1
@@ -470,6 +478,7 @@ scripted_gui = {
 				}
 			}
 			imperial_conglomorates_click = {
+				clr_country_flag = policy_screen_open
 				if = {
 					limit = {
 						has_country_flag = policy_screen_open_1
@@ -536,6 +545,7 @@ scripted_gui = {
 				}
 			}
 			imperial_warlords_click = {
+				clr_country_flag = policy_screen_open
 				if = {
 					limit = {
 						has_country_flag = policy_screen_open_1
@@ -602,6 +612,7 @@ scripted_gui = {
 				}
 			}
 			church_of_the_dark_side_click = {
+				clr_country_flag = policy_screen_open
 				if = {
 					limit = {
 						has_country_flag = policy_screen_open_1
@@ -668,6 +679,7 @@ scripted_gui = {
 				}
 			}
 			compnor_click = {
+				clr_country_flag = policy_screen_open
 				if = {
 					limit = {
 						has_country_flag = policy_screen_open_1
@@ -733,246 +745,44 @@ scripted_gui = {
 					clr_country_flag = church_of_the_dark_side_4
 				}
 			}
-			### MIGHT NEED TO REDO EFFECTS AND PUT THEM IN ON ACTIONS LATER, FOR NOW THIS IS JUST BASICS
-		#	exit_button_click = {
-		#		clr_country_flag = policies_open_warlord_screen
-		#	}
-		#	human_first_click = {
-				if = {
-					limit = {
-						NOT = {
-							has_global_flag = autonomous_warlords
-						}
-					}
-					subtract_from_variable = {legitimacy_emp = 5}
-					set_global_flag = human_first_doctrine
-					every_country = {
-						limit = {
-							has_country_flag = emperor 
-						}
-						every_country = {
-							limit = {
-								is_in_faction_with = PREV
-							}
-							if = {
-								limit = {
-									non_human_planet = no ### REPLACE_ME WHEN WE GO BACK TO UNITS, HUMANS ONLY UNITS AND ECTRA
-								}
-								add_ideas = human_first_positive
-							}
-							if = {
-								limit = {
-									non_human_planet = yes
-								}
-								add_ideas = human_first_negative
-							}
-						}
-					}
-				}
-				else = {
-					subtract_from_variable = {legitimacy_emp = 5}
-					add_ideas = diversity_allowed
-				}
-		#	}
-		#	diversity_allowed_click = {
-				if = {
-					limit = {
-						NOT = {
-							has_global_flag = autonomous_warlords
-						}
-					}
-					subtract_from_variable = {legitimacy_emp = 5}
-					set_global_flag = diversity_allowed
-					every_country = {
-						limit = {
-							has_country_flag = emperor 
-						}
-						every_country = {
-							limit = {
-								is_in_faction_with = PREV
-							}
-							add_ideas = diversity_allowed
-						}
-					}
-				}
-				else = {
-					subtract_from_variable = {legitimacy_emp = 5}
-					add_ideas = diversity_allowed
-				}
-		#	}
-		#	centralized_command_click = {
-				set_global_flag = centralized_command
-				subtract_from_variable = {legitimacy_emp = 15}
-		#	}
-		#	autonomous_warlords_click = {
-				set_global_flag = autonomous_warlords
-				subtract_from_variable = {legitimacy_emp = 5}
-		#	}
-		#	empowered_corporations_click = {
-				set_global_flag = empowered_corporations
-		#	}
-		#	domestic_production_click = {
-				if = {
-					limit = {
-						NOT = {
-							has_global_flag = autonomous_warlords
-						}
-					}
-					set_global_flag = domestic_production
-					every_country = {
-						limit = {
-							has_country_flag = emperor ####################################################################### Im sure this is badly optimised, change it if theres a way of making it better
-						}
-						every_country = {
-							limit = {
-								is_in_faction_with = PREV
-							}
-							add_ideas = domestic_production
-						}
-					}
-				}
-				else = {
-					add_ideas = domestic_production
-				}
-		#	}
-		#	limitless_expriments_click = {
-				if = {
-					limit = {
-						NOT = {
-							has_global_flag = autonomous_warlords
-						}
-					}
-					set_global_flag = limitless_experiments
-					every_country = {
-						limit = {
-							has_country_flag = emperor 
-						}
-						every_country = {
-							limit = {
-								is_in_faction_with = PREV
-							}
-							if = {
-								limit = {
-									non_human_planet = no ### REPLACE_ME WHEN WE GO BACK TO UNITS, HUMANS ONLY UNITS AND ECTRA
-								}
-								add_ideas = limitless_experiments
-							}
-						}
-					}
-				}
-				else = {
-					add_ideas = limitless_experiments
-				}
-		#	}
-		#	safety_first_click = {
-				if = {
-					limit = {
-						NOT = {
-							has_global_flag = autonomous_warlords
-						}
-					}
-					set_global_flag = safety_first
-					every_country = {
-						limit = {
-							has_country_flag = emperor 
-						}
-						every_country = {
-							limit = {
-								is_in_faction_with = PREV
-							}
-							if = {
-								limit = {
-									non_human_planet = no ### REPLACE_ME WHEN WE GO BACK TO UNITS, HUMANS ONLY UNITS AND ECTRA
-								}
-								add_ideas = safety_first
-							}
-						}
-					}
-				}
-				else = {
-					add_ideas = safety_first
-				}
-		#	}
-		#	banned_click = {
-		#		set_global_flag = banned_slavery ### COME BACK TO THIS WHEN CONSORTIUM STUFF IS MORE DOWN
-		#	}
-		#	allowed_click = {
-		#		set_global_flag = allowed_slavery ### ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-		#	}
-		#	partys_banned_click = {
-		#		set_global_flag = partys_banned  ### IMPERIAL SENATE WAIT FOR REPUBLIC SENATE
-		#	}
-		#	senate_click = {
-		#		set_global_flag = senate_imperial ### ^^^^^
-		#	}
-		#	protectionism_click = {
-				if = {
-					limit = {
-						NOT = {
-							has_global_flag = autonomous_warlords
-						}
-					}
-					set_global_flag = protectionism_emp
-					every_country = {
-						limit = {
-							has_country_flag = emperor 
-						}
-						every_country = {
-							limit = {
-								is_in_faction_with = PREV
-							}
-							if = {
-								limit = {
-									non_human_planet = no ### REPLACE_ME WHEN WE GO BACK TO UNITS, HUMANS ONLY UNITS AND ECTRA
-								}
-								add_ideas = empire_protectionism
-							}
-						}
-					}
-				}
-				else = {
-					add_ideas = empire_protectionism
-				}
-		#	}
-		#	free_trade_click = {
-				if = {
-					limit = {
-						NOT = {
-							has_global_flag = autonomous_warlords
-						}
-					}
-					set_global_flag = free_trade_emp
-					every_country = {
-						limit = {
-							has_country_flag = emperor 
-						}
-						every_country = {
-							limit = {
-								is_in_faction_with = PREV
-							}
-							if = {
-								limit = {
-									non_human_planet = no ### REPLACE_ME WHEN WE GO BACK TO UNITS, HUMANS ONLY UNITS AND ECTRA
-								}
-								add_ideas = empire_free_trade
-							}
-						}
-					}
-				}
-				else = {
-					add_ideas = empire_free_trade
-				}
-		#	}
-		#	crackdown_click = {
-		#		set_global_flag = crackdown_emp ### REPLACE_ME
-		#	}
-		#	deals_with_consortiums_click = {
-		#		set_global_flag = deals_with_consortiums_emp
-		#	}
 		}
 
 
 		triggers = {
+			velcar_commerce_click_enabled = {
+				has_country_flag = emperor
+			}
+			slavery_banned_click_enabled = {
+				has_country_flag = emperor
+			}
+			indentured_servitude_click_enabled = {
+				has_country_flag = emperor
+			}
+			criminal_connections_click_enabled = {
+				has_country_flag = emperor
+			}
+			indiscriminate_testing_click_enabled = {
+				has_country_flag = emperor
+			}
+			human_supremacy_click_enabled = {
+				has_country_flag = emperor
+			}
+			imperial_conglomorates_click_enabled = {
+				has_country_flag = emperor
+			}
+			imperial_knights_click_enabled = {
+				has_country_flag = emperor
+			}
+			imperial_warlords_click_enabled = {
+				has_country_flag = emperor
+			}
+			church_of_the_dark_side_click_enabled = {
+				has_country_flag = emperor
+			}
+			compnor_click_enabled = {
+				has_country_flag = emperor
+			}
+			
 			#human_first_click_enabled = {
 			#	if = {
 			#		limit = {

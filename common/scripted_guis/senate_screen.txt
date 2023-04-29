@@ -7,7 +7,313 @@ scripted_gui = {
            has_country_flag = senate_open
 		}
 		effects = {
-			
+			new_rep_senate_law_1_click = {
+				if = {
+					limit = {
+						has_country_flag = senate_policy_open
+					}
+					clr_country_flag = senate_policy_open
+					clr_country_flag = new_rep_law_1_selected
+				}
+				else = {
+					set_country_flag = senate_policy_open
+					set_country_flag = new_rep_law_1_selected
+					clr_country_flag = new_rep_law_2_selected
+					clr_country_flag = new_rep_law_3_selected
+					clr_country_flag = new_rep_law_4_selected
+					clr_country_flag = new_rep_law_5_selected
+				}
+			}
+			new_rep_senate_law_2_click = {
+				if = {
+					limit = {
+						has_country_flag = senate_policy_open
+					}
+					clr_country_flag = senate_policy_open
+					clr_country_flag = new_rep_law_2_selected
+				}
+				else = {
+					set_country_flag = senate_policy_open
+					clr_country_flag = new_rep_law_1_selected
+					set_country_flag = new_rep_law_2_selected
+					clr_country_flag = new_rep_law_3_selected
+					clr_country_flag = new_rep_law_4_selected
+					clr_country_flag = new_rep_law_5_selected
+				}
+			}
+			new_rep_senate_law_3_click = {
+				if = {
+					limit = {
+						has_country_flag = senate_policy_open
+					}
+					clr_country_flag = senate_policy_open
+					clr_country_flag = new_rep_law_3_selected
+				}
+				else = {
+					set_country_flag = senate_policy_open
+					clr_country_flag = new_rep_law_1_selected
+					clr_country_flag = new_rep_law_2_selected
+					set_country_flag = new_rep_law_3_selected
+					clr_country_flag = new_rep_law_4_selected
+					clr_country_flag = new_rep_law_5_selected
+				}
+			}
+			new_rep_senate_law_4_click = {
+				if = {
+					limit = {
+						has_country_flag = senate_policy_open
+					}
+					clr_country_flag = senate_policy_open
+					clr_country_flag = new_rep_law_4_selected
+				}
+				else = {
+					set_country_flag = senate_policy_open
+					clr_country_flag = new_rep_law_1_selected
+					clr_country_flag = new_rep_law_2_selected
+					clr_country_flag = new_rep_law_3_selected
+					set_country_flag = new_rep_law_4_selected
+					clr_country_flag = new_rep_law_5_selected
+				}
+			}
+			new_rep_senate_law_5_click = {
+				if = {
+					limit = {
+						has_country_flag = senate_policy_open
+					}
+					clr_country_flag = senate_policy_open
+					clr_country_flag = new_rep_law_5_selected
+				}
+				else = {
+					set_country_flag = senate_policy_open
+					clr_country_flag = new_rep_law_1_selected
+					clr_country_flag = new_rep_law_2_selected
+					clr_country_flag = new_rep_law_3_selected
+					clr_country_flag = new_rep_law_4_selected
+					set_country_flag = new_rep_law_5_selected
+				}
+			}
+			new_rep_yes_vote_click = {
+				add_to_variable = { Global.votes_for_new_republic = 1}
+				set_country_flag = voted_on_legislation_nr
+			}
+			new_rep_no_vote_click = {
+				add_to_variable = { Global.votes_against_new_republic = 1}
+				set_country_flag = voted_on_legislation_nr
+			}
+			new_rep_abstain_vote_click = {
+				add_to_variable = { Global.votes_abstained_new_republic = 1}
+				set_country_flag = voted_on_legislation_nr
+			}
+		}
+		triggers = {
+			new_rep_yes_vote_click_enabled = {
+				NOT = {
+					has_country_flag = voted_on_legislation_nr
+				}
+				has_global_flag = nr_voting
+			}
+			new_rep_no_vote_click_enabled = {
+				NOT = {
+					has_country_flag = voted_on_legislation_nr
+				}
+				has_global_flag = nr_voting
+			}
+			new_rep_abstain_vote_click_enabled = {
+				NOT = {
+					has_country_flag = voted_on_legislation_nr
+				}
+				has_global_flag = nr_voting
+			}
+		}
+		dynamic_lists = {
+			centrist_grid = {
+				array = Global.rep_centrists
+				entry_container = new_rep_senate_entry
+				change_scope = yes
+			}
+			populists_grid = {
+				array = Global.rep_populists
+				entry_container = new_rep_senate_entry
+				change_scope = yes
+			}
+		}
+		properties = {
+			new_rep_senate_law_1 = {
+				frame = new_rep_law_1
+			}
+			new_rep_senate_law_2 = {
+				frame = new_rep_law_2
+			}
+			new_rep_senate_law_3 = {
+				frame = new_rep_law_3
+			}
+			new_rep_senate_law_4 = {
+				frame = new_rep_law_4
+			}
+			new_rep_senate_law_5 = {
+				frame = new_rep_law_5
+			}
+			member_flag = {
+				image = "[This.GetFlag]"
+			}
+		}
+	}
+	senate_policy_screen = {
+		context_type = player_context
+		window_name = "senate_policy_screen"
+		visible = {
+           has_country_flag = senate_policy_open
+		   has_country_flag = senate_open
+		}
+		effects = {
+			new_rep_senate_law_1_main_click = {
+				if = {
+					limit = {
+						has_country_flag = new_rep_law_1_selected
+					}
+					set_variable = { new_rep_law_1 = 4 }
+					clr_country_flag = senate_policy_open
+				}
+				if = {
+					limit = {
+						has_country_flag = new_rep_law_2_selected
+					}
+					set_variable = { new_rep_law_2 = 4 }
+					clr_country_flag = senate_policy_open
+				}
+				if = {
+					limit = {
+						has_country_flag = new_rep_law_3_selected
+					}
+					set_variable = { new_rep_law_3 = 4 }
+					clr_country_flag = senate_policy_open
+				}
+				if = {
+					limit = {
+						has_country_flag = new_rep_law_4_selected
+					}
+					set_variable = { new_rep_law_4 = 4 }
+					clr_country_flag = senate_policy_open
+				}
+				if = {
+					limit = {
+						has_country_flag = new_rep_law_5_selected
+					}
+					set_variable = { new_rep_law_5 = 4 }
+					clr_country_flag = senate_policy_open
+				}
+			}
+			new_rep_senate_law_2_main_click = {
+				if = {
+					limit = {
+						has_country_flag = new_rep_law_1_selected
+					}
+					set_variable = { new_rep_law_1 = 6 }
+					clr_country_flag = senate_policy_open
+				}
+				if = {
+					limit = {
+						has_country_flag = new_rep_law_2_selected
+					}
+					set_variable = { new_rep_law_2 = 6 }
+					clr_country_flag = senate_policy_open
+				}
+				if = {
+					limit = {
+						has_country_flag = new_rep_law_3_selected
+					}
+					set_variable = { new_rep_law_3 = 6 }
+					clr_country_flag = senate_policy_open
+				}
+				if = {
+					limit = {
+						has_country_flag = new_rep_law_4_selected
+					}
+					set_variable = { new_rep_law_4 = 6 }
+					clr_country_flag = senate_policy_open
+				}
+				if = {
+					limit = {
+						has_country_flag = new_rep_law_5_selected
+					}
+					set_variable = { new_rep_law_5 = 6 }
+					clr_country_flag = senate_policy_open
+				}
+			}
+			new_rep_senate_law_3_main_click = {
+				if = {
+					limit = {
+						has_country_flag = new_rep_law_1_selected
+					}
+					set_variable = { new_rep_law_1 = 5 }
+					clr_country_flag = senate_policy_open
+				}
+				if = {
+					limit = {
+						has_country_flag = new_rep_law_2_selected
+					}
+					set_variable = { new_rep_law_2 = 5 }
+					clr_country_flag = senate_policy_open
+				}
+				if = {
+					limit = {
+						has_country_flag = new_rep_law_3_selected
+					}
+					set_variable = { new_rep_law_3 = 5 }
+					clr_country_flag = senate_policy_open
+				}
+				if = {
+					limit = {
+						has_country_flag = new_rep_law_4_selected
+					}
+					set_variable = { new_rep_law_4 = 5 }
+					clr_country_flag = senate_policy_open
+				}
+				if = {
+					limit = {
+						has_country_flag = new_rep_law_5_selected
+					}
+					set_variable = { new_rep_law_5 = 5 }
+					clr_country_flag = senate_policy_open
+				}
+			}
+			new_rep_senate_law_4_main_click = {
+				if = {
+					limit = {
+						has_country_flag = new_rep_law_1_selected
+					}
+					set_variable = { new_rep_law_1 = 3 }
+					clr_country_flag = senate_policy_open
+				}
+				if = {
+					limit = {
+						has_country_flag = new_rep_law_2_selected
+					}
+					set_variable = { new_rep_law_2 = 3 }
+					clr_country_flag = senate_policy_open
+				}
+				if = {
+					limit = {
+						has_country_flag = new_rep_law_3_selected
+					}
+					set_variable = { new_rep_law_3 = 3 }
+					clr_country_flag = senate_policy_open
+				}
+				if = {
+					limit = {
+						has_country_flag = new_rep_law_4_selected
+					}
+					set_variable = { new_rep_law_4 = 3 }
+					clr_country_flag = senate_policy_open
+				}
+				if = {
+					limit = {
+						has_country_flag = new_rep_law_5_selected
+					}
+					set_variable = { new_rep_law_5 = 3 }
+					clr_country_flag = senate_policy_open
+				}
+			}
 		}
 		triggers = {
 			
