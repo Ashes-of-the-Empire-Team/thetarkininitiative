@@ -134,6 +134,191 @@ news_event = { # Harrsk becomes Emperor
 
 }
 
+news_event = { # The Imperial Crusade
+    id = ZER_news.3
+    title = ZER_news.3.t
+    desc = ZER_news.3.desc
+    picture = GFX_news_event_imperial_crusade
+
+    is_triggered_only = yes
+
+    major = yes
+    
+    option = {
+        name = ZER_news.3.a
+        trigger = {
+            tag = ZER
+		}
+    }
+
+    option = {
+        name = ZER_news.3.b
+        trigger = {
+           original_tag = var:global.emperor_id
+		}
+    }
+
+    option = {
+        name = ZER_news.3.c
+        trigger = {
+            AND = {
+                NOT = { original_tag = ZER }
+                NOT = { has_government = imperial }
+            }
+		}
+    }
+
+    option = {
+        name = ZER_news.3.d
+        trigger = {
+            AND = {
+                NOT = { original_tag = ZER }
+                NOT = { original_tag = var:global.emperor_id }
+                has_government = imperial
+            }
+		}
+    }
+}
+
+news_event = { # Fondor Invasion
+    id = ZER_news.4
+    title = ZER_news.4.t
+    desc = ZER_news.4.desc
+    picture = GFX_news_event_fondor_invasion
+
+    is_triggered_only = yes
+
+    major = yes
+    
+    option = {
+        name = ZER_news.4.a
+        trigger = {
+            tag = ZER
+		}
+    }
+
+    option = {
+        name = ZER_news.4.b
+        trigger = {
+           original_tag = var:global.emperor_id
+		}
+    }
+
+    option = {
+        name = ZER_news.4.c
+        trigger = {
+            AND = {
+                NOT = { original_tag = ZER }
+                NOT = { has_government = imperial }
+            }
+		}
+    }
+
+    option = {
+        name = ZER_news.4.d
+        trigger = {
+            AND = {
+                NOT = { original_tag = ZER }
+                NOT = { original_tag = var:global.emperor_id }
+                has_government = imperial
+            }
+		}
+    }
+}
+
+news_event = { # Fondor Annexation
+    id = ZER_news.5
+    title = ZER_news.5.t
+    desc = ZER_news.5.desc
+    picture = GFX_news_event_fondor_annexed
+
+    is_triggered_only = yes
+
+    major = yes
+    
+    option = {
+        name = ZER_news.5.a
+        trigger = {
+            tag = ZER
+		}
+    }
+
+    option = {
+        name = ZER_news.5.b
+        trigger = {
+           original_tag = var:global.emperor_id
+		}
+    }
+
+    option = {
+        name = ZER_news.5.c
+        trigger = {
+            AND = {
+                NOT = { original_tag = ZER }
+                NOT = { has_government = imperial }
+            }
+		}
+    }
+
+    option = {
+        name = ZER_news.5.d
+        trigger = {
+            AND = {
+                NOT = { original_tag = ZER }
+                NOT = { original_tag = var:global.emperor_id }
+                has_government = imperial
+            }
+		}
+    }
+}
+
+news_event = { # Teradoc Execution
+    id = ZER_news.6
+    title = ZER_news.6.t
+    desc = ZER_news.6.desc
+    picture = GFX_news_event_teradoc_execution
+
+    is_triggered_only = yes
+
+    major = yes
+    
+    option = {
+        name = ZER_news.6.a
+        trigger = {
+            tag = ZER
+		}
+    }
+
+    option = {
+        name = ZER_news.6.b
+        trigger = {
+           original_tag = var:global.emperor_id
+		}
+    }
+
+    option = {
+        name = ZER_news.6.c
+        trigger = {
+            AND = {
+                NOT = { original_tag = ZER }
+                NOT = { has_government = imperial }
+            }
+		}
+    }
+
+    option = {
+        name = ZER_news.6.d
+        trigger = {
+            AND = {
+                NOT = { original_tag = ZER }
+                NOT = { original_tag = var:global.emperor_id }
+                has_government = imperial
+            }
+		}
+    }
+}
+
+
 country_event = { # Fleet Modifications
     id = ZER_start.1
     title = ZER_start.1.t
@@ -676,19 +861,9 @@ country_event = { # DEEP 3 completed
             base = 50
         }
         add_manpower = 50000
-        325 = {
-            create_unit = {
-                division = "name = \"Stormtrooper Regiment\"
-                division_template = \"Stormtrooper Regiment\"
-                start_experience_factor = 0.2"
-                owner = ZER
-            }
-            create_unit = {
-                division = "name = \"Stormtrooper Regiment\"
-                division_template = \"Stormtrooper Regiment\"
-                start_experience_factor = 0.2"
-                owner = ZER
-            }
+        custom_effect_tooltip = tt_zer_2_stormtrooper_divisions
+        hidden_effect = {
+            load_oob = "ZER_MINOR_WARLORDS"
         }
     }
 }
@@ -728,6 +903,9 @@ country_event = { # Forboding Transmission
             base = 60
         }
         ZER = { country_event = ZER_start.21 }
+        hidden_effect = {
+            news_event = ZER_news.4
+        }
     }
 
     option = {
@@ -768,6 +946,9 @@ country_event = { # Forboding Transmission
         }
         359 = {
             add_core_of = ZER
+        }
+        hidden_effect = {
+            news_event = ZER_news.5
         }
     }
 }
