@@ -8,11 +8,11 @@ scripted_gui = {
         effects = {
             select_ground_forces_click = {
                 erase_previous_buying_market_selection = yes
-                set_country_flag = open_market_ground_forces
+                set_country_flag = tank_buying_market_open
             }
             select_starfighters_click = {
                 erase_previous_buying_market_selection = yes
-                set_country_flag = open_market_starfighters
+                set_country_flag = starfighters_buying_market_open
             }
             select_ships_click = {
                 erase_previous_buying_market_selection = yes
@@ -42,6 +42,35 @@ scripted_gui = {
                 erase_previous_buying_market_selection = yes
                 set_country_flag = open_market_raw_goods
             }
+            select_republic_button_click = {
+                erase_previous_ship_menu_faction_selection = yes
+                set_country_flag = republic_market_open
+            }
+            select_neutral_button_click = {
+                erase_previous_ship_menu_faction_selection = yes
+                set_country_flag = neutral_market_open
+            }
+            select_imperial_button_click = {
+                erase_previous_ship_menu_faction_selection = yes
+                set_country_flag = imperial_market_open
+            }
+        }
+        triggers = {
+            select_republic_button_click_enabled = {
+                NOT = {
+                    has_country_flag = republic_market_open
+                }
+            }
+            select_neutral_button_click_enabled = {
+                NOT = {
+                    has_country_flag = neutral_market_open
+                }
+            }
+            select_imperial_button_click_enabled = {
+                NOT = {
+                    has_country_flag = imperial_market_open
+                }
+            }
         }
     }
     Marketplace_buying_ships_main = {
@@ -69,18 +98,6 @@ scripted_gui = {
                 erase_previous_ship_menu_selection = yes
                 set_country_flag = star_destroyer_buying_market_open
             }
-            select_republic_button_click = {
-                erase_previous_ship_menu_faction_selection = yes
-                set_country_flag = republic_market_open
-            }
-            select_neutral_button_click = {
-                erase_previous_ship_menu_faction_selection = yes
-                set_country_flag = neutral_market_open
-            }
-            select_imperial_button_click = {
-                erase_previous_ship_menu_faction_selection = yes
-                set_country_flag = imperial_market_open
-            }
         }
         triggers = {
             select_corvettes_button_click_enabled = {
@@ -88,34 +105,19 @@ scripted_gui = {
                     has_country_flag = corvette_buying_market_open
                 }
             }
-            select_frigates_button_click = {
+            select_frigates_button_click_enabled = {
                 NOT = {
                     has_country_flag = frigate_buying_market_open
                 }
             }
-            select_cruisers_button_click = {
+            select_cruisers_button_click_enabled = {
                 NOT = {
                     has_country_flag = cruiser_buying_market_open
                 }
             }
-            select_star_destroyers_button_click = {
+            select_star_destroyers_button_click_enabled = {
                 NOT = {
                     has_country_flag = star_destroyer_buying_market_open
-                }
-            }
-            select_republic_button_click = {
-                NOT = {
-                    has_country_flag = republic_market_open
-                }
-            }
-            select_neutral_button_click = {
-                NOT = {
-                    has_country_flag = neutral_market_open
-                }
-            }
-            select_imperial_button_click = {
-                NOT = {
-                    has_country_flag = imperial_market_open
                 }
             }
         }
@@ -230,6 +232,7 @@ scripted_gui = {
         parent_window_name = "Marketplace_buying_menu"
         visible = {
             has_country_flag = imperial_market_open
+            has_country_flag = open_market_ships
             has_country_flag = corvette_buying_market_open
         }
         effects = {
@@ -376,6 +379,7 @@ scripted_gui = {
         parent_window_name = "Marketplace_buying_menu"
         visible = {
             has_country_flag = republic_market_open
+            has_country_flag = open_market_ships
             has_country_flag = frigate_buying_market_open
         }
         effects = {
@@ -599,6 +603,7 @@ scripted_gui = {
         parent_window_name = "Marketplace_buying_menu"
         visible = {
             has_country_flag = imperial_market_open
+            has_country_flag = open_market_ships
             has_country_flag = frigate_buying_market_open
         }
         effects = {
@@ -655,6 +660,7 @@ scripted_gui = {
         parent_window_name = "Marketplace_buying_menu"
         visible = {
             has_country_flag = republic_market_open
+            has_country_flag = open_market_ships
             has_country_flag = cruiser_buying_market_open
         }
         effects = {
@@ -788,6 +794,7 @@ scripted_gui = {
         parent_window_name = "Marketplace_buying_menu"
         visible = {
             has_country_flag = imperial_market_open
+            has_country_flag = open_market_ships
             has_country_flag = cruiser_buying_market_open
         }
         effects = {
@@ -964,6 +971,7 @@ scripted_gui = {
         parent_window_name = "Marketplace_buying_menu"
         visible = {
             has_country_flag = republic_market_open
+            has_country_flag = open_market_ships
             has_country_flag = star_destroyer_buying_market_open
         }
         effects = {
@@ -1243,10 +1251,9 @@ scripted_gui = {
         window_name = "Marketplace_buying_star_destoyers_imperial_menu"
         parent_window_name = "Marketplace_buying_menu"
         visible = {
-            AND = {
-                has_country_flag = imperial_market_open
-                has_country_flag = star_destroyer_buying_market_open
-            }
+            has_country_flag = imperial_market_open
+            has_country_flag = open_market_ships
+            has_country_flag = star_destroyer_buying_market_open
         }
         effects = {
             product_buy_one_11005 = {
