@@ -267,9 +267,13 @@ scripted_gui = {
 			new_rep_senate_espionage_law_1_click = {
 				if = {
 					limit = {
-						has_country_flag = senate_policy_open
+						has_country_flag = senate_policy_espionage_open
 					}
-					clr_country_flag = senate_policy_open
+					clr_country_flag = senate_policy_espionage_open
+					clr_country_flag = new_rep_law_1_selected
+				}
+				else = {
+					set_country_flag = senate_policy_espionage_open
 					set_country_flag = new_rep_law_1_selected
 					clr_country_flag = new_rep_law_2_selected
 					clr_country_flag = new_rep_law_3_selected
@@ -280,9 +284,13 @@ scripted_gui = {
 			new_rep_senate_espionage_law_2_click = {
 				if = {
 					limit = {
-						has_country_flag = senate_policy_open
+						has_country_flag = senate_policy_espionage_open
 					}
-					clr_country_flag = senate_policy_open
+					clr_country_flag = senate_policy_espionage_open
+					clr_country_flag = new_rep_law_2_selected
+				}
+				else = {
+					set_country_flag = senate_policy_espionage_open
 					set_country_flag = new_rep_law_2_selected
 					clr_country_flag = new_rep_law_1_selected
 					clr_country_flag = new_rep_law_3_selected
@@ -293,12 +301,16 @@ scripted_gui = {
 			new_rep_senate_espionage_law_3_click = {
 				if = {
 					limit = {
-						has_country_flag = senate_policy_open
+						has_country_flag = senate_policy_espionage_open
 					}
-					clr_country_flag = senate_policy_open
-					set_country_flag = new_rep_law_3_selected
-					clr_country_flag = new_rep_law_1_selected
+					clr_country_flag = senate_policy_espionage_open
 					clr_country_flag = new_rep_law_2_selected
+				}
+				else = {
+					set_country_flag = senate_policy_espionage_open
+					clr_country_flag = new_rep_law_2_selected
+					clr_country_flag = new_rep_law_1_selected
+					set_country_flag = new_rep_law_3_selected
 					clr_country_flag = new_rep_law_4_selected
 					clr_country_flag = new_rep_law_5_selected
 				}
@@ -306,17 +318,37 @@ scripted_gui = {
 			new_rep_senate_espionage_law_4_click = {
 				if = {
 					limit = {
-						has_country_flag = senate_policy_open
+						has_country_flag = senate_policy_espionage_open
 					}
-					clr_country_flag = senate_policy_open
-					set_country_flag = new_rep_law_4_selected
-					clr_country_flag = new_rep_law_1_selected
+					clr_country_flag = senate_policy_espionage_open
+					clr_country_flag = new_rep_law_4_selected
+				}
+				else = {
+					set_country_flag = senate_policy_espionage_open
 					clr_country_flag = new_rep_law_2_selected
+					clr_country_flag = new_rep_law_1_selected
 					clr_country_flag = new_rep_law_3_selected
+					set_country_flag = new_rep_law_4_selected
 					clr_country_flag = new_rep_law_5_selected
 				}
 			}
-
+			new_rep_senate_espionage_law_5_click = {
+				if = {
+					limit = {
+						has_country_flag = senate_policy_espionage_open
+					}
+					clr_country_flag = senate_policy_espionage_open
+					clr_country_flag = new_rep_law_5_selected
+				}
+				else = {
+					set_country_flag = senate_policy_espionage_open
+					clr_country_flag = new_rep_law_2_selected
+					clr_country_flag = new_rep_law_1_selected
+					clr_country_flag = new_rep_law_3_selected
+					clr_country_flag = new_rep_law_4_selected
+					set_country_flag = new_rep_law_5_selected
+				}
+			}
 		}
 		triggers = {
 			new_rep_espionage_member_1_frame_click_enabled = {
@@ -372,16 +404,19 @@ scripted_gui = {
 		}
 		properties = {
 			new_rep_senate_espionage_law_1 = {
-				frame = new_rep_espionage_law_1
+				frame = Global.new_rep_law_espionage_1
 			}
 			new_rep_senate_espionage_law_2 = {
-				frame = new_rep_espionage_law_2
+				frame = Global.new_rep_law_espionage_2
 			}
 			new_rep_senate_espionage_law_3 = {
-				frame = new_rep_espionage_law_3
+				frame = Global.new_rep_law_espionage_3
 			}
 			new_rep_senate_espionage_law_4 = {
-				frame = new_rep_espionage_law_4
+				frame = Global.new_rep_law_espionage_4
+			}
+			new_rep_senate_espionage_law_5 = {
+				frame = Global.new_rep_law_espionage_5
 			}
 			new_rep_espionage_member_1 = {
 				image = "[?Global.EspionageMemberSenate1.GetFlag]"
@@ -676,19 +711,19 @@ scripted_gui = {
 		}
 		properties = {
 			new_rep_senate_law_1 = {
-				frame = new_rep_law_1
+				frame = Global.new_rep_law_1
 			}
 			new_rep_senate_law_2 = {
-				frame = new_rep_law_2
+				frame = Global.new_rep_law_2
 			}
 			new_rep_senate_law_3 = {
-				frame = new_rep_law_3
+				frame = Global.new_rep_law_3
 			}
 			new_rep_senate_law_4 = {
-				frame = new_rep_law_4
+				frame = Global.new_rep_law_4
 			}
 			new_rep_senate_law_5 = {
-				frame = new_rep_law_5
+				frame = Global.new_rep_law_5
 			}
 			member_flag = {
 				image = "[This.GetFlag]"
@@ -855,9 +890,9 @@ scripted_gui = {
 	senate_policy_screen = {
 		context_type = player_context
 		window_name = "senate_policy_screen"
+		parent_window_name = "senate_screen"
 		visible = {
            has_country_flag = senate_policy_open
-		   has_country_flag = senate_open
 		}
 		effects = {
 			new_rep_senate_law_1_main_click = {
@@ -865,35 +900,35 @@ scripted_gui = {
 					limit = {
 						has_country_flag = new_rep_law_1_selected
 					}
-					set_variable = { new_rep_law_1 = 4 }
+					set_variable = { Global.new_rep_law_1 = 4 }
 					clr_country_flag = senate_policy_open
 				}
 				if = {
 					limit = {
 						has_country_flag = new_rep_law_2_selected
 					}
-					set_variable = { new_rep_law_2 = 4 }
+					set_variable = { Global.new_rep_law_2 = 4 }
 					clr_country_flag = senate_policy_open
 				}
 				if = {
 					limit = {
 						has_country_flag = new_rep_law_3_selected
 					}
-					set_variable = { new_rep_law_3 = 4 }
+					set_variable = { Global.new_rep_law_3 = 4 }
 					clr_country_flag = senate_policy_open
 				}
 				if = {
 					limit = {
 						has_country_flag = new_rep_law_4_selected
 					}
-					set_variable = { new_rep_law_4 = 4 }
+					set_variable = { Global.new_rep_law_4 = 4 }
 					clr_country_flag = senate_policy_open
 				}
 				if = {
 					limit = {
 						has_country_flag = new_rep_law_5_selected
 					}
-					set_variable = { new_rep_law_5 = 4 }
+					set_variable = { Global.new_rep_law_5 = 4 }
 					clr_country_flag = senate_policy_open
 				}
 			}
@@ -902,35 +937,35 @@ scripted_gui = {
 					limit = {
 						has_country_flag = new_rep_law_1_selected
 					}
-					set_variable = { new_rep_law_1 = 6 }
+					set_variable = { Global.new_rep_law_1 = 6 }
 					clr_country_flag = senate_policy_open
 				}
 				if = {
 					limit = {
 						has_country_flag = new_rep_law_2_selected
 					}
-					set_variable = { new_rep_law_2 = 6 }
+					set_variable = { Global.new_rep_law_2 = 6 }
 					clr_country_flag = senate_policy_open
 				}
 				if = {
 					limit = {
 						has_country_flag = new_rep_law_3_selected
 					}
-					set_variable = { new_rep_law_3 = 6 }
+					set_variable = { Global.new_rep_law_3 = 6 }
 					clr_country_flag = senate_policy_open
 				}
 				if = {
 					limit = {
 						has_country_flag = new_rep_law_4_selected
 					}
-					set_variable = { new_rep_law_4 = 6 }
+					set_variable = { Global.new_rep_law_4 = 6 }
 					clr_country_flag = senate_policy_open
 				}
 				if = {
 					limit = {
 						has_country_flag = new_rep_law_5_selected
 					}
-					set_variable = { new_rep_law_5 = 6 }
+					set_variable = { Global.new_rep_law_5 = 6 }
 					clr_country_flag = senate_policy_open
 				}
 			}
@@ -939,35 +974,35 @@ scripted_gui = {
 					limit = {
 						has_country_flag = new_rep_law_1_selected
 					}
-					set_variable = { new_rep_law_1 = 5 }
+					set_variable = { Global.new_rep_law_1 = 5 }
 					clr_country_flag = senate_policy_open
 				}
 				if = {
 					limit = {
 						has_country_flag = new_rep_law_2_selected
 					}
-					set_variable = { new_rep_law_2 = 5 }
+					set_variable = { Global.new_rep_law_2 = 5 }
 					clr_country_flag = senate_policy_open
 				}
 				if = {
 					limit = {
 						has_country_flag = new_rep_law_3_selected
 					}
-					set_variable = { new_rep_law_3 = 5 }
+					set_variable = { Global.new_rep_law_3 = 5 }
 					clr_country_flag = senate_policy_open
 				}
 				if = {
 					limit = {
 						has_country_flag = new_rep_law_4_selected
 					}
-					set_variable = { new_rep_law_4 = 5 }
+					set_variable = { Global.new_rep_law_4 = 5 }
 					clr_country_flag = senate_policy_open
 				}
 				if = {
 					limit = {
 						has_country_flag = new_rep_law_5_selected
 					}
-					set_variable = { new_rep_law_5 = 5 }
+					set_variable = { Global.new_rep_law_5 = 5 }
 					clr_country_flag = senate_policy_open
 				}
 			}
@@ -976,35 +1011,35 @@ scripted_gui = {
 					limit = {
 						has_country_flag = new_rep_law_1_selected
 					}
-					set_variable = { new_rep_law_1 = 3 }
+					set_variable = { Global.new_rep_law_1 = 3 }
 					clr_country_flag = senate_policy_open
 				}
 				if = {
 					limit = {
 						has_country_flag = new_rep_law_2_selected
 					}
-					set_variable = { new_rep_law_2 = 3 }
+					set_variable = { Global.new_rep_law_2 = 3 }
 					clr_country_flag = senate_policy_open
 				}
 				if = {
 					limit = {
 						has_country_flag = new_rep_law_3_selected
 					}
-					set_variable = { new_rep_law_3 = 3 }
+					set_variable = { Global.new_rep_law_3 = 3 }
 					clr_country_flag = senate_policy_open
 				}
 				if = {
 					limit = {
 						has_country_flag = new_rep_law_4_selected
 					}
-					set_variable = { new_rep_law_4 = 3 }
+					set_variable = { Global.new_rep_law_4 = 3 }
 					clr_country_flag = senate_policy_open
 				}
 				if = {
 					limit = {
 						has_country_flag = new_rep_law_5_selected
 					}
-					set_variable = { new_rep_law_5 = 3 }
+					set_variable = { Global.new_rep_law_5 = 3 }
 					clr_country_flag = senate_policy_open
 				}
 			}
@@ -1019,6 +1054,241 @@ scripted_gui = {
 			new_rep_senate_law_1 = {
 				frame = new_rep_law_1
 			}
+		}
+	}
+	senate_espionage_policy_screen = {
+		context_type = player_context
+		window_name = "senate_policy_espionage_screen"
+		parent_window_name = "senate_screen"
+		visible = {
+           has_country_flag = senate_policy_espionage_open
+		}
+		effects = {
+			alpha_blue_click = {
+				if = {
+					limit = {
+						has_country_flag = new_rep_law_1_selected
+					}
+					set_variable = { Global.new_rep_law_espionage_1 = 2 }
+					clr_country_flag = senate_policy_espionage_open
+				}
+				if = {
+					limit = {
+						has_country_flag = new_rep_law_2_selected
+					}
+					set_variable = { Global.new_rep_law_espionage_1 = 2 }
+					clr_country_flag = senate_policy_espionage_open
+				}
+				if = {
+					limit = {
+						has_country_flag = new_rep_law_3_selected
+					}
+					set_variable = { Global.new_rep_law_espionage_1 = 2 }
+					clr_country_flag = senate_policy_espionage_open
+				}
+				if = {
+					limit = {
+						has_country_flag = new_rep_law_4_selected
+					}
+					set_variable = { Global.new_rep_law_espionage_1 = 2 }
+					clr_country_flag = senate_policy_espionage_open
+				}
+				if = {
+					limit = {
+						has_country_flag = new_rep_law_5_selected
+					}
+					set_variable = { Global.new_rep_law_espionage_1 = 2 }
+					clr_country_flag = senate_policy_espionage_open
+				}
+			}
+			alpha_green_click = {
+				if = {
+					limit = {
+						has_country_flag = new_rep_law_1_selected
+					}
+					set_variable = { Global.new_rep_law_espionage_1 = 3 }
+					clr_country_flag = senate_policy_espionage_open
+				}
+				if = {
+					limit = {
+						has_country_flag = new_rep_law_2_selected
+					}
+					set_variable = { Global.new_rep_law_espionage_2 = 3 }
+					clr_country_flag = senate_policy_espionage_open
+				}
+				if = {
+					limit = {
+						has_country_flag = new_rep_law_3_selected
+					}
+					set_variable = { Global.new_rep_law_espionage_3 = 3 }
+					clr_country_flag = senate_policy_espionage_open
+				}
+				if = {
+					limit = {
+						has_country_flag = new_rep_law_4_selected
+					}
+					set_variable = { Global.new_rep_law_espionage_4 = 3 }
+					clr_country_flag = senate_policy_espionage_open
+				}
+				if = {
+					limit = {
+						has_country_flag = new_rep_law_5_selected
+					}
+					set_variable = { Global.new_rep_law_espionage_5 = 3 }
+					clr_country_flag = senate_policy_espionage_open
+				}
+			}
+			alpha_red_click = {
+				if = {
+					limit = {
+						has_country_flag = new_rep_law_1_selected
+					}
+					set_variable = { Global.new_rep_law_espionage_1 = 4 }
+					clr_country_flag = senate_policy_espionage_open
+				}
+				if = {
+					limit = {
+						has_country_flag = new_rep_law_2_selected
+					}
+					set_variable = { Global.new_rep_law_espionage_2 = 4 }
+					clr_country_flag = senate_policy_espionage_open
+				}
+				if = {
+					limit = {
+						has_country_flag = new_rep_law_3_selected
+					}
+					set_variable = { Global.new_rep_law_espionage_3 = 4 }
+					clr_country_flag = senate_policy_espionage_open
+				}
+				if = {
+					limit = {
+						has_country_flag = new_rep_law_4_selected
+					}
+					set_variable = { Global.new_rep_law_espionage_4 = 4 }
+					clr_country_flag = senate_policy_espionage_open
+				}
+				if = {
+					limit = {
+						has_country_flag = new_rep_law_5_selected
+					}
+					set_variable = { Global.new_rep_law_espionage_5 = 4 }
+					clr_country_flag = senate_policy_espionage_open
+				}
+			}
+			bothan_spynet_click = {
+				if = {
+					limit = {
+						has_country_flag = new_rep_law_1_selected
+					}
+					set_variable = { Global.new_rep_law_espionage_1 = 5 }
+					clr_country_flag = senate_policy_espionage_open
+				}
+				if = {
+					limit = {
+						has_country_flag = new_rep_law_2_selected
+					}
+					set_variable = { Global.new_rep_law_espionage_2 = 5 }
+					clr_country_flag = senate_policy_espionage_open
+				}
+				if = {
+					limit = {
+						has_country_flag = new_rep_law_3_selected
+					}
+					set_variable = { Global.new_rep_law_espionage_3 = 5 }
+					clr_country_flag = senate_policy_espionage_open
+				}
+				if = {
+					limit = {
+						has_country_flag = new_rep_law_4_selected
+					}
+					set_variable = { Global.new_rep_law_espionage_4 = 5 }
+					clr_country_flag = senate_policy_espionage_open
+				}
+				if = {
+					limit = {
+						has_country_flag = new_rep_law_5_selected
+					}
+					set_variable = { Global.new_rep_law_espionage_5 = 5 }
+					clr_country_flag = senate_policy_espionage_open
+				}
+			}
+			spy_guilds_click = {
+				if = {
+					limit = {
+						has_country_flag = new_rep_law_1_selected
+					}
+					set_variable = { Global.new_rep_law_espionage_1 = 6 }
+					clr_country_flag = senate_policy_espionage_open
+				}
+				if = {
+					limit = {
+						has_country_flag = new_rep_law_2_selected
+					}
+					set_variable = { Global.new_rep_law_espionage_2 = 6 }
+					clr_country_flag = senate_policy_espionage_open
+				}
+				if = {
+					limit = {
+						has_country_flag = new_rep_law_3_selected
+					}
+					set_variable = { Global.new_rep_law_espionage_3 = 6 }
+					clr_country_flag = senate_policy_espionage_open
+				}
+				if = {
+					limit = {
+						has_country_flag = new_rep_law_4_selected
+					}
+					set_variable = { Global.new_rep_law_espionage_4 = 6 }
+					clr_country_flag = senate_policy_espionage_open
+				}
+				if = {
+					limit = {
+						has_country_flag = new_rep_law_5_selected
+					}
+					set_variable = { Global.new_rep_law_espionage_5 = 6 }
+					clr_country_flag = senate_policy_espionage_open
+				}
+			}
+			wraith_squadron_click = {
+				if = {
+					limit = {
+						has_country_flag = new_rep_law_1_selected
+					}
+					set_variable = { Global.new_rep_law_espionage_1 = 7 }
+					clr_country_flag = senate_policy_espionage_open
+				}
+				if = {
+					limit = {
+						has_country_flag = new_rep_law_2_selected
+					}
+					set_variable = { Global.new_rep_law_espionage_2 = 7 }
+					clr_country_flag = senate_policy_espionage_open
+				}
+				if = {
+					limit = {
+						has_country_flag = new_rep_law_3_selected
+					}
+					set_variable = { Global.new_rep_law_espionage_3 = 7 }
+					clr_country_flag = senate_policy_espionage_open
+				}
+				if = {
+					limit = {
+						has_country_flag = new_rep_law_4_selected
+					}
+					set_variable = { Global.new_rep_law_espionage_4 = 7 }
+					clr_country_flag = senate_policy_espionage_open
+				}
+				if = {
+					limit = {
+						has_country_flag = new_rep_law_5_selected
+					}
+					set_variable = { Global.new_rep_law_espionage_5 = 7 }
+					clr_country_flag = senate_policy_espionage_open
+				}
+			}
+		}
+		triggers = {
+			
 		}
 	}
 }
