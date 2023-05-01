@@ -43,36 +43,66 @@ scripted_gui = {
 				clr_country_flag = espionage_committee_open
 			}
 			new_rep_yes_vote_click = {
-				add_to_variable = { Global.votes_for_new_republic = 1}
-				set_country_flag = voted_on_legislation_nr
+				if = { 
+					limit = {
+						has_country_flag = espionage_committee_open
+					}
+					add_to_variable = { Global.votes_for_new_republic_espionage = 1}
+					set_country_flag = votes_for_new_republic_espionage
+				}
 			}
 			new_rep_no_vote_click = {
-				add_to_variable = { Global.votes_against_new_republic = 1}
-				set_country_flag = voted_on_legislation_nr
+				if = { 
+					limit = {
+						has_country_flag = espionage_committee_open
+					}
+					add_to_variable = { Global.votes_against_new_republic_espionage = 1}
+					set_country_flag = votes_for_new_republic_espionage
+				}
 			}
 			new_rep_abstain_vote_click = {
-				add_to_variable = { Global.votes_abstained_new_republic = 1}
-				set_country_flag = voted_on_legislation_nr
+				if = { 
+					limit = {
+						has_country_flag = espionage_committee_open
+					}
+					add_to_variable = { Global.votes_abstained_new_republic_espionage = 1}
+					set_country_flag = votes_for_new_republic_espionage
+				}
 			}
 		}
 		triggers = {
 			new_rep_yes_vote_click_enabled = {
-				NOT = {
-					has_country_flag = voted_on_legislation_nr
+				if = {
+					limit = {
+						has_country_flag = espionage_committee_open
+					}
+					has_country_flag = member_of_espionage_committee
+					NOT = {
+						has_country_flag = votes_for_new_republic_espionage
+					}
 				}
-				has_global_flag = nr_voting
 			}
 			new_rep_no_vote_click_enabled = {
-				NOT = {
-					has_country_flag = voted_on_legislation_nr
+				if = {
+					limit = {
+						has_country_flag = espionage_committee_open
+					}
+					has_country_flag = member_of_espionage_committee
+					NOT = {
+						has_country_flag = votes_for_new_republic_espionage
+					}
 				}
-				has_global_flag = nr_voting
 			}
 			new_rep_abstain_vote_click_enabled = {
-				NOT = {
-					has_country_flag = voted_on_legislation_nr
+				if = {
+					limit = {
+						has_country_flag = espionage_committee_open
+					}
+					has_country_flag = member_of_espionage_committee
+					NOT = {
+						has_country_flag = votes_for_new_republic_espionage
+					}
 				}
-				has_global_flag = nr_voting
 			}
 		}
 	}
@@ -86,23 +116,23 @@ scripted_gui = {
 		effects = {
 			new_rep_economic_member_1_frame_click = {
 				set_variable = { Global.EconomicMemberSenate1 = ROOT.id }
-				set_country_flag = member_of_a_committee
+				set_country_flag = member_of_economic_committee
 			}
 			new_rep_economic_member_2_frame_click = {
 				set_variable = { Global.EconomicMemberSenate2 = ROOT.id }
-				set_country_flag = member_of_a_committee
+				set_country_flag = member_of_economic_committee
 			}
 			new_rep_economic_member_3_frame_click = {
 				set_variable = { Global.EconomicMemberSenate3 = ROOT.id }
-				set_country_flag = member_of_a_committee
+				set_country_flag = member_of_economic_committee
 			}
 			new_rep_economic_member_4_frame_click = {
 				set_variable = { Global.EconomicMemberSenate4 = ROOT.id }
-				set_country_flag = member_of_a_committee
+				set_country_flag = member_of_economic_committee
 			}
 			new_rep_leader_economic_flag_frame_click = {
 				set_variable = { Global.EconomicleaderSenate = ROOT.id }
-				set_country_flag = member_of_a_committee
+				set_country_flag = member_of_economic_committee
 			}
 			new_rep_senate_economy_law_1_click = {
 				set_country_flag = economic_policy_open
@@ -148,27 +178,27 @@ scripted_gui = {
 		triggers = {
 			new_rep_economic_member_1_frame_click_enabled = {
 				NOT = {
-					has_country_flag = member_of_a_committee
+					has_country_flag = member_of_economic_committee
 				}
 			}
 			new_rep_economic_member_2_frame_click_enabled = {
 				NOT = {
-					has_country_flag = member_of_a_committee
+					has_country_flag = member_of_economic_committee
 				}
 			}
 			new_rep_economic_member_3_frame_click_enabled = {
 				NOT = {
-					has_country_flag = member_of_a_committee
+					has_country_flag = member_of_economic_committee
 				}
 			}
 			new_rep_economic_member_4_frame_click_enabled = {
 				NOT = {
-					has_country_flag = member_of_a_committee
+					has_country_flag = member_of_economic_committee
 				}
 			}
 			new_rep_leader_economic_flag_frame_click_enabled = {
 				NOT = {
-					has_country_flag = member_of_a_committee
+					has_country_flag = member_of_economic_committee
 				}
 			}
 			new_rep_economic_member_1_visible = {
@@ -247,19 +277,19 @@ scripted_gui = {
 			}
 			new_rep_espionage_member_1_frame_click = {
 				set_variable = { Global.EspionageMemberSenate1 = ROOT.id }
-				set_country_flag = member_of_a_committee
+				set_country_flag = member_of_espionage_committee
 			}
 			new_rep_espionage_member_2_frame_click = {
 				set_variable = { Global.EspionageMemberSenate2 = ROOT.id }
-				set_country_flag = member_of_a_committee
+				set_country_flag = member_of_espionage_committee
 			}
 			new_rep_espionage_member_3_frame_click = {
 				set_variable = { Global.EspionageMemberSenate3 = ROOT.id }
-				set_country_flag = member_of_a_committee
+				set_country_flag = member_of_espionage_committee
 			}
 			new_rep_espionage_member_4_frame_click = {
 				set_variable = { Global.EspionageMemberSenate4 = ROOT.id }
-				set_country_flag = member_of_a_committee
+				set_country_flag = member_of_espionage_committee
 			}
 			new_rep_leader_espionage_flag_frame_click = {
 				set_variable = { Global.EspionageleaderSenate = ROOT.id }
@@ -353,27 +383,27 @@ scripted_gui = {
 		triggers = {
 			new_rep_espionage_member_1_frame_click_enabled = {
 				NOT = {
-					has_country_flag = member_of_a_committee
+					has_country_flag = member_of_espionage_committee
 				}
 			}
 			new_rep_espionage_member_2_frame_click_enabled = {
 				NOT = {
-					has_country_flag = member_of_a_committee
+					has_country_flag = member_of_espionage_committee
 				}
 			}
 			new_rep_espionage_member_3_frame_click_enabled = {
 				NOT = {
-					has_country_flag = member_of_a_committee
+					has_country_flag = member_of_espionage_committee
 				}
 			}
 			new_rep_espionage_member_4_frame_click_enabled = {
 				NOT = {
-					has_country_flag = member_of_a_committee
+					has_country_flag = member_of_espionage_committee
 				}
 			}
 			new_rep_leader_espionage_flag_frame_click_enabled = {
 				NOT = {
-					has_country_flag = member_of_a_committee
+					has_country_flag = member_of_espionage_committee
 				}
 			}
 			new_rep_leader_espionage_flag_visible = {
@@ -1069,36 +1099,111 @@ scripted_gui = {
 					limit = {
 						has_country_flag = new_rep_law_1_selected
 					}
-					set_variable = { Global.new_rep_law_espionage_1 = 2 }
+					set_global_flag = alpha_blue_allowed
+					news_event = {
+						id = newsenate.1
+						days = 60
+					}
+					set_variable = { Global.new_rep_law_espionage_number = 1 }
 					clr_country_flag = senate_policy_espionage_open
+					set_global_flag = {
+						flag = espionage_vote_ongoing
+						days = 60
+						value = 1
+					}
+					set_global_flag = {
+						flag = espionage_vote
+						days = 60
+						value = 1
+					}
 				}
 				if = {
 					limit = {
 						has_country_flag = new_rep_law_2_selected
 					}
-					set_variable = { Global.new_rep_law_espionage_1 = 2 }
+					set_global_flag = alpha_blue_allowed
+					news_event = {
+						id = newsenate.1
+						days = 60
+					}
+					set_variable = { Global.new_rep_law_espionage_number = 2 }
 					clr_country_flag = senate_policy_espionage_open
+					set_global_flag = {
+						flag = espionage_vote_ongoing
+						days = 60
+						value = 1
+					}
+					set_global_flag = {
+						flag = espionage_vote
+						days = 60
+						value = 1
+					}
 				}
 				if = {
 					limit = {
 						has_country_flag = new_rep_law_3_selected
 					}
-					set_variable = { Global.new_rep_law_espionage_1 = 2 }
+					set_global_flag = alpha_blue_allowed
+					news_event = {
+						id = newsenate.1
+						days = 60
+					}
+					set_variable = { Global.new_rep_law_espionage_number = 3 }
 					clr_country_flag = senate_policy_espionage_open
+					set_global_flag = {
+						flag = espionage_vote_ongoing
+						days = 60
+						value = 1
+					}
+					set_global_flag = {
+						flag = espionage_vote
+						days = 60
+						value = 1
+					}
 				}
 				if = {
 					limit = {
 						has_country_flag = new_rep_law_4_selected
 					}
-					set_variable = { Global.new_rep_law_espionage_1 = 2 }
+					set_global_flag = alpha_blue_allowed
+					news_event = {
+						id = newsenate.1
+						days = 60
+					}
+					set_variable = { Global.new_rep_law_espionage_number = 4 }
 					clr_country_flag = senate_policy_espionage_open
+					set_global_flag = {
+						flag = espionage_vote_ongoing
+						days = 60
+						value = 1
+					}
+					set_global_flag = {
+						flag = espionage_vote
+						days = 60
+						value = 1
+					}
 				}
 				if = {
 					limit = {
 						has_country_flag = new_rep_law_5_selected
 					}
-					set_variable = { Global.new_rep_law_espionage_1 = 2 }
+					set_global_flag = alpha_blue_allowed
+					news_event = {
+						id = newsenate.1
+						days = 60
+					}
+					set_variable = { Global.new_rep_law_espionage_number = 5 }
 					clr_country_flag = senate_policy_espionage_open
+					set_global_flag = {
+						flag = espionage_vote_ongoing
+						days = 60
+						value = 1
+					}
+					set_global_flag = {
+						flag = espionage_vote
+						days = 60
+						value = 1
+					}
 				}
 			}
 			alpha_green_click = {
@@ -1180,6 +1285,7 @@ scripted_gui = {
 					limit = {
 						has_country_flag = new_rep_law_1_selected
 					}
+					set_global_flag = bothan_spynet_allowed
 					set_variable = { Global.new_rep_law_espionage_1 = 5 }
 					clr_country_flag = senate_policy_espionage_open
 				}
@@ -1187,6 +1293,7 @@ scripted_gui = {
 					limit = {
 						has_country_flag = new_rep_law_2_selected
 					}
+					set_global_flag = bothan_spynet_allowed
 					set_variable = { Global.new_rep_law_espionage_2 = 5 }
 					clr_country_flag = senate_policy_espionage_open
 				}
@@ -1194,6 +1301,7 @@ scripted_gui = {
 					limit = {
 						has_country_flag = new_rep_law_3_selected
 					}
+					set_global_flag = bothan_spynet_allowed
 					set_variable = { Global.new_rep_law_espionage_3 = 5 }
 					clr_country_flag = senate_policy_espionage_open
 				}
@@ -1201,6 +1309,7 @@ scripted_gui = {
 					limit = {
 						has_country_flag = new_rep_law_4_selected
 					}
+					set_global_flag = bothan_spynet_allowed
 					set_variable = { Global.new_rep_law_espionage_4 = 5 }
 					clr_country_flag = senate_policy_espionage_open
 				}
@@ -1208,6 +1317,7 @@ scripted_gui = {
 					limit = {
 						has_country_flag = new_rep_law_5_selected
 					}
+					set_global_flag = bothan_spynet_allowed
 					set_variable = { Global.new_rep_law_espionage_5 = 5 }
 					clr_country_flag = senate_policy_espionage_open
 				}
@@ -1288,7 +1398,38 @@ scripted_gui = {
 			}
 		}
 		triggers = {
-			
+			alpha_blue_click_enabled = {
+				NOT = { 
+					has_global_flag = espionage_vote_ongoing
+					has_global_flag = alpha_blue_allowed
+				}
+			}
+			alpha_green_click_enabled = {
+				NOT = { 
+					has_global_flag = espionage_vote_ongoing
+				}
+			}
+			alpha_red_click_enabled = {
+				NOT = { 
+					has_global_flag = espionage_vote_ongoing
+				}
+			}
+			wraith_squadron_click_enabled = {
+				NOT = { 
+					has_global_flag = espionage_vote_ongoing
+				}
+			}
+			spy_guilds_click_enabled = {
+				NOT = { 
+					has_global_flag = espionage_vote_ongoing
+				}
+			}
+			bothan_spynet_click_enabled = {
+				NOT = { 
+					has_global_flag = espionage_vote_ongoing
+					has_global_flag = bothan_spynet_allowed
+				}
+			}
 		}
 	}
 }

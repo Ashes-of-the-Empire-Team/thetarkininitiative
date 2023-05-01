@@ -3,6 +3,7 @@
 ###########################
 
 add_namespace = newrepevent
+add_namespace = newsenate
 add_namespace = newrepleg
 add_namespace = new_rep_black
 
@@ -10,6 +11,34 @@ add_namespace = new_rep_black
 add_namespace = new_republic_focus
 
 ### COUTNRY EVENTS ###
+
+news_event = {
+	id = newsenate.1
+	title = "Alpha Blue"
+	desc = newsenate.1.desc
+	picture = GFX_report_event
+	is_triggered_only = yes
+
+    option = {
+		name = "It has passed"
+			trigger = {
+				check_variable = { Global.votes_for_new_republic_espionage > Global.votes_against_new_republic_espionage }
+			}
+			set_variable = { Global.new_rep_law_espionage_@Global.new_rep_law_espionage_number = 2 }
+			clear_variable = Global.votes_for_new_republic_espionage
+			clear_variable = Global.votes_against_new_republic_espionage
+			clear_variable = Global.votes_abstained_new_republic_espionage
+        }
+	option = {
+		name = "It has failed"
+		trigger = {
+			OR = {
+				check_variable = { Global.votes_for_new_republic_espionage < Global.votes_against_new_republic_espionage }
+				check_variable = { Global.votes_for_new_republic_espionage = Global.votes_against_new_republic_espionage }
+			}
+		}
+	}
+}
 
 country_event = {
 	id = new_rep_black.1
