@@ -3,6 +3,7 @@ defined_text = {
 	text = {
 		trigger = {
 			has_government = democratic
+            has_global_flag = alpha_blue_allowed
 		}
 		localization_key = "Alpha Blue"
 	}
@@ -22,12 +23,46 @@ defined_text = {
 		localization_key = "Counterintelligence Guilds"
 	}
 }
+defined_text = {
+	name = Get4th_guild_loyalty
+	text = {
+		trigger = {
+            AND = {
+                has_government = democratic
+                NOT = {
+                    has_global_flag = alpha_blue_allowed
+                }
+            }
+		}
+		localization_key = ""
+	}
+	text = {
+		trigger = {
+            OR = {
+                has_government = imperial
+                has_government = neutrality
+                AND = {
+                    has_government = democratic
+                    has_global_flag = alpha_blue_allowed
+                }
+            }
+			
+		}
+		localization_key = "[?modifier@4th_guild_loyalty]"
+	}
+}
 
 defined_text = {
 	name = Getspy_guild
 	text = {
 		trigger = {
-			has_government = democratic
+            OR = {
+                AND = {
+                    has_global_flag = bothan_spynet_allowed
+                    has_government = democratic
+                }
+                original_tag = BOT
+            }
 		}
 		localization_key = "Bothan Spynet"
 	}
@@ -45,6 +80,38 @@ defined_text = {
 			}
 		}
 		localization_key = "Guild of Spies"
+	}
+}
+defined_text = {
+	name = Getspy_guild_loyalty
+	text = {
+		trigger = {
+            AND = {
+                NOT = {
+                    original_tag = BOT
+                }
+                has_government = democratic
+                NOT = {
+                    has_global_flag = bothan_spynet_allowed
+                }
+            }
+		}
+		localization_key = ""
+	}
+	text = {
+		trigger = {
+            OR = {
+                original_tag = BOT
+                has_government = imperial
+                has_government = neutrality
+                AND = {
+                    has_government = democratic
+                    has_global_flag = alpha_blue_allowed
+                }
+            }
+			
+		}
+		localization_key = "[?modifier@spy_guild_loyalty]"
 	}
 }
 defined_text = {
