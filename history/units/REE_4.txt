@@ -1,17 +1,145 @@
 division_template = {
-	name = "Stormtrooper Regiment"			
+	name = "Stormtrooper Regiment"
 
 	regiments = {
 		stormtrooper = { x = 0 y = 0 }
 		stormtrooper = { x = 0 y = 1 }
-		stormtrooper = { x = 0 y = 2 }
-   		stormtrooper = { x = 1 y = 0 }
+		stormtrooper = { x = 1 y = 0 }
 		stormtrooper = { x = 1 y = 1 }
-		stormtrooper = { x = 1 y = 2 }
+		at_st = { x = 2 y = 0 }
+	}
+	priority = 1
+}
+
+division_template = {
+	name = "AT-AT Regiment"
+
+	regiments = {
+		at_at = { x = 0 y = 0 }
+		at_at = { x = 0 y = 1 }
+   		at_st = { x = 1 y = 0 }
+		at_st = { x = 1 y = 1 }
+		stormtrooper = { x = 2 y = 0 }
+		stormtrooper = { x = 2 y = 1 }
+	}
+	priority = 2
+}
+
+units = {
+	# Restored Empire Starting Forces
+	division = {
+		name = "1st Restored Imperial Stormtroopers"
+		location = 780
+		division_template = "Stormtrooper Regiment"
+		start_equipment_factor = 0.9
+		start_experience_factor = 0.24
+	}
+	division = {
+		name = "2nd Restored Imperial Stormtroopers"
+		location = 5478
+		division_template = "Stormtrooper Regiment"
+		start_equipment_factor = 0.9
+		start_experience_factor = 0.24
+	}
+	division = {
+		name = "3rd Restored Imperial Stormtroopers"
+		location = 5537
+		division_template = "Stormtrooper Regiment"
+		start_equipment_factor = 0.9
+		start_experience_factor = 0.24
+	}
+	division = {
+		name = "4th Restored Imperial Stormtroopers"
+		location = 2510
+		division_template = "Stormtrooper Regiment"
+		start_equipment_factor = 0.9
+		start_experience_factor = 0.24
+	}
+	division = {
+		name = "5th Restored Imperial Stormtroopers"
+		location = 5555
+		division_template = "Stormtrooper Regiment"
+		start_equipment_factor = 0.9
+		start_experience_factor = 0.24
+	}
+
+	division = {
+		name = "1st Restored Imperial Armoured Brigade"
+		location = 1800
+		division_template = "AT-AT Regiment"
+		start_equipment_factor = 1.0
+		start_experience_factor = 0.23
+	}
+
+	fleet = {
+		name = "Restored Imperial Command Fleet"			
+		naval_base = 1800
+		task_force = {
+			name = "Home Fleet"
+			location = 1800
+			ship = { name = "ISD Maxwell" definition = carrier start_experience_factor = 0.51 equipment = { isd_1 = { amount = 1 owner = EOH version_name = "Empire Class" } } }
+			ship = { name = "ISD Eclipse" definition = capital_ship start_experience_factor = 0.34 equipment = { victory_1 = { amount = 1 owner = EOH version_name = "Thrawn Class" } } }
+			ship = { name = "ISD Maximus" definition = capital_ship start_experience_factor = 0.39 equipment = { victory_1 = { amount = 1 owner = EOH version_name = "Thrawn Class" } } }
+			ship = { name = "ISD Looming" definition = capital_ship start_experience_factor = 0.42 equipment = { victory_1 = { amount = 1 owner = EOH version_name = "Thrawn Class" } } }
+			ship = { name = "ISD Integration" definition = capital_ship start_experience_factor = 0.44 equipment = { victory_1 = { amount = 1 owner = EOH version_name = "Thrawn Class" } } }
+			ship = { name = "IHC Annihilator" definition = heavy_cruiser start_experience_factor = 0.29 equipment = { arquitens_1 = { amount = 1 owner = EOH version_name = "New Order Class" } } }
+			ship = { name = "IHC Cruise" definition = heavy_cruiser start_experience_factor = 0.42 equipment = { arquitens_1 = { amount = 1 owner = EOH version_name = "New Order Class" } } }
+			ship = { name = "IHC Valor" definition = heavy_cruiser start_experience_factor = 0.35 equipment = { arquitens_1 = { amount = 1 owner = EOH version_name = "New Order Class" } } }
+			ship = { name = "IC Temper" definition = light_cruiser start_experience_factor = 0.33 equipment = { raider_1 = { amount = 1 owner = EOH version_name = "Needle Class" } } }
+			ship = { name = "IC Discipline" definition = light_cruiser start_experience_factor = 0.37 equipment = { raider_1 = { amount = 1 owner = EOH version_name = "Needle Class" } } }
+			ship = { name = "IF Decadence" definition = light_cruiser start_experience_factor = 0.29 equipment = { lancer_1 = { amount = 1 owner = EOH version_name = "Stronghold Class" } } }
+		}
 	}
 }
 
+air_wings = {
+	
+	325 = {
+		name = "2nd Kaarenth Fighter Squadron"
+		tie_fighter_airframe_0 =  {
+			owner = "ZER" 
+			amount = 20
+		}
+		name = "1st Kaarenth Fighter Squadron"
+		tie_fighter_airframe_0 =  {
+			owner = "ZER" 
+			amount = 20
+		}
+		name = "1st Kaarenth Bomber Squadron"
+		tie_bomber_airframe_0 =  {
+			owner = "ZER" 
+			amount = 12
+		}
+	}
+}
 
-
-
-###########################################UNITS###########################################
+## Starting Production ###
+instant_effect = {
+	add_equipment_production = {
+		equipment = {
+			type = stormtrooper_equipment_0
+			creator = "REE"
+		}
+		requested_factories = 2
+		progress = 0.40
+		efficiency = 86
+	}
+	add_equipment_production = {
+		equipment = {
+			type = infantry_equipment_0
+			creator = "REE"
+		}
+		requested_factories = 2
+		progress = 0.86
+		efficiency = 81
+	}
+	add_equipment_production = {
+		equipment = {
+			type = at_st_chassis_0
+			creator = "REE"
+		}
+		requested_factories = 1
+		progress = 0.86
+		efficiency = 84
+	}
+}

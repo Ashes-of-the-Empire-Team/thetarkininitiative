@@ -8,7 +8,7 @@ scripted_gui = {
         effects = {
             select_ground_forces_click = {
                 erase_previous_buying_market_selection = yes
-                set_country_flag = tank_buying_market_open
+                set_country_flag = open_market_ground_forces
             }
             select_starfighters_click = {
                 erase_previous_buying_market_selection = yes
@@ -54,8 +54,68 @@ scripted_gui = {
                 erase_previous_ship_menu_faction_selection = yes
                 set_country_flag = imperial_market_open
             }
+            move_up_button_click = {
+                if = {
+                    limit  = {
+                        has_country_flag =  open_first_tab_lazy
+                    }
+                    clr_country_flag = open_first_tab_lazy
+                    set_country_flag = open_second_tab_lazy
+                }else_if = {
+                    limit  = {
+                        has_country_flag =  open_second_tab_lazy
+                    }
+                    clr_country_flag = open_second_tab_lazy
+                    set_country_flag = open_third_tab_lazy
+                }
+            }
+            move_down_button_click = {
+                if = {
+                    limit  = {
+                        has_country_flag =  open_third_tab_lazy
+                    }
+                    clr_country_flag = open_third_tab_lazy
+                    set_country_flag = open_second_tab_lazy
+                }else_if = {
+                    limit  = {
+                        has_country_flag =  open_second_tab_lazy
+                    }
+                    clr_country_flag = open_second_tab_lazy
+                    set_country_flag = open_first_tab_lazy
+                }
+            }
         }
         triggers = {
+            move_up_button_visible = {
+                NOT = {
+                    has_country_flag = open_third_tab_lazy
+                }
+            }
+            move_down_button_visible = {
+                NOT = {
+                    has_country_flag = open_first_tab_lazy
+                }
+            }
+            select_ground_forces_click_enabled = {
+                NOT = {
+                    has_country_flag = open_market_ground_forces
+                }
+            }
+            select_ships_click_enabled = {
+                NOT = {
+                  has_country_flag = open_market_ships
+                }
+            }
+            select_starfighters_click_enabled = {
+                NOT = {
+                    has_country_flag = starfighters_buying_market_open
+                }
+            }
+            select_droids_click_enabled = {
+                NOT = {
+                    has_country_flag = open_market_droids
+                }
+            }
             select_republic_button_click_enabled = {
                 NOT = {
                     has_country_flag = republic_market_open
@@ -1456,6 +1516,7 @@ scripted_gui = {
         visible = {
             has_country_flag = republic_market_open
             has_country_flag = starfighters_buying_market_open
+            has_country_flag = open_first_tab_lazy
         }
         effects = {
             product_buy_one_u_wing = {
@@ -1984,6 +2045,103 @@ scripted_gui = {
             }
         }
     }
+    Marketplace_buying_fighters_2_republic_menu = {
+        context_type = player_context
+        window_name = "Marketplace_buying_fighters_2_republic_menu"
+        parent_window_name = "Marketplace_buying_menu"
+        visible = {
+            has_country_flag = republic_market_open
+            has_country_flag = starfighters_buying_market_open
+            has_country_flag = open_second_tab_lazy
+        }
+        effects = {
+            product_buy_one_u_wing = {
+                if = {
+                    limit = {
+                        EMP = {
+                            NOT = {
+                                has_country_flag = brought_out
+                            }
+                        }
+                    }
+                    if = {
+                        limit = {
+                            has_country_flag = level_0_u_wing_active
+                            check_variable = {global.market_starfighter_holder@0 > 0}
+                        }
+                        add_equipment_to_stockpile = {
+                            producer = EMP
+                            type = u_wing_airframe_0
+                            amount = 100
+                            variant_name = "U Wing V1"
+                        }
+                    }else_if = {
+                        limit = {
+                            has_country_flag = level_1_u_wing_active
+                            check_variable = {global.market_starfighter_holder@1 > 0}
+                        }
+                        add_equipment_to_stockpile = {
+                            producer = emp
+                            type = u_wing_airframe_1
+                            amount = 100
+                            variant_name = "U Wing V2"
+                        }
+                    }
+                }else = {
+                    if = {
+                        limit = {
+                            has_country_flag = level_0_u_wing_active
+                            check_variable = {global.market_starfighter_holder@0 > 0}
+                        }
+                        add_equipment_to_stockpile = {
+                            producer = var:global.u_wing_holder
+                            type = u_wing_airframe_0
+                            amount = 100
+                            variant_name = "U Wing V1"
+                        }
+                    }else_if = {
+                        limit = {
+                            has_country_flag = level_1_u_wing_active
+                            check_variable = {global.market_starfighter_holder@1 > 0}
+                        }
+                        add_equipment_to_stockpile = {
+                            producer = emp
+                            type = u_wing_airframe_1
+                            amount = 100
+                            variant_name = "U Wing V2"
+                        }
+                    }
+                }
+            }
+            product_auto_buy_u_wing = {
+                set_country_flag = auto_buy_enabled_u_wing
+            }
+            level_0_u_wing = {
+                set_country_flag = level_0_u_wing_active
+            }
+            level_1_u_wing = {
+                set_country_flag = level_1_u_wing_active
+            }
+        }
+        triggers = {
+            product_price_u_wing_visible = {
+                has_country_flag = level_0_u_wing_active
+            }
+            product_price_level_2_u_wing_visible = {
+                has_country_flag = level_1_u_wing_active
+            }
+            level_0_u_wing_click_enabled = {
+                NOT = {
+                    has_country_flag = level_0_u_wing_active
+                }
+            }
+            level_1_u_wing_click_enabled = {
+                NOT = {
+                    has_country_flag = level_1_u_wing_active
+                }
+            }
+        }
+    }
     Marketplace_buying_fighters_imperial_menu = {
         context_type = player_context
         window_name = "Marketplace_buying_fighters_imperial_menu"
@@ -1991,6 +2149,7 @@ scripted_gui = {
         visible = {
             has_country_flag = imperial_market_open
             has_country_flag = starfighters_buying_market_open
+            has_country_flag = open_first_tab_lazy
         }
         effects = {
             product_buy_one_tie_dagger = {
@@ -2708,6 +2867,52 @@ scripted_gui = {
             }
         }
     }
+    Marketplace_buying_fighters_2_imperial_menu = {
+        context_type = player_context
+        window_name = "Marketplace_buying_fighters_2_imperial_menu"
+        parent_window_name = "Marketplace_buying_menu"
+        visible = {
+            has_country_flag = imperial_market_open
+            has_country_flag = starfighters_buying_market_open
+            has_country_flag = open_second_tab_lazy
+        }
+        effects = {
+            product_buy_one_tie_silencer = {
+                if = {
+                    limit = {
+                        check_variable = {global.market_starfighter_holder@14 > 0}
+                    }
+                    if = {
+                        limit = {
+                            EMP = {
+                                NOT = {
+                                    has_country_flag = brought_out
+                                }
+                            }
+                        }
+                        add_equipment_to_stockpile = {
+                            producer = EMP
+                            type = tie_silencer_airframe_0
+                            amount = 100
+                            variant_name = "tie_silencer"
+                        }
+                    }else = {
+                        add_equipment_to_stockpile = {
+                            producer = var:global.tie_silencer_holder
+                            type = tie_silencer_airframe_0
+                            amount = 100
+                            variant_name = "tie_silencer"
+                        }
+                    }
+                }
+            }
+            product_auto_buy_tie_silencer = {
+                set_country_flag = auto_buy_enabled_tie_silencer
+            }
+        }
+        triggers = {
+        }
+    }
     Marketplace_buying_fighters_neutral_menu = {
         context_type = player_context
         window_name = "Marketplace_buying_fighters_neutral_menu"
@@ -2720,13 +2925,14 @@ scripted_gui = {
             
         }
     }
-    Marketplace_buying_tanks_republic_menu = {
+    Marketplace_buying_ground_1_republic_menu = {
         context_type = player_context
         window_name = "Marketplace_buying_tanks_republic_menu"
         parent_window_name = "Marketplace_buying_menu"
         visible = {
             has_country_flag = republic_market_open
-            has_country_flag = tank_buying_market_open
+            has_country_flag = open_market_ground_forces
+            has_country_flag = open_first_tab_lazy
         }
         effects = {
             product_buy_one_t3_b = {
@@ -3131,78 +3337,6 @@ scripted_gui = {
             level_1_combat_speeder = {
                 set_country_flag = level_1_combat_speeder_active
             }
-            product_buy_one_flash_speeder = {
-                if = {
-                    limit = {
-                        check_variable = {global.market_tank_holder@0 > 0}
-                    }
-                    if = {
-                        limit = {
-                            EMP = {
-                                NOT = {
-                                    has_country_flag = brought_out
-                                }
-                            }
-                        }
-                        if = {
-                            limit = {
-                                has_country_flag = level_0_flash_speeder_active
-                                check_variable = {global.market_tank_holder@12 > 0}
-                            }
-                            add_equipment_to_stockpile = {
-                                producer = EMP
-                                type = flash_speeder_chassis_0
-                                amount = 100
-                                variant_name = "flash_speeder V1"
-                            }
-                        }else_if = {
-                            limit = {
-                                has_country_flag = level_1_flash_speeder_active
-                                check_variable = {global.market_tank_holder@13 > 0}
-                            }
-                            add_equipment_to_stockpile = {
-                                producer = emp
-                                type = flash_speeder_chassis_1
-                                amount = 100
-                                variant_name = "flash_speeder V2"
-                            }
-                        }
-                    }else = {
-                        if = {
-                            limit = {
-                                has_country_flag = level_0_flash_speeder_active
-                                check_variable = {global.market_tank_holder@12 > 0}
-                            }
-                            add_equipment_to_stockpile = {
-                                producer = var:global.flash_speeder_holder
-                                type = flash_speeder_chassis_0
-                                amount = 100
-                                variant_name = "flash_speeder V1"
-                            }
-                        }else_if = {
-                            limit = {
-                                has_country_flag = level_1_flash_speeder_active
-                                check_variable = {global.market_tank_holder@13 > 0}
-                            }
-                            add_equipment_to_stockpile = {
-                                producer = emp
-                                type = flash_speeder_chassis_1
-                                amount = 100
-                                variant_name = "flash_speeder V2"
-                            }
-                        }
-                    }
-                }
-            }
-            product_auto_buy_flash_speeder = {
-                set_country_flag = auto_buy_enabled_flash_speeder
-            }
-            level_0_flash_speeder = {
-                set_country_flag = level_0_flash_speeder_active
-            }
-            level_1_flash_speeder = {
-                set_country_flag = level_1_flash_speeder_active
-            }
         }
         triggers = {
             product_price_t3_b_visible = {
@@ -3240,12 +3374,6 @@ scripted_gui = {
             }
             product_price_level_2_combat_speeder_visible = {
                 has_country_flag = level_1_combat_speeder_active
-            }
-            product_price_flash_speeder_visible = {
-                has_country_flag = level_0_flash_speeder_active
-            }
-            product_price_level_2_flash_speeder_visible = {
-                has_country_flag = level_1_flash_speeder_active
             }
             level_0_t3_b_click_enabled = {
                 NOT = {
@@ -3307,6 +3435,498 @@ scripted_gui = {
                     has_country_flag = level_1_combat_speeder_active
                 }
             }
+        }
+    }
+    Marketplace_buying_ground_2_republic_menu = {
+        context_type = player_context
+        window_name = "Marketplace_buying_soft_republic_menu"
+        parent_window_name = "Marketplace_buying_menu"
+        visible = {
+            has_country_flag = republic_market_open
+            has_country_flag = open_market_ground_forces
+            has_country_flag = open_second_tab_lazy
+        }
+        effects = {
+            product_buy_one_flash_speeder = {
+                if = {
+                    limit = {
+                        EMP = {
+                            NOT = {
+                                has_country_flag = brought_out
+                            }
+                        }
+                    }
+                    if = {
+                        limit = {
+                            has_country_flag = level_0_flash_speeder_active
+                            check_variable = {global.market_tank_holder@12 > 0}
+                        }
+                        add_equipment_to_stockpile = {
+                            producer = EMP
+                            type = flash_speeder_chassis_0
+                            amount = 100
+                            variant_name = "flash_speeder V1"
+                        }
+                    }else_if = {
+                        limit = {
+                            has_country_flag = level_1_flash_speeder_active
+                            check_variable = {global.market_tank_holder@13 > 0}
+                        }
+                        add_equipment_to_stockpile = {
+                            producer = emp
+                            type = flash_speeder_chassis_1
+                            amount = 100
+                            variant_name = "flash_speeder V2"
+                        }
+                    }
+                }else = {
+                    if = {
+                        limit = {
+                            has_country_flag = level_0_flash_speeder_active
+                            check_variable = {global.market_tank_holder@12 > 0}
+                        }
+                        add_equipment_to_stockpile = {
+                            producer = var:global.flash_speeder_holder
+                            type = flash_speeder_chassis_0
+                            amount = 100
+                            variant_name = "flash_speeder V1"
+                        }
+                    }else_if = {
+                        limit = {
+                            has_country_flag = level_1_flash_speeder_active
+                            check_variable = {global.market_tank_holder@13 > 0}
+                        }
+                        add_equipment_to_stockpile = {
+                            producer = emp
+                            type = flash_speeder_chassis_1
+                            amount = 100
+                            variant_name = "flash_speeder V2"
+                        }
+                    }
+                }
+            }
+            product_auto_buy_flash_speeder = {
+                set_country_flag = auto_buy_enabled_flash_speeder
+            }
+            level_0_flash_speeder = {
+                set_country_flag = level_0_flash_speeder_active
+            }
+            level_1_flash_speeder = {
+                set_country_flag = level_1_flash_speeder_active
+            }
+            product_buy_one_freedom_one_blaster = {
+                if = {
+                    limit = {
+                        EMP = {
+                            NOT = {
+                                has_country_flag = brought_out
+                            }
+                        }
+                    }
+                    if = {
+                        limit = {
+                            has_country_flag = level_0_freedom_one_blaster_active
+                            check_variable = {global.soft_market_ic_cost_holder@15 > 0}
+                        }
+                        add_equipment_to_stockpile = {
+                            producer = EMP
+                            type = infantry_equipment_0
+                            amount = 100
+                        }
+                    }else_if = {
+                        limit = {
+                            has_country_flag = level_1_freedom_one_blaster_active
+                            check_variable = {global.soft_market_ic_cost_holder@16 > 0}
+                        }
+                        add_equipment_to_stockpile = {
+                            producer = emp
+                            type = infantry_equipment_1
+                            amount = 100
+                        }
+                    }else_if = {
+                        limit = {
+                            has_country_flag = level_2_freedom_one_blaster_active
+                            check_variable = {global.soft_market_ic_cost_holder@17 > 0}
+                        }
+                        add_equipment_to_stockpile = {
+                            producer = emp
+                            type = infantry_equipment_2
+                            amount = 100
+                        }
+                    }
+                    else_if = {
+                        limit = {
+                            has_country_flag = level_3_freedom_one_blaster_active
+                            check_variable = {global.soft_market_ic_cost_holder@18 > 0}
+                        }
+                        add_equipment_to_stockpile = {
+                            producer = emp
+                            type = infantry_equipment_3
+                            amount = 100
+                        }
+                    }
+                }else = {
+                    if = {
+                        limit = {
+                            has_country_flag = level_0_freedom_one_blaster_active
+                            check_variable = {global.soft_market_ic_cost_holder@15 > 0}
+                        }
+                        add_equipment_to_stockpile = {
+                            producer = var:global.freedom_one_blaster_holder
+                            type = infantry_equipment_0
+                            amount = 100
+                        }
+                    }else_if = {
+                        limit = {
+                            has_country_flag = level_1_freedom_one_blaster_active
+                            check_variable = {global.soft_market_ic_cost_holder@16 > 0}
+                        }
+                        add_equipment_to_stockpile = {
+                            producer = emp
+                            type = infantry_equipment_1
+                            amount = 100
+                        }
+                    }else_if = {
+                        limit = {
+                            has_country_flag = level_2_freedom_one_blaster_active
+                            check_variable = {global.soft_market_ic_cost_holder@17 > 0}
+                        }
+                        add_equipment_to_stockpile = {
+                            producer = emp
+                            type = infantry_equipment_2
+                            amount = 100
+                        }
+                    }else_if = {
+                        limit = {
+                            has_country_flag = level_3_freedom_one_blaster_active
+                            check_variable = {global.soft_market_ic_cost_holder@18 > 0}
+                        }
+                        add_equipment_to_stockpile = {
+                            producer = emp
+                            type = infantry_equipment_3
+                            amount = 100
+                        }
+                    }
+                }
+            }
+            product_auto_buy_freedom_one_blaster = {
+                set_country_flag = auto_buy_enabled_freedom_one_blaster
+            }
+            level_0_freedom_one_blaster = {
+                set_country_flag = level_0_freedom_one_blaster_active
+            }
+            level_1_freedom_one_blaster = {
+                set_country_flag = level_1_freedom_one_blaster_active
+            }
+            level_2_freedom_one_blaster = {
+                set_country_flag = level_2_freedom_one_blaster_active
+            }
+            level_3_freedom_one_blaster = {
+                set_country_flag = level_3_freedom_one_blaster_active
+            }
+            product_buy_one_A280_blaster = {
+                if = {
+                    limit = {
+                        EMP = {
+                            NOT = {
+                                has_country_flag = brought_out
+                            }
+                        }
+                    }
+                    if = {
+                        limit = {
+                            has_country_flag = level_0_A280_blaster_active
+                            check_variable = {global.soft_market_ic_cost_holder@19 > 0}
+                        }
+                        add_equipment_to_stockpile = {
+                            producer = EMP
+                            type = cheap_blaster_0
+                            amount = 100
+                        }
+                    }else_if = {
+                        limit = {
+                            has_country_flag = level_1_A280_blaster_active
+                            check_variable = {global.soft_market_ic_cost_holder@20 > 0}
+                        }
+                        add_equipment_to_stockpile = {
+                            producer = emp
+                            type = cheap_blaster_1
+                            amount = 100
+                        }
+                    }else_if = {
+                        limit = {
+                            has_country_flag = level_2_A280_blaster_active
+                            check_variable = {global.soft_market_ic_cost_holder@21 > 0}
+                        }
+                        add_equipment_to_stockpile = {
+                            producer = emp
+                            type = cheap_blaster_2
+                            amount = 100
+                        }
+                    }
+                }else = {
+                    if = {
+                        limit = {
+                            has_country_flag = level_0_A280_blaster_active
+                            check_variable = {global.soft_market_ic_cost_holder@19 > 0}
+                        }
+                        add_equipment_to_stockpile = {
+                            producer = var:global.A280_blaster_holder
+                            type = cheap_blaster_0
+                            amount = 100
+                        }
+                    }else_if = {
+                        limit = {
+                            has_country_flag = level_1_A280_blaster_active
+                            check_variable = {global.soft_market_ic_cost_holder@20 > 0}
+                        }
+                        add_equipment_to_stockpile = {
+                            producer = emp
+                            type = cheap_blaster_1
+                            amount = 100
+                        }
+                    }else_if = {
+                        limit = {
+                            has_country_flag = level_2_A280_blaster_active
+                            check_variable = {global.soft_market_ic_cost_holder@21 > 0}
+                        }
+                        add_equipment_to_stockpile = {
+                            producer = emp
+                            type = cheap_blaster_2
+                            amount = 100
+                        }
+                    }
+                }
+            }
+            product_auto_buy_A280_blaster = {
+                set_country_flag = auto_buy_enabled_A280_blaster
+            }
+            level_0_A280_blaster = {
+                set_country_flag = level_0_A280_blaster_active
+            }
+            level_1_A280_blaster = {
+                set_country_flag = level_1_A280_blaster_active
+            }
+            level_2_A280_blaster = {
+                set_country_flag = level_2_A280_blaster_active
+            }
+            product_buy_one_HH-12 = {
+                if = {
+                    limit = {
+                        EMP = {
+                            NOT = {
+                                has_country_flag = brought_out
+                            }
+                        }
+                    }
+                    if = {
+                        limit = {
+                            has_country_flag = level_0_HH-12_active
+                            check_variable = {global.soft_market_ic_cost_holder@22 > 0}
+                        }
+                        add_equipment_to_stockpile = {
+                            producer = EMP
+                            type = anti_tank_equipment_1
+                            amount = 100
+                        }
+                    }else_if = {
+                        limit = {
+                            has_country_flag = level_1_HH-12_active
+                            check_variable = {global.soft_market_ic_cost_holder@23 > 0}
+                        }
+                        add_equipment_to_stockpile = {
+                            producer = emp
+                            type = anti_tank_equipment_2
+                            amount = 100
+                        }
+                    }else_if = {
+                        limit = {
+                            has_country_flag = level_2_HH-12_active
+                            check_variable = {global.soft_market_ic_cost_holder@24 > 0}
+                        }
+                        add_equipment_to_stockpile = {
+                            producer = emp
+                            type = anti_tank_equipment_3
+                            amount = 100
+                        }
+                    }
+                }else = {
+                    if = {
+                        limit = {
+                            has_country_flag = level_0_HH-12_active
+                            check_variable = {global.soft_market_ic_cost_holder@22 > 0}
+                        }
+                        add_equipment_to_stockpile = {
+                            producer = var:global.HH-12_holder
+                            type = anti_tank_equipment_1
+                            amount = 100
+                        }
+                    }else_if = {
+                        limit = {
+                            has_country_flag = level_1_HH-12_active
+                            check_variable = {global.soft_market_ic_cost_holder@23 > 0}
+                        }
+                        add_equipment_to_stockpile = {
+                            producer = emp
+                            type = anti_tank_equipment_2
+                            amount = 100
+                        }
+                    }else_if = {
+                        limit = {
+                            has_country_flag = level_2_HH-12_active
+                            check_variable = {global.soft_market_ic_cost_holder@24 > 0}
+                        }
+                        add_equipment_to_stockpile = {
+                            producer = emp
+                            type = anti_tank_equipment_3
+                            amount = 100
+                        }
+                    }
+                }
+            }
+            product_auto_buy_HH-12 = {
+                set_country_flag = auto_buy_enabled_HH-12
+            }
+            level_0_HH-12 = {
+                set_country_flag = level_0_HH-12_active
+            }
+            level_1_HH-12 = {
+                set_country_flag = level_1_HH-12_active
+            }
+            level_2_HH-12 = {
+                set_country_flag = level_2_HH-12_active
+            }
+            product_buy_one_T1-S = {
+                if = {
+                    limit = {
+                        EMP = {
+                            NOT = {
+                                has_country_flag = brought_out
+                            }
+                        }
+                    }
+                    if = {
+                        limit = {
+                            has_country_flag = level_0_T1-S_active
+                            check_variable = {global.soft_market_ic_cost_holder@25 > 0}
+                        }
+                        add_equipment_to_stockpile = {
+                            producer = EMP
+                            type = motorized_equipment_1
+                            amount = 100
+                        }
+                    }
+                }else = {
+                    if = {
+                        limit = {
+                            has_country_flag = level_0_T1-S_active
+                            check_variable = {global.soft_market_ic_cost_holder@25 > 0}
+                        }
+                        add_equipment_to_stockpile = {
+                            producer = var:global.T1-S_holder
+                            type = motorized_equipment_1
+                            amount = 100
+                        }
+                    }
+                }
+            }
+            product_auto_buy_T1-S = {
+                set_country_flag = auto_buy_enabled_T1-S
+            }
+            product_buy_one_MPTL-2a = {
+                if = {
+                    limit = {
+                        EMP = {
+                            NOT = {
+                                has_country_flag = brought_out
+                            }
+                        }
+                    }
+                    if = {
+                        limit = {
+                            has_country_flag = level_0_MPTL-2a_active
+                            check_variable = {global.soft_market_ic_cost_holder@26 > 0}
+                        }
+                        add_equipment_to_stockpile = {
+                            producer = EMP
+                            type = artillery_equipment_1
+                            amount = 100
+                        }
+                    }else_if = {
+                        limit = {
+                            has_country_flag = level_1_MPTL-2a_active
+                            check_variable = {global.soft_market_ic_cost_holder@27 > 0}
+                        }
+                        add_equipment_to_stockpile = {
+                            producer = emp
+                            type = artillery_equipment_2
+                            amount = 100
+                        }
+                    }else_if = {
+                        limit = {
+                            has_country_flag = level_2_MPTL-2a_active
+                            check_variable = {global.soft_market_ic_cost_holder@28 > 0}
+                        }
+                        add_equipment_to_stockpile = {
+                            producer = emp
+                            type = artillery_equipment_3
+                            amount = 100
+                        }
+                    }
+                }else = {
+                    if = {
+                        limit = {
+                            has_country_flag = level_0_MPTL-2a_active
+                            check_variable = {global.soft_market_ic_cost_holder@26 > 0}
+                        }
+                        add_equipment_to_stockpile = {
+                            producer = var:global.MPTL-2a_holder
+                            type = artillery_equipment_1
+                            amount = 100
+                        }
+                    }else_if = {
+                        limit = {
+                            has_country_flag = level_1_MPTL-2a_active
+                            check_variable = {global.soft_market_ic_cost_holder@27 > 0}
+                        }
+                        add_equipment_to_stockpile = {
+                            producer = emp
+                            type = artillery_equipment_2
+                            amount = 100
+                        }
+                    }else_if = {
+                        limit = {
+                            has_country_flag = level_2_MPTL-2a_active
+                            check_variable = {global.soft_market_ic_cost_holder@28 > 0}
+                        }
+                        add_equipment_to_stockpile = {
+                            producer = emp
+                            type = artillery_equipment_3
+                            amount = 100
+                        }
+                    }
+                }
+            }
+            product_auto_buy_MPTL-2a = {
+                set_country_flag = auto_buy_enabled_MPTL-2a
+            }
+            level_0_MPTL-2a = {
+                set_country_flag = level_0_MPTL-2a_active
+            }
+            level_1_MPTL-2a = {
+                set_country_flag = level_1_MPTL-2a_active
+            }
+            level_2_MPTL-2a = {
+                set_country_flag = level_2_MPTL-2a_active
+            }
+        }
+        triggers = {
+            product_price_flash_speeder_visible = {
+                has_country_flag = level_0_flash_speeder_active
+            }
+            product_price_level_2_flash_speeder_visible = {
+                has_country_flag = level_1_flash_speeder_active
+            }
             level_0_flash_speeder_click_enabled = {
                 NOT = {
                     has_country_flag = level_0_flash_speeder_active
@@ -3317,15 +3937,171 @@ scripted_gui = {
                     has_country_flag = level_1_flash_speeder_active
                 }
             }
+            product_price_freedom_one_blaster_visible = {
+                has_country_flag = level_0_freedom_one_blaster_active
+            }
+            product_price_level_2_freedom_one_blaster_visible = {
+                has_country_flag = level_1_freedom_one_blaster_active
+            }
+            product_price_level_3_freedom_one_blaster_visible = {
+                has_country_flag = level_2_freedom_one_blaster_active
+            }
+            product_price_level_4_freedom_one_blaster_visible = {
+                has_country_flag = level_3_freedom_one_blaster_active
+            }
+            product_price_A280_blaster_visible = {
+                has_country_flag = level_0_A280_blaster_active
+            }
+            product_price_level_2_A280_blaster_visible = {
+                has_country_flag = level_1_A280_blaster_active
+            }
+            product_price_level_3_A280_blaster_visible = {
+                has_country_flag = level_2_A280_blaster_active
+            }
+            product_price_MPTL-2a_visible = {
+                has_country_flag = level_0_MPTL-2a_active
+            }
+            product_price_level_2_MPTL-2a_visible = {
+                has_country_flag = level_1_MPTL-2a_active
+            }
+            product_price_level_3_MPTL-2a_visible = {
+                has_country_flag = level_2_MPTL-2a_active
+            }
+            level_0_freedom_one_blaster_click_enabled = {
+                NOT = {
+                    has_country_flag = level_0_freedom_one_blaster_active
+                }
+            }
+            level_1_freedom_one_blaster_click_enabled = {
+                NOT = {
+                    has_country_flag = level_1_freedom_one_blaster_active
+                }
+            }
+            level_2_freedom_one_blaster_click_enabled = {
+                NOT = {
+                    has_country_flag = level_2_freedom_one_blaster_active
+                }
+            }
+            level_3_freedom_one_blaster_click_enabled = {
+                NOT = {
+                    has_country_flag = level_3_freedom_one_blaster_active
+                }
+            }
+            level_0_A280_blaster_click_enabled = {
+                NOT = {
+                    has_country_flag = level_0_A280_blaster_active
+                }
+            }
+            level_1_A280_blaster_click_enabled = {
+                NOT = {
+                    has_country_flag = level_1_A280_blaster_active
+                }
+            }
+            level_2_A280_blaster_click_enabled = {
+                NOT = {
+                    has_country_flag = level_2_A280_blaster_active
+                }
+            }
+            level_2_HH-12_click_enabled = {
+                NOT = {
+                    has_country_flag = level_2_HH-12_active
+                }
+            }
+            level_0_MPTL-2a_click_enabled = {
+                NOT = {
+                    has_country_flag = level_0_MPTL-2a_active
+                }
+            }
+            level_1_MPTL-2a_click_enabled = {
+                NOT = {
+                    has_country_flag = level_1_MPTL-2a_active
+                }
+            }
+            level_2_MPTL-2a_click_enabled = {
+                NOT = {
+                    has_country_flag = level_2_MPTL-2a_active
+                }
+            }
+            level_0_HH-12_click_enabled = {
+                NOT = {
+                    has_country_flag = level_0_HH-12_active
+                }
+            }
+            level_1_HH-12_click_enabled = {
+                NOT = {
+                    has_country_flag = level_1_HH-12_active
+                }
+            }
+            product_price_HH-12_visible = {
+                has_country_flag = level_0_HH-12_active
+            }
+            product_price_level_2_HH-12_visible = {
+                has_country_flag = level_1_HH-12_active
+            }
+            product_price_level_3_HH-12_visible = {
+                has_country_flag = level_2_HH-12_active
+            }
         }
     }
-    Marketplace_buying_tanks_imperial_menu = {
+    Marketplace_buying_ground_3_republic_menu = {
+        context_type = player_context
+        window_name = "Marketplace_buying_soft_republic_menu"
+        parent_window_name = "Marketplace_buying_menu"
+        visible = {
+            has_country_flag = republic_market_open
+            has_country_flag = open_market_ground_forces
+            has_country_flag = open_third_tab_lazy
+        }
+        effects = {
+            product_buy_one_republic_supply_equipment = {
+                if = {
+                    limit = {
+                        EMP = {
+                            NOT = {
+                                has_country_flag = brought_out
+                            }
+                        }
+                    }
+                    if = {
+                        limit = {
+                            has_country_flag = level_0_republic_supply_equipment_active
+                            check_variable = {global.soft_market_ic_cost_holder@29 > 0}
+                        }
+                        add_equipment_to_stockpile = {
+                            producer = EMP
+                            type = support_equipment_1
+                            amount = 100
+                        }
+                    }
+                }else = {
+                    if = {
+                        limit = {
+                            has_country_flag = level_0_republic_supply_equipment_active
+                            check_variable = {global.soft_market_ic_cost_holder@29 > 0}
+                        }
+                        add_equipment_to_stockpile = {
+                            producer = var:global.republic_supply_equipment_holder
+                            type = republic_supply_equipment_0
+                            amount = 100
+                        }
+                    }
+                }
+            }
+            product_auto_buy_republic_supply_equipment = {
+                set_country_flag = auto_buy_enabled_republic_supply_equipment
+            }
+        }
+        triggers = {
+        }
+    }
+    Marketplace_buying_ground_1_imperial_menu = {
         context_type = player_context
         window_name = "Marketplace_buying_tanks_imperial_menu"
         parent_window_name = "Marketplace_buying_menu"
         visible = {
             has_country_flag = imperial_market_open
-            has_country_flag = tank_buying_market_open
+            has_country_flag = open_market_ground_forces
+            has_country_flag = open_first_tab_lazy
         }
         effects = {
             product_buy_one_at_at = {
@@ -3730,6 +4506,116 @@ scripted_gui = {
             level_1_at_dp = {
                 set_country_flag = level_1_at_dp_active
             }
+        }
+        triggers = {
+            product_price_at_at_visible = {
+                has_country_flag = level_0_at_at_active
+            }
+            product_price_level_2_at_at_visible = {
+                has_country_flag = level_1_at_at_active
+            }
+            product_price_at_aa_visible = {
+                has_country_flag = level_0_at_aa_active
+            }
+            product_price_level_2_at_aa_visible = {
+                has_country_flag = level_1_at_aa_active
+            }
+            product_price_juggernaut_visible = {
+                has_country_flag = level_0_juggernaut_active
+            }
+            product_price_level_2_juggernaut_visible = {
+                has_country_flag = level_1_juggernaut_active
+            }
+            product_price_at_st_visible = {
+                has_country_flag = level_0_at_st_active
+            }
+            product_price_level_2_at_st_visible = {
+                has_country_flag = level_1_at_st_active
+            }
+            product_price_tx_130T_visible = {
+                has_country_flag = level_0_tx_130T_active
+            }
+            product_price_level_2_tx_130T_visible = {
+                has_country_flag = level_1_tx_130T_active
+            }
+            product_price_at_dp_visible = {
+                has_country_flag = level_0_at_dp_active
+            }
+            product_price_level_2_at_dp_visible = {
+                has_country_flag = level_1_at_dp_active
+            }
+            level_0_at_at_click_enabled = {
+                NOT = {
+                    has_country_flag = level_0_at_at_active
+                }
+            }
+            level_1_at_at_click_enabled = {
+                NOT = {
+                    has_country_flag = level_1_at_at_active
+                }
+            }
+            level_0_at_aa_click_enabled = {
+                NOT = {
+                    has_country_flag = level_0_at_aa_active
+                }
+            }
+            level_1_at_aa_click_enabled = {
+                NOT = {
+                    has_country_flag = level_1_at_aa_active
+                }
+            }
+            level_0_juggernaut_click_enabled = {
+                NOT = {
+                    has_country_flag = level_0_juggernaut_active
+                }
+            }
+            level_1_juggernaut_click_enabled = {
+                NOT = {
+                    has_country_flag = level_1_juggernaut_active
+                }
+            }
+            level_0_at_st_click_enabled = {
+                NOT = {
+                    has_country_flag = level_0_at_st_active
+                }
+            }
+            level_1_at_st_click_enabled = {
+                NOT = {
+                    has_country_flag = level_1_at_st_active
+                }
+            }
+            level_0_tx_130T_click_enabled = {
+                NOT = {
+                    has_country_flag = level_0_tx_130T_active
+                }
+            }
+            level_1_tx_130T_click_enabled = {
+                NOT = {
+                    has_country_flag = level_1_tx_130T_active
+                }
+            }
+            level_0_at_dp_click_enabled = {
+                NOT = {
+                    has_country_flag = level_0_at_dp_active
+                }
+            }
+            level_1_at_dp_click_enabled = {
+                NOT = {
+                    has_country_flag = level_1_at_dp_active
+                }
+            }
+        }
+    }
+    Marketplace_buying_ground_2_imperial_menu = {
+        context_type = player_context
+        window_name = "Marketplace_buying_soft_imperial_menu"
+        parent_window_name = "Marketplace_buying_menu"
+        visible = {
+            has_country_flag = imperial_market_open
+            has_country_flag = open_market_ground_forces
+            has_country_flag = open_second_tab_lazy
+        }
+        effects = {
             product_buy_one_tie_crawler = {
                 if = {
                     limit = {
@@ -3797,131 +4683,6 @@ scripted_gui = {
             level_1_tie_crawler = {
                 set_country_flag = level_1_tie_crawler_active
             }
-        }
-        triggers = {
-            product_price_at_at_visible = {
-                has_country_flag = level_0_at_at_active
-            }
-            product_price_level_2_at_at_visible = {
-                has_country_flag = level_1_at_at_active
-            }
-            product_price_at_aa_visible = {
-                has_country_flag = level_0_at_aa_active
-            }
-            product_price_level_2_at_aa_visible = {
-                has_country_flag = level_1_at_aa_active
-            }
-            product_price_juggernaut_visible = {
-                has_country_flag = level_0_juggernaut_active
-            }
-            product_price_level_2_juggernaut_visible = {
-                has_country_flag = level_1_juggernaut_active
-            }
-            product_price_at_st_visible = {
-                has_country_flag = level_0_at_st_active
-            }
-            product_price_level_2_at_st_visible = {
-                has_country_flag = level_1_at_st_active
-            }
-            product_price_tx_130T_visible = {
-                has_country_flag = level_0_tx_130T_active
-            }
-            product_price_level_2_tx_130T_visible = {
-                has_country_flag = level_1_tx_130T_active
-            }
-            product_price_at_dp_visible = {
-                has_country_flag = level_0_at_dp_active
-            }
-            product_price_level_2_at_dp_visible = {
-                has_country_flag = level_1_at_dp_active
-            }
-            product_price_tie_crawler_visible = {
-                has_country_flag = level_0_tie_crawler_active
-            }
-            product_price_level_2_tie_crawler_visible = {
-                has_country_flag = level_1_tie_crawler_active
-            }
-            level_0_at_at_click_enabled = {
-                NOT = {
-                    has_country_flag = level_0_at_at_active
-                }
-            }
-            level_1_at_at_click_enabled = {
-                NOT = {
-                    has_country_flag = level_1_at_at_active
-                }
-            }
-            level_0_at_aa_click_enabled = {
-                NOT = {
-                    has_country_flag = level_0_at_aa_active
-                }
-            }
-            level_1_at_aa_click_enabled = {
-                NOT = {
-                    has_country_flag = level_1_at_aa_active
-                }
-            }
-            level_0_juggernaut_click_enabled = {
-                NOT = {
-                    has_country_flag = level_0_juggernaut_active
-                }
-            }
-            level_1_juggernaut_click_enabled = {
-                NOT = {
-                    has_country_flag = level_1_juggernaut_active
-                }
-            }
-            level_0_at_st_click_enabled = {
-                NOT = {
-                    has_country_flag = level_0_at_st_active
-                }
-            }
-            level_1_at_st_click_enabled = {
-                NOT = {
-                    has_country_flag = level_1_at_st_active
-                }
-            }
-            level_0_tx_130T_click_enabled = {
-                NOT = {
-                    has_country_flag = level_0_tx_130T_active
-                }
-            }
-            level_1_tx_130T_click_enabled = {
-                NOT = {
-                    has_country_flag = level_1_tx_130T_active
-                }
-            }
-            level_0_at_dp_click_enabled = {
-                NOT = {
-                    has_country_flag = level_0_at_dp_active
-                }
-            }
-            level_1_at_dp_click_enabled = {
-                NOT = {
-                    has_country_flag = level_1_at_dp_active
-                }
-            }
-            level_0_tie_crawler_click_enabled = {
-                NOT = {
-                    has_country_flag = level_0_tie_crawler_active
-                }
-            }
-            level_1_tie_crawler_click_enabled = {
-                NOT = {
-                    has_country_flag = level_1_tie_crawler_active
-                }
-            }
-        }
-    }
-    Marketplace_buying_soft_imperial_menu = {
-        context_type = player_context
-        window_name = "Marketplace_buying_soft_imperial_menu"
-        parent_window_name = "Marketplace_buying_menu"
-        visible = {
-            has_country_flag = imperial_market_open
-            has_country_flag = soft_buying_market_open
-        }
-        effects = {
             product_buy_one_E-11_blaster = {
                 if = {
                     limit = {
@@ -4332,45 +5093,24 @@ scripted_gui = {
             level_2_SPHA = {
                 set_country_flag = level_1_SPHA_active
             }
-            product_buy_one_imperial_supply_equipment = {
-                if = {
-                    limit = {
-                        EMP = {
-                            NOT = {
-                                has_country_flag = brought_out
-                            }
-                        }
-                    }
-                    if = {
-                        limit = {
-                            has_country_flag = level_0_imperial_supply_equipment_active
-                            check_variable = {global.soft_market_ic_cost_holder@14 > 0}
-                        }
-                        add_equipment_to_stockpile = {
-                            producer = EMP
-                            type = support_equipment_1
-                            amount = 100
-                        }
-                    }
-                }else = {
-                    if = {
-                        limit = {
-                            has_country_flag = level_0_imperial_supply_equipment_active
-                            check_variable = {global.soft_market_ic_cost_holder@14 > 0}
-                        }
-                        add_equipment_to_stockpile = {
-                            producer = var:global.imperial_supply_equipment_holder
-                            type = support_equipment_1
-                            amount = 100
-                        }
-                    }
-                }
-            }
-            product_auto_buy_imperial_supply_equipment = {
-                set_country_flag = auto_buy_enabled_imperial_supply_equipment
-            }
         }
         triggers = {
+            level_0_tie_crawler_click_enabled = {
+                NOT = {
+                    has_country_flag = level_0_tie_crawler_active
+                }
+            }
+            level_1_tie_crawler_click_enabled = {
+                NOT = {
+                    has_country_flag = level_1_tie_crawler_active
+                }
+            }
+            product_price_tie_crawler_visible = {
+                has_country_flag = level_0_tie_crawler_active
+            }
+            product_price_level_2_tie_crawler_visible = {
+                has_country_flag = level_1_tie_crawler_active
+            }
             product_price_E-11_blaster_visible = {
                 has_country_flag = level_0_E-11_blaster_active
             }
@@ -4477,16 +5217,17 @@ scripted_gui = {
             }
         }
     }
-    Marketplace_buying_soft_republic_menu = {
+    Marketplace_buying_ground_3_imperial_menu = {
         context_type = player_context
-        window_name = "Marketplace_buying_soft_republic_menu"
+        window_name = "Marketplace_buying_ground_3_imperial_menu"
         parent_window_name = "Marketplace_buying_menu"
         visible = {
-            has_country_flag = republic_market_open
-            has_country_flag = soft_buying_market_open
+            has_country_flag = imperial_market_open
+            has_country_flag = open_market_ground_forces
+            has_country_flag = open_third_tab_lazy
         }
         effects = {
-            product_buy_one_freedom_one_blaster = {
+            product_buy_one_imperial_supply_equipment = {
                 if = {
                     limit = {
                         EMP = {
@@ -4497,204 +5238,8 @@ scripted_gui = {
                     }
                     if = {
                         limit = {
-                            has_country_flag = level_0_freedom_one_blaster_active
-                            check_variable = {global.soft_market_ic_cost_holder@15 > 0}
-                        }
-                        add_equipment_to_stockpile = {
-                            producer = EMP
-                            type = infantry_equipment_0
-                            amount = 100
-                        }
-                    }else_if = {
-                        limit = {
-                            has_country_flag = level_1_freedom_one_blaster_active
-                            check_variable = {global.soft_market_ic_cost_holder@16 > 0}
-                        }
-                        add_equipment_to_stockpile = {
-                            producer = emp
-                            type = infantry_equipment_1
-                            amount = 100
-                        }
-                    }else_if = {
-                        limit = {
-                            has_country_flag = level_2_freedom_one_blaster_active
-                            check_variable = {global.soft_market_ic_cost_holder@17 > 0}
-                        }
-                        add_equipment_to_stockpile = {
-                            producer = emp
-                            type = infantry_equipment_2
-                            amount = 100
-                        }
-                    }
-                    else_if = {
-                        limit = {
-                            has_country_flag = level_3_freedom_one_blaster_active
-                            check_variable = {global.soft_market_ic_cost_holder@18 > 0}
-                        }
-                        add_equipment_to_stockpile = {
-                            producer = emp
-                            type = infantry_equipment_3
-                            amount = 100
-                        }
-                    }
-                }else = {
-                    if = {
-                        limit = {
-                            has_country_flag = level_0_freedom_one_blaster_active
-                            check_variable = {global.soft_market_ic_cost_holder@15 > 0}
-                        }
-                        add_equipment_to_stockpile = {
-                            producer = var:global.freedom_one_blaster_holder
-                            type = infantry_equipment_0
-                            amount = 100
-                        }
-                    }else_if = {
-                        limit = {
-                            has_country_flag = level_1_freedom_one_blaster_active
-                            check_variable = {global.soft_market_ic_cost_holder@16 > 0}
-                        }
-                        add_equipment_to_stockpile = {
-                            producer = emp
-                            type = infantry_equipment_1
-                            amount = 100
-                        }
-                    }else_if = {
-                        limit = {
-                            has_country_flag = level_2_freedom_one_blaster_active
-                            check_variable = {global.soft_market_ic_cost_holder@17 > 0}
-                        }
-                        add_equipment_to_stockpile = {
-                            producer = emp
-                            type = infantry_equipment_2
-                            amount = 100
-                        }
-                    }else_if = {
-                        limit = {
-                            has_country_flag = level_3_freedom_one_blaster_active
-                            check_variable = {global.soft_market_ic_cost_holder@18 > 0}
-                        }
-                        add_equipment_to_stockpile = {
-                            producer = emp
-                            type = infantry_equipment_3
-                            amount = 100
-                        }
-                    }
-                }
-            }
-            product_auto_buy_freedom_one_blaster = {
-                set_country_flag = auto_buy_enabled_freedom_one_blaster
-            }
-            level_0_freedom_one_blaster = {
-                set_country_flag = level_0_freedom_one_blaster_active
-            }
-            level_1_freedom_one_blaster = {
-                set_country_flag = level_1_freedom_one_blaster_active
-            }
-            level_2_freedom_one_blaster = {
-                set_country_flag = level_2_freedom_one_blaster_active
-            }
-            level_3_freedom_one_blaster = {
-                set_country_flag = level_3_freedom_one_blaster_active
-            }
-            product_buy_one_A280_blaster = {
-                if = {
-                    limit = {
-                        EMP = {
-                            NOT = {
-                                has_country_flag = brought_out
-                            }
-                        }
-                    }
-                    if = {
-                        limit = {
-                            has_country_flag = level_0_A280_blaster_active
-                            check_variable = {global.soft_market_ic_cost_holder@19 > 0}
-                        }
-                        add_equipment_to_stockpile = {
-                            producer = EMP
-                            type = cheap_blaster_0
-                            amount = 100
-                        }
-                    }else_if = {
-                        limit = {
-                            has_country_flag = level_1_A280_blaster_active
-                            check_variable = {global.soft_market_ic_cost_holder@20 > 0}
-                        }
-                        add_equipment_to_stockpile = {
-                            producer = emp
-                            type = cheap_blaster_1
-                            amount = 100
-                        }
-                    }else_if = {
-                        limit = {
-                            has_country_flag = level_2_A280_blaster_active
-                            check_variable = {global.soft_market_ic_cost_holder@21 > 0}
-                        }
-                        add_equipment_to_stockpile = {
-                            producer = emp
-                            type = cheap_blaster_2
-                            amount = 100
-                        }
-                    }
-                }else = {
-                    if = {
-                        limit = {
-                            has_country_flag = level_0_A280_blaster_active
-                            check_variable = {global.soft_market_ic_cost_holder@19 > 0}
-                        }
-                        add_equipment_to_stockpile = {
-                            producer = var:global.A280_blaster_holder
-                            type = cheap_blaster_0
-                            amount = 100
-                        }
-                    }else_if = {
-                        limit = {
-                            has_country_flag = level_1_A280_blaster_active
-                            check_variable = {global.soft_market_ic_cost_holder@20 > 0}
-                        }
-                        add_equipment_to_stockpile = {
-                            producer = emp
-                            type = cheap_blaster_1
-                            amount = 100
-                        }
-                    }else_if = {
-                        limit = {
-                            has_country_flag = level_2_A280_blaster_active
-                            check_variable = {global.soft_market_ic_cost_holder@21 > 0}
-                        }
-                        add_equipment_to_stockpile = {
-                            producer = emp
-                            type = cheap_blaster_2
-                            amount = 100
-                        }
-                    }
-                }
-            }
-            product_auto_buy_A280_blaster = {
-                set_country_flag = auto_buy_enabled_A280_blaster
-            }
-            level_0_A280_blaster = {
-                set_country_flag = level_0_A280_blaster_active
-            }
-            level_1_A280_blaster = {
-                set_country_flag = level_1_A280_blaster_active
-            }
-            level_2_A280_blaster = {
-                set_country_flag = level_2_A280_blaster_active
-            }
-            product_buy_one_republic_supply_equipment = {
-                if = {
-                    limit = {
-                        EMP = {
-                            NOT = {
-                                has_country_flag = brought_out
-                            }
-                        }
-                    }
-                    if = {
-                        limit = {
-                            has_country_flag = level_0_republic_supply_equipment_active
-                            check_variable = {global.soft_market_ic_cost_holder@29 > 0}
+                            has_country_flag = level_0_imperial_supply_equipment_active
+                            check_variable = {global.soft_market_ic_cost_holder@14 > 0}
                         }
                         add_equipment_to_stockpile = {
                             producer = EMP
@@ -4705,335 +5250,22 @@ scripted_gui = {
                 }else = {
                     if = {
                         limit = {
-                            has_country_flag = level_0_republic_supply_equipment_active
-                            check_variable = {global.soft_market_ic_cost_holder@29 > 0}
+                            has_country_flag = level_0_imperial_supply_equipment_active
+                            check_variable = {global.soft_market_ic_cost_holder@14 > 0}
                         }
                         add_equipment_to_stockpile = {
-                            producer = var:global.republic_supply_equipment_holder
-                            type = republic_supply_equipment_0
+                            producer = var:global.imperial_supply_equipment_holder
+                            type = support_equipment_1
                             amount = 100
                         }
                     }
                 }
             }
-            product_auto_buy_republic_supply_equipment = {
-                set_country_flag = auto_buy_enabled_republic_supply_equipment
-            }
-            product_buy_one_T1-S = {
-                if = {
-                    limit = {
-                        EMP = {
-                            NOT = {
-                                has_country_flag = brought_out
-                            }
-                        }
-                    }
-                    if = {
-                        limit = {
-                            has_country_flag = level_0_T1-S_active
-                            check_variable = {global.soft_market_ic_cost_holder@25 > 0}
-                        }
-                        add_equipment_to_stockpile = {
-                            producer = EMP
-                            type = motorized_equipment_1
-                            amount = 100
-                        }
-                    }
-                }else = {
-                    if = {
-                        limit = {
-                            has_country_flag = level_0_T1-S_active
-                            check_variable = {global.soft_market_ic_cost_holder@25 > 0}
-                        }
-                        add_equipment_to_stockpile = {
-                            producer = var:global.T1-S_holder
-                            type = motorized_equipment_1
-                            amount = 100
-                        }
-                    }
-                }
-            }
-            product_auto_buy_T1-S = {
-                set_country_flag = auto_buy_enabled_T1-S
-            }
-            product_buy_one_MPTL-2a = {
-                if = {
-                    limit = {
-                        EMP = {
-                            NOT = {
-                                has_country_flag = brought_out
-                            }
-                        }
-                    }
-                    if = {
-                        limit = {
-                            has_country_flag = level_0_MPTL-2a_active
-                            check_variable = {global.soft_market_ic_cost_holder@26 > 0}
-                        }
-                        add_equipment_to_stockpile = {
-                            producer = EMP
-                            type = artillery_equipment_1
-                            amount = 100
-                        }
-                    }else_if = {
-                        limit = {
-                            has_country_flag = level_1_MPTL-2a_active
-                            check_variable = {global.soft_market_ic_cost_holder@27 > 0}
-                        }
-                        add_equipment_to_stockpile = {
-                            producer = emp
-                            type = artillery_equipment_2
-                            amount = 100
-                        }
-                    }else_if = {
-                        limit = {
-                            has_country_flag = level_2_MPTL-2a_active
-                            check_variable = {global.soft_market_ic_cost_holder@28 > 0}
-                        }
-                        add_equipment_to_stockpile = {
-                            producer = emp
-                            type = artillery_equipment_3
-                            amount = 100
-                        }
-                    }
-                }else = {
-                    if = {
-                        limit = {
-                            has_country_flag = level_0_MPTL-2a_active
-                            check_variable = {global.soft_market_ic_cost_holder@26 > 0}
-                        }
-                        add_equipment_to_stockpile = {
-                            producer = var:global.MPTL-2a_holder
-                            type = artillery_equipment_1
-                            amount = 100
-                        }
-                    }else_if = {
-                        limit = {
-                            has_country_flag = level_1_MPTL-2a_active
-                            check_variable = {global.soft_market_ic_cost_holder@27 > 0}
-                        }
-                        add_equipment_to_stockpile = {
-                            producer = emp
-                            type = artillery_equipment_2
-                            amount = 100
-                        }
-                    }else_if = {
-                        limit = {
-                            has_country_flag = level_2_MPTL-2a_active
-                            check_variable = {global.soft_market_ic_cost_holder@28 > 0}
-                        }
-                        add_equipment_to_stockpile = {
-                            producer = emp
-                            type = artillery_equipment_3
-                            amount = 100
-                        }
-                    }
-                }
-            }
-            product_auto_buy_MPTL-2a = {
-                set_country_flag = auto_buy_enabled_MPTL-2a
-            }
-            level_0_MPTL-2a = {
-                set_country_flag = level_0_MPTL-2a_active
-            }
-            level_1_MPTL-2a = {
-                set_country_flag = level_1_MPTL-2a_active
-            }
-            level_2_MPTL-2a = {
-                set_country_flag = level_2_MPTL-2a_active
-            }
-            product_buy_one_HH-12 = {
-                if = {
-                    limit = {
-                        EMP = {
-                            NOT = {
-                                has_country_flag = brought_out
-                            }
-                        }
-                    }
-                    if = {
-                        limit = {
-                            has_country_flag = level_0_HH-12_active
-                            check_variable = {global.soft_market_ic_cost_holder@22 > 0}
-                        }
-                        add_equipment_to_stockpile = {
-                            producer = EMP
-                            type = anti_tank_equipment_1
-                            amount = 100
-                        }
-                    }else_if = {
-                        limit = {
-                            has_country_flag = level_1_HH-12_active
-                            check_variable = {global.soft_market_ic_cost_holder@23 > 0}
-                        }
-                        add_equipment_to_stockpile = {
-                            producer = emp
-                            type = anti_tank_equipment_2
-                            amount = 100
-                        }
-                    }else_if = {
-                        limit = {
-                            has_country_flag = level_2_HH-12_active
-                            check_variable = {global.soft_market_ic_cost_holder@24 > 0}
-                        }
-                        add_equipment_to_stockpile = {
-                            producer = emp
-                            type = anti_tank_equipment_3
-                            amount = 100
-                        }
-                    }
-                }else = {
-                    if = {
-                        limit = {
-                            has_country_flag = level_0_HH-12_active
-                            check_variable = {global.soft_market_ic_cost_holder@22 > 0}
-                        }
-                        add_equipment_to_stockpile = {
-                            producer = var:global.HH-12_holder
-                            type = anti_tank_equipment_1
-                            amount = 100
-                        }
-                    }else_if = {
-                        limit = {
-                            has_country_flag = level_1_HH-12_active
-                            check_variable = {global.soft_market_ic_cost_holder@23 > 0}
-                        }
-                        add_equipment_to_stockpile = {
-                            producer = emp
-                            type = anti_tank_equipment_2
-                            amount = 100
-                        }
-                    }else_if = {
-                        limit = {
-                            has_country_flag = level_2_HH-12_active
-                            check_variable = {global.soft_market_ic_cost_holder@24 > 0}
-                        }
-                        add_equipment_to_stockpile = {
-                            producer = emp
-                            type = anti_tank_equipment_3
-                            amount = 100
-                        }
-                    }
-                }
-            }
-            product_auto_buy_HH-12 = {
-                set_country_flag = auto_buy_enabled_HH-12
-            }
-            level_0_HH-12 = {
-                set_country_flag = level_0_HH-12_active
-            }
-            level_1_HH-12 = {
-                set_country_flag = level_1_HH-12_active
-            }
-            level_2_HH-12 = {
-                set_country_flag = level_2_HH-12_active
+            product_auto_buy_imperial_supply_equipment = {
+                set_country_flag = auto_buy_enabled_imperial_supply_equipment
             }
         }
         triggers = {
-            product_price_freedom_one_blaster_visible = {
-                has_country_flag = level_0_freedom_one_blaster_active
-            }
-            product_price_level_2_freedom_one_blaster_visible = {
-                has_country_flag = level_1_freedom_one_blaster_active
-            }
-            product_price_level_3_freedom_one_blaster_visible = {
-                has_country_flag = level_2_freedom_one_blaster_active
-            }
-            product_price_level_4_freedom_one_blaster_visible = {
-                has_country_flag = level_3_freedom_one_blaster_active
-            }
-            product_price_A280_blaster_visible = {
-                has_country_flag = level_0_A280_blaster_active
-            }
-            product_price_level_2_A280_blaster_visible = {
-                has_country_flag = level_1_A280_blaster_active
-            }
-            product_price_level_3_A280_blaster_visible = {
-                has_country_flag = level_2_A280_blaster_active
-            }
-            product_price_HH-12_visible = {
-                has_country_flag = level_0_HH-12_active
-            }
-            product_price_level_2_HH-12_visible = {
-                has_country_flag = level_1_HH-12_active
-            }
-            product_price_level_3_HH-12_visible = {
-                has_country_flag = level_2_HH-12_active
-            }
-            product_price_MPTL-2a_visible = {
-                has_country_flag = level_0_MPTL-2a_active
-            }
-            product_price_level_2_MPTL-2a_visible = {
-                has_country_flag = level_1_MPTL-2a_active
-            }
-            product_price_level_3_MPTL-2a_visible = {
-                has_country_flag = level_2_MPTL-2a_active
-            }
-            level_0_freedom_one_blaster_click_enabled = {
-                NOT = {
-                    has_country_flag = level_0_freedom_one_blaster_active
-                }
-            }
-            level_1_freedom_one_blaster_click_enabled = {
-                NOT = {
-                    has_country_flag = level_1_freedom_one_blaster_active
-                }
-            }
-            level_2_freedom_one_blaster_click_enabled = {
-                NOT = {
-                    has_country_flag = level_2_freedom_one_blaster_active
-                }
-            }
-            level_3_freedom_one_blaster_click_enabled = {
-                NOT = {
-                    has_country_flag = level_3_freedom_one_blaster_active
-                }
-            }
-            level_0_A280_blaster_click_enabled = {
-                NOT = {
-                    has_country_flag = level_0_A280_blaster_active
-                }
-            }
-            level_1_A280_blaster_click_enabled = {
-                NOT = {
-                    has_country_flag = level_1_A280_blaster_active
-                }
-            }
-            level_2_A280_blaster_click_enabled = {
-                NOT = {
-                    has_country_flag = level_2_A280_blaster_active
-                }
-            }
-            level_0_HH-12_click_enabled = {
-                NOT = {
-                    has_country_flag = level_0_HH-12_active
-                }
-            }
-            level_1_HH-12_click_enabled = {
-                NOT = {
-                    has_country_flag = level_1_HH-12_active
-                }
-            }
-            level_2_HH-12_click_enabled = {
-                NOT = {
-                    has_country_flag = level_2_HH-12_active
-                }
-            }
-            level_0_MPTL-2a_click_enabled = {
-                NOT = {
-                    has_country_flag = level_0_MPTL-2a_active
-                }
-            }
-            level_1_MPTL-2a_click_enabled = {
-                NOT = {
-                    has_country_flag = level_1_MPTL-2a_active
-                }
-            }
-            level_2_MPTL-2a_click_enabled = {
-                NOT = {
-                    has_country_flag = level_2_MPTL-2a_active
-                }
-            }
         }
     }
 }    ################################################################################## BUYING SHIPS END #########################################################################
