@@ -1,90 +1,91 @@
-scripted_gui = {
-	production_screen_selection = {
-		context_type = player_context
-		window_name = "production_screen_selection"
-		parent_window_name = countrytradeview
-		visible = {
-            always = yes
-		}
-		effects = {
-			production_open_click = {
-				set_country_flag = production_open
-			}
-			production_close_click = {
-				clr_country_flag = production_open
-			}
-		}
-		triggers = {
-			production_open_click_enabled = {
-				NOT = {
-					has_country_flag = production_open
-				}
-			}
-			production_close_click_enabled = {
-				has_country_flag = production_open
-			}
-		}
-	}
-	civilian_production_screen = {
-		context_type = player_context
-		window_name = "civilian_production_screen"
-		parent_window_name = countrytradeview
-		visible = {
-			has_country_flag = production_open
-		}
-		effects = {
-			market_button_click = {
-				if = {
-					limit = {
-						has_country_flag = markets_open
-					}
-					clr_country_flag = markets_open
-				}
-				else = {
-					set_country_flag = markets_open
-				}
-			}
-			more_factories_1_click = {
-				add_to_variable = { production_line_1_factories = 1 }
-				subtract_from_variable = { corp_factories_available = 1 }
-			}
-			less_factories_1_click = {
-				subtract_from_variable = { production_line_1_factories = 1 }
-				add_to_variable = { corp_factories_available = 1 }
-			}
-		}
-		triggers = {
-			more_factories_1_click_enabled = {
-				check_variable = { corp_factories_available > 0 }
-			}
-			less_factories_1_click_enabled = {
-				check_variable = { production_line_1_factories > 0 }
-			}
-		}
-		properties = {
-			#spys = {
-			#	image = "[Getspy_guild_pic]"
-			#}
-		}
-	}
-	civilian_markets_screen = {
-		context_type = player_context
-		window_name = "civilian_markets_screen"
-		visible = {
-			has_country_flag = markets_open
-		}
-		effects = {
-			market_button_click = {
-				set_country_flag = markets_open
-			}
-		}
-		triggers = {
-		}
-		properties = {
-			#spys = {
-			#	image = "[Getspy_guild_pic]"
-			#}
-		}
-	}
-}
-
+#scripted_gui = {
+#	production_screen_selection = {
+#		context_type = player_context
+#		window_name = "production_screen_selection"
+#		parent_window_name = countrytradeview
+#		visible = {
+#            always = yes
+#		}
+#		effects = {
+#			production_open_click = {
+#				set_country_flag = production_open
+#			}
+#			production_close_click = {
+#				clr_country_flag = production_open
+#			}
+#		}
+#		triggers = {
+#			production_open_click_enabled = {
+#				NOT = {
+#					has_country_flag = production_open
+#				}
+#			}
+#			production_close_click_enabled = {
+#				has_country_flag = production_open
+#			}
+#		}
+#	}
+#	civilian_production_screen = {
+#		context_type = player_context
+#		window_name = "civilian_production_screen"
+#		parent_window_name = countrytradeview
+#		visible = {
+#			has_country_flag = production_open
+#		}
+#		effects = {
+#			market_button_click = {
+#				if = {
+#					limit = {
+#						has_country_flag = markets_open
+#					}
+#					clr_country_flag = markets_open
+#				}
+#				else = {
+#					set_country_flag = markets_open
+#				}
+#			}
+#			more_factories_1_click = {
+#				add_to_variable = { production_line_1_factories = 1 }
+#				subtract_from_variable = { corp_factories_available = 1 }
+#			}
+#			less_factories_1_click = {
+#				subtract_from_variable = { production_line_1_factories = 1 }
+#				add_to_variable = { corp_factories_available = 1 }
+#			}
+#		}
+#		triggers = {
+#			more_factories_1_click_enabled = {
+#				check_variable = { corp_factories_available > 0 }
+#			}
+#			less_factories_1_click_enabled = {
+#				check_variable = { production_line_1_factories > 0 }
+#			}
+#		}
+#		properties = {
+#			#spys = {
+#			#	image = "[Getspy_guild_pic]"
+#			#}
+#		}
+#	}
+#	civilian_markets_screen = {
+#		context_type = player_context
+#		window_name = "civilian_markets_screen"
+#		visible = {
+#			has_country_flag = markets_open
+#		}
+#		effects = {
+#			market_button_click = {
+#				set_country_flag = markets_open
+#			}
+#		}
+#		triggers = {
+#		}
+#		properties = {
+#			#spys = {
+#			#	image = "[Getspy_guild_pic]"
+#			#}
+#		}
+#	}
+#}
+#
+#
