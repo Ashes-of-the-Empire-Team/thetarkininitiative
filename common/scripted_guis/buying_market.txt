@@ -1672,7 +1672,7 @@ scripted_gui = {
             product_buy_one_e_wing_click = {
                 if = {
                     limit = {
-                        check_variable = {global.market_starfighter_holder@2 > 0}
+                        check_variable = {global.market_starfighter_holder@2 > 99}
                     }
                     if = {
                         limit = {
@@ -1686,14 +1686,12 @@ scripted_gui = {
                             producer = EMP
                             type = e_wing_airframe_0
                             amount = 100
-                            variant_name = "e_wing"
                         }
                     }else = {
                         add_equipment_to_stockpile = {
                             producer = var:global.e_wing_holder
                             type = e_wing_airframe_0
                             amount = 100
-                            variant_name = "e_wing"
                         }
                     }
                 }
@@ -1704,11 +1702,11 @@ scripted_gui = {
             product_buy_one_a_wing_click = {
                 if = {
                     limit = {
-                        check_variable = {global.market_starfighter_holder@0 > 0}
+                        check_variable = {global.market_starfighter_holder@0 > 99}
                     }
                     if = {
                         limit = {
-                            EMP = {
+                            KUA = {
                                 NOT = {
                                     has_country_flag = brought_out
                                 }
@@ -1717,48 +1715,44 @@ scripted_gui = {
                         if = {
                             limit = {
                                 has_country_flag = level_0_a_wing_active
-                                check_variable = {global.market_starfighter_holder@3 > 0}
+                                check_variable = {global.market_starfighter_holder@3 > 99}
                             }
                             add_equipment_to_stockpile = {
-                                producer = EMP
+                                producer = KUA
                                 type = a_wing_airframe_0
                                 amount = 100
-                                variant_name = "a_wing V1"
                             }
                         }else_if = {
                             limit = {
                                 has_country_flag = level_1_a_wing_active
-                                check_variable = {global.market_starfighter_holder@4 > 0}
+                                check_variable = {global.market_starfighter_holder@4 > 99}
                             }
                             add_equipment_to_stockpile = {
-                                producer = emp
+                                producer = KUA
                                 type = a_wing_airframe_1
                                 amount = 100
-                                variant_name = "a_wing V2"
                             }
                         }
                     }else = {
                         if = {
                             limit = {
                                 has_country_flag = level_0_a_wing_active
-                                check_variable = {global.market_starfighter_holder@3 > 0}
+                                check_variable = {global.market_starfighter_holder@3 > 99}
                             }
                             add_equipment_to_stockpile = {
                                 producer = var:global.a_wing_holder
                                 type = a_wing_airframe_0
                                 amount = 100
-                                variant_name = "a_wing V1"
                             }
                         }else_if = {
                             limit = {
                                 has_country_flag = level_1_a_wing_active
-                                check_variable = {global.market_starfighter_holder@4 > 0}
+                                check_variable = {global.market_starfighter_holder@4 > 99}
                             }
                             add_equipment_to_stockpile = {
                                 producer = var:global.a_wing_holder
                                 type = a_wing_airframe_1
                                 amount = 100
-                                variant_name = "a_wing V2"
                             }
                         }
                     }
@@ -1788,7 +1782,7 @@ scripted_gui = {
             product_buy_one_k_wing_click = {
                 if = {
                     limit = {
-                        check_variable = {global.market_starfighter_holder@5 > 0}
+                        check_variable = {global.market_starfighter_holder@5 > 99}
                     }
                     if = {
                         limit = {
@@ -1802,14 +1796,12 @@ scripted_gui = {
                             producer = EMP
                             type = k_wing_airframe_0
                             amount = 100
-                            variant_name = "k_wing"
                         }
                     }else = {
                         add_equipment_to_stockpile = {
                             producer = var:global.k_wing_holder
                             type = k_wing_airframe_0
                             amount = 100
-                            variant_name = "k_wing"
                         }
                     }
                 }
@@ -1820,7 +1812,7 @@ scripted_gui = {
             product_buy_one_x_wing_click = {
                 if = {
                     limit = {
-                        EMP = {
+                        INC = {
                             NOT = {
                                 has_country_flag = brought_out
                             }
@@ -1829,70 +1821,70 @@ scripted_gui = {
                     if = {
                         limit = {
                             has_country_flag = level_0_x_wing_active
-                            check_variable = {global.market_starfighter_holder@6 > 0}
+                            check_variable = {global.market_starfighter_holder@6 > 99}
                         }
+                        subtract_from_variable = {global.market_starfighter_holder@6 = 100}
                         add_equipment_to_stockpile = {
-                            producer = EMP
+                            producer = INC
                             type = x_wing_airframe_0
                             amount = 100
-                            variant_name = "x_wing V1"
                         }
                     }else_if = {
                         limit = {
                             has_country_flag = level_1_x_wing_active
-                            check_variable = {global.market_starfighter_holder@7 > 0}
+                            check_variable = {global.market_starfighter_holder@7 > 99}
                         }
+                        subtract_from_variable = {global.market_starfighter_holder@7 = 100}
                         add_equipment_to_stockpile = {
-                            producer = emp
+                            producer = INC
                             type = x_wing_airframe_1
                             amount = 100
-                            variant_name = "x_wing V2"
                         }
                     }else_if = {
                         limit = {
                             has_country_flag = level_2_x_wing_active
-                            check_variable = {global.market_starfighter_holder@8 > 0}
+                            check_variable = {global.market_starfighter_holder@8 > 99}
                         }
+                        subtract_from_variable = {global.market_starfighter_holder@8 = 100}
                         add_equipment_to_stockpile = {
-                            producer = emp
+                            producer = INC
                             type = x_wing_airframe_2
                             amount = 100
-                            variant_name = "x_wing V3"
                         }
                     }
                 }else = {
                     if = {
                         limit = {
                             has_country_flag = level_0_x_wing_active
-                            check_variable = {global.market_starfighter_holder@6 > 0}
+                            check_variable = {global.market_starfighter_holder@6 > 99}
                         }
+                        subtract_from_variable = {global.market_starfighter_holder@6 = 100}
                         add_equipment_to_stockpile = {
                             producer = var:global.x_wing_holder
                             type = x_wing_airframe_0
                             amount = 100
-                            variant_name = "x_wing V1"
                         }
                     }else_if = {
                         limit = {
                             has_country_flag = level_1_x_wing_active
-                            check_variable = {global.market_starfighter_holder@7 > 0}
+                            check_variable = {global.market_starfighter_holder@7 > 99}
                         }
+                        subtract_from_variable = {global.market_starfighter_holder@7 = 100}
                         add_equipment_to_stockpile = {
                             producer = var:global.x_wing_holder
                             type = x_wing_airframe_1
                             amount = 100
-                            variant_name = "x_wing V2"
                         }
                     }else_if = {
                         limit = {
                             has_country_flag = level_2_x_wing_active
-                            check_variable = {global.market_starfighter_holder@8 > 0}
+                            check_variable = {global.market_starfighter_holder@8 > 99}
                         }
+                        subtract_from_variable = {global.market_starfighter_holder@8 = 100}
                         add_equipment_to_stockpile = {
                             producer = var:global.x_wing_holder
                             type = x_wing_airframe_2
                             amount = 100
-                            variant_name = "x_wing V3"
                         }
                     }
                 }
@@ -1940,7 +1932,7 @@ scripted_gui = {
             product_buy_one_y_wing_click = {
                 if = {
                     limit = {
-                        EMP = {
+                        KOE = {
                             NOT = {
                                 has_country_flag = brought_out
                             }
@@ -1949,48 +1941,48 @@ scripted_gui = {
                     if = {
                         limit = {
                             has_country_flag = level_0_y_wing_active
-                            check_variable = {global.market_starfighter_holder@9 > 0}
+                            check_variable = {global.market_starfighter_holder@9 > 99}
                         }
+                        subtract_from_variable = {global.market_starfighter_holder@9 = 100}
                         add_equipment_to_stockpile = {
-                            producer = EMP
+                            producer = KOE
                             type = y_wing_airframe_0
                             amount = 100
-                            variant_name = "y_wing V1"
                         }
                     }else_if = {
                         limit = {
                             has_country_flag = level_1_y_wing_active
-                            check_variable = {global.market_starfighter_holder@10 > 0}
+                            check_variable = {global.market_starfighter_holder@10 > 99}
                         }
+                        subtract_from_variable = {global.market_starfighter_holder@10 = 100}
                         add_equipment_to_stockpile = {
-                            producer = emp
+                            producer = KOE
                             type = y_wing_airframe_1
                             amount = 100
-                            variant_name = "y_wing V2"
                         }
                     }
                 }else = {
                     if = {
                         limit = {
                             has_country_flag = level_0_y_wing_active
-                            check_variable = {global.market_starfighter_holder@9 > 0}
+                            check_variable = {global.market_starfighter_holder@9 > 99}
                         }
+                        subtract_from_variable = {global.market_starfighter_holder@9 = 100}
                         add_equipment_to_stockpile = {
                             producer = var:global.y_wing_holder
                             type = y_wing_airframe_0
                             amount = 100
-                            variant_name = "y_wing V1"
                         }
                     }else_if = {
                         limit = {
                             has_country_flag = level_1_y_wing_active
-                            check_variable = {global.market_starfighter_holder@10 > 0}
+                            check_variable = {global.market_starfighter_holder@10 > 99}
                         }
+                        subtract_from_variable = {global.market_starfighter_holder@10 = 100}
                         add_equipment_to_stockpile = {
                             producer = var:global.y_wing_holder
                             type = y_wing_airframe_1
                             amount = 100
-                            variant_name = "y_wing V2"
                         }
                     }
                 }
@@ -2019,7 +2011,7 @@ scripted_gui = {
             product_buy_one_b_wing_click = {
                 if = {
                     limit = {
-                        EMP = {
+                        SLK = {
                             NOT = {
                                 has_country_flag = brought_out
                             }
@@ -2028,48 +2020,48 @@ scripted_gui = {
                     if = {
                         limit = {
                             has_country_flag = level_0_b_wing_active
-                            check_variable = {global.market_starfighter_holder@11 > 0}
+                            check_variable = {global.market_starfighter_holder@11 > 99}
                         }
+                        subtract_from_variable = {global.market_starfighter_holder@11 = 100}
                         add_equipment_to_stockpile = {
-                            producer = EMP
+                            producer = SLK
                             type = b_wing_airframe_0
                             amount = 100
-                            variant_name = "b_wing V1"
                         }
                     }else_if = {
                         limit = {
                             has_country_flag = level_1_b_wing_active
-                            check_variable = {global.market_starfighter_holder@12 > 0}
+                            check_variable = {global.market_starfighter_holder@12 > 99}
                         }
+                        subtract_from_variable = {global.market_starfighter_holder@12 = 100}
                         add_equipment_to_stockpile = {
-                            producer = EMP
+                            producer = SLK
                             type = b_wing_airframe_1
                             amount = 100
-                            variant_name = "b_wing V2"
                         }
                     }
                 }else = {
                     if = {
                         limit = {
                             has_country_flag = level_0_b_wing_active
-                            check_variable = {global.market_starfighter_holder@11 > 0}
+                            check_variable = {global.market_starfighter_holder@11 > 99}
                         }
+                        subtract_from_variable = {global.market_starfighter_holder@11 = 100}
                         add_equipment_to_stockpile = {
                             producer = var:global.b_wing_holder
                             type = b_wing_airframe_0
                             amount = 100
-                            variant_name = "b_wing V1"
                         }
                     }else_if = {
                         limit = {
                             has_country_flag = level_1_b_wing_active
-                            check_variable = {global.market_starfighter_holder@12 > 0}
+                            check_variable = {global.market_starfighter_holder@12 > 99}
                         }
+                        subtract_from_variable = {global.market_starfighter_holder@12 = 100}
                         add_equipment_to_stockpile = {
                             producer = var:global.b_wing_holder
                             type = b_wing_airframe_1
                             amount = 100
-                            variant_name = "b_wing V2"
                         }
                     }
                 }
@@ -2224,7 +2216,7 @@ scripted_gui = {
             product_buy_one_u_wing_click = {
                 if = {
                     limit = {
-                        EMP = {
+                        INC = {
                             NOT = {
                                 has_country_flag = brought_out
                             }
@@ -2233,48 +2225,48 @@ scripted_gui = {
                     if = {
                         limit = {
                             has_country_flag = level_0_u_wing_active
-                            check_variable = {global.market_starfighter_holder@0 > 0}
+                            check_variable = {global.market_starfighter_holder@0 > 99}
                         }
+                        subtract_from_variable = {global.market_starfighter_holder@0 = 100}
                         add_equipment_to_stockpile = {
-                            producer = EMP
+                            producer = INC
                             type = u_wing_airframe_0
                             amount = 100
-                            variant_name = "U Wing V1"
                         }
                     }else_if = {
                         limit = {
                             has_country_flag = level_1_u_wing_active
-                            check_variable = {global.market_starfighter_holder@1 > 0}
+                            check_variable = {global.market_starfighter_holder@1 > 99}
                         }
+                        subtract_from_variable = {global.market_starfighter_holder@1 = 100}
                         add_equipment_to_stockpile = {
-                            producer = emp
+                            producer = INC
                             type = u_wing_airframe_1
                             amount = 100
-                            variant_name = "U Wing V2"
                         }
                     }
                 }else = {
                     if = {
                         limit = {
                             has_country_flag = level_0_u_wing_active
-                            check_variable = {global.market_starfighter_holder@0 > 0}
+                            check_variable = {global.market_starfighter_holder@0 > 99}
                         }
+                        subtract_from_variable = {global.market_starfighter_holder@0 = 100}
                         add_equipment_to_stockpile = {
                             producer = var:global.u_wing_holder
                             type = u_wing_airframe_0
                             amount = 100
-                            variant_name = "U Wing V1"
                         }
                     }else_if = {
                         limit = {
                             has_country_flag = level_1_u_wing_active
-                            check_variable = {global.market_starfighter_holder@1 > 0}
+                            check_variable = {global.market_starfighter_holder@1 > 99}
                         }
+                        subtract_from_variable = {global.market_starfighter_holder@1 = 100}
                         add_equipment_to_stockpile = {
-                            producer = emp
+                            producer = var:global.u_wing_holder
                             type = u_wing_airframe_1
                             amount = 100
-                            variant_name = "U Wing V2"
                         }
                     }
                 }
@@ -2337,7 +2329,7 @@ scripted_gui = {
             product_buy_one_tie_dagger_click = {
                 if = {
                     limit = {
-                        check_variable = {global.market_starfighter_holder@13 > 0}
+                        check_variable = {global.market_starfighter_holder@13 > 99}
                     }
                     if = {
                         limit = {
@@ -2351,14 +2343,12 @@ scripted_gui = {
                             producer = EMP
                             type = tie_dagger_airframe_0
                             amount = 100
-                            variant_name = "tie_dagger"
                         }
                     }else = {
                         add_equipment_to_stockpile = {
                             producer = var:global.tie_dagger_holder
                             type = tie_dagger_airframe_0
                             amount = 100
-                            variant_name = "tie_dagger"
                         }
                     }
                 }
@@ -2369,7 +2359,7 @@ scripted_gui = {
             product_buy_one_tie_silencer_click = {
                 if = {
                     limit = {
-                        check_variable = {global.market_starfighter_holder@14 > 0}
+                        check_variable = {global.market_starfighter_holder@14 > 99}
                     }
                     if = {
                         limit = {
@@ -2383,14 +2373,12 @@ scripted_gui = {
                             producer = EMP
                             type = tie_silencer_airframe_0
                             amount = 100
-                            variant_name = "tie_silencer"
                         }
                     }else = {
                         add_equipment_to_stockpile = {
                             producer = var:global.tie_silencer_holder
                             type = tie_silencer_airframe_0
                             amount = 100
-                            variant_name = "tie_silencer"
                         }
                     }
                 }
@@ -2410,48 +2398,48 @@ scripted_gui = {
                     if = {
                         limit = {
                             has_country_flag = level_0_tie_automated_active
-                            check_variable = {global.market_starfighter_holder@15 > 0}
+                            check_variable = {global.market_starfighter_holder@15 > 99}
                         }
+                        subtract_from_variable = {global.market_starfighter_holder@15 = 100}
                         add_equipment_to_stockpile = {
                             producer = EMP
                             type = tie_automated_airframe_0
                             amount = 100
-                            variant_name = "tie_automated V1"
                         }
                     }else_if = {
                         limit = {
                             has_country_flag = level_1_tie_automated_active
-                            check_variable = {global.market_starfighter_holder@16 > 0}
+                            check_variable = {global.market_starfighter_holder@16 > 99}
                         }
+                        subtract_from_variable = {global.market_starfighter_holder@16 = 100}
                         add_equipment_to_stockpile = {
                             producer = EMP
                             type = tie_automated_airframe_0
                             amount = 100
-                            variant_name = "tie_automated V2"
                         }
                     }
                 }else = {
                     if = {
                         limit = {
                             has_country_flag = level_0_tie_automated_active
-                            check_variable = {global.market_starfighter_holder@15 > 0}
+                            check_variable = {global.market_starfighter_holder@15 > 99}
                         }
+                        subtract_from_variable = {global.market_starfighter_holder@15 = 100}
                         add_equipment_to_stockpile = {
                             producer = var:global.tie_automated_holder
                             type = tie_automated_airframe_0
                             amount = 100
-                            variant_name = "tie_automated V1"
                         }
                     }else_if = {
                         limit = {
                             has_country_flag = level_1_tie_automated_active
-                            check_variable = {global.market_starfighter_holder@16 > 0}
+                            check_variable = {global.market_starfighter_holder@16 > 99}
                         }
+                        subtract_from_variable = {global.market_starfighter_holder@16 = 100}
                         add_equipment_to_stockpile = {
                             producer = var:global.tie_automated_holder
                             type = tie_automated_airframe_1
                             amount = 100
-                            variant_name = "tie_automated V2"
                         }
                     }
                 }
@@ -2480,99 +2468,101 @@ scripted_gui = {
             product_buy_one_tie_fighter_click = {
                 if = {
                     limit = {
-                        NOT = {
-                            has_country_flag = brought_out
+                        SFS = {
+                            NOT = {
+                                has_country_flag = brought_out
+                            }
                         }
                     }
                     if = {
                         limit = {
                             has_country_flag = level_0_tie_fighter_active
-                            check_variable = {global.market_starfighter_holder@16 > 0}
+                            check_variable = {global.market_starfighter_holder@17 > 99}
                         }
+                        subtract_from_variable = {global.market_starfighter_holder@17 = 100}
                         add_equipment_to_stockpile = {
-                            producer = EMP
+                            producer = SFS
                             type = tie_fighter_airframe_0
                             amount = 100
-                            variant_name = "tie_fighter V1"
                         }
                     }else_if = {
                         limit = {
                             has_country_flag = level_1_tie_fighter_active
-                            check_variable = {global.market_starfighter_holder@17 > 0}
+                            check_variable = {global.market_starfighter_holder@18 > 99}
                         }
+                        subtract_from_variable = {global.market_starfighter_holder@18 = 100}
                         add_equipment_to_stockpile = {
-                            producer = emp
+                            producer = SFS
                             type = tie_fighter_airframe_1
                             amount = 100
-                            variant_name = "tie_fighter V2"
                         }
                     }else_if = {
                         limit = {
                             has_country_flag = level_2_tie_fighter_active
-                            check_variable = {global.market_starfighter_holder@18 > 0}
+                            check_variable = {global.market_starfighter_holder@19 > 99}
                         }
+                        subtract_from_variable = {global.market_starfighter_holder@19 = 100}
                         add_equipment_to_stockpile = {
-                            producer = emp
+                            producer = SFS
                             type = tie_fighter_airframe_2
                             amount = 100
-                            variant_name = "tie_fighter V3"
                         }
                     }else_if = {
                         limit = {
                             has_country_flag = level_3_tie_fighter_active
-                            check_variable = {global.market_starfighter_holder@19 > 0}
+                            check_variable = {global.market_starfighter_holder@20 > 99}
                         }
+                        subtract_from_variable = {global.market_starfighter_holder@20 = 100}
                         add_equipment_to_stockpile = {
-                            producer = emp
+                            producer = SFS
                             type = tie_fighter_airframe_3
                             amount = 100
-                            variant_name = "tie_fighter V4"
                         }
                     }
                 }else = {
                     if = {
                         limit = {
                             has_country_flag = level_0_tie_fighter_active
-                            check_variable = {global.market_starfighter_holder@16 > 0}
+                            check_variable = {global.market_starfighter_holder@17 > 99}
                         }
+                        subtract_from_variable = {global.market_starfighter_holder@17 = 100}
                         add_equipment_to_stockpile = {
                             producer = var:global.tie_fighter_holder
                             type = tie_fighter_airframe_0
                             amount = 100
-                            variant_name = "tie_fighter V1"
                         }
                     }else_if = {
                         limit = {
                             has_country_flag = level_1_tie_fighter_active
-                            check_variable = {global.market_starfighter_holder@17 > 0}
+                            check_variable = {global.market_starfighter_holder@18 > 99}
                         }
+                        subtract_from_variable = {global.market_starfighter_holder@18 = 100}
                         add_equipment_to_stockpile = {
-                            producer = var:global.tie_fighter_holderemp
+                            producer = var:global.tie_fighter_holder
                             type = tie_fighter_airframe_1
                             amount = 100
-                            variant_name = "tie_fighter V2"
                         }
                     }else_if = {
                         limit = {
                             has_country_flag = level_2_tie_fighter_active
-                            check_variable = {global.market_starfighter_holder@18 > 0}
+                            check_variable = {global.market_starfighter_holder@19 > 99}
                         }
+                        subtract_from_variable = {global.market_starfighter_holder@19 = 100}
                         add_equipment_to_stockpile = {
                             producer = var:global.tie_fighter_holder
                             type = tie_fighter_airframe_2
                             amount = 100
-                            variant_name = "tie_fighter V3"
                         }
                     }else_if = {
                         limit = {
                             has_country_flag = level_3_tie_fighter_active
-                            check_variable = {global.market_starfighter_holder@19 > 0}
+                            check_variable = {global.market_starfighter_holder@20 > 99}
                         }
+                        subtract_from_variable = {global.market_starfighter_holder@20 = 100}
                         add_equipment_to_stockpile = {
                             producer = var:global.tie_fighter_holder
                             type = tie_fighter_airframe_3
                             amount = 100
-                            variant_name = "tie_fighter V4"
                         }
                     }
                 }
@@ -2659,99 +2649,101 @@ scripted_gui = {
             product_buy_one_tie_interceptor_click = {
                 if = {
                     limit = {
-                        NOT = {
-                            has_country_flag = brought_out
+                        SFS = {
+                            NOT = {
+                                has_country_flag = brought_out
+                            }
                         }
                     }
                     if = {
                         limit = {
                             has_country_flag = level_0_tie_interceptor_active
-                            check_variable = {global.market_starfighter_holder@20 > 0}
+                            check_variable = {global.market_starfighter_holder@21 > 99}
                         }
+                        subtract_from_variable = {global.market_starfighter_holder@21 = 100}
                         add_equipment_to_stockpile = {
-                            producer = EMP
+                            producer = SFS
                             type = tie_interceptor_airframe_0
                             amount = 100
-                            variant_name = "tie_interceptor V1"
                         }
                     }else_if = {
                         limit = {
                             has_country_flag = level_1_tie_interceptor_active
-                            check_variable = {global.market_starfighter_holder@21 > 0}
+                            check_variable = {global.market_starfighter_holder@22 > 99}
                         }
+                        subtract_from_variable = {global.market_starfighter_holder@22 = 100}
                         add_equipment_to_stockpile = {
-                            producer = emp
+                            producer = SFS
                             type = tie_interceptor_airframe_1
                             amount = 100
-                            variant_name = "tie_interceptor V2"
                         }
                     }else_if = {
                         limit = {
                             has_country_flag = level_2_tie_interceptor_active
-                            check_variable = {global.market_starfighter_holder@22 > 0}
+                            check_variable = {global.market_starfighter_holder@23 > 99}
                         }
+                        subtract_from_variable = {global.market_starfighter_holder@23 = 100}
                         add_equipment_to_stockpile = {
-                            producer = emp
+                            producer = SFS
                             type = tie_interceptor_airframe_2
                             amount = 100
-                            variant_name = "tie_interceptor V3"
                         }
                     }else_if = {
                         limit = {
                             has_country_flag = level_3_tie_interceptor_active
-                            check_variable = {global.market_starfighter_holder@23 > 0}
+                            check_variable = {global.market_starfighter_holder@24 > 99}
                         }
+                        subtract_from_variable = {global.market_starfighter_holder@24 = 100}
                         add_equipment_to_stockpile = {
-                            producer = emp
+                            producer = SFS
                             type = tie_interceptor_airframe_3
                             amount = 100
-                            variant_name = "tie_interceptor V4"
                         }
                     }
                 }else = {
                     if = {
                         limit = {
                             has_country_flag = level_0_tie_interceptor_active
-                            check_variable = {global.market_starfighter_holder@20 > 0}
+                            check_variable = {global.market_starfighter_holder@21 > 99}
                         }
+                        subtract_from_variable = {global.market_starfighter_holder@21 = 100}
                         add_equipment_to_stockpile = {
                             producer = var:global.tie_interceptor_holder
                             type = tie_interceptor_airframe_0
                             amount = 100
-                            variant_name = "tie_interceptor V1"
                         }
                     }else_if = {
                         limit = {
                             has_country_flag = level_1_tie_interceptor_active
-                            check_variable = {global.market_starfighter_holder@21 > 0}
+                            check_variable = {global.market_starfighter_holder@22 > 99}
                         }
+                        subtract_from_variable = {global.market_starfighter_holder@22 = 100}
                         add_equipment_to_stockpile = {
                             producer = var:global.tie_interceptor_holderemp
                             type = tie_interceptor_airframe_1
                             amount = 100
-                            variant_name = "tie_interceptor V2"
                         }
                     }else_if = {
                         limit = {
                             has_country_flag = level_2_tie_interceptor_active
-                            check_variable = {global.market_starfighter_holder@22 > 0}
+                            check_variable = {global.market_starfighter_holder@23 > 99}
                         }
+                        subtract_from_variable = {global.market_starfighter_holder@23 = 100}
                         add_equipment_to_stockpile = {
                             producer = var:global.tie_interceptor_holder
                             type = tie_interceptor_airframe_2
                             amount = 100
-                            variant_name = "tie_interceptor V3"
                         }
                     }else_if = {
                         limit = {
                             has_country_flag = level_3_tie_interceptor_active
-                            check_variable = {global.market_starfighter_holder@23 > 0}
+                            check_variable = {global.market_starfighter_holder@24 > 99}
                         }
+                        subtract_from_variable = {global.market_starfighter_holder@24 = 100}
                         add_equipment_to_stockpile = {
                             producer = var:global.tie_interceptor_holder
                             type = tie_interceptor_airframe_3
                             amount = 100
-                            variant_name = "tie_interceptor V4"
                         }
                     }
                 }
@@ -2838,77 +2830,79 @@ scripted_gui = {
             product_buy_one_tie_fighterbomber_click = {
                 if = {
                     limit = {
-                        NOT = {
-                            has_country_flag = brought_out
+                        SFS = {
+                            NOT = {
+                                has_country_flag = brought_out
+                            }
                         }
                     }
                     if = {
                         limit = {
                             has_country_flag = level_0_tie_fighterbomber_active
-                            check_variable = {global.market_starfighter_holder@24 > 0}
+                            check_variable = {global.market_starfighter_holder@25 > 99}
                         }
+                        subtract_from_variable = {global.market_starfighter_holder@25 = 100}
                         add_equipment_to_stockpile = {
-                            producer = EMP
+                            producer = SFS
                             type = tie_fighterbomber_airframe_0
                             amount = 100
-                            variant_name = "tie_fighterbomber V1"
                         }
                     }else_if = {
                         limit = {
                             has_country_flag = level_1_tie_fighterbomber_active
-                            check_variable = {global.market_starfighter_holder@25 > 0}
+                            check_variable = {global.market_starfighter_holder@26 > 99}
                         }
+                        subtract_from_variable = {global.market_starfighter_holder@26 = 100}
                         add_equipment_to_stockpile = {
-                            producer = emp
+                            producer = SFS
                             type = tie_fighterbomber_airframe_1
                             amount = 100
-                            variant_name = "tie_fighterbomber V2"
                         }
                     }else_if = {
                         limit = {
                             has_country_flag = level_2_tie_fighterbomber_active
-                            check_variable = {global.market_starfighter_holder@26 > 0}
+                            check_variable = {global.market_starfighter_holder@27 > 99}
                         }
+                        subtract_from_variable = {global.market_starfighter_holder@27 = 100}
                         add_equipment_to_stockpile = {
-                            producer = emp
+                            producer = SFS
                             type = tie_fighterbomber_airframe_2
                             amount = 100
-                            variant_name = "tie_fighterbomber V3"
                         }
                     }
                 }else = {
                     if = {
                         limit = {
                             has_country_flag = level_0_tie_fighterbomber_active
-                            check_variable = {global.market_starfighter_holder@24 > 0}
+                            check_variable = {global.market_starfighter_holder@25 > 99}
                         }
+                        subtract_from_variable = {global.market_starfighter_holder@25 = 100}
                         add_equipment_to_stockpile = {
                             producer = var:global.tie_fighterbomber_holder
                             type = tie_fighterbomber_airframe_0
                             amount = 100
-                            variant_name = "tie_fighterbomber V1"
                         }
                     }else_if = {
                         limit = {
                             has_country_flag = level_1_tie_fighterbomber_active
-                            check_variable = {global.market_starfighter_holder@25 > 0}
+                            check_variable = {global.market_starfighter_holder@26 > 99}
                         }
+                        subtract_from_variable = {global.market_starfighter_holder@26 = 100}
                         add_equipment_to_stockpile = {
                             producer = var:global.tie_fighterbomber_holderemp
                             type = tie_fighterbomber_airframe_1
                             amount = 100
-                            variant_name = "tie_fighterbomber V2"
                         }
                     }else_if = {
                         limit = {
                             has_country_flag = level_2_tie_fighterbomber_active
-                            check_variable = {global.market_starfighter_holder@26 > 0}
+                            check_variable = {global.market_starfighter_holder@27 > 99}
                         }
+                        subtract_from_variable = {global.market_starfighter_holder@27 = 100}
                         add_equipment_to_stockpile = {
                             producer = var:global.tie_fighterbomber_holder
                             type = tie_fighterbomber_airframe_2
                             amount = 100
-                            variant_name = "tie_fighterbomber V3"
                         }
                     }
                 }
@@ -2961,103 +2955,97 @@ scripted_gui = {
             product_buy_one_tie_bomber_click = {
                 if = {
                     limit = {
-                        check_variable = {global.market_starfighter_holder@0 > 0}
+                        check_variable = {global.market_starfighter_holder@0 > 99}
                     }
                     if = {
                         limit = {
-                            NOT = {
-                                has_country_flag = brought_out
+                            SFS = {
+                                NOT = {
+                                    has_country_flag = brought_out
+                                }
                             }
                         }
                         if = {
                             limit = {
                                 has_country_flag = level_0_tie_bomber_active
-                                check_variable = {global.market_starfighter_holder@27 > 0}
+                                check_variable = {global.market_starfighter_holder@28 > 99}
                             }
                             add_equipment_to_stockpile = {
-                                producer = EMP
+                                producer = SFS
                                 type = tie_bomber_airframe_0
                                 amount = 100
-                                variant_name = "tie_bomber V1"
                             }
                         }else_if = {
                             limit = {
                                 has_country_flag = level_1_tie_bomber_active
-                                check_variable = {global.market_starfighter_holder@28 > 0}
+                                check_variable = {global.market_starfighter_holder@29 > 99}
                             }
                             add_equipment_to_stockpile = {
-                                producer = emp
+                                producer = SFS
                                 type = tie_bomber_airframe_1
                                 amount = 100
-                                variant_name = "tie_bomber V2"
                             }
                         }else_if = {
                             limit = {
                                 has_country_flag = level_2_tie_bomber_active
-                                check_variable = {global.market_starfighter_holder@29 > 0}
+                                check_variable = {global.market_starfighter_holder@30 > 99}
                             }
                             add_equipment_to_stockpile = {
-                                producer = emp
+                                producer = SFS
                                 type = tie_bomber_airframe_2
                                 amount = 100
-                                variant_name = "tie_bomber V3"
                             }
                         }else_if = {
                             limit = {
                                 has_country_flag = level_3_tie_bomber_active
-                                check_variable = {global.market_starfighter_holder@30 > 0}
+                                check_variable = {global.market_starfighter_holder@31 > 99}
                             }
                             add_equipment_to_stockpile = {
-                                producer = emp
+                                producer = SFS
                                 type = tie_bomber_airframe_3
                                 amount = 100
-                                variant_name = "tie_bomber V4"
                             }
                         }
                     }else = {
                         if = {
                             limit = {
                                 has_country_flag = level_0_tie_bomber_active
-                                check_variable = {global.market_starfighter_holder@27 > 0}
+                                check_variable = {global.market_starfighter_holder@28 > 99}
                             }
                             add_equipment_to_stockpile = {
                                 producer = var:global.tie_bomber_holder
                                 type = tie_bomber_airframe_0
                                 amount = 100
-                                variant_name = "tie_bomber V1"
                             }
                         }else_if = {
                             limit = {
                                 has_country_flag = level_1_tie_bomber_active
-                                check_variable = {global.market_starfighter_holder@28 > 0}
+                                check_variable = {global.market_starfighter_holder@29 > 99}
                             }
                             add_equipment_to_stockpile = {
                                 producer = var:global.tie_bomber_holderemp
                                 type = tie_bomber_airframe_1
                                 amount = 100
-                                variant_name = "tie_bomber V2"
                             }
                         }else_if = {
                             limit = {
                                 has_country_flag = level_2_tie_bomber_active
-                                check_variable = {global.market_starfighter_holder@29 > 0}
+                                check_variable = {global.market_starfighter_holder@30 > 99}
                             }
                             add_equipment_to_stockpile = {
                                 producer = var:global.tie_bomber_holder
                                 type = tie_bomber_airframe_2
                                 amount = 100
-                                variant_name = "tie_bomber V3"
                             }
                         }else_if = {
                             limit = {
                                 has_country_flag = level_3_tie_bomber_active
-                                check_variable = {global.market_starfighter_holder@30 > 0}
+                                check_variable = {global.market_starfighter_holder@31 > 99}
                             }
                             add_equipment_to_stockpile = {
                                 producer = var:global.tie_bomber_holder
                                 type = tie_bomber_airframe_3
                                 amount = 100
-                                variant_name = "tie_bomber V4"
                             }
                         }
                     }
@@ -3184,6 +3172,18 @@ scripted_gui = {
                 has_country_flag = level_2_tie_fighter_active
             }
             product_price_level_4_tie_fighter_visible = {
+                has_country_flag = level_3_tie_fighter_active
+            }
+            product_quantity_tie_fighter_visible = {
+                has_country_flag = level_0_tie_fighter_active
+            }
+            product_quantity_level_2_tie_fighter_visible = {
+                has_country_flag = level_1_tie_fighter_active
+            }
+            product_quantity_level_3_tie_fighter_visible = {
+                has_country_flag = level_2_tie_fighter_active
+            }
+            product_quantity_level_4_tie_fighter_visible = {
                 has_country_flag = level_3_tie_fighter_active
             }
             product_price_tie_interceptor_visible = {
@@ -3323,7 +3323,7 @@ scripted_gui = {
             product_buy_one_tie_silencer_click = {
                 if = {
                     limit = {
-                        check_variable = {global.market_starfighter_holder@14 > 0}
+                        check_variable = {global.market_starfighter_holder@14 > 99}
                     }
                     if = {
                         limit = {
@@ -3337,14 +3337,12 @@ scripted_gui = {
                             producer = EMP
                             type = tie_silencer_airframe_0
                             amount = 100
-                            variant_name = "tie_silencer"
                         }
                     }else = {
                         add_equipment_to_stockpile = {
                             producer = var:global.tie_silencer_holder
                             type = tie_silencer_airframe_0
                             amount = 100
-                            variant_name = "tie_silencer"
                         }
                     }
                 }
@@ -3394,48 +3392,48 @@ scripted_gui = {
                     if = {
                         limit = {
                             has_country_flag = level_0_t3_b_active
-                            check_variable = {global.market_tank_holder@0 > 0}
+                            check_variable = {global.market_tank_holder@0 > 99}
                         }
+                        subtract_from_variable = {global.market_tank_holder@0 = 100}
                         add_equipment_to_stockpile = {
                             producer = EMP
                             type = t3_b_chassis_0
                             amount = 100
-                            variant_name = "t3_b V1"
                         }
                     }else_if = {
                         limit = {
                             has_country_flag = level_1_t3_b_active
-                            check_variable = {global.market_tank_holder@1 > 0}
+                            check_variable = {global.market_tank_holder@1 > 99}
                         }
+                        subtract_from_variable = {global.market_tank_holder@1 = 100}
                         add_equipment_to_stockpile = {
                             producer = emp
                             type = t3_b_chassis_1
                             amount = 100
-                            variant_name = "t3_b V2"
                         }
                     }
                 }else = {
                     if = {
                         limit = {
                             has_country_flag = level_0_t3_b_active
-                            check_variable = {global.market_tank_holder@0 > 0}
+                            check_variable = {global.market_tank_holder@0 > 99}
                         }
+                        subtract_from_variable = {global.market_tank_holder@0 = 100}
                         add_equipment_to_stockpile = {
                             producer = var:global.t3_b_holder
                             type = t3_b_chassis_0
                             amount = 100
-                            variant_name = "t3_b V1"
                         }
                     }else_if = {
                         limit = {
                             has_country_flag = level_1_t3_b_active
-                            check_variable = {global.market_tank_holder@1 > 0}
+                            check_variable = {global.market_tank_holder@1 > 99}
                         }
+                        subtract_from_variable = {global.market_tank_holder@1 = 100}
                         add_equipment_to_stockpile = {
                             producer = emp
                             type = t3_b_chassis_1
                             amount = 100
-                            variant_name = "t3_b V2"
                         }
                     }
                 }
@@ -3473,48 +3471,48 @@ scripted_gui = {
                     if = {
                         limit = {
                             has_country_flag = level_0_t4_b_active
-                            check_variable = {global.market_tank_holder@2 > 0}
+                            check_variable = {global.market_tank_holder@2 > 99}
                         }
+                        subtract_from_variable = {global.market_tank_holder@2 = 100}
                         add_equipment_to_stockpile = {
                             producer = EMP
                             type = t4_b_chassis_0
                             amount = 100
-                            variant_name = "t4_b V1"
                         }
                     }else_if = {
                         limit = {
                             has_country_flag = level_1_t4_b_active
-                            check_variable = {global.market_tank_holder@3 > 0}
+                            check_variable = {global.market_tank_holder@3 > 99}
                         }
+                        subtract_from_variable = {global.market_tank_holder@3 = 100}
                         add_equipment_to_stockpile = {
                             producer = emp
                             type = t4_b_chassis_1
                             amount = 100
-                            variant_name = "t4_b V2"
                         }
                     }
                 }else = {
                     if = {
                         limit = {
                             has_country_flag = level_0_t4_b_active
-                            check_variable = {global.market_tank_holder@2 > 0}
+                            check_variable = {global.market_tank_holder@2 > 99}
                         }
+                        subtract_from_variable = {global.market_tank_holder@2 = 100}
                         add_equipment_to_stockpile = {
                             producer = var:global.t4_b_holder
                             type = t4_b_chassis_0
                             amount = 100
-                            variant_name = "t4_b V1"
                         }
                     }else_if = {
                         limit = {
                             has_country_flag = level_1_t4_b_active
-                            check_variable = {global.market_tank_holder@3 > 0}
+                            check_variable = {global.market_tank_holder@3 > 99}
                         }
+                        subtract_from_variable = {global.market_tank_holder@3 = 100}
                         add_equipment_to_stockpile = {
                             producer = emp
                             type = t4_b_chassis_1
                             amount = 100
-                            variant_name = "t4_b V2"
                         }
                     }
                 }
@@ -3552,48 +3550,48 @@ scripted_gui = {
                     if = {
                         limit = {
                             has_country_flag = level_0_t1_b_active
-                            check_variable = {global.market_tank_holder@4 > 0}
+                            check_variable = {global.market_tank_holder@4 > 99}
                         }
+                        subtract_from_variable = {global.market_tank_holder@4 = 100}
                         add_equipment_to_stockpile = {
                             producer = EMP
                             type = t1_b_chassis_0
                             amount = 100
-                            variant_name = "t1_b V1"
                         }
                     }else_if = {
                         limit = {
                             has_country_flag = level_1_t1_b_active
-                            check_variable = {global.market_tank_holder@5 > 0}
+                            check_variable = {global.market_tank_holder@5 > 99}
                         }
+                        subtract_from_variable = {global.market_tank_holder@5 = 100}
                         add_equipment_to_stockpile = {
                             producer = emp
                             type = t1_b_chassis_1
                             amount = 100
-                            variant_name = "t1_b V2"
                         }
                     }
                 }else = {
                     if = {
                         limit = {
                             has_country_flag = level_0_t1_b_active
-                            check_variable = {global.market_tank_holder@4 > 0}
+                            check_variable = {global.market_tank_holder@4 > 99}
                         }
+                        subtract_from_variable = {global.market_tank_holder@4 = 100}
                         add_equipment_to_stockpile = {
                             producer = var:global.t1_b_holder
                             type = t1_b_chassis_0
                             amount = 100
-                            variant_name = "t1_b V1"
                         }
                     }else_if = {
                         limit = {
                             has_country_flag = level_1_t1_b_active
-                            check_variable = {global.market_tank_holder@5 > 0}
+                            check_variable = {global.market_tank_holder@5 > 99}
                         }
+                        subtract_from_variable = {global.market_tank_holder@5 = 100}
                         add_equipment_to_stockpile = {
                             producer = emp
                             type = t1_b_chassis_1
                             amount = 100
-                            variant_name = "t1_b V2"
                         }
                     }
                 }
@@ -3631,48 +3629,48 @@ scripted_gui = {
                     if = {
                         limit = {
                             has_country_flag = level_0_t1_c_active
-                            check_variable = {global.market_tank_holder@6 > 0}
+                            check_variable = {global.market_tank_holder@6 > 99}
                         }
+                        subtract_from_variable = {global.market_tank_holder@6 = 100}
                         add_equipment_to_stockpile = {
                             producer = EMP
                             type = t1_c_chassis_0
                             amount = 100
-                            variant_name = "t1_c V1"
                         }
                     }else_if = {
                         limit = {
                             has_country_flag = level_1_t1_c_active
-                            check_variable = {global.market_tank_holder@7 > 0}
+                            check_variable = {global.market_tank_holder@7 > 99}
                         }
+                        subtract_from_variable = {global.market_tank_holder@7 = 100}
                         add_equipment_to_stockpile = {
                             producer = emp
                             type = t1_c_chassis_1
                             amount = 100
-                            variant_name = "t1_c V2"
                         }
                     }
                 }else = {
                     if = {
                         limit = {
                             has_country_flag = level_0_t1_c_active
-                            check_variable = {global.market_tank_holder@6 > 0}
+                            check_variable = {global.market_tank_holder@6 > 99}
                         }
+                        subtract_from_variable = {global.market_tank_holder@6 = 100}
                         add_equipment_to_stockpile = {
                             producer = var:global.t1_c_holder
                             type = t1_c_chassis_0
                             amount = 100
-                            variant_name = "t1_c V1"
                         }
                     }else_if = {
                         limit = {
                             has_country_flag = level_1_t1_c_active
-                            check_variable = {global.market_tank_holder@7 > 0}
+                            check_variable = {global.market_tank_holder@7 > 99}
                         }
+                        subtract_from_variable = {global.market_tank_holder@7 = 100}
                         add_equipment_to_stockpile = {
                             producer = emp
                             type = t1_c_chassis_1
                             amount = 100
-                            variant_name = "t1_c V2"
                         }
                     }
                 }
@@ -3710,48 +3708,48 @@ scripted_gui = {
                     if = {
                         limit = {
                             has_country_flag = level_0_AAC_1_speeder_tank_active
-                            check_variable = {global.market_tank_holder@8 > 0}
+                            check_variable = {global.market_tank_holder@8 > 99}
                         }
+                        subtract_from_variable = {global.market_tank_holder@8 = 100}
                         add_equipment_to_stockpile = {
                             producer = EMP
                             type = AAC_1_speeder_tank_chassis_0
                             amount = 100
-                            variant_name = "AAC_1_speeder_tank V1"
                         }
                     }else_if = {
                         limit = {
                             has_country_flag = level_1_AAC_1_speeder_tank_active
-                            check_variable = {global.market_tank_holder@9 > 0}
+                            check_variable = {global.market_tank_holder@9 > 99}
                         }
+                        subtract_from_variable = {global.market_tank_holder@9 = 100}
                         add_equipment_to_stockpile = {
                             producer = emp
                             type = AAC_1_speeder_tank_chassis_1
                             amount = 100
-                            variant_name = "AAC_1_speeder_tank V2"
                         }
                     }
                 }else = {
                     if = {
                         limit = {
                             has_country_flag = level_0_AAC_1_speeder_tank_active
-                            check_variable = {global.market_tank_holder@8 > 0}
+                            check_variable = {global.market_tank_holder@8 > 99}
                         }
+                        subtract_from_variable = {global.market_tank_holder@8 = 100}
                         add_equipment_to_stockpile = {
                             producer = var:global.AAC_1_speeder_tank_holder
                             type = AAC_1_speeder_tank_chassis_0
                             amount = 100
-                            variant_name = "AAC_1_speeder_tank V1"
                         }
                     }else_if = {
                         limit = {
                             has_country_flag = level_1_AAC_1_speeder_tank_active
-                            check_variable = {global.market_tank_holder@9 > 0}
+                            check_variable = {global.market_tank_holder@9 > 99}
                         }
+                        subtract_from_variable = {global.market_tank_holder@9 = 100}
                         add_equipment_to_stockpile = {
                             producer = emp
                             type = AAC_1_speeder_tank_chassis_1
                             amount = 100
-                            variant_name = "AAC_1_speeder_tank V2"
                         }
                     }
                 }
@@ -3789,48 +3787,48 @@ scripted_gui = {
                     if = {
                         limit = {
                             has_country_flag = level_0_combat_speeder_active
-                            check_variable = {global.market_tank_holder@10 > 0}
+                            check_variable = {global.market_tank_holder@10 > 99}
                         }
+                        subtract_from_variable = {global.market_tank_holder@10 = 100}
                         add_equipment_to_stockpile = {
                             producer = EMP
                             type = combat_speeder_chassis_0
                             amount = 100
-                            variant_name = "combat_speeder V1"
                         }
                     }else_if = {
                         limit = {
                             has_country_flag = level_1_combat_speeder_active
-                            check_variable = {global.market_tank_holder@11 > 0}
+                            check_variable = {global.market_tank_holder@11 > 99}
                         }
+                        subtract_from_variable = {global.market_tank_holder@11 = 100}
                         add_equipment_to_stockpile = {
                             producer = emp
                             type = combat_speeder_chassis_1
                             amount = 100
-                            variant_name = "combat_speeder V2"
                         }
                     }
                 }else = {
                     if = {
                         limit = {
                             has_country_flag = level_0_combat_speeder_active
-                            check_variable = {global.market_tank_holder@10 > 0}
+                            check_variable = {global.market_tank_holder@10 > 99}
                         }
+                        subtract_from_variable = {global.market_tank_holder@10 = 100}
                         add_equipment_to_stockpile = {
                             producer = var:global.combat_speeder_holder
                             type = combat_speeder_chassis_0
                             amount = 100
-                            variant_name = "combat_speeder V1"
                         }
                     }else_if = {
                         limit = {
                             has_country_flag = level_1_combat_speeder_active
-                            check_variable = {global.market_tank_holder@11 > 0}
+                            check_variable = {global.market_tank_holder@11 > 99}
                         }
+                        subtract_from_variable = {global.market_tank_holder@11 = 100}
                         add_equipment_to_stockpile = {
                             producer = emp
                             type = combat_speeder_chassis_1
                             amount = 100
-                            variant_name = "combat_speeder V2"
                         }
                     }
                 }
@@ -4002,48 +4000,48 @@ scripted_gui = {
                     if = {
                         limit = {
                             has_country_flag = level_0_flash_speeder_active
-                            check_variable = {global.market_tank_holder@12 > 0}
+                            check_variable = {global.market_tank_holder@12 > 99}
                         }
+                        subtract_from_variable = {global.market_tank_holder@12 = 100}
                         add_equipment_to_stockpile = {
                             producer = EMP
                             type = flash_speeder_chassis_0
                             amount = 100
-                            variant_name = "flash_speeder V1"
                         }
                     }else_if = {
                         limit = {
                             has_country_flag = level_1_flash_speeder_active
-                            check_variable = {global.market_tank_holder@13 > 0}
+                            check_variable = {global.market_tank_holder@13 > 99}
                         }
+                        subtract_from_variable = {global.market_tank_holder@13 = 100}
                         add_equipment_to_stockpile = {
                             producer = emp
                             type = flash_speeder_chassis_1
                             amount = 100
-                            variant_name = "flash_speeder V2"
                         }
                     }
                 }else = {
                     if = {
                         limit = {
                             has_country_flag = level_0_flash_speeder_active
-                            check_variable = {global.market_tank_holder@12 > 0}
+                            check_variable = {global.market_tank_holder@12 > 99}
                         }
+                        subtract_from_variable = {global.market_tank_holder@12 = 100}
                         add_equipment_to_stockpile = {
                             producer = var:global.flash_speeder_holder
                             type = flash_speeder_chassis_0
                             amount = 100
-                            variant_name = "flash_speeder V1"
                         }
                     }else_if = {
                         limit = {
                             has_country_flag = level_1_flash_speeder_active
-                            check_variable = {global.market_tank_holder@13 > 0}
+                            check_variable = {global.market_tank_holder@13 > 99}
                         }
+                        subtract_from_variable = {global.market_tank_holder@13 = 100}
                         add_equipment_to_stockpile = {
                             producer = emp
                             type = flash_speeder_chassis_1
                             amount = 100
-                            variant_name = "flash_speeder V2"
                         }
                     }
                 }
@@ -4081,8 +4079,9 @@ scripted_gui = {
                     if = {
                         limit = {
                             has_country_flag = level_0_DH_17_blaster_active
-                            check_variable = {global.soft_market_array@15 > 0}
+                            check_variable = {global.soft_market_array@15 > 99}
                         }
+                        subtract_from_variable = {global.soft_market_array@15 = 100}
                         add_equipment_to_stockpile = {
                             producer = EMP
                             type = infantry_equipment_0
@@ -4091,8 +4090,9 @@ scripted_gui = {
                     }else_if = {
                         limit = {
                             has_country_flag = level_1_DH_17_blaster_active
-                            check_variable = {global.soft_market_array@16 > 0}
+                            check_variable = {global.soft_market_array@16 > 99}
                         }
+                        subtract_from_variable = {global.soft_market_array@16 = 100}
                         add_equipment_to_stockpile = {
                             producer = emp
                             type = infantry_equipment_1
@@ -4101,8 +4101,9 @@ scripted_gui = {
                     }else_if = {
                         limit = {
                             has_country_flag = level_2_DH_17_blaster_active
-                            check_variable = {global.soft_market_array@17 > 0}
+                            check_variable = {global.soft_market_array@17 > 99}
                         }
+                        subtract_from_variable = {global.soft_market_array@17 = 100}
                         add_equipment_to_stockpile = {
                             producer = emp
                             type = infantry_equipment_2
@@ -4112,8 +4113,9 @@ scripted_gui = {
                     else_if = {
                         limit = {
                             has_country_flag = level_3_DH_17_blaster_active
-                            check_variable = {global.soft_market_array@18 > 0}
+                            check_variable = {global.soft_market_array@18 > 99}
                         }
+                        subtract_from_variable = {global.soft_market_array@18 = 100}
                         add_equipment_to_stockpile = {
                             producer = emp
                             type = infantry_equipment_3
@@ -4124,8 +4126,9 @@ scripted_gui = {
                     if = {
                         limit = {
                             has_country_flag = level_0_DH_17_blaster_active
-                            check_variable = {global.soft_market_array@15 > 0}
+                            check_variable = {global.soft_market_array@15 > 99}
                         }
+                        subtract_from_variable = {global.soft_market_array@15 = 100}
                         add_equipment_to_stockpile = {
                             producer = var:global.DH_17_blaster_holder
                             type = infantry_equipment_0
@@ -4134,8 +4137,9 @@ scripted_gui = {
                     }else_if = {
                         limit = {
                             has_country_flag = level_1_DH_17_blaster_active
-                            check_variable = {global.soft_market_array@16 > 0}
+                            check_variable = {global.soft_market_array@16 > 99}
                         }
+                        subtract_from_variable = {global.soft_market_array@16 = 100}
                         add_equipment_to_stockpile = {
                             producer = emp
                             type = infantry_equipment_1
@@ -4144,8 +4148,9 @@ scripted_gui = {
                     }else_if = {
                         limit = {
                             has_country_flag = level_2_DH_17_blaster_active
-                            check_variable = {global.soft_market_array@17 > 0}
+                            check_variable = {global.soft_market_array@17 > 99}
                         }
+                        subtract_from_variable = {global.soft_market_array@17 = 100}
                         add_equipment_to_stockpile = {
                             producer = emp
                             type = infantry_equipment_2
@@ -4154,8 +4159,9 @@ scripted_gui = {
                     }else_if = {
                         limit = {
                             has_country_flag = level_3_DH_17_blaster_active
-                            check_variable = {global.soft_market_array@18 > 0}
+                            check_variable = {global.soft_market_array@18 > 99}
                         }
+                        subtract_from_variable = {global.soft_market_array@18 = 100}
                         add_equipment_to_stockpile = {
                             producer = emp
                             type = infantry_equipment_3
@@ -4255,8 +4261,9 @@ scripted_gui = {
                     if = {
                         limit = {
                             has_country_flag = level_0_A280_blaster_active
-                            check_variable = {global.soft_market_array@19 > 0}
+                            check_variable = {global.soft_market_array@19 > 99}
                         }
+                        subtract_from_variable = {global.soft_market_array@19 = 100}
                         add_equipment_to_stockpile = {
                             producer = EMP
                             type = cheap_blaster_0
@@ -4265,8 +4272,9 @@ scripted_gui = {
                     }else_if = {
                         limit = {
                             has_country_flag = level_1_A280_blaster_active
-                            check_variable = {global.soft_market_array@20 > 0}
+                            check_variable = {global.soft_market_array@20 > 99}
                         }
+                        subtract_from_variable = {global.soft_market_array@20 = 100}
                         add_equipment_to_stockpile = {
                             producer = emp
                             type = cheap_blaster_1
@@ -4275,8 +4283,9 @@ scripted_gui = {
                     }else_if = {
                         limit = {
                             has_country_flag = level_2_A280_blaster_active
-                            check_variable = {global.soft_market_array@21 > 0}
+                            check_variable = {global.soft_market_array@21 > 99}
                         }
+                        subtract_from_variable = {global.soft_market_array@21 = 100}
                         add_equipment_to_stockpile = {
                             producer = emp
                             type = cheap_blaster_2
@@ -4287,8 +4296,9 @@ scripted_gui = {
                     if = {
                         limit = {
                             has_country_flag = level_0_A280_blaster_active
-                            check_variable = {global.soft_market_array@19 > 0}
+                            check_variable = {global.soft_market_array@19 > 99}
                         }
+                        subtract_from_variable = {global.soft_market_array@19 = 100}
                         add_equipment_to_stockpile = {
                             producer = var:global.A280_blaster_holder
                             type = cheap_blaster_0
@@ -4297,8 +4307,9 @@ scripted_gui = {
                     }else_if = {
                         limit = {
                             has_country_flag = level_1_A280_blaster_active
-                            check_variable = {global.soft_market_array@20 > 0}
+                            check_variable = {global.soft_market_array@20 > 99}
                         }
+                        subtract_from_variable = {global.soft_market_array@20 = 100}
                         add_equipment_to_stockpile = {
                             producer = emp
                             type = cheap_blaster_1
@@ -4307,8 +4318,9 @@ scripted_gui = {
                     }else_if = {
                         limit = {
                             has_country_flag = level_2_A280_blaster_active
-                            check_variable = {global.soft_market_array@21 > 0}
+                            check_variable = {global.soft_market_array@21 > 99}
                         }
+                        subtract_from_variable = {global.soft_market_array@21 = 100}
                         add_equipment_to_stockpile = {
                             producer = emp
                             type = cheap_blaster_2
@@ -4374,8 +4386,9 @@ scripted_gui = {
                     if = {
                         limit = {
                             has_country_flag = level_0_HH_12_active
-                            check_variable = {global.soft_market_array@22 > 0}
+                            check_variable = {global.soft_market_array@22 > 99}
                         }
+                        subtract_from_variable = {global.soft_market_array@22 = 100}
                         add_equipment_to_stockpile = {
                             producer = EMP
                             type = anti_tank_equipment_1
@@ -4384,8 +4397,9 @@ scripted_gui = {
                     }else_if = {
                         limit = {
                             has_country_flag = level_1_HH_12_active
-                            check_variable = {global.soft_market_array@23 > 0}
+                            check_variable = {global.soft_market_array@23 > 99}
                         }
+                        subtract_from_variable = {global.soft_market_array@23 = 100}
                         add_equipment_to_stockpile = {
                             producer = emp
                             type = anti_tank_equipment_2
@@ -4394,8 +4408,9 @@ scripted_gui = {
                     }else_if = {
                         limit = {
                             has_country_flag = level_2_HH_12_active
-                            check_variable = {global.soft_market_array@24 > 0}
+                            check_variable = {global.soft_market_array@24 > 99}
                         }
+                        subtract_from_variable = {global.soft_market_array@24 = 100}
                         add_equipment_to_stockpile = {
                             producer = emp
                             type = anti_tank_equipment_3
@@ -4406,8 +4421,9 @@ scripted_gui = {
                     if = {
                         limit = {
                             has_country_flag = level_0_HH_12_active
-                            check_variable = {global.soft_market_array@22 > 0}
+                            check_variable = {global.soft_market_array@22 > 99}
                         }
+                        subtract_from_variable = {global.soft_market_array@22 = 100}
                         add_equipment_to_stockpile = {
                             producer = var:global.HH_12_holder
                             type = anti_tank_equipment_1
@@ -4416,8 +4432,9 @@ scripted_gui = {
                     }else_if = {
                         limit = {
                             has_country_flag = level_1_HH_12_active
-                            check_variable = {global.soft_market_array@23 > 0}
+                            check_variable = {global.soft_market_array@23 > 99}
                         }
+                        subtract_from_variable = {global.soft_market_array@23 = 100}
                         add_equipment_to_stockpile = {
                             producer = emp
                             type = anti_tank_equipment_2
@@ -4426,8 +4443,9 @@ scripted_gui = {
                     }else_if = {
                         limit = {
                             has_country_flag = level_2_HH_12_active
-                            check_variable = {global.soft_market_array@24 > 0}
+                            check_variable = {global.soft_market_array@24 > 99}
                         }
+                        subtract_from_variable = {global.soft_market_array@24 = 100}
                         add_equipment_to_stockpile = {
                             producer = emp
                             type = anti_tank_equipment_3
@@ -4493,8 +4511,9 @@ scripted_gui = {
                     if = {
                         limit = {
                             has_country_flag = level_0_T1_S_active
-                            check_variable = {global.soft_market_array@25 > 0}
+                            check_variable = {global.soft_market_array@25 > 99}
                         }
+                        subtract_from_variable = {global.soft_market_array@25 = 100}
                         add_equipment_to_stockpile = {
                             producer = EMP
                             type = motorized_equipment_1
@@ -4505,8 +4524,9 @@ scripted_gui = {
                     if = {
                         limit = {
                             has_country_flag = level_0_T1_S_active
-                            check_variable = {global.soft_market_array@25 > 0}
+                            check_variable = {global.soft_market_array@25 > 99}
                         }
+                        subtract_from_variable = {global.soft_market_array@25 = 100}
                         add_equipment_to_stockpile = {
                             producer = var:global.T1_S_holder
                             type = motorized_equipment_1
@@ -4530,8 +4550,9 @@ scripted_gui = {
                     if = {
                         limit = {
                             has_country_flag = level_0_MPTL_2a_active
-                            check_variable = {global.soft_market_array@26 > 0}
+                            check_variable = {global.soft_market_array@26 > 99}
                         }
+                        subtract_from_variable = {global.soft_market_array@26 = 100}
                         add_equipment_to_stockpile = {
                             producer = EMP
                             type = artillery_equipment_1
@@ -4540,8 +4561,9 @@ scripted_gui = {
                     }else_if = {
                         limit = {
                             has_country_flag = level_1_MPTL_2a_active
-                            check_variable = {global.soft_market_array@27 > 0}
+                            check_variable = {global.soft_market_array@27 > 99}
                         }
+                        subtract_from_variable = {global.soft_market_array@27 = 100}
                         add_equipment_to_stockpile = {
                             producer = emp
                             type = artillery_equipment_2
@@ -4550,8 +4572,9 @@ scripted_gui = {
                     }else_if = {
                         limit = {
                             has_country_flag = level_2_MPTL_2a_active
-                            check_variable = {global.soft_market_array@28 > 0}
+                            check_variable = {global.soft_market_array@28 > 99}
                         }
+                        subtract_from_variable = {global.soft_market_array@28 = 100}
                         add_equipment_to_stockpile = {
                             producer = emp
                             type = artillery_equipment_3
@@ -4562,8 +4585,9 @@ scripted_gui = {
                     if = {
                         limit = {
                             has_country_flag = level_0_MPTL_2a_active
-                            check_variable = {global.soft_market_array@26 > 0}
+                            check_variable = {global.soft_market_array@26 > 99}
                         }
+                        subtract_from_variable = {global.soft_market_array@26 = 100}
                         add_equipment_to_stockpile = {
                             producer = var:global.MPTL_2a_holder
                             type = artillery_equipment_1
@@ -4572,8 +4596,9 @@ scripted_gui = {
                     }else_if = {
                         limit = {
                             has_country_flag = level_1_MPTL_2a_active
-                            check_variable = {global.soft_market_array@27 > 0}
+                            check_variable = {global.soft_market_array@27 > 99}
                         }
+                        subtract_from_variable = {global.soft_market_array@27 = 100}
                         add_equipment_to_stockpile = {
                             producer = emp
                             type = artillery_equipment_2
@@ -4582,8 +4607,9 @@ scripted_gui = {
                     }else_if = {
                         limit = {
                             has_country_flag = level_2_MPTL_2a_active
-                            check_variable = {global.soft_market_array@28 > 0}
+                            check_variable = {global.soft_market_array@28 > 99}
                         }
+                        subtract_from_variable = {global.soft_market_array@28 = 100}
                         add_equipment_to_stockpile = {
                             producer = emp
                             type = artillery_equipment_3
@@ -4807,8 +4833,9 @@ scripted_gui = {
                     if = {
                         limit = {
                             has_country_flag = level_0_republic_supply_equipment_active
-                            check_variable = {global.soft_market_array@29 > 0}
+                            check_variable = {global.soft_market_array@29 > 99}
                         }
+                        subtract_from_variable = {global.soft_market_array@29 = 100}
                         add_equipment_to_stockpile = {
                             producer = EMP
                             type = support_equipment_1
@@ -4819,8 +4846,9 @@ scripted_gui = {
                     if = {
                         limit = {
                             has_country_flag = level_0_republic_supply_equipment_active
-                            check_variable = {global.soft_market_array@29 > 0}
+                            check_variable = {global.soft_market_array@29 > 99}
                         }
+                        subtract_from_variable = {global.soft_market_array@29 = 100}
                         add_equipment_to_stockpile = {
                             producer = var:global.republic_supply_equipment_holder
                             type = republic_supply_equipment_0
@@ -4862,48 +4890,48 @@ scripted_gui = {
                     if = {
                         limit = {
                             has_country_flag = level_0_at_at_active
-                            check_variable = {global.market_tank_holder@14 > 0}
+                            check_variable = {global.market_tank_holder@14 > 99}
                         }
+                        subtract_from_variable = {global.market_tank_holder@14 = 100}
                         add_equipment_to_stockpile = {
-                            producer = EMP
+                            producer = KUA
                             type = at_at_chassis_0
                             amount = 100
-                            variant_name = "at_at V1"
                         }
                     }else_if = {
                         limit = {
                             has_country_flag = level_1_at_at_active
-                            check_variable = {global.market_tank_holder@15 > 0}
+                            check_variable = {global.market_tank_holder@15 > 99}
                         }
+                        subtract_from_variable = {global.market_tank_holder@15 = 100}
                         add_equipment_to_stockpile = {
-                            producer = emp
+                            producer = KUA
                             type = at_at_chassis_1
                             amount = 100
-                            variant_name = "at_at V2"
                         }
                     }
                 }else = {
                     if = {
                         limit = {
                             has_country_flag = level_0_at_at_active
-                            check_variable = {global.market_tank_holder@14 > 0}
+                            check_variable = {global.market_tank_holder@14 > 99}
                         }
+                        subtract_from_variable = {global.market_tank_holder@14 = 100}
                         add_equipment_to_stockpile = {
                             producer = var:global.at_at_holder
                             type = at_at_chassis_0
                             amount = 100
-                            variant_name = "at_at V1"
                         }
                     }else_if = {
                         limit = {
                             has_country_flag = level_1_at_at_active
-                            check_variable = {global.market_tank_holder@15 > 0}
+                            check_variable = {global.market_tank_holder@15 > 99}
                         }
+                        subtract_from_variable = {global.market_tank_holder@15 = 100}
                         add_equipment_to_stockpile = {
                             producer = emp
                             type = at_at_chassis_1
                             amount = 100
-                            variant_name = "at_at V2"
                         }
                     }
                 }
@@ -4941,48 +4969,48 @@ scripted_gui = {
                     if = {
                         limit = {
                             has_country_flag = level_0_at_aa_active
-                            check_variable = {global.market_tank_holder@16 > 0}
+                            check_variable = {global.market_tank_holder@16 > 99}
                         }
+                        subtract_from_variable = {global.market_tank_holder@16 = 100}
                         add_equipment_to_stockpile = {
                             producer = EMP
                             type = at_aa_chassis_0
                             amount = 100
-                            variant_name = "at_aa V1"
                         }
                     }else_if = {
                         limit = {
                             has_country_flag = level_1_at_aa_active
-                            check_variable = {global.market_tank_holder@17 > 0}
+                            check_variable = {global.market_tank_holder@17 > 99}
                         }
+                        subtract_from_variable = {global.market_tank_holder@17 = 100}
                         add_equipment_to_stockpile = {
                             producer = emp
                             type = at_aa_chassis_1
                             amount = 100
-                            variant_name = "at_aa V2"
                         }
                     }
                 }else = {
                     if = {
                         limit = {
                             has_country_flag = level_0_at_aa_active
-                            check_variable = {global.market_tank_holder@16 > 0}
+                            check_variable = {global.market_tank_holder@16 > 99}
                         }
+                        subtract_from_variable = {global.market_tank_holder@16 = 100}
                         add_equipment_to_stockpile = {
                             producer = var:global.at_aa_holder
                             type = at_aa_chassis_0
                             amount = 100
-                            variant_name = "at_aa V1"
                         }
                     }else_if = {
                         limit = {
                             has_country_flag = level_1_at_aa_active
-                            check_variable = {global.market_tank_holder@17 > 0}
+                            check_variable = {global.market_tank_holder@17 > 99}
                         }
+                        subtract_from_variable = {global.market_tank_holder@17 = 100}
                         add_equipment_to_stockpile = {
                             producer = emp
                             type = at_aa_chassis_1
                             amount = 100
-                            variant_name = "at_aa V2"
                         }
                     }
                 }
@@ -5020,48 +5048,48 @@ scripted_gui = {
                     if = {
                         limit = {
                             has_country_flag = level_0_juggernaut_active
-                            check_variable = {global.market_tank_holder@18 > 0}
+                            check_variable = {global.market_tank_holder@18 > 99}
                         }
+                        subtract_from_variable = {global.market_tank_holder@18 = 100}
                         add_equipment_to_stockpile = {
                             producer = EMP
                             type = juggernaut_chassis_0
                             amount = 100
-                            variant_name = "juggernaut V1"
                         }
                     }else_if = {
                         limit = {
                             has_country_flag = level_1_juggernaut_active
-                            check_variable = {global.market_tank_holder@19 > 0}
+                            check_variable = {global.market_tank_holder@19 > 99}
                         }
+                        subtract_from_variable = {global.market_tank_holder@19 = 100}
                         add_equipment_to_stockpile = {
                             producer = emp
                             type = juggernaut_chassis_1
                             amount = 100
-                            variant_name = "juggernaut V2"
                         }
                     }
                 }else = {
                     if = {
                         limit = {
                             has_country_flag = level_0_juggernaut_active
-                            check_variable = {global.market_tank_holder@18 > 0}
+                            check_variable = {global.market_tank_holder@18 > 99}
                         }
+                        subtract_from_variable = {global.market_tank_holder@18 = 100}
                         add_equipment_to_stockpile = {
                             producer = var:global.juggernaut_holder
                             type = juggernaut_chassis_0
                             amount = 100
-                            variant_name = "juggernaut V1"
                         }
                     }else_if = {
                         limit = {
                             has_country_flag = level_1_juggernaut_active
-                            check_variable = {global.market_tank_holder@19 > 0}
+                            check_variable = {global.market_tank_holder@19 > 99}
                         }
+                        subtract_from_variable = {global.market_tank_holder@19 = 100}
                         add_equipment_to_stockpile = {
                             producer = emp
                             type = juggernaut_chassis_1
                             amount = 100
-                            variant_name = "juggernaut V2"
                         }
                     }
                 }
@@ -5099,48 +5127,48 @@ scripted_gui = {
                     if = {
                         limit = {
                             has_country_flag = level_0_at_st_active
-                            check_variable = {global.market_tank_holder@20 > 0}
+                            check_variable = {global.market_tank_holder@20 > 99}
                         }
+                        subtract_from_variable = {global.market_tank_holder@20 = 100}
                         add_equipment_to_stockpile = {
                             producer = EMP
                             type = at_st_chassis_0
                             amount = 100
-                            variant_name = "at_st V1"
                         }
                     }else_if = {
                         limit = {
                             has_country_flag = level_1_at_st_active
-                            check_variable = {global.market_tank_holder@21 > 0}
+                            check_variable = {global.market_tank_holder@21 > 99}
                         }
+                        subtract_from_variable = {global.market_tank_holder@21 = 100}
                         add_equipment_to_stockpile = {
                             producer = emp
                             type = at_st_chassis_1
                             amount = 100
-                            variant_name = "at_st V2"
                         }
                     }
                 }else = {
                     if = {
                         limit = {
                             has_country_flag = level_0_at_st_active
-                            check_variable = {global.market_tank_holder@20 > 0}
+                            check_variable = {global.market_tank_holder@20 > 99}
                         }
+                        subtract_from_variable = {global.market_tank_holder@20 = 100}
                         add_equipment_to_stockpile = {
                             producer = var:global.at_st_holder
                             type = at_st_chassis_0
                             amount = 100
-                            variant_name = "at_st V1"
                         }
                     }else_if = {
                         limit = {
                             has_country_flag = level_1_at_st_active
-                            check_variable = {global.market_tank_holder@21 > 0}
+                            check_variable = {global.market_tank_holder@21 > 99}
                         }
+                        subtract_from_variable = {global.market_tank_holder@21 = 100}
                         add_equipment_to_stockpile = {
                             producer = emp
                             type = at_st_chassis_1
                             amount = 100
-                            variant_name = "at_st V2"
                         }
                     }
                 }
@@ -5178,48 +5206,48 @@ scripted_gui = {
                     if = {
                         limit = {
                             has_country_flag = level_0_tx_130T_active
-                            check_variable = {global.market_tank_holder@22 > 0}
+                            check_variable = {global.market_tank_holder@22 > 99}
                         }
+                        subtract_from_variable = {global.market_tank_holder@22 = 100}
                         add_equipment_to_stockpile = {
                             producer = EMP
                             type = tx_130T_chassis_0
                             amount = 100
-                            variant_name = "tx_130T V1"
                         }
                     }else_if = {
                         limit = {
                             has_country_flag = level_1_tx_130T_active
-                            check_variable = {global.market_tank_holder@23 > 0}
+                            check_variable = {global.market_tank_holder@23 > 99}
                         }
+                        subtract_from_variable = {global.market_tank_holder@23 = 100}
                         add_equipment_to_stockpile = {
                             producer = emp
                             type = tx_130T_chassis_1
                             amount = 100
-                            variant_name = "tx_130T V2"
                         }
                     }
                 }else = {
                     if = {
                         limit = {
                             has_country_flag = level_0_tx_130T_active
-                            check_variable = {global.market_tank_holder@22 > 0}
+                            check_variable = {global.market_tank_holder@22 > 99}
                         }
+                        subtract_from_variable = {global.market_tank_holder@22 = 100}
                         add_equipment_to_stockpile = {
                             producer = var:global.tx_130T_holder
                             type = tx_130T_chassis_0
                             amount = 100
-                            variant_name = "tx_130T V1"
                         }
                     }else_if = {
                         limit = {
                             has_country_flag = level_1_tx_130T_active
-                            check_variable = {global.market_tank_holder@23 > 0}
+                            check_variable = {global.market_tank_holder@23 > 99}
                         }
+                        subtract_from_variable = {global.market_tank_holder@23 = 100}
                         add_equipment_to_stockpile = {
                             producer = emp
                             type = tx_130T_chassis_1
                             amount = 100
-                            variant_name = "tx_130T V2"
                         }
                     }
                 }
@@ -5257,48 +5285,48 @@ scripted_gui = {
                     if = {
                         limit = {
                             has_country_flag = level_0_at_dp_active
-                            check_variable = {global.market_tank_holder@24 > 0}
+                            check_variable = {global.market_tank_holder@24 > 99}
                         }
+                        subtract_from_variable = {global.market_tank_holder@24 = 100}
                         add_equipment_to_stockpile = {
                             producer = EMP
                             type = at_dp_chassis_0
                             amount = 100
-                            variant_name = "at_dp V1"
                         }
                     }else_if = {
                         limit = {
                             has_country_flag = level_1_at_dp_active
-                            check_variable = {global.market_tank_holder@25 > 0}
+                            check_variable = {global.market_tank_holder@25 > 99}
                         }
+                        subtract_from_variable = {global.market_tank_holder@25 = 100}
                         add_equipment_to_stockpile = {
                             producer = emp
                             type = at_dp_chassis_1
                             amount = 100
-                            variant_name = "at_dp V2"
                         }
                     }
                 }else = {
                     if = {
                         limit = {
                             has_country_flag = level_0_at_dp_active
-                            check_variable = {global.market_tank_holder@24 > 0}
+                            check_variable = {global.market_tank_holder@24 > 99}
                         }
+                        subtract_from_variable = {global.market_tank_holder@24 = 100}
                         add_equipment_to_stockpile = {
                             producer = var:global.at_dp_holder
                             type = at_dp_chassis_0
                             amount = 100
-                            variant_name = "at_dp V1"
                         }
                     }else_if = {
                         limit = {
                             has_country_flag = level_1_at_dp_active
-                            check_variable = {global.market_tank_holder@25 > 0}
+                            check_variable = {global.market_tank_holder@25 > 99}
                         }
+                        subtract_from_variable = {global.market_tank_holder@25 = 100}
                         add_equipment_to_stockpile = {
                             producer = emp
                             type = at_dp_chassis_1
                             amount = 100
-                            variant_name = "at_dp V2"
                         }
                     }
                 }
@@ -5470,48 +5498,48 @@ scripted_gui = {
                     if = {
                         limit = {
                             has_country_flag = level_0_tie_crawler_active
-                            check_variable = {global.market_tank_holder@26 > 0}
+                            check_variable = {global.market_tank_holder@26 > 99}
                         }
+                        subtract_from_variable = {global.market_tank_holder@26 = 100}
                         add_equipment_to_stockpile = {
                             producer = EMP
                             type = tie_crawler_chassis_0
                             amount = 100
-                            variant_name = "tie_crawler V1"
                         }
                     }else_if = {
                         limit = {
                             has_country_flag = level_1_tie_crawler_active
-                            check_variable = {global.market_tank_holder@27 > 0}
+                            check_variable = {global.market_tank_holder@27 > 99}
                         }
+                        subtract_from_variable = {global.market_tank_holder@27 = 100}
                         add_equipment_to_stockpile = {
                             producer = emp
                             type = tie_crawler_chassis_1
                             amount = 100
-                            variant_name = "tie_crawler V2"
                         }
                     }
                 }else = {
                     if = {
                         limit = {
                             has_country_flag = level_0_tie_crawler_active
-                            check_variable = {global.market_tank_holder@26 > 0}
+                            check_variable = {global.market_tank_holder@26 > 99}
                         }
+                        subtract_from_variable = {global.market_tank_holder@26 = 100}
                         add_equipment_to_stockpile = {
                             producer = var:global.tie_crawler_holder
                             type = tie_crawler_chassis_0
                             amount = 100
-                            variant_name = "tie_crawler V1"
                         }
                     }else_if = {
                         limit = {
                             has_country_flag = level_1_tie_crawler_active
-                            check_variable = {global.market_tank_holder@27 > 0}
+                            check_variable = {global.market_tank_holder@27 > 99}
                         }
+                        subtract_from_variable = {global.market_tank_holder@27 = 100}
                         add_equipment_to_stockpile = {
                             producer = emp
                             type = tie_crawler_chassis_1
                             amount = 100
-                            variant_name = "tie_crawler V2"
                         }
                     }
                 }
@@ -5549,8 +5577,9 @@ scripted_gui = {
                     if = {
                         limit = {
                             has_country_flag = level_0_E_11_blaster_active
-                            check_variable = {global.soft_market_array@0 > 0}
+                            check_variable = {global.soft_market_array@0 > 99}
                         }
+                        subtract_from_variable = {global.soft_market_array@0 = 100}
                         add_equipment_to_stockpile = {
                             producer = EMP
                             type = infantry_equipment_0
@@ -5559,8 +5588,9 @@ scripted_gui = {
                     }else_if = {
                         limit = {
                             has_country_flag = level_1_E_11_blaster_active
-                            check_variable = {global.soft_market_array@1 > 0}
+                            check_variable = {global.soft_market_array@1 > 99}
                         }
+                        subtract_from_variable = {global.soft_market_array@1 = 100}
                         add_equipment_to_stockpile = {
                             producer = emp
                             type = infantry_equipment_1
@@ -5569,8 +5599,9 @@ scripted_gui = {
                     }else_if = {
                         limit = {
                             has_country_flag = level_2_E_11_blaster_active
-                            check_variable = {global.soft_market_array@2 > 0}
+                            check_variable = {global.soft_market_array@2 > 99}
                         }
+                        subtract_from_variable = {global.soft_market_array@2 = 100}
                         add_equipment_to_stockpile = {
                             producer = emp
                             type = infantry_equipment_2
@@ -5579,8 +5610,9 @@ scripted_gui = {
                     }else_if = {
                         limit = {
                             has_country_flag = level_3_E_11_blaster_active
-                            check_variable = {global.soft_market_array@3 > 0}
+                            check_variable = {global.soft_market_array@3 > 99}
                         }
+                        subtract_from_variable = {global.soft_market_array@3 = 100}
                         add_equipment_to_stockpile = {
                             producer = emp
                             type = infantry_equipment_3
@@ -5591,8 +5623,9 @@ scripted_gui = {
                     if = {
                         limit = {
                             has_country_flag = level_0_E_11_blaster_active
-                            check_variable = {global.soft_market_array@0 > 0}
+                            check_variable = {global.soft_market_array@0 > 99}
                         }
+                        subtract_from_variable = {global.soft_market_array@0 = 100}
                         add_equipment_to_stockpile = {
                             producer = var:global.E_11_blaster_holder
                             type = infantry_equipment_0
@@ -5601,8 +5634,9 @@ scripted_gui = {
                     }else_if = {
                         limit = {
                             has_country_flag = level_1_E_11_blaster_active
-                            check_variable = {global.soft_market_array@1 > 0}
+                            check_variable = {global.soft_market_array@1 > 99}
                         }
+                        subtract_from_variable = {global.soft_market_array@1 = 100}
                         add_equipment_to_stockpile = {
                             producer = emp
                             type = infantry_equipment_1
@@ -5611,8 +5645,9 @@ scripted_gui = {
                     }else_if = {
                         limit = {
                             has_country_flag = level_2_E_11_blaster_active
-                            check_variable = {global.soft_market_array@2 > 0}
+                            check_variable = {global.soft_market_array@2 > 99}
                         }
+                        subtract_from_variable = {global.soft_market_array@2 = 100}
                         add_equipment_to_stockpile = {
                             producer = emp
                             type = infantry_equipment_2
@@ -5622,8 +5657,9 @@ scripted_gui = {
                     else_if = {
                         limit = {
                             has_country_flag = level_3_E_11_blaster_active
-                            check_variable = {global.soft_market_array@3 > 0}
+                            check_variable = {global.soft_market_array@3 > 99}
                         }
+                        subtract_from_variable = {global.soft_market_array@3 = 100}
                         add_equipment_to_stockpile = {
                             producer = emp
                             type = infantry_equipment_3
@@ -5723,8 +5759,9 @@ scripted_gui = {
                     if = {
                         limit = {
                             has_country_flag = level_0_EE_4_carbine_active
-                            check_variable = {global.soft_market_array@4 > 0}
+                            check_variable = {global.soft_market_array@4 > 99}
                         }
+                        subtract_from_variable = {global.soft_market_array@4 = 100}
                         add_equipment_to_stockpile = {
                             producer = EMP
                             type = cheap_blaster_0
@@ -5733,8 +5770,9 @@ scripted_gui = {
                     }else_if = {
                         limit = {
                             has_country_flag = level_1_EE_4_carbine_active
-                            check_variable = {global.soft_market_array@5 > 0}
+                            check_variable = {global.soft_market_array@5 > 99}
                         }
+                        subtract_from_variable = {global.soft_market_array@5 = 100}
                         add_equipment_to_stockpile = {
                             producer = emp
                             type = cheap_blaster_1
@@ -5743,8 +5781,9 @@ scripted_gui = {
                     }else_if = {
                         limit = {
                             has_country_flag = level_2_EE_4_carbine_active
-                            check_variable = {global.soft_market_array@6 > 0}
+                            check_variable = {global.soft_market_array@6 > 99}
                         }
+                        subtract_from_variable = {global.soft_market_array@6 = 100}
                         add_equipment_to_stockpile = {
                             producer = emp
                             type = cheap_blaster_2
@@ -5755,8 +5794,9 @@ scripted_gui = {
                     if = {
                         limit = {
                             has_country_flag = level_0_EE_4_carbine_active
-                            check_variable = {global.soft_market_array@4 > 0}
+                            check_variable = {global.soft_market_array@4 > 99}
                         }
+                        subtract_from_variable = {global.soft_market_array@4 = 100}
                         add_equipment_to_stockpile = {
                             producer = var:global.EE_4_carbine_holder
                             type = cheap_blaster_0
@@ -5765,8 +5805,9 @@ scripted_gui = {
                     }else_if = {
                         limit = {
                             has_country_flag = level_1_EE_4_carbine_active
-                            check_variable = {global.soft_market_array@5 > 0}
+                            check_variable = {global.soft_market_array@5 > 99}
                         }
+                        subtract_from_variable = {global.soft_market_array@5 = 100}
                         add_equipment_to_stockpile = {
                             producer = emp
                             type = cheap_blaster_1
@@ -5775,8 +5816,9 @@ scripted_gui = {
                     }else_if = {
                         limit = {
                             has_country_flag = level_2_EE_4_carbine_active
-                            check_variable = {global.soft_market_array@6 > 0}
+                            check_variable = {global.soft_market_array@6 > 99}
                         }
+                        subtract_from_variable = {global.soft_market_array@6 = 100}
                         add_equipment_to_stockpile = {
                             producer = emp
                             type = cheap_blaster_2
@@ -5842,8 +5884,9 @@ scripted_gui = {
                     if = {
                         limit = {
                             has_country_flag = level_0_smart_rocket_active
-                            check_variable = {global.soft_market_array@7 > 0}
+                            check_variable = {global.soft_market_array@7 > 99}
                         }
+                        subtract_from_variable = {global.soft_market_array@7 = 100}
                         add_equipment_to_stockpile = {
                             producer = EMP
                             type = anti_tank_equipment_1
@@ -5852,8 +5895,9 @@ scripted_gui = {
                     }else_if = {
                         limit = {
                             has_country_flag = level_1_smart_rocket_active
-                            check_variable = {global.soft_market_array@8 > 0}
+                            check_variable = {global.soft_market_array@8 > 99}
                         }
+                        subtract_from_variable = {global.soft_market_array@8 = 100}
                         add_equipment_to_stockpile = {
                             producer = emp
                             type = anti_tank_equipment_2
@@ -5862,8 +5906,9 @@ scripted_gui = {
                     }else_if = {
                         limit = {
                             has_country_flag = level_2_smart_rocket_active
-                            check_variable = {global.soft_market_array@9 > 0}
+                            check_variable = {global.soft_market_array@9 > 99}
                         }
+                        subtract_from_variable = {global.soft_market_array@9 = 100}
                         add_equipment_to_stockpile = {
                             producer = emp
                             type = anti_tank_equipment_3
@@ -5874,8 +5919,9 @@ scripted_gui = {
                     if = {
                         limit = {
                             has_country_flag = level_0_smart_rocket_active
-                            check_variable = {global.soft_market_array@7 > 0}
+                            check_variable = {global.soft_market_array@7 > 99}
                         }
+                        subtract_from_variable = {global.soft_market_array@7 = 100}
                         add_equipment_to_stockpile = {
                             producer = var:global.smart_rocket_holder
                             type = anti_tank_equipment_1
@@ -5884,8 +5930,9 @@ scripted_gui = {
                     }else_if = {
                         limit = {
                             has_country_flag = level_1_smart_rocket_active
-                            check_variable = {global.soft_market_array@8 > 0}
+                            check_variable = {global.soft_market_array@8 > 99}
                         }
+                        subtract_from_variable = {global.soft_market_array@8 = 100}
                         add_equipment_to_stockpile = {
                             producer = emp
                             type = anti_tank_equipment_2
@@ -5894,8 +5941,9 @@ scripted_gui = {
                     }else_if = {
                         limit = {
                             has_country_flag = level_2_smart_rocket_active
-                            check_variable = {global.soft_market_array@9 > 0}
+                            check_variable = {global.soft_market_array@9 > 99}
                         }
+                        subtract_from_variable = {global.soft_market_array@9 = 100}
                         add_equipment_to_stockpile = {
                             producer = emp
                             type = anti_tank_equipment_3
@@ -5952,7 +6000,7 @@ scripted_gui = {
             product_buy_one_K79_S80_click = {
                 if = {
                     limit = {
-                        check_variable = {global.market_inf_equip_holder@4 > 0}
+                        check_variable = {global.market_inf_equip_holder@4 > 99}
                     }
                     if = {
                         limit = {
@@ -5965,7 +6013,7 @@ scripted_gui = {
                         if = {
                             limit = {
                                 has_country_flag = level_0_K79_S80_active
-                                check_variable = {global.soft_market_array@10 > 0}
+                                check_variable = {global.soft_market_array@10 > 99}
                             }
                             add_equipment_to_stockpile = {
                                 producer = EMP
@@ -5977,7 +6025,7 @@ scripted_gui = {
                         if = {
                             limit = {
                                 has_country_flag = level_0_K79_S80_active
-                                check_variable = {global.soft_market_array@10 > 0}
+                                check_variable = {global.soft_market_array@10 > 99}
                             }
                             add_equipment_to_stockpile = {
                                 producer = var:global.K79_S80_holder
@@ -6003,8 +6051,9 @@ scripted_gui = {
                     if = {
                         limit = {
                             has_country_flag = level_0_SPHA_active
-                            check_variable = {global.soft_market_array@11 > 0}
+                            check_variable = {global.soft_market_array@11 > 99}
                         }
+                        subtract_from_variable = {global.soft_market_array@11 = 100}
                         add_equipment_to_stockpile = {
                             producer = EMP
                             type = artillery_equipment_1
@@ -6013,8 +6062,9 @@ scripted_gui = {
                     }else_if = {
                         limit = {
                             has_country_flag = level_1_SPHA_active
-                            check_variable = {global.soft_market_array@12 > 0}
+                            check_variable = {global.soft_market_array@12 > 99}
                         }
+                        subtract_from_variable = {global.soft_market_array@12 = 100}
                         add_equipment_to_stockpile = {
                             producer = emp
                             type = artillery_equipment_2
@@ -6023,8 +6073,9 @@ scripted_gui = {
                     }else_if = {
                         limit = {
                             has_country_flag = level_2_SPHA_active
-                            check_variable = {global.soft_market_array@13 > 0}
+                            check_variable = {global.soft_market_array@13 > 99}
                         }
+                        subtract_from_variable = {global.soft_market_array@13 = 100}
                         add_equipment_to_stockpile = {
                             producer = emp
                             type = artillery_equipment_3
@@ -6035,8 +6086,9 @@ scripted_gui = {
                     if = {
                         limit = {
                             has_country_flag = level_0_SPHA_active
-                            check_variable = {global.soft_market_array@11 > 0}
+                            check_variable = {global.soft_market_array@11 > 99}
                         }
+                        subtract_from_variable = {global.soft_market_array@11 = 100}
                         add_equipment_to_stockpile = {
                             producer = var:global.SPHA_holder
                             type = artillery_equipment_1
@@ -6045,8 +6097,9 @@ scripted_gui = {
                     }else_if = {
                         limit = {
                             has_country_flag = level_1_SPHA_active
-                            check_variable = {global.soft_market_array@12 > 0}
+                            check_variable = {global.soft_market_array@12 > 99}
                         }
+                        subtract_from_variable = {global.soft_market_array@12 = 100}
                         add_equipment_to_stockpile = {
                             producer = emp
                             type = artillery_equipment_2
@@ -6055,8 +6108,9 @@ scripted_gui = {
                     }else_if = {
                         limit = {
                             has_country_flag = level_2_SPHA_active
-                            check_variable = {global.soft_market_array@13 > 0}
+                            check_variable = {global.soft_market_array@13 > 99}
                         }
+                        subtract_from_variable = {global.soft_market_array@13 = 100}
                         add_equipment_to_stockpile = {
                             producer = emp
                             type = artillery_equipment_2
@@ -6280,8 +6334,9 @@ scripted_gui = {
                     if = {
                         limit = {
                             has_country_flag = level_0_imperial_supply_equipment_active
-                            check_variable = {global.soft_market_array@14 > 0}
+                            check_variable = {global.soft_market_array@14 > 99}
                         }
+                        subtract_from_variable = {global.soft_market_array@14 = 100}
                         add_equipment_to_stockpile = {
                             producer = EMP
                             type = support_equipment_1
@@ -6292,8 +6347,9 @@ scripted_gui = {
                     if = {
                         limit = {
                             has_country_flag = level_0_imperial_supply_equipment_active
-                            check_variable = {global.soft_market_array@14 > 0}
+                            check_variable = {global.soft_market_array@14 > 99}
                         }
+                        subtract_from_variable = {global.soft_market_array@14 = 100}
                         add_equipment_to_stockpile = {
                             producer = var:global.imperial_supply_equipment_holder
                             type = support_equipment_1
