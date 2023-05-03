@@ -323,6 +323,7 @@ news_event = {        #Endor Aftermath
     major = yes
 
     is_triggered_only = yes
+	fire_only_once = no
 
     immediate = {
     }
@@ -392,6 +393,56 @@ news_event = {        #Imperial Divorce
 	}
 	option = {
 		name = "The Empire is doomed!"
+		trigger = {
+			has_government = democratic
+		}
+	}
+	option = {
+		name = "Interesting."
+		trigger = {
+			AND = {
+				NOT ={
+					has_government = democratic
+				}
+				NOT ={
+					has_government = imperial
+				}
+			}
+			
+		}
+	}
+}
+
+news_event = {        #Imperial Divorce 2
+    id = empnews.11
+    title = empnews.11.t
+    desc = empnews.11.d
+	picture = GFX_news_event_001
+    major = yes
+
+    is_triggered_only = yes
+
+    immediate = {
+    }
+	option = {
+		name = "Unfortunate but inevitable..."
+		trigger = {
+			has_government = imperial
+			NOT = {
+				original_tag = EMP
+			}
+		}
+	}
+	option = {
+		name = "Traitors all!"
+		trigger = {
+			has_government = imperial
+			original_tag = EMP
+		}
+	}
+	
+	option = {
+		name = "The Empire is weak, time to strike..."
 		trigger = {
 			has_government = democratic
 		}

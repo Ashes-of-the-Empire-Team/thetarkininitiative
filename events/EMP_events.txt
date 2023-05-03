@@ -178,6 +178,14 @@ country_event = {
     }
     immediate = {
         add_ideas = EMP_loyalty_enforced
+        EMP = {
+            set_autonomy = {
+                target = PREV
+                autonomy_state = autonomy_imperial_sector
+                end_wars = no
+                end_civil_wars = no
+            }
+        }
     }
     fire_only_once = no
     is_triggered_only = yes
@@ -253,7 +261,7 @@ country_event = {
     fire_only_once = no
     is_triggered_only = yes
     option = {
-        name = "#NotMyEmperor"
+        name = "What a disgrace!"
         EMP = {
             country_event = {id=EMP.11}
         }
@@ -434,6 +442,7 @@ country_event = {
         #tooltip
         news_event = {id=empnews.8 hours=12}
         ai_chance = { factor = 100 }
+        promote_character = EMP_ysanne_isard
     }
 }
 
@@ -490,6 +499,7 @@ country_event = {
         complete_national_focus = EMP_the_conspiracy
         country_event = {id=EMP.12}
         kill_country_leader = yes
+        promote_character = EMP_ruling_council
         #Tooltip
     }
     option = {
@@ -773,5 +783,51 @@ country_event = {
             id = empnews.10
             hours = 12
         }
+    }
+}
+
+country_event = {
+    id = EMP.25 ##Breakup of the Empire
+    title = EMP.25
+    desc = EMP.25.d
+    picture = GFX_report_event_generic_read_write
+        
+    trigger = {
+    }
+    immediate = {
+    }
+    fire_only_once = no
+    is_triggered_only = yes
+    option = {
+        ai_chance = { factor = 90 }
+        name = "We must protect our interests!"
+        EMP = {
+            end_puppet = PREV
+        }
+        
+    }
+    option = {
+        ai_chance = { factor = 10 }
+        name = "We must stay loyal to the Empire!"
+    }
+}
+
+country_event = {
+    id = EMP.26 ##The Kuat Plot
+    title = EMP.26
+    desc = EMP.26.d
+    picture = GFX_report_event_generic_read_write
+    
+    trigger = {
+    }
+    mean_time_to_happen = {
+        
+    }
+    immediate = {
+    }
+    fire_only_once = no
+    is_triggered_only = yes
+    option = {
+        name = "Damn them!"
     }
 }
