@@ -6192,38 +6192,33 @@ scripted_gui = {
             product_buy_one_K79_S80_click = {
                 if = {
                     limit = {
-                        check_variable = {global.market_inf_equip_holder@4 > 99}
+                        CZE = {
+                            NOT = {
+                                has_country_flag = brought_out
+                            }
+                        }
                     }
                     if = {
                         limit = {
-                            CZE = {
-                                NOT = {
-                                    has_country_flag = brought_out
-                                }
-                            }
+                            has_country_flag = level_0_K79_S80_active
+                            check_variable = {global.soft_market_array@10 > 99}
                         }
-                        if = {
-                            limit = {
-                                has_country_flag = level_0_K79_S80_active
-                                check_variable = {global.soft_market_array@10 > 99}
-                            }
-                            add_equipment_to_stockpile = {
-                                producer = CZE
-                                type = motorized_equipment_1
-                                amount = 100
-                            }
+                        add_equipment_to_stockpile = {
+                            producer = CZE
+                            type = motorized_equipment_1
+                            amount = 100
                         }
-                    }else = {
-                        if = {
-                            limit = {
-                                has_country_flag = level_0_K79_S80_active
-                                check_variable = {global.soft_market_array@10 > 99}
-                            }
-                            add_equipment_to_stockpile = {
-                                producer = var:global.K79_S80_holder
-                                type = motorized_equipment_1
-                                amount = 100
-                            }
+                    }
+                }else = {
+                    if = {
+                        limit = {
+                            has_country_flag = level_0_K79_S80_active
+                            check_variable = {global.soft_market_array@10 > 99}
+                        }
+                        add_equipment_to_stockpile = {
+                            producer = var:global.K79_S80_holder
+                            type = motorized_equipment_1
+                            amount = 100
                         }
                     }
                 }
