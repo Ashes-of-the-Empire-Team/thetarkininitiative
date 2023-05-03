@@ -631,4 +631,83 @@ on_actions = {
 			}
 		}
 	}
+	on_daily = {
+		effect = {
+			if = {
+				limit = {
+					has_country_flag = light_ship_in_production
+				}
+				subtract_from_variable = {light_ship_production_time = 1}
+				if = {
+					limit = {
+						check_variable = {
+							var = light_ship_production_time
+							value = 0
+							compare = less_than_or_equals
+						}
+					}
+					add_to_variable = {global.market_ship_holder@var:light_selected_ship_production_cost = 1}
+					if = {
+						limit = {
+							has_country_flag = light_ship_auto_renew
+						}
+						recalculate_light_ship_creation_time = yes
+					}else = {
+						clr_country_flag = light_ship_in_production
+						recalculate_light_ship_creation_time = yes
+					}
+				}
+			}
+			if = {
+				limit = {
+					has_country_flag = medium_ship_in_production
+				}
+				subtract_from_variable = {medium_ship_production_time = 1}
+				if = {
+					limit = {
+						check_variable = {
+							var = medium_ship_production_time
+							value = 0
+							compare = less_than_or_equals
+						}
+					}
+					add_to_variable = {global.market_ship_holder@var:medium_selected_ship_production_cost = 1}
+					if = {
+						limit = {
+							has_country_flag = medium_ship_auto_renew
+						}
+						recalculate_medium_ship_creation_time = yes
+					}else = {
+						clr_country_flag = medium_ship_in_production
+						recalculate_medium_ship_creation_time = yes
+					}
+				}
+			}
+			if = {
+				limit = {
+					has_country_flag = heavy_ship_in_production
+				}
+				subtract_from_variable = {heavy_ship_production_time = 1}
+				if = {
+					limit = {
+						check_variable = {
+							var = heavy_ship_production_time
+							value = 0
+							compare = less_than_or_equals
+						}
+					}
+					add_to_variable = {global.market_ship_holder@var:heavy_selected_ship_production_cost = 1}
+					if = {
+						limit = {
+							has_country_flag = heavy_ship_auto_renew
+						}
+						recalculate_heavy_ship_creation_time = yes
+					}else = {
+						clr_country_flag = heavy_ship_in_production
+						recalculate_heavy_ship_creation_time = yes
+					}
+				}
+			}
+		}
+	}
 }

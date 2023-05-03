@@ -665,7 +665,7 @@ scripted_gui = {
 				}
 			}
 			light_ship_create_button_click = {
-				light_ship_creation_effect = yes
+				set_country_flag = light_ship_in_production
 			}
 			light_ship_auto_renew_button_click = {
 				if = {
@@ -678,7 +678,7 @@ scripted_gui = {
 				}
 			}
 			medium_ship_create_button_click = {
-				medium_ship_creation_effect = yes
+				set_country_flag = medium_ship_in_production
 			}
 			medium_ship_auto_renew_button_click = {
 				if = {
@@ -691,7 +691,7 @@ scripted_gui = {
 				}
 			}
 			heavy_ship_create_button_click = {
-				heavy_ship_creation_effect = yes
+				set_country_flag = heavy_ship_in_production
 			}
 			heavy_ship_auto_renew_button_click = {
 				if = {
@@ -788,40 +788,40 @@ scripted_gui = {
 			}
 			light_workers_add_button_click_enabled = {
 				NOT = {
-					has_idea = light_ship_idea_holder
+					has_country_flag = light_ship_in_production
 				}
 				has_manpower > 999
 				check_variable = {max_light_workers > light_ship_workers}
 			}
 			light_workers_subtract_button_click_enabled = {
 				NOT = {
-					has_idea = light_ship_idea_holder
+					has_country_flag = light_ship_in_production
 				}
 				check_variable = {light_ship_workers > 999}
 			}
 			medium_workers_add_button_click_enabled = {
 				NOT = {
-					has_idea = medium_ship_idea_holder
+					has_country_flag = medium_ship_in_production
 				}
 				has_manpower > 999
 				check_variable = {max_medium_workers > medium_ship_workers}
 			}
 			medium_workers_subtract_button_click_enabled = {
 				NOT = {
-					has_idea = medium_ship_idea_holder
+					has_country_flag = medium_ship_in_production
 				}
 				check_variable = {medium_ship_workers > 999}
 			}
 			heavy_workers_add_button_click_enabled = {
 				NOT = {
-					has_idea = heavy_ship_idea_holder
+					has_country_flag = heavy_ship_in_production
 				}
 				has_manpower > 999
 				check_variable = {max_heavy_workers > heavy_ship_workers}
 			}
 			heavy_workers_subtract_button_click_enabled = {
 				NOT = {
-					has_idea = heavy_ship_idea_holder
+					has_country_flag = heavy_ship_in_production
 				}
 				check_variable = {heavy_ship_workers > 999}
 			}
@@ -829,7 +829,7 @@ scripted_gui = {
 				AND = {
 					check_variable = {total_dockyards > 0}
 					NOT = {
-						has_idea = light_ship_idea_holder
+						has_country_flag = light_ship_in_production
 					}
 				}
 			}
@@ -837,7 +837,7 @@ scripted_gui = {
 				AND = {
 					check_variable = {total_dockyards > 0}
 					NOT = {
-						has_idea = medium_ship_idea_holder
+						has_country_flag = medium_ship_in_production
 					}
 				}
 			}
@@ -845,7 +845,7 @@ scripted_gui = {
 				AND = {
 					check_variable = {total_dockyards > 0}
 					NOT = {
-						has_idea = heavy_ship_idea_holder
+						has_country_flag = heavy_ship_in_production
 					}
 				}
 			}
@@ -853,7 +853,7 @@ scripted_gui = {
 				AND = {
 					check_variable = {light_dockyards > 0}
 					NOT = {
-						has_idea = light_ship_idea_holder
+						has_country_flag = light_ship_in_production
 					}
 				}
 			}
@@ -861,7 +861,7 @@ scripted_gui = {
 				AND = {
 					check_variable = {medium_dockyards > 0}
 					NOT = {
-						has_idea = medium_ship_idea_holder
+						has_country_flag = medium_ship_in_production
 					}
 				}
 			}
@@ -869,15 +869,21 @@ scripted_gui = {
 				AND = {
 					check_variable = {heavy_dockyards > 0}
 					NOT = {
-						has_idea = heavy_ship_idea_holder
+						has_country_flag = heavy_ship_in_production
 					}
 				}
 			}
 			light_ship_create_button_click_enabled = {
 				check_variable = {light_ship_workers > 0}
+				NOT = {
+					has_country_flag = light_ship_in_production
+				}
 			}
 			medium_ship_create_button_click_enabled = {
 				check_variable = {medium_ship_workers > 0}
+				NOT = {
+					has_country_flag = medium_ship_in_production
+				}
 			}
 			heavy_ship_create_button_click_enabled = {
 				check_variable = {heavy_ship_workers > 0}
