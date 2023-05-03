@@ -848,7 +848,7 @@ technologies = {
 
 		#at at
 		at_at = {
-	
+
 			enable_equipments = {
 				at_at_chassis_0
 			}	
@@ -889,7 +889,7 @@ technologies = {
 				leads_to_tech = at_at_UPI
 				research_cost_coeff = 1
 			}		
-	
+
 			categories = {
 				armor
 				cat_heavy_armor
@@ -901,52 +901,526 @@ technologies = {
 				factor = 1
 			}
 		}
-		at_at_UPI = {
-	
+		at_at_upgrade_1 = {
 			research_cost = 1.5
-			start_year = 8
+			start_year = 4
 			folder = {
 				name = emp_tank_folder
-				position = { x = 0 y = 6 }
+				position = { x = 0 y = 2 }
 			}
-				
+			
 			path = {
-				leads_to_tech = at_at_PEI
+				leads_to_tech = at_at_advanced
 				research_cost_coeff = 1
-			}		
+			}
+			categories = {
+				armor
+				cat_light_armor
+				emp_armor
+				at_dp
+			}
+		}
+		at_at_advanced = {
+			enable_equipments = {
+				at_at_chassis_1
+			}
+			on_research_complete = {
+				create_equipment_variant = {
+					name = "AT AT Advanced"
+					type = at_at_artillery_chassis_1
+					
+					parent_version = 0
+					modules = {
+						main_armament_slot = heavy_laser_gun_1
+						turret_type_slot = medium_blaster_gun_1
+						suspension_type_slot = vehicle_tracks
+						armor_type_slot = durasteel_armour
+						engine_type_slot = fuel_reactor_1
+					}
+				}
+			}	
+			path = {
+				leads_to_tech = at_at_upgrade_2
+				research_cost_coeff = 1
+			}
+			research_cost = 1.5
+			start_year = 4
+			## REPLACE_EASY
+	
 			categories = {
 				armor
 				cat_heavy_armor
 				emp_armor
-				at_at
+				at_st
 			}
 			
 			ai_will_do = {
 				factor = 1
 			}
 		}
-		at_at_PEI = {
-	
+		at_at_upgrade_2 = {
 			research_cost = 1.5
-			start_year = 10
+			start_year = 4
 			folder = {
 				name = emp_tank_folder
-				position = { x = 0 y = 8 }
+				position = { x = 0 y = 2 }
 			}
-				
+			categories = {
+				armor
+				cat_light_armor
+				emp_armor
+				at_dp
+			}
+		}
+		juggernaut = {
+			enable_equipments = {
+				juggernaut_chassis_0
+			}	
+			enable_subunits = {
+				juggernaut
+			}
+			on_research_complete = {
+				create_equipment_variant = {
+					name = "Juggernaut"
+					type = juggernaut_destroyer_chassis_0
+					
+					parent_version = 0
+					modules = {
+						main_armament_slot = heavy_laser_gun_1
+						turret_type_slot = medium_blaster_gun_1
+						suspension_type_slot = vehicle_tracks
+						armor_type_slot = durasteel_armour
+						engine_type_slot = fuel_reactor_1
+					}
+				}
+			}
+			enable_equipment_modules = {
+				vehicle_wheels
+				vehicle_tracks
+				vehicle_hover
+				vehicle_6_leg_walker
+				vehicle_4_leg_walker
+				vehicle_2_leg_walker
+			}
+			path = {
+				leads_to_tech = juggernaut_upgrade_1
+				research_cost_coeff = 1
+			}
+			research_cost = 1.5
+			start_year = 4
+			## REPLACE_EASY
 	
 			categories = {
 				armor
 				cat_heavy_armor
 				emp_armor
-				at_at
+				at_st
 			}
 			
+			ai_will_do = {
+				factor = 1
+			}
+		}
+		juggernaut_upgrade_1 = {
+			research_cost = 1.5
+			start_year = 4
+			folder = {
+				name = emp_tank_folder
+				position = { x = 0 y = 2 }
+			}
+			
+			path = {
+				leads_to_tech = juggernaut_upgrade_2
+				research_cost_coeff = 1
+			}
+			categories = {
+				armor
+				cat_light_armor
+				emp_armor
+				at_dp
+			}
+		}
+		juggernaut_upgrade_2 = {
+			research_cost = 1.5
+			start_year = 4
+			folder = {
+				name = emp_tank_folder
+				position = { x = 0 y = 2 }
+			}
+			
+			path = {
+				leads_to_tech = juggernaut_advanced
+				research_cost_coeff = 1
+			}
+			categories = {
+				armor
+				cat_light_armor
+				emp_armor
+				at_dp
+			}
+		}
+		juggernaut_advanced = {
+			enable_equipments = {
+				juggernaut_chassis_1
+			}
+			on_research_complete = {
+				create_equipment_variant = {
+					name = "Juggernaut Advanced"
+					type = juggernaut_destroyer_chassis_1
+					parent_version = 0
+					modules = {
+						main_armament_slot = medium_turbolaser_gun_1
+						turret_type_slot = medium_blaster_gun_1
+						suspension_type_slot = vehicle_hover
+						armor_type_slot = durasteel_armour
+						engine_type_slot = fuel_reactor_1
+					}
+				}
+			}	
+			research_cost = 1.5
+			start_year = 4
+			## REPLACE_EASY
+			categories = {
+				armor
+				cat_heavy_armor
+				emp_armor
+				at_st
+			}
+			path = {
+				leads_to_tech = at_at_advanced
+				research_cost_coeff = 1
+			}
 			ai_will_do = {
 				factor = 1
 			}
 		}
 		# at st
+		tx_130T = {
+			enable_equipments = {
+				tx_130T_chassis_0
+			}	
+			enable_subunits = {
+				tx_130T
+			}
+			on_research_complete = {
+				create_equipment_variant = {
+					name = "TX-130T"
+					type = tx_130T_amphibious_chassis_0
+					parent_version = 0
+					modules = {
+						main_armament_slot = medium_turbolaser_gun_1
+						turret_type_slot = medium_blaster_gun_1
+						suspension_type_slot = vehicle_hover
+						armor_type_slot = durasteel_armour
+						engine_type_slot = fuel_reactor_1
+					}
+				}
+			}
+			research_cost = 1.5
+			start_year = 4
+			## REPLACE_EASY
+			enable_equipment_modules = {
+				vehicle_wheels
+				vehicle_tracks
+				vehicle_hover
+				vehicle_6_leg_walker
+				vehicle_4_leg_walker
+				vehicle_2_leg_walker
+			}
+			categories = {
+				armor
+				cat_heavy_armor
+				emp_armor
+				at_st
+			}
+			path = {
+				leads_to_tech = tx_130T_upgrade_1
+				research_cost_coeff = 1
+			}
+			ai_will_do = {
+				factor = 1
+			}
+		}
+		tx_130T_upgrade_1 = {
+			research_cost = 1.5
+			start_year = 4
+			folder = {
+				name = emp_tank_folder
+				position = { x = 0 y = 2 }
+			}
+			
+			path = {
+				leads_to_tech = tx_130T_upgrade_2
+				research_cost_coeff = 1
+			}
+			categories = {
+				armor
+				cat_light_armor
+				emp_armor
+				at_dp
+			}
+		}
+		tx_130T_upgrade_2 = {
+			research_cost = 1.5
+			start_year = 4
+			folder = {
+				name = emp_tank_folder
+				position = { x = 0 y = 2 }
+			}
+			
+			path = {
+				leads_to_tech = tx_130T_upgrade_3_1
+				research_cost_coeff = 1
+			}
+			path = {
+				leads_to_tech = tx_130T_upgrade_3_2
+				research_cost_coeff = 1
+			}
+			categories = {
+				armor
+				cat_light_armor
+				emp_armor
+				at_dp
+			}
+		}
+		tx_130T_upgrade_3_1 = {
+			research_cost = 1.5
+			start_year = 4
+			folder = {
+				name = emp_tank_folder
+				position = { x = 0 y = 2 }
+			}
+			
+			path = {
+				leads_to_tech = tx_130T_advanced
+				research_cost_coeff = 1
+			}
+			categories = {
+				armor
+				cat_light_armor
+				emp_armor
+				at_dp
+			}
+		}
+		tx_130T_upgrade_3_2 = {
+			research_cost = 1.5
+			start_year = 4
+			folder = {
+				name = emp_tank_folder
+				position = { x = 0 y = 2 }
+			}
+			
+			path = {
+				leads_to_tech = tx_130T_advanced
+				research_cost_coeff = 1
+			}
+			categories = {
+				armor
+				cat_light_armor
+				emp_armor
+				at_dp
+			}
+		}
+		tx_130T_advanced = {
+			enable_equipments = {
+				tx_130T_chassis_1
+			}	
+			on_research_complete = {
+				create_equipment_variant = {
+					name = "TX-130T"
+					type = tx_130T_amphibious_chassis_1
+					parent_version = 0
+					modules = {
+						main_armament_slot = medium_turbolaser_gun_1
+						turret_type_slot = medium_blaster_gun_1
+						suspension_type_slot = vehicle_hover
+						armor_type_slot = durasteel_armour
+						engine_type_slot = fuel_reactor_1
+					}
+				}
+			}
+
+			path = {
+				leads_to_tech = tx_130T_upgrade_4
+				research_cost_coeff = 1
+			}
+			research_cost = 1.5
+			start_year = 4
+			## REPLACE_EASY
+			categories = {
+				armor
+				cat_heavy_armor
+				emp_armor
+				at_st
+			}
+			
+			ai_will_do = {
+				factor = 1
+			}
+		}
+		tx_130T_upgrade_4 = {
+			research_cost = 1.5
+			start_year = 4
+			folder = {
+				name = emp_tank_folder
+				position = { x = 0 y = 2 }
+			}
+			categories = {
+				armor
+				cat_light_armor
+				emp_armor
+				at_dp
+			}
+		}
+		#at dp
+		at_aa = {
+	
+			enable_equipments = {
+				at_aa_chassis_0
+			}	
+			enable_subunits = {
+				at_aa
+			}
+			on_research_complete = {
+				create_equipment_variant = {
+					name = "AT AA"
+					type = at_aa_artillery_chassis_0
+					
+					parent_version = 0
+					modules = {
+						main_armament_slot = heavy_laser_gun_1
+						turret_type_slot = medium_blaster_gun_1
+						suspension_type_slot = vehicle_4_leg_walker
+						armor_type_slot = durasteel_armour
+						engine_type_slot = fuel_reactor_1
+					}
+				}
+			}
+			enable_equipment_modules = {
+				vehicle_wheels
+				vehicle_tracks
+				vehicle_hover
+				vehicle_6_leg_walker
+				vehicle_4_leg_walker
+				vehicle_2_leg_walker
+			}
+			research_cost = 1.5
+			start_year = 4
+			## REPLACE_EASY
+	
+			categories = {
+				armor
+				cat_heavy_armor
+				emp_armor
+				at_st
+			}
+			path = {
+				leads_to_tech = at_aa_upgrade_1
+				research_cost_coeff = 1
+			}
+			ai_will_do = {
+				factor = 1
+			}
+		}
+		at_aa_upgrade_1 = {
+			research_cost = 1.5
+			start_year = 4
+			folder = {
+				name = emp_tank_folder
+				position = { x = 0 y = 2 }
+			}
+			
+			path = {
+				leads_to_tech = at_aa_upgrade_2
+				research_cost_coeff = 1
+			}
+			categories = {
+				armor
+				cat_light_armor
+				emp_armor
+				at_dp
+			}
+		}
+		at_aa_upgrade_2 = {
+			research_cost = 1.5
+			start_year = 4
+			folder = {
+				name = emp_tank_folder
+				position = { x = 0 y = 2 }
+			}
+			
+			path = {
+				leads_to_tech = at_aa_upgrade_3
+				research_cost_coeff = 1
+			}
+			categories = {
+				armor
+				cat_light_armor
+				emp_armor
+				at_dp
+			}
+		}
+		at_aa_upgrade_3 = {
+			research_cost = 1.5
+			start_year = 4
+			folder = {
+				name = emp_tank_folder
+				position = { x = 0 y = 2 }
+			}
+			
+			path = {
+				leads_to_tech = at_aa_advanced
+				research_cost_coeff = 1
+			}
+			categories = {
+				armor
+				cat_light_armor
+				emp_armor
+				at_dp
+			}
+		}
+		at_aa_advanced = {
+				
+			enable_equipments = {
+				at_aa_chassis_1
+			}	
+			on_research_complete = {
+				create_equipment_variant = {
+					name = "AT AA Advanced"
+					type = at_aa_artillery_chassis_1
+					
+					parent_version = 0
+					modules = {
+						main_armament_slot = heavy_laser_gun_1
+						turret_type_slot = medium_blaster_gun_1
+						suspension_type_slot = vehicle_4_leg_walker
+						armor_type_slot = durasteel_armour
+						engine_type_slot = fuel_reactor_1
+					}
+				}
+			}
+			enable_equipment_modules = {
+				vehicle_wheels
+				vehicle_tracks
+				vehicle_hover
+				vehicle_6_leg_walker
+				vehicle_4_leg_walker
+				vehicle_2_leg_walker
+			}
+			research_cost = 1.5
+			start_year = 4
+			## REPLACE_EASY
+	
+			categories = {
+				armor
+				cat_heavy_armor
+				emp_armor
+				at_st
+			}
+			ai_will_do = {
+				factor = 1
+			}
+		}
 		at_st = {
 	
 			enable_equipments = {
@@ -972,16 +1446,27 @@ technologies = {
 			}
 			research_cost = 1.5
 			start_year = 4
+			enable_equipment_modules = {
+				vehicle_wheels
+				vehicle_tracks
+				vehicle_hover
+				vehicle_6_leg_walker
+				vehicle_4_leg_walker
+				vehicle_2_leg_walker
+			}
 			folder = {
 				name = emp_tank_folder
 				position = { x = 0 y = 2 }
 			}
 			
 			path = {
-				leads_to_tech = at_st_UPI
+				leads_to_tech = light_emp_research_1
 				research_cost_coeff = 1
-			}		
-	
+			}
+			path = {
+				leads_to_tech = at_st_upgrade_1
+				research_cost_coeff = 1
+			}
 			categories = {
 				armor
 				cat_heavy_armor
@@ -993,189 +1478,257 @@ technologies = {
 				factor = 1
 			}
 		}
-		juggernaut = {
+		at_st_upgrade_1 = {
+			research_cost = 1.5
+			start_year = 4
+			folder = {
+				name = emp_tank_folder
+				position = { x = 0 y = 2 }
+			}
+			
+			path = {
+				leads_to_tech = at_st_upgrade_2
+				research_cost_coeff = 1
+			}
+			categories = {
+				armor
+				cat_light_armor
+				emp_armor
+				at_dp
+			}
+		}
+		at_st_upgrade_2 = {
+			research_cost = 1.5
+			start_year = 4
+			folder = {
+				name = emp_tank_folder
+				position = { x = 0 y = 2 }
+			}
+			
+			path = {
+				leads_to_tech = at_st_upgrade_3
+				research_cost_coeff = 1
+			}
+			categories = {
+				armor
+				cat_light_armor
+				emp_armor
+				at_dp
+			}
+		}
+		at_st_upgrade_3 = {
+			research_cost = 1.5
+			start_year = 4
+			folder = {
+				name = emp_tank_folder
+				position = { x = 0 y = 2 }
+			}
+			
+			path = {
+				leads_to_tech = at_st_upgrade_4
+				research_cost_coeff = 1
+			}
+			path = {
+				leads_to_tech = tie_crawler
+				research_cost_coeff = 1
+			}
+			categories = {
+				armor
+				cat_light_armor
+				emp_armor
+				at_dp
+			}
+		}
+		at_st_upgrade_4 = {
+			research_cost = 1.5
+			start_year = 4
+			folder = {
+				name = emp_tank_folder
+				position = { x = 0 y = 2 }
+			}
+			
+			path = {
+				leads_to_tech = at_st_advanced
+				research_cost_coeff = 1
+			}
+			categories = {
+				armor
+				cat_light_armor
+				emp_armor
+				at_dp
+			}
+		}
+		at_st_advanced = {
+	
+			enable_equipments = {
+				at_st_chassis_1
+			}
 			on_research_complete = {
 				create_equipment_variant = {
-					name = "Juggernaut"
-					type = juggernaut_destroyer_chassis_0
+					name = "AT ST Advanced"
+					type = at_st_artillery_chassis_1
 					
 					parent_version = 0
 					modules = {
-						main_armament_slot = heavy_laser_gun_1
+						main_armament_slot = medium_blaster_gun_1
 						turret_type_slot = medium_blaster_gun_1
+						suspension_type_slot = vehicle_2_leg_walker
+						armor_type_slot = durasteel_armour
+						engine_type_slot = fuel_reactor_1
+					}
+				}
+			}
+			research_cost = 1.5
+			start_year = 4
+			folder = {
+				name = emp_tank_folder
+				position = { x = 0 y = 2 }
+			}
+			categories = {
+				armor
+				cat_heavy_armor
+				emp_armor
+				at_st
+			}
+			
+			ai_will_do = {
+				factor = 1
+			}
+		}
+		light_emp_research_1 = {
+			research_cost = 1.5
+			start_year = 4
+			folder = {
+				name = emp_tank_folder
+				position = { x = -1 y = 4 }
+			}
+			
+			path = {
+				leads_to_tech = light_emp_research_2
+				research_cost_coeff = 1
+			}
+			categories = {
+				armor
+				cat_light_armor
+				emp_armor
+				at_dp
+			}
+		}
+		light_emp_research_2 = {
+			research_cost = 1.5
+			start_year = 4
+			folder = {
+				name = emp_tank_folder
+				position = { x = -1 y = 6 }
+			}
+			
+			path = {
+				leads_to_tech = tie_crawler
+				research_cost_coeff = 1
+			}
+			categories = {
+				armor
+				cat_light_armor
+				emp_armor
+				at_dp
+			}
+		}
+		tie_crawler = {
+			enable_equipments = {
+				tie_crawler_chassis_0
+			}
+			on_research_complete = {
+				create_equipment_variant = {
+					name = "Tie Crawler"
+					type = tie_crawler_destroyer_chassis_0
+					parent_version = 0
+					modules = {
+						main_armament_slot = light_blaster_gun_1
+						turret_type_slot = light_blaster_gun_1
 						suspension_type_slot = vehicle_tracks
 						armor_type_slot = durasteel_armour
 						engine_type_slot = fuel_reactor_1
 					}
 				}
 			}
-			enable_equipments = {
-				juggernaut_chassis_0
-			}	
-			enable_subunits = {
-				juggernaut
-			}
 			research_cost = 1.5
 			start_year = 4
-			## REPLACE_EASY
-	
-			categories = {
-				armor
-				cat_heavy_armor
-				emp_armor
-				at_st
-			}
-			
-			ai_will_do = {
-				factor = 1
-			}
-		}
-		juggernaut = {
-	
-			enable_equipments = {
-				juggernaut_chassis_0
-			}	
-			enable_subunits = {
-				juggernaut
-			}
-			research_cost = 1.5
-			start_year = 4
-			## REPLACE_EASY
-	
-			categories = {
-				armor
-				cat_heavy_armor
-				emp_armor
-				at_st
-			}
-			
-			ai_will_do = {
-				factor = 1
-			}
-		}
-		at_aa = {
-	
-			enable_equipments = {
-				at_aa_chassis_0
-			}	
-			enable_subunits = {
-				at_aa
-			}
-			on_research_complete = {
-				create_equipment_variant = {
-					name = "AT AA"
-					type = at_aa_artillery_chassis_0
-					
-					parent_version = 0
-					modules = {
-						main_armament_slot = heavy_laser_gun_1
-						turret_type_slot = medium_blaster_gun_1
-						suspension_type_slot = vehicle_4_leg_walker
-						armor_type_slot = durasteel_armour
-						engine_type_slot = fuel_reactor_1
-					}
-				}
-			}
-			research_cost = 1.5
-			start_year = 4
-			## REPLACE_EASY
-	
-			categories = {
-				armor
-				cat_heavy_armor
-				emp_armor
-				at_st
-			}
-			
-			ai_will_do = {
-				factor = 1
-			}
-		}
-		tx_130T = {
-			on_research_complete = {
-				create_equipment_variant = {
-					name = "TX-130T"
-					type = tx_130T_amphibious_chassis_0
-					parent_version = 0
-					modules = {
-						main_armament_slot = medium_turbolaser_gun_1
-						turret_type_slot = medium_blaster_gun_1
-						suspension_type_slot = vehicle_hover
-						armor_type_slot = durasteel_armour
-						engine_type_slot = fuel_reactor_1
-					}
-				}
-			}
-			enable_equipments = {
-				tx_130T_chassis_0
-			}	
-			enable_subunits = {
-				tx_130T
-			}
-			research_cost = 1.5
-			start_year = 4
-			## REPLACE_EASY
-	
-			categories = {
-				armor
-				cat_heavy_armor
-				emp_armor
-				at_st
-			}
-			
-			ai_will_do = {
-				factor = 1
-			}
-		}
-		at_st_UPI = {	
-	
-			research_cost = 1.5
-			start_year = 8
 			folder = {
 				name = emp_tank_folder
-				position = { x = 0 y = 6 }
+				position = { x = -1 y = 8 }
+			}
+			path = {
+				leads_to_tech = at_st_upgrade_3
+				research_cost_coeff = 1
+			}
+			path = {
+				leads_to_tech = tie_crawler_upgrade_1
+				research_cost_coeff = 1
+			}
+			categories = {
+				armor
+				cat_light_armor
+				emp_armor
+				at_dp
+			}
+		}
+		tie_crawler_upgrade_1 = {
+			research_cost = 1.5
+			start_year = 4
+			folder = {
+				name = emp_tank_folder
+				position = { x = -1 y = 9 }
 			}
 			
 			path = {
-				leads_to_tech = at_st_PEI
+				leads_to_tech = tie_crawler_2
 				research_cost_coeff = 1
-			}	
+			}
 			categories = {
 				armor
-				cat_medium_armor
+				cat_light_armor
 				emp_armor
-				at_st
-			}
-			
-			ai_will_do = {
-				factor = 1
+				at_dp
 			}
 		}
-
-		at_st_PEI = {	
-	
+		tie_crawler_2 = {
+			enable_equipments = {
+				tie_crawler_chassis_1
+			}
+			on_research_complete = {
+				create_equipment_variant = {
+					name = "Tie Crawler Advanced"
+					type = tie_crawler_destroyer_chassis_1
+					parent_version = 0
+					modules = {
+						main_armament_slot = light_blaster_gun_1
+						turret_type_slot = light_blaster_gun_1
+						suspension_type_slot = vehicle_tracks
+						armor_type_slot = durasteel_armour
+						engine_type_slot = fuel_reactor_1
+					}
+				}
+			}
 			research_cost = 1.5
-			start_year = 10
+			start_year = 4
 			folder = {
 				name = emp_tank_folder
-				position = { x = 0 y = 8 }
+				position = { x = -1 y = 10 }
 			}
-			
-	
 			categories = {
 				armor
-				cat_medium_armor
+				cat_light_armor
 				emp_armor
-				at_st
-			}
-			
-			ai_will_do = {
-				factor = 1
+				at_dp
 			}
 		}
-		#at dp
-
 		at_dp = {
+			enable_equipments = {
+				at_dp_chassis_0
+			}	
+			enable_subunits = {
+				at_dp
+			}
 			on_research_complete = {
 				create_equipment_variant = {
 					name = "AT DP"
@@ -1190,24 +1743,28 @@ technologies = {
 					}
 				}
 			}
-			enable_equipments = {
-				at_dp_chassis_0
-			}	
-			enable_subunits = {
-				at_dp
+			enable_equipment_modules = {
+				vehicle_wheels
+				vehicle_tracks
+				vehicle_hover
+				vehicle_6_leg_walker
+				vehicle_4_leg_walker
+				vehicle_2_leg_walker
 			}
 			research_cost = 1.5
 			start_year = 4
 			folder = {
 				name = emp_tank_folder
-				position = { x = 0 y = 2 }
+				position = { x = -2 y = 2 }
 			}
-			
 			path = {
-				leads_to_tech = at_dp_UPI
+				leads_to_tech = at_dp_upgrade_1
 				research_cost_coeff = 1
 			}		
-	
+			path = {
+				leads_to_tech = light_emp_research_1
+				research_cost_coeff = 1
+			}	
 			categories = {
 				armor
 				cat_light_armor
@@ -1219,19 +1776,16 @@ technologies = {
 				factor = 1
 			}
 		}
-		at_dp_UPI = {
-	
-			
-	
+		at_dp_upgrade_1 = {
 			research_cost = 1.5
-			start_year = 8
+			start_year = 4
 			folder = {
 				name = emp_tank_folder
-				position = { x = 0 y = 6 }
+				position = { x = -3 y = 4 }
 			}
 			
 			path = {
-				leads_to_tech = at_dp_PEI
+				leads_to_tech = at_dp_advanced
 				research_cost_coeff = 1
 			}
 			categories = {
@@ -1240,32 +1794,41 @@ technologies = {
 				emp_armor
 				at_dp
 			}
-			
-			ai_will_do = {
-				factor = 1
-			}
 		}
-		at_dp_PEI = {
-	
-			
-	
+		at_dp_advanced = {
+			enable_equipments = {
+				at_dp_chassis_1
+			}
+			on_research_complete = {
+				create_equipment_variant = {
+					name = "AT DP Advanced"
+					type = at_dp_artillery_chassis_1
+					parent_version = 0
+					modules = {
+						main_armament_slot = light_blaster_gun_1
+						turret_type_slot = light_blaster_gun_1
+						suspension_type_slot = vehicle_2_leg_walker
+						armor_type_slot = durasteel_armour
+						engine_type_slot = fuel_reactor_1
+					}
+				}
+			}
 			research_cost = 1.5
-			start_year = 10
+			start_year = 4
 			folder = {
 				name = emp_tank_folder
-				position = { x = 0 y = 8 }
+				position = { x = -3 y = 6 }
 			}
 			
-	
+			path = {
+				leads_to_tech = at_dp_advanced
+				research_cost_coeff = 1
+			}
 			categories = {
 				armor
 				cat_light_armor
 				emp_armor
 				at_dp
-			}
-			
-			ai_will_do = {
-				factor = 1
 			}
 		}
 		#stormtrooper
