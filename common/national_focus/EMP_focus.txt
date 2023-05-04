@@ -202,6 +202,7 @@ focus_tree = {
 		mutually_exclusive = {
 		}
 		completion_reward = {
+			mark_focus_tree_layout_dirty = yes
 			#tooltip
 			add_to_variable = {currency_amount^primary_currency = 50}
 			custom_effect_tooltip = plus50credits_tt
@@ -227,6 +228,9 @@ focus_tree = {
 		cost = 7.2
 		x = -1
 		y = 1
+		allow_branch = {
+			has_completed_focus = EMP_access_the_archives
+		}
 		prerequisite = {
 			focus = EMP_access_the_archives
 		}
@@ -286,6 +290,9 @@ focus_tree = {
 		cost = 10.8
 		x = 1
 		y = 1
+		allow_branch = {
+			has_completed_focus = EMP_access_the_archives
+		}
 		prerequisite = {
 			focus = EMP_access_the_archives
 		}
@@ -598,8 +605,11 @@ focus_tree = {
 		cost = 10.8
 		x = 0
 		y = 1
+		allow_branch = {
+			has_completed_focus = EMP_coruscant_a_ruined_world
+		}
 		prerequisite = {
-			focus = EMP_palace_district_renovation
+			focus = EMP_coruscant_a_ruined_world
 		}
 		search_filters = {
 		}
@@ -1060,7 +1070,7 @@ focus = {
 		}
 		completion_reward = {
 			custom_effect_tooltip = EMP_can_only_tt
-			
+			mark_focus_tree_layout_dirty = yes
 		}
 
 		ai_will_do = {
@@ -1086,6 +1096,7 @@ focus = {
 			focus = EMP_the_great_escape
 		}
 		completion_reward = {
+			mark_focus_tree_layout_dirty = yes
 			custom_effect_tooltip = EMP_important_tt
 			#guild relations down
 			imperial_intelligence_loyalty = -10
@@ -1108,6 +1119,9 @@ focus = {
 		cost = 1.5
 		x = 6
 		y = 1
+		allow_branch = {
+			has_completed_focus = EMP_clamp_down
+		}
 		available = {
 			always = no
 		}
@@ -1120,6 +1134,7 @@ focus = {
 			focus = EMP_the_conspiracy
 		}
 		completion_reward = {
+			mark_focus_tree_layout_dirty = yes
 			custom_effect_tooltip = EMP_can_only_tt
 		}
 
@@ -1332,6 +1347,9 @@ focus = {
 		cost = 1.5
 		x = -4
 		y = 1
+		allow_branch = {
+			has_completed_focus = EMP_clamp_down
+		}
 		available = {
 			always = no
 		}
@@ -1344,6 +1362,7 @@ focus = {
 			focus = EMP_close_the_fist
 		}
 		completion_reward = {
+			mark_focus_tree_layout_dirty = yes
 			custom_effect_tooltip = EMP_can_only_tt
 		}
 
@@ -1369,6 +1388,7 @@ focus = {
 			focus = EMP_betrayal
 		}
 		completion_reward = {
+			mark_focus_tree_layout_dirty = yes
 			remove_ideas = EMP_complacent_bureaucracy
 			remove_ideas = EMP_leadership_crisis_1
 			custom_effect_tooltip = EMP_minus2legit
@@ -1648,6 +1668,7 @@ focus = {
 		}
 		completion_reward = {
 			#tooltip
+			mark_focus_tree_layout_dirty = yes
 			EMP = {
 				country_event = {id=EMP.16}
 			}
@@ -1671,6 +1692,12 @@ focus = {
 		cost = 10.8
 		x = 0
 		y = 3
+		allow_branch = {
+			OR = {
+				has_completed_focus = EMP_betrayal
+				has_completed_focus = EMP_the_great_escape
+			}
+		}
 		prerequisite = {
 			focus = EMP_betrayal
 			focus = EMP_the_great_escape
@@ -2073,19 +2100,27 @@ focus = {
 		id = EMP_fall_of_borleias
 		icon = GFX_sate_pestage
 		relative_position_id = EMP_new_intelligence_officers
-		cost = 2.9
+		cost = 1.5
 		x = 1
 		y = 1
-		
-		bypass = {
-			BOR = {
-				has_war = yes
+		allow_branch = {
+			REP = {
+				has_war_with = EMP
 			}
 		}
+		bypass = {
+			always = yes
+			#BOR = {
+				#has_war = yes
+			#}
+		}
 		available = {
-			BOR = {
-				has_war = yes
+			REP = {
+				has_war_with = EMP
 			}
+			#BOR = {
+				#has_war = yes
+			#}
 		}
 		#allow_branch = {
 			#BOR = {
@@ -2099,6 +2134,7 @@ focus = {
 		mutually_exclusive = {
 		}
 		completion_reward = {
+			mark_focus_tree_layout_dirty = yes
 		}
 
 		ai_will_do = {
@@ -2721,7 +2757,8 @@ focus = {
 			focus = EMP_fall_of_borleias
 		}
 		available = {
-			#controls all of coruscant
+			date > 7.1.1
+			num_of_controlled_states > 8
 		}
 		search_filters = {
 		}
