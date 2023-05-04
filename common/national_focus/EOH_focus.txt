@@ -573,22 +573,28 @@ focus_tree = {
 		mutually_exclusive = {
 		}
 		completion_reward = {
-			add_stability = -0.1
-			224 = {
+			add_stability = -0.05
+			186 = {
 				if = {
 					limit = { is_controlled_by = ROOT }
 					add_victory_points = {
-						province = 1983
+						province = 4133
 						value = 7
 					}
 					add_victory_points = {
-						province = 3667
+						province = 6326
 						value = 5
 					}
 					add_victory_points = {
-						province = 9101
+						province = 6308
 						value = 5
 					}
+					add_building_construction = {
+						type = shipyard
+						level = 1
+						instant_build = yes
+					}
+					add_extra_state_shared_building_slots = 1
 					add_manpower = 145000
 				}
 			}
@@ -605,10 +611,13 @@ focus_tree = {
 		relative_position_id = EOH_open_to_chiss_refugees
 		x = 0
 		y = 1
-		bypass = {
-			SSI = {
-				has_war = no
-			}
+		#bypass = {
+			#SSI = {
+				#has_war = no
+			#}
+		#}
+		available = {
+			controls_state = 20
 		}
 		prerequisite = {
 			focus = EOH_open_to_chiss_refugees
@@ -619,7 +628,7 @@ focus_tree = {
 		}
 		completion_reward = {
 			subtract_from_variable = { currency_amount^primary_currency = 10 }
-			224 = {
+			20 = {
 				if = {
 					limit = { is_controlled_by = ROOT }
 					add_extra_state_shared_building_slots = 2
@@ -658,7 +667,7 @@ focus_tree = {
 		mutually_exclusive = {
 		}
 		completion_reward = {
-			220 = {
+			203 = {
 				add_extra_state_shared_building_slots = 2
 				add_building_construction = {
 					type = dockyard
@@ -691,14 +700,10 @@ focus_tree = {
 		}
 		available = {
 			BAK = {
-				has_full_control_of_state = 644
-				has_full_control_of_state = 639
-				has_full_control_of_state = 634
-				has_full_control_of_state = 621
-				has_full_control_of_state = 78
-				has_full_control_of_state = 623
-				has_full_control_of_state = 636
-				has_full_control_of_state = 629
+				has_full_control_of_state = 96
+				has_full_control_of_state = 400
+				has_full_control_of_state = 402
+				has_full_control_of_state = 440
 			}
 		}
 		prerequisite = {
@@ -735,15 +740,11 @@ focus_tree = {
 			}
 		}
 		available = {
-			MIT = {
-				has_full_control_of_state = 324
-				has_full_control_of_state = 316
-				has_full_control_of_state = 300
-				has_full_control_of_state = 33
-				has_full_control_of_state = 305
-				has_full_control_of_state = 318
-				has_full_control_of_state = 321
-				has_full_control_of_state = 310
+			INR = {
+				has_full_control_of_state = 51
+				has_full_control_of_state = 267
+				has_full_control_of_state = 275
+				has_full_control_of_state = 272
 			}
 		}
 		prerequisite = {
@@ -814,7 +815,7 @@ focus_tree = {
 	focus = {
 		id = EOH_leave_lwhekk
 		icon = GFX_EOH_Frame
-		cost = 7.2
+		cost = 5
 		relative_position_id = EOH_allied_invasion_of_lwhekk
 		x = -1
 		y = 1
@@ -830,7 +831,7 @@ focus_tree = {
 			focus = EOH_prevent_ssi-ruuvi_resurgence
 		}
 		completion_reward = {
-			## removes occupying focus idea from ssi-ruuvi
+			release_puppet = SSI
 		}
 		ai_will_do = {
 			factor = 1
@@ -839,7 +840,7 @@ focus_tree = {
 	focus = {
 		id = EOH_prevent_ssi-ruuvi_resurgence
 		icon = GFX_EOH_Frame
-		cost = 14.3
+		cost = 7.2
 		relative_position_id = EOH_allied_invasion_of_lwhekk
 		x = 1
 		y = 1
@@ -855,6 +856,7 @@ focus_tree = {
 			focus = EOH_leave_lwhekk
 		}
 		completion_reward = {
+			add_stability = -0.1
 			## removes occupying focus idea from ssi-ruuvi, adds idea that lasts a couple years and makes them worse
 		}
 		ai_will_do = {
@@ -1050,8 +1052,8 @@ focus_tree = {
 		allow_branch = {
 			EOH = {
 				OR = {
-					#has_completed_focus = EOH_none_evade_thrawns_grasp
-					#has_completed_focus = EOH_reconciliation_with_zaarin
+					has_completed_focus = EOH_none_evade_thrawns_grasp
+					has_completed_focus = EOH_reconciliation_with_zaarin
 				}
 			}
 		}
@@ -1273,7 +1275,7 @@ focus_tree = {
 		search_filters = {
 		}
 		completion_reward = {
-			22 = {
+			28 = {
 				add_core_of = EOH
 				add_extra_state_shared_building_slots = 1
 				add_building_construction = {
@@ -1306,19 +1308,19 @@ focus_tree = {
 		completion_reward = {
 			#Victory point wizardry
 			mark_focus_tree_layout_dirty = yes
-			228 = {
+			456 = {
 				if = {
 					limit = { is_controlled_by = ROOT }
 					add_victory_points = {
-						province = 9208
+						province = 1695
 						value = 1
 					}
 					add_victory_points = {
-						province = 9177
-						value = 1
+						province = 6457
+						value = 2
 					}
 					add_victory_points = {
-						province = 9103
+						province = 1059
 						value = 1
 					}
 					add_building_construction = {
@@ -1348,11 +1350,11 @@ focus_tree = {
 		}
 		completion_reward = {
 			#Victory point wizardry
-			228 = {
+			456 = {
 				if = {
 					limit = { is_controlled_by = ROOT }
 					add_victory_points = {
-						province = 9102
+						province = 898
 						value = 10
 					}
 					add_building_construction = {
@@ -1422,17 +1424,23 @@ focus_tree = {
 		}
 		completion_reward = {
 			#subtract manpower from chiss planets, coruscant, entralla
-			215 = {
+			203 = {
 				add_manpower = 18000
 			}
-			22 = {
+			186 = {
 				add_manpower = 18000
 			}
-			220 = {
+			25 = {
 				add_manpower = 18000
 			}
-			213 = {
+			188 = {
 				add_manpower = 18000
+			}
+			37 = {
+				add_manpower = -36000
+			}
+			235 = {
+				add_manpower = -36000
 			}
 		}
 		ai_will_do = {
@@ -1456,7 +1464,8 @@ focus_tree = {
 		}
 		completion_reward = {
 			mark_focus_tree_layout_dirty = yes
-			#costs money
+			subtract_from_variable = { currency_amount^primary_currency = 20 }
+			custom_effect_tooltip = minus20credits_tt
 			add_stability = -0.03
 		}
 		ai_will_do = {
@@ -1476,11 +1485,17 @@ focus_tree = {
 		search_filters = {
 		}
 		completion_reward = {
-			213 = {
+			188 = {
 				add_victory_points = {
-					province = 4725
+					province = 4496
 					value = 5
 				}
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+				add_extra_state_shared_building_slots = 1
 			}
 			
 			#victory point magic, buildings
@@ -1502,20 +1517,19 @@ focus_tree = {
 		search_filters = {
 		}
 		completion_reward = {
-			213 = {
+			25 = {
 				if = {
 					limit = { is_controlled_by = ROOT }
 					add_victory_points = {
-						province = 8866
+						province = 4712
 						value = 5
 					}
 					add_building_construction = {
-						type = naval_base
-						level = 2
-						province = 8866
+						type = dockyard
+						level = 1
 						instant_build = yes
 					}
-					set_state_flag = FRA_colonial_naval_bases
+					add_extra_state_shared_building_slots = 1
 				}
 			}
 			
@@ -1533,10 +1547,11 @@ focus_tree = {
 		x = -2
 		y = 2
 		allow_branch = {
-			OR = {
-				has_completed_focus = EOH_reconciliation_with_zaarin
-				has_completed_focus = EOH_none_evade_thrawns_grasp
-			}
+			always = no
+			#OR = {
+				#has_completed_focus = EOH_reconciliation_with_zaarin
+				#has_completed_focus = EOH_none_evade_thrawns_grasp
+			#}
 		}
 		prerequisite = {
 			focus = EOH_reconciliation_with_zaarin
@@ -1672,12 +1687,22 @@ focus_tree = {
 		}
 		completion_reward = {
 			mark_focus_tree_layout_dirty = yes
-			220 = {
+			203 = {
 				if = {
 					limit = { is_controlled_by = ROOT }
 					add_building_construction = {
 						type = industrial_complex
+						level = 1
+						instant_build = yes
+					}
+					add_building_construction = {
+						type = dockyard
 						level = 2
+						instant_build = yes
+					}
+					add_building_construction = {
+						type = arms_factory
+						level = 1
 						instant_build = yes
 					}
 					add_extra_state_shared_building_slots = 5
@@ -1735,9 +1760,9 @@ focus_tree = {
 		prerequisite = {
 			focus = EOH_the_hand
 		}
-		prerequisite = {
-			focus = EOH_battle_of_quethold
-		}
+		#prerequisite = {
+			#focus = EOH_battle_of_quethold
+		#}
 		prerequisite = {
 			focus = EOH_peace_in_the_unknown_regions
 		}
@@ -1746,13 +1771,9 @@ focus_tree = {
 		mutually_exclusive = {
 		}
 		completion_reward = {
+			news_event = { hours = 12 id = empnews.12 }
 			remove_ideas = EOH_thrawn_unknown_regions_2
 			remove_ideas = EOH_thrawn_guardian
-			hidden_effect = {
-				22 = {
-					add_core_of = EOH
-				}
-			}
 			mark_focus_tree_layout_dirty = yes
 		}
 		ai_will_do = {
@@ -1782,7 +1803,8 @@ focus_tree = {
 		mutually_exclusive = {
 		}
 		completion_reward = {
-			custom_effect_tooltip = "Becomes imperial marshal"
+			custom_effect_tooltip = "Becomes Imperial Marshal"
+			navy_experience = 50
 		}
 		ai_will_do = {
 			factor = 1
@@ -1806,13 +1828,15 @@ focus_tree = {
 		}
 		completion_reward = {
 			army_experience = 25
-			navy_experience = 25
-			##EOH PEN EMP = {
-				##add_timed_idea = {
-					##idea = EOH_imperial_military_revitalization
-					##days = 140
-				##}
-			##}
+			every_country = {
+				limit = {
+					has_government = imperial
+				}
+				add_timed_idea = {
+					idea = EOH_imperial_military_revitalization
+					days = 140
+				}
+			}
 			mark_focus_tree_layout_dirty = yes
 		}
 		ai_will_do = {
@@ -1841,6 +1865,18 @@ focus_tree = {
 					days = 365
 				}
 			}
+			ICO = {
+				add_timed_idea = {
+					idea = EOH_support_from_thrawn
+					days = 365
+				}
+			}
+			EAD = {
+				add_timed_idea = {
+					idea = EOH_support_from_thrawn
+					days = 365
+				}
+			}
 			mark_focus_tree_layout_dirty = yes
 		}
 		ai_will_do = {
@@ -1864,12 +1900,13 @@ focus_tree = {
 		}
 		completion_reward = {
 			create_faction = "Thrawn's Confederation"
-			#country_event = { id = eoh_thrawns_confederation }
-			PEN = {
-				country_event = { id = EOH.2 }
-			}
-			ZSJ = {
-				country_event = { id = EOH.2 }
+			every_country = {
+				limit = {
+					has_government = imperial
+				}
+				county_event = {
+					id = EOH.2
+				}
 			}
 			mark_focus_tree_layout_dirty = yes
 		}
@@ -1950,6 +1987,7 @@ focus_tree = {
 			focus = EOH_the_emperors_storehouse
 		}
 		available = {
+			always = yes
 			#Zsinj war over
 		}
 		search_filters = {
@@ -1978,6 +2016,9 @@ focus_tree = {
 		y = 2
 		prerequisite = {
 			focus = EOH_mount_tantiss_campaign
+		}
+		allow_branch = {
+			always = no
 		}
 		available = {
 			#requires certain planets

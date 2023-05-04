@@ -462,3 +462,42 @@ news_event = {        #Imperial Divorce 2
 		}
 	}
 }
+
+news_event = {        #Thrawn Returns
+    id = empnews.12
+    title = empnews.12.t
+    desc = empnews.12.d
+	picture = GFX_news_event_001
+    major = yes
+
+    is_triggered_only = yes
+
+    immediate = {
+    }
+	option = {
+		name = "Our time will come..."
+		trigger = {
+			has_government = imperial
+		}
+	}
+	option = {
+		name = "Uh oh..."
+		trigger = {
+			has_government = democratic
+		}
+	}
+	option = {
+		name = "Interesting."
+		trigger = {
+			AND = {
+				NOT ={
+					has_government = democratic
+				}
+				NOT ={
+					has_government = imperial
+				}
+			}
+			
+		}
+	}
+}
