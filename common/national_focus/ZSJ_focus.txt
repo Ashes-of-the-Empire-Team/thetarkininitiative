@@ -158,6 +158,9 @@ focus_tree = {
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
+		completion_reward = {
+			country_event = { id = ZSJ.1 }
+		}
 	}
 
 	#Hunt Down Rivals
@@ -661,6 +664,27 @@ focus_tree = {
 			    target = CHA
 			    type = annex_everything
 			}
+			division_template = {
+				name = "Deathtroopers"
+				is_locked = yes
+				division_cap = 0 
+				division_names_group = USA_INF_01
+				priority = 0
+				regiments = {
+					death_trooper = { x = 0 y = 0 }
+					death_trooper = { x = 1 y = 0 }
+					death_trooper = { x = 2 y = 0 }
+					death_trooper = { x = 0 y = 1 }
+					death_trooper = { x = 1 y = 1 }
+					death_trooper = { x = 2 y = 1 }
+					death_trooper = { x = 0 y = 2 }
+					death_trooper = { x = 1 y = 2 }
+					death_trooper = { x = 2 y = 2 }
+				}
+				support = {
+					#military_police = { x = 0 y = 0 }
+				}
+			}
 			activate_mission = take_chandrila
 		}
 	}
@@ -702,6 +726,18 @@ focus_tree = {
 			FOCUS_FILTER_POLITICAL
 		}
 		prerequisite = { focus = ZSJ_the_imperial_menace  }
+		completion_reward = {
+			add_timed_idea = {
+				idea = ZSJ_defections
+				days = 180
+			}
+			GMA = {
+				add_timed_idea = {
+					idea = ZSJ_defection_bad
+					days = 180
+				}
+			}
+		}
 	}
 
 	#Sabotage the Opposition
@@ -772,6 +808,9 @@ focus_tree = {
 		x = 17
 		y = 8
 		cost = 5
+		available = {
+			always = no
+		}
 		search_filters = {
 			FOCUS_FILTER_INDUSTRY
 		}
@@ -922,6 +961,9 @@ focus_tree = {
 		x = 24
 		y = 8
 		cost = 5
+		available = {
+			always = no
+		}
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
@@ -1207,7 +1249,7 @@ focus_tree = {
 		prerequisite = { focus = ZSJ_imperial_intelligence  }
 		completion_reward = {
 			remove_ideas = ZSJ_pilot_shortage
-			recruit_character = ZSJ_tetran_cowall`
+			recruit_character = ZSJ_tetran_cowall
 		}
 	}
 }
