@@ -88,8 +88,10 @@ focus_tree = {
 			add_ideas = BOT_ascendant
 		}
 		relative_position_id = BOT_support_the_rebellion
-		prerequisite = { focus = BOT_support_the_rebellion }
-		prerequisite = { focus = BOT_disarm_eadu }
+		prerequisite = { 
+			focus = BOT_support_the_rebellion
+			focus = BOT_disarm_eadu
+		}
 		prerequisite = { focus = BOT_the_free_bothan_navy }
 	}
 	
@@ -385,6 +387,7 @@ focus_tree = {
 			factor = 1
 		}
 		completion_reward = {
+			custom_effect_tooltip = BOT_coruscant_recruits_tt
 			#tooltip
 			division_template = {
 				name = "Bothan Diaspora Recruits"
@@ -399,40 +402,46 @@ focus_tree = {
 				}
 				priority = 1
 			}
-			random_state = {
-				limit = {
-					AND = {
-						OR = {
-
-							state = 40
-							state = 315
-							state = 229
-							state = 57
-							state = 39
-							state = 60
-							state = 240
-							state = 230
-							state = 235
-							state = 189
-						}
+			189 = {
+				if = {
+					limit = { 
 						NOT = {
-							is_controlled_by = EMP
+							controlled_by = EMP
 						}
 					}
-				}
-				create_unit = {
-					division = "division_template = \"Bothan Diaspora Recruits\" start_experience_factor = 0.06" 
-					owner = ROOT
-				}
-				create_unit = {
-					division = "division_template = \"Bothan Diaspora Recruits\" start_experience_factor = 0.08" 
-					owner = ROOT
-				}
-				create_unit = {
-					division = "division_template = \"Bothan Diaspora Recruits\" start_experience_factor = 0.07" 
-					owner = ROOT
+					create_unit = {
+						division = "division_template = \"Bothan Diaspora Recruits\" start_experience_factor = 0.06" 
+						owner = ROOT
+					}
 				}
 			}
+			229 = {
+				if = {
+					limit = { 
+						NOT = {
+							controlled_by = EMP
+						}
+					}
+					create_unit = {
+						division = "division_template = \"Bothan Diaspora Recruits\" start_experience_factor = 0.09" 
+						owner = ROOT
+					}
+				}
+			}
+			230 = {
+				if = {
+					limit = { 
+						NOT = {
+							controlled_by = EMP
+						}
+					}
+					create_unit = {
+						division = "division_template = \"Bothan Diaspora Recruits\" start_experience_factor = 0.11" 
+						owner = ROOT
+					}
+				}
+			}
+			
 		}
 		relative_position_id = BOT_the_war_on_kashyyyk
 		prerequisite = { focus = BOT_the_war_on_kashyyyk }
