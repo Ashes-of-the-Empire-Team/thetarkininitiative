@@ -1,5 +1,28 @@
 scripted_gui = {
 
+	bank_top_bar = {
+		context_type = player_context
+		parent_window_token = top_bar
+		window_name = "bank_top_bar"
+		
+		visible = {
+			always = yes
+		}
+		effects = {
+			bank_button_click = {
+				if = {
+					limit = {
+						has_country_flag = banking_open
+					}
+					clr_country_flag = banking_open
+				}
+				else = {
+					set_country_flag = banking_open
+				}
+			}
+		}
+	}
+
 	banking_screen_drop = {
 		context_type = player_context
 		window_name = "banking_screen_drop"
@@ -100,31 +123,31 @@ scripted_gui = {
 				}
 			}
 			sell_asset_click = {
-				subtract_from_variable = { currency_amount^primary_currency = investment_quantity_selected }
+				add_to_variable = { currency_amount^primary_currency = investment_quantity_selected }
 				if = {
 					limit = {
 						has_country_flag = bank_of_core_selected
 					}
 					subtract_from_variable = { bank_of_core_investment = investment_quantity_selected }
-					set_variable = { loan_amount = bank_of_core_investment }
+					set_variable = { investment_amount = bank_of_core_investment }
 				}
 				if = {
 					limit = {
 						has_country_flag = bank_of_aargau_selected
 					}
 					subtract_from_variable = { bank_of_aargau_investment = investment_quantity_selected }
-					set_variable = { loan_amount = bank_of_aargau_investment }
+					set_variable = { investment_amount = bank_of_aargau_investment }
 				}
 				if = {
 					limit = {
 						has_country_flag = ibc_selected
 					}
 					subtract_from_variable = { ibc_investment = investment_quantity_selected }
-					set_variable = { loan_amount = ibc_investment }
+					set_variable = { investment_amount = ibc_investment }
 				}
 			}
 			invest_click = {
-				add_to_variable = { currency_amount^primary_currency = investment_quantity_selected }
+				subtract_from_variable = { currency_amount^primary_currency = investment_quantity_selected }
 				if = {
 					limit = {
 						has_country_flag = bank_of_core_selected
