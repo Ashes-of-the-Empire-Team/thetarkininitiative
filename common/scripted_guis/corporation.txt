@@ -751,6 +751,7 @@ scripted_gui = {
 						check_variable = {light_ship_workers > max_light_workers}
 					}
 					subtract_from_variable = {light_ship_workers = 1000}
+					recalculate_light_ship_creation_time = yes
 				}
 			}
 			medium_dockyards_subtract_button_click = {
@@ -762,6 +763,7 @@ scripted_gui = {
 						check_variable = {medium_ship_workers > max_medium_workers}
 					}
 					subtract_from_variable = {medium_ship_workers = 1000}
+					recalculate_medium_ship_creation_time = yes
 				}
 			}
 			heavy_dockyards_subtract_button_click = {
@@ -773,6 +775,7 @@ scripted_gui = {
 						check_variable = {heavy_ship_workers > max_heavy_workers}
 					}
 					subtract_from_variable = {heavy_ship_workers = 1000}
+					recalculate_heavy_ship_creation_time = yes
 				}
 			}
 		}
@@ -1027,6 +1030,7 @@ scripted_gui = {
 						check_variable = {air_1_workers > max_air_1}
 					}
 					subtract_from_variable = {air_1_workers = 1000}
+					recalculate_air_1_creation_amount = yes
 				}
 			}
 			air_2_factory_subtract_button_click = {
@@ -1038,6 +1042,7 @@ scripted_gui = {
 						check_variable = {air_2_workers > max_air_2_workers}
 					}
 					subtract_from_variable = {air_2_workers = 1000}
+					recalculate_air_2_creation_amount = yes
 				}
 			}
 		}
@@ -1275,162 +1280,162 @@ scripted_gui = {
 			} 
 		}
 	}
-	Marketplace_production_inf_equip = {
+	Marketplace_production_soft = {
 		context_type = player_context
-		window_name = "Marketplace_production_inf_equip"
+		window_name = "Marketplace_production_soft"
 		visible = {
-		   has_country_flag = market_inf_equip_open
+		   has_country_flag = market_soft_open
 		}
 		effects = {
-			inf_equip_1_button_click = {
-				set_variable = { Root.inf_equip_1_selected_item = inf_equip_production_array^i }
-				recalculate_inf_equip_1_creation_amount = yes
+			soft_1_button_click = {
+				set_variable = { Root.soft_1_selected_item = soft_production_array^i }
+				recalculate_soft_1_creation_amount = yes
 			}
-			inf_equip_2_button_click = {
-				set_variable = { Root.inf_equip_2_selected_item = inf_equip_production_array^i }
-				recalculate_inf_equip_2_creation_amount = yes
+			soft_2_button_click = {
+				set_variable = { Root.soft_2_selected_item = soft_production_array^i }
+				recalculate_soft_2_creation_amount = yes
 			}
-			selected_inf_equip_1_click = {
+			selected_soft_1_click = {
 				if = {
 					limit = {
-						has_country_flag = inf_equip_1_selection_open
+						has_country_flag = soft_1_selection_open
 					}
-					clr_country_flag = inf_equip_1_selection_open
+					clr_country_flag = soft_1_selection_open
 				}else = {
-					set_country_flag = inf_equip_1_selection_open
+					set_country_flag = soft_1_selection_open
 				}
 			}
-			selected_inf_equip_2_click = {
+			selected_soft_2_click = {
 				if = {
 					limit = {
-						has_country_flag = inf_equip_2_selection_open
+						has_country_flag = soft_2_selection_open
 					}
-					clr_country_flag = inf_equip_2_selection_open
+					clr_country_flag = soft_2_selection_open
 				}else = {
-					set_country_flag = inf_equip_2_selection_open
+					set_country_flag = soft_2_selection_open
 				}
 			}
-			inf_equip_1_add_button_click = {
-				add_to_variable = {inf_equip_1_workers = 1000}
-				recalculate_inf_equip_1_creation_amount = yes
+			soft_1_add_button_click = {
+				add_to_variable = {soft_1_workers = 1000}
+				recalculate_soft_1_creation_amount = yes
 			}
-			inf_equip_2_add_button_click = {
-				add_to_variable = {inf_equip_2_workers = 1000}
-				recalculate_inf_equip_2_creation_amount = yes
+			soft_2_add_button_click = {
+				add_to_variable = {soft_2_workers = 1000}
+				recalculate_soft_2_creation_amount = yes
 			}
-			inf_equip_1_subtract_button_click = {
-				subtract_from_variable = {inf_equip_1_workers = 1000}
-				recalculate_inf_equip_1_creation_amount = yes
+			soft_1_subtract_button_click = {
+				subtract_from_variable = {soft_1_workers = 1000}
+				recalculate_soft_1_creation_amount = yes
 			}
-			inf_equip_2_subtract_button_click = {
-				subtract_from_variable = {inf_equip_2_workers = 1000}
-				recalculate_inf_equip_2_creation_amount = yes
+			soft_2_subtract_button_click = {
+				subtract_from_variable = {soft_2_workers = 1000}
+				recalculate_soft_2_creation_amount = yes
 			}
-			inf_equip_1_factory_add_button_click = {
-				add_to_variable = {inf_equip_1_factory = 1}
+			soft_1_factory_add_button_click = {
+				add_to_variable = {soft_1_factory = 1}
 				subtract_from_variable = {total_dockyards = 1}
-				add_to_variable = {max_inf_equip_1_workers = 1000}
+				add_to_variable = {max_soft_1_workers = 1000}
 			}
-			inf_equip_2_factory_add_button_click = {
-				add_to_variable = {inf_equip_2_factory = 1}
+			soft_2_factory_add_button_click = {
+				add_to_variable = {soft_2_factory = 1}
 				subtract_from_variable = {total_dockyards = 1}
-				add_to_variable = {max_inf_equip_2_workers = 1000}
+				add_to_variable = {max_soft_2_workers = 1000}
 			}
-			inf_equip_1_factory_subtract_button_click = {
-				subtract_from_variable = {inf_equip_1_factory = 1}
+			soft_1_factory_subtract_button_click = {
+				subtract_from_variable = {soft_1_factory = 1}
 				add_to_variable = {total_dockyards = 1}
-				subtract_from_variable = {max_inf_equip_1_workers = 1000}
+				subtract_from_variable = {max_soft_1_workers = 1000}
 				if = {
 					limit = {
-						check_variable = {inf_equip_1_workers > max_inf_equip_1}
+						check_variable = {soft_1_workers > max_soft_1}
 					}
-					subtract_from_variable = {inf_equip_1_workers = 1000}
+					subtract_from_variable = {soft_1_workers = 1000}
 				}
 			}
-			inf_equip_2_factory_subtract_button_click = {
-				subtract_from_variable = {inf_equip_2_factory = 1}
+			soft_2_factory_subtract_button_click = {
+				subtract_from_variable = {soft_2_factory = 1}
 				add_to_variable = {total_dockyards = 1}
-				subtract_from_variable = {max_inf_equip_2_workers = 1000}
+				subtract_from_variable = {max_soft_2_workers = 1000}
 				if = {
 					limit = {
-						check_variable = {inf_equip_2_workers > max_inf_equip_2}
+						check_variable = {soft_2_workers > max_soft_2}
 					}
-					subtract_from_variable = {inf_equip_2_workers = 1000}
+					subtract_from_variable = {soft_2_workers = 1000}
 				}
 			}
 		}
 		triggers ={
-			selected_inf_equip_1_click_enabled = {
-				check_variable = {inf_equip_1_workers > 999}
+			selected_soft_1_click_enabled = {
+				check_variable = {soft_1_workers > 999}
 			}
-			selected_inf_equip_2_click_enabled = {
-				check_variable = {inf_equip_2_workers > 999}
+			selected_soft_2_click_enabled = {
+				check_variable = {soft_2_workers > 999}
 			}
-			inf_equip_1_add_button_click_enabled = {
+			soft_1_add_button_click_enabled = {
 				has_manpower > 999
-				check_variable = {max_inf_equip_1_workers > inf_equip_1_workers}
+				check_variable = {max_soft_1_workers > soft_1_workers}
 			}
-			inf_equip_1_subtract_button_click_enabled = {
-				check_variable = {inf_equip_1_workers > 999}
+			soft_1_subtract_button_click_enabled = {
+				check_variable = {soft_1_workers > 999}
 			}
-			inf_equip_2_add_button_click_enabled = {
+			soft_2_add_button_click_enabled = {
 				has_manpower > 999
-				check_variable = {max_inf_equip_2_workers > inf_equip_2_workers}
+				check_variable = {max_soft_2_workers > soft_2_workers}
 			}
-			inf_equip_2_subtract_button_click_enabled = {
-				check_variable = {inf_equip_2_workers > 999}
+			soft_2_subtract_button_click_enabled = {
+				check_variable = {soft_2_workers > 999}
 			}
-			inf_equip_1_factory_add_button_click_enabled = {
+			soft_1_factory_add_button_click_enabled = {
 				check_variable = {total_dockyards > 0}
 			}
-			inf_equip_2_factory_add_button_click_enabled = {
+			soft_2_factory_add_button_click_enabled = {
 				check_variable = {total_dockyards > 0}
 			}
-			inf_equip_1_factory_subtract_button_click_enabled = {
-				check_variable = {inf_equip_1_factory > 0}
+			soft_1_factory_subtract_button_click_enabled = {
+				check_variable = {soft_1_factory > 0}
 			}
-			inf_equip_2_factory_subtract_button_click_enabled = {
-				check_variable = {inf_equip_2_factory > 0}
+			soft_2_factory_subtract_button_click_enabled = {
+				check_variable = {soft_2_factory > 0}
 			}
-			inf_equip_1_create_button_click_enabled = {
-				check_variable = {inf_equip_1_workers > 0}
+			soft_1_create_button_click_enabled = {
+				check_variable = {soft_1_workers > 0}
 			}
-			inf_equip_2_create_button_click_enabled = {
-				check_variable = {inf_equip_2_workers > 0}
+			soft_2_create_button_click_enabled = {
+				check_variable = {soft_2_workers > 0}
 			}
-			inf_equip_1_button_visible = {
-				has_country_flag = inf_equip_1_selection_open
+			soft_1_button_visible = {
+				has_country_flag = soft_1_selection_open
 			}
-			inf_equip_1_entry_background_visible = {
-				has_country_flag = inf_equip_1_selection_open
+			soft_1_background_visible = {
+				has_country_flag = soft_1_selection_open
 			}
-			inf_equip_1_name_visible = {
-				has_country_flag = inf_equip_1_selection_open
+			soft_1_name_visible = {
+				has_country_flag = soft_1_selection_open
 			}
-			inf_equip_2_button_visible = {
-				has_country_flag = inf_equip_2_selection_open
+			soft_2_button_visible = {
+				has_country_flag = soft_2_selection_open
 			}
-			inf_equip_2_entry_background_visible = {
-				has_country_flag = inf_equip_2_selection_open
+			soft_2_background_visible = {
+				has_country_flag = soft_2_selection_open
 			}
-			inf_equip_2_name_visible = {
-				has_country_flag = inf_equip_2_selection_open
+			soft_2_name_visible = {
+				has_country_flag = soft_2_selection_open
 			}
 		}
 		properties = {
-			selected_inf_equip_1 = {image = "[get_inf_equip_1_selected_photo]"}
-			selected_inf_equip_2 = {image = "[get_inf_equip_2_selected_photo]"}
-			inf_equip_1_button = { image = "[get_inf_equip_1_photo]" }
-			inf_equip_2_button = { image = "[get_inf_equip_2_photo]" }
+			selected_soft_1 = {image = "[get_soft_1_selected_photo]"}
+			selected_soft_2 = {image = "[get_soft_2_selected_photo]"}
+			soft_1_button = { image = "[get_soft_1_photo]" }
+			soft_2_button = { image = "[get_soft_2_photo]" }
 		}
 		dynamic_lists = {
-			inf_equip_1_gridbox = {
-				array = inf_equip_production_array
-				entry_container = inf_equip_1_entry_box
+			soft_1_gridbox = {
+				array = soft_production_array
+				entry_container = soft_1_entry_box
 			}
-			inf_equip_2_gridbox = {
-				array = inf_equip_production_array
-				entry_container = inf_equip_2_entry_box
+			soft_2_gridbox = {
+				array = soft_production_array
+				entry_container = soft_2_entry_box
 			} 
 		}
 	}
