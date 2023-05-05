@@ -182,7 +182,19 @@ scripted_gui = {
 				check_variable = { investment_quantity_selected > 0 }
 			}
 			take_loan_click_enabled = {
-
+				NOT = {
+					check_variable = { bank_of_core_investment > 0 }
+					check_variable = { bank_of_aargau_investment > 0 }
+					check_variable = { ibc_investment > 0 }
+				}
+			}
+			invest_click_enabled = {
+				NOT = {
+					check_variable = { currency_amount^primary_currency < 0 }
+					check_variable = { bank_of_core_debt > 0 }
+					check_variable = { bank_of_aargau_debt > 0 }
+					check_variable = { ibc_debt > 0 }
+				}
 			}
 			pay_loan_click_enabled = {
 				if = {
@@ -190,21 +202,30 @@ scripted_gui = {
 						has_country_flag = bank_of_core_selected
 					}
 					check_variable = { bank_of_core_debt > 0 }
-					check_variable = { loan_quantity_selected < bank_of_core_debt }
+					OR = {
+						check_variable = { loan_quantity_selected < bank_of_core_debt }
+						check_variable = { loan_quantity_selected = bank_of_core_debt }
+					}
 				}
 				if = {
 					limit = {
 						has_country_flag = bank_of_aargau_selected
 					}
 					check_variable = { bank_of_aargau_debt > 0 }
-					check_variable = { loan_quantity_selected < bank_of_aargau_debt }
+					OR = {
+						check_variable = { loan_quantity_selected < bank_of_aargau_debt }
+						check_variable = { loan_quantity_selected = bank_of_aargau_debt }
+					}
 				}
 				if = {
 					limit = {
 						has_country_flag = ibc_selected
 					}
 					check_variable = { ibc_debt > 0 }
-					check_variable = { loan_quantity_selected < ibc_debt }
+					OR = {
+						check_variable = { loan_quantity_selected < ibc_debt }
+						check_variable = { loan_quantity_selected = ibc_debt }
+					}
 				}
 			}
 			sell_asset_click_enabled = {
