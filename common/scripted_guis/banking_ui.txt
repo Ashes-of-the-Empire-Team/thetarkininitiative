@@ -36,7 +36,7 @@ scripted_gui = {
 			ibc_button_click = {
 				set_country_flag = ibc_selected
 				clr_country_flag = bank_of_core_selected
-				clr_country_flag = central_bank_selected
+				clr_country_flag = bank_of_aargau_selected
 				set_variable = { loan_amount = ibc_debt }
 				set_variable = { investment_amount = ibc_investment }
 				set_variable = { interest_rate_loan = Global.ibc_interest_loan }
@@ -44,7 +44,7 @@ scripted_gui = {
 			}
 			bank_of_core_button_click = {
 				set_country_flag = bank_of_core_selected
-				clr_country_flag = central_bank_selected
+				clr_country_flag = bank_of_aargau_selected
 				clr_country_flag = ibc_selected
 				set_variable = { loan_amount = bank_of_core_debt }
 				set_variable = { investment_amount = bank_of_core_investment }
@@ -202,9 +202,10 @@ scripted_gui = {
 						has_country_flag = bank_of_core_selected
 					}
 					check_variable = { bank_of_core_debt > 0 }
-					OR = {
-						check_variable = { loan_quantity_selected < bank_of_core_debt }
-						check_variable = { loan_quantity_selected = bank_of_core_debt }
+					check_variable = {
+						var = loan_quantity_selected
+						value = bank_of_core_debt
+						compare = less_than_or_equals
 					}
 				}
 				if = {
@@ -212,9 +213,10 @@ scripted_gui = {
 						has_country_flag = bank_of_aargau_selected
 					}
 					check_variable = { bank_of_aargau_debt > 0 }
-					OR = {
-						check_variable = { loan_quantity_selected < bank_of_aargau_debt }
-						check_variable = { loan_quantity_selected = bank_of_aargau_debt }
+					check_variable = {
+						var = loan_quantity_selected
+						value = bank_of_aargau_debt
+						compare = less_than_or_equals
 					}
 				}
 				if = {
@@ -222,9 +224,10 @@ scripted_gui = {
 						has_country_flag = ibc_selected
 					}
 					check_variable = { ibc_debt > 0 }
-					OR = {
-						check_variable = { loan_quantity_selected < ibc_debt }
-						check_variable = { loan_quantity_selected = ibc_debt }
+					check_variable = {
+						var = loan_quantity_selected
+						value = ibc_debt
+						compare = less_than_or_equals
 					}
 				}
 			}
