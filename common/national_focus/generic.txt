@@ -527,7 +527,7 @@
 		x = 0
 		y = 1
 		relative_position_id = ae_the_new_galactic_republic
-		cost = 14.3
+		cost = 7.2
 
 		available = {
 			NOT = {
@@ -577,7 +577,7 @@
 		x = 0
 		y = 1
 		relative_position_id = ae_the_imperial_warlords
-		cost = 14.3
+		cost = 7.2
 
 		available = {
 			NOT = {
@@ -627,7 +627,7 @@
 		x = 1
 		y = 2
 		relative_position_id = ae_repairing_our_cities
-		cost = 14.3
+		cost = 14.4
 
 		available = {
 			NOT = {
@@ -688,7 +688,7 @@
 		x = 0
 		y = 2
 		relative_position_id = ae_the_ssi_ruuvi_invasions
-		cost = 14.3
+		cost = 14.4
 		
 		available = {
 			NOT = {
@@ -738,11 +738,10 @@
 		x = 1
 		y = 2
 		relative_position_id = ae_the_imperial_warlords
-		cost = 14.3
+		cost = 14.4
 
 		available = {
 			NOT = {
-				always = yes
 				OR = {
 					has_government = corporation
 					has_government = consortium
@@ -803,7 +802,7 @@
 		x = -1
 		y = 1
 		relative_position_id = ae_reinforce_neutrality
-		cost = 14.3
+		cost = 7.2
 
 		offset = {
 			x = 0
@@ -822,7 +821,8 @@
 		}
 		
 		completion_reward = {
-			
+			set_country_flag = ae_imp_warlords_unlocked
+			add_political_power = 25
 		}
 	}
 
@@ -832,7 +832,7 @@
 		x = 1
 		y = 1
 		relative_position_id = ae_reinforce_neutrality
-		cost = 14.3
+		cost = 7.2
 
 		offset = {
 			x = 0
@@ -851,7 +851,7 @@
 		}
 		
 		completion_reward = {
-			
+			add_political_power = 25
 		}
 	}
 
@@ -861,7 +861,129 @@
 		x = 1
 		y = 1
 		relative_position_id = ae_imp_picking_sides
-		cost = 14.3
+		cost = 7.2
+
+		available = {
+			if = {
+				limit = {
+					has_country_flag = ae_imp_PEN_picked
+				}
+				PEN = {
+					has_opinion = {
+						target = ROOT
+						value > 99
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					has_country_flag = ae_imp_FTU_picked
+				}
+				FTU = {
+					has_opinion = {
+						target = ROOT
+						value > 99
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					has_country_flag = ae_imp_ERI_picked
+				}
+				ERI = {
+					has_opinion = {
+						target = ROOT
+						value > 99
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					has_country_flag = ae_imp_ZSJ_picked
+				}
+				ZSJ = {
+					has_opinion = {
+						target = ROOT
+						value > 99
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					has_country_flag = ae_imp_ZER_picked
+				}
+				ZER = {
+					has_opinion = {
+						target = ROOT
+						value > 99
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					has_country_flag = ae_imp_REE_picked
+				}
+				REE = {
+					has_opinion = {
+						target = ROOT
+						value > 99
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					has_country_flag = ae_imp_RIN_picked
+				}
+				RIN = {
+					has_opinion = {
+						target = ROOT
+						value > 99
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					has_country_flag = ae_imp_BES_picked
+				}
+				BES = {
+					has_opinion = {
+						target = ROOT
+						value > 99
+					}
+				}
+			}
+			if = {
+				limit = {
+					has_completed_focus = ae_imp_picking_sides
+				}
+				custom_trigger_tooltip = {
+					tooltip = ae_imp_warlord_picked_loc
+					OR = {
+						has_country_flag = ae_imp_PEN_picked
+						has_country_flag = ae_imp_FTU_picked
+						has_country_flag = ae_imp_ERI_picked
+						has_country_flag = ae_imp_ZSJ_picked
+						has_country_flag = ae_imp_ZER_picked
+						has_country_flag = ae_imp_REE_picked
+						has_country_flag = ae_imp_RIN_picked
+						has_country_flag = ae_imp_BES_picked
+					}
+				}
+			}
+			if = {
+				limit = {
+					has_completed_focus = ae_imp_loyalty_to_the_emperor
+					
+				}
+				var:global.emperor_id = {
+					has_opinion = {
+						target = ROOT
+						value > 99
+					}
+				}
+			}
+			
+		}
 
 		offset = {
 			x = 0
@@ -877,7 +999,81 @@
 		}
 		
 		completion_reward = {
-			
+			if = {
+				limit = {
+					has_country_flag = ae_imp_PEN_picked
+				}
+				PEN = {
+					give_guarantee = ROOT
+				}
+			}
+			else_if = {
+				limit = {
+					has_country_flag = ae_imp_FTU_picked
+				}
+				FTU = {
+					give_guarantee = ROOT
+				}
+			}
+			else_if = {
+				limit = {
+					has_country_flag = ae_imp_ERI_picked
+				}
+				ERI = {
+					give_guarantee = ROOT
+				}
+			}
+			else_if = {
+				limit = {
+					has_country_flag = ae_imp_ZSJ_picked
+				}
+				ZSJ = {
+					give_guarantee = ROOT
+				}
+			}
+			else_if = {
+				limit = {
+					has_country_flag = ae_imp_ZER_picked
+				}
+				ZER = {
+					give_guarantee = ROOT
+				}
+			}
+			else_if = {
+				limit = {
+					has_country_flag = ae_imp_REE_picked
+				}
+				REE = {
+					give_guarantee = ROOT
+				}
+			}
+			else_if = {
+				limit = {
+					has_country_flag = ae_imp_RIN_picked
+				}
+				RIN = {
+					give_guarantee = ROOT
+				}
+			}
+			else_if = {
+				limit = {
+					has_country_flag = ae_imp_BES_picked
+				}
+				BES = {
+					give_guarantee = ROOT
+				}
+			}
+			else_if = {
+				limit = {
+					has_completed_focus = ae_imp_loyalty_to_the_emperor
+				}
+				var:global.emperor_id = {
+					give_guarantee = ROOT
+				}
+			}
+			else = {
+				custom_effect_tooltip = ae_imp_request_protection_loc
+			}
 		}
 	}
 
@@ -887,10 +1083,22 @@
 		x = -3
 		y = 1
 		relative_position_id = ae_imp_picking_sides
-		cost = 14.3
+		cost = 7.2
 
 		available = {
-			
+			custom_trigger_tooltip = {
+				tooltip = ae_imp_warlord_picked_loc
+				OR = {
+					has_country_flag = ae_imp_PEN_picked
+					has_country_flag = ae_imp_FTU_picked
+					has_country_flag = ae_imp_ERI_picked
+					has_country_flag = ae_imp_ZSJ_picked
+					has_country_flag = ae_imp_ZER_picked
+					has_country_flag = ae_imp_REE_picked
+					has_country_flag = ae_imp_RIN_picked
+					has_country_flag = ae_imp_BES_picked
+				}
+			}
 		}
 
 		prerequisite = {
@@ -898,7 +1106,74 @@
 		}
 		
 		completion_reward = {
-			
+			army_experience = 25
+			if = {
+				limit = {
+					has_country_flag = ae_imp_PEN_picked
+				}
+				PEN = {
+					army_experience = 5
+				}
+			}
+			else_if = {
+				limit = {
+					has_country_flag = ae_imp_FTU_picked
+				}
+				FTU = {
+					army_experience = 5
+				}
+			}
+			else_if = {
+				limit = {
+					has_country_flag = ae_imp_ERI_picked
+				}
+				ERI = {
+					army_experience = 5
+				}
+			}
+			else_if = {
+				limit = {
+					has_country_flag = ae_imp_ZSJ_picked
+				}
+				ZSJ = {
+					army_experience = 5
+				}
+			}
+			else_if = {
+				limit = {
+					has_country_flag = ae_imp_ZER_picked
+				}
+				ZER = {
+					army_experience = 5
+				}
+			}
+			else_if = {
+				limit = {
+					has_country_flag = ae_imp_REE_picked
+				}
+				REE = {
+					army_experience = 5
+				}
+			}
+			else_if = {
+				limit = {
+					has_country_flag = ae_imp_RIN_picked
+				}
+				RIN = {
+					army_experience = 5
+				}
+			}
+			else_if = {
+				limit = {
+					has_country_flag = ae_imp_BES_picked
+				}
+				BES = {
+					army_experience = 5
+				}
+			}
+			else = {
+				custom_effect_tooltip = ae_imp_joint_drills_loc
+			}
 		}
 	}
 
@@ -908,14 +1183,120 @@
 		x = -1
 		y = 1
 		relative_position_id = ae_imp_picking_sides
-		cost = 14.3
+		cost = 7.2
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = ae_imp_warlord_picked_loc
+				OR = {
+					has_country_flag = ae_imp_PEN_picked
+					has_country_flag = ae_imp_FTU_picked
+					has_country_flag = ae_imp_ERI_picked
+					has_country_flag = ae_imp_ZSJ_picked
+					has_country_flag = ae_imp_ZER_picked
+					has_country_flag = ae_imp_REE_picked
+					has_country_flag = ae_imp_RIN_picked
+					has_country_flag = ae_imp_BES_picked
+				}
+			}
+		}
 
 		prerequisite = {
 			focus = ae_imp_picking_sides
 		}
 		
 		completion_reward = {
-			
+			random_owned_controlled_state = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
+			if = {
+				limit = {
+					has_country_flag = ae_imp_PEN_picked
+				}
+				PEN = {
+					random_owned_controlled_state = {
+						add_extra_state_shared_building_slots = 1
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					has_country_flag = ae_imp_FTU_picked
+				}
+				FTU = {
+					random_owned_controlled_state = {
+						add_extra_state_shared_building_slots = 1
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					has_country_flag = ae_imp_ERI_picked
+				}
+				ERI = {
+					random_owned_controlled_state = {
+						add_extra_state_shared_building_slots = 1
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					has_country_flag = ae_imp_ZSJ_picked
+				}
+				ZSJ = {
+					random_owned_controlled_state = {
+						add_extra_state_shared_building_slots = 1
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					has_country_flag = ae_imp_ZER_picked
+				}
+				ZER = {
+					random_owned_controlled_state = {
+						add_extra_state_shared_building_slots = 1
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					has_country_flag = ae_imp_REE_picked
+				}
+				REE = {
+					random_owned_controlled_state = {
+						add_extra_state_shared_building_slots = 1
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					has_country_flag = ae_imp_RIN_picked
+				}
+				RIN = {
+					random_owned_controlled_state = {
+						add_extra_state_shared_building_slots = 1
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					has_country_flag = ae_imp_BES_picked
+				}
+				BES = {
+					random_owned_controlled_state = {
+						add_extra_state_shared_building_slots = 1
+					}
+				}
+			}
+			else = {
+				custom_effect_tooltip = ae_imp_econ_coop_loc
+			}
 		}
 	}
 
@@ -925,14 +1306,19 @@
 		x = 1
 		y = 1
 		relative_position_id = ae_imp_loyalty_to_the_emperor
-		cost = 14.3
+		cost = 7.2
 
 		prerequisite = {
 			focus = ae_imp_loyalty_to_the_emperor
 		}
 		
 		completion_reward = {
-			
+			add_timed_idea = {
+				idea = ae_imperial_construction_vigour_idea
+				days = 730
+			}
+			custom_effect_tooltip = custom_lose_25b
+			add_to_variable = { currency_amount^primary_currency = -40 }
 		}
 	}
 
@@ -942,14 +1328,14 @@
 		x = 3
 		y = 1
 		relative_position_id = ae_imp_loyalty_to_the_emperor
-		cost = 14.3
+		cost = 7.2
 
 		prerequisite = {
 			focus = ae_imp_loyalty_to_the_emperor
 		}
 		
 		completion_reward = {
-			
+			add_ideas = ae_imperial_delegates_idea
 		}
 	}
 
@@ -959,7 +1345,26 @@
 		x = 1
 		y = 1
 		relative_position_id = ae_imp_joint_military_drills
-		cost = 14.3
+		cost = 7.2
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = ae_imp_warlord_picked_loc
+				OR = {
+					has_country_flag = ae_imp_PEN_picked
+					has_country_flag = ae_imp_FTU_picked
+					has_country_flag = ae_imp_ERI_picked
+					has_country_flag = ae_imp_ZSJ_picked
+					has_country_flag = ae_imp_ZER_picked
+					has_country_flag = ae_imp_REE_picked
+					has_country_flag = ae_imp_RIN_picked
+					has_country_flag = ae_imp_BES_picked
+				}
+			}
+			has_equipment = {
+				infantry_equipment > 4999
+			}
+		}
 
 		prerequisite = {
 			focus = ae_imp_joint_military_drills
@@ -969,7 +1374,90 @@
 		}
 		
 		completion_reward = {
-			
+			add_ideas = ae_sharing_the_burden_idea
+			if = {
+				limit = {
+					has_country_flag = ae_imp_PEN_picked
+				}
+				send_equipment = {
+					equipment = infantry_equipment
+					amount = 5000
+					target = PEN
+				}
+			}
+			else_if = {
+				limit = {
+					has_country_flag = ae_imp_FTU_picked
+				}
+				send_equipment = {
+					equipment = infantry_equipment
+					amount = 5000
+					target = FTU
+				}
+			}
+			else_if = {
+				limit = {
+					has_country_flag = ae_imp_ERI_picked
+				}
+				send_equipment = {
+					equipment = infantry_equipment
+					amount = 5000
+					target = ERI
+				}
+			}
+			else_if = {
+				limit = {
+					has_country_flag = ae_imp_ZSJ_picked
+				}
+				send_equipment = {
+					equipment = infantry_equipment
+					amount = 5000
+					target = ZSJ
+				}
+			}
+			else_if = {
+				limit = {
+					has_country_flag = ae_imp_ZER_picked
+				}
+				send_equipment = {
+					equipment = infantry_equipment
+					amount = 5000
+					target = ZER
+				}
+			}
+			else_if = {
+				limit = {
+					has_country_flag = ae_imp_REE_picked
+				}
+				send_equipment = {
+					equipment = infantry_equipment
+					amount = 5000
+					target = REE
+				}
+			}
+			else_if = {
+				limit = {
+					has_country_flag = ae_imp_RIN_picked
+				}
+				send_equipment = {
+					equipment = infantry_equipment
+					amount = 5000
+					target = RIN
+				}
+			}
+			else_if = {
+				limit = {
+					has_country_flag = ae_imp_BES_picked
+				}
+				send_equipment = {
+					equipment = infantry_equipment
+					amount = 5000
+					target = BES
+				}
+			}
+			else = {
+				custom_effect_tooltip = ae_imp_joint_drills_loc
+			}
 		}
 	}
 
@@ -979,7 +1467,7 @@
 		x = 1
 		y = 1
 		relative_position_id = ae_imp_economic_cooperation
-		cost = 14.3
+		cost = 7.2
 
 		prerequisite = {
 			focus = ae_imp_loyalty_to_the_emperor
@@ -991,7 +1479,7 @@
 		}
 		
 		completion_reward = {
-			
+			add_ideas = ae_imperial_austerity
 		}
 	}
 
@@ -1001,7 +1489,7 @@
 		x = 1
 		y = 1
 		relative_position_id = ae_imp_request_protection
-		cost = 14.3
+		cost = 7.2
 
 		prerequisite = {
 			focus = ae_imp_loyalty_to_the_emperor
@@ -1013,7 +1501,9 @@
 		}
 		
 		completion_reward = {
-			
+			custom_effect_tooltip = custom_add_25b
+			add_to_variable = { currency_amount^primary_currency = 25 }
+			add_stability = -0.05
 		}
 	}
 
@@ -1023,14 +1513,42 @@
 		x = 0
 		y = 1
 		relative_position_id = ae_imp_send_delegates
-		cost = 14.3
+		cost = 7.2
 
 		prerequisite = {
 			focus = ae_imp_send_delegates
 		}
 		
 		completion_reward = {
+			custom_effect_tooltip = ae_stormtrooper_reinforcements_loc
+			hidden_effect = {
+				division_template = {
+					name = "Stormtrooper Brigade"
+					priority = 2
+					division_names_group = ROM_MTN_01
+					regiments = {
+						stormtrooper = { x = 0 y = 0 }
+						stormtrooper = { x = 0 y = 1 }
+						stormtrooper = { x = 0 y = 2 }
 			
+						stormtrooper = { x = 1 y = 0 }
+						stormtrooper = { x = 1 y = 1 }
+						stormtrooper = { x = 1 y = 2 }
+					}
+				}
+				random_owned_controlled_state = {
+					limit = { ROOT = { has_full_control_of_state = PREV } }
+					prioritize = { 46 }
+					create_unit = {
+						division = "name = \"Stormtrooper Brigade\" division_template = \"Stormtrooper Brigade\" start_experience_factor = 0.8" 
+						owner = ROOT
+					}
+					create_unit = {
+						division = "name = \"Stormtrooper Brigade\" division_template = \"Stormtrooper Brigade\" start_experience_factor = 0.8" 
+						owner = ROOT
+					}
+				}
+			}
 		}
 	}
 
@@ -1040,14 +1558,167 @@
 		x = 1
 		y = 1
 		relative_position_id = ae_imp_sharing_the_burden
-		cost = 14.3
+		cost = 7.2
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = ae_imp_warlord_picked_loc
+				OR = {
+					has_country_flag = ae_imp_PEN_picked
+					has_country_flag = ae_imp_FTU_picked
+					has_country_flag = ae_imp_ERI_picked
+					has_country_flag = ae_imp_ZSJ_picked
+					has_country_flag = ae_imp_ZER_picked
+					has_country_flag = ae_imp_REE_picked
+					has_country_flag = ae_imp_RIN_picked
+					has_country_flag = ae_imp_BES_picked
+				}
+			}
+		}
 
 		prerequisite = {
 			focus = ae_imp_sharing_the_burden
 		}
 		
 		completion_reward = {
-			
+			clr_country_flag = ae_imp_warlords_unlocked
+			if = {
+				limit = {
+					has_country_flag = ae_imp_PEN_picked
+				}
+				swap_ideas = {
+					remove_idea = ae_warlord_support
+					add_idea = ae_warlord_support2
+				}
+				PEN = {
+					set_autonomy = {
+						target = ROOT
+						autonomy_state = autonomy_imperial_sector
+						end_wars = no
+						end_civil_wars = no
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					has_country_flag = ae_imp_FTU_picked
+				}
+				swap_ideas = {
+					remove_idea = ae_warlord_support
+					add_idea = ae_warlord_support2
+				}
+				FTU = {
+					set_autonomy = {
+						target = ROOT
+						autonomy_state = autonomy_imperial_sector
+						end_wars = no
+						end_civil_wars = no
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					has_country_flag = ae_imp_ERI_picked
+				}
+				swap_ideas = {
+					remove_idea = ae_warlord_support
+					add_idea = ae_warlord_support2
+				}
+				ERI = {
+					set_autonomy = {
+						target = ROOT
+						autonomy_state = autonomy_imperial_sector
+						end_wars = no
+						end_civil_wars = no
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					has_country_flag = ae_imp_ZSJ_picked
+				}
+				swap_ideas = {
+					remove_idea = ae_warlord_support
+					add_idea = ae_warlord_support2
+				}
+				ZSJ = {
+					set_autonomy = {
+						target = ROOT
+						autonomy_state = autonomy_imperial_sector
+						end_wars = no
+						end_civil_wars = no
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					has_country_flag = ae_imp_ZER_picked
+				}
+				swap_ideas = {
+					remove_idea = ae_warlord_support
+					add_idea = ae_warlord_support2
+				}
+				ZER = {
+					set_autonomy = {
+						target = ROOT
+						autonomy_state = autonomy_imperial_sector
+						end_wars = no
+						end_civil_wars = no
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					has_country_flag = ae_imp_REE_picked
+				}
+				swap_ideas = {
+					remove_idea = ae_warlord_support
+					add_idea = ae_warlord_support2
+				}
+				REE = {
+					set_autonomy = {
+						target = ROOT
+						autonomy_state = autonomy_imperial_sector
+						end_wars = no
+						end_civil_wars = no
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					has_country_flag = ae_imp_RIN_picked
+				}
+				swap_ideas = {
+					remove_idea = ae_warlord_support
+					add_idea = ae_warlord_support2
+				}
+				RIN = {
+					set_autonomy = {
+						target = ROOT
+						autonomy_state = autonomy_imperial_sector
+						end_wars = no
+						end_civil_wars = no
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					has_country_flag = ae_imp_BES_picked
+				}
+				swap_ideas = {
+					remove_idea = ae_warlord_support
+					add_idea = ae_warlord_support2
+				}
+				BES = {
+					set_autonomy = {
+						target = ROOT
+						autonomy_state = autonomy_imperial_sector
+						end_wars = no
+						end_civil_wars = no
+					}
+				}
+			}
+			custom_effect_tooltip = ae_imp_solidify_support_loc
 		}
 	}
 
@@ -1057,7 +1728,11 @@
 		x = 1
 		y = 1
 		relative_position_id = ae_imp_impose_austerity
-		cost = 14.3
+		cost = 7.2
+
+		bypass = {
+			amount_research_slots = 5
+		}
 
 		prerequisite = {
 			focus = ae_imp_impose_austerity
@@ -1067,7 +1742,7 @@
 		}
 		
 		completion_reward = {
-			
+			add_research_slot = 1
 		}
 	}
 
@@ -1077,7 +1752,7 @@
 		x = 1
 		y = 2
 		relative_position_id = ae_imp_imperial_construction_vigour
-		cost = 14.3
+		cost = 7.2
 
 		prerequisite = {
 			focus = ae_imp_imperial_construction_vigour
@@ -1087,7 +1762,7 @@
 		}
 		
 		completion_reward = {
-			
+			add_ideas = ae_foreign_interventions_idea
 		}
 	}
 
@@ -1097,14 +1772,37 @@
 		x = 1
 		y = 1
 		relative_position_id = ae_imp_stormtrooper_reinforcements
-		cost = 14.3
+		cost = 7.2
 
 		prerequisite = {
 			focus = ae_imp_stormtrooper_reinforcements
 		}
 		
 		completion_reward = {
-			
+			random_owned_controlled_state = {
+				limit = {
+					is_capital = yes
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = bunker
+					level = 3
+					instant_build = yes
+					province = {
+						limit_to_victory_point = yes
+					}
+				}
+				add_building_construction = {
+					type = radar_station
+					level = 1
+					instant_build = yes
+				}
+			}
 		}
 	}
 
@@ -1114,7 +1812,95 @@
 		x = -1
 		y = 2
 		relative_position_id = ae_imp_sharing_the_burden
-		cost = 14.3
+		cost = 7.2
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = ae_imp_warlord_picked_loc
+				OR = {
+					has_country_flag = ae_imp_PEN_picked
+					has_country_flag = ae_imp_FTU_picked
+					has_country_flag = ae_imp_ERI_picked
+					has_country_flag = ae_imp_ZSJ_picked
+					has_country_flag = ae_imp_ZER_picked
+					has_country_flag = ae_imp_REE_picked
+					has_country_flag = ae_imp_RIN_picked
+					has_country_flag = ae_imp_BES_picked
+				}
+			}
+			if = {
+				limit = {
+					has_country_flag = ae_imp_ZSJ_picked
+				}
+				ZSJ = {
+					has_country_flag = emperor
+				}
+			}
+			else_if = {
+				limit = {
+					has_country_flag = ae_imp_PEN_picked
+				}
+				PEN = {
+					has_country_flag = emperor
+				}
+			}
+			else_if = {
+				limit = {
+					has_country_flag = ae_imp_FTU_picked
+				}
+				FTU = {
+					has_country_flag = emperor
+				}
+			}
+			else_if = {
+				limit = {
+					has_country_flag = ae_imp_ERI_picked
+				}
+				ERI = {
+					has_country_flag = emperor
+				}
+			}
+			else_if = {
+				limit = {
+					has_country_flag = ae_imp_ZER_picked
+				}
+				ZER = {
+					has_country_flag = emperor
+				}
+			}
+			else_if = {
+				limit = {
+					has_country_flag = ae_imp_REE_picked
+				}
+				REE = {
+					has_country_flag = emperor
+				}
+			}
+			else_if = {
+				limit = {
+					has_country_flag = ae_imp_RIN_picked
+				}
+				RIN = {
+					has_country_flag = emperor
+				}
+			}
+			else_if = {
+				limit = {
+					has_country_flag = ae_imp_BES_picked
+				}
+				BES = {
+					has_country_flag = emperor
+				}
+			}
+			else = {
+				custom_trigger_tooltip = {
+					tooltip = ae_imp_warlord_is_emperor_loc
+					NOT = {
+						always = yes
+					}
+				}
+			}
+		}
 
 		prerequisite = {
 			focus = ae_imp_sharing_the_burden
@@ -1124,7 +1910,8 @@
 		}
 		
 		completion_reward = {
-			
+			add_to_variable = { currency_amount^primary_currency = 200 }
+			custom_effect_tooltip = ae_200b_loc
 		}
 	}
 
@@ -1134,7 +1921,23 @@
 		x = 0
 		y = 1
 		relative_position_id = ae_imp_solidify_support
-		cost = 14.3
+		cost = 7.2
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = ae_imp_warlord_picked_loc
+				OR = {
+					has_country_flag = ae_imp_PEN_picked
+					has_country_flag = ae_imp_FTU_picked
+					has_country_flag = ae_imp_ERI_picked
+					has_country_flag = ae_imp_ZSJ_picked
+					has_country_flag = ae_imp_ZER_picked
+					has_country_flag = ae_imp_REE_picked
+					has_country_flag = ae_imp_RIN_picked
+					has_country_flag = ae_imp_BES_picked
+				}
+			}
+		}
 
 		prerequisite = {
 			focus = ae_imp_solidify_support
@@ -1151,7 +1954,7 @@
 		x = 0
 		y = 1
 		relative_position_id = ae_imp_imperial_science_department
-		cost = 14.3
+		cost = 7.2
 
 		prerequisite = {
 			focus = ae_imp_imperial_science_department
@@ -1162,7 +1965,7 @@
 		}
 		
 		completion_reward = {
-			
+			add_ideas = ae_imp_for_the_empire_idea
 		}
 	}
 
@@ -1172,7 +1975,7 @@
 		x = -1
 		y = 1
 		relative_position_id = ae_imp_foreign_interventions
-		cost = 14.3
+		cost = 7.2
 
 		mutually_exclusive = {
 			focus = ae_imp_counterespionage
@@ -1183,7 +1986,7 @@
 		}
 		
 		completion_reward = {
-			
+			add_ideas = ae_isb_department_idea1
 		}
 	}
 
@@ -1193,7 +1996,7 @@
 		x = 1
 		y = 1
 		relative_position_id = ae_imp_foreign_interventions
-		cost = 14.3
+		cost = 7.2
 
 		mutually_exclusive = {
 			focus = ae_imp_expert_agents
@@ -1204,7 +2007,7 @@
 		}
 		
 		completion_reward = {
-			
+			add_ideas = ae_isb_department_idea2
 		}
 	}
 
@@ -1214,7 +2017,7 @@
 		x = 1
 		y = 1
 		relative_position_id = ae_imp_expert_agents
-		cost = 14.3
+		cost = 7.2
 
 		prerequisite = {
 			focus = ae_imp_expert_agents
@@ -1222,7 +2025,24 @@
 		}
 		
 		completion_reward = {
-			
+			if = {
+				limit = {
+					has_idea = ae_isb_department_idea1
+				}
+				swap_ideas = {
+					remove_idea = ae_isb_department_idea1
+					add_idea = ae_isb_department_idea3
+				}
+			}
+			else_if = {
+				limit = {
+					has_idea = ae_isb_department_idea2
+				}
+				swap_ideas = {
+					remove_idea = ae_isb_department_idea2
+					add_idea = ae_isb_department_idea4
+				}
+			}
 		}
 	}
 
@@ -1232,7 +2052,23 @@
 		x = -1
 		y = 1
 		relative_position_id = ae_imp_warlords_boon
-		cost = 14.3
+		cost = 7.2
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = ae_imp_warlord_picked_loc
+				OR = {
+					has_country_flag = ae_imp_PEN_picked
+					has_country_flag = ae_imp_FTU_picked
+					has_country_flag = ae_imp_ERI_picked
+					has_country_flag = ae_imp_ZSJ_picked
+					has_country_flag = ae_imp_ZER_picked
+					has_country_flag = ae_imp_REE_picked
+					has_country_flag = ae_imp_RIN_picked
+					has_country_flag = ae_imp_BES_picked
+				}
+			}
+		}
 
 		mutually_exclusive = {
 			focus = ae_imp_empty2
@@ -1243,7 +2079,29 @@
 		}
 		
 		completion_reward = {
+			custom_effect_tooltip = ae_deathtrooper_loc
+			hidden_effect = {
+				division_template = {
+					name = "Deathtrooper Brigade"
+					priority = 2
+					division_names_group = ROM_MTN_01
+					regiments = {
+						death_trooper = { x = 0 y = 0 }
+						death_trooper = { x = 0 y = 1 }
 			
+						death_trooper = { x = 1 y = 0 }
+						death_trooper = { x = 1 y = 1 }
+					}
+				}
+				random_owned_controlled_state = {
+					limit = { ROOT = { has_full_control_of_state = PREV } }
+					prioritize = { 46 }
+					create_unit = {
+						division = "name = \"Deathtrooper Brigade\" division_template = \"Deathtrooper Brigade\" start_experience_factor = 1" 
+						owner = ROOT
+					}
+				}
+			}
 		}
 	}
 
@@ -1253,7 +2111,23 @@
 		x = 1
 		y = 1
 		relative_position_id = ae_imp_warlords_boon
-		cost = 14.3
+		cost = 7.2
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = ae_imp_warlord_picked_loc
+				OR = {
+					has_country_flag = ae_imp_PEN_picked
+					has_country_flag = ae_imp_FTU_picked
+					has_country_flag = ae_imp_ERI_picked
+					has_country_flag = ae_imp_ZSJ_picked
+					has_country_flag = ae_imp_ZER_picked
+					has_country_flag = ae_imp_REE_picked
+					has_country_flag = ae_imp_RIN_picked
+					has_country_flag = ae_imp_BES_picked
+				}
+			}
+		}
 
 		mutually_exclusive = {
 			focus = ae_imp_empty1
@@ -1274,7 +2148,23 @@
 		x = 1
 		y = 1
 		relative_position_id = ae_imp_empty1
-		cost = 14.3
+		cost = 7.2
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = ae_imp_warlord_picked_loc
+				OR = {
+					has_country_flag = ae_imp_PEN_picked
+					has_country_flag = ae_imp_FTU_picked
+					has_country_flag = ae_imp_ERI_picked
+					has_country_flag = ae_imp_ZSJ_picked
+					has_country_flag = ae_imp_ZER_picked
+					has_country_flag = ae_imp_REE_picked
+					has_country_flag = ae_imp_RIN_picked
+					has_country_flag = ae_imp_BES_picked
+				}
+			}
+		}
 
 		prerequisite = {
 			focus = ae_imp_empty1
@@ -1296,7 +2186,7 @@
 		x = -1
 		y = 1
 		relative_position_id = ae_reinforce_neutrality
-		cost = 14.3
+		cost = 7.2
 
 		offset = {
 			x = 0
@@ -1325,7 +2215,7 @@
 		x = 1
 		y = 1
 		relative_position_id = ae_reinforce_neutrality
-		cost = 14.3
+		cost = 7.2
 
 		offset = {
 			x = 0
@@ -1354,7 +2244,7 @@
 		x = -2
 		y = 1
 		relative_position_id = ae_rep_align_with_centrists
-		cost = 14.3
+		cost = 7.2
 
 		prerequisite = {
 			focus = ae_rep_align_with_centrists
@@ -1371,7 +2261,7 @@
 		x = 0
 		y = 1
 		relative_position_id = ae_rep_align_with_centrists
-		cost = 14.3
+		cost = 7.2
 
 		prerequisite = {
 			focus = ae_rep_align_with_centrists
@@ -1389,7 +2279,7 @@
 		x = 2
 		y = 1
 		relative_position_id = ae_rep_align_with_centrists
-		cost = 14.3
+		cost = 7.2
 
 		prerequisite = {
 			focus = ae_rep_align_with_centrists
@@ -1407,7 +2297,7 @@
 		x = 2
 		y = 1
 		relative_position_id = ae_rep_align_with_populists
-		cost = 14.3
+		cost = 7.2
 
 		prerequisite = {
 			focus = ae_rep_align_with_populists
@@ -1424,7 +2314,7 @@
 		x = -1
 		y = 1
 		relative_position_id = ae_rep_latent_imperial_legacy
-		cost = 14.3
+		cost = 7.2
 
 		prerequisite = {
 			focus = ae_rep_latent_imperial_legacy
@@ -1441,7 +2331,7 @@
 		x = 1
 		y = 1
 		relative_position_id = ae_rep_latent_imperial_legacy
-		cost = 14.3
+		cost = 7.2
 
 		prerequisite = {
 			focus = ae_rep_new_rep_r_d_department
@@ -1461,7 +2351,7 @@
 		x = 1
 		y = 1
 		relative_position_id = ae_rep_new_rep_r_d_department
-		cost = 14.3
+		cost = 7.2
 
 		prerequisite = {
 			focus = ae_rep_new_rep_r_d_department
@@ -1481,7 +2371,7 @@
 		x = 1
 		y = 1
 		relative_position_id = ae_rep_process_new_rep_laws
-		cost = 14.3
+		cost = 7.2
 
 		prerequisite = {
 			focus = ae_rep_process_new_rep_laws
@@ -1501,7 +2391,7 @@
 		x = 1
 		y = 1
 		relative_position_id = ae_rep_heir_to_the_rebel_spirit
-		cost = 14.3
+		cost = 7.2
 
 		prerequisite = {
 			focus = ae_rep_heir_to_the_rebel_spirit
@@ -1518,7 +2408,7 @@
 		x = 1
 		y = 1
 		relative_position_id = ae_rep_ex_imperial_experience
-		cost = 14.3
+		cost = 7.2
 
 		prerequisite = {
 			focus = ae_rep_ex_imperial_experience
@@ -1535,7 +2425,7 @@
 		x = -1
 		y = 1
 		relative_position_id = ae_rep_commit_efforts_to
-		cost = 14.3
+		cost = 7.2
 
 		prerequisite = {
 			focus = ae_rep_commit_efforts_to
@@ -1552,7 +2442,7 @@
 		x = 1
 		y = 1
 		relative_position_id = ae_rep_commit_efforts_to
-		cost = 14.3
+		cost = 7.2
 
 		prerequisite = {
 			focus = ae_rep_commit_efforts_to
@@ -1569,7 +2459,7 @@
 		x = -1
 		y = 1
 		relative_position_id = ae_rep_smuggler_connections
-		cost = 14.3
+		cost = 7.2
 
 		prerequisite = {
 			focus = ae_rep_smuggler_connections
@@ -1586,7 +2476,7 @@
 		x = -1
 		y = 1
 		relative_position_id = ae_rep_regulated_market
-		cost = 14.3
+		cost = 7.2
 
 		prerequisite = {
 			focus = ae_rep_regulated_market
@@ -1606,7 +2496,7 @@
 		x = 1
 		y = 1
 		relative_position_id = ae_rep_regulated_market
-		cost = 14.3
+		cost = 7.2
 
 		prerequisite = {
 			focus = ae_rep_regulated_market
@@ -1626,7 +2516,7 @@
 		x = 1
 		y = 1
 		relative_position_id = ae_rep_commit_efforts1
-		cost = 14.3
+		cost = 7.2
 
 		prerequisite = {
 			focus = ae_rep_commit_efforts1
@@ -1646,7 +2536,7 @@
 		x = -1
 		y = 1
 		relative_position_id = ae_rep_a_free_market
-		cost = 14.3
+		cost = 7.2
 
 		prerequisite = {
 			focus = ae_rep_a_free_market
@@ -1666,7 +2556,7 @@
 		x = 1
 		y = 1
 		relative_position_id = ae_rep_a_free_market
-		cost = 14.3
+		cost = 7.2
 
 		prerequisite = {
 			focus = ae_rep_a_free_market
@@ -1686,7 +2576,7 @@
 		x = 0
 		y = 1
 		relative_position_id = ae_rep_committee_candidacy
-		cost = 14.3
+		cost = 7.2
 
 		prerequisite = {
 			focus = ae_rep_committee_candidacy
@@ -1703,7 +2593,7 @@
 		x = 1
 		y = 2
 		relative_position_id = ae_rep_emphasize_central_authority
-		cost = 14.3
+		cost = 7.2
 
 		prerequisite = {
 			focus = ae_rep_expertise
@@ -1724,7 +2614,7 @@
 		x = 1
 		y = 2
 		relative_position_id = ae_rep_emphasize_planetary_autonomy
-		cost = 14.3
+		cost = 7.2
 
 		prerequisite = {
 			focus = ae_rep_expertise
