@@ -1,5 +1,7 @@
 ﻿focus_tree = {
 	id = generic_focus
+
+	continuous_focus_position = { x = 3500 y = 50 }
 	
 	country = {
 		factor = 1
@@ -13,6 +15,10 @@
 	}
 
 	shared_focus = ae_our_planet
+
+	###############################################################################
+	############################ Base, Pick a Faction #############################
+	###############################################################################
 
 	focus = {
 		id = ae_aftermath_of_endor
@@ -63,9 +69,32 @@
 		}
 		
 		completion_reward = {
-			add_timed_idea = {
-				idea = ae_a_free_place_idea
-				days = 365
+			if = {
+				limit = {
+					has_idea = reb_influence_1
+				}
+				swap_ideas = {
+					remove_idea = reb_influence_1
+					add_idea = reb_influence_2
+				}
+			}
+			if = {
+				limit = {
+					has_idea = reb_influence_2
+				}
+				swap_ideas = {
+					remove_idea = reb_influence_2
+					add_idea = reb_influence_3
+				}
+			}
+			if = {
+				limit = {
+					has_idea = reb_influence_3
+				}
+				add_timed_idea = {
+					idea = ae_republican_fervour
+					days = 60
+				}
 			}
 		}
 	}
@@ -102,11 +131,40 @@
 		}
 		
 		completion_reward = {
-			random_owned_controlled_state = {
-				add_extra_state_shared_building_slots = 1
+			if = {
+				limit = {
+					has_idea = reb_influence_1
+				}
+				swap_ideas = {
+					remove_idea = reb_influence_1
+					add_idea = reb_influence_2
+				}
+			}
+			if = {
+				limit = {
+					has_idea = reb_influence_2
+				}
+				swap_ideas = {
+					remove_idea = reb_influence_2
+					add_idea = reb_influence_3
+				}
+			}
+			if = {
+				limit = {
+					has_idea = reb_influence_3
+				}
+				add_timed_idea = {
+					idea = ae_republican_fervour
+					days = 60
+				}
 			}
 			random_owned_controlled_state = {
 				add_extra_state_shared_building_slots = 1
+				add_manpower = 25000
+			}
+			random_owned_controlled_state = {
+				add_extra_state_shared_building_slots = 1
+				add_manpower = 25000
 			}
 		}
 	}
@@ -127,17 +185,50 @@
 		}
 		
 		completion_reward = {
-			add_popularity = {
-				ideology = democratic
-				popularity = 0.075
-			}
-			random_owned_controlled_state = {
-				add_building_construction = {
-					type = industrial_complex
-					level = 1
-					instant_build = yes
+			if = {
+				limit = {
+					has_idea = emp_influence_2
 				}
-				add_extra_state_shared_building_slots = 1
+				swap_ideas = {
+					remove_idea = emp_influence_2
+					add_idea = emp_influence_1
+				}
+			}
+			if = {
+				limit = {
+					has_idea = emp_influence_3
+				}
+				swap_ideas = {
+					remove_idea = emp_influence_3
+					add_idea = emp_influence_2
+				}
+			}
+			if = {
+				limit = {
+					has_idea = reb_influence_1
+				}
+				swap_ideas = {
+					remove_idea = reb_influence_1
+					add_idea = reb_influence_2
+				}
+			}
+			if = {
+				limit = {
+					has_idea = reb_influence_2
+				}
+				swap_ideas = {
+					remove_idea = reb_influence_2
+					add_idea = reb_influence_3
+				}
+			}
+			if = {
+				limit = {
+					has_idea = reb_influence_3
+				}
+				add_timed_idea = {
+					idea = ae_republican_fervour
+					days = 60
+				}
 			}
 		}
 	}
@@ -159,9 +250,51 @@
 		}
 		
 		completion_reward = {
-			add_timed_idea = {
-				idea = ae_a_quiet_place_idea
-				days = 365
+			if = {
+				limit = {
+					has_idea = reb_influence_2
+				}
+				swap_ideas = {
+					remove_idea = reb_influence_2
+					add_idea = reb_influence_1
+				}
+			}
+			if = {
+				limit = {
+					has_idea = reb_influence_3
+				}
+				swap_ideas = {
+					remove_idea = reb_influence_3
+					add_idea = reb_influence_2
+				}
+			}
+			if = {
+				limit = {
+					has_idea = emp_influence_2
+				}
+				swap_ideas = {
+					remove_idea = emp_influence_2
+					add_idea = emp_influence_1
+				}
+			}
+			if = {
+				limit = {
+					has_idea = emp_influence_3
+				}
+				swap_ideas = {
+					remove_idea = emp_influence_3
+					add_idea = emp_influence_2
+				}
+			}
+			if = {
+				limit = {
+					has_idea = emp_influence_1
+					has_idea = reb_influence_1
+				}
+				add_timed_idea = {
+					idea = ae_pragmatic_business
+					days = 60
+				}
 			}
 		}
 	}
@@ -198,11 +331,11 @@
 		}
 		
 		completion_reward = {
-			add_popularity = {
-				ideology = neutrality
-				popularity = 0.075
+			army_experience = 20
+			add_timed_idea = {
+				idea = ae_pragmatic_business
+				days = 60
 			}
-			army_experience = 10
 		}
 	}
 
@@ -223,9 +356,32 @@
 		}
 		
 		completion_reward = {
-			add_timed_idea = {
-				idea = ae_a_loyal_place_idea
-				days = 365
+			if = {
+				limit = {
+					has_idea = emp_influence_1
+				}
+				swap_ideas = {
+					remove_idea = emp_influence_1
+					add_idea = emp_influence_2
+				}
+			}
+			if = {
+				limit = {
+					has_idea = emp_influence_2
+				}
+				swap_ideas = {
+					remove_idea = emp_influence_2
+					add_idea = emp_influence_3
+				}
+			}
+			if = {
+				limit = {
+					has_idea = emp_influence_3
+				}
+				add_timed_idea = {
+					idea = ae_imperial_fervour
+					days = 60
+				}
 			}
 		}
 	}
@@ -265,17 +421,50 @@
 		}
 		
 		completion_reward = {
-			add_popularity = {
-				ideology = imperial
-				popularity = 0.075
-			}
-			random_owned_controlled_state = {
-				add_building_construction = {
-					type = arms_factory
-					level = 1
-					instant_build = yes
+			if = {
+				limit = {
+					has_idea = reb_influence_2
 				}
-				add_extra_state_shared_building_slots = 1
+				swap_ideas = {
+					remove_idea = reb_influence_2
+					add_idea = reb_influence_1
+				}
+			}
+			if = {
+				limit = {
+					has_idea = reb_influence_3
+				}
+				swap_ideas = {
+					remove_idea = reb_influence_3
+					add_idea = reb_influence_2
+				}
+			}
+			if = {
+				limit = {
+					has_idea = emp_influence_1
+				}
+				swap_ideas = {
+					remove_idea = emp_influence_1
+					add_idea = emp_influence_2
+				}
+			}
+			if = {
+				limit = {
+					has_idea = emp_influence_2
+				}
+				swap_ideas = {
+					remove_idea = emp_influence_2
+					add_idea = emp_influence_3
+				}
+			}
+			if = {
+				limit = {
+					has_idea = emp_influence_3
+				}
+				add_timed_idea = {
+					idea = ae_imperial_fervour
+					days = 60
+				}
 			}
 		}
 	}
@@ -293,11 +482,141 @@
 		}
 		
 		completion_reward = {
-			random_owned_controlled_state = {
-				add_manpower = 25000
+			if = {
+				limit = {
+					has_idea = emp_influence_1
+				}
+				swap_ideas = {
+					remove_idea = emp_influence_1
+					add_idea = emp_influence_2
+				}
 			}
+			if = {
+				limit = {
+					has_idea = emp_influence_2
+				}
+				swap_ideas = {
+					remove_idea = emp_influence_2
+					add_idea = emp_influence_3
+				}
+			}
+			if = {
+				limit = {
+					has_idea = emp_influence_3
+				}
+				add_timed_idea = {
+					idea = ae_imperial_fervour
+					days = 60
+				}
+			}
+			add_political_power = 25
 			random_owned_controlled_state = {
-				add_manpower = 25000
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = ae_oust_the_imperials
+		icon = GFX_unknown
+		x = 0
+		y = 1
+		relative_position_id = ae_the_new_galactic_republic
+		cost = 14.3
+
+		available = {
+			NOT = {
+				overlord = {
+					has_government = imperial
+				}
+			}
+			OR = {
+				has_idea = emp_influence_3
+				has_idea = emp_influence_2
+			}
+		}
+		prerequisite = {
+			focus = ae_the_new_galactic_republic
+		}
+		
+		completion_reward = {
+			if = {
+				limit = {
+					has_idea = emp_influence_2
+				}
+				swap_ideas = {
+					remove_idea = emp_influence_2
+					add_idea = emp_influence_1
+				}
+			}
+			if = {
+				limit = {
+					has_idea = emp_influence_3
+				}
+				swap_ideas = {
+					remove_idea = emp_influence_3
+					add_idea = emp_influence_2
+				}
+			}
+			add_stability = -0.1
+			add_timed_idea = {
+				idea = ae_imperials_ousted
+				days = 180
+			}
+		}
+	}
+
+	focus = {
+		id = ae_oust_the_new_republic
+		icon = GFX_unknown
+		x = 0
+		y = 1
+		relative_position_id = ae_the_imperial_warlords
+		cost = 14.3
+
+		available = {
+			NOT = {
+				overlord = {
+					has_government = democratic
+				}
+			}
+			OR = {
+				has_idea = reb_influence_3
+				has_idea = reb_influence_2
+			}
+		}
+		prerequisite = {
+			focus = ae_the_new_galactic_republic
+		}
+		
+		completion_reward = {
+			if = {
+				limit = {
+					has_idea = reb_influence_2
+				}
+				swap_ideas = {
+					remove_idea = reb_influence_2
+					add_idea = reb_influence_1
+				}
+			}
+			if = {
+				limit = {
+					has_idea = reb_influence_3
+				}
+				swap_ideas = {
+					remove_idea = reb_influence_3
+					add_idea = reb_influence_2
+				}
+			}
+			add_stability = -0.1
+			add_timed_idea = {
+				idea = ae_new_republic_ousted
+				days = 180
 			}
 		}
 	}
@@ -311,7 +630,26 @@
 		cost = 14.3
 
 		available = {
-			democratic > 0.5
+			NOT = {
+				always = yes
+				OR = {
+					has_government = corporation
+					has_government = consortium
+				}
+			}
+			OR = {
+				AND = {
+					has_idea = reb_influence_3
+					OR = {
+						has_idea = emp_influence_2
+						has_idea = emp_influence_1
+					}
+				}
+				AND = {
+					has_idea = reb_influence_2
+					has_idea = emp_influence_1
+				}
+			}
 		}
 		prerequisite = {
 			focus = ae_repairing_our_cities
@@ -338,10 +676,9 @@
 				ideology = democratic
 				popularity = 0.1
 			}
-			load_focus_tree = {
-				tree = generic_republic
-				keep_completed = yes
-			}
+			mark_focus_tree_layout_dirty = yes
+
+			custom_effect_tooltip = ae_unlock_republic
 		}
 	}
 
@@ -352,10 +689,17 @@
 		y = 2
 		relative_position_id = ae_the_ssi_ruuvi_invasions
 		cost = 14.3
-
+		
 		available = {
-			neutrality > 0.5
+			NOT = {
+				always = yes
+				OR = {
+					has_government = corporation
+					has_government = consortium
+				}
+			}
 		}
+
 		prerequisite = {
 			focus = ae_the_ssi_ruuvi_invasions
 			focus = ae_the_new_galactic_republic
@@ -382,10 +726,9 @@
 				ideology = neutrality
 				popularity = 0.1
 			}
-			load_focus_tree = {
-				tree = generic_neutrality
-				keep_completed = yes
-			}
+			mark_focus_tree_layout_dirty = yes
+
+			custom_effect_tooltip = ae_unlock_neutral
 		}
 	}
 
@@ -398,7 +741,26 @@
 		cost = 14.3
 
 		available = {
-			imperial > 0.5
+			NOT = {
+				always = yes
+				OR = {
+					has_government = corporation
+					has_government = consortium
+				}
+			}
+			OR = {
+				AND = {
+					has_idea = emp_influence_3
+					OR = {
+						has_idea = reb_influence_2
+						has_idea = reb_influence_1
+					}
+				}
+				AND = {
+					has_idea = emp_influence_2
+					has_idea = reb_influence_1
+				}
+			}
 		}
 		prerequisite = {
 			focus = ae_repairing_our_institutions
@@ -425,10 +787,955 @@
 				ideology = imperial
 				popularity = 0.1
 			}
-			load_focus_tree = {
-				tree = generic_imperial
-				keep_completed = yes
+			mark_focus_tree_layout_dirty = yes
+
+			custom_effect_tooltip = ae_unlock_imperial
+		}
+	}
+
+	###############################################################################
+	############################# Imperial Political ##############################
+	###############################################################################
+
+	focus = {
+		id = ae_imp_picking_sides
+		icon = GFX_unknown
+		x = -1
+		y = 1
+		relative_position_id = ae_reinforce_neutrality
+		cost = 14.3
+
+		offset = {
+			x = 0
+			y = -7
+			trigger = {
+				has_country_flag = testrn
 			}
+		}
+
+		allow_branch = {
+			has_completed_focus = ae_stand_with_the_empire
+		}
+
+		mutually_exclusive = {
+			focus = ae_imp_loyalty_to_the_emperor
+		}
+		
+		completion_reward = {
+			
+		}
+	}
+
+	focus = {
+		id = ae_imp_loyalty_to_the_emperor
+		icon = GFX_unknown
+		x = 1
+		y = 1
+		relative_position_id = ae_reinforce_neutrality
+		cost = 14.3
+
+		offset = {
+			x = 0
+			y = -7
+			trigger = {
+				has_country_flag = testrn
+			}
+		}
+
+		allow_branch = {
+			has_completed_focus = ae_stand_with_the_empire
+		}
+
+		mutually_exclusive = {
+			focus = ae_imp_picking_sides
+		}
+		
+		completion_reward = {
+			
+		}
+	}
+
+	focus = {
+		id = ae_imp_request_protection
+		icon = GFX_unknown
+		x = 1
+		y = 1
+		relative_position_id = ae_imp_picking_sides
+		cost = 14.3
+
+		offset = {
+			x = 0
+			y = -7
+			trigger = {
+				has_country_flag = testrn
+			}
+		}
+
+		prerequisite = {
+			focus = ae_imp_loyalty_to_the_emperor
+			focus = ae_imp_picking_sides
+		}
+		
+		completion_reward = {
+			
+		}
+	}
+
+	focus = {
+		id = ae_imp_joint_military_drills
+		icon = GFX_unknown
+		x = -3
+		y = 1
+		relative_position_id = ae_imp_picking_sides
+		cost = 14.3
+
+		available = {
+			
+		}
+
+		prerequisite = {
+			focus = ae_imp_picking_sides
+		}
+		
+		completion_reward = {
+			
+		}
+	}
+
+	focus = {
+		id = ae_imp_economic_cooperation
+		icon = GFX_unknown
+		x = -1
+		y = 1
+		relative_position_id = ae_imp_picking_sides
+		cost = 14.3
+
+		prerequisite = {
+			focus = ae_imp_picking_sides
+		}
+		
+		completion_reward = {
+			
+		}
+	}
+
+	focus = {
+		id = ae_imp_imperial_construction_vigour
+		icon = GFX_unknown
+		x = 1
+		y = 1
+		relative_position_id = ae_imp_loyalty_to_the_emperor
+		cost = 14.3
+
+		prerequisite = {
+			focus = ae_imp_loyalty_to_the_emperor
+		}
+		
+		completion_reward = {
+			
+		}
+	}
+
+	focus = {
+		id = ae_imp_send_delegates
+		icon = GFX_unknown
+		x = 3
+		y = 1
+		relative_position_id = ae_imp_loyalty_to_the_emperor
+		cost = 14.3
+
+		prerequisite = {
+			focus = ae_imp_loyalty_to_the_emperor
+		}
+		
+		completion_reward = {
+			
+		}
+	}
+
+	focus = {
+		id = ae_imp_sharing_the_burden
+		icon = GFX_unknown
+		x = 1
+		y = 1
+		relative_position_id = ae_imp_joint_military_drills
+		cost = 14.3
+
+		prerequisite = {
+			focus = ae_imp_joint_military_drills
+		}
+		prerequisite = {
+			focus = ae_imp_economic_cooperation
+		}
+		
+		completion_reward = {
+			
+		}
+	}
+
+	focus = {
+		id = ae_imp_impose_austerity
+		icon = GFX_unknown
+		x = 1
+		y = 1
+		relative_position_id = ae_imp_economic_cooperation
+		cost = 14.3
+
+		prerequisite = {
+			focus = ae_imp_loyalty_to_the_emperor
+			focus = ae_imp_picking_sides
+		}
+		prerequisite = {
+			focus = ae_imp_economic_cooperation
+			focus = ae_imp_imperial_construction_vigour
+		}
+		
+		completion_reward = {
+			
+		}
+	}
+
+	focus = {
+		id = ae_imp_confiscate_alien_possessions
+		icon = GFX_unknown
+		x = 1
+		y = 1
+		relative_position_id = ae_imp_request_protection
+		cost = 14.3
+
+		prerequisite = {
+			focus = ae_imp_loyalty_to_the_emperor
+			focus = ae_imp_picking_sides
+		}
+		prerequisite = {
+			focus = ae_imp_economic_cooperation
+			focus = ae_imp_imperial_construction_vigour
+		}
+		
+		completion_reward = {
+			
+		}
+	}
+
+	focus = {
+		id = ae_imp_stormtrooper_reinforcements
+		icon = GFX_unknown
+		x = 0
+		y = 1
+		relative_position_id = ae_imp_send_delegates
+		cost = 14.3
+
+		prerequisite = {
+			focus = ae_imp_send_delegates
+		}
+		
+		completion_reward = {
+			
+		}
+	}
+
+	focus = {
+		id = ae_imp_solidify_support
+		icon = GFX_unknown
+		x = 1
+		y = 1
+		relative_position_id = ae_imp_sharing_the_burden
+		cost = 14.3
+
+		prerequisite = {
+			focus = ae_imp_sharing_the_burden
+		}
+		
+		completion_reward = {
+			
+		}
+	}
+
+	focus = {
+		id = ae_imp_imperial_science_department
+		icon = GFX_unknown
+		x = 1
+		y = 1
+		relative_position_id = ae_imp_impose_austerity
+		cost = 14.3
+
+		prerequisite = {
+			focus = ae_imp_impose_austerity
+		}
+		prerequisite = {
+			focus = ae_imp_confiscate_alien_possessions
+		}
+		
+		completion_reward = {
+			
+		}
+	}
+
+	focus = {
+		id = ae_imp_foreign_interventions
+		icon = GFX_unknown
+		x = 1
+		y = 2
+		relative_position_id = ae_imp_imperial_construction_vigour
+		cost = 14.3
+
+		prerequisite = {
+			focus = ae_imp_imperial_construction_vigour
+		}
+		prerequisite = {
+			focus = ae_imp_stormtrooper_reinforcements
+		}
+		
+		completion_reward = {
+			
+		}
+	}
+
+	focus = {
+		id = ae_imp_permanent_imperial_presence
+		icon = GFX_unknown
+		x = 1
+		y = 1
+		relative_position_id = ae_imp_stormtrooper_reinforcements
+		cost = 14.3
+
+		prerequisite = {
+			focus = ae_imp_stormtrooper_reinforcements
+		}
+		
+		completion_reward = {
+			
+		}
+	}
+
+	focus = {
+		id = ae_imp_spoils_of_victory
+		icon = GFX_unknown
+		x = -1
+		y = 2
+		relative_position_id = ae_imp_sharing_the_burden
+		cost = 14.3
+
+		prerequisite = {
+			focus = ae_imp_sharing_the_burden
+		}
+		prerequisite = {
+			focus = ae_imp_solidify_support
+		}
+		
+		completion_reward = {
+			
+		}
+	}
+
+	focus = {
+		id = ae_imp_warlords_boon
+		icon = GFX_unknown
+		x = 0
+		y = 1
+		relative_position_id = ae_imp_solidify_support
+		cost = 14.3
+
+		prerequisite = {
+			focus = ae_imp_solidify_support
+		}
+		
+		completion_reward = {
+			
+		}
+	}
+
+	focus = {
+		id = ae_imp_for_the_empire
+		icon = GFX_unknown
+		x = 0
+		y = 1
+		relative_position_id = ae_imp_imperial_science_department
+		cost = 14.3
+
+		prerequisite = {
+			focus = ae_imp_imperial_science_department
+		}
+		prerequisite = {
+			focus = ae_imp_solidify_support
+			focus = ae_imp_foreign_interventions
+		}
+		
+		completion_reward = {
+			
+		}
+	}
+
+	focus = {
+		id = ae_imp_expert_agents
+		icon = GFX_unknown
+		x = -1
+		y = 1
+		relative_position_id = ae_imp_foreign_interventions
+		cost = 14.3
+
+		mutually_exclusive = {
+			focus = ae_imp_counterespionage
+		}
+
+		prerequisite = {
+			focus = ae_imp_foreign_interventions
+		}
+		
+		completion_reward = {
+			
+		}
+	}
+
+	focus = {
+		id = ae_imp_counterespionage
+		icon = GFX_unknown
+		x = 1
+		y = 1
+		relative_position_id = ae_imp_foreign_interventions
+		cost = 14.3
+
+		mutually_exclusive = {
+			focus = ae_imp_expert_agents
+		}
+
+		prerequisite = {
+			focus = ae_imp_foreign_interventions
+		}
+		
+		completion_reward = {
+			
+		}
+	}
+
+	focus = {
+		id = ae_imp_our_little_isb
+		icon = GFX_unknown
+		x = 1
+		y = 1
+		relative_position_id = ae_imp_expert_agents
+		cost = 14.3
+
+		prerequisite = {
+			focus = ae_imp_expert_agents
+			focus = ae_imp_counterespionage
+		}
+		
+		completion_reward = {
+			
+		}
+	}
+
+	focus = {
+		id = ae_imp_empty1
+		icon = GFX_unknown
+		x = -1
+		y = 1
+		relative_position_id = ae_imp_warlords_boon
+		cost = 14.3
+
+		mutually_exclusive = {
+			focus = ae_imp_empty2
+		}
+
+		prerequisite = {
+			focus = ae_imp_warlords_boon
+		}
+		
+		completion_reward = {
+			
+		}
+	}
+
+	focus = {
+		id = ae_imp_empty2
+		icon = GFX_unknown
+		x = 1
+		y = 1
+		relative_position_id = ae_imp_warlords_boon
+		cost = 14.3
+
+		mutually_exclusive = {
+			focus = ae_imp_empty1
+		}
+
+		prerequisite = {
+			focus = ae_imp_warlords_boon
+		}
+		
+		completion_reward = {
+			
+		}
+	}
+
+	focus = {
+		id = ae_imp_empty3
+		icon = GFX_unknown
+		x = 1
+		y = 1
+		relative_position_id = ae_imp_empty1
+		cost = 14.3
+
+		prerequisite = {
+			focus = ae_imp_empty1
+			focus = ae_imp_empty2
+		}
+		
+		completion_reward = {
+			
+		}
+	}
+
+	###############################################################################
+	########################## New Republic Political #############################
+	###############################################################################
+
+	focus = {
+		id = ae_rep_align_with_centrists
+		icon = GFX_unknown
+		x = -1
+		y = 1
+		relative_position_id = ae_reinforce_neutrality
+		cost = 14.3
+
+		offset = {
+			x = 0
+			y = -7
+			trigger = {
+				has_country_flag = testrn
+			}
+		}
+
+		allow_branch = {
+			has_completed_focus = ae_join_the_new_republic
+		}
+
+		mutually_exclusive = {
+			focus = ae_rep_align_with_populists
+		}
+		
+		completion_reward = {
+			
+		}
+	}
+
+	focus = {
+		id = ae_rep_align_with_populists
+		icon = GFX_unknown
+		x = 1
+		y = 1
+		relative_position_id = ae_reinforce_neutrality
+		cost = 14.3
+
+		offset = {
+			x = 0
+			y = -7
+			trigger = {
+				has_country_flag = testrn
+			}
+		}
+
+		allow_branch = {
+			has_completed_focus = ae_join_the_new_republic
+		}
+
+		mutually_exclusive = {
+			focus = ae_rep_align_with_centrists
+		}
+		
+		completion_reward = {
+			
+		}
+	}
+
+	focus = {
+		id = ae_rep_latent_imperial_legacy
+		icon = GFX_unknown
+		x = -2
+		y = 1
+		relative_position_id = ae_rep_align_with_centrists
+		cost = 14.3
+
+		prerequisite = {
+			focus = ae_rep_align_with_centrists
+		}
+		
+		completion_reward = {
+			
+		}
+	}
+
+	focus = {
+		id = ae_rep_new_rep_r_d_department
+		icon = GFX_unknown
+		x = 0
+		y = 1
+		relative_position_id = ae_rep_align_with_centrists
+		cost = 14.3
+
+		prerequisite = {
+			focus = ae_rep_align_with_centrists
+			focus = ae_rep_align_with_populists
+		}
+		
+		completion_reward = {
+			
+		}
+	}
+
+	focus = {
+		id = ae_rep_process_new_rep_laws
+		icon = GFX_unknown
+		x = 2
+		y = 1
+		relative_position_id = ae_rep_align_with_centrists
+		cost = 14.3
+
+		prerequisite = {
+			focus = ae_rep_align_with_centrists
+			focus = ae_rep_align_with_populists
+		}
+		
+		completion_reward = {
+			
+		}
+	}
+
+	focus = {
+		id = ae_rep_heir_to_the_rebel_spirit
+		icon = GFX_unknown
+		x = 2
+		y = 1
+		relative_position_id = ae_rep_align_with_populists
+		cost = 14.3
+
+		prerequisite = {
+			focus = ae_rep_align_with_populists
+		}
+		
+		completion_reward = {
+			
+		}
+	}
+
+	focus = {
+		id = ae_rep_ex_imperial_experience
+		icon = GFX_unknown
+		x = -1
+		y = 1
+		relative_position_id = ae_rep_latent_imperial_legacy
+		cost = 14.3
+
+		prerequisite = {
+			focus = ae_rep_latent_imperial_legacy
+		}
+		
+		completion_reward = {
+			
+		}
+	}
+
+	focus = {
+		id = ae_rep_centralized_research
+		icon = GFX_unknown
+		x = 1
+		y = 1
+		relative_position_id = ae_rep_latent_imperial_legacy
+		cost = 14.3
+
+		prerequisite = {
+			focus = ae_rep_new_rep_r_d_department
+		}
+		prerequisite = {
+			focus = ae_rep_align_with_centrists
+		}
+		
+		completion_reward = {
+			
+		}
+	}
+
+	focus = {
+		id = ae_rep_commit_efforts_to
+		icon = GFX_unknown
+		x = 1
+		y = 1
+		relative_position_id = ae_rep_new_rep_r_d_department
+		cost = 14.3
+
+		prerequisite = {
+			focus = ae_rep_new_rep_r_d_department
+		}
+		prerequisite = {
+			focus = ae_rep_process_new_rep_laws
+		}
+		
+		completion_reward = {
+			
+		}
+	}
+
+	focus = {
+		id = ae_rep_independent_development
+		icon = GFX_unknown
+		x = 1
+		y = 1
+		relative_position_id = ae_rep_process_new_rep_laws
+		cost = 14.3
+
+		prerequisite = {
+			focus = ae_rep_process_new_rep_laws
+		}
+		prerequisite = {
+			focus = ae_rep_align_with_populists
+		}
+		
+		completion_reward = {
+			
+		}
+	}
+
+	focus = {
+		id = ae_rep_smuggler_connections
+		icon = GFX_unknown
+		x = 1
+		y = 1
+		relative_position_id = ae_rep_heir_to_the_rebel_spirit
+		cost = 14.3
+
+		prerequisite = {
+			focus = ae_rep_heir_to_the_rebel_spirit
+		}
+		
+		completion_reward = {
+			
+		}
+	}
+
+	focus = {
+		id = ae_rep_regulated_market
+		icon = GFX_unknown
+		x = 1
+		y = 1
+		relative_position_id = ae_rep_ex_imperial_experience
+		cost = 14.3
+
+		prerequisite = {
+			focus = ae_rep_ex_imperial_experience
+		}
+		
+		completion_reward = {
+			
+		}
+	}
+
+	focus = {
+		id = ae_rep_commit_efforts1
+		icon = GFX_unknown
+		x = -1
+		y = 1
+		relative_position_id = ae_rep_commit_efforts_to
+		cost = 14.3
+
+		prerequisite = {
+			focus = ae_rep_commit_efforts_to
+		}
+		
+		completion_reward = {
+			
+		}
+	}
+
+	focus = {
+		id = ae_rep_commit_efforts2
+		icon = GFX_unknown
+		x = 1
+		y = 1
+		relative_position_id = ae_rep_commit_efforts_to
+		cost = 14.3
+
+		prerequisite = {
+			focus = ae_rep_commit_efforts_to
+		}
+		
+		completion_reward = {
+			
+		}
+	}
+
+	focus = {
+		id = ae_rep_a_free_market
+		icon = GFX_unknown
+		x = -1
+		y = 1
+		relative_position_id = ae_rep_smuggler_connections
+		cost = 14.3
+
+		prerequisite = {
+			focus = ae_rep_smuggler_connections
+		}
+		
+		completion_reward = {
+			
+		}
+	}
+
+	focus = {
+		id = ae_rep_emphasize_central_authority
+		icon = GFX_unknown
+		x = -1
+		y = 1
+		relative_position_id = ae_rep_regulated_market
+		cost = 14.3
+
+		prerequisite = {
+			focus = ae_rep_regulated_market
+		}
+		prerequisite = {
+			focus = ae_rep_commit_efforts1
+		}
+		
+		completion_reward = {
+			
+		}
+	}
+
+	focus = {
+		id = ae_rep_emphasize_military_readiness
+		icon = GFX_unknown
+		x = 1
+		y = 1
+		relative_position_id = ae_rep_regulated_market
+		cost = 14.3
+
+		prerequisite = {
+			focus = ae_rep_regulated_market
+		}
+		prerequisite = {
+			focus = ae_rep_commit_efforts1
+		}
+		
+		completion_reward = {
+			
+		}
+	}
+
+	focus = {
+		id = ae_rep_committee_candidacy
+		icon = GFX_unknown
+		x = 1
+		y = 1
+		relative_position_id = ae_rep_commit_efforts1
+		cost = 14.3
+
+		prerequisite = {
+			focus = ae_rep_commit_efforts1
+		}
+		prerequisite = {
+			focus = ae_rep_commit_efforts2
+		}
+		
+		completion_reward = {
+			
+		}
+	}
+
+	focus = {
+		id = ae_rep_emphasize_planetary_autonomy
+		icon = GFX_unknown
+		x = -1
+		y = 1
+		relative_position_id = ae_rep_a_free_market
+		cost = 14.3
+
+		prerequisite = {
+			focus = ae_rep_a_free_market
+		}
+		prerequisite = {
+			focus = ae_rep_commit_efforts2
+		}
+		
+		completion_reward = {
+			
+		}
+	}
+
+	focus = {
+		id = ae_rep_emphasize_democratic_values
+		icon = GFX_unknown
+		x = 1
+		y = 1
+		relative_position_id = ae_rep_a_free_market
+		cost = 14.3
+
+		prerequisite = {
+			focus = ae_rep_a_free_market
+		}
+		prerequisite = {
+			focus = ae_rep_commit_efforts2
+		}
+		
+		completion_reward = {
+			
+		}
+	}
+
+	focus = {
+		id = ae_rep_expertise
+		icon = GFX_unknown
+		x = 0
+		y = 1
+		relative_position_id = ae_rep_committee_candidacy
+		cost = 14.3
+
+		prerequisite = {
+			focus = ae_rep_committee_candidacy
+		}
+		
+		completion_reward = {
+			
+		}
+	}
+
+	focus = {
+		id = ae_rep_leader_amongst_centrists
+		icon = GFX_unknown
+		x = 1
+		y = 2
+		relative_position_id = ae_rep_emphasize_central_authority
+		cost = 14.3
+
+		prerequisite = {
+			focus = ae_rep_expertise
+		}
+		prerequisite = {
+			focus = ae_rep_emphasize_central_authority
+			focus = ae_rep_emphasize_military_readiness
+		}
+		
+		completion_reward = {
+			
+		}
+	}
+
+	focus = {
+		id = ae_rep_leader_amongst_populists
+		icon = GFX_unknown
+		x = 1
+		y = 2
+		relative_position_id = ae_rep_emphasize_planetary_autonomy
+		cost = 14.3
+
+		prerequisite = {
+			focus = ae_rep_expertise
+		}
+		prerequisite = {
+			focus = ae_rep_emphasize_planetary_autonomy
+			focus = ae_rep_emphasize_democratic_values
+		}
+		
+		completion_reward = {
+			
 		}
 	}
 }

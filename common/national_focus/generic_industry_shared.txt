@@ -23,7 +23,7 @@
 	available_if_capitulated = no
 
 	completion_reward = {
-
+		add_political_power = 50
 	}
 }
 
@@ -43,7 +43,7 @@ shared_focus = {
 	}
 
 	completion_reward = {
-		
+		army_experience = 25
 	}
 }
 
@@ -60,7 +60,16 @@ shared_focus = {
 	}
 
 	completion_reward = {
-		
+		add_doctrine_cost_reduction = {
+			cost_reduction = 0.5
+			uses = 1
+			category = air_doctrine
+		}
+		add_doctrine_cost_reduction = {
+			cost_reduction = 0.5
+			uses = 1
+			category = naval_doctrine
+		}
 	}
 }
 
@@ -77,7 +86,12 @@ shared_focus = {
 	}
 
 	completion_reward = {
-		
+		add_tech_bonus = {
+			name = ae_ship_support_tech
+			bonus = 1
+			uses = 1
+			category = electronics
+		}
 	}
 }
 
@@ -89,6 +103,13 @@ shared_focus = {
 	relative_position_id = ae_propulsion_innovations
 	cost = 10.8
 
+	available = {
+		any_state = {
+			is_coastal = yes
+			is_controlled_by = ROOT
+		}
+	}
+
 	prerequisite = {
 		focus = ae_propulsion_innovations
 	}
@@ -97,7 +118,17 @@ shared_focus = {
 	}
 
 	completion_reward = {
-		
+		random_owned_controlled_state = {
+			limit = {
+				is_coastal = yes
+			}
+			add_building_construction = {
+				type = dockyard
+				level = 2
+				instant_build = yes
+			}
+			add_extra_state_shared_building_slots = 2
+		}
 	}
 }
 
@@ -114,7 +145,12 @@ shared_focus = {
 	}
 
 	completion_reward = {
-		
+		add_tech_bonus = {
+			name = ae_ship_tech
+			bonus = 1
+			uses = 1
+			category = naval_equipment
+		}
 	}
 }
 
@@ -131,7 +167,12 @@ shared_focus = {
 	}
 
 	completion_reward = {
-		
+		add_tech_bonus = {
+			name = ae_ship_support_tech
+			bonus = 1
+			uses = 1
+			category = light_air
+		}
 	}
 }
 
@@ -165,7 +206,12 @@ shared_focus = {
 	}
 
 	completion_reward = {
-		
+		add_tech_bonus = {
+			name = ae_ship_support_tech
+			bonus = 1
+			uses = 1
+			category = air_equipment
+		}
 	}
 }
 
@@ -184,7 +230,13 @@ shared_focus = {
 	}
 
 	completion_reward = {
-		
+		random_owned_controlled_state = {
+			add_building_construction = {
+				type = air_base
+				level = 2
+				instant_build = yes
+			}
+		}
 	}
 }
 
@@ -201,14 +253,23 @@ shared_focus = {
 	}
 
 	completion_reward = {
-		
+		random_owned_controlled_state = {
+			add_building_construction = {
+				type = naval_base
+				level = 2
+				instant_build = yes
+				province = {
+					limit_to_naval_base = yes
+				}
+			}
+		}
 	}
 }
 
 shared_focus = {
 	id = ae_warship_focus
 	icon = GFX_unknown
-	x = 0
+	x = -2
 	y = 1
 	relative_position_id = ae_naval_bases
 	cost = 10.8
@@ -221,9 +282,12 @@ shared_focus = {
 		focus = ae_naval_bases
 		focus = ae_bomber_innovations
 	}
+	prerequisite = {
+		focus = ae_expand_the_shipyards
+	}
 
 	completion_reward = {
-		
+		navy_experience = 25
 	}
 }
 
@@ -245,52 +309,50 @@ shared_focus = {
 	}
 
 	completion_reward = {
-		
+		air_experience = 25
 	}
 }
 
 shared_focus = {
-	id = ae_stardestroyer_shipyards
+	id = ae_large_ship_construction
 	icon = GFX_unknown
-	x = -2
+	x = -1
 	y = 1
 	relative_position_id = ae_warship_focus
 	cost = 10.8
 
+	available = {
+		any_state = {
+			is_coastal = yes
+			is_controlled_by = ROOT
+		}
+	}
+
 	prerequisite = {
 		focus = ae_warship_focus
-	}
-	prerequisite = {
-		focus = ae_expand_the_shipyards
 	}
 	prerequisite = {
 		focus = ae_heavy_weapons_development
 	}
 
 	completion_reward = {
-		
+		random_owned_controlled_state = {
+			limit = {
+				is_coastal = yes
+			}
+			add_building_construction = {
+				type = dockyard
+				level = 3
+				instant_build = yes
+			}
+			add_extra_state_shared_building_slots = 3
+		}
+		add_ideas = ae_large_ship_construction_idea
 	}
 }
 
 shared_focus = {
-	id = ae_unlimited_firepower
-	icon = GFX_unknown
-	x = 0
-	y = 2
-	relative_position_id = ae_warship_focus
-	cost = 10.8
-
-	prerequisite = {
-		focus = ae_warship_focus
-	}
-
-	completion_reward = {
-		
-	}
-}
-
-shared_focus = {
-	id = ae_heroes_of_the_nation
+	id = ae_small_ship_construction
 	icon = GFX_unknown
 	x = 0
 	y = 1
@@ -302,24 +364,15 @@ shared_focus = {
 	}
 
 	completion_reward = {
-		
-	}
-}
-
-shared_focus = {
-	id = ae_fighter_squadrons
-	icon = GFX_unknown
-	x = 0
-	y = 1
-	relative_position_id = ae_heroes_of_the_nation
-	cost = 10.8
-
-	prerequisite = {
-		focus = ae_heroes_of_the_nation
-	}
-
-	completion_reward = {
-		
+		random_owned_controlled_state = {
+			add_building_construction = {
+				type = arms_factory
+				level = 2
+				instant_build = yes
+			}
+			add_extra_state_shared_building_slots = 2
+		}
+		add_ideas = ae_small_ship_construction_idea
 	}
 }
 
@@ -336,7 +389,11 @@ shared_focus = {
 	}
 
 	completion_reward = {
-		
+		add_doctrine_cost_reduction = {
+			cost_reduction = 0.75
+			uses = 1
+			category = land_doctrine
+		}
 	}
 }
 
@@ -353,7 +410,12 @@ shared_focus = {
 	}
 
 	completion_reward = {
-		
+		add_tech_bonus = {
+			name = ae_ship_support_tech
+			bonus = 1
+			uses = 1
+			category = infantry_weapons
+		}
 	}
 }
 
@@ -370,7 +432,12 @@ shared_focus = {
 	}
 
 	completion_reward = {
-		
+		add_tech_bonus = {
+			name = ae_ship_support_tech
+			bonus = 1
+			uses = 1
+			category = support_tech
+		}
 	}
 }
 
@@ -390,14 +457,19 @@ shared_focus = {
 	}
 
 	completion_reward = {
-		
+		add_tech_bonus = {
+			name = ae_ship_support_tech
+			bonus = 1
+			uses = 1
+			category = artillery
+		}
 	}
 }
 
 shared_focus = {
 	id = ae_discovering_our_nature
 	icon = GFX_unknown
-	x = 4
+	x = 2
 	y = 1
 	relative_position_id = ae_studying_battle_of_hoth
 	cost = 10.8
@@ -407,41 +479,7 @@ shared_focus = {
 	}
 
 	completion_reward = {
-		
-	}
-}
-
-shared_focus = {
-	id = ae_state_of_the_army
-	icon = GFX_unknown
-	x = -3
-	y = 1
-	relative_position_id = ae_discovering_our_nature
-	cost = 10.8
-
-	prerequisite = {
-		focus = ae_discovering_our_nature
-	}
-
-	completion_reward = {
-		
-	}
-}
-
-shared_focus = {
-	id = ae_ideological_army
-	icon = GFX_unknown
-	x = -1
-	y = 2
-	relative_position_id = ae_discovering_our_nature
-	cost = 10.8
-
-	prerequisite = {
-		focus = ae_discovering_our_nature
-	}
-
-	completion_reward = {
-		
+		add_ideas = ae_discovering_our_nature_idea
 	}
 }
 
@@ -461,12 +499,9 @@ shared_focus = {
 		focus = ae_support_equipment_innovations
 		focus = ae_weapon_innovations
 	}
-	prerequisite = {
-		focus = ae_state_of_the_army
-	}
 
 	completion_reward = {
-		
+		add_ideas = ae_prioritise_officer_corps_idea
 	}
 }
 
@@ -483,7 +518,10 @@ shared_focus = {
 	}
 
 	completion_reward = {
-		
+		swap_ideas = {
+			remove_idea = ae_prioritise_officer_corps_idea
+			add_idea = ae_prioritise_officer_corps_idea2
+		}
 	}
 }
 
@@ -503,12 +541,9 @@ shared_focus = {
 		focus = ae_weapon_innovations
 		focus = ae_support_equipment_innovations
 	}
-	prerequisite = {
-		focus = ae_state_of_the_army
-	}
 
 	completion_reward = {
-		
+		add_ideas = ae_rank_and_file_idea
 	}
 }
 
@@ -525,41 +560,94 @@ shared_focus = {
 	}
 
 	completion_reward = {
-		
+		swap_ideas = {
+			remove_idea = ae_rank_and_file_idea
+			add_idea = ae_rank_and_file_idea2
+		}
 	}
 }
 
 shared_focus = {
 	id = ae_rely_on_the_militia
 	icon = GFX_unknown
-	x = 1
+	x = -1
 	y = 1
 	relative_position_id = ae_discovering_our_nature
 	cost = 10.8
+
+	available = {
+		OR = {
+			has_idea = professional_forces
+			has_idea = militia_armies
+		}
+	}
+
+	mutually_exclusive = {
+		focus = ae_field_a_professional_army
+	}
 
 	prerequisite = {
 		focus = ae_discovering_our_nature
 	}
 
 	completion_reward = {
-		
+		if = {
+			limit = {
+				has_idea = militia_armies
+			}
+			add_ideas = militia_armies
+		}
+		else_if = {
+			limit = {
+				has_idea = professional_forces
+			}
+			swap_ideas = {
+				remove_idea = professional_forces
+				add_idea = militia_armies
+			}
+		}
 	}
 }
 
 shared_focus = {
 	id = ae_field_a_professional_army
 	icon = GFX_unknown
-	x = 3
+	x = 1
 	y = 1
 	relative_position_id = ae_discovering_our_nature
 	cost = 10.8
+
+	available = {
+		OR = {
+			has_idea = professional_forces
+			has_idea = militia_armies
+		}
+	}
+
+	mutually_exclusive = {
+		focus = ae_rely_on_the_militia
+	}
 
 	prerequisite = {
 		focus = ae_discovering_our_nature
 	}
 
 	completion_reward = {
-		
+		if = {
+			limit = {
+				has_idea = professional_forces
+			}
+			add_ideas = professional_forces
+		}
+		else_if = {
+			limit = {
+				has_idea = militia_armies
+			}
+			swap_ideas = {
+				remove_idea = militia_armies
+				add_idea = professional_forces
+			}
+		}
 	}
 }
 
@@ -576,7 +664,7 @@ shared_focus = {
 	}
 
 	completion_reward = {
-		
+		add_ideas = ae_expanded_conscription_idea
 	}
 }
 
@@ -593,7 +681,7 @@ shared_focus = {
 	}
 
 	completion_reward = {
-		
+		add_ideas = ae_combined_arms_idea
 	}
 }
 
@@ -611,10 +699,11 @@ shared_focus = {
 
 	prerequisite = {
 		focus = ae_expanded_conscription
+		focus = ae_combined_arms_operation
 	}
 
 	completion_reward = {
-		
+		add_ideas = ae_focus_on_home_idea
 	}
 }
 
@@ -631,11 +720,12 @@ shared_focus = {
 	}
 
 	prerequisite = {
+		focus = ae_expanded_conscription
 		focus = ae_combined_arms_operation
 	}
 
 	completion_reward = {
-		
+		add_ideas = ae_focus_on_enemy_idea
 	}
 }
 
@@ -647,91 +737,47 @@ shared_focus = {
 	relative_position_id = ae_focus_on_home
 	cost = 10.8
 
+	available = {
+		OR = {
+			has_completed_focus = ae_join_the_new_republic
+			has_completed_focus = ae_stand_with_the_empire
+			has_completed_focus = ae_reinforce_neutrality
+		}
+	}
+
 	prerequisite = {
 		focus = ae_focus_on_home
 		focus = ae_focus_on_enemy
 	}
 
 	completion_reward = {
-		
+		if = {
+			limit = {
+				has_completed_focus = ae_join_the_new_republic
+			}
+			add_ideas = ae_new_republican_principle
+		}
+		else_if = {
+			limit = {
+				has_completed_focus = ae_stand_with_the_empire
+			}
+			add_ideas = ae_imperial_principle
+		}
+		else_if = {
+			limit = {
+				has_completed_focus = ae_reinforce_neutrality
+			}
+			add_ideas = ae_neutral_principle
+		}
+		else = {
+			custom_effect_tooltip = ae_principles_of_war_loc
+		}
 	}
 }
 
 #################################
 #Primary Species Dynamic
-shared_focus = {
-	id = ae_a_human_army
-	icon = GFX_unknown
-	x = 1
-	y = 2
-	relative_position_id = ae_state_of_the_army
-	cost = 10.8
 
-	prerequisite = {
-		focus = ae_state_of_the_army
-	}
-	prerequisite = {
-		focus = ae_ideological_army
-	}
-
-	completion_reward = {
-		
-	}
-}
-
-shared_focus = {
-	id = ae_a_human_army2
-	icon = GFX_unknown
-	x = 1
-	y = 1
-	relative_position_id = ae_a_human_army
-	cost = 10.8
-
-	prerequisite = {
-		focus = ae_a_human_army
-	}
-
-	completion_reward = {
-		
-	}
-}
-
-shared_focus = {
-	id = ae_a_human_army3
-	icon = GFX_unknown
-	x = -1
-	y = 1
-	relative_position_id = ae_a_human_army
-	cost = 10.8
-
-	prerequisite = {
-		focus = ae_a_human_army
-	}
-
-	completion_reward = {
-		
-	}
-}
-
-shared_focus = {
-	id = ae_a_human_army4
-	icon = GFX_unknown
-	x = 0
-	y = 2
-	relative_position_id = ae_a_human_army
-	cost = 10.8
-
-	prerequisite = {
-		focus = ae_a_human_army2
-	}
-	prerequisite = {
-		focus = ae_a_human_army3
-	}
-
-	completion_reward = {
-		
-	}
-}
 
 #####################################################
 ################## Industry Branch ##################
@@ -828,24 +874,24 @@ shared_focus = {
 	}
 }
 
-shared_focus = {
-	id = ae_invite_investors
-	icon = GFX_unknown
-	x = 0
-	y = 2
-	relative_position_id = ae_heavy_duty_lifting_robots
-	cost = 10.8
-
-	prerequisite = {
-		focus = ae_heavy_duty_lifting_robots
-	}
-
-	completion_reward = {
-		if = {
-
-		}
-	}
-}
+#shared_focus = {
+#	id = ae_invite_investors
+#	icon = GFX_unknown
+#	x = 0
+#	y = 2
+#	relative_position_id = ae_heavy_duty_lifting_robots
+#	cost = 10.8
+#
+#	prerequisite = {
+#		focus = ae_heavy_duty_lifting_robots
+#	}
+#
+#	completion_reward = {
+#		if = {
+#
+#		}
+#	}
+#}
 
 shared_focus = {
 	id = ae_small_arms_industries
@@ -1240,6 +1286,13 @@ shared_focus = {
 	relative_position_id = ae_spirit_outer_rim
 	cost = 10.8
 
+	available = {
+		any_state = {
+			is_coastal = yes
+			is_controlled_by = ROOT
+		}
+	}
+
 	prerequisite = {
 		focus = ae_deep_mining
 	}
@@ -1250,6 +1303,9 @@ shared_focus = {
 	completion_reward = {
 		random_owned_controlled_state = {
 			add_building_construction = {
+				limit = {
+					is_coastal = yes
+				}
 				type = dockyard
 				level = 2
 				instant_build = yes
