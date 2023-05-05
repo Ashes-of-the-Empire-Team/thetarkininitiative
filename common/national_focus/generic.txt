@@ -1,5 +1,7 @@
 ﻿focus_tree = {
 	id = generic_focus
+
+	continuous_focus_position = { x = 3500 y = 50 }
 	
 	country = {
 		factor = 1
@@ -629,6 +631,7 @@
 
 		available = {
 			NOT = {
+				always = yes
 				OR = {
 					has_government = corporation
 					has_government = consortium
@@ -673,6 +676,9 @@
 				ideology = democratic
 				popularity = 0.1
 			}
+			mark_focus_tree_layout_dirty = yes
+
+			custom_effect_tooltip = ae_unlock_republic
 		}
 	}
 
@@ -683,10 +689,17 @@
 		y = 2
 		relative_position_id = ae_the_ssi_ruuvi_invasions
 		cost = 14.3
-
+		
 		available = {
-			neutrality > 0.5
+			NOT = {
+				always = yes
+				OR = {
+					has_government = corporation
+					has_government = consortium
+				}
+			}
 		}
+
 		prerequisite = {
 			focus = ae_the_ssi_ruuvi_invasions
 			focus = ae_the_new_galactic_republic
@@ -713,6 +726,9 @@
 				ideology = neutrality
 				popularity = 0.1
 			}
+			mark_focus_tree_layout_dirty = yes
+
+			custom_effect_tooltip = ae_unlock_neutral
 		}
 	}
 
@@ -725,6 +741,13 @@
 		cost = 14.3
 
 		available = {
+			NOT = {
+				always = yes
+				OR = {
+					has_government = corporation
+					has_government = consortium
+				}
+			}
 			OR = {
 				AND = {
 					has_idea = emp_influence_3
@@ -764,6 +787,9 @@
 				ideology = imperial
 				popularity = 0.1
 			}
+			mark_focus_tree_layout_dirty = yes
+
+			custom_effect_tooltip = ae_unlock_imperial
 		}
 	}
 
@@ -862,6 +888,10 @@
 		y = 1
 		relative_position_id = ae_imp_picking_sides
 		cost = 14.3
+
+		available = {
+			
+		}
 
 		prerequisite = {
 			focus = ae_imp_picking_sides
