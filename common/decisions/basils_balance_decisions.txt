@@ -1,0 +1,32 @@
+
+
+balance_decisions_category = {
+	fuel_bonds_decision = {
+        priority = 10
+        icon = eng_ally_imperialist_coup
+
+        allowed = {
+            has_political_power > 19
+			check_variable = { currency_amount^primary_currency > 49 }
+
+        }
+        #visible = {
+            #always=yes
+        #}
+        
+        custom_cost_trigger = {
+            has_political_power > 19
+			check_variable = { currency_amount^primary_currency > 49 }
+        }
+        custom_cost_text = DEC_fuel_bonds_cost
+        days_remove = 180
+        complete_effect = {
+            add_political_power = -20
+			custom_effect_tooltip = minus50credits_tt
+            subtract_from_variable = { currency_amount^primary_currency = 50 }
+			add_ideas = fuel_bonds_idea
+        }
+        remove_effect = {
+        }
+    } 
+}
