@@ -6,6 +6,9 @@ scripted_gui = {
             check_variable = { open_market_click = 2}
         }
         effects = {
+			exit_menu_click = {
+                set_variable = { open_market_click = 1}
+            }
             select_ground_forces_click = {
                 erase_previous_buying_market_selection = yes
                 set_country_flag = open_market_ground_forces
@@ -45,6 +48,30 @@ scripted_gui = {
             select_republic_button_click = {
                 erase_previous_ship_menu_faction_selection = yes
                 set_country_flag = republic_market_open
+                if = {
+                    limit = {
+                        NOT = {
+                            has_country_flag = level_0_a_wing_active
+                            has_country_flag = level_1_a_wing_active
+                        }
+                    }
+                    set_country_flag = level_0_a_wing_active
+                    set_country_flag = level_0_x_wing_active
+                    set_country_flag = level_0_y_wing_active
+                    set_country_flag = level_0_u_wing_active
+                    set_country_flag = level_0_b_wing_active
+                    set_country_flag = level_0_t3_b_active
+                    set_country_flag = level_0_t4_b_active
+                    set_country_flag = level_0_t1_b_active
+                    set_country_flag = level_0_t1_c_active
+                    set_country_flag = level_0_AAC_1_speeder_tank_active
+                    set_country_flag = level_0_combat_speeder_active
+                    set_country_flag = level_0_flash_speeder_active
+                    set_country_flag = level_0_A280_blaster_active
+                    set_country_flag = level_0_MPTL_2a_active
+                    set_country_flag = level_0_HH_12_active
+                    set_country_flag = level_0_DH_17_blaster_active
+                }
             }
             select_neutral_button_click = {
                 erase_previous_ship_menu_faction_selection = yes
@@ -53,6 +80,30 @@ scripted_gui = {
             select_imperial_button_click = {
                 erase_previous_ship_menu_faction_selection = yes
                 set_country_flag = imperial_market_open
+                if = {
+                    limit = {
+                        NOT = {
+                            has_country_flag = level_0_tie_automated_active
+                            has_country_flag = level_1_tie_automated_active
+                        }
+                    }
+                    set_country_flag = level_0_tie_automated_active
+                    set_country_flag = level_0_tie_fighter_active
+                    set_country_flag = level_0_tie_bomber_active
+                    set_country_flag = level_0_tie_fighterbomber_active
+                    set_country_flag = level_0_tie_interceptor_active
+                    set_country_flag = level_0_EE_4_carbine_active
+                    set_country_flag = level_0_E_11_blaster_active
+                    set_country_flag = level_0_SPHA_active
+                    set_country_flag = level_0_smart_rocket_active
+                    set_country_flag = level_0_at_aa_active
+                    set_country_flag = level_0_at_at_active
+                    set_country_flag = level_0_at_dp_active
+                    set_country_flag = level_0_at_st_active
+                    set_country_flag = level_0_tie_crawler_active
+                    set_country_flag = level_0_juggernaut_active
+                    set_country_flag = level_0_tx_130T_active
+                }
             }
             move_up_button_click = {
                 if = {
@@ -120,6 +171,7 @@ scripted_gui = {
                 NOT = {
                     has_country_flag = republic_market_open
                 }
+                has_government = democratic
             }
             select_neutral_button_click_enabled = {
                 NOT = {
@@ -130,6 +182,7 @@ scripted_gui = {
                 NOT = {
                     has_country_flag = imperial_market_open
                 }
+                has_government = imperial
             }
         }
     }
@@ -234,10 +287,10 @@ scripted_gui = {
                     }
                 }
             }
-            product_auto_buy_913_off_click = {
+            auto_buy_display_913_off_click = {
                 set_country_flag = auto_buy_enabled_913
             }
-            product_auto_buy_913_on_click = {
+            auto_buy_display_913_on_click = {
                 clr_country_flag = auto_buy_enabled_913
             }
             product_buy_one_990_click = {
@@ -282,10 +335,10 @@ scripted_gui = {
                     }
                 }
             }
-            product_auto_buy_990_off_click = {
+            auto_buy_display_990_off_click = {
                 set_country_flag = auto_buy_enabled_990
             }
-            product_auto_buy_990_on_click = {
+            auto_buy_display_990_on_click = {
                 clr_country_flag = auto_buy_enabled_990
             }
             product_buy_one_1530_click = {
@@ -330,10 +383,10 @@ scripted_gui = {
                     }
                 }
             }
-            product_auto_buy_1530_off_click = {
+            auto_buy_display_1530_off_click = {
                 set_country_flag = auto_buy_enabled_1530
             }
-            product_auto_buy_1530_on_click = {
+            auto_buy_display_1530_on_click = {
                 clr_country_flag = auto_buy_enabled_1530
             }
             ###AAA###
@@ -418,10 +471,10 @@ scripted_gui = {
                     }
                 }
             }
-            product_auto_buy_950_off_click = {
+            auto_buy_display_950_off_click = {
                 set_country_flag = auto_buy_enabled_950
             }
-            product_auto_buy_950_on_click = {
+            auto_buy_display_950_on_click = {
                 clr_country_flag = auto_buy_enabled_950
             }
             product_buy_one_1260_click = {
@@ -474,10 +527,10 @@ scripted_gui = {
                     }
                 }
             }
-            product_auto_buy_1260_off_click = {
+            auto_buy_display_1260_off_click = {
                 set_country_flag = auto_buy_enabled_1260
             }
-            product_auto_buy_1260_on_click = {
+            auto_buy_display_1260_on_click = {
                 clr_country_flag = auto_buy_enabled_1260
             }
             product_buy_one_1925_click = {
@@ -530,10 +583,10 @@ scripted_gui = {
                     }
                 }
             }
-            product_auto_buy_1925_off_click = {
+            auto_buy_display_1925_off_click = {
                 set_country_flag = auto_buy_enabled_1925
             }
-            product_auto_buy_1925_on_click = {
+            auto_buy_display_1925_on_click = {
                 clr_country_flag = auto_buy_enabled_1925
             }
             product_buy_one_1990_click = {
@@ -586,10 +639,10 @@ scripted_gui = {
                     }
                 }
             }
-            product_auto_buy_1990_off_click = {
+            auto_buy_display_1990_off_click = {
                 set_country_flag = auto_buy_enabled_1990
             }
-            product_auto_buy_1990_on_click = {
+            auto_buy_display_1990_on_click = {
                 clr_country_flag = auto_buy_enabled_1990
             }
             ###AAB###
@@ -703,10 +756,10 @@ scripted_gui = {
                     }
                 }
             }
-            product_auto_buy_3200_off_click = {
+            auto_buy_display_3200_off_click = {
                 set_country_flag = auto_buy_enabled_3200
             }
-            product_auto_buy_3200_on_click = {
+            auto_buy_display_3200_on_click = {
                 clr_country_flag = auto_buy_enabled_3200
             }
             product_buy_one_4262_click = {
@@ -759,10 +812,10 @@ scripted_gui = {
                     }
                 }
             }
-            product_auto_buy_4262_off_click = {
+            auto_buy_display_4262_off_click = {
                 set_country_flag = auto_buy_enabled_4262
             }
-            product_auto_buy_4262_on_click = {
+            auto_buy_display_4262_on_click = {
                 clr_country_flag = auto_buy_enabled_4262
             }
             product_buy_one_2829_click = {
@@ -815,10 +868,10 @@ scripted_gui = {
                     }
                 }
             }
-            product_auto_buy_2829_off_click = {
+            auto_buy_display_2829_off_click = {
                 set_country_flag = auto_buy_enabled_2829
             }
-            product_auto_buy_2829_on_click = {
+            auto_buy_display_2829_on_click = {
                 clr_country_flag = auto_buy_enabled_2829
             }
             product_buy_one_2943_click = {
@@ -871,10 +924,10 @@ scripted_gui = {
                     }
                 }
             }
-            product_auto_buy_2943_off_click = {
+            auto_buy_display_2943_off_click = {
                 set_country_flag = auto_buy_enabled_2943
             }
-            product_auto_buy_2943_on_click = {
+            auto_buy_display_2943_on_click = {
                 clr_country_flag = auto_buy_enabled_2943
             }
             product_buy_one_2980_click = {
@@ -920,10 +973,10 @@ scripted_gui = {
                     subtract_from_variable = {currency_amount^primary_currency = 130}
                 }
             }
-            product_auto_buy_2980_off_click = {
+            auto_buy_display_2980_off_click = {
                 set_country_flag = auto_buy_enabled_2980
             }
-            product_auto_buy_2980_on_click = {
+            auto_buy_display_2980_on_click = {
                 clr_country_flag = auto_buy_enabled_2980
             }
             product_buy_one_4300_click = {
@@ -976,10 +1029,10 @@ scripted_gui = {
                     }
                 }
             }
-            product_auto_buy_4300_off_click = {
+            auto_buy_display_4300_off_click = {
                 set_country_flag = auto_buy_enabled_4300
             }
-            product_auto_buy_4300_on_click = {
+            auto_buy_display_4300_on_click = {
                 clr_country_flag = auto_buy_enabled_4300
             }
             product_buy_one_4430_click = {
@@ -1032,10 +1085,10 @@ scripted_gui = {
                     }
                 }
             }
-            product_auto_buy_4430_off_click = {
+            auto_buy_display_4430_off_click = {
                 set_country_flag = auto_buy_enabled_4430
             }
-            product_auto_buy_4430_on_click = {
+            auto_buy_display_4430_on_click = {
                 clr_country_flag = auto_buy_enabled_4430
             }
             ###BBB###
@@ -1126,10 +1179,10 @@ scripted_gui = {
                     }
                 }
             }
-            product_auto_buy_2700_off_click = {
+            auto_buy_display_2700_off_click = {
                 set_country_flag = auto_buy_enabled_2700
             }
-            product_auto_buy_2700_on_click = {
+            auto_buy_display_2700_on_click = {
                 clr_country_flag = auto_buy_enabled_2700
             }
             ###BBC###
@@ -1219,10 +1272,10 @@ scripted_gui = {
                     }
                 }
             }
-            product_auto_buy_5421_off_click = {
+            auto_buy_display_5421_off_click = {
                 set_country_flag = auto_buy_enabled_5421
             }
-            product_auto_buy_5421_on_click = {
+            auto_buy_display_5421_on_click = {
                 clr_country_flag = auto_buy_enabled_5421
             }
             product_buy_one_5600_click = {
@@ -1275,10 +1328,10 @@ scripted_gui = {
                     }
                 }
             }
-            product_auto_buy_5600_off_click = {
+            auto_buy_display_5600_off_click = {
                 set_country_flag = auto_buy_enabled_5600
             }
-            product_auto_buy_5600_on_click = {
+            auto_buy_display_5600_on_click = {
                 clr_country_flag = auto_buy_enabled_5600
             }
             product_buy_one_7340_click = {
@@ -1331,10 +1384,10 @@ scripted_gui = {
                     }
                 }
             }
-            product_auto_buy_7340_off_click = {
+            auto_buy_display_7340_off_click = {
                 set_country_flag = auto_buy_enabled_7340
             }
-            product_auto_buy_7340_on_click = {
+            auto_buy_display_7340_on_click = {
                 clr_country_flag = auto_buy_enabled_7340
             }
             product_buy_one_5830_click = {
@@ -1387,10 +1440,10 @@ scripted_gui = {
                     }
                 }
             }
-            product_auto_buy_5830_off_click = {
+            auto_buy_display_5830_off_click = {
                 set_country_flag = auto_buy_enabled_5830
             }
-            product_auto_buy_5830_on_click = {
+            auto_buy_display_5830_on_click = {
                 clr_country_flag = auto_buy_enabled_5830
             }
             ###CCC###
@@ -1483,10 +1536,10 @@ scripted_gui = {
                     }
                 }
             }
-            product_auto_buy_4800_off_click = {
+            auto_buy_display_4800_off_click = {
                 set_country_flag = auto_buy_enabled_4800
             }
-            product_auto_buy_4800_on_click = {
+            auto_buy_display_4800_on_click = {
                 clr_country_flag = auto_buy_enabled_4800
             }
             product_buy_one_5950_click = {
@@ -1539,10 +1592,10 @@ scripted_gui = {
                     }
                 }
             }
-            product_auto_buy_5950_off_click = {
+            auto_buy_display_5950_off_click = {
                 set_country_flag = auto_buy_enabled_5950
             }
-            product_auto_buy_5950_on_click = {
+            auto_buy_display_5950_on_click = {
                 clr_country_flag = auto_buy_enabled_5950
             }
             product_buy_one_5200_click = {
@@ -1595,10 +1648,10 @@ scripted_gui = {
                     }
                 }
             }
-            product_auto_buy_5200_off_click = {
+            auto_buy_display_5200_off_click = {
                 set_country_flag = auto_buy_enabled_5200
             }
-            product_auto_buy_5200_on_click = {
+            auto_buy_display_5200_on_click = {
                 clr_country_flag = auto_buy_enabled_5200
             }
             product_buy_one_7400_click = {
@@ -1651,10 +1704,10 @@ scripted_gui = {
                     }
                 }
             }
-            product_auto_buy_7400_off_click = {
+            auto_buy_display_7400_off_click = {
                 set_country_flag = auto_buy_enabled_7400
             }
-            product_auto_buy_7400_on_click = {
+            auto_buy_display_7400_on_click = {
                 clr_country_flag = auto_buy_enabled_7400
             }
             product_buy_one_7940_click = {
@@ -1707,10 +1760,10 @@ scripted_gui = {
                     }
                 }
             }
-            product_auto_buy_7940_off_click = {
+            auto_buy_display_7940_off_click = {
                 set_country_flag = auto_buy_enabled_7940
             }
-            product_auto_buy_7940_on_click = {
+            auto_buy_display_7940_on_click = {
                 clr_country_flag = auto_buy_enabled_7940
             }
             ###CCD###
@@ -1832,10 +1885,10 @@ scripted_gui = {
                     }
                 }
             }
-            product_auto_buy_10080_off_click = {
+            auto_buy_display_10080_off_click = {
                 set_country_flag = auto_buy_enabled_10080
             }
-            product_auto_buy_10080_on_click = {
+            auto_buy_display_10080_on_click = {
                 clr_country_flag = auto_buy_enabled_10080
             }
             product_buy_one_12400_click = {
@@ -1881,10 +1934,10 @@ scripted_gui = {
                     subtract_from_variable = {currency_amount^primary_currency = 570}
                 }
             }
-            product_auto_buy_12400_off_click = {
+            auto_buy_display_12400_off_click = {
                 set_country_flag = auto_buy_enabled_12400
             }
-            product_auto_buy_12400_on_click = {
+            auto_buy_display_12400_on_click = {
                 clr_country_flag = auto_buy_enabled_12400
             }
             product_buy_one_9120_click = {
@@ -1937,10 +1990,10 @@ scripted_gui = {
                     }
                 }
             }
-            product_auto_buy_9120_off_click = {
+            auto_buy_display_9120_off_click = {
                 set_country_flag = auto_buy_enabled_9120
             }
-            product_auto_buy_9120_on_click = {
+            auto_buy_display_9120_on_click = {
                 clr_country_flag = auto_buy_enabled_9120
             }
             product_buy_one_13450_click = {
@@ -1993,10 +2046,10 @@ scripted_gui = {
                     }
                 }
             }
-            product_auto_buy_13450_off_click = {
+            auto_buy_display_13450_off_click = {
                 set_country_flag = auto_buy_enabled_13450
             }
-            product_auto_buy_13450_on_click = {
+            auto_buy_display_13450_on_click = {
                 clr_country_flag = auto_buy_enabled_13450
             }
             product_buy_one_13200_click = {
@@ -2049,10 +2102,10 @@ scripted_gui = {
                     }
                 }
             }
-            product_auto_buy_13200_off_click = {
+            auto_buy_display_13200_off_click = {
                 set_country_flag = auto_buy_enabled_13200
             }
-            product_auto_buy_13200_on_click = {
+            auto_buy_display_13200_on_click = {
                 clr_country_flag = auto_buy_enabled_13200
             }
             product_buy_one_10630_click = {
@@ -2106,10 +2159,10 @@ scripted_gui = {
                 }
             }
             
-            product_auto_buy_10630_off_click = {
+            auto_buy_display_10630_off_click = {
                 set_country_flag = auto_buy_enabled_10630
             }
-            product_auto_buy_10630_on_click = {
+            auto_buy_display_10630_on_click = {
                 clr_country_flag = auto_buy_enabled_10630
             }
             product_buy_one_14400_click = {
@@ -2155,10 +2208,10 @@ scripted_gui = {
                     }
                 }
             }
-            product_auto_buy_14400_off_click = {
+            auto_buy_display_14400_off_click = {
                 set_country_flag = auto_buy_enabled_14400
             }
-            product_auto_buy_14400_on_click = {
+            auto_buy_display_14400_on_click = {
                 clr_country_flag = auto_buy_enabled_14400
             }
             product_variant_type_14400 = {
@@ -2247,10 +2300,10 @@ scripted_gui = {
                     subtract_from_variable = {currency_amount^primary_currency = 635}
                 }
             }
-            product_auto_buy_13430_off_click = {
+            auto_buy_display_13430_off_click = {
                 set_country_flag = auto_buy_enabled_13430
             }
-            product_auto_buy_13430_on_click = {
+            auto_buy_display_13430_on_click = {
                 clr_country_flag = auto_buy_enabled_13430
             }
             ###DDD###
@@ -2383,10 +2436,10 @@ scripted_gui = {
                     }
                 }
             }
-            product_auto_buy_11005_off_click = {
+            auto_buy_display_11005_off_click = {
                 set_country_flag = auto_buy_enabled_11005
             }
-            product_auto_buy_11005_on_click = {
+            auto_buy_display_11005_on_click = {
                 clr_country_flag = auto_buy_enabled_11005
             }
             product_variant_type_11005 = {
@@ -2489,10 +2542,10 @@ scripted_gui = {
                     }
                 }
             }
-            product_auto_buy_11850_off_click = {
+            auto_buy_display_11850_off_click = {
                 set_country_flag = auto_buy_enabled_11850
             }
-            product_auto_buy_11850_on_click = {
+            auto_buy_display_11850_on_click = {
                 clr_country_flag = auto_buy_enabled_11850
             }
             product_variant_type_11005 = {
@@ -2595,10 +2648,10 @@ scripted_gui = {
                     }
                 }
             }
-            product_auto_buy_14503_off_click = {
+            auto_buy_display_14503_off_click = {
                 set_country_flag = auto_buy_enabled_14503
             }
-            product_auto_buy_14503_on_click = {
+            auto_buy_display_14503_on_click = {
                 clr_country_flag = auto_buy_enabled_14503
             }
             product_buy_one_14030_click = {
@@ -2651,10 +2704,10 @@ scripted_gui = {
                     }
                 }
             }
-            product_auto_buy_14030_off_click = {
+            auto_buy_display_14030_off_click = {
                 set_country_flag = auto_buy_enabled_14030
             }
-            product_auto_buy_14030_on_click = {
+            auto_buy_display_14030_on_click = {
                 clr_country_flag = auto_buy_enabled_14030
             }
             ###DDE###
@@ -2750,10 +2803,10 @@ scripted_gui = {
                     }
                 }
             }
-            product_auto_buy_e_wing_off_click = {
+            auto_buy_display_e_wing_off_click = {
                 set_country_flag = auto_buy_enabled_e_wing
             }
-            product_auto_buy_e_wing_on_click = {
+            auto_buy_display_e_wing_on_click = {
                 clr_country_flag = auto_buy_enabled_e_wing
             }
             product_buy_one_a_wing_click = {
@@ -2826,10 +2879,10 @@ scripted_gui = {
                     }
                 }
             }
-            product_auto_buy_a_wing_off_click = {
+            auto_buy_display_a_wing_off_click = {
                 set_country_flag = auto_buy_enabled_a_wing
             }
-            product_auto_buy_a_wing_on_click = {
+            auto_buy_display_a_wing_on_click = {
                 clr_country_flag = auto_buy_enabled_a_wing
             }
             level_0_a_wing_click = {
@@ -2886,10 +2939,10 @@ scripted_gui = {
                     }
                 }
             }
-            product_auto_buy_k_wing_off_click = {
+            auto_buy_display_k_wing_off_click = {
                 set_country_flag = auto_buy_enabled_k_wing
             }
-            product_auto_buy_k_wing_on_click = {
+            auto_buy_display_k_wing_on_click = {
                 clr_country_flag = auto_buy_enabled_k_wing
             }
             product_buy_one_x_wing_click = {
@@ -2996,10 +3049,10 @@ scripted_gui = {
                     }
                 }
             }
-            product_auto_buy_x_wing_off_click = {
+            auto_buy_display_x_wing_off_click = {
                 set_country_flag = auto_buy_enabled_x_wing
             }
-            product_auto_buy_x_wing_on_click = {
+            auto_buy_display_x_wing_on_click = {
                 clr_country_flag = auto_buy_enabled_x_wing
             }
             level_0_x_wing_click = {
@@ -3113,10 +3166,10 @@ scripted_gui = {
                     }
                 }
             }
-            product_auto_buy_y_wing_off_click = {
+            auto_buy_display_y_wing_off_click = {
                 set_country_flag = auto_buy_enabled_y_wing
             }
-            product_auto_buy_y_wing_on_click = {
+            auto_buy_display_y_wing_on_click = {
                 clr_country_flag = auto_buy_enabled_y_wing
             }
             level_0_y_wing_click = {
@@ -3210,10 +3263,10 @@ scripted_gui = {
                     }
                 }
             }
-            product_auto_buy_b_wing_off_click = {
+            auto_buy_display_b_wing_off_click = {
                 set_country_flag = auto_buy_enabled_b_wing
             }
-            product_auto_buy_b_wing_on_click = {
+            auto_buy_display_b_wing_on_click = {
                 clr_country_flag = auto_buy_enabled_b_wing
             }
             level_0_b_wing_click = {
@@ -3491,10 +3544,10 @@ scripted_gui = {
                     }
                 }
             }
-            product_auto_buy_u_wing_off_click = {
+            auto_buy_display_u_wing_off_click = {
                 set_country_flag = auto_buy_enabled_u_wing
             }
-            product_auto_buy_u_wing_on_click = {
+            auto_buy_display_u_wing_on_click = {
                 clr_country_flag = auto_buy_enabled_u_wing
             }
             level_0_u_wing_click = {
@@ -3595,10 +3648,10 @@ scripted_gui = {
                     }
                 }
             }
-            product_auto_buy_tie_dagger_off_click = {
+            auto_buy_display_tie_dagger_off_click = {
                 set_country_flag = auto_buy_enabled_tie_dagger
             }
-            product_auto_buy_tie_dagger_on_click = {
+            auto_buy_display_tie_dagger_on_click = {
                 clr_country_flag = auto_buy_enabled_tie_dagger
             }
             product_buy_one_tie_silencer_click = {
@@ -3637,10 +3690,10 @@ scripted_gui = {
                     }
                 }
             }
-            product_auto_buy_tie_silencer_off_click = {
+            auto_buy_display_tie_silencer_off_click = {
                 set_country_flag = auto_buy_enabled_tie_silencer
             }
-            product_auto_buy_tie_silencer_on_click = {
+            auto_buy_display_tie_silencer_on_click = {
                 clr_country_flag = auto_buy_enabled_tie_silencer
             }
             product_buy_one_tie_automated_click = {
@@ -3709,10 +3762,10 @@ scripted_gui = {
                     }
                 }
             }
-            product_auto_buy_tie_automated_off_click = {
+            auto_buy_display_tie_automated_off_click = {
                 set_country_flag = auto_buy_enabled_tie_automated
             }
-            product_auto_buy_tie_automated_on_click = {
+            auto_buy_display_tie_automated_on_click = {
                 clr_country_flag = auto_buy_enabled_tie_automated
             }
             level_0_tie_automated_click = {
@@ -3851,7 +3904,7 @@ scripted_gui = {
                     }
                 }
             }
-            product_auto_buy_tie_fighter_click = {
+            auto_buy_display_tie_fighter_click = {
                 if = {
                     limit = {
                         has_country_flag = auto_buy_enabled_tie_fighter
@@ -4062,10 +4115,10 @@ scripted_gui = {
                     }
                 }
             }
-            product_auto_buy_tie_interceptor_off_click = {
+            auto_buy_display_tie_interceptor_off_click = {
                 set_country_flag = auto_buy_enabled_tie_interceptor
             }
-            product_auto_buy_tie_interceptor_on_click = {
+            auto_buy_display_tie_interceptor_on_click = {
                 clr_country_flag = auto_buy_enabled_tie_interceptor
             }
             level_0_tie_interceptor_click = {
@@ -4236,10 +4289,10 @@ scripted_gui = {
                     }
                 }
             }
-            product_auto_buy_tie_fighterbomber_off_click = {
+            auto_buy_display_tie_fighterbomber_off_click = {
                 set_country_flag = auto_buy_enabled_tie_fighterbomber
             }
-            product_auto_buy_tie_fighterbomber_on_click = {
+            auto_buy_display_tie_fighterbomber_on_click = {
                 clr_country_flag = auto_buy_enabled_tie_fighterbomber
             }
             level_0_tie_fighterbomber_click = {
@@ -4398,10 +4451,10 @@ scripted_gui = {
                     }
                 }
             }
-            product_auto_buy_tie_bomber_off_click = {
+            auto_buy_display_tie_bomber_off_click = {
                 set_country_flag = auto_buy_enabled_tie_bomber
             }
-            product_auto_buy_tie_bomber_on_click = {
+            auto_buy_display_tie_bomber_on_click = {
                 clr_country_flag = auto_buy_enabled_tie_bomber
             }
             level_0_tie_bomber_click = {
@@ -4762,10 +4815,10 @@ scripted_gui = {
                     }
                 }
             }
-            product_auto_buy_tie_silencer_off_click = {
+            auto_buy_display_tie_silencer_off_click = {
                 set_country_flag = auto_buy_enabled_tie_silencer
             }
-            product_auto_buy_tie_silencer_on_click = {
+            auto_buy_display_tie_silencer_on_click = {
                 clr_country_flag = auto_buy_enabled_tie_silencer
             }
         }
@@ -4868,10 +4921,10 @@ scripted_gui = {
                     }
                 }
             }
-            product_auto_buy_t3_b_off_click = {
+            auto_buy_display_t3_b_off_click = {
                 set_country_flag = auto_buy_enabled_t3_b
             }
-            product_auto_buy_t3_b_on_click = {
+            auto_buy_display_t3_b_on_click = {
                 clr_country_flag = auto_buy_enabled_t3_b
             }
             level_0_t3_b_click = {
@@ -4958,10 +5011,10 @@ scripted_gui = {
                     }
                 }
             }
-            product_auto_buy_t4_b_off_click = {
+            auto_buy_display_t4_b_off_click = {
                 set_country_flag = auto_buy_enabled_t4_b
             }
-            product_auto_buy_t4_b_on_click = {
+            auto_buy_display_t4_b_on_click = {
                 clr_country_flag = auto_buy_enabled_t4_b
             }
             level_0_t4_b_click = {
@@ -5048,10 +5101,10 @@ scripted_gui = {
                     }
                 }
             }
-            product_auto_buy_t1_b_off_click = {
+            auto_buy_display_t1_b_off_click = {
                 set_country_flag = auto_buy_enabled_t1_b
             }
-            product_auto_buy_t1_b_on_click = {
+            auto_buy_display_t1_b_on_click = {
                 clr_country_flag = auto_buy_enabled_t1_b
             }
             level_0_t1_b_click = {
@@ -5138,10 +5191,10 @@ scripted_gui = {
                     }
                 }
             }
-            product_auto_buy_t1_off_click = {
+            auto_buy_display_t1_off_click = {
                 set_country_flag = auto_buy_enabled_t1
             }
-            product_auto_buy_t1_on_click = {
+            auto_buy_display_t1_on_click = {
                 clr_country_flag = auto_buy_enabled_t1
             }
             level_0_t1_c_click = {
@@ -5228,10 +5281,10 @@ scripted_gui = {
                     }
                 }
             }
-            product_auto_buy_AAC_1_speeder_tank_off_click = {
+            auto_buy_display_AAC_1_speeder_tank_off_click = {
                 set_country_flag = auto_buy_enabled_AAC_1_speeder_tank
             }
-            product_auto_buy_AAC_1_speeder_tank_on_click = {
+            auto_buy_display_AAC_1_speeder_tank_on_click = {
                 clr_country_flag = auto_buy_enabled_AAC_1_speeder_tank
             }
             level_0_AAC_1_speeder_tank_click = {
@@ -5318,10 +5371,10 @@ scripted_gui = {
                     }
                 }
             }
-            product_auto_buy_combat_speeder_off_click = {
+            auto_buy_display_combat_speeder_off_click = {
                 set_country_flag = auto_buy_enabled_combat_speeder
             }
-            product_auto_buy_combat_speeder_on_click = {
+            auto_buy_display_combat_speeder_on_click = {
                 clr_country_flag = auto_buy_enabled_combat_speeder
             }
             level_0_combat_speeder_click = {
@@ -5602,10 +5655,10 @@ scripted_gui = {
                     }
                 }
             }
-            product_auto_buy_flash_speeder_off_click = {
+            auto_buy_display_flash_speeder_off_click = {
                 set_country_flag = auto_buy_enabled_flash_speeder
             }
-            product_auto_buy_flash_speeder_on_click = {
+            auto_buy_display_flash_speeder_on_click = {
                 clr_country_flag = auto_buy_enabled_flash_speeder
             }
             level_0_flash_speeder_click = {
@@ -5745,10 +5798,10 @@ scripted_gui = {
                     }
                 }
             }
-            product_auto_buy_DH_17_blaster_off_click = {
+            auto_buy_display_DH_17_blaster_off_click = {
                 set_country_flag = auto_buy_enabled_DH_17_blaster
             }
-            product_auto_buy_DH_17_blaster_on_click = {
+            auto_buy_display_DH_17_blaster_on_click = {
                 clr_country_flag = auto_buy_enabled_DH_17_blaster
             }
             level_0_DH_17_blaster_click = {
@@ -5919,10 +5972,10 @@ scripted_gui = {
                     }
                 }
             }
-            product_auto_buy_A280_blaster_off_click = {
+            auto_buy_display_A280_blaster_off_click = {
                 set_country_flag = auto_buy_enabled_A280_blaster
             }
-            product_auto_buy_A280_blaster_on_click = {
+            auto_buy_display_A280_blaster_on_click = {
                 clr_country_flag = auto_buy_enabled_A280_blaster
             }
             level_0_A280_blaster_click = {
@@ -6059,10 +6112,10 @@ scripted_gui = {
                     }
                 }
             }
-            product_auto_buy_HH_12_off_click = {
+            auto_buy_display_HH_12_off_click = {
                 set_country_flag = auto_buy_enabled_HH_12
             }
-            product_auto_buy_HH_12_on_click = {
+            auto_buy_display_HH_12_on_click = {
                 clr_country_flag = auto_buy_enabled_HH_12
             }
             level_0_HH_12_click = {
@@ -6151,10 +6204,10 @@ scripted_gui = {
                     }
                 }
             }
-            product_auto_buy_T1_S_off_click = {
+            auto_buy_display_T1_S_off_click = {
                 set_country_flag = auto_buy_enabled_T1_S
             }
-            product_auto_buy_T1_S_on_click = {
+            auto_buy_display_T1_S_on_click = {
                 clr_country_flag = auto_buy_enabled_T1_S
             }
             product_buy_one_MPTL_2a_click = {
@@ -6249,10 +6302,10 @@ scripted_gui = {
                     }
                 }
             }
-            product_auto_buy_MPTL_2a_off_click = {
+            auto_buy_display_MPTL_2a_off_click = {
                 set_country_flag = auto_buy_enabled_MPTL_2a
             }
-            product_auto_buy_MPTL_2a_on_click = {
+            auto_buy_display_MPTL_2a_on_click = {
                 clr_country_flag = auto_buy_enabled_MPTL_2a
             }
             level_0_MPTL_2a_click = {
@@ -6564,10 +6617,10 @@ scripted_gui = {
                     }
                 }
             }
-            product_auto_buy_republic_supply_equipment_off_click = {
+            auto_buy_display_republic_supply_equipment_off_click = {
                 set_country_flag = auto_buy_enabled_republic_supply_equipment
             }
-            product_auto_buy_republic_supply_equipment_on_click = {
+            auto_buy_display_republic_supply_equipment_on_click = {
                 clr_country_flag = auto_buy_enabled_republic_supply_equipment
             }
         }
@@ -6659,10 +6712,10 @@ scripted_gui = {
                     }
                 }
             }
-            product_auto_buy_at_at_off_click = {
+            auto_buy_display_at_at_off_click = {
                 set_country_flag = auto_buy_enabled_at_at
             }
-            product_auto_buy_at_at_on_click = {
+            auto_buy_display_at_at_on_click = {
                 clr_country_flag = auto_buy_enabled_at_at
             }
             level_0_at_at_click = {
@@ -6749,10 +6802,10 @@ scripted_gui = {
                     }
                 }
             }
-            product_auto_buy_at_aa_off_click = {
+            auto_buy_display_at_aa_off_click = {
                 set_country_flag = auto_buy_enabled_at_aa
             }
-            product_auto_buy_at_aa_on_click = {
+            auto_buy_display_at_aa_on_click = {
                 clr_country_flag = auto_buy_enabled_at_aa
             }
             level_0_at_aa_click = {
@@ -6839,10 +6892,10 @@ scripted_gui = {
                     }
                 }
             }
-            product_auto_buy_juggernaut_off_click = {
+            auto_buy_display_juggernaut_off_click = {
                 set_country_flag = auto_buy_enabled_juggernaut
             }
-            product_auto_buy_juggernaut_on_click = {
+            auto_buy_display_juggernaut_on_click = {
                 clr_country_flag = auto_buy_enabled_juggernaut
             }
             level_0_juggernaut_click = {
@@ -6929,10 +6982,10 @@ scripted_gui = {
                     }
                 }
             }
-            product_auto_buy_at_st_off_click = {
+            auto_buy_display_at_st_off_click = {
                 set_country_flag = auto_buy_enabled_at_st
             }
-            product_auto_buy_at_st_on_click = {
+            auto_buy_display_at_st_on_click = {
                 clr_country_flag = auto_buy_enabled_at_st
             }
             level_0_at_st_click = {
@@ -7019,10 +7072,10 @@ scripted_gui = {
                     }
                 }
             }
-            product_auto_buy_tx_130T_off_click = {
+            auto_buy_display_tx_130T_off_click = {
                 set_country_flag = auto_buy_enabled_tx_130T
             }
-            product_auto_buy_tx_130T_on_click = {
+            auto_buy_display_tx_130T_on_click = {
                 clr_country_flag = auto_buy_enabled_tx_130T
             }
             level_0_tx_130T_click = {
@@ -7109,10 +7162,10 @@ scripted_gui = {
                     }
                 }
             }
-            product_auto_buy_at_dp_off_click = {
+            auto_buy_display_at_dp_off_click = {
                 set_country_flag = auto_buy_enabled_at_dp
             }
-            product_auto_buy_at_dp_on_click = {
+            auto_buy_display_at_dp_on_click = {
                 clr_country_flag = auto_buy_enabled_at_dp
             }
             level_0_at_dp_click = {
@@ -7390,10 +7443,10 @@ scripted_gui = {
                     }
                 }
             }
-            product_auto_buy_tie_crawler_off_click = {
+            auto_buy_display_tie_crawler_off_click = {
                 set_country_flag = auto_buy_enabled_tie_crawler
             }
-            product_auto_buy_tie_crawler_on_click = {
+            auto_buy_display_tie_crawler_on_click = {
                 clr_country_flag = auto_buy_enabled_tie_crawler
             }
             level_0_tie_crawler_click = {
@@ -7533,7 +7586,7 @@ scripted_gui = {
                     }
                 }
             }
-            product_auto_buy_E_11_blaster_click = {
+            auto_buy_display_E_11_blaster_click = {
                 if = {
                     limit = {
                         has_country_flag = auto_buy_enabled_E_11_blaster
@@ -7718,10 +7771,10 @@ scripted_gui = {
                     }
                 }
             }
-            product_auto_buy_EE_4_carbine_off_click = {
+            auto_buy_display_EE_4_carbine_off_click = {
                 set_country_flag = auto_buy_enabled_EE_4_carbine
             }
-            product_auto_buy_EE_4_carbine_on_click = {
+            auto_buy_display_EE_4_carbine_on_click = {
                 clr_country_flag = auto_buy_enabled_EE_4_carbine
             }
             level_0_EE_4_carbine_click = {
@@ -7858,10 +7911,10 @@ scripted_gui = {
                     }
                 }
             }
-            product_auto_buy_smart_rocket_off_click = {
+            auto_buy_display_smart_rocket_off_click = {
                 set_country_flag = auto_buy_enabled_smart_rocket
             }
-            product_auto_buy_smart_rocket_on_click = {
+            auto_buy_display_smart_rocket_on_click = {
                 clr_country_flag = auto_buy_enabled_smart_rocket
             }
             level_0_smart_rocket_click = {
@@ -7948,10 +8001,10 @@ scripted_gui = {
                     }
                 }
             }
-            product_auto_buy_K79_S80_off_click = {
+            auto_buy_display_K79_S80_off_click = {
                 set_country_flag = auto_buy_enabled_K79_S80
             }
-            product_auto_buy_K79_S80_on_click = {
+            auto_buy_display_K79_S80_on_click = {
                 clr_country_flag = auto_buy_enabled_K79_S80
             }
             product_buy_one_SPHA_click = {
@@ -8046,10 +8099,10 @@ scripted_gui = {
                     }
                 }
             }
-            product_auto_buy_SPHA_off_click = {
+            auto_buy_display_SPHA_off_click = {
                 set_country_flag = auto_buy_enabled_SPHA
             }
-            product_auto_buy_SPHA_on_click = {
+            auto_buy_display_SPHA_on_click = {
                 clr_country_flag = auto_buy_enabled_SPHA
             }
             level_0_SPHA_click = {
@@ -8355,10 +8408,10 @@ scripted_gui = {
                     }
                 }
             }
-            product_auto_buy_imperial_supply_equipment_off_click = {
+            auto_buy_display_imperial_supply_equipment_off_click = {
                 set_country_flag = auto_buy_enabled_imperial_supply_equipment
             }
-            product_auto_buy_imperial_supply_equipment_on_click = {
+            auto_buy_display_imperial_supply_equipment_on_click = {
                 clr_country_flag = auto_buy_enabled_imperial_supply_equipment
             }
         }

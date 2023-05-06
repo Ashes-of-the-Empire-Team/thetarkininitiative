@@ -14,7 +14,23 @@ scripted_gui = {
 				else = {
 					set_variable = { open_market_click = 2}
 					set_country_flag = open_buy_market
-					set_country_flag = open_first_tab_lazy
+					if = {
+						limit = {
+							NOT = {
+								has_country_flag = open_market_ground_forces
+								has_country_flag = starfighters_buying_market_open
+								has_country_flag = open_market_ships
+								has_country_flag = open_market_droids
+								has_country_flag = open_market_mercs
+								has_country_flag = open_market_medical
+								has_country_flag = open_market_entertainment
+								has_country_flag = open_market_resource_extraction
+								has_country_flag = open_market_raw_goods
+							}
+						}
+						set_country_flag = open_first_tab_lazy
+						set_country_flag = open_market_ground_forces
+					}
 				}
 			}	
 		}
