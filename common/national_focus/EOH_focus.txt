@@ -279,9 +279,8 @@ focus_tree = {
 		y = 2
 		relative_position_id = EOH_a_helping_hand
 		allow_branch = {
-			OR = {
-				has_completed_focus = EOH_a_helping_hand
-				has_completed_focus = EOH_abandon_the_chiss
+			NOT = {
+				has_completed_focus = EOH_follow_the_emperors_trail
 			}
 		}
 		available = {
@@ -339,12 +338,12 @@ focus_tree = {
 		x = 2
 		y = 0
 		relative_position_id = EOH_contact_ardus_kaine
-		allow_branch = {
-			OR = {
-				has_completed_focus = EOH_a_helping_hand
-				has_completed_focus = EOH_abandon_the_chiss
-			}
-		}
+		#allow_branch = {
+			#OR = {
+				#has_completed_focus = EOH_a_helping_hand
+				#has_completed_focus = EOH_abandon_the_chiss
+			#}
+		#}
 		available = {
 		}
 		prerequisite = {
@@ -776,7 +775,7 @@ focus_tree = {
 		cost = 2.9
 		relative_position_id = EOH_rebuild_bakura
 		x = 2
-		y = 1
+		y = 2
 		prerequisite = {
 			focus = EOH_rebuild_bakura
 			focus = EOH_rebuild_csaus
@@ -910,7 +909,7 @@ focus_tree = {
 		icon = GFX_thrawn_peace_regions
 		cost = 5
 		x = 0
-		y = 5
+		y = 6
 		relative_position_id = EOH_the_ssi_ruuvi_threat
 		allow_branch = {
 			OR = {
@@ -919,29 +918,38 @@ focus_tree = {
 				has_completed_focus = EOH_guardian_of_the_unknown_regions
 			}
 		}
-		available = {
+		#available = {
 			#SSI = {
 				#has_war = no
 			#}
-			OR = {
-				AND = {
-					OR = {
-						has_completed_focus = EOH_the_phantom_menace
-						has_completed_focus = EOH_edge_of_the_galaxy
-						has_completed_focus = EOH_fund_chiss_arms
-					}
-					OR = {
-						has_completed_focus = EOH_begin_smuggling_operations
-						has_completed_focus = EOH_mutual_development_assurances
-					}
-				}
-				OR = {
-					has_completed_focus = EOH_leave_lwhekk
-					has_completed_focus = EOH_prevent_ssi-ruuvi_resurgence
-				}
-			}
+			#OR = {
+				#AND = {
+					#OR = {
+						#has_completed_focus = EOH_the_phantom_menace
+						#has_completed_focus = EOH_edge_of_the_galaxy
+						#has_completed_focus = EOH_fund_chiss_arms
+					#}
+					#OR = {
+						#has_completed_focus = EOH_begin_smuggling_operations
+						#has_completed_focus = EOH_mutual_development_assurances
+					#}
+				#}
+				#OR = {
+					#has_completed_focus = EOH_leave_lwhekk
+					#has_completed_focus = EOH_prevent_ssi-ruuvi_resurgence
+				#}
+			#}
+		#}
+		prerequisite = {
+			focus = EOH_begin_smuggling_operations
+			focus = EOH_mutual_development_assurances
 		}
 		prerequisite = {
+			focus = EOH_fund_chiss_arms
+			focus = EOH_leave_lwhekk
+			focus = EOH_prevent_ssi-ruuvi_resurgence
+			focus = EOH_the_phantom_menace
+			focus = EOH_edge_of_the_galaxy
 		}
 		search_filters = {
 		}
@@ -4197,6 +4205,143 @@ focus_tree = {
 			##Thrawn back again
 			mark_focus_tree_layout_dirty = yes
 		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = EOH_contact_ardus_kaine_2
+		icon = GFX_thrawn_contact_kaine
+		cost = 7.2
+		x = -3
+		y = 2
+		relative_position_id = EOH_a_helping_hand
+		allow_branch = {
+			has_completed_focus = EOH_guardian_of_the_unknown_regions
+		}
+		#allow_branch = {
+			#OR = {
+				#has_completed_focus = EOH_a_helping_hand
+				#has_completed_focus = EOH_abandon_the_chiss
+			#}
+		#}
+		available = {
+		}
+		prerequisite = {
+			focus = EOH_a_helping_hand
+			focus = EOH_abandon_the_chiss
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+			focus = EOH_connect_to_the_criminal_underworld
+		}
+		completion_reward = {
+			PEN = {
+				country_event = { id = EOH.7 }
+			}
+			
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = EOH_mutual_development_assurances_2
+		icon = GFX_thrawn_mutual_dev
+		cost = 10.8
+		x = 0
+		y = 1
+		relative_position_id = EOH_contact_ardus_kaine
+		allow_branch = {
+			has_completed_focus = EOH_guardian_of_the_unknown_regions
+		}
+		available = {
+		}
+		prerequisite = {
+			focus = EOH_contact_ardus_kaine
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			PEN = {
+				country_event = { id = EOH.8 }
+			}
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = EOH_connect_to_the_criminal_underworld_2
+		icon = GFX_thrawn_criminal
+		cost = 7.2
+		x = 2
+		y = 0
+		relative_position_id = EOH_contact_ardus_kaine
+		allow_branch = {
+			has_completed_focus = EOH_guardian_of_the_unknown_regions
+		}
+		#allow_branch = {
+			#OR = {
+				#has_completed_focus = EOH_a_helping_hand
+				#has_completed_focus = EOH_abandon_the_chiss
+			#}
+		#}
+		available = {
+		}
+		prerequisite = {
+			focus = EOH_a_helping_hand
+			focus = EOH_abandon_the_chiss
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+			focus = EOH_contact_ardus_kaine
+		}
+		completion_reward = {
+			BLA = {
+				country_event = {id = EOH.9}
+			}
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = EOH_begin_smuggling_operations_2
+		icon = GFX_thrawn_boxes
+		cost = 10.8
+		x = 0
+		y = 1
+		relative_position_id = EOH_connect_to_the_criminal_underworld
+		allow_branch = {
+			has_completed_focus = EOH_guardian_of_the_unknown_regions
+		}
+		available = {
+		}
+		prerequisite = {
+			focus = EOH_connect_to_the_criminal_underworld
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			203 = {
+				add_resource = {
+					type = rubber
+					amount = 8
+				}
+			}
+			#Relations with smugglers guild, add smuggler
+		}
+
 		ai_will_do = {
 			factor = 1
 		}

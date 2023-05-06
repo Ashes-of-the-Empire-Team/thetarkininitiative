@@ -705,4 +705,78 @@ on_actions = {
 			}
 		}
 	}
+	on_monthly = {
+		effect = {
+			if = {
+				limit = {
+					has_variable = air_1_production_selected_fighter
+					check_variable = {air_1_workers > 1000}
+				}
+				subtract_from_variable = {starfighter_amount_contract_holder@var:air_1_production_selected_fighter^0 = air_1_production_amount}
+				if = {
+					limit = {
+						check_variable = {starfighter_amount_contract_holder@var:air_1_production_selected_fighter^0 < 1}
+					}
+					create_starfighter_1_market_effect = yes
+				}
+				subtract_from_variable = {starfighter_amount_contract_holder@var:air_1_production_selected_fighter^1 = starfighter@var:air_1_production_selected_fighter^0}
+			}
+			if = {
+				limit = {
+					has_variable = air_2_production_selected_fighter
+					check_variable = {air_2_workers > 1000}
+				}
+				subtract_from_variable = {starfighter_amount_contract_holder@var:air_2_production_selected_fighter^0 = air_1_production_amount}
+				if = {
+					limit = {
+						check_variable = {starfighter_amount_contract_holder@var:air_2_production_selected_fighter^0 < 1}
+					}
+					create_starfighter_2_market_effect = yes
+				}
+				subtract_from_variable = {starfighter_amount_contract_holder@var:air_2_production_selected_fighter^1 = starfighter@var:air_2_production_selected_fighter^0}
+			}
+			if = {
+				limit = {
+					has_variable = land_1_selected_item
+					check_variable = {land_1_workers > 1000}
+				}
+				subtract_from_variable = {tank_amount_contract_holder@var:land_1_selected_item^0 = land_1_production_amount}
+				if = {
+					limit = {
+						check_variable = {tank_amount_contract_holder@var:land_1_selected_item^0 < 1}
+					}
+					create_tank_1_market_effect = yes
+				}
+				subtract_from_variable = {tank_amount_contract_holder@var:land_1_selected_item^1 = starfighter@var:land_1_production_amount^0}
+			}
+			if = {
+				limit = {
+					has_variable = land_2_selected_item
+					check_variable = {land_2_workers > 1000}
+				}
+				subtract_from_variable = {tank_amount_contract_holder@var:land_2_selected_item^0 = land_2_production_amount}
+				if = {
+					limit = {
+						check_variable = {tank_amount_contract_holder@var:land_2_selected_item^0 < 1}
+					}
+					create_tank_2_market_effect = yes
+				}
+				subtract_from_variable = {tank_amount_contract_holder@var:land_2_selected_item^1 = starfighter@var:land_2_production_amount^0}
+			}
+			if = {
+				limit = {
+					check_variable = {inf_equip_1_workers > 1000} ## called soft in other places
+					has_variable = soft_1_selected_item
+				}
+				add_to_variable = {global.soft_market_array@var:soft_1_selected_item = soft_1_production_amount}
+			}
+			if = {
+				limit = {
+					check_variable = {inf_equip_2_workers > 1000}
+					has_variable = soft_2_selected_item
+				}
+				add_to_variable = {global.soft_market_array@var:soft_2_selected_item = soft_2_production_amount}
+			}
+		}
+	}
 }
