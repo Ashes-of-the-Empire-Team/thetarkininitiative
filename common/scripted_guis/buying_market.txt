@@ -133,6 +133,38 @@ scripted_gui = {
                 erase_previous_ship_menu_selection = yes
                 set_country_flag = star_destroyer_buying_market_open
             }
+            order_ship_click = {
+                CEC = {
+                    if = {
+                        limit = {
+                            has_country_flag = CR70_buying_market_open
+                        }
+                        add_to_array = { array = ship_counting_to_zero_holder@913  value = amount_to_be_produced }
+                        add_to_array = { array = ship_amount_contract_holder@913 value = amount_to_be_produced }
+                        add_to_array = { array = ship_tag_holder@913 value = ROOT.id }
+                    }
+                }
+                CEC = {
+                    if = {
+                        limit = {
+                            has_country_flag = CR90_buying_market_open
+                        }
+                        add_to_array = { array = ship_counting_to_zero_holder@990  value = amount_to_be_produced }
+                        add_to_array = { array = ship_amount_contract_holder@990 value = amount_to_be_produced }
+                        add_to_array = { array = ship_tag_holder@990 value = ROOT.id }
+                    }
+                }
+                CEC = {
+                    if = {
+                        limit = {
+                            has_country_flag = warrior_buying_market_open
+                        }
+                        add_to_array = { array = ship_counting_to_zero_holder@1530  value = amount_to_be_produced }
+                        add_to_array = { array = ship_amount_contract_holder@1530 value = amount_to_be_produced }
+                        add_to_array = { array = ship_tag_holder@1530 value = ROOT.id }
+                    }
+                }
+            }
         }
         triggers = {
             select_corvettes_button_click_enabled = {
@@ -197,6 +229,11 @@ scripted_gui = {
                 NOT = {
                     has_country_flag = warrior_buying_market_open
                 }
+            }
+        }
+        properties = {
+            ship_icon = {
+                image = "[Get_new_rep_corvette]"
             }
         }
     }
@@ -459,6 +496,63 @@ scripted_gui = {
             }
         }
     }
+    Marketplace_corvettes_imperial_buttons = {
+        context_type = player_context
+        parent_window_name = "Marketplace_buying_menu"
+        window_name = "Marketplace_corvettes_imperial_buttons"
+        visible = {
+            has_country_flag = corvette_buying_market_open
+            has_country_flag = imperial_market_open
+        }
+        effects = {
+            ipv_1_click = {
+                set_country_flag = ipv_1_buying_market_open
+                clr_country_flag = gozanti_buying_market_open
+                clr_country_flag = raider_buying_market_open
+                clr_country_flag = raider_2_buying_market_open
+            }
+            gozanti_click = {
+                set_country_flag = gozanti_buying_market_open
+                clr_country_flag = ipv_1_buying_market_open
+                clr_country_flag = raider_buying_market_open
+                clr_country_flag = raider_2_buying_market_open
+            }
+            raider_click = {
+                set_country_flag = raider_buying_market_open
+                clr_country_flag = ipv_1_buying_market_open
+                clr_country_flag = gozanti_buying_market_open
+                clr_country_flag = raider_2_buying_market_open
+            }
+            raider_2_click = {
+                set_country_flag = raider_2_buying_market_open
+                clr_country_flag = ipv_1_buying_market_open
+                clr_country_flag = gozanti_buying_market_open
+                clr_country_flag = raider_buying_market_open
+            }
+        }
+        triggers = {
+            ipv_1_click_enabled = {
+                NOT = {
+                    has_country_flag = ipv_1_buying_market_open
+                }
+            }
+            gozanti_click_enabled = {
+                NOT = {
+                    has_country_flag = gozanti_buying_market_open
+                }
+            }
+            raider_click_enabled = {
+                NOT = {
+                    has_country_flag = raider_buying_market_open
+                }
+            }
+            raider_2_click_enabled = {
+                NOT = {
+                    has_country_flag = raider_2_buying_market_open
+                }
+            }
+        }
+    }
     Marketplace_frigate_imperial_buttons = {
         context_type = player_context
         parent_window_name = "Marketplace_buying_menu"
@@ -466,6 +560,54 @@ scripted_gui = {
         visible = {
             has_country_flag = frigate_buying_market_open
             has_country_flag = imperial_market_open
+        }
+        effects = {
+            ipv_click = {
+                set_country_flag = IPV_buying_market_open
+                clr_country_flag = gozanti_buying_market_open
+                clr_country_flag = raider_buying_market_open
+                clr_country_flag = raider_2_buying_market_open
+            }
+            gozanti_click = {
+                set_country_flag = gozanti_buying_market_open
+                clr_country_flag = IPV_buying_market_open
+                clr_country_flag = raider_buying_market_open
+                clr_country_flag = raider_2_buying_market_open
+            }
+            raider_click = {
+                set_country_flag = raider_buying_market_open
+                clr_country_flag = IPV_buying_market_open
+                clr_country_flag = gozanti_buying_market_open
+                clr_country_flag = raider_2_buying_market_open
+            }
+            raider_2_click = {
+                set_country_flag = raider_2_buying_market_open
+                clr_country_flag = IPV_buying_market_open
+                clr_country_flag = gozanti_buying_market_open
+                clr_country_flag = raider_buying_market_open
+            }
+        }
+        triggers = {
+            IPV_click_enabled = {
+                NOT = {
+                    has_country_flag = IPV_buying_market_open
+                }
+            }
+            gozanti_click_enabled = {
+                NOT = {
+                    has_country_flag = gozanti_buying_market_open
+                }
+            }
+            raider_click_enabled = {
+                NOT = {
+                    has_country_flag = raider_buying_market_open
+                }
+            }
+            raider_2_click_enabled = {
+                NOT = {
+                    has_country_flag = raider_2_buying_market_open
+                }
+            }
         }
     }
     Marketplace_cruiser_imperial_buttons = {
@@ -476,6 +618,18 @@ scripted_gui = {
             has_country_flag = cruiser_buying_market_open
             has_country_flag = imperial_market_open
         }
+        effects = {
+            lancer_click = {
+                set_country_flag = lancer_buying_market_open
+            }
+        }
+        triggers = {
+            lancer_click_enabled = {
+                NOT = {
+                    has_country_flag = lancer_buying_market_open
+                }
+            }
+        }
     }
     Marketplace_battlecruiser_imperial_buttons = {
         context_type = player_context
@@ -484,6 +638,32 @@ scripted_gui = {
         visible = {
             has_country_flag = star_destroyer_buying_market_open
             has_country_flag = imperial_market_open
+        }
+        effects = {
+            Imperial_Star_Destroyer_click = {
+                set_country_flag = Imperial_Star_Destroyer_buying_market_open
+                clr_country_flag = Imperial_Star_Destroyer_1_buying_market_open
+                clr_country_flag = resurgent_buying_market_open
+                clr_country_flag = praertor_buying_market_open
+            }
+            Imperial_Star_Destroyer_1_click = {
+                set_country_flag = Imperial_Star_Destroyer_1_buying_market_open
+                clr_country_flag = Imperial_Star_Destroyer_buying_market_open
+                clr_country_flag = resurgent_buying_market_open
+                clr_country_flag = praertor_buying_market_open
+            }
+            resurgent_click = {
+                set_country_flag = resurgent_buying_market_open
+                clr_country_flag = Imperial_Star_Destroyer_buying_market_open
+                clr_country_flag = Imperial_Star_Destroyer_1_buying_market_open
+                clr_country_flag = praertor_buying_market_open
+            }
+            praertor_click = {
+                set_country_flag = praertor_buying_market_open
+                clr_country_flag = Imperial_Star_Destroyer_buying_market_open
+                clr_country_flag = Imperial_Star_Destroyer_1_buying_market_open
+                clr_country_flag = resurgent_buying_market_open
+            }
         }
     }
 }   
