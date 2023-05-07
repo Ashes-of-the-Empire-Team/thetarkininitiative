@@ -31,47 +31,48 @@ country_event = {
     desc = EOH.1.d
     picture = GFX_WIP_focus
     
-    #trigger = {
-    #    original_tag = EOH
-    #    date > 9.03.01
-    #}
-    #mean_time_to_happen = {
-    #    days = 200
-    #    modifier = {
-    #        add = 120
-    #        EOH = {
-    #            has_completed_focus = EOH_the_question_of_protection
-    #        }
-    #    }
-    #    modifier = {
-    #        add = 120
-    #        EOH = {
-    #            has_completed_focus = EOH_discipline_and_self_defence
-    #        }
-    #    }
-    #    modifier = {
-    #        add = -40
-    #        EOH = {
-    #            has_completed_focus = EOH_none_evade_thrawns_grasp
-    #        }
-    #    }
-    #    modifier = {
-    #        add = -40
-    #        EOH = {
-    #            has_completed_focus = EOH_death_to_the_traitor
-    #        }
-    #    }
-    #    modifier = {
-    #        add = -40
-    #        EOH = {
-    #            has_completed_focus = EOH_assasinate_oxtroe
-    #        }
-    #    }
-    #}
+    trigger = {
+        original_tag = EOH
+        date > 9.03.01
+    }
+    mean_time_to_happen = {
+        days = 200
+        modifier = {
+            add = 120
+            EOH = {
+                has_completed_focus = EOH_the_question_of_protection
+            }
+        }
+        modifier = {
+            add = 120
+            EOH = {
+                has_completed_focus = EOH_discipline_and_self_defence
+            }
+        }
+        modifier = {
+            add = -40
+            EOH = {
+                has_completed_focus = EOH_none_evade_thrawns_grasp
+            }
+        }
+        modifier = {
+            add = -40
+            EOH = {
+                has_completed_focus = EOH_death_to_the_traitor
+            }
+        }
+        modifier = {
+            add = -40
+            EOH = {
+                has_completed_focus = EOH_assasinate_oxtroe
+            }
+        }
+    }
     immediate = {
         kill_country_leader = yes
     }
     fire_only_once = yes
+    is_triggered_only = yes
     option = {
         name = "But... it was so artistically done."
         custom_effect_tooltip = "Thrawn has died."
@@ -117,10 +118,8 @@ country_event = {
 			FROM = { set_country_flag = alliance_applicant@ROOT }
         }
         effect_tooltip = {
-            FROM = {   
-                faction_leader = {
-                    add_to_faction = ROOT
-                }
+            FROM = {
+                add_to_faction = ROOT
                 country_event = { id = EOH.3 hours = 2 }
             }
         }
