@@ -134,13 +134,13 @@ scripted_gui = {
                 set_country_flag = star_destroyer_buying_market_open
             }
             order_ship_click = {
-                CEC = {
-                    if = {
-                        limit = {
-                            has_country_flag = CR70_buying_market_open
-                        }
-                        add_to_array = { array = ship_counting_to_zero_holder@913  value = amount_to_be_produced }
-                        add_to_array = { array = ship_amount_contract_holder@913 value = amount_to_be_produced }
+                if = {
+                    limit = {
+                        has_country_flag = CR70_buying_market_open
+                    }
+                    CEC = {
+                        add_to_array = { array = ship_counting_to_zero_holder@913  value = prev.amount_to_be_produced }
+                        add_to_array = { array = ship_amount_contract_holder@913 value = prev.amount_to_be_produced }
                         add_to_array = { array = ship_tag_holder@913 value = ROOT.id }
                     }
                 }

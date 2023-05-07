@@ -915,6 +915,10 @@ on_actions = {
 					}
 				}
 			}
+		}
+	}
+	on_daily = {
+		effect = {
 			if = {
 				limit = {
 					has_variable = light_selected_ship_to_be_reduced
@@ -924,18 +928,19 @@ on_actions = {
 					limit = {
 						check_variable = {light_selected_ship_to_be_reduced < 1}
 					}
-					subtract_from_variable = {light_ship_counting_to_zero_holder@var:light_selected_ship_production_cost^0 = 1}
+					subtract_from_variable = {ship_counting_to_zero_holder@var:light_selected_ship_production_cost^0 = 1}
 				}else = {
 					set_temp_variable = {light_ship_calculator = light_ship_workers}
 					divide_temp_variable = {light_ship_calculator = 100}
 					subtract_from_variable = {light_selected_ship_to_be_reduced = light_ship_calculator}
+					set_variable = {light_selected_ship_to_be_reduced = light_selected_ship_production_cost}
 				}
 				if = {
 					limit = {
-						check_variable = {light_ship_counting_to_zero_holder@var:light_selected_ship_production_cost^0 < 1}
+						check_variable = {ship_counting_to_zero_holder@var:light_selected_ship_production_cost^0 < 1}
 					}
 					create_light_ship_market_effect = yes
-					add_to_variable = {light_ship_counting_to_zero_holder@var:light_selected_ship_production_cost^1 = light_ship_counting_to_zero_holder@var:light_selected_ship_production_cost^0}
+					add_to_variable = {ship_counting_to_zero_holder@var:light_selected_ship_production_cost^1 = ship_counting_to_zero_holder@var:light_selected_ship_production_cost^0}
 					remove_from_array = {
 						array = ship_counting_to_zero_holder@var:light_selected_ship_production_cost
 						index = 0
@@ -959,18 +964,19 @@ on_actions = {
 					limit = {
 						check_variable = {medium_selected_ship_to_be_reduced < 1}
 					}
-					subtract_from_variable = {medium_ship_counting_to_zero_holder@var:medium_selected_ship_production_cost^0 = 1}
+					subtract_from_variable = {ship_counting_to_zero_holder@var:medium_selected_ship_production_cost^0 = 1}
 				}else = {
 					set_temp_variable = {medium_ship_calculator = medium_ship_workers}
 					divide_temp_variable = {medium_ship_calculator = 100}
 					subtract_from_variable = {medium_selected_ship_to_be_reduced = medium_ship_calculator}
+					set_variable = {medium_selected_ship_to_be_reduced = medium_selected_ship_production_cost}
 				}
 				if = {
 					limit = {
-						check_variable = {medium_ship_counting_to_zero_holder@var:medium_selected_ship_production_cost^0 < 1}
+						check_variable = {ship_counting_to_zero_holder@var:medium_selected_ship_production_cost^0 < 1}
 					}
 					create_medium_ship_market_effect = yes
-					add_to_variable = {medium_ship_counting_to_zero_holder@var:medium_selected_ship_production_cost^1 = medium_ship_counting_to_zero_holder@var:medium_selected_ship_production_cost^0}
+					add_to_variable = {ship_counting_to_zero_holder@var:medium_selected_ship_production_cost^1 = ship_counting_to_zero_holder@var:medium_selected_ship_production_cost^0}
 					remove_from_array = {
 						array = ship_counting_to_zero_holder@var:medium_selected_ship_production_cost
 						index = 0
@@ -994,18 +1000,19 @@ on_actions = {
 					limit = {
 						check_variable = {heavy_selected_ship_to_be_reduced < 1}
 					}
-					subtract_from_variable = {heavy_ship_counting_to_zero_holder@var:heavy_selected_ship_production_cost^0 = 1}
+					subtract_from_variable = {ship_counting_to_zero_holder@var:heavy_selected_ship_production_cost^0 = 1}
 				}else = {
 					set_temp_variable = {heavy_ship_calculator = heavy_ship_workers}
 					divide_temp_variable = {heavy_ship_calculator = 100}
 					subtract_from_variable = {heavy_selected_ship_to_be_reduced = heavy_ship_calculator}
+					set_variable = {heavy_selected_ship_to_be_reduced = heavy_selected_ship_production_cost}
 				}
 				if = {
 					limit = {
-						check_variable = {heavy_ship_counting_to_zero_holder@var:heavy_selected_ship_production_cost^0 < 1}
+						check_variable = {ship_counting_to_zero_holder@var:heavy_selected_ship_production_cost^0 < 1}
 					}
 					create_heavy_ship_market_effect = yes
-					add_to_variable = {heavy_ship_counting_to_zero_holder@var:heavy_selected_ship_production_cost^1 = heavy_ship_counting_to_zero_holder@var:heavy_selected_ship_production_cost^0}
+					add_to_variable = {ship_counting_to_zero_holder@var:heavy_selected_ship_production_cost^1 = ship_counting_to_zero_holder@var:heavy_selected_ship_production_cost^0}
 					remove_from_array = {
 						array = ship_counting_to_zero_holder@var:heavy_selected_ship_production_cost
 						index = 0
