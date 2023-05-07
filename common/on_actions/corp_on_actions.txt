@@ -94,7 +94,7 @@ on_actions = {
 				}
 				add_to_array = {
 					array = heavy_production_array
-					value = 9120
+					value = 7540
 				}
 			}
 			KUA = {#kuat
@@ -291,7 +291,41 @@ on_actions = {
 					value = 4
 				}
 			}
-
+			set_variable = {ship_price_holder@950 = 60} #IPV 1
+			set_variable = {ship_price_holder@1260 = 75} #Gonzanti
+			set_variable = {ship_price_holder@1925 = 90} #Raider 1
+			set_variable = {ship_price_holder@1990 = 93} #Raider 2
+			set_variable = {ship_price_holder@2700 = 105} #Lancer
+			set_variable = {ship_price_holder@4800 = 180} # Arquitens
+			set_variable = {ship_price_holder@5950 = 260} #Interdictor
+			set_variable = {ship_price_holder@5200 = 220} #Dreadnaught
+			set_variable = {ship_price_holder@7400 = 300} #Victory
+			set_variable = {ship_price_holder@7940 = 310} #Victory 2
+			set_variable = {ship_price_holder@11005 = 520} #ISD 1
+			set_variable = {ship_price_holder@11850 = 550} #ISD 2
+			set_variable = {ship_price_holder@14503 = 710} #Resurgent
+			set_variable = {ship_price_holder@14030 = 700} #Praetor
+			set_variable = {ship_price_holder@913 = 57} #Cr 70
+			set_variable = {ship_price_holder@990 = 65} #Cr 70 2 /CR90
+			set_variable = {ship_price_holder@1530 = 80} # Warrior
+			set_variable = {ship_price_holder@3200 = 157} #Pelta
+			set_variable = {ship_price_holder@4262 = 170} #MC30
+			set_variable = {ship_price_holder@2829 = 112} #Nebulon
+			set_variable = {ship_price_holder@2943 = 124} #Nebulon 2
+			set_variable = {ship_price_holder@2980 = 130} #Corona
+			set_variable = {ship_price_holder@5421 = 240} #Assault 1
+			set_variable = {ship_price_holder@5600 = 255} # Assault 2
+			set_variable = {ship_price_holder@5830 = 270} #MC40
+			set_variable = {ship_price_holder@4300 = 160} #Quaser
+			set_variable = {ship_price_holder@7540 = 390} # MC75
+			set_variable = {ship_price_holder@7340 = 320} #Bothan assualt cruiser
+			set_variable = {ship_price_holder@10080 = 540} #MC80 Liberty
+			set_variable = {ship_price_holder@12400 = 570} #Starhawk
+			set_variable = {ship_price_holder@13450 = 640} #Dauntless
+			set_variable = {ship_price_holder@13200 = 620} #MC80 Home One
+			set_variable = {ship_price_holder@10630 = 524} #MC85
+			set_variable = {ship_price_holder@14400 = 710} #Nebula
+			set_variable = {ship_price_holder@13430 = 635} #Repubic Star Destroyer
 	# AIR - NEVERFIRE  ### SET UP FOR ALL IC TO THEN USE IN MARKET CALC
 		## REPUBLIC
 			## U WING
@@ -715,127 +749,6 @@ on_actions = {
 				}
 			}
 			### land and air market -- neverfire
-			if = {
-				limit = {
-					check_variable = {air_1_workers > 1000}
-					has_variable = air_1_production_selected_fighter
-				}
-				add_to_variable = {global.market_starfighter_holder@var:air_1_production_selected_fighter = air_1_production_amount}
-			}
-			if = {
-				limit = {
-					check_variable = {air_2_workers > 1000}
-					has_variable = air_2_production_selected_fighter
-				}
-				add_to_variable = {global.market_starfighter_holder@var:air_2_production_selected_fighter = air_2_production_amount}
-			}
-			if = {
-				limit = {
-					check_variable = {land_1_workers > 1000}
-					has_variable = land_1_selected_item
-				}
-				add_to_variable = {global.market_tank_holder@var:land_1_selected_item = land_1_production_amount}
-			}
-			if = {
-				limit = {
-					check_variable = {land_2_workers > 1000}
-					has_variable = land_2_selected_item
-				}
-				add_to_variable = {global.market_tank_holder@var:land_1_selected_item = land_2_production_amount}
-			}
-			if = {
-				limit = {
-					check_variable = {inf_equip_1_workers > 1000} ## called soft in other places
-					has_variable = soft_1_selected_item
-				}
-				add_to_variable = {global.soft_market_array@var:soft_1_selected_item = soft_1_production_amount}
-			}
-			if = {
-				limit = {
-					check_variable = {inf_equip_2_workers > 1000}
-					has_variable = soft_2_selected_item
-				}
-				add_to_variable = {global.soft_market_array@var:soft_2_selected_item = soft_2_production_amount}
-			}
-		}
-	}
-	on_daily = {
-		effect = {
-			if = {
-				limit = {
-					has_country_flag = light_ship_in_production
-				}
-				subtract_from_variable = {light_ship_production_time = 1}
-				if = {
-					limit = {
-						check_variable = {
-							var = light_ship_production_time
-							value = 0
-							compare = less_than_or_equals
-						}
-					}
-					add_to_variable = {global.market_ship_holder@var:light_selected_ship_production_cost = 1}
-					if = {
-						limit = {
-							has_country_flag = light_ship_auto_renew
-						}
-						recalculate_light_ship_creation_time = yes
-					}else = {
-						clr_country_flag = light_ship_in_production
-						recalculate_light_ship_creation_time = yes
-					}
-				}
-			}
-			if = {
-				limit = {
-					has_country_flag = medium_ship_in_production
-				}
-				subtract_from_variable = {medium_ship_production_time = 1}
-				if = {
-					limit = {
-						check_variable = {
-							var = medium_ship_production_time
-							value = 0
-							compare = less_than_or_equals
-						}
-					}
-					add_to_variable = {global.market_ship_holder@var:medium_selected_ship_production_cost = 1}
-					if = {
-						limit = {
-							has_country_flag = medium_ship_auto_renew
-						}
-						recalculate_medium_ship_creation_time = yes
-					}else = {
-						clr_country_flag = medium_ship_in_production
-						recalculate_medium_ship_creation_time = yes
-					}
-				}
-			}
-			if = {
-				limit = {
-					has_country_flag = heavy_ship_in_production
-				}
-				subtract_from_variable = {heavy_ship_production_time = 1}
-				if = {
-					limit = {
-						check_variable = {
-							var = heavy_ship_production_time
-							value = 0
-							compare = less_than_or_equals
-						}
-					}
-					add_to_variable = {global.market_ship_holder@var:heavy_selected_ship_production_cost = 1}
-					if = {
-						limit = {
-							has_country_flag = heavy_ship_auto_renew
-						}
-						recalculate_heavy_ship_creation_time = yes
-					}else = {
-						clr_country_flag = heavy_ship_in_production
-						recalculate_heavy_ship_creation_time = yes
-					}
-				}
-			}
 		}
 	}
 	on_monthly = {
@@ -928,6 +841,75 @@ on_actions = {
 					set_variable = {soft_market_equipment_builder = soft_2_selected_item}
 					create_soft_market_effect = yes
 					add_to_variable = {soft_counting_to_zero_holder@var:soft_2_selected_item^2 = soft_counting_to_zero_holder@var:soft_2_production_amount^0}
+				}
+			}
+			if = {
+				limit = {
+					has_variable = light_selected_ship_to_be_reduced
+					check_variable = {light_ship_workers > 1000}
+				}
+				if = {
+					limit = {
+						check_variable = {light_selected_ship_to_be_reduced < 1}
+					}
+					subtract_from_variable = {light_ship_counting_to_zero_holder@var:light_selected_ship_production_cost^0 = 1}
+				}else = {
+					set_temp_variable = {light_ship_calculator = light_ship_workers}
+					divide_temp_variable = {light_ship_calculator = 100}
+					subtract_from_variable = {light_selected_ship_to_be_reduced = light_ship_calculator}
+				}
+				if = {
+					limit = {
+						check_variable = {light_ship_counting_to_zero_holder@var:light_selected_ship_production_cost^0 < 1}
+					}
+					create_light_ship_market_effect = yes
+					add_to_variable = {light_ship_counting_to_zero_holder@var:light_selected_ship_production_cost^1 = light_ship_counting_to_zero_holder@var:light_selected_ship_production_cost^0}
+				}
+			}
+			if = {
+				limit = {
+					has_variable = medium_selected_ship_production_cost
+					check_variable = {medium_ship_workers > 1000}
+				}
+				if = {
+					limit = {
+						check_variable = {medium_selected_ship_to_be_reduced < 1}
+					}
+					subtract_from_variable = {medium_ship_counting_to_zero_holder@var:medium_selected_ship_production_cost^0 = 1}
+				}else = {
+					set_temp_variable = {medium_ship_calculator = medium_ship_workers}
+					divide_temp_variable = {medium_ship_calculator = 100}
+					subtract_from_variable = {medium_selected_ship_to_be_reduced = medium_ship_calculator}
+				}
+				if = {
+					limit = {
+						check_variable = {medium_ship_counting_to_zero_holder@var:medium_selected_ship_production_cost^0 < 1}
+					}
+					create_medium_ship_market_effect = yes
+					add_to_variable = {medium_ship_counting_to_zero_holder@var:medium_selected_ship_production_cost^1 = medium_ship_counting_to_zero_holder@var:medium_selected_ship_production_cost^0}
+				}
+			}
+			if = {
+				limit = {
+					has_variable = heavy_selected_ship_to_be_reduced
+					check_variable = {heavy_ship_workers > 1000}
+				}
+				if = {
+					limit = {
+						check_variable = {heavy_selected_ship_to_be_reduced < 1}
+					}
+					subtract_from_variable = {heavy_ship_counting_to_zero_holder@var:heavy_selected_ship_production_cost^0 = 1}
+				}else = {
+					set_temp_variable = {heavy_ship_calculator = heavy_ship_workers}
+					divide_temp_variable = {heavy_ship_calculator = 100}
+					subtract_from_variable = {heavy_selected_ship_to_be_reduced = heavy_ship_calculator}
+				}
+				if = {
+					limit = {
+						check_variable = {heavy_ship_counting_to_zero_holder@var:heavy_selected_ship_production_cost^0 < 1}
+					}
+					create_heavy_ship_market_effect = yes
+					add_to_variable = {heavy_ship_counting_to_zero_holder@var:heavy_selected_ship_production_cost^1 = heavy_ship_counting_to_zero_holder@var:heavy_selected_ship_production_cost^0}
 				}
 			}
 		}
