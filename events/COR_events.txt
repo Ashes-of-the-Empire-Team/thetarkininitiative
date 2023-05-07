@@ -1,0 +1,115 @@
+###########################
+# Corellia events
+###########################
+
+add_namespace = COR
+
+
+country_event = {
+    id = COR.1
+    title = COR.1.t
+    desc = COR.1.d
+    picture = GFX_report_event_election_vote
+    is_triggered_only = yes
+    fire_only_once = yes
+    option = {
+        name = COR.1.a
+		COR_Admiral_Roek={
+			add_naval_commander_role = {
+				skill = 4
+				attack_skill = 2
+				defense_skill = 3
+				planning_skill = 4
+				logistics_skill = 1
+			}
+			add_country_leader_role = {
+				promote_leader = yes
+				country_leader = {
+					ideology = imperial_ideology
+					expire = "1965.1.1.1"
+					traits = { moff }
+				}
+			}
+		}
+		COR_Admiral_Jaeffis={
+			remove_country_leader_role = {
+				ideology = imperial_ideology
+			}
+		}
+    }
+}
+country_event = {
+    id = COR.2
+    title = COR.2.t
+    desc = COR.2.d
+    picture = GFX_report_event_election_vote
+    is_triggered_only = yes
+    fire_only_once = yes
+    option = {
+        name = COR.2.a
+		
+    }
+	option = {
+        name = COR.2.b
+		
+    }
+	option = {
+        name = COR.2.c
+		
+    }
+}
+country_event = {
+    id = COR.3
+    title = COR.3.t
+    desc = COR.3.d
+    picture = GFX_report_event_election_vote
+    is_triggered_only = yes
+    fire_only_once = yes
+    option = {
+        name = COR.3.a
+		add_stability = -0.025
+    }
+}
+country_event = {
+    id = COR.4
+    title = COR.4.t
+    desc = COR.4.d
+    picture = GFX_report_event_election_vote
+    is_triggered_only = yes
+    fire_only_once = yes
+    option = {
+        name = COR.4.a
+		COR_Danetta_Pitta={
+			add_country_leader_role = {
+				promote_leader = yes
+				country_leader = {
+					ideology = imperial_ideology
+					expire = "1965.1.1.1"
+					traits = { moff }
+					desc=COR_Danetta_Pitta_desc
+				}
+			}
+		}
+		set_cosmetic_tag = COR_pitta
+		set_country_flag = COR_Pitta
+		mark_focus_tree_layout_dirty = yes
+    }
+}
+country_event = {#whispers of grungers ambition
+    id = COR.5
+    title = COR.5.t
+    desc = COR.5.d
+    picture = GFX_report_event_election_vote
+    #is_triggered_only = yes
+	trigger={
+		tag = COR
+		date > 5.1.1
+	}
+    fire_only_once = yes
+    option = {
+        name = COR.5.a
+		hidden_effect={
+			country_event = {id = COR.6 days = 200 random = 80}
+		}
+    }
+}
