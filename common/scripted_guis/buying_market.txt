@@ -117,6 +117,12 @@ scripted_gui = {
             has_country_flag = open_market_ships
         }
         effects = {
+            right_click_market_click = {
+                subtract_from_variable = { amount_to_be_produced = 1 }
+            }
+            left_click_market_click = {
+                subtract_from_variable = { amount_to_be_produced = 1 }
+            }
             select_corvettes_button_click = {
                 erase_previous_ship_menu_selection = yes
                 set_country_flag = corvette_buying_market_open
@@ -134,36 +140,257 @@ scripted_gui = {
                 set_country_flag = star_destroyer_buying_market_open
             }
             order_ship_click = {
-                CEC = {
-                    if = {
-                        limit = {
-                            has_country_flag = CR70_buying_market_open
-                        }
-                        add_to_array = { array = ship_counting_to_zero_holder@913  value = amount_to_be_produced }
-                        add_to_array = { array = ship_amount_contract_holder@913 value = amount_to_be_produced }
+                if = {
+                    limit = {
+                        has_country_flag = CR70_buying_market_open
+                    }
+                    CEC = {
+                        add_to_array = { array = ship_counting_to_zero_holder@913  value = prev.amount_to_be_produced }
+                        add_to_array = { array = ship_amount_contract_holder@913 value = prev.amount_to_be_produced }
                         add_to_array = { array = ship_tag_holder@913 value = ROOT.id }
                     }
                 }
-                CEC = {
-                    if = {
-                        limit = {
-                            has_country_flag = CR90_buying_market_open
-                        }
-                        add_to_array = { array = ship_counting_to_zero_holder@990  value = amount_to_be_produced }
-                        add_to_array = { array = ship_amount_contract_holder@990 value = amount_to_be_produced }
+                if = {
+                    limit = {
+                        has_country_flag = CR90_buying_market_open
+                    }
+                    CEC = {
+                        add_to_array = { array = ship_counting_to_zero_holder@990  value = prev.amount_to_be_produced }
+                        add_to_array = { array = ship_amount_contract_holder@990 value = prev.amount_to_be_produced }
                         add_to_array = { array = ship_tag_holder@990 value = ROOT.id }
                     }
                 }
-                CEC = {
-                    if = {
-                        limit = {
-                            has_country_flag = warrior_buying_market_open
-                        }
-                        add_to_array = { array = ship_counting_to_zero_holder@1530  value = amount_to_be_produced }
-                        add_to_array = { array = ship_amount_contract_holder@1530 value = amount_to_be_produced }
+                if = {
+                    limit = {
+                        has_country_flag = warrior_buying_market_open
+                    }
+                    VON = {
+                        add_to_array = { array = ship_counting_to_zero_holder@1530  value = prev.amount_to_be_produced }
+                        add_to_array = { array = ship_amount_contract_holder@1530 value = prev.amount_to_be_produced }
                         add_to_array = { array = ship_tag_holder@1530 value = ROOT.id }
                     }
                 }
+                if = {
+                    limit = {
+                        has_country_flag = assault_1_buying_market_open
+                    }
+                    REN = {
+                        add_to_array = { array = ship_counting_to_zero_holder@5421  value = prev.amount_to_be_produced }
+                        add_to_array = { array = ship_amount_contract_holder@5421 value = prev.amount_to_be_produced }
+                        add_to_array = { array = ship_tag_holder@5421 value = ROOT.id }
+                    }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = assault_2_buying_market_open
+                    }
+                    REN = {
+                        add_to_array = { array = ship_counting_to_zero_holder@5600  value = prev.amount_to_be_produced }
+                        add_to_array = { array = ship_amount_contract_holder@5600 value = prev.amount_to_be_produced }
+                        add_to_array = { array = ship_tag_holder@5600 value = ROOT.id }
+                    }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = mc40_buying_market_open
+                    }
+                    CAL = {
+                        add_to_array = { array = ship_counting_to_zero_holder@5830  value = prev.amount_to_be_produced }
+                        add_to_array = { array = ship_amount_contract_holder@5830 value = prev.amount_to_be_produced }
+                        add_to_array = { array = ship_tag_holder@5830 value = ROOT.id }
+                    }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = mc75_buying_market_open
+                    }
+                    CAL = {
+                        add_to_array = { array = ship_counting_to_zero_holder@7540  value = prev.amount_to_be_produced }
+                        add_to_array = { array = ship_amount_contract_holder@7540 value = prev.amount_to_be_produced }
+                        add_to_array = { array = ship_tag_holder@7540 value = ROOT.id }
+                    }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = pelta_buying_market_open
+                    }
+                    KUA = {
+                        add_to_array = { array = ship_counting_to_zero_holder@3200  value = prev.amount_to_be_produced }
+                        add_to_array = { array = ship_amount_contract_holder@3200 value = prev.amount_to_be_produced }
+                        add_to_array = { array = ship_tag_holder@3200 value = ROOT.id }
+                    }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = mc30_buying_market_open
+                    }
+                    CAL = {
+                        add_to_array = { array = ship_counting_to_zero_holder@4262  value = prev.amount_to_be_produced }
+                        add_to_array = { array = ship_amount_contract_holder@4262 value = prev.amount_to_be_produced }
+                        add_to_array = { array = ship_tag_holder@4262 value = ROOT.id }
+                    }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = nebulon_b_buying_market_open
+                    }
+                    KUA = {
+                        add_to_array = { array = ship_counting_to_zero_holder@2829  value = prev.amount_to_be_produced }
+                        add_to_array = { array = ship_amount_contract_holder@2829 value = prev.amount_to_be_produced }
+                        add_to_array = { array = ship_tag_holder@2829 value = ROOT.id }
+                    }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = nebulon_b2_buying_market_open
+                    }
+                    KUA = {
+                        add_to_array = { array = ship_counting_to_zero_holder@2943  value = prev.amount_to_be_produced }
+                        add_to_array = { array = ship_amount_contract_holder@2943 value = prev.amount_to_be_produced }
+                        add_to_array = { array = ship_tag_holder@2943 value = ROOT.id }
+                    }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = quaser_buying_market_open
+                    }
+                    SOR = {
+                        add_to_array = { array = ship_counting_to_zero_holder@4300  value = prev.amount_to_be_produced }
+                        add_to_array = { array = ship_amount_contract_holder@4300 value = prev.amount_to_be_produced }
+                        add_to_array = { array = ship_tag_holder@4300 value = ROOT.id }
+                    }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = corona_buying_market_open
+                    }
+                    KUA = {
+                        add_to_array = { array = ship_counting_to_zero_holder@2980  value = prev.amount_to_be_produced }
+                        add_to_array = { array = ship_amount_contract_holder@2980 value = prev.amount_to_be_produced }
+                        add_to_array = { array = ship_tag_holder@2980 value = ROOT.id }
+                    }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = mc80_liberty_buying_market_open
+                    }
+                    CAL = {
+                        add_to_array = { array = ship_counting_to_zero_holder@10080  value = prev.amount_to_be_produced }
+                        add_to_array = { array = ship_amount_contract_holder@10080 value = prev.amount_to_be_produced }
+                        add_to_array = { array = ship_tag_holder@10080 value = ROOT.id }
+                    }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = starhawk_buying_market_open
+                    }
+                    VON = {
+                        add_to_array = { array = ship_counting_to_zero_holder@12400  value = prev.amount_to_be_produced }
+                        add_to_array = { array = ship_amount_contract_holder@12400 value = prev.amount_to_be_produced }
+                        add_to_array = { array = ship_tag_holder@12400 value = ROOT.id }
+                    }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = mc80_home_one_buying_market_open
+                    }
+                    CAL = {
+                        add_to_array = { array = ship_counting_to_zero_holder@13200  value = prev.amount_to_be_produced }
+                        add_to_array = { array = ship_amount_contract_holder@13200 value = prev.amount_to_be_produced }
+                        add_to_array = { array = ship_tag_holder@13200 value = ROOT.id }
+                    }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = republic_star_destroyer_buying_market_open
+                    }
+                    VON = {
+                        add_to_array = { array = ship_counting_to_zero_holder@13430  value = prev.amount_to_be_produced }
+                        add_to_array = { array = ship_amount_contract_holder@13430 value = prev.amount_to_be_produced }
+                        add_to_array = { array = ship_tag_holder@13430 value = ROOT.id }
+                    }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = nebula_star_destroyer_buying_market_open
+                    }
+                    VON = {
+                        add_to_array = { array = ship_counting_to_zero_holder@14400  value = prev.amount_to_be_produced }
+                        add_to_array = { array = ship_amount_contract_holder@14400 value = prev.amount_to_be_produced }
+                        add_to_array = { array = ship_tag_holder@14400 value = ROOT.id }
+                    }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = MC90_buying_market_open
+                    }
+                    CAL = {
+                        add_to_array = { array = ship_counting_to_zero_holder@10630  value = prev.amount_to_be_produced }
+                        add_to_array = { array = ship_amount_contract_holder@10630 value = prev.amount_to_be_produced }
+                        add_to_array = { array = ship_tag_holder@10630 value = ROOT.id }
+                    }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = dauntless_buying_market_open
+                    }
+                    SOR = {
+                        add_to_array = { array = ship_counting_to_zero_holder@13450  value = prev.amount_to_be_produced }
+                        add_to_array = { array = ship_amount_contract_holder@13450 value = prev.amount_to_be_produced }
+                        add_to_array = { array = ship_tag_holder@13450 value = ROOT.id }
+                    }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = ipv_1_buying_market_open
+                    }
+                    SFS = {
+                        add_to_array = { array = ship_counting_to_zero_holder@950  value = prev.amount_to_be_produced }
+                        add_to_array = { array = ship_amount_contract_holder@950 value = prev.amount_to_be_produced }
+                        add_to_array = { array = ship_tag_holder@950 value = ROOT.id }
+                    }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = gozanti_buying_market_open
+                    }
+                    CEC = {
+                        add_to_array = { array = ship_counting_to_zero_holder@1260  value = prev.amount_to_be_produced }
+                        add_to_array = { array = ship_amount_contract_holder@1260 value = prev.amount_to_be_produced }
+                        add_to_array = { array = ship_tag_holder@1260 value = ROOT.id }
+                    }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = raider_buying_market_open
+                    }
+                    KUA = {
+                        add_to_array = { array = ship_counting_to_zero_holder@1925  value = prev.amount_to_be_produced }
+                        add_to_array = { array = ship_amount_contract_holder@1925 value = prev.amount_to_be_produced }
+                        add_to_array = { array = ship_tag_holder@1925 value = ROOT.id }
+                    }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = raider_2_buying_market_open
+                    }
+                    KUA = {
+                        add_to_array = { array = ship_counting_to_zero_holder@1990  value = prev.amount_to_be_produced }
+                        add_to_array = { array = ship_amount_contract_holder@1990 value = prev.amount_to_be_produced }
+                        add_to_array = { array = ship_tag_holder@1990 value = ROOT.id }
+                    }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = lancer_buying_market_open
+                    }
+                    KUA = {
+                        add_to_array = { array = ship_counting_to_zero_holder@2700  value = prev.amount_to_be_produced }
+                        add_to_array = { array = ship_amount_contract_holder@2700 value = prev.amount_to_be_produced }
+                        add_to_array = { array = ship_tag_holder@2700 value = ROOT.id }
+                    }
+                }
+                clear_variable = amount_to_be_produced
             }
         }
         triggers = {
@@ -562,50 +789,14 @@ scripted_gui = {
             has_country_flag = imperial_market_open
         }
         effects = {
-            ipv_click = {
-                set_country_flag = IPV_buying_market_open
-                clr_country_flag = gozanti_buying_market_open
-                clr_country_flag = raider_buying_market_open
-                clr_country_flag = raider_2_buying_market_open
-            }
-            gozanti_click = {
-                set_country_flag = gozanti_buying_market_open
-                clr_country_flag = IPV_buying_market_open
-                clr_country_flag = raider_buying_market_open
-                clr_country_flag = raider_2_buying_market_open
-            }
-            raider_click = {
-                set_country_flag = raider_buying_market_open
-                clr_country_flag = IPV_buying_market_open
-                clr_country_flag = gozanti_buying_market_open
-                clr_country_flag = raider_2_buying_market_open
-            }
-            raider_2_click = {
-                set_country_flag = raider_2_buying_market_open
-                clr_country_flag = IPV_buying_market_open
-                clr_country_flag = gozanti_buying_market_open
-                clr_country_flag = raider_buying_market_open
+            lancer_click = {
+                set_country_flag = lancer_buying_market_open
             }
         }
         triggers = {
-            IPV_click_enabled = {
+            lancer_click_enabled = {
                 NOT = {
-                    has_country_flag = IPV_buying_market_open
-                }
-            }
-            gozanti_click_enabled = {
-                NOT = {
-                    has_country_flag = gozanti_buying_market_open
-                }
-            }
-            raider_click_enabled = {
-                NOT = {
-                    has_country_flag = raider_buying_market_open
-                }
-            }
-            raider_2_click_enabled = {
-                NOT = {
-                    has_country_flag = raider_2_buying_market_open
+                    has_country_flag = lancer_buying_market_open
                 }
             }
         }
@@ -619,14 +810,66 @@ scripted_gui = {
             has_country_flag = imperial_market_open
         }
         effects = {
-            lancer_click = {
-                set_country_flag = lancer_buying_market_open
+            Arquitens_click = {
+                set_country_flag = arquitens_buying_market_open
+                clr_country_flag = Interdictor_buying_market_open
+                clr_country_flag = dreadnaught_buying_market_open
+                clr_country_flag = Victory_buying_market_open
+                clr_country_flag = Victory_2_buying_market_open
+            }
+            Interdictor_click = {
+                set_country_flag = interdictor_buying_market_open
+                clr_country_flag = arquitens_buying_market_open
+                clr_country_flag = dreadnaught_buying_market_open
+                clr_country_flag = Victory_buying_market_open
+                clr_country_flag = Victory_2_buying_market_open
+            }
+            Dreadnaught_click = {
+                set_country_flag = dreadnaught_buying_market_open
+                clr_country_flag = arquitens_buying_market_open
+                clr_country_flag = Interdictor_buying_market_open
+                clr_country_flag = Victory_buying_market_open
+                clr_country_flag = Victory_2_buying_market_open
+            }
+            Victory_click = {
+                set_country_flag = Victory_buying_market_open
+                clr_country_flag = arquitens_buying_market_open
+                clr_country_flag = Interdictor_buying_market_open
+                clr_country_flag = dreadnaught_buying_market_open
+                clr_country_flag = Victory_2_buying_market_open
+            }
+            Victory_2_click = {
+                set_country_flag = Victory_2_buying_market_open
+                clr_country_flag = arquitens_buying_market_open
+                clr_country_flag = Interdictor_buying_market_open
+                clr_country_flag = dreadnaught_buying_market_open
+                clr_country_flag = Victory_buying_market_open
             }
         }
         triggers = {
-            lancer_click_enabled = {
+            Arquitens_click_enabled = {
                 NOT = {
-                    has_country_flag = lancer_buying_market_open
+                    has_country_flag = arquitens_buying_market_open
+                }
+            }
+            Interdictor_click_enabled = {
+                NOT = {
+                    has_country_flag = interdictor_buying_market_open
+                }
+            }
+            Dreadnaught_click_enabled = {
+                NOT = {
+                    has_country_flag = dreadnaught_buying_market_open
+                }
+            }
+            Victory_click_enabled = {
+                NOT = {
+                    has_country_flag = Victory_buying_market_open
+                }
+            }
+            Victory_2_click_enabled = {
+                NOT = {
+                    has_country_flag = Victory_2_buying_market_open
                 }
             }
         }
