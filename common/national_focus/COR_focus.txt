@@ -1,0 +1,1648 @@
+# Corellian Focus Tree
+# Made by Garion132
+
+focus_tree = {
+	id = COR_focus
+	
+	country = {
+		factor = 0
+		
+		modifier = {
+			add = 10
+			tag = COR
+		}
+	}
+	default = no
+	continuous_focus_position = { x = 2200 y = 1000 }
+	##Open politics
+	#Imperial leaning
+	focus = {
+		id = COR_imperial_fortress_world
+		icon = GFX_WIP_focus
+		cost = 5
+		x = 7
+		y = 0
+		available = {
+			NOT={has_idea = emp_influence_1 }
+		}
+		completion_reward = {
+			add_political_power = 50
+			add_popularity = {
+				ideology = imperial
+				popularity = 0.05
+			}
+		}
+		allow_branch={
+			NOT={has_country_flag = COR_Pitta}
+			NOT={has_country_flag = COR_NR_member}
+			NOT={has_country_flag = COR_neutral}
+		}
+
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = COR_imperial_reneforcments
+		icon = GFX_WIP_focus
+		cost = 5
+		x = 0
+		y = 1
+		relative_position_id = COR_imperial_fortress_world
+		prerequisite = {
+			focus = COR_imperial_fortress_world
+		}
+		available = {
+			NOT={has_idea = emp_influence_1 }
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			country_event = COR.1
+			custom_effect_tooltip = COR_imperial_reneforcments_tt
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = COR_crack_down_on_rebels
+		icon = GFX_WIP_focus
+		cost = 5
+		x = 2
+		y = 1
+		relative_position_id = COR_imperial_reneforcments
+		prerequisite = {
+			focus = COR_imperial_reneforcments
+		}
+		available = {
+			NOT={has_idea = emp_influence_1 }
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			COR_reduce_resistance = yes
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = COR_warlordism
+		icon = GFX_WIP_focus
+		cost = 5
+		x = 0
+		y = 1
+		relative_position_id = COR_imperial_reneforcments
+		prerequisite = {
+			focus = COR_imperial_reneforcments
+		}
+		available = {
+			NOT={has_idea = emp_influence_1 }
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = COR_pittas_play
+		icon = GFX_WIP_focus
+		cost = 5
+		x = 0
+		y = 2
+		relative_position_id = COR_warlordism
+		prerequisite = {
+			focus = COR_warlordism
+		}
+		available = {
+			NOT={has_idea = emp_influence_1 }
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			country_event = COR.4
+			custom_effect_tooltip = COR_Danetta_Pitta_warlord_tt
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = COR_the_Sal_Solo_coup
+		icon = GFX_WIP_focus
+		cost = 5
+		x = -2
+		y = 2
+		relative_position_id = COR_warlordism
+		prerequisite = {
+			focus = COR_warlordism
+		}
+		available = {
+			NOT={has_idea = emp_influence_1 }
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	#new republlic leaning
+	focus = {
+		id = COR_home_of_the_rebellion
+		icon = GFX_WIP_focus
+		cost = 5
+		x = 1
+		y = 0
+		prerequisite = {
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			add_popularity = {
+				ideology = democratic
+				popularity = 0.05
+			}
+		}
+		allow_branch={
+			NOT={has_country_flag = COR_Pitta}
+			NOT={has_country_flag = COR_NR_leaning}
+			#NOT={has_country_flag = COR_neutral}
+		}
+
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = COR_weaning_corellia_from_empire
+		icon = GFX_WIP_focus
+		cost = 5
+		x = 0
+		y = 1
+		relative_position_id = COR_home_of_the_rebellion
+		prerequisite = {
+			focus = COR_home_of_the_rebellion
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			add_political_power = -50
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = COR_republicans_in_CorSec
+		icon = GFX_WIP_focus
+		cost = 5
+		x = 2
+		y = 1
+		relative_position_id = COR_weaning_corellia_from_empire
+		prerequisite = {
+			focus = COR_weaning_corellia_from_empire
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+			focus = COR_investigate_CorSec
+		}
+		available = {
+			NOT={
+				has_completed_focus = COR_public_safety_service
+			}
+		}
+		completion_reward = {
+			add_popularity = {
+				ideology = democratic
+				popularity = 0.05
+			}
+			custom_effect_tooltip = republicans_in_CorSec_tt
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = COR_plea_for_NR_aid
+		icon = GFX_WIP_focus
+		cost = 5
+		x = -2
+		y = 1
+		relative_position_id = COR_violent_force
+		prerequisite = {
+			focus = COR_violent_force
+		}
+		search_filters = {
+		}
+		available = {
+			NOT={has_idea = emp_influence_3}
+			OR={
+				AND={
+					NOT={has_idea = emp_influence_2}
+					has_idea = reb_influence_2
+				}
+				has_idea = reb_influence_3
+				has_idea = emp_influence_1
+			}
+		}
+		completion_reward = {
+			REB={
+				country_event = COR.2
+			}
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = COR_rally_the_radicals
+		icon = GFX_WIP_focus
+		cost = 5
+		x = 0
+		y = 1
+		relative_position_id = COR_violent_force
+		prerequisite = {
+			focus = COR_violent_force
+		}
+		search_filters = {
+		}
+		available = {
+			
+		}
+		completion_reward = {
+			
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = COR_smuggle_in_equipment
+		icon = GFX_WIP_focus
+		cost = 5
+		x = 2
+		y = 1
+		relative_position_id = COR_violent_force
+		prerequisite = {
+			focus = COR_violent_force
+			focus = COR_the_long_play
+		}
+		search_filters = {
+		}
+		available = {
+			
+		}
+		completion_reward = {
+			
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = COR_rally_the_people
+		icon = GFX_WIP_focus
+		cost = 5
+		x = -2
+		y = 1
+		relative_position_id = COR_weaning_corellia_from_empire
+		prerequisite = {
+			focus = COR_weaning_corellia_from_empire
+		}
+		search_filters = {
+		}
+		available = {
+			
+		}
+		completion_reward = {
+			add_stability = 0.05
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = COR_path_of_our_rebellion
+		icon = GFX_WIP_focus
+		cost = 5
+		x = 0
+		y = 1
+		relative_position_id = COR_weaning_corellia_from_empire
+		prerequisite = {
+			focus = COR_weaning_corellia_from_empire
+		}
+		search_filters = {
+		}
+		available = {
+			
+		}
+		completion_reward = {
+			
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = COR_violent_force
+		icon = GFX_WIP_focus
+		cost = 5
+		x = -2
+		y = 1
+		relative_position_id = COR_path_of_our_rebellion
+		prerequisite = {
+			focus = COR_path_of_our_rebellion
+		}
+		search_filters = {
+		}
+		available = {
+			
+		}
+		completion_reward = {
+			
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = COR_the_long_play
+		icon = GFX_WIP_focus
+		cost = 5
+		x = 2
+		y = 1
+		relative_position_id = COR_path_of_our_rebellion
+		prerequisite = {
+			focus = COR_path_of_our_rebellion
+		}
+		search_filters = {
+		}
+		available = {
+			
+		}
+		completion_reward = {
+			
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = COR_aid_the_poor
+		icon = GFX_WIP_focus
+		cost = 5
+		x = 0
+		y = 1
+		relative_position_id = COR_the_long_play
+		prerequisite = {
+			focus = COR_the_long_play
+		}
+		search_filters = {
+		}
+		available = {
+			
+		}
+		completion_reward = {
+			
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+
+	#pragmatic_tree
+	focus = {
+		id = COR_investigate_CorSec
+		icon = GFX_WIP_focus
+		cost = 5
+		x = -2
+		y = 1
+		relative_position_id = COR_imperial_reneforcments
+		prerequisite = {
+			focus = COR_imperial_reneforcments
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+			focus = COR_republicans_in_CorSec
+		}
+		available = {
+			NOT={
+				has_completed_focus = COR_public_safety_service
+			}
+		}
+		completion_reward = {
+			add_popularity = {
+				ideology = democratic
+				popularity = -0.05
+			}
+			custom_effect_tooltip = republicans_lost_in_CorSec_tt
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	##Danetta Pitta Warlord Tree
+	focus = {
+		id = COR_warlord_of_corellia
+		icon = GFX_COR_warlord_pitta
+		cost = 5
+		x = 4
+		y = 0
+		#relative_position_id = COR_pittas_play
+		#prerequisite = {
+		#	focus = COR_pittas_play
+		#}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			add_political_power = 50
+		}
+		allow_branch={
+			OR={
+				has_country_flag = COR_Pitta
+				#has_country_leader = {
+				#	name = "Danetta Pitta"
+				#	ruling_only = yes
+				#}
+			}
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = COR_promoting_human_high_culture
+		icon = GFX_WIP_focus
+		cost = 5
+		x = 1
+		y = 1
+		relative_position_id = COR_warlord_of_corellia
+		prerequisite = {
+			focus = COR_warlord_of_corellia
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			add_ideas = {COR_human_high_culture}
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = COR_tightining_the_grip
+		icon = GFX_WIP_focus
+		cost = 5
+		x = -1
+		y = 1
+		relative_position_id = COR_warlord_of_corellia
+		prerequisite = {
+			focus = COR_warlord_of_corellia
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			add_stability = 0.05
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = COR_wealth_of_the_outer_rim
+		icon = GFX_WIP_focus
+		cost = 5
+		x = 0
+		y = 2
+		relative_position_id = COR_warlord_of_corellia
+		prerequisite = {
+			focus = COR_warlord_of_corellia
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			custom_effect_tooltip = plus200credits_tt
+			add_to_variable = {
+				currency_amount^primary_currency = 200
+			}
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = COR_dealing_with_grunger
+		icon = GFX_WIP_focus
+		cost = 5
+		x = 0
+		y = 1
+		relative_position_id = COR_wealth_of_the_outer_rim
+		prerequisite = {
+			focus = COR_wealth_of_the_outer_rim
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = COR_two_warlords_enter_one_leaves
+		icon = GFX_WIP_focus
+		cost = 5
+		x = 0
+		y = 1
+		relative_position_id = COR_dealing_with_grunger
+		prerequisite = {
+			focus = COR_dealing_with_grunger
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			
+		}
+		available = {
+			OR={
+				has_country_leader = {
+					name = "Danetta Pitta"
+					ruling_only = yes
+				}
+				has_country_leader = {
+					name = "Josef Grunger"
+					ruling_only = yes
+				}
+			}
+			has_country_flag =  COR_Battle_of_Tralus
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = COR_bringing_in_outer_rim_support
+		icon = GFX_WIP_focus
+		cost = 5
+		x = 2
+		y = 1
+		relative_position_id = COR_two_warlords_enter_one_leaves
+		prerequisite = {
+			focus = COR_two_warlords_enter_one_leaves
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = COR_the_prison_ships_arrive
+		icon = GFX_WIP_focus
+		cost = 5
+		x = 1
+		y = 1
+		relative_position_id = COR_bringing_in_outer_rim_support
+		prerequisite = {
+			focus = COR_bringing_in_outer_rim_support
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = COR_managing_a_diconnected_empire
+		icon = GFX_WIP_focus
+		cost = 5
+		x = -1
+		y = 1
+		relative_position_id = COR_bringing_in_outer_rim_support
+		prerequisite = {
+			focus = COR_bringing_in_outer_rim_support
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			#activate outer rim management mechanic
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = COR_the_plea_of_nubian_imperials
+		icon = GFX_WIP_focus
+		cost = 5
+		x = -2
+		y = 1
+		relative_position_id = COR_two_warlords_enter_one_leaves
+		prerequisite = {
+			focus = COR_two_warlords_enter_one_leaves
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			create_wargoal = {
+				type = topple_government
+				target = NUB
+			}
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	##
+	focus = {
+		id = COR_a_founding_member_of_the_alliance
+		icon = GFX_WIP_focus
+		cost = 5
+		x = 6
+		y = 0
+		#relative_position_id = COR_pittas_play
+		#prerequisite = {
+		#	focus = COR_pittas_play
+		#}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			
+		}
+		allow_branch={
+			OR={
+				has_country_flag = COR_NR_member
+				#has_country_leader = {
+				#	name = "Danetta Pitta"
+				#	ruling_only = yes
+				#}
+			}
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = COR_picking_a_side
+		icon = GFX_WIP_focus
+		cost = 5
+		x = 0
+		y = 1
+		relative_position_id = COR_a_founding_member_of_the_alliance
+		prerequisite = {
+			focus = COR_a_founding_member_of_the_alliance
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			#event picking between populist and centrist
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = COR_establishing_the_NRMI
+		icon = GFX_WIP_focus
+		cost = 5
+		x = -1
+		y = 1
+		relative_position_id = COR_picking_a_side
+		prerequisite = {
+			focus = COR_picking_a_side
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = COR_ending_the_persucution
+		icon = GFX_WIP_focus
+		cost = 5
+		x = 1
+		y = 1
+		relative_position_id = COR_picking_a_side
+		prerequisite = {
+			focus = COR_picking_a_side
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = COR_threat_of_the_human_league
+		icon = GFX_WIP_focus
+		cost = 5
+		x = 0
+		y = 3
+		relative_position_id = COR_picking_a_side
+		prerequisite = {
+			focus = COR_picking_a_side
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = COR_the_corellian_crisis
+		icon = GFX_WIP_focus
+		cost = 5
+		x = 0
+		y = 1
+		relative_position_id = COR_threat_of_the_human_league
+		prerequisite = {
+			focus = COR_threat_of_the_human_league
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	#neutral tree
+	focus = {
+		id = COR_free_and_neutral
+		icon = GFX_WIP_focus
+		cost = 5
+		x = 6
+		y = 0
+		prerequisite = {
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			
+		}
+		allow_branch={
+			has_country_flag = COR_neutral
+		}
+
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = COR_the_will_of_the_dikat
+		icon = GFX_WIP_focus
+		cost = 5
+		x = 0
+		y = 1
+		relative_position_id = COR_free_and_neutral
+		prerequisite = {
+			focus = COR_free_and_neutral
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = COR_repluse_NR_diplomacy
+		icon = GFX_WIP_focus
+		cost = 5
+		x = -1
+		y = 1
+		relative_position_id = COR_the_will_of_the_dikat
+		prerequisite = {
+			focus = COR_the_will_of_the_dikat
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = COR_coruption_as_a_rule
+		icon = GFX_WIP_focus
+		cost = 5
+		x = 1
+		y = 1
+		relative_position_id = COR_the_will_of_the_dikat
+		prerequisite = {
+			focus = COR_the_will_of_the_dikat
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = COR_looking_inward
+		icon = GFX_WIP_focus
+		cost = 5
+		x = 0
+		y = 2
+		relative_position_id = COR_the_will_of_the_dikat
+		prerequisite = {
+			focus = COR_coruption_as_a_rule
+		}
+		prerequisite = {
+			focus = COR_repluse_NR_diplomacy
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = COR_joining_NR
+		icon = GFX_WIP_focus
+		cost = 5
+		x = 6
+		y = 10
+		prerequisite = {
+			
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	#military
+	focus = {
+		id = COR_CorSec
+		icon = GFX_WIP_focus
+		cost = 5
+		x = 18
+		y = 0
+		prerequisite = {
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			army_experience = 25
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = COR_deploy_CorSec_aganst_rebels
+		icon = GFX_WIP_focus
+		cost = 5
+		x = -1
+		y = 1
+		relative_position_id = COR_CorSec
+		prerequisite = {
+			focus = COR_CorSec
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+			focus = COR_keep_them_focused_on_criminals
+		}
+		completion_reward = {
+			COR_reduce_resistance = yes
+
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = COR_keep_them_focused_on_criminals
+		icon = GFX_WIP_focus
+		cost = 5
+		x = 1
+		y = 1
+		relative_position_id = COR_CorSec
+		prerequisite = {
+			focus = COR_CorSec
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+			focus = COR_deploy_CorSec_aganst_rebels
+		}
+		completion_reward = {
+			
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = COR_modernise_CorSec
+		icon = GFX_WIP_focus
+		cost = 5
+		x = 19
+		y = 5
+		prerequisite = {
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+			focus = COR_public_safety_service
+		}
+		completion_reward = {
+			
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = COR_public_safety_service
+		icon = GFX_WIP_focus
+		cost = 5
+		x = 17
+		y = 5
+		prerequisite = {
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+				focus = COR_modernise_CorSec
+		}
+		completion_reward = {
+			
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	#naval/air
+	focus = {
+		id = COR_CEC
+		icon = GFX_WIP_focus
+		cost = 5
+		x = 13
+		y = 0
+		prerequisite = {
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			navy_experience = 25
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = COR_fighters
+		icon = GFX_WIP_focus
+		cost = 5
+		x = -2
+		y = 1
+		relative_position_id = COR_CEC
+		prerequisite = {
+			focus = COR_CEC
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			add_tech_bonus = {
+				name = ae_ship_support_tech
+				bonus = 1
+				uses = 1
+				category = light_air
+			}
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = COR_militarise_VCX_series
+		icon = GFX_WIP_focus
+		cost = 5
+		x = 0
+		y = 1
+		relative_position_id = COR_fighters
+		prerequisite = {
+			focus = COR_fighters
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = COR_skim_profits_from_CEC
+		icon = GFX_WIP_focus
+		cost = 5
+		x = 0
+		y = 1
+		relative_position_id = COR_CEC
+		prerequisite = {
+			focus = COR_CEC
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			custom_effect_tooltip = plus50credits_tt
+			add_to_variable = {
+				currency_amount^primary_currency = 50
+			}
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = COR_starships
+		icon = GFX_WIP_focus
+		cost = 5
+		x = 2
+		y = 1
+		relative_position_id = COR_CEC
+		prerequisite = {
+			focus = COR_CEC
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			add_tech_bonus = {
+				name = ae_ship_tech
+				bonus = 1
+				uses = 1
+				category = naval_equipment
+			}
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = COR_expand_CEC_shipyards
+		icon = GFX_WIP_focus
+		cost = 5
+		x = 0
+		y = 1
+		relative_position_id = COR_starships
+		prerequisite = {
+			focus = COR_starships
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			455={
+				add_building_construction = {
+					type = dockyard
+					level = 1
+					instant_build = yes
+				}
+				add_extra_state_shared_building_slots = 1
+			}
+			318={
+				add_building_construction = {
+					type = dockyard
+					level = 1
+					instant_build = yes
+				}
+				add_extra_state_shared_building_slots = 1
+			}
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = COR_fully_nationalise_CEC
+		icon = GFX_WIP_focus
+		cost = 5
+		x = 13
+		y = 5
+		prerequisite = {
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = COR_develop_corellian_dreadnaught
+		icon = GFX_WIP_focus
+		cost = 5
+		x = 13
+		y = 6
+		prerequisite = {
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	#economic
+	focus = {
+		id = COR_dealing_with_the_economic_collapse
+		icon = GFX_WIP_focus
+		cost = 10
+		x = 24
+		y = 0
+		prerequisite = {
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = economic_collapse_emp_1
+				add_idea = economic_collapse_emp_2
+			}
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = COR_drawing_on_the_CEC
+		icon = GFX_WIP_focus
+		cost = 5
+		x = 1
+		y = 1
+		relative_position_id = COR_dealing_with_the_economic_collapse
+		prerequisite = {
+			focus = COR_dealing_with_the_economic_collapse
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			CEC={
+				add_opinion_modifier = {
+					target = COR
+					modifier = protest_action
+				}
+				add_timed_idea = {
+					idea = COR_CEC_emergency_taxes
+					days = 200
+				}
+				
+			}
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = COR_leveraging_the_corellian_run
+		icon = GFX_WIP_focus
+		cost = 5
+		x = -1
+		y = 1
+		relative_position_id = COR_dealing_with_the_economic_collapse
+		prerequisite = {
+			focus = COR_dealing_with_the_economic_collapse
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			add_timed_idea = {
+				idea = COR_overleaveraged_corellian_run
+				days = 150
+			}
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = COR_begin_the_economic_recovery
+		icon = GFX_WIP_focus
+		cost = 10
+		x = 1
+		y = 1
+		relative_position_id = COR_leveraging_the_corellian_run
+		prerequisite = {
+			focus = COR_leveraging_the_corellian_run
+		}
+		prerequisite = {
+			focus = COR_drawing_on_the_CEC
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = economic_collapse_emp_2
+				add_idea = economic_collapse_emp_3
+			}
+		}
+		available = {
+			has_damaged_buildings = no
+		}
+
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = COR_propaganda_in_labor_valley
+		icon = GFX_WIP_focus
+		cost = 5
+		x = 2
+		y = 1
+		relative_position_id = COR_begin_the_economic_recovery
+		prerequisite = {
+			focus = COR_begin_the_economic_recovery
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		available = {
+			324={
+				non_damaged_building_level = {
+					building = arms_factory
+					level > 3
+				}
+				non_damaged_building_level = {
+					building = industrial_complex
+					level > 3
+				}
+			}
+		}
+		completion_reward = {
+			324={
+				set_state_flag = COR_economic_recovery_propaganda
+			}
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = COR_workers_rewards
+		icon = GFX_WIP_focus
+		cost = 5
+		x = 0
+		y = 1
+		relative_position_id = COR_propaganda_in_labor_valley
+		prerequisite = {
+			focus = COR_propaganda_in_labor_valley
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = has_20credits_tt
+				check_variable = {
+					currency_amount^primary_currency = 20
+					compare = greater_than_or_equals
+				}
+			}
+		}
+		completion_reward = {
+			custom_effect_tooltip = minus20credits_tt
+			subtract_from_variable = {
+				currency_amount^primary_currency = 20
+			}
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = COR_sprucing_up_the_capital
+		icon = GFX_WIP_focus
+		cost = 5
+		x = 0
+		y = 1
+		relative_position_id = COR_begin_the_economic_recovery
+		prerequisite = {
+			focus = COR_begin_the_economic_recovery
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = has_10credits_tt
+				check_variable = {
+					currency_amount^primary_currency = 10
+					compare = greater_than_or_equals
+				}
+			}
+			455={
+				non_damaged_building_level = {
+					building = industrial_complex
+					level > 3
+				}
+			}
+		}
+		completion_reward = {
+			custom_effect_tooltip = minus10credits_tt
+			subtract_from_variable = {
+				currency_amount^primary_currency = 10
+			}
+			455={
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = COR_inter_system_trade
+		icon = GFX_WIP_focus
+		cost = 5
+		x = -2
+		y = 1
+		relative_position_id = COR_begin_the_economic_recovery
+		prerequisite = {
+			focus = COR_begin_the_economic_recovery
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		available = {
+			
+		}
+		completion_reward = {
+			add_ideas = {COR_CEC_inter_system_trade}
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = COR_helping_those_who_help_us
+		icon = GFX_WIP_focus
+		cost = 5
+		x = 0
+		y = 1
+		relative_position_id = COR_inter_system_trade
+		prerequisite = {
+			focus = COR_inter_system_trade
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = has_20credits_tt
+				check_variable = {
+					currency_amount^primary_currency = 20
+					compare = greater_than_or_equals
+				}
+			}
+		}
+		completion_reward = {
+			custom_effect_tooltip = minus20credits_tt
+			subtract_from_variable = {
+				currency_amount^primary_currency = 20
+			}
+			#improves the opinion of the other corellian planets
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = COR_revitalise_the_economy
+		icon = GFX_WIP_focus
+		cost = 5
+		x = 0
+		y = 2
+		relative_position_id = COR_sprucing_up_the_capital
+		prerequisite = {
+			focus = COR_workers_rewards
+		}
+		prerequisite = {
+			focus = COR_helping_those_who_help_us
+		}
+		prerequisite = {
+			focus = COR_sprucing_up_the_capital
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		available = {
+			
+		}
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = economic_collapse_emp_3
+				add_idea = economic_collapse_emp_4
+			}
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+
+}
