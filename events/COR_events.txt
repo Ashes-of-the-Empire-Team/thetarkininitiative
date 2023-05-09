@@ -36,6 +36,7 @@ country_event = {
 				ideology = imperial_ideology
 			}
 		}
+		COR_reduce_resistance = yes
     }
 }
 country_event = {
@@ -92,9 +93,24 @@ country_event = {
 				}
 			}
 		}
-		set_cosmetic_tag = COR_pitta
-		set_country_flag = COR_Pitta
-		mark_focus_tree_layout_dirty = yes
+		hidden_effect={
+			EMP={
+				if={
+					limit={
+						has_subject = ROOT
+					}
+					set_autonomy = {
+						target = ROOT
+						autonomy_state = autonomy_free
+						end_wars = no
+						end_civil_wars = no
+					}
+				}
+			}
+			set_cosmetic_tag = COR_pitta
+			set_country_flag = COR_Pitta
+			mark_focus_tree_layout_dirty = yes
+		}
     }
 }
 country_event = {#whispers of grungers ambition
@@ -143,6 +159,19 @@ country_event = {#Grunger arrives in the corellian system
 			set_cosmetic_tag = COR_grunger
 			set_country_flag = COR_grunger
 			mark_focus_tree_layout_dirty = yes
+			EMP={
+				if={
+					limit={
+						has_subject = ROOT
+					}
+					set_autonomy = {
+						target = ROOT
+						autonomy_state = autonomy_free
+						end_wars = no
+						end_civil_wars = no
+					}
+				}
+			}
 		}
     }
 	option = {#Resist
@@ -218,6 +247,12 @@ country_event = {#Call for elections
     fire_only_once = yes
     option = {#give in
         name = COR.8.a
+		remove_ideas = {
+			COR_corellian_resistance
+			COR_corellian_resistance_2
+			COR_corellian_resistance_3
+			COR_corellian_resistance_4
+		}
 		set_politics = {
 			ruling_party = democratic
 		}
@@ -289,6 +324,10 @@ country_event = {#EMP | Corellian Demands
 					navy_ratio = 0.75
 					air_ratio = 0.0
 				}
+				delete_unit_template_and_units = {
+					division_template = "Stormtrooper Legion"
+					disband = no #will refund equipment and manpower
+				}
 			}
 		}
 		if={
@@ -315,6 +354,10 @@ country_event = {#EMP | Corellian Demands
 					navy_ratio = 0.5
 					air_ratio = 0.0
 				}
+				delete_unit_template_and_units = {
+					division_template = "Stormtrooper Legion"
+					disband = no #will refund equipment and manpower
+				}
 			}
 		}
 		if={
@@ -333,5 +376,29 @@ country_event = {#EMP | Corellian Demands
 			type = puppet_wargoal_focus
 		}
 		custom_effect_tooltip = COR.10.b_tt
+    }
+}
+country_event = {#Unrest across corellia
+    id = COR.11
+    title = COR.11.t
+    desc = COR.11.d
+    picture = GFX_report_event_election_vote
+    is_triggered_only = yes
+    fire_only_once = yes
+    option = {#give in
+        name = COR.11.a
+		add_stability = -0.075
+    }
+}
+country_event = {#
+    id = COR.12
+    title = COR.12.t
+    desc = COR.12.d
+    picture = GFX_report_event_election_vote
+    is_triggered_only = yes
+    fire_only_once = yes
+    option = {#give in
+        name = COR.12.a
+		
     }
 }
