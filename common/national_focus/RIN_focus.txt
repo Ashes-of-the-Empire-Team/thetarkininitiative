@@ -11,11 +11,11 @@ focus_tree = {
 
 
 focus = {
-	id = RIN_emperors_death
+	id = RIN_the_emperors_dead
 	icon = GFX_WIP_focus
 	cost = 2
-	x = 10
-	y = 1
+	x = 0
+	y = -1
 	ai_will_do = {
 		factor = 1
 	}
@@ -37,7 +37,7 @@ focus = {
 	add_stability = .20
 	}
 	relative_position_id = RIN_emperors_death
-	prerequisite = { focus = RIN_emperors_death }
+	prerequisite = { focus = RIN_the_emperors_dead }
 }
 
 focus = {
@@ -50,33 +50,8 @@ focus = {
 		factor = 1
 	}
 	completion_reward = {
-		413 = {
-			create_unit = {
-				division = "division_template = \"Imperial Millitia\" start_experience_factor = 0.23" 
-				owner = RIN
-			}
-			create_unit = {
-				division = "division_template = \"Imperial Millitia\" start_experience_factor = 0.29" 
-				owner = RIN
-			}
-			create_unit = {
-				division = "division_template = \"Imperial Millitia\" start_experience_factor = 0.26" 
-				owner = RIN
-			}
-			create_unit = {
-				division = "division_template = \"Imperial Millitia\" start_experience_factor = 0.23" 
-				owner = RIN
-			}
-			create_unit = {
-				division = "division_template = \"Imperial Millitia\" start_experience_factor = 0.29" 
-				owner = RIN
-			}
-			create_unit = {
-				division = "division_template = \"Imperial Millitia\" start_experience_factor = 0.26" 
-				owner = RIN
-		}
+		add_ideas = RIN_fotress_world
 	}
-}
 	relative_position_id = RIN_keeping_it_a_secret
 	prerequisite = { focus = RIN_keeping_it_a_secret }
 }
@@ -337,7 +312,13 @@ focus = {
 		factor = 1
 	}
 	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus RIN_repurposed_dormant_factories"
+		98 ={
+		add_building_construction = {
+			type = arms_factory
+			level = 2
+			instant_build = yes
+			}
+		}
 	}
 	relative_position_id = RIN_fortress_world
 	prerequisite = { focus = RIN_fortress_world }
@@ -353,7 +334,34 @@ focus = {
 		factor = 1
 	}
 	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus RIN_planetary_defenses"
+		RIN = {
+		413 = {
+			create_unit = {
+				division = "division_template = \"Imperial Millitia\" start_experience_factor = 0.23" 
+				owner = RIN
+			}
+			create_unit = {
+				division = "division_template = \"Imperial Millitia\" start_experience_factor = 0.29" 
+				owner = RIN
+			}
+			create_unit = {
+				division = "division_template = \"Imperial Millitia\" start_experience_factor = 0.26" 
+				owner = RIN
+			}
+			create_unit = {
+				division = "division_template = \"Imperial Millitia\" start_experience_factor = 0.23" 
+				owner = RIN
+			}
+			create_unit = {
+				division = "division_template = \"Imperial Millitia\" start_experience_factor = 0.29" 
+				owner = RIN
+			}
+			create_unit = {
+				division = "division_template = \"Imperial Millitia\" start_experience_factor = 0.26" 
+				owner = RIN
+			}
+		}
+	}
 	}
 	relative_position_id = RIN_fortress_world
 	prerequisite = { focus = RIN_fortress_world }
@@ -389,6 +397,13 @@ focus = {
 		factor = 1
 	}
 	completion_reward = {
+		hiden_effect {release = PAN}
+		set_autonomy = {
+			target = PAN
+			autonomy_state = autonomy_imperial_sector
+			end_wars = yes
+			end_civil_wars = yes
+		}
 		
 	}
 	relative_position_id = RIN_repurposed_dormant_factories
@@ -401,13 +416,40 @@ focus = {
 	id = RIN_imperials_on_alzoc_iii
 	icon = GFX_WIP_focus
 	cost = 2
-	x = -1
+	x = -3
 	y = 1
 	ai_will_do = {
 		factor = 1
 	}
 	completion_reward = {
-		
+		RIN = {
+		transfer_state = 109
+		109 = {
+		create_unit = {
+			division = "division_template = \"Stormtrooper Regiment\" start_experience_factor = 0.23" 
+			owner = RIN
+		}
+		create_unit = {
+			division = "division_template = \"Stormtrooper Regiment\" start_experience_factor = 0.29" 
+			owner = RIN
+		}
+		}	
+	}
+	}
+	relative_position_id = RIN_reining_in_the_sujimis_sector
+	prerequisite = { focus = RIN_reining_in_the_sujimis_sector }
+}
+focus = {
+	id = RIN_retake_the_mines
+	icon = GFX_WIP_focus
+	cost = 2
+	x = -3
+	y = 2.5
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		declare_war_on = { target = ALZ    type = annex_everything }
 	}
 	relative_position_id = RIN_reining_in_the_sujimis_sector
 	prerequisite = { focus = RIN_reining_in_the_sujimis_sector }
@@ -423,7 +465,14 @@ focus = {
 		factor = 1
 	}
 	completion_reward = {
-		
+		create_wargoal = {
+			type = annex_everything
+			target = LOK
+		}
+		create_wargoal = {
+			type = annex_everything
+			target = KAR
+		}
 	}
 	relative_position_id = RIN_reining_in_the_sujimis_sector
 	prerequisite = { focus = RIN_reining_in_the_sujimis_sector }
@@ -434,12 +483,23 @@ focus = {
 	icon = GFX_WIP_focus
 	cost = 2
 	x = -1
-	y = 1
+	y = 2
 	ai_will_do = {
 		factor = 1
 	}
 	completion_reward = {
-		
+		create_wargoal = {
+			type = puppet_wargoal_focus
+			target = NAB
+		}
+		create_wargoal = {
+			type = puppet_wargoal_focus
+			target = GUN
+		}
+		hidden_effect = {
+			NAB = {give_guarantee = GUN}
+			GUN = {give_guarantee = NAB}
+		}
 	}
 	relative_position_id = RIN_war_on_consortium
 	prerequisite = { focus = RIN_war_on_consortium }
@@ -447,7 +507,7 @@ focus = {
 }
 
 focus = {
-	id = RIN_gungans_ensure_order
+	id = RIN_the_queen_will_ensure_order
 	icon = GFX_WIP_focus
 	cost = 2
 	x = -2
@@ -455,8 +515,37 @@ focus = {
 	ai_will_do = {
 		factor = 1
 	}
+	available = {
+		RIN = {
+			owns_state = 463
+			owns_state = 410
+			owns_state = 97
+			owns_state = 412
+			owns_state = 464
+			owns_state = 416
+			owns_state = 462
+			owns_state = 461
+		}
+		NAB = {has_capitulated = yes}
+		GUN = {has_capitulated = yes}
+	}
 	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus RIN_gungans_ensure_order"
+		set_autonomy = {
+			target = NAB
+			autonomy_state = autonomy_imperial_sector
+			end_wars = yes
+			end_civil_wars = yes
+		}
+		hidden_effect = {	
+		NAB = {
+			transfer_state = 461
+			transfer_state = 464
+			transfer_state = 463
+			add_state_core = 461
+			add_state_core = 464
+			add_state_core = 463
+		}
+	}
 	}
 	relative_position_id = RIN_expanding_the_sector
 	prerequisite = { focus = RIN_expanding_the_sector }
@@ -473,7 +562,14 @@ focus = {
 		factor = 1
 	}
 	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus RIN_we_will_ensure_order"
+		463 = {add_compliance = 30}
+		410 = {add_compliance = 30}
+		97 = {add_compliance = 30}
+		412 = {add_compliance = 30}
+		464 = {add_compliance = 30}
+		416 = {add_compliance = 30}
+		462 = {add_compliance = 30}
+		461 = {add_compliance = 30}
 	}
 	relative_position_id = RIN_expanding_the_sector
 	prerequisite = { focus = RIN_expanding_the_sector }
@@ -484,13 +580,16 @@ focus = {
 	id = RIN_invasion_of_falleen
 	icon = GFX_WIP_focus
 	cost = 2
-	x = -3
+	x = -5
 	y = 1
 	ai_will_do = {
 		factor = 1
 	}
 	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus RIN_invasion_of_falleen"
+		create_wargoal = {
+			type = puppet_wargoal_focus
+			target = FAL
+		}
 	}
 	relative_position_id = RIN_reining_in_the_sujimis_sector
 	prerequisite = { focus = RIN_reining_in_the_sujimis_sector }
