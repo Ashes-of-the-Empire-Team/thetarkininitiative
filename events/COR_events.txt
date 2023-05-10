@@ -36,6 +36,7 @@ country_event = {
 				ideology = imperial_ideology
 			}
 		}
+		COR_reduce_resistance = yes
     }
 }
 country_event = {
@@ -51,7 +52,9 @@ country_event = {
     }
 	option = {
         name = COR.2.b
-		
+		COR={
+			add_to_variable = { COR_rebel_stockpile = 5}
+		}
     }
 	option = {
         name = COR.2.c
@@ -90,9 +93,24 @@ country_event = {
 				}
 			}
 		}
-		set_cosmetic_tag = COR_pitta
-		set_country_flag = COR_Pitta
-		mark_focus_tree_layout_dirty = yes
+		hidden_effect={
+			EMP={
+				if={
+					limit={
+						has_subject = ROOT
+					}
+					set_autonomy = {
+						target = ROOT
+						autonomy_state = autonomy_free
+						end_wars = no
+						end_civil_wars = no
+					}
+				}
+			}
+			set_cosmetic_tag = COR_pitta
+			set_country_flag = COR_Pitta
+			mark_focus_tree_layout_dirty = yes
+		}
     }
 }
 country_event = {#whispers of grungers ambition
@@ -111,5 +129,276 @@ country_event = {#whispers of grungers ambition
 		hidden_effect={
 			country_event = {id = COR.6 days = 200 random = 80}
 		}
+    }
+}
+country_event = {#Grunger arrives in the corellian system
+    id = COR.6
+    title = COR.6.t
+    desc = COR.6.d
+    picture = GFX_report_event_election_vote
+    is_triggered_only = yes
+    fire_only_once = yes
+    option = {#Surrender
+        name = COR.6.a
+		trigger={
+			NOT={has_country_flag = COR_pitta}
+		}
+		custom_effect_tooltip = COR6_surrender_tt
+		hidden_effect={
+			COR_Josef_Grunger={
+				add_country_leader_role = {
+					promote_leader = yes
+					country_leader = {
+						ideology = imperial_ideology
+						expire = "1965.1.1.1"
+						traits = { moff }
+						desc=COR_Josef_Grunger_desc
+					}
+				}
+			}
+			set_cosmetic_tag = COR_grunger
+			set_country_flag = COR_grunger
+			mark_focus_tree_layout_dirty = yes
+			EMP={
+				if={
+					limit={
+						has_subject = ROOT
+					}
+					set_autonomy = {
+						target = ROOT
+						autonomy_state = autonomy_free
+						end_wars = no
+						end_civil_wars = no
+					}
+				}
+			}
+		}
+    }
+	option = {#Resist
+        name = COR.6.b
+		trigger={
+			NOT={has_country_flag = COR_pitta}
+		}
+    }
+	option = {#from my cold, dead hands
+        name = COR.6.c
+		trigger={
+			has_country_flag = COR_pitta
+		}
+		country_event = {id = COR.7 days = 1}#battle of tralus
+    }
+}
+country_event = {#Battle of Tralus
+    id = COR.7
+    title = COR.7.t
+    desc = COR.7.d
+    picture = GFX_report_event_election_vote
+    is_triggered_only = yes
+    fire_only_once = yes
+    option = {
+        name = COR.7.a
+		custom_effect_tooltip = COR7_tralus_battle_tt
+		hidden_effect={
+			destroy_ships = {
+				type = isd_hull
+				count = all
+			}
+			clr_country_flag = COR_pitta
+			set_country_flag = COR_Battle_of_Tralus
+			set_country_flag = COR_neutral
+			retire_character = COR_Danetta_Pitta
+			retire_character = COR_Admiral_Jaeffis
+			retire_character = COR_Admiral_Roek
+			mark_focus_tree_layout_dirty = yes
+			drop_cosmetic_tag = yes
+			add_popularity = {
+				ideology = imperial
+				popularity = -0.5
+			}
+			add_popularity = {
+				ideology = neutrality
+				popularity = 0.25
+			}
+			add_popularity = {
+				ideology = democratic
+				popularity = 0.25
+			}
+			set_politics = {
+				ruling_party = neutrality
+			}
+			add_stability = 0.2
+		}
+    }
+	option = {
+        name = COR.7.b
+		destroy_ships = {
+			type = isd_hull
+			count = 8 #19
+		}
+		set_country_flag = COR_Battle_of_Tralus
+    }
+}
+country_event = {#Call for elections
+    id = COR.8
+    title = COR.8.t
+    desc = COR.8.d
+    picture = GFX_report_event_election_vote
+    is_triggered_only = yes
+    fire_only_once = yes
+    option = {#give in
+        name = COR.8.a
+		remove_ideas = {
+			COR_corellian_resistance
+			COR_corellian_resistance_2
+			COR_corellian_resistance_3
+			COR_corellian_resistance_4
+		}
+		set_politics = {
+			ruling_party = democratic
+		}
+    }
+}
+country_event = {#Sal-Solo Coup
+    id = COR.9
+    title = COR.9.t
+    desc = COR.9.d
+    picture = GFX_report_event_election_vote
+    is_triggered_only = yes
+    fire_only_once = yes
+    option = {#give in
+        name = COR.9.a
+		if={
+			limit={
+				OR={
+					has_country_leader = {
+						name = "Admiral Jaeffis"
+						ruling_only = yes
+					}
+					has_country_leader = {
+						name = "Admiral Roek"
+						ruling_only = yes
+					}
+				}
+				EMP = {
+					controls = 235
+				}
+			}
+			EMP = { country_event = {id = COR.10}}
+		}
+		add_popularity = {
+			ideology = neutrality
+			popularity = 0.15
+		}
+		set_politics = {
+			ruling_party = neutrality
+		}
+		COR_Thrackan_Sal_Solo = {
+			add_country_leader_role = {
+				promote_leader = yes
+				country_leader = {
+					ideology = neutrality
+					expire = "1965.1.1.1"
+					traits = {  } #dikat
+					desc=COR_Thrackan_Sal_Solo_desc
+				}
+			}
+		}
+		set_country_flag = COR_sal_solo
+		mark_focus_tree_layout_dirty = yes
+    }
+}
+country_event = {#EMP | Corellian Demands
+    id = COR.10
+    title = COR.10.t
+    desc = COR.10.d
+    picture = GFX_report_event_election_vote
+    is_triggered_only = yes
+    option = {#Agree
+        name = COR.10.a
+		hidden_effect={
+			FROM={#Half the fleet stays loyal
+				transfer_units_fraction= {
+					target = ROOT
+					stockpile_ratio = 0.0
+					army_ratio = 0.0
+					navy_ratio = 0.75
+					air_ratio = 0.0
+				}
+				delete_unit_template_and_units = {
+					division_template = "Stormtrooper Legion"
+					disband = no #will refund equipment and manpower
+				}
+			}
+		}
+		if={
+			limit={
+				has_subject = FROM
+			}
+			set_autonomy = {
+				target = FROM
+				autonomy_state = autonomy_free
+				end_wars = no
+				end_civil_wars = no
+			}
+		}
+		custom_effect_tooltip = COR.10.a_tt
+    }
+	option = {#Enforce our will
+        name = COR.10.b
+		hidden_effect={
+			FROM={#Half the fleet stays loyal
+				transfer_units_fraction= {
+					target = ROOT
+					stockpile_ratio = 0.0
+					army_ratio = 0.0
+					navy_ratio = 0.5
+					air_ratio = 0.0
+				}
+				delete_unit_template_and_units = {
+					division_template = "Stormtrooper Legion"
+					disband = no #will refund equipment and manpower
+				}
+			}
+		}
+		if={
+			limit={
+				has_subject = FROM
+			}
+			set_autonomy = {
+				target = FROM
+				autonomy_state = autonomy_free
+				end_wars = no
+				end_civil_wars = no
+			}
+		}
+		declare_war_on = {
+			target = FROM
+			type = puppet_wargoal_focus
+		}
+		custom_effect_tooltip = COR.10.b_tt
+    }
+}
+country_event = {#Unrest across corellia
+    id = COR.11
+    title = COR.11.t
+    desc = COR.11.d
+    picture = GFX_report_event_election_vote
+    is_triggered_only = yes
+    fire_only_once = yes
+    option = {#give in
+        name = COR.11.a
+		add_stability = -0.075
+    }
+}
+country_event = {#
+    id = COR.12
+    title = COR.12.t
+    desc = COR.12.d
+    picture = GFX_report_event_election_vote
+    is_triggered_only = yes
+    fire_only_once = yes
+    option = {#give in
+        name = COR.12.a
+		
     }
 }

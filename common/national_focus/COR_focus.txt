@@ -36,6 +36,9 @@ focus_tree = {
 			NOT={has_country_flag = COR_Pitta}
 			NOT={has_country_flag = COR_NR_member}
 			NOT={has_country_flag = COR_neutral}
+			NOT={has_country_flag = COR_Grunger}
+			NOT={has_country_flag = COR_Battle_of_Tralus}
+			NOT={has_country_flag = COR_sal_solo}
 		}
 
 
@@ -134,7 +137,8 @@ focus_tree = {
 		}
 		search_filters = {
 		}
-		mutually_exclusive = {
+		available={
+			NOT={ has_completed_focus = COR_the_Sal_Solo_coup}
 		}
 		completion_reward = {
 			country_event = COR.4
@@ -146,24 +150,55 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = COR_the_Sal_Solo_coup
+		id = COR_unrest_under_the_dikat
 		icon = GFX_WIP_focus
 		cost = 5
 		x = -2
-		y = 2
+		y = 1
 		relative_position_id = COR_warlordism
 		prerequisite = {
 			focus = COR_warlordism
+			focus = COR_path_of_our_rebellion
+			focus = COR_the_will_of_the_dikat
+		}
+		allow_branch={
+			NOT={has_country_flag = COR_sal_solo}
 		}
 		available = {
-			NOT={has_idea = emp_influence_1 }
 		}
 		search_filters = {
 		}
 		mutually_exclusive = {
 		}
 		completion_reward = {
-			
+			add_stability = -0.02
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = COR_the_Sal_Solo_coup
+		icon = GFX_WIP_focus
+		cost = 5
+		x = 0
+		y = 1
+		relative_position_id = COR_unrest_under_the_dikat
+		prerequisite = {
+			focus = COR_unrest_under_the_dikat
+		}
+		available = {
+			has_stability < 0.25
+			NOT={has_idea = emp_influence_3 }
+			NOT={has_idea = reb_influence_3 }
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			country_event = COR.9
 		}
 
 		ai_will_do = {
@@ -192,7 +227,8 @@ focus_tree = {
 		allow_branch={
 			NOT={has_country_flag = COR_Pitta}
 			NOT={has_country_flag = COR_NR_leaning}
-			#NOT={has_country_flag = COR_neutral}
+			NOT={has_country_flag = COR_Grunger}
+			NOT= {has_country_flag = COR_NR_member}
 		}
 
 
@@ -215,7 +251,27 @@ focus_tree = {
 		mutually_exclusive = {
 		}
 		completion_reward = {
-			add_political_power = -50
+			custom_effect_tooltip = COR_weaning_corellia_from_empire_tt
+			hidden_effect={
+				if={
+					limit={
+						has_idea = emp_influence_3
+					}
+					add_political_power = -100
+				}
+				else_if={
+					limit={
+						has_idea = emp_influence_2
+					}
+					add_political_power = -50
+				}
+				else={
+					add_popularity = {
+						ideology = democratic
+						popularity = 0.05
+					}
+				}
+			}
 		}
 
 		ai_will_do = {
@@ -243,10 +299,6 @@ focus_tree = {
 			}
 		}
 		completion_reward = {
-			add_popularity = {
-				ideology = democratic
-				popularity = 0.05
-			}
 			custom_effect_tooltip = republicans_in_CorSec_tt
 		}
 
@@ -291,29 +343,6 @@ focus_tree = {
 		id = COR_rally_the_radicals
 		icon = GFX_WIP_focus
 		cost = 5
-		x = 0
-		y = 1
-		relative_position_id = COR_violent_force
-		prerequisite = {
-			focus = COR_violent_force
-		}
-		search_filters = {
-		}
-		available = {
-			
-		}
-		completion_reward = {
-			
-		}
-
-		ai_will_do = {
-			factor = 1
-		}
-	}
-	focus = {
-		id = COR_smuggle_in_equipment
-		icon = GFX_WIP_focus
-		cost = 5
 		x = 2
 		y = 1
 		relative_position_id = COR_violent_force
@@ -327,7 +356,32 @@ focus_tree = {
 			
 		}
 		completion_reward = {
+			country_event = COR.11
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = COR_smuggle_in_equipment
+		icon = GFX_WIP_focus
+		cost = 5
+		x = 0
+		y = 1
+		relative_position_id = COR_violent_force
+		prerequisite = {
+			focus = COR_violent_force
+		}
+		search_filters = {
+		}
+		available = {
 			
+		}
+		completion_reward = {
+			#adds equipment to the rebels on revolt
+			custom_effect_tooltip = COR_smuggle_in_equipment_tt
+			add_to_variable = { COR_rebel_stockpile = 3}
 		}
 
 		ai_will_do = {
@@ -351,6 +405,10 @@ focus_tree = {
 		}
 		completion_reward = {
 			add_stability = 0.05
+			add_popularity = {
+				ideology = democratic
+				popularity = 0.02
+			}
 		}
 
 		ai_will_do = {
@@ -395,8 +453,11 @@ focus_tree = {
 		available = {
 			
 		}
+		mutually_exclusive={
+			focus = COR_the_long_play
+		}
 		completion_reward = {
-			
+			COR_increase_resistance = yes
 		}
 
 		ai_will_do = {
@@ -415,6 +476,9 @@ focus_tree = {
 		}
 		search_filters = {
 		}
+		mutually_exclusive={
+			focus = COR_violent_force
+		}
 		available = {
 			
 		}
@@ -429,7 +493,7 @@ focus_tree = {
 	focus = {
 		id = COR_aid_the_poor
 		icon = GFX_WIP_focus
-		cost = 5
+		cost = 10
 		x = 0
 		y = 1
 		relative_position_id = COR_the_long_play
@@ -442,7 +506,64 @@ focus_tree = {
 			
 		}
 		completion_reward = {
-			
+			add_popularity = {
+				ideology = democratic
+				popularity = 0.05
+			}
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = COR_a_popular_front
+		icon = GFX_WIP_focus
+		cost = 10
+		x = -1
+		y = 1
+		relative_position_id = COR_aid_the_poor
+		prerequisite = {
+			focus = COR_aid_the_poor
+		}
+		prerequisite = {
+			focus = COR_rally_the_radicals
+		}
+		search_filters = {
+		}
+		available = {
+			has_completed_focus = COR_rally_the_people
+		}
+		completion_reward = {
+			COR_increase_resistance = yes
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = COR_calls_for_elections
+		icon = GFX_WIP_focus
+		cost = 10
+		x = 0
+		y = 1
+		relative_position_id = COR_a_popular_front
+		prerequisite = {
+			focus = COR_a_popular_front
+		}
+		search_filters = {
+		}
+		available = {
+			has_stability < 0.5
+			custom_trigger_tooltip={
+				tooltip = COR_calls_for_elections_tt
+				democratic > 0.6
+			}
+		}
+		completion_reward = {
+			country_event = COR.8
+			custom_effect_tooltip = COR_calls_for_elections_et
 		}
 
 		ai_will_do = {
@@ -488,7 +609,7 @@ focus_tree = {
 		id = COR_warlord_of_corellia
 		icon = GFX_COR_warlord_pitta
 		cost = 5
-		x = 4
+		x = 5
 		y = 0
 		#relative_position_id = COR_pittas_play
 		#prerequisite = {
@@ -519,11 +640,11 @@ focus_tree = {
 		id = COR_promoting_human_high_culture
 		icon = GFX_WIP_focus
 		cost = 5
-		x = 1
+		x = -2
 		y = 1
-		relative_position_id = COR_warlord_of_corellia
+		relative_position_id = COR_wealth_of_the_outer_rim
 		prerequisite = {
-			focus = COR_warlord_of_corellia
+			focus = COR_wealth_of_the_outer_rim
 		}
 		search_filters = {
 		}
@@ -541,11 +662,11 @@ focus_tree = {
 		id = COR_tightining_the_grip
 		icon = GFX_WIP_focus
 		cost = 5
-		x = -1
+		x = 2
 		y = 1
-		relative_position_id = COR_warlord_of_corellia
+		relative_position_id = COR_wealth_of_the_outer_rim
 		prerequisite = {
-			focus = COR_warlord_of_corellia
+			focus = COR_wealth_of_the_outer_rim
 		}
 		search_filters = {
 		}
@@ -564,7 +685,7 @@ focus_tree = {
 		icon = GFX_WIP_focus
 		cost = 5
 		x = 0
-		y = 2
+		y = 1
 		relative_position_id = COR_warlord_of_corellia
 		prerequisite = {
 			focus = COR_warlord_of_corellia
@@ -585,7 +706,7 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = COR_dealing_with_grunger
+		id = COR_preparing_to_deal_with_grunger
 		icon = GFX_WIP_focus
 		cost = 5
 		x = 0
@@ -606,22 +727,29 @@ focus_tree = {
 			factor = 1
 		}
 	}
+	##Warlord victorius
 	focus = {
 		id = COR_two_warlords_enter_one_leaves
 		icon = GFX_WIP_focus
 		cost = 5
 		x = 0
 		y = 1
-		relative_position_id = COR_dealing_with_grunger
-		prerequisite = {
-			focus = COR_dealing_with_grunger
-		}
+		relative_position_id = COR_preparing_to_deal_with_grunger
+		#prerequisite = {
+		#	focus = COR_dealing_with_grunger
+		#}
 		search_filters = {
 		}
 		mutually_exclusive = {
 		}
 		completion_reward = {
 			
+		}
+		allow_branch={
+			OR={
+				has_country_flag = COR_Pitta
+				has_country_flag = COR_Grunger
+			}
 		}
 		available = {
 			OR={
@@ -645,11 +773,17 @@ focus_tree = {
 		id = COR_bringing_in_outer_rim_support
 		icon = GFX_WIP_focus
 		cost = 5
-		x = 2
+		x = 3
 		y = 1
 		relative_position_id = COR_two_warlords_enter_one_leaves
 		prerequisite = {
 			focus = COR_two_warlords_enter_one_leaves
+		}
+		prerequisite = {
+			focus = COR_tightining_the_grip
+		}
+		allow_branch={
+			has_country_flag = COR_Pitta
 		}
 		search_filters = {
 		}
@@ -680,20 +814,23 @@ focus_tree = {
 		completion_reward = {
 			
 		}
+		available={
+			has_completed_focus = COR_promoting_human_high_culture
+		}
 
 		ai_will_do = {
 			factor = 1
 		}
 	}
 	focus = {
-		id = COR_managing_a_diconnected_empire
+		id = COR_managing_a_disconnected_empire
 		icon = GFX_WIP_focus
 		cost = 5
-		x = -1
+		x = 0
 		y = 1
-		relative_position_id = COR_bringing_in_outer_rim_support
+		relative_position_id = COR_two_warlords_enter_one_leaves
 		prerequisite = {
-			focus = COR_bringing_in_outer_rim_support
+			focus = COR_two_warlords_enter_one_leaves
 		}
 		search_filters = {
 		}
@@ -711,7 +848,7 @@ focus_tree = {
 		id = COR_the_plea_of_nubian_imperials
 		icon = GFX_WIP_focus
 		cost = 5
-		x = -2
+		x = -3
 		y = 1
 		relative_position_id = COR_two_warlords_enter_one_leaves
 		prerequisite = {
@@ -726,6 +863,29 @@ focus_tree = {
 				type = topple_government
 				target = NUB
 			}
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = COR_integrating_nubia
+		icon = GFX_WIP_focus
+		cost = 5
+		x = 0
+		y = 1
+		relative_position_id = COR_the_plea_of_nubian_imperials
+		prerequisite = {
+			focus = COR_the_plea_of_nubian_imperials
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			set_country_flag = can_use_imperial_occupation
+			NUB = { add_to_ROOT_potential_cores = yes }
 		}
 
 		ai_will_do = {
@@ -879,7 +1039,7 @@ focus_tree = {
 		id = COR_free_and_neutral
 		icon = GFX_WIP_focus
 		cost = 5
-		x = 6
+		x = 7
 		y = 0
 		prerequisite = {
 		}
@@ -936,7 +1096,10 @@ focus_tree = {
 		mutually_exclusive = {
 		}
 		completion_reward = {
-			
+			add_popularity = {
+				ideology = democratic
+				popularity = -0.05
+			}
 		}
 
 		ai_will_do = {
@@ -958,7 +1121,10 @@ focus_tree = {
 		mutually_exclusive = {
 		}
 		completion_reward = {
-			
+			custom_effect_tooltip = plus20credits_tt
+			add_to_variable = {
+				currency_amount^primary_currency = 20
+			}
 		}
 
 		ai_will_do = {
@@ -990,14 +1156,14 @@ focus_tree = {
 			factor = 1
 		}
 	}
+	##Solo->five worlds
 	focus = {
-		id = COR_joining_NR
+		id = COR_government_of_sal_solo
 		icon = GFX_WIP_focus
 		cost = 5
-		x = 6
-		y = 10
+		x = 7
+		y = 0
 		prerequisite = {
-			
 		}
 		search_filters = {
 		}
@@ -1005,6 +1171,36 @@ focus_tree = {
 		}
 		completion_reward = {
 			
+		}
+		allow_branch={
+			has_country_flag = COR_sal_solo
+		}
+
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = COR_joining_NR
+		icon = GFX_WIP_focus
+		cost = 5
+		x = 0
+		y = 8
+		relative_position_id = COR_home_of_the_rebellion
+		prerequisite = {
+			focus = COR_calls_for_elections
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			join_republic_centrist = yes #paply to do
+		}
+		available = {
+			has_government = democratic
+			has_war = no
 		}
 
 		ai_will_do = {
@@ -1016,7 +1212,7 @@ focus_tree = {
 		id = COR_CorSec
 		icon = GFX_WIP_focus
 		cost = 5
-		x = 18
+		x = 19
 		y = 0
 		prerequisite = {
 		}
@@ -1072,7 +1268,31 @@ focus_tree = {
 			focus = COR_deploy_CorSec_aganst_rebels
 		}
 		completion_reward = {
-			
+			add_stability = 0.025
+			add_political_power = 40
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = COR_future_of_security
+		icon = GFX_WIP_focus
+		cost = 5
+		x = 1
+		y = 1
+		relative_position_id = COR_deploy_CorSec_aganst_rebels
+		prerequisite = {
+			focus = COR_deploy_CorSec_aganst_rebels
+			focus = COR_keep_them_focused_on_criminals
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			country_event = COR.12
 		}
 
 		ai_will_do = {
@@ -1083,9 +1303,11 @@ focus_tree = {
 		id = COR_modernise_CorSec
 		icon = GFX_WIP_focus
 		cost = 5
-		x = 19
-		y = 5
+		x = 1
+		y = 1
+		relative_position_id = COR_future_of_security
 		prerequisite = {
+			focus = COR_future_of_security
 		}
 		search_filters = {
 		}
@@ -1104,9 +1326,11 @@ focus_tree = {
 		id = COR_public_safety_service
 		icon = GFX_WIP_focus
 		cost = 5
-		x = 17
-		y = 5
+		x = -1
+		y = 1
+		relative_position_id = COR_future_of_security
 		prerequisite = {
+			focus = COR_future_of_security
 		}
 		search_filters = {
 		}
@@ -1115,6 +1339,33 @@ focus_tree = {
 		}
 		completion_reward = {
 			
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = COR_invest_in_equipment
+		icon = GFX_WIP_focus
+		cost = 5
+		x = 1
+		y = 1
+		relative_position_id = COR_public_safety_service
+		prerequisite = {
+			focus = COR_public_safety_service
+			focus = COR_modernise_CorSec
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = 100
+				producer = COR
+			}
 		}
 
 		ai_will_do = {
@@ -1206,6 +1457,10 @@ focus_tree = {
 		mutually_exclusive = {
 		}
 		completion_reward = {
+			add_opinion_modifier = {
+				target = COR
+				modifier = protest_action
+			}
 			custom_effect_tooltip = plus50credits_tt
 			add_to_variable = {
 				currency_amount^primary_currency = 50
@@ -1248,10 +1503,11 @@ focus_tree = {
 		icon = GFX_WIP_focus
 		cost = 5
 		x = 0
-		y = 1
-		relative_position_id = COR_starships
+		y = 2
+		relative_position_id = COR_CEC
 		prerequisite = {
 			focus = COR_starships
+			focus = COR_fighters
 		}
 		search_filters = {
 		}
@@ -1281,6 +1537,58 @@ focus_tree = {
 		}
 	}
 	focus = {
+		id = COR_mainstay_designs
+		icon = GFX_WIP_focus
+		cost = 5
+		x = 0
+		y = 1
+		relative_position_id = COR_starships
+		prerequisite = {
+			focus = COR_starships
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 0.33
+				uses = 3
+				category = dd_tech
+			}
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = COR_mainstay_designs
+		icon = GFX_WIP_focus
+		cost = 5
+		x = 0
+		y = 1
+		relative_position_id = COR_starships
+		prerequisite = {
+			focus = COR_starships
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 0.33
+				uses = 3
+				category = dd_tech
+			}
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
 		id = COR_fully_nationalise_CEC
 		icon = GFX_WIP_focus
 		cost = 5
@@ -1294,6 +1602,9 @@ focus_tree = {
 		}
 		completion_reward = {
 			
+		}
+		available = {
+			has_stability > 0.7
 		}
 
 		ai_will_do = {
@@ -1437,12 +1748,13 @@ focus_tree = {
 		id = COR_propaganda_in_labor_valley
 		icon = GFX_WIP_focus
 		cost = 5
-		x = 2
+		x = 0
 		y = 1
-		relative_position_id = COR_begin_the_economic_recovery
+		relative_position_id = COR_workers_rewards
 		prerequisite = {
-			focus = COR_begin_the_economic_recovery
+			focus = COR_workers_rewards
 		}
+		
 		search_filters = {
 		}
 		mutually_exclusive = {
@@ -1461,7 +1773,9 @@ focus_tree = {
 		}
 		completion_reward = {
 			324={
+				custom_effect_tooltip = COR_labor_valley_propaganda
 				set_state_flag = COR_economic_recovery_propaganda
+				add_extra_state_shared_building_slots = 1
 			}
 		}
 
@@ -1473,11 +1787,11 @@ focus_tree = {
 		id = COR_workers_rewards
 		icon = GFX_WIP_focus
 		cost = 5
-		x = 0
+		x = 2
 		y = 1
-		relative_position_id = COR_propaganda_in_labor_valley
+		relative_position_id = COR_begin_the_economic_recovery
 		prerequisite = {
-			focus = COR_propaganda_in_labor_valley
+			focus = COR_begin_the_economic_recovery
 		}
 		search_filters = {
 		}
@@ -1485,17 +1799,17 @@ focus_tree = {
 		}
 		available = {
 			custom_trigger_tooltip = {
-				tooltip = has_20credits_tt
+				tooltip = has_200credits_tt
 				check_variable = {
-					currency_amount^primary_currency = 20
+					currency_amount^primary_currency = 200
 					compare = greater_than_or_equals
 				}
 			}
 		}
 		completion_reward = {
-			custom_effect_tooltip = minus20credits_tt
+			custom_effect_tooltip = minus200credits_tt
 			subtract_from_variable = {
-				currency_amount^primary_currency = 20
+				currency_amount^primary_currency = 200
 			}
 		}
 
@@ -1519,9 +1833,9 @@ focus_tree = {
 		}
 		available = {
 			custom_trigger_tooltip = {
-				tooltip = has_10credits_tt
+				tooltip = has_100credits_tt
 				check_variable = {
-					currency_amount^primary_currency = 10
+					currency_amount^primary_currency = 100
 					compare = greater_than_or_equals
 				}
 			}
@@ -1533,9 +1847,9 @@ focus_tree = {
 			}
 		}
 		completion_reward = {
-			custom_effect_tooltip = minus10credits_tt
+			custom_effect_tooltip = minus100credits_tt
 			subtract_from_variable = {
-				currency_amount^primary_currency = 10
+				currency_amount^primary_currency = 100
 			}
 			455={
 				add_building_construction = {
@@ -1591,17 +1905,17 @@ focus_tree = {
 		}
 		available = {
 			custom_trigger_tooltip = {
-				tooltip = has_20credits_tt
+				tooltip = has_200credits_tt
 				check_variable = {
-					currency_amount^primary_currency = 20
+					currency_amount^primary_currency = 200
 					compare = greater_than_or_equals
 				}
 			}
 		}
 		completion_reward = {
-			custom_effect_tooltip = minus20credits_tt
+			custom_effect_tooltip = minus200credits_tt
 			subtract_from_variable = {
-				currency_amount^primary_currency = 20
+				currency_amount^primary_currency = 200
 			}
 			#improves the opinion of the other corellian planets
 		}
@@ -1618,7 +1932,7 @@ focus_tree = {
 		y = 2
 		relative_position_id = COR_sprucing_up_the_capital
 		prerequisite = {
-			focus = COR_workers_rewards
+			focus = COR_propaganda_in_labor_valley
 		}
 		prerequisite = {
 			focus = COR_helping_those_who_help_us
