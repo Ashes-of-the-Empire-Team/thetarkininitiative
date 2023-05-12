@@ -14,7 +14,7 @@ focus_tree = {
 focus = {
 	id = RIN_the_emperors_dead
 	icon = GFX_WIP_focus
-	cost = 2
+	cost = 5
 	x = 0
 	y = -1
 	ai_will_do = {
@@ -28,7 +28,7 @@ focus = {
 focus = {
 	id = RIN_keeping_it_a_secret
 	icon = GFX_WIP_focus
-	cost = 2
+	cost = 5
 	x = 0
 	y = 1
 	ai_will_do = {
@@ -44,7 +44,7 @@ focus = {
 focus = {
 	id = RIN_fortress_world
 	icon = GFX_WIP_focus
-	cost = 2
+	cost = 5
 	x = -6
 	y = 1
 	ai_will_do = {
@@ -60,7 +60,7 @@ focus = {
 focus = {
 	id = RIN_preparing_for_the_storm
 	icon = GFX_WIP_focus
-	cost = 2
+	cost = 5
 	x = 4
 	y = 1
 	ai_will_do = {
@@ -76,7 +76,7 @@ focus = {
 focus = {
 	id = RIN_industrial_buildup
 	icon = GFX_WIP_focus
-	cost = 2
+	cost = 5
 	x = -4
 	y = 2
 	ai_will_do = {
@@ -96,13 +96,15 @@ focus = {
 focus = {
 	id = RIN_stormtroopers_for_our_protection
 	icon = GFX_WIP_focus
-	cost = 2
+	cost = 5
 	x = 3
 	y = 2
 	ai_will_do = {
 		factor = 1
 	}
 	completion_reward = {
+		custom_effect_tooltip = tt_zer_spend_50_credits
+		subtract_from_variable = { currency_amount^primary_currency = 50 }
 		409 ={
 			add_building_construction = {
 				type = arms_factory
@@ -125,13 +127,15 @@ focus = {
 focus = {
 	id = RIN_star_destroyers_for_our_protection
 	icon = GFX_WIP_focus
-	cost = 2
+	cost = 5
 	x = 8
 	y = 2
 	ai_will_do = {
 		factor = 1
 	}
 	completion_reward = {
+		custom_effect_tooltip = tt_zer_spend_50_credits
+		subtract_from_variable = { currency_amount^primary_currency = 50 }
 		409 ={
 			add_building_construction = {
 				type = dockyard
@@ -155,7 +159,7 @@ focus = {
 focus = {
 	id = RIN_new_officers
 	icon = GFX_WIP_focus
-	cost = 2
+	cost = 5
 	x = 0
 	y = 1
 	ai_will_do = {
@@ -174,7 +178,7 @@ focus = {
 focus = {
 	id = RIN_new_dockyards
 	icon = GFX_WIP_focus
-	cost = 2
+	cost = 5
 	x = -1
 	y = 1
 	ai_will_do = {
@@ -194,9 +198,9 @@ focus = {
 }
 
 focus = {
-	id = RIN_seize_production
+	id = RIN_underwater_factories
 	icon = GFX_WIP_focus
-	cost = 2
+	cost = 5
 	x = -2
 	y = 2
 	ai_will_do = {
@@ -204,17 +208,10 @@ focus = {
 	}
 	completion_reward = {
 		add_stability = -0.05
-		98 ={
+		409 ={
 			add_building_construction = {
 				type = industrial_complex
-				level = 1
-				instant_build = yes
-				}
-		}
-		411 ={
-			add_building_construction = {
-				type = industrial_complex
-				level = 1
+				level = 2
 				instant_build = yes
 				}
 		}
@@ -226,13 +223,15 @@ focus = {
 focus = {
 	id = RIN_new_supply_lanes
 	icon = GFX_WIP_focus
-	cost = 2
+	cost = 5
 	x = -2
 	y = 1
 	ai_will_do = {
 		factor = 1
 	}
 	completion_reward = {
+		custom_effect_tooltip = tt_zer_spend_50_credits
+		subtract_from_variable = { currency_amount^primary_currency = 50 }
 		98 ={
 				add_building_construction = {
 					type = infrastructure
@@ -264,12 +263,13 @@ focus = {
 	}
 	relative_position_id = RIN_industrial_buildup
 	prerequisite = { focus = RIN_industrial_buildup }
+	mutually_exclusive = { focus = RIN_resource_prospecting }
 }
 
 focus = {
 	id = RIN_recruit_defectors
 	icon = GFX_WIP_focus
-	cost = 2
+	cost = 5
 	x = -2
 	y = 1
 	ai_will_do = {
@@ -287,7 +287,7 @@ focus = {
 focus = {
 	id = RIN_loyal_imperials
 	icon = GFX_WIP_focus
-	cost = 2
+	cost = 5
 	x = 2
 	y = 1
 	ai_will_do = {
@@ -304,7 +304,7 @@ focus = {
 focus = {
 	id = RIN_new_weaponry
 	icon = GFX_WIP_focus
-	cost = 2
+	cost = 5
 	x = 0
 	y = 1
 	ai_will_do = {
@@ -326,7 +326,7 @@ focus = {
 focus = {
 	id = RIN_new_elites
 	icon = GFX_WIP_focus
-	cost = 2
+	cost = 5
 	x = 0
 	y = 1
 	ai_will_do = {
@@ -344,27 +344,45 @@ focus = {
 focus = {
 	id = RIN_resource_prospecting
 	icon = GFX_WIP_focus
-	cost = 2
+	cost = 5
 	x = 2
 	y = 1
 	ai_will_do = {
 		factor = 1
 	}
 	completion_reward = {
+		custom_effect_tooltip = tt_zer_spend_50_credits
+			subtract_from_variable = { currency_amount^primary_currency = 50 }
+		add_resource = {
+			type = tungsten
+			amount = 5
+			state = 98
+		}
+		add_resource = {
+			type = chromium
+			amount = 5
+			state = 98
+		}
+		add_resource = {
+			type = aluminium
+			amount = 5
+			state = 98
+		}
 		add_resource = {
 			type = steel
-			amount = 7
+			amount = 10
 			state = 98
 		}
 	}
 	relative_position_id = RIN_industrial_buildup
 	prerequisite = { focus = RIN_industrial_buildup }
+	mutually_exclusive = { focus = RIN_new_supply_lanes }
 }
 
 focus = {
 	id = RIN_rationing_our_resources
 	icon = GFX_WIP_focus
-	cost = 2
+	cost = 5
 	x = 0
 	y = 1
 	ai_will_do = {
@@ -377,14 +395,15 @@ focus = {
 			add_idea = RIN_economic_collapse_emp
 		}
 	}
-	relative_position_id = RIN_seize_production
-	prerequisite = { focus = RIN_seize_production }
+	relative_position_id = RIN_underwater_factories
+	prerequisite = { focus = RIN_underwater_factories 
+	focus = RIN_excavating_rhydonium }
 }
 
 focus = {
 	id = RIN_excavating_rhydonium
 	icon = GFX_WIP_focus
-	cost = 2
+	cost = 5
 	x = 0
 	y = 1
 	ai_will_do = {
@@ -403,7 +422,7 @@ focus = {
 focus = {
 	id = RIN_new_mining_methods
 	icon = GFX_WIP_focus
-	cost = 2
+	cost = 5
 	x = 0
 	y = 2
 	ai_will_do = {
@@ -417,13 +436,14 @@ focus = {
 		}
 	}
 	relative_position_id = RIN_resource_prospecting
-	prerequisite = { focus = RIN_excavating_rhydonium }
+	prerequisite = { focus = RIN_underwater_factories 
+	focus = RIN_excavating_rhydonium }
 }
 
 focus = {
 	id = RIN_kuat_license
 	icon = GFX_WIP_focus
-	cost = 2
+	cost = 5
 	x = 2
 	y = 0
 	ai_will_do = {
@@ -439,7 +459,7 @@ focus = {
 focus = {
 	id = RIN_a_new_navy
 	icon = GFX_WIP_focus
-	cost = 2
+	cost = 5
 	x = 1
 	y = 1
 	ai_will_do = {
@@ -457,7 +477,7 @@ focus = {
 focus = {
 	id = RIN_repurposed_dormant_factories
 	icon = GFX_WIP_focus
-	cost = 2
+	cost = 5
 	x = 0
 	y = 1
 	ai_will_do = {
@@ -479,7 +499,7 @@ focus = {
 focus = {
 	id = RIN_planetary_defenses
 	icon = GFX_WIP_focus
-	cost = 2
+	cost = 5
 	x = -2
 	y = 1
 	ai_will_do = {
@@ -522,7 +542,7 @@ focus = {
 focus = {
 	id = RIN_Accord_with_Eriadu
 	icon = GFX_WIP_focus
-	cost = 2
+	cost = 5
 	x = 2
 	y = 1
 	ai_will_do = {
@@ -542,7 +562,7 @@ focus = {
 focus = {
 	id = RIN_reining_in_the_sujimis_sector
 	icon = GFX_WIP_focus
-	cost = 2
+	cost = 5
 	x = 0
 	y = 1
 	ai_will_do = {
@@ -567,8 +587,8 @@ focus = {
 focus = {
 	id = RIN_imperials_on_alzoc_iii
 	icon = GFX_WIP_focus
-	cost = 2
-	x = -3
+	cost = 5
+	x = -4
 	y = 1
 	ai_will_do = {
 		factor = 1
@@ -594,24 +614,70 @@ focus = {
 focus = {
 	id = RIN_retake_the_mines
 	icon = GFX_WIP_focus
-	cost = 2
-	x = -3
-	y = 2.5
+	cost = 5
+	x = 0
+	y = 1
 	ai_will_do = {
 		factor = 1
 	}
 	completion_reward = {
 		declare_war_on = { target = ALZ    type = annex_everything }
 	}
-	relative_position_id = RIN_reining_in_the_sujimis_sector
-	prerequisite = { focus = RIN_reining_in_the_sujimis_sector }
+	relative_position_id = RIN_imperials_on_alzoc_iii
+	prerequisite = { focus = RIN_imperials_on_alzoc_iii }
 }
 
 focus = {
-	id = RIN_war_on_consortium
+	id = RIN_resume_mining_operations
 	icon = GFX_WIP_focus
-	cost = 2
-	x = 1
+	cost = 5
+	x = 0
+	y = 1
+	ai_will_do = {
+		factor = 1
+	}
+	available = {
+		RIN = {
+			owns_state = 109
+			owns_state = 433
+			owns_state = 448
+			owns_state = 441
+		}
+		ALZ = {has_capitulated = yes}
+	}
+	completion_reward = {
+		add_ideas = RIN_alzoc_miners
+		add_resource = {
+			type = steel
+			amount = 10
+			state = 448
+		}
+	}
+	relative_position_id = RIN_retake_the_mines
+	prerequisite = { focus = RIN_retake_the_mines }
+}
+
+focus = {
+	id = RIN_conqouring_the_ice_planet
+	icon = GFX_WIP_focus
+	cost = 5
+	x = 0
+	y = 1
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		ALZ = { add_to_ROOT_potential_cores = yes }
+	}
+	relative_position_id = RIN_resume_mining_operations
+	prerequisite = { focus = RIN_resume_mining_operations }
+}
+
+focus = {
+	id = RIN_expanding_the_sector
+	icon = GFX_WIP_focus
+	cost = 5
+	x = -0
 	y = 1
 	ai_will_do = {
 		factor = 1
@@ -619,33 +685,10 @@ focus = {
 	completion_reward = {
 		create_wargoal = {
 			type = annex_everything
-			target = LOK
-		}
-		create_wargoal = {
-			type = annex_everything
-			target = KAR
-		}
-	}
-	relative_position_id = RIN_reining_in_the_sujimis_sector
-	prerequisite = { focus = RIN_reining_in_the_sujimis_sector }
-}
-
-focus = {
-	id = RIN_expanding_the_sector
-	icon = GFX_WIP_focus
-	cost = 2
-	x = -1
-	y = 2
-	ai_will_do = {
-		factor = 1
-	}
-	completion_reward = {
-		create_wargoal = {
-			type = puppet_wargoal_focus
 			target = NAB
 		}
 		create_wargoal = {
-			type = puppet_wargoal_focus
+			type = annex_everything
 			target = GUN
 		}
 		hidden_effect = {
@@ -653,15 +696,15 @@ focus = {
 			GUN = {give_guarantee = NAB}
 		}
 	}
-	relative_position_id = RIN_war_on_consortium
-	prerequisite = { focus = RIN_war_on_consortium }
-	prerequisite = { focus = RIN_imperials_on_alzoc_iii }
+	relative_position_id = RIN_reining_in_the_sujimis_sector
+	prerequisite = { focus = RIN_reining_in_the_sujimis_sector }
+
 }
 
 focus = {
 	id = RIN_the_queen_will_ensure_order
 	icon = GFX_WIP_focus
-	cost = 2
+	cost = 5
 	x = -2
 	y = 1
 	ai_will_do = {
@@ -707,7 +750,7 @@ focus = {
 focus = {
 	id = RIN_we_will_ensure_order
 	icon = GFX_WIP_focus
-	cost = 2
+	cost = 5
 	x = 2
 	y = 1
 	ai_will_do = {
@@ -724,20 +767,155 @@ focus = {
 focus = {
 	id = RIN_invasion_of_falleen
 	icon = GFX_WIP_focus
-	cost = 2
-	x = -5
+	cost = 5
+	x = -7
 	y = 1
 	ai_will_do = {
 		factor = 1
 	}
 	completion_reward = {
 		create_wargoal = {
-			type = puppet_wargoal_focus
+			type = annex_everything
 			target = FAL
 		}
 	}
 	relative_position_id = RIN_reining_in_the_sujimis_sector
 	prerequisite = { focus = RIN_reining_in_the_sujimis_sector }
+}
+
+focus = {
+	id = RIN_falleen_govenor
+	icon = GFX_WIP_focus
+	cost = 5
+	x = 1
+	y = 1
+	ai_will_do = {
+		factor = 1
+	}
+	available = {
+		FAL = {has_capitulated = yes
+	is_puppet_of = RIN }
+	}
+	completion_reward = {
+		hidden_effect = {
+			release = FAL
+		}
+		set_autonomy = {
+			target = FAL
+			autonomy_state = autonomy_imperial_sector
+			end_wars = yes
+			end_civil_wars = yes
+		}
+	}
+	relative_position_id = RIN_invasion_of_falleen
+	prerequisite = { focus = RIN_invasion_of_falleen }
+	mutually_exclusive = { focus = RIN_imperial_occupation }
+}
+
+focus = {
+	id = RIN_imperial_occupation
+	icon = GFX_WIP_focus
+	cost = 5
+	x = -1
+	y = 1
+	ai_will_do = {
+		factor = 1
+	}
+	available = {
+		FAL = {has_capitulated = yes
+	is_puppet_of = RIN }
+	}
+	completion_reward = {
+		hidden_effect = {
+			annex_country = {
+				target = FAL
+				transfer_troops = yes
+			}
+		}
+		annex_country = {
+			target = GER
+			transfer_troops = yes
+		}
+		384 = {add_compliance = 20}
+		392 = {add_compliance = 20}
+		388 = {add_compliance = 20}
+		91 = {add_compliance = 20}
+		
+	}
+	relative_position_id = RIN_invasion_of_falleen
+	prerequisite = { focus = RIN_invasion_of_falleen }
+	mutually_exclusive = { focus = RIN_falleen_govenor }
+	
+}
+
+focus = {
+	id = RIN_recruit_falleen_informants
+	icon = GFX_WIP_focus
+	cost = 5
+	x = 0
+	y = 2
+	ai_will_do = {
+		factor = 1
+	}
+
+	completion_reward = {
+		add_ideas = RIN_falleen_informants
+	}
+	relative_position_id = RIN_invasion_of_falleen
+	prerequisite = { focus = RIN_falleen_govenor
+	focus = RIN_imperial_occupation}
+}
+
+focus = {
+	id = RIN_full_planet_garrison
+	icon = GFX_WIP_focus
+	cost = 5
+	x = -1
+	y = 3
+	ai_will_do = {
+		factor = 1
+	}
+
+	completion_reward = {
+		FAL = { add_to_ROOT_potential_cores = yes }
+	}
+	relative_position_id = RIN_invasion_of_falleen
+	prerequisite = { focus = RIN_imperial_occupation}
+	prerequisite = { focus = RIN_recruit_falleen_informants }
+}
+
+focus = {
+	id = RIN_falleen_garrisons
+	icon = GFX_WIP_focus
+	cost = 5
+	x = 1
+	y = 3
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		392 = {
+			create_unit = {
+				division = "division_template = \"Falleen Militia\" start_experience_factor = 0.23" 
+				owner = FAL
+			}
+			create_unit = {
+				division = "division_template = \"Falleen Militia\" start_experience_factor = 0.29" 
+				owner = FAL
+			}
+			create_unit = {
+				division = "division_template = \"Falleen Militia\" start_experience_factor = 0.26" 
+				owner = FAL
+			}
+			create_unit = {
+				division = "division_template = \"Falleen Militia\" start_experience_factor = 0.23" 
+				owner = FAL
+			}
+		}
+	}
+	relative_position_id = RIN_invasion_of_falleen
+	prerequisite = { focus = RIN_falleen_govenor }
+	prerequisite = { focus = RIN_recruit_falleen_informants }
 }
 
 ##############
@@ -748,11 +926,11 @@ focus = {
 
 focus = {
 	id = RIN_expand_the_air_force
-	icon = GFX_goal_generic_build_airforce
+	icon = GFX_WIP_focus
 	x = 20
 	y = 0
 
-	cost = 10
+	cost = 5
 
 	ai_will_do = {
 		factor = 1
@@ -785,7 +963,7 @@ focus = {
 
 focus = {
 	id = RIN_fang_squadron_focus
-	icon = GFX_goal_generic_build_airforce
+	icon = GFX_WIP_focus
 	x = 0
 	y = 1
 	prerequisite = { focus = RIN_expand_the_air_force }
@@ -815,14 +993,14 @@ focus = {
 
 focus = {
 	id = RIN_mass_production
-	icon = GFX_focus_generic_license_production
+	icon = GFX_WIP_focus
 	prerequisite = { focus = RIN_expand_the_air_force }
 	mutually_exclusive = { focus = RIN_local_development }
 	x = -2
 	y = 2
 	relative_position_id = RIN_expand_the_air_force
 
-	cost = 10
+	cost = 5
 
 	ai_will_do = {
 		factor = 5
@@ -846,52 +1024,15 @@ focus = {
 }
 
 focus = {
-	id = RIN_air_defense
-	icon = GFX_goal_generic_air_doctrine
-	prerequisite = { focus = RIN_mass_production }
-	mutually_exclusive = { focus = RIN_ground_support }
-	x = -2
-	y = 1
-	relative_position_id = RIN_mass_production
-
-	cost = 10
-
-	ai_will_do = {
-		factor = 1
-	}
-
-	available = {
-
-	}
-
-	bypass = {
-
-	}
-
-	cancel_if_invalid = yes
-	continue_if_invalid = no
-	available_if_capitulated = yes
-	search_filters = { FOCUS_FILTER_RESEARCH }
-	completion_reward = {
-		add_doctrine_cost_reduction = {
-			name = RIN_air_defense
-			cost_reduction = 0.50
-			uses = 2
-			category = cat_operational_integrity
-		}
-	}
-}
-
-focus = {
 	id = RIN_ground_support
-	icon = GFX_goal_poland_goal
+	icon = GFX_WIP_focus
 	prerequisite = { focus = RIN_mass_production }
 	mutually_exclusive = { focus = RIN_air_defense }
 	x = 0
 	y = 1
 	relative_position_id = RIN_mass_production
 
-	cost = 10
+	cost = 5
 
 	ai_will_do = {
 		factor = 1
@@ -905,29 +1046,26 @@ focus = {
 
 	}
 
-	cancel_if_invalid = yes
-	continue_if_invalid = no
-	available_if_capitulated = yes
 	search_filters = { FOCUS_FILTER_RESEARCH }
 	completion_reward = {
 		add_doctrine_cost_reduction = {
-			name = RIN_ground_support
+			name = naval_doctrine
 			cost_reduction = 0.50
 			uses = 2
-			category = battlefield_support_tree
+			category = naval_doctrine
 		}
 	}
 }
 
 focus = {
 	id = RIN_medium_bombers
-	icon = GFX_goal_generic_air_bomber
+	icon = GFX_WIP_focus
 	prerequisite = { focus = RIN_ground_support }
 	x = 0
 	y = 2
 	relative_position_id = RIN_mass_production
 
-	cost = 10
+	cost = 5
 
 	ai_will_do = {
 		factor = 1
@@ -947,105 +1085,23 @@ focus = {
 	search_filters = { FOCUS_FILTER_RESEARCH }
 	completion_reward = {
 		add_tech_bonus = {
-			name = RIN_medium_bombers
-			bonus = 1.0
-			uses = 1
-			category = tactical_bomber
+			name = electronics
+			bonus = 0.5
+			uses = 2
 		}
-	}
-}
-
-focus = {
-	id = RIN_acquire_fighters
-	icon = GFX_goal_generic_air_fighter2
-	prerequisite = { focus = RIN_air_defense }
-	x = -2
-	y = 2
-	relative_position_id = RIN_mass_production
-
-	cost = 10
-
-	ai_will_do = {
-		factor = 1
-	}
-
-	available = {
-		NOT = {
-			has_tech = fighter3
-			has_tech = heavy_fighter3
-		}
-		OR = {
-			GER = {
-				custom_trigger_tooltip = {
-					tooltip = fighter_tt
-					OR = {
-						is_available_fighter_RIN = yes
-						is_available_heavy_fighter_RIN = yes
-					}
-				}
-			}
-			FRA = {
-				custom_trigger_tooltip = {
-					tooltip = fighter_tt
-					OR = {
-						is_available_fighter_RIN = yes
-						is_available_heavy_fighter_RIN = yes
-					}
-				}
-			}
-			ITA = {
-				custom_trigger_tooltip = {
-					tooltip = fighter_tt
-					OR = {
-						is_available_fighter_RIN = yes
-						is_available_heavy_fighter_RIN = yes
-					}
-				}
-			}
-			ENG = {
-				custom_trigger_tooltip = {
-					tooltip = fighter_tt
-					OR = {
-						is_available_fighter_RIN = yes
-						is_available_heavy_fighter_RIN = yes
-					}
-				}
-			}
-			USA = {
-				custom_trigger_tooltip = {
-					tooltip = fighter_tt
-					OR = {
-						is_available_fighter_RIN = yes
-						is_available_heavy_fighter_RIN = yes
-					}
-				}
-			}
-		}
-	}
-
-	bypass = {
-
-	}
-
-	cancel_if_invalid = yes
-	continue_if_invalid = no
-	available_if_capitulated = no
-
-	completion_reward = {
-		country_event = DOD_RINania.150
 	}
 }
 
 focus = {
 	id = RIN_local_development
-	icon = GFX_goal_generic_air_production
+	icon = GFX_WIP_focus
 	prerequisite = { focus = RIN_expand_the_air_force }
 	mutually_exclusive = { focus = RIN_mass_production }
 	x = 2
 	y = 2
 	relative_position_id = RIN_expand_the_air_force
 
-	cost = 10
+	cost = 5
 
 	ai_will_do = {
 		factor = 9
@@ -1064,187 +1120,20 @@ focus = {
 	available_if_capitulated = no
 
 	completion_reward = {
-		add_ideas = RIN_local_development
-	}
-}
-
-focus = {
-	id = RIN_air_superiority
-	icon = GFX_goal_generic_air_fighter2
-	prerequisite = { focus = RIN_local_development }
-	mutually_exclusive = { focus = RIN_strategic_bomber_force }
-	x = -1
-	y = 1
-	relative_position_id = RIN_local_development
-
-	cost = 10
-
-	ai_will_do = {
-		factor = 9
-	}
-
-	available = {
-
-	}
-
-	bypass = {
-
-	}
-
-	cancel_if_invalid = yes
-	continue_if_invalid = no
-	available_if_capitulated = yes
-	search_filters = { FOCUS_FILTER_RESEARCH }
-	completion_reward = {
-		add_doctrine_cost_reduction = {
-			name = RIN_air_superiority
-			cost_reduction = 0.50
-			uses = 2
-			category = strategic_destruction_tree
-		}
-	}
-}
-
-focus = {
-	id = RIN_cas
-	icon = GFX_goal_generic_CAS
-	prerequisite = { focus = RIN_air_superiority }
-	x = 1
-	y = 1
-	relative_position_id = RIN_air_superiority
-
-	cost = 10
-
-	ai_will_do = {
-		factor = 1
-	}
-
-	available = {
-
-	}
-
-	bypass = {
-
-	}
-
-	cancel_if_invalid = yes
-	continue_if_invalid = no
-	available_if_capitulated = no 
-	search_filters = { FOCUS_FILTER_RESEARCH }
-	completion_reward = {
-		add_tech_bonus = {
-			name = RIN_cas
-			bonus = 1.0
-			uses = 1
-			category = cas_bomber
-		}
-	}
-}
-
-focus = {
-	id = RIN_iar_80
-	icon = GFX_goal_generic_air_fighter
-	prerequisite = { focus = RIN_air_superiority }
-	x = -1
-	y = 1
-	relative_position_id = RIN_air_superiority
-
-	cost = 10
-
-	ai_will_do = {
-		factor = 1
-	}
-
-	available = {
-
-	}
-
-	bypass = {
-
-	}
-
-	cancel_if_invalid = yes
-	continue_if_invalid = no
-	available_if_capitulated = no
-	search_filters = { FOCUS_FILTER_RESEARCH }
-	completion_reward = {
-		if = {
-			limit = { NOT = { has_dlc = "By Blood Alone" } }
-			if = {
-				limit = {
-					has_tech = fighter2
-				}
-				add_tech_bonus = {
-					name = RIN_iar_80
-					bonus = 1.0
-					ahead_reduction = 2
-					uses = 1
-					category = light_fighter
-				}
-				else = {
-					add_tech_bonus = {
-						name = RIN_iar_80
-						bonus = 1.0
-						ahead_reduction = 2
-						uses = 1
-						technology = fighter2
-					}
-				}
-			}
-		}
-		if = {
-			limit = { has_dlc = "By Blood Alone" }
-			if = {
-				limit = {
-					NOT = { has_tech = improved_small_airframe }
-				}
-				add_tech_bonus = {
-					name = RIN_iar_80
-					bonus = 1.0
-					ahead_reduction = 2
-					uses = 1
-					technology = improved_small_airframe
-				}
-				create_equipment_variant = {
-					name = "IAR 80"
-					type = small_plane_airframe_2
-					modules = {
-						fixed_main_weapon_slot = light_mg_4x
-						fixed_auxiliary_weapon_slot_1 = light_mg_2x
-						engine_type_slot = engine_2_1x
-						special_type_slot_1 = empty
-					}
-					icon = "GFX_RIN_fighter2_medium"
-				}
-			}
-			else = {
-				create_equipment_variant = {
-					name = "IAR 80"
-					type = small_plane_airframe_2
-					allow_without_tech = yes #Makes no difference since appropriate tech is already researched, but it improves tooltip
-					modules = {
-						fixed_main_weapon_slot = light_mg_4x
-						fixed_auxiliary_weapon_slot_1 = light_mg_2x
-						engine_type_slot = engine_2_1x
-						special_type_slot_1 = empty
-					}
-					icon = "GFX_RIN_fighter2_medium"
-				}
-			}
-		}
+	add_ideas = RIN_quality_fighters
 	}
 }
 
 focus = {
 	id = RIN_strategic_bomber_force
-	icon = GFX_goal_generic_occupy_start_war
+	icon = GFX_WIP_focus
 	prerequisite = { focus = RIN_local_development }
 	mutually_exclusive = { focus = RIN_air_superiority }
-	x = 1
+	x = 0
 	y = 1
 	relative_position_id = RIN_local_development
 
-	cost = 10
+	cost = 5
 
 	ai_will_do = {
 		factor = 5
@@ -1263,24 +1152,24 @@ focus = {
 	available_if_capitulated = no
 	search_filters = { FOCUS_FILTER_RESEARCH }
 	completion_reward = {
-		add_tech_bonus = {
-			name = RIN_strategic_bomber_force
-			bonus = 1.0
-			uses = 1
-			category = cat_strategic_bomber
+		add_doctrine_cost_reduction = {
+			name = naval_doctrine
+			cost_reduction = 0.50
+			uses = 2
+			category = naval_doctrine
 		}
 	}
 }
 
 focus = {
 	id = RIN_heavy_bombers
-	icon = GFX_goal_generic_air_bomber
+	icon = GFX_WIP_focus
 	prerequisite = { focus = RIN_strategic_bomber_force }
-	x = 1
+	x = 0
 	y = 1
 	relative_position_id = RIN_strategic_bomber_force
 
-	cost = 10
+	cost = 5
 
 	ai_will_do = {
 		factor = 1
@@ -1300,23 +1189,22 @@ focus = {
 	search_filters = { FOCUS_FILTER_RESEARCH }
 	completion_reward = {
 		add_tech_bonus = {
-			name = RIN_heavy_bombers
-			bonus = 1.0
-			uses = 1
-			category = cat_strategic_bomber
+			name = electronics
+			bonus = 0.5
+			uses = 2
 		}
 	}
 }
 
 focus = {
 	id = RIN_nuclear_bomb_project
-	icon = GFX_focus_wonderweapons
+	icon = GFX_WIP_focus
 	prerequisite = { focus = RIN_heavy_bombers }
-	x = 1
+	x = 0
 	y = 2
 	relative_position_id = RIN_strategic_bomber_force
 
-	cost = 10
+	cost = 5
 
 	ai_will_do = {
 		factor = 1
