@@ -1122,7 +1122,7 @@ create_light_ship_market_effect = {
 				value = temp
 				create_ship = {
 					type = IPV_1_1
-					equipment_variant = "IPV 1"
+					equipment_variant = "IPV"
 					creator = PREV
 				}
 			}
@@ -1414,10 +1414,11 @@ create_medium_ship_market_effect = {
 }
 create_heavy_ship_market_effect = {
 	set_variable = {price_of_the_item = global.ship_price_holder@var:heavy_selected_ship_production_cost}
-	set_temp_variable = {price_to_be_times_by = ship_amount_contract_holder@var:medium_selected_ship_production_cost^0}
+	set_temp_variable = {price_to_be_times_by = ship_amount_contract_holder@var:heavy_selected_ship_production_cost^0}
+	divide_temp_variable = {price_to_be_divided_by = 100}
 	multiply_variable = {price_of_the_item = price_to_be_divided_by}
 	set_temp_variable = {tag_to_use_as_effect = ship_tag_holder@var:heavy_selected_ship_production_cost^0}
-	set_temp_variable = {ship_amount_to_add = ship_amount_contract_holder@var:medium_selected_ship_production_cost^0}
+	set_temp_variable = {ship_amount_to_add = ship_amount_contract_holder@var:heavy_selected_ship_production_cost^0}
 	if = {
 		limit = {
 			check_variable = {heavy_selected_ship_production_cost = 7400}

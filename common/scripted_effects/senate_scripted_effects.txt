@@ -1,0 +1,107 @@
+calculate_economic_senate_power = {
+	set_temp_variable = {manpower_calculator = max_manpower_k}
+	divide_temp_variable = {manpower_calculator = 10000}
+	set_temp_variable = {credit_income_calculator = nmn}
+	set_temp_variable = {factory_count_calculator = num_of_civilian_factories}
+	add_to_temp_variable = {manpower_calculator = credit_income_calculator}
+	add_to_temp_variable = {manpower_calculator = factory_count_calculator}
+	for_each_loop = {
+		array = global.EconomicMemberSenateArray
+		value = Tag_we_are_looking_for
+		index = i
+		break = break
+		if = {
+			limit = {
+				check_variable = {Tag_we_are_looking_for = global.EconomicMemberSenateArray^i}
+			}
+			add_to_temp_array = {
+				array = global.temporary_economic_senate_power
+				value = manpower_calculator
+			}
+		}
+	}
+}
+calculate_military_senate_power = {
+	set_temp_variable = {battalions_calculator = num_battalions}
+	divide_temp_variable = {manpower_calculator = 10}
+	set_temp_variable = {num_ships_calculator = num_ships }
+	set_temp_variable = {num_of_planes_calculator = num_deployed_planes}
+	divide_temp_variable = {num_of_planes_calculator = 50}
+	for_each_loop = {
+		array = global.MilitaryMemberSenateArray
+		value = Tag_we_are_looking_for
+		index = i
+		break = break
+		if = {
+			limit = {
+				check_variable = {Tag_we_are_looking_for = global.MilitaryMemberSenateArray^i}
+			}
+			add_to_temp_array = {
+				array = global.temporary_military_senate_power
+				value = manpower_calculator
+			}
+		}
+	}
+}
+calculate_espionage_senate_power = {
+	set_temp_variable = {agent_total_score_calculator = 0}
+	if = {
+		limit = {
+			has_variable = agent_martial@var:agent_operation_slot_1
+		}
+		add_to_temp_variable = {agent_total_score_calculator = agent_martial@var:agent_operation_slot_1}
+		add_to_temp_variable = {agent_total_score_calculator = agent_intelligence@var:agent_operation_slot_1}
+		add_to_temp_variable = {agent_total_score_calculator = agent_charisma@var:agent_operation_slot_1}
+	}
+	if = {
+		limit = {
+			has_variable = agent_martial@var:agent_operation_slot_2
+		}
+		add_to_temp_variable = {agent_total_score_calculator = agent_martial@var:agent_operation_slot_2}
+		add_to_temp_variable = {agent_total_score_calculator = agent_intelligence@var:agent_operation_slot_2}
+		add_to_temp_variable = {agent_total_score_calculator = agent_charisma@var:agent_operation_slot_2}
+	}
+	if = {
+		limit = {
+			has_variable = agent_martial@var:agent_operation_slot_3
+		}
+		add_to_temp_variable = {agent_total_score_calculator = agent_martial@var:agent_operation_slot_3}
+		add_to_temp_variable = {agent_total_score_calculator = agent_intelligence@var:agent_operation_slot_3}
+		add_to_temp_variable = {agent_total_score_calculator = agent_charisma@var:agent_operation_slot_3}
+	}
+	for_each_loop = {
+		array = global.EspionageMemberSenateArray
+		value = Tag_we_are_looking_for
+		index = i
+		break = break
+		if = {
+			limit = {
+				check_variable = {Tag_we_are_looking_for = global.ResearchMemberSenateArray^i}
+			}
+			add_to_temp_array = {
+				array = global.temporary_espionage_senate_power
+				value = manpower_calculator
+			}
+		}
+	}
+}
+calculate_research_senate_power = {
+	set_temp_variable = {research_slots_calculator = amount_research_slots }
+	set_temp_variable = {research_technologies_calculator = num_research_technologies }
+	set_temp_variable = {tech_sharing_groups_calculator = num_tech_sharing_groups}
+	for_each_loop = {
+		array = global.ResearchMemberSenateArray
+		value = Tag_we_are_looking_for
+		index = i
+		break = break
+		if = {
+			limit = {
+				check_variable = {Tag_we_are_looking_for = global.ResearchMemberSenateArray^i}
+			}
+			add_to_temp_array = {
+				array = global.temporary_research_senate_power
+				value = manpower_calculator
+			}
+		}
+	}
+}
