@@ -1,4 +1,49 @@
-guiTypes = {	
+guiTypes = {
+	containerWindowType = {
+		name = "production_market_back_screen"
+		position = { x = 620 y = 100 } #990
+		size = { width=800 height=800 }
+		moveable = yes
+		background = {
+			name = "Background"
+			quadTextureSprite = "GFX_production_screen_market"
+		}
+		buttonType = {
+			name = naval_top_button
+			position = { x = 107 y=33 }
+			spriteType = "GFX_naval_production_top_button"
+		}
+		buttonType = {
+			name = air_top_button
+			position = { x = 190 y=33 }
+			spriteType = "GFX_air_production_top_button"
+		}
+		buttonType = {
+			name = land_top_button
+			position = { x = 276 y=33 }
+			spriteType = "GFX_land_production_top_button"
+		}
+		buttonType = {
+			name = droid_top_button
+			position = { x = 364 y=33 }
+			spriteType = "GFX_droid_production_top_button"
+		}
+		buttonType = {
+			name = medicine_top_button
+			position = { x = 451 y=33 }
+			spriteType = "GFX_medicine_production_top_button"
+		}
+		buttonType = {
+			name = raw_goods_top_button
+			position = { x = 536 y=33 }
+			spriteType = "GFX_raw_goods_production_top_button"
+		}
+		buttonType = {
+			name = entertainment_top_button
+			position = { x = 619 y=33 }
+			spriteType = "GFX_entertainment_production_top_button"
+		}
+	}	
 	containerWindowType = {
 		name = "light_ship_entry_box"
 		position = { x = 100 y = 100 } #990
@@ -64,37 +109,8 @@ guiTypes = {
 	}
 	containerWindowType = {
 		name = "Marketplace_production_ships"
-		position = { x = 620 y = 100 } #990
+		position = { x = 0 y = 0 } #990
 		size = { width=946 height=982 }
-		background = {
-			name = "Background"
-			quadTextureSprite = "GFX_production_screen_market"
-		}
-		instantTextBoxType = {
-			name = "light_top_title"
-			position = {x = 44 y = 89}
-			text = "Light"
-			font = deathstar_32
-			format = centre
-			alwaystransparent = yes
-		}
-		instantTextBoxType = {
-			name = "medium_top_title"
-			position = {x = 280 y = 89}
-			text = "Medium" #medium_dockyards_used_text
-			font = deathstar_32
-			format = centre
-			maxWidth = 240
-			alwaystransparent = yes
-		}
-		instantTextBoxType = {
-			name = "heavy_top_title"
-			position = {x = 560 y = 89}
-			text = "Heavy" #heavy_dockyards_used_text
-			font = deathstar_32
-			format = centre
-			alwaystransparent = yes
-		}
 		instantTextBoxType = {
 			name = "light_shipyard_workers_desc"
 			position = {x = 380 y = 210}
@@ -124,37 +140,37 @@ guiTypes = {
 		}
 		buttonType = {
 			name = "light_workers_add_button" 
-			position = { x = 402 y = 210 }
+			position = { x = 543 y = 210 }
 			spriteType = "GFX_Plus_production_button"
 			pdx_tooltip = "worker_add_1000_tooltip"
 		}
 		buttonType = {
 			name = "medium_workers_add_button" 
-			position = { x = 402 y = 347 }
+			position = { x = 543 y = 347 }
 			spriteType = "GFX_Plus_production_button"
 			pdx_tooltip = "worker_add_1000_tooltip"
 		}
 		buttonType = {
 			name = "heavy_workers_add_button" 
-			position = { x = 402 y = 484 }
+			position = { x = 543 y = 484 }
 			spriteType = "GFX_Plus_production_button"
 			pdx_tooltip = "worker_add_1000_tooltip"
 		}
 		buttonType = {
 			name = "light_workers_subtract_button" 
-			position = { x = 545 y = 215 }
+			position = { x = 402 y = 215 }
 			spriteType = "GFX_Minus_production_button"
 			pdx_tooltip = "worker_subtract_1000_tooltip"
 		}
 		buttonType = {
 			name = "medium_workers_subtract_button" 
-			position = { x = 545 y = 352 }
+			position = { x = 402 y = 352 }
 			spriteType = "GFX_Minus_production_button"
 			pdx_tooltip = "worker_subtract_1000_tooltip"
 		}
 		buttonType = {
 			name = "heavy_workers_subtract_button" 
-			position = { x = 545 y = 489 }
+			position = { x = 402 y = 489 }
 			spriteType = "GFX_Minus_production_button"
 			pdx_tooltip = "worker_subtract_1000_tooltip"
 		}
@@ -201,6 +217,84 @@ guiTypes = {
 			spriteType = "GFX_Level_1_production_factory"
 			position = {x = -365 y = 486}
 			orientation = UPPER_RIGHT
+		}
+		instantTextBoxType = {
+			name = "light_dockyard_level"
+			text = "[get_light_shipyard_level]"
+			font = vic_18
+			position = { x = -327 y = 215 }
+			orientation = UPPER_RIGHT
+			maxWidth = 100
+		}
+		instantTextBoxType = {
+			name = "medium_dockyard_level"
+			text = "[get_medium_shipyard_level]"
+			font = vic_18
+			position = { x = -327 y = 353 }
+			orientation = UPPER_RIGHT
+			maxWidth = 100
+		}
+		instantTextBoxType = {
+			name = "heavy_dockyard_level"
+			text = "[get_heavy_shipyard_level]"
+			font = vic_18
+			position = { x = -327 y = 491 }
+			orientation = UPPER_RIGHT
+			maxWidth = 100
+		}
+		instantTextBoxType = {
+			name = "light_dockyards_price"
+			position = {x = 294 y = 226}
+			text = "light_dockyards_get_price_selected" # light_dockyards_used_text
+			font = vic_18
+			format = centre
+			orientation = UPPER_LEFT
+			maxWidth = 100
+		}
+		instantTextBoxType = {
+			name = "medium_dockyards_price"
+			position = {x = 294 y = 364}
+			text = "medium_dockyards_get_price_selected" #medium_dockyards_used_text
+			font = vic_18
+			format = centre # BEEP
+			orientation = UPPER_LEFT
+			maxWidth = 100
+		}
+		instantTextBoxType = {
+			name = "heavy_dockyards_price"
+			position = {x = 294 y = 502}
+			text = "heavy_dockyards_get_price_selected" #heavy_dockyards_used_text
+			font = vic_18
+			format = centre
+			orientation = UPPER_LEFT
+			maxWidth = 100
+		}
+		instantTextBoxType = {
+			name = "light_dockyards_desc"
+			position = {x = -355 y = 299}
+			text = "light_dockyards_used_text" # light_dockyards_used_text
+			font = vic_18
+			format = centre
+			orientation = UPPER_RIGHT
+			maxWidth = 100
+		}
+		instantTextBoxType = {
+			name = "medium_dockyards_desc"
+			position = {x = -355 y = 437}
+			text = "medium_dockyards_used_text" #medium_dockyards_used_text
+			font = vic_18
+			format = centre # BEEP
+			orientation = UPPER_RIGHT
+			maxWidth = 100
+		}
+		instantTextBoxType = {
+			name = "heavy_dockyards_desc"
+			position = {x = -355 y = 575}
+			text = "heavy_dockyards_used_text" #heavy_dockyards_used_text
+			font = vic_18
+			format = centre
+			orientation = UPPER_RIGHT
+			maxWidth = 100
 		}
 		buttonType = {
 			name = "light_dockyards_add_button" 
@@ -267,57 +361,6 @@ guiTypes = {
 			position = { x = 120 y = 565 }
 			orientation = UPPER_LEFT
 			font = vic_18
-		}
-		instantTextBoxType = {
-			name = "light_dockyard_level"
-			text = "Level 1"
-			font = deathstar_32
-			position = { x = 120 y = 565 }
-			orientation = UPPER_RIGHT
-			font = vic_18
-		}
-		instantTextBoxType = {
-			name = "medium_dockyard_level"
-			text = "Level 1"
-			font = deathstar_32
-			position = { x = 120 y = 565 }
-			orientation = UPPER_LEFT
-			font = vic_18
-		}
-		instantTextBoxType = {
-			name = "heavy_dockyard_level"
-			text = "Level 1"
-			font = deathstar_32
-			position = { x = 120 y = 565 }
-			orientation = UPPER_LEFT
-			font = vic_18
-		}
-		instantTextBoxType = {
-			name = "light_dockyards_desc"
-			position = {x = -355 y = 299}
-			text = "light_dockyards_used_text" # light_dockyards_used_text
-			font = vic_18
-			format = centre
-			orientation = UPPER_RIGHT
-			maxWidth = 100
-		}
-		instantTextBoxType = {
-			name = "medium_dockyards_desc"
-			position = {x = -355 y = 437}
-			text = "medium_dockyards_used_text" #medium_dockyards_used_text
-			font = vic_18
-			format = centre # BEEP
-			orientation = UPPER_RIGHT
-			maxWidth = 100
-		}
-		instantTextBoxType = {
-			name = "heavy_dockyards_desc"
-			position = {x = -355 y = 575}
-			text = "heavy_dockyards_used_text" #heavy_dockyards_used_text
-			font = vic_18
-			format = centre
-			orientation = UPPER_RIGHT
-			maxWidth = 100
 		}
 		gridBoxType = {
 			name = light_ship_gridbox

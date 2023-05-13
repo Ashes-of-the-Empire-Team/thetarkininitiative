@@ -40,602 +40,84 @@ scripted_gui = {
 			}
 		}
 	}
-	corporation_sell_market = {
+	marketplace_production_back_screen = {
 		context_type = player_context
-		window_name = "corporation_sell_market"
+		window_name = "production_market_back_screen"
 		visible = {
-			has_country_flag = corp_sell
+           has_country_flag = production_market_open
 		}
 		effects = {
-			fighter_add_click = {
-				add_to_array = { fighter_product_array = 0 }
+			naval_top_button_click = {
+				set_country_flag = production_ships_open
+				clr_country_flag = production_air_open 
+				clr_country_flag = production_land_open
+				clr_country_flag = production_droid_open
+				clr_country_flag = production_medicine_open
+				clr_country_flag = production_raw_goods_open
+				clr_country_flag = production_entertainment_open
 			}
-		}
-		triggers = {
-		}
-
-		properties = {
-			contract_nation = {
-				image = "[?v.GetFlag]" 
-				}
-			item_button = {
-				image = "[GetFighterProduct]" 
-				}
+			air_top_button_click = {
+				set_country_flag = production_air_open
+				clr_country_flag = production_ships_open
+				clr_country_flag = production_land_open
+				clr_country_flag = production_droid_open
+				clr_country_flag = production_medicine_open
+				clr_country_flag = production_raw_goods_open
+				clr_country_flag = production_entertainment_open
 			}
-		dynamic_lists = {
-			contract_grid = {
-				array = current_contracts_tag
-				entry_container = contract_item
-				change_scope = yes
+			land_top_button_click = {
+				set_country_flag = production_land_open
+				clr_country_flag = production_air_open
+				clr_country_flag = production_ships_open
+				clr_country_flag = production_droid_open
+				clr_country_flag = production_medicine_open
+				clr_country_flag = production_raw_goods_open
+				clr_country_flag = production_entertainment_open
 			}
-		}
-	}
-	corp_product_market = {
-		context_type = player_context
-		window_name = "corp_product_market"
-		visible = {
-			has_country_flag = corp_product
-		}
-		effects = {
-			efficiency_red_button_1_click = {
-
+			droid_top_button_click = {
+				set_country_flag = production_droid_open
+				clr_country_flag = production_air_open
+				clr_country_flag = production_land_open
+				clr_country_flag = production_ships_open
+				clr_country_flag = production_medicine_open
+				clr_country_flag = production_raw_goods_open
+				clr_country_flag = production_entertainment_open
 			}
-			fighter_category_click = {
-				set_country_flag = fighter_select_category
-				clr_country_flag = droid_select_category
-				clr_country_flag = ship_select_category
-				clr_country_flag = vehicle_select_category
-				add_to_array = { product_dev_array = token:tie_fighter_airframe_0 }
+			medicine_top_button_click = {
+				set_country_flag = production_medicine_open
+				clr_country_flag = production_air_open
+				clr_country_flag = production_land_open
+				clr_country_flag = production_droid_open
+				clr_country_flag = production_ships_open
+				clr_country_flag = production_raw_goods_open
+				clr_country_flag = production_entertainment_open
 			}
-			ship_category_click = {
-				set_country_flag = ship_select_category
-				clr_country_flag = droid_select_category
-				clr_country_flag = fighter_select_category
-				clr_country_flag = vehicle_select_category
+			raw_goods_top_button_click = {
+				set_country_flag = production_raw_goods_open
+				clr_country_flag = production_air_open
+				clr_country_flag = production_land_open
+				clr_country_flag = production_droid_open
+				clr_country_flag = production_medicine_open
+				clr_country_flag = production_ships_open
+				clr_country_flag = production_entertainment_open
 			}
-			vehicle_category_click = {
-				set_country_flag = vehicle_select_category
-				clr_country_flag = droid_select_category
-				clr_country_flag = ship_select_category
-				clr_country_flag = fighter_select_category
-			}
-			droid_category_click = {
-				set_country_flag = droid_select_category
-				clr_country_flag = vehicle_select_category
-				clr_country_flag = ship_select_category
-				clr_country_flag = fighter_select_category
-			}
-			product_item_select_click = {
-				set_variable = { selected_item = ROOT }
-			}
-			research_button_click = {
-				if = {
-					limit = {
-						has_country_flag = tie_fighter_selected
-					}
-					set_country_flag = {
-						flag = tie_fighter_development
-						days = 180
-					}
-					set_country_flag = tie_fighter_researched
-				}
-				if = {
-					limit = {
-						has_country_flag = tie_bomber_selected
-					}
-					set_country_flag = {
-						flag = tie_bomber
-						days = 180
-					}
-					set_country_flag = tie_bomber_researched
-				}
-			}
-			flagship_button_click = {
-				for_each_loop = {
-					array = global.imperial_fighters_tag_array
-					value = v
-						if = {
-							 limit = { tag = var:v }
-						  remove_from_array = {
-							array = Global.imperial_fighters_tag_array
-							index = i
-						}
-						remove_from_array = {
-							array = Global.imperial_fighters_array
-							index = i
-						}
-						remove_from_array = {
-							array = Global.imperial_fighters_price_per_unit_array
-							index = i
-						}
-					}
-				}
-				if = {
-					limit = {
-						has_country_flag = tie_fighter_selected
-					}
-					add_to_array = { Global.imperial_fighters_tag_array = ROOT.id }
-					add_to_array = { Global.imperial_fighters_array = 0 }
-					add_to_array = { Global.imperial_fighters_price_per_unit_array = actual_price }
-				}
-				if = {
-					limit = {
-						has_country_flag = tie_bomber_selected
-					}
-					add_to_array = { Global.imperial_fighters_tag_array = ROOT.id }
-					add_to_array = { Global.imperial_fighters_array = 1 }
-					add_to_array = { Global.imperial_fighters_price_per_unit_array = actual_price }
-				}
-				if = {
-					limit = {
-						has_country_flag = tie_advanced_selected
-					}
-					add_to_array = { Global.imperial_fighters_tag_array = ROOT.id }
-					add_to_array = { Global.imperial_fighters_array = 2 }
-					add_to_array = { Global.imperial_fighters_price_per_unit_array = actual_price }
-				}
-				if = {
-					limit = {
-						has_country_flag = tie_advanced_defender_selected
-					}
-					add_to_array = { Global.imperial_fighters_tag_array = ROOT.id }
-					add_to_array = { Global.imperial_fighters_array = 3 }
-					add_to_array = { Global.imperial_fighters_price_per_unit_array = actual_price }
-				}
-				if = {
-					limit = {
-						has_country_flag = tie_defender_selected
-					}
-					add_to_array = { Global.imperial_fighters_tag_array = ROOT.id }
-					add_to_array = { Global.imperial_fighters_array = 4 }
-					add_to_array = { Global.imperial_fighters_price_per_unit_array = actual_price }
-				}
-				if = {
-					limit = {
-						has_country_flag = tie_defender_gunner_selected
-					}
-					add_to_array = { Global.imperial_fighters_tag_array = ROOT.id }
-					add_to_array = { Global.imperial_fighters_array = 5 }
-					add_to_array = { Global.imperial_fighters_price_per_unit_array = actual_price }
-				}
-				if = {
-					limit = {
-						has_country_flag = tie_heavy_bomber_selected
-					}
-					add_to_array = { Global.imperial_fighters_tag_array = ROOT.id }
-					add_to_array = { Global.imperial_fighters_array = 6 }
-					add_to_array = { Global.imperial_fighters_price_per_unit_array = actual_price }
-				}
-				if = {
-					limit = {
-						has_country_flag = tie_interceptor_selected
-					}
-					add_to_array = { Global.imperial_fighters_tag_array = ROOT.id }
-					add_to_array = { Global.imperial_fighters_array = 7 }
-					add_to_array = { Global.imperial_fighters_price_per_unit_array = actual_price }
-				}
-				if = {
-					limit = {
-						has_country_flag = tie_interceptor_2_selected
-					}
-					add_to_array = { Global.imperial_fighters_tag_array = ROOT.id }
-					add_to_array = { Global.imperial_fighters_array = 8 }
-					add_to_array = { Global.imperial_fighters_price_per_unit_array = actual_price }
-				}
-				if = {
-					limit = {
-						has_country_flag = tie_punisher_selected
-					}
-					add_to_array = { Global.imperial_fighters_tag_array = ROOT.id }
-					add_to_array = { Global.imperial_fighters_array = 9 }
-					add_to_array = { Global.imperial_fighters_price_per_unit_array = actual_price }
-				}
-				if = {
-					limit = {
-						has_country_flag = tie_specter_selected
-					}
-					add_to_array = { Global.imperial_fighters_tag_array = ROOT.id }
-					add_to_array = { Global.imperial_fighters_array = 10 }
-					add_to_array = { Global.imperial_fighters_price_per_unit_array = actual_price }
-				}
-				if = {
-					limit = {
-						has_country_flag = tie_tiespecter_selected
-					}
-					add_to_array = { Global.imperial_fighters_tag_array = ROOT.id }
-					add_to_array = { Global.imperial_fighters_array = 11 }
-					add_to_array = { Global.imperial_fighters_price_per_unit_array = actual_price }
-				}
-				if = {
-					limit = {
-						has_country_flag = tie_vanguard_selected
-					}
-					add_to_array = { Global.imperial_fighters_tag_array = ROOT.id }
-					add_to_array = { Global.imperial_fighters_array = 12 }
-					add_to_array = { Global.imperial_fighters_price_per_unit_array = actual_price }
-				}
-			}
-			higher_button_product_click = {
-				add_to_variable = { product_set_markup = 0.1 }
-				set_variable = { actual_price = base_price }
-				set_variable = { product_markup = product_set_markup }
-				add_to_variable = { product_markup = 1 }
-				multiply_variable = { actual_price = product_markup }
-			}
-			lower_button_product_click = {
-				subtract_from_variable = { product_set_markup = 0.1 }
-				set_variable = { actual_price = base_price }
-				set_variable = { product_markup = product_set_markup }
-				add_to_variable = { product_markup = 1 }
-				multiply_variable = { actual_price = product_markup }
-			}
-		}
-		triggers = {
-			price_visible = {
-				has_country_flag = not_developed
-			}
-			markup_visible = {
-				NOT = {
-					has_country_flag = not_developed
-				}
-			}
-			lower_button_product_click_enabled = {
-				check_variable = { actual_price > 1 }
-			}
-			efficiency_red_button_1_click_enabled = {
-				check_variable = { efficiency_item > 0 }
-			}
-			efficiency_red_button_2_click_enabled = {
-				check_variable = { efficiency_item > 1 }
-			}
-			efficiency_red_button_3_click_enabled = {
-				check_variable = { efficiency_item > 2 }
-			}
-			efficiency_red_button_4_click_enabled = {
-				check_variable = { efficiency_item > 3 }
-			}
-			efficiency_red_button_5_click_enabled = {
-				check_variable = { efficiency_item > 4 }
-			}
-			quality_red_button_1_click_enabled = {
-				check_variable = { quality_item > 0 }
-			}
-			quality_red_button_2_click_enabled = {
-				check_variable = { quality_item > 1 }
-			}
-			quality_red_button_3_click_enabled = {
-				check_variable = { quality_item > 2 }
-			}
-			quality_red_button_4_click_enabled = {
-				check_variable = { quality_item > 3 }
-			}
-			quality_red_button_5_click_enabled = {
-				check_variable = { quality_item > 4 }
-			}
-			fighter_category_click_enabled = {
-				NOT = {
-					has_country_flag = fighter_select_category
-				}
-			}
-			ship_category_click_enabled = {
-				NOT = {
-					has_country_flag = ship_select_category
-				}
-			}
-			vehicle_category_click_enabled = {
-				NOT = {
-					has_country_flag = vehicle_select_category
-				}
-			}
-			droid_category_click_enabled = {
-				NOT = {
-					has_country_flag = droid_select_category
-				}
-			}
-		}
-		#dynamic_lists = {
-		#	product_dev_grid = {
-		#		array = product_dev_array
-		#		entry_container = product_item_entry
-		#		change_scope = yes
-		#	}
-		#}
-		properties = {
-			product_selected_imperial = {
-				image = "[Getimperialfighter]" 
-				}
-			}
-	}
-	imperial_fighters = {
-		context_type = player_context
-		window_name = "imperial_fighters"
-		parent_window_name = "corp_product_market"
-		visible = {
-			has_country_flag = fighter_select_category
-		}
-		effects = {
-			tie_fighter_click = {
-				set_variable = { base_price = 5 }
-				set_country_flag = tie_fighter_selected
-				clr_country_flag = tie_bomber_selected
-				clr_country_flag = tie_advanced_selected
-				clr_country_flag = tie_advanced_defender_selected
-				clr_country_flag = tie_defender_selected
-				clr_country_flag = tie_defender_gunner_selected
-				clr_country_flag = tie_heavy_bomber_selected
-				clr_country_flag = tie_interceptor_selected
-				clr_country_flag = tie_interceptor_2_selected
-				clr_country_flag = tie_punisher_selected
-				clr_country_flag = tie_specter_selected
-				clr_country_flag = tie_tiespecter_selected
-				clr_country_flag = tie_vanguard_selected
-			}
-			tie_bomber_click = {
-				set_variable = { base_price = 7 }
-				clr_country_flag = tie_fighter_selected
-				set_country_flag = tie_bomber_selected
-				clr_country_flag = tie_advanced_selected
-				clr_country_flag = tie_advanced_defender_selected
-				clr_country_flag = tie_defender_selected
-				clr_country_flag = tie_defender_gunner_selected
-				clr_country_flag = tie_heavy_bomber_selected
-				clr_country_flag = tie_interceptor_selected
-				clr_country_flag = tie_interceptor_2_selected
-				clr_country_flag = tie_punisher_selected
-				clr_country_flag = tie_specter_selected
-				clr_country_flag = tie_tiespecter_selected
-				clr_country_flag = tie_vanguard_selected
-			}
-			tie_advanced_click = {
-				set_variable = { base_price = 0 }
-				clr_country_flag = tie_fighter_selected
-				clr_country_flag = tie_bomber_selected
-				set_country_flag = tie_advanced_selected
-				clr_country_flag = tie_advanced_defender_selected
-				clr_country_flag = tie_defender_selected
-				clr_country_flag = tie_defender_gunner_selected
-				clr_country_flag = tie_heavy_bomber_selected
-				clr_country_flag = tie_interceptor_selected
-				clr_country_flag = tie_interceptor_2_selected
-				clr_country_flag = tie_punisher_selected
-				clr_country_flag = tie_specter_selected
-				clr_country_flag = tie_tiespecter_selected
-				clr_country_flag = tie_vanguard_selected
-			}
-			tie_advanced_defender_click = {
-				set_variable = { base_price = 0 }
-				clr_country_flag = tie_fighter_selected
-				clr_country_flag = tie_bomber_selected
-				clr_country_flag = tie_advanced_selected
-				set_country_flag = tie_advanced_defender_selected
-				clr_country_flag = tie_defender_selected
-				clr_country_flag = tie_defender_gunner_selected
-				clr_country_flag = tie_heavy_bomber_selected
-				clr_country_flag = tie_interceptor_selected
-				clr_country_flag = tie_interceptor_2_selected
-				clr_country_flag = tie_punisher_selected
-				clr_country_flag = tie_specter_selected
-				clr_country_flag = tie_tiespecter_selected
-				clr_country_flag = tie_vanguard_selected
-			}
-			tie_defender_click = {
-				set_variable = { base_price = 0 }
-				clr_country_flag = tie_fighter_selected
-				clr_country_flag = tie_bomber_selected
-				clr_country_flag = tie_advanced_selected
-				clr_country_flag = tie_advanced_defender_selected
-				set_country_flag = tie_defender_selected
-				clr_country_flag = tie_defender_gunner_selected
-				clr_country_flag = tie_heavy_bomber_selected
-				clr_country_flag = tie_interceptor_selected
-				clr_country_flag = tie_interceptor_2_selected
-				clr_country_flag = tie_punisher_selected
-				clr_country_flag = tie_specter_selected
-				clr_country_flag = tie_tiespecter_selected
-				clr_country_flag = tie_vanguard_selected
-			}
-			tie_defender_gunner_click = {
-				set_variable = { base_price = 0 }
-				clr_country_flag = tie_fighter_selected
-				clr_country_flag = tie_bomber_selected
-				clr_country_flag = tie_advanced_selected
-				clr_country_flag = tie_advanced_defender_selected
-				clr_country_flag = tie_defender_selected
-				set_country_flag = tie_defender_gunner_selected
-				clr_country_flag = tie_heavy_bomber_selected
-				clr_country_flag = tie_interceptor_selected
-				clr_country_flag = tie_interceptor_2_selected
-				clr_country_flag = tie_punisher_selected
-				clr_country_flag = tie_specter_selected
-				clr_country_flag = tie_tiespecter_selected
-				clr_country_flag = tie_vanguard_selected
-			}
-			tie_heavy_bomber_click = {
-				set_variable = { base_price = 0 }
-				clr_country_flag = tie_fighter_selected
-				clr_country_flag = tie_bomber_selected
-				clr_country_flag = tie_advanced_selected
-				clr_country_flag = tie_advanced_defender_selected
-				clr_country_flag = tie_defender_selected
-				clr_country_flag = tie_defender_gunner_selected
-				set_country_flag = tie_heavy_bomber_selected
-				clr_country_flag = tie_interceptor_selected
-				clr_country_flag = tie_interceptor_2_selected
-				clr_country_flag = tie_punisher_selected
-				clr_country_flag = tie_specter_selected
-				clr_country_flag = tie_tiespecter_selected
-				clr_country_flag = tie_vanguard_selected
-			}
-			tie_interceptor_click = {
-				set_variable = { base_price = 0 }
-				clr_country_flag = tie_fighter_selected
-				clr_country_flag = tie_bomber_selected
-				clr_country_flag = tie_advanced_selected
-				clr_country_flag = tie_advanced_defender_selected
-				clr_country_flag = tie_defender_selected
-				clr_country_flag = tie_defender_gunner_selected
-				clr_country_flag = tie_heavy_bomber_selected
-				set_country_flag = tie_interceptor_selected
-				clr_country_flag = tie_interceptor_2_selected
-				clr_country_flag = tie_punisher_selected
-				clr_country_flag = tie_specter_selected
-				clr_country_flag = tie_tiespecter_selected
-				clr_country_flag = tie_vanguard_selected
-			}
-			tie_interceptor_2_click = {
-				set_variable = { base_price = 0 }
-				clr_country_flag = tie_fighter_selected
-				clr_country_flag = tie_bomber_selected
-				clr_country_flag = tie_advanced_selected
-				clr_country_flag = tie_advanced_defender_selected
-				clr_country_flag = tie_defender_selected
-				clr_country_flag = tie_defender_gunner_selected
-				clr_country_flag = tie_heavy_bomber_selected
-				clr_country_flag = tie_interceptor_selected
-				set_country_flag = tie_interceptor_2_selected
-				clr_country_flag = tie_punisher_selected
-				clr_country_flag = tie_specter_selected
-				clr_country_flag = tie_tiespecter_selected
-				clr_country_flag = tie_vanguard_selected
-			}
-			tie_punisher_click = {
-				set_variable = { base_price = 0 }
-				clr_country_flag = tie_fighter_selected
-				clr_country_flag = tie_bomber_selected
-				clr_country_flag = tie_advanced_selected
-				clr_country_flag = tie_advanced_defender_selected
-				clr_country_flag = tie_defender_selected
-				clr_country_flag = tie_defender_gunner_selected
-				clr_country_flag = tie_heavy_bomber_selected
-				clr_country_flag = tie_interceptor_selected
-				clr_country_flag = tie_interceptor_2_selected
-				set_country_flag = tie_punisher_selected
-				clr_country_flag = tie_specter_selected
-				clr_country_flag = tie_tiespecter_selected
-				clr_country_flag = tie_vanguard_selected
-			}
-			tie_specter_click = {
-				set_variable = { base_price = 0 }
-				clr_country_flag = tie_fighter_selected
-				clr_country_flag = tie_bomber_selected
-				clr_country_flag = tie_advanced_selected
-				clr_country_flag = tie_advanced_defender_selected
-				clr_country_flag = tie_defender_selected
-				clr_country_flag = tie_defender_gunner_selected
-				clr_country_flag = tie_heavy_bomber_selected
-				clr_country_flag = tie_interceptor_selected
-				clr_country_flag = tie_interceptor_2_selected
-				clr_country_flag = tie_punisher_selected
-				set_country_flag = tie_specter_selected
-				clr_country_flag = tie_tiespecter_selected
-				clr_country_flag = tie_vanguard_selected
-			}
-			tie_tiespecter_click = {
-				set_variable = { base_price = 0 }
-				clr_country_flag = tie_fighter_selected
-				clr_country_flag = tie_bomber_selected
-				clr_country_flag = tie_advanced_selected
-				clr_country_flag = tie_advanced_defender_selected
-				clr_country_flag = tie_defender_selected
-				clr_country_flag = tie_defender_gunner_selected
-				clr_country_flag = tie_heavy_bomber_selected
-				clr_country_flag = tie_interceptor_selected
-				clr_country_flag = tie_interceptor_2_selected
-				clr_country_flag = tie_punisher_selected
-				clr_country_flag = tie_specter_selected
-				set_country_flag = tie_tiespecter_selected
-				clr_country_flag = tie_vanguard_selected
-			}
-			tie_vanguard_click = {
-				set_variable = { base_price = 0 }
-				clr_country_flag = tie_fighter_selected
-				clr_country_flag = tie_bomber_selected
-				clr_country_flag = tie_advanced_selected
-				clr_country_flag = tie_advanced_defender_selected
-				clr_country_flag = tie_defender_selected
-				clr_country_flag = tie_defender_gunner_selected
-				clr_country_flag = tie_heavy_bomber_selected
-				clr_country_flag = tie_interceptor_selected
-				clr_country_flag = tie_interceptor_2_selected
-				clr_country_flag = tie_punisher_selected
-				clr_country_flag = tie_specter_selected
-				clr_country_flag = tie_tiespecter_selected
-				set_country_flag = tie_vanguard_selected
-			}
-		}
-		triggers = {
-			tie_fighter_click_enabled = {
-				NOT = {
-					has_country_flag = tie_fighter_selected
-				}
-			}
-			tie_bomber_click_enabled = {
-				NOT = {
-					has_country_flag = tie_bomber_selected
-				}
-			}
-			tie_advanced_click_enabled = {
-				NOT = {
-					has_country_flag = tie_advanced_selected
-				}
-			}
-			tie_advanced_defender_click_enabled = {
-				NOT = {
-					has_country_flag = tie_advanced_defender_selected
-				}
-			}
-			tie_defender_click_enabled = {
-				NOT = {
-					has_country_flag = tie_defender_selected
-				}
-			}
-			tie_defender_gunner_click_enabled = {
-				NOT = {
-					has_country_flag = tie_defender_gunner_selected
-				}
-			}
-			tie_heavy_bomber_click_enabled = {
-				NOT = {
-					has_country_flag = tie_heavy_bomber_selected
-				}
-			}
-			tie_interceptor_click_enabled = {
-				NOT = {
-					has_country_flag = tie_interceptor_selected
-				}
-			}
-			tie_interceptor_2_click_enabled = {
-				NOT = {
-					has_country_flag = tie_interceptor_2_selected
-				}
-			}
-			tie_punisher_click_enabled = {
-				NOT = {
-					has_country_flag = tie_punisher_selected
-				}
-			}
-			tie_specter_click_enabled = {
-				NOT = {
-					has_country_flag = tie_specter_selected
-				}
-			}
-			tie_tiespecter_click_enabled = {
-				NOT = {
-					has_country_flag = tie_tiespecter_selected
-				}
-			}
-			tie_vanguard_click_enabled = {
-				NOT = {
-					has_country_flag = tie_vanguard_selected
-				}
+			entertainment_top_button_click = {
+				set_country_flag = production_entertainment_open
+				clr_country_flag = production_air_open
+				clr_country_flag = production_land_open
+				clr_country_flag = production_droid_open
+				clr_country_flag = production_medicine_open
+				clr_country_flag = production_raw_goods_open
+				clr_country_flag = production_ships_open
 			}
 		}
 	}
 	Marketplace_production_ships = {
 		context_type = player_context
 		window_name = "Marketplace_production_ships"
+		parent_window_name = "production_market_back_screen"
 		visible = {
-           has_country_flag = market_ships_open
+           has_country_flag = production_ships_open
 		}
 		effects = {
 			light_ship_button_click = {
@@ -853,9 +335,9 @@ scripted_gui = {
 			light_ship_button = { image = "[get_light_ship_photo]" }
 			medium_ship_button = { image = "[get_medium_ship_photo]" }
 			heavy_ship_button = { image = "[get_heavy_ship_photo]" }
-			light_shipyard = { image = "[get_light_shipyard]" }
-			medium_shipyard = { image = "[get_medium_shipyard]" }
-			large_shipyard = { image = "[get_heavy_shipyard]" }
+			light_shipyard_level = { image = "[get_light_shipyard]" }
+			medium_shipyard_level = { image = "[get_medium_shipyard]" }
+			large_shipyard_level = { image = "[get_heavy_shipyard]" }
 		}
 		dynamic_lists = {
 			light_ship_gridbox = {
@@ -880,11 +362,11 @@ scripted_gui = {
 		}
 		effects = {
 			air_1_button_click = {
-				set_variable = { Root.air_1_production_selected_fighter = air_production_array^i }
+				set_variable = { Root.air_1_selected_item = air_production_array^i }
 				recalculate_air_1_creation_amount = yes
 			}
 			air_2_button_click = {
-				set_variable = { Root.air_2_production_selected_fighter = air_production_array^i }
+				set_variable = { Root.air_2_selected_item = air_production_array^i }
 				recalculate_air_2_creation_amount = yes
 			}
 			selected_air_1_click = {
@@ -1351,4 +833,596 @@ scripted_gui = {
 			} 
 		}
 	}
+## OLD PALPY STUFF
+	# corporation_sell_market = {
+	# 	context_type = player_context
+	# 	window_name = "corporation_sell_market"
+	# 	visible = {
+	# 		has_country_flag = corp_sell
+	# 	}
+	# 	effects = {
+	# 		fighter_add_click = {
+	# 			add_to_array = { fighter_product_array = 0 }
+	# 		}
+	# 	}
+	# 	triggers = {
+	# 	}
+
+	# 	properties = {
+	# 		contract_nation = {
+	# 			image = "[?v.GetFlag]" 
+	# 			}
+	# 		item_button = {
+	# 			image = "[GetFighterProduct]" 
+	# 			}
+	# 		}
+	# 	dynamic_lists = {
+	# 		contract_grid = {
+	# 			array = current_contracts_tag
+	# 			entry_container = contract_item
+	# 			change_scope = yes
+	# 		}
+	# 	}
+	# }
+	# corp_product_market = {
+	# 	context_type = player_context
+	# 	window_name = "corp_product_market"
+	# 	visible = {
+	# 		has_country_flag = corp_product
+	# 	}
+	# 	effects = {
+	# 		efficiency_red_button_1_click = {
+
+	# 		}
+	# 		fighter_category_click = {
+	# 			set_country_flag = fighter_select_category
+	# 			clr_country_flag = droid_select_category
+	# 			clr_country_flag = ship_select_category
+	# 			clr_country_flag = vehicle_select_category
+	# 			add_to_array = { product_dev_array = token:tie_fighter_airframe_0 }
+	# 		}
+	# 		ship_category_click = {
+	# 			set_country_flag = ship_select_category
+	# 			clr_country_flag = droid_select_category
+	# 			clr_country_flag = fighter_select_category
+	# 			clr_country_flag = vehicle_select_category
+	# 		}
+	# 		vehicle_category_click = {
+	# 			set_country_flag = vehicle_select_category
+	# 			clr_country_flag = droid_select_category
+	# 			clr_country_flag = ship_select_category
+	# 			clr_country_flag = fighter_select_category
+	# 		}
+	# 		droid_category_click = {
+	# 			set_country_flag = droid_select_category
+	# 			clr_country_flag = vehicle_select_category
+	# 			clr_country_flag = ship_select_category
+	# 			clr_country_flag = fighter_select_category
+	# 		}
+	# 		product_item_select_click = {
+	# 			set_variable = { selected_item = ROOT }
+	# 		}
+	# 		research_button_click = {
+	# 			if = {
+	# 				limit = {
+	# 					has_country_flag = tie_fighter_selected
+	# 				}
+	# 				set_country_flag = {
+	# 					flag = tie_fighter_development
+	# 					days = 180
+	# 				}
+	# 				set_country_flag = tie_fighter_researched
+	# 			}
+	# 			if = {
+	# 				limit = {
+	# 					has_country_flag = tie_bomber_selected
+	# 				}
+	# 				set_country_flag = {
+	# 					flag = tie_bomber
+	# 					days = 180
+	# 				}
+	# 				set_country_flag = tie_bomber_researched
+	# 			}
+	# 		}
+	# 		flagship_button_click = {
+	# 			for_each_loop = {
+	# 				array = global.imperial_fighters_tag_array
+	# 				value = v
+	# 					if = {
+	# 						 limit = { tag = var:v }
+	# 					  remove_from_array = {
+	# 						array = Global.imperial_fighters_tag_array
+	# 						index = i
+	# 					}
+	# 					remove_from_array = {
+	# 						array = Global.imperial_fighters_array
+	# 						index = i
+	# 					}
+	# 					remove_from_array = {
+	# 						array = Global.imperial_fighters_price_per_unit_array
+	# 						index = i
+	# 					}
+	# 				}
+	# 			}
+	# 			if = {
+	# 				limit = {
+	# 					has_country_flag = tie_fighter_selected
+	# 				}
+	# 				add_to_array = { Global.imperial_fighters_tag_array = ROOT.id }
+	# 				add_to_array = { Global.imperial_fighters_array = 0 }
+	# 				add_to_array = { Global.imperial_fighters_price_per_unit_array = actual_price }
+	# 			}
+	# 			if = {
+	# 				limit = {
+	# 					has_country_flag = tie_bomber_selected
+	# 				}
+	# 				add_to_array = { Global.imperial_fighters_tag_array = ROOT.id }
+	# 				add_to_array = { Global.imperial_fighters_array = 1 }
+	# 				add_to_array = { Global.imperial_fighters_price_per_unit_array = actual_price }
+	# 			}
+	# 			if = {
+	# 				limit = {
+	# 					has_country_flag = tie_advanced_selected
+	# 				}
+	# 				add_to_array = { Global.imperial_fighters_tag_array = ROOT.id }
+	# 				add_to_array = { Global.imperial_fighters_array = 2 }
+	# 				add_to_array = { Global.imperial_fighters_price_per_unit_array = actual_price }
+	# 			}
+	# 			if = {
+	# 				limit = {
+	# 					has_country_flag = tie_advanced_defender_selected
+	# 				}
+	# 				add_to_array = { Global.imperial_fighters_tag_array = ROOT.id }
+	# 				add_to_array = { Global.imperial_fighters_array = 3 }
+	# 				add_to_array = { Global.imperial_fighters_price_per_unit_array = actual_price }
+	# 			}
+	# 			if = {
+	# 				limit = {
+	# 					has_country_flag = tie_defender_selected
+	# 				}
+	# 				add_to_array = { Global.imperial_fighters_tag_array = ROOT.id }
+	# 				add_to_array = { Global.imperial_fighters_array = 4 }
+	# 				add_to_array = { Global.imperial_fighters_price_per_unit_array = actual_price }
+	# 			}
+	# 			if = {
+	# 				limit = {
+	# 					has_country_flag = tie_defender_gunner_selected
+	# 				}
+	# 				add_to_array = { Global.imperial_fighters_tag_array = ROOT.id }
+	# 				add_to_array = { Global.imperial_fighters_array = 5 }
+	# 				add_to_array = { Global.imperial_fighters_price_per_unit_array = actual_price }
+	# 			}
+	# 			if = {
+	# 				limit = {
+	# 					has_country_flag = tie_heavy_bomber_selected
+	# 				}
+	# 				add_to_array = { Global.imperial_fighters_tag_array = ROOT.id }
+	# 				add_to_array = { Global.imperial_fighters_array = 6 }
+	# 				add_to_array = { Global.imperial_fighters_price_per_unit_array = actual_price }
+	# 			}
+	# 			if = {
+	# 				limit = {
+	# 					has_country_flag = tie_interceptor_selected
+	# 				}
+	# 				add_to_array = { Global.imperial_fighters_tag_array = ROOT.id }
+	# 				add_to_array = { Global.imperial_fighters_array = 7 }
+	# 				add_to_array = { Global.imperial_fighters_price_per_unit_array = actual_price }
+	# 			}
+	# 			if = {
+	# 				limit = {
+	# 					has_country_flag = tie_interceptor_2_selected
+	# 				}
+	# 				add_to_array = { Global.imperial_fighters_tag_array = ROOT.id }
+	# 				add_to_array = { Global.imperial_fighters_array = 8 }
+	# 				add_to_array = { Global.imperial_fighters_price_per_unit_array = actual_price }
+	# 			}
+	# 			if = {
+	# 				limit = {
+	# 					has_country_flag = tie_punisher_selected
+	# 				}
+	# 				add_to_array = { Global.imperial_fighters_tag_array = ROOT.id }
+	# 				add_to_array = { Global.imperial_fighters_array = 9 }
+	# 				add_to_array = { Global.imperial_fighters_price_per_unit_array = actual_price }
+	# 			}
+	# 			if = {
+	# 				limit = {
+	# 					has_country_flag = tie_specter_selected
+	# 				}
+	# 				add_to_array = { Global.imperial_fighters_tag_array = ROOT.id }
+	# 				add_to_array = { Global.imperial_fighters_array = 10 }
+	# 				add_to_array = { Global.imperial_fighters_price_per_unit_array = actual_price }
+	# 			}
+	# 			if = {
+	# 				limit = {
+	# 					has_country_flag = tie_tiespecter_selected
+	# 				}
+	# 				add_to_array = { Global.imperial_fighters_tag_array = ROOT.id }
+	# 				add_to_array = { Global.imperial_fighters_array = 11 }
+	# 				add_to_array = { Global.imperial_fighters_price_per_unit_array = actual_price }
+	# 			}
+	# 			if = {
+	# 				limit = {
+	# 					has_country_flag = tie_vanguard_selected
+	# 				}
+	# 				add_to_array = { Global.imperial_fighters_tag_array = ROOT.id }
+	# 				add_to_array = { Global.imperial_fighters_array = 12 }
+	# 				add_to_array = { Global.imperial_fighters_price_per_unit_array = actual_price }
+	# 			}
+	# 		}
+	# 		higher_button_product_click = {
+	# 			add_to_variable = { product_set_markup = 0.1 }
+	# 			set_variable = { actual_price = base_price }
+	# 			set_variable = { product_markup = product_set_markup }
+	# 			add_to_variable = { product_markup = 1 }
+	# 			multiply_variable = { actual_price = product_markup }
+	# 		}
+	# 		lower_button_product_click = {
+	# 			subtract_from_variable = { product_set_markup = 0.1 }
+	# 			set_variable = { actual_price = base_price }
+	# 			set_variable = { product_markup = product_set_markup }
+	# 			add_to_variable = { product_markup = 1 }
+	# 			multiply_variable = { actual_price = product_markup }
+	# 		}
+	# 	}
+	# 	triggers = {
+	# 		price_visible = {
+	# 			has_country_flag = not_developed
+	# 		}
+	# 		markup_visible = {
+	# 			NOT = {
+	# 				has_country_flag = not_developed
+	# 			}
+	# 		}
+	# 		lower_button_product_click_enabled = {
+	# 			check_variable = { actual_price > 1 }
+	# 		}
+	# 		efficiency_red_button_1_click_enabled = {
+	# 			check_variable = { efficiency_item > 0 }
+	# 		}
+	# 		efficiency_red_button_2_click_enabled = {
+	# 			check_variable = { efficiency_item > 1 }
+	# 		}
+	# 		efficiency_red_button_3_click_enabled = {
+	# 			check_variable = { efficiency_item > 2 }
+	# 		}
+	# 		efficiency_red_button_4_click_enabled = {
+	# 			check_variable = { efficiency_item > 3 }
+	# 		}
+	# 		efficiency_red_button_5_click_enabled = {
+	# 			check_variable = { efficiency_item > 4 }
+	# 		}
+	# 		quality_red_button_1_click_enabled = {
+	# 			check_variable = { quality_item > 0 }
+	# 		}
+	# 		quality_red_button_2_click_enabled = {
+	# 			check_variable = { quality_item > 1 }
+	# 		}
+	# 		quality_red_button_3_click_enabled = {
+	# 			check_variable = { quality_item > 2 }
+	# 		}
+	# 		quality_red_button_4_click_enabled = {
+	# 			check_variable = { quality_item > 3 }
+	# 		}
+	# 		quality_red_button_5_click_enabled = {
+	# 			check_variable = { quality_item > 4 }
+	# 		}
+	# 		fighter_category_click_enabled = {
+	# 			NOT = {
+	# 				has_country_flag = fighter_select_category
+	# 			}
+	# 		}
+	# 		ship_category_click_enabled = {
+	# 			NOT = {
+	# 				has_country_flag = ship_select_category
+	# 			}
+	# 		}
+	# 		vehicle_category_click_enabled = {
+	# 			NOT = {
+	# 				has_country_flag = vehicle_select_category
+	# 			}
+	# 		}
+	# 		droid_category_click_enabled = {
+	# 			NOT = {
+	# 				has_country_flag = droid_select_category
+	# 			}
+	# 		}
+	# 	}
+	# 	#dynamic_lists = {
+	# 	#	product_dev_grid = {
+	# 	#		array = product_dev_array
+	# 	#		entry_container = product_item_entry
+	# 	#		change_scope = yes
+	# 	#	}
+	# 	#}
+	# 	properties = {
+	# 		product_selected_imperial = {
+	# 			image = "[Getimperialfighter]" 
+	# 			}
+	# 		}
+	# }
+	# imperial_fighters = {
+	# 	context_type = player_context
+	# 	window_name = "imperial_fighters"
+	# 	parent_window_name = "corp_product_market"
+	# 	visible = {
+	# 		has_country_flag = fighter_select_category
+	# 	}
+	# 	effects = {
+	# 		tie_fighter_click = {
+	# 			set_variable = { base_price = 5 }
+	# 			set_country_flag = tie_fighter_selected
+	# 			clr_country_flag = tie_bomber_selected
+	# 			clr_country_flag = tie_advanced_selected
+	# 			clr_country_flag = tie_advanced_defender_selected
+	# 			clr_country_flag = tie_defender_selected
+	# 			clr_country_flag = tie_defender_gunner_selected
+	# 			clr_country_flag = tie_heavy_bomber_selected
+	# 			clr_country_flag = tie_interceptor_selected
+	# 			clr_country_flag = tie_interceptor_2_selected
+	# 			clr_country_flag = tie_punisher_selected
+	# 			clr_country_flag = tie_specter_selected
+	# 			clr_country_flag = tie_tiespecter_selected
+	# 			clr_country_flag = tie_vanguard_selected
+	# 		}
+	# 		tie_bomber_click = {
+	# 			set_variable = { base_price = 7 }
+	# 			clr_country_flag = tie_fighter_selected
+	# 			set_country_flag = tie_bomber_selected
+	# 			clr_country_flag = tie_advanced_selected
+	# 			clr_country_flag = tie_advanced_defender_selected
+	# 			clr_country_flag = tie_defender_selected
+	# 			clr_country_flag = tie_defender_gunner_selected
+	# 			clr_country_flag = tie_heavy_bomber_selected
+	# 			clr_country_flag = tie_interceptor_selected
+	# 			clr_country_flag = tie_interceptor_2_selected
+	# 			clr_country_flag = tie_punisher_selected
+	# 			clr_country_flag = tie_specter_selected
+	# 			clr_country_flag = tie_tiespecter_selected
+	# 			clr_country_flag = tie_vanguard_selected
+	# 		}
+	# 		tie_advanced_click = {
+	# 			set_variable = { base_price = 0 }
+	# 			clr_country_flag = tie_fighter_selected
+	# 			clr_country_flag = tie_bomber_selected
+	# 			set_country_flag = tie_advanced_selected
+	# 			clr_country_flag = tie_advanced_defender_selected
+	# 			clr_country_flag = tie_defender_selected
+	# 			clr_country_flag = tie_defender_gunner_selected
+	# 			clr_country_flag = tie_heavy_bomber_selected
+	# 			clr_country_flag = tie_interceptor_selected
+	# 			clr_country_flag = tie_interceptor_2_selected
+	# 			clr_country_flag = tie_punisher_selected
+	# 			clr_country_flag = tie_specter_selected
+	# 			clr_country_flag = tie_tiespecter_selected
+	# 			clr_country_flag = tie_vanguard_selected
+	# 		}
+	# 		tie_advanced_defender_click = {
+	# 			set_variable = { base_price = 0 }
+	# 			clr_country_flag = tie_fighter_selected
+	# 			clr_country_flag = tie_bomber_selected
+	# 			clr_country_flag = tie_advanced_selected
+	# 			set_country_flag = tie_advanced_defender_selected
+	# 			clr_country_flag = tie_defender_selected
+	# 			clr_country_flag = tie_defender_gunner_selected
+	# 			clr_country_flag = tie_heavy_bomber_selected
+	# 			clr_country_flag = tie_interceptor_selected
+	# 			clr_country_flag = tie_interceptor_2_selected
+	# 			clr_country_flag = tie_punisher_selected
+	# 			clr_country_flag = tie_specter_selected
+	# 			clr_country_flag = tie_tiespecter_selected
+	# 			clr_country_flag = tie_vanguard_selected
+	# 		}
+	# 		tie_defender_click = {
+	# 			set_variable = { base_price = 0 }
+	# 			clr_country_flag = tie_fighter_selected
+	# 			clr_country_flag = tie_bomber_selected
+	# 			clr_country_flag = tie_advanced_selected
+	# 			clr_country_flag = tie_advanced_defender_selected
+	# 			set_country_flag = tie_defender_selected
+	# 			clr_country_flag = tie_defender_gunner_selected
+	# 			clr_country_flag = tie_heavy_bomber_selected
+	# 			clr_country_flag = tie_interceptor_selected
+	# 			clr_country_flag = tie_interceptor_2_selected
+	# 			clr_country_flag = tie_punisher_selected
+	# 			clr_country_flag = tie_specter_selected
+	# 			clr_country_flag = tie_tiespecter_selected
+	# 			clr_country_flag = tie_vanguard_selected
+	# 		}
+	# 		tie_defender_gunner_click = {
+	# 			set_variable = { base_price = 0 }
+	# 			clr_country_flag = tie_fighter_selected
+	# 			clr_country_flag = tie_bomber_selected
+	# 			clr_country_flag = tie_advanced_selected
+	# 			clr_country_flag = tie_advanced_defender_selected
+	# 			clr_country_flag = tie_defender_selected
+	# 			set_country_flag = tie_defender_gunner_selected
+	# 			clr_country_flag = tie_heavy_bomber_selected
+	# 			clr_country_flag = tie_interceptor_selected
+	# 			clr_country_flag = tie_interceptor_2_selected
+	# 			clr_country_flag = tie_punisher_selected
+	# 			clr_country_flag = tie_specter_selected
+	# 			clr_country_flag = tie_tiespecter_selected
+	# 			clr_country_flag = tie_vanguard_selected
+	# 		}
+	# 		tie_heavy_bomber_click = {
+	# 			set_variable = { base_price = 0 }
+	# 			clr_country_flag = tie_fighter_selected
+	# 			clr_country_flag = tie_bomber_selected
+	# 			clr_country_flag = tie_advanced_selected
+	# 			clr_country_flag = tie_advanced_defender_selected
+	# 			clr_country_flag = tie_defender_selected
+	# 			clr_country_flag = tie_defender_gunner_selected
+	# 			set_country_flag = tie_heavy_bomber_selected
+	# 			clr_country_flag = tie_interceptor_selected
+	# 			clr_country_flag = tie_interceptor_2_selected
+	# 			clr_country_flag = tie_punisher_selected
+	# 			clr_country_flag = tie_specter_selected
+	# 			clr_country_flag = tie_tiespecter_selected
+	# 			clr_country_flag = tie_vanguard_selected
+	# 		}
+	# 		tie_interceptor_click = {
+	# 			set_variable = { base_price = 0 }
+	# 			clr_country_flag = tie_fighter_selected
+	# 			clr_country_flag = tie_bomber_selected
+	# 			clr_country_flag = tie_advanced_selected
+	# 			clr_country_flag = tie_advanced_defender_selected
+	# 			clr_country_flag = tie_defender_selected
+	# 			clr_country_flag = tie_defender_gunner_selected
+	# 			clr_country_flag = tie_heavy_bomber_selected
+	# 			set_country_flag = tie_interceptor_selected
+	# 			clr_country_flag = tie_interceptor_2_selected
+	# 			clr_country_flag = tie_punisher_selected
+	# 			clr_country_flag = tie_specter_selected
+	# 			clr_country_flag = tie_tiespecter_selected
+	# 			clr_country_flag = tie_vanguard_selected
+	# 		}
+	# 		tie_interceptor_2_click = {
+	# 			set_variable = { base_price = 0 }
+	# 			clr_country_flag = tie_fighter_selected
+	# 			clr_country_flag = tie_bomber_selected
+	# 			clr_country_flag = tie_advanced_selected
+	# 			clr_country_flag = tie_advanced_defender_selected
+	# 			clr_country_flag = tie_defender_selected
+	# 			clr_country_flag = tie_defender_gunner_selected
+	# 			clr_country_flag = tie_heavy_bomber_selected
+	# 			clr_country_flag = tie_interceptor_selected
+	# 			set_country_flag = tie_interceptor_2_selected
+	# 			clr_country_flag = tie_punisher_selected
+	# 			clr_country_flag = tie_specter_selected
+	# 			clr_country_flag = tie_tiespecter_selected
+	# 			clr_country_flag = tie_vanguard_selected
+	# 		}
+	# 		tie_punisher_click = {
+	# 			set_variable = { base_price = 0 }
+	# 			clr_country_flag = tie_fighter_selected
+	# 			clr_country_flag = tie_bomber_selected
+	# 			clr_country_flag = tie_advanced_selected
+	# 			clr_country_flag = tie_advanced_defender_selected
+	# 			clr_country_flag = tie_defender_selected
+	# 			clr_country_flag = tie_defender_gunner_selected
+	# 			clr_country_flag = tie_heavy_bomber_selected
+	# 			clr_country_flag = tie_interceptor_selected
+	# 			clr_country_flag = tie_interceptor_2_selected
+	# 			set_country_flag = tie_punisher_selected
+	# 			clr_country_flag = tie_specter_selected
+	# 			clr_country_flag = tie_tiespecter_selected
+	# 			clr_country_flag = tie_vanguard_selected
+	# 		}
+	# 		tie_specter_click = {
+	# 			set_variable = { base_price = 0 }
+	# 			clr_country_flag = tie_fighter_selected
+	# 			clr_country_flag = tie_bomber_selected
+	# 			clr_country_flag = tie_advanced_selected
+	# 			clr_country_flag = tie_advanced_defender_selected
+	# 			clr_country_flag = tie_defender_selected
+	# 			clr_country_flag = tie_defender_gunner_selected
+	# 			clr_country_flag = tie_heavy_bomber_selected
+	# 			clr_country_flag = tie_interceptor_selected
+	# 			clr_country_flag = tie_interceptor_2_selected
+	# 			clr_country_flag = tie_punisher_selected
+	# 			set_country_flag = tie_specter_selected
+	# 			clr_country_flag = tie_tiespecter_selected
+	# 			clr_country_flag = tie_vanguard_selected
+	# 		}
+	# 		tie_tiespecter_click = {
+	# 			set_variable = { base_price = 0 }
+	# 			clr_country_flag = tie_fighter_selected
+	# 			clr_country_flag = tie_bomber_selected
+	# 			clr_country_flag = tie_advanced_selected
+	# 			clr_country_flag = tie_advanced_defender_selected
+	# 			clr_country_flag = tie_defender_selected
+	# 			clr_country_flag = tie_defender_gunner_selected
+	# 			clr_country_flag = tie_heavy_bomber_selected
+	# 			clr_country_flag = tie_interceptor_selected
+	# 			clr_country_flag = tie_interceptor_2_selected
+	# 			clr_country_flag = tie_punisher_selected
+	# 			clr_country_flag = tie_specter_selected
+	# 			set_country_flag = tie_tiespecter_selected
+	# 			clr_country_flag = tie_vanguard_selected
+	# 		}
+	# 		tie_vanguard_click = {
+	# 			set_variable = { base_price = 0 }
+	# 			clr_country_flag = tie_fighter_selected
+	# 			clr_country_flag = tie_bomber_selected
+	# 			clr_country_flag = tie_advanced_selected
+	# 			clr_country_flag = tie_advanced_defender_selected
+	# 			clr_country_flag = tie_defender_selected
+	# 			clr_country_flag = tie_defender_gunner_selected
+	# 			clr_country_flag = tie_heavy_bomber_selected
+	# 			clr_country_flag = tie_interceptor_selected
+	# 			clr_country_flag = tie_interceptor_2_selected
+	# 			clr_country_flag = tie_punisher_selected
+	# 			clr_country_flag = tie_specter_selected
+	# 			clr_country_flag = tie_tiespecter_selected
+	# 			set_country_flag = tie_vanguard_selected
+	# 		}
+	# 	}
+	# 	triggers = {
+	# 		tie_fighter_click_enabled = {
+	# 			NOT = {
+	# 				has_country_flag = tie_fighter_selected
+	# 			}
+	# 		}
+	# 		tie_bomber_click_enabled = {
+	# 			NOT = {
+	# 				has_country_flag = tie_bomber_selected
+	# 			}
+	# 		}
+	# 		tie_advanced_click_enabled = {
+	# 			NOT = {
+	# 				has_country_flag = tie_advanced_selected
+	# 			}
+	# 		}
+	# 		tie_advanced_defender_click_enabled = {
+	# 			NOT = {
+	# 				has_country_flag = tie_advanced_defender_selected
+	# 			}
+	# 		}
+	# 		tie_defender_click_enabled = {
+	# 			NOT = {
+	# 				has_country_flag = tie_defender_selected
+	# 			}
+	# 		}
+	# 		tie_defender_gunner_click_enabled = {
+	# 			NOT = {
+	# 				has_country_flag = tie_defender_gunner_selected
+	# 			}
+	# 		}
+	# 		tie_heavy_bomber_click_enabled = {
+	# 			NOT = {
+	# 				has_country_flag = tie_heavy_bomber_selected
+	# 			}
+	# 		}
+	# 		tie_interceptor_click_enabled = {
+	# 			NOT = {
+	# 				has_country_flag = tie_interceptor_selected
+	# 			}
+	# 		}
+	# 		tie_interceptor_2_click_enabled = {
+	# 			NOT = {
+	# 				has_country_flag = tie_interceptor_2_selected
+	# 			}
+	# 		}
+	# 		tie_punisher_click_enabled = {
+	# 			NOT = {
+	# 				has_country_flag = tie_punisher_selected
+	# 			}
+	# 		}
+	# 		tie_specter_click_enabled = {
+	# 			NOT = {
+	# 				has_country_flag = tie_specter_selected
+	# 			}
+	# 		}
+	# 		tie_tiespecter_click_enabled = {
+	# 			NOT = {
+	# 				has_country_flag = tie_tiespecter_selected
+	# 			}
+	# 		}
+	# 		tie_vanguard_click_enabled = {
+	# 			NOT = {
+	# 				has_country_flag = tie_vanguard_selected
+	# 			}
+	# 		}
+	# 	}
+	# }
 }
