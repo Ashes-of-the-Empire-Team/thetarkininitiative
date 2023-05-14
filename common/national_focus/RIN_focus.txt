@@ -355,12 +355,31 @@ focus = {
 		factor = 1
 	}
 	completion_reward = {
-		add_tech_bonus = {
-			bonus = 1.0
-			uses = 2
-			category = armor
-		
+		set_technology = { at_at = 1 }
+		division_template = {
+			name = "AT-AT Company"			
+			regiments = {
+				at_at_walker_brigade = { x = 0 y = 0 }
+				at_at_walker_brigade = { x = 0 y = 1 }
+				at_at_walker_brigade = { x = 0 y = 2 }
+				at_at_walker_brigade = { x = 0 y = 3 }
+				stormtrooper = { x = 1 y = 0 }
+				stormtrooper = { x = 1 y = 1 }
+				stormtrooper = { x = 1 y = 2 }
+				stormtrooper = { x = 1 y = 3 }
+			}
 		}
+		413 = {
+		create_unit = {
+			division = "division_template = \"AT-AT Company\" start_experience_factor = 0.23" 
+			owner = RIN
+		}
+		create_unit = {
+			division = "division_template = \"AT-AT Company\" start_experience_factor = 0.23" 
+			owner = RIN
+		}
+	}
+
 	}
 	relative_position_id = RIN_recruit_defectors
 	prerequisite = { focus = RIN_recruit_defectors
@@ -448,7 +467,7 @@ focus = {
 	id = RIN_slaves_in_the_factories
 	icon = GFX_WIP_focus
 	cost = 5
-	x = 2
+	x = 1
 	y = 2
 	ai_will_do = {
 		factor = 1
@@ -461,11 +480,29 @@ focus = {
 	prerequisite = { focus = RIN_rationing_our_resources }
 	prerequisite = { focus = RIN_new_mining_methods }
 }
+
+focus = {
+	id = RIN_improved_materials
+	icon = GFX_WIP_focus
+	cost = 5
+	x = 3
+	y = 2
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+	add_ideas = RIN_construction_droids
+	}
+	relative_position_id = RIN_underwater_factories
+	prerequisite = { focus = RIN_rationing_our_resources }
+	prerequisite = { focus = RIN_new_mining_methods }
+}
+
 focus = {
 	id = RIN_new_production_methods
 	icon = GFX_WIP_focus
 	cost = 5
-	x = 0
+	x = 1
 	y = 1
 	ai_will_do = {
 		factor = 1
@@ -478,14 +515,15 @@ focus = {
 		}
 	}
 	relative_position_id = RIN_slaves_in_the_factories
-	prerequisite = { focus = RIN_slaves_in_the_factories }
+	prerequisite = { focus = RIN_slaves_in_the_factories 
+focus = RIN_improved_materials }
 }
 
 focus = {
 	id = RIN_economic_prosperity
 	icon = GFX_WIP_focus
 	cost = 5
-	x = 0
+	x = 1
 	y = 2
 	ai_will_do = {
 		factor = 1
@@ -503,8 +541,8 @@ focus = {
 focus = {
 	id = RIN_paying_off_debts
 	icon = GFX_WIP_focus
-	cost = 5
-	x = 0
+	cost = 10
+	x = 1
 	y = 3
 	ai_will_do = {
 		factor = 1
@@ -593,6 +631,45 @@ focus = {
 	relative_position_id = RIN_new_dockyards
 	prerequisite = { focus = RIN_kuat_license}
 	prerequisite = { focus = RIN_new_dockyards}
+}
+
+focus = {
+	id = RIN_kuat_order
+	icon = GFX_WIP_focus
+	cost = 10
+	x = 0
+	y = 1
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		custom_effect_tooltip = tt_zer_spend_100_credits
+		subtract_from_variable = { currency_amount^primary_currency = 100 }
+		add_timed_idea = {
+			idea = RIN_kuat_order
+			days = 180
+		}
+		create_ship = {
+			type = isd_hull
+			equipment_variant = "Empire Class"
+			creator = RIN
+			name = "Bradoc"
+		}
+		create_ship = {
+			type = isd_hull
+			equipment_variant = "Empire Class"
+			creator = RIN
+			name = "Portorian"
+		}
+		create_ship = {
+			type = isd_hull
+			equipment_variant = "Empire Class"
+			creator = RIN
+			name = "Farklin"
+		}
+	}
+	relative_position_id = RIN_a_new_navy
+	prerequisite = { focus = RIN_a_new_navy}
 }
 
 focus = {
@@ -1283,19 +1360,6 @@ focus = {
 	ai_will_do = {
 		factor = 1
 	}
-
-	available = {
-
-	}
-
-	bypass = {
-
-	}
-
-	cancel_if_invalid = yes
-	continue_if_invalid = no
-	available_if_capitulated = no
-	search_filters = { FOCUS_FILTER_RESEARCH }
 	completion_reward = {
 		add_tech_bonus = {
 			name = electronics
