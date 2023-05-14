@@ -7,7 +7,7 @@ add_namespace = newsenate
 add_namespace = newrepleg
 add_namespace = new_rep_black
 
-
+add_namespace = new_rep_elections
 add_namespace = new_republic_focus
 
 ### COUTNRY EVENTS ###
@@ -340,5 +340,122 @@ news_event = {
 		}
 		name = "The Legislation has Failed"
 		clr_global_flag = legislation_failed_nr
+	}
+}
+
+news_event = {
+	id = new_rep_elections.1 ## RESEARCH COMITTEE
+	title = new_rep_elections.1.title
+	desc = new_rep_elections.1.desc
+	picture = GFX_report_event
+	is_triggered_only = yes
+
+    option = {
+		name = "Appoint the Nominee"
+		var:ResearchMemberSenateArray^country_index_to_remove_from_senate = {
+			clr_country_flag = member_of_research_committee
+		}
+		prev = {
+			remove_from_array = {
+				array = Global.ResearchMemberSenateArray ##assign new member
+				index = country_index_to_remove_from_senate
+			}
+			add_to_array = {
+				array = Global.ResearchMemberSenateArray
+				value = ROOT.id
+			}
+			set_country_flag = member_of_research_committee
+			clear_variable = country_index_to_remove_from_senate
+		}
+	}
+	option = {
+		name = "Reject the Nominee"
+	}
+}
+news_event = {
+	id = new_rep_elections.2 ## ESPIONAGE COMITTEE
+	title = new_rep_elections.2.title
+	desc = new_rep_elections.2.desc
+	picture = GFX_report_event
+	is_triggered_only = yes
+
+    option = {
+		name = "Appoint the Nominee"
+		var:ResearchMemberSenateArray^country_index_to_remove_from_senate = {
+			clr_country_flag = member_of_espionage_committee
+		}
+		prev = {
+			remove_from_array = {
+				array = Global.EspionageMemberSenateArray ##assign new member
+				index = country_index_to_remove_from_senate
+			}
+			add_to_array = {
+				array = Global.EspionageMemberSenateArray
+				value = ROOT.id
+			}
+			set_country_flag = member_of_espionage_committee
+			clear_variable = country_index_to_remove_from_senate
+		}
+	}
+	option = {
+		name = "Reject the Nominee"
+	}
+}
+news_event = {
+	id = new_rep_elections.3 ## MILITARY COMITTEE
+	title = new_rep_elections.3.title
+	desc = new_rep_elections.3.desc
+	picture = GFX_report_event
+	is_triggered_only = yes
+
+    option = {
+		name = "Appoint the Nominee"
+		var:ResearchMemberSenateArray^country_index_to_remove_from_senate = {
+			clr_country_flag = member_of_military_committee
+		}
+		prev = {
+			remove_from_array = {
+				array = Global.MilitaryMemberSenateArray ##assign new member
+				index = country_index_to_remove_from_senate
+			}
+			add_to_array = {
+				array = Global.MilitaryMemberSenateArray
+				value = ROOT.id
+			}
+			set_country_flag = member_of_military_committee
+			clear_variable = country_index_to_remove_from_senate
+		}
+	}
+	option = {
+		name = "Reject the Nominee"
+	}
+}
+news_event = {
+	id = new_rep_elections.4 ## ECONOMIC COMITTEE
+	title = new_rep_elections.4.title
+	desc = new_rep_elections.4.desc
+	picture = GFX_report_event
+	is_triggered_only = yes
+
+    option = {
+		name = "Appoint the Nominee"
+		var:ResearchMemberSenateArray^country_index_to_remove_from_senate = {
+			clr_country_flag = member_of_economic_committee
+		}
+		prev = {
+			remove_from_array = {
+				array = Global.EconomicMemberSenateArray ##assign new member
+				index = country_index_to_remove_from_senate
+			}
+			add_to_array = {
+				array = Global.EconomicMemberSenateArray
+				value = ROOT.id
+			}
+			set_country_flag = member_of_economic_committee
+			clear_variable = country_index_to_remove_from_senate
+		}
+	}
+	option = {
+		name = "Reject the Nominee"
 	}
 }
