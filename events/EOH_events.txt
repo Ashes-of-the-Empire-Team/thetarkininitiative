@@ -95,52 +95,18 @@ country_event = {
     is_triggered_only = yes
     fire_only_once = yes
     option = {
-        name = "We will do our part"
-        ai_chance = {
-			base = 40
-			
-			modifier = {
-				add = -10
-				ROOT = {
-                    tag = PEN
-                }
-			}
-			
-            modifier = {
-				add = -40
-				ROOT = {
-                    tag = ZSJ
-                }
-			}
-		}
-        hidden_effect = {
-            set_country_flag = alliance_inviter@ROOT
-			FROM = { set_country_flag = alliance_applicant@ROOT }
-        }
-        effect_tooltip = {
-            FROM = {
-                add_to_faction = ROOT
-                country_event = { id = EOH.3 hours = 2 }
-            }
-        }
-    }
-    option = {
         name = "We will take no part in this"
         ai_chance = {
-			base = 60
+			base = 70
 			
 			modifier = {
 				add = 5
-				ROOT = {
-                    tag = PEN
-                }
+				tag = PEN
 			}
 			
             modifier = {
 				add = 40
-				ROOT = {
-                    tag = ZSJ
-                }
+				tag = ZSJ
 			}
 		}
         hidden_effect = {
@@ -149,6 +115,31 @@ country_event = {
             country_event = { id = EOH.4 hours = 2 }
         }
     }
+    option = {
+        name = "We will do our part"
+        ai_chance = {
+			base = 30
+			
+			modifier = {
+				add = -10
+				tag = PEN
+			}
+			
+            modifier = {
+				add = -40
+				tag = ZSJ
+			}
+		}
+        hidden_effect = {
+            set_country_flag = alliance_inviter@ROOT
+			FROM = { set_country_flag = alliance_applicant@ROOT }
+        }
+            FROM = {
+                add_to_faction = PREV
+                country_event = { id = EOH.3 hours = 2 }
+            }
+    }
+    
 }
 
 country_event = {
@@ -507,5 +498,84 @@ country_event = {
     fire_only_once = yes
     option = {
         name = "I am inevitable."
+    }
+}
+
+country_event = {
+    id = EOH.20 ## QJ - 1
+    title = EOH.20
+    desc = EOH.20.d
+
+    picture = GFX_WIP_focus
+    
+    is_triggered_only = yes
+    fire_only_once = yes
+    option = {
+        name = "Keep trying."
+    }
+}
+
+country_event = {
+    id = EOH.21 ## QJ - 2
+    title = EOH.21
+    desc = EOH.21.d
+
+    picture = GFX_WIP_focus
+    
+    is_triggered_only = yes
+    fire_only_once = yes
+    option = {
+        name = "Our presence is gift enough."
+    }
+    option = {
+        name = "Do a weapons demo."
+        457 = {
+            add_manpower = -1
+        }
+        army_experience = 10
+    }
+    option = {
+        name = "Show them our advanced technology."
+        457 = {
+            add_building_construction = {
+                type = infrastructure
+                level = 1
+            }
+        }
+        subtract_from_variable = { currency_amount^primary_currency = 20 }
+		custom_effect_tooltip = minus20credits_tt
+    }
+}
+
+country_event = {
+    id = EOH.22 ## QJ - 3
+    title = EOH.22
+    desc = EOH.22.d
+
+    picture = GFX_WIP_focus
+    
+    is_triggered_only = yes
+    fire_only_once = yes
+    option = {
+        name = "Do not intercede."
+    }
+    option = {
+        name = "Side with the stormtrooper."
+        cance
+        457 = {
+            add_manpower = -1
+        }
+        army_experience = 10
+    }
+    option = {
+        name = "Side with the Qom Qae."
+        457 = {
+            add_building_construction = {
+                type = infrastructure
+                level = 1
+            }
+        }
+        subtract_from_variable = { currency_amount^primary_currency = 20 }
+		custom_effect_tooltip = minus20credits_tt
     }
 }
