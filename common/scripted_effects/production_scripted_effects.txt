@@ -1200,7 +1200,6 @@ create_light_ship_market_effect = {
 			for_loop_effect = {
 				end = ship_amount_to_add
 				value = temp
-				log = "GOT TO CR70 Creation Effect"
 				create_ship = {
 					type = cr70_1
 					equipment_variant = "CR70"
@@ -1250,7 +1249,7 @@ create_light_ship_market_effect = {
 				end = ship_amount_to_add
 				value = temp
 				create_ship = {
-					type = nebulon_1
+					type = Nebulon_1
 					equipment_variant = "Neublon 1"
 					creator = PREV
 				}
@@ -1298,6 +1297,7 @@ create_medium_ship_market_effect = {
 	multiply_variable = {price_of_the_item = price_to_be_divided_by}
 	set_temp_variable = { tag_to_use_as_effect = ship_tag_holder@var:medium_selected_ship_production_cost^0}
 	set_temp_variable = {ship_amount_to_add = ship_amount_contract_holder@var:medium_selected_ship_production_cost^0}
+
 	if = {
 		limit = {
 			check_variable = {medium_selected_ship_production_cost = 4800}
@@ -1380,6 +1380,38 @@ create_medium_ship_market_effect = {
 		add_to_variable = {currency_amount^primary_currency = price_of_the_item }
 	}else_if = {
 		limit = {
+			check_variable = {medium_selected_ship_production_cost = 3200}
+		}
+		var:tag_to_use_as_effect = {
+			for_loop_effect = {
+				end = ship_amount_to_add
+				value = temp
+				create_ship = {
+					type = pelta_1
+					equipment_variant = "Pelta"
+					creator = PREV
+				}
+			}
+		}
+		add_to_variable = {currency_amount^primary_currency = price_of_the_item }
+	}else_if = {
+		limit = {
+			check_variable = {medium_selected_ship_production_cost = 5830}
+		}
+		var:tag_to_use_as_effect = {
+			for_loop_effect = {
+				end = ship_amount_to_add
+				value = temp
+				create_ship = {
+					type = MC30_1
+					equipment_variant = "MC30"
+					creator = PREV
+				}
+			}
+		}
+		add_to_variable = {currency_amount^primary_currency = price_of_the_item }
+	}else_if = {
+		limit = {
 			check_variable = {medium_selected_ship_production_cost = 5830}
 		}
 		var:tag_to_use_as_effect = {
@@ -1389,22 +1421,6 @@ create_medium_ship_market_effect = {
 				create_ship = {
 					type = mc40_1
 					equipment_variant = "MC40"
-					creator = PREV
-				}
-			}
-		}
-		add_to_variable = {currency_amount^primary_currency = price_of_the_item }
-	}else_if = {
-		limit = {
-			check_variable = {medium_selected_ship_production_cost = 4430}
-		}
-		var:tag_to_use_as_effect = {
-			for_loop_effect = {
-				end = ship_amount_to_add
-				value = temp
-				create_ship = {
-					type = quaser_1
-					equipment_variant = "Quaser"
 					creator = PREV
 				}
 			}
@@ -1541,7 +1557,7 @@ create_heavy_ship_market_effect = {
 				value = temp
 				create_ship = {
 					type = mc80_liberty_1
-					equipment_variant = "MC80 Liberty"
+					equipment_variant = "MC80 Liberty Type"
 					creator = PREV
 				}
 			}
@@ -1605,7 +1621,7 @@ create_heavy_ship_market_effect = {
 				value = temp
 				create_ship = {
 					type = mc80_home_one_1
-					equipment_variant = "MC80 Home One"
+					equipment_variant = "MC80 Home-One Type"
 					creator = PREV
 				}
 			}
@@ -1620,8 +1636,8 @@ create_heavy_ship_market_effect = {
 				end = ship_amount_to_add
 				value = temp
 				create_ship = {
-					type = mc85_1
-					equipment_variant = "MC85"
+					type = mc90_1
+					equipment_variant = "MC90"
 					creator = PREV
 				}
 			}
