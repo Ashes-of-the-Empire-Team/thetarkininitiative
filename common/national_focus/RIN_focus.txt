@@ -974,6 +974,24 @@ focus = {
 }
 
 focus = {
+	id = RIN_economic_stability
+	icon = GFX_WIP_focus
+	cost = 10
+	x = 0
+	y = 2
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		custom_effect_tooltip = tt_rin_gain_150_credits
+		add_to_variable = { currency_amount^primary_currency = 150 }
+	}
+	relative_position_id = RIN_expanding_the_sector
+	prerequisite = { focus = RIN_expanding_the_sector }
+	mutually_exclusive = { focus = RIN_we_will_ensure_order focus = RIN_the_queen_will_ensure_order }
+}
+
+focus = {
 	id = RIN_naboo_gaurd
 	icon = GFX_WIP_focus
 	cost = 5
@@ -1010,6 +1028,20 @@ focus = {
 	y = 1
 	ai_will_do = {
 		factor = 1
+	}
+	available = {
+		RIN = {
+			owns_state = 463
+			owns_state = 410
+			owns_state = 97
+			owns_state = 412
+			owns_state = 464
+			owns_state = 416
+			owns_state = 462
+			owns_state = 461
+		}
+		NAB = {has_capitulated = yes}
+		GUN = {has_capitulated = yes}
 	}
 	completion_reward = {
 		NAB = { add_to_ROOT_potential_cores = yes }
@@ -1058,7 +1090,11 @@ focus = {
 		factor = 1
 	}
 	completion_reward = {
-		#begins path to war or peace with warlord neighbor
+		diplomatic_relation = {
+			country = ERI
+			relation = non_aggression_pact
+			active = no
+		}
 	}
 	relative_position_id = RIN_declaring_ambitions
 	prerequisite = { focus = RIN_declaring_ambitions }
@@ -1066,9 +1102,111 @@ focus = {
 }
 
 focus = {
-	id = RIN_declaring_ambitions
+	id = RIN_war_with_eriadu
 	icon = GFX_WIP_focus
 	cost = 5
+	x = -2
+	y = 1
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		create_wargoal = {
+			type = annex_everything
+			target = ERI
+		}
+	}
+	relative_position_id = RIN_dealing_with_eriadu
+	prerequisite = { focus = RIN_dealing_with_eriadu }
+	mutually_exclusive = { focus = RIN_alliance_with_eriadu }
+}
+
+focus = {
+	id = RIN_alliance_with_eriadu
+	icon = GFX_WIP_focus
+	cost = 5
+	x = 2
+	y = 1
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		diplomatic_relation = {
+			country = ERI
+			relation = non_aggression_pact
+			active = yes
+		}
+		set_rule = {
+			can_create_factions = yes
+		}
+		create_faction = new_empire
+	}
+	relative_position_id = RIN_dealing_with_eriadu
+	prerequisite = { focus = RIN_dealing_with_eriadu }
+	mutually_exclusive = { focus = RIN_war_with_eriadu }
+}
+
+focus = {
+	id = RIN_lambda_occupation
+	icon = GFX_WIP_focus
+	cost = 5
+	x = -1
+	y = 1
+	ai_will_do = {
+		factor = 1
+	}
+	available = {
+		RIN = {
+			owns_state = 104
+			owns_state = 432
+			owns_state = 428
+			owns_state = 430
+		}
+		ERI = {has_capitulated = yes}
+	}
+	completion_reward = {
+		ERI = { add_to_ROOT_potential_cores = yes }
+	}
+	relative_position_id = RIN_war_with_eriadu
+	prerequisite = { focus = RIN_war_with_eriadu }
+	mutually_exclusive = { focus = RIN_lambda_puppet}
+}
+
+focus = {
+	id = RIN_lambda_puppet
+	icon = GFX_WIP_focus
+	cost = 5
+	x = 1
+	y = 1
+	ai_will_do = {
+		factor = 1
+	}
+	available = {
+		RIN = {
+			owns_state = 104
+			owns_state = 432
+			owns_state = 428
+			owns_state = 430
+		}
+		ERI = {has_capitulated = yes}
+	}
+	completion_reward = {
+		set_autonomy = {
+			target = ERI
+			autonomy_state = autonomy_imperial_sector
+			end_wars = yes
+			end_civil_wars = yes
+		}
+	}
+	relative_position_id = RIN_war_with_eriadu
+	prerequisite = { focus = RIN_war_with_eriadu }
+	mutually_exclusive = { focus = RIN_lambda_occupation }
+}
+
+focus = {
+	id = RIN_declaring_ambitions
+	icon = GFX_WIP_focus
+	cost = 10
 	x = 0
 	y = 4
 	ai_will_do = {
@@ -1093,7 +1231,8 @@ focus = {
 	}
 	relative_position_id = RIN_reining_in_the_sujimis_sector
 	prerequisite = { focus = RIN_naboo_gaurd 
-	focus = RIN_imperial_garrison }
+	focus = RIN_imperial_garrison
+focus = RIN_economic_stability }
 
 }
 
