@@ -85,15 +85,15 @@ on_actions = {
 					value = 5830
 				}
 				add_to_array = {
-					array = heavy_production_array
+					array = heavy_ship_production_array
 					value = 10080
 				}
 				add_to_array = {
-					array = heavy_production_array
+					array = heavy_ship_production_array
 					value = 13200
 				}
 				add_to_array = {
-					array = heavy_production_array
+					array = heavy_ship_production_array
 					value = 7540
 				}
 			}
@@ -139,17 +139,17 @@ on_actions = {
 					value = 2829
 				}
 				add_to_array = {
-					array = heavy_production_array
+					array = heavy_ship_production_array
 					value = 7400
 				}
 				add_to_array = {
-					array = heavy_production_array
+					array = heavy_ship_production_array
 					value = 11005
 				}
 			}
 			BOT = {
 				add_to_array = {
-					array = heavy_production_array
+					array = heavy_ship_production_array
 					value = 7340
 				}
 			}
@@ -755,115 +755,163 @@ on_actions = {
 		effect = {
 			if = {
 				limit = {
-					has_variable = air_1_production_selected_fighter
+					check_variable = {
+						var = air_amount_contract_holder@var:air_1_selected_item^num
+						value = 0
+						compare = not_equals
+					}
 					check_variable = {air_1_workers > 1000}
 				}
-				subtract_from_variable = {starfighter_counting_to_zero_holder@var:air_1_production_selected_fighter^0 = air_1_production_amount}
+				subtract_from_variable = {air_counting_to_zero_holder@var:air_1_selected_item = air_1_production_amount}
 				if = {
 					limit = {
-						check_variable = {starfighter_counting_to_zero_holder@var:air_1_production_selected_fighter^0 < 1}
+						check_variable = {air_counting_to_zero_holder@var:air_1_selected_item < 1}
 					}
-					set_variable = {air_market_equipment_builder = air_1_production_selected_fighter}
-					subtract_from_variable = {starfighter_counting_to_zero_holder@var:air_1_production_selected_fighter^1 = starfighter_counting_to_zero_holder@var:air_1_production_selected_fighter^0}
-					create_starfighter_market_effect = yes
+					set_variable = {air_market_equipment_builder = air_1_selected_item}
+					create_air_market_effect = yes
+					if = {
+						limit = {
+							check_variable = {
+								var = air_amount_contract_holder@var:air_1_selected_item
+								value = 0
+								compare = not_equals
+							}
+						}
+						set_temp_variable = {how_much_remove_from_next_production = air_counting_to_zero_holder@var:air_1_selected_item}
+						set_variable = {air_counting_to_zero_holder@var:air_1_selected_item = air_amount_contract_holder@var:air_1_selected_item}
+						add_to_variable = {air_counting_to_zero_holder@var:air_1_selected_item = how_much_remove_from_next_production}
+					}
 					remove_from_array = {
-						array = starfighter_counting_to_zero_holder@var:air_1_production_selected_fighter
+						array = air_tag_holder@var:air_1_selected_item
 						index = 0
 					}
 					remove_from_array = {
-						array = starfighter_amount_contract_holder@var:air_1_production_selected_fighter
-						index = 0
-					}
-					remove_from_array = {
-						array = starfighter_tag_holder@var:air_1_production_selected_fighter
+						array = air_amount_contract_holder@var:air_1_selected_item
 						index = 0
 					}
 				}
 			}
 			if = {
 				limit = {
-					has_variable = air_2_production_selected_fighter
-					check_variable = {air_2_workers > 1000}
+					check_variable = {
+						var = air_amount_contract_holder@var:air_2_selected_item^num
+						value = 0
+						compare = not_equals
+					}
+					check_variable = {air_2_workers > 999}
 				}
-				subtract_from_variable = {starfighter_counting_to_zero_holder@var:air_2_production_selected_fighter^0 = air_1_production_amount}
+				subtract_from_variable = {air_counting_to_zero_holder@var:air_2_selected_ite = air_2_production_amount}
 				if = {
 					limit = {
-						check_variable = {starfighter_counting_to_zero_holder@var:air_2_production_selected_fighter^0 < 1}
+						check_variable = {air_counting_to_zero_holder@var:air_2_selected_item < 1}
 					}
-					set_variable = {air_market_equipment_builder = air_2_production_selected_fighter}
-					create_starfighter_market_effect = yes
-					subtract_from_variable = {starfighter_counting_to_zero_holder@var:air_2_production_selected_fighter^1 = starfighter_counting_to_zero_holder@var:air_2_production_selected_fighter^0}
+					set_variable = {air_market_equipment_builder = air_2_selected_item}
+					create_air_market_effect = yes
+					if = {
+						limit = {
+							check_variable = {
+								var = air_amount_contract_holder@var:air_2_selected_item
+								value = 0
+								compare = not_equals
+							}
+						}
+						set_temp_variable = {how_much_remove_from_next_production = air_counting_to_zero_holder@var:air_2_selected_item}
+						set_variable = {air_counting_to_zero_holder@var:air_2_selected_item = air_amount_contract_holder@var:air_2_selected_item}
+						add_to_variable = {air_counting_to_zero_holder@var:air_2_selected_item = how_much_remove_from_next_production}
+					}
 					remove_from_array = {
-						array = starfighter_counting_to_zero_holder@var:air_2_production_selected_fighter
+						array = air_tag_holder@var:air_2_selected_item
 						index = 0
 					}
 					remove_from_array = {
-						array = starfighter_amount_contract_holder@var:air_2_production_selected_fighter
-						index = 0
-					}
-					remove_from_array = {
-						array = starfighter_tag_holder@var:air_2_production_selected_fighter
+						array = air_amount_contract_holder@var:air_2_selected_item
 						index = 0
 					}
 				}
 			}
 			if = {
 				limit = {
-					has_variable = land_1_selected_item
-					check_variable = {land_1_workers > 1000}
+					check_variable = {
+						var = land_amount_contract_holder@var:land_1_selected_item^num
+						value = 0
+						compare = not_equals
+					}
+					check_variable = {land_1_workers > 999}
 				}
-				subtract_from_variable = {tank_counting_to_zero_holder@var:land_1_selected_item^0 = land_1_production_amount}
+				subtract_from_variable = {land_counting_to_zero_holder@var:land_1_selected_item^0 = land_1_production_amount}
 				if = {
 					limit = {
-						check_variable = {tank_counting_to_zero_holder@var:land_1_selected_item^0 < 1}
+						check_variable = {land_counting_to_zero_holder@var:land_1_selected_item^0 < 1}
 					}
 					set_variable = {land_market_equipment_builder = land_1_selected_item}
-					create_tank_market_effect = yes
-					subtract_from_variable = {tank_counting_to_zero_holder@var:land_1_selected_item^1 = tank_counting_to_zero_holder@var:land_1_production_amount^0}
+					create_land_market_effect = yes
+					if = {
+						limit = {
+							check_variable = {
+								var = land_amount_contract_holder@var:land_1_selected_item
+								value = 0
+								compare = not_equals
+							}
+						}
+						set_temp_variable = {how_much_remove_from_next_production = land_counting_to_zero_holder@var:land_1_selected_item}
+						set_variable = {land_counting_to_zero_holder@var:land_1_selected_item = land_amount_contract_holder@var:land_1_selected_item}
+						add_to_variable = {land_counting_to_zero_holder@var:land_1_selected_item = how_much_remove_from_next_production}
+					}
 					remove_from_array = {
-						array = tank_counting_to_zero_holder@var:land_1_production_amount
+						array = land_tag_holder@var:land_1_selected_item
 						index = 0
 					}
 					remove_from_array = {
-						array = tank_tag_holder@var:land_1_production_amount
-						index = 0
-					}
-					remove_from_array = {
-						array = tank_amount_contract_holder@var:land_1_production_amount
+						array = land_amount_contract_holder@var:land_1_selected_item
 						index = 0
 					}
 				}
 			}
 			if = {
 				limit = {
-					has_variable = land_2_selected_item
-					check_variable = {land_2_workers > 1000}
+					check_variable = {
+						var = land_amount_contract_holder@var:land_2_selected_item^num
+						value = 0
+						compare = not_equals
+					}
+					check_variable = {land_2_workers > 999}
 				}
-				subtract_from_variable = {tank_counting_to_zero_holder@var:land_2_selected_item^0 = land_2_production_amount}
+				subtract_from_variable = {land_counting_to_zero_holder@var:land_2_selected_item^0 = land_2_production_amount}
 				if = {
 					limit = {
-						check_variable = {tank_counting_to_zero_holder@var:land_2_selected_item^0 < 1}
+						check_variable = {land_counting_to_zero_holder@var:land_2_selected_item^0 < 1}
 					}
 					set_variable = {land_market_equipment_builder = land_2_selected_item}
-					create_tank_market_effect = yes
-					add_to_variable = {tank_counting_to_zero_holder@var:land_2_selected_item^1 = tank_counting_to_zero_holder@var:land_2_production_amount^0}
+					create_land_market_effect = yes
+					if = {
+						limit = {
+							check_variable = {
+								var = land_amount_contract_holder@var:land_2_selected_item
+								value = 0
+								compare = not_equals
+							}
+						}
+						set_temp_variable = {how_much_remove_from_next_production = land_counting_to_zero_holder@var:land_2_selected_item}
+						set_variable = {land_counting_to_zero_holder@var:land_2_selected_item = land_amount_contract_holder@var:land_2_selected_item}
+						add_to_variable = {land_counting_to_zero_holder@var:land_2_selected_item = how_much_remove_from_next_production}
+					}
 					remove_from_array = {
-						array = tank_counting_to_zero_holder@var:land_2_production_amount
+						array = land_tag_holder@var:land_2_selected_item
 						index = 0
 					}
 					remove_from_array = {
-						array = tank_tag_holder@var:land_2_production_amount
-						index = 0
-					}
-					remove_from_array = {
-						array = tank_amount_contract_holder@var:land_2_production_amount
+						array = land_amount_contract_holder@var:land_2_selected_item
 						index = 0
 					}
 				}
 			}
 			if = {
 				limit = {
-					has_variable = soft_1_selected_item
+					check_variable = {
+						var = soft_amount_contract_holder@var:soft_1_selected_item^num
+						value = 0
+						compare = not_equals
+					}
 					check_variable = {soft_1_workers > 1000}
 				}
 				subtract_from_variable = {soft_counting_to_zero_holder@var:soft_1_selected_item^0 = soft_1_production_amount}
@@ -873,10 +921,17 @@ on_actions = {
 					}
 					set_variable = {soft_market_equipment_builder = soft_1_selected_item}
 					create_soft_market_effect = yes
-					add_to_variable = {soft_counting_to_zero_holder@var:soft_1_selected_item^1 = soft_counting_to_zero_holder@var:soft_1_production_amount^0}
-					remove_from_array = {
-						array = soft_counting_to_zero_holder@var:soft_1_selected_item
-						index = 0
+					if = {
+						limit = {
+							check_variable = {
+								var = soft_amount_contract_holder@var:soft_1_selected_item
+								value = 0
+								compare = not_equals
+							}
+						}
+						set_temp_variable = {how_much_remove_from_next_production = soft_counting_to_zero_holder@var:soft_1_selected_item}
+						set_variable = {soft_counting_to_zero_holder@var:soft_1_selected_item = soft_amount_contract_holder@var:soft_1_selected_item}
+						add_to_variable = {soft_counting_to_zero_holder@var:soft_1_selected_item = how_much_remove_from_next_production}
 					}
 					remove_from_array = {
 						array = soft_tag_holder@var:soft_1_selected_item
@@ -890,7 +945,11 @@ on_actions = {
 			}
 			if = {
 				limit = {
-					has_variable = soft_2_selected_item
+					check_variable = {
+						var = soft_amount_contract_holder@var:light_selected_ship_production_cost^num
+						value = 0
+						compare = not_equals
+					}
 					check_variable = {soft_2_workers > 1000}
 				}
 				subtract_from_variable = {soft_counting_to_zero_holder@var:soft_2_selected_item^0 = soft_2_production_amount}
@@ -900,10 +959,17 @@ on_actions = {
 					}
 					set_variable = {soft_market_equipment_builder = soft_2_selected_item}
 					create_soft_market_effect = yes
-					add_to_variable = {soft_counting_to_zero_holder@var:soft_2_selected_item^2 = soft_counting_to_zero_holder@var:soft_2_production_amount^0}
-					remove_from_array = {
-						array = soft_counting_to_zero_holder@var:soft_2_selected_item
-						index = 0
+					if = {
+						limit = {
+							check_variable = {
+								var = soft_amount_contract_holder@var:soft_2_selected_item
+								value = 0
+								compare = not_equals
+							}
+						}
+						set_temp_variable = {how_much_remove_from_next_production = soft_counting_to_zero_holder@var:soft_2_selected_item}
+						set_variable = {soft_counting_to_zero_holder@var:soft_2_selected_item = soft_amount_contract_holder@var:soft_2_selected_item}
+						add_to_variable = {soft_counting_to_zero_holder@var:soft_2_selected_item = how_much_remove_from_next_production}
 					}
 					remove_from_array = {
 						array = soft_tag_holder@var:soft_2_selected_item
@@ -921,7 +987,11 @@ on_actions = {
 		effect = {
 			if = {
 				limit = {
-					has_variable = light_selected_ship_to_be_reduced
+					check_variable = {
+						var = ship_amount_contract_holder@var:light_selected_ship_production_cost^num
+						value = 0
+						compare = not_equals
+					}
 					check_variable = {light_ship_workers > 1000}
 				}
 				if = {
@@ -930,101 +1000,124 @@ on_actions = {
 					}
 					subtract_from_variable = {ship_counting_to_zero_holder@var:light_selected_ship_production_cost^0 = 1}
 					set_variable = {light_selected_ship_to_be_reduced = light_selected_ship_production_cost}
+					if = {
+						limit = {
+							check_variable = {ship_counting_to_zero_holder@var:light_selected_ship_production_cost < 1}
+						}
+						create_light_ship_market_effect = yes
+						remove_from_array = {
+							array = ship_tag_holder@var:light_selected_ship_production_cost
+							index = 0
+						}
+						remove_from_array = {
+							array = ship_amount_contract_holder@var:light_selected_ship_production_cost
+							index = 0
+						}
+						if = {
+							limit = {
+								check_variable = {
+									var = ship_amount_contract_holder@var:light_selected_ship_production_cost^num
+									value = 0
+									compare = not_equals
+								}
+							}
+							set_variable = {ship_counting_to_zero_holder@var:light_selected_ship_production_cost = ship_amount_contract_holder@var:light_selected_ship_production_cost^1}
+						}
+					}
 				}else = {
 					set_temp_variable = {light_ship_calculator = light_ship_workers}
 					divide_temp_variable = {light_ship_calculator = 100}
 					subtract_from_variable = {light_selected_ship_to_be_reduced = light_ship_calculator}
 				}
-				if = {
-					limit = {
-						check_variable = {ship_counting_to_zero_holder@var:light_selected_ship_production_cost^0 < 1}
-					}
-					create_light_ship_market_effect = yes
-					add_to_variable = {ship_counting_to_zero_holder@var:light_selected_ship_production_cost^1 = ship_counting_to_zero_holder@var:light_selected_ship_production_cost^0}
-					remove_from_array = {
-						array = ship_counting_to_zero_holder@var:light_selected_ship_production_cost
-						index = 0
-					}
-					remove_from_array = {
-						array = ship_tag_holder@var:light_selected_ship_production_cost
-						index = 0
-					}
-					remove_from_array = {
-						array = ship_amount_contract_holder@var:light_selected_ship_production_cost
-						index = 0
-					}
-				}
 			}
 			if = {
 				limit = {
-					has_variable = medium_selected_ship_production_cost
+					check_variable = {
+						var = ship_amount_contract_holder@var:medium_selected_ship_production_cost^num
+						value = 0
+						compare = not_equals
+					}
 					check_variable = {medium_ship_workers > 1000}
 				}
 				if = {
 					limit = {
 						check_variable = {medium_selected_ship_to_be_reduced < 1}
 					}
-					subtract_from_variable = {ship_counting_to_zero_holder@var:medium_selected_ship_production_cost^0 = 1}
+					subtract_from_variable = {ship_counting_to_zero_holder@var:medium_selected_ship_production_cost = 1}
 					set_variable = {medium_selected_ship_to_be_reduced = medium_selected_ship_production_cost}
+					if = {
+						limit = {
+							check_variable = {ship_counting_to_zero_holder@var:medium_selected_ship_production_cost < 1}
+						}
+						create_medium_ship_market_effect = yes
+						remove_from_array = {
+							array = ship_tag_holder@var:medium_selected_ship_production_cost
+							index = 0
+						}
+						remove_from_array = {
+							array = ship_amount_contract_holder@var:medium_selected_ship_production_cost
+							index = 0
+						}
+						if = {
+							limit = {
+								check_variable = {
+									var = ship_amount_contract_holder@var:medium_selected_ship_production_cost^num
+									value = 0
+									compare = not_equals
+								}
+							}
+							set_variable = {ship_counting_to_zero_holder@var:medium_selected_ship_production_cost = ship_amount_contract_holder@var:medium_selected_ship_production_cost^1}
+						}
+					}
 				}else = {
 					set_temp_variable = {medium_ship_calculator = medium_ship_workers}
 					divide_temp_variable = {medium_ship_calculator = 100}
 					subtract_from_variable = {medium_selected_ship_to_be_reduced = medium_ship_calculator}
 				}
-				if = {
-					limit = {
-						check_variable = {ship_counting_to_zero_holder@var:medium_selected_ship_production_cost^0 < 1}
-					}
-					create_medium_ship_market_effect = yes
-					add_to_variable = {ship_counting_to_zero_holder@var:medium_selected_ship_production_cost^1 = ship_counting_to_zero_holder@var:medium_selected_ship_production_cost^0}
-					remove_from_array = {
-						array = ship_counting_to_zero_holder@var:medium_selected_ship_production_cost
-						index = 0
-					}
-					remove_from_array = {
-						array = ship_tag_holder@var:medium_selected_ship_production_cost
-						index = 0
-					}
-					remove_from_array = {
-						array = ship_amount_contract_holder@var:medium_selected_ship_production_cost
-						index = 0
-					}
-				}
 			}
 			if = {
 				limit = {
-					has_variable = heavy_selected_ship_to_be_reduced
-					check_variable = {heavy_ship_workers > 1000}
+					check_variable = {
+						var = ship_amount_contract_holder@var:heavy_selected_ship_production_cost^num
+						value = 0
+						compare = not_equals
+					}
+					check_variable = {heavy_ship_workers > 999}
 				}
 				if = {
 					limit = {
 						check_variable = {heavy_selected_ship_to_be_reduced < 1}
 					}
-					subtract_from_variable = {ship_counting_to_zero_holder@var:heavy_selected_ship_production_cost^0 = 1}
+					subtract_from_variable = {ship_counting_to_zero_holder@var:heavy_selected_ship_production_cost = 1}
 					set_variable = {heavy_selected_ship_to_be_reduced = heavy_selected_ship_production_cost}
+					if = {
+						limit = {
+							check_variable = {ship_counting_to_zero_holder@var:heavy_selected_ship_production_cost < 1}
+						}
+						create_heavy_ship_market_effect = yes
+						remove_from_array = {
+							array = ship_tag_holder@var:heavy_selected_ship_production_cost
+							index = 0
+						}
+						remove_from_array = {
+							array = ship_amount_contract_holder@var:heavy_selected_ship_production_cost
+							index = 0
+						}
+						if = {
+							limit = {
+								check_variable = {
+									var = ship_amount_contract_holder@var:heavy_selected_ship_production_cost^num
+									value = 0
+									compare = not_equals
+								}
+							}
+							set_variable = {ship_counting_to_zero_holder@var:heavy_selected_ship_production_cost = ship_amount_contract_holder@var:heavy_selected_ship_production_cost^1}
+						}
+					}
 				}else = {
 					set_temp_variable = {heavy_ship_calculator = heavy_ship_workers}
 					divide_temp_variable = {heavy_ship_calculator = 100}
 					subtract_from_variable = {heavy_selected_ship_to_be_reduced = heavy_ship_calculator}
-				}
-				if = {
-					limit = {
-						check_variable = {ship_counting_to_zero_holder@var:heavy_selected_ship_production_cost^0 < 1}
-					}
-					create_heavy_ship_market_effect = yes
-					add_to_variable = {ship_counting_to_zero_holder@var:heavy_selected_ship_production_cost^1 = ship_counting_to_zero_holder@var:heavy_selected_ship_production_cost^0}
-					remove_from_array = {
-						array = ship_counting_to_zero_holder@var:heavy_selected_ship_production_cost
-						index = 0
-					}
-					remove_from_array = {
-						array = ship_tag_holder@var:heavy_selected_ship_production_cost
-						index = 0
-					}
-					remove_from_array = {
-						array = ship_amount_contract_holder@var:heavy_selected_ship_production_cost
-						index = 0
-					}
 				}
 			}
 		}

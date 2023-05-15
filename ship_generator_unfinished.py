@@ -94,10 +94,10 @@ elif type_of_ship == 2:
 elif type_of_ship == 3:
     for line in fileinput.input('00_scripted_localisation_market.txt', inplace=1): #common\scripted_localisation\00_scripted_localisation_market.txt
         if line.startswith('	###CCC###'):
-            print("	text = {\n		trigger = {\n			heavy_production_array = "+str(price_of_equipment)+"\n		}\n		localization_key = \""+gfx_key+"\" \n	}")
+            print("	text = {\n		trigger = {\n			heavy_ship_production_array = "+str(price_of_equipment)+"\n		}\n		localization_key = \""+gfx_key+"\" \n	}")
             print("	###CCC###")
         elif line.startswith('	###CCD###'):
-            print("	text = {\n		trigger = {\n			heavy_production_array = "+str(price_of_equipment)+"\n		}\n		localization_key = \""+name_of_equipment_game_name+"\" \n	}")
+            print("	text = {\n		trigger = {\n			heavy_ship_production_array = "+str(price_of_equipment)+"\n		}\n		localization_key = \""+name_of_equipment_game_name+"\" \n	}")
             print("	###CCD###")
         elif line.startswith('	###CDD###'):
             print("	text = {\n		trigger = {\n			check_variable = {selected_ship_production_cost = "+str(price_of_equipment)+"}\n		}\n		localization_key = \""+name_of_equipment_game_name+"\" \n	}")

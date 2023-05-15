@@ -420,13 +420,13 @@ erase_previous_food_production = {
 }
 recalculate_air_1_creation_amount = {  ########## CALCULATES HOW MANY YOU CAN MAKE IN A WEEK
 	set_variable = {air_1_production_amount = air_1_workers}
-	divide_variable = {air_1_production_amount = global.air_market_ic_cost_holder@var:air_1_production_selected_fighter }
+	divide_variable = {air_1_production_amount = global.air_market_ic_cost_holder@var:air_1_selected_item }
 	divide_variable = {air_1_production_amount = 40 }
 	round_variable = air_1_production_amount
 }
 recalculate_air_2_creation_amount = {  ########## CALCULATES HOW MANY YOU CAN MAKE IN A WEEK
 	set_variable = {air_2_production_amount = air_2_workers}
-	divide_variable = {air_2_production_amount = global.air_market_ic_cost_holder@var:air_2_production_selected_fighter }
+	divide_variable = {air_2_production_amount = global.air_market_ic_cost_holder@var:air_2_selected_item }
 	divide_variable = {air_2_production_amount = 40 }
 	round_variable = air_2_production_amount
 }
@@ -522,6 +522,56 @@ ai_corp_set_tech_for_year_3 = { #6 ABY
 			set_technology = {artillery1 = 1}
 		}
 	}
+	SFS = {
+		if = {
+			limit = {
+				NOT = {							
+					has_tech = tie_hunter
+				}
+			}
+			set_technology = {tie_hunter = 1}
+		}
+	}
+	SFS = {
+		if = { #?
+			limit = {
+				NOT = {							
+					has_tech = tie_dagger
+				}
+			}
+			set_technology = {tie_dagger = 1}
+		}
+	}
+	SFS = {
+		if = {
+			limit = {
+				NOT = {							
+					has_tech = tie_punisher
+				}
+			}
+			set_technology = {tie_punisher = 1}
+		}
+	}
+	SFS = {
+		if = {
+			limit = {
+				NOT = {							
+					has_tech = tie_oppressor
+				}
+			}
+			set_technology = {tie_oppressor = 1}
+		}
+	}
+	SFS = {
+		if = {
+			limit = {
+				NOT = {							
+					has_tech = tie_aggressor
+				}
+			}
+			set_technology = {tie_aggressor = 1}
+		}
+	}
 }
 ai_corp_set_tech_for_year_4 = { #7 ABY
 	BLS = {
@@ -593,7 +643,17 @@ ai_corp_set_tech_for_year_4 = { #7 ABY
 			}
 			set_technology = {at_dp_advanced = 1}
 		}
-	}	
+	}
+	KUA = {
+		if = {
+			limit = {
+				NOT = {
+					has_tech = victory_2
+				}
+			}
+		}
+		set_technology = {victory_2 = 1}
+	}
 }
 ai_corp_set_tech_for_year_5 = { #8 ABY
 	SFS = { #?
@@ -687,7 +747,17 @@ ai_corp_set_tech_for_year_6 = { #9 ABY
 			}
 			set_technology = {u_wing_1 = 1}
 		}
-	}	
+	}
+	KUA = {
+		if = {
+			limit = {
+				NOT = {
+					has_tech = isd_2
+				}
+			}
+			set_technology = {isd_2 = 1}
+		}
+	}
 	KUA = { #?
 		if = {
 			limit = {
@@ -908,7 +978,7 @@ ai_corp_set_tech_for_year_9 = { #12 ABY
 		if = {
 			limit = {
 				NOT = {							
-					has_tech = antitank5
+					has_tech = antitank2
 				}
 			}
 			set_technology = {antitank2 = 1}
@@ -1052,56 +1122,6 @@ ai_corp_set_tech_for_start = { #4 ABY
 			set_technology = {tie_advanced = 1}
 		}
 	}
-	SFS = {
-		if = {
-			limit = {
-				NOT = {							
-					has_tech = tie_hunter
-				}
-			}
-			set_technology = {tie_hunter = 1}
-		}
-	}
-	SFS = {
-		if = { #?
-			limit = {
-				NOT = {							
-					has_tech = tie_dagger
-				}
-			}
-			set_technology = {tie_dagger = 1}
-		}
-	}
-	SFS = {
-		if = {
-			limit = {
-				NOT = {							
-					has_tech = tie_punisher
-				}
-			}
-			set_technology = {tie_punisher = 1}
-		}
-	}
-	SFS = {
-		if = {
-			limit = {
-				NOT = {							
-					has_tech = tie_oppressor
-				}
-			}
-			set_technology = {tie_oppressor = 1}
-		}
-	}
-	SFS = {
-		if = {
-			limit = {
-				NOT = {							
-					has_tech = tie_aggressor
-				}
-			}
-			set_technology = {tie_aggressor = 1}
-		}
-	}
 #Imperial Ship
 
 	KUA = {
@@ -1112,16 +1132,6 @@ ai_corp_set_tech_for_start = { #4 ABY
 				}
 			}
 			set_technology = {praetor_1 = 1}
-		}
-	}
-	SFS = {
-		if = {
-			limit = {
-				NOT = {							
-					has_tech = ipv_1
-				}
-			}
-			set_technology = {ipv_1 = 1}
 		}
 	}
 	CEC = {
@@ -1142,6 +1152,16 @@ ai_corp_set_tech_for_start = { #4 ABY
 				}
 			}
 			set_technology = {raider_1 = 1}
+		}
+	}
+	KUA = {
+		if = {
+			limit = {
+				NOT = {
+					has_tech = arquitens_1
+				}
+			}
+			set_technology = {arquitens_1 = 1}
 		}
 	}
 #Imperial Ground
