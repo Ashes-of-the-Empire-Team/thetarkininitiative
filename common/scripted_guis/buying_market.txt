@@ -106,9 +106,7 @@ scripted_gui = {
                 }
             }
             top_cover_visible = {
-                NOT = {
-                    has_country_flag = open_market_ships
-                }
+                has_country_flag = starfighters_buying_market_open
             }
             upgrade_cover_visible = {
                 NOT = {
@@ -169,7 +167,233 @@ scripted_gui = {
             }
         }
     }
-    Marketplace_buying_starfighters_reb_main = {
+    Marketplace_buying_land_main = {
+        context_type = player_context
+        parent_window_name = "Marketplace_buying_menu"
+        window_name = "Marketplace_buying_land_main"
+        visible = {
+            has_country_flag = open_market_ground_forces
+        }
+        effects = {
+            gun_button_click = {
+                set_country_flag = gun_selected
+                clr_country_flag = tank_selected
+            }
+            tank_button_click = {
+                set_country_flag = tank_selected
+                clr_country_flag = gun_selected
+            }
+            level_1_click = {
+                set_country_flag = level_1_selected
+                clr_country_flag = level_2_selected
+                clr_country_flag = level_3_selected
+                clr_country_flag = level_4_selected
+            }
+            level_2_click = {
+                set_country_flag = level_2_selected
+                clr_country_flag = level_1_selected
+                clr_country_flag = level_3_selected
+                clr_country_flag = level_4_selected
+            }
+            level_3_click = {
+                set_country_flag = level_3_selected
+                clr_country_flag = level_1_selected
+                clr_country_flag = level_2_selected
+                clr_country_flag = level_4_selected
+            }
+            level_4_click = {
+                set_country_flag = level_4_selected
+                clr_country_flag = level_1_selected
+                clr_country_flag = level_2_selected
+                clr_country_flag = level_3_selected
+            }
+        }
+        triggers = {
+            gun_button_click_enabled = {
+                NOT = {
+                    has_country_flag = gun_selected
+                }
+            }
+            tank_button_click_enabled = {
+                NOT = {
+                    has_country_flag = tank_selected
+                }
+            }
+            level_2_visible = {
+                has_country_flag = level_1_selected
+                has_country_flag = ee_4_selected
+                has_country_flag = e_11_selected
+                has_country_flag = smart_rocket_selected
+                has_country_flag = spha_selected    
+            }
+            level_3_visible = {
+                has_country_flag = level_2_selected
+                has_country_flag = ee_4_selected
+                has_country_flag = smart_rocket_selected
+                has_country_flag = e_11_selected
+                has_country_flag = spha_selected    
+
+            }
+            level_4_visible = {
+                has_country_flag = level_3_selected
+                has_country_flag = ee_4_selected
+            }
+        }
+    }
+    Marketplace_buying_land_emp_main = {
+        context_type = player_context
+        parent_window_name = "Marketplace_buying_menu"
+        window_name = "Marketplace_buying_land_emp_main"
+        visible = {
+            has_country_flag = open_market_ground_forces
+            has_country_flag = imperial_market_open
+        }
+        effects = {
+            ee_4_click = {
+                set_country_flag = ee_4_selected
+                clr_country_flag = e_11_selected
+                clr_country_flag = smart_rocket_selected
+                clr_country_flag = k79_s80_selected
+                clr_country_flag = spha_selected
+                clr_country_flag = supply_equipment_merr_selected
+                set_variable = { manufacturing_country = BLS.id }
+                set_variable = { current_price_market_buy_ships = Global.ship_price_holder@0 }
+                set_variable = { current_ic_cost_ships = 990}
+                set_country_flag = level_1_selected
+                clr_country_flag = level_2_selected
+                clr_country_flag = level_3_selected
+                clr_country_flag = level_4_selected
+                
+            }
+            e_11_click = {
+                set_country_flag = e_11_selected
+                clr_country_flag = ee_4_selected
+                clr_country_flag = smart_rocket_selected
+                clr_country_flag = k79_s80_selected
+                clr_country_flag = spha_selected
+                clr_country_flag = supply_equipment_merr_selected
+                set_variable = { manufacturing_country = CZE.id }
+                set_variable = { current_price_market_buy_ships = Global.ship_price_holder@4 }
+                set_variable = { current_ic_cost_ships = 990}
+                set_country_flag = level_1_selected
+                clr_country_flag = level_2_selected
+                clr_country_flag = level_3_selected
+                clr_country_flag = level_4_selected
+            }
+            smart_rocket_click = {
+                set_country_flag = smart_rocket_selected
+                clr_country_flag = ee_4_selected
+                clr_country_flag = e_11_selected
+                clr_country_flag = k79_s80_selected
+                clr_country_flag = spha_selected
+                clr_country_flag = supply_equipment_merr_selected
+                set_variable = { manufacturing_country = MER.id }
+                set_variable = { current_price_market_buy_ships = Global.ship_price_holder@7 }
+                set_variable = { current_ic_cost_ships = 990}
+                set_country_flag = level_1_selected
+                clr_country_flag = level_2_selected
+                clr_country_flag = level_3_selected
+                clr_country_flag = level_4_selected
+            }
+            k79_s80_click = {
+                set_country_flag = k79_s80_selected
+                clr_country_flag = ee_4_selected
+                clr_country_flag = e_11_selected
+                clr_country_flag = smart_rocket_selected
+                clr_country_flag = spha_selected
+                clr_country_flag = supply_equipment_merr_selected
+                set_variable = { manufacturing_country = BLS.id }
+                set_variable = { current_price_market_buy_ships = Global.ship_price_holder@10 }
+                set_variable = { current_ic_cost_ships = 990}
+                set_country_flag = level_1_selected
+                clr_country_flag = level_2_selected
+                clr_country_flag = level_3_selected
+                clr_country_flag = level_4_selected
+            }
+            spha_click = {
+                set_country_flag = spha_selected
+                clr_country_flag = ee_4_selected
+                clr_country_flag = e_11_selected
+                clr_country_flag = smart_rocket_selected
+                clr_country_flag = k79_s80_selected
+                clr_country_flag = supply_equipment_merr_selected
+                set_variable = { manufacturing_country = ROT.id }
+                set_variable = { current_price_market_buy_ships = Global.ship_price_holder@11 }
+                set_variable = { current_ic_cost_ships = 990}
+                set_country_flag = level_1_selected
+                clr_country_flag = level_2_selected
+                clr_country_flag = level_3_selected
+                clr_country_flag = level_4_selected
+            }
+            supply_equipment_merr_click = {
+                set_country_flag = supply_equipment_merr_selected
+                clr_country_flag = ee_4_selected
+                clr_country_flag = e_11_selected
+                clr_country_flag = smart_rocket_selected
+                clr_country_flag = k79_s80_selected
+                clr_country_flag = spha_selected
+                set_variable = { manufacturing_country = MER.id }
+                set_variable = { current_price_market_buy_ships = Global.ship_price_holder@12 }
+                set_variable = { current_ic_cost_ships = 990}
+                set_country_flag = level_1_selected
+                clr_country_flag = level_2_selected
+                clr_country_flag = level_3_selected
+                clr_country_flag = level_4_selected
+            }
+            
+        }
+        triggers = {
+            ee_4_click_enabled = {
+                NOT = {
+                    has_country_flag = ee_4_selected
+                }
+            }
+            e_11_click_enabled = {
+                NOT = {
+                    has_country_flag = e_11_selected
+                }
+            }
+            smart_rocket_click_enabled = {
+                NOT = {
+                    has_country_flag = smart_rocket_selected
+                }
+            }
+            k79_s80_click_enabled = {
+                NOT = {
+                    has_country_flag = k79_s80_selected
+                }
+            }
+            spha_click_enabled = {
+                NOT = {
+                    has_country_flag = spha_selected
+                }
+            }
+            supply_equipment_merr_click_enabled = {
+                NOT = {
+                    has_country_flag = supply_equipment_merr_selected
+                }
+            }
+            ee_4_visible = {
+                has_country_flag = gun_selected
+            }
+            e_11_visible = {
+                has_country_flag = gun_selected
+            }
+            smart_rocket_visible = {
+                has_country_flag = gun_selected
+            }
+            k79_s80_visible = {
+                has_country_flag = gun_selected
+            }
+            spha_visible = {
+                has_country_flag = gun_selected
+            }
+            supply_equipment_merr_visible = {
+                has_country_flag = gun_selected
+            }
+        }
+    }
+    Marketplace_buying_starfighters_main = {
         context_type = player_context
         parent_window_name = "Marketplace_buying_menu"
         window_name = "Marketplace_buying_starfighters"
@@ -487,145 +711,35 @@ scripted_gui = {
                 }
                 set_variable = { amount_to_be_produced = 100 }
             }
-            x_wing_click = {
-                set_country_flag = x_wing_selected
-                clr_country_flag = y_wing_selected
-                clr_country_flag = a_wing_selected
-                clr_country_flag = b_wing_selected
-                clr_country_flag = e_wing_selected
-                clr_country_flag = k_wing_selected
-                clr_country_flag = u_wing_selected
-                set_variable = { manufacturing_country = INC.id }
-                set_variable = { current_price_market_buy_ships = Global.ship_price_holder@6 }
-                set_variable = { current_ic_cost_ships = 990}
-            }
-            y_wing_click = {
-                clr_country_flag = x_wing_selected
-                set_country_flag = y_wing_selected
-                clr_country_flag = a_wing_selected
-                clr_country_flag = b_wing_selected
-                clr_country_flag = e_wing_selected
-                clr_country_flag = k_wing_selected
-                clr_country_flag = u_wing_selected
-                set_variable = { manufacturing_country = KOE.id }
-                set_variable = { current_price_market_buy_ships = Global.ship_price_holder@2 }
-                set_variable = { current_ic_cost_ships = 990}
-            }
-            a_wing_click = {
-                clr_country_flag = x_wing_selected
-                clr_country_flag = y_wing_selected
-                set_country_flag = a_wing_selected
-                clr_country_flag = b_wing_selected
-                clr_country_flag = e_wing_selected
-                clr_country_flag = k_wing_selected
-                clr_country_flag = u_wing_selected
-                set_variable = { manufacturing_country = KUA.id }
-                set_variable = { current_price_market_buy_ships = Global.ship_price_holder@3 }
-                set_variable = { current_ic_cost_ships = 990}
-            }
-            b_wing_click = {
-                clr_country_flag = x_wing_selected
-                clr_country_flag = y_wing_selected
-                clr_country_flag = a_wing_selected
-                set_country_flag = b_wing_selected
-                clr_country_flag = e_wing_selected
-                clr_country_flag = k_wing_selected
-                clr_country_flag = u_wing_selected
-                set_variable = { manufacturing_country = SLK.id }
-                set_variable = { current_price_market_buy_ships = Global.ship_price_holder@11 }
-                set_variable = { current_ic_cost_ships = 990}
-            }
-            e_wing_click = {
-                clr_country_flag = x_wing_selected
-                clr_country_flag = y_wing_selected
-                clr_country_flag = a_wing_selected
-                clr_country_flag = b_wing_selected
-                set_country_flag = e_wing_selected
-                clr_country_flag = k_wing_selected
-                clr_country_flag = u_wing_selected
-                set_variable = { manufacturing_country = INC.id }
-                set_variable = { current_price_market_buy_ships = Global.ship_price_holder@2 }
-                set_variable = { current_ic_cost_ships = 990}
-            }
-            k_wing_click = {
-                clr_country_flag = x_wing_selected
-                clr_country_flag = y_wing_selected
-                clr_country_flag = a_wing_selected
-                clr_country_flag = b_wing_selected
-                clr_country_flag = e_wing_selected
-                set_country_flag = k_wing_selected
-                clr_country_flag = u_wing_selected
-                set_variable = { manufacturing_country = KOE.id }
-                set_variable = { current_price_market_buy_ships = Global.ship_price_holder@5 }
-                set_variable = { current_ic_cost_ships = 990}
-            }
-            u_wing_click = {
-                clr_country_flag = x_wing_selected
-                clr_country_flag = y_wing_selected
-                clr_country_flag = a_wing_selected
-                clr_country_flag = b_wing_selected
-                clr_country_flag = e_wing_selected
-                clr_country_flag = k_wing_selected
-                set_country_flag = u_wing_selected
-                set_variable = { manufacturing_country = INC.id }
-                set_variable = { current_price_market_buy_ships = Global.ship_price_holder@6 }
-                set_variable = { current_ic_cost_ships = 990}
-            }
             level_1_click = {
                 set_country_flag = level_1_selected
                 clr_country_flag = level_2_selected
                 clr_country_flag = level_3_selected
+                clr_country_flag = level_4_selected
             }
             level_2_click = {
                 set_country_flag = level_2_selected
                 clr_country_flag = level_1_selected
                 clr_country_flag = level_3_selected
+                clr_country_flag = level_4_selected
             }
             level_3_click = {
                 set_country_flag = level_3_selected
                 clr_country_flag = level_1_selected
                 clr_country_flag = level_2_selected
+                clr_country_flag = level_4_selected
+            }
+            level_4_click = {
+                set_country_flag = level_4_selected
+                clr_country_flag = level_1_selected
+                clr_country_flag = level_2_selected
+                clr_country_flag = level_3_selected
             }
             #level_4_click = {
             #    set_country_flag = level_4_selected
             #}
         }
         triggers = {
-            x_wing_click_enabled = {
-                NOT = {
-                    has_country_flag = x_wing_selected
-                }
-            }
-            y_wing_click_enabled = {
-                NOT = {
-                    has_country_flag = y_wing_selected
-                }
-            }
-            a_wing_click_enabled = {
-                NOT = {
-                    has_country_flag = a_wing_selected
-                }
-            }
-            b_wing_click_enabled = {
-                NOT = {
-                    has_country_flag = b_wing_selected
-                }
-            }
-            e_wing_click_enabled = {
-                NOT = {
-                    has_country_flag = e_wing_selected
-                }
-            }
-            k_wing_click_enabled = {
-                NOT = {
-                    has_country_flag = k_wing_selected
-                }
-            }
-            u_wing_click_enabled = {
-                NOT = {
-                    has_country_flag = u_wing_selected
-                }
-            }
             level_2_visible = {
                 OR = {
                     has_country_flag = u_wing_selected
@@ -633,17 +747,29 @@ scripted_gui = {
                     has_country_flag = x_wing_selected
                     has_country_flag = y_wing_selected
                     has_country_flag = b_wing_selected
+                    has_country_flag = tie_fighter_selected
+                    has_country_flag = tie_bomber_selected
+                    has_country_flag = tie_interceptor_selected
+                    has_country_flag = tie_fighter_bomber_selected
+                    has_country_flag = tie_automated_selected
                 }
             }
             level_3_visible = {
                 OR = {
-                    has_country_flag = y_wing_selected
+                    has_country_flag = x_wing_selected
+                    has_country_flag = tie_fighter_selected
+                    has_country_flag = tie_bomber_selected
+                    has_country_flag = tie_interceptor_selected
+                    has_country_flag = tie_fighter_bomber_selected
+                    
                 }
             }
             level_4_visible = {
-               #OR = {
-               #    has_country_flag = b_wing_selected
-               #}
+                OR = {
+                    has_country_flag = tie_fighter_selected
+                    has_country_flag = tie_bomber_selected
+                    has_country_flag = tie_interceptor_selected
+                }
             }
             level_1_click_enabled = {
                 NOT = {
@@ -664,11 +790,6 @@ scripted_gui = {
                 NOT = {
                     has_country_flag = level_4_selected
                 }
-            }
-        }
-        properties = {
-            ship_icon = {
-                image = "[Get_reb_starfighter]"
             }
         }
     }
@@ -2627,50 +2748,143 @@ scripted_gui = {
             has_country_flag = imperial_market_open
         }
         effects = {
-            level_1_click = {
+            tie_fighters_click = {
+                set_country_flag = tie_fighter_selected
+                clr_country_flag = tie_bomber_selected
+                clr_country_flag = tie_interceptor_selected
+                clr_country_flag = tie_fighter_bomber_selected
+                clr_country_flag = tie_defender_selected
+                clr_country_flag = tie_phantom_selected
+                clr_country_flag = tie_automated_selected
+                set_variable = { manufacturing_country = SFS.id }
+                set_variable = { current_price_market_buy_ships = Global.ship_price_holder@17 }
+                set_variable = { current_ic_cost_ships = 990}
                 set_country_flag = level_1_selected
                 clr_country_flag = level_2_selected
                 clr_country_flag = level_3_selected
                 clr_country_flag = level_4_selected
             }
-            level_2_click = {
-                set_country_flag = level_2_selected
-                clr_country_flag = level_1_selected
+            tie_bomber_click = {
+                set_country_flag = tie_bomber_selected
+                clr_country_flag = tie_fighter_selected
+                clr_country_flag = tie_interceptor_selected
+                clr_country_flag = tie_fighter_bomber_selected
+                clr_country_flag = tie_defender_selected
+                clr_country_flag = tie_phantom_selected
+                clr_country_flag = tie_automated_selected
+                set_variable = { manufacturing_country = SFS.id }
+                set_variable = { current_price_market_buy_ships = Global.ship_price_holder@28 }
+                set_variable = { current_ic_cost_ships = 990}
+                set_country_flag = level_1_selected
+                clr_country_flag = level_2_selected
                 clr_country_flag = level_3_selected
                 clr_country_flag = level_4_selected
             }
-            level_3_click = {
-                set_country_flag = level_3_selected
-                clr_country_flag = level_1_selected
-                clr_country_flag = level_2_selected
-                clr_country_flag = level_4_selected
-            }
-            level_4_click = {
-                set_country_flag = level_4_selected
-                clr_country_flag = level_1_selected
+            tie_interceptor_click = {
+                set_country_flag = tie_interceptor_selected
+                clr_country_flag = tie_fighter_selected
+                clr_country_flag = tie_bomber_selected
+                clr_country_flag = tie_fighter_bomber_selected
+                clr_country_flag = tie_defender_selected
+                clr_country_flag = tie_phantom_selected
+                clr_country_flag = tie_automated_selected
+                set_variable = { manufacturing_country = SFS.id }
+                set_variable = { current_price_market_buy_ships = Global.ship_price_holder@21 }
+                set_variable = { current_ic_cost_ships = 990}
+                set_country_flag = level_1_selected
                 clr_country_flag = level_2_selected
                 clr_country_flag = level_3_selected
+                clr_country_flag = level_4_selected
+            }
+            tie_fighter_bomber_click = {
+                set_country_flag = tie_fighter_bomber_selected
+                clr_country_flag = tie_fighter_selected
+                clr_country_flag = tie_bomber_selected
+                clr_country_flag = tie_interceptor_selected
+                clr_country_flag = tie_defender_selected
+                clr_country_flag = tie_phantom_selected
+                clr_country_flag = tie_automated_selected
+                set_variable = { manufacturing_country = SFS.id }
+                set_variable = { current_price_market_buy_ships = Global.ship_price_holder@25 }
+                set_variable = { current_ic_cost_ships = 990}
+                set_country_flag = level_1_selected
+                clr_country_flag = level_2_selected
+                clr_country_flag = level_3_selected
+                clr_country_flag = level_4_selected
+            }
+            tie_defender_click = {
+                set_country_flag = tie_defender_selected
+                clr_country_flag = tie_fighter_selected
+                clr_country_flag = tie_bomber_selected
+                clr_country_flag = tie_interceptor_selected
+                clr_country_flag = tie_fighter_bomber_selected
+                clr_country_flag = tie_phantom_selected
+                clr_country_flag = tie_automated_selected
+                set_variable = { manufacturing_country = SFS.id }
+                set_variable = { current_price_market_buy_ships = Global.ship_price_holder@13 }
+                set_variable = { current_ic_cost_ships = 990}
+                set_country_flag = level_1_selected
+                clr_country_flag = level_2_selected
+                clr_country_flag = level_3_selected
+                clr_country_flag = level_4_selected
+            }
+            tie_phantom_click = {
+                set_country_flag = tie_phantom_selected
+                clr_country_flag = tie_fighter_selected
+                clr_country_flag = tie_bomber_selected
+                clr_country_flag = tie_interceptor_selected
+                clr_country_flag = tie_fighter_bomber_selected
+                clr_country_flag = tie_defender_selected
+                clr_country_flag = tie_automated_selected
+                set_variable = { manufacturing_country = SFS.id }
+                set_variable = { current_price_market_buy_ships = Global.ship_price_holder@14 }
+                set_variable = { current_ic_cost_ships = 990}
+                set_country_flag = level_1_selected
+                clr_country_flag = level_2_selected
+                clr_country_flag = level_3_selected
+                clr_country_flag = level_4_selected
+            }
+            tie_automated_click = {
+                set_country_flag = tie_automated_selected
+                clr_country_flag = tie_fighter_selected
+                clr_country_flag = tie_bomber_selected
+                clr_country_flag = tie_interceptor_selected
+                clr_country_flag = tie_fighter_bomber_selected
+                clr_country_flag = tie_defender_selected
+                clr_country_flag = tie_phantom_selected
+                set_variable = { manufacturing_country = SFS.id }
+                set_variable = { current_price_market_buy_ships = Global.ship_price_holder@15 }
+                set_variable = { current_ic_cost_ships = 990}
+                set_country_flag = level_1_selected
+                clr_country_flag = level_2_selected
+                clr_country_flag = level_3_selected
+                clr_country_flag = level_4_selected
             }
         }
         triggers = {
             level_2_visible = {
                 OR = {
-                    has_country_flag = u_wing_selected
-                    has_country_flag = a_wing_selected
-                    has_country_flag = x_wing_selected
-                    has_country_flag = y_wing_selected
-                    has_country_flag = b_wing_selected
+                    has_country_flag = tie_fighter_selected
+                    has_country_flag = tie_bomber_selected
+                    has_country_flag = tie_interceptor_selected
+                    has_country_flag = tie_fighter_bomber_selected
+                    has_country_flag = tie_automated_selected
                 }
             }
             level_3_visible = {
                 OR = {
-                    has_country_flag = y_wing_selected
+                    has_country_flag = tie_fighter_selected
+                    has_country_flag = tie_bomber_selected
+                    has_country_flag = tie_interceptor_selected
+                    has_country_flag = tie_fighter_bomber_selected
                 }
             }
             level_4_visible = {
-               #OR = {
-               #    has_country_flag = b_wing_selected
-               #}
+                OR = {
+                    has_country_flag = tie_fighter_selected
+                    has_country_flag = tie_bomber_selected
+                    has_country_flag = tie_interceptor_selected
+                }
             }
             level_1_click_enabled = {
                 NOT = {
@@ -2691,6 +2905,11 @@ scripted_gui = {
                 NOT = {
                     has_country_flag = level_4_selected
                 }
+            }
+        }
+        properties = {
+            ship_icon = {
+                image = "[Get_emp_starfighter]"
             }
         }
     }
@@ -3024,6 +3243,9 @@ scripted_gui = {
                 set_variable = { manufacturing_country = INC.id }
                 set_variable = { current_price_market_buy_ships = Global.ship_price_holder@6 }
                 set_variable = { current_ic_cost_ships = 990}
+                set_country_flag = level_1_selected
+                clr_country_flag = level_2_selected
+                clr_country_flag = level_3_selected
             }
             y_wing_click = {
                 clr_country_flag = x_wing_selected
@@ -3036,6 +3258,9 @@ scripted_gui = {
                 set_variable = { manufacturing_country = KOE.id }
                 set_variable = { current_price_market_buy_ships = Global.ship_price_holder@2 }
                 set_variable = { current_ic_cost_ships = 990}
+                set_country_flag = level_1_selected
+                clr_country_flag = level_2_selected
+                clr_country_flag = level_3_selected
             }
             a_wing_click = {
                 clr_country_flag = x_wing_selected
@@ -3048,6 +3273,9 @@ scripted_gui = {
                 set_variable = { manufacturing_country = KUA.id }
                 set_variable = { current_price_market_buy_ships = Global.ship_price_holder@3 }
                 set_variable = { current_ic_cost_ships = 990}
+                set_country_flag = level_1_selected
+                clr_country_flag = level_2_selected
+                clr_country_flag = level_3_selected
             }
             b_wing_click = {
                 clr_country_flag = x_wing_selected
@@ -3060,6 +3288,9 @@ scripted_gui = {
                 set_variable = { manufacturing_country = SLK.id }
                 set_variable = { current_price_market_buy_ships = Global.ship_price_holder@11 }
                 set_variable = { current_ic_cost_ships = 990}
+                set_country_flag = level_1_selected
+                clr_country_flag = level_2_selected
+                clr_country_flag = level_3_selected
             }
             e_wing_click = {
                 clr_country_flag = x_wing_selected
@@ -3072,6 +3303,9 @@ scripted_gui = {
                 set_variable = { manufacturing_country = INC.id }
                 set_variable = { current_price_market_buy_ships = Global.ship_price_holder@2 }
                 set_variable = { current_ic_cost_ships = 990}
+                set_country_flag = level_1_selected
+                clr_country_flag = level_2_selected
+                clr_country_flag = level_3_selected
             }
             k_wing_click = {
                 clr_country_flag = x_wing_selected
@@ -3084,6 +3318,9 @@ scripted_gui = {
                 set_variable = { manufacturing_country = KOE.id }
                 set_variable = { current_price_market_buy_ships = Global.ship_price_holder@5 }
                 set_variable = { current_ic_cost_ships = 990}
+                set_country_flag = level_1_selected
+                clr_country_flag = level_2_selected
+                clr_country_flag = level_3_selected
             }
             u_wing_click = {
                 clr_country_flag = x_wing_selected
@@ -3096,6 +3333,9 @@ scripted_gui = {
                 set_variable = { manufacturing_country = INC.id }
                 set_variable = { current_price_market_buy_ships = Global.ship_price_holder@6 }
                 set_variable = { current_ic_cost_ships = 990}
+                set_country_flag = level_1_selected
+                clr_country_flag = level_2_selected
+                clr_country_flag = level_3_selected
             }
             level_1_click = {
                 set_country_flag = level_1_selected
