@@ -4,6 +4,63 @@ on_actions = {
 			ai_corp_set_tech_for_start = yes
 		}
 	}
+	on_monthly = { ## REEVALUATE PRODUCTION
+		effect = {
+			if = {
+				limit = {
+					check_variable = {light_ship_production_array^num > 0}
+					is_ai = yes
+				}
+				## find highest need light_ship_one
+				for_each_loop = {
+					array = light_ship_production_array
+					value = item_to_look_for
+					break = break
+					random_list = {
+						10 = { add_political_power = v }
+						10 = {
+							divide_temp_variable = { v = 100 }
+							add_stability = v
+						}
+						10 = {
+							divide_temp_variable = { v = 100 }
+							add_war_support = v
+						}
+					}
+				}
+			}
+			if = {
+				limit = {
+					check_variable = {medium_ship_production_array^num > 0}
+					is_ai = yes
+				}
+			}
+			if = {
+				limit = {
+					check_variable = {heavy_ship_production_array^num > 0}
+					is_ai = yes
+				}
+			}
+			if = {
+				limit = {
+					check_variable = {air_production_array^num > 0}
+					is_ai = yes
+				}
+			}
+			if = {
+				limit = {
+					check_variable = {land_production_array^num > 0}
+					is_ai = yes
+				}
+			}
+			if = {
+				limit = {
+					check_variable = {soft_production_array^num > 0}
+					is_ai = yes
+				}
+			}
+		}
+	}
 	on_monthly_VON = {
 		#soft_market_array
 		#market_tank_holder
