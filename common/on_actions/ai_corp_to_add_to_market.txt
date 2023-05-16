@@ -178,6 +178,57 @@ on_actions = {
 					check_variable = {air_production_array^num > 0}
 					is_ai = yes
 				}
+				set_variable = {air_1_workers = 10000}
+				set_variable = {air_2_workers = 10000}
+				set_temp_variable = {highest_so_far = 0}
+				set_temp_variable = {storing_current_index = 0}
+				for_each_loop = {
+					array = air_production_array
+					break = break
+					index = current_index
+					set_temp_variable = {grab_item_number = air_production_array^current_index}
+					if = {
+						limit = {
+							check_variable = {air_amount_contract_holder@var:grab_item_number^num > highest_so_far }
+						}
+						set_temp_variable = {highest_so_far = air_amount_contract_holder@var:grab_item_number^num}
+						set_temp_variable = {storing_current_index = current_index}
+					}else_if = {
+						limit = {
+							check_variable = {air_amount_contract_holder@var:grab_item_number^num > highest_so_far }
+						}
+						set_temp_variable = {highest_so_far = air_amount_contract_holder@var:grab_item_number^num}
+						set_temp_variable = {storing_current_index = current_index}
+					}
+				}
+				if = {
+					limit = {
+						check_variable = {
+							var = highest_so_far
+							value = 0
+							compare = not_equals
+						}
+					}
+					if = {
+						limit = {
+							check_variable = {
+								var = current_production_value
+								value = 0
+								compare = not_equals
+							}
+						}
+						divide_temp_variable = {highest_so_far = current_production_value}
+					}
+					if = {
+						limit = {
+							or = {
+								check_variable = {highest_so_far > 2}
+								check_variable = {current_production_value = 0}
+							}
+						}
+						set_variable = {air_1_selected_item = air_production_array^storing_current_index}
+					}
+				}
 			}
 			if = {
 				limit = {
