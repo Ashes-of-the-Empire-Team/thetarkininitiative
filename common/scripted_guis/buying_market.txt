@@ -6,20 +6,45 @@ scripted_gui = {
             check_variable = { open_market_click = 2}
         }
         effects = {
+            right_click_market_click = {
+                if = {
+                    limit = {
+                        has_country_flag = open_market_ships
+                    }
+                    add_to_variable = { amount_to_be_produced = 1 }
+                }
+                else = {
+                    add_to_variable = { amount_to_be_produced = 100 }
+                }
+            }
+            left_click_market_click = {
+                if = {
+                    limit = {
+                        has_country_flag = open_market_ships
+                    }
+                    subtract_from_variable = { amount_to_be_produced = 1 }
+                }
+                else = {
+                    subtract_from_variable = { amount_to_be_produced = 100 }
+                }
+            }
 			exit_menu_click = {
                 set_variable = { open_market_click = 1}
             }
             select_ground_forces_click = {
                 erase_previous_buying_market_selection = yes
                 set_country_flag = open_market_ground_forces
+                set_variable = { amount_to_be_produced = 100 }
             }
             select_starfighters_click = {
                 erase_previous_buying_market_selection = yes
                 set_country_flag = starfighters_buying_market_open
+                set_variable = { amount_to_be_produced = 100 }
             }
             select_ships_click = {
                 erase_previous_buying_market_selection = yes
                 set_country_flag = open_market_ships
+                set_variable = { amount_to_be_produced = 1 }
             }
             select_droids_click = {
                 erase_previous_buying_market_selection = yes
@@ -1340,6 +1365,482 @@ scripted_gui = {
             }
         }
         triggers = {
+            right_click_market_click_enabled = {
+                NOT = {
+                    check_variable = { amount_to_be_produced = 5 }
+                    check_variable = { amount_to_be_produced = 500 }
+                }
+            }
+            left_click_market_click_enabled = {
+                NOT = {
+                    check_variable = { amount_to_be_produced = 1 }
+                    check_variable = { amount_to_be_produced = 100 }
+                }
+            }
+            amount_in_queue_in_front_visible = {
+                if = {
+                    limit = {
+                        has_country_flag = CR70_buying_market_open
+                    }
+                    has_country_flag = CR70_buying_market_order_in_progress
+                }else_if = {
+                    limit = {
+                        has_country_flag = CR90_buying_market_open
+                    }
+                    has_country_flag = CR90_buying_market_order_in_progress
+                }else_if = {
+                    limit = {
+                        has_country_flag = corona_buying_market_open
+                    }
+                    has_country_flag = corona_buying_market_order_in_progress
+                }else_if = {
+                    limit = {
+                        has_country_flag = pelta_buying_market_open
+                    }
+                    has_country_flag = pelta_buying_market_order_in_progress
+                }else_if = {
+                    limit = {
+                        has_country_flag = mc30_buying_market_open
+                    }
+                    has_country_flag = mc30_buying_market_order_in_progress
+                }else_if = {
+                    limit = {
+                        has_country_flag = nebulon_b_buying_market_open
+                    }
+                    has_country_flag = nebulon_b_buying_market_order_in_progress
+                }else_if = {
+                    limit = {
+                        has_country_flag = nebulon_b2_buying_market_open
+                    }
+                    has_country_flag = nebulon_b2_buying_market_order_in_progress
+                }else_if = {
+                    limit = {
+                        has_country_flag = quaser_buying_market_open
+                    }
+                    has_country_flag = quaser_buying_market_order_in_progress
+                }else_if = {
+                    limit = {
+                        has_country_flag = warrior_buying_market_open
+                    }
+                    has_country_flag = warrior_buying_market_order_in_progress
+                }else_if = {
+                    limit = {
+                        has_country_flag = assault_1_buying_market_open
+                    }
+                    has_country_flag = assault_1_buying_market_order_in_progress
+                }else_if = {
+                    limit = {
+                        has_country_flag = assault_2_buying_market_open
+                    }
+                    has_country_flag = assault_2_buying_market_order_in_progress
+                }else_if = {
+                    limit = {
+                        has_country_flag = mc40_buying_market_open
+                    }
+                    has_country_flag = mc40_buying_market_order_in_progress
+                }else_if = {
+                    limit = {
+                        has_country_flag = mc75_buying_market_open
+                    }
+                    has_country_flag = mc75_buying_market_order_in_progress
+                }else_if = {
+                    limit = {
+                        has_country_flag = bothan_assault_buying_market_open
+                    }
+                    has_country_flag = bothan_assault_buying_market_order_in_progress
+                }else_if = {
+                    limit = {
+                        has_country_flag = mc80_home_one_buying_market_open
+                    }
+                    has_country_flag = mc80_home_one_buying_market_order_in_progress
+                }else_if = {
+                    limit = {
+                        has_country_flag = starhawk_buying_market_open
+                    }
+                    has_country_flag = starhawk_buying_market_order_in_progress
+                }else_if = {
+                    limit = {
+                        has_country_flag = mc80_liberty_buying_market_open
+                    }
+                    has_country_flag = mc80_liberty_buying_market_order_in_progress
+                }else_if = {
+                    limit = {
+                        has_country_flag = republic_star_destroyer_buying_market_open
+                    }
+                    has_country_flag = republic_star_destroyer_buying_market_order_in_progress
+                }else_if = {
+                    limit = {
+                        has_country_flag = nebula_star_destroyer_buying_market_open
+                    }
+                    has_country_flag = nebula_star_destroyer_buying_market_order_in_progress
+                }else_if = {
+                    limit = {
+                        has_country_flag = MC90_buying_market_open
+                    }
+                    has_country_flag = MC90_buying_market_order_in_progress
+                }else_if = {
+                    limit = {
+                        has_country_flag = dauntless_buying_market_open
+                    }
+                    has_country_flag = dauntless_buying_market_order_in_progress
+                }
+                else_if = {
+                    limit = {
+                        has_country_flag = ipv_1_buying_market_open
+                    }
+                    has_country_flag = ipv_1_buying_market_order_in_progress
+                }else_if = {
+                    limit = {
+                        has_country_flag = gozanti_buying_market_open
+                    }
+                    has_country_flag = gozanti_buying_market_order_in_progress
+                }else_if = {
+                    limit = {
+                        has_country_flag = raider_buying_market_open
+                    }
+                    has_country_flag = raider_buying_market_order_in_progress
+                }else_if = {
+                    limit = {
+                        has_country_flag = raider_2_buying_market_open
+                    }
+                    has_country_flag = raider_2_buying_market_order_in_progress
+                }else_if = {
+                    limit = {
+                        has_country_flag = lancer_buying_market_open
+                    }
+                    has_country_flag = lancer_buying_market_order_in_progress
+                }else_if = {
+                    limit = {
+                        has_country_flag = Victory_buying_market_open
+                    }
+                    has_country_flag = Victory_buying_market_order_in_progress
+                }else_if = {
+                    limit = {
+                        has_country_flag = arquitens_buying_market_open
+                    }
+                    has_country_flag = arquitens_buying_market_order_in_progress
+                }else_if = {
+                    limit = {
+                        has_country_flag = Interdictor_buying_market_open
+                    }
+                    has_country_flag = Interdictor_buying_market_order_in_progress
+                }else_if = {
+                    limit = {
+                        has_country_flag = dreadnaught_buying_market_open
+                    }
+                    has_country_flag = dreadnaught_buying_market_order_in_progress
+                }else_if = {
+                    limit = {
+                        has_country_flag = Victory_2_buying_market_open
+                    }
+                    has_country_flag = Victory_2_buying_market_order_in_progress
+                }else_if = {
+                    limit = {
+                        has_country_flag = praertor_buying_market_open
+                    }
+                    has_country_flag = praertor_buying_market_order_in_progress
+                }else_if = {
+                    limit = {
+                        has_country_flag = Imperial_Star_Destroyer_buying_market_open
+                    }
+                    has_country_flag = Imperial_Star_Destroyer_buying_market_order_in_progress
+                }else_if = {
+                    limit = {
+                        has_country_flag = Imperial_Star_Destroyer_1_buying_market_open
+                    }
+                    has_country_flag = Imperial_Star_Destroyer_1_buying_market_order_in_progress
+                }else_if = {
+                    limit = {
+                        has_country_flag = resurgent_buying_market_open
+                    }
+                    has_country_flag = resurgent_buying_market_order_in_progress
+                }else = {
+                    always = no
+                }
+            }
+            amount_in_queue_visible = {
+                 if = {
+                    limit = {
+                        has_country_flag = CR70_buying_market_open
+                    }
+                    NOT = {
+                        has_country_flag = CR70_buying_market_order_in_progress
+                    }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = CR90_buying_market_open
+                    }
+                    NOT = {
+                        has_country_flag = CR90_buying_market_order_in_progress
+                    }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = corona_buying_market_open
+                    }
+                    NOT = {
+                        has_country_flag = corona_buying_market_order_in_progress
+                    }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = pelta_buying_market_open
+                    }
+                    NOT = {
+                        has_country_flag = pelta_buying_market_order_in_progress
+                    }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = mc30_buying_market_open
+                    }
+                    NOT = {
+                        has_country_flag = mc30_buying_market_order_in_progress
+                    }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = nebulon_b_buying_market_open
+                    }
+                    NOT = {
+                        has_country_flag = nebulon_b_buying_market_order_in_progress
+                    }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = nebulon_b2_buying_market_open
+                    }
+                    NOT = {
+                        has_country_flag = nebulon_b2_buying_market_order_in_progress
+                    }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = quaser_buying_market_open
+                    }
+                    NOT = {
+                        has_country_flag = quaser_buying_market_order_in_progress
+                    }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = warrior_buying_market_open
+                    }
+                    NOT = {
+                        has_country_flag = warrior_buying_market_order_in_progress
+                    }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = assault_1_buying_market_open
+                    }
+                    NOT = {
+                        has_country_flag = assault_1_buying_market_order_in_progress
+                    }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = assault_2_buying_market_open
+                    }
+                    NOT = {
+                        has_country_flag = assault_2_buying_market_order_in_progress
+                    }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = mc40_buying_market_open
+                    }
+                    NOT = {
+                        has_country_flag = mc40_buying_market_order_in_progress
+                    }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = mc75_buying_market_open
+                    }
+                    NOT = {
+                        has_country_flag = mc75_buying_market_order_in_progress
+                    }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = bothan_assault_buying_market_open
+                    }
+                    NOT = {
+                        has_country_flag = bothan_assault_buying_market_order_in_progress
+                    }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = mc80_home_one_buying_market_open
+                    }
+                    NOT = {
+                        has_country_flag = mc80_home_one_buying_market_order_in_progress
+                    }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = starhawk_buying_market_open
+                    }
+                    NOT = {
+                        has_country_flag = starhawk_buying_market_order_in_progress
+                    }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = mc80_liberty_buying_market_open
+                    }
+                    NOT = {
+                        has_country_flag = mc80_liberty_buying_market_order_in_progress
+                    }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = republic_star_destroyer_buying_market_open
+                    }
+                    NOT = {
+                        has_country_flag = republic_star_destroyer_buying_market_order_in_progress
+                    }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = nebula_star_destroyer_buying_market_open
+                    }
+                    NOT = {
+                        has_country_flag = nebula_star_destroyer_buying_market_order_in_progress
+                    }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = MC90_buying_market_open
+                    }
+                    NOT = {
+                        has_country_flag = MC90_buying_market_order_in_progress
+                    }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = dauntless_buying_market_open
+                    }
+                    NOT = {
+                        has_country_flag = dauntless_buying_market_order_in_progress
+                    }
+                }
+                
+                if = {
+                    limit = {
+                        has_country_flag = ipv_1_buying_market_open
+                    }
+                    NOT = {
+                        has_country_flag = ipv_1_buying_market_order_in_progress
+                    }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = gozanti_buying_market_open
+                    }
+                    NOT = {
+                        has_country_flag = gozanti_buying_market_order_in_progress
+                    }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = raider_buying_market_open
+                    }
+                    NOT = {
+                        has_country_flag = raider_buying_market_order_in_progress
+                    }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = raider_2_buying_market_open
+                    }
+                    NOT = {
+                        has_country_flag = raider_2_buying_market_order_in_progress
+                    }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = lancer_buying_market_open
+                    }
+                    NOT = {
+                        has_country_flag = lancer_buying_market_order_in_progress
+                    }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = Victory_buying_market_open
+                    }
+                    NOT = {
+                        has_country_flag = Victory_buying_market_order_in_progress
+                    }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = arquitens_buying_market_open
+                    }
+                    NOT = {
+                        has_country_flag = arquitens_buying_market_order_in_progress
+                    }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = Interdictor_buying_market_open
+                    }
+                    NOT = {
+                        has_country_flag = Interdictor_buying_market_order_in_progress
+                    }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = dreadnaught_buying_market_open
+                    }
+                    NOT = {
+                        has_country_flag = dreadnaught_buying_market_order_in_progress
+                    }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = Victory_2_buying_market_open
+                    }
+                    NOT = {
+                        has_country_flag = Victory_2_buying_market_order_in_progress
+                    }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = praertor_buying_market_open
+                    }
+                    NOT = {
+                        has_country_flag = praertor_buying_market_order_in_progress
+                    }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = Imperial_Star_Destroyer_buying_market_open
+                    }
+                    NOT = {
+                        has_country_flag = Imperial_Star_Destroyer_buying_market_order_in_progress
+                    }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = Imperial_Star_Destroyer_1_buying_market_open
+                    }
+                    NOT = {
+                        has_country_flag = Imperial_Star_Destroyer_1_buying_market_order_in_progress
+                    }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = resurgent_buying_market_open
+                    }
+                    NOT = {
+                        has_country_flag = resurgent_buying_market_order_in_progress
+                    }
+                }
+            }
             top_cover_visible = {
                 NOT = {
                     has_country_flag = open_market_ships
@@ -1930,12 +2431,6 @@ scripted_gui = {
             has_country_flag = open_market_ships
         }
         effects = {
-            right_click_market_click = {
-                add_to_variable = { amount_to_be_produced = 1 }
-            }
-            left_click_market_click = {
-                subtract_from_variable = { amount_to_be_produced = 1 }
-            }
             select_corvettes_button_click = {
                 erase_previous_ship_menu_selection = yes
                 set_country_flag = corvette_buying_market_open
@@ -2134,480 +2629,6 @@ scripted_gui = {
             select_star_destroyers_button_click_enabled = {
                 NOT = {
                     has_country_flag = star_destroyer_buying_market_open
-                }
-            }
-            right_click_market_click_enabled = {
-                NOT = {
-                    check_variable = { amount_to_be_produced = 5 }
-                }
-            }
-            left_click_market_click_enabled = {
-                NOT = {
-                    check_variable = { amount_to_be_produced = 1 }
-                }
-            }
-            amount_in_queue_in_front_visible = {
-                if = {
-                    limit = {
-                        has_country_flag = CR70_buying_market_open
-                    }
-                    has_country_flag = CR70_buying_market_order_in_progress
-                }else_if = {
-                    limit = {
-                        has_country_flag = CR90_buying_market_open
-                    }
-                    has_country_flag = CR90_buying_market_order_in_progress
-                }else_if = {
-                    limit = {
-                        has_country_flag = corona_buying_market_open
-                    }
-                    has_country_flag = corona_buying_market_order_in_progress
-                }else_if = {
-                    limit = {
-                        has_country_flag = pelta_buying_market_open
-                    }
-                    has_country_flag = pelta_buying_market_order_in_progress
-                }else_if = {
-                    limit = {
-                        has_country_flag = mc30_buying_market_open
-                    }
-                    has_country_flag = mc30_buying_market_order_in_progress
-                }else_if = {
-                    limit = {
-                        has_country_flag = nebulon_b_buying_market_open
-                    }
-                    has_country_flag = nebulon_b_buying_market_order_in_progress
-                }else_if = {
-                    limit = {
-                        has_country_flag = nebulon_b2_buying_market_open
-                    }
-                    has_country_flag = nebulon_b2_buying_market_order_in_progress
-                }else_if = {
-                    limit = {
-                        has_country_flag = quaser_buying_market_open
-                    }
-                    has_country_flag = quaser_buying_market_order_in_progress
-                }else_if = {
-                    limit = {
-                        has_country_flag = warrior_buying_market_open
-                    }
-                    has_country_flag = warrior_buying_market_order_in_progress
-                }else_if = {
-                    limit = {
-                        has_country_flag = assault_1_buying_market_open
-                    }
-                    has_country_flag = assault_1_buying_market_order_in_progress
-                }else_if = {
-                    limit = {
-                        has_country_flag = assault_2_buying_market_open
-                    }
-                    has_country_flag = assault_2_buying_market_order_in_progress
-                }else_if = {
-                    limit = {
-                        has_country_flag = mc40_buying_market_open
-                    }
-                    has_country_flag = mc40_buying_market_order_in_progress
-                }else_if = {
-                    limit = {
-                        has_country_flag = mc75_buying_market_open
-                    }
-                    has_country_flag = mc75_buying_market_order_in_progress
-                }else_if = {
-                    limit = {
-                        has_country_flag = bothan_assault_buying_market_open
-                    }
-                    has_country_flag = bothan_assault_buying_market_order_in_progress
-                }else_if = {
-                    limit = {
-                        has_country_flag = mc80_home_one_buying_market_open
-                    }
-                    has_country_flag = mc80_home_one_buying_market_order_in_progress
-                }else_if = {
-                    limit = {
-                        has_country_flag = starhawk_buying_market_open
-                    }
-                    has_country_flag = starhawk_buying_market_order_in_progress
-                }else_if = {
-                    limit = {
-                        has_country_flag = mc80_liberty_buying_market_open
-                    }
-                    has_country_flag = mc80_liberty_buying_market_order_in_progress
-                }else_if = {
-                    limit = {
-                        has_country_flag = republic_star_destroyer_buying_market_open
-                    }
-                    has_country_flag = republic_star_destroyer_buying_market_order_in_progress
-                }else_if = {
-                    limit = {
-                        has_country_flag = nebula_star_destroyer_buying_market_open
-                    }
-                    has_country_flag = nebula_star_destroyer_buying_market_order_in_progress
-                }else_if = {
-                    limit = {
-                        has_country_flag = MC90_buying_market_open
-                    }
-                    has_country_flag = MC90_buying_market_order_in_progress
-                }else_if = {
-                    limit = {
-                        has_country_flag = dauntless_buying_market_open
-                    }
-                    has_country_flag = dauntless_buying_market_order_in_progress
-                }
-                else_if = {
-                    limit = {
-                        has_country_flag = ipv_1_buying_market_open
-                    }
-                    has_country_flag = ipv_1_buying_market_order_in_progress
-                }else_if = {
-                    limit = {
-                        has_country_flag = gozanti_buying_market_open
-                    }
-                    has_country_flag = gozanti_buying_market_order_in_progress
-                }else_if = {
-                    limit = {
-                        has_country_flag = raider_buying_market_open
-                    }
-                    has_country_flag = raider_buying_market_order_in_progress
-                }else_if = {
-                    limit = {
-                        has_country_flag = raider_2_buying_market_open
-                    }
-                    has_country_flag = raider_2_buying_market_order_in_progress
-                }else_if = {
-                    limit = {
-                        has_country_flag = lancer_buying_market_open
-                    }
-                    has_country_flag = lancer_buying_market_order_in_progress
-                }else_if = {
-                    limit = {
-                        has_country_flag = Victory_buying_market_open
-                    }
-                    has_country_flag = Victory_buying_market_order_in_progress
-                }else_if = {
-                    limit = {
-                        has_country_flag = arquitens_buying_market_open
-                    }
-                    has_country_flag = arquitens_buying_market_order_in_progress
-                }else_if = {
-                    limit = {
-                        has_country_flag = Interdictor_buying_market_open
-                    }
-                    has_country_flag = Interdictor_buying_market_order_in_progress
-                }else_if = {
-                    limit = {
-                        has_country_flag = dreadnaught_buying_market_open
-                    }
-                    has_country_flag = dreadnaught_buying_market_order_in_progress
-                }else_if = {
-                    limit = {
-                        has_country_flag = Victory_2_buying_market_open
-                    }
-                    has_country_flag = Victory_2_buying_market_order_in_progress
-                }else_if = {
-                    limit = {
-                        has_country_flag = praertor_buying_market_open
-                    }
-                    has_country_flag = praertor_buying_market_order_in_progress
-                }else_if = {
-                    limit = {
-                        has_country_flag = Imperial_Star_Destroyer_buying_market_open
-                    }
-                    has_country_flag = Imperial_Star_Destroyer_buying_market_order_in_progress
-                }else_if = {
-                    limit = {
-                        has_country_flag = Imperial_Star_Destroyer_1_buying_market_open
-                    }
-                    has_country_flag = Imperial_Star_Destroyer_1_buying_market_order_in_progress
-                }else_if = {
-                    limit = {
-                        has_country_flag = resurgent_buying_market_open
-                    }
-                    has_country_flag = resurgent_buying_market_order_in_progress
-                }else = {
-                    always = no
-                }
-            }
-            amount_in_queue_visible = {
-                 if = {
-                    limit = {
-                        has_country_flag = CR70_buying_market_open
-                    }
-                    NOT = {
-                        has_country_flag = CR70_buying_market_order_in_progress
-                    }
-                }
-                if = {
-                    limit = {
-                        has_country_flag = CR90_buying_market_open
-                    }
-                    NOT = {
-                        has_country_flag = CR90_buying_market_order_in_progress
-                    }
-                }
-                if = {
-                    limit = {
-                        has_country_flag = corona_buying_market_open
-                    }
-                    NOT = {
-                        has_country_flag = corona_buying_market_order_in_progress
-                    }
-                }
-                if = {
-                    limit = {
-                        has_country_flag = pelta_buying_market_open
-                    }
-                    NOT = {
-                        has_country_flag = pelta_buying_market_order_in_progress
-                    }
-                }
-                if = {
-                    limit = {
-                        has_country_flag = mc30_buying_market_open
-                    }
-                    NOT = {
-                        has_country_flag = mc30_buying_market_order_in_progress
-                    }
-                }
-                if = {
-                    limit = {
-                        has_country_flag = nebulon_b_buying_market_open
-                    }
-                    NOT = {
-                        has_country_flag = nebulon_b_buying_market_order_in_progress
-                    }
-                }
-                if = {
-                    limit = {
-                        has_country_flag = nebulon_b2_buying_market_open
-                    }
-                    NOT = {
-                        has_country_flag = nebulon_b2_buying_market_order_in_progress
-                    }
-                }
-                if = {
-                    limit = {
-                        has_country_flag = quaser_buying_market_open
-                    }
-                    NOT = {
-                        has_country_flag = quaser_buying_market_order_in_progress
-                    }
-                }
-                if = {
-                    limit = {
-                        has_country_flag = warrior_buying_market_open
-                    }
-                    NOT = {
-                        has_country_flag = warrior_buying_market_order_in_progress
-                    }
-                }
-                if = {
-                    limit = {
-                        has_country_flag = assault_1_buying_market_open
-                    }
-                    NOT = {
-                        has_country_flag = assault_1_buying_market_order_in_progress
-                    }
-                }
-                if = {
-                    limit = {
-                        has_country_flag = assault_2_buying_market_open
-                    }
-                    NOT = {
-                        has_country_flag = assault_2_buying_market_order_in_progress
-                    }
-                }
-                if = {
-                    limit = {
-                        has_country_flag = mc40_buying_market_open
-                    }
-                    NOT = {
-                        has_country_flag = mc40_buying_market_order_in_progress
-                    }
-                }
-                if = {
-                    limit = {
-                        has_country_flag = mc75_buying_market_open
-                    }
-                    NOT = {
-                        has_country_flag = mc75_buying_market_order_in_progress
-                    }
-                }
-                if = {
-                    limit = {
-                        has_country_flag = bothan_assault_buying_market_open
-                    }
-                    NOT = {
-                        has_country_flag = bothan_assault_buying_market_order_in_progress
-                    }
-                }
-                if = {
-                    limit = {
-                        has_country_flag = mc80_home_one_buying_market_open
-                    }
-                    NOT = {
-                        has_country_flag = mc80_home_one_buying_market_order_in_progress
-                    }
-                }
-                if = {
-                    limit = {
-                        has_country_flag = starhawk_buying_market_open
-                    }
-                    NOT = {
-                        has_country_flag = starhawk_buying_market_order_in_progress
-                    }
-                }
-                if = {
-                    limit = {
-                        has_country_flag = mc80_liberty_buying_market_open
-                    }
-                    NOT = {
-                        has_country_flag = mc80_liberty_buying_market_order_in_progress
-                    }
-                }
-                if = {
-                    limit = {
-                        has_country_flag = republic_star_destroyer_buying_market_open
-                    }
-                    NOT = {
-                        has_country_flag = republic_star_destroyer_buying_market_order_in_progress
-                    }
-                }
-                if = {
-                    limit = {
-                        has_country_flag = nebula_star_destroyer_buying_market_open
-                    }
-                    NOT = {
-                        has_country_flag = nebula_star_destroyer_buying_market_order_in_progress
-                    }
-                }
-                if = {
-                    limit = {
-                        has_country_flag = MC90_buying_market_open
-                    }
-                    NOT = {
-                        has_country_flag = MC90_buying_market_order_in_progress
-                    }
-                }
-                if = {
-                    limit = {
-                        has_country_flag = dauntless_buying_market_open
-                    }
-                    NOT = {
-                        has_country_flag = dauntless_buying_market_order_in_progress
-                    }
-                }
-                
-                if = {
-                    limit = {
-                        has_country_flag = ipv_1_buying_market_open
-                    }
-                    NOT = {
-                        has_country_flag = ipv_1_buying_market_order_in_progress
-                    }
-                }
-                if = {
-                    limit = {
-                        has_country_flag = gozanti_buying_market_open
-                    }
-                    NOT = {
-                        has_country_flag = gozanti_buying_market_order_in_progress
-                    }
-                }
-                if = {
-                    limit = {
-                        has_country_flag = raider_buying_market_open
-                    }
-                    NOT = {
-                        has_country_flag = raider_buying_market_order_in_progress
-                    }
-                }
-                if = {
-                    limit = {
-                        has_country_flag = raider_2_buying_market_open
-                    }
-                    NOT = {
-                        has_country_flag = raider_2_buying_market_order_in_progress
-                    }
-                }
-                if = {
-                    limit = {
-                        has_country_flag = lancer_buying_market_open
-                    }
-                    NOT = {
-                        has_country_flag = lancer_buying_market_order_in_progress
-                    }
-                }
-                if = {
-                    limit = {
-                        has_country_flag = Victory_buying_market_open
-                    }
-                    NOT = {
-                        has_country_flag = Victory_buying_market_order_in_progress
-                    }
-                }
-                if = {
-                    limit = {
-                        has_country_flag = arquitens_buying_market_open
-                    }
-                    NOT = {
-                        has_country_flag = arquitens_buying_market_order_in_progress
-                    }
-                }
-                if = {
-                    limit = {
-                        has_country_flag = Interdictor_buying_market_open
-                    }
-                    NOT = {
-                        has_country_flag = Interdictor_buying_market_order_in_progress
-                    }
-                }
-                if = {
-                    limit = {
-                        has_country_flag = dreadnaught_buying_market_open
-                    }
-                    NOT = {
-                        has_country_flag = dreadnaught_buying_market_order_in_progress
-                    }
-                }
-                if = {
-                    limit = {
-                        has_country_flag = Victory_2_buying_market_open
-                    }
-                    NOT = {
-                        has_country_flag = Victory_2_buying_market_order_in_progress
-                    }
-                }
-                if = {
-                    limit = {
-                        has_country_flag = praertor_buying_market_open
-                    }
-                    NOT = {
-                        has_country_flag = praertor_buying_market_order_in_progress
-                    }
-                }
-                if = {
-                    limit = {
-                        has_country_flag = Imperial_Star_Destroyer_buying_market_open
-                    }
-                    NOT = {
-                        has_country_flag = Imperial_Star_Destroyer_buying_market_order_in_progress
-                    }
-                }
-                if = {
-                    limit = {
-                        has_country_flag = Imperial_Star_Destroyer_1_buying_market_open
-                    }
-                    NOT = {
-                        has_country_flag = Imperial_Star_Destroyer_1_buying_market_order_in_progress
-                    }
-                }
-                if = {
-                    limit = {
-                        has_country_flag = resurgent_buying_market_open
-                    }
-                    NOT = {
-                        has_country_flag = resurgent_buying_market_order_in_progress
-                    }
                 }
             }
         }
