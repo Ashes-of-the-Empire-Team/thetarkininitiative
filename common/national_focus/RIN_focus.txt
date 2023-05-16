@@ -83,7 +83,7 @@ focus = {
 	}
 	bypass = {has_idea = professional_forces }
 	completion_reward = {
-		custom_effect_tooltip = tt_zer_spend_100_credits
+		custom_effect_tooltip = tt_rin_spend_100_credits
 		subtract_from_variable = { currency_amount^primary_currency = 100 }
 		swap_ideas = {
 			remove_idea = militia_armies
@@ -105,7 +105,7 @@ focus = {
 	}
 	bypass = {has_idea = planetary_defense }
 	completion_reward = {
-		custom_effect_tooltip = tt_zer_spend_100_credits
+		custom_effect_tooltip = tt_rin_spend_100_credits
 		subtract_from_variable = { currency_amount^primary_currency = 100 }
 		swap_ideas = {
 			remove_idea = unorganized_navy
@@ -146,7 +146,7 @@ focus = {
 		factor = 1
 	}
 	completion_reward = {
-		custom_effect_tooltip = tt_zer_spend_50_credits
+		custom_effect_tooltip = tt_rin_spend_50_credits
 		subtract_from_variable = { currency_amount^primary_currency = 50 }
 		409 ={
 			add_building_construction = {
@@ -177,7 +177,7 @@ focus = {
 		factor = 1
 	}
 	completion_reward = {
-		custom_effect_tooltip = tt_zer_spend_50_credits
+		custom_effect_tooltip = tt_rin_spend_50_credits
 		subtract_from_variable = { currency_amount^primary_currency = 50 }
 		409 ={
 			add_building_construction = {
@@ -274,7 +274,7 @@ focus = {
 		factor = 1
 	}
 	completion_reward = {
-		custom_effect_tooltip = tt_zer_spend_50_credits
+		custom_effect_tooltip = tt_rin_spend_50_credits
 		subtract_from_variable = { currency_amount^primary_currency = 50 }
 		98 ={
 				add_building_construction = {
@@ -414,7 +414,7 @@ focus = {
 		factor = 1
 	}
 	completion_reward = {
-		custom_effect_tooltip = tt_zer_spend_50_credits
+		custom_effect_tooltip = tt_rin_spend_50_credits
 			subtract_from_variable = { currency_amount^primary_currency = 50 }
 		add_resource = {
 			type = tungsten
@@ -548,7 +548,7 @@ focus = {
 		factor = 1
 	}
 	completion_reward = {
-		custom_effect_tooltip = tt_zer_spend_250_credits
+		custom_effect_tooltip = tt_rin_spend_250_credits
 		subtract_from_variable = { currency_amount^primary_currency = 250 }
 		swap_ideas = {
 			remove_idea = economic_collapse_emp_4
@@ -557,6 +557,25 @@ focus = {
 	}
 	relative_position_id = RIN_slaves_in_the_factories
 	prerequisite = { focus = RIN_economic_prosperity }
+}
+
+focus = {
+	id = RIN_our_own_economy
+	icon = GFX_WIP_focus
+	cost = 10
+	x = 0
+	y = 1
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		custom_effect_tooltip = tt_rin_increase_15_legitimacy
+			add_to_variable = { legitimacy_emp = 15 }
+        	add_to_variable = { legitimacy_emp_equilibirum = 15 }
+			add_stability = 0.1
+	}
+	relative_position_id = RIN_paying_off_debts
+	prerequisite = { focus = RIN_paying_off_debts }
 }
 
 focus = {
@@ -643,7 +662,7 @@ focus = {
 		factor = 1
 	}
 	completion_reward = {
-		custom_effect_tooltip = tt_zer_spend_100_credits
+		custom_effect_tooltip = tt_rin_spend_100_credits
 		subtract_from_variable = { currency_amount^primary_currency = 100 }
 		add_timed_idea = {
 			idea = RIN_kuat_order
@@ -723,14 +742,6 @@ focus = {
 				division = "division_template = \"Imperial Millitia\" start_experience_factor = 0.23" 
 				owner = RIN
 			}
-			create_unit = {
-				division = "division_template = \"Imperial Millitia\" start_experience_factor = 0.29" 
-				owner = RIN
-			}
-			create_unit = {
-				division = "division_template = \"Imperial Millitia\" start_experience_factor = 0.26" 
-				owner = RIN
-			}
 		}
 	}
 	}
@@ -768,12 +779,9 @@ focus = {
 		factor = 1
 	}
 	completion_reward = {
-		hiden_effect {release = PAN}
-		set_autonomy = {
+		create_wargoal = {
+			type = puppet_wargoal_focus
 			target = PAN
-			autonomy_state = autonomy_imperial_sector
-			end_wars = yes
-			end_civil_wars = yes
 		}
 		
 	}
@@ -813,13 +821,14 @@ focus = {
 focus = {
 	id = RIN_retake_the_mines
 	icon = GFX_WIP_focus
-	cost = 5
+	cost = 2
 	x = 0
 	y = 1
 	ai_will_do = {
 		factor = 1
 	}
 	completion_reward = {
+		custom_effect_tooltip = tt_rin_warning
 		declare_war_on = { target = ALZ    type = annex_everything }
 	}
 	relative_position_id = RIN_imperials_on_alzoc_iii
@@ -866,10 +875,28 @@ focus = {
 		factor = 1
 	}
 	completion_reward = {
-		ALZ = { add_to_ROOT_potential_cores = yes }
+		add_resistance = -20
+		add_compliance = 10
 	}
 	relative_position_id = RIN_resume_mining_operations
 	prerequisite = { focus = RIN_resume_mining_operations }
+}
+
+focus = {
+	id = RIN_exploting_the_planet
+	icon = GFX_WIP_focus
+	cost = 5
+	x = 0
+	y = 1
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		custom_effect_tooltip = tt_rin_gain_150_credits
+		add_to_variable = { currency_amount^primary_currency = 150 }
+	}
+	relative_position_id = RIN_conqouring_the_ice_planet
+	prerequisite = { focus = RIN_conqouring_the_ice_planet }
 }
 
 focus = {
@@ -947,6 +974,24 @@ focus = {
 }
 
 focus = {
+	id = RIN_economic_stability
+	icon = GFX_WIP_focus
+	cost = 10
+	x = 0
+	y = 2
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		custom_effect_tooltip = tt_rin_gain_150_credits
+		add_to_variable = { currency_amount^primary_currency = 150 }
+	}
+	relative_position_id = RIN_expanding_the_sector
+	prerequisite = { focus = RIN_expanding_the_sector }
+	mutually_exclusive = { focus = RIN_we_will_ensure_order focus = RIN_the_queen_will_ensure_order }
+}
+
+focus = {
 	id = RIN_naboo_gaurd
 	icon = GFX_WIP_focus
 	cost = 5
@@ -969,18 +1014,6 @@ focus = {
 				division = "division_template = \"Royal Naboo Gaurd Forces\" start_experience_factor = 0.53" 
 				owner = NAB
 			}
-			create_unit = {
-				division = "division_template = \"Royal Naboo Gaurd Forces\" start_experience_factor = 0.49" 
-				owner = NAB
-			}
-			create_unit = {
-				division = "division_template = \"Royal Naboo Gaurd Forces\" start_experience_factor = 0.46" 
-				owner = NAB
-			}
-			create_unit = {
-				division = "division_template = \"Royal Naboo Gaurd Forces\" start_experience_factor = 0.43" 
-				owner = NAB
-			}
 		}
 	}
 	relative_position_id = RIN_the_queen_will_ensure_order
@@ -995,6 +1028,20 @@ focus = {
 	y = 1
 	ai_will_do = {
 		factor = 1
+	}
+	available = {
+		RIN = {
+			owns_state = 463
+			owns_state = 410
+			owns_state = 97
+			owns_state = 412
+			owns_state = 464
+			owns_state = 416
+			owns_state = 462
+			owns_state = 461
+		}
+		NAB = {has_capitulated = yes}
+		GUN = {has_capitulated = yes}
 	}
 	completion_reward = {
 		NAB = { add_to_ROOT_potential_cores = yes }
@@ -1027,10 +1074,6 @@ focus = {
 				division = "division_template = \"Imperial Millitia\" start_experience_factor = 0.26" 
 				owner = RIN
 			}
-			create_unit = {
-				division = "division_template = \"Imperial Millitia\" start_experience_factor = 0.23" 
-				owner = RIN
-			}
 		}
 	}
 	relative_position_id = RIN_we_will_ensure_order
@@ -1042,16 +1085,154 @@ focus = {
 	icon = GFX_WIP_focus
 	cost = 5
 	x = 0
+	y = 1
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		diplomatic_relation = {
+			country = ERI
+			relation = non_aggression_pact
+			active = no
+		}
+	}
+	relative_position_id = RIN_declaring_ambitions
+	prerequisite = { focus = RIN_declaring_ambitions }
+
+}
+
+focus = {
+	id = RIN_war_with_eriadu
+	icon = GFX_WIP_focus
+	cost = 5
+	x = -2
+	y = 1
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		create_wargoal = {
+			type = annex_everything
+			target = ERI
+		}
+	}
+	relative_position_id = RIN_dealing_with_eriadu
+	prerequisite = { focus = RIN_dealing_with_eriadu }
+	mutually_exclusive = { focus = RIN_alliance_with_eriadu }
+}
+
+focus = {
+	id = RIN_alliance_with_eriadu
+	icon = GFX_WIP_focus
+	cost = 5
+	x = 2
+	y = 1
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		diplomatic_relation = {
+			country = ERI
+			relation = non_aggression_pact
+			active = yes
+		}
+		set_rule = {
+			can_create_factions = yes
+		}
+		create_faction = new_empire
+	}
+	relative_position_id = RIN_dealing_with_eriadu
+	prerequisite = { focus = RIN_dealing_with_eriadu }
+	mutually_exclusive = { focus = RIN_war_with_eriadu }
+}
+
+focus = {
+	id = RIN_lambda_occupation
+	icon = GFX_WIP_focus
+	cost = 5
+	x = -1
+	y = 1
+	ai_will_do = {
+		factor = 1
+	}
+	available = {
+		RIN = {
+			owns_state = 104
+			owns_state = 432
+			owns_state = 428
+			owns_state = 430
+		}
+		ERI = {has_capitulated = yes}
+	}
+	completion_reward = {
+		ERI = { add_to_ROOT_potential_cores = yes }
+	}
+	relative_position_id = RIN_war_with_eriadu
+	prerequisite = { focus = RIN_war_with_eriadu }
+	mutually_exclusive = { focus = RIN_lambda_puppet}
+}
+
+focus = {
+	id = RIN_lambda_puppet
+	icon = GFX_WIP_focus
+	cost = 5
+	x = 1
+	y = 1
+	ai_will_do = {
+		factor = 1
+	}
+	available = {
+		RIN = {
+			owns_state = 104
+			owns_state = 432
+			owns_state = 428
+			owns_state = 430
+		}
+		ERI = {has_capitulated = yes}
+	}
+	completion_reward = {
+		set_autonomy = {
+			target = ERI
+			autonomy_state = autonomy_imperial_sector
+			end_wars = yes
+			end_civil_wars = yes
+		}
+	}
+	relative_position_id = RIN_war_with_eriadu
+	prerequisite = { focus = RIN_war_with_eriadu }
+	mutually_exclusive = { focus = RIN_lambda_occupation }
+}
+
+focus = {
+	id = RIN_declaring_ambitions
+	icon = GFX_WIP_focus
+	cost = 10
+	x = 0
 	y = 4
 	ai_will_do = {
 		factor = 1
 	}
 	completion_reward = {
-		#begins path to war or peace with warlord neighbor
+		#increase imperiarl legitamancy
+		custom_effect_tooltip = tt_rin_increase_15_legitimacy
+			add_to_variable = { legitimacy_emp = 15 }
+        	add_to_variable = { legitimacy_emp_equilibirum = 15 }
+			custom_effect_tooltip = tt_rin_decrease_empire_legitimacy
+			var:global.emperor_id = {
+				add_opinion_modifier = {
+					target = RIN
+					modifier = wants_to_dethrone_us
+				}
+				subtract_from_variable = { legitimacy_emp = 10 }
+        		subtract_from_variable = { legitimacy_emp_equilibirum = 10 }
+			}
+			add_political_power = 100
+			add_war_support = 0.2
 	}
 	relative_position_id = RIN_reining_in_the_sujimis_sector
 	prerequisite = { focus = RIN_naboo_gaurd 
-	focus = RIN_imperial_garrison }
+	focus = RIN_imperial_garrison
+focus = RIN_economic_stability }
 
 }
 
@@ -1168,7 +1349,8 @@ focus = {
 	}
 
 	completion_reward = {
-		FAL = { add_to_ROOT_potential_cores = yes }
+		add_resistance = -20
+		add_compliance = 10
 	}
 	relative_position_id = RIN_invasion_of_falleen
 	prerequisite = { focus = RIN_imperial_occupation}
