@@ -107,6 +107,12 @@ country_event = {
 					}
 				}
 			}
+			if={
+				limit={
+					has_idea = EMP_loyalty_enforced
+				}
+				remove_ideas = {EMP_loyalty_enforced}
+			}
 			set_cosmetic_tag = COR_pitta
 			set_country_flag = COR_Pitta
 			mark_focus_tree_layout_dirty = yes
@@ -203,6 +209,14 @@ country_event = {#Battle of Tralus
 				type = isd_hull
 				count = all
 			}
+			destroy_ships = {
+				type = arquitens_hull
+				count = all
+			}
+			destroy_ships = {
+				type = lancer_hull
+				count = all
+			}
 			clr_country_flag = COR_pitta
 			set_country_flag = COR_Battle_of_Tralus
 			set_country_flag = COR_neutral
@@ -235,7 +249,16 @@ country_event = {#Battle of Tralus
 			type = isd_hull
 			count = 8 #19
 		}
+		destroy_ships = {
+			type = arquitens_hull
+			count = all
+		}
+		destroy_ships = {
+			type = lancer_hull
+			count = 20
+		}
 		set_country_flag = COR_Battle_of_Tralus
+		country_event = COR.17
     }
 }
 country_event = {#Call for elections
@@ -399,6 +422,77 @@ country_event = {#
     fire_only_once = yes
     option = {#give in
         name = COR.12.a
+		
+    }
+}
+country_event = {#The Corellian Government demands Nationaisation
+    id = COR.13
+    title = COR.13.t
+    desc = COR.13.d
+    picture = GFX_report_event_election_vote
+    is_triggered_only = yes
+    fire_only_once = yes
+    option = {#give in
+        name = COR.13.a
+		FROM={
+			country_event = COR.14
+		}
+    }
+	option = {#refuse
+        name = COR.13.b
+		FROM={
+			country_event = COR.15
+		}
+    }
+}
+country_event = {#
+    id = COR.14
+    title = COR.14.t
+    desc = COR.14.d
+    picture = GFX_report_event_election_vote
+    is_triggered_only = yes
+    fire_only_once = yes
+    option = {#
+        name = COR.14.a
+		annex = FROM
+    }
+}
+country_event = {#
+    id = COR.15
+    title = COR.15.t
+    desc = COR.15.d
+    picture = GFX_report_event_election_vote
+    is_triggered_only = yes
+    fire_only_once = yes
+    option = {#
+        name = COR.15.a
+		create_wargoal = {
+			type = annex_everything
+			target = FROM
+		}
+    }
+}
+country_event = {#Launch of the Torpedo Sphere
+    id = COR.16
+    title = COR.16.t
+    desc = COR.16.d
+    picture = GFX_report_event_election_vote
+    is_triggered_only = yes
+    fire_only_once = yes
+    option = {#
+        name = COR.16.a
+		
+    }
+}
+country_event = {#Grungers Fairwell gift
+    id = COR.17
+    title = COR.17.t
+    desc = COR.17.d
+    picture = GFX_report_event_election_vote
+    is_triggered_only = yes
+    fire_only_once = yes
+    option = {#
+        name = COR.17.a
 		
     }
 }
