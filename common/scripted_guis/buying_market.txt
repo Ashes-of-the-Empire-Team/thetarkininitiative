@@ -1919,12 +1919,89 @@ scripted_gui = {
             }
         }
     }
-    Marketplace_buying_starfighters_reb_main = {
+    Marketplace_buying_emp_starfighters = {
         context_type = player_context
         parent_window_name = "Marketplace_buying_menu"
-        window_name = "Marketplace_buying_starfighters"
+        window_name = "Marketplace_buying_emp_starfighters"
         visible = {
             has_country_flag = starfighters_buying_market_open
+            has_country_flag = imperial_market_open
+        }
+        effects = {
+            level_1_click = {
+                set_country_flag = level_1_selected
+                clr_country_flag = level_2_selected
+                clr_country_flag = level_3_selected
+                clr_country_flag = level_4_selected
+            }
+            level_2_click = {
+                set_country_flag = level_2_selected
+                clr_country_flag = level_1_selected
+                clr_country_flag = level_3_selected
+                clr_country_flag = level_4_selected
+            }
+            level_3_click = {
+                set_country_flag = level_3_selected
+                clr_country_flag = level_1_selected
+                clr_country_flag = level_2_selected
+                clr_country_flag = level_4_selected
+            }
+            level_4_click = {
+                set_country_flag = level_4_selected
+                clr_country_flag = level_1_selected
+                clr_country_flag = level_2_selected
+                clr_country_flag = level_3_selected
+            }
+        }
+        triggers = {
+            level_2_visible = {
+                OR = {
+                    has_country_flag = u_wing_selected
+                    has_country_flag = a_wing_selected
+                    has_country_flag = x_wing_selected
+                    has_country_flag = y_wing_selected
+                    has_country_flag = b_wing_selected
+                }
+            }
+            level_3_visible = {
+                OR = {
+                    has_country_flag = y_wing_selected
+                }
+            }
+            level_4_visible = {
+               #OR = {
+               #    has_country_flag = b_wing_selected
+               #}
+            }
+            level_1_click_enabled = {
+                NOT = {
+                    has_country_flag = level_1_selected
+                }
+            }
+            level_2_click_enabled = {
+                NOT = {
+                    has_country_flag = level_2_selected
+                }
+            }
+            level_3_click_enabled = {
+                NOT = {
+                    has_country_flag = level_3_selected
+                }
+            }
+            level_4_click_enabled = {
+                NOT = {
+                    has_country_flag = level_4_selected
+                }
+            }
+        }
+    }
+    Marketplace_buying_reb_starfighters = {
+        context_type = player_context
+        parent_window_name = "Marketplace_buying_menu"
+        window_name = "Marketplace_buying_reb_starfighters"
+        visible = {
+            has_country_flag = starfighters_buying_market_open
+            has_country_flag = republic_market_open
         }
         effects = {
             order_ship_click = {
