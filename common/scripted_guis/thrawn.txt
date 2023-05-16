@@ -1,0 +1,40 @@
+scripted_gui = {
+    thrawn_open_gui = {
+        context_type = player_context
+        window_name = "Thrawn_open"
+        visible = {
+            tag = EOH
+        }
+        effects = {
+            thrawn_opener_click = {
+                set_variable = {thrawn_screen=0}
+                set_country_flag = thscrop
+            }
+        }
+    }
+    thrawn_gui = {
+        context_type = player_context
+        window_name = "Thrawn_menu"
+        visible = {
+            has_country_flag = thscrop
+        }
+        effects = {
+            thrawn_exit_click = {
+                clr_country_flag = thscrop
+                set_variable = {thrawn_screen=0}
+            }
+            art_enter_click = {
+                set_variable = {thrawn_screen=1}
+            }
+        }
+    }
+    thrawn_art_gui = {
+        context_type = player_context
+        parent_window_name = "Thrawn_menu"
+        window_name = "Thrawn_art_menu"
+        visible = {
+            has_country_flag = thscrop 
+            #var:thrawn_screen=1
+        }
+    }
+}

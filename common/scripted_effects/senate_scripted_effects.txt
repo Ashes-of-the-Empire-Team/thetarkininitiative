@@ -1,0 +1,329 @@
+calculate_economic_senate_power = {
+	set_temp_variable = {economic_score = max_manpower_k}
+	divide_temp_variable = {economic_score = 10000}
+	set_temp_variable = {credit_income_calculator = nmn}
+	set_temp_variable = {factory_count_calculator = num_of_civilian_factories}
+	add_to_temp_variable = {economic_score = credit_income_calculator}
+	add_to_temp_variable = {economic_score = factory_count_calculator}
+
+	add_to_temp_array = {
+		array = global.highest_economic_score
+		value = economic_score
+	}
+}
+calculate_military_senate_power = {
+	set_temp_variable = {military_score = num_battalions}
+	divide_temp_variable = {military_score = 15}
+	set_temp_variable = {num_ships_calculator = num_ships }
+	divide_temp_variable = {num_ships_calculator = 5}
+	set_temp_variable = {num_of_planes_calculator = num_deployed_planes}
+	divide_temp_variable = {num_of_planes_calculator = 50}
+
+	add_to_temp_variable = {military_score = num_of_planes_calculator}
+	add_to_temp_variable = {military_score = num_ships_calculator}
+	
+	add_to_temp_array = {
+		array = global.highest_military_score
+		value = military_score
+	}
+}
+calculate_espionage_senate_power = {
+	set_temp_variable = {espionage_score = 0}
+	if = {
+		limit = {
+			has_variable = agent_martial@var:agent_operation_slot_1
+		}
+		add_to_temp_variable = {espionage_score = agent_martial@var:agent_operation_slot_1}
+		add_to_temp_variable = {espionage_score = agent_intelligence@var:agent_operation_slot_1}
+		add_to_temp_variable = {espionage_score = agent_charisma@var:agent_operation_slot_1}
+	}
+	if = {
+		limit = {
+			has_variable = agent_martial@var:agent_operation_slot_2
+		}
+		add_to_temp_variable = {espionage_score = agent_martial@var:agent_operation_slot_2}
+		add_to_temp_variable = {espionage_score = agent_intelligence@var:agent_operation_slot_2}
+		add_to_temp_variable = {espionage_score = agent_charisma@var:agent_operation_slot_2}
+	}
+	if = {
+		limit = {
+			has_variable = agent_martial@var:agent_operation_slot_3
+		}
+		add_to_temp_variable = {espionage_score = agent_martial@var:agent_operation_slot_3}
+		add_to_temp_variable = {espionage_score = agent_intelligence@var:agent_operation_slot_3}
+		add_to_temp_variable = {espionage_score = agent_charisma@var:agent_operation_slot_3}
+	}
+	add_to_temp_array = {
+		array = global.highest_espionage_score
+		value = espionage_score
+	}
+}
+calculate_research_senate_power = {
+	set_temp_variable = {research_score = amount_research_slots}
+	add_to_temp_variable = {research_score = num_research_technologies }
+	add_to_temp_variable = {research_score = num_tech_sharing_groups}
+	add_to_temp_array = {
+		array = global.highest_research_score
+		value = research_score
+	}
+}
+
+
+replace_economic_member_calculator = {
+
+	add_to_temp_array = {
+		array = global.highest_economic_score
+		value = 0
+	}
+	remove_from_temp_array = { array = global.highest_economic_score}
+	for_each_scope_loop = {
+		array = global.EconomicMemberSenateArray
+		calculate_economic_senate_power = yes
+	}
+	set_temp_variable = {economic_score = max_manpower_k}
+	divide_temp_variable = {economic_score = 10000}
+	set_temp_variable = {credit_income_calculator = nmn}
+	set_temp_variable = {factory_count_calculator = num_of_civilian_factories}
+	add_to_temp_variable = {economic_score = credit_income_calculator}
+	add_to_temp_variable = {economic_score = factory_count_calculator}
+	for_each_loop = {
+		break = found_country_to_remove
+		array = global.EconomicMemberSenateArray
+		find_lowest_in_array = {
+			array = global.highest_economic_score
+			index = temp_country_index
+			value = temp_lowest_score
+		}
+		if = {
+			limit = {
+				check_variable = {temp_lowest_score < economic_score}
+				set_temp_variable = {tag_to_use_as_effect = Global.EconomicMemberSenateArray^temp_country_index}
+				var:tag_to_use_as_effect = {
+					NOT = {
+						has_country_flag = locked_senate_power
+					}
+				}
+				NOT = {
+					check_variable = {temp_country_index = 0}
+					has_global_flag = locked_economic_leader
+				}
+			}
+			REB = {
+				news_event = {
+					id = new_rep_elections.4
+					days = 5
+				}
+			}
+			set_variable = {country_index_to_remove_from_senate = temp_country_index}
+			set_temp_variable = {found_country_to_remove = 1}
+		}else = {
+			remove_from_temp_array = {
+				array = global.highest_economic_score
+				index = temp_country_index
+			}
+			add_to_temp_array = {
+				array = global.highest_economic_score
+				index = temp_country_index
+				value = 100000
+			}
+		}
+	}
+}
+
+replace_military_member_calculator = {
+	add_to_temp_array = {
+		array = global.highest_military_score
+		value = 0
+	}
+	remove_from_temp_array = { array = global.highest_military_score}
+	for_each_scope_loop = {
+		array = global.MilitaryMemberSenateArray
+		calculate_military_senate_power = yes
+	}
+	set_temp_variable = {military_score = num_battalions}
+	divide_temp_variable = {military_score = 15}
+	set_temp_variable = {num_ships_calculator = num_ships }
+	divide_temp_variable = {num_ships_calculator = 5}
+	set_temp_variable = {num_of_planes_calculator = num_deployed_planes}
+	divide_temp_variable = {num_of_planes_calculator = 50}
+
+	add_to_temp_variable = {military_score = num_of_planes_calculator}
+	add_to_temp_variable = {military_score = num_ships_calculator}
+	for_each_loop = {
+		break = found_country_to_remove
+		array = global.MilitaryMemberSenateArray
+		find_lowest_in_array = {
+			array = global.highest_military_score
+			index = temp_country_index
+			value = temp_lowest_score
+		}
+		if = {
+			limit = {
+				check_variable = {temp_lowest_score < military_score}
+				set_temp_variable = {tag_to_use_as_effect = Global.MilitaryMemberSenateArray^temp_country_index}
+				var:tag_to_use_as_effect = {
+					NOT = {
+						has_country_flag = locked_senate_power
+					}
+				}
+				NOT = {
+					check_variable = {temp_country_index = 0}
+					has_global_flag = locked_military_leader
+				}
+			}
+			REB = {
+				news_event = {
+					id = new_rep_elections.3
+					days = 5
+				}
+			}
+			set_variable = {country_index_to_remove_from_senate = temp_country_index}
+			set_temp_variable = {found_country_to_remove = 1}
+		}else = {
+			remove_from_temp_array = {
+				array = global.highest_military_score
+				index = temp_country_index
+			}
+			add_to_temp_array = {
+				array = global.highest_military_score
+				index = temp_country_index
+				value = 100000
+			}
+		}
+	}
+}
+
+replace_research_member_calculator = {
+	add_to_temp_array = {
+		array = global.highest_research_score
+		value = 0
+	}
+	remove_from_temp_array = { array = global.highest_research_score}
+	for_each_scope_loop = {
+		array = global.ResearchMemberSenateArray
+		calculate_research_senate_power = yes
+	}
+	set_temp_variable = {research_score = amount_research_slots}
+	add_to_temp_variable = {research_score = num_research_technologies }
+	add_to_temp_variable = {research_score = num_tech_sharing_groups}
+	for_each_loop = {
+		break = found_country_to_remove
+		array = global.ResearchMemberSenateArray
+		find_lowest_in_array = {
+			array = global.highest_research_score
+			index = temp_country_index
+			value = temp_lowest_score
+		}
+		if = {
+			limit = {
+				check_variable = {temp_lowest_score < research_score}
+				set_temp_variable = {tag_to_use_as_effect = Global.ResearchMemberSenateArray^temp_country_index}
+				var:tag_to_use_as_effect = {
+					NOT = {
+						has_country_flag = locked_senate_power
+					}
+				}
+				NOT = {
+					check_variable = {temp_country_index = 0}
+					has_global_flag = locked_research_leader
+				}
+			}
+			REB = {
+				news_event = {
+					id = new_rep_elections.1
+					days = 5
+				}
+			}
+			set_variable = {country_index_to_remove_from_senate = temp_country_index}
+			set_temp_variable = {found_country_to_remove = 1}
+		}else = {
+			remove_from_temp_array = {
+				array = global.highest_research_score
+				index = temp_country_index
+			}
+			add_to_temp_array = {
+				array = global.highest_research_score
+				index = temp_country_index
+				value = 100000
+			}
+		}
+	}
+}
+
+replace_espionage_member_calculator = {
+	add_to_temp_array = {
+		array = global.highest_espionage_score
+		value = 0
+	}
+	remove_from_temp_array = { array = global.highest_espionage_score}
+	for_each_scope_loop = {
+		array = global.EspionageMemberSenateArray
+		calculate_espionage_senate_power = yes
+	}
+	if = {
+		limit = {
+			has_variable = agent_martial@var:agent_operation_slot_1
+		}
+		add_to_temp_variable = {espionage_score = agent_martial@var:agent_operation_slot_1}
+		add_to_temp_variable = {espionage_score = agent_intelligence@var:agent_operation_slot_1}
+		add_to_temp_variable = {espionage_score = agent_charisma@var:agent_operation_slot_1}
+	}
+	if = {
+		limit = {
+			has_variable = agent_martial@var:agent_operation_slot_2
+		}
+		add_to_temp_variable = {espionage_score = agent_martial@var:agent_operation_slot_2}
+		add_to_temp_variable = {espionage_score = agent_intelligence@var:agent_operation_slot_2}
+		add_to_temp_variable = {espionage_score = agent_charisma@var:agent_operation_slot_2}
+	}
+	if = {
+		limit = {
+			has_variable = agent_martial@var:agent_operation_slot_3
+		}
+		add_to_temp_variable = {espionage_score = agent_martial@var:agent_operation_slot_3}
+		add_to_temp_variable = {espionage_score = agent_intelligence@var:agent_operation_slot_3}
+		add_to_temp_variable = {espionage_score = agent_charisma@var:agent_operation_slot_3}
+	}
+	for_each_loop = {
+		break = found_country_to_remove
+		array = global.EspionageMemberSenateArray
+		find_lowest_in_array = {
+			array = global.highest_espionage_score
+			index = temp_country_index
+			value = temp_lowest_score
+		}
+		if = {
+			limit = {
+				check_variable = {temp_lowest_score < espionage_score}
+				set_temp_variable = {tag_to_use_as_effect = Global.EspionageMemberSenateArray^temp_country_index}
+				var:tag_to_use_as_effect = {
+					NOT = {
+						has_country_flag = locked_senate_power
+					}
+				}
+				NOT = {
+					check_variable = {temp_country_index = 0}
+					has_global_flag = locked_espionage_leader
+				}
+			}
+			REB = {
+				news_event = {
+					id = new_rep_elections.2
+					days = 5
+				}
+			}
+			set_variable = {country_index_to_remove_from_senate = temp_country_index}
+			set_temp_variable = {found_country_to_remove = 1}
+		}else = {
+			remove_from_temp_array = {
+				array = global.highest_espionage_score
+				index = temp_country_index
+			}
+			add_to_temp_array = {
+				array = global.highest_espionage_score
+				index = temp_country_index
+				value = 100000
+			}
+		}
+	}
+}

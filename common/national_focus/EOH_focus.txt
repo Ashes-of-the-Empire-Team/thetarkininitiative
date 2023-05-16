@@ -47,7 +47,7 @@ focus_tree = {
 		relative_position_id = EOH_legacy_of_outbound_flight
 		available = {
 			has_navy_size = {
-    			size > 19#make 20 when market works
+    			size > 20#make 20 when market works
 			}
 			SSI = {
 				has_war = yes
@@ -993,6 +993,7 @@ focus_tree = {
 		}
 		completion_reward = {
 			## Slightly reduces debuffs from Zaarin
+			navy_experience = 50
 			swap_ideas = {
 				remove_idea = EOH_demetrius_zaarin_1
 				add_idea = EOH_demetrius_zaarin_2
@@ -1020,14 +1021,19 @@ focus_tree = {
 			focus = EOH_none_evade_thrawns_grasp
 		}
 		completion_reward = {
+			custom_effect_tooltip = EOH_unlock_tt
+			custom_effect_tooltip = EOH_zaarin_ships_tt
 			## gets rid of debuffs from zaarin, recruits him, tech bonus for w/e he was working on, palpatine likes you less
 			mark_focus_tree_layout_dirty = yes
 			ZAA = {
 				country_event = {id=EOH.16}
 			}
 			remove_ideas = EOH_demetrius_zaarin_2
-			custom_effect_tooltip = EOH_zaarin_ships_tt
-			load_oob = "EOH_ZAA_4"
+			
+			hidden_effect = {
+				load_oob = "EOH_ZAA_4"	
+			}
+			
 		}
 		ai_will_do = {
 			factor = 1
@@ -1049,6 +1055,7 @@ focus_tree = {
 			focus = EOH_reconciliation_with_zaarin
 		}
 		completion_reward = {
+			custom_effect_tooltip = EOH_unlock_tt
 			## gets rid of debuffs from zaarin, noghri like you less
 			mark_focus_tree_layout_dirty = yes
 			custom_effect_tooltip = EOH_order_noghri_tt
@@ -1293,18 +1300,21 @@ focus_tree = {
 		}
 		search_filters = {
 		}
+		available = {
+			owns_state = 28
+		}
 		completion_reward = {
 			28 = {
 				add_core_of = EOH
 				add_extra_state_shared_building_slots = 1
 				add_building_construction = {
-					type = industrial_complex
+					type = arms_factory
 					level = 1
 				}
 				add_building_construction = {
 					type = naval_base
 					level = 1
-					province = 9338
+					province = 3225
 				}
 			}
 		}
@@ -1387,17 +1397,17 @@ focus_tree = {
 			add_resource = {
 				type = steel
 				amount = 6
-				state = 228
+				state = 456
 			}
 			add_resource = {
 				type = tungsten
 				amount = 16
-				state = 228
+				state = 456
 			}
 			add_resource = {
 				type = chromium
 				amount = 6
-				state = 228
+				state = 456
 			}
 		}
 		ai_will_do = {
@@ -1925,9 +1935,12 @@ focus_tree = {
 			create_faction = "Thrawn's Confederation"
 			every_country = {
 				limit = {
-					has_government = imperial
+					AND = {
+						has_government = imperial
+					}
+					
 				}
-				county_event = {
+				country_event = {
 					id = EOH.2
 				}
 			}
