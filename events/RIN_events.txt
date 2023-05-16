@@ -11,49 +11,100 @@ trigger = {
 create_ship = {
     type = isd_hull
     equipment_variant = "Imperial Star Destroyer"
-    creator = ZER
+    creator = RIN
     name = "Bradoc"
 }
 create_ship = {
     type = isd_hull
     equipment_variant = "Imperial Star Destroyer"
-    creator = ZER
+    creator = RIN
     name = "Portorian"
 }
 create_ship = {
     type = isd_hull
     equipment_variant = "Imperial Star Destroyer"
-    creator = ZER
+    creator = RIN
     name = "Farklin"
 }
 }
 
-country_event = {
-    id = RIN.701
+country_event = { # RIN and ERI reaserch agreement
+    id = RIN.11
+    title = RIN.11.t
+    desc = RIN.11.d
+    picture = GFX_report_event_conference_room
+
     is_triggered_only = yes
     trigger = {
-       has_decision = my_decision_1
+        tag = ERI
     }
-    create_ship = {
-        type = isd_hull
-        equipment_variant = "Imperial Star Destroyer"
-        creator = ZER
-        name = "Bradoc"
+
+    fire_only_once = yes
+
+    option = {
+        name = RIN.11.a
+        ai_chance = {
+			factor = 70
+		}
+       RIN = {
+        add_ideas = RIN_eriadu_Lambda_reaserch_treaty
+        diplomatic_relation = {
+			country = ERI
+			relation = non_aggression_pact
+			active = yes
+		}
+        country_event = RIN.111
+       }
+       ERI = {
+        add_ideas = RIN_eriadu_Lambda_reaserch_treaty
+       }
+       RIN = {}
+
+
     }
-    create_ship = {
-        type = isd_hull
-        equipment_variant = "Imperial Star Destroyer"
-        creator = ZER
-        name = "Portorian"
+
+    option = {
+        name = RIN.11.b
+        ai_chance = {
+			factor = 30
+		}
+        add_political_power = 100
+        RIN = {
+            country_event = RIN.1111
+        }
     }
-    create_ship = {
-        type = isd_hull
-        equipment_variant = "Imperial Star Destroyer"
-        creator = ZER
-        name = "Farklin"
-    }
-    
-    
-    }
+}
+
+country_event = { # RIN and ERI reaserch agreement
+    id = RIN.111
+    title = RIN.11.t
+    desc = RIN.11.d
+    picture = GFX_report_event_conference_room
+
+    is_triggered_only = yes
+
+    fire_only_once = yes
+
+    option = {
+        name = RIN.11.f
+      
+}
+}
+
+country_event = { # RIN and ERI reaserch agreement
+    id = RIN.1111
+    title = RIN.11.t
+    desc = RIN.12.d
+    picture = GFX_report_event_conference_room
+
+    is_triggered_only = yes
+
+    fire_only_once = yes
+
+    option = {
+        name = RIN.11.g
+      
+}
+}
     
 
