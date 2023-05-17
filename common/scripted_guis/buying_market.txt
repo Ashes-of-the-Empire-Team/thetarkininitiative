@@ -6,20 +6,45 @@ scripted_gui = {
             check_variable = { open_market_click = 2}
         }
         effects = {
+            right_click_market_click = {
+                if = {
+                    limit = {
+                        has_country_flag = open_market_ships
+                    }
+                    add_to_variable = { amount_to_be_produced = 1 }
+                }
+                else = {
+                    add_to_variable = { amount_to_be_produced = 100 }
+                }
+            }
+            left_click_market_click = {
+                if = {
+                    limit = {
+                        has_country_flag = open_market_ships
+                    }
+                    subtract_from_variable = { amount_to_be_produced = 1 }
+                }
+                else = {
+                    subtract_from_variable = { amount_to_be_produced = 100 }
+                }
+            }
 			exit_menu_click = {
                 set_variable = { open_market_click = 1}
             }
             select_ground_forces_click = {
                 erase_previous_buying_market_selection = yes
                 set_country_flag = open_market_ground_forces
+                set_variable = { amount_to_be_produced = 100 }
             }
             select_starfighters_click = {
                 erase_previous_buying_market_selection = yes
                 set_country_flag = starfighters_buying_market_open
+                set_variable = { amount_to_be_produced = 100 }
             }
             select_ships_click = {
                 erase_previous_buying_market_selection = yes
                 set_country_flag = open_market_ships
+                set_variable = { amount_to_be_produced = 1 }
             }
             select_droids_click = {
                 erase_previous_buying_market_selection = yes
@@ -57,8 +82,37 @@ scripted_gui = {
                 erase_previous_ship_menu_faction_selection = yes
                 set_country_flag = imperial_market_open
             }
+            country_flag_overlay_click = {
+                var:manufacturing_country = {
+                    capital_scope = {
+                        ROOT = {
+                            goto_state = PREV
+                        }
+                    }
+                }
+            }
         }
         triggers = {
+            right_click_market_click_enabled = {
+                NOT = {
+                    check_variable = { amount_to_be_produced = 5 }
+                    check_variable = { amount_to_be_produced = 500 }
+                }
+            }
+            left_click_market_click_enabled = {
+                NOT = {
+                    check_variable = { amount_to_be_produced = 1 }
+                    check_variable = { amount_to_be_produced = 100 }
+                }
+            }
+            top_cover_visible = {
+                has_country_flag = starfighters_buying_market_open
+            }
+            upgrade_cover_visible = {
+                NOT = {
+                    has_country_flag = open_market_ships
+                }
+            }
             move_up_button_visible = {
                 NOT = {
                     has_country_flag = open_third_tab_lazy
@@ -107,39 +161,859 @@ scripted_gui = {
                 has_government = imperial
             }
         }
+        properties = {
+            flag_producer = {
+                image = "[?manufacturing_country.GetFlag]"
+            }
+        }
+    }
+    Marketplace_buying_land_main = {
+        context_type = player_context
+        parent_window_name = "Marketplace_buying_menu"
+        window_name = "Marketplace_buying_land_main"
+        visible = {
+            has_country_flag = open_market_ground_forces
+        }
+        effects = {
+            gun_button_click = {
+                set_country_flag = gun_selected
+                clr_country_flag = tank_selected
+            }
+            tank_button_click = {
+                set_country_flag = tank_selected
+                clr_country_flag = gun_selected
+            }
+            level_1_click = {
+                set_country_flag = level_1_selected
+                clr_country_flag = level_2_selected
+                clr_country_flag = level_3_selected
+                clr_country_flag = level_4_selected
+            }
+            level_2_click = {
+                set_country_flag = level_2_selected
+                clr_country_flag = level_1_selected
+                clr_country_flag = level_3_selected
+                clr_country_flag = level_4_selected
+            }
+            level_3_click = {
+                set_country_flag = level_3_selected
+                clr_country_flag = level_1_selected
+                clr_country_flag = level_2_selected
+                clr_country_flag = level_4_selected
+            }
+            level_4_click = {
+                set_country_flag = level_4_selected
+                clr_country_flag = level_1_selected
+                clr_country_flag = level_2_selected
+                clr_country_flag = level_3_selected
+            }
+        }
+        triggers = {
+            gun_button_click_enabled = {
+                NOT = {
+                    has_country_flag = gun_selected
+                }
+            }
+            tank_button_click_enabled = {
+                NOT = {
+                    has_country_flag = tank_selected
+                }
+            }
+            level_2_visible = {
+                has_country_flag = level_1_selected
+                has_country_flag = ee_4_selected
+                has_country_flag = e_11_selected
+                has_country_flag = smart_rocket_selected
+                has_country_flag = spha_selected    
+            }
+            level_3_visible = {
+                has_country_flag = level_2_selected
+                has_country_flag = ee_4_selected
+                has_country_flag = smart_rocket_selected
+                has_country_flag = e_11_selected
+                has_country_flag = spha_selected    
+
+            }
+            level_4_visible = {
+                has_country_flag = level_3_selected
+                has_country_flag = ee_4_selected
+            }
+        }
+    }
+    Marketplace_buying_land_emp_main = {
+        context_type = player_context
+        parent_window_name = "Marketplace_buying_menu"
+        window_name = "Marketplace_buying_land_emp_main"
+        visible = {
+            has_country_flag = open_market_ground_forces
+            has_country_flag = imperial_market_open
+        }
+        effects = {
+            ee_4_click = {
+                set_country_flag = ee_4_selected
+                clr_country_flag = e_11_selected
+                clr_country_flag = smart_rocket_selected
+                clr_country_flag = k79_s80_selected
+                clr_country_flag = spha_selected
+                clr_country_flag = supply_equipment_merr_selected
+                set_variable = { manufacturing_country = BLS.id }
+                set_variable = { current_price_market_buy_ships = Global.ship_price_holder@0 }
+                set_variable = { current_ic_cost_ships = 990}
+                set_country_flag = level_1_selected
+                clr_country_flag = level_2_selected
+                clr_country_flag = level_3_selected
+                clr_country_flag = level_4_selected
+                
+            }
+            e_11_click = {
+                set_country_flag = e_11_selected
+                clr_country_flag = ee_4_selected
+                clr_country_flag = smart_rocket_selected
+                clr_country_flag = k79_s80_selected
+                clr_country_flag = spha_selected
+                clr_country_flag = supply_equipment_merr_selected
+                set_variable = { manufacturing_country = CZE.id }
+                set_variable = { current_price_market_buy_ships = Global.ship_price_holder@4 }
+                set_variable = { current_ic_cost_ships = 990}
+                set_country_flag = level_1_selected
+                clr_country_flag = level_2_selected
+                clr_country_flag = level_3_selected
+                clr_country_flag = level_4_selected
+            }
+            smart_rocket_click = {
+                set_country_flag = smart_rocket_selected
+                clr_country_flag = ee_4_selected
+                clr_country_flag = e_11_selected
+                clr_country_flag = k79_s80_selected
+                clr_country_flag = spha_selected
+                clr_country_flag = supply_equipment_merr_selected
+                set_variable = { manufacturing_country = MER.id }
+                set_variable = { current_price_market_buy_ships = Global.ship_price_holder@7 }
+                set_variable = { current_ic_cost_ships = 990}
+                set_country_flag = level_1_selected
+                clr_country_flag = level_2_selected
+                clr_country_flag = level_3_selected
+                clr_country_flag = level_4_selected
+            }
+            k79_s80_click = {
+                set_country_flag = k79_s80_selected
+                clr_country_flag = ee_4_selected
+                clr_country_flag = e_11_selected
+                clr_country_flag = smart_rocket_selected
+                clr_country_flag = spha_selected
+                clr_country_flag = supply_equipment_merr_selected
+                set_variable = { manufacturing_country = BLS.id }
+                set_variable = { current_price_market_buy_ships = Global.ship_price_holder@10 }
+                set_variable = { current_ic_cost_ships = 990}
+                set_country_flag = level_1_selected
+                clr_country_flag = level_2_selected
+                clr_country_flag = level_3_selected
+                clr_country_flag = level_4_selected
+            }
+            spha_click = {
+                set_country_flag = spha_selected
+                clr_country_flag = ee_4_selected
+                clr_country_flag = e_11_selected
+                clr_country_flag = smart_rocket_selected
+                clr_country_flag = k79_s80_selected
+                clr_country_flag = supply_equipment_merr_selected
+                set_variable = { manufacturing_country = ROT.id }
+                set_variable = { current_price_market_buy_ships = Global.ship_price_holder@11 }
+                set_variable = { current_ic_cost_ships = 990}
+                set_country_flag = level_1_selected
+                clr_country_flag = level_2_selected
+                clr_country_flag = level_3_selected
+                clr_country_flag = level_4_selected
+            }
+            supply_equipment_merr_click = {
+                set_country_flag = supply_equipment_merr_selected
+                clr_country_flag = ee_4_selected
+                clr_country_flag = e_11_selected
+                clr_country_flag = smart_rocket_selected
+                clr_country_flag = k79_s80_selected
+                clr_country_flag = spha_selected
+                set_variable = { manufacturing_country = MER.id }
+                set_variable = { current_price_market_buy_ships = Global.ship_price_holder@12 }
+                set_variable = { current_ic_cost_ships = 990}
+                set_country_flag = level_1_selected
+                clr_country_flag = level_2_selected
+                clr_country_flag = level_3_selected
+                clr_country_flag = level_4_selected
+            }
+            
+        }
+        triggers = {
+            ee_4_click_enabled = {
+                NOT = {
+                    has_country_flag = ee_4_selected
+                }
+            }
+            e_11_click_enabled = {
+                NOT = {
+                    has_country_flag = e_11_selected
+                }
+            }
+            smart_rocket_click_enabled = {
+                NOT = {
+                    has_country_flag = smart_rocket_selected
+                }
+            }
+            k79_s80_click_enabled = {
+                NOT = {
+                    has_country_flag = k79_s80_selected
+                }
+            }
+            spha_click_enabled = {
+                NOT = {
+                    has_country_flag = spha_selected
+                }
+            }
+            supply_equipment_merr_click_enabled = {
+                NOT = {
+                    has_country_flag = supply_equipment_merr_selected
+                }
+            }
+            ee_4_visible = {
+                has_country_flag = gun_selected
+            }
+            e_11_visible = {
+                has_country_flag = gun_selected
+            }
+            smart_rocket_visible = {
+                has_country_flag = gun_selected
+            }
+            k79_s80_visible = {
+                has_country_flag = gun_selected
+            }
+            spha_visible = {
+                has_country_flag = gun_selected
+            }
+            supply_equipment_merr_visible = {
+                has_country_flag = gun_selected
+            }
+        }
+    }
+    Marketplace_buying_starfighters_main = {
+        context_type = player_context
+        parent_window_name = "Marketplace_buying_menu"
+        window_name = "Marketplace_buying_starfighters"
+        visible = {
+            has_country_flag = starfighters_buying_market_open
+        }
+        effects = {
+            order_starship_click = {
+                ####################### Fighters ##################################
+                if = {
+                    limit = {
+                        has_country_flag = x_wing_selected
+                        has_country_flag = level_1_selected
+                    }
+                    INC = {
+                        if = {
+                            limit = {
+                                check_variable = {
+                                    var = starfighter_amount_contract_holder@6^num
+                                    value = 0
+                                    compare = equals
+                                }
+                            }
+                            set_variable = {starfighter_counting_to_zero_holder@6 = prev.amount_to_be_produced}
+                        }
+                        add_to_array = { array = starfighter_amount_contract_holder@6 value = prev.amount_to_be_produced }
+                        add_to_array = { array = starfighter_tag_holder@6 value = ROOT.id }
+                    }
+                    set_temp_variable = {price_to_subtract_from_buyer = amount_to_be_produced}
+                    multiply_temp_variable = { price_to_subtract_from_buyer = current_price_market_buy_starfighters }
+                    subtract_from_variable = {currency_amount^primary_currency = price_to_subtract_from_buyer }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = x_wing_selected
+                        has_country_flag = level_2_selected
+                    }
+                    INC = {
+                        if = {
+                            limit = {
+                                check_variable = {
+                                    var = starfighter_amount_contract_holder@7^num
+                                    value = 0
+                                    compare = equals
+                                }
+                            }
+                            set_variable = {starfighter_counting_to_zero_holder@7 = prev.amount_to_be_produced}
+                        }
+                        add_to_array = { array = starfighter_amount_contract_holder@7 value = prev.amount_to_be_produced }
+                        add_to_array = { array = starfighter_tag_holder@7 value = ROOT.id }
+                    }
+                    set_temp_variable = {price_to_subtract_from_buyer = amount_to_be_produced}
+                    multiply_temp_variable = { price_to_subtract_from_buyer = current_price_market_buy_starfighters }
+                    subtract_from_variable = {currency_amount^primary_currency = price_to_subtract_from_buyer }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = x_wing_selected
+                        has_country_flag = level_3_selected
+                    }
+                    INC = {
+                        if = {
+                            limit = {
+                                check_variable = {
+                                    var = starfighter_amount_contract_holder@8^num
+                                    value = 0
+                                    compare = equals
+                                }
+                            }
+                            set_variable = {starfighter_counting_to_zero_holder@8 = prev.amount_to_be_produced}
+                        }
+                        add_to_array = { array = starfighter_amount_contract_holder@8 value = prev.amount_to_be_produced }
+                        add_to_array = { array = starfighter_tag_holder@8 value = ROOT.id }
+                    }
+                    set_temp_variable = {price_to_subtract_from_buyer = amount_to_be_produced}
+                    multiply_temp_variable = { price_to_subtract_from_buyer = current_price_market_buy_starfighters }
+                    subtract_from_variable = {currency_amount^primary_currency = price_to_subtract_from_buyer }
+                }
+
+                if = {
+                    limit = {
+                        has_country_flag = e_wing_selected
+                    }
+                    INC = {
+                        if = {
+                            limit = {
+                                check_variable = {
+                                    var = starfighter_amount_contract_holder@2^num
+                                    value = 0
+                                    compare = equals
+                                }
+                            }
+                            set_variable = {starfighter_counting_to_zero_holder@2 = prev.amount_to_be_produced}
+                        }
+                        add_to_array = { array = starfighter_amount_contract_holder@2 value = prev.amount_to_be_produced }
+                        add_to_array = { array = starfighter_tag_holder@2 value = ROOT.id }
+                    }
+                    set_temp_variable = {price_to_subtract_from_buyer = amount_to_be_produced}
+                    multiply_temp_variable = { price_to_subtract_from_buyer = current_price_market_buy_starfighters }
+                    subtract_from_variable = {currency_amount^primary_currency = price_to_subtract_from_buyer }
+                }
+
+                if = {
+                    limit = {
+                        has_country_flag = a_wing_selected
+                        has_country_flag = level_1_selected
+                    }
+                    KUA = {
+                        if = {
+                            limit = {
+                                check_variable = {
+                                    var = starfighter_amount_contract_holder@3^num
+                                    value = 0
+                                    compare = equals
+                                }
+                            }
+                            set_variable = {starfighter_counting_to_zero_holder@3 = prev.amount_to_be_produced}
+                        }
+                        add_to_array = { array = starfighter_amount_contract_holder@3 value = prev.amount_to_be_produced }
+                        add_to_array = { array = starfighter_tag_holder@3 value = ROOT.id }
+                    }
+                    set_temp_variable = {price_to_subtract_from_buyer = amount_to_be_produced}
+                    multiply_temp_variable = { price_to_subtract_from_buyer = current_price_market_buy_starfighters }
+                    subtract_from_variable = {currency_amount^primary_currency = price_to_subtract_from_buyer }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = a_wing_selected
+                        has_country_flag = level_2_selected
+                    }
+                    KUA = {
+                        if = {
+                            limit = {
+                                check_variable = {
+                                    var = starfighter_amount_contract_holder@4^num
+                                    value = 0
+                                    compare = equals
+                                }
+                            }
+                            set_variable = {starfighter_counting_to_zero_holder@4 = prev.amount_to_be_produced}
+                        }
+                        add_to_array = { array = starfighter_amount_contract_holder@4 value = prev.amount_to_be_produced }
+                        add_to_array = { array = starfighter_tag_holder@4 value = ROOT.id }
+                    }
+                    set_temp_variable = {price_to_subtract_from_buyer = amount_to_be_produced}
+                    multiply_temp_variable = { price_to_subtract_from_buyer = current_price_market_buy_starfighters }
+                    subtract_from_variable = {currency_amount^primary_currency = price_to_subtract_from_buyer }
+                }
+
+                if = {
+                    limit = {
+                        has_country_flag = k_wing_selected
+                    }
+                    KOE = {
+                        if = {
+                            limit = {
+                                check_variable = {
+                                    var = starfighter_amount_contract_holder@5^num
+                                    value = 0
+                                    compare = equals
+                                }
+                            }
+                            set_variable = {starfighter_counting_to_zero_holder@5 = prev.amount_to_be_produced}
+                        }
+                        add_to_array = { array = starfighter_amount_contract_holder@5 value = prev.amount_to_be_produced }
+                        add_to_array = { array = starfighter_tag_holder@5 value = ROOT.id }
+                    }
+                    set_temp_variable = {price_to_subtract_from_buyer = amount_to_be_produced}
+                    multiply_temp_variable = { price_to_subtract_from_buyer = current_price_market_buy_starfighters }
+                    subtract_from_variable = {currency_amount^primary_currency = price_to_subtract_from_buyer }
+                }
+
+                if = {
+                    limit = {
+                        has_country_flag = y_wing_selected
+                        has_country_flag = level_1_selected
+                    }
+                    KOE = {
+                        if = {
+                            limit = {
+                                check_variable = {
+                                    var = starfighter_amount_contract_holder@9^num
+                                    value = 0
+                                    compare = equals
+                                }
+                            }
+                            set_variable = {starfighter_counting_to_zero_holder@9 = prev.amount_to_be_produced}
+                        }
+                        add_to_array = { array = starfighter_amount_contract_holder@9 value = prev.amount_to_be_produced }
+                        add_to_array = { array = starfighter_tag_holder@9 value = ROOT.id }
+                    }
+                    set_temp_variable = {price_to_subtract_from_buyer = amount_to_be_produced}
+                    multiply_temp_variable = { price_to_subtract_from_buyer = current_price_market_buy_starfighters }
+                    subtract_from_variable = {currency_amount^primary_currency = price_to_subtract_from_buyer }
+                }
+
+                if = {
+                    limit = {
+                        has_country_flag = y_wing_selected
+                        has_country_flag = level_2_selected
+                    }
+                    KOE = {
+                        if = {
+                            limit = {
+                                check_variable = {
+                                    var = starfighter_amount_contract_holder@10^num
+                                    value = 0
+                                    compare = equals
+                                }
+                            }
+                            set_variable = {starfighter_counting_to_zero_holder@10 = prev.amount_to_be_produced}
+                        }
+                        add_to_array = { array = starfighter_amount_contract_holder@10 value = prev.amount_to_be_produced }
+                        add_to_array = { array = starfighter_tag_holder@10 value = ROOT.id }
+                    }
+                    set_temp_variable = {price_to_subtract_from_buyer = amount_to_be_produced }
+                    multiply_temp_variable = { price_to_subtract_from_buyer = current_price_market_buy_starfighters }
+                    subtract_from_variable = {currency_amount^primary_currency = price_to_subtract_from_buyer }
+                }
+
+                if = {
+                    limit = {
+                        has_country_flag = b_wing_selected
+                        has_country_flag = level_1_selected
+                    }
+                    SLK = {
+                        if = {
+                            limit = {
+                                check_variable = {
+                                    var = starfighter_amount_contract_holder@11^num
+                                    value = 0
+                                    compare = equals
+                                }
+                            }
+                            set_variable = {starfighter_counting_to_zero_holder@11 = prev.amount_to_be_produced}
+                        }
+                        add_to_array = { array = starfighter_amount_contract_holder@11 value = prev.amount_to_be_produced }
+                        add_to_array = { array = starfighter_tag_holder@11 value = ROOT.id }
+                    }
+                    set_temp_variable = {price_to_subtract_from_buyer = amount_to_be_produced}
+                    multiply_temp_variable = { price_to_subtract_from_buyer = current_price_market_buy_starfighters }
+                    subtract_from_variable = {currency_amount^primary_currency = price_to_subtract_from_buyer }
+                }
+
+                if = {
+                    limit = {
+                        has_country_flag = b_wing_selected
+                        has_country_flag = level_2_selected
+                    }
+                    SLK = {
+                        if = {
+                            limit = {
+                                check_variable = {
+                                    var = starfighter_amount_contract_holder@12^num
+                                    value = 0
+                                    compare = equals
+                                }
+                            }
+                            set_variable = {starfighter_counting_to_zero_holder@12 = prev.amount_to_be_produced}
+                        }
+                        add_to_array = { array = starfighter_amount_contract_holder@12 value = prev.amount_to_be_produced }
+                        add_to_array = { array = starfighter_tag_holder@12 value = ROOT.id }
+                    }
+                    set_temp_variable = {price_to_subtract_from_buyer = amount_to_be_produced}
+                    multiply_temp_variable = { price_to_subtract_from_buyer = current_price_market_buy_starfighters }
+                    subtract_from_variable = {currency_amount^primary_currency = price_to_subtract_from_buyer }
+                }
+
+                if = {
+                    limit = {
+                        has_country_flag = u_wing_selected
+                        has_country_flag = level_1_selected
+                    }
+                    INC = {
+                        if = {
+                            limit = {
+                                check_variable = {
+                                    var = starfighter_amount_contract_holder@0^num
+                                    value = 0
+                                    compare = equals
+                                }
+                            }
+                            set_variable = {starfighter_counting_to_zero_holder@0 = prev.amount_to_be_produced}
+                        }
+                        add_to_array = { array = starfighter_amount_contract_holder@0 value = prev.amount_to_be_produced }
+                        add_to_array = { array = starfighter_tag_holder@0 value = ROOT.id }
+                    }
+                    set_temp_variable = {price_to_subtract_from_buyer = amount_to_be_produced}
+                    multiply_temp_variable = { price_to_subtract_from_buyer = current_price_market_buy_starfighters }
+                    subtract_from_variable = {currency_amount^primary_currency = price_to_subtract_from_buyer }
+                }
+
+                if = {
+                    limit = {
+                        has_country_flag = u_wing_selected
+                        has_country_flag = level_2_selected
+                    }
+                    INC = {
+                        if = {
+                            limit = {
+                                check_variable = {
+                                    var = starfighter_amount_contract_holder@1^num
+                                    value = 0
+                                    compare = equals
+                                }
+                            }
+                            set_variable = {starfighter_counting_to_zero_holder@1 = prev.amount_to_be_produced}
+                        }
+                        add_to_array = { array = starfighter_amount_contract_holder@1 value = prev.amount_to_be_produced }
+                        add_to_array = { array = starfighter_tag_holder@1 value = ROOT.id }
+                    }
+                    set_temp_variable = {price_to_subtract_from_buyer = amount_to_be_produced}
+                    multiply_temp_variable = { price_to_subtract_from_buyer = current_price_market_buy_starfighters }
+                    subtract_from_variable = {currency_amount^primary_currency = price_to_subtract_from_buyer }
+                }
+                set_variable = { amount_to_be_produced = 100 }
+            }
+            level_1_click = {
+                set_country_flag = level_1_selected
+                clr_country_flag = level_2_selected
+                clr_country_flag = level_3_selected
+                clr_country_flag = level_4_selected
+            }
+            level_2_click = {
+                set_country_flag = level_2_selected
+                clr_country_flag = level_1_selected
+                clr_country_flag = level_3_selected
+                clr_country_flag = level_4_selected
+            }
+            level_3_click = {
+                set_country_flag = level_3_selected
+                clr_country_flag = level_1_selected
+                clr_country_flag = level_2_selected
+                clr_country_flag = level_4_selected
+            }
+            level_4_click = {
+                set_country_flag = level_4_selected
+                clr_country_flag = level_1_selected
+                clr_country_flag = level_2_selected
+                clr_country_flag = level_3_selected
+            }
+            #level_4_click = {
+            #    set_country_flag = level_4_selected
+            #}
+        }
+        triggers = {
+            level_2_visible = {
+                OR = {
+                    has_country_flag = u_wing_selected
+                    has_country_flag = a_wing_selected
+                    has_country_flag = x_wing_selected
+                    has_country_flag = y_wing_selected
+                    has_country_flag = b_wing_selected
+                    has_country_flag = tie_fighter_selected
+                    has_country_flag = tie_bomber_selected
+                    has_country_flag = tie_interceptor_selected
+                    has_country_flag = tie_fighter_bomber_selected
+                    has_country_flag = tie_automated_selected
+                }
+            }
+            level_3_visible = {
+                OR = {
+                    has_country_flag = x_wing_selected
+                    has_country_flag = tie_fighter_selected
+                    has_country_flag = tie_bomber_selected
+                    has_country_flag = tie_interceptor_selected
+                    has_country_flag = tie_fighter_bomber_selected
+                    
+                }
+            }
+            level_4_visible = {
+                OR = {
+                    has_country_flag = tie_fighter_selected
+                    has_country_flag = tie_bomber_selected
+                    has_country_flag = tie_interceptor_selected
+                }
+            }
+            level_1_click_enabled = {
+                NOT = {
+                    has_country_flag = level_1_selected
+                }
+            }
+            level_2_click_enabled = {
+                NOT = {
+                    has_country_flag = level_2_selected
+                }
+            }
+            level_3_click_enabled = {
+                NOT = {
+                    has_country_flag = level_3_selected
+                }
+            }
+            level_4_click_enabled = {
+                NOT = {
+                    has_country_flag = level_4_selected
+                }
+            }
+        }
     }
     Marketplace_buying_ships_main = {
         context_type = player_context
         parent_window_name = "Marketplace_buying_menu"
         window_name = "Marketplace_buying_ships"
         visible = {
-            has_country_flag = open_buy_market
             has_country_flag = open_market_ships
         }
         effects = {
-            right_click_market_click = {
-                add_to_variable = { amount_to_be_produced = 1 }
-            }
-            left_click_market_click = {
-                subtract_from_variable = { amount_to_be_produced = 1 }
-            }
-            select_corvettes_button_click = {
-                erase_previous_ship_menu_selection = yes
-                set_country_flag = corvette_buying_market_open
-            }
-            select_frigates_button_click = {
-                erase_previous_ship_menu_selection = yes
-                set_country_flag = frigate_buying_market_open
-            }
-            select_cruisers_button_click = {
-                erase_previous_ship_menu_selection = yes
-                set_country_flag = cruiser_buying_market_open
-            }
-            select_star_destroyers_button_click = {
-                erase_previous_ship_menu_selection = yes
-                set_country_flag = star_destroyer_buying_market_open
-            }
             order_ship_click = {
+                add_political_power = -1
+                if = {
+                    limit = {
+                        has_country_flag = CR70_buying_market_open
+                    }
+                    set_country_flag = CR70_buying_market_order_in_progress
+                }
+                if = {
+                    limit = {
+                        has_country_flag = CR90_buying_market_open
+                    }
+                    set_country_flag = CR90_buying_market_order_in_progress
+                }
+                if = {
+                    limit = {
+                        has_country_flag = corona_buying_market_open
+                    }
+                    set_country_flag = corona_buying_market_order_in_progress
+                }
+                if = {
+                    limit = {
+                        has_country_flag = pelta_buying_market_open
+                    }
+                    set_country_flag = pelta_buying_market_order_in_progress
+                }
+                if = {
+                    limit = {
+                        has_country_flag = mc30_buying_market_open
+                    }
+                    set_country_flag = mc30_buying_market_order_in_progress
+                }
+                if = {
+                    limit = {
+                        has_country_flag = nebulon_b_buying_market_open
+                    }
+                    set_country_flag = nebulon_b_buying_market_order_in_progress
+                }
+                if = {
+                    limit = {
+                        has_country_flag = nebulon_b2_buying_market_open
+                    }
+                    set_country_flag = nebulon_b2_buying_market_order_in_progress
+                }
+                if = {
+                    limit = {
+                        has_country_flag = quaser_buying_market_open
+                    }
+                    set_country_flag = quaser_buying_market_order_in_progress
+                }
+                if = {
+                    limit = {
+                        has_country_flag = warrior_buying_market_open
+                    }
+                    set_country_flag = warrior_buying_market_order_in_progress
+                }
+                if = {
+                    limit = {
+                        has_country_flag = assault_1_buying_market_open
+                    }
+                    set_country_flag = assault_1_buying_market_order_in_progress
+                }
+                if = {
+                    limit = {
+                        has_country_flag = assault_2_buying_market_open
+                    }
+                    set_country_flag = assault_2_buying_market_order_in_progress
+                }
+                if = {
+                    limit = {
+                        has_country_flag = mc40_buying_market_open
+                    }
+                    set_country_flag = mc40_buying_market_order_in_progress
+                }
+                if = {
+                    limit = {
+                        has_country_flag = mc75_buying_market_open
+                    }
+                    set_country_flag = mc75_buying_market_order_in_progress
+                }
+                if = {
+                    limit = {
+                        has_country_flag = bothan_assault_buying_market_open
+                    }
+                    set_country_flag = bothan_assault_buying_market_order_in_progress
+                }
+                if = {
+                    limit = {
+                        has_country_flag = mc80_home_one_buying_market_open
+                    }
+                    set_country_flag = mc80_home_one_buying_market_order_in_progress
+                }
+                if = {
+                    limit = {
+                        has_country_flag = starhawk_buying_market_open
+                    }
+                    set_country_flag = starhawk_buying_market_order_in_progress
+                }
+                if = {
+                    limit = {
+                        has_country_flag = mc80_liberty_buying_market_open
+                    }
+                    set_country_flag = mc80_liberty_buying_market_order_in_progress
+                }
+                if = {
+                    limit = {
+                        has_country_flag = republic_star_destroyer_buying_market_open
+                    }
+                    set_country_flag = republic_star_destroyer_buying_market_order_in_progress
+                }
+                if = {
+                    limit = {
+                        has_country_flag = nebula_star_destroyer_buying_market_open
+                    }
+                    set_country_flag = nebula_star_destroyer_buying_market_order_in_progress
+                }
+                if = {
+                    limit = {
+                        has_country_flag = MC90_buying_market_open
+                    }
+                    set_country_flag = MC90_buying_market_order_in_progress
+                }
+                if = {
+                    limit = {
+                        has_country_flag = dauntless_buying_market_open
+                    }
+                    set_country_flag = dauntless_buying_market_order_in_progress
+                }
+                
+                if = {
+                    limit = {
+                        has_country_flag = ipv_1_buying_market_open
+                    }
+                    set_country_flag = ipv_1_buying_market_order_in_progress
+                }
+                if = {
+                    limit = {
+                        has_country_flag = gozanti_buying_market_open
+                    }
+                    set_country_flag = gozanti_buying_market_order_in_progress
+                }
+                if = {
+                    limit = {
+                        has_country_flag = raider_buying_market_open
+                    }
+                    set_country_flag = raider_buying_market_order_in_progress
+                }
+                if = {
+                    limit = {
+                        has_country_flag = raider_2_buying_market_open
+                    }
+                    set_country_flag = raider_2_buying_market_order_in_progress
+                }
+                if = {
+                    limit = {
+                        has_country_flag = lancer_buying_market_open
+                    }
+                    set_country_flag = lancer_buying_market_order_in_progress
+                }
+                if = {
+                    limit = {
+                        has_country_flag = Victory_buying_market_open
+                    }
+                    set_country_flag = Victory_buying_market_order_in_progress
+                }
+                if = {
+                    limit = {
+                        has_country_flag = arquitens_buying_market_open
+                    }
+                    set_country_flag = arquitens_buying_market_order_in_progress
+                }
+                if = {
+                    limit = {
+                        has_country_flag = Interdictor_buying_market_open
+                    }
+                    set_country_flag = Interdictor_buying_market_order_in_progress
+                }
+                if = {
+                    limit = {
+                        has_country_flag = dreadnaught_buying_market_open
+                    }
+                    set_country_flag = dreadnaught_buying_market_order_in_progress
+                }
+                if = {
+                    limit = {
+                        has_country_flag = Victory_2_buying_market_open
+                    }
+                    set_country_flag = Victory_2_buying_market_order_in_progress
+                }
+                if = {
+                    limit = {
+                        has_country_flag = praertor_buying_market_open
+                    }
+                    set_country_flag = praertor_buying_market_order_in_progress
+                }
+                if = {
+                    limit = {
+                        has_country_flag = Imperial_Star_Destroyer_buying_market_open
+                    }
+                    set_country_flag = Imperial_Star_Destroyer_buying_market_order_in_progress
+                }
+                if = {
+                    limit = {
+                        has_country_flag = Imperial_Star_Destroyer_1_buying_market_open
+                    }
+                    set_country_flag = Imperial_Star_Destroyer_1_buying_market_order_in_progress
+                }
+                if = {
+                    limit = {
+                        has_country_flag = resurgent_buying_market_open
+                    }
+                    set_country_flag = resurgent_buying_market_order_in_progress
+                }
                 if = {
                     limit = {
                         has_country_flag = CR70_buying_market_open
@@ -188,7 +1062,7 @@ scripted_gui = {
                     limit = {
                         has_country_flag = warrior_buying_market_open
                     }
-                    VON = {
+                    RPE = {
                         if = {
                             limit = {
                                 check_variable = {
@@ -453,7 +1327,7 @@ scripted_gui = {
                     limit = {
                         has_country_flag = starhawk_buying_market_open
                     }
-                    VON = {
+                    RPE = {
                         if = {
                             limit = {
                                 check_variable = {
@@ -497,7 +1371,7 @@ scripted_gui = {
                     limit = {
                         has_country_flag = republic_star_destroyer_buying_market_open
                     }
-                    VON = {
+                    RPE = {
                         if = {
                             limit = {
                                 check_variable = {
@@ -519,7 +1393,7 @@ scripted_gui = {
                     limit = {
                         has_country_flag = nebula_star_destroyer_buying_market_open
                     }
-                    VON = {
+                    RPE = {
                         if = {
                             limit = {
                                 check_variable = {
@@ -765,15 +1639,15 @@ scripted_gui = {
                         if = {
                             limit = {
                                 check_variable = {
-                                    var = ship_amount_contract_holder@5950^num
+                                    var = ship_amount_contract_holder@7400^num
                                     value = 0
                                     compare = equals
                                 }
                             }
-                            set_variable = {ship_counting_to_zero_holder@5950 = prev.amount_to_be_produced}
+                            set_variable = {ship_counting_to_zero_holder@7400 = prev.amount_to_be_produced}
                         }
-                        add_to_array = { array = ship_amount_contract_holder@5950 value = prev.amount_to_be_produced }
-                        add_to_array = { array = ship_tag_holder@5950 value = ROOT.id }
+                        add_to_array = { array = ship_amount_contract_holder@7400 value = prev.amount_to_be_produced }
+                        add_to_array = { array = ship_tag_holder@7400 value = ROOT.id }
                     }
                     set_temp_variable = {price_to_subtract_from_buyer = amount_to_be_produced}
                     multiply_temp_variable = { price_to_subtract_from_buyer = current_price_market_buy_ships }
@@ -787,15 +1661,15 @@ scripted_gui = {
                         if = {
                             limit = {
                                 check_variable = {
-                                    var = ship_amount_contract_holder@5950^num
+                                    var = ship_amount_contract_holder@7940^num
                                     value = 0
                                     compare = equals
                                 }
                             }
-                            set_variable = {ship_counting_to_zero_holder@5950 = prev.amount_to_be_produced}
+                            set_variable = {ship_counting_to_zero_holder@7940 = prev.amount_to_be_produced}
                         }
-                        add_to_array = { array = ship_amount_contract_holder@5950 value = prev.amount_to_be_produced }
-                        add_to_array = { array = ship_tag_holder@5950 value = ROOT.id }
+                        add_to_array = { array = ship_amount_contract_holder@7940 value = prev.amount_to_be_produced }
+                        add_to_array = { array = ship_tag_holder@7940 value = ROOT.id }
                     }
                     set_temp_variable = {price_to_subtract_from_buyer = amount_to_be_produced}
                     multiply_temp_variable = { price_to_subtract_from_buyer = current_price_market_buy_ships }
@@ -889,7 +1763,175 @@ scripted_gui = {
                     multiply_temp_variable = { price_to_subtract_from_buyer = current_price_market_buy_ships }
                     subtract_from_variable = {currency_amount^primary_currency = price_to_subtract_from_buyer }
                 }
-                clear_variable = amount_to_be_produced
+            }
+            select_corvettes_button_click = {
+                erase_previous_ship_menu_selection = yes
+                set_country_flag = corvette_buying_market_open
+                set_variable = { current_ic_cost_ships = 0 }
+                set_variable = { current_price_market_buy_ships = 0 }
+                clr_country_flag = CR70_buying_market_open
+                clr_country_flag = CR90_buying_market_open
+                clr_country_flag = corona_buying_market_open
+                clr_country_flag = pelta_buying_market_open
+                clr_country_flag = mc30_buying_market_open
+                clr_country_flag = nebulon_b_buying_market_open
+                clr_country_flag = nebulon_b2_buying_market_open
+                clr_country_flag = quaser_buying_market_open
+                clr_country_flag = warrior_buying_market_open
+                clr_country_flag = assault_1_buying_market_open
+                clr_country_flag = assault_2_buying_market_open
+                clr_country_flag = mc40_buying_market_open
+                clr_country_flag = mc75_buying_market_open
+                clr_country_flag = bothan_assault_buying_market_open
+                clr_country_flag = mc80_home_one_buying_market_open
+                clr_country_flag = starhawk_buying_market_open
+                clr_country_flag = mc80_liberty_buying_market_open
+                clr_country_flag = republic_star_destroyer_buying_market_open
+                clr_country_flag = nebula_star_destroyer_buying_market_open
+                clr_country_flag = MC90_buying_market_open
+                clr_country_flag = dauntless_buying_market_open
+
+                clr_country_flag = ipv_1_buying_market_open
+                clr_country_flag = gozanti_buying_market_open
+                clr_country_flag = raider_buying_market_open
+                clr_country_flag = raider_2_buying_market_open
+                clr_country_flag = lancer_buying_market_open
+                clr_country_flag = Victory_buying_market_open
+                clr_country_flag = arquitens_buying_market_open
+                clr_country_flag = Interdictor_buying_market_open
+                clr_country_flag = dreadnaught_buying_market_open
+                clr_country_flag = Victory_2_buying_market_open
+                clr_country_flag = praertor_buying_market_open
+                clr_country_flag = Imperial_Star_Destroyer_buying_market_open
+                clr_country_flag = Imperial_Star_Destroyer_1_buying_market_open
+                clr_country_flag = resurgent_buying_market_open
+            }
+            select_frigates_button_click = {
+                erase_previous_ship_menu_selection = yes
+                set_country_flag = frigate_buying_market_open
+                set_variable = { current_ic_cost_ships = 0 }
+                set_variable = { current_price_market_buy_ships = 0 }
+                clr_country_flag = CR70_buying_market_open
+                clr_country_flag = CR90_buying_market_open
+                clr_country_flag = corona_buying_market_open
+                clr_country_flag = pelta_buying_market_open
+                clr_country_flag = mc30_buying_market_open
+                clr_country_flag = nebulon_b_buying_market_open
+                clr_country_flag = nebulon_b2_buying_market_open
+                clr_country_flag = quaser_buying_market_open
+                clr_country_flag = warrior_buying_market_open
+                clr_country_flag = assault_1_buying_market_open
+                clr_country_flag = assault_2_buying_market_open
+                clr_country_flag = mc40_buying_market_open
+                clr_country_flag = mc75_buying_market_open
+                clr_country_flag = bothan_assault_buying_market_open
+                clr_country_flag = mc80_home_one_buying_market_open
+                clr_country_flag = starhawk_buying_market_open
+                clr_country_flag = mc80_liberty_buying_market_open
+                clr_country_flag = republic_star_destroyer_buying_market_open
+                clr_country_flag = nebula_star_destroyer_buying_market_open
+                clr_country_flag = MC90_buying_market_open
+                clr_country_flag = dauntless_buying_market_open
+
+                clr_country_flag = ipv_1_buying_market_open
+                clr_country_flag = gozanti_buying_market_open
+                clr_country_flag = raider_buying_market_open
+                clr_country_flag = raider_2_buying_market_open
+                clr_country_flag = lancer_buying_market_open
+                clr_country_flag = Victory_buying_market_open
+                clr_country_flag = arquitens_buying_market_open
+                clr_country_flag = Interdictor_buying_market_open
+                clr_country_flag = dreadnaught_buying_market_open
+                clr_country_flag = Victory_2_buying_market_open
+                clr_country_flag = praertor_buying_market_open
+                clr_country_flag = Imperial_Star_Destroyer_buying_market_open
+                clr_country_flag = Imperial_Star_Destroyer_1_buying_market_open
+                clr_country_flag = resurgent_buying_market_open
+                
+            }
+            select_cruisers_button_click = {
+                erase_previous_ship_menu_selection = yes
+                set_country_flag = cruiser_buying_market_open
+                set_variable = { current_ic_cost_ships = 0 }
+                set_variable = { current_price_market_buy_ships = 0 }
+                clr_country_flag = CR70_buying_market_open
+                clr_country_flag = CR90_buying_market_open
+                clr_country_flag = corona_buying_market_open
+                clr_country_flag = pelta_buying_market_open
+                clr_country_flag = mc30_buying_market_open
+                clr_country_flag = nebulon_b_buying_market_open
+                clr_country_flag = nebulon_b2_buying_market_open
+                clr_country_flag = quaser_buying_market_open
+                clr_country_flag = warrior_buying_market_open
+                clr_country_flag = assault_1_buying_market_open
+                clr_country_flag = assault_2_buying_market_open
+                clr_country_flag = mc40_buying_market_open
+                clr_country_flag = mc75_buying_market_open
+                clr_country_flag = bothan_assault_buying_market_open
+                clr_country_flag = mc80_home_one_buying_market_open
+                clr_country_flag = starhawk_buying_market_open
+                clr_country_flag = mc80_liberty_buying_market_open
+                clr_country_flag = republic_star_destroyer_buying_market_open
+                clr_country_flag = nebula_star_destroyer_buying_market_open
+                clr_country_flag = MC90_buying_market_open
+                clr_country_flag = dauntless_buying_market_open
+
+                clr_country_flag = ipv_1_buying_market_open
+                clr_country_flag = gozanti_buying_market_open
+                clr_country_flag = raider_buying_market_open
+                clr_country_flag = raider_2_buying_market_open
+                clr_country_flag = lancer_buying_market_open
+                clr_country_flag = Victory_buying_market_open
+                clr_country_flag = arquitens_buying_market_open
+                clr_country_flag = Interdictor_buying_market_open
+                clr_country_flag = dreadnaught_buying_market_open
+                clr_country_flag = Victory_2_buying_market_open
+                clr_country_flag = praertor_buying_market_open
+                clr_country_flag = Imperial_Star_Destroyer_buying_market_open
+                clr_country_flag = Imperial_Star_Destroyer_1_buying_market_open
+                clr_country_flag = resurgent_buying_market_open
+            }
+            select_star_destroyers_button_click = {
+                erase_previous_ship_menu_selection = yes
+                set_country_flag = star_destroyer_buying_market_open
+                set_variable = { current_ic_cost_ships = 0 }
+                set_variable = { current_price_market_buy_ships = 0 }
+                clr_country_flag = CR70_buying_market_open
+                clr_country_flag = CR90_buying_market_open
+                clr_country_flag = corona_buying_market_open
+                clr_country_flag = pelta_buying_market_open
+                clr_country_flag = mc30_buying_market_open
+                clr_country_flag = nebulon_b_buying_market_open
+                clr_country_flag = nebulon_b2_buying_market_open
+                clr_country_flag = quaser_buying_market_open
+                clr_country_flag = warrior_buying_market_open
+                clr_country_flag = assault_1_buying_market_open
+                clr_country_flag = assault_2_buying_market_open
+                clr_country_flag = mc40_buying_market_open
+                clr_country_flag = mc75_buying_market_open
+                clr_country_flag = bothan_assault_buying_market_open
+                clr_country_flag = mc80_home_one_buying_market_open
+                clr_country_flag = starhawk_buying_market_open
+                clr_country_flag = mc80_liberty_buying_market_open
+                clr_country_flag = republic_star_destroyer_buying_market_open
+                clr_country_flag = nebula_star_destroyer_buying_market_open
+                clr_country_flag = MC90_buying_market_open
+                clr_country_flag = dauntless_buying_market_open
+
+                clr_country_flag = ipv_1_buying_market_open
+                clr_country_flag = gozanti_buying_market_open
+                clr_country_flag = raider_buying_market_open
+                clr_country_flag = raider_2_buying_market_open
+                clr_country_flag = lancer_buying_market_open
+                clr_country_flag = Victory_buying_market_open
+                clr_country_flag = arquitens_buying_market_open
+                clr_country_flag = Interdictor_buying_market_open
+                clr_country_flag = dreadnaught_buying_market_open
+                clr_country_flag = Victory_2_buying_market_open
+                clr_country_flag = praertor_buying_market_open
+                clr_country_flag = Imperial_Star_Destroyer_buying_market_open
+                clr_country_flag = Imperial_Star_Destroyer_1_buying_market_open
+                clr_country_flag = resurgent_buying_market_open
             }
             #flag_producer_click = {
             #    var:manufacturing_country = {
@@ -900,17 +1942,797 @@ scripted_gui = {
             #        }
             #    }
             #}
-            country_flag_overlay_click = {
-                var:manufacturing_country = {
-                    capital_scope = {
-                        ROOT = {
-                            goto_state = PREV
-                        }
+        }
+        triggers = {
+            amount_in_queue_in_front_visible = {
+                if = {
+                    limit = {
+                        has_country_flag = CR70_buying_market_open
+                    }
+                    has_country_flag = CR70_buying_market_order_in_progress
+                }else_if = {
+                    limit = {
+                        has_country_flag = CR90_buying_market_open
+                    }
+                    has_country_flag = CR90_buying_market_order_in_progress
+                }else_if = {
+                    limit = {
+                        has_country_flag = corona_buying_market_open
+                    }
+                    has_country_flag = corona_buying_market_order_in_progress
+                }else_if = {
+                    limit = {
+                        has_country_flag = pelta_buying_market_open
+                    }
+                    has_country_flag = pelta_buying_market_order_in_progress
+                }else_if = {
+                    limit = {
+                        has_country_flag = mc30_buying_market_open
+                    }
+                    has_country_flag = mc30_buying_market_order_in_progress
+                }else_if = {
+                    limit = {
+                        has_country_flag = nebulon_b_buying_market_open
+                    }
+                    has_country_flag = nebulon_b_buying_market_order_in_progress
+                }else_if = {
+                    limit = {
+                        has_country_flag = nebulon_b2_buying_market_open
+                    }
+                    has_country_flag = nebulon_b2_buying_market_order_in_progress
+                }else_if = {
+                    limit = {
+                        has_country_flag = quaser_buying_market_open
+                    }
+                    has_country_flag = quaser_buying_market_order_in_progress
+                }else_if = {
+                    limit = {
+                        has_country_flag = warrior_buying_market_open
+                    }
+                    has_country_flag = warrior_buying_market_order_in_progress
+                }else_if = {
+                    limit = {
+                        has_country_flag = assault_1_buying_market_open
+                    }
+                    has_country_flag = assault_1_buying_market_order_in_progress
+                }else_if = {
+                    limit = {
+                        has_country_flag = assault_2_buying_market_open
+                    }
+                    has_country_flag = assault_2_buying_market_order_in_progress
+                }else_if = {
+                    limit = {
+                        has_country_flag = mc40_buying_market_open
+                    }
+                    has_country_flag = mc40_buying_market_order_in_progress
+                }else_if = {
+                    limit = {
+                        has_country_flag = mc75_buying_market_open
+                    }
+                    has_country_flag = mc75_buying_market_order_in_progress
+                }else_if = {
+                    limit = {
+                        has_country_flag = bothan_assault_buying_market_open
+                    }
+                    has_country_flag = bothan_assault_buying_market_order_in_progress
+                }else_if = {
+                    limit = {
+                        has_country_flag = mc80_home_one_buying_market_open
+                    }
+                    has_country_flag = mc80_home_one_buying_market_order_in_progress
+                }else_if = {
+                    limit = {
+                        has_country_flag = starhawk_buying_market_open
+                    }
+                    has_country_flag = starhawk_buying_market_order_in_progress
+                }else_if = {
+                    limit = {
+                        has_country_flag = mc80_liberty_buying_market_open
+                    }
+                    has_country_flag = mc80_liberty_buying_market_order_in_progress
+                }else_if = {
+                    limit = {
+                        has_country_flag = republic_star_destroyer_buying_market_open
+                    }
+                    has_country_flag = republic_star_destroyer_buying_market_order_in_progress
+                }else_if = {
+                    limit = {
+                        has_country_flag = nebula_star_destroyer_buying_market_open
+                    }
+                    has_country_flag = nebula_star_destroyer_buying_market_order_in_progress
+                }else_if = {
+                    limit = {
+                        has_country_flag = MC90_buying_market_open
+                    }
+                    has_country_flag = MC90_buying_market_order_in_progress
+                }else_if = {
+                    limit = {
+                        has_country_flag = dauntless_buying_market_open
+                    }
+                    has_country_flag = dauntless_buying_market_order_in_progress
+                }
+                else_if = {
+                    limit = {
+                        has_country_flag = ipv_1_buying_market_open
+                    }
+                    has_country_flag = ipv_1_buying_market_order_in_progress
+                }else_if = {
+                    limit = {
+                        has_country_flag = gozanti_buying_market_open
+                    }
+                    has_country_flag = gozanti_buying_market_order_in_progress
+                }else_if = {
+                    limit = {
+                        has_country_flag = raider_buying_market_open
+                    }
+                    has_country_flag = raider_buying_market_order_in_progress
+                }else_if = {
+                    limit = {
+                        has_country_flag = raider_2_buying_market_open
+                    }
+                    has_country_flag = raider_2_buying_market_order_in_progress
+                }else_if = {
+                    limit = {
+                        has_country_flag = lancer_buying_market_open
+                    }
+                    has_country_flag = lancer_buying_market_order_in_progress
+                }else_if = {
+                    limit = {
+                        has_country_flag = Victory_buying_market_open
+                    }
+                    has_country_flag = Victory_buying_market_order_in_progress
+                }else_if = {
+                    limit = {
+                        has_country_flag = arquitens_buying_market_open
+                    }
+                    has_country_flag = arquitens_buying_market_order_in_progress
+                }else_if = {
+                    limit = {
+                        has_country_flag = Interdictor_buying_market_open
+                    }
+                    has_country_flag = Interdictor_buying_market_order_in_progress
+                }else_if = {
+                    limit = {
+                        has_country_flag = dreadnaught_buying_market_open
+                    }
+                    has_country_flag = dreadnaught_buying_market_order_in_progress
+                }else_if = {
+                    limit = {
+                        has_country_flag = Victory_2_buying_market_open
+                    }
+                    has_country_flag = Victory_2_buying_market_order_in_progress
+                }else_if = {
+                    limit = {
+                        has_country_flag = praertor_buying_market_open
+                    }
+                    has_country_flag = praertor_buying_market_order_in_progress
+                }else_if = {
+                    limit = {
+                        has_country_flag = Imperial_Star_Destroyer_buying_market_open
+                    }
+                    has_country_flag = Imperial_Star_Destroyer_buying_market_order_in_progress
+                }else_if = {
+                    limit = {
+                        has_country_flag = Imperial_Star_Destroyer_1_buying_market_open
+                    }
+                    has_country_flag = Imperial_Star_Destroyer_1_buying_market_order_in_progress
+                }else_if = {
+                    limit = {
+                        has_country_flag = resurgent_buying_market_open
+                    }
+                    has_country_flag = resurgent_buying_market_order_in_progress
+                }else = {
+                    always = no
+                }
+            }
+            amount_in_queue_visible = {
+                 if = {
+                    limit = {
+                        has_country_flag = CR70_buying_market_open
+                    }
+                    NOT = {
+                        has_country_flag = CR70_buying_market_order_in_progress
+                    }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = CR90_buying_market_open
+                    }
+                    NOT = {
+                        has_country_flag = CR90_buying_market_order_in_progress
+                    }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = corona_buying_market_open
+                    }
+                    NOT = {
+                        has_country_flag = corona_buying_market_order_in_progress
+                    }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = pelta_buying_market_open
+                    }
+                    NOT = {
+                        has_country_flag = pelta_buying_market_order_in_progress
+                    }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = mc30_buying_market_open
+                    }
+                    NOT = {
+                        has_country_flag = mc30_buying_market_order_in_progress
+                    }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = nebulon_b_buying_market_open
+                    }
+                    NOT = {
+                        has_country_flag = nebulon_b_buying_market_order_in_progress
+                    }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = nebulon_b2_buying_market_open
+                    }
+                    NOT = {
+                        has_country_flag = nebulon_b2_buying_market_order_in_progress
+                    }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = quaser_buying_market_open
+                    }
+                    NOT = {
+                        has_country_flag = quaser_buying_market_order_in_progress
+                    }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = warrior_buying_market_open
+                    }
+                    NOT = {
+                        has_country_flag = warrior_buying_market_order_in_progress
+                    }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = assault_1_buying_market_open
+                    }
+                    NOT = {
+                        has_country_flag = assault_1_buying_market_order_in_progress
+                    }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = assault_2_buying_market_open
+                    }
+                    NOT = {
+                        has_country_flag = assault_2_buying_market_order_in_progress
+                    }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = mc40_buying_market_open
+                    }
+                    NOT = {
+                        has_country_flag = mc40_buying_market_order_in_progress
+                    }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = mc75_buying_market_open
+                    }
+                    NOT = {
+                        has_country_flag = mc75_buying_market_order_in_progress
+                    }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = bothan_assault_buying_market_open
+                    }
+                    NOT = {
+                        has_country_flag = bothan_assault_buying_market_order_in_progress
+                    }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = mc80_home_one_buying_market_open
+                    }
+                    NOT = {
+                        has_country_flag = mc80_home_one_buying_market_order_in_progress
+                    }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = starhawk_buying_market_open
+                    }
+                    NOT = {
+                        has_country_flag = starhawk_buying_market_order_in_progress
+                    }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = mc80_liberty_buying_market_open
+                    }
+                    NOT = {
+                        has_country_flag = mc80_liberty_buying_market_order_in_progress
+                    }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = republic_star_destroyer_buying_market_open
+                    }
+                    NOT = {
+                        has_country_flag = republic_star_destroyer_buying_market_order_in_progress
+                    }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = nebula_star_destroyer_buying_market_open
+                    }
+                    NOT = {
+                        has_country_flag = nebula_star_destroyer_buying_market_order_in_progress
+                    }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = MC90_buying_market_open
+                    }
+                    NOT = {
+                        has_country_flag = MC90_buying_market_order_in_progress
+                    }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = dauntless_buying_market_open
+                    }
+                    NOT = {
+                        has_country_flag = dauntless_buying_market_order_in_progress
+                    }
+                }
+                
+                if = {
+                    limit = {
+                        has_country_flag = ipv_1_buying_market_open
+                    }
+                    NOT = {
+                        has_country_flag = ipv_1_buying_market_order_in_progress
+                    }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = gozanti_buying_market_open
+                    }
+                    NOT = {
+                        has_country_flag = gozanti_buying_market_order_in_progress
+                    }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = raider_buying_market_open
+                    }
+                    NOT = {
+                        has_country_flag = raider_buying_market_order_in_progress
+                    }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = raider_2_buying_market_open
+                    }
+                    NOT = {
+                        has_country_flag = raider_2_buying_market_order_in_progress
+                    }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = lancer_buying_market_open
+                    }
+                    NOT = {
+                        has_country_flag = lancer_buying_market_order_in_progress
+                    }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = Victory_buying_market_open
+                    }
+                    NOT = {
+                        has_country_flag = Victory_buying_market_order_in_progress
+                    }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = arquitens_buying_market_open
+                    }
+                    NOT = {
+                        has_country_flag = arquitens_buying_market_order_in_progress
+                    }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = Interdictor_buying_market_open
+                    }
+                    NOT = {
+                        has_country_flag = Interdictor_buying_market_order_in_progress
+                    }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = dreadnaught_buying_market_open
+                    }
+                    NOT = {
+                        has_country_flag = dreadnaught_buying_market_order_in_progress
+                    }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = Victory_2_buying_market_open
+                    }
+                    NOT = {
+                        has_country_flag = Victory_2_buying_market_order_in_progress
+                    }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = praertor_buying_market_open
+                    }
+                    NOT = {
+                        has_country_flag = praertor_buying_market_order_in_progress
+                    }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = Imperial_Star_Destroyer_buying_market_open
+                    }
+                    NOT = {
+                        has_country_flag = Imperial_Star_Destroyer_buying_market_order_in_progress
+                    }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = Imperial_Star_Destroyer_1_buying_market_open
+                    }
+                    NOT = {
+                        has_country_flag = Imperial_Star_Destroyer_1_buying_market_order_in_progress
+                    }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = resurgent_buying_market_open
+                    }
+                    NOT = {
+                        has_country_flag = resurgent_buying_market_order_in_progress
                     }
                 }
             }
-        }
-        triggers = {
+            order_ship_click_enabled = {
+                if = {
+                    limit = {
+                        has_country_flag = CR70_buying_market_open
+                    }
+                    NOT = {
+                        has_country_flag = CR70_buying_market_order_in_progress
+                    }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = CR90_buying_market_open
+                    }
+                    NOT = {
+                        has_country_flag = CR90_buying_market_order_in_progress
+                    }
+                    CEC = {
+                        has_tech = cr70_2
+                    }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = corona_buying_market_open
+                    }
+                    NOT = {
+                        has_country_flag = corona_buying_market_order_in_progress
+                    }
+                    KUA = {
+                        has_tech = Corona_1
+                    }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = pelta_buying_market_open
+                    }
+                    NOT = {
+                        has_country_flag = pelta_buying_market_order_in_progress
+                    }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = mc30_buying_market_open
+                    }
+                    NOT = {
+                        has_country_flag = mc30_buying_market_order_in_progress
+                    }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = nebulon_b_buying_market_open
+                    }
+                    NOT = {
+                        has_country_flag = nebulon_b_buying_market_order_in_progress
+                    }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = nebulon_b2_buying_market_open
+                    }
+                    NOT = {
+                        has_country_flag = nebulon_b2_buying_market_order_in_progress
+                    }
+                    KUA = {
+                        has_tech = Nebulon_2
+                    }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = quaser_buying_market_open
+                    }
+                    NOT = {
+                        has_country_flag = quaser_buying_market_order_in_progress
+                    }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = warrior_buying_market_open
+                    }
+                    NOT = {
+                        has_country_flag = warrior_buying_market_order_in_progress
+                    }
+                    var:global.New_republic_engineering = {
+                        has_tech = warrior_1
+                    }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = assault_1_buying_market_open
+                    }
+                    NOT = {
+                        has_country_flag = assault_1_buying_market_order_in_progress
+                    }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = assault_2_buying_market_open
+                    }
+                    NOT = {
+                        has_country_flag = assault_2_buying_market_order_in_progress
+                    }
+                    REN = {
+                        has_tech = assault_2
+                    }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = mc40_buying_market_open
+                    }
+                    NOT = {
+                        has_country_flag = mc40_buying_market_order_in_progress
+                    }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = mc75_buying_market_open
+                    }
+                    NOT = {
+                        has_country_flag = mc75_buying_market_order_in_progress
+                    }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = bothan_assault_buying_market_open
+                    }
+                    NOT = {
+                        has_country_flag = bothan_assault_buying_market_order_in_progress
+                    }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = mc80_home_one_buying_market_open
+                    }
+                    NOT = {
+                        has_country_flag = mc80_home_one_buying_market_order_in_progress
+                    }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = starhawk_buying_market_open
+                    }
+                    NOT = {
+                        has_country_flag = starhawk_buying_market_order_in_progress
+                    }
+                    var:global.New_republic_engineering = {
+                        has_tech = starhawk_1
+                    }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = mc80_liberty_buying_market_open
+                    }
+                    NOT = {
+                        has_country_flag = mc80_liberty_buying_market_order_in_progress
+                    }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = republic_star_destroyer_buying_market_open
+                    }
+                    NOT = {
+                        has_country_flag = republic_star_destroyer_buying_market_order_in_progress
+                    }
+                    var:global.New_republic_engineering = {
+                        has_tech = republic_star_1
+                    }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = nebula_star_destroyer_buying_market_open
+                    }
+                    NOT = {
+                        has_country_flag = nebula_star_destroyer_buying_market_order_in_progress
+                    }
+                    var:global.New_republic_engineering = {
+                        has_tech = nebula_1
+                    }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = MC90_buying_market_open
+                    }
+                    NOT = {
+                        has_country_flag = MC90_buying_market_order_in_progress
+                    }
+                    CAL = {
+                        has_tech = mc90_1
+                    }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = dauntless_buying_market_open
+                    }
+                    NOT = {
+                        has_country_flag = dauntless_buying_market_order_in_progress
+                    }
+                }
+                
+                if = {
+                    limit = {
+                        has_country_flag = ipv_1_buying_market_open
+                    }
+                    NOT = {
+                        has_country_flag = ipv_1_buying_market_order_in_progress
+                    }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = gozanti_buying_market_open
+                    }
+                    NOT = {
+                        has_country_flag = gozanti_buying_market_order_in_progress
+                    }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = raider_buying_market_open
+                    }
+                    NOT = {
+                        has_country_flag = raider_buying_market_order_in_progress
+                    }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = raider_2_buying_market_open
+                    }
+                    NOT = {
+                        has_country_flag = raider_2_buying_market_order_in_progress
+                    }
+                    KUA = {
+                        has_tech = raider_2
+                    }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = lancer_buying_market_open
+                    }
+                    NOT = {
+                        has_country_flag = lancer_buying_market_order_in_progress
+                    }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = Victory_buying_market_open
+                    }
+                    NOT = {
+                        has_country_flag = Victory_buying_market_order_in_progress
+                    }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = arquitens_buying_market_open
+                    }
+                    NOT = {
+                        has_country_flag = arquitens_buying_market_order_in_progress
+                    }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = Interdictor_buying_market_open
+                    }
+                    NOT = {
+                        has_country_flag = Interdictor_buying_market_order_in_progress
+                    }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = dreadnaught_buying_market_open
+                    }
+                    NOT = {
+                        has_country_flag = dreadnaught_buying_market_order_in_progress
+                    }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = Victory_2_buying_market_open
+                    }
+                    NOT = {
+                        has_country_flag = Victory_2_buying_market_order_in_progress
+                    }
+                    KUA = {
+                        has_tech = victory_2
+                    }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = praertor_buying_market_open
+                    }
+                    NOT = {
+                        has_country_flag = praertor_buying_market_order_in_progress
+                    }
+                    KUA = {
+                        has_tech = praetor_1
+                    }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = Imperial_Star_Destroyer_buying_market_open
+                    }
+                    NOT = {
+                        has_country_flag = Imperial_Star_Destroyer_buying_market_order_in_progress
+                    }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = Imperial_Star_Destroyer_1_buying_market_open
+                    }
+                    NOT = {
+                        has_country_flag = Imperial_Star_Destroyer_1_buying_market_order_in_progress
+                    }
+                    KUA = {
+                        has_tech = isd_2
+                    }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = resurgent_buying_market_open
+                    }
+                    NOT = {
+                        has_country_flag = resurgent_buying_market_order_in_progress
+                    }
+                    KUA = {
+                        has_tech = resurgent_1
+                    }
+                }
+            }
             select_corvettes_button_click_enabled = {
                 NOT = {
                     has_country_flag = corvette_buying_market_open
@@ -931,16 +2753,6 @@ scripted_gui = {
                     has_country_flag = star_destroyer_buying_market_open
                 }
             }
-            right_click_market_click_enabled = {
-                NOT = {
-                    check_variable = { amount_to_be_produced = 5 }
-                }
-            }
-            left_click_market_click_enabled = {
-                NOT = {
-                    check_variable = { amount_to_be_produced = 1 }
-                }
-            }
         }
         properties = {
             flag_producer = {
@@ -948,6 +2760,915 @@ scripted_gui = {
             }
         }
     }
+    Marketplace_buying_emp_starfighters = {
+        context_type = player_context
+        parent_window_name = "Marketplace_buying_menu"
+        window_name = "Marketplace_buying_emp_starfighters"
+        visible = {
+            has_country_flag = starfighters_buying_market_open
+            has_country_flag = imperial_market_open
+        }
+        effects = {
+            tie_fighters_click = {
+                set_country_flag = tie_fighter_selected
+                clr_country_flag = tie_bomber_selected
+                clr_country_flag = tie_interceptor_selected
+                clr_country_flag = tie_fighter_bomber_selected
+                clr_country_flag = tie_defender_selected
+                clr_country_flag = tie_phantom_selected
+                clr_country_flag = tie_automated_selected
+                set_variable = { manufacturing_country = SFS.id }
+                set_variable = { current_price_market_buy_ships = Global.ship_price_holder@17 }
+                set_variable = { current_ic_cost_ships = 990}
+                set_country_flag = level_1_selected
+                clr_country_flag = level_2_selected
+                clr_country_flag = level_3_selected
+                clr_country_flag = level_4_selected
+            }
+            tie_bomber_click = {
+                set_country_flag = tie_bomber_selected
+                clr_country_flag = tie_fighter_selected
+                clr_country_flag = tie_interceptor_selected
+                clr_country_flag = tie_fighter_bomber_selected
+                clr_country_flag = tie_defender_selected
+                clr_country_flag = tie_phantom_selected
+                clr_country_flag = tie_automated_selected
+                set_variable = { manufacturing_country = SFS.id }
+                set_variable = { current_price_market_buy_ships = Global.ship_price_holder@28 }
+                set_variable = { current_ic_cost_ships = 990}
+                set_country_flag = level_1_selected
+                clr_country_flag = level_2_selected
+                clr_country_flag = level_3_selected
+                clr_country_flag = level_4_selected
+            }
+            tie_interceptor_click = {
+                set_country_flag = tie_interceptor_selected
+                clr_country_flag = tie_fighter_selected
+                clr_country_flag = tie_bomber_selected
+                clr_country_flag = tie_fighter_bomber_selected
+                clr_country_flag = tie_defender_selected
+                clr_country_flag = tie_phantom_selected
+                clr_country_flag = tie_automated_selected
+                set_variable = { manufacturing_country = SFS.id }
+                set_variable = { current_price_market_buy_ships = Global.ship_price_holder@21 }
+                set_variable = { current_ic_cost_ships = 990}
+                set_country_flag = level_1_selected
+                clr_country_flag = level_2_selected
+                clr_country_flag = level_3_selected
+                clr_country_flag = level_4_selected
+            }
+            tie_fighter_bomber_click = {
+                set_country_flag = tie_fighter_bomber_selected
+                clr_country_flag = tie_fighter_selected
+                clr_country_flag = tie_bomber_selected
+                clr_country_flag = tie_interceptor_selected
+                clr_country_flag = tie_defender_selected
+                clr_country_flag = tie_phantom_selected
+                clr_country_flag = tie_automated_selected
+                set_variable = { manufacturing_country = SFS.id }
+                set_variable = { current_price_market_buy_ships = Global.ship_price_holder@25 }
+                set_variable = { current_ic_cost_ships = 990}
+                set_country_flag = level_1_selected
+                clr_country_flag = level_2_selected
+                clr_country_flag = level_3_selected
+                clr_country_flag = level_4_selected
+            }
+            tie_defender_click = {
+                set_country_flag = tie_defender_selected
+                clr_country_flag = tie_fighter_selected
+                clr_country_flag = tie_bomber_selected
+                clr_country_flag = tie_interceptor_selected
+                clr_country_flag = tie_fighter_bomber_selected
+                clr_country_flag = tie_phantom_selected
+                clr_country_flag = tie_automated_selected
+                set_variable = { manufacturing_country = SFS.id }
+                set_variable = { current_price_market_buy_ships = Global.ship_price_holder@13 }
+                set_variable = { current_ic_cost_ships = 990}
+                set_country_flag = level_1_selected
+                clr_country_flag = level_2_selected
+                clr_country_flag = level_3_selected
+                clr_country_flag = level_4_selected
+            }
+            tie_phantom_click = {
+                set_country_flag = tie_phantom_selected
+                clr_country_flag = tie_fighter_selected
+                clr_country_flag = tie_bomber_selected
+                clr_country_flag = tie_interceptor_selected
+                clr_country_flag = tie_fighter_bomber_selected
+                clr_country_flag = tie_defender_selected
+                clr_country_flag = tie_automated_selected
+                set_variable = { manufacturing_country = SFS.id }
+                set_variable = { current_price_market_buy_ships = Global.ship_price_holder@14 }
+                set_variable = { current_ic_cost_ships = 990}
+                set_country_flag = level_1_selected
+                clr_country_flag = level_2_selected
+                clr_country_flag = level_3_selected
+                clr_country_flag = level_4_selected
+            }
+            tie_automated_click = {
+                set_country_flag = tie_automated_selected
+                clr_country_flag = tie_fighter_selected
+                clr_country_flag = tie_bomber_selected
+                clr_country_flag = tie_interceptor_selected
+                clr_country_flag = tie_fighter_bomber_selected
+                clr_country_flag = tie_defender_selected
+                clr_country_flag = tie_phantom_selected
+                set_variable = { manufacturing_country = SFS.id }
+                set_variable = { current_price_market_buy_ships = Global.ship_price_holder@15 }
+                set_variable = { current_ic_cost_ships = 990}
+                set_country_flag = level_1_selected
+                clr_country_flag = level_2_selected
+                clr_country_flag = level_3_selected
+                clr_country_flag = level_4_selected
+            }
+        }
+        triggers = {
+            level_2_visible = {
+                OR = {
+                    has_country_flag = tie_fighter_selected
+                    has_country_flag = tie_bomber_selected
+                    has_country_flag = tie_interceptor_selected
+                    has_country_flag = tie_fighter_bomber_selected
+                    has_country_flag = tie_automated_selected
+                }
+            }
+            level_3_visible = {
+                OR = {
+                    has_country_flag = tie_fighter_selected
+                    has_country_flag = tie_bomber_selected
+                    has_country_flag = tie_interceptor_selected
+                    has_country_flag = tie_fighter_bomber_selected
+                }
+            }
+            level_4_visible = {
+                OR = {
+                    has_country_flag = tie_fighter_selected
+                    has_country_flag = tie_bomber_selected
+                    has_country_flag = tie_interceptor_selected
+                }
+            }
+            level_1_click_enabled = {
+                NOT = {
+                    has_country_flag = level_1_selected
+                }
+            }
+            level_2_click_enabled = {
+                NOT = {
+                    has_country_flag = level_2_selected
+                }
+            }
+            level_3_click_enabled = {
+                NOT = {
+                    has_country_flag = level_3_selected
+                }
+            }
+            level_4_click_enabled = {
+                NOT = {
+                    has_country_flag = level_4_selected
+                }
+            }
+        }
+        properties = {
+            ship_icon = {
+                image = "[Get_emp_starfighter]"
+            }
+        }
+    }
+    Marketplace_buying_reb_starfighters = {
+        context_type = player_context
+        parent_window_name = "Marketplace_buying_menu"
+        window_name = "Marketplace_buying_reb_starfighters"
+        visible = {
+            has_country_flag = starfighters_buying_market_open
+            has_country_flag = republic_market_open
+        }
+        effects = {
+            order_ship_click = {
+                ####################### Fighters ##################################
+                if = {
+                    limit = {
+                        has_country_flag = x_wing_selected
+                        has_country_flag = level_1_selected
+                    }
+                    INC = {
+                        if = {
+                            limit = {
+                                check_variable = {
+                                    var = starfighter_amount_contract_holder@6^num
+                                    value = 0
+                                    compare = equals
+                                }
+                            }
+                            set_variable = {starfighter_counting_to_zero_holder@6 = prev.amount_to_be_produced}
+                        }
+                        add_to_array = { array = starfighter_amount_contract_holder@6 value = prev.amount_to_be_produced }
+                        add_to_array = { array = starfighter_tag_holder@6 value = ROOT.id }
+                    }
+                    set_temp_variable = {price_to_subtract_from_buyer = amount_to_be_produced}
+                    multiply_temp_variable = { price_to_subtract_from_buyer = current_price_market_buy_starfighters }
+                    subtract_from_variable = {currency_amount^primary_currency = price_to_subtract_from_buyer }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = x_wing_selected
+                        has_country_flag = level_2_selected
+                    }
+                    INC = {
+                        if = {
+                            limit = {
+                                check_variable = {
+                                    var = starfighter_amount_contract_holder@7^num
+                                    value = 0
+                                    compare = equals
+                                }
+                            }
+                            set_variable = {starfighter_counting_to_zero_holder@7 = prev.amount_to_be_produced}
+                        }
+                        add_to_array = { array = starfighter_amount_contract_holder@7 value = prev.amount_to_be_produced }
+                        add_to_array = { array = starfighter_tag_holder@7 value = ROOT.id }
+                    }
+                    set_temp_variable = {price_to_subtract_from_buyer = amount_to_be_produced}
+                    multiply_temp_variable = { price_to_subtract_from_buyer = current_price_market_buy_starfighters }
+                    subtract_from_variable = {currency_amount^primary_currency = price_to_subtract_from_buyer }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = x_wing_selected
+                        has_country_flag = level_3_selected
+                    }
+                    INC = {
+                        if = {
+                            limit = {
+                                check_variable = {
+                                    var = starfighter_amount_contract_holder@8^num
+                                    value = 0
+                                    compare = equals
+                                }
+                            }
+                            set_variable = {starfighter_counting_to_zero_holder@8 = prev.amount_to_be_produced}
+                        }
+                        add_to_array = { array = starfighter_amount_contract_holder@8 value = prev.amount_to_be_produced }
+                        add_to_array = { array = starfighter_tag_holder@8 value = ROOT.id }
+                    }
+                    set_temp_variable = {price_to_subtract_from_buyer = amount_to_be_produced}
+                    multiply_temp_variable = { price_to_subtract_from_buyer = current_price_market_buy_starfighters }
+                    subtract_from_variable = {currency_amount^primary_currency = price_to_subtract_from_buyer }
+                }
+
+                if = {
+                    limit = {
+                        has_country_flag = e_wing_selected
+                    }
+                    INC = {
+                        if = {
+                            limit = {
+                                check_variable = {
+                                    var = starfighter_amount_contract_holder@2^num
+                                    value = 0
+                                    compare = equals
+                                }
+                            }
+                            set_variable = {starfighter_counting_to_zero_holder@2 = prev.amount_to_be_produced}
+                        }
+                        add_to_array = { array = starfighter_amount_contract_holder@2 value = prev.amount_to_be_produced }
+                        add_to_array = { array = starfighter_tag_holder@2 value = ROOT.id }
+                    }
+                    set_temp_variable = {price_to_subtract_from_buyer = amount_to_be_produced}
+                    multiply_temp_variable = { price_to_subtract_from_buyer = current_price_market_buy_starfighters }
+                    subtract_from_variable = {currency_amount^primary_currency = price_to_subtract_from_buyer }
+                }
+
+                if = {
+                    limit = {
+                        has_country_flag = a_wing_selected
+                        has_country_flag = level_1_selected
+                    }
+                    KUA = {
+                        if = {
+                            limit = {
+                                check_variable = {
+                                    var = starfighter_amount_contract_holder@3^num
+                                    value = 0
+                                    compare = equals
+                                }
+                            }
+                            set_variable = {starfighter_counting_to_zero_holder@3 = prev.amount_to_be_produced}
+                        }
+                        add_to_array = { array = starfighter_amount_contract_holder@3 value = prev.amount_to_be_produced }
+                        add_to_array = { array = starfighter_tag_holder@3 value = ROOT.id }
+                    }
+                    set_temp_variable = {price_to_subtract_from_buyer = amount_to_be_produced}
+                    multiply_temp_variable = { price_to_subtract_from_buyer = current_price_market_buy_starfighters }
+                    subtract_from_variable = {currency_amount^primary_currency = price_to_subtract_from_buyer }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = a_wing_selected
+                        has_country_flag = level_2_selected
+                    }
+                    KUA = {
+                        if = {
+                            limit = {
+                                check_variable = {
+                                    var = starfighter_amount_contract_holder@4^num
+                                    value = 0
+                                    compare = equals
+                                }
+                            }
+                            set_variable = {starfighter_counting_to_zero_holder@4 = prev.amount_to_be_produced}
+                        }
+                        add_to_array = { array = starfighter_amount_contract_holder@4 value = prev.amount_to_be_produced }
+                        add_to_array = { array = starfighter_tag_holder@4 value = ROOT.id }
+                    }
+                    set_temp_variable = {price_to_subtract_from_buyer = amount_to_be_produced}
+                    multiply_temp_variable = { price_to_subtract_from_buyer = current_price_market_buy_starfighters }
+                    subtract_from_variable = {currency_amount^primary_currency = price_to_subtract_from_buyer }
+                }
+
+                if = {
+                    limit = {
+                        has_country_flag = k_wing_selected
+                    }
+                    KOE = {
+                        if = {
+                            limit = {
+                                check_variable = {
+                                    var = starfighter_amount_contract_holder@5^num
+                                    value = 0
+                                    compare = equals
+                                }
+                            }
+                            set_variable = {starfighter_counting_to_zero_holder@5 = prev.amount_to_be_produced}
+                        }
+                        add_to_array = { array = starfighter_amount_contract_holder@5 value = prev.amount_to_be_produced }
+                        add_to_array = { array = starfighter_tag_holder@5 value = ROOT.id }
+                    }
+                    set_temp_variable = {price_to_subtract_from_buyer = amount_to_be_produced}
+                    multiply_temp_variable = { price_to_subtract_from_buyer = current_price_market_buy_starfighters }
+                    subtract_from_variable = {currency_amount^primary_currency = price_to_subtract_from_buyer }
+                }
+
+                if = {
+                    limit = {
+                        has_country_flag = y_wing_selected
+                        has_country_flag = level_1_selected
+                    }
+                    KOE = {
+                        if = {
+                            limit = {
+                                check_variable = {
+                                    var = starfighter_amount_contract_holder@9^num
+                                    value = 0
+                                    compare = equals
+                                }
+                            }
+                            set_variable = {starfighter_counting_to_zero_holder@9 = prev.amount_to_be_produced}
+                        }
+                        add_to_array = { array = starfighter_amount_contract_holder@9 value = prev.amount_to_be_produced }
+                        add_to_array = { array = starfighter_tag_holder@9 value = ROOT.id }
+                    }
+                    set_temp_variable = {price_to_subtract_from_buyer = amount_to_be_produced}
+                    multiply_temp_variable = { price_to_subtract_from_buyer = current_price_market_buy_starfighters }
+                    subtract_from_variable = {currency_amount^primary_currency = price_to_subtract_from_buyer }
+                }
+
+                if = {
+                    limit = {
+                        has_country_flag = y_wing_selected
+                        has_country_flag = level_2_selected
+                    }
+                    KOE = {
+                        if = {
+                            limit = {
+                                check_variable = {
+                                    var = starfighter_amount_contract_holder@10^num
+                                    value = 0
+                                    compare = equals
+                                }
+                            }
+                            set_variable = {starfighter_counting_to_zero_holder@10 = prev.amount_to_be_produced}
+                        }
+                        add_to_array = { array = starfighter_amount_contract_holder@10 value = prev.amount_to_be_produced }
+                        add_to_array = { array = starfighter_tag_holder@10 value = ROOT.id }
+                    }
+                    set_temp_variable = {price_to_subtract_from_buyer = amount_to_be_produced }
+                    multiply_temp_variable = { price_to_subtract_from_buyer = current_price_market_buy_starfighters }
+                    subtract_from_variable = {currency_amount^primary_currency = price_to_subtract_from_buyer }
+                }
+
+                if = {
+                    limit = {
+                        has_country_flag = b_wing_selected
+                        has_country_flag = level_1_selected
+                    }
+                    SLK = {
+                        if = {
+                            limit = {
+                                check_variable = {
+                                    var = starfighter_amount_contract_holder@11^num
+                                    value = 0
+                                    compare = equals
+                                }
+                            }
+                            set_variable = {starfighter_counting_to_zero_holder@11 = prev.amount_to_be_produced}
+                        }
+                        add_to_array = { array = starfighter_amount_contract_holder@11 value = prev.amount_to_be_produced }
+                        add_to_array = { array = starfighter_tag_holder@11 value = ROOT.id }
+                    }
+                    set_temp_variable = {price_to_subtract_from_buyer = amount_to_be_produced}
+                    multiply_temp_variable = { price_to_subtract_from_buyer = current_price_market_buy_starfighters }
+                    subtract_from_variable = {currency_amount^primary_currency = price_to_subtract_from_buyer }
+                }
+
+                if = {
+                    limit = {
+                        has_country_flag = b_wing_selected
+                        has_country_flag = level_2_selected
+                    }
+                    SLK = {
+                        if = {
+                            limit = {
+                                check_variable = {
+                                    var = starfighter_amount_contract_holder@12^num
+                                    value = 0
+                                    compare = equals
+                                }
+                            }
+                            set_variable = {starfighter_counting_to_zero_holder@12 = prev.amount_to_be_produced}
+                        }
+                        add_to_array = { array = starfighter_amount_contract_holder@12 value = prev.amount_to_be_produced }
+                        add_to_array = { array = starfighter_tag_holder@12 value = ROOT.id }
+                    }
+                    set_temp_variable = {price_to_subtract_from_buyer = amount_to_be_produced}
+                    multiply_temp_variable = { price_to_subtract_from_buyer = current_price_market_buy_starfighters }
+                    subtract_from_variable = {currency_amount^primary_currency = price_to_subtract_from_buyer }
+                }
+
+                if = {
+                    limit = {
+                        has_country_flag = u_wing_selected
+                        has_country_flag = level_1_selected
+                    }
+                    INC = {
+                        if = {
+                            limit = {
+                                check_variable = {
+                                    var = starfighter_amount_contract_holder@0^num
+                                    value = 0
+                                    compare = equals
+                                }
+                            }
+                            set_variable = {starfighter_counting_to_zero_holder@0 = prev.amount_to_be_produced}
+                        }
+                        add_to_array = { array = starfighter_amount_contract_holder@0 value = prev.amount_to_be_produced }
+                        add_to_array = { array = starfighter_tag_holder@0 value = ROOT.id }
+                    }
+                    set_temp_variable = {price_to_subtract_from_buyer = amount_to_be_produced}
+                    multiply_temp_variable = { price_to_subtract_from_buyer = current_price_market_buy_starfighters }
+                    subtract_from_variable = {currency_amount^primary_currency = price_to_subtract_from_buyer }
+                }
+
+                if = {
+                    limit = {
+                        has_country_flag = u_wing_selected
+                        has_country_flag = level_2_selected
+                    }
+                    INC = {
+                        if = {
+                            limit = {
+                                check_variable = {
+                                    var = starfighter_amount_contract_holder@1^num
+                                    value = 0
+                                    compare = equals
+                                }
+                            }
+                            set_variable = {starfighter_counting_to_zero_holder@1 = prev.amount_to_be_produced}
+                        }
+                        add_to_array = { array = starfighter_amount_contract_holder@1 value = prev.amount_to_be_produced }
+                        add_to_array = { array = starfighter_tag_holder@1 value = ROOT.id }
+                    }
+                    set_temp_variable = {price_to_subtract_from_buyer = amount_to_be_produced}
+                    multiply_temp_variable = { price_to_subtract_from_buyer = current_price_market_buy_starfighters }
+                    subtract_from_variable = {currency_amount^primary_currency = price_to_subtract_from_buyer }
+                }
+                set_variable = { amount_to_be_produced = 100 }
+            }
+            x_wing_click = {
+                set_country_flag = x_wing_selected
+                clr_country_flag = y_wing_selected
+                clr_country_flag = a_wing_selected
+                clr_country_flag = b_wing_selected
+                clr_country_flag = e_wing_selected
+                clr_country_flag = k_wing_selected
+                clr_country_flag = u_wing_selected
+                set_variable = { manufacturing_country = INC.id }
+                set_variable = { current_price_market_buy_ships = Global.ship_price_holder@6 }
+                set_variable = { current_ic_cost_ships = 990}
+                set_country_flag = level_1_selected
+                clr_country_flag = level_2_selected
+                clr_country_flag = level_3_selected
+            }
+            y_wing_click = {
+                clr_country_flag = x_wing_selected
+                set_country_flag = y_wing_selected
+                clr_country_flag = a_wing_selected
+                clr_country_flag = b_wing_selected
+                clr_country_flag = e_wing_selected
+                clr_country_flag = k_wing_selected
+                clr_country_flag = u_wing_selected
+                set_variable = { manufacturing_country = KOE.id }
+                set_variable = { current_price_market_buy_ships = Global.ship_price_holder@2 }
+                set_variable = { current_ic_cost_ships = 990}
+                set_country_flag = level_1_selected
+                clr_country_flag = level_2_selected
+                clr_country_flag = level_3_selected
+            }
+            a_wing_click = {
+                clr_country_flag = x_wing_selected
+                clr_country_flag = y_wing_selected
+                set_country_flag = a_wing_selected
+                clr_country_flag = b_wing_selected
+                clr_country_flag = e_wing_selected
+                clr_country_flag = k_wing_selected
+                clr_country_flag = u_wing_selected
+                set_variable = { manufacturing_country = KUA.id }
+                set_variable = { current_price_market_buy_ships = Global.ship_price_holder@3 }
+                set_variable = { current_ic_cost_ships = 990}
+                set_country_flag = level_1_selected
+                clr_country_flag = level_2_selected
+                clr_country_flag = level_3_selected
+            }
+            b_wing_click = {
+                clr_country_flag = x_wing_selected
+                clr_country_flag = y_wing_selected
+                clr_country_flag = a_wing_selected
+                set_country_flag = b_wing_selected
+                clr_country_flag = e_wing_selected
+                clr_country_flag = k_wing_selected
+                clr_country_flag = u_wing_selected
+                set_variable = { manufacturing_country = SLK.id }
+                set_variable = { current_price_market_buy_ships = Global.ship_price_holder@11 }
+                set_variable = { current_ic_cost_ships = 990}
+                set_country_flag = level_1_selected
+                clr_country_flag = level_2_selected
+                clr_country_flag = level_3_selected
+            }
+            e_wing_click = {
+                clr_country_flag = x_wing_selected
+                clr_country_flag = y_wing_selected
+                clr_country_flag = a_wing_selected
+                clr_country_flag = b_wing_selected
+                set_country_flag = e_wing_selected
+                clr_country_flag = k_wing_selected
+                clr_country_flag = u_wing_selected
+                set_variable = { manufacturing_country = INC.id }
+                set_variable = { current_price_market_buy_ships = Global.ship_price_holder@2 }
+                set_variable = { current_ic_cost_ships = 990}
+                set_country_flag = level_1_selected
+                clr_country_flag = level_2_selected
+                clr_country_flag = level_3_selected
+            }
+            k_wing_click = {
+                clr_country_flag = x_wing_selected
+                clr_country_flag = y_wing_selected
+                clr_country_flag = a_wing_selected
+                clr_country_flag = b_wing_selected
+                clr_country_flag = e_wing_selected
+                set_country_flag = k_wing_selected
+                clr_country_flag = u_wing_selected
+                set_variable = { manufacturing_country = KOE.id }
+                set_variable = { current_price_market_buy_ships = Global.ship_price_holder@5 }
+                set_variable = { current_ic_cost_ships = 990}
+                set_country_flag = level_1_selected
+                clr_country_flag = level_2_selected
+                clr_country_flag = level_3_selected
+            }
+            u_wing_click = {
+                clr_country_flag = x_wing_selected
+                clr_country_flag = y_wing_selected
+                clr_country_flag = a_wing_selected
+                clr_country_flag = b_wing_selected
+                clr_country_flag = e_wing_selected
+                clr_country_flag = k_wing_selected
+                set_country_flag = u_wing_selected
+                set_variable = { manufacturing_country = INC.id }
+                set_variable = { current_price_market_buy_ships = Global.ship_price_holder@6 }
+                set_variable = { current_ic_cost_ships = 990}
+                set_country_flag = level_1_selected
+                clr_country_flag = level_2_selected
+                clr_country_flag = level_3_selected
+            }
+            level_1_click = {
+                set_country_flag = level_1_selected
+                clr_country_flag = level_2_selected
+                clr_country_flag = level_3_selected
+            }
+            level_2_click = {
+                set_country_flag = level_2_selected
+                clr_country_flag = level_1_selected
+                clr_country_flag = level_3_selected
+            }
+            level_3_click = {
+                set_country_flag = level_3_selected
+                clr_country_flag = level_1_selected
+                clr_country_flag = level_2_selected
+            }
+            #level_4_click = {
+            #    set_country_flag = level_4_selected
+            #}
+        }
+        triggers = {
+            x_wing_click_enabled = {
+                NOT = {
+                    has_country_flag = x_wing_selected
+                }
+            }
+            y_wing_click_enabled = {
+                NOT = {
+                    has_country_flag = y_wing_selected
+                }
+            }
+            a_wing_click_enabled = {
+                NOT = {
+                    has_country_flag = a_wing_selected
+                }
+            }
+            b_wing_click_enabled = {
+                NOT = {
+                    has_country_flag = b_wing_selected
+                }
+            }
+            e_wing_click_enabled = {
+                NOT = {
+                    has_country_flag = e_wing_selected
+                }
+            }
+            k_wing_click_enabled = {
+                NOT = {
+                    has_country_flag = k_wing_selected
+                }
+            }
+            u_wing_click_enabled = {
+                NOT = {
+                    has_country_flag = u_wing_selected
+                }
+            }
+            level_2_visible = {
+                OR = {
+                    has_country_flag = u_wing_selected
+                    has_country_flag = a_wing_selected
+                    has_country_flag = x_wing_selected
+                    has_country_flag = y_wing_selected
+                    has_country_flag = b_wing_selected
+                }
+            }
+            level_3_visible = {
+                OR = {
+                    has_country_flag = y_wing_selected
+                }
+            }
+            level_4_visible = {
+               #OR = {
+               #    has_country_flag = b_wing_selected
+               #}
+            }
+            level_1_click_enabled = {
+                NOT = {
+                    has_country_flag = level_1_selected
+                }
+            }
+            level_2_click_enabled = {
+                NOT = {
+                    has_country_flag = level_2_selected
+                }
+            }
+            level_3_click_enabled = {
+                NOT = {
+                    has_country_flag = level_3_selected
+                }
+            }
+            level_4_click_enabled = {
+                NOT = {
+                    has_country_flag = level_4_selected
+                }
+            }
+        }
+        properties = {
+            ship_icon = {
+                image = "[Get_reb_starfighter]"
+            }
+        }
+    }
+    #Marketplace_buying_ships_main = {
+    #   context_type = player_context
+    #   parent_window_name = "Marketplace_buying_menu"
+    #   window_name = "Marketplace_buying_ships"
+    #   visible = {
+    #       has_country_flag = open_market_ships
+    #   }
+    #   effects = {
+    #       select_corvettes_button_click = {
+    #           erase_previous_ship_menu_selection = yes
+    #           set_country_flag = corvette_buying_market_open
+    #           set_variable = { current_ic_cost_ships = 0 }
+    #           set_variable = { current_price_market_buy_ships = 0 }
+    #           clr_country_flag = CR70_buying_market_open
+    #           clr_country_flag = CR90_buying_market_open
+    #           clr_country_flag = corona_buying_market_open
+    #           clr_country_flag = pelta_buying_market_open
+    #           clr_country_flag = mc30_buying_market_open
+    #           clr_country_flag = nebulon_b_buying_market_open
+    #           clr_country_flag = nebulon_b2_buying_market_open
+    #           clr_country_flag = quaser_buying_market_open
+    #           clr_country_flag = warrior_buying_market_open
+    #           clr_country_flag = assault_1_buying_market_open
+    #           clr_country_flag = assault_2_buying_market_open
+    #           clr_country_flag = mc40_buying_market_open
+    #           clr_country_flag = mc75_buying_market_open
+    #           clr_country_flag = bothan_assault_buying_market_open
+    #           clr_country_flag = mc80_home_one_buying_market_open
+    #           clr_country_flag = starhawk_buying_market_open
+    #           clr_country_flag = mc80_liberty_buying_market_open
+    #           clr_country_flag = republic_star_destroyer_buying_market_open
+    #           clr_country_flag = nebula_star_destroyer_buying_market_open
+    #           clr_country_flag = MC90_buying_market_open
+    #           clr_country_flag = dauntless_buying_market_open
+
+    #           clr_country_flag = ipv_1_buying_market_open
+    #           clr_country_flag = gozanti_buying_market_open
+    #           clr_country_flag = raider_buying_market_open
+    #           clr_country_flag = raider_2_buying_market_open
+    #           clr_country_flag = lancer_buying_market_open
+    #           clr_country_flag = Victory_buying_market_open
+    #           clr_country_flag = arquitens_buying_market_open
+    #           clr_country_flag = Interdictor_buying_market_open
+    #           clr_country_flag = dreadnaught_buying_market_open
+    #           clr_country_flag = Victory_2_buying_market_open
+    #           clr_country_flag = praertor_buying_market_open
+    #           clr_country_flag = Imperial_Star_Destroyer_buying_market_open
+    #           clr_country_flag = Imperial_Star_Destroyer_1_buying_market_open
+    #           clr_country_flag = resurgent_buying_market_open
+    #       }
+    #       select_frigates_button_click = {
+    #           erase_previous_ship_menu_selection = yes
+    #           set_country_flag = frigate_buying_market_open
+    #           set_variable = { current_ic_cost_ships = 0 }
+    #           set_variable = { current_price_market_buy_ships = 0 }
+    #           clr_country_flag = CR70_buying_market_open
+    #           clr_country_flag = CR90_buying_market_open
+    #           clr_country_flag = corona_buying_market_open
+    #           clr_country_flag = pelta_buying_market_open
+    #           clr_country_flag = mc30_buying_market_open
+    #           clr_country_flag = nebulon_b_buying_market_open
+    #           clr_country_flag = nebulon_b2_buying_market_open
+    #           clr_country_flag = quaser_buying_market_open
+    #           clr_country_flag = warrior_buying_market_open
+    #           clr_country_flag = assault_1_buying_market_open
+    #           clr_country_flag = assault_2_buying_market_open
+    #           clr_country_flag = mc40_buying_market_open
+    #           clr_country_flag = mc75_buying_market_open
+    #           clr_country_flag = bothan_assault_buying_market_open
+    #           clr_country_flag = mc80_home_one_buying_market_open
+    #           clr_country_flag = starhawk_buying_market_open
+    #           clr_country_flag = mc80_liberty_buying_market_open
+    #           clr_country_flag = republic_star_destroyer_buying_market_open
+    #           clr_country_flag = nebula_star_destroyer_buying_market_open
+    #           clr_country_flag = MC90_buying_market_open
+    #           clr_country_flag = dauntless_buying_market_open
+
+    #           clr_country_flag = ipv_1_buying_market_open
+    #           clr_country_flag = gozanti_buying_market_open
+    #           clr_country_flag = raider_buying_market_open
+    #           clr_country_flag = raider_2_buying_market_open
+    #           clr_country_flag = lancer_buying_market_open
+    #           clr_country_flag = Victory_buying_market_open
+    #           clr_country_flag = arquitens_buying_market_open
+    #           clr_country_flag = Interdictor_buying_market_open
+    #           clr_country_flag = dreadnaught_buying_market_open
+    #           clr_country_flag = Victory_2_buying_market_open
+    #           clr_country_flag = praertor_buying_market_open
+    #           clr_country_flag = Imperial_Star_Destroyer_buying_market_open
+    #           clr_country_flag = Imperial_Star_Destroyer_1_buying_market_open
+    #           clr_country_flag = resurgent_buying_market_open
+    #           
+    #       }
+    #       select_cruisers_button_click = {
+    #           erase_previous_ship_menu_selection = yes
+    #           set_country_flag = cruiser_buying_market_open
+    #           set_variable = { current_ic_cost_ships = 0 }
+    #           set_variable = { current_price_market_buy_ships = 0 }
+    #           clr_country_flag = CR70_buying_market_open
+    #           clr_country_flag = CR90_buying_market_open
+    #           clr_country_flag = corona_buying_market_open
+    #           clr_country_flag = pelta_buying_market_open
+    #           clr_country_flag = mc30_buying_market_open
+    #           clr_country_flag = nebulon_b_buying_market_open
+    #           clr_country_flag = nebulon_b2_buying_market_open
+    #           clr_country_flag = quaser_buying_market_open
+    #           clr_country_flag = warrior_buying_market_open
+    #           clr_country_flag = assault_1_buying_market_open
+    #           clr_country_flag = assault_2_buying_market_open
+    #           clr_country_flag = mc40_buying_market_open
+    #           clr_country_flag = mc75_buying_market_open
+    #           clr_country_flag = bothan_assault_buying_market_open
+    #           clr_country_flag = mc80_home_one_buying_market_open
+    #           clr_country_flag = starhawk_buying_market_open
+    #           clr_country_flag = mc80_liberty_buying_market_open
+    #           clr_country_flag = republic_star_destroyer_buying_market_open
+    #           clr_country_flag = nebula_star_destroyer_buying_market_open
+    #           clr_country_flag = MC90_buying_market_open
+    #           clr_country_flag = dauntless_buying_market_open
+
+    #           clr_country_flag = ipv_1_buying_market_open
+    #           clr_country_flag = gozanti_buying_market_open
+    #           clr_country_flag = raider_buying_market_open
+    #           clr_country_flag = raider_2_buying_market_open
+    #           clr_country_flag = lancer_buying_market_open
+    #           clr_country_flag = Victory_buying_market_open
+    #           clr_country_flag = arquitens_buying_market_open
+    #           clr_country_flag = Interdictor_buying_market_open
+    #           clr_country_flag = dreadnaught_buying_market_open
+    #           clr_country_flag = Victory_2_buying_market_open
+    #           clr_country_flag = praertor_buying_market_open
+    #           clr_country_flag = Imperial_Star_Destroyer_buying_market_open
+    #           clr_country_flag = Imperial_Star_Destroyer_1_buying_market_open
+    #           clr_country_flag = resurgent_buying_market_open
+    #       }
+    #       select_star_destroyers_button_click = {
+    #           erase_previous_ship_menu_selection = yes
+    #           set_country_flag = star_destroyer_buying_market_open
+    #           set_variable = { current_ic_cost_ships = 0 }
+    #           set_variable = { current_price_market_buy_ships = 0 }
+    #           clr_country_flag = CR70_buying_market_open
+    #           clr_country_flag = CR90_buying_market_open
+    #           clr_country_flag = corona_buying_market_open
+    #           clr_country_flag = pelta_buying_market_open
+    #           clr_country_flag = mc30_buying_market_open
+    #           clr_country_flag = nebulon_b_buying_market_open
+    #           clr_country_flag = nebulon_b2_buying_market_open
+    #           clr_country_flag = quaser_buying_market_open
+    #           clr_country_flag = warrior_buying_market_open
+    #           clr_country_flag = assault_1_buying_market_open
+    #           clr_country_flag = assault_2_buying_market_open
+    #           clr_country_flag = mc40_buying_market_open
+    #           clr_country_flag = mc75_buying_market_open
+    #           clr_country_flag = bothan_assault_buying_market_open
+    #           clr_country_flag = mc80_home_one_buying_market_open
+    #           clr_country_flag = starhawk_buying_market_open
+    #           clr_country_flag = mc80_liberty_buying_market_open
+    #           clr_country_flag = republic_star_destroyer_buying_market_open
+    #           clr_country_flag = nebula_star_destroyer_buying_market_open
+    #           clr_country_flag = MC90_buying_market_open
+    #           clr_country_flag = dauntless_buying_market_open
+
+    #           clr_country_flag = ipv_1_buying_market_open
+    #           clr_country_flag = gozanti_buying_market_open
+    #           clr_country_flag = raider_buying_market_open
+    #           clr_country_flag = raider_2_buying_market_open
+    #           clr_country_flag = lancer_buying_market_open
+    #           clr_country_flag = Victory_buying_market_open
+    #           clr_country_flag = arquitens_buying_market_open
+    #           clr_country_flag = Interdictor_buying_market_open
+    #           clr_country_flag = dreadnaught_buying_market_open
+    #           clr_country_flag = Victory_2_buying_market_open
+    #           clr_country_flag = praertor_buying_market_open
+    #           clr_country_flag = Imperial_Star_Destroyer_buying_market_open
+    #           clr_country_flag = Imperial_Star_Destroyer_1_buying_market_open
+    #           clr_country_flag = resurgent_buying_market_open
+    #       }
+    #       #flag_producer_click = {
+    #       #    var:manufacturing_country = {
+    #       #        capital_scope = {
+    #       #            ROOT = {
+    #       #                goto_state = PREV
+    #       #            }
+    #       #        }
+    #       #    }
+    #       #}
+    #   }
+    #   triggers = {
+    #       select_corvettes_button_click_enabled = {
+    #           NOT = {
+    #               has_country_flag = corvette_buying_market_open
+    #           }
+    #       }
+    #       select_frigates_button_click_enabled = {
+    #           NOT = {
+    #               has_country_flag = frigate_buying_market_open
+    #           }
+    #       }
+    #       select_cruisers_button_click_enabled = {
+    #           NOT = {
+    #               has_country_flag = cruiser_buying_market_open
+    #           }
+    #       }
+    #       select_star_destroyers_button_click_enabled = {
+    #           NOT = {
+    #               has_country_flag = star_destroyer_buying_market_open
+    #           }
+    #       }
+    #   }
+    #}
     Marketplace_corvettes_rebel_buttons = {
         context_type = player_context
         parent_window_name = "Marketplace_buying_menu"
@@ -955,6 +3676,7 @@ scripted_gui = {
         visible = {
             has_country_flag = corvette_buying_market_open
             has_country_flag = republic_market_open
+            has_country_flag = open_market_ships
         }
         effects = {
             CR70_click = {
@@ -963,6 +3685,7 @@ scripted_gui = {
                 clr_country_flag = warrior_buying_market_open
                 set_variable = { manufacturing_country = CEC.id }
                 set_variable = { current_price_market_buy_ships = Global.ship_price_holder@913 }
+                set_variable = { current_ic_cost_ships = 913}
             }
             CR90_click = {
                 set_country_flag = CR90_buying_market_open
@@ -970,14 +3693,16 @@ scripted_gui = {
                 clr_country_flag = warrior_buying_market_open
                 set_variable = { manufacturing_country = CEC.id }
                 set_variable = { current_price_market_buy_ships = Global.ship_price_holder@990 }
+                set_variable = { current_ic_cost_ships = 990}
 
             }
             warrior_click = {
                 set_country_flag = warrior_buying_market_open
                 clr_country_flag = CR70_buying_market_open
                 clr_country_flag = CR90_buying_market_open
-                set_variable = { manufacturing_country = VON.id }
+                set_variable = { manufacturing_country = RPE.id }
                 set_variable = { current_price_market_buy_ships = Global.ship_price_holder@1530 }
+                set_variable = { current_ic_cost_ships = 1530}
             }
         }
         triggers = {
@@ -1010,6 +3735,7 @@ scripted_gui = {
         visible = {
             has_country_flag = frigate_buying_market_open
             has_country_flag = republic_market_open
+            has_country_flag = open_market_ships
         }
         effects = {
             pelta_click = {
@@ -1019,8 +3745,9 @@ scripted_gui = {
                 clr_country_flag = nebulon_b2_buying_market_open
                 clr_country_flag = quaser_buying_market_open
                 clr_country_flag = corona_buying_market_open
-                set_variable = { manufacturing_country = REN.id }
+                set_variable = { manufacturing_country = KUA.id }
                 set_variable = { current_price_market_buy_ships = Global.ship_price_holder@3200 }
+                set_variable = { current_ic_cost_ships = 3200}
             }
             MC30_click = {
                 set_country_flag = mc30_buying_market_open
@@ -1031,7 +3758,7 @@ scripted_gui = {
                 clr_country_flag = corona_buying_market_open
                 set_variable = { manufacturing_country = CAL.id }
                 set_variable = { current_price_market_buy_ships = Global.ship_price_holder@4262 }
-
+                set_variable = { current_ic_cost_ships = 4262}
             }
             Nebulon_b_click = {
                 set_country_flag = nebulon_b_buying_market_open
@@ -1042,6 +3769,7 @@ scripted_gui = {
                 clr_country_flag = corona_buying_market_open
                 set_variable = { manufacturing_country = KUA.id }
                 set_variable = { current_price_market_buy_ships = Global.ship_price_holder@2829 }
+                set_variable = { current_ic_cost_ships = 2829}
             }
             Nebulon_b_2_click = {
                 set_country_flag = nebulon_b2_buying_market_open
@@ -1052,6 +3780,7 @@ scripted_gui = {
                 clr_country_flag = corona_buying_market_open
                 set_variable = { manufacturing_country = KUA.id }
                 set_variable = { current_price_market_buy_ships = Global.ship_price_holder@2943 }
+                set_variable = { current_ic_cost_ships = 2943}
             }
             quaser_click = {
                 set_country_flag = quaser_buying_market_open
@@ -1062,6 +3791,7 @@ scripted_gui = {
                 clr_country_flag = corona_buying_market_open
                 set_variable = { manufacturing_country = SOR.id }
                 set_variable = { current_price_market_buy_ships = Global.ship_price_holder@4300 }
+                set_variable = { current_ic_cost_ships = 4300}
             }
             corona_click = {
                 set_country_flag = corona_buying_market_open
@@ -1072,6 +3802,7 @@ scripted_gui = {
                 clr_country_flag = quaser_buying_market_open
                 set_variable = { manufacturing_country = KUA.id }
                 set_variable = { current_price_market_buy_ships = Global.ship_price_holder@2980 }
+                set_variable = { current_ic_cost_ships = 2980}
             }
         }
         triggers = {
@@ -1119,6 +3850,7 @@ scripted_gui = {
         visible = {
             has_country_flag = cruiser_buying_market_open
             has_country_flag = republic_market_open
+            has_country_flag = open_market_ships
         }
         effects = {
             assault_1_click = {
@@ -1129,6 +3861,7 @@ scripted_gui = {
                 clr_country_flag = bothan_assault_buying_market_open
                 set_variable = { manufacturing_country = REN.id }
                 set_variable = { current_price_market_buy_ships = Global.ship_price_holder@5421 }
+                set_variable = { current_ic_cost_ships = 5421}
 
             }
             assault_2_click = {
@@ -1139,6 +3872,7 @@ scripted_gui = {
                 clr_country_flag = bothan_assault_buying_market_open
                 set_variable = { manufacturing_country = REN.id }
                 set_variable = { current_price_market_buy_ships = Global.ship_price_holder@5600 }
+                set_variable = { current_ic_cost_ships = 5600}
 
             }
             mc40_click = {
@@ -1149,6 +3883,7 @@ scripted_gui = {
                 clr_country_flag = bothan_assault_buying_market_open
                 set_variable = { manufacturing_country = CAL.id }
                 set_variable = { current_price_market_buy_ships = Global.ship_price_holder@5830 }
+                set_variable = { current_ic_cost_ships = 5830}
             }
             bothan_assault_click = {
                 set_country_flag = bothan_assault_buying_market_open
@@ -1158,6 +3893,7 @@ scripted_gui = {
                 clr_country_flag = assault_2_buying_market_open
                 set_variable = { manufacturing_country = REN.id }
                 set_variable = { current_price_market_buy_ships = Global.ship_price_holder@7340 }
+                set_variable = { current_ic_cost_ships = 7340}
             }
             mc75_click = {
                 set_country_flag = mc75_buying_market_open
@@ -1167,6 +3903,7 @@ scripted_gui = {
                 clr_country_flag = bothan_assault_buying_market_open
                 set_variable = { manufacturing_country = CAL.id }
                 set_variable = { current_price_market_buy_ships = Global.ship_price_holder@7540 }
+                set_variable = { current_ic_cost_ships = 7540}
             }
         }
         triggers = {
@@ -1209,6 +3946,7 @@ scripted_gui = {
         visible = {
             has_country_flag = star_destroyer_buying_market_open
             has_country_flag = republic_market_open
+            has_country_flag = open_market_ships
         }
         effects = {
             mc80_liberty_click = {
@@ -1221,6 +3959,7 @@ scripted_gui = {
                 clr_country_flag = dauntless_buying_market_open
                 set_variable = { manufacturing_country = CAL.id }
                 set_variable = { current_price_market_buy_ships = Global.ship_price_holder@10080 }
+                set_variable = { current_ic_cost_ships = 10080}
             }
             starhawk_click = {
                 set_country_flag = starhawk_buying_market_open
@@ -1230,8 +3969,9 @@ scripted_gui = {
                 clr_country_flag = nebula_star_destroyer_buying_market_open
                 clr_country_flag = MC90_buying_market_open
                 clr_country_flag = dauntless_buying_market_open
-                set_variable = { manufacturing_country = VON.id }
+                set_variable = { manufacturing_country = RPE.id }
                 set_variable = { current_price_market_buy_ships = Global.ship_price_holder@12400 }
+                set_variable = { current_ic_cost_ships = 12400}
             }
             dauntless_click = {
                 set_country_flag = dauntless_buying_market_open
@@ -1243,6 +3983,7 @@ scripted_gui = {
                 clr_country_flag = MC90_buying_market_open
                 set_variable = { manufacturing_country = SOR.id }
                 set_variable = { current_price_market_buy_ships = Global.ship_price_holder@13450 }
+                set_variable = { current_ic_cost_ships = 13450}
             }
             mc80_home_one_click = {
                 set_country_flag = mc80_home_one_buying_market_open
@@ -1254,6 +3995,7 @@ scripted_gui = {
                 clr_country_flag = dauntless_buying_market_open
                 set_variable = { manufacturing_country = CAL.id }
                 set_variable = { current_price_market_buy_ships = Global.ship_price_holder@13200 }
+                set_variable = { current_ic_cost_ships = 13200}
             }
             republic_star_destroyer_click = {
                 set_country_flag = republic_star_destroyer_buying_market_open
@@ -1263,8 +4005,9 @@ scripted_gui = {
                 clr_country_flag = nebula_star_destroyer_buying_market_open
                 clr_country_flag = MC90_buying_market_open
                 clr_country_flag = dauntless_buying_market_open
-                set_variable = { manufacturing_country = VON.id }
+                set_variable = { manufacturing_country = RPE.id }
                 set_variable = { current_price_market_buy_ships = Global.ship_price_holder@13430 }
+                set_variable = { current_ic_cost_ships = 13430}
             }
             nebula_star_destroyer_click = {
                 set_country_flag = nebula_star_destroyer_buying_market_open
@@ -1274,8 +4017,9 @@ scripted_gui = {
                 clr_country_flag = republic_star_destroyer_buying_market_open
                 clr_country_flag = MC90_buying_market_open
                 clr_country_flag = dauntless_buying_market_open
-                set_variable = { manufacturing_country = VON.id }
+                set_variable = { manufacturing_country = RPE.id }
                 set_variable = { current_price_market_buy_ships = Global.ship_price_holder@14400 }
+                set_variable = { current_ic_cost_ships = 14400}
             }
             MC90_click = {
                 set_country_flag = MC90_buying_market_open
@@ -1287,6 +4031,7 @@ scripted_gui = {
                 clr_country_flag = dauntless_buying_market_open
                 set_variable = { manufacturing_country = CAL.id }
                 set_variable = { current_price_market_buy_ships = Global.ship_price_holder@7540 }
+                set_variable = { current_ic_cost_ships = 7540}
             }
         }
         triggers = {
@@ -1340,15 +4085,17 @@ scripted_gui = {
         visible = {
             has_country_flag = corvette_buying_market_open
             has_country_flag = imperial_market_open
+            has_country_flag = open_market_ships
         }
         effects = {
-            ipv_1_click = {
+            ipv_click = {
                 set_country_flag = ipv_1_buying_market_open
                 clr_country_flag = gozanti_buying_market_open
                 clr_country_flag = raider_buying_market_open
                 clr_country_flag = raider_2_buying_market_open
                 set_variable = { manufacturing_country = SFS.id }
                 set_variable = { current_price_market_buy_ships = Global.ship_price_holder@950 }
+                set_variable = { current_ic_cost_ships = 950}
             }
             gozanti_click = {
                 set_country_flag = gozanti_buying_market_open
@@ -1357,6 +4104,7 @@ scripted_gui = {
                 clr_country_flag = raider_2_buying_market_open
                 set_variable = { manufacturing_country = CEC.id }
                 set_variable = { current_price_market_buy_ships = Global.ship_price_holder@1260 }
+                set_variable = { current_ic_cost_ships = 1260}
             }
             raider_click = {
                 set_country_flag = raider_buying_market_open
@@ -1365,6 +4113,7 @@ scripted_gui = {
                 clr_country_flag = raider_2_buying_market_open
                 set_variable = { manufacturing_country = KUA.id }
                 set_variable = { current_price_market_buy_ships = Global.ship_price_holder@1925 }
+                set_variable = { current_ic_cost_ships = 1925}
             }
             raider_2_click = {
                 set_country_flag = raider_2_buying_market_open
@@ -1373,10 +4122,11 @@ scripted_gui = {
                 clr_country_flag = raider_buying_market_open
                 set_variable = { manufacturing_country = KUA.id }
                 set_variable = { current_price_market_buy_ships = Global.ship_price_holder@1990 }
+                set_variable = { current_ic_cost_ships = 1990}
             }
         }
         triggers = {
-            ipv_1_click_enabled = {
+            ipv_click_enabled = {
                 NOT = {
                     has_country_flag = ipv_1_buying_market_open
                 }
@@ -1410,6 +4160,7 @@ scripted_gui = {
         visible = {
             has_country_flag = frigate_buying_market_open
             has_country_flag = imperial_market_open
+            has_country_flag = open_market_ships
         }
         effects = {
             lancer_click = {
@@ -1432,6 +4183,7 @@ scripted_gui = {
         visible = {
             has_country_flag = cruiser_buying_market_open
             has_country_flag = imperial_market_open
+            has_country_flag = open_market_ships
         }
         effects = {
             Arquitens_click = {
@@ -1441,6 +4193,7 @@ scripted_gui = {
                 clr_country_flag = Victory_buying_market_open
                 clr_country_flag = Victory_2_buying_market_open
                 set_variable = { current_price_market_buy_ships = Global.ship_price_holder@4800 }
+                set_variable = { current_ic_cost_ships = 4800}
                 set_variable = { manufacturing_country = KUA.id }
             }
             Interdictor_click = {
@@ -1450,6 +4203,7 @@ scripted_gui = {
                 clr_country_flag = Victory_buying_market_open
                 clr_country_flag = Victory_2_buying_market_open
                 set_variable = { current_price_market_buy_ships = Global.ship_price_holder@5950 }
+                set_variable = { current_ic_cost_ships = 5950}
                 set_variable = { manufacturing_country = SFS.id }
             }
             Dreadnaught_click = {
@@ -1459,6 +4213,7 @@ scripted_gui = {
                 clr_country_flag = Victory_buying_market_open
                 clr_country_flag = Victory_2_buying_market_open
                 set_variable = { current_price_market_buy_ships = Global.ship_price_holder@5200 }
+                set_variable = { current_ic_cost_ships = 5200}
                 set_variable = { manufacturing_country = KUA.id }
             }
             Victory_click = {
@@ -1468,6 +4223,7 @@ scripted_gui = {
                 clr_country_flag = dreadnaught_buying_market_open
                 clr_country_flag = Victory_2_buying_market_open
                 set_variable = { current_price_market_buy_ships = Global.ship_price_holder@7400 }
+                set_variable = { current_ic_cost_ships = 7400}
                 set_variable = { manufacturing_country = KUA.id }
             }
             Victory_2_click = {
@@ -1477,6 +4233,7 @@ scripted_gui = {
                 clr_country_flag = dreadnaught_buying_market_open
                 clr_country_flag = Victory_buying_market_open
                 set_variable = { current_price_market_buy_ships = Global.ship_price_holder@7940 }
+                set_variable = { current_ic_cost_ships = 7940}
                 set_variable = { manufacturing_country = KUA.id }
             }
         }
@@ -1520,6 +4277,7 @@ scripted_gui = {
         visible = {
             has_country_flag = star_destroyer_buying_market_open
             has_country_flag = imperial_market_open
+            has_country_flag = open_market_ships
         }
         effects = {
             Imperial_Star_Destroyer_click = {
@@ -1528,6 +4286,7 @@ scripted_gui = {
                 clr_country_flag = resurgent_buying_market_open
                 clr_country_flag = praertor_buying_market_open
                 set_variable = { current_price_market_buy_ships = Global.ship_price_holder@11005 }
+                set_variable = { current_ic_cost_ships = 11005}
                 set_variable = { manufacturing_country = KUA.id }
             }
             Imperial_Star_Destroyer_1_click = {
@@ -1536,6 +4295,7 @@ scripted_gui = {
                 clr_country_flag = resurgent_buying_market_open
                 clr_country_flag = praertor_buying_market_open
                 set_variable = { current_price_market_buy_ships = Global.ship_price_holder@11850 }
+                set_variable = { current_ic_cost_ships = 11850}
                 set_variable = { manufacturing_country = KUA.id }
             }
             resurgent_click = {
@@ -1544,6 +4304,7 @@ scripted_gui = {
                 clr_country_flag = Imperial_Star_Destroyer_1_buying_market_open
                 clr_country_flag = praertor_buying_market_open
                 set_variable = { current_price_market_buy_ships = Global.ship_price_holder@14503 }
+                set_variable = { current_ic_cost_ships = 14503}
                 set_variable = { manufacturing_country = KUA.id }
             }
             praetor_click = {
@@ -1552,6 +4313,7 @@ scripted_gui = {
                 clr_country_flag = Imperial_Star_Destroyer_1_buying_market_open
                 clr_country_flag = resurgent_buying_market_open
                 set_variable = { current_price_market_buy_ships = Global.ship_price_holder@14030 }
+                set_variable = { current_ic_cost_ships = 14030}
                 set_variable = { manufacturing_country = KUA.id }
             }
         }
