@@ -21,6 +21,7 @@ focus = {
 		factor = 1
 	}
 	completion_reward = {
+	news_event = RIN.13
 	add_war_support = -.20
 	}
 }
@@ -35,6 +36,7 @@ focus = {
 		factor = 1
 	}
 	completion_reward = {
+		news_event = RIN.14
 	add_stability = .20
 	}
 	relative_position_id = RIN_emperors_death
@@ -759,10 +761,13 @@ focus = {
 		factor = 1
 	}
 	completion_reward = {
-		diplomatic_relation = {
-			country = ERI
-			relation = non_aggression_pact
-			active = yes
+		if = {
+			limit = {
+				NOT = {
+					has_war_with = RIN
+				}
+			}
+			ERI = { country_event = RIN.11 }
 		}
 	}
 	relative_position_id = RIN_fortress_world
@@ -1131,15 +1136,14 @@ focus = {
 		factor = 1
 	}
 	completion_reward = {
-		diplomatic_relation = {
-			country = ERI
-			relation = non_aggression_pact
-			active = yes
+		if = {
+			limit = {
+				NOT = {
+					has_war_with = RIN
+				}
+			}
+			ERI = { country_event = RIN.16 }
 		}
-		set_rule = {
-			can_create_factions = yes
-		}
-		create_faction = new_empire
 	}
 	relative_position_id = RIN_dealing_with_eriadu
 	prerequisite = { focus = RIN_dealing_with_eriadu }
@@ -1213,6 +1217,7 @@ focus = {
 		factor = 1
 	}
 	completion_reward = {
+		news_event = RIN.15
 		#increase imperiarl legitamancy
 		custom_effect_tooltip = tt_rin_increase_15_legitimacy
 			add_to_variable = { legitimacy_emp = 15 }
