@@ -4,7 +4,11 @@ technologies = {
 		enable_equipments = {
 			CR70_1
 		}
-
+		
+		folder = {
+			name = rep_naval_folder
+			position = {  x = 1 y = 1 }
+		}
 
 		research_cost = 1.75
 
@@ -19,7 +23,7 @@ technologies = {
 			}
 		}
 		path = {
-			leads_to_tech = pelta_upgrade_1
+			leads_to_tech = cr70_2
 			research_cost_coeff = 1
 		}
 		categories = {
@@ -31,14 +35,42 @@ technologies = {
 	cr70_2 = {
 	
 		enable_equipments = {
-			cr70_2
+			CR70_2
 		}
-
+		
+		folder = {
+			name = rep_naval_folder
+			position = {  x = 1 y = 4 }
+		}
 
 		research_cost = 1.75
 
 		start_year = 4
-
+		on_research_complete = {
+			add_to_array = {
+				array = light_ship_production_array
+				value = 990
+			}
+			create_equipment_variant = {
+				type = CR70_2
+				name = "CR90"
+				modules = {
+					fixed_ship_battery_slot = rudimentary_laser_cannon
+					fixed_ship_anti_air_slot = ship_point_defence_system_1
+					fixed_ship_fire_control_system_slot = targetting_computer_0
+					fixed_ship_radar_slot = sensor_array_1
+					fixed_ship_engine_slot = hd_5
+					fixed_ship_secondaries_slot = sd_2
+					fixed_ship_armor_slot = sr_10
+					front_1_custom_slot = empty
+					front_2_custom_slot = rudimentary_laser_cannon
+					rear_1_custom_slot = empty
+				}
+			}
+		}
+		on_research_complete_limit = {
+			TAG = CEC
+		}
 		ai_will_do = {
 			factor = 0
 
@@ -224,39 +256,59 @@ technologies = {
 			bc_tech
 		}
 	}
-	quaser_2 = {
+	# quaser_2 = {
 	
-		enable_equipments = {
-			quaser_2
-		}
+	# 	enable_equipments = {
+	# 		quaser_2
+	# 	}
+	# 	on_research_complete = {
+	# 		create_equipment_variant = {
+	# 			type = quaser_2
+	# 			name = "Quaser 2"
+	# 			modules = {
+	# 				fixed_ship_battery_slot = rudimentary_laser_cannon
+	# 				fixed_ship_anti_air_slot = ship_point_defence_system_1
+	# 				fixed_ship_fire_control_system_slot = targetting_computer_0
+	# 				fixed_ship_radar_slot = sensor_array_1
+	# 				fixed_ship_engine_slot = hd_5
+	# 				fixed_ship_secondaries_slot = sd_2
+	# 				fixed_ship_armor_slot = sr_10
+	# 				front_1_custom_slot = empty
+	# 				front_2_custom_slot = rudimentary_laser_cannon
+	# 				rear_1_custom_slot = empty
+	# 			}
+	# 		}
+	# 	}
+	# 	on_research_complete_limit = {
+	# 		TAG = SUL
+	# 	}
+	# 	research_cost = 1.75
 
-		research_cost = 1.75
+	# 	start_year = 4
 
-		start_year = 4
+	# 	folder = {
+	# 		name = rep_naval_folder
+	# 		position = {  x = 5 y = 8 }
+	# 	}
 
-		folder = {
-			name = rep_naval_folder
-			position = {  x = 5 y = 8 }
-		}
+	# 	ai_will_do = {
+	# 		factor = 0
 
-		ai_will_do = {
-			factor = 0
-
-			modifier = {
-				factor = 1
-				has_government = democratic
-			}
-		}
-		path = {
-			leads_to_tech = pelta_upgrade_1
-			research_cost_coeff = 1
-		}
-		categories = {
-			naval_equipment
-			bb_tech
-			bc_tech
-		}
-	}
+	# 		modifier = {
+	# 			factor = 1
+	# 			has_government = democratic
+	# 		}
+	# 	}
+	# 	path = {
+	# 		leads_to_tech = pelta_upgrade_1
+	# 		research_cost_coeff = 1
+	# 	}
+	# 	categories = {
+	# 		naval_equipment
+	# 		bb_tech
+	# 		bc_tech
+	# 	}
+	# }
 	assault_1 = {
 	
 		enable_equipments = {
@@ -327,9 +379,35 @@ technologies = {
 	assault_2 = {
 	
 		enable_equipments = {
-			assault_2
+			assault_2_hull
 		}
-
+		on_research_complete = {
+			add_to_array = {
+				array = medium_ship_production_array
+				value = 5600
+			}
+			create_equipment_variant = {
+				type = assault_2_hull
+				name = "Assault 2"
+				modules = {
+					fixed_ship_battery_slot = rudimentary_laser_cannon
+					fixed_ship_anti_air_slot = ship_point_defence_system_1
+					fixed_ship_fire_control_system_slot = targetting_computer_0
+					fixed_ship_radar_slot = sensor_array_2
+					fixed_ship_engine_slot = hd_2
+					fixed_ship_secondaries_slot = sd_4
+					fixed_ship_armor_slot = sr_60
+					front_1_custom_slot = rudimentary_laser_cannon
+					front_2_custom_slot = rudimentary_laser_cannon
+					mid_1_custom_slot = empty
+					rear_1_custom_slot = empty
+					rear_2_custom_slot = empty
+				}
+			}
+		}
+		on_research_complete_limit = {
+			TAG = REN
+		}
 		research_cost = 1.75
 
 		start_year = 4
@@ -455,7 +533,32 @@ technologies = {
 		enable_equipments = {
 			Nebulon_2
 		}
-
+		on_research_complete = {
+			add_to_array = {
+				array = light_ship_production_array
+				value = 2943
+			}
+			create_equipment_variant = {
+				type = Nebulon_2
+				name = "Nebulon 2"
+				modules = {
+					fixed_ship_battery_slot = rudimentary_laser_cannon
+					fixed_ship_anti_air_slot = ship_point_defence_system_1
+					fixed_ship_fire_control_system_slot = targetting_computer_0
+					fixed_ship_radar_slot = sensor_array_1
+					fixed_ship_engine_slot = hd_5
+					fixed_ship_secondaries_slot = sd_2
+					fixed_ship_armor_slot = sr_10
+					front_1_custom_slot = empty
+					front_2_custom_slot = rudimentary_laser_cannon
+					mid_1_custom_slot = empty
+					rear_1_custom_slot = empty
+				}
+			}
+		}
+		on_research_complete_limit = {
+			TAG = KUA
+		}
 		research_cost = 1.75
 
 		start_year = 4
@@ -493,7 +596,35 @@ technologies = {
 			name = rep_naval_folder
 			position = {  x = 11 y = 8 }
 		}
-
+		on_research_complete = {
+			add_to_array = {
+				array = heavy_ship_production_array
+				value = 12400
+			}
+			create_equipment_variant = {
+				type = starhawk_1
+				name = "Starhawk"
+				modules = {
+					fixed_ship_battery_slot = rudimentary_laser_cannon
+					fixed_ship_anti_air_slot = ship_point_defence_system_1
+					fixed_ship_fire_control_system_slot = targetting_computer_0
+					fixed_ship_radar_slot = sensor_array_2
+					fixed_ship_engine_slot = hd_2
+					fixed_ship_secondaries_slot = sd_3
+					fixed_ship_armor_slot = sr_150
+					front_1_custom_slot = rudimentary_laser_cannon
+					front_2_custom_slot = empty
+					mid_1_custom_slot = empty
+					mid_2_custom_slot = empty
+					mid_3_custom_slot = empty
+					rear_1_custom_slot = empty
+					rear_2_custom_slot = empty
+				}
+			}
+		}
+		on_research_complete_limit = {
+			TAG = var:New_republic_engineering
+		}
 		ai_will_do = {
 			factor = 0
 
@@ -557,7 +688,7 @@ technologies = {
 	new_republic_star_destroyers = {
 	
 		enable_equipments = {
-			republic_star
+			republic_star_1
 		}
 
 		research_cost = 1.75
@@ -568,7 +699,6 @@ technologies = {
 			name = rep_naval_folder
 			position = {  x = 5 y = 13 }
 		}
-
 		ai_will_do = {
 			factor = 0
 
@@ -596,7 +726,35 @@ technologies = {
 		enable_equipments = {
 			nebula_1
 		}
-
+		on_research_complete = {
+			add_to_array = {
+				array = heavy_ship_production_array
+				value = 14400
+			}
+			create_equipment_variant = {
+				type = nebula_1
+				name = "Nebula"
+				modules = {
+					fixed_ship_battery_slot = rudimentary_laser_cannon
+					fixed_ship_anti_air_slot = ship_point_defence_system_1
+					fixed_ship_fire_control_system_slot = targetting_computer_0
+					fixed_ship_radar_slot = sensor_array_1
+					fixed_ship_engine_slot = hd_2
+					fixed_ship_secondaries_slot = sd_3
+					fixed_ship_armor_slot = sr_150
+					front_1_custom_slot = rudimentary_laser_cannon
+					front_2_custom_slot = rudimentary_laser_cannon
+					mid_1_custom_slot = rudimentary_laser_cannon
+					mid_2_custom_slot = empty
+					mid_3_custom_slot = empty
+					rear_1_custom_slot = empty
+					rear_2_custom_slot = empty
+				}
+			}
+		}
+		on_research_complete_limit = {
+			TAG = var:New_republic_engineering
+		}
 		research_cost = 1.75
 
 		start_year = 4
@@ -663,7 +821,35 @@ technologies = {
 		research_cost = 1.75
 
 		start_year = 4
-
+		on_research_complete = {
+			add_to_array = {
+				array = heavy_ship_production_array
+				value = 13430
+			}
+			create_equipment_variant = {
+				type = republic_star_1
+				name = "Republic Star Destroyer"
+				modules = {
+					fixed_ship_battery_slot = rudimentary_laser_cannon
+					fixed_ship_anti_air_slot = ship_point_defence_system_1
+					fixed_ship_fire_control_system_slot = targetting_computer_0
+					fixed_ship_radar_slot = sensor_array_1
+					fixed_ship_engine_slot = hd_2
+					fixed_ship_secondaries_slot = sd_3
+					fixed_ship_armor_slot = sr_150
+					front_1_custom_slot = rudimentary_laser_cannon
+					front_2_custom_slot = rudimentary_laser_cannon
+					mid_1_custom_slot = rudimentary_laser_cannon
+					mid_2_custom_slot = rudimentary_laser_cannon
+					mid_3_custom_slot = empty
+					rear_1_custom_slot = empty
+					rear_2_custom_slot = empty
+				}
+			}
+		}
+		on_research_complete_limit = {
+			TAG = var:New_republic_engineering
+		}
 		folder = {
 			name = rep_naval_folder
 			position = {  x = 6 y = 17 }
@@ -722,7 +908,31 @@ technologies = {
 		enable_equipments = {
 			warrior_1	
 		}
-
+		on_research_complete = {
+			add_to_array = {
+				array = light_ship_production_array
+				value = 1530
+			}
+			create_equipment_variant = {
+				type = warrior_1
+				name = "Warrior"
+				modules = {
+					fixed_ship_battery_slot = rudimentary_laser_cannon
+					fixed_ship_anti_air_slot = ship_point_defence_system_1
+					fixed_ship_fire_control_system_slot = targetting_computer_0
+					fixed_ship_radar_slot = sensor_array_1
+					fixed_ship_engine_slot = hd_5
+					fixed_ship_secondaries_slot = sd_2
+					fixed_ship_armor_slot = sr_10
+					front_1_custom_slot = empty
+					front_2_custom_slot = rudimentary_laser_cannon
+					rear_1_custom_slot = empty
+				}
+			}
+		}
+		on_research_complete_limit = {
+			TAG = var:New_republic_engineering
+		}
 		research_cost = 1.75
 
 		start_year = 4
@@ -781,7 +991,32 @@ technologies = {
 		enable_equipments = {
 			Corona_1	
 		}
-
+		on_research_complete = {
+			add_to_array = {
+				array = light_ship_production_array
+				value = 2980
+			}
+			create_equipment_variant = {
+				type = Corona_1
+				name = "Corona"
+				modules = {
+					fixed_ship_battery_slot = rudimentary_laser_cannon
+					fixed_ship_anti_air_slot = ship_point_defence_system_1
+					fixed_ship_fire_control_system_slot = targetting_computer_0
+					fixed_ship_radar_slot = sensor_array_1
+					fixed_ship_engine_slot = hd_5
+					fixed_ship_secondaries_slot = sd_2
+					fixed_ship_armor_slot = sr_10
+					front_1_custom_slot = empty
+					front_2_custom_slot = rudimentary_laser_cannon
+					mid_1_custom_slot = empty
+					rear_1_custom_slot = empty
+				}
+			}
+		}
+		on_research_complete_limit = {
+			TAG = KUA
+		}
 
 		research_cost = 1.75
 
@@ -1033,6 +1268,59 @@ technologies = {
 		}
 
 
+		research_cost = 1.75
+
+		start_year = 4
+
+		ai_will_do = {
+			factor = 0
+
+			modifier = {
+				factor = 1
+				has_government = democratic
+			}
+		}
+		categories = {
+			naval_equipment
+			bb_tech
+			bc_tech
+		}
+	}
+	mc90_1 = {
+	
+		enable_equipments = {
+			mc90_1	
+		}
+
+		on_research_complete = {
+			add_to_array = {
+				array = heavy_ship_production_array
+				value = 10630
+			}
+			create_equipment_variant = {
+				type = mc90_1
+				name = "MC90"
+				modules = {
+					fixed_ship_battery_slot = rudimentary_laser_cannon
+					fixed_ship_anti_air_slot = ship_point_defence_system_1
+					fixed_ship_fire_control_system_slot = targetting_computer_0
+					fixed_ship_radar_slot = sensor_array_1
+					fixed_ship_engine_slot = hd_2
+					fixed_ship_secondaries_slot = sd_3
+					fixed_ship_armor_slot = sr_150
+					front_1_custom_slot = rudimentary_laser_cannon
+					front_2_custom_slot = rudimentary_laser_cannon
+					mid_1_custom_slot = rudimentary_laser_cannon
+					mid_2_custom_slot = rudimentary_laser_cannon
+					mid_3_custom_slot = empty
+					rear_1_custom_slot = empty
+					rear_2_custom_slot = empty
+				}
+			}
+		}
+		on_research_complete_limit = {
+			TAG = CAL
+		}
 		research_cost = 1.75
 
 		start_year = 4

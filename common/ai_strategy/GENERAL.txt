@@ -524,3 +524,57 @@ put_garrisons_on_high_prio = {
 		value = 100 # positive is high prio, negative is low prio
 	}
 }
+#attempt to make naval invasions happen #1
+naval_invade_planets = {
+	allowed = {
+		always = yes
+	}
+	enable = {
+		always = yes
+	}
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = naval_invasion_focus
+		value = 100
+	}
+	ai_strategy = {
+		type = naval_avoid_region
+		id = 233
+		value = 1000
+	}
+}
+
+REB_take_coruscant = {
+	allowed = {
+		OR = {
+			original_tag = REB
+			original_tag = CHA
+			original_tag = BOT
+			original_tag = CAL
+		}
+		#is_historical_focus_on = yes
+	}
+	enable = {
+		REB={has_mission = invasion_of_coruscant}
+	}
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = area_priority
+		id = coruscant_landing_zone
+		value = 60
+	}
+
+	ai_strategy = {
+		type = invasion_unit_request
+		strategic_region = 37
+		value = 5
+	}
+	ai_strategy = {
+		type = invasion_unit_request
+		strategic_region = 38
+		value = 4
+	}
+
+}

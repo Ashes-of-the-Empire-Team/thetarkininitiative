@@ -4,6 +4,339 @@ on_actions = {
 			ai_corp_set_tech_for_start = yes
 		}
 	}
+	on_monthly = { ## REEVALUATE PRODUCTION
+		effect = {
+			if = {
+				limit = {
+					check_variable = {light_ship_production_array^num > 0}
+					is_ai = yes
+				}
+				## find highest need light_ship_one
+				set_variable = {light_ship_workers = 25000}
+				set_temp_variable = {highest_so_far = 0}
+				set_temp_variable = {storing_current_index = 0}
+				set_temp_variable = {current_production_value = ship_amount_contract_holder@var:light_selected_ship_production_cost^num}
+				for_each_loop = {
+					array = light_ship_production_array
+					value = item_to_look_for
+					break = break
+					index = current_index
+					set_temp_variable = {grab_ship_number = light_ship_production_array^current_index}
+					if = {
+						limit = {
+							check_variable = {ship_amount_contract_holder@var:grab_ship_number^num > highest_so_far }
+						}
+						set_temp_variable = {highest_so_far = ship_amount_contract_holder@var:grab_ship_number^num}
+						set_temp_variable = {storing_current_index = current_index}
+					}
+				}
+				if = {
+					limit = {
+						check_variable = {
+							var = highest_so_far
+							value = 0
+							compare = not_equals
+						}
+					}
+					if = {
+						limit = {
+							check_variable = {
+								var = current_production_value
+								value = 0
+								compare = not_equals
+							}
+						}
+						divide_temp_variable = {highest_so_far = current_production_value}
+					}
+					if = {
+						limit = {
+							or = {
+								check_variable = {highest_so_far > 2}
+								NOT = {
+									has_variable = light_selected_ship_production_cost
+								}
+							}
+						}
+						set_variable = {light_selected_ship_production_cost = light_ship_production_array^storing_current_index}
+						set_variable = {light_selected_ship_to_be_reduced = light_ship_production_array^storing_current_index}
+					}
+				}
+			}
+			if = {
+				limit = {
+					check_variable = {medium_ship_production_array^num > 0}
+					is_ai = yes
+				}
+				## find highest need medium_ship_one
+				set_variable = {medium_ship_workers = 25000}
+				set_temp_variable = {highest_so_far = 0}
+				set_temp_variable = {storing_current_index = 0}
+				set_temp_variable = {current_production_value = ship_amount_contract_holder@var:medium_selected_ship_production_cost^num}
+				for_each_loop = {
+					array = medium_ship_production_array
+					value = item_to_look_for
+					break = break
+					index = current_index
+					set_temp_variable = {grab_ship_number = medium_ship_production_array^current_index}
+					if = {
+						limit = {
+							check_variable = {ship_amount_contract_holder@var:grab_ship_number^num > highest_so_far }
+						}
+						set_temp_variable = {highest_so_far = ship_amount_contract_holder@var:grab_ship_number^num}
+						set_temp_variable = {storing_current_index = current_index}
+					}
+				}
+				if = {
+					limit = {
+						check_variable = {
+							var = highest_so_far
+							value = 0
+							compare = not_equals
+						}
+					}
+					if = {
+						limit = {
+							check_variable = {
+								var = current_production_value
+								value = 0
+								compare = not_equals
+							}
+						}
+						divide_temp_variable = {highest_so_far = current_production_value}
+					}
+					if = {
+						limit = {
+							or = {
+								check_variable = {highest_so_far > 2}
+								check_variable = {current_production_value = 0}
+								NOT = {
+									has_variable = medium_selected_ship_production_cost
+								}
+							}
+						}
+						set_variable = {medium_selected_ship_production_cost = medium_ship_production_array^storing_current_index}
+						set_variable = {medium_selected_ship_to_be_reduced = medium_ship_production_array^storing_current_index}
+					}
+				}
+			}
+			if = {
+				limit = {
+					check_variable = {heavy_ship_production_array^num > 0}
+					is_ai = yes
+				}
+				## find highest need heavy_ship_one
+				set_variable = {heavy_ship_workers = 25000}
+				set_temp_variable = {highest_so_far = 0}
+				set_temp_variable = {storing_current_index = 0}
+				set_temp_variable = {current_production_value = ship_amount_contract_holder@var:heavy_selected_ship_production_cost^num}
+				for_each_loop = {
+					array = heavy_ship_production_array
+					value = item_to_look_for
+					break = break
+					index = current_index
+					set_temp_variable = {grab_ship_number = heavy_ship_production_array^current_index}
+					if = {
+						limit = {
+							check_variable = {ship_amount_contract_holder@var:grab_ship_number^num > highest_so_far }
+						}
+						set_temp_variable = {highest_so_far = ship_amount_contract_holder@var:grab_ship_number^num}
+						set_temp_variable = {storing_current_index = current_index}
+					}
+				}
+				if = {
+					limit = {
+						check_variable = {
+							var = highest_so_far
+							value = 0
+							compare = not_equals
+						}
+					}
+					if = {
+						limit = {
+							check_variable = {
+								var = current_production_value
+								value = 0
+								compare = not_equals
+							}
+						}
+						divide_temp_variable = {highest_so_far = current_production_value}
+					}
+					if = {
+						limit = {
+							or = {
+								check_variable = {highest_so_far > 2}
+								check_variable = {current_production_value = 0}
+								NOT = {
+									has_variable = heavy_selected_ship_production_cost
+								}
+							}
+						}
+						set_variable = {heavy_selected_ship_production_cost = heavy_ship_production_array^storing_current_index}
+						set_variable = {heavy_selected_ship_to_be_reduced = heavy_ship_production_array^storing_current_index}
+					}
+				}
+			}
+			if = {
+				limit = {
+					check_variable = {air_production_array^num > 0}
+					is_ai = yes
+				}
+				set_variable = {air_1_workers = 10000}
+				set_variable = {air_2_workers = 10000}
+				set_temp_variable = {highest_so_far = 0}
+				set_temp_variable = {storing_current_index = 0}
+				set_temp_variable = {current_production_value = air_amount_contract_holder@var:grab_item_number^num}
+				for_each_loop = {
+					array = air_production_array
+					break = break
+					index = current_index
+					set_temp_variable = {grab_item_number = air_production_array^current_index}
+					if = {
+						limit = {
+							check_variable = {air_amount_contract_holder@var:grab_item_number^num > highest_so_far }
+						}
+						set_temp_variable = {highest_so_far = air_amount_contract_holder@var:grab_item_number^num}
+						set_temp_variable = {storing_current_index = current_index}
+					}
+				}
+				if = {
+					limit = {
+						check_variable = {
+							var = highest_so_far
+							value = 0
+							compare = not_equals
+						}
+					}
+					if = {
+						limit = {
+							check_variable = {
+								var = current_production_value
+								value = 0
+								compare = not_equals
+							}
+						}
+						divide_temp_variable = {highest_so_far = current_production_value}
+					}
+					if = {
+						limit = {
+							or = {
+								check_variable = {highest_so_far > 2}
+								check_variable = {current_production_value = 0}
+							}
+						}
+						set_variable = {air_1_selected_item = air_production_array^storing_current_index}
+						set_variable = {air_2_selected_item = air_production_array^storing_current_index}
+					}
+				}
+			}
+			if = {
+				limit = {
+					check_variable = {land_production_array^num > 0}
+					is_ai = yes
+				}
+				set_variable = {land_1_workers = 10000}
+				set_variable = {land_2_workers = 10000}
+				set_temp_variable = {highest_so_far = 0}
+				set_temp_variable = {storing_current_index = 0}
+				set_temp_variable = {current_production_value = land_amount_contract_holder@var:grab_item_number^num}
+				for_each_loop = {
+					array = land_production_array
+					break = break
+					index = current_index
+					set_temp_variable = {grab_item_number = land_production_array^current_index}
+					if = {
+						limit = {
+							check_variable = {land_amount_contract_holder@var:grab_item_number^num > highest_so_far }
+						}
+						set_temp_variable = {highest_so_far = land_amount_contract_holder@var:grab_item_number^num}
+						set_temp_variable = {storing_current_index = current_index}
+					}
+				}
+				if = {
+					limit = {
+						check_variable = {
+							var = highest_so_far
+							value = 0
+							compare = not_equals
+						}
+					}
+					if = {
+						limit = {
+							check_variable = {
+								var = current_production_value
+								value = 0
+								compare = not_equals
+							}
+						}
+						divide_temp_variable = {highest_so_far = current_production_value}
+					}
+					if = {
+						limit = {
+							or = {
+								check_variable = {highest_so_far > 2}
+								check_variable = {current_production_value = 0}
+							}
+						}
+						set_variable = {land_1_selected_item = land_production_array^storing_current_index}
+						set_variable = {land_2_selected_item = land_production_array^storing_current_index}
+					}
+				}
+			}
+			if = {
+				limit = {
+					check_variable = {soft_production_array^num > 0}
+					is_ai = yes
+				}
+				set_variable = {soft_1_workers = 13000}
+				set_variable = {soft_2_workers = 13000}
+				set_temp_variable = {highest_so_far = 0}
+				set_temp_variable = {storing_current_index = 0}
+				set_temp_variable = {current_production_value = soft_amount_contract_holder@var:grab_item_number^num}
+				for_each_loop = {
+					array = soft_production_array
+					break = break
+					index = current_index
+					set_temp_variable = {grab_item_number = soft_production_array^current_index}
+					if = {
+						limit = {
+							check_variable = {soft_amount_contract_holder@var:grab_item_number^num > highest_so_far }
+						}
+						set_temp_variable = {highest_so_far = soft_amount_contract_holder@var:grab_item_number^num}
+						set_temp_variable = {storing_current_index = current_index}
+					}
+				}
+				if = {
+					limit = {
+						check_variable = {
+							var = highest_so_far
+							value = 0
+							compare = not_equals
+						}
+					}
+					if = {
+						limit = {
+							check_variable = {
+								var = current_production_value
+								value = 0
+								compare = not_equals
+							}
+						}
+						divide_temp_variable = {highest_so_far = current_production_value}
+					}
+					if = {
+						limit = {
+							or = {
+								check_variable = {highest_so_far > 2}
+								check_variable = {current_production_value = 0}
+							}
+						}
+						set_variable = {soft_1_selected_item = soft_production_array^storing_current_index}
+						set_variable = {soft_2_selected_item = soft_production_array^storing_current_index}
+					}
+				}
+			}
+		}
+	}
 	on_monthly_VON = {
 		#soft_market_array
 		#market_tank_holder
