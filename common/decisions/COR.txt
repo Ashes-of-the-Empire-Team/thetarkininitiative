@@ -1,0 +1,249 @@
+
+corellian_politics_category = {
+	COR_begin_uprising = {
+		priority = 1115
+		icon = GFX_decision_generic_military
+
+		allowed = {
+			original_tag = COR
+		}
+
+		visible = {
+			has_completed_focus = COR_violent_force
+		}
+
+		available = {
+		
+		}
+
+		#cost = -50
+
+		complete_effect = {
+			
+		}
+	}
+	COR_gather_REB_stockpiles = {
+		priority = 1
+		icon = GFX_decision_generic_military
+
+		allowed = {
+			original_tag = COR
+		}
+
+		# visible = {
+			# has_completed_focus = COR_path_of_our_rebellion
+		# }
+
+		available = {
+			has_political_power < -50
+		}
+
+		#cost = 50
+
+		days_re_enable = 210
+		
+		days_remove = 30
+		
+		modifier={
+			industrial_capacity_factory = -0.15
+		}
+
+		complete_effect = {
+			add_political_power = 50
+		}
+		remove_effect = {
+			add_to_variable = { 
+				COR_rebel_stockpile = 1
+				tooltip = COR_smuggle_in_equipment_tt
+			}
+		}
+	}
+	COR_centralise_power_in_dikat = {
+		priority = 1
+		icon = GFX_decision_generic_military
+
+		allowed = {
+			original_tag = COR
+		}
+
+		# visible = {
+			# has_completed_focus = kyk_true_to_the_empire
+		# }
+
+		available = {
+		
+		}
+
+		cost = 50
+		
+		fire_only_once = yes
+
+		complete_effect = {
+			add_popularity = {
+				ideology = neutrality
+				popularity = 0.05
+			}
+		}
+	}
+	COR_rebellion_propaganda = {
+		priority = 1
+		icon = GFX_decision_generic_military
+
+		allowed = {
+			original_tag = COR
+		}
+
+		visible = {
+			OR={
+				has_idea = reb_influence_2
+				has_idea = reb_influence_3
+			}
+		}
+
+		available = {
+			NOT={
+				has_decision = COR_imperial_propaganda
+			}
+		}
+
+		cost = 100
+		
+		days_remove = 60
+		
+		modifier={
+			democratic_drift = 0.02
+		}
+	}
+	COR_imperial_propaganda = {
+		priority = 1
+		icon = GFX_decision_generic_military
+
+		allowed = {
+			original_tag = COR
+		}
+
+		visible = {
+			OR={
+				has_idea = emp_influence_2
+				has_idea = emp_influence_3
+			}
+		}
+
+		available = {
+			NOT={
+				has_decision = COR_rebellion_propaganda
+			}
+		}
+
+		cost = 100
+
+		days_remove = 60
+		
+		modifier={
+			imperial_drift = 0.02
+		}
+	}
+	COR_ending_labor_valley_strikes = {
+		priority = 1
+		icon = GFX_decision_generic_military
+
+		allowed = {
+			original_tag = COR
+		}
+
+		visible = {
+			324={
+				has_state_flag = COR_labor_strikes
+			}
+		}
+
+		available = {
+			OR={
+				324={
+					compliance > 45
+					has_active_resistance = no
+				}
+				has_government = democratic
+			}
+		}
+
+		cost = 100
+
+		days_remove = 25
+		
+		modifier={
+			
+		}
+		remove_effect={
+			324={
+				cancel_resistance = yes
+			}
+		}
+	}
+	COR_concessions_to_the_strikers = {
+		priority = 1
+		icon = GFX_decision_generic_military
+
+		allowed = {
+			original_tag = COR
+		}
+
+		visible = {
+			324={
+				has_state_flag = COR_labor_strikes
+			}
+		}
+
+		available = {
+			
+		}
+
+		cost = 50
+
+		days_remove = 60
+		
+		modifier={
+			tax_modifier = -0.1
+		}
+		remove_effect={
+			324={
+				add_resistance_target = -5
+			}
+		}
+	}
+	COR_crackdown_on_strikers = {
+		priority = 1
+		icon = GFX_decision_generic_military
+
+		allowed = {
+			original_tag = COR
+		}
+
+		visible = {
+			324={
+				has_state_flag = COR_labor_strikes
+			}
+		}
+
+		available = {
+			has_manpower > 5000
+			army_manpower_in_state = {
+				amount > 10000
+				state = 324
+			}
+		}
+
+		cost = 50
+
+		days_remove = 70
+		
+		modifier={
+			weekly_manpower = -125
+		}
+		remove_effect={
+			324={
+				add_compliance = 5
+			}
+		}
+	}
+}
