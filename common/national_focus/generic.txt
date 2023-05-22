@@ -566,7 +566,7 @@
 		available = {
 			if={
 				limit={
-					is_puppet = yes
+					is_subject = yes
 				}
 				NOT = {
 					overlord = {
@@ -623,9 +623,14 @@
 		cost = 7.2
 
 		available = {
-			NOT = {
-				overlord = {
-					has_government = democratic
+			if = {
+				limit = {
+					is_subject = yes
+				}
+				NOT = {
+					overlord = {
+						has_government = democratic
+					}
 				}
 			}
 			OR = {
@@ -1777,7 +1782,7 @@
 		cost = 7.2
 
 		bypass = {
-			amount_research_slots = 5
+			amount_research_slots > 4
 		}
 
 		prerequisite = {
@@ -2309,6 +2314,10 @@
 		y = 1
 		relative_position_id = ae_rep_align_with_centrists
 		cost = 7.2
+
+		bypass = {
+			amount_research_slots > 4
+		}
 
 		prerequisite = {
 			focus = ae_rep_align_with_centrists
