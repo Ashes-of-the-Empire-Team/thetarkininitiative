@@ -8,23 +8,23 @@ scripted_diplomatic_actions = {
 			
 		}
 		selectable = {
-			#has money to send
-			custom_trigger_tooltip={
-				tooltip = diplo_not_negitive_balance
-				check_variable = {
-					currency_amount^primary_currency > 0
-				}
-			}
-			#not in debt
-			custom_trigger_tooltip={
-				tooltip = diplo_not_in_debt
-				check_variable = {
-					ROOT.total_debt < 1
-				}
-			}
 			ROOT = {
 				NOT = {
 					has_country_flag = sent_gift_recently
+				}
+				#has money to send
+				custom_trigger_tooltip={
+					tooltip = diplo_not_negitive_balance
+					check_variable = {
+						currency_amount^primary_currency > 0
+					}
+				}
+				#not in debt
+				custom_trigger_tooltip={
+					tooltip = diplo_not_in_debt
+					check_variable = {
+						ROOT.total_debt < 1
+					}
 				}
 			}
 		}
