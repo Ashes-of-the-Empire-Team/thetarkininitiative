@@ -12,6 +12,11 @@ scripted_gui = {
                         has_country_flag = open_market_ships
                     }
                     add_to_variable = { amount_to_be_produced = 1 }
+                }else_if = {
+                    limit = {
+                        has_country_flag = gun_selected
+                    }
+                    add_to_variable = { amount_to_be_produced = 1000 }
                 }
                 else = {
                     add_to_variable = { amount_to_be_produced = 100 }
@@ -23,6 +28,11 @@ scripted_gui = {
                         has_country_flag = open_market_ships
                     }
                     subtract_from_variable = { amount_to_be_produced = 1 }
+                }else_if = {
+                    limit = {
+                        has_country_flag = gun_selected
+                    }
+                    subtract_from_variable = { amount_to_be_produced = 1000 }
                 }
                 else = {
                     subtract_from_variable = { amount_to_be_produced = 100 }
@@ -34,7 +44,14 @@ scripted_gui = {
             select_ground_forces_click = {
                 erase_previous_buying_market_selection = yes
                 set_country_flag = open_market_ground_forces
-                set_variable = { amount_to_be_produced = 100 }
+                if = {
+                    limit = {
+                        has_country_flag = gun_selected
+                    }
+                    set_variable = { amount_to_be_produced = 1000 }
+                }else = {
+                    set_variable = { amount_to_be_produced = 100 }
+                }
                 set_country_flag = level_1_selected
                 clr_country_flag = level_2_selected
                 clr_country_flag = level_3_selected
@@ -141,12 +158,14 @@ scripted_gui = {
                 NOT = {
                     check_variable = { amount_to_be_produced = 5 }
                     check_variable = { amount_to_be_produced = 500 }
+                    check_variable = { amount_to_be_produced = 5000 }
                 }
             }
             left_click_market_click_enabled = {
                 NOT = {
                     check_variable = { amount_to_be_produced = 1 }
                     check_variable = { amount_to_be_produced = 100 }
+                    check_variable = { amount_to_be_produced = 1000 }
                 }
             }
             top_cover_visible = {
@@ -219,7 +238,783 @@ scripted_gui = {
             has_country_flag = open_market_ground_forces
         }
         effects = {
-            
+            order_starship_click = {
+                if = {
+                    limit = {
+                        has_country_flag = atat_selected
+                    }
+                    set_country_flag = atat_order_in_progress
+                }
+                if = {
+                    limit = {
+                        has_country_flag = ataa_selected
+                    }
+                    set_country_flag = ataa_order_in_progress
+                }
+                if = {
+                    limit = {
+                        has_country_flag = atdp_selected
+                    }
+                    set_country_flag = atdp_order_in_progress
+                }
+                if = {
+                    limit = {
+                        has_country_flag = atst_selected
+                    }
+                    set_country_flag = atst_order_in_progress
+                }
+                if = {
+                    limit = {
+                        has_country_flag = juggernaut_selected
+                    }
+                    set_country_flag = juggernaut_order_in_progress
+                }
+                if = {
+                    limit = {
+                        has_country_flag = tie_crawler_selected
+                    }
+                    set_country_flag = tie_crawler_order_in_progress
+                }
+                if = {
+                    limit = {
+                        has_country_flag = tx130t_selected
+                    }
+                    set_country_flag = tx130t_order_in_progress
+                }
+                if = {
+                    limit = {
+                        has_country_flag = smart_rocket_selected
+                    }
+                    set_country_flag = smart_rocket_order_in_progress
+                }
+                if = {
+                    limit = {
+                        has_country_flag = ee_4_selected
+                    }
+                    set_country_flag = ee_4_order_in_progress
+                }
+                if = {
+                    limit = {
+                        has_country_flag = e_11_selected
+                    }
+                    set_country_flag = e_11_order_in_progress
+                }
+                if = {
+                    limit = {
+                        has_country_flag = k79_s80_selected
+                    }
+                    set_country_flag = k79_s80_order_in_progress
+                }
+                if = {
+                    limit = {
+                        has_country_flag = spha_selected
+                    }
+                    set_country_flag = spha_order_in_progress
+                }
+                if = {
+                    limit = {
+                        has_country_flag = supply_equipment_merr_selected
+                    }
+                    set_country_flag = supply_equipment_merr_order_in_progress
+                }
+                if = {
+                    limit = {
+                        has_country_flag = atat_selected
+                        has_country_flag = level_1_selected
+                    }
+                    KUA = {
+                        if = {
+                            limit = {
+                                check_variable = {
+                                    var = tank_amount_contract_holder@14^num
+                                    value = 0
+                                    compare = equals
+                                }
+                            }
+                            set_variable = {tank_counting_to_zero_holder@14 = prev.amount_to_be_produced}
+                        }
+                        add_to_array = { array = tank_amount_contract_holder@14 value = prev.amount_to_be_produced }
+                        add_to_array = { array = tank_tag_holder@14 value = ROOT.id }
+                    }
+                    set_temp_variable = {price_to_subtract_from_buyer = amount_to_be_produced}
+                    divide_temp_variable = {price_to_subtract_from_buyer = 100}
+                    multiply_temp_variable = { price_to_subtract_from_buyer = current_price_market_buy_price }
+                    subtract_from_variable = {currency_amount^primary_currency = price_to_subtract_from_buyer }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = atat_selected
+                        has_country_flag = level_2_selected
+                    }
+                    KUA = {
+                        if = {
+                            limit = {
+                                check_variable = {
+                                    var = tank_amount_contract_holder@15^num
+                                    value = 0
+                                    compare = equals
+                                }
+                            }
+                            set_variable = {tank_counting_to_zero_holder@15 = prev.amount_to_be_produced}
+                        }
+                        add_to_array = { array = tank_amount_contract_holder@15 value = prev.amount_to_be_produced }
+                        add_to_array = { array = tank_tag_holder@15 value = ROOT.id }
+                    }
+                    set_temp_variable = {price_to_subtract_from_buyer = amount_to_be_produced}
+                    divide_temp_variable = {price_to_subtract_from_buyer = 100}
+                    multiply_temp_variable = { price_to_subtract_from_buyer = current_price_market_buy_price }
+                    subtract_from_variable = {currency_amount^primary_currency = price_to_subtract_from_buyer }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = ataa_selected
+                        has_country_flag = level_1_selected
+                    }
+                    KUA = {
+                        if = {
+                            limit = {
+                                check_variable = {
+                                    var = tank_amount_contract_holder@16^num
+                                    value = 0
+                                    compare = equals
+                                }
+                            }
+                            set_variable = {tank_counting_to_zero_holder@16 = prev.amount_to_be_produced}
+                        }
+                        add_to_array = { array = tank_amount_contract_holder@16 value = prev.amount_to_be_produced }
+                        add_to_array = { array = tank_tag_holder@16 value = ROOT.id }
+                    }
+                    set_temp_variable = {price_to_subtract_from_buyer = amount_to_be_produced}
+                    divide_temp_variable = {price_to_subtract_from_buyer = 100}
+                    multiply_temp_variable = { price_to_subtract_from_buyer = current_price_market_buy_price }
+                    subtract_from_variable = {currency_amount^primary_currency = price_to_subtract_from_buyer }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = ataa_selected
+                        has_country_flag = level_2_selected
+                    }
+                    KUA = {
+                        if = {
+                            limit = {
+                                check_variable = {
+                                    var = tank_amount_contract_holder@17^num
+                                    value = 0
+                                    compare = equals
+                                }
+                            }
+                            set_variable = {tank_counting_to_zero_holder@17 = prev.amount_to_be_produced}
+                        }
+                        add_to_array = { array = tank_amount_contract_holder@17 value = prev.amount_to_be_produced }
+                        add_to_array = { array = tank_tag_holder@17 value = ROOT.id }
+                    }
+                    set_temp_variable = {price_to_subtract_from_buyer = amount_to_be_produced}
+                    divide_temp_variable = {price_to_subtract_from_buyer = 100}
+                    multiply_temp_variable = { price_to_subtract_from_buyer = current_price_market_buy_price }
+                    subtract_from_variable = {currency_amount^primary_currency = price_to_subtract_from_buyer }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = juggernaut_selected
+                        has_country_flag = level_1_selected
+                    }
+                    KUA = {
+                        if = {
+                            limit = {
+                                check_variable = {
+                                    var = tank_amount_contract_holder@18^num
+                                    value = 0
+                                    compare = equals
+                                }
+                            }
+                            set_variable = {tank_counting_to_zero_holder@18 = prev.amount_to_be_produced}
+                        }
+                        add_to_array = { array = tank_amount_contract_holder@18 value = prev.amount_to_be_produced }
+                        add_to_array = { array = tank_tag_holder@18 value = ROOT.id }
+                    }
+                    set_temp_variable = {price_to_subtract_from_buyer = amount_to_be_produced}
+                    divide_temp_variable = {price_to_subtract_from_buyer = 100}
+                    multiply_temp_variable = { price_to_subtract_from_buyer = current_price_market_buy_price }
+                    subtract_from_variable = {currency_amount^primary_currency = price_to_subtract_from_buyer }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = juggernaut_selected
+                        has_country_flag = level_2_selected
+                    }
+                    KUA = {
+                        if = {
+                            limit = {
+                                check_variable = {
+                                    var = tank_amount_contract_holder@19^num
+                                    value = 0
+                                    compare = equals
+                                }
+                            }
+                            set_variable = {tank_counting_to_zero_holder@19 = prev.amount_to_be_produced}
+                        }
+                        add_to_array = { array = tank_amount_contract_holder@19 value = prev.amount_to_be_produced }
+                        add_to_array = { array = tank_tag_holder@19 value = ROOT.id }
+                    }
+                    set_temp_variable = {price_to_subtract_from_buyer = amount_to_be_produced}
+                    divide_temp_variable = {price_to_subtract_from_buyer = 100}
+                    multiply_temp_variable = { price_to_subtract_from_buyer = current_price_market_buy_price }
+                    subtract_from_variable = {currency_amount^primary_currency = price_to_subtract_from_buyer }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = atst_selected
+                        has_country_flag = level_1_selected
+                    }
+                    KUA = {
+                        if = {
+                            limit = {
+                                check_variable = {
+                                    var = tank_amount_contract_holder@20^num
+                                    value = 0
+                                    compare = equals
+                                }
+                            }
+                            set_variable = {tank_counting_to_zero_holder@20 = prev.amount_to_be_produced}
+                        }
+                        add_to_array = { array = tank_amount_contract_holder@20 value = prev.amount_to_be_produced }
+                        add_to_array = { array = tank_tag_holder@20 value = ROOT.id }
+                    }
+                    set_temp_variable = {price_to_subtract_from_buyer = amount_to_be_produced}
+                    divide_temp_variable = {price_to_subtract_from_buyer = 100}
+                    multiply_temp_variable = { price_to_subtract_from_buyer = current_price_market_buy_price }
+                    subtract_from_variable = {currency_amount^primary_currency = price_to_subtract_from_buyer }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = atst_selected
+                        has_country_flag = level_2_selected
+                    }
+                    KUA = {
+                        if = {
+                            limit = {
+                                check_variable = {
+                                    var = tank_amount_contract_holder@21^num
+                                    value = 0
+                                    compare = equals
+                                }
+                            }
+                            set_variable = {tank_counting_to_zero_holder@21 = prev.amount_to_be_produced}
+                        }
+                        add_to_array = { array = tank_amount_contract_holder@21 value = prev.amount_to_be_produced }
+                        add_to_array = { array = tank_tag_holder@21 value = ROOT.id }
+                    }
+                    set_temp_variable = {price_to_subtract_from_buyer = amount_to_be_produced}
+                    divide_temp_variable = {price_to_subtract_from_buyer = 100}
+                    multiply_temp_variable = { price_to_subtract_from_buyer = current_price_market_buy_price }
+                    subtract_from_variable = {currency_amount^primary_currency = price_to_subtract_from_buyer }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = tx130t_selected
+                        has_country_flag = level_1_selected
+                    }
+                    KUA = {
+                        if = {
+                            limit = {
+                                check_variable = {
+                                    var = tank_amount_contract_holder@22^num
+                                    value = 0
+                                    compare = equals
+                                }
+                            }
+                            set_variable = {tank_counting_to_zero_holder@22 = prev.amount_to_be_produced}
+                        }
+                        add_to_array = { array = tank_amount_contract_holder@22 value = prev.amount_to_be_produced }
+                        add_to_array = { array = tank_tag_holder@22 value = ROOT.id }
+                    }
+                    set_temp_variable = {price_to_subtract_from_buyer = amount_to_be_produced}
+                    divide_temp_variable = {price_to_subtract_from_buyer = 100}
+                    multiply_temp_variable = { price_to_subtract_from_buyer = current_price_market_buy_price }
+                    subtract_from_variable = {currency_amount^primary_currency = price_to_subtract_from_buyer }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = tx130t_selected
+                        has_country_flag = level_2_selected
+                    }
+                    KUA = {
+                        if = {
+                            limit = {
+                                check_variable = {
+                                    var = tank_amount_contract_holder@23^num
+                                    value = 0
+                                    compare = equals
+                                }
+                            }
+                            set_variable = {tank_counting_to_zero_holder@23 = prev.amount_to_be_produced}
+                        }
+                        add_to_array = { array = tank_amount_contract_holder@23 value = prev.amount_to_be_produced }
+                        add_to_array = { array = tank_tag_holder@23 value = ROOT.id }
+                    }
+                    set_temp_variable = {price_to_subtract_from_buyer = amount_to_be_produced}
+                    divide_temp_variable = {price_to_subtract_from_buyer = 100}
+                    multiply_temp_variable = { price_to_subtract_from_buyer = current_price_market_buy_price }
+                    subtract_from_variable = {currency_amount^primary_currency = price_to_subtract_from_buyer }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = atdp_selected
+                        has_country_flag = level_1_selected
+                    }
+                    KUA = {
+                        if = {
+                            limit = {
+                                check_variable = {
+                                    var = tank_amount_contract_holder@24^num
+                                    value = 0
+                                    compare = equals
+                                }
+                            }
+                            set_variable = {tank_counting_to_zero_holder@24 = prev.amount_to_be_produced}
+                        }
+                        add_to_array = { array = tank_amount_contract_holder@24 value = prev.amount_to_be_produced }
+                        add_to_array = { array = tank_tag_holder@24 value = ROOT.id }
+                    }
+                    set_temp_variable = {price_to_subtract_from_buyer = amount_to_be_produced}
+                    divide_temp_variable = {price_to_subtract_from_buyer = 100}
+                    multiply_temp_variable = { price_to_subtract_from_buyer = current_price_market_buy_price }
+                    subtract_from_variable = {currency_amount^primary_currency = price_to_subtract_from_buyer }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = atdp_selected
+                        has_country_flag = level_2_selected
+                    }
+                    KUA = {
+                        if = {
+                            limit = {
+                                check_variable = {
+                                    var = tank_amount_contract_holder@25^num
+                                    value = 0
+                                    compare = equals
+                                }
+                            }
+                            set_variable = {tank_counting_to_zero_holder@25 = prev.amount_to_be_produced}
+                        }
+                        add_to_array = { array = tank_amount_contract_holder@25 value = prev.amount_to_be_produced }
+                        add_to_array = { array = tank_tag_holder@25 value = ROOT.id }
+                    }
+                    set_temp_variable = {price_to_subtract_from_buyer = amount_to_be_produced}
+                    divide_temp_variable = {price_to_subtract_from_buyer = 100}
+                    multiply_temp_variable = { price_to_subtract_from_buyer = current_price_market_buy_price }
+                    subtract_from_variable = {currency_amount^primary_currency = price_to_subtract_from_buyer }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = tie_crawler_selected
+                        has_country_flag = level_1_selected
+                    }
+                    SFS = {
+                        if = {
+                            limit = {
+                                check_variable = {
+                                    var = tank_amount_contract_holder@26^num
+                                    value = 0
+                                    compare = equals
+                                }
+                            }
+                            set_variable = {tank_counting_to_zero_holder@26 = prev.amount_to_be_produced}
+                        }
+                        add_to_array = { array = tank_amount_contract_holder@26 value = prev.amount_to_be_produced }
+                        add_to_array = { array = tank_tag_holder@26 value = ROOT.id }
+                    }
+                    set_temp_variable = {price_to_subtract_from_buyer = amount_to_be_produced}
+                    divide_temp_variable = {price_to_subtract_from_buyer = 100}
+                    multiply_temp_variable = { price_to_subtract_from_buyer = current_price_market_buy_price }
+                    subtract_from_variable = {currency_amount^primary_currency = price_to_subtract_from_buyer }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = tie_crawler_selected
+                        has_country_flag = level_2_selected
+                    }
+                    SFS = {
+                        if = {
+                            limit = {
+                                check_variable = {
+                                    var = tank_amount_contract_holder@27^num
+                                    value = 0
+                                    compare = equals
+                                }
+                            }
+                            set_variable = {tank_counting_to_zero_holder@27 = prev.amount_to_be_produced}
+                        }
+                        add_to_array = { array = tank_amount_contract_holder@27 value = prev.amount_to_be_produced }
+                        add_to_array = { array = tank_tag_holder@27 value = ROOT.id }
+                    }
+                    set_temp_variable = {price_to_subtract_from_buyer = amount_to_be_produced}
+                    divide_temp_variable = {price_to_subtract_from_buyer = 100}
+                    multiply_temp_variable = { price_to_subtract_from_buyer = current_price_market_buy_price }
+                    subtract_from_variable = {currency_amount^primary_currency = price_to_subtract_from_buyer }
+                }
+            #
+                if = {
+                    limit = {
+                        has_country_flag = e_11_selected
+                        has_country_flag = level_1_selected
+                    }
+                    BLS = {
+                        if = {
+                            limit = {
+                                check_variable = {
+                                    var = soft_amount_contract_holder@0^num
+                                    value = 0
+                                    compare = equals
+                                }
+                            }
+                            set_variable = {soft_counting_to_zero_holder@0 = prev.amount_to_be_produced}
+                        }
+                        add_to_array = { array = soft_amount_contract_holder@0 value = prev.amount_to_be_produced }
+                        add_to_array = { array = soft_tag_holder@0 value = ROOT.id }
+                    }
+                    set_temp_variable = {price_to_subtract_from_buyer = amount_to_be_produced}
+                    divide_temp_variable = {price_to_subtract_from_buyer = 1000}
+                    multiply_temp_variable = { price_to_subtract_from_buyer = current_price_market_buy_price }
+                    subtract_from_variable = {currency_amount^primary_currency = price_to_subtract_from_buyer }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = e_11_selected
+                        has_country_flag = level_2_selected
+                    }
+                    BLS = {
+                        if = {
+                            limit = {
+                                check_variable = {
+                                    var = soft_amount_contract_holder@1^num
+                                    value = 0
+                                    compare = equals
+                                }
+                            }
+                            set_variable = {soft_counting_to_zero_holder@1 = prev.amount_to_be_produced}
+                        }
+                        add_to_array = { array = soft_amount_contract_holder@1 value = prev.amount_to_be_produced }
+                        add_to_array = { array = soft_tag_holder@1 value = ROOT.id }
+                    }
+                    set_temp_variable = {price_to_subtract_from_buyer = amount_to_be_produced}
+                    divide_temp_variable = {price_to_subtract_from_buyer = 1000}
+                    multiply_temp_variable = { price_to_subtract_from_buyer = current_price_market_buy_price }
+                    subtract_from_variable = {currency_amount^primary_currency = price_to_subtract_from_buyer }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = e_11_selected
+                        has_country_flag = level_3_selected
+                    }
+                    BLS = {
+                        if = {
+                            limit = {
+                                check_variable = {
+                                    var = soft_amount_contract_holder@2^num
+                                    value = 0
+                                    compare = equals
+                                }
+                            }
+                            set_variable = {soft_counting_to_zero_holder@2 = prev.amount_to_be_produced}
+                        }
+                        add_to_array = { array = soft_amount_contract_holder@2 value = prev.amount_to_be_produced }
+                        add_to_array = { array = soft_tag_holder@2 value = ROOT.id }
+                    }
+                    set_temp_variable = {price_to_subtract_from_buyer = amount_to_be_produced}
+                    divide_temp_variable = {price_to_subtract_from_buyer = 1000}
+                    multiply_temp_variable = { price_to_subtract_from_buyer = current_price_market_buy_price }
+                    subtract_from_variable = {currency_amount^primary_currency = price_to_subtract_from_buyer }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = e_11_selected
+                        has_country_flag = level_4_selected
+                    }
+                    BLS = {
+                        if = {
+                            limit = {
+                                check_variable = {
+                                    var = soft_amount_contract_holder@3^num
+                                    value = 0
+                                    compare = equals
+                                }
+                            }
+                            set_variable = {soft_counting_to_zero_holder@3 = prev.amount_to_be_produced}
+                        }
+                        add_to_array = { array = soft_amount_contract_holder@3 value = prev.amount_to_be_produced }
+                        add_to_array = { array = soft_tag_holder@3 value = ROOT.id }
+                    }
+                    set_temp_variable = {price_to_subtract_from_buyer = amount_to_be_produced}
+                    divide_temp_variable = {price_to_subtract_from_buyer = 1000}
+                    multiply_temp_variable = { price_to_subtract_from_buyer = current_price_market_buy_price }
+                    subtract_from_variable = {currency_amount^primary_currency = price_to_subtract_from_buyer }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = ee_4_selected
+                        has_country_flag = level_1_selected
+                    }
+                    CZE = {
+                        if = {
+                            limit = {
+                                check_variable = {
+                                    var = soft_amount_contract_holder@4^num
+                                    value = 0
+                                    compare = equals
+                                }
+                            }
+                            set_variable = {soft_counting_to_zero_holder@4 = prev.amount_to_be_produced}
+                        }
+                        add_to_array = { array = soft_amount_contract_holder@4 value = prev.amount_to_be_produced }
+                        add_to_array = { array = soft_tag_holder@4 value = ROOT.id }
+                    }
+                    set_temp_variable = {price_to_subtract_from_buyer = amount_to_be_produced}
+                    divide_temp_variable = {price_to_subtract_from_buyer = 1000}
+                    multiply_temp_variable = { price_to_subtract_from_buyer = current_price_market_buy_price }
+                    subtract_from_variable = {currency_amount^primary_currency = price_to_subtract_from_buyer }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = ee_4_selected
+                        has_country_flag = level_2_selected
+                    }
+                    CZE = {
+                        if = {
+                            limit = {
+                                check_variable = {
+                                    var = soft_amount_contract_holder@5^num
+                                    value = 0
+                                    compare = equals
+                                }
+                            }
+                            set_variable = {soft_counting_to_zero_holder@5 = prev.amount_to_be_produced}
+                        }
+                        add_to_array = { array = soft_amount_contract_holder@5 value = prev.amount_to_be_produced }
+                        add_to_array = { array = soft_tag_holder@5 value = ROOT.id }
+                    }
+                    set_temp_variable = {price_to_subtract_from_buyer = amount_to_be_produced}
+                    divide_temp_variable = {price_to_subtract_from_buyer = 1000}
+                    multiply_temp_variable = { price_to_subtract_from_buyer = current_price_market_buy_price }
+                    subtract_from_variable = {currency_amount^primary_currency = price_to_subtract_from_buyer }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = ee_4_selected
+                        has_country_flag = level_3_selected
+                    }
+                    CZE = {
+                        if = {
+                            limit = {
+                                check_variable = {
+                                    var = soft_amount_contract_holder@6^num
+                                    value = 0
+                                    compare = equals
+                                }
+                            }
+                            set_variable = {soft_counting_to_zero_holder@6 = prev.amount_to_be_produced}
+                        }
+                        add_to_array = { array = soft_amount_contract_holder@6 value = prev.amount_to_be_produced }
+                        add_to_array = { array = soft_tag_holder@6 value = ROOT.id }
+                    }
+                    set_temp_variable = {price_to_subtract_from_buyer = amount_to_be_produced}
+                    divide_temp_variable = {price_to_subtract_from_buyer = 1000}
+                    multiply_temp_variable = { price_to_subtract_from_buyer = current_price_market_buy_price }
+                    subtract_from_variable = {currency_amount^primary_currency = price_to_subtract_from_buyer }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = smart_rocket_selected
+                        has_country_flag = level_1_selected
+                    }
+                    MER = {
+                        if = {
+                            limit = {
+                                check_variable = {
+                                    var = soft_amount_contract_holder@7^num
+                                    value = 0
+                                    compare = equals
+                                }
+                            }
+                            set_variable = {soft_counting_to_zero_holder@7 = prev.amount_to_be_produced}
+                        }
+                        add_to_array = { array = soft_amount_contract_holder@7 value = prev.amount_to_be_produced }
+                        add_to_array = { array = soft_tag_holder@7 value = ROOT.id }
+                    }
+                    set_temp_variable = {price_to_subtract_from_buyer = amount_to_be_produced}
+                    divide_temp_variable = {price_to_subtract_from_buyer = 1000}
+                    multiply_temp_variable = { price_to_subtract_from_buyer = current_price_market_buy_price }
+                    subtract_from_variable = {currency_amount^primary_currency = price_to_subtract_from_buyer }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = smart_rocket_selected
+                        has_country_flag = level_2_selected
+                    }
+                    MER = {
+                        if = {
+                            limit = {
+                                check_variable = {
+                                    var = soft_amount_contract_holder@8^num
+                                    value = 0
+                                    compare = equals
+                                }
+                            }
+                            set_variable = {soft_counting_to_zero_holder@8 = prev.amount_to_be_produced}
+                        }
+                        add_to_array = { array = soft_amount_contract_holder@8 value = prev.amount_to_be_produced }
+                        add_to_array = { array = soft_tag_holder@8 value = ROOT.id }
+                    }
+                    set_temp_variable = {price_to_subtract_from_buyer = amount_to_be_produced}
+                    divide_temp_variable = {price_to_subtract_from_buyer = 1000}
+                    multiply_temp_variable = { price_to_subtract_from_buyer = current_price_market_buy_price }
+                    subtract_from_variable = {currency_amount^primary_currency = price_to_subtract_from_buyer }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = smart_rocket_selected
+                        has_country_flag = level_3_selected
+                    }
+                    MER = {
+                        if = {
+                            limit = {
+                                check_variable = {
+                                    var = soft_amount_contract_holder@9^num
+                                    value = 0
+                                    compare = equals
+                                }
+                            }
+                            set_variable = {soft_counting_to_zero_holder@9 = prev.amount_to_be_produced}
+                        }
+                        add_to_array = { array = soft_amount_contract_holder@9 value = prev.amount_to_be_produced }
+                        add_to_array = { array = soft_tag_holder@9 value = ROOT.id }
+                    }
+                    set_temp_variable = {price_to_subtract_from_buyer = amount_to_be_produced}
+                    divide_temp_variable = {price_to_subtract_from_buyer = 1000}
+                    multiply_temp_variable = { price_to_subtract_from_buyer = current_price_market_buy_price }
+                    subtract_from_variable = {currency_amount^primary_currency = price_to_subtract_from_buyer }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = k79_s80_selected
+                        has_country_flag = level_1_selected
+                    }
+                    BLS = {
+                        if = {
+                            limit = {
+                                check_variable = {
+                                    var = soft_amount_contract_holder@10^num
+                                    value = 0
+                                    compare = equals
+                                }
+                            }
+                            set_variable = {soft_counting_to_zero_holder@10 = prev.amount_to_be_produced}
+                        }
+                        add_to_array = { array = soft_amount_contract_holder@10 value = prev.amount_to_be_produced }
+                        add_to_array = { array = soft_tag_holder@10 value = ROOT.id }
+                    }
+                    set_temp_variable = {price_to_subtract_from_buyer = amount_to_be_produced}
+                    divide_temp_variable = {price_to_subtract_from_buyer = 1000}
+                    multiply_temp_variable = { price_to_subtract_from_buyer = current_price_market_buy_price }
+                    subtract_from_variable = {currency_amount^primary_currency = price_to_subtract_from_buyer }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = spha_selected
+                        has_country_flag = level_1_selected
+                    }
+                    ROT = {
+                        if = {
+                            limit = {
+                                check_variable = {
+                                    var = soft_amount_contract_holder@11^num
+                                    value = 0
+                                    compare = equals
+                                }
+                            }
+                            set_variable = {soft_counting_to_zero_holder@11 = prev.amount_to_be_produced}
+                        }
+                        add_to_array = { array = soft_amount_contract_holder@11 value = prev.amount_to_be_produced }
+                        add_to_array = { array = soft_tag_holder@11 value = ROOT.id }
+                    }
+                    set_temp_variable = {price_to_subtract_from_buyer = amount_to_be_produced}
+                    divide_temp_variable = {price_to_subtract_from_buyer = 1000}
+                    multiply_temp_variable = { price_to_subtract_from_buyer = current_price_market_buy_price }
+                    subtract_from_variable = {currency_amount^primary_currency = price_to_subtract_from_buyer }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = spha_selected
+                        has_country_flag = level_2_selected
+                    }
+                    ROT = {
+                        if = {
+                            limit = {
+                                check_variable = {
+                                    var = soft_amount_contract_holder@12^num
+                                    value = 0
+                                    compare = equals
+                                }
+                            }
+                            set_variable = {soft_counting_to_zero_holder@12 = prev.amount_to_be_produced}
+                        }
+                        add_to_array = { array = soft_amount_contract_holder@12 value = prev.amount_to_be_produced }
+                        add_to_array = { array = soft_tag_holder@12 value = ROOT.id }
+                    }
+                    set_temp_variable = {price_to_subtract_from_buyer = amount_to_be_produced}
+                    divide_temp_variable = {price_to_subtract_from_buyer = 1000}
+                    multiply_temp_variable = { price_to_subtract_from_buyer = current_price_market_buy_price }
+                    subtract_from_variable = {currency_amount^primary_currency = price_to_subtract_from_buyer }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = spha_selected
+                        has_country_flag = level_3_selected
+                    }
+                    ROT = {
+                        if = {
+                            limit = {
+                                check_variable = {
+                                    var = soft_amount_contract_holder@13^num
+                                    value = 0
+                                    compare = equals
+                                }
+                            }
+                            set_variable = {soft_counting_to_zero_holder@13 = prev.amount_to_be_produced}
+                        }
+                        add_to_array = { array = soft_amount_contract_holder@13 value = prev.amount_to_be_produced }
+                        add_to_array = { array = soft_tag_holder@13 value = ROOT.id }
+                    }
+                    set_temp_variable = {price_to_subtract_from_buyer = amount_to_be_produced}
+                    divide_temp_variable = {price_to_subtract_from_buyer = 1000}
+                    multiply_temp_variable = { price_to_subtract_from_buyer = current_price_market_buy_price }
+                    subtract_from_variable = {currency_amount^primary_currency = price_to_subtract_from_buyer }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = supply_equipment_merr_selected
+                        has_country_flag = level_1_selected
+                    }
+                    MER = {
+                        if = {
+                            limit = {
+                                check_variable = {
+                                    var = soft_amount_contract_holder@14^num
+                                    value = 0
+                                    compare = equals
+                                }
+                            }
+                            set_variable = {soft_counting_to_zero_holder@14 = prev.amount_to_be_produced}
+                        }
+                        add_to_array = { array = soft_amount_contract_holder@14 value = prev.amount_to_be_produced }
+                        add_to_array = { array = soft_tag_holder@14 value = ROOT.id }
+                    }
+                    set_temp_variable = {price_to_subtract_from_buyer = amount_to_be_produced}
+                    divide_temp_variable = {price_to_subtract_from_buyer = 1000}
+                    multiply_temp_variable = { price_to_subtract_from_buyer = current_price_market_buy_price }
+                    subtract_from_variable = {currency_amount^primary_currency = price_to_subtract_from_buyer }
+                }
+            }
             gun_button_click = {
                 set_country_flag = gun_selected
                 clr_country_flag = tank_selected
@@ -230,6 +1025,7 @@ scripted_gui = {
                 clr_country_flag = tie_crawler_selected
                 clr_country_flag = tx130t_selected
                 clr_country_flag = atat_selected
+                set_variable = {amount_to_be_produced = 1000}
             }
             tank_button_click = {
                 set_country_flag = tank_selected
@@ -240,30 +1036,174 @@ scripted_gui = {
                 clr_country_flag = k79_s80_selected
                 clr_country_flag = spha_selected
                 clr_country_flag = supply_equipment_merr_selected
+                set_variable = {amount_to_be_produced = 100}
             }
             level_1_click = {
                 set_country_flag = level_1_selected
                 clr_country_flag = level_2_selected
                 clr_country_flag = level_3_selected
                 clr_country_flag = level_4_selected
+                
+                if = {
+                    limit = {
+                        has_country_flag = atat_selected
+                    }
+                    set_variable = { current_price_market_buy_price = Global.tank_market_price_holder@14 }
+                }else_if = {
+                    limit = {
+                        has_country_flag = ataa_selected
+                    }
+                    set_variable = { current_price_market_buy_price = Global.tank_market_price_holder@16 }
+                }else_if = {
+                    limit = {
+                        has_country_flag = juggernaut_selected
+                    }
+                    set_variable = { current_price_market_buy_price = Global.tank_market_price_holder@18 }
+                }else_if = {
+                    limit = {
+                        has_country_flag = atst_selected
+                    }
+                    set_variable = { current_price_market_buy_price = Global.tank_market_price_holder@20 }
+                }else_if = {
+                    limit = {
+                        has_country_flag = tx130t_selected
+                    }
+                    set_variable = { current_price_market_buy_price = Global.tank_market_price_holder@22 }
+                }else_if = {
+                    limit = {
+                        has_country_flag = atdp_selected
+                    }
+                    set_variable = { current_price_market_buy_price = Global.tank_market_price_holder@24 }
+                }else_if = {
+                    limit = {
+                        has_country_flag = tie_crawler_selected
+                    }
+                    set_variable = { current_price_market_buy_price = Global.tank_market_price_holder@26 }
+                }else_if = {
+                    limit = {
+                        has_country_flag = ee_4_selected
+                    }
+                    set_variable = { current_price_market_buy_price = Global.soft_market_price_holder@0 }
+                }else_if = {
+                    limit = {
+                        has_country_flag = e_11_selected
+                    }
+                    set_variable = { current_price_market_buy_price = Global.soft_market_price_holder@4 }
+                }else_if = {
+                    limit = {
+                        has_country_flag = spha_selected
+                    }
+                    set_variable = { current_price_market_buy_price = Global.soft_market_price_holder@11 }
+                }else_if = {
+                    limit = {
+                        has_country_flag = smart_rocket_selected
+                    }
+                    set_variable = { current_price_market_buy_price = Global.soft_market_price_holder@7 }
+                }
             }
             level_2_click = {
                 set_country_flag = level_2_selected
                 clr_country_flag = level_1_selected
                 clr_country_flag = level_3_selected
                 clr_country_flag = level_4_selected
+
+                if = {
+                    limit = {
+                        has_country_flag = atat_selected
+                    }
+                    set_variable = { current_price_market_buy_price = Global.tank_market_price_holder@15 }
+                }else_if = {
+                    limit = {
+                        has_country_flag = ataa_selected
+                    }
+                    set_variable = { current_price_market_buy_price = Global.tank_market_price_holder@17 }
+                }else_if = {
+                    limit = {
+                        has_country_flag = juggernaut_selected
+                    }
+                    set_variable = { current_price_market_buy_price = Global.tank_market_price_holder@19 }
+                }else_if = {
+                    limit = {
+                        has_country_flag = atst_selected
+                    }
+                    set_variable = { current_price_market_buy_price = Global.tank_market_price_holder@21 }
+                }else_if = {
+                    limit = {
+                        has_country_flag = tx130t_selected
+                    }
+                    set_variable = { current_price_market_buy_price = Global.tank_market_price_holder@23 }
+                }else_if = {
+                    limit = {
+                        has_country_flag = atdp_selected
+                    }
+                    set_variable = { current_price_market_buy_price = Global.tank_market_price_holder@25 }
+                }else_if = {
+                    limit = {
+                        has_country_flag = tie_crawler_selected
+                    }
+                    set_variable = { current_price_market_buy_price = Global.tank_market_price_holder@27 }
+                }else_if = {
+                    limit = {
+                        has_country_flag = ee_4_selected
+                    }
+                    set_variable = { current_price_market_buy_price = Global.soft_market_price_holder@5 }
+                }else_if = {
+                    limit = {
+                        has_country_flag = e_11_selected
+                    }
+                    set_variable = { current_price_market_buy_price = Global.soft_market_price_holder@1 }
+                }else_if = {
+                    limit = {
+                        has_country_flag = spha_selected
+                    }
+                    set_variable = { current_price_market_buy_price = Global.soft_market_price_holder@12 }
+                }else_if = {
+                    limit = {
+                        has_country_flag = smart_rocket_selected
+                    }
+                    set_variable = { current_price_market_buy_price = Global.soft_market_price_holder@8 }
+                }
             }
             level_3_click = {
                 set_country_flag = level_3_selected
                 clr_country_flag = level_1_selected
                 clr_country_flag = level_2_selected
                 clr_country_flag = level_4_selected
+
+                if = {
+                    limit = {
+                        has_country_flag = ee_4_selected
+                    }
+                    set_variable = { current_price_market_buy_price = Global.soft_market_price_holder@6 }
+                }else_if = {
+                    limit = {
+                        has_country_flag = e_11_selected
+                    }
+                    set_variable = { current_price_market_buy_price = Global.soft_market_price_holder@2 }
+                }else_if = {
+                    limit = {
+                        has_country_flag = spha_selected
+                    }
+                    set_variable = { current_price_market_buy_price = Global.soft_market_price_holder@13 }
+                }else_if = {
+                    limit = {
+                        has_country_flag = smart_rocket_selected
+                    }
+                    set_variable = { current_price_market_buy_price = Global.soft_market_price_holder@9 }
+                }
             }
             level_4_click = {
                 set_country_flag = level_4_selected
                 clr_country_flag = level_1_selected
                 clr_country_flag = level_2_selected
                 clr_country_flag = level_3_selected
+
+                if = {
+                    limit = {
+                        has_country_flag = e_11_selected
+                    }
+                    set_variable = { current_price_market_buy_price = Global.soft_market_price_holder@3 }
+                }
             }
         }
         triggers = {
@@ -304,7 +1244,7 @@ scripted_gui = {
                     has_country_flag = smart_rocket_selected
                     has_country_flag = spha_selected  
                     has_country_flag = tank_selected
-                }  
+                }
             }
             level_3_visible = { 
                 OR = {
@@ -315,7 +1255,357 @@ scripted_gui = {
                 }
             }
             level_4_visible = {
-                has_country_flag = ee_4_selected
+                has_country_flag = e_11_selected
+            }
+            order_starship_click_enabled = {
+                if = {
+                    limit = {
+                        has_country_flag = e_11_selected
+                    }
+                    NOT = {
+                        has_country_flag = e_11_order_in_progress
+                    }
+                    if = {
+                        limit = {
+                            has_country_flag = level_2_selected
+                        }
+                        BLS = {
+                            has_tech = infantry_weapons1
+                        }
+                    }else_if = {
+                        limit = {
+                            has_country_flag = level_3_selected
+                        }
+                        BLS = {
+                            has_tech = advanced_infantry_weapons
+                        }
+                    }else_if = {
+                        limit = {
+                            has_country_flag = level_4_selected
+                        }
+                        BLS = {
+                            has_tech = advanced_infantry_weapons
+                        }
+                    }
+                }else_if = {
+                    limit = {
+                        has_country_flag = ee_4_selected
+                    }
+                    NOT = {
+                        has_country_flag = ee_4_order_in_progress
+                    }
+                    if = {
+                        limit = {
+                            has_country_flag = level_2_selected
+                        }
+                        CZE = {
+                            has_tech = cheap_blaster_1
+                        }
+                    }else_if = {
+                        limit = {
+                            has_country_flag = level_3_selected
+                        }
+                        CZE = {
+                            has_tech = cheap_blaster_2
+                        }
+                    }
+                }else_if = {
+                    limit = {
+                        has_country_flag = spha_selected
+                    }
+                    NOT = {
+                        has_country_flag = spha_order_in_progress
+                    }
+                    if = {
+                        limit = {
+                            has_country_flag = level_2_selected
+                        }
+                        ROT = {
+                            has_tech = artillery1
+                        }
+                    }else_if = {
+                        limit = {
+                            has_country_flag = level_3_selected
+                        }
+                        ROT = {
+                            has_tech = artillery4
+                        }
+                    }
+                }else_if = {
+                    limit = {
+                        has_country_flag = smart_rocket_selected
+                    }
+                    NOT = {
+                        has_country_flag = smart_rocket_order_in_progress
+                    }
+                    if = {
+                        limit = {
+                            has_country_flag = level_2_selected
+                        }
+                        MER = {
+                            has_tech = antitank2
+                        }
+                    }else_if = {
+                        limit = {
+                            has_country_flag = level_3_selected
+                        }
+                        MER = {
+                            has_tech = antitank5
+                        }
+                    }
+                }else_if = {
+                    limit = {
+                        has_country_flag = ataa_selected
+                    }
+                    NOT = {
+                        has_country_flag = ataa_order_in_progress
+                    }
+                    if = {
+                        limit = {
+                            has_country_flag = level_2_selected
+                        }
+                        KUA = {
+                            has_tech = at_aa_advanced
+                        }
+                    }
+                }else_if = {
+                    limit = {
+                        has_country_flag = atdp_selected
+                    }
+                    NOT = {
+                        has_country_flag = atdp_order_in_progress
+                    }
+                    if = {
+                        limit = {
+                            has_country_flag = level_2_selected
+                        }
+                        KUA = {
+                            has_tech = at_dp_advanced
+                        }
+                    }
+                }else_if = {
+                    limit = {
+                        has_country_flag = atst_selected
+                    }
+                    NOT = {
+                        has_country_flag = atst_order_in_progress
+                    }
+                    if = {
+                        limit = {
+                            has_country_flag = level_2_selected
+                        }
+                        KUA = {
+                            has_tech = at_st_advanced
+                        }
+                    }
+                }else_if = {
+                    limit = {
+                        has_country_flag = tx130t_selected
+                    }
+                    NOT = {
+                        has_country_flag = tx130t_order_in_progress
+                    }
+                    if = {
+                        limit = {
+                            has_country_flag = level_2_selected
+                        }
+                        KUA = {
+                            has_tech = tx_130T_advanced
+                        }
+                    }
+                }else_if = {
+                    limit = {
+                        has_country_flag = atat_selected
+                    }
+                    NOT = {
+                        has_country_flag = atat_order_in_progress
+                    }
+                    if = {
+                        limit = {
+                            has_country_flag = level_2_selected
+                        }
+                        KUA = {
+                            has_tech = at_at_advanced
+                        }
+                    }
+                }else_if = {
+                    limit = {
+                        has_country_flag = tie_crawler_selected
+                    }
+                    NOT = {
+                        has_country_flag = tie_crawler_order_in_progress
+                    }
+                    if = {
+                        limit = {
+                            has_country_flag = level_1_selected
+                        }
+                        SFS = {
+                            has_tech = tie_crawler
+                        }
+                    }else_if = {
+                        limit = {
+                            has_country_flag = level_2_selected
+                        }
+                        SFS = {
+                            has_tech = tie_crawler_2
+                        }
+                    }
+                }else_if = {
+                    limit = {
+                        has_country_flag = juggernaut_selected
+                    }
+                    NOT = {
+                        has_country_flag = juggernaut_order_in_progress
+                    }
+                    if = {
+                        limit = {
+                            has_country_flag = level_2_selected
+                        }
+                        KUA = {
+                            has_tech = juggernaut_advanced
+                        }
+                    }
+                }
+            }
+            amount_in_queue_in_front_visible = {
+                if = {
+                    limit = {
+                        has_country_flag = ee_4_selected
+                    }
+                    has_country_flag = ee_4_order_in_progress
+                }else_if = {
+                    limit = {
+                        has_country_flag = e_11_selected
+                    }
+                    has_country_flag = e_11_order_in_progress
+                }else_if = {
+                    limit = {
+                        has_country_flag = smart_rocket_selected
+                    }
+                    has_country_flag = smart_rocket_order_in_progress
+                }else_if = {
+                    limit = {
+                        has_country_flag = spha_selected
+                    }
+                    has_country_flag = spha_order_in_progress
+                }else_if = {
+                    limit = {
+                        has_country_flag = ataa_selected
+                    }
+                    has_country_flag = ataa_order_in_progress
+                }else_if = {
+                    limit = {
+                        has_country_flag = tie_crawler_selected
+                    }
+                    has_country_flag = tie_crawler_order_in_progress
+                }else_if = {
+                    limit = {
+                        has_country_flag = atdp_selected
+                    }
+                    has_country_flag = atdp_order_in_progress
+                }else_if = {
+                    limit = {
+                        has_country_flag = tx130t_selected
+                    }
+                    has_country_flag = tx130t_order_in_progress
+                }else_if = {
+                    limit = {
+                        has_country_flag = atst_selected
+                    }
+                    has_country_flag = atst_order_in_progress
+                }else_if = {
+                    limit = {
+                        has_country_flag = juggernaut_selected
+                    }
+                    has_country_flag = juggernaut_order_in_progress
+                }else_if = {
+                    limit = {
+                        has_country_flag = atat_selected
+                    }
+                    has_country_flag = atat_order_in_progress
+                }else = {
+                    always = no
+                }
+            }
+            amount_in_queue_visible = {
+                if = {
+                    limit = {
+                        has_country_flag = ee_4_selected
+                    }
+                    NOT = {
+                        has_country_flag = ee_4_order_in_progress
+                    }
+                }else_if = {
+                    limit = {
+                        has_country_flag = e_11_selected
+                    }
+                    NOT = {
+                        has_country_flag = e_11_order_in_progress
+                    }
+                }else_if = {
+                    limit = {
+                        has_country_flag = smart_rocket_selected
+                    }
+                    NOT = {
+                        has_country_flag = smart_rocket_order_in_progress
+                    }
+                }else_if = {
+                    limit = {
+                        has_country_flag = spha_selected
+                    }
+                    NOT = {
+                        has_country_flag = spha_order_in_progress
+                    }
+                }else_if = {
+                    limit = {
+                        has_country_flag = ataa_selected
+                    }
+                    NOT = {
+                        has_country_flag = ataa_order_in_progress
+                    }
+                }else_if = {
+                    limit = {
+                        has_country_flag = tie_crawler_selected
+                    }
+                    NOT = {
+                        has_country_flag = tie_crawler_order_in_progress
+                    }
+                }else_if = {
+                    limit = {
+                        has_country_flag = atdp_selected
+                    }
+                    NOT = {
+                        has_country_flag = atdp_order_in_progress
+                    }
+                }else_if = {
+                    limit = {
+                        has_country_flag = tx130t_selected
+                    }
+                    NOT = {
+                        has_country_flag = tx130t_order_in_progress
+                    }
+                }else_if = {
+                    limit = {
+                        has_country_flag = atst_selected
+                    }
+                    NOT = {
+                        has_country_flag = atst_order_in_progress
+                    }
+                }else_if = {
+                    limit = {
+                        has_country_flag = juggernaut_selected
+                    }
+                    NOT = {
+                        has_country_flag = juggernaut_order_in_progress
+                    }
+                }else_if = {
+                    limit = {
+                        has_country_flag = atat_selected
+                    }
+                    NOT = {
+                        has_country_flag = atat_order_in_progress
+                    }
+                }
             }
         }
     }
@@ -335,9 +1625,9 @@ scripted_gui = {
                 clr_country_flag = k79_s80_selected
                 clr_country_flag = spha_selected
                 clr_country_flag = supply_equipment_merr_selected
-                set_variable = { manufacturing_country = BLS.id }
-                set_variable = { current_price_market_buy_price = Global.soft_market_price_holder@0 }
-                set_variable = { current_ic_cost_ships = 990}
+                set_variable = { manufacturing_country = CZE.id }
+                set_variable = { current_price_market_buy_price = Global.soft_market_price_holder@4 }
+                set_variable = { current_ic_cost_ships = Global.soft_market_ic_cost_holder@4}
                 set_country_flag = level_1_selected
                 clr_country_flag = level_2_selected
                 clr_country_flag = level_3_selected
@@ -351,9 +1641,9 @@ scripted_gui = {
                 clr_country_flag = k79_s80_selected
                 clr_country_flag = spha_selected
                 clr_country_flag = supply_equipment_merr_selected
-                set_variable = { manufacturing_country = CZE.id }
-                set_variable = { current_price_market_buy_price = Global.soft_market_price_holder@4 }
-                set_variable = { current_ic_cost_ships = 990}
+                set_variable = { manufacturing_country = BLS.id }
+                set_variable = { current_price_market_buy_price = Global.soft_market_price_holder@0 }
+                set_variable = { current_ic_cost_ships = Global.soft_market_ic_cost_holder@0}
                 set_country_flag = level_1_selected
                 clr_country_flag = level_2_selected
                 clr_country_flag = level_3_selected
@@ -368,7 +1658,7 @@ scripted_gui = {
                 clr_country_flag = supply_equipment_merr_selected
                 set_variable = { manufacturing_country = MER.id }
                 set_variable = { current_price_market_buy_price = Global.soft_market_price_holder@7 }
-                set_variable = { current_ic_cost_ships = 990}
+                set_variable = { current_ic_cost_ships = Global.soft_market_ic_cost_holder@7}
                 set_country_flag = level_1_selected
                 clr_country_flag = level_2_selected
                 clr_country_flag = level_3_selected
@@ -383,7 +1673,7 @@ scripted_gui = {
                 clr_country_flag = supply_equipment_merr_selected
                 set_variable = { manufacturing_country = BLS.id }
                 set_variable = { current_price_market_buy_price = Global.soft_market_price_holder@10 }
-                set_variable = { current_ic_cost_ships = 990}
+                set_variable = { current_ic_cost_ships = Global.soft_market_ic_cost_holder@10}
                 set_country_flag = level_1_selected
                 clr_country_flag = level_2_selected
                 clr_country_flag = level_3_selected
@@ -398,7 +1688,7 @@ scripted_gui = {
                 clr_country_flag = supply_equipment_merr_selected
                 set_variable = { manufacturing_country = ROT.id }
                 set_variable = { current_price_market_buy_price = Global.soft_market_price_holder@11 }
-                set_variable = { current_ic_cost_ships = 990}
+                set_variable = { current_ic_cost_ships = Global.soft_market_ic_cost_holder@11}
                 set_country_flag = level_1_selected
                 clr_country_flag = level_2_selected
                 clr_country_flag = level_3_selected
@@ -413,7 +1703,7 @@ scripted_gui = {
                 clr_country_flag = spha_selected
                 set_variable = { manufacturing_country = MER.id }
                 set_variable = { current_price_market_buy_price = Global.soft_market_price_holder@12 }
-                set_variable = { current_ic_cost_ships = 990}
+                set_variable = { current_ic_cost_ships = Global.soft_market_ic_cost_holder@12}
                 set_country_flag = level_1_selected
                 clr_country_flag = level_2_selected
                 clr_country_flag = level_3_selected
@@ -428,8 +1718,8 @@ scripted_gui = {
                 clr_country_flag = tx130t_selected
                 clr_country_flag = atat_selected
                 set_variable = { manufacturing_country = KUA.id }
-                set_variable = { current_price_market_buy_price = Global.tank_market_price_holder@14 }
-                set_variable = { current_ic_cost_ships = 990}
+                set_variable = { current_price_market_buy_price = Global.tank_market_price_holder@24 }
+                set_variable = { current_ic_cost_ships = Global.tank_market_ic_cost_holder@24}
             }
             atst_click = {
                 set_country_flag = atst_selected
@@ -441,7 +1731,7 @@ scripted_gui = {
                 clr_country_flag = atat_selected
                 set_variable = { manufacturing_country = KUA.id }
                 set_variable = { current_price_market_buy_price = Global.tank_market_price_holder@20 }
-                set_variable = { current_ic_cost_ships = 990}
+                set_variable = { current_ic_cost_ships = Global.tank_market_ic_cost_holder@20}
                 
             }
             juggernaut_click = {
@@ -454,7 +1744,7 @@ scripted_gui = {
                 clr_country_flag = atat_selected
                 set_variable = { manufacturing_country = KUA.id }
                 set_variable = { current_price_market_buy_price = Global.tank_market_price_holder@18 }
-                set_variable = { current_ic_cost_ships = 990}
+                set_variable = { current_ic_cost_ships = Global.tank_market_ic_cost_holder@18}
             }
             tie_crawler_click = {
                 set_country_flag = tie_crawler_selected
@@ -466,7 +1756,7 @@ scripted_gui = {
                 clr_country_flag = atat_selected
                 set_variable = { manufacturing_country = KUA.id }
                 set_variable = { current_price_market_buy_price = Global.tank_market_price_holder@26 }
-                set_variable = { current_ic_cost_ships = 990}
+                set_variable = { current_ic_cost_ships = Global.tank_market_ic_cost_holder@26}
             }
             ataa_click = {
                 set_country_flag = ataa_selected
@@ -478,7 +1768,7 @@ scripted_gui = {
                 clr_country_flag = atat_selected
                 set_variable = { manufacturing_country = KUA.id }
                 set_variable = { current_price_market_buy_price = Global.tank_market_price_holder@16 }
-                set_variable = { current_ic_cost_ships = 990}
+                set_variable = { current_ic_cost_ships = Global.tank_market_ic_cost_holder@16}
             }
             tx130t_click = {
                 set_country_flag = tx130t_selected
@@ -490,7 +1780,7 @@ scripted_gui = {
                 clr_country_flag = atat_selected
                 set_variable = { manufacturing_country = KUA.id }
                 set_variable = { current_price_market_buy_price = Global.tank_market_price_holder@22 }
-                set_variable = { current_ic_cost_ships = 990}
+                set_variable = { current_ic_cost_ships = Global.tank_market_ic_cost_holder@22}
             }
             atat_click = {
                 set_country_flag = atat_selected
@@ -502,9 +1792,8 @@ scripted_gui = {
                 clr_country_flag = tx130t_selected
                 set_variable = { manufacturing_country = KUA.id }
                 set_variable = { current_price_market_buy_price = Global.tank_market_price_holder@14 }
-                set_variable = { current_ic_cost_ships = 990}
-            }
-            
+                set_variable = { current_ic_cost_ships = Global.tank_market_ic_cost_holder@14}
+            }    
         }
         triggers = {
             ee_4_click_enabled = {
@@ -4370,24 +5659,6 @@ scripted_gui = {
                 clr_country_flag = level_2_selected
                 clr_country_flag = level_3_selected
             }
-            level_1_click = {
-                set_country_flag = level_1_selected
-                clr_country_flag = level_2_selected
-                clr_country_flag = level_3_selected
-            }
-            level_2_click = {
-                set_country_flag = level_2_selected
-                clr_country_flag = level_1_selected
-                clr_country_flag = level_3_selected
-            }
-            level_3_click = {
-                set_country_flag = level_3_selected
-                clr_country_flag = level_1_selected
-                clr_country_flag = level_2_selected
-            }
-            #level_4_click = {
-            #    set_country_flag = level_4_selected
-            #}
         }
         triggers = {
             x_wing_click_enabled = {
