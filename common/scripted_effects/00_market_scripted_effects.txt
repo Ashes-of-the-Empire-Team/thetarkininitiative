@@ -432,13 +432,13 @@ recalculate_air_2_creation_amount = {  ########## CALCULATES HOW MANY YOU CAN MA
 }
 recalculate_land_1_creation_amount = {  ########## CALCULATES HOW MANY YOU CAN MAKE IN A WEEK
 	set_variable = {land_1_production_amount = land_1_workers}
-	divide_variable = {land_1_production_amount = global.land_market_ic_cost_holder@var:land_1_selected_item }
-	divide_variable = {land_1_production_amount = 20 }
+	divide_variable = {land_1_production_amount = global.tank_market_ic_cost_holder@var:land_1_selected_item}
+	divide_variable = {land_1_production_amount = 20}
 	round_variable = land_1_production_amount
 }
 recalculate_land_2_creation_amount = {  ########## CALCULATES HOW MANY YOU CAN MAKE IN A WEEK
 	set_variable = {land_2_production_amount = land_2_workers}
-	divide_variable = {land_2_production_amount = global.land_market_ic_cost_holder@var:land_2_selected_item }
+	divide_variable = {land_2_production_amount = global.tank_market_ic_cost_holder@var:land_2_selected_item }
 	divide_variable = {land_2_production_amount = 20 }
 	round_variable = land_2_production_amount
 }
@@ -478,6 +478,16 @@ ai_corp_set_tech_for_year_2 = { #5 ABY
 				}
 			}
 			set_technology = {starhawk_1 = 1}
+		}
+	}
+	YUT = {
+		if = {
+			limit = {
+				NOT = {							
+					has_tech = t4_b
+				}
+			}
+			set_technology = {t4_b = 1}
 		}
 	}
 }
