@@ -36,6 +36,7 @@ country_event = {
 				ideology = imperial_ideology
 			}
 		}
+		load_oob = COR_roek
 		COR_reduce_resistance = yes
     }
 }
@@ -53,12 +54,17 @@ country_event = {
 	option = {
         name = COR.2.b
 		COR={
-			add_to_variable = { COR_rebel_stockpile = 5}
+			add_to_variable = { 
+				COR_rebel_stockpile = 5
+				tooltip = COR_smuggle_in_equipment_tt
+			}
 		}
     }
 	option = {
         name = COR.2.c
-		
+		COR={
+			set_country_flag = REB_pledged_aid
+		}
     }
 }
 country_event = {
@@ -93,6 +99,7 @@ country_event = {
 				}
 			}
 		}
+		set_major = yes
 		hidden_effect={
 			EMP={
 				if={
@@ -162,9 +169,16 @@ country_event = {#Grunger arrives in the corellian system
 					}
 				}
 			}
+			set_major = yes
 			set_cosmetic_tag = COR_grunger
 			set_country_flag = COR_grunger
 			mark_focus_tree_layout_dirty = yes
+			if={
+				limit={
+					has_idea = EMP_loyalty_enforced
+				}
+				remove_ideas = {EMP_loyalty_enforced}
+			}
 			EMP={
 				if={
 					limit={
@@ -241,13 +255,14 @@ country_event = {#Battle of Tralus
 				ruling_party = neutrality
 			}
 			add_stability = 0.2
+			remove_ideas = {COR_human_high_culture}
 		}
     }
 	option = {
         name = COR.7.b
 		destroy_ships = {
 			type = isd_hull
-			count = 8 #19
+			count = 10 #19
 		}
 		destroy_ships = {
 			type = arquitens_hull
@@ -454,7 +469,10 @@ country_event = {#
     fire_only_once = yes
     option = {#
         name = COR.14.a
-		annex = FROM
+		annex_country = {
+			target = FROM
+			transfer_troops = no
+		}
     }
 }
 country_event = {#
@@ -493,6 +511,281 @@ country_event = {#Grungers Fairwell gift
     fire_only_once = yes
     option = {#
         name = COR.17.a
+		add_timed_idea={
+			idea = COR_destructive_fallout
+			days = 400
+		}
+		454 = {
+			damage_building = {
+				type = infrastructure
+				damage = 3
+			}
+		}
+		324 = {
+			damage_building = {
+				type = infrastructure
+				damage = 3
+			}
+			damage_building = {
+				type = industrial_complex
+				damage = 2
+			}
+		}
+    }
+}
+country_event = {#corellian Confederation
+    id = COR.18
+    title = COR.18.t
+    desc = COR.18.d
+    picture = GFX_report_event_election_vote
+    is_triggered_only = yes
+    fire_only_once = yes
+    option = {#
+        name = COR.18.a
+		set_cosmetic_tag = COR_confederation
+		set_country_flag = COR_is_confederation
+		set_major = yes
+    }
+}
+country_event = {#Rogue Squadron clashes with imperials above Corellia
+    id = COR.19
+    title = COR.19.t
+    desc = COR.19.d
+    picture = GFX_report_event_election_vote
+    #is_triggered_only = yes
+	trigger={
+		tag = COR
+		date > 4.1.8
+	}
+    fire_only_once = yes
+    option = {
+        name = COR.19.a
+		add_political_power = -100
+    }
+	option = {
+        name = COR.19.b
+		add_popularity = {
+			ideology = democratic
+			popularity = 0.025
+		}
+    }
+}
+country_event = {#Rogue Squadron rescues the Fel Family
+    id = COR.20
+    title = COR.20.t
+    desc = COR.20.d
+    picture = GFX_report_event_election_vote
+    #is_triggered_only = yes
+	trigger={
+		tag = COR
+		date > 4.8.14
+	}
+    fire_only_once = yes
+    option = {
+        name = COR.20.a
+		add_political_power = -50
+    }
+}
+country_event = {#Spark ignites the firebird
+    id = COR.21
+    title = COR.21.t
+    desc = COR.21.d
+    picture = GFX_report_event_election_vote
+    is_triggered_only = yes
+    option = {
+        name = COR.21.a
+		start_civil_war = {
+			ruling_party = democratic
+			# Original country's ideology changes to communism
+			ideology = ROOT
+			# Breakaway gets old ideology of ROOT
+			size = 0.33
+			capital = 455
+			navy_ratio = 0.75
+			states = {
+				455 72 330
+			}
+		}
+		delete_unit_template_and_units = {
+			division_template = "Stormtrooper Legion"
+			disband = no #will refund equipment and manpower
+		}
+    }
+}
+country_event = {#The Imperial Government on Corellia request support from Teradoc
+    id = COR.22
+    title = COR.22.t
+    desc = COR.22.d
+    picture = GFX_report_event_election_vote
+    is_triggered_only = yes
+    option = {#agree
+        name = COR.22.a
+		send_equipment = {
+			equipment = infantry_equipment
+			amount = 100
+			target = FROM
+		}
+		FROM={
+			country_event = {id = COR.23}
+		}
+    }
+	option = {#refuse
+        name = COR.22.b
 		
     }
 }
+country_event = {#Teradoc responds
+    id = COR.23
+    title = COR.23.t
+    desc = COR.23.d
+    picture = GFX_report_event_election_vote
+    is_triggered_only = yes
+    option = {
+        name = COR.23.a
+		add_stability = 0.02
+    }
+}
+country_event = {#collapse of the corellian run
+    id = COR.24
+    title = COR.24.t
+    desc = COR.24.d
+    picture = GFX_report_event_election_vote
+    #is_triggered_only = yes
+	trigger={
+		tag = COR
+		date > 5.9.1
+	}
+    fire_only_once = yes
+    option = {
+        name = COR.24.a
+		add_ideas = {
+			COR_collapse_corellian_run
+		}
+		every_country={
+			limit={
+				OR={
+					tag = AAR
+					tag = NUB
+					tag = HOS
+					tag = IND
+				}
+			}
+			country_event = {id = COR.25}
+		}
+    }
+}
+country_event = {#collapse of the corellian run
+    id = COR.25
+    title = COR.25.t
+    desc = COR.25.d
+    picture = GFX_report_event_election_vote
+    is_triggered_only = yes
+    option = {
+        name = COR.25.a
+		add_timed_idea = {
+			days = 960
+			idea = COR_collapse_corellian_run_minor
+		}
+    }
+}
+country_event = {#rolling strikes in labor valley
+    id = COR.26
+    title = COR.26.t
+    desc = COR.26.d
+    picture = GFX_report_event_election_vote
+    #is_triggered_only = yes
+	trigger={
+		tag = COR
+		date > 4.3.1
+	}
+    fire_only_once = yes
+    option = {
+        name = COR.24.a
+		324={
+			set_state_flag = COR_labor_strikes
+			force_enable_resistance = yes
+			start_resistance = yes
+			set_resistance = 10
+		}
+    }
+}
+country_event = {#demand to give up a starport
+    id = COR.27
+    title = COR.27.t
+    desc = COR.27.d
+    picture = GFX_report_event_election_vote
+    is_triggered_only = yes
+    option = {
+        name = COR.27.a
+		FROM={
+			country_event = COR.29
+			transfer_state = 266
+		}
+    }
+	option = {
+        name = COR.27.b
+		FROM={
+			country_event = COR.28
+		}
+    }
+}
+country_event = {#Aargau refuses
+    id = COR.28
+    title = COR.28.t
+    desc = COR.28.d
+    picture = GFX_report_event_election_vote
+    is_triggered_only = yes
+    option = {#invade
+        name = COR.27.a
+		declare_war_on = {
+			target = FROM
+			type = annex_everything
+		}
+    }
+	option = {#back down
+        name = COR.27.b
+		subtract_from_variable = {
+			legitimacy_emp = 5
+			tooltip = sub_from_EMP_legitimacy
+		}
+    }
+}
+
+country_event = {#Aargau accepts
+    id = COR.29
+    title = COR.29.t
+    desc = COR.29.d
+    picture = GFX_report_event_election_vote
+    is_triggered_only = yes
+    option = {
+        name = COR.27.a
+		add_to_variable = {
+			legitimacy_emp = 5
+			tooltip = add_to_EMP_legitimacy
+		}
+    }
+}
+country_event = {#arrival of Pittas Prison Ships
+    id = COR.30
+    title = COR.30.t
+    desc = COR.30.d
+    picture = GFX_report_event_election_vote
+    is_triggered_only = yes
+    option = {
+        name = COR.30.a
+		
+    }
+}
+news_event = {#attack on the Aargau bank
+    id = COR.31
+    title = COR.31.t
+    desc = COR.31.d
+    picture = GFX_report_event_election_vote
+    is_triggered_only = yes
+	is_major = yes
+    option = {
+        name = COR.31.a
+		
+    }
+}
+
