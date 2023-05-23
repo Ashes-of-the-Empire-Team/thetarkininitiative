@@ -1818,3 +1818,59 @@ create_heavy_ship_market_effect = {
 		add_to_variable = {currency_amount^primary_currency = price_of_the_item }
 	}
 }
+
+## FUTURE CODE FOR LATER 
+
+# add_to_variable = { amount_in_queue@token:u_wing_airframe_0 = 1 }
+
+# set_variable = { equip_to_buy = token:u_wing_airframe_0 }
+# add_to_variable = { amount_in_queue@var:equip_to_buy = 1 }
+
+# for_each_loop = {
+#     array = in_queue_equipment
+#     value = eq
+#     break = bb1
+
+#     if = {
+#         limit = {
+#             check_variable = { eq = equipment_finder_temp }
+#         }
+        
+#         code
+
+#         set_temp_variable = { bb1 = 1 }
+#     }
+# }
+
+# for_each_loop = {
+#     array = global.market_equipment_types
+#     value = eq
+#     break = bb1
+
+#     if = {
+#         limit = {
+#             check_variable = { orders_in_queue@var:eq > greatest_temp }
+#         }
+        
+#         set_temp_variable = { greatest_temp = orders_in_queue@var:eq }
+#         set_temp_variable = { greatest_eq_temp = eq }
+
+#         set_temp_variable = { bb1 = 1 }
+#     }
+# }
+
+
+
+# #Adding an equipment to queue
+
+# add_to_array = { global.market_equipment_types = token:u_wing_airframe_0 }
+# add_to_array = { global.market_equipment_types = token:u_wing_airframe_1 }
+# add_to_array = { global.market_equipment_types = token:u_wing_airframe_2 }
+# add_to_array = { global.market_equipment_types = token:u_wing_airframe_3 }
+
+# add_to_variable = { orders_in_queue@token:u_wing_airframe_0 = 1 }
+# add_to_variable = { amount_in_queue@token:u_wing_airframe_0 = 100 }
+# add_to_array = { in_queue_equipment = token:u_wing_airframe_0 }
+# add_to_array = { in_queue_tag = EMP }
+# add_to_array = { in_queue_amount = 100 }
+# add_to_array = { in_queue_cost = 1000 }
