@@ -188,10 +188,6 @@ on_actions = {
 			}
 			UBK = {#ubrikkian
 				add_to_array = {
-					array = land_production_array
-					value = 10
-				}
-				add_to_array = {
 					array = soft_production_array
 					value = 26
 				}
@@ -275,10 +271,6 @@ on_actions = {
 			YUT = {
 				add_to_array = {
 					array = land_production_array
-					value = 10
-				}
-				add_to_array = {
-					array = land_production_array
 					value = 8
 				}
 				add_to_array = {
@@ -293,11 +285,15 @@ on_actions = {
 					array = land_production_array
 					value = 4
 				}
+				add_to_array = {
+					array = land_production_array
+					value = 2
+				}
 			}
 			## LEVEL 2 - 1.1 original price
 			## Level 3 - 1.2 original price
 			## Level 4 - 1.3 original price
-
+	## SHIPS
 			set_variable = {Global.ship_price_holder@950 = 60} #IPV 1
 			set_variable = {Global.ship_price_holder@1260 = 75} #Gonzanti
 			set_variable = {Global.ship_price_holder@1925 = 90} #Raider 1
@@ -561,7 +557,10 @@ on_actions = {
 			set_variable = {global.soft_market_ic_cost_holder@28 = 20.4}
 			## Supply Equip - CZE Czerkia - Dunno
 			set_variable = {global.soft_market_ic_cost_holder@29 = 12.3}
-		#
+		# ADDITIONAL ADDED AFTER START
+			set_variable = {global.soft_market_ic_cost_holder@30 = 28.4} ## STORM TROOPER EQUIPMENT
+
+		## PRICE
 			## Inf equipment
 			set_variable = {global.soft_market_price_holder@0 = 38}
 			set_variable = {global.soft_market_price_holder@1 = 39}
@@ -606,6 +605,7 @@ on_actions = {
 			## Supply Equip
 			set_variable = {global.soft_market_price_holder@29 = 49}
 		#
+			set_variable = {global.soft_market_price_holder@30 = 120}
 			every_country = {
 				if = {
 					limit = {
@@ -750,8 +750,8 @@ on_actions = {
 					set_temp_variable = { entertainment_profit_overall =  0}
 
 					calculate_censorship_total = yes
-					calculate_drama_v_comedy = yes
-					calculate_tonality = yes
+					#calculate_drama_v_comedy = yes
+					#calculate_tonality = yes
 					add_to_variable = { currency_amount^primary_currency = entertainment_profit_overall }
 				}
 			}
@@ -839,37 +839,37 @@ on_actions = {
 			if = {
 				limit = {
 					check_variable = {
-						var = land_amount_contract_holder@var:land_1_selected_item^num
+						var = tank_amount_contract_holder@var:land_1_selected_item^num
 						value = 0
 						compare = not_equals
 					}
 					check_variable = {land_1_workers > 999}
 				}
-				subtract_from_variable = {land_counting_to_zero_holder@var:land_1_selected_item^0 = land_1_production_amount}
+				subtract_from_variable = {tank_counting_to_zero_holder@var:land_1_selected_item^0 = land_1_production_amount}
 				if = {
 					limit = {
-						check_variable = {land_counting_to_zero_holder@var:land_1_selected_item^0 < 1}
+						check_variable = {tank_counting_to_zero_holder@var:land_1_selected_item^0 < 1}
 					}
 					set_variable = {land_market_equipment_builder = land_1_selected_item}
-					create_land_market_effect = yes
+					create_tank_market_effect = yes
 					if = {
 						limit = {
 							check_variable = {
-								var = land_amount_contract_holder@var:land_1_selected_item^num
+								var = tank_amount_contract_holder@var:land_1_selected_item^num
 								value = 0
 								compare = not_equals
 							}
 						}
-						set_temp_variable = {how_much_remove_from_next_production = land_counting_to_zero_holder@var:land_1_selected_item}
-						set_variable = {land_counting_to_zero_holder@var:land_1_selected_item = land_amount_contract_holder@var:land_1_selected_item}
-						add_to_variable = {land_counting_to_zero_holder@var:land_1_selected_item = how_much_remove_from_next_production}
+						set_temp_variable = {how_much_remove_from_next_production = tank_counting_to_zero_holder@var:land_1_selected_item}
+						set_variable = {tank_counting_to_zero_holder@var:land_1_selected_item = tank_amount_contract_holder@var:land_1_selected_item}
+						add_to_variable = {tank_counting_to_zero_holder@var:land_1_selected_item = how_much_remove_from_next_production}
 					}
 					remove_from_array = {
-						array = land_tag_holder@var:land_1_selected_item
+						array = tank_tag_holder@var:land_1_selected_item
 						index = 0
 					}
 					remove_from_array = {
-						array = land_amount_contract_holder@var:land_1_selected_item
+						array = tank_amount_contract_holder@var:land_1_selected_item
 						index = 0
 					}
 				}
@@ -877,37 +877,37 @@ on_actions = {
 			if = {
 				limit = {
 					check_variable = {
-						var = land_amount_contract_holder@var:land_2_selected_item^num
+						var = tank_amount_contract_holder@var:land_2_selected_item^num
 						value = 0
 						compare = not_equals
 					}
 					check_variable = {land_2_workers > 999}
 				}
-				subtract_from_variable = {land_counting_to_zero_holder@var:land_2_selected_item^0 = land_2_production_amount}
+				subtract_from_variable = {tank_counting_to_zero_holder@var:land_2_selected_item = land_2_production_amount}
 				if = {
 					limit = {
-						check_variable = {land_counting_to_zero_holder@var:land_2_selected_item^0 < 1}
+						check_variable = {tank_counting_to_zero_holder@var:land_2_selected_item < 1}
 					}
 					set_variable = {land_market_equipment_builder = land_2_selected_item}
-					create_land_market_effect = yes
+					create_tank_market_effect = yes
 					if = {
 						limit = {
 							check_variable = {
-								var = land_amount_contract_holder@var:land_2_selected_item^num
+								var = tank_amount_contract_holder@var:land_2_selected_item^num
 								value = 0
 								compare = not_equals
 							}
 						}
-						set_temp_variable = {how_much_remove_from_next_production = land_counting_to_zero_holder@var:land_2_selected_item}
-						set_variable = {land_counting_to_zero_holder@var:land_2_selected_item = land_amount_contract_holder@var:land_2_selected_item}
-						add_to_variable = {land_counting_to_zero_holder@var:land_2_selected_item = how_much_remove_from_next_production}
+						set_temp_variable = {how_much_remove_from_next_production = tank_counting_to_zero_holder@var:land_2_selected_item}
+						set_variable = {tank_counting_to_zero_holder@var:land_2_selected_item = tank_amount_contract_holder@var:land_2_selected_item}
+						add_to_variable = {tank_counting_to_zero_holder@var:land_2_selected_item = how_much_remove_from_next_production}
 					}
 					remove_from_array = {
-						array = land_tag_holder@var:land_2_selected_item
+						array = tank_tag_holder@var:land_2_selected_item
 						index = 0
 					}
 					remove_from_array = {
-						array = land_amount_contract_holder@var:land_2_selected_item
+						array = tank_amount_contract_holder@var:land_2_selected_item
 						index = 0
 					}
 				}
@@ -927,12 +927,13 @@ on_actions = {
 						check_variable = {soft_counting_to_zero_holder@var:soft_1_selected_item^0 < 1}
 					}
 					set_variable = {soft_market_equipment_builder = soft_1_selected_item}
+					log = " GOT HERE"
 					create_soft_market_effect = yes
 					if = {
 						limit = {
 							check_variable = {
 								var = soft_amount_contract_holder@var:soft_1_selected_item^num
-								value = 0
+								value = 1
 								compare = not_equals
 							}
 						}
