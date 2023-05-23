@@ -135,6 +135,14 @@
 		}
 		
 		completion_reward = {
+			random_owned_controlled_state = {
+				add_extra_state_shared_building_slots = 1
+				add_manpower = 25000
+			}
+			random_owned_controlled_state = {
+				add_extra_state_shared_building_slots = 1
+				add_manpower = 25000
+			}
 			custom_effect_tooltip = ae_new_rep_upgrade
 			custom_effect_tooltip = ae_alternatively_republic_idea
 			hidden_effect = {
@@ -165,14 +173,6 @@
 						days = 60
 					}
 				}
-			}
-			random_owned_controlled_state = {
-				add_extra_state_shared_building_slots = 1
-				add_manpower = 25000
-			}
-			random_owned_controlled_state = {
-				add_extra_state_shared_building_slots = 1
-				add_manpower = 25000
 			}
 		}
 	}
@@ -511,6 +511,16 @@
 		}
 		
 		completion_reward = {
+			add_political_power = 25
+			random_owned_controlled_state = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+
 			custom_effect_tooltip = ae_imp_upgrade
 			custom_effect_tooltip = ae_alternatively_imperial_idea
 			hidden_effect = {
@@ -543,15 +553,6 @@
 				}
 			}
 			
-			add_political_power = 25
-			random_owned_controlled_state = {
-				add_extra_state_shared_building_slots = 1
-				add_building_construction = {
-					type = arms_factory
-					level = 1
-					instant_build = yes
-				}
-			}
 		}
 	}
 
@@ -584,7 +585,7 @@
 		}
 		
 		completion_reward = {
-			custom_effect_tooltip = ae_imp_downgrade
+			custom_effect_tooltip = ae_imp_double_downgrade
 			hidden_effect = {
 				if = {
 					limit = {
@@ -601,7 +602,7 @@
 					}
 					swap_ideas = {
 						remove_idea = emp_influence_3
-						add_idea = emp_influence_2
+						add_idea = emp_influence_1
 					}
 				}
 			}
@@ -611,6 +612,21 @@
 				idea = ae_imperials_ousted
 				days = 180
 			}
+			if = {
+				limit = {
+					has_idea = emp_influence_3
+				}
+				add_to_variable = { currency_amount^primary_currency = 50 }
+				custom_effect_tooltip = custom_add_50b
+			}
+			else_if = {
+				limit = {
+					has_idea = emp_influence_2
+				}
+				add_to_variable = { currency_amount^primary_currency = 25 }
+				custom_effect_tooltip = custom_add_25b
+			}
+			
 		}
 	}
 
@@ -643,7 +659,7 @@
 		}
 		
 		completion_reward = {
-			custom_effect_tooltip = ae_new_rep_downgrade
+			custom_effect_tooltip = ae_new_rep_double_downgrade
 			hidden_effect = {
 				if = {
 					limit = {
@@ -660,7 +676,7 @@
 					}
 					swap_ideas = {
 						remove_idea = reb_influence_3
-						add_idea = reb_influence_2
+						add_idea = reb_influence_1
 					}
 				}
 			}
@@ -669,6 +685,20 @@
 			add_timed_idea = {
 				idea = ae_new_republic_ousted
 				days = 180
+			}
+			if = {
+				limit = {
+					has_idea = reb_influence_3
+				}
+				add_to_variable = { currency_amount^primary_currency = 50 }
+				custom_effect_tooltip = custom_add_50b
+			}
+			else_if = {
+				limit = {
+					has_idea = reb_influence_2
+				}
+				add_to_variable = { currency_amount^primary_currency = 25 }
+				custom_effect_tooltip = custom_add_25b
 			}
 		}
 	}
