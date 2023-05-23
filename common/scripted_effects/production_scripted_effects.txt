@@ -430,13 +430,14 @@ create_tank_market_effect = {
 	multiply_variable = {price_of_the_item = price_to_be_divided_by}
 	set_temp_variable = {tag_to_use_as_effect = tank_tag_holder@var:land_market_equipment_builder^0}
 	set_temp_variable = {amount_to_add = tank_amount_contract_holder@var:land_market_equipment_builder^0}
+	set_temp_variable = {whos_producing_equipment = THIS.id}
 	if = {
 		limit = {
 			check_variable = {land_market_equipment_builder = 0}
 		}
 		var:tag_to_use_as_effect = {
 			add_equipment_to_stockpile = {
-				type = t3_b_destroyer_chassis_0
+				type = t3_b_destroyer_chassis
 				amount = amount_to_add
 				producer = PREV
 			}
@@ -621,7 +622,7 @@ create_tank_market_effect = {
 			add_equipment_to_stockpile = {
 				type = at_at_artillery_chassis_0
 				amount = amount_to_add
-				producer = PREV
+				producer = prev
 			}
 			clr_country_flag = atat_order_in_progress
 		}
@@ -1194,6 +1195,19 @@ create_soft_market_effect = {
 				producer = PREV
 			}
 			clr_country_flag = supply_equipment_czerkia_order_in_progress
+		}
+		add_to_variable = {currency_amount^primary_currency = price_of_the_item }
+	}else_if = {
+		limit = {
+			check_variable = {soft_market_equipment_builder = 30}
+		}
+		var:tag_to_use_as_effect = {
+			add_equipment_to_stockpile = {
+				type = stormtrooper_equipment_0
+				amount = amount_to_add
+				producer = PREV
+			}
+			clr_country_flag = stormtrooper_equipment_order_in_progress
 		}
 		add_to_variable = {currency_amount^primary_currency = price_of_the_item }
 	}

@@ -4,7 +4,7 @@ on_actions = {
 			ai_corp_set_tech_for_start = yes
 		}
 	}
-	on_daily = { ## REEVALUATE PRODUCTION
+	on_weekly = { ## REEVALUATE PRODUCTION
 		effect = {
 			if = {
 				limit = {
@@ -185,7 +185,7 @@ on_actions = {
 				set_variable = {air_2_workers = 10000}
 				set_temp_variable = {highest_so_far = 0}
 				set_temp_variable = {storing_current_index = 0}
-				set_temp_variable = {current_production_value = starfighter_amount_contract_holder@var:grab_item_number^num}
+				set_temp_variable = {current_production_value = starfighter_amount_contract_holder@var:air_1_selected_item^num}
 				for_each_loop = {
 					array = air_production_array
 					break = break
@@ -222,6 +222,9 @@ on_actions = {
 							or = {
 								check_variable = {highest_so_far > 2}
 								check_variable = {current_production_value = 0}
+								NOT = {
+									has_variable = air_1_selected_item
+								}
 							}
 						}
 						set_variable = {air_1_selected_item = air_production_array^storing_current_index}
@@ -236,11 +239,11 @@ on_actions = {
 					check_variable = {land_production_array^num > 0}
 					is_ai = yes
 				}
-				set_variable = {land_1_workers = 10000}
-				set_variable = {land_2_workers = 10000}
+				set_variable = {land_1_workers = 30000}
+				set_variable = {land_2_workers = 30000}
 				set_temp_variable = {highest_so_far = 0}
 				set_temp_variable = {storing_current_index = 0}
-				set_temp_variable = {current_production_value = tank_amount_contract_holder@var:grab_item_number^num}
+				set_temp_variable = {current_production_value = tank_amount_contract_holder@var:land_1_selected_item^num}
 				for_each_loop = {
 					array = land_production_array
 					break = break
@@ -277,11 +280,20 @@ on_actions = {
 							or = {
 								check_variable = {highest_so_far > 2}
 								check_variable = {current_production_value = 0}
+								NOT = {
+									has_variable = land_1_selected_item
+								}
 							}
 						}
 						set_variable = {land_1_selected_item = land_production_array^storing_current_index}
 						set_variable = {land_2_selected_item = land_production_array^storing_current_index}
 						recalculate_land_1_creation_amount = yes
+						if = {
+							limit = {
+							tag = YUT
+							}
+							log = "Help [?land_1_production_amount]"
+						}
 						recalculate_land_2_creation_amount = yes
 					}
 				}
@@ -295,7 +307,7 @@ on_actions = {
 				set_variable = {soft_2_workers = 13000}
 				set_temp_variable = {highest_so_far = 0}
 				set_temp_variable = {storing_current_index = 0}
-				set_temp_variable = {current_production_value = soft_amount_contract_holder@var:grab_item_number^num}
+				set_temp_variable = {current_production_value = soft_amount_contract_holder@var:soft_1_selected_item^num}
 				for_each_loop = {
 					array = soft_production_array
 					break = break
@@ -332,16 +344,13 @@ on_actions = {
 							or = {
 								check_variable = {highest_so_far > 2}
 								check_variable = {current_production_value = 0}
+								NOT = {
+									has_variable = soft_1_selected_item
+								}
 							}
 						}
 						set_variable = {soft_1_selected_item = soft_production_array^storing_current_index}
 						set_variable = {soft_2_selected_item = soft_production_array^storing_current_index}
-						if = {
-							limit ={
-								tag = BLS
-							}
-							log = "Got to for selected item [?soft_1_selected_item]"
-						}
 						recalculate_soft_1_creation_amount = yes
 						recalculate_soft_2_creation_amount = yes
 					}
