@@ -11,20 +11,194 @@ trigger = {
 create_ship = {
     type = isd_hull
     equipment_variant = "Imperial Star Destroyer"
-    creator = ZER
+    creator = RIN
     name = "Bradoc"
 }
 create_ship = {
     type = isd_hull
     equipment_variant = "Imperial Star Destroyer"
-    creator = ZER
+    creator = RIN
     name = "Portorian"
 }
 create_ship = {
     type = isd_hull
     equipment_variant = "Imperial Star Destroyer"
-    creator = ZER
+    creator = RIN
     name = "Farklin"
 }
 }
 
+country_event = { # RIN and ERI reaserch agreement
+    id = RIN.11
+    title = RIN.11.t
+    desc = RIN.11.d
+    picture = GFX_report_event_conference_room
+
+    is_triggered_only = yes
+    trigger = {
+        tag = ERI
+    }
+
+    fire_only_once = yes
+
+    option = {
+        name = RIN.11.a
+        ai_chance = {
+			factor = 70
+		}
+       RIN = {
+        add_ideas = RIN_eriadu_Lambda_reaserch_treaty
+        diplomatic_relation = {
+			country = ERI
+			relation = non_aggression_pact
+			active = yes
+		}
+        country_event = RIN.111
+       }
+       ERI = {
+        add_ideas = RIN_eriadu_Lambda_reaserch_treaty
+       }
+       RIN = {}
+
+
+    }
+
+    option = {
+        name = RIN.11.b
+        ai_chance = {
+			factor = 30
+		}
+        add_political_power = 100
+        RIN = {
+            country_event = RIN.1111
+        }
+    }
+}
+
+country_event = { # RIN and ERI reaserch agreement
+    id = RIN.111
+    title = RIN.11.t
+    desc = RIN.11.d
+    picture = GFX_report_event_conference_room
+
+    is_triggered_only = yes
+
+    fire_only_once = no
+
+    option = {
+        name = RIN.11.f
+      
+}
+}
+
+country_event = { # RIN and ERI reaserch agreement
+    id = RIN.1111
+    title = RIN.11.t
+    desc = RIN.12.d
+    picture = GFX_report_event_conference_room
+
+    is_triggered_only = yes
+
+    fire_only_once = no
+
+    option = {
+        name = RIN.11.g
+}
+}
+
+news_event = { # emporors death
+    id = RIN.13
+    title = RIN_news.13.t
+    desc = RIN_news.13.d
+    picture = GFX_news_event_harrsk_lord_high_admiral
+
+    is_triggered_only = yes
+
+    option = {
+        name = RIN_news.13.a
+    }
+
+    option = {
+        name = RIN_news.13.b
+    }
+}
+
+news_event = { # resistance news
+    id = RIN.14
+    title = RIN_news.14.t
+    desc = RIN_news.14.d
+    picture = GFX_news_event_harrsk_lord_high_admiral
+
+    is_triggered_only = yes
+
+    option = {
+        name = RIN_news.14.a
+    }
+}
+
+news_event = { # resistance news
+    id = RIN.15
+    title = RIN_news.15.t
+    desc = RIN_news.15.d
+    picture = GFX_news_event_harrsk_lord_high_admiral
+
+    is_triggered_only = yes
+
+    major
+
+    option = {
+        name = RIN_news.15.a
+        trigger = {
+            tag = RIN
+        }
+    }
+
+    option = {
+        name = RIN_news.15.b
+        trigger = {
+            NOT = { tag = RIN }
+        }
+    }
+    option = {
+        name = RIN_news.15.c
+        trigger = {
+            NOT = { tag = RIN }
+        }
+    }
+}
+    
+country_event = { # RIN and ERI reaserch agreement
+    id = RIN.16
+    title = RIN.16.t
+    desc = RIN.16.d
+    picture = GFX_report_event_conference_room
+
+    is_triggered_only = yes
+    trigger = {
+        tag = ERI
+    }
+
+    fire_only_once = yes
+
+    option = {
+        name = RIN.16.a
+        ai_chance = {
+			factor = 90
+		}
+        RIN = {
+        create_faction = new_empire
+        country_event = RIN.111
+        }
+        RIN = { add_to_faction = ERI }
+    }
+
+    option = {
+        name = RIN.16.b
+        ai_chance = {
+			factor = 10
+		}
+        RIN = {
+            country_event = RIN.1111
+        }
+    }
+}

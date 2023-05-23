@@ -1,0 +1,82 @@
+
+##
+RIN_civil_war = {
+	my_decision_1 = {
+		available = { has_stability > 0.1 }
+		days_remove = 100
+			complete_effect = {
+				add_days_mission_timeout = {
+					mission = RIN_civil_war_mission
+					days = 20
+				}
+				add_stability = -0.1					
+			}
+		}
+		my_decision_2 = {
+			available = { has_manpower > 50000 }
+			days_remove = 100
+				complete_effect = {
+					add_days_mission_timeout = {
+						mission = RIN_civil_war_mission
+						days = 20
+					}
+					add_manpower = -50000					
+				}
+			}
+			my_decision_3 = {
+				available = { has_political_power > 100 }
+				days_remove = 100
+					complete_effect = {
+						add_days_mission_timeout = {
+							mission = RIN_civil_war_mission
+							days = 20
+						}
+						add_political_power = -100				
+					}
+				}
+    }
+
+
+crisis = {
+	RIN_civil_war_mission = {
+		icon = generic_civil_support
+		allowed = { 
+			TAG = RIN 																# Mission is only allowed for TAG
+		}
+		visible = {
+			has_completed_focus = RIN_the_emperors_dead											# The focus that starts the mission - get rid of this if its started by an event
+		}
+		available = { 
+			has_completed_focus = RIN_declaring_ambitions											# The focus needed to complete the mission stop the civil war
+		}
+ 
+ 
+		days_mission_timeout = 240													# Days until the civil war starts
+		is_good = no																# good = yes: avoid something happening until timeout. 
+																					# good = no: do something before timeout
+		fire_only_once = yes														# Stops the mission from reapearring later
+ 
+		timeout_effect = {
+			98 = { transfer_state_to = RIT	 } 
+				
+			RIT = {
+				RIN = {
+			declare_war_on = {
+					target = RIT
+					type = civil_war
+				}
+			}
+		}
+			hidden_effect = {
+				RIT = {
+					load_oob = RIT_4
+				}
+			}
+		}
+ 
+		complete_effect = {
+              add_stability = 0.1
+			  add_political_power = 100													# Reward for completing the mission, here adds 5% stability (you can leave this empty if you want)
+		}
+	}
+}

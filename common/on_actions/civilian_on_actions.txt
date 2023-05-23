@@ -1,121 +1,121 @@
-on_actions = {
-	on_startup = {
-		effect = {
-			every_country = {
-				set_variable = { base_output = 4.75 }
-
-				set_variable = { bacta_price = 1.5 }
-				set_variable = { bacta_prod_cost = 4 }
-				set_variable = { bacta_cost = 4 }
-				set_temp_variable = { bacta_demand_calc = max_manpower_k }
-				multiply_temp_variable = { bacta_demand_calc = 0.10 }
-				set_variable = { bacta_demand = bacta_demand_calc }
-	
-				set_variable = { droid_price = 8 }
-				set_variable = { bacta_prod_cost = 15 }
-				set_variable = { droid_cost = 15 }
-				set_temp_variable = { droid_demand_calc = max_manpower_k }
-				multiply_temp_variable = { droid_demand_calc = 0.05 }
-				set_variable = { droid_demand = droid_demand_calc }
-	
-				set_variable = { electronics_price = 6 }
-				set_variable = { electronics_prod_cost = 15 }
-				set_variable = { electronics_cost = 9 }
-				set_temp_variable = { electronics_demand_calc = max_manpower_k }
-				multiply_temp_variable = { electronics_demand_calc = 0.08 }
-				set_variable = { electronics_demand = electronics_demand_calc }
-	
-				set_variable = { entertainment_price = 5 }
-				set_variable = { entertainment_prod_cost = 8 }
-				set_variable = { entertainment_cost = 8 }
-				set_temp_variable = { entertainment_demand_calc = max_manpower_k }
-				multiply_temp_variable = { entertainment_demand_calc = 0.17 }
-				set_variable = { entertainment_demand = entertainment_demand_calc }
-	
-				set_variable = { food_price = 3 }
-				set_variable = { food_prod_cost = 3 }
-				set_variable = { food_cost = 3 }
-				set_temp_variable = { food_demand_calc = max_manpower_k }
-				multiply_temp_variable = { food_demand_calc = 0.30 }
-				set_variable = { food_demand = food_demand_calc }
-	
-				set_variable = { energy_price = 11 }
-				set_variable = { energy_prod_cost = 5 }
-				set_variable = { energy_cost = 5 }
-				set_temp_variable = { energy_demand_calc = max_manpower_k }
-				multiply_temp_variable = { energy_demand_calc = 0.10 }
-				set_variable = { energy_demand = energy_demand_calc }
-	
-				set_variable = { luxury_price = 18 }
-				set_variable = { luxury_prod_cost = 7 }
-				set_variable = { luxury_cost = 7 }
-				set_temp_variable = { luxury_demand_calc = max_manpower_k }
-				multiply_temp_variable = { luxury_demand_calc = 0.02 }
-				set_variable = { luxury_demand = luxury_demand_calc }
-	
-				set_variable = { vehicle_price = 14 }
-				set_variable = { vehicle_prod_cost = 14 }
-				set_variable = { vehicle_cost = 14 }
-				set_temp_variable = { vehicle_demand_calc = max_manpower_k }
-				multiply_temp_variable = { vehicle_demand_calc = 0.10 }
-				set_variable = { vehicle_demand = vehicle_demand_calc }
-			}
-		}
-	}
-
-	on_daily = {
-		effect = {
-				if = {
-					limit = {
-						has_country_flag = slot_in_use_1
-						check_variable = { production_output_efficiency_1 < production_output_1 }
-					}
-				set_temp_variable = { production_output_1_calc = production_output_1 }
-				multiply_temp_variable = { production_output_1_calc = production_output_1_calc}
-				divide_temp_variable = { production_output_1_calc = production_output_efficiency_1 }
-				multiply_temp_variable = { production_output_1_calc = 0.001 }
-				add_to_variable = { production_output_efficiency_1 = production_output_1_calc }
-				}
-
-				set_temp_variable = { line_1_production = production_output_efficiency_1 }
-				multiply_temp_variable = { line_1_production = 4 }
-				set_temp_variable = { product_1_cost = product_cost_@product_1 }
-				divide_temp_variable = { product_1_cost = line_1_production }
-				add_to_variable = { item_stockpile@product_1 = item_1_produced }
-
-				if = {
-					limit = {
-						has_country_flag = slot_in_use_2
-						check_variable = { production_output_efficiency_2 < production_output_2 }
-					}
-				set_temp_variable = { production_output_2_calc = production_output_2 }
-				multiply_temp_variable = { production_output_2_calc = production_output_2_calc}
-				divide_temp_variable = { production_output_2_calc = production_output_efficiency_2 }
-				multiply_temp_variable = { production_output_2_calc = 0.001 }
-				add_to_variable = { production_output_efficiency_2 = production_output_2_calc }
-				}
-				if = {
-					limit = {
-						has_country_flag = slot_in_use_3
-						check_variable = { production_output_efficiency_3 < production_output_3 }
-					}
-				set_temp_variable = { production_output_3_calc = production_output_3 }
-				multiply_temp_variable = { production_output_3_calc = production_output_3_calc}
-				divide_temp_variable = { production_output_3_calc = production_output_efficiency_3 }
-				multiply_temp_variable = { production_output_3_calc = 0.001 }
-				add_to_variable = { production_output_efficiency_3 = production_output_3_calc }
-				}
-				if = {
-					limit = {
-						has_country_flag = slot_in_use_4
-						check_variable = { production_output_efficiency_4 < production_output_4 }
-					}
-				set_temp_variable = { production_output_4_calc = production_output_4 }
-				multiply_temp_variable = { production_output_4_calc = production_output_4_calc}
-				divide_temp_variable = { production_output_4_calc = production_output_efficiency_4 }
-				multiply_temp_variable = { production_output_4_calc = 0.001 }
-				add_to_variable = { production_output_efficiency_4 = production_output_4_calc }
-			}
-		}
-	}
-}
+#on_actions = {
+#	on_startup = {
+#		effect = {
+#			every_country = {
+#				set_variable = { base_output = 4.75 }
+#
+#				set_variable = { bacta_price = 1.5 }
+#				set_variable = { bacta_prod_cost = 4 }
+#				set_variable = { bacta_cost = 4 }
+#				set_temp_variable = { bacta_demand_calc = max_manpower_k }
+#				multiply_temp_variable = { bacta_demand_calc = 0.10 }
+#				set_variable = { bacta_demand = bacta_demand_calc }
+#	
+#				set_variable = { droid_price = 8 }
+#				set_variable = { bacta_prod_cost = 15 }
+#				set_variable = { droid_cost = 15 }
+#				set_temp_variable = { droid_demand_calc = max_manpower_k }
+#				multiply_temp_variable = { droid_demand_calc = 0.05 }
+#				set_variable = { droid_demand = droid_demand_calc }
+#	
+#				set_variable = { electronics_price = 6 }
+#				set_variable = { electronics_prod_cost = 15 }
+#				set_variable = { electronics_cost = 9 }
+#				set_temp_variable = { electronics_demand_calc = max_manpower_k }
+#				multiply_temp_variable = { electronics_demand_calc = 0.08 }
+#				set_variable = { electronics_demand = electronics_demand_calc }
+#	
+#				set_variable = { entertainment_price = 5 }
+#				set_variable = { entertainment_prod_cost = 8 }
+#				set_variable = { entertainment_cost = 8 }
+#				set_temp_variable = { entertainment_demand_calc = max_manpower_k }
+#				multiply_temp_variable = { entertainment_demand_calc = 0.17 }
+#				set_variable = { entertainment_demand = entertainment_demand_calc }
+#	
+#				set_variable = { food_price = 3 }
+#				set_variable = { food_prod_cost = 3 }
+#				set_variable = { food_cost = 3 }
+#				set_temp_variable = { food_demand_calc = max_manpower_k }
+#				multiply_temp_variable = { food_demand_calc = 0.30 }
+#				set_variable = { food_demand = food_demand_calc }
+#	
+#				set_variable = { energy_price = 11 }
+#				set_variable = { energy_prod_cost = 5 }
+#				set_variable = { energy_cost = 5 }
+#				set_temp_variable = { energy_demand_calc = max_manpower_k }
+#				multiply_temp_variable = { energy_demand_calc = 0.10 }
+#				set_variable = { energy_demand = energy_demand_calc }
+#	
+#				set_variable = { luxury_price = 18 }
+#				set_variable = { luxury_prod_cost = 7 }
+#				set_variable = { luxury_cost = 7 }
+#				set_temp_variable = { luxury_demand_calc = max_manpower_k }
+#				multiply_temp_variable = { luxury_demand_calc = 0.02 }
+#				set_variable = { luxury_demand = luxury_demand_calc }
+#	
+#				set_variable = { vehicle_price = 14 }
+#				set_variable = { vehicle_prod_cost = 14 }
+#				set_variable = { vehicle_cost = 14 }
+#				set_temp_variable = { vehicle_demand_calc = max_manpower_k }
+#				multiply_temp_variable = { vehicle_demand_calc = 0.10 }
+#				set_variable = { vehicle_demand = vehicle_demand_calc }
+#			}
+#		}
+#	}
+#
+#	on_daily = {
+#		effect = {
+#				if = {
+#					limit = {
+#						has_country_flag = slot_in_use_1
+#						check_variable = { production_output_efficiency_1 < production_output_1 }
+#					}
+#				set_temp_variable = { production_output_1_calc = production_output_1 }
+#				multiply_temp_variable = { production_output_1_calc = production_output_1_calc}
+#				divide_temp_variable = { production_output_1_calc = production_output_efficiency_1 }
+#				multiply_temp_variable = { production_output_1_calc = 0.001 }
+#				add_to_variable = { production_output_efficiency_1 = production_output_1_calc }
+#				}
+#
+#				set_temp_variable = { line_1_production = production_output_efficiency_1 }
+#				multiply_temp_variable = { line_1_production = 4 }
+#				set_temp_variable = { product_1_cost = product_cost_@product_1 }
+#				divide_temp_variable = { product_1_cost = line_1_production }
+#				add_to_variable = { item_stockpile@product_1 = item_1_produced }
+#
+#				if = {
+#					limit = {
+#						has_country_flag = slot_in_use_2
+#						check_variable = { production_output_efficiency_2 < production_output_2 }
+#					}
+#				set_temp_variable = { production_output_2_calc = production_output_2 }
+#				multiply_temp_variable = { production_output_2_calc = production_output_2_calc}
+#				divide_temp_variable = { production_output_2_calc = production_output_efficiency_2 }
+#				multiply_temp_variable = { production_output_2_calc = 0.001 }
+#				add_to_variable = { production_output_efficiency_2 = production_output_2_calc }
+#				}
+#				if = {
+#					limit = {
+#						has_country_flag = slot_in_use_3
+#						check_variable = { production_output_efficiency_3 < production_output_3 }
+#					}
+#				set_temp_variable = { production_output_3_calc = production_output_3 }
+#				multiply_temp_variable = { production_output_3_calc = production_output_3_calc}
+#				divide_temp_variable = { production_output_3_calc = production_output_efficiency_3 }
+#				multiply_temp_variable = { production_output_3_calc = 0.001 }
+#				add_to_variable = { production_output_efficiency_3 = production_output_3_calc }
+#				}
+#				if = {
+#					limit = {
+#						has_country_flag = slot_in_use_4
+#						check_variable = { production_output_efficiency_4 < production_output_4 }
+#					}
+#				set_temp_variable = { production_output_4_calc = production_output_4 }
+#				multiply_temp_variable = { production_output_4_calc = production_output_4_calc}
+#				divide_temp_variable = { production_output_4_calc = production_output_efficiency_4 }
+#				multiply_temp_variable = { production_output_4_calc = 0.001 }
+#				add_to_variable = { production_output_efficiency_4 = production_output_4_calc }
+#			}
+#		}
+#	}
+#}

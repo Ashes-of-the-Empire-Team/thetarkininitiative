@@ -3,7 +3,8 @@ scripted_gui = {
         context_type = player_context
         window_name = "Thrawn_open"
         visible = {
-            tag = EOH
+            #tag = EOH
+            always = no
         }
         effects = {
             thrawn_opener_click = {
@@ -26,6 +27,12 @@ scripted_gui = {
             art_enter_click = {
                 set_variable = {thrawn_screen=1}
             }
+            martial_arts_enter_click = {
+                set_variable = {thrawn_screen=2}
+            }
+            menace_enter_click = {
+                set_variable = {thrawn_screen=3}
+            }
         }
     }
     thrawn_art_gui = {
@@ -34,7 +41,25 @@ scripted_gui = {
         window_name = "Thrawn_art_menu"
         visible = {
             has_country_flag = thscrop 
-            #var:thrawn_screen=1
+            check_variable = {thrawn_screen=1}
+        }
+    }
+    thrawn_martial_arts_gui = {
+        context_type = player_context
+        parent_window_name = "Thrawn_menu"
+        window_name = "Thrawn_martial_arts_menu"
+        visible = {
+            has_country_flag = thscrop 
+            check_variable = {thrawn_screen=2}
+        }
+    }
+    thrawn_martial_arts_gui = {
+        context_type = player_context
+        parent_window_name = "Thrawn_menu"
+        window_name = "Thrawn_menace_menu"
+        visible = {
+            has_country_flag = thscrop 
+            check_variable = {thrawn_screen=3}
         }
     }
 }
