@@ -102,8 +102,52 @@ crisis = {
 		timeout_effect = {
 			activate_mission = RIN_corruption
 			random_list = {
+			30 = {
+				custom_effect_tooltip = tt_rin_spend_250_credits
+				subtract_from_variable = { currency_amount^primary_currency = 250 }
+			}
+			40 = {
+				add_manpower = -10000
+				add_stability = -0.1
+    		}
+			30 = {
+				add_timed_idea = {
+					idea = RIN_corrupt_factory_owners
+					days = 100
+				}
+			}
+		}
+	}
+ 
+		complete_effect = {
+              add_stability = 0.2
+			  add_political_power = 200													# Reward for completing the mission, here adds 5% stability (you can leave this empty if you want)
+		}
+	}
+
+	RIN_corruption_2 = {
+		icon = generic_civil_support
+		allowed = { 
+			TAG = RIN 																# Mission is only allowed for TAG
+		}
+		visible = {
+			TAG = RIN											# The focus that starts the mission - get rid of this if its started by an event
+		}
+		available = { 
+			has_completed_focus = RIN_facing_the_corruption
+		}
+ 
+ 
+		days_mission_timeout = 300													# Days until the civil war starts
+		is_good = no																# good = yes: avoid something happening until timeout. 
+																					# good = no: do something before timeout
+		fire_only_once = no														# Stops the mission from reapearring later
+ 
+		timeout_effect = {
+			activate_mission = RIN_corruption_2
+			random_list = {
 				
-			25 = {
+			50 = {
 				RIN = {
 				random_owned_controlled_state = {
 					damage_building = {
@@ -117,20 +161,10 @@ crisis = {
 				}
 				}
 			}
-			25 = {
-				custom_effect_tooltip = tt_rin_spend_250_credits
-				subtract_from_variable = { currency_amount^primary_currency = 250 }
-			}
-			25 = {
+			50 = {
 				add_manpower = -50000
 				add_stability = -0.1
     		}
-			25 = {
-				add_timed_idea = {
-					idea = RIN_corrupt_factory_owners
-					days = 100
-				}
-			}
 		}
 	}
  

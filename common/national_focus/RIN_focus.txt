@@ -804,7 +804,7 @@ focus = {
 }
 
 focus = {
-	id = RIN_imperials_on_alzoc_iii
+	id = RIN_stranded_imperials
 	icon = GFX_WIP_focus
 	cost = 5
 	x = -4
@@ -814,21 +814,30 @@ focus = {
 	}
 	completion_reward = {
 		RIN = {
-		transfer_state = 109
-		109 = {
-		create_unit = {
-			division = "division_template = \"Stormtrooper Regiment\" start_experience_factor = 0.23" 
-			owner = RIN
-		}
-		create_unit = {
-			division = "division_template = \"Stormtrooper Regiment\" start_experience_factor = 0.29" 
-			owner = RIN
-		}
-		}	
+		news_event = RIN.21
 	}
 	}
 	relative_position_id = RIN_reining_in_the_sujimis_sector
 	prerequisite = { focus = RIN_reining_in_the_sujimis_sector }
+}
+
+focus = {
+	id = RIN_imperials_on_alzoc_iii
+	icon = GFX_WIP_focus
+	cost = 5
+	x = 0
+	y = 1
+	ai_will_do = {
+		factor = 2
+	}
+	completion_reward = {
+		RIN = {
+			news_event = RIN.22	
+		add_stability = -0.05
+	}
+	}
+	relative_position_id = RIN_stranded_imperials
+	prerequisite = { focus = RIN_stranded_imperials }
 }
 focus = {
 	id = RIN_retake_the_mines
@@ -926,11 +935,32 @@ focus = {
 }
 
 focus = {
-	id = RIN_expanding_the_sector
+	id = RIN_dealing_with_sabatours
 	icon = GFX_WIP_focus
 	cost = 5
 	x = -0
 	y = 1
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		hidden_effect = {
+			remove_decision = RIN_corruption_2
+		}
+		
+		custom_effect_tooltip = corruption_2
+	}
+	relative_position_id = RIN_reining_in_the_sujimis_sector
+	prerequisite = { focus = RIN_reining_in_the_sujimis_sector }
+
+}
+
+focus = {
+	id = RIN_expanding_the_sector
+	icon = GFX_WIP_focus
+	cost = 5
+	x = -0
+	y = 2
 	ai_will_do = {
 		factor = 2
 	}
@@ -949,7 +979,7 @@ focus = {
 		}
 	}
 	relative_position_id = RIN_reining_in_the_sujimis_sector
-	prerequisite = { focus = RIN_reining_in_the_sujimis_sector }
+	prerequisite = { focus = RIN_dealing_with_sabatours }
 
 }
 
@@ -1233,7 +1263,7 @@ focus = {
 	icon = GFX_WIP_focus
 	cost = 10
 	x = 0
-	y = 4
+	y = 5
 	ai_will_do = {
 		factor = 3
 	}
