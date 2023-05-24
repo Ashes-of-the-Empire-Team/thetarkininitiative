@@ -2707,10 +2707,22 @@ scripted_gui = {
                         }
                     }
                 }
-                set_temp_variable = {price_of_soft_batch = current_price_market_buy_price}
-                multiply_temp_variable = {price_of_soft_batch = amount_to_be_produced}
-                divide_temp_variable = {price_of_soft_batch = 1000}
-                check_variable = {price_of_soft_batch < currency_amount^primary_currency}
+                set_temp_variable = {price_of_batch = current_price_market_buy_price}
+                multiply_temp_variable = {price_of_batch = amount_to_be_produced}
+                if = {
+                    limit = {
+                        OR = {
+                            has_country_flag = e_11_selected
+                            has_country_flag = ee_4_selected
+                            has_country_flag = a280c_selected
+                            has_country_flag = dh_17_selected
+                        }
+                    }
+                    divide_temp_variable = {price_of_batch = 1000}
+                }else = {
+                    divide_temp_variable = {price_of_batch = 100}
+                }
+                check_variable = {price_of_batch < currency_amount^primary_currency}
             }
             amount_in_queue_in_front_visible = {
                 if = {
@@ -5099,6 +5111,10 @@ scripted_gui = {
                         }
                     }
                 }
+                set_temp_variable = {price_of_batch = current_price_market_buy_price}
+                multiply_temp_variable = {price_of_batch = amount_to_be_produced}
+                divide_temp_variable = {price_of_batch = 100}
+                check_variable = {price_of_batch < currency_amount^primary_currency}
             }
             amount_in_queue_in_front_visible = {
                 if = {
@@ -7567,6 +7583,11 @@ scripted_gui = {
                         has_tech = resurgent_1
                     }
                 }
+                set_temp_variable = {price_of_batch = current_price_market_buy_price}
+                multiply_temp_variable = {price_of_batch = amount_to_be_produced}
+                divide_temp_variable = {price_of_batch = 100}
+                log = "[?price_of_batch]"
+                check_variable = {price_of_batch < currency_amount^primary_currency}
             }
             select_corvettes_button_click_enabled = {
                 NOT = {
