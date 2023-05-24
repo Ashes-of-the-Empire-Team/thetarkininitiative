@@ -555,6 +555,12 @@ scripted_gui = {
                 }
                 if = {
                     limit = {
+                        has_country_flag = stormtrooper_equipment_selected
+                    }
+                    set_country_flag = stormtrooper_equipment_order_in_progress
+                }
+                if = {
+                    limit = {
                         has_country_flag = t3_b_selected
                         has_country_flag = level_1_selected
                     }
@@ -2706,6 +2712,13 @@ scripted_gui = {
                             has_tech =  flash_speeder_advanced
                         }
                     }
+                }else_if = {
+                    limit = {
+                        has_country_flag = stormtrooper_equipment_selected
+                    }
+                    NOT = {
+                        has_country_flag = stormtrooper_equipment_order_in_progress
+                    }
                 }
                 set_temp_variable = {price_of_batch = current_price_market_buy_price}
                 multiply_temp_variable = {price_of_batch = amount_to_be_produced}
@@ -2716,6 +2729,7 @@ scripted_gui = {
                             has_country_flag = ee_4_selected
                             has_country_flag = a280c_selected
                             has_country_flag = dh_17_selected
+                            has_country_flag = stormtrooper_equipment_selected
                         }
                     }
                     divide_temp_variable = {price_of_batch = 1000}
@@ -7585,8 +7599,6 @@ scripted_gui = {
                 }
                 set_temp_variable = {price_of_batch = current_price_market_buy_price}
                 multiply_temp_variable = {price_of_batch = amount_to_be_produced}
-                divide_temp_variable = {price_of_batch = 100}
-                log = "[?price_of_batch]"
                 check_variable = {price_of_batch < currency_amount^primary_currency}
             }
             select_corvettes_button_click_enabled = {
