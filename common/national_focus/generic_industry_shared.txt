@@ -177,30 +177,6 @@ shared_focus = {
 }
 
 shared_focus = {
-	id = ae_bomber_innovations
-	icon = GFX_navy_generic_goal
-	x = 0
-	y = 1
-	relative_position_id = ae_groundhangars
-	cost = 10.8
-
-	prerequisite = {
-		focus = ae_groundhangars
-	}
-
-	completion_reward = {
-		add_tech_bonus = {
-			name = ae_ship_support_tech
-			bonus = 1
-			uses = 1
-			category = air_equipment
-		}
-	}
-}
-
-
-
-shared_focus = {
 	id = ae_groundhangars
 	icon = GFX_navy_generic_goal
 	x = 0
@@ -219,6 +195,28 @@ shared_focus = {
 				level = 2
 				instant_build = yes
 			}
+		}
+	}
+}
+
+shared_focus = {
+	id = ae_bomber_innovations
+	icon = GFX_navy_generic_goal
+	x = 0
+	y = 1
+	relative_position_id = ae_groundhangars
+	cost = 10.8
+
+	prerequisite = {
+		focus = ae_groundhangars
+	}
+
+	completion_reward = {
+		add_tech_bonus = {
+			name = ae_ship_support_tech
+			bonus = 1
+			uses = 1
+			category = air_equipment
 		}
 	}
 }
@@ -559,9 +557,12 @@ shared_focus = {
 	cost = 10.8
 
 	available = {
-		OR = {
+		has_idea = militia_armies
+	}
+
+	bypass = {
+		NOT = {
 			has_idea = professional_forces
-			has_idea = militia_armies
 		}
 	}
 
@@ -601,8 +602,11 @@ shared_focus = {
 	cost = 10.8
 
 	available = {
-		OR = {
-			has_idea = professional_forces
+		has_idea = professional_forces
+	}
+
+	bypass = {
+		NOT = {
 			has_idea = militia_armies
 		}
 	}
