@@ -2,39 +2,44 @@
 # Era Events
 #####################
 #
-#add_namespace = eraevent
-#
-#news_event = {        #
-#    id = eraevent.1
-#    title = "The Era of Restoration"
-#    desc = "The Era of Restoration has begun"
-#    hidden = yes
-#    major = yes
-#
-#    is_triggered_only = yes
-#
-#    immediate = {
-#        #play_song = " Begin"
-#        set_country_flag = Super_Event_Visible
-#        set_global_flag = era_of_restoration_1
-#		if = {
-#			limit  ={
-#				has_government = imperial
-#			}
-#			add_ideas = aftermath_of_endor
-#		}
-#		else_if = {
-#			limit = {
-#				has_government = democratic
-#			}
-#			add_ideas = liberation
-#		}
-#		else_if = {
-#			add_ideas = safe_haven
-#		}
-#    }    
-#}
-#
+add_namespace = eraevent
+
+news_event = {        #
+    id = eraevent.1
+    title = "Nagai Invasion of Zeltros"
+    desc = "Having failed to conquer Kashyyyk, The Nagai have turned their attention to the pleasure planet of Zeltros. Although the Nagai have managed to secure control of the planet for now there are new enemies seeking their destruction from beyond this galaxy."
+    hidden = yes
+    major = yes
+
+    is_triggered_only = yes
+
+    immediate = {
+		NAG = {
+			declare_war_on = {
+				target = ZEL
+				type = annex_everything
+			}
+		}
+		ZEL = {
+			become_exiled_in = { target = REB legitimacy = 100 }
+		}
+		NAG = {
+			set_state_controller = 54
+			set_state_controller = 278
+			set_state_controller = 282
+			#280 = {
+			#	set_demilitarized_zone = yes
+			#}
+		}
+		280 = {
+			transfer_state_to = TOF
+		}
+		TOF = {
+			load_oob = "TOF_4"
+		}
+    }    
+}
+
 #news_event = {        #
 #    id = eraevent.2
 #    title = "The Era of Restoration Phase 2"
