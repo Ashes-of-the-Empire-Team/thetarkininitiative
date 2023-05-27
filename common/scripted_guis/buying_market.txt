@@ -76,15 +76,24 @@ scripted_gui = {
                 clr_country_flag = level_4_selected
                 if = {
                     limit = {
-                        has_government = democratic
+                        NOT = {
+                            has_country_flag = republic_market_open
+                            has_country_flag = imperial_market_open
+                            has_country_flag = neutral_market_open
+                        }
                     }
-                    set_country_flag = republic_market_open
-                }
-                if = {
-                    limit = {
-                        has_government = imperial
+                    if = {
+                        limit = {
+                            has_government = democratic
+                        }
+                        set_country_flag = republic_market_open
                     }
-                    set_country_flag = imperial_market_open
+                    if = {
+                        limit = {
+                            has_government = imperial
+                        }
+                        set_country_flag = imperial_market_open
+                    }
                 }
             }
             select_starfighters_click = {
@@ -97,15 +106,24 @@ scripted_gui = {
                 clr_country_flag = level_4_selected
                 if = {
                     limit = {
-                        has_government = democratic
+                        NOT = {
+                            has_country_flag = republic_market_open
+                            has_country_flag = imperial_market_open
+                            has_country_flag = neutral_market_open
+                        }
                     }
-                    set_country_flag = republic_market_open
-                }
-                if = {
-                    limit = {
-                        has_government = imperial
+                    if = {
+                        limit = {
+                            has_government = democratic
+                        }
+                        set_country_flag = republic_market_open
                     }
-                    set_country_flag = imperial_market_open
+                    if = {
+                        limit = {
+                            has_government = imperial
+                        }
+                        set_country_flag = imperial_market_open
+                    }
                 }
             }
             select_ships_click = {
@@ -114,15 +132,24 @@ scripted_gui = {
                 set_variable = { amount_to_be_produced = 1 }
                 if = {
                     limit = {
-                        has_government = democratic
+                        NOT = {
+                            has_country_flag = republic_market_open
+                            has_country_flag = imperial_market_open
+                            has_country_flag = neutral_market_open
+                        }
                     }
-                    set_country_flag = republic_market_open
-                }
-                if = {
-                    limit = {
-                        has_government = imperial
+                    if = {
+                        limit = {
+                            has_government = democratic
+                        }
+                        set_country_flag = republic_market_open
                     }
-                    set_country_flag = imperial_market_open
+                    if = {
+                        limit = {
+                            has_government = imperial
+                        }
+                        set_country_flag = imperial_market_open
+                    }
                 }
             }
             select_droids_click = {
@@ -3938,13 +3965,13 @@ scripted_gui = {
             }
         }
     }
-    Marketplace_buying_land_emp_main = {
+    Marketplace_buying_land_neu_main = {
         context_type = player_context
         parent_window_name = "Marketplace_buying_menu"
-        window_name = "Marketplace_buying_land_emp_main"
+        window_name = "Marketplace_buying_land_neutral_main"
         visible = {
             has_country_flag = open_market_ground_forces
-            has_country_flag = imperial_market_open
+            has_country_flag = neutral_market_open
         }
         effects = {
             aat_click = {
@@ -9249,6 +9276,296 @@ scripted_gui = {
         properties = {
             ship_icon = {
                 image = "[Get_emp_battlecruiser]"
+            }
+        }
+    }
+    Marketplace_mercs_main_buttons = { ## Different containers for easy of modding (copy paste of ships)
+        context_type = player_context
+        parent_window_name = "Marketplace_buying_menu"
+        window_name = "Marketplace_corvettes_imperial_buttons"
+        visible = {
+            has_country_flag = open_market_mercs
+        }
+        effects = {
+            order_mercs_click = {
+                if = {
+                    limit = {
+                        has_country_flag = selected_mandolorian_warriors
+                    }
+                    division_template = {
+                        name = "Mandolorian Warriors"
+                        is_locked = yes
+                        force_allow_recruiting = yes
+                        priority = 0
+                        template_counter = 0
+                        regiments = {
+                            mandolorian_warriors = { x = 0 y = 0 }
+                            mandolorian_warriors = { x = 0 y = 1 }
+                            mandolorian_warriors = { x = 0 y = 2 }
+                            mandolorian_warriors = { x = 0 y = 3 }
+                            mandolorian_warriors = { x = 1 y = 0 }
+                            mandolorian_warriors = { x = 1 y = 1 }
+                            mandolorian_warriors = { x = 1 y = 2 }
+                            mandolorian_warriors = { x = 1 y = 3 }
+                        }
+                        support = {
+                        }
+                    }
+                    for_loop_effect = {
+                        end = amount_to_be_produced
+                        capital_scope = {
+                            create_unit = {
+                                division = "name = \"Mandolorian Warriors\" division_template = \"Mandolorian Warriors\" start_experience_factor = 1.0"
+                                owner = PREV
+                            }	
+                        }
+                    }
+                    add_ideas = mandolorian_hired_mercs
+                }
+                if = {
+                    limit = {
+                        has_country_flag = selected_pirate_brigade
+                    }
+                    division_template = {
+                        name = "Pirate Brigade"
+                        is_locked = yes
+                        force_allow_recruiting = yes
+                        priority = 0
+                        template_counter = 0
+                        regiments = {
+                            pirate_brigade = { x = 0 y = 0 }
+                            pirate_brigade = { x = 0 y = 1 }
+                            pirate_brigade = { x = 0 y = 2 }
+                            pirate_brigade = { x = 0 y = 3 }
+                            pirate_brigade = { x = 1 y = 0 }
+                            pirate_brigade = { x = 1 y = 1 }
+                            pirate_brigade = { x = 1 y = 2 }
+                            pirate_brigade = { x = 1 y = 3 }
+                        }
+                        support = {
+                        }
+                    }
+                    for_loop_effect = {
+                        end = amount_to_be_produced
+                        capital_scope = {
+                            create_unit = {
+                                division = "name = \"Pirate Brigade\" division_template = \"Pirate Brigade\" start_experience_factor = 1.0"
+                                owner = PREV
+                            }	
+                        }
+                    }
+                    add_ideas = mandolorian_hired_mercs
+                }
+                if = {
+                    limit = {
+                        has_country_flag = selected_mistral_shadow_guard
+                    }
+                    division_template = {
+                        name = "Mistral Shadow Guard"
+                        is_locked = yes
+                        force_allow_recruiting = yes
+                        priority = 0
+                        template_counter = 0
+                        regiments = {
+                            mistral_shadow_guard = { x = 0 y = 0 }
+                            mistral_shadow_guard = { x = 0 y = 1 }
+                            mistral_shadow_guard = { x = 0 y = 2 }
+                            mistral_shadow_guard = { x = 0 y = 3 }
+                            mistral_shadow_guard = { x = 1 y = 0 }
+                            mistral_shadow_guard = { x = 1 y = 1 }
+                            mistral_shadow_guard = { x = 1 y = 2 }
+                            mistral_shadow_guard = { x = 1 y = 3 }
+                        }
+                        support = {
+                        }
+                    }
+                    for_loop_effect = {
+                        end = amount_to_be_produced
+                        capital_scope = {
+                            create_unit = {
+                                division = "name = \"Mistral Shadow Guard\" division_template = \"Mistral Shadow Guard\" start_experience_factor = 1.0"
+                                owner = PREV
+                            }	
+                        }
+                    }
+                    add_ideas = mandolorian_hired_mercs
+                }
+                if = {
+                    limit = {
+                        has_country_flag = selected_gamorrean_warriors
+                    }
+                    division_template = {
+                        name = "Gamorrean Warriors"
+                        is_locked = yes
+                        force_allow_recruiting = yes
+                        priority = 0
+                        template_counter = 0
+                        regiments = {
+                            gamorrean_warriors = { x = 0 y = 0 }
+                            gamorrean_warriors = { x = 0 y = 1 }
+                            gamorrean_warriors = { x = 0 y = 2 }
+                            gamorrean_warriors = { x = 0 y = 3 }
+                            gamorrean_warriors = { x = 1 y = 0 }
+                            gamorrean_warriors = { x = 1 y = 1 }
+                            gamorrean_warriors = { x = 1 y = 2 }
+                            gamorrean_warriors = { x = 1 y = 3 }
+                        }
+                        support = {
+                        }
+                    }
+                    for_loop_effect = {
+                        end = amount_to_be_produced
+                        capital_scope = {
+                            create_unit = {
+                                division = "name = \"Gamorrean Warriors\" division_template = \"Gamorrean Warriors\" start_experience_factor = 1.0"
+                                owner = PREV
+                            }	
+                        }
+                    }
+                    add_ideas = mandolorian_hired_mercs
+                }
+                if = {
+                    limit = {
+                        has_country_flag = selected_corporate_security
+                    }
+                    division_template = {
+                        name = "Corporate Security"
+                        is_locked = yes
+                        force_allow_recruiting = yes
+                        priority = 0
+                        template_counter = 0
+                        regiments = {
+                            hired_mercs = { x = 0 y = 0 }
+                            hired_mercs = { x = 0 y = 1 }
+                            hired_mercs = { x = 0 y = 2 }
+                            hired_mercs = { x = 0 y = 3 }
+                            hired_mercs = { x = 1 y = 0 }
+                            hired_mercs = { x = 1 y = 1 }
+                            hired_mercs = { x = 1 y = 2 }
+                            hired_mercs = { x = 1 y = 3 }
+                        }
+                        support = {
+                        }
+                    }
+                    for_loop_effect = {
+                        end = amount_to_be_produced
+                        capital_scope = {
+                            create_unit = {
+                                division = "name = \"Corporate Security\" division_template = \"Corporate Security\" start_experience_factor = 1.0"
+                                owner = PREV
+                            }	
+                        }
+                    }
+                }
+            }
+            select_division_button_click = {
+                set_country_flag = mercs_divisions_open
+                clr_country_flag = mercs_starfighters_open
+                set_variable = {amount_to_be_produced = 1}
+            }
+            select_starfighters_button_click = {
+                set_country_flag = mercs_starfighters_open
+                clr_country_flag = mercs_divisions_open
+                clr_country_flag = selected_mandolorian_warriors
+                clr_country_flag = selected_pirate_brigade
+                clr_country_flag = selected_mistral_shadow_guard
+                clr_country_flag = selected_gamorrean_warriors
+                clr_country_flag = selected_corporate_security
+                set_variable = {amount_to_be_produced = 100}
+            }
+        }
+        triggers = {
+            select_division_button = {
+                NOT = {
+                    has_country_flag = mercs_divisions_open
+                }
+            }
+            select_starfighters_button = {
+                NOT = {
+                    has_country_flag = mercs_starfighters_open
+                }
+            }
+        }
+    }
+    Marketplace_select_mercs_division_buttons = {
+        context_type = player_context
+        parent_window_name = "Marketplace_buying_menu"
+        window_name = "Marketplace_buying_mercs_division_buttons"
+        visible = {
+            has_country_flag = open_market_mercs
+            has_country_flag = mercs_divisions_open
+        }
+        effects = {
+            mandolorian_warriors_button_click = {
+                set_country_flag = selected_mandolorian_warriors
+                clr_country_flag = selected_pirate_brigade
+                clr_country_flag = selected_mistral_shadow_guard
+                clr_country_flag = selected_gamorrean_warriors
+                clr_country_flag = selected_corporate_security
+                set_variable = { current_price_market_buy_price = Global.mercs_price_holder@0 }
+                set_variable = { manufacturing_country = KUA.id }
+            }
+            pirate_brigade_button_click = {
+                set_country_flag = selected_pirate_brigade
+                clr_country_flag = selected_mandolorian_warriors
+                clr_country_flag = selected_mistral_shadow_guard
+                clr_country_flag = selected_gamorrean_warriors
+                clr_country_flag = selected_corporate_security
+                set_variable = { current_price_market_buy_price = Global.mercs_price_holder@1 }
+                set_variable = { manufacturing_country = KUA.id }
+            }
+            mistral_shadow_guard_button_click = {
+                set_country_flag = selected_mistral_shadow_guard
+                clr_country_flag = selected_pirate_brigade
+                clr_country_flag = selected_mandolorian_warriors
+                clr_country_flag = selected_gamorrean_warriors
+                clr_country_flag = selected_corporate_security
+                set_variable = { current_price_market_buy_price = Global.mercs_price_holder@2 }
+                set_variable = { manufacturing_country = KUA.id }
+            }
+            gamorrean_warriors_button_click = {
+                set_country_flag = selected_gamorrean_warriors
+                clr_country_flag = selected_pirate_brigade
+                clr_country_flag = selected_mistral_shadow_guard
+                clr_country_flag = selected_mandolorian_warriors
+                clr_country_flag = selected_corporate_security
+                set_variable = { current_price_market_buy_price = Global.mercs_price_holder@3 }
+                set_variable = { manufacturing_country = KUA.id }
+            }
+            corporate_security_button_click = {
+                set_country_flag = selected_corporate_security
+                clr_country_flag = selected_pirate_brigade
+                clr_country_flag = selected_mistral_shadow_guard
+                clr_country_flag = selected_gamorrean_warriors
+                clr_country_flag = selected_mandolorian_warriors
+                set_variable = { current_price_market_buy_price = Global.mercs_price_holder@4 }
+                set_variable = { manufacturing_country = KUA.id }
+            }
+        }
+    }
+    Marketplace_select_mercs_starfighter_buttons = {
+        context_type = player_context
+        parent_window_name = "Marketplace_buying_menu"
+        window_name = "Marketplace_buying_mercs_starfighters_buttons"
+        visible = {
+            has_country_flag = open_market_mercs
+            has_country_flag = mercs_starfighters_open
+        }
+        effects = {
+            crimson_aces_button_click = {
+
+            }
+            rebel_privateer_button_click = {
+
+            }
+            pirate_starfighters_button_click = {
+
+            }
+            disgraced_imperial_fighters_button_click = {
+
+            }
+            havoc_bombers_button_click = {
+
             }
         }
     }
