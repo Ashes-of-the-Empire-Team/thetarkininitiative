@@ -2,19 +2,31 @@
 ##
 RIN_civil_war = {
 	enforce_curfews = {
-		available = { has_stability > 0.1 }
-		days_remove = 100
+		available = { has_stability > 0.05 }
+		days_remove = 150
 			complete_effect = {
 				add_days_mission_timeout = {
 					mission = RIN_civil_war_mission
-					days = 20
+					days = 40
 				}
-				add_stability = -0.1					
+				add_stability = -0.10					
 			}
 		}
+		promise_peace = {
+			available = { has_war_support =  > 0.05 }
+			days_remove = 150
+				complete_effect = {
+					add_days_mission_timeout = {
+						mission = RIN_civil_war_mission
+						days = 40
+					}
+					add_war_support =  = -0.05	
+					add_stability = 0.05						
+				}
+			}
 		enact_martial_law = {
-			available = { has_manpower > 50000 }
-			days_remove = 100
+			available = { has_manpower > 20000 }
+			days_remove = 150
 				complete_effect = {
 					add_days_mission_timeout = {
 						mission = RIN_civil_war_mission
@@ -25,7 +37,7 @@ RIN_civil_war = {
 			}
 			political_speaches = {
 				available = { has_political_power > 100 }
-				days_remove = 100
+				days_remove = 150
 					complete_effect = {
 						add_days_mission_timeout = {
 							mission = RIN_civil_war_mission
