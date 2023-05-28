@@ -282,6 +282,58 @@ country_event = {
 		name = "There must be a reason why"
 	}
 }
+country_event = {
+	id = new_republic_focus.10
+	title = new_republic_focus.10.t
+	desc = new_republic_focus.10.desc
+	picture = GFX_report_event
+	is_triggered_only = yes
+
+    option = {#agree
+		name = new_republic_focus.10.a
+		#join NR effect
+		FROM={
+			country_event = new_republic_focus.11
+		}
+	}
+	option = {#refuse
+		name = new_republic_focus.10.b
+		FROM={
+			country_event = new_republic_focus.12
+		}
+	}
+}
+country_event = {#they agree
+	id = new_republic_focus.11
+	title = new_republic_focus.11.t
+	desc = new_republic_focus.11.desc
+	picture = GFX_report_event
+	is_triggered_only = yes
+
+    option = {#
+		name = new_republic_focus.11.a
+		clr_country_flag = REB_currently_in_operation
+		clr_country_flag = utapau_negotiation
+		add_political_power = 150
+	}
+}
+country_event = {
+	id = new_republic_focus.12
+	title = new_republic_focus.12.t
+	desc = new_republic_focus.12.desc
+	picture = GFX_report_event
+	is_triggered_only = yes
+
+    option = {#try again
+		name = new_republic_focus.12.a
+		
+	}
+	option = {#abandon the operation
+		name = new_republic_focus.12.b
+		clr_country_flag = REB_currently_in_operation
+		clr_country_flag = utapau_negotiation
+	}
+}
 ### NEWS EVENTS ###
 
 news_event = {

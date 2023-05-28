@@ -144,7 +144,7 @@ new_republic_missions = {
 }
 new_republic_galatic_liberation={
 	REB_intervene_in_bakura_decision = {
-        priority = 10
+        priority = 11
         icon = eng_ally_imperialist_coup
 
         allowed = {
@@ -152,17 +152,111 @@ new_republic_galatic_liberation={
         }
         visible = {
             always=yes
+			NOT={has_country_flag = bakura_operation}
         }
-        
+        cost = 50
         available = {
             has_completed_focus = REB_unknown_region_focus
+			NOT={has_country_flag = REB_currently_in_operation}
         }
         #days_remove = 120
         complete_effect = {
-			
+			set_country_flag = REB_currently_in_operation
+			set_country_flag = bakura_operation
+			custom_effect_tooltip = REB_intervene_in_bakura_decision_tt
         }
         #remove_effect = {
 		#}
+    }
+	REB_send_volunteers_to_bakura_decision = {
+        priority = 11
+        icon = eng_ally_imperialist_coup
+
+        allowed = {
+			tag = REB
+        }
+        visible = {
+            has_country_flag = bakura_operation
+        }
+        cost = 50
+        available = {
+			has_manpower > 27000
+        }
+		fire_only_once = yes
+        #days_remove = 120
+        complete_effect = {
+			BAK={
+				division_template = {
+					name = "Rebel Battalion"
+					is_locked = yes
+					division_cap = 3
+					force_allow_recruiting  = yes
+					division_names_group = USA_INF_01
+					priority = 0
+					template_counter = 0
+					regiments = {
+						infantry = { x = 0 y = 0 }
+						infantry = { x = 0 y = 1 }
+						infantry = { x = 0 y = 2 }
+						infantry = { x = 1 y = 0 }
+						infantry = { x = 1 y = 1 }
+						infantry = { x = 1 y = 2 }
+						infantry = { x = 2 y = 0 }
+						infantry = { x = 2 y = 1 }
+						infantry = { x = 2 y = 2 }
+					}
+				}
+			}
+			440={
+				create_unit = {
+					division = "name = \"Rebel Volunteers\" division_template = \"Rebel Battalion\" start_experience_factor = 0.5"
+					owner = BAK
+				}
+				create_unit = {
+					division = "name = \"Rebel Volunteers\" division_template = \"Rebel Battalion\" start_experience_factor = 0.5"
+					owner = BAK
+				}
+				create_unit = {
+					division = "name = \"Rebel Volunteers\" division_template = \"Rebel Battalion\" start_experience_factor = 0.5"
+					owner = BAK
+				}
+			}
+        }
+        #remove_effect = {
+		#}
+    }
+	REB_abandon_bakura_decision = {
+        priority = 11
+        icon = eng_ally_imperialist_coup
+
+        allowed = {
+			tag = REB
+        }
+        visible = {
+            has_country_flag = bakura_operation
+        }
+        cost = 25
+        available = {
+			
+        }
+        #days_remove = 120
+        complete_effect = {
+			clr_country_flag = REB_currently_in_operation
+			clr_country_flag = bakura_operation
+			custom_effect_tooltip = REB_abandon_bakura_decision_tt
+			add_war_support = -0.05
+			BAK={
+				delete_unit_template_and_units = {
+					division_template = "Rebel Battalion"
+					disband = no
+				}
+			}
+        }
+        #remove_effect = {
+		#}
+		ai_will_do={
+			factor = 0
+		}
     }
 	REB_take_back_bespin_decision = {
         priority = 10
@@ -173,20 +267,24 @@ new_republic_galatic_liberation={
         }
         visible = {
             always=yes
+			NOT={has_country_flag = bespin_operation}
         }
-        
+        cost = 50
         available = {
             has_completed_focus = REB_western_reaches_focus
+			NOT={has_country_flag = REB_currently_in_operation}
         }
         #days_remove = 120
         complete_effect = {
-			
+			set_country_flag = REB_currently_in_operation
+			set_country_flag = bespin_operation
+			custom_effect_tooltip = REB_take_back_bespin_decision_tt
         }
         #remove_effect = {
 		#}
     }
 	REB_diplomatic_mission_to_utapau_decision = {
-        priority = 10
+        priority = 9
         icon = eng_ally_imperialist_coup
 
         allowed = {
@@ -194,20 +292,47 @@ new_republic_galatic_liberation={
         }
         visible = {
             always=yes
+			NOT={has_country_flag = utapau_negotiation}
         }
-        
+        cost = 50
         available = {
             has_completed_focus = REB_western_reaches_focus
+			NOT={has_country_flag = REB_currently_in_operation}
         }
         #days_remove = 120
         complete_effect = {
-			
+			set_country_flag = REB_currently_in_operation
+			set_country_flag = utapau_negotiation
+			custom_effect_tooltip = REB_diplomatic_mission_to_utapau_decision_tt
+        }
+        #remove_effect = {
+		#}
+    }
+	REB_dispach_the_diplomats_decision = {
+        priority = 9
+        icon = eng_ally_imperialist_coup
+
+        allowed = {
+			tag = REB
+        }
+        visible = {
+            has_country_flag = utapau_negotiation
+        }
+        cost = 50
+        available = {
+			#has_manpower > 27000
+        }
+        #days_remove = 120
+        complete_effect = {
+			UTA={
+				country_event = new_republic_focus.10
+			}
         }
         #remove_effect = {
 		#}
     }
 	REB_tatooine_uprising_decision = {
-        priority = 10
+        priority = 8
         icon = eng_ally_imperialist_coup
 
         allowed = {
@@ -215,14 +340,19 @@ new_republic_galatic_liberation={
         }
         visible = {
             always=yes
+			NOT={has_country_flag = tatooine_operation}
         }
         
         available = {
             has_completed_focus = REB_trailing_sectors_focus
+			NOT={has_country_flag = REB_currently_in_operation}
         }
+		cost = 50
         #days_remove = 120
         complete_effect = {
-			
+			set_country_flag = REB_currently_in_operation
+			set_country_flag = tatooine_operation
+			custom_effect_tooltip = REB_tatooine_uprising_decision_tt
         }
         #remove_effect = {
 		#}
