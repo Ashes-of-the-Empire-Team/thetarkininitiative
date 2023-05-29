@@ -1252,7 +1252,137 @@ defined_text = {
 #[?share_owner_1.Getname] [?shares_held_@var:share_owner_1] [?share_owner_1@var:company_selected:share_percent]
 #
 #share_percentage_@var:company_selected
+defined_text = {
+	name = GetShipPriceBatch
+	text = {
+		trigger = {
+			has_country_flag = open_market_ships
+			set_temp_variable = {price_of_ship_batch = current_price_market_buy_price}
+			multiply_temp_variable = {price_of_ship_batch = amount_to_be_produced}
+		}
+		localization_key = "price_of_batch_ship_loc"
+	}
+	text = {
+		trigger = {
+			has_country_flag = starfighters_buying_market_open
+			set_temp_variable = {price_of_air_batch = current_price_market_buy_price}
+			multiply_temp_variable = {price_of_air_batch = amount_to_be_produced}
+			divide_temp_variable = {price_of_air_batch = 100}
+		}
+		localization_key = "price_of_batch_air_loc"
+	}
+	text = {
+		trigger = {
+			has_country_flag = tank_selected
+			set_temp_variable = {price_of_tank_batch = current_price_market_buy_price}
+			multiply_temp_variable = {price_of_tank_batch = amount_to_be_produced}
+			divide_temp_variable = {price_of_tank_batch = 100}
+		}
+		localization_key = "price_of_batch_tank_loc"
+	}
+	text = {
+		trigger = {
+			has_country_flag = gun_selected
+			NOT = {
+				has_country_flag = a280c_selected
+				has_country_flag = ee_4_selected
+				has_country_flag = e_11_selected
+				has_country_flag = dh_17_selected
+				has_country_flag = stormtrooper_equipment_selected
+			}
+			set_temp_variable = {price_of_soft_batch = current_price_market_buy_price}
+			multiply_temp_variable = {price_of_soft_batch = amount_to_be_produced}
+			divide_temp_variable = {price_of_soft_batch = 100}
+		}
+		localization_key = "price_of_batch_soft_loc"
+	}
+	text = {
+		trigger = {
+			OR {
+				has_country_flag = a280c_selected
+				has_country_flag = ee_4_selected
+				has_country_flag = e_11_selected
+				has_country_flag = dh_17_selected
+				has_country_flag = stormtrooper_equipment_selected
+			}
+			set_temp_variable = {price_of_soft_batch = current_price_market_buy_price}
+			multiply_temp_variable = {price_of_soft_batch = amount_to_be_produced}
+			divide_temp_variable = {price_of_soft_batch = 1000}
+		}
+		localization_key = "price_of_batch_soft_loc"
+	}
+}
 
+defined_text = {
+	name = GetHowFastCanBeProduced
+    text = {
+        trigger = {
+			has_country_flag = gun_selected
+			var:manufacturing_country = {
+				check_variable = {ROOT.manufacturing_number = soft_1_selected_item}
+				set_temp_variable = {production_amount = soft_1_production_amount}
+			}
+        }
+        localization_key = "market_production_numbers"
+    }
+	text = {
+		trigger = {
+			has_country_flag = tank_selected
+			var:manufacturing_country = {
+				check_variable = {ROOT.manufacturing_number = land_1_selected_item}
+				set_temp_variable = {production_amount = land_1_production_amount}
+			}
+        }
+		localization_key = "market_production_numbers"
+	}
+	text = {
+		trigger = {
+			has_country_flag = starfighters_buying_market_open
+			var:manufacturing_country = {
+				check_variable = {ROOT.manufacturing_number = air_1_selected_item}
+				set_temp_variable = {production_amount = air_1_production_amount}
+			}
+        }
+		localization_key = "market_production_numbers"
+	}
+	text = {
+		trigger = {
+			check_variable = {current_ic_cost_ships < 3000}
+			has_variable = current_ic_cost_ships
+			var:manufacturing_country = {
+				check_variable = {ROOT.manufacturing_number = light_selected_ship_production_cost}
+				set_temp_variable = {production_amount = light_ship_production_time}
+			}
+        }
+		localization_key = "market_ships_production_numbers"
+	}
+	text = {
+		trigger = {
+			check_variable = {current_ic_cost_ships < 6000}
+			has_variable = current_ic_cost_ships
+			var:manufacturing_country = {
+				check_variable = {ROOT.manufacturing_number = medium_selected_ship_production_cost}
+				set_temp_variable = {production_amount = medium_ship_production_time}
+			}
+        }
+		localization_key = "market_ships_production_numbers"
+	}
+	text = {
+		trigger = {
+			check_variable = {current_ic_cost_ships > 6000}
+			has_variable = current_ic_cost_ships
+			var:manufacturing_country = {
+				check_variable = {ROOT.manufacturing_number = heavy_selected_ship_production_cost}
+				set_temp_variable = {production_amount = heavy_ship_production_time}
+			}
+		}
+		localization_key = "market_ships_production_numbers"
+	}
+	text = {
+		localization_key = "item_not_being_worked_on"
+	}
+}
+## HELLISH SHIT BELOW THIS
 defined_text = {
 	name = GetArrayAmountInQueueImperialCorvette
 	text = {
@@ -8820,134 +8950,4 @@ defined_text = {
         }
         localization_key = "[GetAmountInQueueInFrontRepublicSoftSupportEquipment]"
     }
-}
-defined_text = {
-	name = GetShipPriceBatch
-	text = {
-		trigger = {
-			has_country_flag = open_market_ships
-			set_temp_variable = {price_of_ship_batch = current_price_market_buy_price}
-			multiply_temp_variable = {price_of_ship_batch = amount_to_be_produced}
-		}
-		localization_key = "price_of_batch_ship_loc"
-	}
-	text = {
-		trigger = {
-			has_country_flag = starfighters_buying_market_open
-			set_temp_variable = {price_of_air_batch = current_price_market_buy_price}
-			multiply_temp_variable = {price_of_air_batch = amount_to_be_produced}
-			divide_temp_variable = {price_of_air_batch = 100}
-		}
-		localization_key = "price_of_batch_air_loc"
-	}
-	text = {
-		trigger = {
-			has_country_flag = tank_selected
-			set_temp_variable = {price_of_tank_batch = current_price_market_buy_price}
-			multiply_temp_variable = {price_of_tank_batch = amount_to_be_produced}
-			divide_temp_variable = {price_of_tank_batch = 100}
-		}
-		localization_key = "price_of_batch_tank_loc"
-	}
-	text = {
-		trigger = {
-			has_country_flag = gun_selected
-			NOT = {
-				has_country_flag = a280c_selected
-				has_country_flag = ee_4_selected
-				has_country_flag = e_11_selected
-				has_country_flag = dh_17_selected
-				has_country_flag = stormtrooper_equipment_selected
-			}
-			set_temp_variable = {price_of_soft_batch = current_price_market_buy_price}
-			multiply_temp_variable = {price_of_soft_batch = amount_to_be_produced}
-			divide_temp_variable = {price_of_soft_batch = 100}
-		}
-		localization_key = "price_of_batch_soft_loc"
-	}
-	text = {
-		trigger = {
-			OR {
-				has_country_flag = a280c_selected
-				has_country_flag = ee_4_selected
-				has_country_flag = e_11_selected
-				has_country_flag = dh_17_selected
-				has_country_flag = stormtrooper_equipment_selected
-			}
-			set_temp_variable = {price_of_soft_batch = current_price_market_buy_price}
-			multiply_temp_variable = {price_of_soft_batch = amount_to_be_produced}
-			divide_temp_variable = {price_of_soft_batch = 1000}
-		}
-		localization_key = "price_of_batch_soft_loc"
-	}
-}
-
-defined_text = {
-	name = GetHowFastCanBeProduced
-    text = {
-        trigger = {
-			has_country_flag = gun_selected
-			var:manufacturing_country = {
-				check_variable = {ROOT.manufacturing_number = soft_1_selected_item}
-				set_temp_variable = {production_amount = soft_1_production_amount}
-			}
-        }
-        localization_key = "market_production_numbers"
-    }
-	text = {
-		trigger = {
-			has_country_flag = tank_selected
-			var:manufacturing_country = {
-				check_variable = {ROOT.manufacturing_number = land_1_selected_item}
-				set_temp_variable = {production_amount = land_1_production_amount}
-			}
-        }
-		localization_key = "market_production_numbers"
-	}
-	text = {
-		trigger = {
-			has_country_flag = starfighters_buying_market_open
-			var:manufacturing_country = {
-				check_variable = {ROOT.manufacturing_number = air_1_selected_item}
-				set_temp_variable = {production_amount = air_1_production_amount}
-			}
-        }
-		localization_key = "market_production_numbers"
-	}
-	text = {
-		trigger = {
-			check_variable = {current_ic_cost_ships < 3000}
-			has_variable = current_ic_cost_ships
-			var:manufacturing_country = {
-				check_variable = {ROOT.manufacturing_number = light_selected_ship_production_cost}
-				set_temp_variable = {production_amount = light_ship_production_time}
-			}
-        }
-		localization_key = "market_ships_production_numbers"
-	}
-	text = {
-		trigger = {
-			check_variable = {current_ic_cost_ships < 6000}
-			has_variable = current_ic_cost_ships
-			var:manufacturing_country = {
-				check_variable = {ROOT.manufacturing_number = medium_selected_ship_production_cost}
-				set_temp_variable = {production_amount = medium_ship_production_time}
-			}
-        }
-		localization_key = "market_ships_production_numbers"
-	}
-	text = {
-		trigger = {
-			check_variable = {current_ic_cost_ships > 6000}
-			has_variable = current_ic_cost_ships
-			var:manufacturing_country = {
-				check_variable = {ROOT.manufacturing_number = heavy_selected_ship_production_cost}
-				set_temp_variable = {production_amount = heavy_ship_production_time}
-			}
-		}
-		localization_key = "market_ships_production_numbers"
-	}
-	text = {
-		localization_key = "item_not_being_worked_on"
-	}
 }
