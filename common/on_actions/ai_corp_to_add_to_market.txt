@@ -4,7 +4,7 @@ on_actions = {
 			ai_corp_set_tech_for_start = yes
 		}
 	}
-	on_weekly = { ## REEVALUATE PRODUCTION
+	on_daily = { ## REEVALUATE PRODUCTION
 		effect = {
 			if = {
 				limit = {
@@ -15,7 +15,7 @@ on_actions = {
 				set_variable = {light_ship_workers = 25000}
 				set_temp_variable = {highest_so_far = 0}
 				set_temp_variable = {storing_current_index = 0}
-				set_temp_variable = {current_production_value = ship_amount_contract_holder@var:light_selected_ship_production_cost^num}
+				set_temp_variable = {current_production_value = ship_amount_contract_holder@var:light_ship_selected_item^num}
 				for_each_loop = {
 					array = light_ship_production_array
 					value = item_to_look_for
@@ -53,12 +53,12 @@ on_actions = {
 							or = {
 								check_variable = {highest_so_far > 2}
 								NOT = {
-									has_variable = light_selected_ship_production_cost
+									has_variable = light_ship_selected_item
 								}
 							}
 						}
-						set_variable = {light_selected_ship_production_cost = light_ship_production_array^storing_current_index}
-						set_variable = {light_selected_ship_to_be_reduced = light_ship_production_array^storing_current_index}
+						set_variable = {light_ship_selected_item = light_ship_production_array^storing_current_index}
+						set_variable = {light_selected_ship_to_be_reduced = global.ship_ic_holder@light_ship_selected_item}
 						recalculate_light_ship_creation_time = yes
 					}
 				}
@@ -72,7 +72,7 @@ on_actions = {
 				set_variable = {medium_ship_workers = 25000}
 				set_temp_variable = {highest_so_far = 0}
 				set_temp_variable = {storing_current_index = 0}
-				set_temp_variable = {current_production_value = ship_amount_contract_holder@var:medium_selected_ship_production_cost^num}
+				set_temp_variable = {current_production_value = ship_amount_contract_holder@var:medium_ship_selected_item^num}
 				for_each_loop = {
 					array = medium_ship_production_array
 					value = item_to_look_for
@@ -111,12 +111,12 @@ on_actions = {
 								check_variable = {highest_so_far > 2}
 								check_variable = {current_production_value = 0}
 								NOT = {
-									has_variable = medium_selected_ship_production_cost
+									has_variable = medium_ship_selected_item
 								}
 							}
 						}
-						set_variable = {medium_selected_ship_production_cost = medium_ship_production_array^storing_current_index}
-						set_variable = {medium_selected_ship_to_be_reduced = medium_ship_production_array^storing_current_index}
+						set_variable = {medium_ship_selected_item = medium_ship_production_array^storing_current_index}
+						set_variable = {medium_selected_ship_to_be_reduced = global.ship_ic_holder@medium_ship_selected_item}
 						recalculate_medium_ship_creation_time = yes
 					}
 				}
@@ -130,7 +130,7 @@ on_actions = {
 				set_variable = {heavy_ship_workers = 25000}
 				set_temp_variable = {highest_so_far = 0}
 				set_temp_variable = {storing_current_index = 0}
-				set_temp_variable = {current_production_value = ship_amount_contract_holder@var:heavy_selected_ship_production_cost^num}
+				set_temp_variable = {current_production_value = ship_amount_contract_holder@var:heavy_ship_selected_item^num}
 				for_each_loop = {
 					array = heavy_ship_production_array
 					value = item_to_look_for
@@ -169,12 +169,12 @@ on_actions = {
 								check_variable = {highest_so_far > 2}
 								check_variable = {current_production_value = 0}
 								NOT = {
-									has_variable = heavy_selected_ship_production_cost
+									has_variable = heavy_ship_selected_item
 								}
 							}
 						}
-						set_variable = {heavy_selected_ship_production_cost = heavy_ship_production_array^storing_current_index}
-						set_variable = {heavy_selected_ship_to_be_reduced = heavy_ship_production_array^storing_current_index}
+						set_variable = {heavy_ship_selected_item = heavy_ship_production_array^storing_current_index}
+						set_variable = {heavy_selected_ship_to_be_reduced = global.ship_ic_holder@heavy_ship_selected_item}
 						recalculate_heavy_ship_creation_time = yes
 					}
 				}
