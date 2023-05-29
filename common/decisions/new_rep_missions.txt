@@ -3,7 +3,7 @@ new_republic_missions = {
 	invasion_of_coruscant = {
 
 		activation = {
-			has_completed_focus = REB_the_invasion_begins
+			has_completed_focus = REB_take_back_the_capital
 		}
 
 		icon = ger_mefo_bills
@@ -93,6 +93,20 @@ new_republic_missions = {
 			every_country = {
 				set_country_flag = reclamation_of_coruscant
 				play_song = "reclamation_of_coruscant"
+				if={
+					limit={
+						is_subject_of = EMP
+						NOT={tag = FON}
+					}
+					EMP={
+						set_autonomy = {
+							target = PREV
+							autonomy_state = autonomy_free
+							end_wars = no
+							end_civil_wars = no
+						}
+					}
+				}
 			}
 		}
 
