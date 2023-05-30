@@ -52,14 +52,7 @@ scripted_gui = {
                 erase_previous_buying_market_selection = yes
                 set_country_flag = open_market_ground_forces
                 set_variable = { manufacturing_number = 0 }
-                if = {
-                    limit = {
-                        has_country_flag = gun_selected
-                    }
-                    set_variable = { amount_to_be_produced = 1000 }
-                }else = {
-                    set_variable = { amount_to_be_produced = 100 }
-                }
+                set_variable = { amount_to_be_produced = 100 }
                 set_country_flag = level_1_selected
                 clr_country_flag = level_2_selected
                 clr_country_flag = level_3_selected
@@ -1331,7 +1324,7 @@ scripted_gui = {
                             has_country_flag = aug2_slugthower_selected
                         }
                     }
-                    divide_temp_variable = {price_of_batch = 1000}
+                    divide_temp_variable = {price_of_batch = 100}
                 }else = {
                     divide_temp_variable = {price_of_batch = 100}
                 }
@@ -2114,6 +2107,9 @@ scripted_gui = {
                 set_country_flag = aat_selected
                 clr_country_flag = a_25_truck_selected
                 clr_country_flag = x_34_landspeeder_selected
+                set_technology = {
+                    AAT_market = 1
+                }
                 set_variable = { manufacturing_country = UBK.id }
                 set_variable = { manufacturing_number = 28 }
 				set_variable = { current_price_market_buy_price = Global.tank_market_price_holder@root.manufacturing_number }
@@ -2123,6 +2119,9 @@ scripted_gui = {
                 set_country_flag = a_25_truck_selected
                 clr_country_flag = aat_selected
                 clr_country_flag = x_34_landspeeder_selected
+                set_technology = {
+                    a_25_truck_market = 1
+                }
                 set_variable = { manufacturing_country = TAG.id }
                 set_variable = { manufacturing_number = 30 }
 				set_variable = { current_price_market_buy_price = Global.tank_market_price_holder@root.manufacturing_number }
@@ -2132,6 +2131,9 @@ scripted_gui = {
                 set_country_flag = x_34_landspeeder_selected
                 clr_country_flag = aat_selected
                 clr_country_flag = a_25_truck_selected
+                set_technology = {
+                    x_34_landspeeder_market = 1
+                }
                 set_variable = { manufacturing_country = TAG.id }
                 set_variable = { manufacturing_number = 32 }
 				set_variable = { current_price_market_buy_price = Global.tank_market_price_holder@root.manufacturing_number }
@@ -2685,6 +2687,249 @@ scripted_gui = {
                 }
             }
             order_starship_click_enabled = {
+                order_starship_click_enabled = {
+                    if = {
+                        limit = {
+                            has_country_flag = imperial_market_open
+                        }
+                        if = {
+                            limit = {
+                                has_country_flag = tie_fighter_selected
+                            }
+                            if = {
+                                limit = {
+                                    has_country_flag = level_2_selected
+                                }
+                                SFS = {
+                                    has_tech = tie_fighter_2
+                                }
+                            }else_if = {
+                                limit = {
+                                    has_country_flag = level_3_selected
+                                }
+                                SFS = {
+                                    has_tech = tie_dagger
+                                }
+                            }else_if = {
+                                limit = {
+                                    has_country_flag = level_4_selected
+                                }
+                                SFS = {
+                                    has_tech = tie_predator
+                                }
+                            }
+                        }else_if = {
+                            limit = {
+                                has_country_flag = tie_bomber_selected
+                            }
+                            if = {
+                                limit = {
+                                    has_country_flag = level_2_selected
+                                }
+                                SFS = {
+                                    has_tech = tie_heavy_bomber
+                                }
+                            }else_if = {
+                                limit = {
+                                    has_country_flag = level_3_selected
+                                }
+                                SFS = {
+                                    has_tech = tie_punisher
+                                }
+                            }else_if = {
+                                limit = {
+                                    has_country_flag = level_4_selected
+                                }
+                                SFS = {
+                                    has_tech = tie_scimitar
+                                }
+                            }
+                        }else_if = {
+                            limit = {
+                                has_country_flag = tie_automated_selected
+                            }
+                            if = {
+                                limit = {
+                                    has_country_flag = level_2_selected
+                                }
+                                SFS = {
+                                    has_tech = tie_automated
+                                }
+                            }
+                        }else_if = {
+                            limit = {
+                                has_country_flag = tie_interceptor_selected
+                            }
+                            if = {
+                                limit = {
+                                    has_country_flag = level_2_selected
+                                }
+                                SFS = {
+                                    has_tech = tie_hunter
+                                }
+                            }else_if = {
+                                limit = {
+                                    has_country_flag = level_3_selected
+                                }
+                                SFS = {
+                                    has_tech = tie_raptor
+                                }
+                            }else_if = {
+                                limit = {
+                                    has_country_flag = level_4_selected
+                                }
+                                SFS = {
+                                    has_tech = tie_silencer
+                                }
+                            }
+                        }else_if = {
+                            limit = {
+                                has_country_flag = tie_fighter_bomber_selected
+                            }
+                            if = {
+                                limit = {
+                                    has_country_flag = level_2_selected
+                                }
+                                SFS = {
+                                    has_tech = tie_oppressor
+                                }
+                            }else_if = {
+                                limit = {
+                                    has_country_flag = level_3_selected
+                                }
+                                SFS = {
+                                    has_tech = tie_aggressor
+                                }
+                            }
+                        }
+                    }else_if = {
+                        limit = {
+                            has_country_flag = republic_market_open
+                        }
+                        if = {
+                            limit = {
+                                has_country_flag = x_wing_selected
+                            }
+                            if = {
+                                limit = {
+                                    has_country_flag = level_2_selected
+                                    INC = {
+                                        has_tech = x_wing_70
+                                    }
+                                }
+                            }else_if = {
+                                limit = {
+                                    has_country_flag = level_3_selected
+                                }
+                                INC = {
+                                    has_tech = x_wing_85
+                                }
+                            }
+                        }else_if = {
+                            limit = {
+                                has_country_flag = e_wing_selected
+                            }
+                            INC = {
+                                has_tech = e_wing
+                            }
+                        }else_if = {
+                            limit = {
+                                has_country_flag = a_wing_selected
+                            }
+                            if = {
+                                limit = {
+                                    has_country_flag = level_2_selected
+                                }
+                                KUA = {
+                                    has_tech = a_wing_2
+                                }
+                            }
+                        }else_if = {
+                            limit = {
+                                has_country_flag = u_wing_selected
+                            }
+                            if = {
+                                limit = {
+                                    has_country_flag = level_2_selected
+                                }
+                                KUA = {
+                                    has_tech = u_wing_1
+                                }
+                            }
+                        }else_if = {
+                            limit = {
+                                has_country_flag = y_wing_selected
+                            }
+                            if = {
+                                limit = {
+                                    has_country_flag = level_2_selected
+                                }
+                                KOE = {
+                                    has_tech = y_wing_airframe_2
+                                }
+                            }
+                        }else_if = {
+                            limit = {
+                                has_country_flag = b_wing_selected
+                            }
+                            if = {
+                                limit = {
+                                    has_country_flag = level_2_selected
+                                }
+                                SLK = {
+                                    has_tech = b_wing_airframe_1
+                                }
+                            }
+                        }else_if = {
+                            limit = {
+                                has_country_flag = k_wing_selected
+                                KOE = {
+                                    has_tech = k_wing
+                                }
+                            }
+                        }
+                    }else_if = {
+                        limit = {
+                            has_country_flag = neutral_market_open
+                        }
+                        else_if = {
+                            limit = {
+                                has_country_flag = z_95_selected
+                            }
+                            if = {
+                                limit = {
+                                    has_country_flag = level_2_selected
+                                }
+                                INC = {
+                                    has_tech = z_95_upgrade_1
+                                }
+                            }
+                        }else_if = {
+                            limit = {
+                                has_country_flag = v_wing_selected
+                            }
+                            if = {
+                                limit = {
+                                    has_country_flag = level_2_selected
+                                }
+                                INC = {
+                                    has_tech = v_wing_upgrade_1
+                                }
+                            }
+                        }else_if = {
+                            limit = {
+                                has_country_flag = star_fortress_selected
+                            }
+                            if = {
+                                limit = {
+                                    has_country_flag = level_2_selected
+                                }
+                                INC = {
+                                    has_tech = star_fortress_upgrade_1
+                                }
+                            }
+                        }
+                    }
                 var:manufacturing_country = {
                     NOT = {
                         is_in_array = {
@@ -2693,6 +2938,7 @@ scripted_gui = {
                         }
                     }
                 }
+                check_variable = {price_of_batch < currency_amount^primary_currency}
             }
         }
     }
