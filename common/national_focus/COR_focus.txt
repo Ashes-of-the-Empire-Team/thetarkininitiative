@@ -711,6 +711,7 @@ focus_tree = {
 		}
 		mutually_exclusive={
 			focus = COR_violent_force
+			focus = COR_corellian_isolation
 		}
 		available = {
 			
@@ -1204,11 +1205,11 @@ focus_tree = {
 		}
 		completion_reward = {
 			add_to_variable = {
-				legitimacy_emp = 30
+				legitimacy_emp = 15
 				tooltip = add_to_EMP_legitimacy
 			}
 			add_to_variable = {
-				legitimacy_emp_equilibrium = 25
+				legitimacy_emp_equilibrium = 10
 			}
 		}
 
@@ -1270,6 +1271,13 @@ focus_tree = {
 		completion_reward = {
 			set_country_flag = can_use_imperial_occupation
 			NUB = { add_to_ROOT_potential_cores = yes }
+			add_to_variable = {
+				legitimacy_emp = 10
+				tooltip = add_to_EMP_legitimacy
+			}
+			add_to_variable = {
+				legitimacy_emp_equilibrium = 5
+			}
 		}
 
 		ai_will_do = {
@@ -1280,7 +1288,7 @@ focus_tree = {
 		id = COR_preparing_for_the_push_to_coruscant
 		icon = GFX_pitta_goal
 		cost = 5
-		x = -1
+		x = -2
 		y = 1
 		relative_position_id = COR_centralising_power_on_corellia
 		prerequisite = {
@@ -1298,14 +1306,6 @@ focus_tree = {
 			has_navy_size = {
 				size > 7
 				type = carrier
-			}
-			custom_trigger_tooltip = {
-				tooltip = COR_legitimacy_emp_40_tt
-				check_variable = {
-					var = legitimacy_emp
-					value = 40
-					compare = greater_than
-				}
 			}
 		}
 		completion_reward = {
@@ -1387,6 +1387,14 @@ focus_tree = {
 		available = {
 			controls_state = 266
 			has_war = no
+			custom_trigger_tooltip = {
+				tooltip = COR_legitimacy_emp_40_tt
+				check_variable = {
+					var = legitimacy_emp
+					value = 40
+					compare = greater_than
+				}
+			}
 		}
 		#will_lead_to_war_with = EMP
 		completion_reward = {
@@ -1723,6 +1731,311 @@ focus_tree = {
 			factor = 1
 		}
 	}
+	focus = {
+		id = COR_rooting_out_dikat_loyalists
+		icon = GFX_WIP_focus
+		cost = 5
+		x = -1
+		y = 1
+		relative_position_id = COR_government_of_sal_solo
+		prerequisite = {
+			focus = COR_government_of_sal_solo
+		}
+		search_filters = {
+		}
+		completion_reward = {
+			
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = COR_breaking_imperial_influence
+		icon = GFX_WIP_focus
+		cost = 5
+		x = 1
+		y = 1
+		relative_position_id = COR_government_of_sal_solo
+		prerequisite = {
+			focus = COR_government_of_sal_solo
+		}
+		search_filters = {
+		}
+		completion_reward = {
+			
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = COR_rebuilding_corellian_power
+		icon = GFX_WIP_focus
+		cost = 5
+		x = 0
+		y = 2
+		relative_position_id = COR_government_of_sal_solo
+		prerequisite = {
+			focus = COR_breaking_imperial_influence
+		}
+		prerequisite = {
+			focus = COR_rooting_out_dikat_loyalists
+		}
+		search_filters = {
+		}
+		completion_reward = {
+			
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = COR_corellian_isolation
+		icon = GFX_WIP_focus
+		cost = 5
+		x = -2
+		y = 1
+		relative_position_id = COR_rebuilding_corellian_power
+		prerequisite = {
+			focus = COR_rebuilding_corellian_power
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+			focus = COR_the_long_play
+			focus = COR_a_new_path_for_corellia
+		}
+		completion_reward = {
+			
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = COR_continue_rallying_aganist_xenos
+		icon = GFX_WIP_focus
+		cost = 5
+		x = 0
+		y = 1
+		relative_position_id = COR_corellian_isolation
+		prerequisite = {
+			focus = COR_corellian_isolation
+		}
+		search_filters = {
+		}
+		completion_reward = {
+			
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = COR_a_new_path_for_corellia
+		icon = GFX_WIP_focus
+		cost = 5
+		x = 2
+		y = 1
+		relative_position_id = COR_rebuilding_corellian_power
+		prerequisite = {
+			focus = COR_rebuilding_corellian_power
+		}
+		search_filters = {
+		}
+		completion_reward = {
+			
+		}
+		mutually_exclusive = {
+			focus = COR_corellian_isolation
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = COR_defending_corellia
+		icon = GFX_WIP_focus
+		cost = 5
+		x = 0
+		y = 2
+		relative_position_id = COR_rebuilding_corellian_power
+		prerequisite = {
+			focus = COR_a_new_path_for_corellia
+			focus = COR_corellian_isolation
+		}
+		search_filters = {
+		}
+		completion_reward = {
+			
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = COR_unite_the_corellian_system
+		icon = GFX_WIP_focus
+		cost = 5
+		x = 0
+		y = 1
+		relative_position_id = COR_a_new_path_for_corellia
+		prerequisite = {
+			focus = COR_a_new_path_for_corellia
+		}
+		search_filters = {
+		}
+		completion_reward = {
+			
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = COR_sway_selonia
+		icon = GFX_WIP_focus
+		cost = 10.8
+		x = 2
+		y = 1
+		relative_position_id = COR_unite_the_corellian_system
+		prerequisite = {
+			focus = COR_unite_the_corellian_system
+		}
+		search_filters = {
+		}
+		completion_reward = {
+			
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = COR_sway_talus
+		icon = GFX_WIP_focus
+		cost = 10.8
+		x = 1
+		y = 2
+		relative_position_id = COR_unite_the_corellian_system
+		prerequisite = {
+			focus = COR_unite_the_corellian_system
+		}
+		search_filters = {
+		}
+		completion_reward = {
+			
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = COR_sway_tralus
+		icon = GFX_WIP_focus
+		cost = 10.8
+		x = -1
+		y = 2
+		relative_position_id = COR_unite_the_corellian_system
+		prerequisite = {
+			focus = COR_unite_the_corellian_system
+		}
+		search_filters = {
+		}
+		completion_reward = {
+			
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = COR_sway_drall
+		icon = GFX_WIP_focus
+		cost = 10.8
+		x = 0
+		y = 1
+		relative_position_id = COR_unite_the_corellian_system
+		prerequisite = {
+			focus = COR_unite_the_corellian_system
+		}
+		search_filters = {
+		}
+		completion_reward = {
+			
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = COR_secure_centerpoint
+		icon = GFX_WIP_focus
+		cost = 10.8
+		x = 0
+		y = 1
+		relative_position_id = COR_defending_corellia
+		prerequisite = {
+			focus = COR_defending_corellia
+		}
+		prerequisite = {
+			focus = COR_unite_the_corellian_system
+			focus = COR_continue_rallying_aganist_xenos
+		}
+		search_filters = {
+		}
+		completion_reward = {
+			
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = COR_five_worlds
+		icon = GFX_WIP_focus
+		cost = 5
+		x = 0
+		y = 2
+		relative_position_id = COR_sway_drall
+		prerequisite = {
+			focus = COR_sway_drall
+		}
+		available = {
+			has_completed_focus  = COR_secure_centerpoint
+
+			has_completed_focus = COR_sway_selonia
+
+			has_completed_focus = COR_sway_talus
+
+			has_completed_focus = COR_sway_tralus
+		}
+		search_filters = {
+		}
+		completion_reward = {
+			
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+
 	focus = {
 		id = COR_joining_NR
 		icon = GFX_WIP_focus
