@@ -3797,6 +3797,13 @@ scripted_gui = {
                 clr_country_flag = Imperial_Star_Destroyer_buying_market_open
                 clr_country_flag = Imperial_Star_Destroyer_1_buying_market_open
                 clr_country_flag = resurgent_buying_market_open
+
+                clr_country_flag = marauder_buying_market_open
+                clr_country_flag = shpyrna_buying_market_open
+                clr_country_flag = dp20_buying_market_open
+                clr_country_flag = hynestian_buying_market_open
+                clr_country_flag = bulwark_buying_market_open
+
             }
             select_frigates_button_click = {
                 erase_previous_ship_menu_selection = yes
@@ -3840,6 +3847,12 @@ scripted_gui = {
                 clr_country_flag = Imperial_Star_Destroyer_buying_market_open
                 clr_country_flag = Imperial_Star_Destroyer_1_buying_market_open
                 clr_country_flag = resurgent_buying_market_open
+
+                clr_country_flag = marauder_buying_market_open
+                clr_country_flag = shpyrna_buying_market_open
+                clr_country_flag = dp20_buying_market_open
+                clr_country_flag = hynestian_buying_market_open
+                clr_country_flag = bulwark_buying_market_open
                 
             }
             select_cruisers_button_click = {
@@ -3884,6 +3897,12 @@ scripted_gui = {
                 clr_country_flag = Imperial_Star_Destroyer_buying_market_open
                 clr_country_flag = Imperial_Star_Destroyer_1_buying_market_open
                 clr_country_flag = resurgent_buying_market_open
+
+                clr_country_flag = marauder_buying_market_open
+                clr_country_flag = shpyrna_buying_market_open
+                clr_country_flag = dp20_buying_market_open
+                clr_country_flag = hynestian_buying_market_open
+                clr_country_flag = bulwark_buying_market_open
             }
             select_star_destroyers_button_click = {
                 erase_previous_ship_menu_selection = yes
@@ -3927,6 +3946,12 @@ scripted_gui = {
                 clr_country_flag = Imperial_Star_Destroyer_buying_market_open
                 clr_country_flag = Imperial_Star_Destroyer_1_buying_market_open
                 clr_country_flag = resurgent_buying_market_open
+
+                clr_country_flag = marauder_buying_market_open
+                clr_country_flag = shpyrna_buying_market_open
+                clr_country_flag = dp20_buying_market_open
+                clr_country_flag = hynestian_buying_market_open
+                clr_country_flag = bulwark_buying_market_open
             }
             #flag_producer_click = {
             #    var:manufacturing_country = {
@@ -4682,10 +4707,6 @@ scripted_gui = {
         }
         effects = {
             lancer_click = {
-                set_country_flag = lancer_buying_market_open
-                set_variable = { manufacturing_country = KUA.id }
-            }
-            lancer_click = {
                 set_variable = { manufacturing_country = KUA.id }
                 set_variable = { manufacturing_number = 4 }
 				set_variable = { current_price_market_buy_price = Global.ship_price_holder@root.manufacturing_number }
@@ -4908,12 +4929,149 @@ scripted_gui = {
             }
         }
     }
+    Marketplace_corvettes_neutral_buttons = {
+        context_type = player_context
+        parent_window_name = "Marketplace_buying_menu"
+        window_name = "Marketplace_corvettes_imperial_buttons"
+        visible = {
+            has_country_flag = corvette_buying_market_open
+            has_country_flag = neutral_market_open
+            has_country_flag = open_market_ships
+        }
+        effects = {
+            marauder_click = {
+                set_country_flag = marauder_buying_market_open
+                clr_country_flag = shpyrna_buying_market_open
+                set_variable = { manufacturing_country = SFS.id }
+                set_variable = { manufacturing_number = 35 }
+				set_variable = { current_price_market_buy_price = Global.ship_price_holder@root.manufacturing_number }
+                set_variable = { current_ic_cost_ships = Global.ship_ic_holder@root.manufacturing_number}
+                set_technology = {
+                    marauder_market =  1
+                }
+            }
+            shpyrna_click = {
+                set_country_flag = shpyrna_buying_market_open
+                clr_country_flag = marauder_buying_market_open
+                set_variable = { manufacturing_country = REN.id }
+                set_variable = { manufacturing_number = 36 }
+				set_variable = { current_price_market_buy_price = Global.ship_price_holder@root.manufacturing_number }
+                set_variable = { current_ic_cost_ships = Global.ship_ic_holder@root.manufacturing_number}
+                set_technology = {
+                    shpyrna_market =  1
+                }
+            }
+        }
+        triggers = {
+            marauder_click_enabled = {
+                NOT = {
+                    has_country_flag = marauder_buying_market_open
+                }
+            }
+            shpyrna_click_enabled = {
+                NOT = {
+                    has_country_flag = shpyrna_buying_market_open
+                }
+            }
+        }
+        properties = {
+            ship_icon = {
+                image = "[Get_neu_corvette]"
+            }
+        }
+    }
+    Marketplace_frigate_neutral_buttons = {
+        context_type = player_context
+        parent_window_name = "Marketplace_buying_menu"
+        window_name = "Marketplace_frigate_imperial_buttons"
+        visible = {
+            has_country_flag = frigate_buying_market_open
+            has_country_flag = neutral_market_open
+            has_country_flag = open_market_ships
+        }
+        effects = {
+            dp20_click = {
+                set_variable = { manufacturing_country = CEC.id }
+                set_variable = { manufacturing_number = 37 }
+				set_variable = { current_price_market_buy_price = Global.ship_price_holder@root.manufacturing_number }
+                set_variable = { current_ic_cost_ships = Global.ship_ic_holder@root.manufacturing_number}
+                set_technology = {
+                    dp20_market =  1
+                }
+            }
+        }
+        triggers = {
+            dp20_click_enabled = {
+                NOT = {
+                    has_country_flag = dp20_buying_market_open
+                }
+            }
+        }
+    }
+    Marketplace_cruiser_neutral_buttons = {
+        context_type = player_context
+        parent_window_name = "Marketplace_buying_menu"
+        window_name = "Marketplace_cruiser_imperial_buttons"
+        visible = {
+            has_country_flag = cruiser_buying_market_open
+            has_country_flag = neutral_market_open
+            has_country_flag = open_market_ships
+        }
+        effects = {
+            hynestian_click = {
+                set_country_flag = hynestian_buying_market_open
+                set_variable = { manufacturing_number = 38 }
+				set_variable = { current_price_market_buy_price = Global.ship_price_holder@root.manufacturing_number }
+                set_variable = { current_ic_cost_ships = Global.ship_ic_holder@root.manufacturing_number}
+                set_variable = { manufacturing_country = REN.id }
+                set_technology = {
+                    hynestian_market =  1
+                }
+            }
+        }
+        triggers = {
+            hynestian_click_enabled = {
+                NOT = {
+                    has_country_flag = hynestian_buying_market_open
+                }
+            }
+        }
+    }
+    Marketplace_battlecruiser_neutral_buttons = {
+        context_type = player_context
+        parent_window_name = "Marketplace_buying_menu"
+        window_name = "Marketplace_cruiser_imperial_buttons"
+        visible = {
+            has_country_flag = star_destroyer_buying_market_open
+            has_country_flag = neutral_market_open
+            has_country_flag = open_market_ships
+        }
+        effects = {
+            bulwark_click = {
+                set_country_flag = bulwark_buying_market_open
+                set_variable = { manufacturing_number = 39 }
+				set_variable = { current_price_market_buy_price = Global.ship_price_holder@root.manufacturing_number }
+                set_variable = { current_ic_cost_ships = Global.ship_ic_holder@root.manufacturing_number}
+                set_variable = { manufacturing_country = SOR.id }
+                set_technology = {
+                    bulwark_market =  1
+                }
+            }
+        }
+        triggers = {
+            bulwark_click_enabled = {
+                NOT = {
+                    has_country_flag = bulwark_buying_market_open
+                }
+            }
+        }
+    }
     Marketplace_mercs_main_buttons = { ## Different containers for easy of modding (copy paste of ships)
         context_type = player_context
         parent_window_name = "Marketplace_buying_menu"
         window_name = "Marketplace_corvettes_imperial_buttons"
         visible = {
-            has_country_flag = open_market_mercs
+            always = no
         }
         effects = {
             order_mercs_click = {
@@ -5121,8 +5279,7 @@ scripted_gui = {
         parent_window_name = "Marketplace_buying_menu"
         window_name = "Marketplace_buying_mercs_division_buttons"
         visible = {
-            has_country_flag = open_market_mercs
-            has_country_flag = mercs_divisions_open
+            always = no
         }
         effects = {
             mandolorian_warriors_button_click = {
@@ -5182,8 +5339,7 @@ scripted_gui = {
         parent_window_name = "Marketplace_buying_menu"
         window_name = "Marketplace_buying_mercs_starfighters_buttons"
         visible = {
-            has_country_flag = open_market_mercs
-            has_country_flag = mercs_starfighters_open
+            always = no
         }
         effects = {
             crimson_aces_button_click = {

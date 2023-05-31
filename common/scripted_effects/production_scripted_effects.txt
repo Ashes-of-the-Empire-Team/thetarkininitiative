@@ -152,39 +152,3 @@ create_ship_market_effect = {
 # add_to_array = { in_queue_tag = EMP }
 # add_to_array = { in_queue_amount = 100 }
 # add_to_array = { in_queue_cost = 1000 }
-test_effect_neverfire_early = {
-	set_variable = { test_variable_20 = token:t3_b_destroyer_chassis_0 }
-	log = "[?test_variable_20.GetTokenKey]"
-	meta_effect = {
-		text = {
-			add_equipment_to_stockpile = {
-				type = [MARKET_ITEM]
-				amount = 100
-			}
-		}
-		MARKET_ITEM = "[?test_variable_20.GetTokenKey]" 
-	}
-}
-test_effect_neverfire_seventy = {
-	set_temp_variable = {tag_to_use_as_effect = KUA.id}
-	set_temp_variable = {ship_amount_to_add = 2}
-	set_temp_variable = {market_equipment_actual = token:IPV_1_1 }
-	set_technology = {
-		ipv_market = 1
-	}
-	meta_effect = {
-		text = {
-			for_loop_effect = {
-				end = [MARKET_AMOUNT]
-				value = temp
-				create_ship = {
-					type = [MARKET_ITEM]
-					equipment_variant = "[MARKET_SHIP_VARIENT_NAME]"
-				}
-			}
-		}
-		MARKET_ITEM = "[?market_equipment_actual.GetTokenKey]" 
-		MARKET_AMOUNT = "[?ship_amount_to_add]"
-		MARKET_SHIP_VARIENT_NAME = "[GetShipVarientName]"
-	}
-}
