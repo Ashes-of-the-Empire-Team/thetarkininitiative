@@ -1,55 +1,4 @@
 
-##
-RIN_civil_war = {
-	enforce_curfews = {
-		available = { has_stability > 0.05 }
-		days_remove = 150
-			complete_effect = {
-				add_days_mission_timeout = {
-					mission = RIN_civil_war_mission
-					days = 40
-				}
-				add_stability = -0.10					
-			}
-		}
-		promise_peace = {
-			available = { has_war_support =  > 0.05 }
-			days_remove = 150
-				complete_effect = {
-					add_days_mission_timeout = {
-						mission = RIN_civil_war_mission
-						days = 40
-					}
-					add_war_support =  = -0.05	
-					add_stability = 0.05						
-				}
-			}
-		enact_martial_law = {
-			available = { has_manpower > 20000 }
-			days_remove = 150
-				complete_effect = {
-					add_days_mission_timeout = {
-						mission = RIN_civil_war_mission
-						days = 20
-					}
-					add_manpower = -20000					
-				}
-			}
-			political_speaches = {
-				available = { has_political_power > 100 }
-				days_remove = 150
-					complete_effect = {
-						add_days_mission_timeout = {
-							mission = RIN_civil_war_mission
-							days = 20
-						}
-						add_political_power = -100
-						add_stability = 0.05			
-					}
-				}
-    }
-
-
 crisis = {
 	RIN_civil_war_mission = {
 		icon = generic_civil_support
@@ -173,7 +122,7 @@ crisis = {
 				}
 				}
 			}
-			50 = {S
+			50 = {
 				add_manpower = -30000
 				add_stability = -0.1
     		}
@@ -186,3 +135,52 @@ crisis = {
 		}
 	}
 }
+
+RIN_civil_war = {
+	enforce_curfews = {
+		available = { has_stability > 0.05 }
+		days_remove = 150
+			complete_effect = {
+				add_days_mission_timeout = {
+					mission = RIN_civil_war_mission
+					days = 40
+				}
+				add_stability = -0.10					
+			}
+		}
+		enact_martial_law = {
+			available = { has_manpower > 20000 }
+			days_remove = 150
+				complete_effect = {
+					add_days_mission_timeout = {
+						mission = RIN_civil_war_mission
+						days = 20
+					}
+					add_manpower = -20000					
+				}
+			}
+			political_speaches = {
+				available = { has_political_power > 100 }
+				days_remove = 150
+					complete_effect = {
+						add_days_mission_timeout = {
+							mission = RIN_civil_war_mission
+							days = 20
+						}
+						add_political_power = -100
+						add_stability = 0.05			
+					}
+				}
+			promise_peace = {
+			available = {has_war_support > 0.05 }
+			days_remove = 150
+				complete_effect = {
+					add_days_mission_timeout = {
+						mission = RIN_civil_war_mission
+						days = 40
+					}
+					add_war_support = -0.05	
+					add_stability = 0.05						
+				}
+			}
+	 }

@@ -44,16 +44,16 @@ focus = {
 }
 
 focus = {
-	id = RIN_fortress_world
+	id = RIN_fortress_world_focus
 	icon = GFX_EMP_goal
-	cost = 5
+	cost = 10
 	x = -6
 	y = 1
 	ai_will_do = {
 		factor = 1
 	}
 	completion_reward = {
-		add_ideas = RIN_fotress_world
+		add_ideas = RIN_fortress_world
 	}
 	relative_position_id = RIN_keeping_it_a_secret
 	prerequisite = { focus = RIN_keeping_it_a_secret }
@@ -719,8 +719,8 @@ focus = {
 				}
 		}
 	}
-	relative_position_id = RIN_fortress_world
-	prerequisite = { focus = RIN_fortress_world }
+	relative_position_id = RIN_fortress_world_focus
+	prerequisite = { focus = RIN_fortress_world_focus }
 }
 
 focus = {
@@ -754,8 +754,8 @@ focus = {
 		}
 	}
 	}
-	relative_position_id = RIN_fortress_world
-	prerequisite = { focus = RIN_fortress_world }
+	relative_position_id = RIN_fortress_world_focus
+	prerequisite = { focus = RIN_fortress_world_focus }
 }
 
 focus = {
@@ -777,8 +777,8 @@ focus = {
 			ERI = { country_event = RIN.11 }
 		}
 	}
-	relative_position_id = RIN_fortress_world
-	prerequisite = { focus = RIN_fortress_world }
+	relative_position_id = RIN_fortress_world_focus
+	prerequisite = { focus = RIN_fortress_world_focus }
 }
 
 focus = {
@@ -1244,13 +1244,17 @@ focus = {
 		factor = 1
 	}
 	available = {
-		RIN = {
+		OR	= {
+		AND = {RIN = {
 			owns_state = 104
 			owns_state = 432
 			owns_state = 428
 			owns_state = 430
 		}
 		ERI = {has_capitulated = yes}
+		}
+		ERI = { OVERLORD = {tag = RIN } }
+	}
 	}
 	completion_reward = {
 		set_autonomy = {
@@ -1628,6 +1632,7 @@ focus = {
 			name = electronics
 			bonus = 0.5
 			uses = 2
+			category = electronics
 		}
 	}
 }
@@ -1696,6 +1701,7 @@ focus = {
 			name = electronics
 			bonus = 0.5
 			uses = 2
+			category = electronics
 		}
 	}
 }
