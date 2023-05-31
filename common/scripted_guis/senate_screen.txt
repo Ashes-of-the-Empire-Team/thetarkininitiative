@@ -1547,6 +1547,23 @@ scripted_gui = {
            has_country_flag = senate_main_open
 		}
 		effects = {
+			senate_choice_click = {
+				if = {
+					limit = {
+						check_variable = { senate_choice = 1 }
+					}
+					add_to_array = { Global.Newrepleaders = ROOT.id }
+					set_variable = { senate_choice = 2 }
+				}
+				else = {
+					remove_from_array = {
+						array = Global.Newrepleaders
+						value = ROOT.id
+					}				
+					set_variable = { senate_choice = 1 }
+				}
+			}
+
 			senate_flag_frame_leader_click = {
 				capital_scope = {
 					ROOT = {
@@ -1680,6 +1697,39 @@ scripted_gui = {
 			}
 			new_rep_leader_flag = {
 				image = "[ROOT.GetFlag]"
+			}
+			senate_choice = {
+				frame = senate_choice
+			}
+		}
+	}
+	senate_voting_leader_screen = {
+		context_type = player_context
+		window_name = "senate_voting_leader_screen"
+		parent_window_name = "senate_screen"
+		visible = {
+			always = no
+		}
+		effects = {
+			
+		}
+		triggers = {
+			leader_vote_flag_click_enabled = {
+				NOT = {
+					has_country_flag = voted_for_leader
+				}
+			}
+		}
+		dynamic_lists = {
+			candidates_grid = {
+				array = Global.Newrepleaders
+				entry_container = leader_vote_entry
+				change_scope = yes
+			}
+		}
+		properties = {
+			leader_vote_flag = {
+				image = "[This.GetFlag]"
 			}
 		}
 	}
