@@ -27,19 +27,59 @@ news_event = {        #
 			set_state_controller = 54
 			set_state_controller = 278
 			set_state_controller = 282
-			#280 = {
-			#	set_demilitarized_zone = yes
-			#}
-		}
-		280 = {
-			transfer_state_to = TOF
-		}
-		TOF = {
-			load_oob = "TOF_4"
+			set_state_controller = 280
+			country_event = {
+				id = eraevent.2
+				days = 10
+			}
+			load_oob = "NAG_5"
 		}
     }    
 }
-
+country_event = {
+	id = eraevent.2
+	title = "Toph Invasion"
+    desc = "Invaders get invaded"
+	picture = GFX_report_event
+	is_triggered_only = yes
+	immediate = {
+		TOF = {
+			transfer_state = 280
+			load_oob = "TOF_4"
+			declare_war_on = {
+				target = NAG
+				type = annex_everything
+			}
+		}
+		NAG = {
+			country_event = {
+				id = eraevent.3
+				days = 10
+			}
+		}
+    }
+	option = {
+		name = "Repulse the Toph invaders"
+	}
+}
+country_event = {
+	id = eraevent.3
+	title = "Ask the Republic for help?"
+    desc = "We are slowly being repulsed by the Toph, should we ask the republic for help in trade for the Zeltros independance"
+	picture = GFX_report_event
+	is_triggered_only = yes
+	option = {
+		name = "We can beat the Toph by ourselves"
+		ai_chance = {base = 0}
+	}
+	option = {
+		name = "Ask the republic for help"
+		REB = {
+			country_event = new_republic_focus.9	
+		}
+		ai_chance = {base = 100}
+	}
+}
 #news_event = {        #
 #    id = eraevent.2
 #    title = "The Era of Restoration Phase 2"

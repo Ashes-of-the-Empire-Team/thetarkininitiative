@@ -6,7 +6,7 @@ new_republic_missions = {
 			has_completed_focus = REB_take_back_the_capital
 		}
 
-		icon = ger_mefo_bills
+		icon = GFX_rebel_momentum_in_text
 
 		available = {
 			189={
@@ -127,7 +127,7 @@ new_republic_missions = {
 			always = yes
 		}
 
-		icon = ger_mefo_bills
+		icon = GFX_rebel_momentum_in_text
 
 		available = {
 			always = no
@@ -159,7 +159,7 @@ new_republic_missions = {
 new_republic_galatic_liberation={
 	REB_intervene_in_bakura_decision = {
         priority = 11
-        icon = eng_ally_imperialist_coup
+        icon = GFX_rebel_momentum_in_text
 
         allowed = {
 			tag = REB
@@ -181,10 +181,13 @@ new_republic_galatic_liberation={
         }
         #remove_effect = {
 		#}
+		ai_will_do = {
+			factor = 20
+		}
     }
 	REB_send_volunteers_to_bakura_decision = {
         priority = 11
-        icon = eng_ally_imperialist_coup
+        icon = GFX_rebel_momentum_in_text
 
         allowed = {
 			tag = REB
@@ -236,12 +239,15 @@ new_republic_galatic_liberation={
 				}
 			}
         }
+		ai_will_do = {
+			factor = 10
+		}
         #remove_effect = {
 		#}
     }
 	REB_abandon_bakura_decision = {
         priority = 11
-        icon = eng_ally_imperialist_coup
+        icon = GFX_rebel_momentum_in_text
 
         allowed = {
 			tag = REB
@@ -274,7 +280,7 @@ new_republic_galatic_liberation={
     }
 	REB_take_back_bespin_decision = {
         priority = 10
-        icon = eng_ally_imperialist_coup
+        icon = GFX_rebel_momentum_in_text
 
         allowed = {
 			tag = REB
@@ -297,9 +303,79 @@ new_republic_galatic_liberation={
         #remove_effect = {
 		#}
     }
+	REB_send_guns_bespin_decision = {
+        priority = 9
+        icon = GFX_rebel_momentum_in_text
+
+        allowed = {
+			tag = REB
+        }
+        visible = {
+            always=yes
+			has_country_flag = bespin_operation
+        }
+        cost = 50
+        available = {
+			has_country_flag = bespin_operation
+        }
+        #days_remove = 120
+        complete_effect = {
+			set_country_flag = guns_sent_to_bespin
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = -1500
+				#producer = REB
+			}
+        }
+        #remove_effect = {
+		#}
+		ai_will_do = {
+			factor = 15
+		}
+    }
+	REB_begin_the_war_decision = {
+        priority = 10
+        icon = GFX_rebel_momentum_in_text
+
+        allowed = {
+			tag = REB
+        }
+        visible = {
+            always=yes
+			has_country_flag = bespin_operation
+        }
+        cost = 50
+        available = {
+			has_country_flag = bespin_operation
+        }
+        #days_remove = 120
+        complete_effect = {
+			custom_effect_tooltip = REB_begin_the_war_decision_tt
+			BES = {
+				hidden_effect = {
+					start_civil_war = {
+						ruling_party = democratic
+						ideology = EMP
+						size = 0.3
+						capital = 445
+						states = {
+							445
+						}
+					}
+					add_popularity = {
+						ideology = democratic
+						popularity = 1
+					}
+					load_oob = "BES_4_civil_war"
+				}
+			}
+        }
+        #remove_effect = {
+		#}
+    }
 	REB_diplomatic_mission_to_utapau_decision = {
         priority = 9
-        icon = eng_ally_imperialist_coup
+        icon = GFX_rebel_momentum_in_text
 
         allowed = {
 			tag = REB
@@ -317,14 +393,20 @@ new_republic_galatic_liberation={
         complete_effect = {
 			set_country_flag = REB_currently_in_operation
 			set_country_flag = utapau_negotiation
-			custom_effect_tooltip = REB_diplomatic_mission_to_utapau_decision_tt
+			#custom_effect_tooltip = REB_diplomatic_mission_to_utapau_decision_tt
+			UTA = {
+				country_event = { id = new_rep_reaches.1 days = 1 }
+			}
         }
         #remove_effect = {
 		#}
+		ai_will_do = {
+			factor = 15
+		}
     }
 	REB_dispach_the_diplomats_decision = {
         priority = 9
-        icon = eng_ally_imperialist_coup
+        icon = GFX_rebel_momentum_in_text
 
         allowed = {
 			tag = REB
@@ -342,12 +424,15 @@ new_republic_galatic_liberation={
 				country_event = new_republic_focus.10
 			}
         }
+		ai_will_do = {
+			factor = 200
+		}
         #remove_effect = {
 		#}
     }
 	REB_tatooine_uprising_decision = {
         priority = 8
-        icon = eng_ally_imperialist_coup
+        icon = GFX_rebel_momentum_in_text
 
         allowed = {
 			tag = REB

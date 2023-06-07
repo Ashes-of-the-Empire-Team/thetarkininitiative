@@ -45,6 +45,26 @@ on_actions = {
 				}
 				set_country_flag = member_of_economic_committee
 			}
+			REB = {
+				set_variable = {current_new_republic_leader = THIS.id}
+			}
+		}
+	}
+	on_peace = {
+		effect = {
+			if = {
+				limit = {
+					tag = var:current_new_republic_leader
+				}
+				if = {
+					limit = {
+						has_global_flag = new_republic_election_delayed ## IF ELECTION HAS BEEN DELAYED, START THE ELECTION AGAIN
+					}
+					news_event = {
+						id = new_rep_elections.5
+					}
+				}
+			}
 		}
 	}
 }
