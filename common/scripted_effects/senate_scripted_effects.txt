@@ -60,7 +60,7 @@ calculate_espionage_senate_power = {
 }
 calculate_research_senate_power = {
 	set_temp_variable = {research_score = amount_research_slots}
-	add_to_temp_variable = {research_score = num_research_technologies }
+	add_to_temp_variable = {research_score = num_researched_technologies }
 	add_to_temp_variable = {research_score = num_tech_sharing_groups}
 	add_to_temp_array = {
 		array = global.highest_research_score
@@ -323,6 +323,192 @@ replace_espionage_member_calculator = {
 				array = global.highest_espionage_score
 				index = temp_country_index
 				value = 100000
+			}
+		}
+	}
+}
+
+presidential_election_calculate_voting_power = {
+	## RESEARCH SCORE
+	set_temp_variable = {research_score = amount_research_slots}
+	add_to_temp_variable = {research_score = num_researched_technologies }
+	add_to_temp_variable = {research_score = num_tech_sharing_groups}
+	## ESPIONAGE SCORE
+	set_temp_variable = {espionage_score = 0}
+	if = {
+		limit = {
+			has_variable = agent_martial@var:agent_operation_slot_1
+		}
+		add_to_temp_variable = {espionage_score = agent_martial@var:agent_operation_slot_1}
+		add_to_temp_variable = {espionage_score = agent_intelligence@var:agent_operation_slot_1}
+		add_to_temp_variable = {espionage_score = agent_charisma@var:agent_operation_slot_1}
+	}
+	if = {
+		limit = {
+			has_variable = agent_martial@var:agent_operation_slot_2
+		}
+		add_to_temp_variable = {espionage_score = agent_martial@var:agent_operation_slot_2}
+		add_to_temp_variable = {espionage_score = agent_intelligence@var:agent_operation_slot_2}
+		add_to_temp_variable = {espionage_score = agent_charisma@var:agent_operation_slot_2}
+	}
+	if = {
+		limit = {
+			has_variable = agent_martial@var:agent_operation_slot_3
+		}
+		add_to_temp_variable = {espionage_score = agent_martial@var:agent_operation_slot_3}
+		add_to_temp_variable = {espionage_score = agent_intelligence@var:agent_operation_slot_3}
+		add_to_temp_variable = {espionage_score = agent_charisma@var:agent_operation_slot_3}
+	}
+	##MILITARY SCORE
+	set_temp_variable = {military_score = num_battalions}
+	divide_temp_variable = {military_score = 15}
+	set_temp_variable = {num_ships_calculator = num_ships }
+	divide_temp_variable = {num_ships_calculator = 5}
+	set_temp_variable = {num_of_planes_calculator = num_deployed_planes}
+	divide_temp_variable = {num_of_planes_calculator = 50}
+
+	add_to_temp_variable = {military_score = num_of_planes_calculator}
+	add_to_temp_variable = {military_score = num_ships_calculator}
+	##ECONOMIC SCORE
+	set_temp_variable = {economic_score = max_manpower_k}
+	divide_temp_variable = {economic_score = 10000}
+	set_temp_variable = {credit_income_calculator = nmn}
+	set_temp_variable = {factory_count_calculator = num_of_civilian_factories}
+	add_to_temp_variable = {economic_score = credit_income_calculator}
+	add_to_temp_variable = {economic_score = factory_count_calculator}
+
+	## TOTAL SCORE
+	set_variable = {total_new_republic_voting_score = economic_score}
+	add_to_variable = {total_new_republic_voting_score = espionage_score}
+	add_to_variable = {total_new_republic_voting_score = military_score}
+	add_to_variable = {total_new_republic_voting_score = research_score}
+}
+presidential_election_calculate_votes_first_time_around = {
+	for_each_scope_loop = {
+		array = global.presidental_election_canidates
+		add_to_temp_array = {
+			array = presidental_voting_score_to_be_sorted
+			value = new_republic_voting_score
+		}
+		add_to_temp_array = {
+			array = presidental_voting_score_the_tag
+			value = THIS.id
+		}
+	}
+	add_to_temp_array = {
+		array = presidental_voting_score_sorted
+		value = 0 ## DUMMY SCORE TO START THE ARRAYS
+	}
+	## SIMPLE SORT SINCE MORE IFS WOULD BE BAD WITH THIS LITTLE DATA
+	for_each_loop = {
+		array = presidental_voting_score_to_be_sorted
+		value = current_unsorted_value
+		index = unsorted_index
+		for_each_loop = {
+			array = presidental_voting_score_sorted
+			value = current_sorted_value
+			index = current_index
+			break = put_sorted_item_in
+			if = {
+				limit = {
+					check_variable = {current_unsorted_value > current_sorted_value} ## HIGHEST NUMBER AT THE START
+				}
+				add_to_array = {
+					array = presidental_voting_score_sorted
+					value = current_unsorted_value
+					index = current_index
+				}
+				add_to_array = {
+					array = presidental_voting_score_tag_sorted
+					value = presidental_voting_score_the_tag^unsorted_index
+					index = current_index
+				}
+				set_temp_variable = {put_sorted_item_in = 1}
+			}
+		}
+	}
+	set_temp_variable = {presidental_voting_score_median = presidental_voting_score_tag_sorted^num}
+	divide_temp_variable = {presidental_voting_score_median = 2}
+	resize_temp_array = { ## ELIMINATES HALF OF COMPETITORS
+		array = presidental_voting_score_tag_sorted
+		size = presidental_voting_score_median
+	}
+	clear_array = global.presidental_election_canidates
+	for_each_loop = {
+		array = presidental_voting_score_tag_sorted
+		value = v
+		add_to_array = {
+			array = global.presidental_election_canidates
+			value = v
+		}
+	}
+}
+presidential_election_calculate_votes_second_time_around = {
+	for_each_scope_loop = {
+		array = global.presidental_election_canidates
+		add_to_temp_array = {
+			array = presidental_voting_score_to_be_sorted
+			value = new_republic_voting_score
+		}
+		add_to_temp_array = {
+			array = presidental_voting_score_the_tag
+			value = THIS.id
+		}
+	}
+	add_to_temp_array = {
+		array = presidental_voting_score_sorted
+		value = 0 ## DUMMY SCORE TO START THE ARRAYS
+	}
+	## SIMPLE SORT SINCE MORE IFS WOULD BE BAD WITH THIS LITTLE DATA
+	for_each_loop = {
+		array = presidental_voting_score_to_be_sorted
+		value = current_unsorted_value
+		index = unsorted_index
+		for_each_loop = {
+			array = presidental_voting_score_sorted
+			value = current_sorted_value
+			index = current_index
+			break = put_sorted_item_in
+			if = {
+				limit = {
+					check_variable = {current_unsorted_value > current_sorted_value} ## HIGHEST NUMBER AT THE START
+				}
+				add_to_array = {
+					array = presidental_voting_score_sorted
+					value = current_unsorted_value
+					index = current_index
+				}
+				add_to_array = {
+					array = presidental_voting_score_tag_sorted
+					value = presidental_voting_score_the_tag^unsorted_index
+					index = current_index
+				}
+				set_temp_variable = {put_sorted_item_in = 1}
+			}
+		}
+	}
+	if = {
+		limit = {
+			check_variable = {
+				var = presidental_voting_score_sorted^0
+				value = presidental_voting_score_sorted^1
+				compare = not_equals
+			}
+		}
+		## NEW REPUBLIC LEADER
+		set_variable = {current_new_republic_leader = presidental_voting_score_tag_sorted^0}
+		var:current_new_republic_leader = { ## done for easy localisation reasons
+			for_each_scope_loop = {
+				array = rep_populists
+				news_event = {
+					id = new_rep_elections.11
+				}
+			}
+			for_each_scope_loop = {
+				array = rep_centrists
+				news_event = {
+					id = new_rep_elections.11
+				}
 			}
 		}
 	}

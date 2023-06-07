@@ -570,3 +570,183 @@ news_event = {
 		name = "Reject the Nominee"
 	}
 }
+
+news_event = {
+	id = new_rep_elections.5 ## NEW REPUBLIC LEADER START CANIDATE VOTING EVENT, EFFECT BLOCK
+	title = new_rep_elections.5.title
+	desc = new_rep_elections.5.desc
+	picture = GFX_report_event
+	is_triggered_only = yes
+	
+	immediate = {
+		if = {
+			limit = {
+				has_war = no
+			}
+			set_global_flag = new_republic_canidate_voting
+			for_each_scope_loop = {
+				array = rep_populists
+				news_event = {
+					id = new_rep_elections.8
+				}
+				news_event = {
+					id = new_rep_elections.9
+					days = 30
+				}
+			}
+			for_each_scope_loop = {
+				array = rep_centrists
+				news_event = {
+					id = new_rep_elections.8
+				}
+				news_event = {
+					id = new_rep_elections.9
+					days = 30
+				}
+			}
+			news_event = {
+				id = new_rep_elections.12
+				days = 30
+			}
+		}
+	}
+	option = {
+		name = "So it begins"
+	}
+	option = {
+		name = "Start the elections"
+		set_global_flag = new_republic_canidate_voting
+		for_each_scope_loop = {
+			array = rep_populists
+			news_event = {
+				id = new_rep_elections.8
+			}
+		}
+		for_each_scope_loop = {
+			array = rep_centrists
+			news_event = {
+				id = new_rep_elections.8
+			}
+		}
+		news_event = {
+			id = new_rep_elections.12
+			days = 30
+		}
+	}
+	option = {
+		name = "Delay the elections"
+		set_global_flag = new_republic_election_delayed
+	}
+}
+news_event = {
+	id = new_rep_elections.12 ## NEW REPUBLIC END OF CANIDATE VOTING, EFFECT BLOCK
+	title = new_rep_elections.12.title
+	desc = new_rep_elections.12.desc
+	picture = GFX_report_event
+	is_triggered_only = yes
+	
+	immediate = {
+		set_global_flag = new_republic_leader_election
+		for_each_scope_loop = {
+			array = rep_populists
+			news_event = {
+				id = new_rep_elections.9
+			}
+			presidential_election_calculate_voting_power = yes
+		}
+		for_each_scope_loop = {
+			array = rep_centrists
+			news_event = {
+				id = new_rep_elections.9
+			}
+			presidential_election_calculate_voting_power = yes
+		}
+	}
+	option = {
+		name = "Let us vote"
+	}
+}
+news_event = {
+	id = new_rep_elections.6 ## NEW REPUBLIC FIRST TIME AROUND END VOTING, EFFECT BLOCK
+	title = new_rep_elections.6.title
+	desc = new_rep_elections.6.desc
+	picture = GFX_report_event
+	is_triggered_only = yes
+	
+	immediate = {
+		presidential_election_calculate_votes_first_time_around = yes
+		for_each_scope_loop = {
+			array = rep_populists
+			news_event = {
+				id = new_rep_elections.10
+			}
+		}
+		for_each_scope_loop = {
+			array = rep_centrists
+			news_event = {
+				id = new_rep_elections.10
+			}
+		}
+	}
+	option = {
+		name = "Let us vote"
+	}
+}
+news_event = {
+	id = new_rep_elections.7 ## NEW REPUBLIC LEADER SECOND TIME END VOTING, EFFECT BLOCK
+	title = new_rep_elections.7.title
+	desc = new_rep_elections.7.desc
+	picture = GFX_report_event
+	is_triggered_only = yes
+	
+	immediate = {
+		presidential_election_calculate_votes_second_time_around = yes
+	}
+	option = {
+		name = "Let us vote"
+	}
+}
+news_event = {
+	id = new_rep_elections.8 ## NEW REPUBLIC LEADER CANIDATE VOTING, NO EFFECT BLOCK
+	title = new_rep_elections.8.title
+	desc = new_rep_elections.8.desc
+	picture = GFX_report_event
+	is_triggered_only = yes
+	
+	option = {
+		name = "Let us vote"
+	}
+}
+news_event = {
+	id = new_rep_elections.9 ## NEW REPUBLIC LEADER FIRST TIME VOTING, NO EFFECT BLOCK
+	title = new_rep_elections.9.title
+	desc = new_rep_elections.9.desc
+	picture = GFX_report_event
+	is_triggered_only = yes
+	
+	option = {
+		name = "Let us vote"
+	}
+}
+news_event = {
+	id = new_rep_elections.10 ## NEW REPUBLIC LEADER SECOND TIME VOTING, NO EFFECT BLOCK
+	title = new_rep_elections.10.title
+	desc = new_rep_elections.10.desc
+	picture = GFX_report_event
+	is_triggered_only = yes
+
+	option = {
+		name = "Let us vote"
+	}
+}
+news_event = {
+	id = new_rep_elections.11 ## NEW REPUBLIC ANNOUNCING NEW LEADER, NO EFFECT BLOCK
+	title = new_rep_elections.11.title
+	desc = new_rep_elections.11.desc
+	picture = GFX_report_event
+	is_triggered_only = yes
+
+	option = {
+		name = "Let us vote"
+	}
+}

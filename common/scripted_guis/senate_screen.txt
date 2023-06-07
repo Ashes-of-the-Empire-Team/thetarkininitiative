@@ -7,6 +7,27 @@ scripted_gui = {
            has_country_flag = senate_open
 		}
 		effects = {
+			president_election_button = {## Puts your nation as wanting to become leader
+				if = {
+					limit = {
+						NOT = {
+							is_in_array = {
+								array = global.presidental_election_canidates
+								value = THIS.id
+							}
+						}
+					}
+					add_to_array = {
+						array = global.presidental_election_canidates
+						value = THIS.id
+					}
+				}else = {
+					remove_from_array = {
+						array = global.presidental_election_canidates
+						value = THIS.id
+					}
+				}
+			}
 			senate_button_click = {
 				set_country_flag = senate_main_open
 				clr_country_flag = military_committee_open
