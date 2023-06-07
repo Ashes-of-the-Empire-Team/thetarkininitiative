@@ -1,42 +1,4 @@
 
-##
-RIN_civil_war = {
-	my_decision_1 = {
-		available = { has_stability > 0.1 }
-		days_remove = 100
-			complete_effect = {
-				add_days_mission_timeout = {
-					mission = RIN_civil_war_mission
-					days = 20
-				}
-				add_stability = -0.1					
-			}
-		}
-		my_decision_2 = {
-			available = { has_manpower > 50000 }
-			days_remove = 100
-				complete_effect = {
-					add_days_mission_timeout = {
-						mission = RIN_civil_war_mission
-						days = 20
-					}
-					add_manpower = -50000					
-				}
-			}
-			my_decision_3 = {
-				available = { has_political_power > 100 }
-				days_remove = 100
-					complete_effect = {
-						add_days_mission_timeout = {
-							mission = RIN_civil_war_mission
-							days = 20
-						}
-						add_political_power = -100				
-					}
-				}
-    }
-
-
 crisis = {
 	RIN_civil_war_mission = {
 		icon = generic_civil_support
@@ -51,11 +13,12 @@ crisis = {
 		}
  
  
-		days_mission_timeout = 240													# Days until the civil war starts
+		days_mission_timeout = 340													# Days until the civil war starts
 		is_good = no																# good = yes: avoid something happening until timeout. 
 																					# good = no: do something before timeout
-		fire_only_once = yes														# Stops the mission from reapearring later
+		fire_only_once = no														# Stops the mission from reapearring later
  
+		days_re_enable = 40	
 		timeout_effect = {
 			98 = { transfer_state_to = RIT	 } 
 				
@@ -75,8 +38,149 @@ crisis = {
 		}
  
 		complete_effect = {
-              add_stability = 0.1
-			  add_political_power = 100													# Reward for completing the mission, here adds 5% stability (you can leave this empty if you want)
+              add_stability = 0.05
+			  add_political_power = 20													# Reward for completing the mission, here adds 5% stability (you can leave this empty if you want)
+		}
+	}
+	RIN_corruption = {
+		icon = generic_civil_support
+		allowed = { 
+			TAG = RIN 																# Mission is only allowed for TAG
+		}
+		visible = {
+			TAG = RIN											# The focus that starts the mission - get rid of this if its started by an event
+		}
+		available = { 
+			LOK = { has_capitulated = yes }
+		}
+ 
+ 
+		days_mission_timeout = 200													# Days until the civil war starts
+		is_good = no																# good = yes: avoid something happening until timeout. 
+																					# good = no: do something before timeout
+		fire_only_once = no														# Stops the mission from reapearring later
+ 
+		timeout_effect = {
+			activate_mission = RIN_corruption
+			random_list = {
+			30 = {
+				custom_effect_tooltip = tt_rin_spend_50_credits
+				subtract_from_variable = { currency_amount^primary_currency = 50 }
+			}
+			40 = {
+				add_manpower = -10000
+				add_stability = -0.1
+    		}
+			30 = {
+				add_timed_idea = {
+					idea = RIN_corrupt_factory_owners
+					days = 100
+				}
+			}
+		}
+	}
+ 
+		complete_effect = {
+              add_stability = 0.2
+			  add_political_power = 200													# Reward for completing the mission, here adds 5% stability (you can leave this empty if you want)
+		}
+	}
+
+	RIN_corruption_2 = {
+		icon = generic_civil_support
+		allowed = { 
+			TAG = RIN 																# Mission is only allowed for TAG
+		}
+		visible = {
+			TAG = RIN											# The focus that starts the mission - get rid of this if its started by an event
+		}
+		available = { 
+			has_completed_focus = RIN_dealing_with_sabatours
+		}
+ 
+ 
+		days_mission_timeout = 300													# Days until the civil war starts
+		is_good = no																# good = yes: avoid something happening until timeout. 
+																					# good = no: do something before timeout
+		fire_only_once = no														# Stops the mission from reapearring later
+ 
+		timeout_effect = {
+			activate_mission = RIN_corruption_2
+			random_list = {
+				
+			50 = {
+				RIN = {
+				random_owned_controlled_state = {
+					damage_building = {
+						type = corporate_factory
+						damage = 2
+					}
+					damage_building = {
+						type = arms_factory
+						damage = 2
+					}
+				}
+				}
+			}
+			50 = {
+				add_manpower = -30000
+				add_stability = -0.1
+    		}
+		}
+	}
+ 
+		complete_effect = {
+              add_stability = 0.2
+			  add_political_power = 200													# Reward for completing the mission, here adds 5% stability (you can leave this empty if you want)
 		}
 	}
 }
+
+RIN_civil_war = {
+	enforce_curfews = {
+		available = { has_stability > 0.05 }
+		days_remove = 150
+			complete_effect = {
+				add_days_mission_timeout = {
+					mission = RIN_civil_war_mission
+					days = 40
+				}
+				add_stability = -0.10					
+			}
+		}
+		enact_martial_law = {
+			available = { has_manpower > 20000 }
+			days_remove = 150
+				complete_effect = {
+					add_days_mission_timeout = {
+						mission = RIN_civil_war_mission
+						days = 20
+					}
+					add_manpower = -20000					
+				}
+			}
+			political_speaches = {
+				available = { has_political_power > 100 }
+				days_remove = 150
+					complete_effect = {
+						add_days_mission_timeout = {
+							mission = RIN_civil_war_mission
+							days = 20
+						}
+						add_political_power = -100
+						add_stability = 0.05			
+					}
+				}
+			promise_peace = {
+			available = {has_war_support > 0.05 }
+			days_remove = 150
+				complete_effect = {
+					add_days_mission_timeout = {
+						mission = RIN_civil_war_mission
+						days = 40
+					}
+					add_war_support = -0.05	
+					add_stability = 0.05						
+				}
+			}
+	 }

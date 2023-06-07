@@ -7,6 +7,27 @@ scripted_gui = {
            has_country_flag = senate_open
 		}
 		effects = {
+			president_election_button = {## Puts your nation as wanting to become leader
+				if = {
+					limit = {
+						NOT = {
+							is_in_array = {
+								array = global.presidental_election_canidates
+								value = THIS.id
+							}
+						}
+					}
+					add_to_array = {
+						array = global.presidental_election_canidates
+						value = THIS.id
+					}
+				}else = {
+					remove_from_array = {
+						array = global.presidental_election_canidates
+						value = THIS.id
+					}
+				}
+			}
 			senate_button_click = {
 				set_country_flag = senate_main_open
 				clr_country_flag = military_committee_open
@@ -113,7 +134,10 @@ scripted_gui = {
 							has_country_flag = espionage_committee_open
 						}
 						has_country_flag = member_of_espionage_committee
-						has_global_flag = espionage_member_vote
+						OR = {
+							has_global_flag = espionage_member_vote ### THESE STUFF THAT CAN BE VOTED FOR
+							has_global_flag = espionage_vote_ongoing
+						}
 						NOT = {
 							has_country_flag = votes_for_new_republic_espionage
 						}
@@ -122,7 +146,10 @@ scripted_gui = {
 							has_country_flag = economic_committee_open
 						}
 						has_country_flag = member_of_economic_committee
-						has_global_flag = economic_member_vote
+						OR = {
+							has_global_flag = economic_member_vote
+							has_global_flag = economic_vote_ongoing
+						}
 						NOT = {
 							has_country_flag = votes_for_new_republic_economic
 						}
@@ -131,7 +158,10 @@ scripted_gui = {
 							has_country_flag = military_committee_open
 						}
 						has_country_flag = member_of_military_committee
-						has_global_flag = military_member_vote
+						OR = {
+							has_global_flag = military_member_vote
+							has_global_flag = military_vote_ongoing
+						}
 						NOT = {
 							has_country_flag = votes_for_new_republic_military
 						}
@@ -140,7 +170,10 @@ scripted_gui = {
 							has_country_flag = research_committee_open
 						}
 						has_country_flag = member_of_research_committee
-						has_global_flag = research_member_vote
+						OR = {
+							has_global_flag = research_member_vote
+							has_global_flag = research_vote_ongoing
+						}
 						NOT = {
 							has_country_flag = votes_for_new_republic_research
 						}
@@ -154,7 +187,10 @@ scripted_gui = {
 							has_country_flag = espionage_committee_open
 						}
 						has_country_flag = member_of_espionage_committee
-						has_global_flag = espionage_member_vote
+						OR = {
+							has_global_flag = espionage_member_vote ### THESE STUFF THAT CAN BE VOTED FOR
+							has_global_flag = espionage_vote_ongoing
+						}
 						NOT = {
 							has_country_flag = votes_for_new_republic_espionage
 						}
@@ -163,7 +199,10 @@ scripted_gui = {
 							has_country_flag = economic_committee_open
 						}
 						has_country_flag = member_of_economic_committee
-						has_global_flag = economic_member_vote
+						OR = {
+							has_global_flag = economic_member_vote
+							has_global_flag = economic_vote_ongoing
+						}
 						NOT = {
 							has_country_flag = votes_for_new_republic_economic
 						}
@@ -172,7 +211,10 @@ scripted_gui = {
 							has_country_flag = military_committee_open
 						}
 						has_country_flag = member_of_military_committee
-						has_global_flag = military_member_vote
+						OR = {
+							has_global_flag = military_member_vote
+							has_global_flag = military_vote_ongoing
+						}
 						NOT = {
 							has_country_flag = votes_for_new_republic_military
 						}
@@ -181,7 +223,10 @@ scripted_gui = {
 							has_country_flag = research_committee_open
 						}
 						has_country_flag = member_of_research_committee
-						has_global_flag = research_member_vote
+						OR = {
+							has_global_flag = research_member_vote
+							has_global_flag = research_vote_ongoing
+						}
 						NOT = {
 							has_country_flag = votes_for_new_republic_research
 						}
@@ -195,7 +240,10 @@ scripted_gui = {
 							has_country_flag = espionage_committee_open
 						}
 						has_country_flag = member_of_espionage_committee
-						has_global_flag = espionage_member_vote
+						OR = {
+							has_global_flag = espionage_member_vote ### THESE STUFF THAT CAN BE VOTED FOR
+							has_global_flag = espionage_vote_ongoing
+						}
 						NOT = {
 							has_country_flag = votes_for_new_republic_espionage
 						}
@@ -205,6 +253,10 @@ scripted_gui = {
 						}
 						has_country_flag = member_of_economic_committee
 						has_global_flag = economic_member_vote
+						OR = {
+							has_global_flag = economic_member_vote
+							has_global_flag = economic_vote_ongoing
+						}
 						NOT = {
 							has_country_flag = votes_for_new_republic_economic
 						}
@@ -213,7 +265,10 @@ scripted_gui = {
 							has_country_flag = military_committee_open
 						}
 						has_country_flag = member_of_military_committee
-						has_global_flag = military_member_vote
+						OR = {
+							has_global_flag = military_member_vote
+							has_global_flag = military_vote_ongoing
+						}
 						NOT = {
 							has_country_flag = votes_for_new_republic_military
 						}
@@ -222,7 +277,10 @@ scripted_gui = {
 							has_country_flag = research_committee_open
 						}
 						has_country_flag = member_of_research_committee
-						has_global_flag = research_member_vote
+						OR = {
+							has_global_flag = research_member_vote
+							has_global_flag = research_vote_ongoing
+						}
 						NOT = {
 							has_country_flag = votes_for_new_republic_research
 						}
@@ -1510,6 +1568,23 @@ scripted_gui = {
            has_country_flag = senate_main_open
 		}
 		effects = {
+			senate_choice_click = {
+				if = {
+					limit = {
+						check_variable = { senate_choice = 1 }
+					}
+					add_to_array = { Global.Newrepleaders = ROOT.id }
+					set_variable = { senate_choice = 2 }
+				}
+				else = {
+					remove_from_array = {
+						array = Global.Newrepleaders
+						value = ROOT.id
+					}				
+					set_variable = { senate_choice = 1 }
+				}
+			}
+
 			senate_flag_frame_leader_click = {
 				capital_scope = {
 					ROOT = {
@@ -1643,6 +1718,39 @@ scripted_gui = {
 			}
 			new_rep_leader_flag = {
 				image = "[ROOT.GetFlag]"
+			}
+			senate_choice = {
+				frame = senate_choice
+			}
+		}
+	}
+	senate_voting_leader_screen = {
+		context_type = player_context
+		window_name = "senate_voting_leader_screen"
+		parent_window_name = "senate_screen"
+		visible = {
+			always = no
+		}
+		effects = {
+			
+		}
+		triggers = {
+			leader_vote_flag_click_enabled = {
+				NOT = {
+					has_country_flag = voted_for_leader
+				}
+			}
+		}
+		dynamic_lists = {
+			candidates_grid = {
+				array = Global.Newrepleaders
+				entry_container = leader_vote_entry
+				change_scope = yes
+			}
+		}
+		properties = {
+			leader_vote_flag = {
+				image = "[This.GetFlag]"
 			}
 		}
 	}

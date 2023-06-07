@@ -239,19 +239,19 @@ calculate_tonality_total = {
 }
 ### SHIP MARKET - NEVERFIRE
 recalculate_light_ship_creation_time = {  ########## 
-	set_variable = {light_ship_production_time = light_selected_ship_production_cost}
+	set_variable = {light_ship_production_time = Global.ship_ic_holder@ROOT.light_ship_selected_item}
 	divide_variable = {light_ship_production_time = light_ship_workers }
 	multiply_variable = {light_ship_production_time = 100 }
 	round_variable = light_ship_production_time
 }
 recalculate_medium_ship_creation_time = {  ########## 
-	set_variable = {medium_ship_production_time = medium_selected_ship_production_cost}
+	set_variable = {medium_ship_production_time = Global.ship_ic_holder@ROOT.medium_ship_selected_item}
 	divide_variable = {medium_ship_production_time = medium_ship_workers }
 	multiply_variable = {medium_ship_production_time = 100 }
 	round_variable = medium_ship_production_time
 }
 recalculate_heavy_ship_creation_time = {  ########## 
-	set_variable = {heavy_ship_production_time = heavy_selected_ship_production_cost}
+	set_variable = {heavy_ship_production_time = Global.ship_ic_holder@ROOT.heavy_ship_selected_item}
 	divide_variable = {heavy_ship_production_time = heavy_ship_workers }
 	multiply_variable = {heavy_ship_production_time = 100 }
 	round_variable = heavy_ship_production_time
@@ -421,24 +421,24 @@ erase_previous_food_production = {
 recalculate_air_1_creation_amount = {  ########## CALCULATES HOW MANY YOU CAN MAKE IN A WEEK
 	set_variable = {air_1_production_amount = air_1_workers}
 	divide_variable = {air_1_production_amount = global.air_market_ic_cost_holder@var:air_1_selected_item }
-	divide_variable = {air_1_production_amount = 40 }
+	divide_variable = {air_1_production_amount = 20 }
 	round_variable = air_1_production_amount
 }
 recalculate_air_2_creation_amount = {  ########## CALCULATES HOW MANY YOU CAN MAKE IN A WEEK
 	set_variable = {air_2_production_amount = air_2_workers}
 	divide_variable = {air_2_production_amount = global.air_market_ic_cost_holder@var:air_2_selected_item }
-	divide_variable = {air_2_production_amount = 40 }
+	divide_variable = {air_2_production_amount = 20 }
 	round_variable = air_2_production_amount
 }
 recalculate_land_1_creation_amount = {  ########## CALCULATES HOW MANY YOU CAN MAKE IN A WEEK
 	set_variable = {land_1_production_amount = land_1_workers}
-	divide_variable = {land_1_production_amount = global.land_market_ic_cost_holder@var:land_1_selected_item }
-	divide_variable = {land_1_production_amount = 20 }
+	divide_variable = {land_1_production_amount = global.tank_market_ic_cost_holder@var:land_1_selected_item}
+	divide_variable = {land_1_production_amount = 20}
 	round_variable = land_1_production_amount
 }
 recalculate_land_2_creation_amount = {  ########## CALCULATES HOW MANY YOU CAN MAKE IN A WEEK
 	set_variable = {land_2_production_amount = land_2_workers}
-	divide_variable = {land_2_production_amount = global.land_market_ic_cost_holder@var:land_2_selected_item }
+	divide_variable = {land_2_production_amount = global.tank_market_ic_cost_holder@var:land_2_selected_item }
 	divide_variable = {land_2_production_amount = 20 }
 	round_variable = land_2_production_amount
 }
@@ -460,6 +460,16 @@ recalculate_soft_2_creation_amount = {  ########## CALCULATES HOW MANY YOU CAN M
 ## SET TECHNOLOGY FOR THIS YEAR
 
 ai_corp_set_tech_for_year_2 = { #5 ABY
+	BOT = {
+		if = {
+			limit = {
+				NOT = {							
+					has_tech = bothan_assault_1
+				}
+			}
+			set_technology = {bothan_assault_1 = 1}
+		}
+	}
 	SFS = {
 		if = {
 			limit = {
@@ -468,6 +478,16 @@ ai_corp_set_tech_for_year_2 = { #5 ABY
 				}
 			}
 			set_technology = {tie_raptor = 1}
+		}
+	}
+	SOR = {
+		if = {
+			limit = {
+				NOT = {							
+					has_tech = combat_speeder_advanced
+				}
+			}
+			set_technology = {combat_speeder_advanced = 1}
 		}
 	}
 	YAG = {
@@ -480,8 +500,38 @@ ai_corp_set_tech_for_year_2 = { #5 ABY
 			set_technology = {starhawk_1 = 1}
 		}
 	}
+	KUA = { #?
+		if = {
+			limit = {
+				NOT = {							
+					has_tech = at_dp_advanced
+				}
+			}
+			set_technology = {at_dp_advanced = 1}
+		}
+	}
+	YUT = {
+		if = {
+			limit = {
+				NOT = {							
+					has_tech = t4_b
+				}
+			}
+			set_technology = {t4_b = 1}
+		}
+	}
 }
 ai_corp_set_tech_for_year_3 = { #6 ABY
+	SOR = {
+		if = {
+			limit = {
+				NOT = {							
+					has_tech = flash_speeder_advanced
+				}
+			}
+			set_technology = {flash_speeder_advanced = 1}
+		}
+	}
 	SFS = { #?
 		if = {
 			limit = {
@@ -502,6 +552,16 @@ ai_corp_set_tech_for_year_3 = { #6 ABY
 			set_technology = {warrior_1 = 1}
 		}
 	}
+	SLK = {
+		if = {
+			limit = { #?
+				NOT = {							
+					has_tech = b_wing_airframe_1
+				}
+			}
+			set_technology = {b_wing_airframe_1 = 1}
+		}
+	}
 	ROT = {
 		if = {
 			limit = {
@@ -512,6 +572,16 @@ ai_corp_set_tech_for_year_3 = { #6 ABY
 			set_technology = {artillery1 = 1}
 		}
 	}
+	MER = {
+		if = {
+			limit = {
+				NOT = {							
+					has_tech = antitank2
+				}
+			}
+			set_technology = {antitank2 = 1}
+		}
+	}
 	UBK = {
 		if = {
 			limit = {
@@ -520,6 +590,36 @@ ai_corp_set_tech_for_year_3 = { #6 ABY
 				}
 			}
 			set_technology = {artillery1 = 1}
+		}
+	}
+	MER = {
+		if = {
+			limit = {
+				NOT = {							
+					has_tech = artillery1
+				}
+			}
+			set_technology = {artillery1 = 1}
+		}
+	}
+	INC = {
+		if = {
+			limit = { #?
+				NOT = {							
+					has_tech = x_wing_70
+				}
+			}
+			set_technology = {x_wing_70 = 1}
+		}
+	}
+	KOE = {
+		if = {
+			limit = { #?
+				NOT = {							
+					has_tech = y_wing_airframe_2
+				}
+			}
+			set_technology = {y_wing_airframe_2 = 1}
 		}
 	}
 	SFS = {
@@ -562,14 +662,14 @@ ai_corp_set_tech_for_year_3 = { #6 ABY
 			set_technology = {tie_oppressor = 1}
 		}
 	}
-	SFS = {
+	YUT = {
 		if = {
 			limit = {
 				NOT = {							
-					has_tech = tie_aggressor
+					has_tech = t1_b_advanced
 				}
 			}
-			set_technology = {tie_aggressor = 1}
+			set_technology = {t1_b_advanced = 1}
 		}
 	}
 }
@@ -584,24 +684,24 @@ ai_corp_set_tech_for_year_4 = { #7 ABY
 			set_technology = {infantry_weapons1 = 1}
 		}
 	}
-	YAG = {
+	CZE = {
 		if = {
 			limit = {
 				NOT = {							
-					has_tech = republic_star_1
+					has_tech = infantry_weapons1
 				}
 			}
-			set_technology = {republic_star_1 = 1}
+			set_technology = {infantry_weapons1 = 1}
 		}
 	}
-	YAG = {
+	BLS = {
 		if = {
 			limit = {
 				NOT = {							
-					has_tech = nebula_1
+					has_tech = cheap_blaster_1
 				}
 			}
-			set_technology = {nebula_1 = 1}
+			set_technology = {cheap_blaster_1 = 1}
 		}
 	}
 	CZE = {
@@ -614,6 +714,16 @@ ai_corp_set_tech_for_year_4 = { #7 ABY
 			set_technology = {cheap_blaster_1 = 1}
 		}
 	}
+	SOR = {
+		if = {
+			limit = {
+				NOT = {							
+					has_tech = t1_c_advanced
+				}
+			}
+			set_technology = {t1_c_advanced = 1}
+		}
+	}	
 	KUA = {
 		if = {
 			limit = { #?
@@ -634,16 +744,6 @@ ai_corp_set_tech_for_year_4 = { #7 ABY
 			set_technology = {juggernaut_advanced = 1}
 		}
 	}	
-	KUA = { #?
-		if = {
-			limit = {
-				NOT = {							
-					has_tech = at_dp_advanced
-				}
-			}
-			set_technology = {at_dp_advanced = 1}
-		}
-	}
 	KUA = {
 		if = {
 			limit = {
@@ -654,16 +754,26 @@ ai_corp_set_tech_for_year_4 = { #7 ABY
 		}
 		set_technology = {victory_2 = 1}
 	}
+	KUA = { #?
+		if = {
+			limit = {
+				NOT = {							
+					has_tech = at_st_advanced
+				}
+			}
+			set_technology = {at_st_advanced = 1}
+		}
+	}
 }
 ai_corp_set_tech_for_year_5 = { #8 ABY
 	SFS = { #?
 		if = {
 			limit = {
 				NOT = {							
-					has_tech = tie_scimitar
+					has_tech = tie_fighter_2
 				}
 			}
-			set_technology = {tie_scimitar = 1}
+			set_technology = {tie_fighter_2 = 1}
 		}
 	}
 	INC = {
@@ -677,47 +787,77 @@ ai_corp_set_tech_for_year_5 = { #8 ABY
 		}
 	}
 	SOR = {
-		if = { #?
+		if = {
 			limit = {
 				NOT = {							
-					has_tech = quaser_2
+					has_tech = AAC_1_speeder_tank_advanced
 				}
 			}
-			set_technology = {quaser_2 = 1}
+			set_technology = {AAC_1_speeder_tank_advanced = 1}
 		}
-	}
-	KOE = {
+	}	
+	ROT = { #?
 		if = {
-			limit = { #?
+			limit = {
 				NOT = {							
-					has_tech = y_wing_airframe_2
+					has_tech = tx_130T_advanced
 				}
 			}
-			set_technology = {y_wing_airframe_2 = 1}
+			set_technology = {tx_130T_advanced = 1}
+		}
+	}	
+}
+ai_corp_set_tech_for_year_6 = { #9 ABY
+	YUT = {
+		if = {
+			limit = {
+				NOT = {							
+					has_tech = t3_b_advanced
+				}
+			}
+			set_technology = {t3_b_advanced = 1}
+		}
+	}	
+	SFS = {
+		if = {
+			limit = {
+				NOT = {							
+					has_tech = tie_aggressor
+				}
+			}
+			set_technology = {tie_aggressor = 1}
 		}
 	}
 	INC = {
 		if = {
 			limit = { #?
 				NOT = {							
-					has_tech = x_wing_70
+					has_tech = x_wing_85
 				}
 			}
-			set_technology = {x_wing_70 = 1}
+			set_technology = {x_wing_85 = 1}
 		}
 	}
-	SFS = { #?
+	CZE = {
 		if = {
 			limit = {
 				NOT = {							
-					has_tech = tie_fighter_2
+					has_tech = cheap_blaster_2
 				}
 			}
-			set_technology = {tie_fighter_2 = 1}
+			set_technology = {cheap_blaster_2 = 1}
 		}
 	}
-}
-ai_corp_set_tech_for_year_6 = { #9 ABY
+	BLS = {
+		if = {
+			limit = {
+				NOT = {							
+					has_tech = cheap_blaster_2
+				}
+			}
+			set_technology = {cheap_blaster_2 = 1}
+		}
+	}
 	KOE = {
 		if = {
 			limit = {
@@ -758,16 +898,6 @@ ai_corp_set_tech_for_year_6 = { #9 ABY
 			set_technology = {isd_2 = 1}
 		}
 	}
-	KUA = { #?
-		if = {
-			limit = {
-				NOT = {							
-					has_tech = at_at_advanced
-				}
-			}
-			set_technology = {at_at_advanced = 1}
-		}
-	}
 	ROT = { #?
 		if = {
 			limit = {
@@ -778,14 +908,14 @@ ai_corp_set_tech_for_year_6 = { #9 ABY
 			set_technology = {at_aa_advanced = 1}
 		}
 	}	
-	KUA = { #?
+	SFS = { #?
 		if = {
 			limit = {
 				NOT = {							
-					has_tech = at_st_advanced
+					has_tech = tie_phantom
 				}
 			}
-			set_technology = {at_st_advanced = 1}
+			set_technology = {tie_phantom = 1}
 		}
 	}
 }
@@ -800,6 +930,28 @@ ai_corp_set_tech_for_year_7 = { #10 ABY
 			set_technology = {tie_automated = 1}
 		}
 	}
+	INC = {
+		if = {
+			limit = {
+				NOT = {							
+					has_tech = e_wing
+				}
+			}
+			set_technology = {e_wing = 1}
+		}
+	}
+	YAG = {
+		if = {
+			limit = {
+				NOT = {							
+					has_tech = nebula_1
+				}
+			}
+			set_technology = {nebula_1 = 1}
+		}
+	}
+}
+ai_corp_set_tech_for_year_8 = { #11 ABY
 	YUT = {
 		if = {
 			limit = {
@@ -810,86 +962,14 @@ ai_corp_set_tech_for_year_7 = { #10 ABY
 			set_technology = {t4_b_advanced = 1}
 		}
 	}
-	SOR = {
+	KUA = { #?
 		if = {
 			limit = {
 				NOT = {							
-					has_tech = flash_speeder_advanced
+					has_tech = at_at_advanced
 				}
 			}
-			set_technology = {flash_speeder_advanced = 1}
-		}
-	}
-	YUT = {
-		if = {
-			limit = {
-				NOT = {							
-					has_tech = t3_b_advanced
-				}
-			}
-			set_technology = {t3_b_advanced = 1}
-		}
-	}	
-	SOR = {
-		if = {
-			limit = {
-				NOT = {							
-					has_tech = t1_c_advanced
-				}
-			}
-			set_technology = {t1_c_advanced = 1}
-		}
-	}	
-	SOR = {
-		if = {
-			limit = {
-				NOT = {							
-					has_tech = AAC_1_speeder_tank_advanced
-				}
-			}
-			set_technology = {AAC_1_speeder_tank_advanced = 1}
-		}
-	}
-	SOR = {
-		if = {
-			limit = {
-				NOT = {							
-					has_tech = combat_speeder_advanced
-				}
-			}
-			set_technology = {combat_speeder_advanced = 1}
-		}
-	}	
-	YUT = {
-		if = {
-			limit = {
-				NOT = {							
-					has_tech = t1_b_advanced
-				}
-			}
-			set_technology = {t1_b_advanced = 1}
-		}
-	}
-	SOR = {
-		if = {
-			limit = {
-				NOT = {							
-					has_tech = flash_speeder_advanced
-				}
-			}
-			set_technology = {flash_speeder_advanced = 1}
-		}
-	}
-}
-ai_corp_set_tech_for_year_8 = { #11 ABY
-	SFS = { #?
-		if = {
-			limit = {
-				NOT = {							
-					has_tech = tie_phantom
-				}
-			}
-			set_technology = {tie_phantom = 1}
+			set_technology = {at_at_advanced = 1}
 		}
 	}
 	KUA = {
@@ -909,21 +989,40 @@ ai_corp_set_tech_for_year_8 = { #11 ABY
 					has_tech = advanced_infantry_weapons
 				}
 			}
-			set_technology = {advanced_infantry_weapons = 1
-	tech_support = 1}
+			set_technology = {advanced_infantry_weapons = 1}
 		}
 	}
 	CZE = {
 		if = {
 			limit = {
 				NOT = {							
-					has_tech = cheap_blaster_2
+					has_tech = advanced_infantry_weapons
 				}
 			}
-			set_technology = {cheap_blaster_2 = 1}
+			set_technology = {advanced_infantry_weapons = 1}
+		}
+	}
+	YAG = {
+		if = {
+			limit = {
+				NOT = {							
+					has_tech = republic_star_1
+				}
+			}
+			set_technology = {republic_star_1 = 1}
 		}
 	}
 	ROT = {
+		if = {
+			limit = {
+				NOT = {							
+					has_tech = artillery4
+				}
+			}
+			set_technology = {artillery4 = 1}
+		}
+	}
+	MER = {
 		if = {
 			limit = {
 				NOT = {							
@@ -943,28 +1042,6 @@ ai_corp_set_tech_for_year_8 = { #11 ABY
 			set_technology = {artillery4 = 1}
 		}
 	}
-	SLK = {
-		if = {
-			limit = { #?
-				NOT = {							
-					has_tech = b_wing_1
-				}
-			}
-			set_technology = {b_wing_1 = 1}
-		}
-	}
-	ROT = { #?
-		if = {
-			limit = {
-				NOT = {							
-					has_tech = tx_130T_advanced
-				}
-			}
-			set_technology = {tx_130T_advanced = 1}
-		}
-	}	
-}
-ai_corp_set_tech_for_year_9 = { #12 ABY
 	MER = {
 		if = {
 			limit = {
@@ -975,38 +1052,20 @@ ai_corp_set_tech_for_year_9 = { #12 ABY
 			set_technology = {antitank5 = 1}
 		}
 	}
-	MER = {
+}
+ai_corp_set_tech_for_year_9 = { #12 ABY
+	SFS = { #?
 		if = {
 			limit = {
 				NOT = {							
-					has_tech = antitank2
+					has_tech = tie_scimitar
 				}
 			}
-			set_technology = {antitank2 = 1}
+			set_technology = {tie_scimitar = 1}
 		}
 	}
-	BOT = {
-		if = {
-			limit = {
-				NOT = {							
-					has_tech = bothan_assault_1
-				}
-			}
-			set_technology = {bothan_assault_1 = 1}
-		}
-	}	
 }
 ai_corp_set_tech_for_year_10 = { #13 ABY
-	INC = {
-		if = {
-			limit = { #?
-				NOT = {							
-					has_tech = x_wing_85
-				}
-			}
-			set_technology = {x_wing_85 = 1}
-		}
-	}
 	SFS = {
 		if = {
 			limit = {
@@ -1019,7 +1078,7 @@ ai_corp_set_tech_for_year_10 = { #13 ABY
 	}
 }
 ai_corp_set_tech_for_start = { #4 ABY
-## Inf Equipment
+	## Inf Equipment
 	BLS = {
 		if = {
 			limit = {
@@ -1027,8 +1086,7 @@ ai_corp_set_tech_for_start = { #4 ABY
 					has_tech = infantry_weapons
 				}
 			}
-			set_technology = {infantry_weapons = 1
-	tech_support = 1}
+			set_technology = {infantry_weapons = 1}
 		}
 	}	
 	CZE = {
@@ -1041,7 +1099,7 @@ ai_corp_set_tech_for_start = { #4 ABY
 			set_technology = {cheap_blaster_0 = 1}
 		}
 	}
-#Mobile Infantry
+	#Mobile Infantry
 	SOR = {
 		if = {
 			limit = {
@@ -1062,7 +1120,7 @@ ai_corp_set_tech_for_start = { #4 ABY
 			set_technology = {motorised_infantry = 1}
 		}
 	}	
-#Artillery
+	#Artillery
 	ROT = {
 		if = {
 			limit = {
@@ -1083,7 +1141,7 @@ ai_corp_set_tech_for_start = { #4 ABY
 			set_technology = {gw_artillery = 1}
 		}
 	}
-#Imperial Starfighter
+	#Imperial Starfighter
 	SFS = {
 		if = {
 			limit = {
@@ -1124,7 +1182,7 @@ ai_corp_set_tech_for_start = { #4 ABY
 			set_technology = {tie_advanced = 1}
 		}
 	}
-#Imperial Ship
+	#Imperial Ship
 
 	KUA = {
 		if = {
@@ -1166,7 +1224,7 @@ ai_corp_set_tech_for_start = { #4 ABY
 			set_technology = {arquitens_1 = 1}
 		}
 	}
-#Imperial Ground
+	#Imperial Ground
 	KUA = {
 		if = {
 			limit = {
@@ -1237,7 +1295,7 @@ ai_corp_set_tech_for_start = { #4 ABY
 			set_technology = {tie_crawler = 1}
 		}
 	}
-#Republic Starfighter
+	#Republic Starfighter
 	INC = {
 		if = {
 			limit = {
@@ -1288,7 +1346,7 @@ ai_corp_set_tech_for_start = { #4 ABY
 			set_technology = {b_wing = 1}
 		}
 	}
-#Republic Ship
+	#Republic Ship
 	KUA = {
 		if = {
 			limit = { #?
@@ -1372,7 +1430,7 @@ ai_corp_set_tech_for_start = { #4 ABY
 			set_technology = {Nebulon_1 = 1}
 		}
 	}
-#Republic Ground
+	#Republic Ground
 		YUT = {
 			if = {
 				limit = {

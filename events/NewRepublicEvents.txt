@@ -6,6 +6,7 @@ add_namespace = newrepevent
 add_namespace = newsenate
 add_namespace = newrepleg
 add_namespace = new_rep_black
+add_namespace = new_rep_reaches
 
 add_namespace = new_rep_elections
 add_namespace = new_republic_focus
@@ -42,6 +43,23 @@ news_event = {
 		clear_variable = Global.votes_against_new_republic_espionage
 		clear_variable = Global.votes_abstained_new_republic_espionage
 		clr_country_flag = votes_for_new_republic_espionage
+	}
+}
+
+country_event = {
+	id = new_rep_reaches.1
+	title = "The New Republic Reaches Out"
+	desc = new_rep_black.1.desc
+	picture = GFX_report_event
+	is_triggered_only = yes
+
+    option = {
+		name = "Let us join the New Republic"
+		REB = { add_to_faction = UTA }
+	}
+	option = {
+		name = "We do not need to own this fledgling government"
+
 	}
 }
 
@@ -244,6 +262,157 @@ country_event = {
 	option = {
 		name = "Encourage enlistment of the refugees"
 		add_manpower = 100000
+	}
+}
+country_event = {
+	id = new_republic_focus.7
+	title = "Alliance of Free Planets"
+	desc = new_republic_focus.7.desc
+	picture = GFX_report_event
+	is_triggered_only = yes
+
+    option = {
+		name = "Onwards"
+	}
+}
+country_event = {
+	id = new_republic_focus.8
+	title = "Conference on Kabray"
+	desc = new_republic_focus.8.desc
+	picture = GFX_report_event
+	is_triggered_only = yes
+
+    option = {
+		name = "That is why we fight"
+		remove_ideas = {REB_centralisation_unrest}
+	}
+}
+country_event = {
+	id = new_republic_focus.9
+	title = "Nagai Ask for Assistance"
+	desc = new_republic_focus.9.desc
+	picture = GFX_report_event
+	is_triggered_only = yes
+
+    option = {
+		name = "Repulse both the Toph and the Nagai"
+		declare_war_on = {
+			target = TOF
+			type = annex_everything
+		}
+		ai_chance = {base = 0}
+	}
+	option = {
+		name = "The Enemy of my Enemy is my friend"
+		NAG = {
+			if = {
+				limit = {
+					has_full_control_of_state = 54
+				}
+				ZEL = {
+					transfer_state = 54	
+				}
+			}
+			if = {
+				limit = {
+					has_full_control_of_state = 278
+				}
+				ZEL = {
+					transfer_state = 278	
+				}
+			}
+			if = {
+				limit = {
+					has_full_control_of_state = 282
+				}
+				ZEL = {
+					transfer_state = 282	
+				}
+			}
+			if = {
+				limit = {
+					has_full_control_of_state = 280
+				}
+				ZEL = {
+					transfer_state = 280	
+				}
+			}
+		}
+		ZEL = {
+			white_peace = NAG
+		}
+		for_each_scope_loop = {
+			array = global.rep_centrists
+			white_peace = NAG
+		}
+		for_each_scope_loop = {
+			array = global.rep_populists
+			white_peace = NAG
+		}
+		declare_war_on = {
+			target = TOF
+			type = annex_everything
+		}
+		ZEL = {
+			declare_war_on = {
+				target = TOF
+				type = annex_everything
+			}
+		}
+		add_to_faction = NAG 
+		ai_chance = {base = 100}
+	}
+}
+country_event = {
+	id = new_republic_focus.10
+	title = new_republic_focus.10.t
+	desc = new_republic_focus.10.desc
+	picture = GFX_report_event
+	is_triggered_only = yes
+
+    option = {#agree
+		name = new_republic_focus.10.a
+		#join NR effect
+		FROM={
+			country_event = new_republic_focus.11
+		}
+	}
+	option = {#refuse
+		name = new_republic_focus.10.b
+		FROM={
+			country_event = new_republic_focus.12
+		}
+	}
+}
+country_event = {#they agree
+	id = new_republic_focus.11
+	title = new_republic_focus.11.t
+	desc = new_republic_focus.11.desc
+	picture = GFX_report_event
+	is_triggered_only = yes
+
+    option = {#
+		name = new_republic_focus.11.a
+		clr_country_flag = REB_currently_in_operation
+		clr_country_flag = utapau_negotiation
+		add_political_power = 150
+	}
+}
+country_event = {
+	id = new_republic_focus.12
+	title = new_republic_focus.12.t
+	desc = new_republic_focus.12.desc
+	picture = GFX_report_event
+	is_triggered_only = yes
+
+    option = {#try again
+		name = new_republic_focus.12.a
+		
+	}
+	option = {#abandon the operation
+		name = new_republic_focus.12.b
+		clr_country_flag = REB_currently_in_operation
+		clr_country_flag = utapau_negotiation
 	}
 }
 ### NEWS EVENTS ###
@@ -461,5 +630,185 @@ news_event = {
 	}
 	option = {
 		name = "Reject the Nominee"
+	}
+}
+
+news_event = {
+	id = new_rep_elections.5 ## NEW REPUBLIC LEADER START CANIDATE VOTING EVENT, EFFECT BLOCK
+	title = new_rep_elections.5.title
+	desc = new_rep_elections.5.desc
+	picture = GFX_report_event
+	is_triggered_only = yes
+	
+	immediate = {
+		if = {
+			limit = {
+				has_war = no
+			}
+			set_global_flag = new_republic_canidate_voting
+			for_each_scope_loop = {
+				array = rep_populists
+				news_event = {
+					id = new_rep_elections.8
+				}
+				news_event = {
+					id = new_rep_elections.9
+					days = 30
+				}
+			}
+			for_each_scope_loop = {
+				array = rep_centrists
+				news_event = {
+					id = new_rep_elections.8
+				}
+				news_event = {
+					id = new_rep_elections.9
+					days = 30
+				}
+			}
+			news_event = {
+				id = new_rep_elections.12
+				days = 30
+			}
+		}
+	}
+	option = {
+		name = "So it begins"
+	}
+	option = {
+		name = "Start the elections"
+		set_global_flag = new_republic_canidate_voting
+		for_each_scope_loop = {
+			array = rep_populists
+			news_event = {
+				id = new_rep_elections.8
+			}
+		}
+		for_each_scope_loop = {
+			array = rep_centrists
+			news_event = {
+				id = new_rep_elections.8
+			}
+		}
+		news_event = {
+			id = new_rep_elections.12
+			days = 30
+		}
+	}
+	option = {
+		name = "Delay the elections"
+		set_global_flag = new_republic_election_delayed
+	}
+}
+news_event = {
+	id = new_rep_elections.12 ## NEW REPUBLIC END OF CANIDATE VOTING, EFFECT BLOCK
+	title = new_rep_elections.12.title
+	desc = new_rep_elections.12.desc
+	picture = GFX_report_event
+	is_triggered_only = yes
+	
+	immediate = {
+		set_global_flag = new_republic_leader_election
+		for_each_scope_loop = {
+			array = rep_populists
+			news_event = {
+				id = new_rep_elections.9
+			}
+			presidential_election_calculate_voting_power = yes
+		}
+		for_each_scope_loop = {
+			array = rep_centrists
+			news_event = {
+				id = new_rep_elections.9
+			}
+			presidential_election_calculate_voting_power = yes
+		}
+	}
+	option = {
+		name = "Let us vote"
+	}
+}
+news_event = {
+	id = new_rep_elections.6 ## NEW REPUBLIC FIRST TIME AROUND END VOTING, EFFECT BLOCK
+	title = new_rep_elections.6.title
+	desc = new_rep_elections.6.desc
+	picture = GFX_report_event
+	is_triggered_only = yes
+	
+	immediate = {
+		presidential_election_calculate_votes_first_time_around = yes
+		for_each_scope_loop = {
+			array = rep_populists
+			news_event = {
+				id = new_rep_elections.10
+			}
+		}
+		for_each_scope_loop = {
+			array = rep_centrists
+			news_event = {
+				id = new_rep_elections.10
+			}
+		}
+	}
+	option = {
+		name = "Let us vote"
+	}
+}
+news_event = {
+	id = new_rep_elections.7 ## NEW REPUBLIC LEADER SECOND TIME END VOTING, EFFECT BLOCK
+	title = new_rep_elections.7.title
+	desc = new_rep_elections.7.desc
+	picture = GFX_report_event
+	is_triggered_only = yes
+	
+	immediate = {
+		presidential_election_calculate_votes_second_time_around = yes
+	}
+	option = {
+		name = "Let us vote"
+	}
+}
+news_event = {
+	id = new_rep_elections.8 ## NEW REPUBLIC LEADER CANIDATE VOTING, NO EFFECT BLOCK
+	title = new_rep_elections.8.title
+	desc = new_rep_elections.8.desc
+	picture = GFX_report_event
+	is_triggered_only = yes
+	
+	option = {
+		name = "Let us vote"
+	}
+}
+news_event = {
+	id = new_rep_elections.9 ## NEW REPUBLIC LEADER FIRST TIME VOTING, NO EFFECT BLOCK
+	title = new_rep_elections.9.title
+	desc = new_rep_elections.9.desc
+	picture = GFX_report_event
+	is_triggered_only = yes
+	
+	option = {
+		name = "Let us vote"
+	}
+}
+news_event = {
+	id = new_rep_elections.10 ## NEW REPUBLIC LEADER SECOND TIME VOTING, NO EFFECT BLOCK
+	title = new_rep_elections.10.title
+	desc = new_rep_elections.10.desc
+	picture = GFX_report_event
+	is_triggered_only = yes
+
+	option = {
+		name = "Let us vote"
+	}
+}
+news_event = {
+	id = new_rep_elections.11 ## NEW REPUBLIC ANNOUNCING NEW LEADER, NO EFFECT BLOCK
+	title = new_rep_elections.11.title
+	desc = new_rep_elections.11.desc
+	picture = GFX_report_event
+	is_triggered_only = yes
+
+	option = {
+		name = "Let us vote"
 	}
 }
