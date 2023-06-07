@@ -296,20 +296,70 @@ country_event = {
 
     option = {
 		name = "Repulse both the Toph and the Nagai"
+		declare_war_on = {
+			target = TOF
+			type = annex_everything
+		}
 		ai_chance = {base = 0}
 	}
 	option = {
 		name = "The Enemy of my Enemy is my friend"
 		NAG = {
-			white_peace = REB	
+			if = {
+				limit = {
+					has_full_control_of_state = 54
+				}
+				ZEL = {
+					transfer_state = 54	
+				}
+			}
+			if = {
+				limit = {
+					has_full_control_of_state = 278
+				}
+				ZEL = {
+					transfer_state = 278	
+				}
+			}
+			if = {
+				limit = {
+					has_full_control_of_state = 282
+				}
+				ZEL = {
+					transfer_state = 282	
+				}
+			}
+			if = {
+				limit = {
+					has_full_control_of_state = 280
+				}
+				ZEL = {
+					transfer_state = 280	
+				}
+			}
+		}
+		ZEL = {
+			white_peace = NAG
+		}
+		for_each_scope_loop = {
+			array = global.rep_centrists
+			white_peace = NAG
+		}
+		for_each_scope_loop = {
+			array = global.rep_populists
+			white_peace = NAG
+		}
+		declare_war_on = {
+			target = TOF
+			type = annex_everything
+		}
+		ZEL = {
+			declare_war_on = {
+				target = TOF
+				type = annex_everything
+			}
 		}
 		add_to_faction = NAG 
-		ZEL = {
-			set_state_controller = 54
-			set_state_controller = 278
-			set_state_controller = 282
-			set_state_controller = 280
-		}
 		ai_chance = {base = 100}
 	}
 }
