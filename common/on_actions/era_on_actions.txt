@@ -26,6 +26,45 @@ on_actions = {
 			}
 		}
 	}
+	on_capitulation_immediate = {
+		effect = {
+			if = {
+				limit = {
+					ROOT = {
+						TAG = TOF
+					}
+				}
+				if = {
+					limit = {
+						has_global_flag = nagai_refused_peace_deal
+						FROM = {
+							TAG = NAG
+						}
+					}
+					annex_country = {
+						target = TOF
+						transfer_troops = NO
+					}
+					news_event = eraevent.4
+				}else = {
+					if = {
+						limit = {
+							ROOT = {
+								has_goverment = democratic
+							}
+						}
+						ZEL = {
+							annex_country = {
+								target = TOF
+								transfer_troops = NO
+							}
+						}
+					}
+					news_event = eraevent.4
+				}
+			}
+		}
+	}
 #	on_weekly = {
 #		effect = {
 #			if = {
