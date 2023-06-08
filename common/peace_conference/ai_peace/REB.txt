@@ -1,0 +1,23 @@
+peace_ai_desires = {
+
+	# Soviet really wants that Königsberg place for themselves, don't they?
+    New_republic_flip_goverment = {
+	    peace_action_type = force_government
+	    enable = {
+			ROOT = { has_government = democratic }
+	    }
+
+	   ai_desire = 400
+    }
+	stop_random_taking_states_as_republic = {
+        peace_action_type = {take_states puppet}
+
+        enable = {
+            ROOT = { has_government = democratic }
+			ROOT.FROM.FROM.FROM = {
+                NOT = { is_core_of = ROOT.FROM.FROM }
+            }
+        }
+        ai_desire = -50
+    }
+}
