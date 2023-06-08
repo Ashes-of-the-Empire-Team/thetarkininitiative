@@ -320,11 +320,22 @@ new_republic_galatic_liberation={
         }
         #days_remove = 120
         complete_effect = {
-			set_country_flag = guns_sent_to_bespin
-			add_equipment_to_stockpile = {
-				type = infantry_equipment
-				amount = -1500
-				#producer = REB
+			if = {
+				limit = {
+					NOT = {
+						has_country_flag = bespin_civil_war_started
+					}
+				}
+				BES = {
+					add_to_variable = {rep_sent_weapons_civil_war = 1500}
+				}
+				custom_effect_tooltip = REB_send_guns_bespin_decision_tt
+				hidden_effect = {
+					add_equipment_to_stockpile = {
+						type = infantry_equipment
+						amount = -1500
+					}
+				}
 			}
         }
         #remove_effect = {
@@ -347,10 +358,15 @@ new_republic_galatic_liberation={
         cost = 50
         available = {
 			has_country_flag = bespin_operation
+			NOT = {
+				has_country_flag = bespin_civil_war_started
+			}
         }
         #days_remove = 120
         complete_effect = {
 			custom_effect_tooltip = REB_begin_the_war_decision_tt
+			set_country_flag = bespin_civil_war_started
+			clr_country_flag = bespin_operation
 			BES = {
 				hidden_effect = {
 					start_civil_war = {
@@ -367,6 +383,16 @@ new_republic_galatic_liberation={
 						popularity = 1
 					}
 					load_oob = "BES_4_civil_war"
+					add_equipment_to_stockpile = {
+						type = infantry_equipment
+						amount = rep_sent_weapons_civil_war
+						producer = REB
+					}
+					clear_variable = rep_sent_weapons_civil_war
+					country_event = {
+						id = newrepevent.4
+						days = 100
+					}
 				}
 			}
         }
@@ -456,5 +482,95 @@ new_republic_galatic_liberation={
         #remove_effect = {
 		#}
     }
+	REB_send_guns_tatooine_decision = {
+        priority = 9
+        icon = GFX_rebel_momentum_in_text
 
+        allowed = {
+			tag = REB
+        }
+        visible = {
+            always=yes
+			has_country_flag = tatooine_operation
+        }
+        cost = 50
+        available = {
+			has_country_flag = tatooine_operation
+        }
+        #days_remove = 120
+        complete_effect = {
+			if = {
+				limit = {
+					NOT = {
+						has_country_flag = tatooine_civil_war_started
+					}
+				}
+				TAT = {
+					add_to_variable = {rep_sent_weapons_civil_war = 1500}
+				}
+				custom_effect_tooltip = REB_send_guns_tatooine_decision_tt
+				hidden_effect = {
+					add_equipment_to_stockpile = {
+						type = infantry_equipment
+						amount = -1500
+					}
+				}
+			}
+        }
+        #remove_effect = {
+		#}
+		ai_will_do = {
+			factor = 15
+		}
+    }
+	REB_begin_the_war_tatooine_decision = {
+        priority = 10
+        icon = GFX_rebel_momentum_in_text
+
+        allowed = {
+			tag = REB
+        }
+        visible = {
+            always=yes
+			has_country_flag = tatooine_operation
+        }
+        cost = 50
+        available = {
+			has_country_flag = tatooine_operation
+			NOT = {
+				has_country_flag = tatooine_civil_war_started
+			}
+        }
+        #days_remove = 120
+        complete_effect = {
+			custom_effect_tooltip = REB_begin_the_war_tatooine_decision_tt
+			set_country_flag = tatooine_civil_war_started
+			TAT = {
+				hidden_effect = {
+					start_civil_war = {
+						ruling_party = democratic
+						ideology = EMP
+						size = 0.3
+						capital = 445
+						states = {
+							551
+						}
+					}
+					add_popularity = {
+						ideology = democratic
+						popularity = 1
+					}
+					load_oob = "TAT_REB"
+					add_equipment_to_stockpile = {
+						type = infantry_equipment
+						amount = rep_sent_weapons_civil_war
+						producer = REB
+					}
+					clear_variable = rep_sent_weapons_civil_war
+				}
+			}
+        }
+        #remove_effect = {
+		#}
+    }
 }
