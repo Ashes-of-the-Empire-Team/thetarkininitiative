@@ -555,6 +555,9 @@ country_event = { #Negotiate with the IBC (IBC Denies)
 			type = puppet_wargoal_focus
 			target = IBC
 		}
+		PEN = {
+			set_country_flag = PEN_IBC_War
+		}
 	}
 }
 
@@ -565,12 +568,14 @@ country_event = { #IBC Defeated (IBC)
 	picture = GFX_report_event_election_vote
 
 	trigger = {
+		PEN = {
+			has_country_flag = PEN_IBC_War
+		}
 		IBC = {
 			has_war_with = PEN
-			surrender_progress > 0.75
+			surrender_progress > 0.6
 		}
 	}
-	is_triggered_only = yes
 
 	fire_only_once = yes
 
@@ -578,6 +583,7 @@ country_event = { #IBC Defeated (IBC)
 		hidden_effect = {
 			PEN = {
 				country_event = { id = PEN_ibc.6 days = 1 }
+				clr_country_flag = PEN_IBC_War
 			}
 		}
 	}
@@ -610,6 +616,21 @@ country_event = { #IBC Defeated (PEN)
 		}
 		IBC = {
 			country_event = { id = PEN_ibc.7 days = 1 }
+		}
+		hidden_effect = {
+			IBC = {
+				set_politics = {
+					ruling_party = corporation
+					elections_allowed = no
+				}
+				set_popularities = {
+					democratic = 0
+					consortium = 0
+					imperial = 40
+					neutrality = 0
+					corporation = 60
+				}
+			}
 		}
 	}
 }
