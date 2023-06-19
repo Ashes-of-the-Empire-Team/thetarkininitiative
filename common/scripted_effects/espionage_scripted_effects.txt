@@ -1,918 +1,3 @@
-intelligence_bonus_add = {
-	if = {
-		limit = {
-			has_variable = agent_operation_slot_1
-		}
-		add_to_variable = {agent_intelligence@var:agent_operation_slot_1 = temp_wanted_espionage_bonus }  
-	}
-	if = {
-		limit = {
-			has_variable = agent_operation_slot_2
-		}
-		add_to_variable = {agent_intelligence@var:agent_operation_slot_2 = temp_wanted_espionage_bonus }  
-	}
-	if = {
-		limit = {
-			has_variable = agent_operation_slot_3
-		}
-		add_to_variable = {agent_intelligence@var:agent_operation_slot_3 = temp_wanted_espionage_bonus }  
-	}
-}
-intelligence_bonus_subtract = {
-	if = {
-		limit = {
-			has_variable = agent_operation_slot_1
-		}
-		subtract_from_variable = {agent_intelligence@var:agent_operation_slot_1 = temp_wanted_espionage_bonus }  
-	}
-	if = {
-		limit = {
-			has_variable = agent_operation_slot_2
-		}
-		subtract_from_variable = {agent_intelligence@var:agent_operation_slot_2 = temp_wanted_espionage_bonus }  
-	}
-	if = {
-		limit = {
-			has_variable = agent_operation_slot_3
-		}
-		subtract_from_variable = {agent_intelligence@var:agent_operation_slot_3 = temp_wanted_espionage_bonus }  
-	}
-}
-charisma_bonus_add = {
-	if = {
-		limit = {
-			has_variable = agent_operation_slot_1
-		}
-		add_to_variable = {agent_charisma@var:agent_operation_slot_1 = temp_wanted_espionage_bonus }  
-	}
-	if = {
-		limit = {
-			has_variable = agent_operation_slot_2
-		}
-		add_to_variable = {agent_charisma@var:agent_operation_slot_2 = temp_wanted_espionage_bonus }  
-	}
-	if = {
-		limit = {
-			has_variable = agent_operation_slot_3
-		}
-		add_to_variable = {agent_charisma@var:agent_operation_slot_3 = temp_wanted_espionage_bonus }  
-	}
-}
-charisma_bonus_subtract = {
-	if = {
-		limit = {
-			has_variable = agent_operation_slot_1
-		}
-		subtract_from_variable = {agent_charisma@var:agent_operation_slot_1 = temp_wanted_espionage_bonus }  
-	}
-	if = {
-		limit = {
-			has_variable = agent_operation_slot_2
-		}
-		subtract_from_variable = {agent_martial@var:agent_operation_slot_2 = temp_wanted_espionage_bonus }  
-	}
-	if = {
-		limit = {
-			has_variable = agent_operation_slot_3
-		}
-		subtract_from_variable = {agent_martial@var:agent_operation_slot_3 = temp_wanted_espionage_bonus }  
-	}
-}
-martial_bonus_add = {
-	if = {
-		limit = {
-			has_variable = agent_operation_slot_1
-		}
-		add_to_variable = {agent_martial@var:agent_operation_slot_1 = temp_wanted_espionage_bonus }  
-	}
-	if = {
-		limit = {
-			has_variable = agent_operation_slot_2
-		}
-		add_to_variable = {agent_martial@var:agent_operation_slot_2 = temp_wanted_espionage_bonus }  
-	}
-	if = {
-		limit = {
-			has_variable = agent_operation_slot_3
-		}
-		add_to_variable = {agent_martial@var:agent_operation_slot_3 = temp_wanted_espionage_bonus }  
-	}
-}
-martial_bonus_subtract = {
-	if = {
-		limit = {
-			has_variable = agent_operation_slot_1
-		}
-		subtract_from_variable = {agent_martial@var:agent_operation_slot_1 = temp_wanted_espionage_bonus }  
-	}
-	if = {
-		limit = {
-			has_variable = agent_operation_slot_2
-		}
-		subtract_from_variable = {agent_martial@var:agent_operation_slot_2 = temp_wanted_espionage_bonus }  
-	}
-	if = {
-		limit = {
-			has_variable = agent_operation_slot_3
-		}
-		subtract_from_variable = {agent_martial@var:agent_operation_slot_3 = temp_wanted_espionage_bonus }  
-	}
-}
-scrap_espionage_mission_1 = {
-	if = {
-		limit = {
-			has_country_flag = assassinate_slot_1
-		}
-		clr_country_flag = assassinate_slot_1
-		var:targeted_country_slot_1 = {
-			every_unit_leader = {
-				limit = {
-					has_character_flag = targeted_by_mission
-					has_character_flag = targeted_by_@ROOT_1_murder
-				}
-				clr_character_flag = targeted_by_mission
-				clr_character_flag = targeted_by_@ROOT_1_murder
-			}
-		}
-	}else_if = {
-		limit = {
-			has_country_flag = ransom_slot_1
-		}
-		clr_country_flag = ransom_slot_1
-		var:targeted_country_slot_1 = {
-			every_unit_leader = {
-				limit = {
-					has_character_flag = targeted_by_mission
-					has_character_flag = targeted_by_@ROOT_1_ransom
-				}
-				clr_character_flag = targeted_by_mission
-				clr_character_flag = targeted_by_@ROOT_1_ransom
-			}
-		}
-	}else_if = {
-		limit = {
-			has_country_flag = army_training_slot_1
-		}
-		clr_country_flag = army_training_slot_1
-		every_unit_leader = {
-			limit = {
-				has_character_flag = targeted_by_mission
-				has_character_flag = targeted_by_training_1
-			}
-			clr_character_flag = targeted_by_mission
-			clr_character_flag = targeted_by_training_1
-		}
-	}else_if = {
-		limit = {
-			has_country_flag = steal_equipment_slot_1
-		}
-		clr_country_flag = steal_equipment_slot_1
-	}else_if = {
-		limit = {
-			has_country_flag = set_Slaves_free_slot_1
-		}
-		clr_country_flag = set_Slaves_free_slot_1
-	}else_if = {
-		limit = {
-			has_country_flag = smuggle_slaves_slot_1
-		}
-		clr_country_flag = smuggle_slaves_slot_1
-	}else_if = {
-		limit = {
-			has_country_flag = arming_dissidents_slot_1
-		}
-		clr_country_flag = arming_dissidents_slot_1
-	}else_if = {
-		limit = {
-			has_country_flag = provoke_slave_revolt_slot_1
-		}
-		clr_country_flag = provoke_slave_revolt_slot_1
-	}else_if = {
-		limit = {
-			has_country_flag = capitial_ship_target_slot_1
-		}
-		clr_country_flag = capitial_ship_target_slot_1
-	}else_if = {
-		limit = {
-			has_country_flag = sabotage_target_slot_1
-		}
-		clr_country_flag = sabotage_target_slot_1
-	}else_if = {
-		limit = {
-			has_country_flag = infilitrate_military_target_slot_1
-		}
-		clr_country_flag = infilitrate_military_target_slot_1
-	}else_if = {
-		limit = {
-			has_country_flag = undermind_guild_connections_target_slot_1
-		}
-		clr_country_flag = undermind_guild_connections_target_slot_1
-	}else_if = {
-		limit = {
-			has_country_flag = cyber_attack_target_slot_1
-		}
-		clr_country_flag = cyber_attack_target_slot_1
-	}else_if = {
-		limit = {
-			has_country_flag = steal_blueprint_target_slot_1
-		}
-		clr_country_flag = steal_blueprint_target_slot_1
-	}else_if = {
-		limit = {
-			has_country_flag = sprout_disease_target_slot_1
-		}
-		clr_country_flag = sprout_disease_target_slot_1
-	}else_if = {
-		limit = {
-			has_country_flag = logistics_sabotage_target_slot_1
-		}
-		clr_country_flag = logistics_sabotage_target_slot_1
-	}
-	clear_variable = targeted_country_slot_1
-	clr_country_flag = slot_1_filled
-clear_variable = mission_1_progress_var
-clear_variable = agent_in_mission_1
-}
-scrap_espionage_mission_2 = {
-	if = {
-		limit = {
-			has_country_flag = assassinate_slot_2
-		}
-		clr_country_flag = assassinate_slot_2
-		var:targeted_country_slot_2 = {
-			every_unit_leader = {
-				limit = {
-					has_character_flag = targeted_by_mission
-					has_character_flag = targeted_by_@ROOT_2_murder
-				}
-				clr_character_flag = targeted_by_mission
-				clr_character_flag = targeted_by_@ROOT_2_murder
-			}
-		}
-	}else_if = {
-		limit = {
-			has_country_flag = ransom_slot_2
-		}
-		clr_country_flag = ransom_slot_2
-		var:targeted_country_slot_2 = {
-			every_unit_leader = {
-				limit = {
-					has_character_flag = targeted_by_mission
-					has_character_flag = targeted_by_@ROOT_2_ransom
-				}
-				clr_character_flag = targeted_by_mission
-				clr_character_flag = targeted_by_@ROOT_2_ransom
-			}
-		}
-	}else_if = {
-		limit = {
-			has_country_flag = army_training_slot_2
-		}
-		clr_country_flag = army_training_slot_2
-		every_unit_leader = {
-			limit = {
-				has_character_flag = targeted_by_mission
-				has_character_flag = targeted_by_training_2
-			}
-			clr_character_flag = targeted_by_mission
-			clr_character_flag = targeted_by_training_2
-		}
-	}else_if = {
-		limit = {
-			has_country_flag = steal_equipment_slot_2
-		}
-		clr_country_flag = steal_equipment_slot_2
-	}else_if = {
-		limit = {
-			has_country_flag = set_Slaves_free_slot_2
-		}
-		clr_country_flag = set_Slaves_free_slot_2
-	}else_if = {
-		limit = {
-			has_country_flag = smuggle_slaves_slot_2
-		}
-		clr_country_flag = smuggle_slaves_slot_2
-	}else_if = {
-		limit = {
-			has_country_flag = arming_dissidents_slot_2
-		}
-		clr_country_flag = arming_dissidents_slot_2
-	}else_if = {
-		limit = {
-			has_country_flag = provoke_slave_revolt_slot_2
-		}
-		clr_country_flag = provoke_slave_revolt_slot_2
-	}else_if = {
-		limit = {
-			has_country_flag = capitial_ship_target_slot_2
-		}
-		clr_country_flag = capitial_ship_target_slot_2
-	}else_if = {
-		limit = {
-			has_country_flag = sabotage_target_slot_2
-		}
-		clr_country_flag = sabotage_target_slot_2
-	}else_if = {
-		limit = {
-			has_country_flag = infilitrate_military_target_slot_2
-		}
-		clr_country_flag = infilitrate_military_target_slot_2
-	}else_if = {
-		limit = {
-			has_country_flag = undermind_guild_connections_target_slot_2
-		}
-		clr_country_flag = undermind_guild_connections_target_slot_2
-	}else_if = {
-		limit = {
-			has_country_flag = cyber_attack_target_slot_2
-		}
-		clr_country_flag = cyber_attack_target_slot_2
-	}else_if = {
-		limit = {
-			has_country_flag = steal_blueprint_target_slot_2
-		}
-		clr_country_flag = steal_blueprint_target_slot_2
-	}else_if = {
-		limit = {
-			has_country_flag = sprout_disease_target_slot_2
-		}
-		clr_country_flag = sprout_disease_target_slot_2
-	}else_if = {
-		limit = {
-			has_country_flag = logistics_sabotage_target_slot_2
-		}
-		clr_country_flag = logistics_sabotage_target_slot_2
-	}
-	clear_variable = targeted_country_slot_2
-	clr_country_flag = slot_2_filled
-clear_variable = mission_2_progress_var
-clear_variable = agent_in_mission_2
-}
-scrap_espionage_mission_3 = {
-	if = {
-		limit = {
-			has_country_flag = assassinate_slot_3
-		}
-		clr_country_flag = assassinate_slot_3
-		var:targeted_country_slot_3 = {
-			every_unit_leader = {
-				limit = {
-					has_character_flag = targeted_by_mission
-					has_character_flag = targeted_by_@ROOT_3_murder
-				}
-				clr_character_flag = targeted_by_mission
-				clr_character_flag = targeted_by_@ROOT_3_murder
-			}
-		}
-	}else_if = {
-		limit = {
-			has_country_flag = ransom_slot_3
-		}
-		clr_country_flag = ransom_slot_3
-		var:targeted_country_slot_3 = {
-			every_unit_leader = {
-				limit = {
-					has_character_flag = targeted_by_mission
-					has_character_flag = targeted_by_@ROOT_3_ransom
-				}
-				clr_character_flag = targeted_by_mission
-				clr_character_flag = targeted_by_@ROOT_3_ransom
-			}
-		}
-	}else_if = {
-		limit = {
-			has_country_flag = army_training_slot_3
-		}
-		clr_country_flag = army_training_slot_3
-		every_unit_leader = {
-			limit = {
-				has_character_flag = targeted_by_mission
-				has_character_flag = targeted_by_training_3
-			}
-			clr_character_flag = targeted_by_mission
-			clr_character_flag = targeted_by_training_3
-		}
-	}else_if = {
-		limit = {
-			has_country_flag = steal_equipment_slot_3
-		}
-		clr_country_flag = steal_equipment_slot_3
-	}else_if = {
-		limit = {
-			has_country_flag = set_Slaves_free_slot_3
-		}
-		clr_country_flag = set_Slaves_free_slot_3
-	}else_if = {
-		limit = {
-			has_country_flag = smuggle_slaves_slot_3
-		}
-		clr_country_flag = smuggle_slaves_slot_3
-	}else_if = {
-		limit = {
-			has_country_flag = arming_dissidents_slot_3
-		}
-		clr_country_flag = arming_dissidents_slot_3
-	}else_if = {
-		limit = {
-			has_country_flag = provoke_slave_revolt_slot_3
-		}
-		clr_country_flag = provoke_slave_revolt_slot_3
-	}else_if = {
-		limit = {
-			has_country_flag = capitial_ship_target_slot_3
-		}
-		clr_country_flag = capitial_ship_target_slot_3
-	}else_if = {
-		limit = {
-			has_country_flag = sabotage_target_slot_3
-		}
-		clr_country_flag = sabotage_target_slot_3
-	}else_if = {
-		limit = {
-			has_country_flag = infilitrate_military_target_slot_3
-		}
-		clr_country_flag = infilitrate_military_target_slot_3
-	}else_if = {
-		limit = {
-			has_country_flag = undermind_guild_connections_target_slot_3
-		}
-		clr_country_flag = undermind_guild_connections_target_slot_3
-	}else_if = {
-		limit = {
-			has_country_flag = cyber_attack_target_slot_3
-		}
-		clr_country_flag = cyber_attack_target_slot_3
-	}else_if = {
-		limit = {
-			has_country_flag = steal_blueprint_target_slot_3
-		}
-		clr_country_flag = steal_blueprint_target_slot_3
-	}else_if = {
-		limit = {
-			has_country_flag = sprout_disease_target_slot_3
-		}
-		clr_country_flag = sprout_disease_target_slot_3
-	}else_if = {
-		limit = {
-			has_country_flag = logistics_sabotage_target_slot_3
-		}
-		clr_country_flag = logistics_sabotage_target_slot_3
-	}
-	clear_variable = targeted_country_slot_3
-	clr_country_flag = slot_3_filled
-clear_variable = mission_3_progress_var
-clear_variable = agent_in_mission_3
-}
-grab_semi_hostile_nation_1 = {
-	if = {
-		limit = {
-			has_variable = higher_chance_espionage_target
-		}
-		random = {
-		    chance = 33
-		    set_variable = {targeted_country_slot_1 = higher_chance_espionage_target}
-		}
-	}
-	while_loop_effect = {
-	    break = temp_break
-	    limit = {
-	    	NOT = {
-	        	has_variable = targeted_country_slot_1
-	        }
-	    }
-	    random_other_country = {
-	    	if = {
-	    		limit = {
-	    			OR = {
-		    			AND = {
-		    				has_opinion = {
-							    target = ROOT
-							    value < 0
-							}
-							NOT = {has_government = ROOT}
-		    			}
-		    			AND = {
-		    				has_opinion = {
-							    target = ROOT
-							    value < -50
-							}
-							has_government = ROOT
-		    			}
-	    			}
-	    		}
-	    		set_variable = {ROOT.targeted_country_slot_1 = THIS.id}
-	    	}
-	    }
-	}
-}
-grab_semi_hostile_nation_2 = {
-	if = {
-		limit = {
-			has_variable = higher_chance_espionage_target
-		}
-		random = {
-		    chance = 33
-		    set_variable = {targeted_country_slot_2 = higher_chance_espionage_target}
-		}
-	}
-	while_loop_effect = {
-	    break = temp_break
-	    limit = {
-	    	NOT = {
-	        	has_variable = targeted_country_slot_2
-	        }
-	    }
-	    random_other_country = {
-	    	if = {
-	    		limit = {
-	    			OR = {
-		    			AND = {
-		    				has_opinion = {
-							    target = ROOT
-							    value < 0
-							}
-							NOT = {has_government = ROOT}
-		    			}
-		    			AND = {
-		    				has_opinion = {
-							    target = ROOT
-							    value < -50
-							}
-							has_government = ROOT
-		    			}
-	    			}
-	    		}
-	    		set_variable = {ROOT.targeted_country_slot_2 = THIS.id}
-	    	}
-	    }
-	}
-}
-grab_semi_hostile_nation_3 = {
-	if = {
-		limit = {
-			has_variable = higher_chance_espionage_target
-		}
-		random = {
-		    chance = 33
-		    set_variable = {targeted_country_slot_3 = higher_chance_espionage_target}
-		}
-	}
-	while_loop_effect = {
-	    break = temp_break
-	    limit = {
-	    	NOT = {
-	        	has_variable = targeted_country_slot_3
-	        }
-	    }
-	    random_other_country = {
-	    	if = {
-	    		limit = {
-	    			OR = {
-		    			AND = {
-		    				has_opinion = {
-							    target = ROOT
-							    value < 0
-							}
-							NOT = {has_government = ROOT}
-		    			}
-		    			AND = {
-		    				has_opinion = {
-							    target = ROOT
-							    value < -50
-							}
-							has_government = ROOT
-		    			}
-	    			}
-	    		}
-	    		set_variable = {ROOT.targeted_country_slot_3 = THIS.id}
-	    	}
-	    }
-	}
-}
-slave_raid_selector_1 = {
-	find_highest_in_array = {
-	     array = slaves
-	     value = check_if_slaves_equal_zero
-	}
-	if = {
-		limit = {
-			has_variable = higher_chance_espionage_target
-			check_variable = { check_if_slaves_equal_zero > 0 }
-		}
-		random = {
-		    chance = 33
-		    set_variable = {targeted_country_slot_1 = higher_chance_espionage_target}
-		}
-	}
-	if = {
-		limit = {
-			has_war = yes
-		}
-		for_loop_effect = {
-		    start = 0
-		    end = 11
-		    add = 1
-		    value = time_checker
-		    break = break_name
-			random_enemy_country = {
-				if = {
-					limit = {
-						check_variable = { check_if_slaves_equal_zero > 0 }
-					}
-					set_variable = { targeted_country_slot_1 = THIS.id }
-				}
-			}
-			if = {
-				limit = {
-					check_variable = {time_checker = 10}
-				}
-				while_loop_effect = {
-				    break = temp_break
-				    limit = {
-				    	NOT = {
-				        	has_variable = targeted_country_slot_1
-				        }
-				    }
-				    random_country = {
-				    	if = {
-				    		limit = {
-				    			OR = {
-					    			AND = {
-					    				has_opinion = {
-										    target = ROOT
-										    value < 0
-										}
-										NOT = {has_government = ROOT}
-										check_variable = { check_if_slaves_equal_zero > 0 }
-					    			}
-					    			AND = {
-					    				has_opinion = {
-										    target = ROOT
-										    value < -50
-										}
-										has_government = ROOT
-										check_variable = { check_if_slaves_equal_zero > 0 }
-					    			}
-				    			}
-				    		}
-				    		set_variable = {targeted_country_slot_1 = THIS.id}
-				    	}
-				    }
-				}
-			}
-		}
-	}else = {
-		while_loop_effect = {
-		    break = temp_break
-		    limit = {
-		    	NOT = {
-		        	has_variable = targeted_country_slot_1
-		        }
-		    }
-		    random_country = {
-		    	if = {
-		    		limit = {
-		    			OR = {
-			    			AND = {
-			    				has_opinion = {
-								    target = ROOT
-								    value < 0
-								}
-								NOT = {has_government = ROOT}
-								check_variable = { check_if_slaves_equal_zero > 0 }
-			    			}
-			    			AND = {
-			    				has_opinion = {
-								    target = ROOT
-								    value < -50
-								}
-								has_government = ROOT
-								check_variable = { check_if_slaves_equal_zero > 0 }
-			    			}
-		    			}
-		    		}
-		    		set_variable = {targeted_country_slot_1 = THIS.id}
-		    	}
-		    }
-		}
-	}
-}
-slave_raid_selector_2 = {
-	find_highest_in_array = {
-	     array = slaves
-	     value = check_if_slaves_equal_zero
-	}
-	if = {
-		limit = {
-			has_variable = higher_chance_espionage_target
-			check_variable = { check_if_slaves_equal_zero > 0 }
-		}
-		random = {
-		    chance = 33
-		    set_variable = {targeted_country_slot_2 = higher_chance_espionage_target}
-		}
-	}
-	if = {
-		limit = {
-			has_war = yes
-		}
-		for_loop_effect = {
-		    start = 0
-		    end = 11
-		    add = 1
-		    value = time_checker
-		    break = break_name
-			random_enemy_country = {
-				if = {
-					limit = {
-						check_variable = { check_if_slaves_equal_zero > 0 }
-					}
-					set_variable = { targeted_country_slot_2 = THIS.id }
-				}
-			}
-			if = {
-				limit = {
-					check_variable = {time_checker = 10}
-				}
-				while_loop_effect = {
-				    break = temp_break
-				    limit = {
-				    	NOT = {
-				        	has_variable = targeted_country_slot_2
-				        }
-				    }
-				    random_country = {
-				    	if = {
-				    		limit = {
-				    			OR = {
-					    			AND = {
-					    				has_opinion = {
-										    target = ROOT
-										    value < 0
-										}
-										NOT = {has_government = ROOT}
-										check_variable = { check_if_slaves_equal_zero > 0 }
-					    			}
-					    			AND = {
-					    				has_opinion = {
-										    target = ROOT
-										    value < -50
-										}
-										has_government = ROOT
-										check_variable = { check_if_slaves_equal_zero > 0 }
-					    			}
-				    			}
-				    		}
-				    		set_variable = {targeted_country_slot_2 = THIS.id}
-				    	}
-				    }
-				}
-			}
-		}
-	}else = {
-		while_loop_effect = {
-		    break = temp_break
-		    limit = {
-		    	NOT = {
-		        	has_variable = targeted_country_slot_2
-		        }
-		    }
-		    random_country = {
-		    	if = {
-		    		limit = {
-		    			OR = {
-			    			AND = {
-			    				has_opinion = {
-								    target = ROOT
-								    value < 0
-								}
-								NOT = {has_government = ROOT}
-								check_variable = { check_if_slaves_equal_zero > 0 }
-			    			}
-			    			AND = {
-			    				has_opinion = {
-								    target = ROOT
-								    value < -50
-								}
-								has_government = ROOT
-								check_variable = { check_if_slaves_equal_zero > 0 }
-			    			}
-		    			}
-		    		}
-		    		set_variable = {targeted_country_slot_2 = THIS.id}
-		    	}
-		    }
-		}
-	}
-}
-slave_raid_selector_3 = {
-	find_highest_in_array = {
-	     array = slaves
-	     value = check_if_slaves_equal_zero
-	}
-	if = {
-		limit = {
-			has_variable = higher_chance_espionage_target
-			check_variable = { check_if_slaves_equal_zero > 0 }
-		}
-		random = {
-		    chance = 33
-		    set_variable = {targeted_country_slot_3 = higher_chance_espionage_target}
-		}
-	}
-	if = {
-		limit = {
-			has_war = yes
-		}
-		for_loop_effect = {
-		    start = 0
-		    end = 11
-		    add = 1
-		    value = time_checker
-		    break = break_name
-			random_enemy_country = {
-				if = {
-					limit = {
-						check_variable = { check_if_slaves_equal_zero > 0 }
-					}
-					set_variable = { targeted_country_slot_3 = THIS.id }
-				}
-			}
-			if = {
-				limit = {
-					check_variable = {time_checker = 10}
-				}
-				while_loop_effect = {
-				    break = temp_break
-				    limit = {
-				    	NOT = {
-				        	has_variable = targeted_country_slot_3
-				        }
-				    }
-				    random_country = {
-				    	if = {
-				    		limit = {
-				    			OR = {
-					    			AND = {
-					    				has_opinion = {
-										    target = ROOT
-										    value < 0
-										}
-										NOT = {has_government = ROOT}
-										check_variable = { check_if_slaves_equal_zero > 0 }
-					    			}
-					    			AND = {
-					    				has_opinion = {
-										    target = ROOT
-										    value < -50
-										}
-										has_government = ROOT
-										check_variable = { check_if_slaves_equal_zero > 0 }
-					    			}
-				    			}
-				    		}
-				    		set_variable = {targeted_country_slot_3 = THIS.id}
-				    	}
-				    }
-				}
-			}
-		}
-	}else = {
-		while_loop_effect = {
-		    break = temp_break
-		    limit = {
-		    	NOT = {
-		        	has_variable = targeted_country_slot_3
-		        }
-		    }
-		    random_country = {
-		    	if = {
-		    		limit = {
-		    			OR = {
-			    			AND = {
-			    				has_opinion = {
-								    target = ROOT
-								    value < 0
-								}
-								NOT = {has_government = ROOT}
-								check_variable = { check_if_slaves_equal_zero > 0 }
-			    			}
-			    			AND = {
-			    				has_opinion = {
-								    target = ROOT
-								    value < -50
-								}
-								has_government = ROOT
-								check_variable = { check_if_slaves_equal_zero > 0 }
-			    			}
-		    			}
-		    		}
-		    		set_variable = {targeted_country_slot_3 = THIS.id}
-		    	}
-		    }
-		}
-	}
-}
 clear_side_guild_screen_flags = {
 	if = {
 		limit = {
@@ -942,3394 +27,848 @@ clear_side_guild_screen_flags = {
 	}
 		
 }
-Agent_generator_main = {   ### BASIC AGENT GENERATOR
-	if = {
-		limit = {
-			NOT = {
-				has_variable = agent_operation_slot_1
-			}
-		}
-		while_loop_effect = {
-		    break = name_unique
-		    limit = {
-		    	NOT = {
-		    		has_variable = agent_operation_slot_1
-		    	}
-		        OR = {
-		        	check_variable = {                          ########### MAKES SURE NAME IS UNIQUE TO THIS COUNTRY, ALLOWS PULLING OF THE NAME
-					    var = agent_operation_slot_1
-					    value = agent_operation_slot_2
-					    compare = equals
-					}
-					check_variable = {
-					    var = agent_operation_slot_1
-					    value = agent_operation_slot_3	
-					    compare = equals
-					}
-					NOT = {
-						has_variable = agent_operation_slot_1
-					}
-				}
-		    }
-			set_variable_to_random = {
-			    var = agent_operation_slot_1  #### ASSIGNS NUMBER TO AGENT OPERATION SLOT FOR USE IN LATER PULLS, THIS DECIDES NAMES
-			    max = 20
-			    min = 1
-			    integer = yes
-			}
-			set_variable = {current_agent_recruitment = agent_operation_slot_1}
-		}
-	}else_if = {
-		limit = {
-			NOT = {
-				has_variable = agent_operation_slot_2
-			}
-		}
-		while_loop_effect = {
-		    break = name_unique
-		    limit = {
-		        OR = {
-		        	check_variable = {                          ########### MAKES SURE NAME IS UNIQUE TO THIS COUNTRY, ALLOWS PULLING OF THE NAME
-					    var = agent_operation_slot_2
-					    value = agent_operation_slot_1
-					    compare = equals
-					}
-					check_variable = {
-					    var = agent_operation_slot_2
-					    value = agent_operation_slot_3	
-					    compare = equals
-					}
-					NOT = {
-						has_variable = agent_operation_slot_2
-					}
-				}
-		    }
-			set_variable_to_random = {
-			    var = agent_operation_slot_2  #### ASSIGNS NUMBER TO AGENT OPERATION SLOT FOR USE IN LATER PULLS, THIS DECIDES NAMES
-			    max = 20
-			    min = 1
-			    integer = yes
-			}
-			set_variable = {current_agent_recruitment = agent_operation_slot_2}
-		}
-	}else_if = {
-		limit = {
-			NOT = {
-				has_variable = agent_operation_slot_3
-			}
-		}
-		while_loop_effect = {
-		    break = name_unique
-		    limit = {
-		        OR = {
-		        	check_variable = {                          ########### MAKES SURE NAME IS UNIQUE TO THIS COUNTRY, ALLOWS PULLING OF THE NAME
-					    var = agent_operation_slot_3
-					    value = agent_operation_slot_2
-					    compare = equals
-					}
-					check_variable = {
-					    var = agent_operation_slot_3
-					    value = agent_operation_slot_1
-					    compare = equals
-					}
-					NOT = {
-						has_variable = agent_operation_slot_3
-					}
-				}
-		    }
-			set_variable_to_random = {
-			    var = agent_operation_slot_3  #### ASSIGNS NUMBER TO AGENT OPERATION SLOT FOR USE IN LATER PULLS, THIS DECIDES NAMES
-			    max = 20
-			    min = 1
-			    integer = yes
-			}
-			set_variable = {current_agent_recruitment = agent_operation_slot_3}
-		}
+find_espionage_mission_end_time = {
+
+}
+espionage_end_mission_effect = {
+	## add Modifiers for success chance here
+	set_temp_variable = {Total_counterespionage_vs_espionage_percentage = modifier@espionage_value } ## grab espionage value (the good for you one)
+	targeted_country = {
+		subtract_from_temp_variable = {Total_counterespionage_vs_espionage_percentage = modifier@counter_espionage_value} ## grab opponetnts counter espionage value (bad for you)
 	}
-	if = {
-		limit = {
-			has_country_flag = bounty_hunter_side_screen           ######################## TELLS WHICH GUILD IS THE AGENT
+
+	##
+
+	randomize_temp_variable = {  ## success and failure chance generator
+		var = chance_of_success 
+		distribution = uniform
+		min = 1
+		max = 100
+	}
+
+	## HOW THE CHANCE OF SUCCESS WORKS
+# Chance of success is a random number between 1 and 100
+# You want that number to fall within your 'net', which is the sum total of positive and negative modifiers and skill scores
+# multiplied by how easy the mission is (lower numbers are harder as your net is smaller)
+
+	## FOR EXAMPLE
+#	martial score is 12
+#	technician score is 7
+#	total skill score divided by two = 9.5 (reason is there are two skills while some missions use only one)
+#   mission is 6 on the factor of how hard it is
+#   net is then 57
+#   times by 1.10, which is the sum total of the percentages for epsionage and counter espionage
+#	so net becomes 62.7
+#	chance_of_success lands on 62
+	##
+	meta_effect = { # grab the mission identifier and enact that scripted effect, each scripted effects holds the end results of a operation
+		text = {
+			mission_number_[mission_number] = yes
 		}
-        bounty_hunter_recruitment = yes
-	}else_if = {
-		limit = {
-			has_country_flag = smugglers_side_screen
-		}
-		smugglers_recruitment = yes
-	}else_if = {
-		limit = {
-			has_country_flag = technicians_side_screen
-		}
-		technicians_recruitment = yes
-	}else_if = {
-		limit = {
-			has_country_flag = spynet_side_screen
-		}
-		spynet_recruitment = yes
-	}else_if = {
-		limit = {
-			has_country_flag = counter_intelligence_side_screen
-		}
-		counter_intelligence_recruitment = yes
+		mission_number = "[?effect_mission_identifier]"
 	}
 }
-bounty_hunter_recruitment = {
-	set_variable_to_random = {
-	    var = agent_portrait@var:current_agent_recruitment  #### ASSIGNS NUMBER AS AGENT PORTRAIT, SCRIPTED LOCALISATION PULLS PORTRAIT FROM NUMBER
-	    max = 8
-	    min = 0
-	    integer = yes
-	}
-
-	set_variable =  { bounty_hunter_agent_portrait = agent_portrait@var:current_agent_recruitment}
-
-	set_variable_to_random = {
-	    var = agent_loyality@var:current_agent_recruitment
-	    max = 20
-	    min = 0
-	    integer = yes
-	}
-	set_variable_to_random = {
-	    var = agent_martial@var:current_agent_recruitment 
-	    max = 16
-	    min = 8
-	    integer = yes
-	}
-	set_variable_to_random = {
-	    var = agent_charisma@var:current_agent_recruitment
-	    max = 10
-	    min = 1
-	    integer = yes
-	}
-	set_variable_to_random = {
-	    var = agent_intelligence@var:current_agent_recruitment
-	    max = 12
-	    min = 4
-	    integer = yes
-	}
-	add_to_array = {
-	    array = espionage_guild_small_icons 
-	    value = 1
-	}
-	add_to_variable = {amount_of_bounty_hunters = 1}
-
-	clear_variable = current_agent_recruitment
-}
-smugglers_recruitment = {
-	set_variable_to_random = {
-	    var = agent_portrait@var:current_agent_recruitment  #### ASSIGNS NUMBER AS AGENT PORTRAIT, SCRIPTED LOCALISATION PULLS PORTRAIT FROM NUMBER
-	    max = 27
-	    min = 24
-	    integer = yes
-	}
-
-	set_variable =  { smugglers_agent_portrait = agent_portrait@var:current_agent_recruitment}
-
-	set_variable_to_random = {
-	    var = agent_loyality@var:current_agent_recruitment
-	    max = 20
-	    min = 0
-	    integer = yes
-	}
-	set_variable_to_random = {
-	    var = agent_martial@var:current_agent_recruitment 
-	    max = 10
-	    min = 4
-	    integer = yes
-	}
-	set_variable_to_random = {
-	    var = agent_charisma@var:current_agent_recruitment
-	    max = 16
-	    min = 10
-	    integer = yes
-	}
-	set_variable_to_random = {
-	    var = agent_intelligence@var:current_agent_recruitment
-	    max = 10
-	    min = 4
-	    integer = yes
-	}
-	add_to_array = {
-	    array = espionage_guild_small_icons 
-	    value = 2
-	}
-	add_to_variable = {amount_of_smugglers = 1}
-
-	clear_variable = current_agent_recruitment
-}
-technicians_recruitment = {
-	set_variable_to_random = {
-	    var = agent_portrait@var:current_agent_recruitment  #### ASSIGNS NUMBER AS AGENT PORTRAIT, SCRIPTED LOCALISATION PULLS PORTRAIT FROM NUMBER
-	    max = 31
-	    min = 28
-	    integer = yes
-	}
-	set_variable =  { technicians_agent_portrait = agent_portrait@var:current_agent_recruitment}
-
-	set_variable_to_random = {
-	    var = agent_loyality@var:current_agent_recruitment
-	    max = 20
-	    min = 0
-	    integer = yes
-	}
-	set_variable_to_random = {
-	    var = agent_martial@var:current_agent_recruitment 
-	    max = 8
-	    min = 1
-	    integer = yes
-	}
-	set_variable_to_random = {
-	    var = agent_charisma@var:current_agent_recruitment
-	    max = 8
-	    min = 1
-	    integer = yes
-	}
-	set_variable_to_random = {
-	    var = agent_intelligence@var:current_agent_recruitment
-	    max = 18
-	    min = 12
-	    integer = yes
-	}
-	add_to_array = {
-	    array = espionage_guild_small_icons 
-	    value = 3
-	}
-	add_to_variable = {amount_of_technicians = 1}
-
-	clear_variable = current_agent_recruitment
-}
-spynet_recruitment = {
+mission_number_1 = { ## assassinate mission end effect
+	set_temp_variable = { net_size = agent_martial@var:agent_in_mission } ## find characters martial and sets net_size to then work out success chance
+	multiply_temp_variable = { net_size = 6 } ## 6 on how easy it is
+	multiply_temp_variable = { net_size = Total_counterespionage_vs_espionage_percentage} ## multiply the bonuses to get total net size
 	if = {
 		limit = {
-			has_government = imperial 
-		}
-		set_variable_to_random = {
-		    var = agent_portrait@var:current_agent_recruitment  #### ASSIGNS NUMBER AS AGENT PORTRAIT, SCRIPTED LOCALISATION PULLS PORTRAIT FROM NUMBER
-		    max = 17
-		    min = 13
-		    integer = yes
-		}
-	}else = {
-		set_variable_to_random = {
-		    var = agent_portrait@var:current_agent_recruitment  #### ASSIGNS NUMBER AS AGENT PORTRAIT, SCRIPTED LOCALISATION PULLS PORTRAIT FROM NUMBER
-		    max = 24
-		    min = 18
-		    integer = yes
-		}
-	}
-	set_variable_to_random = {
-	    var = agent_portrait@var:current_agent_recruitment  #### ASSIGNS NUMBER AS AGENT PORTRAIT, SCRIPTED LOCALISATION PULLS PORTRAIT FROM NUMBER
-	    max = 23
-	    min = 12
-	    integer = yes
-	}
-
-	set_variable =  { spynet_agent_portrait = agent_portrait@var:current_agent_recruitment}
-
-	set_variable_to_random = {
-	    var = agent_loyality@var:current_agent_recruitment
-	    max = 20
-	    min = 0
-	    integer = yes
-	}
-	set_variable_to_random = {
-	    var = agent_martial@var:current_agent_recruitment 
-	    max = 14
-	    min = 8
-	    integer = yes
-	}
-	set_variable_to_random = {
-	    var = agent_charisma@var:current_agent_recruitment
-	    max = 14
-	    min = 10
-	    integer = yes
-	}
-	set_variable_to_random = {
-	    var = agent_intelligence@var:current_agent_recruitment
-	    max = 10
-	    min = 6
-	    integer = yes
-	}
-	add_to_variable = {amount_of_spies = 1}
-	if = {
-		limit = {
-			has_government = imperial 
-		}
-		add_to_array = {
-		    array = espionage_guild_small_icons 
-		    value = 4
-		}
-	}else = {
-		add_to_array = {
-		    array = espionage_guild_small_icons 
-		    value = 5
-		}
-	}
-}
-counter_intelligence_recruitment = {
-	set_variable_to_random = {
-	    var = agent_portrait@var:current_agent_recruitment  #### ASSIGNS NUMBER AS AGENT PORTRAIT, SCRIPTED LOCALISATION PULLS PORTRAIT FROM NUMBER
-	    max = 12
-	    min = 9
-	    integer = yes
-	}
-
-	set_variable =  { counter_intelligence_agent_portrait = agent_portrait@var:current_agent_recruitment}
-
-	set_variable_to_random = {
-	    var = agent_loyality@var:current_agent_recruitment
-	    max = 20
-	    min = 0
-	    integer = yes
-	}
-	set_variable_to_random = {
-	    var = agent_martial@var:current_agent_recruitment 
-	    max = 14
-	    min = 12
-	    integer = yes
-	}
-	set_variable_to_random = {
-	    var = agent_charisma@var:current_agent_recruitment
-	    max = 6
-	    min = 1
-	    integer = yes
-	}
-	set_variable_to_random = {
-	    var = agent_intelligence@var:current_agent_recruitment
-	    max = 18
-	    min = 2
-	    integer = yes
-	}
-	add_to_variable = {amount_of_counter_intelligence = 1}
-	if = {
-		limit = {
-			has_government = imperial 
-		}
-		add_to_array = {
-		    array = espionage_guild_small_icons 
-		    value = 6
-		}
-	}else = {
-		add_to_array = {
-		    array = espionage_guild_small_icons 
-		    value = 7
-		}
-	}
-	clear_variable = current_agent_recruitment
-}
-
-Slot_1_espionage_end_mission_effects = {
-	if = {
-		### EXAMPLE SKILL CHECK ###
-		# set_variable = { agent_in_mission_1 = ### GRABS OPERATIVE FROM PALPYS GRIDBOX}
-		# set_variable = { agent_loyality@var:agent_in_mission_1 = 12 }
-		# check_variable = { agent_loyality@var:agent_in_mission_1 = 12 }  ## WOULD I GET 12 TELL ME YES
-		# check_variable = { agent_martial@var:agent_in_mission_1 = 12 }
-		# check_variable = { agent_charisma@var:agent_in_mission_1 = 12 }
-		# check_variable = { agent_intelligence@var:agent_in_mission_1 = 12 }
-		limit = {
-			has_country_flag = slot_1_filled
-		}
-		randomize_temp_variable = {  ## success and failure chance generator
-		  var = chance_of_success_1
-		  distribution = uniform
-		  min = 1
-		  max = 100
-		}
-		############# BOUNTY HUNTER ##############################
-		if = {                  ########### ASSASSIN ONLY WOUNDS
-			limit = {
-				has_country_flag = assassinate_slot_1 
+			check_variable = {
+				var = chance_of_success
+				value = net_size
+				compare = less_than_or_equals
 			}
-			set_temp_variable = { tempAverage = agent_martial@var:agent_in_mission_1 } ## find characters martial and sets tempAverage to then work out success chance
-			multiply_temp_variable = { tempAverage = 6 } ## 6 factor
-			add_to_temp_variable = {tempAverage = outside_success_chance_bonus}
-			subtract_from_temp_variable = {tempAverage = targeted_country_slot_1:outside_success_chance_bonus}
-			if = {
-				limit = {
-					check_variable = {
-						var = chance_of_success_1
-						value = tempAverage
-						compare = less_than_or_equals
-					}
-				}
-				if = {
-					limit = {
-						check_variable = {chance_of_success_1 > 10}
-					}
-					var:targeted_country_slot_1 = {
-						every_unit_leader = {
-							limit = {
-								has_character_flag = targeted_by_mission
-								has_character_flag = targeted_by_@ROOT_1_murder
-							}
-							add_timed_unit_leader_trait = {
-								trait = wounded
-								days = 180
-							}
-							unit_leader_event = {id = espionage.1}
-						}
-						country_event = espionage_missions.8
-					}
-					country_event = espionage_missions.5
-				}else = {														 ### CRITICAL SUCCESSS
-					var:targeted_country_slot_1 = { ### ASSASSIN KILLS TARGET
-						every_unit_leader = {
-							limit = {
-								has_character_flag = targeted_by_mission
-								has_character_flag = targeted_by_@ROOT_1_murder
-							}
-							retire = yes
-							unit_leader_event = {id = espionage.2}
-						}
-						country_event = espionage_missions.13
-					}
-					country_event = espionage_missions.14
-				}
-			}else = {## FALIURE
-				country_event = espionage_missions.6
-				var:targeted_country_slot_1 = {
-					country_event = espionage_missions.9
-				}
-			}
-			clr_country_flag = assassinate_slot_1
-			clr_country_flag = slot_1_filled
-			clear_variable = mission_1_progress_var
-			clear_variable = agent_in_mission_1
-			clear_variable = targeted_country_slot_1
 		}
 		if = {
 			limit = {
-				has_country_flag = ransom_slot_1
+				check_variable = {chance_of_success_1 > 10}
 			}
-			set_temp_variable = { tempAverage = agent_martial@var:agent_in_mission_1 }
-			add_to_temp_variable = { tempAverage = agent_intelligence@var:agent_in_mission_1 }
-			divide_temp_variable = { tempAverage = 2 }
-			multiply_temp_variable = { tempAverage = 5 }
-			add_to_temp_variable = {tempAverage = outside_success_chance_bonus}
-			subtract_from_temp_variable = {tempAverage = targeted_country_slot_1:outside_success_chance_bonus}
-			if = {
-				limit = {
-					check_variable = {
-						var = chance_of_success_1
-						value = tempAverage
-						compare = less_than_or_equals
-					}
-				}
-				var:targeted_country_slot_1 = {
-					country_event = {
-					    id = espionage.3
-					    days = 1
-					}
-				}
-			}
-			clr_country_flag = ransom_slot_1
-			clr_country_flag = slot_1_filled
-			clear_variable = mission_1_progress_var
-			clear_variable = agent_in_mission_1
-			clear_variable = targeted_country_slot_1
-		}
-		if = {
-			limit = {
-				has_country_flag = army_training_slot_1
-			}
-			set_temp_variable = { tempAverage = agent_martial@var:agent_in_mission_1 }
-			add_to_temp_variable = { tempAverage = agent_charisma@var:agent_in_mission_1 }
-			divide_temp_variable = { tempAverage = 2 }
-			multiply_temp_variable = { tempAverage = 10 }
-			add_to_temp_variable = {tempAverage = outside_success_chance_bonus}
-			subtract_from_temp_variable = {tempAverage = targeted_country_slot_1:outside_success_chance_bonus}
-			if = {
-				limit = {
-					check_variable = {
-						var = chance_of_success_1
-						value = tempAverage
-						compare = less_than_or_equals
-					}
-				}
+			var:targeted_country = {
 				every_unit_leader = {
 					limit = {
 						has_character_flag = targeted_by_mission
-						has_character_flag = targeted_by_training_1
+						has_character_flag = targeted_by_@ROOT_1_murder
 					}
-					add_random_trait = {
-						organizer
-						cavalry_leader
-						infantry_leader
-						skilled_staffer
-						trickster
-						infantry_officer
-						armor_officer
+					add_timed_unit_leader_trait = {
+						trait = wounded
+						days = 180
 					}
-				}
-				country_event = espionage_missions.11
-			}else = {## FALIURE
-				country_event = espionage_missions.12
-			}
-			clr_country_flag = army_training_slot_1
-			clr_country_flag = slot_1_filled
-			clear_variable = mission_1_progress_var
-			clear_variable = agent_in_mission_1
-			clear_variable = targeted_country_slot_1
-		}
-		if = {
-			limit = {
-				has_country_flag = intimidate_senator_slot_1 ###### CHANGE_ME
-			}
-			set_temp_variable = { tempAverage = agent_martial@var:agent_in_mission_1 }
-			add_to_temp_variable = { tempAverage = agent_charisma@var:agent_in_mission_1 }
-			divide_temp_variable = { tempAverage = 2 }
-			multiply_temp_variable = { tempAverage = 10 }
-			add_to_temp_variable = {tempAverage = outside_success_chance_bonus}
-			subtract_from_temp_variable = {tempAverage = targeted_country_slot_1:outside_success_chance_bonus}
-			if = {
-				limit = {
-					check_variable = {
-						var = chance_of_success_1
-						value = tempAverage
-						compare = less_than_or_equals
-					}
-				}
-				var:targeted_country_slot_1 = {
-					country_event = espionage_missions.20
-				}
-				country_event = espionage_missions.17
-			}else = {## FALIURE
-				country_event = espionage_missions.18
-				var:targeted_country_slot_1 = {
-					country_event = espionage_missions.21
+					unit_leader_event = {id = espionage.1}
 				}
 			}
-			clr_country_flag = intimidate_senator_slot_1
-			clr_country_flag = slot_1_filled
-			clear_variable = mission_1_progress_var
-			clear_variable = agent_in_mission_1
-			clear_variable = targeted_country_slot_1
-		}
-		########### TECHNICIAN ##################################
-		if = {
-			limit = {
-				has_country_flag = cyber_attack_target_slot_1
-			}
-			set_temp_variable = { tempAverage = agent_intelligence@var:agent_in_mission_1 }
-			multiply_temp_variable = { tempAverage = 5 }
-			add_to_temp_variable = {tempAverage = outside_success_chance_bonus}
-			subtract_from_temp_variable = {tempAverage = targeted_country_slot_1:outside_success_chance_bonus}
-			if = {
-				limit = {
-					check_variable = {
-						var = chance_of_success_1
-						value = tempAverage
-						compare = less_than_or_equals
-					}
-				}
-				var:targeted_country_slot_1 = {
-					add_timed_idea = {
-					    idea = cyber_attack_espionage
-					    days = 100
-					}
-					country_event = espionage_missions.26
-				}
-				country_event = espionage_missions.23
-			}else = {## FALIURE
-				country_event = espionage_missions.24
-				var:targeted_country_slot_1 = {
-					country_event = espionage_missions.21
-				}
-			}
-			clr_country_flag = cyber_attack_target_slot_1
-			clr_country_flag = slot_1_filled
-						clear_variable = mission_1_progress_var
-			clear_variable = agent_in_mission_1
-			clear_variable = targeted_country_slot_1
-		}
-		if = {
-			limit = {
-				has_country_flag = steal_blueprint_target_slot_1
-			}
-			set_temp_variable = { tempAverage = agent_intelligence@var:agent_in_mission_1 }
-			add_to_temp_variable = { tempAverage = agent_charisma@var:agent_in_mission_1 }
-			divide_temp_variable = { tempAverage = 2 }
-			multiply_temp_variable = { tempAverage = 8 }
-			add_to_temp_variable = {tempAverage = outside_success_chance_bonus}
-			subtract_from_temp_variable = {tempAverage = targeted_country_slot_1:outside_success_chance_bonus}
-			if = {
-				limit = {
-					check_variable = {
-						var = chance_of_success_1
-						value = tempAverage
-						compare = less_than_or_equals
-					}
-				}
-				var:targeted_country_slot_1 = {
-					steal_random_tech_bonus = {
-						folder = electronics_folder
-						folder = industry_folder
-						bonus = 3.0
-						dynamic = no
-						instant = yes
-						name = operation_steal_tech_civilian
-						target = FROM
-						uses = 1
-					}
-					country_event = espionage_missions.32
-				}
-				country_event = espionage_missions.29
-			}else = {## FALIURE
-				country_event = espionage_missions.30
-				var:targeted_country_slot_1 = {
-					country_event = espionage_missions.33
-				}
-			}
-			clr_country_flag = steal_blueprint_target_slot_1
-			clr_country_flag = slot_1_filled
-			clear_variable = mission_1_progress_var
-			clear_variable = agent_in_mission_1
-			clear_variable = targeted_country_slot_1
-		}
-		if = {
-			limit = {
-				has_country_flag = sprout_disease_target_slot_1
-			}
-			set_temp_variable = { tempAverage = agent_intelligence@var:agent_in_mission_1 }
-			add_to_temp_variable = { tempAverage = agent_charisma@var:agent_in_mission_1 }
-			divide_temp_variable = { tempAverage = 2 }
-			multiply_temp_variable = { tempAverage = 5 }
-			add_to_temp_variable = {tempAverage = outside_success_chance_bonus}
-			subtract_from_temp_variable = {tempAverage = targeted_country_slot_1:outside_success_chance_bonus}
-			if = {
-				limit = {
-					check_variable = {
-						var = chance_of_success_1
-						value = tempAverage
-						compare = less_than_or_equals
-					}
-				}
-				var:targeted_country_slot_1 = {
-					capital_scope = {
-						add_manpower = -50000
-					}
-					country_event = espionage_missions.38
-				}
-				country_event = espionage_missions.35
-			}else = {## FALIURE
-				country_event = espionage_missions.36
-				var:targeted_country_slot_1 = {
-					country_event = espionage_missions.39
-				}
-			}
-			clr_country_flag = sprout_disease_target_slot_1
-			clr_country_flag = slot_1_filled
-			clear_variable = mission_1_progress_var
-			clear_variable = agent_in_mission_1
-			clear_variable = targeted_country_slot_1
-		}
-		if = {
-			limit = {
-				has_country_flag = logisitics_target_slot_1
-			}
-			set_temp_variable = { tempAverage = agent_intelligence@var:agent_in_mission_1 }
-			add_to_temp_variable = { tempAverage = agent_martial@var:agent_in_mission_1 }
-			divide_temp_variable = { tempAverage = 2 }
-			multiply_temp_variable = { tempAverage = 8 }
-			add_to_temp_variable = {tempAverage = outside_success_chance_bonus}
-			subtract_from_temp_variable = {tempAverage = targeted_country_slot_1:outside_success_chance_bonus}
-			if = {
-				limit = {
-					check_variable = {
-						var = chance_of_success_1
-						value = tempAverage
-						compare = less_than_or_equals
-					}
-				}
-				var:targeted_country_slot_1 = {
-					add_timed_idea = {
-					    idea = logistics_sabotage_espionage
-					    days = 40
-					}
-					country_event = espionage_missions.44
-				}
-				country_event = espionage_missions.41
-			}else = {## FALIURE
-				country_event = espionage_missions.42
-				var:targeted_country_slot_1 = {
-					country_event = espionage_missions.45
-				}
-			}
-			clr_country_flag = logistics_sabotage_target_slot_1
-			clr_country_flag = slot_1_filled
-			clear_variable = mission_1_progress_var
-			clear_variable = agent_in_mission_1
-			clear_variable = targeted_country_slot_1
-		}
-		### SPY ####
-		if = {
-			limit = {
-				has_country_flag = sabotage_target_slot_1
-			}
-			set_temp_variable = { tempAverage = agent_intelligence@var:agent_in_mission_1 }
-			add_to_temp_variable = { tempAverage = agent_martial@var:agent_in_mission_1 }
-			divide_temp_variable = { tempAverage = 2 }
-			multiply_temp_variable = { tempAverage = 12 }
-			add_to_temp_variable = {tempAverage = outside_success_chance_bonus}
-			subtract_from_temp_variable = {tempAverage = targeted_country_slot_1:outside_success_chance_bonus}
-			if = {
-				limit = {
-					check_variable = {
-						var = chance_of_success_1
-						value = tempAverage
-						compare = less_than_or_equals
-					}
-				}
-				var:targeted_country_slot_1 = {
-					while_loop_effect = {
-					    break = temp_break
-					    limit = {
-					    	NOT = {
-					        	has_variable = targeted_country_slot_1
-					        }
-					    }
-					    random_core_state = {
-					    	if = {
-					    		limit = {
-					    			arms_factory > 1
-					    		}
-					    		remove_building = {
-								    type = arms_factory
-								    level = 1
-								}
-								set_temp_variable = {temp_break = 1}
-					    	}else_if = {
-					    		limit = {
-					    			industrial_complex > 1
-					    		}
-					    		remove_building = {
-								    type = industrial_complex
-								    level = 1
-								}
-								set_temp_variable = {temp_break = 1}
-					    	}
-					    }
-					}
-					country_event = espionage_missions.50
-				}
-				country_event = espionage_missions.47
-			}else = {## FALIURE
-				country_event = espionage_missions.48
-				var:targeted_country_slot_1 = {
-					country_event = espionage_missions.51
-				}
-			}
-			clr_country_flag = sabotage_target_slot_1
-			clr_country_flag = slot_1_filled
-			clear_variable = mission_1_progress_var
-			clear_variable = agent_in_mission_1
-			clear_variable = targeted_country_slot_1
-		}
-		if = {
-			limit = {
-				has_country_flag = infiltrate_military_slot_1
-			}
-			set_temp_variable = { tempAverage = agent_martial@var:agent_in_mission_1 }
-			add_to_temp_variable = { tempAverage = agent_charisma@var:agent_in_mission_1 }
-			divide_temp_variable = { tempAverage = 2 }
-			multiply_temp_variable = { tempAverage = 6 }
-			add_to_temp_variable = {tempAverage = outside_success_chance_bonus}
-			subtract_from_temp_variable = {tempAverage = targeted_country_slot_1:outside_success_chance_bonus}
-			if = {
-				limit = {
-					check_variable = {
-						var = chance_of_success_1
-						value = tempAverage
-						compare = less_than_or_equals
-					}
-				}
-				add_intel = {
-				    target = var:targeted_country_slot_1
-				    army_intel = 30
-				    navy_intel = 30
-				    airforce_intel = 30
-				}
-				var:targeted_country_slot_1 = {
-					country_event = espionage_missions.56
-				}
-				country_event = espionage_missions.53
-			}else = {## FALIURE
-				country_event = espionage_missions.54
-				var:targeted_country_slot_1 = {
-					country_event = espionage_missions.57
-				}
-			}
-			clr_country_flag = infiltrate_military_slot_1
-			clr_country_flag = slot_1_filled
-			clear_variable = mission_1_progress_var
-			clear_variable = agent_in_mission_1
-			clear_variable = targeted_country_slot_1
-		}
-		if = {
-			limit = {
-				has_country_flag = undermine_guild_connections_slot_1 ## CHANGE_ME no idea how to do this palpy help
-			}
-			set_temp_variable = { tempAverage = agent_intelligence@var:agent_in_mission_1 }
-			add_to_temp_variable = { tempAverage = agent_charisma@var:agent_in_mission_1 }
-			divide_temp_variable = { tempAverage = 2 }
-			multiply_temp_variable = { tempAverage = 8 }
-			add_to_temp_variable = {tempAverage = outside_success_chance_bonus}
-			subtract_from_temp_variable = {tempAverage = targeted_country_slot_1:outside_success_chance_bonus}
-			if = {
-				limit = {
-					check_variable = {
-						var = chance_of_success_1
-						value = tempAverage
-						compare = less_than_or_equals
-					}
-				}
-				var:targeted_country_slot_1 = {
-					country_event = espionage_missions.62
-				}
-				country_event = espionage_missions.59
-			}else = {## FALIURE
-				country_event = espionage_missions.60
-				var:targeted_country_slot_1 = {
-					country_event = espionage_missions.63
-				}
-			}	
-			clr_country_flag = undermine_guild_connections_slot_1
-			clr_country_flag = slot_1_filled
-			clear_variable = mission_1_progress_var
-			clear_variable = agent_in_mission_1
-			clear_variable = targeted_country_slot_1
-		}
-		if = {
-			limit = {
-				has_country_flag = turn_agent_slot_1 ## CHANGE_ME lol no, leaving that till last
-			}
-			set_temp_variable = { tempAverage = agent_martial@var:agent_in_mission_1 }
-			add_to_temp_variable = { tempAverage = agent_charisma@var:agent_in_mission_1 }
-			divide_temp_variable = { tempAverage = 2 }
-			multiply_temp_variable = { tempAverage = 6 }
-			add_to_temp_variable = {tempAverage = outside_success_chance_bonus}
-			subtract_from_temp_variable = {tempAverage = targeted_country_slot_1:outside_success_chance_bonus}
-			if = {
-				limit = {
-					check_variable = {
-						var = chance_of_success_1
-						value = tempAverage
-						compare = less_than_or_equals
-					}
-				}
-			}
-			clr_country_flag = turn_agent_slot_1
-			clr_country_flag = slot_1_filled
-			clear_variable = mission_1_progress_var
-			clear_variable = agent_in_mission_1
-			clear_variable = targeted_country_slot_1
-		}
-		if = {
-			limit = {
-				has_country_flag = capital_ship_slot_1 ## finds biggest capital ship (Super star destroyers not included due to how busted that would be)
-			}
-			set_temp_variable = { tempAverage = agent_martial@var:agent_in_mission_1 }
-			divide_temp_variable = { tempAverage = 2 }
-			multiply_temp_variable = { tempAverage = 5 }
-			add_to_temp_variable = {tempAverage = outside_success_chance_bonus}
-			subtract_from_temp_variable = {tempAverage = targeted_country_slot_1:outside_success_chance_bonus}
-			if = {
-				limit = {
-					check_variable = {
-						var = chance_of_success_1
-						value = tempAverage
-						compare = less_than_or_equals
-					}
-				}
-				var:targeted_country_slot_1 = {
-					if = {
-						limit = {
-							check_variable = {
-								var = num_ships_with_type@carrier  ## CHANGE_ME, need to ask diosysnus about ship types
-								value = 1
-								compare = greater_than
-							}
-						}
-						destroy_ships = {
-						    type = carrier
-						    count = 1
-						}
-					}else_if = {
-						limit = {
-							check_variable = {
-								var = num_ships_with_type@battleship ## CHANGE_ME, need to ask diosysnus about ship types
-								value = 1
-								compare = greater_than
-							}
-						}
-						destroy_ships = {
-						    type = battleship
-						    count = 1
-						}
-					}
-					country_event = espionage_missions.74
-				}
-				country_event = espionage_missions.71
-			}else = {## FALIURE
-				country_event = espionage_missions.72
-				var:targeted_country_slot_1 = {
-					country_event = espionage_missions.75
-				}
-			}
-			clr_country_flag = capital_ship_slot_1
-			clr_country_flag = slot_1_filled
-			clear_variable = mission_1_progress_var
-			clear_variable = agent_in_mission_1
-			clear_variable = targeted_country_slot_1
-		}
-		####### SMUGGLER ###############
-		if = {
-			limit = {
-				has_country_flag = steal_equipment_slot_1
-			}
-			set_temp_variable = { tempAverage = agent_martial@var:agent_in_mission_1 }
-			add_to_temp_variable = { tempAverage = agent_intelligence@var:agent_in_mission_1 }
-			divide_temp_variable = { tempAverage = 2 }
-			multiply_temp_variable = { tempAverage = 10 }
-			add_to_temp_variable = {tempAverage = outside_success_chance_bonus}
-			subtract_from_temp_variable = {tempAverage = targeted_country_slot_1:outside_success_chance_bonus}
-			if = {
-				limit = {
-					check_variable = {
-						var = chance_of_success_1
-						value = tempAverage
-						compare = less_than_or_equals
-					}
-				}
-				var:targeted_country_slot_1 = {
-					send_equipment_fraction = {
-					    value = 0.02
-					    target = PREV
-					}
-					country_event = espionage_missions.80
-				}
-				country_event = espionage_missions.77
-			}else = {## FALIURE
-				country_event = espionage_missions.78
-				var:targeted_country_slot_1 = {
-					country_event = espionage_missions.81
-				}
-			}
-			clr_country_flag = steal_equipment_slot_1
-			clr_country_flag = slot_1_filled
-			clear_variable = mission_1_progress_var
-			clear_variable = agent_in_mission_1
-			clear_variable = targeted_country_slot_1
-		}
-		if = {
-			limit = {
-				has_country_flag = smuggle_slaves_slot_1
-			}
-			set_temp_variable = { tempAverage = agent_martial@var:agent_in_mission_1 }
-			add_to_temp_variable = { tempAverage = agent_intelligence@var:agent_in_mission_1 }
-			divide_temp_variable = { tempAverage = 2 }
-			multiply_temp_variable = { tempAverage = 8 }
-			add_to_temp_variable = {tempAverage = outside_success_chance_bonus}
-			subtract_from_temp_variable = {tempAverage = targeted_country_slot_1:outside_success_chance_bonus}
-			if = {
-				limit = {
-					check_variable = {
-						var = chance_of_success_1
-						value = tempAverage
-						compare = less_than_or_equals
-					}
-				}
-				var:targeted_country_slot_1 = {
-					find_highest_in_array = { 
-						array = slaves
-						value = slave_value_count_temp
-						index = slave_index_espionage_temp
-					}
-					divide_variable = {slave_value_count_temp = 3} ## Thought this might be cleaner
-					multiply_variable = {slave_value_count_temp = 2}
-					round_variable = slave_value_count_temp
-					set_variable = { slaves^slave_index_espionage_temp = slave_value_count_temp }
-				country_event = espionage_missions.80
-				}
-				country_event = espionage_missions.77
-				set_variable = { slaves^targeted_country_slot_1.slave_index_espionage_temp = var:targeted_country_slot_1.slave_value_count_temp} ## this is stupid and should be treated as such
-			}else = {## FALIURE
-				country_event = espionage_missions.78
-				var:targeted_country_slot_1 = {
-					country_event = espionage_missions.81
-				}
-			}
-			clr_country_flag = smuggle_slaves_slot_1
-			clr_country_flag = slot_1_filled
-			clear_variable = mission_1_progress_var
-			clear_variable = agent_in_mission_1
-			clear_variable = targeted_country_slot_1
-		}
-		if = {
-			limit = {
-				has_country_flag = set_Slaves_free_slot_1
-			}
-			set_temp_variable = { tempAverage = agent_martial@var:agent_in_mission_1 }
-			add_to_temp_variable = { tempAverage = agent_intelligence@var:agent_in_mission_1 }
-			divide_temp_variable = { tempAverage = 2 }
-			multiply_temp_variable = { tempAverage = 10 }
-			add_to_temp_variable = {tempAverage = outside_success_chance_bonus}
-			subtract_from_temp_variable = {tempAverage = targeted_country_slot_1:outside_success_chance_bonus}
-			if = {
-				limit = {
-					check_variable = {
-						var = chance_of_success_1
-						value = tempAverage
-						compare = less_than_or_equals
-					}
-				}
-				var:targeted_country_slot_1 = {
-					find_highest_in_array = { 
-						array = slaves
-						value = slave_value_count_temp
-						index = slave_index_espionage_temp
-					}
-					divide_variable = {slave_value_count_temp = 3} ## Thought this might be cleaner
-					multiply_variable = {slave_value_count_temp = 2}
-					round_variable = slave_value_count_temp
-					set_variable = { slaves^slave_index_espionage_temp = slave_value_count_temp }
-					country_event = espionage_missions.92
-				}
-				country_event = espionage_missions.89
-			}else = {## FALIURE
-				country_event = espionage_missions.90
-				var:targeted_country_slot_1 = {
-					country_event = espionage_missions.93
-				}
-			}
-			clr_country_flag = set_Slaves_free_slot_1
-			clr_country_flag = slot_1_filled
-			clear_variable = mission_1_progress_var
-			clear_variable = agent_in_mission_1
-			clear_variable = targeted_country_slot_1
-		}
-		if = {
-			limit = {
-				has_country_flag = provoke_slave_revolt_slot_1
-			}
-			set_temp_variable = { tempAverage = agent_martial@var:agent_in_mission_1 }
-			add_to_temp_variable = { tempAverage = agent_charisma@var:agent_in_mission_1 }
-			divide_temp_variable = { tempAverage = 2 }
-			multiply_temp_variable = { tempAverage = 4 }
-			add_to_temp_variable = {tempAverage = outside_success_chance_bonus}
-			subtract_from_temp_variable = {tempAverage = targeted_country_slot_1:outside_success_chance_bonus}
-			if = {
-				limit = {
-					check_variable = {
-						var = chance_of_success_1
-						value = tempAverage
-						compare = less_than_or_equals
-					}
-				}
-				var:targeted_country_slot_1 = {
-					set_temp_variable = { slave_total_count_temp = 0 }
-					for_each_loop = {
-						array = slaves
-						value = slave_index_count
-
-						add_to_temp_variable = {slave_total_count_temp = slave_index_count}
-					}
-					divide_variable = {slave_total_count_temp = 800000}
-					random_core_state = {
-						 set_variable = { core_temp_state = THIS.id}
-					}
-					start_civil_war = {
-					    ruling_party = neutrality
-					    ideology = ROOT
-					    size = slave_total_count_temp
-					    capital = var:core_temp_state
-					    navy_ratio = 0
-					    states_filter = {
-					    	check_variable = {var:core_temp_state = THIS.id}
-					    }
-					    keep_unit_leaders_trigger = {
-					    	always = yes
-					    }
-					    keep_political_leader = yes
-					    keep_political_party_members = yes
-					}
-					country_event = espionage_missions.98
-				}
-				country_event = espionage_missions.95
-			}else = {## FALIURE
-				country_event = espionage_missions.96
-				var:targeted_country_slot_1 = {
-					country_event = espionage_missions.99
-				}
-			}
-			clr_country_flag = provoke_slave_revolt_slot_1
-			clr_country_flag = slot_1_filled
-			clear_variable = mission_1_progress_var
-			clear_variable = agent_in_mission_1
-			clear_variable = targeted_country_slot_1
-		}
-		if = {
-			limit = {
-				has_country_flag = arming_dissidents_slot_1
-			}
-			set_temp_variable = { tempAverage = agent_martial@var:agent_in_mission_1 }
-			add_to_temp_variable = { tempAverage = agent_charisma@var:agent_in_mission_1 }
-			divide_temp_variable = { tempAverage = 2 }
-			multiply_temp_variable = { tempAverage = 10 }
-			add_to_temp_variable = {tempAverage = outside_success_chance_bonus}
-			subtract_from_temp_variable = {tempAverage = targeted_country_slot_1:outside_success_chance_bonus}
-			if = {
-				limit = {
-					check_variable = {
-						var = chance_of_success_1
-						value = tempAverage
-						compare = less_than_or_equals
-					}
-				}
-				var:targeted_country_slot_1 = {
-					every_controlled_state = {
-						limit = {
-							has_active_resistance = yes
-						}
-						add_resistance = 20 
-					}
-					country_event = espionage_missions.104
-				}
-				country_event = espionage_missions.101
-			}else = {## FALIURE
-				country_event = espionage_missions.102
-				var:targeted_country_slot_1 = {
-					country_event = espionage_missions.105
-				}
-			}
-			clr_country_flag = arming_dissidents_slot_1
-			clr_country_flag = slot_1_filled
-			clear_variable = mission_1_progress_var
-			clear_variable = agent_in_mission_1
-			clear_variable = targeted_country_slot_1
-		}
-		if = {
-			limit = {
-				has_country_flag = plant_sleeper_agent_slot_1
-			}
-			set_temp_variable = { tempAverage = agent_intelligence@var:agent_in_mission_1 }
-			add_to_temp_variable = { tempAverage = agent_charisma@var:agent_in_mission_1 }
-			divide_temp_variable = { tempAverage = 2 }
-			multiply_temp_variable = { tempAverage = 12 }
-			add_to_temp_variable = {tempAverage = outside_success_chance_bonus}
-			subtract_from_temp_variable = {tempAverage = targeted_country_slot_1:outside_success_chance_bonus}
-			if = {
-				limit = {
-					check_variable = {
-						var = chance_of_success_1
-						value = tempAverage
-						compare = less_than_or_equals
-					}
-				}
-				var:targeted_country_slot_1 = {
-					country_event = espionage_missions.110
-				}
-				country_event = espionage_missions.107
-				set_variable = {higher_chance_espionage_target = var:targeted_country_slot_1.id }
-			}else = {## FALIURE
-				country_event = espionage_missions.108
-				var:targeted_country_slot_1 = {
-					country_event = espionage_missions.111
-				}
-			}
-			clr_country_flag = plant_sleeper_agent_slot_1
-			clr_country_flag = slot_1_filled
-			clear_variable = mission_1_progress_var
-			clear_variable = agent_in_mission_1
-			clear_variable = targeted_country_slot_1
-		}
-		if = {
-			limit = {
-				has_country_flag = market_flood_slot_1
-			}
-			set_temp_variable = { tempAverage = agent_intelligence@var:agent_in_mission_1 }
-			add_to_temp_variable = { tempAverage = agent_charisma@var:agent_in_mission_1 }
-			divide_temp_variable = { tempAverage = 2 }
-			multiply_temp_variable = { tempAverage = 8 }
-			add_to_temp_variable = {tempAverage = outside_success_chance_bonus}
-			subtract_from_temp_variable = {tempAverage = targeted_country_slot_1:outside_success_chance_bonus}
-			if = {
-				limit = {
-					check_variable = {
-						var = chance_of_success_1
-						value = tempAverage
-						compare = less_than_or_equals
-					}
-				}
-				var:targeted_country_slot_1 = {
-					subtract_from_variable = { currency_amount^primary_currency = 1000 }
-					country_event = espionage_missions.116
-				}
-				country_event = espionage_missions.113
-			}else = {## FALIURE
-				country_event = espionage_missions.114
-				var:targeted_country_slot_1 = {
-					country_event = espionage_missions.117
-				}
-			}
-			clr_country_flag = market_flood_slot_1
-			clr_country_flag = slot_1_filled
-			clear_variable = mission_1_progress_var
-			clear_variable = agent_in_mission_1
-			clear_variable = targeted_country_slot_1
-		}
-		if = {
-			limit = {
-				has_country_flag = reroute_supply_slot_1
-			}
-			set_temp_variable = { tempAverage = agent_intelligence@var:agent_in_mission_1 }
-			add_to_temp_variable = { tempAverage = agent_charisma@var:agent_in_mission_1 }
-			divide_temp_variable = { tempAverage = 2 }
-			multiply_temp_variable = { tempAverage = 8 }
-			add_to_temp_variable = {tempAverage = outside_success_chance_bonus}
-			subtract_from_temp_variable = {tempAverage = targeted_country_slot_1:outside_success_chance_bonus}
-			if = {
-				limit = {
-					check_variable = {
-						var = chance_of_success_1
-						value = tempAverage
-						compare = less_than_or_equals
-					}
-				}
-				var:targeted_country_slot_1 = {
-					give_resource_rights = { receiver = ROOT state = capital }
-					country_event = {
-					    id = espionage.4
-					    days = 80
-					}
-					country_event = espionage_missions.122
-				}
-				country_event = espionage_missions.119
-			}else = {## FALIURE
-				country_event = espionage_missions.120
-				var:targeted_country_slot_1 = {
-					country_event = espionage_missions.123
-				}
-			}
-			clr_country_flag = reroute_supply_slot_1
-			clr_country_flag = slot_1_filled
-			clear_variable = mission_1_progress_var
-			clear_variable = agent_in_mission_1
-			clear_variable = targeted_country_slot_1
-		}
-	}
-}
-Slot_2_espionage_end_mission_effects = {
-	if = {
-		### EXAMPLE SKILL CHECK ###
-		# set_variable = { agent_in_mission_2 = ### GRABS OPERATIVE FROM PALPYS GRIDBOX}
-		# set_variable = { agent_loyality@var:agent_in_mission_2 = 12 }
-		# check_variable = { agent_loyality@var:agent_in_mission_2 = 12 }  ## WOULD I GET 12 TELL ME YES
-		# check_variable = { agent_martial@var:agent_in_mission_2 = 12 }
-		# check_variable = { agent_charisma@var:agent_in_mission_2 = 12 }
-		# check_variable = { agent_intelligence@var:agent_in_mission_2 = 12 }
-		limit = {
-			has_country_flag = slot_2_filled
-		}
-		randomize_temp_variable = {  ## success and failure chance generator
-		  var = chance_of_success_2
-		  distribution = uniform
-		  min = 1
-		  max = 100
-		}
-		############# BOUNTY HUNTER ##############################
-		if = {                  ########### ASSASSIN ONLY WOUNDS
-			limit = {
-				has_country_flag = assassinate_slot_2 
-			}
-			set_temp_variable = { tempAverage = agent_martial@var:agent_in_mission_2 } ## find characters martial and sets tempAverage to then work out success chance
-			multiply_temp_variable = { tempAverage = 6 } ## 6 factor
-			add_to_temp_variable = {tempAverage = outside_success_chance_bonus}
-			subtract_from_temp_variable = {tempAverage = targeted_country_slot_2:outside_success_chance_bonus}
-			if = {
-				limit = {
-					check_variable = {
-						var = chance_of_success_2
-						value = tempAverage
-						compare = less_than_or_equals
-					}
-				}
-				if = {
-					limit = {
-						check_variable = {chance_of_success_2 > 10}
-					}
-					var:targeted_country_slot_2 = {
-						every_unit_leader = {
-							limit = {
-								has_character_flag = targeted_by_mission
-								has_character_flag = targeted_by_@ROOT_2_murder
-							}
-							add_timed_unit_leader_trait = {
-								trait = wounded
-								days = 180
-							}
-							unit_leader_event = {id = espionage.1}
-						}
-						country_event = espionage_missions.8
-					}
-					country_event = espionage_missions.5
-				}else = {														 ### CRITICAL SUCCESSS
-					var:targeted_country_slot_2 = { ### ASSASSIN KILLS TARGET
-						every_unit_leader = {
-							limit = {
-								has_character_flag = targeted_by_mission
-								has_character_flag = targeted_by_@ROOT_2_murder
-							}
-							retire = yes
-							unit_leader_event = {id = espionage.2}
-						}
-						country_event = espionage_missions.13
-					}
-					country_event = espionage_missions.14
-				}
-			}else = {## FALIURE
-				country_event = espionage_missions.6
-				var:targeted_country_slot_2 = {
-					country_event = espionage_missions.9
-				}
-			}
-			clr_country_flag = assassinate_slot_2
-			clr_country_flag = slot_2_filled
-			clear_variable = mission_2_progress_var
-			clear_variable = agent_in_mission_2
-			clear_variable = targeted_country_slot_2
-		}
-		if = {
-			limit = {
-				has_country_flag = ransom_slot_2
-			}
-			set_temp_variable = { tempAverage = agent_martial@var:agent_in_mission_2 }
-			add_to_temp_variable = { tempAverage = agent_intelligence@var:agent_in_mission_2 }
-			divide_temp_variable = { tempAverage = 2 }
-			multiply_temp_variable = { tempAverage = 5 }
-			add_to_temp_variable = {tempAverage = outside_success_chance_bonus}
-			subtract_from_temp_variable = {tempAverage = targeted_country_slot_2:outside_success_chance_bonus}
-			if = {
-				limit = {
-					check_variable = {
-						var = chance_of_success_2
-						value = tempAverage
-						compare = less_than_or_equals
-					}
-				}
-				var:targeted_country_slot_2 = {
-					country_event = {
-					    id = espionage.3
-					    days = 1
-					}
-				}
-			}
-			clr_country_flag = ransom_slot_2
-			clr_country_flag = slot_2_filled
-			clear_variable = mission_2_progress_var
-			clear_variable = agent_in_mission_2
-			clear_variable = targeted_country_slot_2
-		}
-		if = {
-			limit = {
-				has_country_flag = army_training_slot_2
-			}
-			set_temp_variable = { tempAverage = agent_martial@var:agent_in_mission_2 }
-			add_to_temp_variable = { tempAverage = agent_charisma@var:agent_in_mission_2 }
-			divide_temp_variable = { tempAverage = 2 }
-			multiply_temp_variable = { tempAverage = 10 }
-			add_to_temp_variable = {tempAverage = outside_success_chance_bonus}
-			subtract_from_temp_variable = {tempAverage = targeted_country_slot_2:outside_success_chance_bonus}
-			if = {
-				limit = {
-					check_variable = {
-						var = chance_of_success_2
-						value = tempAverage
-						compare = less_than_or_equals
-					}
-				}
+			country_event = espionage_missions.5
+		}else = {														 ### CRITICAL SUCCESSS
+			var:targeted_country = { ### ASSASSIN KILLS TARGET
 				every_unit_leader = {
 					limit = {
 						has_character_flag = targeted_by_mission
-						has_character_flag = targeted_by_training_2
+						has_character_flag = targeted_by_@ROOT_1_murder
 					}
-					add_random_trait = {
-						organizer
-						cavalry_leader
-						infantry_leader
-						skilled_staffer
-						trickster
-						infantry_officer
-						armor_officer
-					}
+					retire = yes
+					unit_leader_event = {id = espionage.2}
 				}
-				country_event = espionage_missions.11
-			}else = {## FALIURE
-				country_event = espionage_missions.12
 			}
-			clr_country_flag = army_training_slot_2
-			clr_country_flag = slot_2_filled
-			clear_variable = mission_2_progress_var
-			clear_variable = agent_in_mission_2
-			clear_variable = targeted_country_slot_2
+			country_event = espionage_missions.14
 		}
-		if = {
-			limit = {
-				has_country_flag = intimidate_senator_slot_2 ###### CHANGE_ME
-			}
-			set_temp_variable = { tempAverage = agent_martial@var:agent_in_mission_2 }
-			add_to_temp_variable = { tempAverage = agent_charisma@var:agent_in_mission_2 }
-			divide_temp_variable = { tempAverage = 2 }
-			multiply_temp_variable = { tempAverage = 10 }
-			add_to_temp_variable = {tempAverage = outside_success_chance_bonus}
-			subtract_from_temp_variable = {tempAverage = targeted_country_slot_2:outside_success_chance_bonus}
-			if = {
+	}else = {## FALIURE
+		country_event = espionage_missions.6
+		var:targeted_country = {
+			country_event = espionage_missions.9
+			every_unit_leader = {
 				limit = {
-					check_variable = {
-						var = chance_of_success_2
-						value = tempAverage
-						compare = less_than_or_equals
-					}
+					has_character_flag = targeted_by_mission
+					has_character_flag = targeted_by_@ROOT_1_murder
 				}
-				var:targeted_country_slot_2 = {
-					country_event = espionage_missions.20
-				}
-				country_event = espionage_missions.17
-			}else = {## FALIURE
-				country_event = espionage_missions.18
-				var:targeted_country_slot_2 = {
-					country_event = espionage_missions.21
-				}
+				clr_character_flag = targeted_by_training
+				clr_character_flag = targeted_by_@ROOT_1_murder
 			}
-			clr_country_flag = intimidate_senator_slot_2
-			clr_country_flag = slot_2_filled
-			clear_variable = mission_2_progress_var
-			clear_variable = agent_in_mission_2
-			clear_variable = targeted_country_slot_2
 		}
-		########### TECHNICIAN ##################################
-		if = {
-			limit = {
-				has_country_flag = cyber_attack_target_slot_2
+	}
+}
+mission_number_2 = {
+	set_temp_variable = { net_size = agent_martial@var:agent_in_mission }
+	add_to_temp_variable = { net_size = agent_intelligence@var:agent_in_mission }
+	divide_temp_variable = { net_size = 2 }
+	multiply_temp_variable = { net_size = 5 }
+	multiply_temp_variable = { net_size = Total_counterespionage_vs_espionage_percentage} ## multiply the bonuses to get total net size
+	if = {
+		limit = {
+			check_variable = {
+				var = chance_of_success
+				value = net_size
+				compare = less_than_or_equals
 			}
-			set_temp_variable = { tempAverage = agent_intelligence@var:agent_in_mission_2 }
-			multiply_temp_variable = { tempAverage = 5 }
-			add_to_temp_variable = {tempAverage = outside_success_chance_bonus}
-			subtract_from_temp_variable = {tempAverage = targeted_country_slot_2:outside_success_chance_bonus}
-			if = {
-				limit = {
-					check_variable = {
-						var = chance_of_success_2
-						value = tempAverage
-						compare = less_than_or_equals
-					}
-				}
-				var:targeted_country_slot_2 = {
-					add_timed_idea = {
-					    idea = cyber_attack_espionage
-					    days = 100
-					}
-					country_event = espionage_missions.26
-				}
-				country_event = espionage_missions.23
-			}else = {## FALIURE
-				country_event = espionage_missions.24
-				var:targeted_country_slot_2 = {
-					country_event = espionage_missions.21
-				}
-			}
-			clr_country_flag = cyber_attack_target_slot_2
-			clr_country_flag = slot_2_filled
-			clear_variable = mission_2_progress_var
-			clear_variable = agent_in_mission_2
-			clear_variable = targeted_country_slot_2
 		}
-		if = {
-			limit = {
-				has_country_flag = steal_blueprint_target_slot_2
+		var:targeted_country = {
+			country_event = {
+				id = espionage.3
+				days = 1
 			}
-			set_temp_variable = { tempAverage = agent_intelligence@var:agent_in_mission_2 }
-			add_to_temp_variable = { tempAverage = agent_charisma@var:agent_in_mission_2 }
-			divide_temp_variable = { tempAverage = 2 }
-			multiply_temp_variable = { tempAverage = 8 }
-			add_to_temp_variable = {tempAverage = outside_success_chance_bonus}
-			subtract_from_temp_variable = {tempAverage = targeted_country_slot_2:outside_success_chance_bonus}
-			if = {
-				limit = {
-					check_variable = {
-						var = chance_of_success_2
-						value = tempAverage
-						compare = less_than_or_equals
-					}
-				}
-				var:targeted_country_slot_2 = {
-					steal_random_tech_bonus = {
-						folder = electronics_folder
-						folder = industry_folder
-						bonus = 3.0
-						dynamic = no
-						instant = yes
-						name = operation_steal_tech_civilian
-						target = FROM
-						uses = 1
-					}
-					country_event = espionage_missions.32
-				}
-				country_event = espionage_missions.29
-			}else = {## FALIURE
-				country_event = espionage_missions.30
-				var:targeted_country_slot_2 = {
-					country_event = espionage_missions.33
-				}
-			}
-			clr_country_flag = steal_blueprint_target_slot_2
-			clr_country_flag = slot_2_filled
-			clear_variable = mission_2_progress_var
-			clear_variable = agent_in_mission_2
-			clear_variable = targeted_country_slot_2
 		}
-		if = {
-			limit = {
-				has_country_flag = sprout_disease_target_slot_2
+	}
+}
+mission_number_3 = { ## Army Training
+	set_temp_variable = { net_size = agent_martial@var:agent_in_mission }
+	add_to_temp_variable = { net_size = agent_intelligence@var:agent_in_mission }
+	divide_temp_variable = { net_size = 2 }
+	multiply_temp_variable = { net_size = 5 }
+	if = {
+		limit = {
+			check_variable = {
+				var = chance_of_success
+				value = net_size
+				compare = less_than_or_equals
 			}
-			set_temp_variable = { tempAverage = agent_intelligence@var:agent_in_mission_2 }
-			add_to_temp_variable = { tempAverage = agent_charisma@var:agent_in_mission_2 }
-			divide_temp_variable = { tempAverage = 2 }
-			multiply_temp_variable = { tempAverage = 5 }
-			add_to_temp_variable = {tempAverage = outside_success_chance_bonus}
-			subtract_from_temp_variable = {tempAverage = targeted_country_slot_2:outside_success_chance_bonus}
-			if = {
-				limit = {
-					check_variable = {
-						var = chance_of_success_2
-						value = tempAverage
-						compare = less_than_or_equals
-					}
-				}
-				var:targeted_country_slot_2 = {
-					capital_scope = {
-						add_manpower = -50000
-					}
-					country_event = espionage_missions.38
-				}
-				country_event = espionage_missions.35
-			}else = {## FALIURE
-				country_event = espionage_missions.36
-				var:targeted_country_slot_2 = {
-					country_event = espionage_missions.39
-				}
-			}
-			clr_country_flag = sprout_disease_target_slot_2
-			clr_country_flag = slot_2_filled
-			clear_variable = mission_2_progress_var
-			clear_variable = agent_in_mission_2
-			clear_variable = targeted_country_slot_2
 		}
-		if = {
+		every_unit_leader = {
 			limit = {
-				has_country_flag = logisitics_target_slot_2
+				has_character_flag = targeted_by_mission
+				has_character_flag = targeted_by_training
 			}
-			set_temp_variable = { tempAverage = agent_intelligence@var:agent_in_mission_2 }
-			add_to_temp_variable = { tempAverage = agent_martial@var:agent_in_mission_2 }
-			divide_temp_variable = { tempAverage = 2 }
-			multiply_temp_variable = { tempAverage = 8 }
-			add_to_temp_variable = {tempAverage = outside_success_chance_bonus}
-			subtract_from_temp_variable = {tempAverage = targeted_country_slot_2:outside_success_chance_bonus}
-			if = {
-				limit = {
-					check_variable = {
-						var = chance_of_success_2
-						value = tempAverage
-						compare = less_than_or_equals
-					}
-				}
-				var:targeted_country_slot_2 = {
-					add_timed_idea = {
-					    idea = logistics_sabotage_espionage
-					    days = 40
-					}
-					country_event = espionage_missions.44
-				}
-				country_event = espionage_missions.41
-			}else = {## FALIURE
-				country_event = espionage_missions.42
-				var:targeted_country_slot_2 = {
-					country_event = espionage_missions.45
-				}
+			add_random_trait = {
+				organizer
+				cavalry_leader
+				infantry_leader
+				skilled_staffer
+				trickster
+				infantry_officer
+				armor_officer
 			}
-			clr_country_flag = logistics_sabotage_target_slot_2
-			clr_country_flag = slot_2_filled
-			clear_variable = mission_2_progress_var
-			clear_variable = agent_in_mission_2
-			clear_variable = targeted_country_slot_2
 		}
-		### SPY ####
-		if = {
+		country_event = espionage_missions.11
+	}else = {## FALIURE
+		country_event = espionage_missions.12
+		every_unit_leader = {
 			limit = {
-				has_country_flag = sabotage_target_slot_2
+				has_character_flag = targeted_by_mission
+				has_character_flag = targeted_by_training
 			}
-			set_temp_variable = { tempAverage = agent_intelligence@var:agent_in_mission_2 }
-			add_to_temp_variable = { tempAverage = agent_martial@var:agent_in_mission_2 }
-			divide_temp_variable = { tempAverage = 2 }
-			multiply_temp_variable = { tempAverage = 12 }
-			add_to_temp_variable = {tempAverage = outside_success_chance_bonus}
-			subtract_from_temp_variable = {tempAverage = targeted_country_slot_2:outside_success_chance_bonus}
-			if = {
-				limit = {
-					check_variable = {
-						var = chance_of_success_2
-						value = tempAverage
-						compare = less_than_or_equals
-					}
-				}
-				var:targeted_country_slot_2 = {
-					while_loop_effect = {
-					    break = temp_break
-					    limit = {
-					    	NOT = {
-					        	has_variable = targeted_country_slot_2
-					        }
-					    }
-					    random_core_state = {
-					    	if = {
-					    		limit = {
-					    			arms_factory > 1
-					    		}
-					    		remove_building = {
-								    type = arms_factory
-								    level = 1
-								}
-								set_temp_variable = {temp_break = 1}
-					    	}else_if = {
-					    		limit = {
-					    			industrial_complex > 1
-					    		}
-					    		remove_building = {
-								    type = industrial_complex
-								    level = 1
-								}
-								set_temp_variable = {temp_break = 1}
-					    	}
-					    }
-					}
-					country_event = espionage_missions.50
-				}
-				country_event = espionage_missions.47
-			}else = {## FALIURE
-				country_event = espionage_missions.48
-				var:targeted_country_slot_2 = {
-					country_event = espionage_missions.51
-				}
-			}
-			clr_country_flag = sabotage_target_slot_2
-			clr_country_flag = slot_2_filled
-			clear_variable = mission_2_progress_var
-			clear_variable = agent_in_mission_2
-			clear_variable = targeted_country_slot_2
+			clr_character_flag = targeted_by_training
+			clr_character_flag = targeted_by_mission
 		}
-		if = {
-			limit = {
-				has_country_flag = infiltrate_military_slot_2
+	}
+}
+mission_number_4 = { ## Blackmail Senator
+	set_temp_variable = { net_size = agent_martial@var:agent_in_mission }
+	add_to_temp_variable = { net_size = agent_charisma@var:agent_in_mission }
+	divide_temp_variable = { net_size = 2 }
+	multiply_temp_variable = { net_size = 10 }
+	multiply_temp_variable = { net_size = Total_counterespionage_vs_espionage_percentage} ## multiply the bonuses to get total net size
+	if = {
+		limit = {
+			check_variable = {
+				var = chance_of_success
+				value = net_size
+				compare = less_than_or_equals
 			}
-			set_temp_variable = { tempAverage = agent_martial@var:agent_in_mission_2 }
-			add_to_temp_variable = { tempAverage = agent_charisma@var:agent_in_mission_2 }
-			divide_temp_variable = { tempAverage = 2 }
-			multiply_temp_variable = { tempAverage = 6 }
-			add_to_temp_variable = {tempAverage = outside_success_chance_bonus}
-			subtract_from_temp_variable = {tempAverage = targeted_country_slot_2:outside_success_chance_bonus}
-			if = {
-				limit = {
-					check_variable = {
-						var = chance_of_success_2
-						value = tempAverage
-						compare = less_than_or_equals
-					}
-				}
-				add_intel = {
-				    target = var:targeted_country_slot_2
-				    army_intel = 30
-				    navy_intel = 30
-				    airforce_intel = 30
-				}
-				var:targeted_country_slot_2 = {
-					country_event = espionage_missions.56
-				}
-				country_event = espionage_missions.53
-			}else = {## FALIURE
-				country_event = espionage_missions.54
-				var:targeted_country_slot_2 = {
-					country_event = espionage_missions.57
-				}
-			}
-			clr_country_flag = infiltrate_military_slot_2
-			clr_country_flag = slot_2_filled
-			clear_variable = mission_2_progress_var
-			clear_variable = agent_in_mission_2
-			clear_variable = targeted_country_slot_2
 		}
-		if = {
-			limit = {
-				has_country_flag = undermine_guild_connections_slot_2 ## CHANGE_ME no idea how to do this palpy help
-			}
-			set_temp_variable = { tempAverage = agent_intelligence@var:agent_in_mission_2 }
-			add_to_temp_variable = { tempAverage = agent_charisma@var:agent_in_mission_2 }
-			divide_temp_variable = { tempAverage = 2 }
-			multiply_temp_variable = { tempAverage = 8 }
-			add_to_temp_variable = {tempAverage = outside_success_chance_bonus}
-			subtract_from_temp_variable = {tempAverage = targeted_country_slot_2:outside_success_chance_bonus}
-			if = {
-				limit = {
-					check_variable = {
-						var = chance_of_success_2
-						value = tempAverage
-						compare = less_than_or_equals
-					}
-				}
-				var:targeted_country_slot_2 = {
-					country_event = espionage_missions.62
-				}
-				country_event = espionage_missions.59
-			}else = {## FALIURE
-				country_event = espionage_missions.60
-				var:targeted_country_slot_2 = {
-					country_event = espionage_missions.63
-				}
-			}	
-			clr_country_flag = undermine_guild_connections_slot_2
-			clr_country_flag = slot_2_filled
-			clear_variable = mission_2_progress_var
-			clear_variable = agent_in_mission_2
-			clear_variable = targeted_country_slot_2
+		var:targeted_country = {
+			country_event = espionage_missions.20
 		}
-		if = {
-			limit = {
-				has_country_flag = turn_agent_slot_2 ## CHANGE_ME lol no, leaving that till last
-			}
-			set_temp_variable = { tempAverage = agent_martial@var:agent_in_mission_2 }
-			add_to_temp_variable = { tempAverage = agent_charisma@var:agent_in_mission_2 }
-			divide_temp_variable = { tempAverage = 2 }
-			multiply_temp_variable = { tempAverage = 6 }
-			add_to_temp_variable = {tempAverage = outside_success_chance_bonus}
-			subtract_from_temp_variable = {tempAverage = targeted_country_slot_2:outside_success_chance_bonus}
-			if = {
-				limit = {
-					check_variable = {
-						var = chance_of_success_2
-						value = tempAverage
-						compare = less_than_or_equals
-					}
-				}
-			}
-			clr_country_flag = turn_agent_slot_2
-			clr_country_flag = slot_2_filled
-			clear_variable = mission_2_progress_var
-			clear_variable = agent_in_mission_2
-			clear_variable = targeted_country_slot_2
+		country_event = espionage_missions.17
+	}else = {## FALIURE
+		country_event = espionage_missions.18
+		var:targeted_country = {
+			country_event = espionage_missions.21
 		}
-		if = {
-			limit = {
-				has_country_flag = capital_ship_slot_2 ## finds biggest capital ship (Super star destroyers not included due to how busted that would be)
+	}
+}
+mission_number_5 = {
+	set_temp_variable = { net_size = agent_intelligence@var:agent_in_mission }
+	multiply_temp_variable = { net_size = 5 }
+	multiply_temp_variable = { net_size = Total_counterespionage_vs_espionage_percentage} ## multiply the bonuses to get total net size
+	if = {
+		limit = {
+			check_variable = {
+				var = chance_of_success
+				value = net_size
+				compare = less_than_or_equals
 			}
-			set_temp_variable = { tempAverage = agent_martial@var:agent_in_mission_2 }
-			divide_temp_variable = { tempAverage = 2 }
-			multiply_temp_variable = { tempAverage = 5 }
-			add_to_temp_variable = {tempAverage = outside_success_chance_bonus}
-			subtract_from_temp_variable = {tempAverage = targeted_country_slot_2:outside_success_chance_bonus}
-			if = {
+		}
+		var:targeted_country = {
+			add_timed_idea = {
+				idea = cyber_attack_espionage
+				days = 100
+			}
+			country_event = espionage_missions.26
+		}
+		country_event = espionage_missions.23
+	}else = {## FALIURE
+		country_event = espionage_missions.24
+		var:targeted_country = {
+			country_event = espionage_missions.21
+		}
+	}
+}
+mission_number_6 = {
+	set_temp_variable = { net_size = agent_intelligence@var:agent_in_mission }
+	add_to_temp_variable = { net_size = agent_charisma@var:agent_in_mission }
+	divide_temp_variable = { net_size = 2 }
+	multiply_temp_variable = { net_size = 8 }
+	multiply_temp_variable = { net_size = Total_counterespionage_vs_espionage_percentage} ## multiply the bonuses to get total net size
+	if = {
+		limit = {
+			check_variable = {
+				var = chance_of_success
+				value = net_size
+				compare = less_than_or_equals
+			}
+		}
+		var:targeted_country = {
+			steal_random_tech_bonus = {
+				folder = electronics_folder
+				folder = industry_folder
+				bonus = 3.0
+				dynamic = no
+				instant = yes
+				name = operation_steal_tech_civilian
+				target = FROM
+				uses = 1
+			}
+			country_event = espionage_missions.32
+		}
+		country_event = espionage_missions.29
+	}else = {## FALIURE
+		country_event = espionage_missions.30
+		var:targeted_country = {
+			country_event = espionage_missions.33
+		}
+	}
+}
+mission_number_7 = {
+	set_temp_variable = { net_size = agent_intelligence@var:agent_in_mission }
+	add_to_temp_variable = { net_size = agent_charisma@var:agent_in_mission }
+	divide_temp_variable = { net_size = 2 }
+	multiply_temp_variable = { net_size = 5 }
+	multiply_temp_variable = { net_size = Total_counterespionage_vs_espionage_percentage} ## multiply the bonuses to get total net size
+	if = {
+		limit = {
+			check_variable = {
+				var = chance_of_success
+				value = net_size
+				compare = less_than_or_equals
+			}
+		}
+		var:targeted_country = {
+			capital_scope = {
+				add_manpower = -50000
+			}
+			country_event = espionage_missions.38
+		}
+		country_event = espionage_missions.35
+	}else = {## FALIURE
+		country_event = espionage_missions.36
+		var:targeted_country = {
+			country_event = espionage_missions.39
+		}
+	}
+}
+mission_number_8 = {
+	set_temp_variable = { net_size = agent_intelligence@var:agent_in_mission }
+	add_to_temp_variable = { net_size = agent_martial@var:agent_in_mission }
+	divide_temp_variable = { net_size = 2 }
+	multiply_temp_variable = { net_size = 8 }
+	multiply_temp_variable = { net_size = Total_counterespionage_vs_espionage_percentage} ## multiply the bonuses to get total net size
+	if = {
+		limit = {
+			check_variable = {
+				var = chance_of_success
+				value = net_size
+				compare = less_than_or_equals
+			}
+		}
+		var:targeted_country = {
+			add_timed_idea = {
+				idea = logistics_sabotage_espionage
+				days = 40
+			}
+			country_event = espionage_missions.44
+		}
+		country_event = espionage_missions.41
+	}else = {## FALIURE
+		country_event = espionage_missions.42
+		var:targeted_country = {
+			country_event = espionage_missions.45
+		}
+	}
+}
+mission_number_9 = {
+	set_temp_variable = { net_size = agent_intelligence@var:agent_in_mission }
+	add_to_temp_variable = { net_size = agent_martial@var:agent_in_mission }
+	divide_temp_variable = { net_size = 2 }
+	multiply_temp_variable = { net_size = 12 }
+	multiply_temp_variable = { net_size = Total_counterespionage_vs_espionage_percentage} ## multiply the bonuses to get total net size
+	if = {
+		limit = {
+			check_variable = {
+				var = chance_of_success
+				value = net_size
+				compare = less_than_or_equals
+			}
+		}
+		var:targeted_country = {
+			while_loop_effect = {
+				break = temp_break
 				limit = {
-					check_variable = {
-						var = chance_of_success_2
-						value = tempAverage
-						compare = less_than_or_equals
+					NOT = {
+						has_variable = targeted_country
 					}
 				}
-				var:targeted_country_slot_2 = {
+				random_core_state = {
 					if = {
 						limit = {
-							check_variable = {
-								var = num_ships_with_type@carrier  ## CHANGE_ME, need to ask diosysnus about ship types
-								value = 1
-								compare = greater_than
-							}
+							arms_factory > 1
 						}
-						destroy_ships = {
-						    type = carrier
-						    count = 1
+						remove_building = {
+							type = arms_factory
+							level = 1
 						}
+						set_temp_variable = {temp_break = 1}
 					}else_if = {
 						limit = {
-							check_variable = {
-								var = num_ships_with_type@battleship ## CHANGE_ME, need to ask diosysnus about ship types
-								value = 1
-								compare = greater_than
-							}
+							industrial_complex > 1
 						}
-						destroy_ships = {
-						    type = battleship
-						    count = 1
+						remove_building = {
+							type = industrial_complex
+							level = 1
 						}
+						set_temp_variable = {temp_break = 1}
 					}
-					country_event = espionage_missions.74
-				}
-				country_event = espionage_missions.71
-			}else = {## FALIURE
-				country_event = espionage_missions.72
-				var:targeted_country_slot_2 = {
-					country_event = espionage_missions.75
 				}
 			}
-			clr_country_flag = capital_ship_slot_2
-			clr_country_flag = slot_2_filled
-			clear_variable = mission_2_progress_var
-			clear_variable = agent_in_mission_2
-			clear_variable = targeted_country_slot_2
+			country_event = espionage_missions.50
 		}
-		####### SMUGGLER ###############
-		if = {
-			limit = {
-				has_country_flag = steal_equipment_slot_2
+		country_event = espionage_missions.47
+	}else = {## FALIURE
+		country_event = espionage_missions.48
+		var:targeted_country = {
+			country_event = espionage_missions.51
+		}
+	}
+}
+mission_number_10 = {
+	set_temp_variable = { net_size = agent_martial@var:agent_in_mission }
+	add_to_temp_variable = { net_size = agent_charisma@var:agent_in_mission }
+	divide_temp_variable = { net_size = 2 }
+	multiply_temp_variable = { net_size = 6 }
+	multiply_temp_variable = { net_size = Total_counterespionage_vs_espionage_percentage} ## multiply the bonuses to get total net size
+	if = {
+		limit = {
+			check_variable = {
+				var = chance_of_success
+				value = net_size
+				compare = less_than_or_equals
 			}
-			set_temp_variable = { tempAverage = agent_martial@var:agent_in_mission_2 }
-			add_to_temp_variable = { tempAverage = agent_intelligence@var:agent_in_mission_2 }
-			divide_temp_variable = { tempAverage = 2 }
-			multiply_temp_variable = { tempAverage = 10 }
-			add_to_temp_variable = {tempAverage = outside_success_chance_bonus}
-			subtract_from_temp_variable = {tempAverage = targeted_country_slot_2:outside_success_chance_bonus}
+		}
+		add_intel = {
+			target = var:targeted_country
+			army_intel = 30
+			navy_intel = 30
+			airforce_intel = 30
+		}
+		var:targeted_country = {
+			country_event = espionage_missions.56
+		}
+		country_event = espionage_missions.53
+	}else = {## FALIURE
+		country_event = espionage_missions.54
+		var:targeted_country = {
+			country_event = espionage_missions.57
+		}
+	}
+}
+mission_number_11 = {
+	set_temp_variable = { net_size = agent_intelligence@var:agent_in_mission }
+	add_to_temp_variable = { net_size = agent_charisma@var:agent_in_mission }
+	divide_temp_variable = { net_size = 2 }
+	multiply_temp_variable = { net_size = 8 }
+	multiply_temp_variable = { net_size = Total_counterespionage_vs_espionage_percentage} ## multiply the bonuses to get total net size
+	if = {
+		limit = {
+			check_variable = {
+				var = chance_of_success
+				value = net_size
+				compare = less_than_or_equals
+			}
+		}
+		var:targeted_country = {
+			country_event = espionage_missions.62
+		}
+		country_event = espionage_missions.59
+	}else = {## FALIURE
+		country_event = espionage_missions.60
+		var:targeted_country = {
+			country_event = espionage_missions.63
+		}
+	}
+}
+mission_number_12 = {
+	set_temp_variable = { net_size = agent_martial@var:agent_in_mission }
+	divide_temp_variable = { net_size = 2 }
+	multiply_temp_variable = { net_size = 5 }
+	multiply_temp_variable = { net_size = Total_counterespionage_vs_espionage_percentage} ## multiply the bonuses to get total net size
+	if = {
+		limit = {
+			check_variable = {
+				var = chance_of_success
+				value = net_size
+				compare = less_than_or_equals
+			}
+		}
+		var:targeted_country = {
 			if = {
 				limit = {
 					check_variable = {
-						var = chance_of_success_2
-						value = tempAverage
-						compare = less_than_or_equals
+						var = num_ships_with_type@carrier  ## CHANGE_ME, need to ask diosysnus about ship types
+						value = 1
+						compare = greater_than
 					}
 				}
-				var:targeted_country_slot_2 = {
-					send_equipment_fraction = {
-					    value = 0.02
-					    target = PREV
-					}
-					country_event = espionage_missions.80
+				destroy_ships = {
+					type = carrier
+					count = 1
 				}
-				country_event = espionage_missions.77
-			}else = {## FALIURE
-				country_event = espionage_missions.78
-				var:targeted_country_slot_2 = {
-					country_event = espionage_missions.81
-				}
-			}
-			clr_country_flag = steal_equipment_slot_2
-			clr_country_flag = slot_2_filled
-			clear_variable = mission_2_progress_var
-			clear_variable = agent_in_mission_2
-			clear_variable = targeted_country_slot_2
-		}
-		if = {
-			limit = {
-				has_country_flag = smuggle_slaves_slot_2
-			}
-			set_temp_variable = { tempAverage = agent_martial@var:agent_in_mission_2 }
-			add_to_temp_variable = { tempAverage = agent_intelligence@var:agent_in_mission_2 }
-			divide_temp_variable = { tempAverage = 2 }
-			multiply_temp_variable = { tempAverage = 8 }
-			add_to_temp_variable = {tempAverage = outside_success_chance_bonus}
-			subtract_from_temp_variable = {tempAverage = targeted_country_slot_2:outside_success_chance_bonus}
-			if = {
+			}else_if = {
 				limit = {
 					check_variable = {
-						var = chance_of_success_2
-						value = tempAverage
-						compare = less_than_or_equals
+						var = num_ships_with_type@battleship ## CHANGE_ME, need to ask diosysnus about ship types
+						value = 1
+						compare = greater_than
 					}
 				}
-				var:targeted_country_slot_2 = {
-					find_highest_in_array = { 
-						array = slaves
-						value = slave_value_count_temp
-						index = slave_index_espionage_temp
-					}
-					divide_variable = {slave_value_count_temp = 3} ## Thought this might be cleaner
-					multiply_variable = {slave_value_count_temp = 2}
-					round_variable = slave_value_count_temp
-					set_variable = { slaves^slave_index_espionage_temp = slave_value_count_temp }
-				country_event = espionage_missions.80
-				}
-				country_event = espionage_missions.77
-				set_variable = { slaves^targeted_country_slot_2.slave_index_espionage_temp = var:targeted_country_slot_2.slave_value_count_temp} ## this is stupid and should be treated as such
-			}else = {## FALIURE
-				country_event = espionage_missions.78
-				var:targeted_country_slot_2 = {
-					country_event = espionage_missions.81
+				destroy_ships = {
+					type = battleship
+					count = 1
 				}
 			}
-			clr_country_flag = smuggle_slaves_slot_2
-			clr_country_flag = slot_2_filled
-			clear_variable = mission_2_progress_var
-			clear_variable = agent_in_mission_2
-			clear_variable = targeted_country_slot_2
+			country_event = espionage_missions.74
 		}
-		if = {
-			limit = {
-				has_country_flag = set_Slaves_free_slot_2
-			}
-			set_temp_variable = { tempAverage = agent_martial@var:agent_in_mission_2 }
-			add_to_temp_variable = { tempAverage = agent_intelligence@var:agent_in_mission_2 }
-			divide_temp_variable = { tempAverage = 2 }
-			multiply_temp_variable = { tempAverage = 10 }
-			add_to_temp_variable = {tempAverage = outside_success_chance_bonus}
-			subtract_from_temp_variable = {tempAverage = targeted_country_slot_2:outside_success_chance_bonus}
-			if = {
-				limit = {
-					check_variable = {
-						var = chance_of_success_2
-						value = tempAverage
-						compare = less_than_or_equals
-					}
-				}
-				var:targeted_country_slot_2 = {
-					find_highest_in_array = { 
-						array = slaves
-						value = slave_value_count_temp
-						index = slave_index_espionage_temp
-					}
-					divide_variable = {slave_value_count_temp = 3} ## Thought this might be cleaner
-					multiply_variable = {slave_value_count_temp = 2}
-					round_variable = slave_value_count_temp
-					set_variable = { slaves^slave_index_espionage_temp = slave_value_count_temp }
-					country_event = espionage_missions.92
-				}
-				country_event = espionage_missions.89
-			}else = {## FALIURE
-				country_event = espionage_missions.90
-				var:targeted_country_slot_2 = {
-					country_event = espionage_missions.93
-				}
-			}
-			clr_country_flag = set_Slaves_free_slot_2
-			clr_country_flag = slot_2_filled
-			clear_variable = mission_2_progress_var
-			clear_variable = agent_in_mission_2
-			clear_variable = targeted_country_slot_2
+		country_event = espionage_missions.71
+	}else = {## FALIURE
+		country_event = espionage_missions.72
+		var:targeted_country = {
+			country_event = espionage_missions.75
 		}
-		if = {
-			limit = {
-				has_country_flag = provoke_slave_revolt_slot_2
+	}
+}
+mission_number_13 = {
+	set_temp_variable = { net_size = agent_martial@var:agent_in_mission }
+	add_to_temp_variable = { net_size = agent_intelligence@var:agent_in_mission }
+	divide_temp_variable = { net_size = 2 }
+	multiply_temp_variable = { net_size = 10 }
+	multiply_temp_variable = { net_size = Total_counterespionage_vs_espionage_percentage} ## multiply the bonuses to get total net size
+	if = {
+		limit = {
+			check_variable = {
+				var = chance_of_success
+				value = net_size
+				compare = less_than_or_equals
 			}
-			set_temp_variable = { tempAverage = agent_martial@var:agent_in_mission_2 }
-			add_to_temp_variable = { tempAverage = agent_charisma@var:agent_in_mission_2 }
-			divide_temp_variable = { tempAverage = 2 }
-			multiply_temp_variable = { tempAverage = 4 }
-			add_to_temp_variable = {tempAverage = outside_success_chance_bonus}
-			subtract_from_temp_variable = {tempAverage = targeted_country_slot_2:outside_success_chance_bonus}
-			if = {
-				limit = {
-					check_variable = {
-						var = chance_of_success_2
-						value = tempAverage
-						compare = less_than_or_equals
-					}
-				}
-				var:targeted_country_slot_2 = {
-					set_temp_variable = { slave_total_count_temp = 0 }
-					for_each_loop = {
-						array = slaves
-						value = slave_index_count
+		}
+		var:targeted_country = {
+			send_equipment_fraction = {
+				value = 0.02
+				target = PREV
+			}
+			country_event = espionage_missions.80
+		}
+		country_event = espionage_missions.77
+	}else = {## FALIURE
+		country_event = espionage_missions.78
+		var:targeted_country = {
+			country_event = espionage_missions.81
+		}
+	}
+}
+mission_number_14 = {
+	set_temp_variable = { net_size = agent_martial@var:agent_in_mission }
+	add_to_temp_variable = { net_size = agent_intelligence@var:agent_in_mission }
+	divide_temp_variable = { net_size = 2 }
+	multiply_temp_variable = { net_size = 8 }
+	multiply_temp_variable = { net_size = Total_counterespionage_vs_espionage_percentage} ## multiply the bonuses to get total net size
+	if = {
+		limit = {
+			check_variable = {
+				var = chance_of_success
+				value = net_size
+				compare = less_than_or_equals
+			}
+		}
+		var:targeted_country = {
+			find_highest_in_array = { 
+				array = slaves
+				value = slave_value_count_temp
+				index = slave_index_espionage_temp
+			}
+			divide_variable = {slave_value_count_temp = 3} ## Thought this might be cleaner
+			multiply_variable = {slave_value_count_temp = 2}
+			round_variable = slave_value_count_temp
+			set_variable = { slaves^slave_index_espionage_temp = slave_value_count_temp }
+		country_event = espionage_missions.80
+		}
+		country_event = espionage_missions.77
+		set_variable = { slaves^targeted_country.slave_index_espionage_temp = var:targeted_country.slave_value_count_temp} ## this is stupid and should be treated as such
+	}else = {## FALIURE
+		country_event = espionage_missions.78
+		var:targeted_country = {
+			country_event = espionage_missions.81
+		}
+	}
+}
+mission_number_15 = {
+	set_temp_variable = { net_size = agent_martial@var:agent_in_mission }
+	add_to_temp_variable = { net_size = agent_intelligence@var:agent_in_mission }
+	divide_temp_variable = { net_size = 2 }
+	multiply_temp_variable = { net_size = 10 }
+	multiply_temp_variable = { net_size = Total_counterespionage_vs_espionage_percentage} ## multiply the bonuses to get total net size
+	if = {
+		limit = {
+			check_variable = {
+				var = chance_of_success
+				value = net_size
+				compare = less_than_or_equals
+			}
+		}
+		var:targeted_country = {
+			find_highest_in_array = { 
+				array = slaves
+				value = slave_value_count_temp
+				index = slave_index_espionage_temp
+			}
+			divide_variable = {slave_value_count_temp = 3} ## Thought this might be cleaner
+			multiply_variable = {slave_value_count_temp = 2}
+			round_variable = slave_value_count_temp
+			set_variable = { slaves^slave_index_espionage_temp = slave_value_count_temp }
+			country_event = espionage_missions.92
+		}
+		country_event = espionage_missions.89
+	}else = {## FALIURE
+		country_event = espionage_missions.90
+		var:targeted_country = {
+			country_event = espionage_missions.93
+		}
+	}
+}
+mission_number_16 = {
+	set_temp_variable = { net_size = agent_martial@var:agent_in_mission }
+	add_to_temp_variable = { net_size = agent_charisma@var:agent_in_mission }
+	divide_temp_variable = { net_size = 2 }
+	multiply_temp_variable = { net_size = 4 }
+	multiply_temp_variable = { net_size = Total_counterespionage_vs_espionage_percentage} ## multiply the bonuses to get total net size
+	if = {
+		limit = {
+			check_variable = {
+				var = chance_of_success
+				value = net_size
+				compare = less_than_or_equals
+			}
+		}
+		var:targeted_country = {
+			set_temp_variable = { slave_total_count_temp = 0 }
+			for_each_loop = {
+				array = slaves
+				value = slave_index_count
 
-						add_to_temp_variable = {slave_total_count_temp = slave_index_count}
-					}
-					divide_variable = {slave_total_count_temp = 800000}
-					random_core_state = {
-						 set_variable = { core_temp_state = THIS.id}
-					}
-					start_civil_war = {
-					    ruling_party = neutrality
-					    ideology = ROOT
-					    size = slave_total_count_temp
-					    capital = var:core_temp_state
-					    navy_ratio = 0
-					    states_filter = {
-					    	check_variable = {var:core_temp_state = THIS.id}
-					    }
-					    keep_unit_leaders_trigger = {
-					    	always = yes
-					    }
-					    keep_political_leader = yes
-					    keep_political_party_members = yes
-					}
-					country_event = espionage_missions.98
-				}
-				country_event = espionage_missions.95
-			}else = {## FALIURE
-				country_event = espionage_missions.96
-				var:targeted_country_slot_2 = {
-					country_event = espionage_missions.99
-				}
+				add_to_temp_variable = {slave_total_count_temp = slave_index_count}
 			}
-			clr_country_flag = provoke_slave_revolt_slot_2
-			clr_country_flag = slot_2_filled
-			clear_variable = mission_2_progress_var
-			clear_variable = agent_in_mission_2
-			clear_variable = targeted_country_slot_2
+			divide_variable = {slave_total_count_temp = 800000}
+			random_core_state = {
+					set_variable = { core_temp_state = THIS.id}
+			}
+			start_civil_war = {
+				ruling_party = neutrality
+				ideology = ROOT
+				size = slave_total_count_temp
+				capital = var:core_temp_state
+				navy_ratio = 0
+				states_filter = {
+					check_variable = {var:core_temp_state = THIS.id}
+				}
+				keep_unit_leaders_trigger = {
+					always = yes
+				}
+				keep_political_leader = yes
+				keep_political_party_members = yes
+			}
+			country_event = espionage_missions.98
 		}
-		if = {
-			limit = {
-				has_country_flag = arming_dissidents_slot_2
-			}
-			set_temp_variable = { tempAverage = agent_martial@var:agent_in_mission_2 }
-			add_to_temp_variable = { tempAverage = agent_charisma@var:agent_in_mission_2 }
-			divide_temp_variable = { tempAverage = 2 }
-			multiply_temp_variable = { tempAverage = 10 }
-			add_to_temp_variable = {tempAverage = outside_success_chance_bonus}
-			subtract_from_temp_variable = {tempAverage = targeted_country_slot_2:outside_success_chance_bonus}
-			if = {
-				limit = {
-					check_variable = {
-						var = chance_of_success_2
-						value = tempAverage
-						compare = less_than_or_equals
-					}
-				}
-				var:targeted_country_slot_2 = {
-					every_controlled_state = {
-						limit = {
-							has_active_resistance = yes
-						}
-						add_resistance = 20 
-					}
-					country_event = espionage_missions.104
-				}
-				country_event = espionage_missions.101
-			}else = {## FALIURE
-				country_event = espionage_missions.102
-				var:targeted_country_slot_2 = {
-					country_event = espionage_missions.105
-				}
-			}
-			clr_country_flag = arming_dissidents_slot_2
-			clr_country_flag = slot_2_filled
-			clear_variable = mission_2_progress_var
-			clear_variable = agent_in_mission_2
-			clear_variable = targeted_country_slot_2
-		}
-		if = {
-			limit = {
-				has_country_flag = plant_sleeper_agent_slot_2
-			}
-			set_temp_variable = { tempAverage = agent_intelligence@var:agent_in_mission_2 }
-			add_to_temp_variable = { tempAverage = agent_charisma@var:agent_in_mission_2 }
-			divide_temp_variable = { tempAverage = 2 }
-			multiply_temp_variable = { tempAverage = 12 }
-			add_to_temp_variable = {tempAverage = outside_success_chance_bonus}
-			subtract_from_temp_variable = {tempAverage = targeted_country_slot_2:outside_success_chance_bonus}
-			if = {
-				limit = {
-					check_variable = {
-						var = chance_of_success_2
-						value = tempAverage
-						compare = less_than_or_equals
-					}
-				}
-				var:targeted_country_slot_2 = {
-					country_event = espionage_missions.110
-				}
-				country_event = espionage_missions.107
-				set_variable = {higher_chance_espionage_target = var:targeted_country_slot_2.id }
-			}else = {## FALIURE
-				country_event = espionage_missions.108
-				var:targeted_country_slot_2 = {
-					country_event = espionage_missions.111
-				}
-			}
-			clr_country_flag = plant_sleeper_agent_slot_2
-			clr_country_flag = slot_2_filled
-			clear_variable = mission_2_progress_var
-			clear_variable = agent_in_mission_2
-			clear_variable = targeted_country_slot_2
-		}
-		if = {
-			limit = {
-				has_country_flag = market_flood_slot_2
-			}
-			set_temp_variable = { tempAverage = agent_intelligence@var:agent_in_mission_2 }
-			add_to_temp_variable = { tempAverage = agent_charisma@var:agent_in_mission_2 }
-			divide_temp_variable = { tempAverage = 2 }
-			multiply_temp_variable = { tempAverage = 8 }
-			add_to_temp_variable = {tempAverage = outside_success_chance_bonus}
-			subtract_from_temp_variable = {tempAverage = targeted_country_slot_2:outside_success_chance_bonus}
-			if = {
-				limit = {
-					check_variable = {
-						var = chance_of_success_2
-						value = tempAverage
-						compare = less_than_or_equals
-					}
-				}
-				var:targeted_country_slot_2 = {
-					subtract_from_variable = { currency_amount^primary_currency = 1000 }
-					country_event = espionage_missions.116
-				}
-				country_event = espionage_missions.113
-			}else = {## FALIURE
-				country_event = espionage_missions.114
-				var:targeted_country_slot_2 = {
-					country_event = espionage_missions.117
-				}
-			}
-			clr_country_flag = market_flood_slot_2
-			clr_country_flag = slot_2_filled
-			clear_variable = mission_2_progress_var
-			clear_variable = agent_in_mission_2
-			clear_variable = targeted_country_slot_2
-		}
-		if = {
-			limit = {
-				has_country_flag = reroute_supply_slot_2
-			}
-			set_temp_variable = { tempAverage = agent_intelligence@var:agent_in_mission_2 }
-			add_to_temp_variable = { tempAverage = agent_charisma@var:agent_in_mission_2 }
-			divide_temp_variable = { tempAverage = 2 }
-			multiply_temp_variable = { tempAverage = 8 }
-			add_to_temp_variable = {tempAverage = outside_success_chance_bonus}
-			subtract_from_temp_variable = {tempAverage = targeted_country_slot_2:outside_success_chance_bonus}
-			if = {
-				limit = {
-					check_variable = {
-						var = chance_of_success_2
-						value = tempAverage
-						compare = less_than_or_equals
-					}
-				}
-				var:targeted_country_slot_2 = {
-					give_resource_rights = { receiver = ROOT state = capital }
-					country_event = {
-					    id = espionage.4
-					    days = 80
-					}
-					country_event = espionage_missions.122
-				}
-				country_event = espionage_missions.119
-			}else = {## FALIURE
-				country_event = espionage_missions.120
-				var:targeted_country_slot_2 = {
-					country_event = espionage_missions.123
-				}
-			}
-			clr_country_flag = reroute_supply_slot_2
-			clr_country_flag = slot_2_filled
-			clear_variable = mission_2_progress_var
-			clear_variable = agent_in_mission_2
-			clear_variable = targeted_country_slot_2
+		country_event = espionage_missions.95
+	}else = {## FALIURE
+		country_event = espionage_missions.96
+		var:targeted_country = {
+			country_event = espionage_missions.99
 		}
 	}
 }
-Slot_3_espionage_end_mission_effects = {
+mission_number_17 = {
+	set_temp_variable = { net_size = agent_martial@var:agent_in_mission }
+	add_to_temp_variable = { net_size = agent_charisma@var:agent_in_mission }
+	divide_temp_variable = { net_size = 2 }
+	multiply_temp_variable = { net_size = 10 }
+	multiply_temp_variable = { net_size = Total_counterespionage_vs_espionage_percentage} ## multiply the bonuses to get total net size
 	if = {
-		### EXAMPLE SKILL CHECK ###
-		# set_variable = { agent_in_mission_3 = ### GRABS OPERATIVE FROM PALPYS GRIDBOX}
-		# set_variable = { agent_loyality@var:agent_in_mission_3 = 12 }
-		# check_variable = { agent_loyality@var:agent_in_mission_3 = 12 }  ## WOULD I GET 12 TELL ME YES
-		# check_variable = { agent_martial@var:agent_in_mission_3 = 12 }
-		# check_variable = { agent_charisma@var:agent_in_mission_3 = 12 }
-		# check_variable = { agent_intelligence@var:agent_in_mission_3 = 12 }
 		limit = {
-			has_country_flag = slot_3_filled
-		}
-		randomize_temp_variable = {  ## success and failure chance generator
-		  var = chance_of_success_3
-		  distribution = uniform
-		  min = 1
-		  max = 100
-		}
-		############# BOUNTY HUNTER ##############################
-		if = {                  ########### ASSASSIN ONLY WOUNDS
-			limit = {
-				has_country_flag = assassinate_slot_3 
+			check_variable = {
+				var = chance_of_success
+				value = net_size
+				compare = less_than_or_equals
 			}
-			set_temp_variable = { tempAverage = agent_martial@var:agent_in_mission_3 } ## find characters martial and sets tempAverage to then work out success chance
-			multiply_temp_variable = { tempAverage = 6 } ## 6 factor
-			add_to_temp_variable = {tempAverage = outside_success_chance_bonus}
-			subtract_from_temp_variable = {tempAverage = targeted_country_slot_3:outside_success_chance_bonus}
-			if = {
+		}
+		var:targeted_country = {
+			every_controlled_state = {
 				limit = {
-					check_variable = {
-						var = chance_of_success_3
-						value = tempAverage
-						compare = less_than_or_equals
-					}
+					has_active_resistance = yes
 				}
-				if = {
-					limit = {
-						check_variable = {chance_of_success_3 > 10}
-					}
-					var:targeted_country_slot_3 = {
-						every_unit_leader = {
-							limit = {
-								has_character_flag = targeted_by_mission
-								has_character_flag = targeted_by_@ROOT_3_murder
-							}
-							add_timed_unit_leader_trait = {
-								trait = wounded
-								days = 180
-							}
-							unit_leader_event = {id = espionage.1}
-						}
-						country_event = espionage_missions.8
-					}
-					country_event = espionage_missions.5
-				}else = {														 ### CRITICAL SUCCESSS
-					var:targeted_country_slot_3 = { ### ASSASSIN KILLS TARGET
-						every_unit_leader = {
-							limit = {
-								has_character_flag = targeted_by_mission
-								has_character_flag = targeted_by_@ROOT_3_murder
-							}
-							retire = yes
-							unit_leader_event = {id = espionage.2}
-						}
-						country_event = espionage_missions.13
-					}
-					country_event = espionage_missions.14
-				}
-			}else = {## FALIURE
-				country_event = espionage_missions.6
-				var:targeted_country_slot_3 = {
-					country_event = espionage_missions.9
-				}
+				add_resistance = 20 
 			}
-			clr_country_flag = assassinate_slot_3
-			clr_country_flag = slot_3_filled
-			clear_variable = mission_3_progress_var
-			clear_variable = agent_in_mission_3
-			clear_variable = targeted_country_slot_3
+			country_event = espionage_missions.104
 		}
-		if = {
-			limit = {
-				has_country_flag = ransom_slot_3
-			}
-			set_temp_variable = { tempAverage = agent_martial@var:agent_in_mission_3 }
-			add_to_temp_variable = { tempAverage = agent_intelligence@var:agent_in_mission_3 }
-			divide_temp_variable = { tempAverage = 2 }
-			multiply_temp_variable = { tempAverage = 5 }
-			add_to_temp_variable = {tempAverage = outside_success_chance_bonus}
-			subtract_from_temp_variable = {tempAverage = targeted_country_slot_3:outside_success_chance_bonus}
-			if = {
-				limit = {
-					check_variable = {
-						var = chance_of_success_3
-						value = tempAverage
-						compare = less_than_or_equals
-					}
-				}
-				var:targeted_country_slot_3 = {
-					country_event = {
-					    id = espionage.3
-					    days = 1
-					}
-				}
-			}
-			clr_country_flag = ransom_slot_3
-			clr_country_flag = slot_3_filled
-			clear_variable = mission_3_progress_var
-			clear_variable = agent_in_mission_3
-			clear_variable = targeted_country_slot_3
+		country_event = espionage_missions.101
+	}else = {## FALIURE
+		country_event = espionage_missions.102
+		var:targeted_country = {
+			country_event = espionage_missions.105
 		}
-		if = {
-			limit = {
-				has_country_flag = army_training_slot_3
+	}
+}
+mission_number_18 = {
+	set_temp_variable = { net_size = agent_intelligence@var:agent_in_mission }
+	add_to_temp_variable = { net_size = agent_charisma@var:agent_in_mission }
+	divide_temp_variable = { net_size = 2 }
+	multiply_temp_variable = { net_size = 12 }
+	multiply_temp_variable = { net_size = Total_counterespionage_vs_espionage_percentage} ## multiply the bonuses to get total net size
+	if = {
+		limit = {
+			check_variable = {
+				var = chance_of_success
+				value = net_size
+				compare = less_than_or_equals
 			}
-			set_temp_variable = { tempAverage = agent_martial@var:agent_in_mission_3 }
-			add_to_temp_variable = { tempAverage = agent_charisma@var:agent_in_mission_3 }
-			divide_temp_variable = { tempAverage = 2 }
-			multiply_temp_variable = { tempAverage = 10 }
-			add_to_temp_variable = {tempAverage = outside_success_chance_bonus}
-			subtract_from_temp_variable = {tempAverage = targeted_country_slot_3:outside_success_chance_bonus}
-			if = {
-				limit = {
-					check_variable = {
-						var = chance_of_success_3
-						value = tempAverage
-						compare = less_than_or_equals
-					}
-				}
-				every_unit_leader = {
-					limit = {
-						has_character_flag = targeted_by_mission
-						has_character_flag = targeted_by_training_3
-					}
-					add_random_trait = {
-						organizer
-						cavalry_leader
-						infantry_leader
-						skilled_staffer
-						trickster
-						infantry_officer
-						armor_officer
-					}
-				}
-				country_event = espionage_missions.11
-			}else = {## FALIURE
-				country_event = espionage_missions.12
-			}
-			clr_country_flag = army_training_slot_3
-			clr_country_flag = slot_3_filled
-			clear_variable = mission_3_progress_var
-			clear_variable = agent_in_mission_3
-			clear_variable = targeted_country_slot_3
 		}
-		if = {
-			limit = {
-				has_country_flag = intimidate_senator_slot_3 ###### CHANGE_ME
-			}
-			set_temp_variable = { tempAverage = agent_martial@var:agent_in_mission_3 }
-			add_to_temp_variable = { tempAverage = agent_charisma@var:agent_in_mission_3 }
-			divide_temp_variable = { tempAverage = 2 }
-			multiply_temp_variable = { tempAverage = 10 }
-			add_to_temp_variable = {tempAverage = outside_success_chance_bonus}
-			subtract_from_temp_variable = {tempAverage = targeted_country_slot_3:outside_success_chance_bonus}
-			if = {
-				limit = {
-					check_variable = {
-						var = chance_of_success_3
-						value = tempAverage
-						compare = less_than_or_equals
-					}
-				}
-				var:targeted_country_slot_3 = {
-					country_event = espionage_missions.20
-				}
-				country_event = espionage_missions.17
-			}else = {## FALIURE
-				country_event = espionage_missions.18
-				var:targeted_country_slot_3 = {
-					country_event = espionage_missions.21
-				}
-			}
-			clr_country_flag = intimidate_senator_slot_3
-			clr_country_flag = slot_3_filled
-			clear_variable = mission_3_progress_var
-			clear_variable = agent_in_mission_3
-			clear_variable = targeted_country_slot_3
+		var:targeted_country = {
+			country_event = espionage_missions.110
 		}
-		########### TECHNICIAN ##################################
-		if = {
-			limit = {
-				has_country_flag = cyber_attack_target_slot_3
-			}
-			set_temp_variable = { tempAverage = agent_intelligence@var:agent_in_mission_3 }
-			multiply_temp_variable = { tempAverage = 5 }
-			add_to_temp_variable = {tempAverage = outside_success_chance_bonus}
-			subtract_from_temp_variable = {tempAverage = targeted_country_slot_3:outside_success_chance_bonus}
-			if = {
-				limit = {
-					check_variable = {
-						var = chance_of_success_3
-						value = tempAverage
-						compare = less_than_or_equals
-					}
-				}
-				var:targeted_country_slot_3 = {
-					add_timed_idea = {
-					    idea = cyber_attack_espionage
-					    days = 100
-					}
-					country_event = espionage_missions.26
-				}
-				country_event = espionage_missions.23
-			}else = {## FALIURE
-				country_event = espionage_missions.24
-				var:targeted_country_slot_3 = {
-					country_event = espionage_missions.21
-				}
-			}
-			clr_country_flag = cyber_attack_target_slot_3
-			clr_country_flag = slot_3_filled
-			clear_variable = mission_3_progress_var
-			clear_variable = agent_in_mission_3
-			clear_variable = targeted_country_slot_3
+		country_event = espionage_missions.107
+		set_variable = {higher_chance_espionage_target = var:targeted_country.id }
+	}else = {## FALIURE
+		country_event = espionage_missions.108
+		var:targeted_country = {
+			country_event = espionage_missions.111
 		}
-		if = {
-			limit = {
-				has_country_flag = steal_blueprint_target_slot_3
+	}
+}
+mission_number_19 = {
+	set_temp_variable = { net_size = agent_intelligence@var:agent_in_mission }
+	add_to_temp_variable = { net_size = agent_charisma@var:agent_in_mission }
+	divide_temp_variable = { net_size = 2 }
+	multiply_temp_variable = { net_size = 8 }
+	multiply_temp_variable = { net_size = Total_counterespionage_vs_espionage_percentage} ## multiply the bonuses to get total net size
+	if = {
+		limit = {
+			check_variable = {
+				var = chance_of_success
+				value = net_size
+				compare = less_than_or_equals
 			}
-			set_temp_variable = { tempAverage = agent_intelligence@var:agent_in_mission_3 }
-			add_to_temp_variable = { tempAverage = agent_charisma@var:agent_in_mission_3 }
-			divide_temp_variable = { tempAverage = 2 }
-			multiply_temp_variable = { tempAverage = 8 }
-			add_to_temp_variable = {tempAverage = outside_success_chance_bonus}
-			subtract_from_temp_variable = {tempAverage = targeted_country_slot_3:outside_success_chance_bonus}
-			if = {
-				limit = {
-					check_variable = {
-						var = chance_of_success_3
-						value = tempAverage
-						compare = less_than_or_equals
-					}
-				}
-				var:targeted_country_slot_3 = {
-					steal_random_tech_bonus = {
-						folder = electronics_folder
-						folder = industry_folder
-						bonus = 3.0
-						dynamic = no
-						instant = yes
-						name = operation_steal_tech_civilian
-						target = FROM
-						uses = 1
-					}
-					country_event = espionage_missions.32
-				}
-				country_event = espionage_missions.29
-			}else = {## FALIURE
-				country_event = espionage_missions.30
-				var:targeted_country_slot_3 = {
-					country_event = espionage_missions.33
-				}
-			}
-			clr_country_flag = steal_blueprint_target_slot_3
-			clr_country_flag = slot_3_filled
-			clear_variable = mission_3_progress_var
-			clear_variable = agent_in_mission_3
-			clear_variable = targeted_country_slot_3
 		}
-		if = {
-			limit = {
-				has_country_flag = sprout_disease_target_slot_3
-			}
-			set_temp_variable = { tempAverage = agent_intelligence@var:agent_in_mission_3 }
-			add_to_temp_variable = { tempAverage = agent_charisma@var:agent_in_mission_3 }
-			divide_temp_variable = { tempAverage = 2 }
-			multiply_temp_variable = { tempAverage = 5 }
-			add_to_temp_variable = {tempAverage = outside_success_chance_bonus}
-			subtract_from_temp_variable = {tempAverage = targeted_country_slot_3:outside_success_chance_bonus}
-			if = {
-				limit = {
-					check_variable = {
-						var = chance_of_success_3
-						value = tempAverage
-						compare = less_than_or_equals
-					}
-				}
-				var:targeted_country_slot_3 = {
-					capital_scope = {
-						add_manpower = -50000
-					}
-					country_event = espionage_missions.38
-				}
-				country_event = espionage_missions.35
-			}else = {## FALIURE
-				country_event = espionage_missions.36
-				var:targeted_country_slot_3 = {
-					country_event = espionage_missions.39
-				}
-			}
-			clr_country_flag = sprout_disease_target_slot_3
-			clr_country_flag = slot_3_filled
-			clear_variable = mission_3_progress_var
-			clear_variable = agent_in_mission_3
-			clear_variable = targeted_country_slot_3
+		var:targeted_country = {
+			subtract_from_variable = { currency_amount^primary_currency = 1000 }
+			country_event = espionage_missions.116
 		}
-		if = {
-			limit = {
-				has_country_flag = logisitics_target_slot_3
-			}
-			set_temp_variable = { tempAverage = agent_intelligence@var:agent_in_mission_3 }
-			add_to_temp_variable = { tempAverage = agent_martial@var:agent_in_mission_3 }
-			divide_temp_variable = { tempAverage = 2 }
-			multiply_temp_variable = { tempAverage = 8 }
-			add_to_temp_variable = {tempAverage = outside_success_chance_bonus}
-			subtract_from_temp_variable = {tempAverage = targeted_country_slot_3:outside_success_chance_bonus}
-			if = {
-				limit = {
-					check_variable = {
-						var = chance_of_success_3
-						value = tempAverage
-						compare = less_than_or_equals
-					}
-				}
-				var:targeted_country_slot_3 = {
-					add_timed_idea = {
-					    idea = logistics_sabotage_espionage
-					    days = 40
-					}
-					country_event = espionage_missions.44
-				}
-				country_event = espionage_missions.41
-			}else = {## FALIURE
-				country_event = espionage_missions.42
-				var:targeted_country_slot_3 = {
-					country_event = espionage_missions.45
-				}
-			}
-			clr_country_flag = logistics_sabotage_target_slot_3
-			clr_country_flag = slot_3_filled
-			clear_variable = mission_3_progress_var
-			clear_variable = agent_in_mission_3
-			clear_variable = targeted_country_slot_3
+		country_event = espionage_missions.113
+	}else = {## FALIURE
+		country_event = espionage_missions.114
+		var:targeted_country = {
+			country_event = espionage_missions.117
 		}
-		### SPY ####
-		if = {
-			limit = {
-				has_country_flag = sabotage_target_slot_3
+	}
+}
+mission_number_20 = {
+	set_temp_variable = { net_size = agent_intelligence@var:agent_in_mission }
+	add_to_temp_variable = { net_size = agent_charisma@var:agent_in_mission }
+	divide_temp_variable = { net_size = 2 }
+	multiply_temp_variable = { net_size = 8 }
+	multiply_temp_variable = { net_size = Total_counterespionage_vs_espionage_percentage} ## multiply the bonuses to get total net size
+	if = {
+		limit = {
+			check_variable = {
+				var = chance_of_success
+				value = net_size
+				compare = less_than_or_equals
 			}
-			set_temp_variable = { tempAverage = agent_intelligence@var:agent_in_mission_3 }
-			add_to_temp_variable = { tempAverage = agent_martial@var:agent_in_mission_3 }
-			divide_temp_variable = { tempAverage = 2 }
-			multiply_temp_variable = { tempAverage = 12 }
-			add_to_temp_variable = {tempAverage = outside_success_chance_bonus}
-			subtract_from_temp_variable = {tempAverage = targeted_country_slot_3:outside_success_chance_bonus}
-			if = {
-				limit = {
-					check_variable = {
-						var = chance_of_success_3
-						value = tempAverage
-						compare = less_than_or_equals
-					}
-				}
-				var:targeted_country_slot_3 = {
-					while_loop_effect = {
-					    break = temp_break
-					    limit = {
-					    	NOT = {
-					        	has_variable = targeted_country_slot_3
-					        }
-					    }
-					    random_core_state = {
-					    	if = {
-					    		limit = {
-					    			arms_factory > 1
-					    		}
-					    		remove_building = {
-								    type = arms_factory
-								    level = 1
-								}
-								set_temp_variable = {temp_break = 1}
-					    	}else_if = {
-					    		limit = {
-					    			industrial_complex > 1
-					    		}
-					    		remove_building = {
-								    type = industrial_complex
-								    level = 1
-								}
-								set_temp_variable = {temp_break = 1}
-					    	}
-					    }
-					}
-					country_event = espionage_missions.50
-				}
-				country_event = espionage_missions.47
-			}else = {## FALIURE
-				country_event = espionage_missions.48
-				var:targeted_country_slot_3 = {
-					country_event = espionage_missions.51
-				}
-			}
-			clr_country_flag = sabotage_target_slot_3
-			clr_country_flag = slot_3_filled
-			clear_variable = mission_3_progress_var
-			clear_variable = agent_in_mission_3
-			clear_variable = targeted_country_slot_3
 		}
-		if = {
-			limit = {
-				has_country_flag = infiltrate_military_slot_3
+		var:targeted_country = {
+			give_resource_rights = { receiver = ROOT state = capital }
+			country_event = {
+				id = espionage.4
+				days = 80
 			}
-			set_temp_variable = { tempAverage = agent_martial@var:agent_in_mission_3 }
-			add_to_temp_variable = { tempAverage = agent_charisma@var:agent_in_mission_3 }
-			divide_temp_variable = { tempAverage = 2 }
-			multiply_temp_variable = { tempAverage = 6 }
-			add_to_temp_variable = {tempAverage = outside_success_chance_bonus}
-			subtract_from_temp_variable = {tempAverage = targeted_country_slot_3:outside_success_chance_bonus}
-			if = {
-				limit = {
-					check_variable = {
-						var = chance_of_success_3
-						value = tempAverage
-						compare = less_than_or_equals
-					}
-				}
-				add_intel = {
-				    target = var:targeted_country_slot_3
-				    army_intel = 30
-				    navy_intel = 30
-				    airforce_intel = 30
-				}
-				var:targeted_country_slot_3 = {
-					country_event = espionage_missions.56
-				}
-				country_event = espionage_missions.53
-			}else = {## FALIURE
-				country_event = espionage_missions.54
-				var:targeted_country_slot_3 = {
-					country_event = espionage_missions.57
-				}
-			}
-			clr_country_flag = infiltrate_military_slot_3
-			clr_country_flag = slot_3_filled
-			clear_variable = mission_3_progress_var
-			clear_variable = agent_in_mission_3
-			clear_variable = targeted_country_slot_3
 		}
-		if = {
-			limit = {
-				has_country_flag = undermine_guild_connections_slot_3 ## CHANGE_ME no idea how to do this palpy help
-			}
-			set_temp_variable = { tempAverage = agent_intelligence@var:agent_in_mission_3 }
-			add_to_temp_variable = { tempAverage = agent_charisma@var:agent_in_mission_3 }
-			divide_temp_variable = { tempAverage = 2 }
-			multiply_temp_variable = { tempAverage = 8 }
-			add_to_temp_variable = {tempAverage = outside_success_chance_bonus}
-			subtract_from_temp_variable = {tempAverage = targeted_country_slot_3:outside_success_chance_bonus}
-			if = {
-				limit = {
-					check_variable = {
-						var = chance_of_success_3
-						value = tempAverage
-						compare = less_than_or_equals
-					}
-				}
-				var:targeted_country_slot_3 = {
-					country_event = espionage_missions.62
-				}
-				country_event = espionage_missions.59
-			}else = {## FALIURE
-				country_event = espionage_missions.60
-				var:targeted_country_slot_3 = {
-					country_event = espionage_missions.63
-				}
-			}	
-			clr_country_flag = undermine_guild_connections_slot_3
-			clr_country_flag = slot_3_filled
-			clear_variable = mission_3_progress_var
-			clear_variable = agent_in_mission_3
-			clear_variable = targeted_country_slot_3
-		}
-		if = {
-			limit = {
-				has_country_flag = turn_agent_slot_3 ## CHANGE_ME lol no, leaving that till last
-			}
-			set_temp_variable = { tempAverage = agent_martial@var:agent_in_mission_3 }
-			add_to_temp_variable = { tempAverage = agent_charisma@var:agent_in_mission_3 }
-			divide_temp_variable = { tempAverage = 2 }
-			multiply_temp_variable = { tempAverage = 6 }
-			add_to_temp_variable = {tempAverage = outside_success_chance_bonus}
-			subtract_from_temp_variable = {tempAverage = targeted_country_slot_3:outside_success_chance_bonus}
-			if = {
-				limit = {
-					check_variable = {
-						var = chance_of_success_3
-						value = tempAverage
-						compare = less_than_or_equals
-					}
-				}
-			}
-			clr_country_flag = turn_agent_slot_3
-			clr_country_flag = slot_3_filled
-			clear_variable = mission_3_progress_var
-			clear_variable = agent_in_mission_3
-			clear_variable = targeted_country_slot_3
-		}
-		if = {
-			limit = {
-				has_country_flag = capital_ship_slot_3 ## finds biggest capital ship (Super star destroyers not included due to how busted that would be)
-			}
-			set_temp_variable = { tempAverage = agent_martial@var:agent_in_mission_3 }
-			divide_temp_variable = { tempAverage = 2 }
-			multiply_temp_variable = { tempAverage = 5 }
-			add_to_temp_variable = {tempAverage = outside_success_chance_bonus}
-			subtract_from_temp_variable = {tempAverage = targeted_country_slot_3:outside_success_chance_bonus}
-			if = {
-				limit = {
-					check_variable = {
-						var = chance_of_success_3
-						value = tempAverage
-						compare = less_than_or_equals
-					}
-				}
-				var:targeted_country_slot_3 = {
-					if = {
-						limit = {
-							check_variable = {
-								var = num_ships_with_type@carrier  ## CHANGE_ME, need to ask diosysnus about ship types
-								value = 1
-								compare = greater_than
-							}
-						}
-						destroy_ships = {
-						    type = carrier
-						    count = 1
-						}
-					}else_if = {
-						limit = {
-							check_variable = {
-								var = num_ships_with_type@battleship ## CHANGE_ME, need to ask diosysnus about ship types
-								value = 1
-								compare = greater_than
-							}
-						}
-						destroy_ships = {
-						    type = battleship
-						    count = 1
-						}
-					}
-					country_event = espionage_missions.74
-				}
-				country_event = espionage_missions.71
-			}else = {## FALIURE
-				country_event = espionage_missions.72
-				var:targeted_country_slot_3 = {
-					country_event = espionage_missions.75
-				}
-			}
-			clr_country_flag = capital_ship_slot_3
-			clr_country_flag = slot_3_filled
-			clear_variable = mission_3_progress_var
-			clear_variable = agent_in_mission_3
-			clear_variable = targeted_country_slot_3
-		}
-		####### SMUGGLER ###############
-		if = {
-			limit = {
-				has_country_flag = steal_equipment_slot_3
-			}
-			set_temp_variable = { tempAverage = agent_martial@var:agent_in_mission_3 }
-			add_to_temp_variable = { tempAverage = agent_intelligence@var:agent_in_mission_3 }
-			divide_temp_variable = { tempAverage = 2 }
-			multiply_temp_variable = { tempAverage = 10 }
-			add_to_temp_variable = {tempAverage = outside_success_chance_bonus}
-			subtract_from_temp_variable = {tempAverage = targeted_country_slot_3:outside_success_chance_bonus}
-			if = {
-				limit = {
-					check_variable = {
-						var = chance_of_success_3
-						value = tempAverage
-						compare = less_than_or_equals
-					}
-				}
-				var:targeted_country_slot_3 = {
-					send_equipment_fraction = {
-					    value = 0.02
-					    target = PREV
-					}
-					country_event = espionage_missions.80
-				}
-				country_event = espionage_missions.77
-			}else = {## FALIURE
-				country_event = espionage_missions.78
-				var:targeted_country_slot_3 = {
-					country_event = espionage_missions.81
-				}
-			}
-			clr_country_flag = steal_equipment_slot_3
-			clr_country_flag = slot_3_filled
-			clear_variable = mission_3_progress_var
-			clear_variable = agent_in_mission_3
-			clear_variable = targeted_country_slot_3
-		}
-		if = {
-			limit = {
-				has_country_flag = smuggle_slaves_slot_3
-			}
-			set_temp_variable = { tempAverage = agent_martial@var:agent_in_mission_3 }
-			add_to_temp_variable = { tempAverage = agent_intelligence@var:agent_in_mission_3 }
-			divide_temp_variable = { tempAverage = 2 }
-			multiply_temp_variable = { tempAverage = 8 }
-			add_to_temp_variable = {tempAverage = outside_success_chance_bonus}
-			subtract_from_temp_variable = {tempAverage = targeted_country_slot_3:outside_success_chance_bonus}
-			if = {
-				limit = {
-					check_variable = {
-						var = chance_of_success_3
-						value = tempAverage
-						compare = less_than_or_equals
-					}
-				}
-				var:targeted_country_slot_3 = {
-					find_highest_in_array = { 
-						array = slaves
-						value = slave_value_count_temp
-						index = slave_index_espionage_temp
-					}
-					divide_variable = {slave_value_count_temp = 3} ## Thought this might be cleaner
-					multiply_variable = {slave_value_count_temp = 2}
-					round_variable = slave_value_count_temp
-					set_variable = { slaves^slave_index_espionage_temp = slave_value_count_temp }
-				country_event = espionage_missions.80
-				}
-				country_event = espionage_missions.77
-				set_variable = { slaves^targeted_country_slot_3.slave_index_espionage_temp = var:targeted_country_slot_3.slave_value_count_temp} ## this is stupid and should be treated as such
-			}else = {## FALIURE
-				country_event = espionage_missions.78
-				var:targeted_country_slot_3 = {
-					country_event = espionage_missions.81
-				}
-			}
-			clr_country_flag = smuggle_slaves_slot_3
-			clr_country_flag = slot_3_filled
-			clear_variable = mission_3_progress_var
-			clear_variable = agent_in_mission_3
-			clear_variable = targeted_country_slot_3
-		}
-		if = {
-			limit = {
-				has_country_flag = set_Slaves_free_slot_3
-			}
-			set_temp_variable = { tempAverage = agent_martial@var:agent_in_mission_3 }
-			add_to_temp_variable = { tempAverage = agent_intelligence@var:agent_in_mission_3 }
-			divide_temp_variable = { tempAverage = 2 }
-			multiply_temp_variable = { tempAverage = 10 }
-			add_to_temp_variable = {tempAverage = outside_success_chance_bonus}
-			subtract_from_temp_variable = {tempAverage = targeted_country_slot_3:outside_success_chance_bonus}
-			if = {
-				limit = {
-					check_variable = {
-						var = chance_of_success_3
-						value = tempAverage
-						compare = less_than_or_equals
-					}
-				}
-				var:targeted_country_slot_3 = {
-					find_highest_in_array = { 
-						array = slaves
-						value = slave_value_count_temp
-						index = slave_index_espionage_temp
-					}
-					divide_variable = {slave_value_count_temp = 3} ## Thought this might be cleaner
-					multiply_variable = {slave_value_count_temp = 2}
-					round_variable = slave_value_count_temp
-					set_variable = { slaves^slave_index_espionage_temp = slave_value_count_temp }
-					country_event = espionage_missions.92
-				}
-				country_event = espionage_missions.89
-			}else = {## FALIURE
-				country_event = espionage_missions.90
-				var:targeted_country_slot_3 = {
-					country_event = espionage_missions.93
-				}
-			}
-			clr_country_flag = set_Slaves_free_slot_3
-			clr_country_flag = slot_3_filled
-			clear_variable = mission_3_progress_var
-			clear_variable = agent_in_mission_3
-			clear_variable = targeted_country_slot_3
-		}
-		if = {
-			limit = {
-				has_country_flag = provoke_slave_revolt_slot_3
-			}
-			set_temp_variable = { tempAverage = agent_martial@var:agent_in_mission_3 }
-			add_to_temp_variable = { tempAverage = agent_charisma@var:agent_in_mission_3 }
-			divide_temp_variable = { tempAverage = 2 }
-			multiply_temp_variable = { tempAverage = 4 }
-			add_to_temp_variable = {tempAverage = outside_success_chance_bonus}
-			subtract_from_temp_variable = {tempAverage = targeted_country_slot_3:outside_success_chance_bonus}
-			if = {
-				limit = {
-					check_variable = {
-						var = chance_of_success_3
-						value = tempAverage
-						compare = less_than_or_equals
-					}
-				}
-				var:targeted_country_slot_3 = {
-					set_temp_variable = { slave_total_count_temp = 0 }
-					for_each_loop = {
-						array = slaves
-						value = slave_index_count
+	}else = {## FALIURE
+	}
+}
 
-						add_to_temp_variable = {slave_total_count_temp = slave_index_count}
-					}
-					divide_variable = {slave_total_count_temp = 800000}
-					random_core_state = {
-						 set_variable = { core_temp_state = THIS.id}
-					}
-					start_civil_war = {
-					    ruling_party = neutrality
-					    ideology = ROOT
-					    size = slave_total_count_temp
-					    capital = var:core_temp_state
-					    navy_ratio = 0
-					    states_filter = {
-					    	check_variable = {var:core_temp_state = THIS.id}
-					    }
-					    keep_unit_leaders_trigger = {
-					    	always = yes
-					    }
-					    keep_political_leader = yes
-					    keep_political_party_members = yes
-					}
-					country_event = espionage_missions.98
-				}
-				country_event = espionage_missions.95
-			}else = {## FALIURE
-				country_event = espionage_missions.96
-				var:targeted_country_slot_3 = {
-					country_event = espionage_missions.99
-				}
+create_temporary_agents = { ## CREATE TEMPORARY AGENTS FOR RECRUITMENT
+	set_temp_variable = {amount_of_common_agents = 32}
+	while_loop_effect = {
+		limit = {
+			NOT = {
+				check_variable = {temporary_agent_1 = agent_slot_1_identifier}
+				check_variable = {temporary_agent_1 = agent_slot_2_identifier}
+				check_variable = {temporary_agent_1 = agent_slot_3_identifier}
+				check_variable = {temporary_agent_1 = agent_slot_4_identifier}
+				check_variable = {temporary_agent_1 = agent_slot_5_identifier}
 			}
-			clr_country_flag = provoke_slave_revolt_slot_3
-			clr_country_flag = slot_3_filled
-			clear_variable = mission_3_progress_var
-			clear_variable = agent_in_mission_3
-			clear_variable = targeted_country_slot_3
 		}
-		if = {
-			limit = {
-				has_country_flag = arming_dissidents_slot_3
-			}
-			set_temp_variable = { tempAverage = agent_martial@var:agent_in_mission_3 }
-			add_to_temp_variable = { tempAverage = agent_charisma@var:agent_in_mission_3 }
-			divide_temp_variable = { tempAverage = 2 }
-			multiply_temp_variable = { tempAverage = 10 }
-			add_to_temp_variable = {tempAverage = outside_success_chance_bonus}
-			subtract_from_temp_variable = {tempAverage = targeted_country_slot_3:outside_success_chance_bonus}
-			if = {
-				limit = {
-					check_variable = {
-						var = chance_of_success_3
-						value = tempAverage
-						compare = less_than_or_equals
-					}
-				}
-				var:targeted_country_slot_3 = {
-					every_controlled_state = {
-						limit = {
-							has_active_resistance = yes
-						}
-						add_resistance = 20 
-					}
-					country_event = espionage_missions.104
-				}
-				country_event = espionage_missions.101
-			}else = {## FALIURE
-				country_event = espionage_missions.102
-				var:targeted_country_slot_3 = {
-					country_event = espionage_missions.105
-				}
-			}
-			clr_country_flag = arming_dissidents_slot_3
-			clr_country_flag = slot_3_filled
-			clear_variable = mission_3_progress_var
-			clear_variable = agent_in_mission_3
-			clear_variable = targeted_country_slot_3
-		}
-		if = {
-			limit = {
-				has_country_flag = plant_sleeper_agent_slot_3
-			}
-			set_temp_variable = { tempAverage = agent_intelligence@var:agent_in_mission_3 }
-			add_to_temp_variable = { tempAverage = agent_charisma@var:agent_in_mission_3 }
-			divide_temp_variable = { tempAverage = 2 }
-			multiply_temp_variable = { tempAverage = 12 }
-			add_to_temp_variable = {tempAverage = outside_success_chance_bonus}
-			subtract_from_temp_variable = {tempAverage = targeted_country_slot_3:outside_success_chance_bonus}
-			if = {
-				limit = {
-					check_variable = {
-						var = chance_of_success_3
-						value = tempAverage
-						compare = less_than_or_equals
-					}
-				}
-				var:targeted_country_slot_3 = {
-					country_event = espionage_missions.110
-				}
-				country_event = espionage_missions.107
-				set_variable = {higher_chance_espionage_target = var:targeted_country_slot_3.id }
-			}else = {## FALIURE
-				country_event = espionage_missions.108
-				var:targeted_country_slot_3 = {
-					country_event = espionage_missions.111
-				}
-			}
-			clr_country_flag = plant_sleeper_agent_slot_3
-			clr_country_flag = slot_3_filled
-			clear_variable = mission_3_progress_var
-			clear_variable = agent_in_mission_3
-			clear_variable = targeted_country_slot_3
-		}
-		if = {
-			limit = {
-				has_country_flag = market_flood_slot_3
-			}
-			set_temp_variable = { tempAverage = agent_intelligence@var:agent_in_mission_3 }
-			add_to_temp_variable = { tempAverage = agent_charisma@var:agent_in_mission_3 }
-			divide_temp_variable = { tempAverage = 2 }
-			multiply_temp_variable = { tempAverage = 8 }
-			add_to_temp_variable = {tempAverage = outside_success_chance_bonus}
-			subtract_from_temp_variable = {tempAverage = targeted_country_slot_3:outside_success_chance_bonus}
-			if = {
-				limit = {
-					check_variable = {
-						var = chance_of_success_3
-						value = tempAverage
-						compare = less_than_or_equals
-					}
-				}
-				var:targeted_country_slot_3 = {
-					subtract_from_variable = { currency_amount^primary_currency = 1000 }
-					country_event = espionage_missions.116
-				}
-				country_event = espionage_missions.113
-			}else = {## FALIURE
-				country_event = espionage_missions.114
-				var:targeted_country_slot_3 = {
-					country_event = espionage_missions.117
-				}
-			}
-			clr_country_flag = market_flood_slot_3
-			clr_country_flag = slot_3_filled
-			clear_variable = mission_3_progress_var
-			clear_variable = agent_in_mission_3
-			clear_variable = targeted_country_slot_3
-		}
-		if = {
-			limit = {
-				has_country_flag = reroute_supply_slot_3
-			}
-			set_temp_variable = { tempAverage = agent_intelligence@var:agent_in_mission_3 }
-			add_to_temp_variable = { tempAverage = agent_charisma@var:agent_in_mission_3 }
-			divide_temp_variable = { tempAverage = 2 }
-			multiply_temp_variable = { tempAverage = 8 }
-			add_to_temp_variable = {tempAverage = outside_success_chance_bonus}
-			subtract_from_temp_variable = {tempAverage = targeted_country_slot_3:outside_success_chance_bonus}
-			if = {
-				limit = {
-					check_variable = {
-						var = chance_of_success_3
-						value = tempAverage
-						compare = less_than_or_equals
-					}
-				}
-				var:targeted_country_slot_3 = {
-					give_resource_rights = { receiver = ROOT state = capital }
-					country_event = {
-					    id = espionage.4
-					    days = 80
-					}
-					country_event = espionage_missions.122
-				}
-				country_event = espionage_missions.119
-			}else = {## FALIURE
-				country_event = espionage_missions.120
-				var:targeted_country_slot_3 = {
-					country_event = espionage_missions.123
-				}
-			}
-			clr_country_flag = reroute_supply_slot_3
-			clr_country_flag = slot_3_filled
-			clear_variable = mission_3_progress_var
-			clear_variable = agent_in_mission_3
-			clear_variable = targeted_country_slot_3
+		set_temp_variable = {
+			min = 0
+			max = amount_of_common_agents
+			var = temporary_agent_1
+			interger = yes
 		}
 	}
+	while_loop_effect = {
+		limit = {
+			NOT = {
+				check_variable = {temporary_agent_2 = agent_slot_1_identifier}
+				check_variable = {temporary_agent_2 = agent_slot_2_identifier}
+				check_variable = {temporary_agent_2 = agent_slot_3_identifier}
+				check_variable = {temporary_agent_2 = agent_slot_4_identifier}
+				check_variable = {temporary_agent_2 = agent_slot_5_identifier}
+				check_variable = {temporary_agent_2 = temporary_agent_1}
+			}
+		}
+		set_temp_variable = {
+			min = 0
+			max = amount_of_common_agents
+			var = temporary_agent_2
+			interger = yes
+		}
+	}
+	while_loop_effect = {
+		limit = {
+			NOT = {
+				check_variable = {temporary_agent_3 = agent_slot_1_identifier}
+				check_variable = {temporary_agent_3 = agent_slot_2_identifier}
+				check_variable = {temporary_agent_3 = agent_slot_3_identifier}
+				check_variable = {temporary_agent_3 = agent_slot_4_identifier}
+				check_variable = {temporary_agent_3 = agent_slot_5_identifier}
+				check_variable = {temporary_agent_3 = temporary_agent_1}
+				check_variable = {temporary_agent_3 = temporary_agent_2}
+			}
+		}
+		set_temp_variable = {
+			min = 0
+			max = amount_of_common_agents
+			var = temporary_agent_3
+			interger = yes
+		}
+	}
+	set_temp_variable = {agent_identifier = 0} ## HOLDS PUT ONE HIGHER THEN LAST EFFECT
+	set_temp_variable = {agent_portrait =0} ## THIS IS THE GFX HOLDER FOR THE PORTRAIT
+	set_temp_variable = {agent_name = 0} ## HOLDS NAME LOCALISATION
+	set_temp_variable = {agent_charisma = 0} 
+	set_temp_variable = {agent_intelligence = 0}
+	set_temp_variable = {agent_martial = 0}
+	set_temp_variable = {personality_trait = 0}
+	set_temp_variable = {class_trait = 0}
+	set_temp_variable = {race_trait = 0}
+	meta_effect = {
+		text = {
+			agent_recruitment_agent_[AGENT_GRAB_NUMBER] = yes
+		}
+		AGENT_GRAB_NUMBER = "[?temporary_agent_1]"
+	}
+	set_variable = {agent_identifier_temporary_agent_1 = agent_identifier}
+	set_variable = {agent_portrait_temporary_agent_1 = agent_portrait}
+	set_variable = {agent_name_temporary_agent_1 = agent_name}
+	set_variable = {agent_charisma_temporary_agent_1 = agent_charisma}
+	set_variable = {agent_intelligence_temporary_agent_1 = agent_intelligence}
+	set_variable = {agent_martial_temporary_agent_1 = agent_martial}
+	set_variable = {personality_trait_temporary_agent_1 = personality_trait}
+	set_variable = {class_trait_temporary_agent_1 = class_trait}
+	set_variable = {race_trait_temporary_agent_1 = race_trait}
+	meta_effect = {
+		text = {
+			agent_recruitment_agent_[AGENT_GRAB_NUMBER] = yes
+		}
+		AGENT_GRAB_NUMBER = "[?temporary_agent_2]"
+	}
+	set_variable = {agent_identifier_temporary_agent_2 = agent_identifier}
+	set_variable = {agent_portrait_temporary_agent_2 = agent_portrait}
+	set_variable = {agent_name_temporary_agent_2 = agent_name}
+	set_variable = {agent_charisma_temporary_agent_2 = agent_charisma}
+	set_variable = {agent_intelligence_temporary_agent_2 = agent_intelligence}
+	set_variable = {agent_martial_temporary_agent_2 = agent_martial}
+	set_variable = {personality_trait_temporary_agent_2 = personality_trait}
+	set_variable = {class_trait_temporary_agent_2 = class_trait}
+	set_variable = {race_trait_temporary_agent_2 = race_trait}
+	meta_effect = {
+		text = {
+			agent_recruitment_agent_[AGENT_GRAB_NUMBER] = yes
+		}
+		AGENT_GRAB_NUMBER = "[?temporary_agent_3]"
+	}
+	set_variable = {agent_identifier_temporary_agent_3 = agent_identifier}
+	set_variable = {agent_portrait_temporary_agent_3 = agent_portrait}
+	set_variable = {agent_name_temporary_agent_3 = agent_name}
+	set_variable = {agent_charisma_temporary_agent_3 = agent_charisma}
+	set_variable = {agent_intelligence_temporary_agent_3 = agent_intelligence}
+	set_variable = {agent_martial_temporary_agent_3 = agent_martial}
+	set_variable = {personality_trait_temporary_agent_3 = personality_trait}
+	set_variable = {class_trait_temporary_agent_3 = class_trait}
+	set_variable = {race_trait_temporary_agent_3 = race_trait}
 }
-find_time_for_espionage_idea_1 = {
-	if = {
-		limit = {
-			has_country_flag = assassinate_slot_1
-		}
-		set_variable = {mission_1_progress_var = 120}
-	}else_if = {
-		limit = {
-			has_country_flag = ransom_slot_1
-		}
-		set_variable = {mission_1_progress_var = 120}	
-	}else_if = {
-		limit = {
-			has_country_flag = army_training_slot_1
-		}
-		set_variable = {mission_1_progress_var = 120}	
-	}else_if = {
-		limit = {
-			has_country_flag = intimidate_senator_slot_1
-		}
-		set_variable = {mission_1_progress_var = 120}	
-	}else_if = {
-		limit = {
-			has_country_flag = cyber_attack_target_slot_1
-		}
-		set_variable = {mission_1_progress_var = 120}	
-	}else_if = {
-		limit = {
-			has_country_flag = steal_blueprint_target_slot_1
-		}
-		set_variable = {mission_1_progress_var = 120}	
-	}else_if = {
-		limit = {
-			has_country_flag = sprout_disease_target_slot_1
-		}
-		set_variable = {mission_1_progress_var = 120}	
-	}else_if = {
-		limit = {
-			has_country_flag = logisitics_target_slot_1
-		}
-		set_variable = {mission_1_progress_var = 120}	
-	}else_if = {
-		limit = {
-			has_country_flag = sabotage_target_slot_1
-		}
-		set_variable = {mission_1_progress_var = 120}	
-	}else_if = {
-		limit = {
-			has_country_flag = infiltrate_military_slot_1
-		}
-		set_variable = {mission_1_progress_var = 120}	
-	}else_if = {
-		limit = {
-			has_country_flag = undermine_guild_connections_slot_1
-		}
-		set_variable = {mission_1_progress_var = 120}	
-	}else_if = {
-		limit = {
-			has_country_flag = capital_ship_slot_1
-		}
-		set_variable = {mission_1_progress_var = 120}	
-	}else_if = {
-		limit = {
-			has_country_flag = steal_equipment_slot_1
-		}
-		set_variable = {mission_1_progress_var = 120}	
-	}else_if = {
-		limit = {
-			has_country_flag = smuggle_slaves_slot_1
-		}
-		set_variable = {mission_1_progress_var = 120}	
-	}else_if = {
-		limit = {
-			has_country_flag = set_Slaves_free_slot_1
-		}
-		set_variable = {mission_1_progress_var = 120}	
-	}else_if = {
-		limit = {
-			has_country_flag = provoke_slave_revolt_slot_1
-		}
-		set_variable = {mission_1_progress_var = 120}	
-	}else_if = {
-		limit = {
-			has_country_flag = arming_dissidents_slot_1
-		}
-		set_variable = {mission_1_progress_var = 120}	
-	}else_if = {
-		limit = {
-			has_country_flag = plant_sleeper_agent_slot_1
-		}
-		set_variable = {mission_1_progress_var = 120}	
-	}else_if = {
-		limit = {
-			has_country_flag = market_flood_slot_1
-		}
-		set_variable = {mission_1_progress_var = 120}	
-	}else_if = {
-		limit = {
-			has_country_flag = reroute_supply_slot_1
-		}
-		set_variable = {mission_1_progress_var = 120}	
-	}
-}
-find_time_for_espionage_idea_2 = {
-	if = {
-		limit = {
-			has_country_flag = assassinate_slot_2
-		}
-		set_variable = {mission_2_progress_var = 120}
-	}else_if = {
-		limit = {
-			has_country_flag = ransom_slot_2
-		}
-		set_variable = {mission_2_progress_var = 120}	
-	}else_if = {
-		limit = {
-			has_country_flag = army_training_slot_2
-		}
-		set_variable = {mission_2_progress_var = 120}	
-	}else_if = {
-		limit = {
-			has_country_flag = intimidate_senator_slot_2
-		}
-		set_variable = {mission_2_progress_var = 120}	
-	}else_if = {
-		limit = {
-			has_country_flag = cyber_attack_target_slot_2
-		}
-		set_variable = {mission_2_progress_var = 120}	
-	}else_if = {
-		limit = {
-			has_country_flag = steal_blueprint_target_slot_2
-		}
-		set_variable = {mission_2_progress_var = 120}	
-	}else_if = {
-		limit = {
-			has_country_flag = sprout_disease_target_slot_2
-		}
-		set_variable = {mission_2_progress_var = 120}	
-	}else_if = {
-		limit = {
-			has_country_flag = logisitics_target_slot_2
-		}
-		set_variable = {mission_2_progress_var = 120}	
-	}else_if = {
-		limit = {
-			has_country_flag = sabotage_target_slot_2
-		}
-		set_variable = {mission_2_progress_var = 120}	
-	}else_if = {
-		limit = {
-			has_country_flag = infiltrate_military_slot_2
-		}
-		set_variable = {mission_2_progress_var = 120}	
-	}else_if = {
-		limit = {
-			has_country_flag = undermine_guild_connections_slot_2
-		}
-		set_variable = {mission_2_progress_var = 120}	
-	}else_if = {
-		limit = {
-			has_country_flag = capital_ship_slot_2
-		}
-		set_variable = {mission_2_progress_var = 120}	
-	}else_if = {
-		limit = {
-			has_country_flag = steal_equipment_slot_2
-		}
-		set_variable = {mission_2_progress_var = 120}	
-	}else_if = {
-		limit = {
-			has_country_flag = smuggle_slaves_slot_2
-		}
-		set_variable = {mission_2_progress_var = 120}	
-	}else_if = {
-		limit = {
-			has_country_flag = set_Slaves_free_slot_2
-		}
-		set_variable = {mission_2_progress_var = 120}	
-	}else_if = {
-		limit = {
-			has_country_flag = provoke_slave_revolt_slot_2
-		}
-		set_variable = {mission_2_progress_var = 120}	
-	}else_if = {
-		limit = {
-			has_country_flag = arming_dissidents_slot_2
-		}
-		set_variable = {mission_2_progress_var = 120}	
-	}else_if = {
-		limit = {
-			has_country_flag = plant_sleeper_agent_slot_2
-		}
-		set_variable = {mission_2_progress_var = 120}	
-	}else_if = {
-		limit = {
-			has_country_flag = market_flood_slot_2
-		}
-		set_variable = {mission_2_progress_var = 120}	
-	}else_if = {
-		limit = {
-			has_country_flag = reroute_supply_slot_2
-		}
-		set_variable = {mission_2_progress_var = 120}	
-	}
-}
-find_time_for_espionage_idea_3 = {
-	if = {
-		limit = {
-			has_country_flag = assassinate_slot_3
-		}
-		set_variable = {mission_3_progress_var = 120}
-	}else_if = {
-		limit = {
-			has_country_flag = ransom_slot_3
-		}
-		set_variable = {mission_3_progress_var = 120}	
-	}else_if = {
-		limit = {
-			has_country_flag = army_training_slot_3
-		}
-		set_variable = {mission_3_progress_var = 120}	
-	}else_if = {
-		limit = {
-			has_country_flag = intimidate_senator_slot_3
-		}
-		set_variable = {mission_3_progress_var = 120}	
-	}else_if = {
-		limit = {
-			has_country_flag = cyber_attack_target_slot_3
-		}
-		set_variable = {mission_3_progress_var = 120}	
-	}else_if = {
-		limit = {
-			has_country_flag = steal_blueprint_target_slot_3
-		}
-		set_variable = {mission_3_progress_var = 120}	
-	}else_if = {
-		limit = {
-			has_country_flag = sprout_disease_target_slot_3
-		}
-		set_variable = {mission_3_progress_var = 120}	
-	}else_if = {
-		limit = {
-			has_country_flag = logisitics_target_slot_3
-		}
-		set_variable = {mission_3_progress_var = 120}	
-	}else_if = {
-		limit = {
-			has_country_flag = sabotage_target_slot_3
-		}
-		set_variable = {mission_3_progress_var = 120}	
-	}else_if = {
-		limit = {
-			has_country_flag = infiltrate_military_slot_3
-		}
-		set_variable = {mission_3_progress_var = 120}	
-	}else_if = {
-		limit = {
-			has_country_flag = undermine_guild_connections_slot_3
-		}
-		set_variable = {mission_3_progress_var = 120}	
-	}else_if = {
-		limit = {
-			has_country_flag = capital_ship_slot_3
-		}
-		set_variable = {mission_3_progress_var = 120}	
-	}else_if = {
-		limit = {
-			has_country_flag = steal_equipment_slot_3
-		}
-		set_variable = {mission_3_progress_var = 120}	
-	}else_if = {
-		limit = {
-			has_country_flag = smuggle_slaves_slot_3
-		}
-		set_variable = {mission_3_progress_var = 120}	
-	}else_if = {
-		limit = {
-			has_country_flag = set_Slaves_free_slot_3
-		}
-		set_variable = {mission_3_progress_var = 120}	
-	}else_if = {
-		limit = {
-			has_country_flag = provoke_slave_revolt_slot_3
-		}
-		set_variable = {mission_3_progress_var = 120}	
-	}else_if = {
-		limit = {
-			has_country_flag = arming_dissidents_slot_2
-		}
-		set_variable = {mission_3_progress_var = 120}	
-	}else_if = {
-		limit = {
-			has_country_flag = plant_sleeper_agent_slot_3
-		}
-		set_variable = {mission_3_progress_var = 120}	
-	}else_if = {
-		limit = {
-			has_country_flag = market_flood_slot_3
-		}
-		set_variable = {mission_3_progress_var = 120}	
-	}else_if = {
-		limit = {
-			has_country_flag = reroute_supply_slot_3
-		}
-		set_variable = {mission_3_progress_var = 120}	
-	}
+
+agent_recruitment_agent_1 = { ## ALL FEEDS UP TO create_temporary_agents EFFECT
+	set_temp_variable = {agent_identifier = 1} ## HOLDS PUT ONE HIGHER THEN LAST EFFECT
+	set_temp_variable = {agent_portrait = token:agent_1_portrait} ## THIS IS THE GFX HOLDER FOR THE PORTRAIT
+	set_temp_variable = {agent_name = token:agent_1_name} ## HOLDS NAME LOCALISATION
+	set_temp_variable = {agent_charisma = 10} 
+	set_temp_variable = {agent_intelligence = 10}
+	set_temp_variable = {agent_martial = 10}
+	set_temp_variable = {personality_trait = token:cautious_trait} ## LOOK AT ESPIONAGE_TOKENS FOR TRAITS
+	set_temp_variable = {class_trait = token:smuggler_trait} ## LOOK AT ESPIONAGE_TOKENS FOR TRAITS
+	set_temp_variable = {race_trait = token:bothan_trait} ## LOOK AT ESPIONAGE_TOKENS FOR TRAITS, RACE TRAIT IS NOT NEEDED YOU CAN IGNORE THIS
 }

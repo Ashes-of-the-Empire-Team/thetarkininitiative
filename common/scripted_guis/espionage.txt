@@ -1,5 +1,5 @@
 scripted_gui = {
-	operations_missions = {            ########## THIS ENTIRE THING IS UNNEEDSLY COMPLICATED, IF YOU WANT TO CHANGE THIS GOOD LUCK
+	operations_missions = {
 		context_type = player_context
 		window_name = "operations_missions"
 		parent_window_name = countryintelligenceagencyview
@@ -9,91 +9,22 @@ scripted_gui = {
 		}
 		triggers = {
 			espionage_missions_1_initiate_click_enabled = {
-				has_country_flag = slot_1_filled
-            	NOT = {
-            		OR = {
-            			has_variable = agent_in_mission_1
-            			AND = {
-            				check_variable = {Selected_operative_1 = 0}
-		            		OR = {
-			            		check_variable = {agent_operation_slot_1 = agent_in_mission_1}
-			            		check_variable = {agent_operation_slot_1 = agent_in_mission_2}
-			            	}
-            			}
-            			AND =  {
-            				check_variable = {Selected_operative_1 = 1}
-		            		OR = {
-			            		check_variable = {agent_operation_slot_2 = agent_in_mission_1}
-			            		check_variable = {agent_operation_slot_2 = agent_in_mission_2}
-			            	}
-            			}
-            			AND = {
-            				check_variable = {Selected_operative_1 = 2}
-            				OR = {
-			            		check_variable = {agent_operation_slot_3 = agent_in_mission_1}
-			            		check_variable = {agent_operation_slot_3 = agent_in_mission_2}
-			            	}
-            			}
-	            	}
-            	}
+				has_variable = espionage_mission_description_token_1
+				NOT = {
+					has_idea = espionage_mission_1_progress
+				}
 			}
 			espionage_missions_2_initiate_click_enabled = {
-				has_country_flag = slot_2_filled
-            	NOT = {
-            		OR = {
-            			has_variable = agent_in_mission_2
-            			AND = {
-            				check_variable = {Selected_operative_2 = 0}
-		            		OR = {
-			            		check_variable = {agent_operation_slot_1 = agent_in_mission_1}
-			            		check_variable = {agent_operation_slot_1 = agent_in_mission_2}
-			            	}
-            			}
-            			AND =  {
-            				check_variable = {Selected_operative_2 = 1}
-		            		OR = {
-			            		check_variable = {agent_operation_slot_2 = agent_in_mission_1}
-			            		check_variable = {agent_operation_slot_2 = agent_in_mission_2}
-			            	}
-            			}
-            			AND = {
-            				check_variable = {Selected_operative_2 = 2}
-            				OR = {
-			            		check_variable = {agent_operation_slot_3 = agent_in_mission_1}
-			            		check_variable = {agent_operation_slot_3 = agent_in_mission_2}
-			            	}
-            			}
-	            	}
-            	}
+				has_variable = espionage_mission_description_token_2
+				NOT = {
+					has_idea = espionage_mission_2_progress
+				}
 			}
             espionage_missions_3_initiate_click_enabled = {
-				has_country_flag = slot_3_filled
-            	NOT = {
-            		OR = {
-            			has_variable = agent_in_mission_3
-            			AND = {
-            				check_variable = {Selected_operative_3 = 0}
-		            		OR = {
-			            		check_variable = {agent_operation_slot_1 = agent_in_mission_1}
-			            		check_variable = {agent_operation_slot_1 = agent_in_mission_2}
-			            	}
-            			}
-            			AND =  {
-            				check_variable = {Selected_operative_3 = 1}
-		            		OR = {
-			            		check_variable = {agent_operation_slot_2 = agent_in_mission_1}
-			            		check_variable = {agent_operation_slot_2 = agent_in_mission_2}
-			            	}
-            			}
-            			AND = {
-            				check_variable = {Selected_operative_3 = 2}
-            				OR = {
-			            		check_variable = {agent_operation_slot_3 = agent_in_mission_1}
-			            		check_variable = {agent_operation_slot_3 = agent_in_mission_2}
-			            	}
-            			}
-	            	}
-            	}
+				has_variable = espionage_mission_description_token_3
+				NOT = {
+					has_idea = espionage_mission_3_progress
+				}
             }
 		}
 		effects = {
@@ -133,173 +64,40 @@ scripted_gui = {
 			espionage_missions_3_scrap_click = {
 				scrap_espionage_mission_3 = yes
 			}
-			select_operative_increase_1_button_click = {
-				if = {
-					limit = {
-						check_variable = {Selected_operative_1 = 2}
-					}
-					set_variable = {Selected_operative_1 = 0}
-				}else = {
-					add_to_variable = {Selected_operative_1 = 1}
-				}
-			}
-			select_operative_decrease_1_button_click = {
-				if = {
-					limit = {
-						check_variable = {Selected_operative_1 = 0}
-					}
-					set_variable = {Selected_operative_1 = 2}
-				}else = {
-					subtract_from_variable = {Selected_operative_1 = 1}
-				}
-			}
-			select_operative_increase_2_button_click = {
-				if = {
-					limit = {
-						check_variable = {Selected_operative_2 = 2}
-					}
-					set_variable = {Selected_operative_2 = 0}
-				}else = {
-					add_to_variable  = {Selected_operative_2 = 1}
-				}
-			}
-			select_operative_decrease_2_button_click = {
-				if = {
-					limit = {
-						check_variable = {Selected_operative_2 = 0}
-					}
-					set_variable = {Selected_operative_2 = 2}
-				}else = {
-					subtract_from_variable = {Selected_operative_2 = 1}
-				}
-			}
-			select_operative_increase_3_button_click = {
-				if = {
-					limit = {
-						check_variable = {Selected_operative_3 = 2}
-					}
-					set_variable = {Selected_operative_3 = 0}
-				}else = {
-					add_to_variable  = {Selected_operative_3 = 1}
-				}
-			}
-			select_operative_decrease_3_button_click = {
-				if = {
-					limit = {
-						check_variable = {Selected_operative_3= 0}
-					}
-					set_variable = {Selected_operative_3 = 2}
-				}else = {
-					subtract_from_variable = {Selected_operative_3 = 1}
-				}
-			}
 			espionage_missions_1_initiate_click = {
-				if = {
-					limit = {
-						check_variable = {Selected_operative_1 = 0}
-					}
-					set_variable = {agent_in_mission_1 = agent_operation_slot_1}
-					find_time_for_espionage_idea_1 = yes
-					add_timed_idea = {
-						idea = espionage_mission_1_progress
-						days = mission_1_progress_var
-					}
-					set_variable = { mission_1_progress_var = 0 }
-				}else_if = {
-					limit = {
-						check_variable = {Selected_operative_1 = 1}
-					}
-					set_variable = {agent_in_mission_1 = agent_operation_slot_2}
-					find_time_for_espionage_idea_1 = yes
-					add_timed_idea = {
-						idea = espionage_mission_1_progress
-						days = mission_1_progress_var
-					}
-					set_variable = { mission_1_progress_var = 0 }
-				}else_if = {
-					limit = {
-						check_variable = {Selected_operative_1 = 2}
-					}
-					set_variable = {agent_in_mission_1 = agent_operation_slot_3}
-					find_time_for_espionage_idea_1 = yes
-					add_timed_idea = {
-						idea = espionage_mission_1_progress
-						days = mission_1_progress_var
-					}
-					set_variable = { mission_1_progress_var = 0 }
-				}
+				add_ideas = espionage_mission_1_progress
 			}
 			espionage_missions_2_initiate_click = {
-				if = {
-					limit = {
-						check_variable = {Selected_operative_2 = 0}
-					}
-					set_variable = {agent_in_mission_2 = agent_operation_slot_1}
-					find_time_for_espionage_idea_2 = yes
-					add_timed_idea = {
-						idea = espionage_mission_2_progress
-						days = mission_2_progress_var
-					}
-					set_variable = { mission_2_progress_var = 0 }
-				}else_if = {
-					limit = {
-						check_variable = {Selected_operative_2 = 1}
-					}
-					set_variable = {agent_in_mission_2 = agent_operation_slot_2}
-					find_time_for_espionage_idea_2 = yes
-					add_timed_idea = {
-						idea = espionage_mission_2_progress
-						days = mission_2_progress_var
-					}
-					set_variable = { mission_2_progress_var = 0 }
-				}else_if = {
-					limit = {
-						check_variable = {Selected_operative_2 = 2}
-					}
-					set_variable = {agent_in_mission_2 = agent_operation_slot_3}
-					find_time_for_espionage_idea_2 = yes
-					add_timed_idea = {
-						idea = espionage_mission_2_progress
-						days = mission_2_progress_var
-					}
-					set_variable = { mission_2_progress_var = 0 }
-				}
+				add_ideas = espionage_mission_2_progress
 			}
 			espionage_missions_3_initiate_click = {
-				if = {
-					limit = {
-						check_variable = {Selected_operative_3 = 0}
-					}
-					set_variable = {agent_in_mission_3 = agent_operation_slot_1}
-					find_time_for_espionage_idea_3 = yes
-					add_timed_idea = {
-						idea = espionage_mission_3_progress
-						days = mission_3_progress_var
-					}
-					set_variable = { mission_3_progress_var = 0 }
-				}else_if = {
-					limit = {
-						check_variable = {Selected_operative_3 = 1}
-					}
-					set_variable = {agent_in_mission_3 = agent_operation_slot_2}
-					find_time_for_espionage_idea_3 = yes
-					add_timed_idea = {
-						idea = espionage_mission_3_progress
-						days = mission_3_progress_var
-					}
-					set_variable = { mission_3_progress_var = 0 }
-				}else_if = {
-					limit = {
-						check_variable = {Selected_operative_3 = 2}
-					}
-					set_variable = {agent_in_mission_3 = agent_operation_slot_3}
-					find_time_for_espionage_idea_3 = yes
-					add_timed_idea = {
-						idea = espionage_mission_3_progress
-						days = mission_3_progress_var
-					}
-					set_variable = { mission_3_progress_var = 0 }
-				}
+				add_ideas = espionage_mission_3_progress
+			}
+
+			espionage_agent_recruitment_1 = {
+				set_country_flag = agent_recruitment_screen_open
+				set_variable = {what_espionage_slot = 1}
+				create_temporary_agents = yes
+			}
+			espionage_agent_recruitment_2 = {
+				set_country_flag = agent_recruitment_screen_open
+				set_variable = {what_espionage_slot = 2}
+				create_temporary_agents = yes
+			}
+			espionage_agent_recruitment_3 = {
+				set_country_flag = agent_recruitment_screen_open
+				set_variable = {what_espionage_slot = 3}
+				create_temporary_agents = yes
+			}
+			espionage_agent_recruitment_4 = {
+				set_country_flag = agent_recruitment_screen_open
+				set_variable = {what_espionage_slot = 4}
+				create_temporary_agents = yes
+			}
+			espionage_agent_recruitment_5 = {
+				set_country_flag = agent_recruitment_screen_open
+				set_variable = {what_espionage_slot = 5}
+				create_temporary_agents = yes
 			}
 		}
 		properties = {
@@ -330,14 +128,158 @@ scripted_gui = {
 			mission_3_progress_bar = {
 				frame = mission_3_progress_var
 			}
-			character_small_guild_logo_1 = {
-				image = "[get_agent_guild_logo_1]"
+		}
+	}
+	operation_mission_selection = {
+		context_type = player_context
+        parent_window_name = "operations_missions"
+        window_name = "espionage_mission_selection"
+		visible = {
+            #has_country_flag = operations_open
+			always = no
+		}
+		effects = {
+			background_box_click = {
+				if = {
+					limit = {
+						has_country_flag = operation_selection_slot_1
+					}
+					set_variable = {mission_identifier_1 = i}
+					meta_effect = {
+						text = {
+							set_variable = { espionage_mission_title_token_1 = token:espionage_mission_[MISSION_IDENTIFIER] }
+							set_variable = { espionage_mission_phase_token_1_1 = token:espionage_mission_[MISSION_IDENTIFIER]_description }
+							set_variable = { espionage_mission_phase_token_1_2 = token:espionage_mission_[MISSION_IDENTIFIER]_description } 
+							set_variable = { espionage_mission_phase_token_1_3 = token:espionage_mission_[MISSION_IDENTIFIER]_description } 
+							set_variable = { espionage_mission_reward_token_1 = token:espionage_mission_[MISSION_IDENTIFIER]_description } 
+						}
+						MISSION_IDENTIFIER = "[?mission_identifier_1]"
+					}
+				}else_if = {
+					limit = {
+						has_country_flag = operation_selection_slot_2
+					}
+					set_variable = {mission_identifier_2 = i}
+					meta_effect = {
+						text = {
+							set_variable = { espionage_mission_title_token_2 = token:espionage_mission_[MISSION_IDENTIFIER] }
+							set_variable = { espionage_mission_phase_token_2_1 = token:espionage_mission_[MISSION_IDENTIFIER]_description }
+							set_variable = { espionage_mission_phase_token_2_2 = token:espionage_mission_[MISSION_IDENTIFIER]_description } 
+							set_variable = { espionage_mission_phase_token_2_3 = token:espionage_mission_[MISSION_IDENTIFIER]_description } 
+							set_variable = { espionage_mission_reward_token_2 = token:espionage_mission_[MISSION_IDENTIFIER]_description } 
+						}
+						MISSION_IDENTIFIER = "[?mission_identifier_2]"
+					}
+				}else_if = {
+					limit = {
+						has_country_flag = operation_selection_slot_1
+					}
+					set_variable = {mission_identifier_3 = i}
+					meta_effect = {
+						text = {
+							set_variable = { espionage_mission_title_token_3 = token:espionage_mission_[MISSION_IDENTIFIER] }
+							set_variable = { espionage_mission_phase_token_3_1 = token:espionage_mission_[MISSION_IDENTIFIER]_description }
+							set_variable = { espionage_mission_phase_token_3_2 = token:espionage_mission_[MISSION_IDENTIFIER]_description } 
+							set_variable = { espionage_mission_phase_token_3_3 = token:espionage_mission_[MISSION_IDENTIFIER]_description } 
+							set_variable = { espionage_mission_reward_token_3 = token:espionage_mission_[MISSION_IDENTIFIER]_description } 
+						}
+						MISSION_IDENTIFIER = "[?mission_identifier_3]"
+					}
+				}else_if = {
+					limit = {
+						has_country_flag = operation_selection_slot_1
+					}
+					set_variable = {mission_identifier_4 = i}
+					meta_effect = {
+						text = {
+							set_variable = { espionage_mission_title_token_4 = token:espionage_mission_[MISSION_IDENTIFIER] }
+							set_variable = { espionage_mission_phase_token_4_1 = token:espionage_mission_[MISSION_IDENTIFIER]_description }
+							set_variable = { espionage_mission_phase_token_4_2 = token:espionage_mission_[MISSION_IDENTIFIER]_description } 
+							set_variable = { espionage_mission_phase_token_4_3 = token:espionage_mission_[MISSION_IDENTIFIER]_description } 
+							set_variable = { espionage_mission_reward_token_4 = token:espionage_mission_[MISSION_IDENTIFIER]_description } 
+						}
+						MISSION_IDENTIFIER = "[?mission_identifier_4]"
+					}
+				}else_if = {
+					limit = {
+						has_country_flag = operation_selection_slot_1
+					}
+					set_variable = {mission_identifier_5 = i}
+					meta_effect = {
+						text = {
+							set_variable = { espionage_mission_title_token_5 = token:espionage_mission_[MISSION_IDENTIFIER] }
+							set_variable = { espionage_mission_phase_token_5_1 = token:espionage_mission_[MISSION_IDENTIFIER]_description }
+							set_variable = { espionage_mission_phase_token_5_2 = token:espionage_mission_[MISSION_IDENTIFIER]_description } 
+							set_variable = { espionage_mission_phase_token_5_3 = token:espionage_mission_[MISSION_IDENTIFIER]_description } 
+							set_variable = { espionage_mission_reward_token_5 = token:espionage_mission_[MISSION_IDENTIFIER]_description } 
+						}
+						MISSION_IDENTIFIER = "[?mission_identifier_5]"
+					}
+				}
 			}
-			character_small_guild_logo_2 = {
-				image = "[get_agent_guild_logo_2]"
+		}
+
+		dynamic_lists = {
+            mission_gridbox = {
+                array = global.Espionage_token_array
+                entry_container = espionage_mission_boxes
+                change_scope = no
+            }
+        }
+	}
+	agent_recruitment_screen = {
+		context_type = player_context
+        parent_window_name = "operations_missions"
+        window_name = "agent_recruitment_screen"
+		visible = {
+            has_country_flag = agent_recruitment_screen_open
+		}
+		select_agent_1 = {
+			meta_effect = {
+				text = {
+					set_variable = { agent_identifier_slot_[WHAT_SLOT_IT_IS]  = agent_identifier_temporary_agent_1} 
+					set_variable = { agent_portrait_slot_[WHAT_SLOT_IT_IS]  = agent_portrait_temporary_agent_1} 
+					set_variable = { agent_name_slot_[WHAT_SLOT_IT_IS]  = agent_name_temporary_agent_1} 
+					set_variable = { agent_charisma_slot_[WHAT_SLOT_IT_IS]  = agent_charisma_temporary_agent_1} 
+					set_variable = { agent_intelligence_slot_[WHAT_SLOT_IT_IS]  = agent_intelligence_temporary_agent_1} 
+					set_variable = { agent_martial_slot_[WHAT_SLOT_IT_IS]  = agent_martial_temporary_agent_1} 
+					set_variable = { personality_trait_slot_[WHAT_SLOT_IT_IS]  = personality_trait_temporary_agent_1} 
+					set_variable = { class_trait_slot_[WHAT_SLOT_IT_IS]  = class_trait_temporary_agent_1} 
+					set_variable = { race_trait_slot_[WHAT_SLOT_IT_IS]  = race_trait_temporary_agent_1}
+				}
+				WHAT_SLOT_IT_IS = "[?what_espionage_slot]"
 			}
-			character_small_guild_logo_3 = {
-				image = "[get_agent_guild_logo_3]"
+		}
+		select_agent_2 = {
+			meta_effect = {
+				text = {
+					set_variable = { agent_identifier_slot_[WHAT_SLOT_IT_IS]  = agent_identifier_temporary_agent_2} 
+					set_variable = { agent_portrait_slot_[WHAT_SLOT_IT_IS]  = agent_portrait_temporary_agent_2} 
+					set_variable = { agent_name_slot_[WHAT_SLOT_IT_IS]  = agent_name_temporary_agent_2} 
+					set_variable = { agent_charisma_slot_[WHAT_SLOT_IT_IS]  = agent_charisma_temporary_agent_2} 
+					set_variable = { agent_intelligence_slot_[WHAT_SLOT_IT_IS]  = agent_intelligence_temporary_agent_2} 
+					set_variable = { agent_martial_slot_[WHAT_SLOT_IT_IS]  = agent_martial_temporary_agent_2} 
+					set_variable = { personality_trait_slot_[WHAT_SLOT_IT_IS]  = personality_trait_temporary_agent_2} 
+					set_variable = { class_trait_slot_[WHAT_SLOT_IT_IS]  = class_trait_temporary_agent_2} 
+					set_variable = { race_trait_slot_[WHAT_SLOT_IT_IS]  = race_trait_temporary_agent_2}
+				}
+				WHAT_SLOT_IT_IS = "[?what_espionage_slot]"
+			}
+		}
+		select_agent_3 = {
+			meta_effect = {
+				text = {
+					set_variable = { agent_identifier_slot_[WHAT_SLOT_IT_IS]  = agent_identifier_temporary_agent_3} 
+					set_variable = { agent_portrait_slot_[WHAT_SLOT_IT_IS]  = agent_portrait_temporary_agent_3} 
+					set_variable = { agent_name_slot_[WHAT_SLOT_IT_IS]  = agent_name_temporary_agent_3} 
+					set_variable = { agent_charisma_slot_[WHAT_SLOT_IT_IS]  = agent_charisma_temporary_agent_3} 
+					set_variable = { agent_intelligence_slot_[WHAT_SLOT_IT_IS]  = agent_intelligence_temporary_agent_3} 
+					set_variable = { agent_martial_slot_[WHAT_SLOT_IT_IS]  = agent_martial_temporary_agent_3} 
+					set_variable = { personality_trait_slot_[WHAT_SLOT_IT_IS]  = personality_trait_temporary_agent_3} 
+					set_variable = { class_trait_slot_[WHAT_SLOT_IT_IS]  = class_trait_temporary_agent_3} 
+					set_variable = { race_trait_slot_[WHAT_SLOT_IT_IS]  = race_trait_temporary_agent_3}
+				}
+				WHAT_SLOT_IT_IS = "[?what_espionage_slot]"
 			}
 		}
 	}
