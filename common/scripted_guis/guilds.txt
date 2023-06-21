@@ -42,445 +42,445 @@ scripted_gui = {
 			}
 		}
 	}
-	guild_screen = {
-		context_type = player_context
-		window_name = "guild_screen"
-		parent_window_name = countryintelligenceagencyview
-		visible = {
-            #has_country_flag = guilds_open
-			always = no
+	# guild_screen = {
+	# 	context_type = player_context
+	# 	window_name = "guild_screen"
+	# 	parent_window_name = countryintelligenceagencyview
+	# 	visible = {
+    #         #has_country_flag = guilds_open
+	# 		always = no
 
-		}
-		effects = {
-			bounty_hunters_click = {
-				if = {
-					limit = {
-						has_country_flag = guild_side_bar_opened
-						has_country_flag = bounty_hunter_side_screen
-					}
-					clr_country_flag = guild_side_bar_opened
-					clear_side_guild_screen_flags = yes
-				}
-				else_if = {
-					clear_side_guild_screen_flags = yes
-					set_country_flag = bounty_hunter_side_screen
-					set_country_flag = guild_side_bar_opened
-				}
-			}
-			smugglers_click = {
-				if = {
-					limit = {
-						has_country_flag = guild_side_bar_opened
-						has_country_flag = smugglers_side_screen
-					}
-					clr_country_flag = guild_side_bar_opened
-					clear_side_guild_screen_flags = yes
-				}else_if = {
-					clear_side_guild_screen_flags = yes
-					set_country_flag = smugglers_side_screen
-					set_country_flag = guild_side_bar_opened
-				}
-			}
-			technicians_click = {
-				if = {
-					limit = {
-						has_country_flag = guild_side_bar_opened
-						has_country_flag = technicians_side_screen
-					}
-					clr_country_flag = guild_side_bar_opened
-					clear_side_guild_screen_flags = yes
-				}else_if = {
-					clear_side_guild_screen_flags = yes
-					set_country_flag = technicians_side_screen
-					set_country_flag = guild_side_bar_opened
-				}
-			}
-			spynet_click = {
-				if = {
-					limit = {
-						has_country_flag = guild_side_bar_opened
-						has_country_flag = spynet_side_screen
-					}
-					clr_country_flag = guild_side_bar_opened
-					clear_side_guild_screen_flags = yes
-				}else_if = {
-					clear_side_guild_screen_flags = yes
-					set_country_flag = spynet_side_screen
-					set_country_flag = guild_side_bar_opened
-				}
-			}
-			counter_intelligence_click = {
-				if = {
-					limit = {
-						has_country_flag = guild_side_bar_opened
-						has_country_flag = counter_intelligence_side_screen
-					}
-					clr_country_flag = guild_side_bar_opened
-					clear_side_guild_screen_flags = yes
-				}else_if = {
-					clear_side_guild_screen_flags = yes
-					set_country_flag = counter_intelligence_side_screen
-					set_country_flag = guild_side_bar_opened
-				}
-			}
-		}
-		triggers = {
-			spynet_visible = {
-				OR = {
-					AND = {
-						has_global_flag = bothan_spynet_allowed
-						has_government = democratic
-					}
-					has_government = imperial
-					original_tag = BOT
-				}
-			}
-			spynet_loyalty_visible = {
-				OR = {
-					AND = {
-						has_global_flag = bothan_spynet_allowed
-						has_government = democratic
-					}
-					has_government = imperial
-					original_tag = BOT
-				}
-			}
-			counter_intelligence_visible = {
-				OR = {
-					AND = {
-						has_global_flag = alpha_blue_allowed
-						has_government = democratic
-					}
-					has_government = imperial
-				}
-			}
-			jedi_visible = {
-				OR = {
-					has_country_flag = jedi_order
-					has_country_flag = sith_order
-				}
-			}
-			counter_intelligence_loyalty_visible = {
-				AND = {
-					has_global_flag = alpha_blue_allowed
-					has_government = democratic
-				}
-				has_government = imperial
-			}
-			jedi_loyalty_visible = {
-				OR = {
-					has_country_flag = jedi_order
-					has_country_flag = sith_order
-				}
-			}
-		}
-		properties = {
-			spynet = {
-				image = "[Getspy_guild_pic]"
-			}
-			counter_intelligence = {
-				image = "[Get4th_guild_pic]"
-			}
-			jedi = {
-				image = "[Get5th_guild_pic]"
-			}
-		}
-	}
-	guild_side_bar_screen_bounty_hunter = {
-		context_type = player_context
-		window_name = "guild_bounty_hunter_side_screen"
-		parent_window_name = guild_screen
-		visible = {
-            has_country_flag = guild_side_bar_opened
-            has_country_flag = guilds_open
-            has_country_flag = bounty_hunter_side_screen
-		}
-		effects = {
-			recruit_agent_button_click = {
-				Agent_generator_main = yes
-				subtract_from_variable = { currency_amount^primary_currency = 20 }
-			}
-			large_button_1_box_click = {
-				add_ideas = bounty_hunters_benfit_1
-			}
-			small_button_1_left_box_click = {
-				add_ideas = bounty_hunters_benfit_2_1
-			}
-			small_button_1_right_box_click = {
-				add_ideas = bounty_hunters_benfit_2_2
-			}
-			small_button_2_left_box_click = {
-				add_ideas = bounty_hunters_benfit_3_1
-			}
-			small_button_2_right_box_click = {
-				add_ideas = bounty_hunters_benfit_3_2
-			}
-			large_button_2_box_click = {
-				add_ideas = bounty_hunters_benfit_4
-			}
-		}
-		properties = {
-			Agent_portrait_guild_bounty_hunter = {
-				image = "[get_espionage_agent_side_screen_bounty_hunter]"
-			}
-		}
-		triggers = {
-			recruit_agent_button_click_enabled = {
-				NOT = {
-					OR = {
-						AND = {
-							has_country_flag = bounty_hunter_side_screen
-							has_variable = bounty_hunter_agent_portrait
-						}
-						AND = {
-							has_variable = agent_operation_slot_1 
-							has_variable = agent_operation_slot_2
-							has_variable = agent_operation_slot_3
-						}
-					}
-				}
-			}
-		}
-	}
-	guild_side_bar_screen_technicians = {
-		context_type = player_context
-		window_name = "guild_technicians_side_screen"
-		parent_window_name = guild_screen
-		visible = {
-            has_country_flag = guild_side_bar_opened
-            has_country_flag = guilds_open
-            has_country_flag = technicians_side_screen
-		}
-		effects = {
-			recruit_agent_button_click = {
-				Agent_generator_main = yes
-				subtract_from_variable = { currency_amount^primary_currency = 20 }
-			}
-			large_button_1_box_click = {
-				add_ideas = technicians_benfit_1
-			}
-			small_button_1_left_box_click = {
-				add_ideas = technicians_benfit_2_1
-			}
-			small_button_1_right_box_click = {
-				add_ideas = technicians_benfit_2_2
-			}
-			small_button_2_left_box_click = {
-				add_ideas = technicians_benfit_3_1
-			}
-			small_button_2_right_box_click = {
-				add_ideas = technicians_benfit_3_2
-			}
-			large_button_2_box_click = {
-				add_ideas = technicians_benfit_4
-			}
-		}
-		properties = {
-			Agent_portrait_guild_technicians = {
-				image = "[get_espionage_agent_side_screen_technicians]"
-			}
-		}
-		triggers = {
-			recruit_agent_button_click_enabled = {
-				NOT = {
-					OR = {
-						AND = {
-							has_country_flag = technicians_side_screen
-							has_variable = technicians_agent_portrait
-						}
-						AND = {
-							has_variable = agent_operation_slot_1 
-							has_variable = agent_operation_slot_2
-							has_variable = agent_operation_slot_3
-						}
-					}
-				}
-			}
-		}
-	}
-	guild_side_bar_screen_counter_intelligence = {
-		context_type = player_context
-		window_name = "guild_counter_intelligence_side_screen"
-		parent_window_name = guild_screen
-		visible = {
-            has_country_flag = guild_side_bar_opened
-            has_country_flag = guilds_open
-            has_country_flag = counter_intelligence_side_screen
-		}
-		effects = {
-			recruit_agent_button_click = {
-				Agent_generator_main = yes
-				subtract_from_variable = { currency_amount^primary_currency = 20 }
-			}
-			large_button_1_box_click = {
-				add_ideas = counter_intelligences_benfit_1
-			}
-			small_button_1_left_box_click = {
-				add_ideas = counter_intelligences_benfit_2_1
-			}
-			small_button_1_right_box_click = {
-				add_ideas = counter_intelligences_benfit_2_2
-			}
-			small_button_2_left_box_click = {
-				add_ideas = counter_intelligences_benfit_3_1
-			}
-			small_button_2_right_box_click = {
-				add_ideas = counter_intelligences_benfit_3_2
-			}
-			large_button_2_box_click = {
-				add_ideas = counter_intelligences_benfit_4
-			}
-		}
-		properties = {
-			Agent_portrait_guild_counter_intelligence = {
-				image = "[get_espionage_agent_side_screen_counter_intelligence]"
-			}
-		}
-		triggers = {
-			recruit_agent_button_click_enabled = {
-				NOT = {
-					OR = {
-						AND = {
-							has_country_flag = counter_intelligence_side_screen
-							has_variable = counter_intelligence_agent_portrait
-						}
-						AND = {
-							has_variable = agent_operation_slot_1 
-							has_variable = agent_operation_slot_2
-							has_variable = agent_operation_slot_3
-						}
-					}
-				}
-			}
-		}
-	}
-	guild_side_bar_screen_spynet = {
-		context_type = player_context
-		window_name = "guild_spynet_side_screen"
-		parent_window_name = guild_screen
-		visible = {
-            has_country_flag = guild_side_bar_opened
-            has_country_flag = guilds_open
-            has_country_flag = spynet_side_screen
-		}
-		effects = {
-			recruit_agent_button_click = {
-				Agent_generator_main = yes
-				subtract_from_variable = { currency_amount^primary_currency = 20 }
-			}
-			large_button_1_box_click = {
-				add_ideas = spynets_benfit_1
-			}
-			small_button_1_left_box_click = {
-				add_ideas = spynets_benfit_2_1
-			}
-			small_button_1_right_box_click = {
-				add_ideas = spynets_benfit_2_2
-			}
-			small_button_2_left_box_click = {
-				add_ideas = spynets_benfit_3_1
-			}
-			small_button_2_right_box_click = {
-				add_ideas = spynets_benfit_3_2
-			}
-			large_button_2_box_click = {
-				add_ideas = spynets_benfit_4
-			}
-		}
-		properties = {
-			Agent_portrait_guild_spynet = {
-				image = "[get_espionage_agent_side_screen_spynet]"
-			}
-		}
-		triggers = {
-			recruit_agent_button_click_enabled = {
-				NOT = {
-					OR = {
-						AND = {
-							has_country_flag = spynet_side_screen
-							has_variable = spynet_agent_portrait
-						}
-						AND = {
-							has_variable = agent_operation_slot_1 
-							has_variable = agent_operation_slot_2
-							has_variable = agent_operation_slot_3
-						}
-					}
-				}
-			}
-		}
-	}
-	guild_side_bar_screen_smugglers = {
-		context_type = player_context
-		window_name = "guild_smugglers_side_screen"
-		parent_window_name = guild_screen
-		visible = {
-            has_country_flag = guild_side_bar_opened
-            has_country_flag = guilds_open
-            has_country_flag = smugglers_side_screen
-		}
-		effects = {
-			recruit_agent_button_click = {
-				Agent_generator_main = yes
-				subtract_from_variable = { currency_amount^primary_currency = 20 }
-			}
-			large_button_1_box_click = {
-				add_ideas = smugglers_benfit_1
-			}
-			small_button_1_left_box_click = {
-				add_ideas = smugglers_benfit_2_1
-			}
-			small_button_1_right_box_click = {
-				add_ideas = smugglers_benfit_2_2
-			}
-			small_button_2_left_box_click = {
-				add_ideas = smugglers_benfit_3_1
-			}
-			small_button_2_right_box_click = {
-				add_ideas = smugglers_benfit_3_2
-			}
-			large_button_2_box_click = {
-				add_ideas = smugglers_benfit_4
-			}
-		}
-		properties = {
-			Agent_portrait_guild_smugglers = {
-				image = "[get_espionage_agent_side_screen_smugglers]"
-			}
-		}
-		triggers = {
-			recruit_agent_button_click_enabled = {
-				NOT = {
-					OR = {
-						AND = {
-							has_country_flag = bounty_hunter_side_screen
-							has_variable = bounty_hunter_agent_portrait
-						}
-						AND = {
-							has_country_flag = technicians_side_screen
-							has_variable = technicians_agent_portrait
-						}
-						AND = {
-							has_country_flag = counter_intelligence_side_screen
-							has_variable = counter_intelligence_agent_portrait
-						}
-						AND = {
-							has_country_flag = spynet_side_screen
-							has_variable = spynet_agent_portrait
-						}
-						AND = {
-							has_country_flag = smugglers_side_screen
-							has_variable = smugglers_agent_portrait
-						}
-						AND = {
-							has_variable = agent_operation_slot_1 
-							has_variable = agent_operation_slot_2
-							has_variable = agent_operation_slot_3
-						}
-					}
-				}
-			}
-		}
-	}
+	# 	}
+	# 	effects = {
+	# 		bounty_hunters_click = {
+	# 			if = {
+	# 				limit = {
+	# 					has_country_flag = guild_side_bar_opened
+	# 					has_country_flag = bounty_hunter_side_screen
+	# 				}
+	# 				clr_country_flag = guild_side_bar_opened
+	# 				clear_side_guild_screen_flags = yes
+	# 			}
+	# 			else_if = {
+	# 				clear_side_guild_screen_flags = yes
+	# 				set_country_flag = bounty_hunter_side_screen
+	# 				set_country_flag = guild_side_bar_opened
+	# 			}
+	# 		}
+	# 		smugglers_click = {
+	# 			if = {
+	# 				limit = {
+	# 					has_country_flag = guild_side_bar_opened
+	# 					has_country_flag = smugglers_side_screen
+	# 				}
+	# 				clr_country_flag = guild_side_bar_opened
+	# 				clear_side_guild_screen_flags = yes
+	# 			}else_if = {
+	# 				clear_side_guild_screen_flags = yes
+	# 				set_country_flag = smugglers_side_screen
+	# 				set_country_flag = guild_side_bar_opened
+	# 			}
+	# 		}
+	# 		technicians_click = {
+	# 			if = {
+	# 				limit = {
+	# 					has_country_flag = guild_side_bar_opened
+	# 					has_country_flag = technicians_side_screen
+	# 				}
+	# 				clr_country_flag = guild_side_bar_opened
+	# 				clear_side_guild_screen_flags = yes
+	# 			}else_if = {
+	# 				clear_side_guild_screen_flags = yes
+	# 				set_country_flag = technicians_side_screen
+	# 				set_country_flag = guild_side_bar_opened
+	# 			}
+	# 		}
+	# 		spynet_click = {
+	# 			if = {
+	# 				limit = {
+	# 					has_country_flag = guild_side_bar_opened
+	# 					has_country_flag = spynet_side_screen
+	# 				}
+	# 				clr_country_flag = guild_side_bar_opened
+	# 				clear_side_guild_screen_flags = yes
+	# 			}else_if = {
+	# 				clear_side_guild_screen_flags = yes
+	# 				set_country_flag = spynet_side_screen
+	# 				set_country_flag = guild_side_bar_opened
+	# 			}
+	# 		}
+	# 		counter_intelligence_click = {
+	# 			if = {
+	# 				limit = {
+	# 					has_country_flag = guild_side_bar_opened
+	# 					has_country_flag = counter_intelligence_side_screen
+	# 				}
+	# 				clr_country_flag = guild_side_bar_opened
+	# 				clear_side_guild_screen_flags = yes
+	# 			}else_if = {
+	# 				clear_side_guild_screen_flags = yes
+	# 				set_country_flag = counter_intelligence_side_screen
+	# 				set_country_flag = guild_side_bar_opened
+	# 			}
+	# 		}
+	# 	}
+	# 	triggers = {
+	# 		spynet_visible = {
+	# 			OR = {
+	# 				AND = {
+	# 					has_global_flag = bothan_spynet_allowed
+	# 					has_government = democratic
+	# 				}
+	# 				has_government = imperial
+	# 				original_tag = BOT
+	# 			}
+	# 		}
+	# 		spynet_loyalty_visible = {
+	# 			OR = {
+	# 				AND = {
+	# 					has_global_flag = bothan_spynet_allowed
+	# 					has_government = democratic
+	# 				}
+	# 				has_government = imperial
+	# 				original_tag = BOT
+	# 			}
+	# 		}
+	# 		counter_intelligence_visible = {
+	# 			OR = {
+	# 				AND = {
+	# 					has_global_flag = alpha_blue_allowed
+	# 					has_government = democratic
+	# 				}
+	# 				has_government = imperial
+	# 			}
+	# 		}
+	# 		jedi_visible = {
+	# 			OR = {
+	# 				has_country_flag = jedi_order
+	# 				has_country_flag = sith_order
+	# 			}
+	# 		}
+	# 		counter_intelligence_loyalty_visible = {
+	# 			AND = {
+	# 				has_global_flag = alpha_blue_allowed
+	# 				has_government = democratic
+	# 			}
+	# 			has_government = imperial
+	# 		}
+	# 		jedi_loyalty_visible = {
+	# 			OR = {
+	# 				has_country_flag = jedi_order
+	# 				has_country_flag = sith_order
+	# 			}
+	# 		}
+	# 	}
+	# 	properties = {
+	# 		spynet = {
+	# 			image = "[Getspy_guild_pic]"
+	# 		}
+	# 		counter_intelligence = {
+	# 			image = "[Get4th_guild_pic]"
+	# 		}
+	# 		jedi = {
+	# 			image = "[Get5th_guild_pic]"
+	# 		}
+	# 	}
+	# }
+	# guild_side_bar_screen_bounty_hunter = {
+	# 	context_type = player_context
+	# 	window_name = "guild_bounty_hunter_side_screen"
+	# 	parent_window_name = guild_screen
+	# 	visible = {
+    #         has_country_flag = guild_side_bar_opened
+    #         has_country_flag = guilds_open
+    #         has_country_flag = bounty_hunter_side_screen
+	# 	}
+	# 	effects = {
+	# 		recruit_agent_button_click = {
+	# 			Agent_generator_main = yes
+	# 			subtract_from_variable = { currency_amount^primary_currency = 20 }
+	# 		}
+	# 		large_button_1_box_click = {
+	# 			add_ideas = bounty_hunters_benfit_1
+	# 		}
+	# 		small_button_1_left_box_click = {
+	# 			add_ideas = bounty_hunters_benfit_2_1
+	# 		}
+	# 		small_button_1_right_box_click = {
+	# 			add_ideas = bounty_hunters_benfit_2_2
+	# 		}
+	# 		small_button_2_left_box_click = {
+	# 			add_ideas = bounty_hunters_benfit_3_1
+	# 		}
+	# 		small_button_2_right_box_click = {
+	# 			add_ideas = bounty_hunters_benfit_3_2
+	# 		}
+	# 		large_button_2_box_click = {
+	# 			add_ideas = bounty_hunters_benfit_4
+	# 		}
+	# 	}
+	# 	properties = {
+	# 		Agent_portrait_guild_bounty_hunter = {
+	# 			image = "[get_espionage_agent_side_screen_bounty_hunter]"
+	# 		}
+	# 	}
+	# 	triggers = {
+	# 		recruit_agent_button_click_enabled = {
+	# 			NOT = {
+	# 				OR = {
+	# 					AND = {
+	# 						has_country_flag = bounty_hunter_side_screen
+	# 						has_variable = bounty_hunter_agent_portrait
+	# 					}
+	# 					AND = {
+	# 						has_variable = agent_operation_slot_1 
+	# 						has_variable = agent_operation_slot_2
+	# 						has_variable = agent_operation_slot_3
+	# 					}
+	# 				}
+	# 			}
+	# 		}
+	# 	}
+	# }
+	# guild_side_bar_screen_technicians = {
+	# 	context_type = player_context
+	# 	window_name = "guild_technicians_side_screen"
+	# 	parent_window_name = guild_screen
+	# 	visible = {
+    #         has_country_flag = guild_side_bar_opened
+    #         has_country_flag = guilds_open
+    #         has_country_flag = technicians_side_screen
+	# 	}
+	# 	effects = {
+	# 		recruit_agent_button_click = {
+	# 			Agent_generator_main = yes
+	# 			subtract_from_variable = { currency_amount^primary_currency = 20 }
+	# 		}
+	# 		large_button_1_box_click = {
+	# 			add_ideas = technicians_benfit_1
+	# 		}
+	# 		small_button_1_left_box_click = {
+	# 			add_ideas = technicians_benfit_2_1
+	# 		}
+	# 		small_button_1_right_box_click = {
+	# 			add_ideas = technicians_benfit_2_2
+	# 		}
+	# 		small_button_2_left_box_click = {
+	# 			add_ideas = technicians_benfit_3_1
+	# 		}
+	# 		small_button_2_right_box_click = {
+	# 			add_ideas = technicians_benfit_3_2
+	# 		}
+	# 		large_button_2_box_click = {
+	# 			add_ideas = technicians_benfit_4
+	# 		}
+	# 	}
+	# 	properties = {
+	# 		Agent_portrait_guild_technicians = {
+	# 			image = "[get_espionage_agent_side_screen_technicians]"
+	# 		}
+	# 	}
+	# 	triggers = {
+	# 		recruit_agent_button_click_enabled = {
+	# 			NOT = {
+	# 				OR = {
+	# 					AND = {
+	# 						has_country_flag = technicians_side_screen
+	# 						has_variable = technicians_agent_portrait
+	# 					}
+	# 					AND = {
+	# 						has_variable = agent_operation_slot_1 
+	# 						has_variable = agent_operation_slot_2
+	# 						has_variable = agent_operation_slot_3
+	# 					}
+	# 				}
+	# 			}
+	# 		}
+	# 	}
+	# }
+	# guild_side_bar_screen_counter_intelligence = {
+	# 	context_type = player_context
+	# 	window_name = "guild_counter_intelligence_side_screen"
+	# 	parent_window_name = guild_screen
+	# 	visible = {
+    #         has_country_flag = guild_side_bar_opened
+    #         has_country_flag = guilds_open
+    #         has_country_flag = counter_intelligence_side_screen
+	# 	}
+	# 	effects = {
+	# 		recruit_agent_button_click = {
+	# 			Agent_generator_main = yes
+	# 			subtract_from_variable = { currency_amount^primary_currency = 20 }
+	# 		}
+	# 		large_button_1_box_click = {
+	# 			add_ideas = counter_intelligences_benfit_1
+	# 		}
+	# 		small_button_1_left_box_click = {
+	# 			add_ideas = counter_intelligences_benfit_2_1
+	# 		}
+	# 		small_button_1_right_box_click = {
+	# 			add_ideas = counter_intelligences_benfit_2_2
+	# 		}
+	# 		small_button_2_left_box_click = {
+	# 			add_ideas = counter_intelligences_benfit_3_1
+	# 		}
+	# 		small_button_2_right_box_click = {
+	# 			add_ideas = counter_intelligences_benfit_3_2
+	# 		}
+	# 		large_button_2_box_click = {
+	# 			add_ideas = counter_intelligences_benfit_4
+	# 		}
+	# 	}
+	# 	properties = {
+	# 		Agent_portrait_guild_counter_intelligence = {
+	# 			image = "[get_espionage_agent_side_screen_counter_intelligence]"
+	# 		}
+	# 	}
+	# 	triggers = {
+	# 		recruit_agent_button_click_enabled = {
+	# 			NOT = {
+	# 				OR = {
+	# 					AND = {
+	# 						has_country_flag = counter_intelligence_side_screen
+	# 						has_variable = counter_intelligence_agent_portrait
+	# 					}
+	# 					AND = {
+	# 						has_variable = agent_operation_slot_1 
+	# 						has_variable = agent_operation_slot_2
+	# 						has_variable = agent_operation_slot_3
+	# 					}
+	# 				}
+	# 			}
+	# 		}
+	# 	}
+	# }
+	# guild_side_bar_screen_spynet = {
+	# 	context_type = player_context
+	# 	window_name = "guild_spynet_side_screen"
+	# 	parent_window_name = guild_screen
+	# 	visible = {
+    #         has_country_flag = guild_side_bar_opened
+    #         has_country_flag = guilds_open
+    #         has_country_flag = spynet_side_screen
+	# 	}
+	# 	effects = {
+	# 		recruit_agent_button_click = {
+	# 			Agent_generator_main = yes
+	# 			subtract_from_variable = { currency_amount^primary_currency = 20 }
+	# 		}
+	# 		large_button_1_box_click = {
+	# 			add_ideas = spynets_benfit_1
+	# 		}
+	# 		small_button_1_left_box_click = {
+	# 			add_ideas = spynets_benfit_2_1
+	# 		}
+	# 		small_button_1_right_box_click = {
+	# 			add_ideas = spynets_benfit_2_2
+	# 		}
+	# 		small_button_2_left_box_click = {
+	# 			add_ideas = spynets_benfit_3_1
+	# 		}
+	# 		small_button_2_right_box_click = {
+	# 			add_ideas = spynets_benfit_3_2
+	# 		}
+	# 		large_button_2_box_click = {
+	# 			add_ideas = spynets_benfit_4
+	# 		}
+	# 	}
+	# 	properties = {
+	# 		Agent_portrait_guild_spynet = {
+	# 			image = "[get_espionage_agent_side_screen_spynet]"
+	# 		}
+	# 	}
+	# 	triggers = {
+	# 		recruit_agent_button_click_enabled = {
+	# 			NOT = {
+	# 				OR = {
+	# 					AND = {
+	# 						has_country_flag = spynet_side_screen
+	# 						has_variable = spynet_agent_portrait
+	# 					}
+	# 					AND = {
+	# 						has_variable = agent_operation_slot_1 
+	# 						has_variable = agent_operation_slot_2
+	# 						has_variable = agent_operation_slot_3
+	# 					}
+	# 				}
+	# 			}
+	# 		}
+	# 	}
+	# }
+	# guild_side_bar_screen_smugglers = {
+	# 	context_type = player_context
+	# 	window_name = "guild_smugglers_side_screen"
+	# 	parent_window_name = guild_screen
+	# 	visible = {
+    #         has_country_flag = guild_side_bar_opened
+    #         has_country_flag = guilds_open
+    #         has_country_flag = smugglers_side_screen
+	# 	}
+	# 	effects = {
+	# 		recruit_agent_button_click = {
+	# 			Agent_generator_main = yes
+	# 			subtract_from_variable = { currency_amount^primary_currency = 20 }
+	# 		}
+	# 		large_button_1_box_click = {
+	# 			add_ideas = smugglers_benfit_1
+	# 		}
+	# 		small_button_1_left_box_click = {
+	# 			add_ideas = smugglers_benfit_2_1
+	# 		}
+	# 		small_button_1_right_box_click = {
+	# 			add_ideas = smugglers_benfit_2_2
+	# 		}
+	# 		small_button_2_left_box_click = {
+	# 			add_ideas = smugglers_benfit_3_1
+	# 		}
+	# 		small_button_2_right_box_click = {
+	# 			add_ideas = smugglers_benfit_3_2
+	# 		}
+	# 		large_button_2_box_click = {
+	# 			add_ideas = smugglers_benfit_4
+	# 		}
+	# 	}
+	# 	properties = {
+	# 		Agent_portrait_guild_smugglers = {
+	# 			image = "[get_espionage_agent_side_screen_smugglers]"
+	# 		}
+	# 	}
+	# 	triggers = {
+	# 		recruit_agent_button_click_enabled = {
+	# 			NOT = {
+	# 				OR = {
+	# 					AND = {
+	# 						has_country_flag = bounty_hunter_side_screen
+	# 						has_variable = bounty_hunter_agent_portrait
+	# 					}
+	# 					AND = {
+	# 						has_country_flag = technicians_side_screen
+	# 						has_variable = technicians_agent_portrait
+	# 					}
+	# 					AND = {
+	# 						has_country_flag = counter_intelligence_side_screen
+	# 						has_variable = counter_intelligence_agent_portrait
+	# 					}
+	# 					AND = {
+	# 						has_country_flag = spynet_side_screen
+	# 						has_variable = spynet_agent_portrait
+	# 					}
+	# 					AND = {
+	# 						has_country_flag = smugglers_side_screen
+	# 						has_variable = smugglers_agent_portrait
+	# 					}
+	# 					AND = {
+	# 						has_variable = agent_operation_slot_1 
+	# 						has_variable = agent_operation_slot_2
+	# 						has_variable = agent_operation_slot_3
+	# 					}
+	# 				}
+	# 			}
+	# 		}
+	# 	}
+	# }
 }
 
