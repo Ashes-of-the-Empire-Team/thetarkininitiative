@@ -884,7 +884,6 @@ focus = {
 			owns_state = 448
 			owns_state = 441
 		}
-		ALZ = {has_capitulated = yes}
 	}
 	completion_reward = {
 		add_ideas = RIN_alzoc_miners
@@ -1020,6 +1019,8 @@ focus = {
 		factor = 1
 	}
 	available = {
+		OR = {
+			AND = {
 		RIN = {
 			owns_state = 463
 			owns_state = 410
@@ -1030,8 +1031,16 @@ focus = {
 			owns_state = 462
 			owns_state = 461
 		}
-		NAB = {has_capitulated = yes}
-		GUN = {has_capitulated = yes}
+	}
+		OR = {
+		GUN = {
+		is_puppet_of = RIN				
+		}
+		NAB = {
+		is_puppet_of = RIN
+		}
+		}
+	}
 	}
 	completion_reward = {
 		set_autonomy = {
@@ -1113,18 +1122,28 @@ focus = {
 		factor = 1
 	}
 	available = {
-		RIN = {
-			owns_state = 463
-			owns_state = 410
-			owns_state = 97
-			owns_state = 412
-			owns_state = 464
-			owns_state = 416
-			owns_state = 462
-			owns_state = 461
+		OR = {
+			AND = {
+				RIN = {
+					owns_state = 463
+					owns_state = 410
+					owns_state = 97
+					owns_state = 412
+					owns_state = 464
+					owns_state = 416
+					owns_state = 462
+					owns_state = 461
+				}
+			}
+			OR = {
+			GUN = {
+			is_puppet_of = RIN				
+			}
+			NAB = {
+			is_puppet_of = RIN
+			}
+			}
 		}
-		NAB = {has_capitulated = yes}
-		GUN = {has_capitulated = yes}
 	}
 	completion_reward = {
 		NAB = { add_to_ROOT_potential_cores = yes }
@@ -1238,13 +1257,17 @@ focus = {
 		factor = 1
 	}
 	available = {
-		RIN = {
-			owns_state = 104
-			owns_state = 432
-			owns_state = 428
-			owns_state = 430
+		OR	= {
+			AND = {
+				RIN = {
+				owns_state = 104
+				owns_state = 432
+				owns_state = 428
+				owns_state = 430
+			}
+			}
+			ERI = { OVERLORD = {tag = RIN } }
 		}
-		ERI = {has_capitulated = yes}
 	}
 	completion_reward = {
 		ERI = { add_to_ROOT_potential_cores = yes }
@@ -1271,7 +1294,6 @@ focus = {
 			owns_state = 428
 			owns_state = 430
 		}
-		ERI = {has_capitulated = yes}
 		}
 		ERI = { OVERLORD = {tag = RIN } }
 	}
