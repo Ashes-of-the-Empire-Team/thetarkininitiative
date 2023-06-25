@@ -1,0 +1,755 @@
+# Sullust Focus Tree
+# plan by Loso
+# implemented by Garion132
+
+focus_tree = {
+	id = SUL_focus
+	
+	country = {
+		factor = 0
+		
+		modifier = {
+			add = 10
+			tag = SUL
+		}
+	}
+	default = no
+	continuous_focus_position = { x = 2200 y = 1700 }
+	##politics
+	focus = {
+		id = SUL_new_republic_senate_vote
+		icon = GFX_reb_goal
+		cost = 10
+		x = 7
+		y = 0
+		completion_reward = {
+			add_political_power = 50
+			country_event = {id = SUL_events.1}
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = SUL_matter_of_sorosub
+		icon = GFX_reb_goal
+		cost = 5
+		x = -5
+		y = 1
+		relative_position_id = SUL_new_republic_senate_vote
+		prerequisite = {
+			focus = SUL_new_republic_senate_vote
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = SUL_sullust_not_sorosub
+		icon = GFX_reb_goal
+		cost = 5
+		x = 1
+		y = 1
+		relative_position_id = SUL_matter_of_sorosub
+		prerequisite = {
+			focus = SUL_matter_of_sorosub
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+			focus = SUL_support_sorosub
+		}
+		completion_reward = {
+			add_power_balance_value = {
+				id = SUL_balance
+				value = 0.2
+				tooltip_side = government_right_side
+			}
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = SUL_support_sorosub
+		icon = GFX_reb_goal
+		cost = 5
+		x = -1
+		y = 1
+		relative_position_id = SUL_matter_of_sorosub
+		prerequisite = {
+			focus = SUL_matter_of_sorosub
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+			focus = SUL_sullust_not_sorosub
+		}
+		completion_reward = {
+			add_power_balance_value = {
+				id = SUL_balance
+				value = -0.2
+				tooltip_side = sorosub_left_side
+			}
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = SUL_elect_pro_sorosuub_senator
+		icon = GFX_reb_goal
+		cost = 5
+		x = 0
+		y = 1
+		relative_position_id = SUL_support_sorosub
+		prerequisite = {
+			focus = SUL_support_sorosub
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = SUL_filler_1
+		icon = GFX_reb_goal
+		cost = 5
+		x = 0
+		y = 1
+		relative_position_id = SUL_new_republic_senate_vote
+		prerequisite = {
+			focus = SUL_new_republic_senate_vote
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = SUL_filler_4
+		icon = GFX_reb_goal
+		cost = 5
+		x = -1
+		y = 1
+		relative_position_id = SUL_filler_1
+		prerequisite = {
+			focus = SUL_filler_1
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = SUL_filler_5
+		icon = GFX_reb_goal
+		cost = 5
+		x = 0
+		y = 1
+		relative_position_id = SUL_filler_4
+		prerequisite = {
+			focus = SUL_filler_4
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = SUL_invite_bith
+		icon = GFX_reb_goal
+		cost = 5
+		x = 1
+		y = 1
+		relative_position_id = SUL_filler_1
+		prerequisite = {
+			focus = SUL_filler_1
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = SUL_defence_pact_bith
+		icon = GFX_reb_goal
+		cost = 5
+		x = 0
+		y = 1
+		relative_position_id = SUL_invite_bith
+		prerequisite = {
+			focus = SUL_invite_bith
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = SUL_eriadu_emergency
+		icon = GFX_reb_goal
+		cost = 5
+		x = -1
+		y = 1
+		relative_position_id = SUL_defence_pact_bith
+		prerequisite = {
+			focus = SUL_defence_pact_bith
+		}
+		prerequisite = {
+			focus = SUL_filler_5
+		}
+		available={
+			ERI={
+				OR={
+					has_war_with = ROOT
+					has_wargoal_against = ROOT
+					is_justifying_wargoal_against = ROOT
+				}
+			}
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			set_country_flag = SUL_war_with_ERI
+			add_ideas = {SUL_defend_aganist_eriadu}
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = SUL_push_for_peace
+		icon = GFX_reb_goal
+		cost = 5
+		x = 0
+		y = 1
+		relative_position_id = SUL_eriadu_emergency
+		prerequisite = {
+			focus = SUL_eriadu_emergency
+		}
+		available={
+			surrender_progress < 0.01
+			ERI={
+				has_war_with = ROOT
+			}
+			has_country_flag = {
+				flag = SUL_war_with_ERI
+				days > 200
+			}
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+			focus = SUL_lead_counter_attack
+		}
+		completion_reward = {
+			
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = SUL_lead_counter_attack
+		icon = GFX_reb_goal
+		cost = 5
+		x = -2
+		y = 1
+		relative_position_id = SUL_eriadu_emergency
+		prerequisite = {
+			focus = SUL_eriadu_emergency
+		}
+		available={
+			surrender_progress < 0.01
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+			focus = SUL_push_for_peace
+		}
+		completion_reward = {
+			swap_ideas={
+				add_idea = SUL_invade_eriadu
+				remove_idea = SUL_defend_aganist_eriadu
+			}
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = SUL_victory_aganst_delvardus
+		icon = GFX_reb_goal
+		cost = 5
+		x = 0
+		y = 1
+		relative_position_id = SUL_lead_counter_attack
+		prerequisite = {
+			focus = SUL_lead_counter_attack
+		}
+		available={
+			430={
+				owns_or_subject_of = yes
+			}
+			NOT={
+				has_war_with = ERI
+			}
+		}
+		search_filters = {
+		}
+		completion_reward = {
+			give_resource_rights = { receiver = ROOT state = 430 }
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = SUL_imperial_issue
+		icon = GFX_reb_goal
+		cost = 5
+		x = 4
+		y = 1
+		relative_position_id = SUL_new_republic_senate_vote
+		prerequisite = {
+			focus = SUL_new_republic_senate_vote
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+
+	focus = {
+		id = SUL_reorganise_sullustan_resistance
+		icon = GFX_reb_goal
+		cost = 10
+		x = 17
+		y = 0
+		completion_reward = {
+			army_experience = 50
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = SUL_sullustian_regiments
+		icon = GFX_reb_goal
+		cost = 10
+		x = -2
+		y = 1
+		relative_position_id = SUL_reorganise_sullustan_resistance
+		prerequisite = {
+			focus = SUL_reorganise_sullustan_resistance
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = SUL_train_sullustian_milita
+		icon = GFX_reb_goal
+		cost = 10
+		x = -1
+		y = 1
+		relative_position_id = SUL_sullustian_regiments
+		prerequisite = {
+			focus = SUL_sullustian_regiments
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = SUL_invite_nien_nuub
+		icon = GFX_reb_goal
+		cost = 10
+		x = -1
+		y = 1
+		relative_position_id = SUL_train_sullustian_milita
+		prerequisite = {
+			focus = SUL_train_sullustian_milita
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			SUL_nien_nunb={
+				add_corps_commander_role = {
+					skill = 4
+					attack_skill = 4
+					defense_skill = 5
+					planning_skill = 3
+					logistics_skill = 2
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = SUL_reform_constable_brigade
+		icon = GFX_reb_goal
+		cost = 10
+		x = 1
+		y = 1
+		relative_position_id = SUL_sullustian_regiments
+		prerequisite = {
+			focus = SUL_sullustian_regiments
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 3.0
+				uses = 1
+				category = military_police_tech
+			}
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = SUL_organize_home_guard_fleet
+		icon = GFX_reb_goal
+		cost = 10
+		x = 3
+		y = 1
+		relative_position_id = SUL_reorganise_sullustan_resistance
+		prerequisite = {
+			focus = SUL_reorganise_sullustan_resistance
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			army_experience = 50
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = SUL_convert_imperial_shipyards
+		icon = GFX_reb_goal
+		cost = 10
+		x = -1
+		y = 1
+		relative_position_id = SUL_organize_home_guard_fleet
+		prerequisite = {
+			focus = SUL_organize_home_guard_fleet
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = SUL_sieze_sorosuub_shipyards
+		icon = GFX_reb_goal
+		cost = 10
+		x = -1
+		y = 1
+		relative_position_id = SUL_convert_imperial_shipyards
+		prerequisite = {
+			focus = SUL_convert_imperial_shipyards
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = SUL_starship_construction
+		icon = GFX_reb_goal
+		cost = 10
+		x = 1
+		y = 1
+		relative_position_id = SUL_organize_home_guard_fleet
+		prerequisite = {
+			focus = SUL_organize_home_guard_fleet
+		}
+		prerequisite = {
+			focus = SUL_construct_ground_hangars
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = SUL_missile_batteries
+		icon = GFX_reb_goal
+		cost = 10
+		x = 1
+		y = 1
+		relative_position_id = SUL_starship_construction
+		prerequisite = {
+			focus = SUL_starship_construction
+		}
+		prerequisite = {
+			focus = SUL_turbolaser_batteries
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = SUL_rebuild_planet
+		icon = GFX_reb_goal
+		cost = 10
+		x = 25
+		y = 0
+		completion_reward = {
+			unlock_decision_category_tooltip = rebuiling_sullust_category
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = SUL_construct_ground_hangars
+		icon = GFX_reb_goal
+		cost = 10
+		x = 2
+		y = 0
+		relative_position_id = SUL_organize_home_guard_fleet
+		prerequisite = {
+			focus = SUL_rebuild_planet
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = SUL_turbolaser_batteries
+		icon = GFX_reb_goal
+		cost = 10
+		x = 1
+		y = 1
+		relative_position_id = SUL_construct_ground_hangars
+		prerequisite = {
+			focus = SUL_construct_ground_hangars
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = SUL_filler_6
+		icon = GFX_reb_goal
+		cost = 10
+		x = 0
+		y = 1
+		relative_position_id = SUL_rebuild_planet
+		prerequisite = {
+			focus = SUL_rebuild_planet
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = SUL_subsidizer_national_corp
+		icon = GFX_reb_goal
+		cost = 10
+		x = 0
+		y = 1
+		relative_position_id = SUL_filler_6
+		prerequisite = {
+			focus = SUL_filler_6
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			add_timed_idea={
+				idea = SUL_national_corperation_subsidies
+				days = 365
+			}
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = SUL_surface_city_project
+		icon = GFX_reb_goal
+		cost = 10
+		x = 3
+		y = 1
+		relative_position_id = SUL_rebuild_planet
+		prerequisite = {
+			focus = SUL_rebuild_planet
+		}
+		available={
+			NOT = {
+				has_dynamic_modifier = {
+					modifier = SUL_war_torn_planet_modifier
+				}
+			}
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+
+
+}
