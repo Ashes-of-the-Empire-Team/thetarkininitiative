@@ -1,5 +1,5 @@
 ###########################
-# Reformed Empire events
+# Sullust events
 ###########################
 
 add_namespace = SUL_events
@@ -27,4 +27,106 @@ country_event = {
 		
 	}
 	
+}
+country_event = {
+    id = SUL_events.2
+    title = SUL_events.2.t
+    desc = SUL_events.2.d
+    picture = GFX_report_event_generic_read_write
+    
+    trigger = {
+    }
+    mean_time_to_happen = {
+        
+    }
+    immediate = {
+    }
+    is_triggered_only = yes
+    option = {
+        name = SUL_events.2.a
+        add_power_balance_value = {
+            id = SUL_balance
+            value = -0.2
+            tooltip_side = sorosub_left_side
+        }
+        
+    }
+	option = {
+        name = SUL_events.2.b
+		add_power_balance_value = {
+            id = SUL_balance
+            value = 0.2
+            tooltip_side = government_right_side
+        }
+	}
+	
+}
+country_event = { # SUL and BIT Alliance
+    id = SUL_events.3
+    title = SUL_events.3.t
+    desc = SUL_events.3.d
+    picture = GFX_report_event_conference_room
+
+    is_triggered_only = yes
+    trigger = {
+        tag = BIT
+    }
+
+    fire_only_once = no
+
+    option = {
+        name = SUL_events.3.a
+        ai_chance = {
+			factor = 100
+		}
+        SUL = {give_guarantee = BIT}
+	    BIT = {give_guarantee = SUL}
+        SUL = {
+            army_experience = 69
+        country_event = SUL_events.31
+        }
+       }
+
+    option = {
+        name = SUL_events.3.b
+        ai_chance = {
+			factor = 0
+		}
+        add_political_power = 100
+        SUL = {
+            country_event = SUL_events.32
+        }
+    }
+}
+
+country_event = { # SUL and BIT Alliance
+    id = SUL_events.31
+    title = SUL_events.31.t
+    desc = SUL_events.31.d
+    picture = GFX_report_event_conference_room
+
+    is_triggered_only = yes
+
+    fire_only_once = no
+
+    option = {
+        name = SUL_events.31.f
+      
+}
+}
+
+country_event = { # SUL and BIT Alliance
+    id = SUL_events.32
+    title = SUL_events.32.t
+    desc = SUL_events.32.d
+    picture = GFX_report_event_conference_room
+
+    is_triggered_only = yes
+
+    fire_only_once = no
+
+    option = {
+        name = SUL_events.32.g
+        add_political_power = 100
+}
 }
