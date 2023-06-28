@@ -8,26 +8,148 @@ scripted_gui = {
 			always = yes
 		}
 		triggers = {
+			espionage_mission_1_select_mission_visible = {
+				NOT = {
+					has_variable = mission_identifier_1
+				}
+			}
+			espionage_mission_2_select_mission_visible = {
+				NOT = {
+					has_variable = mission_identifier_2
+				}
+			}
+			espionage_mission_3_select_mission_visible = {
+				NOT = {
+					has_variable = mission_identifier_3
+				}
+			}
+			espionage_mission_4_select_mission_visible = {
+				NOT = {
+					has_variable = mission_identifier_4
+				}
+			}
+			espionage_mission_5_select_mission_visible = {
+				NOT = {
+					has_variable = mission_identifier_5
+				}
+			}
 			espionage_missions_1_initiate_click_enabled = {
-				has_variable = espionage_mission_description_token_1
+				has_variable = mission_identifier_1
+				has_variable = agent_name_slot_1
 				NOT = {
 					has_idea = espionage_mission_1_progress
 				}
 			}
 			espionage_missions_2_initiate_click_enabled = {
-				has_variable = espionage_mission_description_token_2
+				has_variable = mission_identifier_2
+				has_variable = agent_name_slot_2
 				NOT = {
 					has_idea = espionage_mission_2_progress
 				}
 			}
             espionage_missions_3_initiate_click_enabled = {
-				has_variable = espionage_mission_description_token_3
+				has_variable = mission_identifier_3
+				has_variable = agent_name_slot_3
 				NOT = {
 					has_idea = espionage_mission_3_progress
 				}
             }
+			espionage_missions_4_initiate_click_enabled = {
+				has_variable = mission_identifier_4
+				has_variable = agent_name_slot_4
+				NOT = {
+					has_idea = espionage_mission_4_progress
+				}
+            }
+			espionage_missions_5_initiate_click_enabled = {
+				has_variable = mission_identifier_5
+				has_variable = agent_name_slot_5
+				NOT = {
+					has_idea = espionage_mission_5_progress
+				}
+            }
+			espionage_agent_recruitment_1_visible = {
+				NOT = {
+					has_variable = agent_name_slot_1
+				}
+			}
+			espionage_agent_recruitment_2_visible = {
+				NOT = {
+					has_variable = agent_name_slot_2
+				}
+			}
+			espionage_agent_recruitment_3_visible = {
+				NOT = {
+					has_variable = agent_name_slot_3
+				}
+			}
+			espionage_agent_recruitment_4_visible = {
+				NOT = {
+					has_variable = agent_name_slot_4
+				}
+			}
+			espionage_agent_recruitment_5_visible = {
+				NOT = {
+					has_variable = agent_name_slot_5
+				}
+			}
 		}
 		effects = {
+			espionage_target_nation_1_click = {
+				if = {
+					limit = {
+						has_country_flag = select_espionage_mission_target
+					}
+					clr_country_flag = select_espionage_mission_target
+				}else = {
+					set_country_flag = select_espionage_mission_target
+					set_variable = {what_espionage_slot = 1}
+				}
+			}
+			espionage_target_nation_2_click = {
+				if = {
+					limit = {
+						has_country_flag = select_espionage_mission_target
+					}
+					clr_country_flag = select_espionage_mission_target
+				}else = {
+					set_country_flag = select_espionage_mission_target
+					set_variable = {what_espionage_slot = 2}
+				}
+			}
+			espionage_target_nation_3_click = {
+				if = {
+					limit = {
+						has_country_flag = select_espionage_mission_target
+					}
+					clr_country_flag = select_espionage_mission_target
+				}else = {
+					set_country_flag = select_espionage_mission_target
+					set_variable = {what_espionage_slot = 3}
+				}
+			}
+			espionage_target_nation_4_click = {
+				if = {
+					limit = {
+						has_country_flag = select_espionage_mission_target
+					}
+					clr_country_flag = select_espionage_mission_target
+				}else = {
+					set_country_flag = select_espionage_mission_target
+					set_variable = {what_espionage_slot = 4}
+				}
+			}
+			espionage_target_nation_5_click = {
+				if = {
+					limit = {
+						has_country_flag = select_espionage_mission_target
+					}
+					clr_country_flag = select_espionage_mission_target
+				}else = {
+					set_country_flag = select_espionage_mission_target
+					set_variable = {what_espionage_slot = 5}
+				}
+			}
 			espionage_mission_1_target_click = {
 				var:targeted_country_slot_1 = {
 					capital_scope = {
@@ -55,6 +177,24 @@ scripted_gui = {
 					}
 				}
 			}
+			espionage_mission_4_target_click = {
+				var:targeted_country_slot_4 = {
+					capital_scope = {
+						ROOT = {
+							goto_state = PREV
+						}
+					}
+				}
+			}
+			espionage_mission_5_target_click = {
+				var:targeted_country_slot_5 = {
+					capital_scope = {
+						ROOT = {
+							goto_state = PREV
+						}
+					}
+				}
+			}
 			espionage_missions_1_scrap_click = {
 				scrap_espionage_mission_1 = yes
 			}
@@ -63,6 +203,12 @@ scripted_gui = {
 			}
 			espionage_missions_3_scrap_click = {
 				scrap_espionage_mission_3 = yes
+			}
+			espionage_missions_4_scrap_click = {
+				scrap_espionage_mission_4 = yes
+			}
+			espionage_missions_5_scrap_click = {
+				scrap_espionage_mission_5 = yes
 			}
 			espionage_missions_1_initiate_click = {
 				add_ideas = espionage_mission_1_progress
@@ -73,51 +219,163 @@ scripted_gui = {
 			espionage_missions_3_initiate_click = {
 				add_ideas = espionage_mission_3_progress
 			}
+			espionage_missions_4_initiate_click = {
+				add_ideas = espionage_mission_4_progress
+			}
+			espionage_missions_5_initiate_click = {
+				add_ideas = espionage_mission_5_progress
+			}
+			espionage_mission_1_select_mission_click = {
+				clr_country_flag = operation_selection_slot_1
+				clr_country_flag = operation_selection_slot_2
+				clr_country_flag = operation_selection_slot_3
+				clr_country_flag = operation_selection_slot_4
+				clr_country_flag = operation_selection_slot_5
 
-			espionage_agent_recruitment_1 = {
+				set_country_flag = operation_selection_slot_1
+				set_country_flag = operation_mission_selection
+			}
+			espionage_mission_2_select_mission_click = {
+				clr_country_flag = operation_selection_slot_1
+				clr_country_flag = operation_selection_slot_2
+				clr_country_flag = operation_selection_slot_3
+				clr_country_flag = operation_selection_slot_4
+				clr_country_flag = operation_selection_slot_5
+				
+				set_country_flag = operation_selection_slot_2
+				set_country_flag = operation_mission_selection
+			}
+			espionage_mission_3_select_mission_click = {
+				clr_country_flag = operation_selection_slot_1
+				clr_country_flag = operation_selection_slot_2
+				clr_country_flag = operation_selection_slot_3
+				clr_country_flag = operation_selection_slot_4
+				clr_country_flag = operation_selection_slot_5
+
+				set_country_flag = operation_selection_slot_3
+				set_country_flag = operation_mission_selection
+			}
+			espionage_mission_4_select_mission_click = {
+				clr_country_flag = operation_selection_slot_1
+				clr_country_flag = operation_selection_slot_2
+				clr_country_flag = operation_selection_slot_3
+				clr_country_flag = operation_selection_slot_4
+				clr_country_flag = operation_selection_slot_5
+
+				set_country_flag = operation_selection_slot_4
+				set_country_flag = operation_mission_selection
+			}
+			espionage_mission_5_select_mission_click = {
+				clr_country_flag = operation_selection_slot_1
+				clr_country_flag = operation_selection_slot_2
+				clr_country_flag = operation_selection_slot_3
+				clr_country_flag = operation_selection_slot_4
+				clr_country_flag = operation_selection_slot_5
+
+				set_country_flag = operation_selection_slot_5
+				set_country_flag = operation_mission_selectio5
+			}
+			espionage_agent_recruitment_1_click = {
 				set_country_flag = agent_recruitment_screen_open
 				set_variable = {what_espionage_slot = 1}
 				create_temporary_agents = yes
 			}
-			espionage_agent_recruitment_2 = {
+			espionage_agent_recruitment_2_click = {
 				set_country_flag = agent_recruitment_screen_open
 				set_variable = {what_espionage_slot = 2}
 				create_temporary_agents = yes
 			}
-			espionage_agent_recruitment_3 = {
+			espionage_agent_recruitment_3_click = {
 				set_country_flag = agent_recruitment_screen_open
 				set_variable = {what_espionage_slot = 3}
 				create_temporary_agents = yes
 			}
-			espionage_agent_recruitment_4 = {
+			espionage_agent_recruitment_4_click = {
 				set_country_flag = agent_recruitment_screen_open
 				set_variable = {what_espionage_slot = 4}
 				create_temporary_agents = yes
 			}
-			espionage_agent_recruitment_5 = {
+			espionage_agent_recruitment_5_click = {
 				set_country_flag = agent_recruitment_screen_open
 				set_variable = {what_espionage_slot = 5}
 				create_temporary_agents = yes
 			}
 		}
 		properties = {
-			espionage_mission_1_target = {
+			espionage_target_nation_icon_1 = {
 				image = "[?targeted_country_slot_1.GetFlag]"
 			}
-			espionage_mission_2_target = {
+			espionage_target_nation_icon_2 = {
 				image = "[?targeted_country_slot_2.GetFlag]"
 			}
-			espionage_mission_3_target = {
+			espionage_target_nation_icon_3 = {
 				image = "[?targeted_country_slot_3.GetFlag]"
 			}
-			character_portrait_1 = {
-				image = "[get_espionage_agent_portrait_1_main_key]"
+			espionage_target_nation_icon_4 = {
+				image = "[?targeted_country_slot_4.GetFlag]"
 			}
-			character_portrait_2 = {
-				image = "[get_espionage_agent_portrait_2_main_key]"
+			espionage_target_nation_icon_5 = {
+				image = "[?targeted_country_slot_5.GetFlag]"
 			}
-			character_portrait_3 = {
-				image = "[get_espionage_agent_portrait_3_main_key]"
+			espionage_agent_personaility_trait_1 = {
+				image = "[get_personality_trait_slot_1]"
+			}
+			espionage_agent_personaility_trait_2 = {
+				image = "[get_personality_trait_slot_2]"
+			}
+			espionage_agent_personaility_trait_3 = {
+				image = "[get_personality_trait_slot_3]"
+			}
+			espionage_agent_personaility_trait_4 = {
+				image = "[get_personality_trait_slot_4]"
+			}
+			espionage_agent_personaility_trait_5 = {
+				image = "[get_personality_trait_slot_5]"
+			}
+			espionage_agent_class_trait_1 = {
+				image = "[get_class_trait_slot_1]"
+			}
+			espionage_agent_class_trait_2 = {
+				image = "[get_class_trait_slot_2]"
+			}
+			espionage_agent_class_trait_3 = {
+				image = "[get_class_trait_slot_3]"
+			}
+			espionage_agent_class_trait_4 = {
+				image = "[get_class_trait_slot_4]"
+			}
+			espionage_agent_class_trait_5 = {
+				image = "[get_class_trait_slot_5]"
+			}
+			espionage_agent_race_trait_1 = {
+				image = "[get_race_trait_slot_1]"
+			}
+			espionage_agent_race_trait_2 = {
+				image = "[get_race_trait_slot_2]"
+			}
+			espionage_agent_race_trait_3 = {
+				image = "[get_race_trait_slot_3]"
+			}
+			espionage_agent_race_trait_4 = {
+				image = "[get_race_trait_slot_4]"
+			}
+			espionage_agent_race_trait_5 = {
+				image = "[get_race_trait_slot_5]"
+			}
+			character_slot_1 = {
+				image = "[get_agent_photo_1]"
+			}
+			character_slot_2 = {
+				image = "[get_agent_photo_2]"
+			}
+			character_slot_3 = {
+				image = "[get_agent_photo_3]"
+			}
+			character_slot_4 = {
+				image = "[get_agent_photo_4]"
+			}
+			character_slot_5 = {
+				image = "[get_agent_photo_5]"
 			}
 			mission_1_progress_bar = {
 				frame = mission_1_progress_var
@@ -128,108 +386,529 @@ scripted_gui = {
 			mission_3_progress_bar = {
 				frame = mission_3_progress_var
 			}
+			mission_4_progress_bar = {
+				frame = mission_4_progress_var
+			}
+			mission_5_progress_bar = {
+				frame = mission_5_progress_var
+			}
 		}
 	}
 	operation_mission_selection = {
 		context_type = player_context
-        parent_window_name = "operations_missions"
         window_name = "espionage_mission_selection"
 		visible = {
             #has_country_flag = operations_open
-			always = no
+			has_country_flag = operation_mission_selection
+		}
+		triggers = {
+			Title_of_mission_intelligence_visible = {
+				has_country_flag = intelligence_mission_box_open
+			}
+			background_box_intelligence_visible = {
+				has_country_flag = intelligence_mission_box_open
+			}
+			background_box_charisma_visible = {
+				has_country_flag = charisma_mission_box_open
+			}
+			Title_of_mission_charisma_visible = {
+				has_country_flag = charisma_mission_box_open
+			}
+			background_box_martial_visible = {
+				has_country_flag = martial_mission_box_open
+			}
+			Title_of_mission_martial_visible = {
+				has_country_flag = martial_mission_box_open
+			}
 		}
 		effects = {
-			background_box_click = {
+			background_box_martial_click = {
 				if = {
 					limit = {
 						has_country_flag = operation_selection_slot_1
 					}
-					set_variable = {mission_identifier_1 = Espionage_mission_token_array^i}
+					set_variable = {mission_identifier_1 = global.espionage_mission_martial_missions^i}
+					log = "Tried Set"
+					log = "[?global.espionage_mission_martial_missions^0]"
 				}else_if = {
 					limit = {
 						has_country_flag = operation_selection_slot_2
 					}
-					set_variable = {mission_identifier_2 = Espionage_mission_token_array^i}
+					set_variable = {mission_identifier_2 = global.espionage_mission_martial_missions^i}
 				}else_if = {
 					limit = {
-						has_country_flag = operation_selection_slot_1
+						has_country_flag = operation_selection_slot_3
 					}
-					set_variable = {mission_identifier_3 = Espionage_mission_token_array^i}
+					set_variable = {mission_identifier_3 = global.espionage_mission_martial_missions^i}
 				}else_if = {
 					limit = {
-						has_country_flag = operation_selection_slot_1
+						has_country_flag = operation_selection_slot_4
 					}
-					set_variable = {mission_identifier_4 = Espionage_mission_token_array^i}
+					set_variable = {mission_identifier_4 = global.espionage_mission_martial_missions^i}
 				}else_if = {
 					limit = {
-						has_country_flag = operation_selection_slot_1
+						has_country_flag = operation_selection_slot_5
 					}
-					set_variable = {mission_identifier_5 = Espionage_mission_token_array^i}
+					set_variable = {mission_identifier_5 = global.espionage_mission_martial_missions^i}
 				}
+				clr_country_flag = operation_mission_selection
+			}
+			background_box_intelligence_click = {
+				if = {
+					limit = {
+						has_country_flag = operation_selection_slot_1
+					}
+					set_variable = {mission_identifier_1 = global.espionage_mission_intelligence_missions^i}
+				}else_if = {
+					limit = {
+						has_country_flag = operation_selection_slot_2
+					}
+					set_variable = {mission_identifier_2 = global.espionage_mission_intelligence_missions^i}
+				}else_if = {
+					limit = {
+						has_country_flag = operation_selection_slot_3
+					}
+					set_variable = {mission_identifier_3 = global.espionage_mission_intelligence_missions^i}
+				}else_if = {
+					limit = {
+						has_country_flag = operation_selection_slot_4
+					}
+					set_variable = {mission_identifier_4 = global.espionage_mission_intelligence_missions^i}
+				}else_if = {
+					limit = {
+						has_country_flag = operation_selection_slot_5
+					}
+					set_variable = {mission_identifier_5 = global.espionage_mission_intelligence_missions^i}
+				}
+				clr_country_flag = operation_mission_selection
+			}
+			background_box_charisma_click = {
+				if = {
+					limit = {
+						has_country_flag = operation_selection_slot_1
+					}
+					set_variable = {mission_identifier_1 = global.espionage_mission_charisma_missions^i}
+				}else_if = {
+					limit = {
+						has_country_flag = operation_selection_slot_2
+					}
+					set_variable = {mission_identifier_2 = global.espionage_mission_charisma_missions^i}
+				}else_if = {
+					limit = {
+						has_country_flag = operation_selection_slot_3
+					}
+					set_variable = {mission_identifier_3 = global.espionage_mission_charisma_missions^i}
+				}else_if = {
+					limit = {
+						has_country_flag = operation_selection_slot_4
+					}
+					set_variable = {mission_identifier_4 = global.espionage_mission_charisma_missions^i}
+				}else_if = {
+					limit = {
+						has_country_flag = operation_selection_slot_5
+					}
+					set_variable = {mission_identifier_5 = global.espionage_mission_charisma_missions^i}
+				}
+				clr_country_flag = operation_mission_selection
+			}
+			select_martial_missions_click = {
+				clr_country_flag = charisma_mission_box_open
+				clr_country_flag = intelligence_mission_box_open
+				clr_country_flag = martial_mission_box_open
+				set_country_flag = martial_mission_box_open
+			}
+			select_intelligence_missions_click = {
+				clr_country_flag = charisma_mission_box_open
+				clr_country_flag = intelligence_mission_box_open
+				clr_country_flag = martial_mission_box_open
+				set_country_flag = intelligence_mission_box_open
+			}
+			select_charisma_missions_click = {
+				clr_country_flag = charisma_mission_box_open
+				clr_country_flag = intelligence_mission_box_open
+				clr_country_flag = martial_mission_box_open
+				set_country_flag = charisma_mission_box_open
 			}
 		}
-
 		dynamic_lists = {
-            mission_gridbox = {
-                array = global.Espionage_mission_token_array
-                entry_container = espionage_mission_boxes
+            martial_mission_gridbox = {
+                array = global.espionage_mission_martial_missions
+                entry_container = martial_espionage_mission_boxes
+                change_scope = no
+            }
+			intelligence_mission_gridbox = {
+                array = global.espionage_mission_intelligence_missions
+                entry_container = intelligence_espionage_mission_boxes
+                change_scope = no
+            }
+			charisma_mission_gridbox = {
+                array = global.espionage_mission_charisma_missions
+                entry_container = charisma_espionage_mission_boxes
                 change_scope = no
             }
         }
 	}
-	agent_recruitment_screen = {
+	espionage_agent_recruitment_screen = {
 		context_type = player_context
-        parent_window_name = "operations_missions"
-        window_name = "agent_recruitment_screen"
+		parent_window_name = "operations_missions"
+        window_name = "espionage_agent_recruitment_screen"
 		visible = {
             has_country_flag = agent_recruitment_screen_open
 		}
-		select_agent_1 = {
-			meta_effect = {
-				text = {
-					set_variable = { agent_identifier_slot_[WHAT_SLOT_IT_IS]  = agent_identifier_temporary_agent_1} 
-					set_variable = { agent_portrait_slot_[WHAT_SLOT_IT_IS]  = agent_portrait_temporary_agent_1} 
-					set_variable = { agent_name_slot_[WHAT_SLOT_IT_IS]  = agent_name_temporary_agent_1} 
-					set_variable = { agent_charisma_slot_[WHAT_SLOT_IT_IS]  = agent_charisma_temporary_agent_1} 
-					set_variable = { agent_intelligence_slot_[WHAT_SLOT_IT_IS]  = agent_intelligence_temporary_agent_1} 
-					set_variable = { agent_martial_slot_[WHAT_SLOT_IT_IS]  = agent_martial_temporary_agent_1} 
-					set_variable = { personality_trait_slot_[WHAT_SLOT_IT_IS]  = personality_trait_temporary_agent_1} 
-					set_variable = { class_trait_slot_[WHAT_SLOT_IT_IS]  = class_trait_temporary_agent_1} 
-					set_variable = { race_trait_slot_[WHAT_SLOT_IT_IS]  = race_trait_temporary_agent_1}
-				}
-				WHAT_SLOT_IT_IS = "[?what_espionage_slot]"
+		triggers = {
+			select_agent_1_visible = {
+				check_variable = {agent_name_temporary_agent_1 > 0}
+			}
+			select_agent_2_visible = {
+				check_variable = {agent_name_temporary_agent_2 > 0}
+			}
+			select_agent_3_visible = {
+				check_variable = {agent_name_temporary_agent_3 > 0}
 			}
 		}
-		select_agent_2 = {
-			meta_effect = {
-				text = {
-					set_variable = { agent_identifier_slot_[WHAT_SLOT_IT_IS]  = agent_identifier_temporary_agent_2} 
-					set_variable = { agent_portrait_slot_[WHAT_SLOT_IT_IS]  = agent_portrait_temporary_agent_2} 
-					set_variable = { agent_name_slot_[WHAT_SLOT_IT_IS]  = agent_name_temporary_agent_2} 
-					set_variable = { agent_charisma_slot_[WHAT_SLOT_IT_IS]  = agent_charisma_temporary_agent_2} 
-					set_variable = { agent_intelligence_slot_[WHAT_SLOT_IT_IS]  = agent_intelligence_temporary_agent_2} 
-					set_variable = { agent_martial_slot_[WHAT_SLOT_IT_IS]  = agent_martial_temporary_agent_2} 
-					set_variable = { personality_trait_slot_[WHAT_SLOT_IT_IS]  = personality_trait_temporary_agent_2} 
-					set_variable = { class_trait_slot_[WHAT_SLOT_IT_IS]  = class_trait_temporary_agent_2} 
-					set_variable = { race_trait_slot_[WHAT_SLOT_IT_IS]  = race_trait_temporary_agent_2}
+		effects = {
+			select_agent_1_click = {
+				meta_effect = {
+					text = {
+						set_variable = { agent_name_slot_[WHAT_SLOT_IT_IS]  = agent_name_temporary_agent_1} 
+						set_variable = { agent_charisma_slot_[WHAT_SLOT_IT_IS]  = agent_charisma_temporary_agent_1} 
+						set_variable = { agent_intelligence_slot_[WHAT_SLOT_IT_IS]  = agent_intelligence_temporary_agent_1} 
+						set_variable = { agent_martial_slot_[WHAT_SLOT_IT_IS]  = agent_martial_temporary_agent_1} 
+						set_variable = { personality_trait_slot_[WHAT_SLOT_IT_IS]  = personality_trait_temporary_agent_1} 
+						set_variable = { class_trait_slot_[WHAT_SLOT_IT_IS]  = class_trait_temporary_agent_1} 
+						set_variable = { race_trait_slot_[WHAT_SLOT_IT_IS]  = race_trait_temporary_agent_1}
+						set_variable = { expertise_slot_[WHAT_SLOT_IT_IS]  = 1}
+					}
+					WHAT_SLOT_IT_IS = "[?what_espionage_slot]"
 				}
-				WHAT_SLOT_IT_IS = "[?what_espionage_slot]"
+				
+				if = {
+					limit = {
+						has_country_flag = agent_2_Espionage_intelligence_array
+					}
+					add_to_array = {
+						array = global.Espionage_bounty_hunter_array
+						value = agent_name_temporary_agent_2
+					}
+				}else_if = {
+					limit = {
+						has_country_flag = agent_2_Espionage_technicians_array
+					}
+					add_to_array = {
+						array = global.Espionage_bounty_hunter_array
+						value = agent_name_temporary_agent_2
+					}
+				}else_if = {
+					limit = {
+						has_country_flag = agent_2_Espionage_counterintelligence_array
+					}
+					add_to_array = {
+						array = global.Espionage_bounty_hunter_array
+						value = agent_name_temporary_agent_2
+					}
+				}else_if = {
+					limit = {
+						has_country_flag = agent_2_Espionage_smugglers_array
+					}
+					add_to_array = {
+						array = global.Espionage_bounty_hunter_array
+						value = agent_name_temporary_agent_2
+					}
+				}else_if = {
+					limit = {
+						has_country_flag = agent_2_Espionage_bounty_hunter_array
+					}
+					add_to_array = {
+						array = global.Espionage_bounty_hunter_array
+						value = agent_name_temporary_agent_2
+					}
+				}
+				if = {
+					limit = {
+						has_country_flag = agent_3_Espionage_intelligence_array
+					}
+					add_to_array = {
+						array = global.Espionage_bounty_hunter_array
+						value = agent_name_temporary_agent_3
+					}
+				}else_if = {
+					limit = {
+						has_country_flag = agent_3_Espionage_technicians_array
+					}
+					add_to_array = {
+						array = global.Espionage_bounty_hunter_array
+						value = agent_name_temporary_agent_3
+					}
+				}else_if = {
+					limit = {
+						has_country_flag = agent_3_Espionage_counterintelligence_array
+					}
+					add_to_array = {
+						array = global.Espionage_bounty_hunter_array
+						value = agent_name_temporary_agent_3
+					}
+				}else_if = {
+					limit = {
+						has_country_flag = agent_3_Espionage_smugglers_array
+					}
+					add_to_array = {
+						array = global.Espionage_bounty_hunter_array
+						value = agent_name_temporary_agent_3
+					}
+				}else_if = {
+					limit = {
+						has_country_flag = agent_3_Espionage_bounty_hunter_array
+					}
+					add_to_array = {
+						array = global.Espionage_bounty_hunter_array
+						value = agent_name_temporary_agent_3
+					}
+				}
+				clear_temp_variable_in_agents = yes
+				clr_country_flag = agent_recruitment_screen_open
+			}
+			select_agent_2_click = {
+				meta_effect = {
+					text = {
+						set_variable = { agent_name_slot_[WHAT_SLOT_IT_IS]  = agent_name_temporary_agent_2} 
+						set_variable = { agent_charisma_slot_[WHAT_SLOT_IT_IS]  = agent_charisma_temporary_agent_2} 
+						set_variable = { agent_intelligence_slot_[WHAT_SLOT_IT_IS]  = agent_intelligence_temporary_agent_2} 
+						set_variable = { agent_martial_slot_[WHAT_SLOT_IT_IS]  = agent_martial_temporary_agent_2} 
+						set_variable = { personality_trait_slot_[WHAT_SLOT_IT_IS]  = personality_trait_temporary_agent_2} 
+						set_variable = { class_trait_slot_[WHAT_SLOT_IT_IS]  = class_trait_temporary_agent_2} 
+						set_variable = { race_trait_slot_[WHAT_SLOT_IT_IS]  = race_trait_temporary_agent_2}
+						set_variable = { expertise_slot_[WHAT_SLOT_IT_IS]  = 1}
+					}
+					WHAT_SLOT_IT_IS = "[?what_espionage_slot]"
+				}
+				if = {
+					limit = {
+						has_country_flag = agent_1_Espionage_intelligence_array
+					}
+					add_to_array = {
+						array = global.Espionage_bounty_hunter_array
+						value = agent_name_temporary_agent_1
+					}
+				}else_if = {
+					limit = {
+						has_country_flag = agent_1_Espionage_technicians_array
+					}
+					add_to_array = {
+						array = global.Espionage_bounty_hunter_array
+						value = agent_name_temporary_agent_1
+					}
+				}else_if = {
+					limit = {
+						has_country_flag = agent_1_Espionage_counterintelligence_array
+					}
+					add_to_array = {
+						array = global.Espionage_bounty_hunter_array
+						value = agent_name_temporary_agent_1
+					}
+				}else_if = {
+					limit = {
+						has_country_flag = agent_1_Espionage_smugglers_array
+					}
+					add_to_array = {
+						array = global.Espionage_bounty_hunter_array
+						value = agent_name_temporary_agent_1
+					}
+				}else_if = {
+					limit = {
+						has_country_flag = agent_1_Espionage_bounty_hunter_array
+					}
+					add_to_array = {
+						array = global.Espionage_bounty_hunter_array
+						value = agent_name_temporary_agent_1
+					}
+				}
+				if = {
+					limit = {
+						has_country_flag = agent_3_Espionage_intelligence_array
+					}
+					add_to_array = {
+						array = global.Espionage_bounty_hunter_array
+						value = agent_name_temporary_agent_3
+					}
+				}else_if = {
+					limit = {
+						has_country_flag = agent_3_Espionage_technicians_array
+					}
+					add_to_array = {
+						array = global.Espionage_bounty_hunter_array
+						value = agent_name_temporary_agent_3
+					}
+				}else_if = {
+					limit = {
+						has_country_flag = agent_3_Espionage_counterintelligence_array
+					}
+					add_to_array = {
+						array = global.Espionage_bounty_hunter_array
+						value = agent_name_temporary_agent_3
+					}
+				}else_if = {
+					limit = {
+						has_country_flag = agent_3_Espionage_smugglers_array
+					}
+					add_to_array = {
+						array = global.Espionage_bounty_hunter_array
+						value = agent_name_temporary_agent_3
+					}
+				}else_if = {
+					limit = {
+						has_country_flag = agent_3_Espionage_bounty_hunter_array
+					}
+					add_to_array = {
+						array = global.Espionage_bounty_hunter_array
+						value = agent_name_temporary_agent_3
+					}
+				}
+
+				clear_temp_variable_in_agents = yes
+				clr_country_flag = agent_recruitment_screen_open
+			}
+			select_agent_3_click = {
+				meta_effect = {
+					text = {
+						set_variable = { agent_name_slot_[WHAT_SLOT_IT_IS]  = agent_name_temporary_agent_3} 
+						set_variable = { agent_charisma_slot_[WHAT_SLOT_IT_IS]  = agent_charisma_temporary_agent_3} 
+						set_variable = { agent_intelligence_slot_[WHAT_SLOT_IT_IS]  = agent_intelligence_temporary_agent_3} 
+						set_variable = { agent_martial_slot_[WHAT_SLOT_IT_IS]  = agent_martial_temporary_agent_3} 
+						set_variable = { personality_trait_slot_[WHAT_SLOT_IT_IS]  = personality_trait_temporary_agent_3} 
+						set_variable = { class_trait_slot_[WHAT_SLOT_IT_IS]  = class_trait_temporary_agent_3} 
+						set_variable = { race_trait_slot_[WHAT_SLOT_IT_IS]  = race_trait_temporary_agent_3}
+						set_variable = { expertise_slot_[WHAT_SLOT_IT_IS]  = 1}
+					}
+					WHAT_SLOT_IT_IS = "[?what_espionage_slot]"
+				}
+				if = {
+					limit = {
+						has_country_flag = agent_1_Espionage_intelligence_array
+					}
+					add_to_array = {
+						array = global.Espionage_bounty_hunter_array
+						value = agent_name_temporary_agent_1
+					}
+				}else_if = {
+					limit = {
+						has_country_flag = agent_1_Espionage_technicians_array
+					}
+					add_to_array = {
+						array = global.Espionage_bounty_hunter_array
+						value = agent_name_temporary_agent_1
+					}
+				}else_if = {
+					limit = {
+						has_country_flag = agent_1_Espionage_counterintelligence_array
+					}
+					add_to_array = {
+						array = global.Espionage_bounty_hunter_array
+						value = agent_name_temporary_agent_1
+					}
+				}else_if = {
+					limit = {
+						has_country_flag = agent_1_Espionage_smugglers_array
+					}
+					add_to_array = {
+						array = global.Espionage_bounty_hunter_array
+						value = agent_name_temporary_agent_1
+					}
+				}else_if = {
+					limit = {
+						has_country_flag = agent_1_Espionage_bounty_hunter_array
+					}
+					add_to_array = {
+						array = global.Espionage_bounty_hunter_array
+						value = agent_name_temporary_agent_1
+					}
+				}
+
+				if = {
+					limit = {
+						has_country_flag = agent_2_Espionage_intelligence_array
+					}
+					add_to_array = {
+						array = global.Espionage_bounty_hunter_array
+						value = agent_name_temporary_agent_2
+					}
+				}else_if = {
+					limit = {
+						has_country_flag = agent_2_Espionage_technicians_array
+					}
+					add_to_array = {
+						array = global.Espionage_bounty_hunter_array
+						value = agent_name_temporary_agent_2
+					}
+				}else_if = {
+					limit = {
+						has_country_flag = agent_2_Espionage_counterintelligence_array
+					}
+					add_to_array = {
+						array = global.Espionage_bounty_hunter_array
+						value = agent_name_temporary_agent_2
+					}
+				}else_if = {
+					limit = {
+						has_country_flag = agent_2_Espionage_smugglers_array
+					}
+					add_to_array = {
+						array = global.Espionage_bounty_hunter_array
+						value = agent_name_temporary_agent_2
+					}
+				}else_if = {
+					limit = {
+						has_country_flag = agent_2_Espionage_bounty_hunter_array
+					}
+					add_to_array = {
+						array = global.Espionage_bounty_hunter_array
+						value = agent_name_temporary_agent_2
+					}
+				}
+				clear_temp_variable_in_agents = yes
+				clr_country_flag = agent_recruitment_screen_open
 			}
 		}
-		select_agent_3 = {
-			meta_effect = {
-				text = {
-					set_variable = { agent_identifier_slot_[WHAT_SLOT_IT_IS]  = agent_identifier_temporary_agent_3} 
-					set_variable = { agent_portrait_slot_[WHAT_SLOT_IT_IS]  = agent_portrait_temporary_agent_3} 
-					set_variable = { agent_name_slot_[WHAT_SLOT_IT_IS]  = agent_name_temporary_agent_3} 
-					set_variable = { agent_charisma_slot_[WHAT_SLOT_IT_IS]  = agent_charisma_temporary_agent_3} 
-					set_variable = { agent_intelligence_slot_[WHAT_SLOT_IT_IS]  = agent_intelligence_temporary_agent_3} 
-					set_variable = { agent_martial_slot_[WHAT_SLOT_IT_IS]  = agent_martial_temporary_agent_3} 
-					set_variable = { personality_trait_slot_[WHAT_SLOT_IT_IS]  = personality_trait_temporary_agent_3} 
-					set_variable = { class_trait_slot_[WHAT_SLOT_IT_IS]  = class_trait_temporary_agent_3} 
-					set_variable = { race_trait_slot_[WHAT_SLOT_IT_IS]  = race_trait_temporary_agent_3}
+		properties = {
+			select_agent_1 = {
+				image = "[get_recruitment_agent_photo_1]"
+			}
+			select_agent_2 = {
+				image = "[get_recruitment_agent_photo_2]"
+			}
+			select_agent_3 = {
+				image = "[get_recruitment_agent_photo_3]"
+			}
+		}
+	}
+	espionage_target_nation_selector_screen = {
+		context_type = player_context
+		parent_window_name = "operations_missions"
+        window_name = "espionage_target_nation_selector_screen"
+		visible = {
+            has_country_flag = select_espionage_mission_target
+		}
+		effects = {
+			member_flag_click = {
+				log = "Got here"
+				meta_effect = {
+					text = {
+						set_variable = { ROOT.targeted_country_slot_[WHAT_SLOT_IT_IS]  = This.id}
+						log = "targeted_country_slot_[WHAT_SLOT_IT_IS]"
+					}
+					WHAT_SLOT_IT_IS = "[?ROOT.what_espionage_slot]"
 				}
-				WHAT_SLOT_IT_IS = "[?what_espionage_slot]"
+			}
+		}
+		properties = {
+			member_flag = {
+				image = "[This.GetFlag]"
+			}
+		}
+		dynamic_lists = {
+			epsionage_target_gridbox = {
+				array = espionage_target_countries
+				entry_container = espionage_target_nation_selector_entry
+				change_scope = yes
 			}
 		}
 	}
