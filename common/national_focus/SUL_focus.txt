@@ -46,7 +46,7 @@ focus_tree = {
 		mutually_exclusive = {
 		}
 		completion_reward = {
-			
+			country_event = SUL_events.2
 		}
 
 		ai_will_do = {
@@ -209,8 +209,44 @@ focus_tree = {
 		mutually_exclusive = {
 		}
 		completion_reward = {
-				
+			BIT = {
+			add_timed_idea = {
+				idea = SUL_new_republic_influence
+				days = 365
 			}
+			democratic_acceptance = 30
+			custom_effect_tooltip = ae_new_rep_upgrade
+			hidden_effect = {
+				if = {
+					limit = {
+						has_idea = reb_influence_1
+					}
+					swap_ideas = {
+						remove_idea = reb_influence_1
+						add_idea = reb_influence_2
+					}
+				}
+				else_if = {
+					limit = {
+						has_idea = reb_influence_2
+					}
+					swap_ideas = {
+						remove_idea = reb_influence_2
+						add_idea = reb_influence_3
+					}
+				}
+				else_if = {
+					limit = {
+						has_idea = reb_influence_3
+					}
+					set_political_party = {
+						ideology = democratic
+						popularity = 50
+					}
+				}
+				}
+			}
+		}
 
 		ai_will_do = {
 			factor = 5
@@ -416,6 +452,35 @@ focus_tree = {
 		}
 		completion_reward = {
 			add_ideas = guerilla_forces
+			hidden_effect = {
+			division_template = {
+				name = "Sullustan Garrison"
+			
+				regiments = {
+					sullustans = { x = 0 y = 0 }
+					sullustans = { x = 0 y = 1 }
+					sullustans = { x = 1 y = 0 }
+					sullustans = { x = 1 y = 1 }
+					sullustans = { x = 2 y = 0 }
+					sullustans = { x = 2 y = 1 }
+				}
+				support = {
+			
+				}
+			}
+			SUL = {
+				419 = {
+					create_unit = {
+						division = "division_template = \"Sullustan Garrison\" start_experience_factor = 0.33" 
+						owner = SUL
+					}
+					create_unit = {
+						division = "division_template = \"Sullustan Garrison\" start_experience_factor = 0.39" 
+						owner = SUL
+					}
+				}
+			}
+			}
 		}
 
 		ai_will_do = {
@@ -561,12 +626,25 @@ focus_tree = {
 		prerequisite = {
 			focus = SUL_convert_imperial_shipyards
 		}
+		available = {
+			power_balance_value = {
+				id = SUL_balance
+				value > 0.45
+			}
+		}
 		search_filters = {
 		}
 		mutually_exclusive = {
 		}
 		completion_reward = {
-			
+			419 ={
+				add_extra_state_shared_building_slots = 4
+			add_building_construction = {
+				type = dockyard
+				level = 4
+				instant_build = yes
+				}
+			}
 		}
 
 		ai_will_do = {
@@ -616,7 +694,11 @@ focus_tree = {
 		mutually_exclusive = {
 		}
 		completion_reward = {
-			
+			add_tech_bonus = {
+				bonus = 1.0
+				uses = 2
+				category = rocketry
+			}
 		}
 
 		ai_will_do = {
@@ -652,7 +734,13 @@ focus_tree = {
 		mutually_exclusive = {
 		}
 		completion_reward = {
-			
+			419 = {
+				add_building_construction = {
+					type = air_base
+					level = 2
+					instant_build = yes
+					}
+			}
 		}
 
 		ai_will_do = {
@@ -669,12 +757,36 @@ focus_tree = {
 		prerequisite = {
 			focus = SUL_construct_ground_hangars
 		}
+		available = {
+			has_tech = interwar_antiair
+			has_tech = turbolaser_technology_1
+		}
 		search_filters = {
 		}
 		mutually_exclusive = {
 		}
 		completion_reward = {
-			
+			419 = {
+				add_building_construction = {
+					type = anti_air_building
+					level = 2
+					instant_build = yes
+					}
+			}
+			414 = {
+				add_building_construction = {
+					type = anti_air_building
+					level = 2
+					instant_build = yes
+					}
+			}
+			99 = {
+				add_building_construction = {
+					type = anti_air_building
+					level = 2
+					instant_build = yes
+					}
+			}
 		}
 
 		ai_will_do = {
