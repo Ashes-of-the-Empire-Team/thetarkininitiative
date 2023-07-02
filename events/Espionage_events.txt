@@ -1,7 +1,7 @@
 add_namespace = espionage_missions
-
-unit_leader_event = {
-	id = espionage_missions.1
+################################################## Events targeting the country who activated the mission ################################################################
+country_event = {
+  id = espionage_missions.1 ## SUCCESS
 	title = espionage_missions.1.t
 	desc = espionage_missions.1.d
 	
@@ -14,1432 +14,153 @@ unit_leader_event = {
 
 	option = {
 		name = unfortunate
-		effect_tooltip = {
-			FROM = {
-				add_timed_unit_leader_trait = {
-					trait = wounded
-					days = 180
-				}
-			}
-		}
-	}	
-}
-
-country_event = { ## ransom
-    id = espionage_missions.3
-    title = espionage_missions.3.t
-    desc = espionage_missions.3.d
-    
-    is_triggered_only = yes
-    
-    option = {
-        name = espionage_missions.3.a
-		every_unit_leader = {
-			limit = {
-				has_character_flag = targeted_by_mission
-				has_character_flag = targeted_by_@ROOT_1_ransom
-			}
-			retire = yes
-			unit_leader_event = {id = espionage_ransom_goes_bad}
-		}
-    }
-    option = {
-        name = espionage_missions.3.b
-	    trigger = {
-	        tag = ENG
-	    }
-		every_unit_leader = {
-			limit = {
-				has_character_flag = targeted_by_mission
-				has_character_flag = targeted_by_@ROOT_1_ransom
-			}
-		}
-    }
-}
-country_event = { #faliure ransom
-  id = espionage_missions.15
-  title = espionage_missions.15.t
-  desc = espionage_missions.15.d
-
-  is_triggered_only = yes
-  
-  option = {
-    name = espionage_missions.5.a
-  }
-}
-country_event = { #resource_rights
-    id = espionage_missions.4
-    title = espionage_missions.4.t
-    desc = espionage_missions.4.d
-    
-    is_triggered_only = yes
-    
-    option = {
-        name = espionage_missions.4.a
-        remove_resource_rights = capital
-    }
-}
-country_event = { #successful Operation
-  id = espionage_missions.5
-  title = espionage_missions.5.t
-  desc = espionage_missions.5.d
-
-  is_triggered_only = yes
-  
-  option = {
-    name = espionage_missions.5.a
-  }
-}
-country_event = { #unsuccessful Operation (not revealed)
-  id = espionage_missions.6
-  title = espionage_missions.6.t
-  desc = espionage_missions.6.d
-
-  is_triggered_only = yes
-
-  option = {
-    name = espionage_missions.6.a
-  }
-}
-country_event = { #successful Operation (revealed)
-  id = espionage_missions.7
-  title = espionage_missions.7.t
-  desc = espionage_missions.7.d
-
-  is_triggered_only = yes
-  
-  option = {
-    name = espionage_missions.7.a
-  }
-}
-country_event = { #successful Operation for target
-  id = espionage_missions.8
-  title = espionage_missions.8.t
-  desc = espionage_missions.8.d
-
-  is_triggered_only = yes
-  
-  option = {
-    name = espionage_missions.8.a
-  }
-}
-country_event = { #unsuccessful Operation for target
-  id = espionage_missions.9
-  title = espionage_missions.9.t
-  desc = espionage_missions.9.d
-
-  is_triggered_only = yes
-  
-  option = {
-    name = espionage_missions.9.a
-  }
-}
-country_event = { #unsuccessful Operation for target (revealed)
-  id = espionage_missions.10
-  title = espionage_missions.10.t
-  desc = espionage_missions.10.d
-
-  is_triggered_only = yes
-  
-  option = {
-    name = espionage_missions.10.a
-  }
-}
-country_event = { #successful Operation (revealed)
-  id = espionage_missions.13
-  title = espionage_missions.13.t
-  desc = espionage_missions.13.d
-
-  is_triggered_only = yes
-  
-  option = {
-    name = espionage_missions.13.a
-  }
-}
-country_event = { #successful Operation for target
-  id = espionage_missions.14
-  title = espionage_missions.14.t
-  desc = espionage_missions.14.d
-
-  is_triggered_only = yes
-  
-  option = {
-    name = espionage_missions.14.a
-  }
-}## Assassnation events end
-country_event = { #successful Operation
-  id = espionage_missions.11
-  title = espionage_missions.11.t
-  desc = espionage_missions.11.d
-
-  is_triggered_only = yes
-  
-  option = {
-    name = espionage_missions.11.a
-  }
-}
-country_event = { #unsuccessful Operation (not revealed)
-  id = espionage_missions.12
-  title = espionage_missions.12.t
-  desc = espionage_missions.12.d
-
-  is_triggered_only = yes
-  
-  option = {
-    name = espionage_missions.12.a
-  }
-}
-country_event = { #successful Operation
-  id = espionage_missions.17
-  title = espionage_missions.17.t
-  desc = espionage_missions.17.d
-
-  is_triggered_only = yes
-  
-  option = {
-    name = espionage_missions.17.a
-  }
-}
-country_event = { #unsuccessful Operation (not revealed)
-  id = espionage_missions.18
-  title = espionage_missions.18.t
-  desc = espionage_missions.18.d
-
-  is_triggered_only = yes
-  
-  option = {
-    name = espionage_missions.18.a
-  }
-}
-country_event = { #successful Operation (revealed)
-  id = espionage_missions.19
-  title = espionage_missions.19.t
-  desc = espionage_missions.19.d
-
-  is_triggered_only = yes
-  
-  option = {
-    name = espionage_missions.19.a
-  }
-}
-country_event = { #successful Operation for target
-  id = espionage_missions.20
-  title = espionage_missions.20.t
-  desc = espionage_missions.20.d
-
-  is_triggered_only = yes
-  
-  option = {
-    name = espionage_missions.20.a
-  }
-}
-country_event = { #unsuccessful Operation for target
-  id = espionage_missions.21
-  title = espionage_missions.21.t
-  desc = espionage_missions.21.d
-
-  is_triggered_only = yes
-  
-  option = {
-    name = espionage_missions.21.a
-  }
-}
-country_event = { #unsuccessful Operation for target (revealed)
-  id = espionage_missions.22
-  title = espionage_missions.22.t
-  desc = espionage_missions.22.d
-
-  is_triggered_only = yes
-  
-  option = {
-    name = espionage_missions.22.a
-  }
-}
-country_event = { #successful Operation
-  id = espionage_missions.23
-  title = espionage_missions.23.t
-  desc = espionage_missions.23.d
-
-  is_triggered_only = yes
-  
-  option = {
-    name = espionage_missions.23.a
-  }
-}
-country_event = { #unsuccessful Operation (not revealed)
-  id = espionage_missions.24
-  title = espionage_missions.24.t
-  desc = espionage_missions.24.d
-
-  is_triggered_only = yes
-  
-  option = {
-    name = espionage_missions.24.a
-  }
-}
-country_event = { #successful Operation (revealed)
-  id = espionage_missions.25
-  title = espionage_missions.25.t
-  desc = espionage_missions.25.d
-
-  is_triggered_only = yes
-  
-  option = {
-    name = espionage_missions.25.a
-  }
-}
-country_event = { #successful Operation for target
-  id = espionage_missions.26
-  title = espionage_missions.26.t
-  desc = espionage_missions.26.d
-
-  is_triggered_only = yes
-  
-  option = {
-    name = espionage_missions.26.a
-  }
-}
-country_event = { #unsuccessful Operation for target
-  id = espionage_missions.27
-  title = espionage_missions.27.t
-  desc = espionage_missions.27.d
-
-  is_triggered_only = yes
-  
-  option = {
-    name = espionage_missions.27.a
-  }
-}
-country_event = { #unsuccessful Operation for target (revealed)
-  id = espionage_missions.28
-  title = espionage_missions.28.t
-  desc = espionage_missions.28.d
-
-  is_triggered_only = yes
-  
-  option = {
-    name = espionage_missions.28.a
-  }
-}
-country_event = { #successful Operation
-  id = espionage_missions.29
-  title = espionage_missions.29.t
-  desc = espionage_missions.29.d
-
-  is_triggered_only = yes
-  
-  option = {
-    name = espionage_missions.29.a
-  }
-}
-country_event = { #unsuccessful Operation (not revealed)
-  id = espionage_missions.30
-  title = espionage_missions.30.t
-  desc = espionage_missions.30.d
-
-  is_triggered_only = yes
-  
-  option = {
-    name = espionage_missions.30.a
-  }
-}
-country_event = { #successful Operation (revealed)
-  id = espionage_missions.31
-  title = espionage_missions.31.t
-  desc = espionage_missions.31.d
-
-  is_triggered_only = yes
-  
-  option = {
-    name = espionage_missions.31.a
-  }
-}
-country_event = { #successful Operation for target
-  id = espionage_missions.32
-  title = espionage_missions.32.t
-  desc = espionage_missions.32.d
-
-  is_triggered_only = yes
-  
-  option = {
-    name = espionage_missions.32.a
-  }
-}
-country_event = { #unsuccessful Operation for target
-  id = espionage_missions.33
-  title = espionage_missions.33.t
-  desc = espionage_missions.33.d
-
-  is_triggered_only = yes
-  
-  option = {
-    name = espionage_missions.33.a
-  }
-}
-country_event = { #unsuccessful Operation for target (revealed)
-  id = espionage_missions.34
-  title = espionage_missions.34.t
-  desc = espionage_missions.34.d
-
-  is_triggered_only = yes
-  
-  option = {
-    name = espionage_missions.34.a
-  }
-}
-country_event = { #successful Operation
-  id = espionage_missions.35
-  title = espionage_missions.35.t
-  desc = espionage_missions.35.d
-
-  is_triggered_only = yes
-  
-  option = {
-    name = espionage_missions.35.a
-  }
-}
-country_event = { #unsuccessful Operation (not revealed)
-  id = espionage_missions.36
-  title = espionage_missions.36.t
-  desc = espionage_missions.36.d
-
-  is_triggered_only = yes
-  
-  option = {
-    name = espionage_missions.36.a
-  }
-}
-country_event = { #successful Operation (revealed)
-  id = espionage_missions.37
-  title = espionage_missions.37.t
-  desc = espionage_missions.37.d
-
-  is_triggered_only = yes
-  
-  option = {
-    name = espionage_missions.37.a
-  }
-}
-country_event = { #successful Operation for target
-  id = espionage_missions.38
-  title = espionage_missions.38.t
-  desc = espionage_missions.38.d
-
-  is_triggered_only = yes
-  
-  option = {
-    name = espionage_missions.38.a
-  }
-}
-country_event = { #unsuccessful Operation for target
-  id = espionage_missions.39
-  title = espionage_missions.39.t
-  desc = espionage_missions.39.d
-
-  is_triggered_only = yes
-  
-  option = {
-    name = espionage_missions.39.a
-  }
-}
-country_event = { #unsuccessful Operation for target (revealed)
-  id = espionage_missions.40
-  title = espionage_missions.40.t
-  desc = espionage_missions.40.d
-
-  is_triggered_only = yes
-  
-  option = {
-    name = espionage_missions.40.a
-  }
-}
-country_event = { #successful Operation
-  id = espionage_missions.41
-  title = espionage_missions.41.t
-  desc = espionage_missions.41.d
-
-  is_triggered_only = yes
-  
-  option = {
-    name = espionage_missions.41.a
-  }
-}
-country_event = { #unsuccessful Operation (not revealed)
-  id = espionage_missions.42
-  title = espionage_missions.42.t
-  desc = espionage_missions.42.d
-
-  is_triggered_only = yes
-  
-  option = {
-    name = espionage_missions.42.a
-  }
-}
-country_event = { #successful Operation (revealed)
-  id = espionage_missions.43
-  title = espionage_missions.43.t
-  desc = espionage_missions.43.d
-
-  is_triggered_only = yes
-  
-  option = {
-    name = espionage_missions.43.a
-  }
-}
-country_event = { #successful Operation for target
-  id = espionage_missions.44
-  title = espionage_missions.44.t
-  desc = espionage_missions.44.d
-
-  is_triggered_only = yes
-  
-  option = {
-    name = espionage_missions.44.a
-  }
-}
-country_event = { #unsuccessful Operation for target
-  id = espionage_missions.45
-  title = espionage_missions.45.t
-  desc = espionage_missions.45.d
-
-  is_triggered_only = yes
-  
-  option = {
-    name = espionage_missions.45.a
-  }
-}
-country_event = { #unsuccessful Operation for target (revealed)
-  id = espionage_missions.46
-  title = espionage_missions.46.t
-  desc = espionage_missions.46.d
-
-  is_triggered_only = yes
-  
-  option = {
-    name = espionage_missions.46.a
-  }
-}
-country_event = { #successful Operation
-  id = espionage_missions.47
-  title = espionage_missions.47.t
-  desc = espionage_missions.47.d
-
-  is_triggered_only = yes
-  
-  option = {
-    name = espionage_missions.47.a
-  }
-}
-country_event = { #unsuccessful Operation (not revealed)
-  id = espionage_missions.48
-  title = espionage_missions.48.t
-  desc = espionage_missions.48.d
-
-  is_triggered_only = yes
-  
-  option = {
-    name = espionage_missions.48.a
-  }
-}
-country_event = { #successful Operation (revealed)
-  id = espionage_missions.49
-  title = espionage_missions.49.t
-  desc = espionage_missions.49.d
-
-  is_triggered_only = yes
-  
-  option = {
-    name = espionage_missions.49.a
-  }
-}
-country_event = { #successful Operation for target
-  id = espionage_missions.50
-  title = espionage_missions.50.t
-  desc = espionage_missions.50.d
-
-  is_triggered_only = yes
-  
-  option = {
-    name = espionage_missions.50.a
-  }
-}
-country_event = { #unsuccessful Operation for target
-  id = espionage_missions.51
-  title = espionage_missions.51.t
-  desc = espionage_missions.51.d
-
-  is_triggered_only = yes
-  
-  option = {
-    name = espionage_missions.51.a
-  }
-}
-country_event = { #unsuccessful Operation for target (revealed)
-  id = espionage_missions.52
-  title = espionage_missions.52.t
-  desc = espionage_missions.52.d
-
-  is_triggered_only = yes
-  
-  option = {
-    name = espionage_missions.52.a
-  }
-}
-country_event = { #successful Operation
-  id = espionage_missions.53
-  title = espionage_missions.53.t
-  desc = espionage_missions.53.d
-
-  is_triggered_only = yes
-  
-  option = {
-    name = espionage_missions.53.a
-  }
-}
-country_event = { #unsuccessful Operation (not revealed)
-  id = espionage_missions.54
-  title = espionage_missions.54.t
-  desc = espionage_missions.54.d
-
-  is_triggered_only = yes
-  
-  option = {
-    name = espionage_missions.54.a
-  }
-}
-country_event = { #successful Operation (revealed)
-  id = espionage_missions.55
-  title = espionage_missions.55.t
-  desc = espionage_missions.55.d
-
-  is_triggered_only = yes
-  
-  option = {
-    name = espionage_missions.55.a
-  }
-}
-country_event = { #successful Operation for target
-  id = espionage_missions.56
-  title = espionage_missions.56.t
-  desc = espionage_missions.56.d
-
-  is_triggered_only = yes
-  
-  option = {
-    name = espionage_missions.56.a
-  }
-}
-country_event = { #unsuccessful Operation for target
-  id = espionage_missions.57
-  title = espionage_missions.57.t
-  desc = espionage_missions.57.d
-
-  is_triggered_only = yes
-  
-  option = {
-    name = espionage_missions.57.a
-  }
-}
-country_event = { #unsuccessful Operation for target (revealed)
-  id = espionage_missions.58
-  title = espionage_missions.58.t
-  desc = espionage_missions.58.d
-
-  is_triggered_only = yes
-  
-  option = {
-    name = espionage_missions.58.a
-  }
-}
-country_event = { #successful Operation
-  id = espionage_missions.59
-  title = espionage_missions.59.t
-  desc = espionage_missions.59.d
-
-  is_triggered_only = yes
-  
-  option = {
-    name = espionage_missions.59.a
-  }
-}
-country_event = { #unsuccessful Operation (not revealed)
-  id = espionage_missions.60
-  title = espionage_missions.60.t
-  desc = espionage_missions.60.d
-
-  is_triggered_only = yes
-  
-  option = {
-    name = espionage_missions.60.a
-  }
-}
-country_event = { #successful Operation (revealed)
-  id = espionage_missions.61
-  title = espionage_missions.61.t
-  desc = espionage_missions.61.d
-
-  is_triggered_only = yes
-  
-  option = {
-    name = espionage_missions.61.a
-  }
-}
-country_event = { #successful Operation for target
-  id = espionage_missions.62
-  title = espionage_missions.62.t
-  desc = espionage_missions.62.d
-
-  is_triggered_only = yes
-  
-  option = {
-    name = espionage_missions.62.a
-  }
-}
-country_event = { #unsuccessful Operation for target
-  id = espionage_missions.63
-  title = espionage_missions.63.t
-  desc = espionage_missions.63.d
-
-  is_triggered_only = yes
-  
-  option = {
-    name = espionage_missions.63.a
-  }
-}
-country_event = { #unsuccessful Operation for target (revealed)
-  id = espionage_missions.64
-  title = espionage_missions.64.t
-  desc = espionage_missions.64.d
-
-  is_triggered_only = yes
-  
-  option = {
-    name = espionage_missions.64.a
-  }
-}
-country_event = { #successful Operation
-  id = espionage_missions.65
-  title = espionage_missions.65.t
-  desc = espionage_missions.65.d
-
-  is_triggered_only = yes
-  
-  option = {
-    name = espionage_missions.65.a
-  }
-}
-country_event = { #unsuccessful Operation (not revealed)
-  id = espionage_missions.66
-  title = espionage_missions.66.t
-  desc = espionage_missions.66.d
-
-  is_triggered_only = yes
-  
-  option = {
-    name = espionage_missions.66.a
-  }
-}
-country_event = { #successful Operation (revealed)
-  id = espionage_missions.67
-  title = espionage_missions.67.t
-  desc = espionage_missions.67.d
-
-  is_triggered_only = yes
-  
-  option = {
-    name = espionage_missions.67.a
-  }
-}
-country_event = { #successful Operation for target
-  id = espionage_missions.68
-  title = espionage_missions.68.t
-  desc = espionage_missions.68.d
-
-  is_triggered_only = yes
-  
-  option = {
-    name = espionage_missions.68.a
-  }
-}
-country_event = { #unsuccessful Operation for target
-  id = espionage_missions.69
-  title = espionage_missions.69.t
-  desc = espionage_missions.69.d
-
-  is_triggered_only = yes
-  
-  option = {
-    name = espionage_missions.69.a
-  }
-}
-country_event = { #unsuccessful Operation for target (revealed)
-  id = espionage_missions.70
-  title = espionage_missions.70.t
-  desc = espionage_missions.70.d
-
-  is_triggered_only = yes
-  
-  option = {
-    name = espionage_missions.70.a
-  }
-}
-country_event = { #successful Operation
-  id = espionage_missions.71
-  title = espionage_missions.71.t
-  desc = espionage_missions.71.d
-
-  is_triggered_only = yes
-  
-  option = {
-    name = espionage_missions.71.a
-  }
-}
-country_event = { #unsuccessful Operation (not revealed)
-  id = espionage_missions.72
-  title = espionage_missions.72.t
-  desc = espionage_missions.72.d
-
-  is_triggered_only = yes
-  
-  option = {
-    name = espionage_missions.72.a
-  }
-}
-country_event = { #successful Operation (revealed)
-  id = espionage_missions.73
-  title = espionage_missions.73.t
-  desc = espionage_missions.73.d
-
-  is_triggered_only = yes
-  
-  option = {
-    name = espionage_missions.73.a
-  }
-}
-country_event = { #successful Operation for target
-  id = espionage_missions.74
-  title = espionage_missions.74.t
-  desc = espionage_missions.74.d
-
-  is_triggered_only = yes
-  
-  option = {
-    name = espionage_missions.74.a
-  }
-}
-country_event = { #unsuccessful Operation for target
-  id = espionage_missions.75
-  title = espionage_missions.75.t
-  desc = espionage_missions.75.d
-
-  is_triggered_only = yes
-  
-  option = {
-    name = espionage_missions.75.a
-  }
-}
-country_event = { #unsuccessful Operation for target (revealed)
-  id = espionage_missions.76
-  title = espionage_missions.76.t
-  desc = espionage_missions.76.d
-
-  is_triggered_only = yes
-  
-  option = {
-    name = espionage_missions.76.a
-  }
-}
-country_event = { #successful Operation
-  id = espionage_missions.77
-  title = espionage_missions.77.t
-  desc = espionage_missions.77.d
-
-  is_triggered_only = yes
-  
-  option = {
-    name = espionage_missions.77.a
-  }
-}
-country_event = { #unsuccessful Operation (not revealed)
-  id = espionage_missions.78
-  title = espionage_missions.78.t
-  desc = espionage_missions.78.d
-
-  is_triggered_only = yes
-  
-  option = {
-    name = espionage_missions.78.a
-  }
-}
-country_event = { #successful Operation (revealed)
-  id = espionage_missions.79
-  title = espionage_missions.79.t
-  desc = espionage_missions.79.d
-
-  is_triggered_only = yes
-  
-  option = {
-    name = espionage_missions.79.a
-  }
-}
-country_event = { #successful Operation for target
-  id = espionage_missions.80
-  title = espionage_missions.80.t
-  desc = espionage_missions.80.d
-
-  is_triggered_only = yes
-  
-  option = {
-    name = espionage_missions.80.a
-  }
-}
-country_event = { #unsuccessful Operation for target
-  id = espionage_missions.81
-  title = espionage_missions.81.t
-  desc = espionage_missions.81.d
-
-  is_triggered_only = yes
-  
-  option = {
-    name = espionage_missions.81.a
-  }
-}
-country_event = { #unsuccessful Operation for target (revealed)
-  id = espionage_missions.82
-  title = espionage_missions.82.t
-  desc = espionage_missions.82.d
-
-  is_triggered_only = yes
-  
-  option = {
-    name = espionage_missions.82.a
-  }
-}
-country_event = { #successful Operation
-  id = espionage_missions.83
-  title = espionage_missions.83.t
-  desc = espionage_missions.83.d
-
-  is_triggered_only = yes
-  
-  option = {
-    name = espionage_missions.83.a
-  }
-}
-country_event = { #unsuccessful Operation (not revealed)
-  id = espionage_missions.84
-  title = espionage_missions.84.t
-  desc = espionage_missions.84.d
-
-  is_triggered_only = yes
-  
-  option = {
-    name = espionage_missions.84.a
-  }
-}
-country_event = { #successful Operation (revealed)
-  id = espionage_missions.85
-  title = espionage_missions.85.t
-  desc = espionage_missions.85.d
-
-  is_triggered_only = yes
-  
-  option = {
-    name = espionage_missions.85.a
-  }
-}
-country_event = { #successful Operation for target
-  id = espionage_missions.86
-  title = espionage_missions.86.t
-  desc = espionage_missions.86.d
-
-  is_triggered_only = yes
-  
-  option = {
-    name = espionage_missions.86.a
-  }
-}
-country_event = { #unsuccessful Operation for target
-  id = espionage_missions.87
-  title = espionage_missions.87.t
-  desc = espionage_missions.87.d
-
-  is_triggered_only = yes
-  
-  option = {
-    name = espionage_missions.87.a
-  }
-}
-country_event = { #unsuccessful Operation for target (revealed)
-  id = espionage_missions.88
-  title = espionage_missions.88.t
-  desc = espionage_missions.88.d
-
-  is_triggered_only = yes
-  
-  option = {
-    name = espionage_missions.88.a
-  }
-}
-country_event = { #successful Operation
-  id = espionage_missions.89
-  title = espionage_missions.89.t
-  desc = espionage_missions.89.d
-
-  is_triggered_only = yes
-  
-  option = {
-    name = espionage_missions.89.a
-  }
-}
-country_event = { #unsuccessful Operation (not revealed)
-  id = espionage_missions.90
-  title = espionage_missions.90.t
-  desc = espionage_missions.90.d
-
-  is_triggered_only = yes
-  
-  option = {
-    name = espionage_missions.90.a
-  }
-}
-country_event = { #successful Operation (revealed)
-  id = espionage_missions.91
-  title = espionage_missions.91.t
-  desc = espionage_missions.91.d
-
-  is_triggered_only = yes
-  
-  option = {
-    name = espionage_missions.91.a
-  }
-}
-country_event = { #successful Operation for target
-  id = espionage_missions.92
-  title = espionage_missions.92.t
-  desc = espionage_missions.92.d
-
-  is_triggered_only = yes
-  
-  option = {
-    name = espionage_missions.92.a
-  }
-}
-country_event = { #unsuccessful Operation for target
-  id = espionage_missions.93
-  title = espionage_missions.93.t
-  desc = espionage_missions.93.d
-
-  is_triggered_only = yes
-  
-  option = {
-    name = espionage_missions.93.a
-  }
-}
-country_event = { #unsuccessful Operation for target (revealed)
-  id = espionage_missions.94
-  title = espionage_missions.94.t
-  desc = espionage_missions.94.d
-
-  is_triggered_only = yes
-  
-  option = {
-    name = espionage_missions.94.a
-  }
-}
-country_event = { #successful Operation
-  id = espionage_missions.95
-  title = espionage_missions.95.t
-  desc = espionage_missions.95.d
-
-  is_triggered_only = yes
-  
-  option = {
-    name = espionage_missions.95.a
-  }
-}
-country_event = { #unsuccessful Operation (not revealed)
-  id = espionage_missions.96
-  title = espionage_missions.96.t
-  desc = espionage_missions.96.d
-
-  is_triggered_only = yes
-  
-  option = {
-    name = espionage_missions.96.a
-  }
-}
-country_event = { #successful Operation (revealed)
-  id = espionage_missions.97
-  title = espionage_missions.97.t
-  desc = espionage_missions.97.d
-
-  is_triggered_only = yes
-  
-  option = {
-    name = espionage_missions.97.a
-  }
-}
-country_event = { #successful Operation for target
-  id = espionage_missions.98
-  title = espionage_missions.98.t
-  desc = espionage_missions.98.d
-
-  is_triggered_only = yes
-  
-  option = {
-    name = espionage_missions.98.a
-  }
-}
-country_event = { #unsuccessful Operation for target
-  id = espionage_missions.99
-  title = espionage_missions.99.t
-  desc = espionage_missions.99.d
-
-  is_triggered_only = yes
-  
-  option = {
-    name = espionage_missions.99.a
-  }
-}
-country_event = { #unsuccessful Operation for target (revealed)
-  id = espionage_missions.100
-  title = espionage_missions.100.t
-  desc = espionage_missions.100.d
-
-  is_triggered_only = yes
-  
-  option = {
-    name = espionage_missions.100.a
-  }
-}
-country_event = { #successful Operation
-  id = espionage_missions.101
-  title = espionage_missions.101.t
-  desc = espionage_missions.101.d
-
-  is_triggered_only = yes
-  
-  option = {
-    name = espionage_missions.101.a
   }
 }
-country_event = { #unsuccessful Operation (not revealed)
-  id = espionage_missions.102
-  title = espionage_missions.102.t
-  desc = espionage_missions.102.d
+country_event = {
+  id = espionage_missions.2 ## CRITICAL SUCCESS
+	title = espionage_missions.2.t
+	desc = espionage_missions.2.d
+	
+	picture = GFX_report_event_military_planning
 
-  is_triggered_only = yes
-  
-  option = {
-    name = espionage_missions.102.a
-  }
-}
-country_event = { #successful Operation (revealed)
-  id = espionage_missions.103
-  title = espionage_missions.103.t
-  desc = espionage_missions.103.d
+	is_triggered_only = yes
 
-  is_triggered_only = yes
-  
-  option = {
-    name = espionage_missions.103.a
-  }
-}
-country_event = { #successful Operation for target
-  id = espionage_missions.104
-  title = espionage_missions.104.t
-  desc = espionage_missions.104.d
+	immediate = {
+	}
 
-  is_triggered_only = yes
-  
-  option = {
-    name = espionage_missions.104.a
+	option = {
+		name = unfortunate
   }
 }
-country_event = { #unsuccessful Operation for target
-  id = espionage_missions.105
-  title = espionage_missions.105.t
-  desc = espionage_missions.105.d
+country_event = {
+  id = espionage_missions.3 ## FALIURE
+	title = espionage_missions.3.t
+	desc = espionage_missions.3.d
+	
+	picture = GFX_report_event_military_planning
 
-  is_triggered_only = yes
-  
-  option = {
-    name = espionage_missions.105.a
-  }
-}
-country_event = { #unsuccessful Operation for target (revealed)
-  id = espionage_missions.106
-  title = espionage_missions.106.t
-  desc = espionage_missions.106.d
+	is_triggered_only = yes
 
-  is_triggered_only = yes
-  
-  option = {
-    name = espionage_missions.106.a
-  }
-}
-country_event = { #successful Operation
-  id = espionage_missions.107
-  title = espionage_missions.107.t
-  desc = espionage_missions.107.d
+	immediate = {
+	}
 
-  is_triggered_only = yes
-  
-  option = {
-    name = espionage_missions.107.a
+	option = {
+		name = unfortunate
   }
 }
-country_event = { #unsuccessful Operation (not revealed)
-  id = espionage_missions.108
-  title = espionage_missions.108.t
-  desc = espionage_missions.108.d
+country_event = {
+  id = espionage_missions.4 ## CRITICAL FALIURE
+	title = espionage_missions.4.t
+	desc = espionage_missions.4.d
+	
+	picture = GFX_report_event_military_planning
 
-  is_triggered_only = yes
-  
-  option = {
-    name = espionage_missions.108.a
-  }
-}
-country_event = { #successful Operation (revealed)
-  id = espionage_missions.109
-  title = espionage_missions.109.t
-  desc = espionage_missions.109.d
+	is_triggered_only = yes
 
-  is_triggered_only = yes
-  
-  option = {
-    name = espionage_missions.109.a
-  }
-}
-country_event = { #successful Operation for target
-  id = espionage_missions.110
-  title = espionage_missions.110.t
-  desc = espionage_missions.110.d
+	immediate = {
+	}
 
-  is_triggered_only = yes
-  
-  option = {
-    name = espionage_missions.110.a
+	option = {
+		name = unfortunate
   }
 }
-country_event = { #unsuccessful Operation for target
-  id = espionage_missions.111
-  title = espionage_missions.111.t
-  desc = espionage_missions.111.d
+################################################## events targeting the target country of mission ###################################################################################
+country_event = {
+  id = espionage_missions.5 ## SUCCESSFUL
+	title = espionage_missions.5.t
+	desc = espionage_missions.5.d
+	
+	picture = GFX_report_event_military_planning
 
-  is_triggered_only = yes
-  
-  option = {
-    name = espionage_missions.111.a
-  }
-}
-country_event = { #unsuccessful Operation for target (revealed)
-  id = espionage_missions.112
-  title = espionage_missions.112.t
-  desc = espionage_missions.112.d
+	is_triggered_only = yes
 
-  is_triggered_only = yes
-  
-  option = {
-    name = espionage_missions.112.a
-  }
-}
-country_event = { #successful Operation
-  id = espionage_missions.113
-  title = espionage_missions.113.t
-  desc = espionage_missions.113.d
+	immediate = {
+	}
 
-  is_triggered_only = yes
-  
-  option = {
-    name = espionage_missions.113.a
+	option = {
+		name = unfortunate
   }
 }
-country_event = { #unsuccessful Operation (not revealed)
-  id = espionage_missions.114
-  title = espionage_missions.114.t
-  desc = espionage_missions.114.d
+country_event = {
+  id = espionage_missions.6 ## CRITICAL SUCCESS
+	title = espionage_missions.6.t
+	desc = espionage_missions.6.d
+	
+	picture = GFX_report_event_military_planning
 
-  is_triggered_only = yes
-  
-  option = {
-    name = espionage_missions.114.a
-  }
-}
-country_event = { #successful Operation (revealed)
-  id = espionage_missions.115
-  title = espionage_missions.115.t
-  desc = espionage_missions.115.d
+	is_triggered_only = yes
 
-  is_triggered_only = yes
-  
-  option = {
-    name = espionage_missions.115.a
-  }
-}
-country_event = { #successful Operation for target
-  id = espionage_missions.116
-  title = espionage_missions.116.t
-  desc = espionage_missions.116.d
+	immediate = {
+	}
 
-  is_triggered_only = yes
-  
-  option = {
-    name = espionage_missions.116.a
+	option = {
+		name = unfortunate
   }
 }
-country_event = { #unsuccessful Operation for target
-  id = espionage_missions.117
-  title = espionage_missions.117.t
-  desc = espionage_missions.117.d
+country_event = {
+  id = espionage_missions.7 ## FALIURE
+	title = espionage_missions.7.t
+	desc = espionage_missions.7.d
+	
+	picture = GFX_report_event_military_planning
 
-  is_triggered_only = yes
-  
-  option = {
-    name = espionage_missions.117.a
-  }
-}
-country_event = { #unsuccessful Operation for target (revealed)
-  id = espionage_missions.118
-  title = espionage_missions.118.t
-  desc = espionage_missions.118.d
+	is_triggered_only = yes
 
-  is_triggered_only = yes
-  
-  option = {
-    name = espionage_missions.118.a
-  }
-}
-country_event = { #successful Operation
-  id = espionage_missions.119
-  title = espionage_missions.119.t
-  desc = espionage_missions.119.d
+	immediate = {
+	}
 
-  is_triggered_only = yes
-  
-  option = {
-    name = espionage_missions.119.a
+	option = {
+		name = unfortunate
   }
 }
-country_event = { #unsuccessful Operation (not revealed)
-  id = espionage_missions.120
-  title = espionage_missions.120.t
-  desc = espionage_missions.120.d
+country_event = {
+  id = espionage_missions.8 ## CRITICAL FALIURE
+	title = espionage_missions.8.t
+	desc = espionage_missions.8.d
+	
+	picture = GFX_report_event_military_planning
 
-  is_triggered_only = yes
-  
-  option = {
-    name = espionage_missions.120.a
-  }
-}
-country_event = { #successful Operation (revealed)
-  id = espionage_missions.121
-  title = espionage_missions.121.t
-  desc = espionage_missions.121.d
+	is_triggered_only = yes
 
-  is_triggered_only = yes
-  
-  option = {
-    name = espionage_missions.121.a
-  }
-}
-country_event = { #successful Operation for target
-  id = espionage_missions.122
-  title = espionage_missions.122.t
-  desc = espionage_missions.122.d
+	immediate = {
+	}
 
-  is_triggered_only = yes
-  
-  option = {
-    name = espionage_missions.122.a
+	option = {
+		name = unfortunate
   }
 }
-country_event = { #unsuccessful Operation for target
-  id = espionage_missions.123
-  title = espionage_missions.123.t
-  desc = espionage_missions.123.d
 
-  is_triggered_only = yes
-  
-  option = {
-    name = espionage_missions.123.a
-  }
-}
-country_event = { #unsuccessful Operation for target (revealed)
-  id = espionage_missions.124
-  title = espionage_missions.124.t
-  desc = espionage_missions.124.d
 
-  is_triggered_only = yes
-  
-  option = {
-    name = espionage_missions.124.a
-  }
-}
-country_event = { #successful Operation
-  id = espionage_missions.125
-  title = espionage_missions.125.t
-  desc = espionage_missions.125.d
+country_event = {
+  id = espionage_missions.9 ## CRITICAL FALIURE AGENT DEATH
+	title = espionage_missions.9.t
+	desc = espionage_missions.9.d
+	
+	picture = GFX_report_event_military_planning
 
-  is_triggered_only = yes
-  
-  option = {
-    name = espionage_missions.125.a
-  }
-}
-country_event = { #unsuccessful Operation (not revealed)
-  id = espionage_missions.126
-  title = espionage_missions.126.t
-  desc = espionage_missions.126.d
+	is_triggered_only = yes
 
-  is_triggered_only = yes
-  
-  option = {
-    name = espionage_missions.126.a
-  }
-}
-country_event = { #successful Operation (revealed)
-  id = espionage_missions.127
-  title = espionage_missions.127.t
-  desc = espionage_missions.127.d
+	immediate = {
+	}
 
-  is_triggered_only = yes
-  
-  option = {
-    name = espionage_missions.127.a
+	option = {
+		name = unfortunate
   }
 }
-country_event = { #successful Operation for target
-  id = espionage_missions.128
-  title = espionage_missions.128.t
-  desc = espionage_missions.128.d
 
-  is_triggered_only = yes
+country_event = {
+	id = espionage_missions.10 ## CRITICAL FALIURE YOU KILLED A AGENT
+	  title = espionage_missions.10.t
+	  desc = espionage_missions.10.d
+	  
+	  picture = GFX_report_event_military_planning
   
-  option = {
-    name = espionage_missions.128.a
-  }
-}
-country_event = { #unsuccessful Operation for target
-  id = espionage_missions.129
-  title = espionage_missions.129.t
-  desc = espionage_missions.129.d
-
-  is_triggered_only = yes
+	  is_triggered_only = yes
   
-  option = {
-    name = espionage_missions.129.a
-  }
-}
-country_event = { #unsuccessful Operation for target (revealed)
-  id = espionage_missions.130
-  title = espionage_missions.130.t
-  desc = espionage_missions.130.d
-
-  is_triggered_only = yes
+	  immediate = {
+	  }
   
-  option = {
-    name = espionage_missions.130.a
+	  option = {
+		  name = unfortunate
+	}
   }
-}

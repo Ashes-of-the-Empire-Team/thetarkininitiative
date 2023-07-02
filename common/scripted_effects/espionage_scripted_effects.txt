@@ -31,14 +31,49 @@ find_espionage_mission_end_time = {
 
 }
 espionage_end_mission_effect = {
-	## add Modifiers for success chance here
+	## DO NOT CHANGE THIS WITHOUT PRIOR NOTIFICATION TO NEVERFIRE, ONLY ADD STUFF AT ADD MODIFIERS FOR SUCCESS CHANCE
+	meta_effect = { # GRABING THE AGENT VARIABLES
+		text = {
+			set_temp_variable = {agent_name = agent_name_slot_[WHAT_SLOT_IT_IS] }
+			set_temp_variable = {agent_charisma = agent_charisma_slot_[WHAT_SLOT_IT_IS] }
+			set_temp_variable = {agent_intelligence = agent_intelligence_slot_[WHAT_SLOT_IT_IS] }
+			set_temp_variable = {agent_martial = agent_martial_slot_[WHAT_SLOT_IT_IS] }
+			set_temp_variable = {agent_personality_trait = personality_trait_slot_[WHAT_SLOT_IT_IS] }
+			set_temp_variable = {agent_class_trait = class_trait_slot_[WHAT_SLOT_IT_IS] }
+			set_temp_variable = {agent_race_trait = race_trait_slot_[WHAT_SLOT_IT_IS] }
+			set_temp_variable = {agent_expertise = expertise_slot_[WHAT_SLOT_IT_IS] }
+			set_temp_variable = {agent_expertise_progress = expertise_progress_slot_[WHAT_SLOT_IT_IS] }
+		}
+			WHAT_SLOT_IT_IS = "[?agent_slot_number]"
+	}
+## ADD MODIFIERS FOR SUCCESS CHANCE HERE
 	set_temp_variable = {Total_counterespionage_vs_espionage_percentage = modifier@espionage_value } ## grab espionage value (the good for you one)
 	targeted_country = {
 		subtract_from_temp_variable = {Total_counterespionage_vs_espionage_percentage = modifier@counter_espionage_value} ## grab opponetnts counter espionage value (bad for you)
 	}
-
-	##
-
+	## GRABBING TRAIT MODIFIERS
+	add_ideas = {
+		agent_class_trait
+		agent_race_trait
+		agent_personality_trait
+	}
+	meta_effect = { ### Grabbing specfic mission success chance from traits
+		text = {
+			add_to_temp_variable = {Total_counterespionage_vs_espionage_percentage = modifier@[MISSION_NAME]_success_chance} 
+		}
+			MISSION_NAME = "[?effect_mission_identifier.GetTokenKey]"
+	}
+	set_temp_variable = {critical_success_chance = 10}
+	add_to_temp_variable = {critical_success_chance = modifier@espionage_critical_success_chance}
+	set_temp_variable = {critical_faliure_chance = 90}
+	add_to_temp_variable = {critical_faliure_chance = modifier@espionage_critical_faliure_chance} ## THIS WILL BE NEGATIVE (if you want the chance of critical failure to be lower)
+	add_to_temp_variable = {agent_charisma = modifier@espionage_charisma_score_bonuses}
+	add_to_temp_variable = {agent_martial = modifier@espionage_martial_score_bonuses}
+	add_to_temp_variable = {agent_intelligence = modifier@espionage_intelligence_score_bonuses}
+	add_to_temp_variable = {Total_counterespionage_vs_espionage_percentage = agent_expertise}
+	add_to_temp_variable = {Total_counterespionage_vs_espionage_percentage = modifier@espionage_faliure_chance}
+	add_to_temp_variable = {Total_counterespionage_vs_espionage_percentage = modifier@espionage_success_chance}
+## END OF MODIFIERS
 	randomize_temp_variable = {  ## success and failure chance generator
 		var = chance_of_success 
 		distribution = uniform
@@ -46,30 +81,155 @@ espionage_end_mission_effect = {
 		max = 100
 	}
 
-	## HOW THE CHANCE OF SUCCESS WORKS
-# Chance of success is a random number between 1 and 100
-# You want that number to fall within your 'net', which is the sum total of positive and negative modifiers and skill scores
-# multiplied by how easy the mission is (lower numbers are harder as your net is smaller)
-
-	## FOR EXAMPLE
-#	martial score is 12
-#	technician score is 7
-#	total skill score divided by two = 9.5 (reason is there are two skills while some missions use only one)
-#   mission is 6 on the factor of how hard it is
-#   net is then 57
-#   times by 1.10, which is the sum total of the percentages for epsionage and counter espionage
-#	so net becomes 62.7
-#	chance_of_success lands on 62
-	##
+	## ABOVE IS GRABBING THE CORRECT AGENTS VARIABLES
 	meta_effect = { # grab the mission identifier and enact that scripted effect, each scripted effects holds the end results of a operation
 		text = {
 			[MISSION_NAME]_mission_end_effect = yes
 		}
 			MISSION_NAME = "[?effect_mission_identifier.GetTokenKey]"
 	}
+
+	remove_ideas = {
+		agent_class_trait
+		agent_race_trait
+		agent_personality_trait
+	}
 }
+
+## EXAMPLE END EFFECT
+example_end_effect = {
+
+		## HOW THE CHANCE OF SUCCESS WORKS
+	# Chance of success is a random number between 1 and 100
+	# You want that number to fall within your 'net', which is the sum total of positive and negative modifiers and skill scores
+	# multiplied by how easy the mission is (lower numbers are harder as your net is smaller)
+
+		## FOR EXAMPLE
+	#	martial score is 12
+	#	technician score is 7
+	#	total skill score divided by two = 9.5 (reason is there are two skills while some missions use only one)
+	#   mission is 6 on the factor of how hard it is
+	#   net is then 57
+	#   times by 1.10, which is the sum total of the percentages for epsionage and counter espionage
+	#	so net becomes 62.7
+	#	chance_of_success lands on 62
+		##
+	## 
+		set_temp_variable = { net_size = agent_martial } ## find characters martial and sets net_size to then work out success chance
+		add_to_temp_variable = { net_size = agent_charisma } ## find characters charisma and adds to net_size to then work out success chance
+		add_to_temp_variable = { net_size = agent_intelligence } ## find characters intelligence and adds to net_size to then work out success chance
+		divide_temp_variable = { net_size = 3 } ## Getting the average points between agents (3 skill scores being used so divide by 3)
+	# ALL OF ABOVE DECIDES WHICH POINTS TO USE
+
+		multiply_temp_variable = { net_size = 6 } ## 6 on how easy it is
+		multiply_temp_variable = { net_size = Total_counterespionage_vs_espionage_percentage} ## multiply the bonuses to get total net size
+
+
+
+
+		### THIS BIT IS THE END RESULT, IT DECIDES THE EVENTS AND EFFECTS. 
+	## ALWAYS USE THIS SETUP
+	## PUTS IN CORRECT TRIGGERS
+	## EVENTS ARE GENERALISED EVENTS, WILL PUT IN LISTED REWARDS FROM LOCALISATION AND LAST PHASE 
+
+	if = {
+		limit = {
+			check_variable = {
+				var = chance_of_success
+				value = net_size
+				compare = greater_than_or_equals
+			}
+		}
+		if = {
+			limit = {
+				check_variable = {chance_of_success > critical_success_chance} ## If the success chance is over critical success chance (normally 10) (chance rolled didnt roll low} act the nromal effects
+			}
+			var:targeted_country = {
+				## EFFECTS ON THE TARGETED COUNTRY
+				country_event = espionage_missions.5 ## ESPIOANGE MISSION WAS SUCCESSFUL ON YOUR COUNTRY
+			}
+			country_event = espionage_missions.1 ## SUCCESS MISSION EVENT
+		}else = { ### CRITICAL SUCCESSS EFFECTS
+			var:targeted_country = {
+				## CRITICAL SUCCESSS EFFECTS ON TARGET COUNTRY
+				country_event = espionage_missions.6 ## ESPIOANGE CRITICAL SUCCESS WAS SUCCESSFUL ON YOUR COUNTRY
+			}
+			country_event = espionage_missions.2 ## CRITICAL SUCCESS EVENT
+		}
+	}else = {## FALIURE
+		if = {
+			limit = {
+				check_variable = {chance_of_success < critical_faliure_chance} ## If the success chance is under critical faliure chance (normally 90) (mission wasnt critical failure)
+			}
+			var:targeted_country = {
+				country_event = espionage_missions.7
+				## ESPIOANGE MISSION WAS UNSUCCESSFUL ON YOUR COUNTRY
+			}
+			country_event = espionage_missions.3 ## UNSUCCESSFUL MISSION EVENT
+		}else = {### CRITICAL FAILURE EFFECTS
+			chance_of_death = yes ## CALCULATES WEATHER DEATH CHANCE WILL HAPPEN OR NOT, CRITICAL FALIURE EVENT IS HELD IN HERE
+		}
+	}
+}
+
+
+chance_of_death = {
+	set_temp_variable = {agent_surviability_bonuses = modifier@espionage_agent_survivability}
+	set_temp_variable = {death_chance = 10}
+	subtract_from_temp_variable = {death_chance = agent_surviability_bonuses}
+	subtract_from_temp_variable = {death_chance = agent_expertise}
+	clamp_temp_variable = {
+		var = death_chance
+		min = 5
+	}
+	randomize_temp_variable = {  ## death generator
+		var = chance_of_death
+		distribution = uniform
+		min = 1
+		max = 100
+	}
+	if = {
+		limit = {
+			check_variable = {
+				var = chance_of_death
+				value = death_chance
+				compare = less_than_or_equals
+			}
+		}
+		country_event = espionage_missions.9 ## CRITICAL FAILURE EVENT AGENT DEATH
+		var:targeted_country = {
+			## CRITICAL FAILURE EFFECTS ON TARGET COUNTRY
+			country_event = espionage_missions.10 ## ESPIOANGE CRITICAL SUCCESS WAS UNSUCCESSFUL ON YOUR COUNTRY
+		}
+		meta_effect = { # REMOVING AGENT VARIABLES
+			text = {
+				clear_variable = agent_name_slot_[WHAT_SLOT_IT_IS]
+				clear_variable = agent_charisma_slot_[WHAT_SLOT_IT_IS]
+				clear_variable = agent_intelligence_slot_[WHAT_SLOT_IT_IS]
+				clear_variable = agent_martial_slot_[WHAT_SLOT_IT_IS]
+				clear_variable = personality_trait_slot_[WHAT_SLOT_IT_IS]
+				clear_variable = class_trait_slot_[WHAT_SLOT_IT_IS]
+				clear_variable = race_trait_slot_[WHAT_SLOT_IT_IS]
+				clear_variable = expertise_slot_[WHAT_SLOT_IT_IS]
+				clear_variable = expertise_progress_slot_[WHAT_SLOT_IT_IS]
+			}
+			WHAT_SLOT_IT_IS = "[?agent_slot_number]"
+		}
+	}else = {
+		var:targeted_country = {
+			## CRITICAL FAILURE EFFECTS ON TARGET COUNTRY
+			country_event = espionage_missions.8 ## ESPIOANGE CRITICAL SUCCESS WAS UNSUCCESSFUL ON YOUR COUNTRY
+		}
+		country_event = espionage_missions.4 ## CRITICAL FAILURE EVENT
+	}
+}
+
+
+
+
+
 assassinate_mission_end_effect = { ## assassinate mission end effect
-	set_temp_variable = { net_size = agent_martial@var:agent_in_mission } ## find characters martial and sets net_size to then work out success chance
+	set_temp_variable = { net_size = agent_martial } ## find characters martial and sets net_size to then work out success chance
 	multiply_temp_variable = { net_size = 6 } ## 6 on how easy it is
 	multiply_temp_variable = { net_size = Total_counterespionage_vs_espionage_percentage} ## multiply the bonuses to get total net size
 	if = {
@@ -77,12 +237,12 @@ assassinate_mission_end_effect = { ## assassinate mission end effect
 			check_variable = {
 				var = chance_of_success
 				value = net_size
-				compare = less_than_or_equals
+				compare = greater_than_or_equals
 			}
 		}
 		if = {
 			limit = {
-				check_variable = {chance_of_success_1 > 10}
+				check_variable = {chance_of_success > 10}
 			}
 			var:targeted_country = {
 				every_unit_leader = {
@@ -127,8 +287,8 @@ assassinate_mission_end_effect = { ## assassinate mission end effect
 	}
 }
 ransom_mission_end_effect = {
-	set_temp_variable = { net_size = agent_martial@var:agent_in_mission }
-	add_to_temp_variable = { net_size = agent_intelligence@var:agent_in_mission }
+	set_temp_variable = { net_size = agent_martial }
+	add_to_temp_variable = { net_size = agent_intelligence }
 	divide_temp_variable = { net_size = 2 }
 	multiply_temp_variable = { net_size = 5 }
 	multiply_temp_variable = { net_size = Total_counterespionage_vs_espionage_percentage} ## multiply the bonuses to get total net size
@@ -137,20 +297,22 @@ ransom_mission_end_effect = {
 			check_variable = {
 				var = chance_of_success
 				value = net_size
-				compare = less_than_or_equals
+				compare = greater_than_or_equals
 			}
 		}
 		var:targeted_country = {
 			country_event = {
-				id = espionage.3
+				id = espionage.2
 				days = 1
 			}
 		}
+	}else = {
+		country_event = espionage_missions.3
 	}
 }
 army_training_mission_end_effect = { ## Army Training
-	set_temp_variable = { net_size = agent_martial@var:agent_in_mission }
-	add_to_temp_variable = { net_size = agent_intelligence@var:agent_in_mission }
+	set_temp_variable = { net_size = agent_martial }
+	add_to_temp_variable = { net_size = agent_intelligence }
 	divide_temp_variable = { net_size = 2 }
 	multiply_temp_variable = { net_size = 5 }
 	if = {
@@ -158,7 +320,7 @@ army_training_mission_end_effect = { ## Army Training
 			check_variable = {
 				var = chance_of_success
 				value = net_size
-				compare = less_than_or_equals
+				compare = greater_than_or_equals
 			}
 		}
 		every_unit_leader = {
@@ -176,9 +338,9 @@ army_training_mission_end_effect = { ## Army Training
 				armor_officer
 			}
 		}
-		country_event = espionage_missions.11
+		country_event = espionage_missions.1
 	}else = {## FALIURE
-		country_event = espionage_missions.12
+		country_event = espionage_missions.3
 		every_unit_leader = {
 			limit = {
 				has_character_flag = targeted_by_mission
@@ -190,32 +352,15 @@ army_training_mission_end_effect = { ## Army Training
 	}
 }
 intimidate_senator_mission_end_effect = { ## Blackmail Senator
-	set_temp_variable = { net_size = agent_martial@var:agent_in_mission }
-	add_to_temp_variable = { net_size = agent_charisma@var:agent_in_mission }
+	set_temp_variable = { net_size = agent_martial }
+	add_to_temp_variable = { net_size = agent_charisma }
 	divide_temp_variable = { net_size = 2 }
 	multiply_temp_variable = { net_size = 10 }
 	multiply_temp_variable = { net_size = Total_counterespionage_vs_espionage_percentage} ## multiply the bonuses to get total net size
-	if = {
-		limit = {
-			check_variable = {
-				var = chance_of_success
-				value = net_size
-				compare = less_than_or_equals
-			}
-		}
-		var:targeted_country = {
-			country_event = espionage_missions.20
-		}
-		country_event = espionage_missions.17
-	}else = {## FALIURE
-		country_event = espionage_missions.18
-		var:targeted_country = {
-			country_event = espionage_missions.21
-		}
-	}
+	
 }
 cyber_attack_mission_end_effect = {
-	set_temp_variable = { net_size = agent_intelligence@var:agent_in_mission }
+	set_temp_variable = { net_size = agent_intelligence }
 	multiply_temp_variable = { net_size = 5 }
 	multiply_temp_variable = { net_size = Total_counterespionage_vs_espionage_percentage} ## multiply the bonuses to get total net size
 	if = {
@@ -223,7 +368,7 @@ cyber_attack_mission_end_effect = {
 			check_variable = {
 				var = chance_of_success
 				value = net_size
-				compare = less_than_or_equals
+				compare = greater_than_or_equals
 			}
 		}
 		var:targeted_country = {
@@ -231,19 +376,19 @@ cyber_attack_mission_end_effect = {
 				idea = cyber_attack_espionage
 				days = 100
 			}
-			country_event = espionage_missions.26
+			country_event = espionage_missions.5
 		}
-		country_event = espionage_missions.23
+		country_event = espionage_missions.1
 	}else = {## FALIURE
-		country_event = espionage_missions.24
+		country_event = espionage_missions.3
 		var:targeted_country = {
-			country_event = espionage_missions.21
+			country_event = espionage_missions.7
 		}
 	}
 }
 steal_blueprint_mission_end_effect = {
-	set_temp_variable = { net_size = agent_intelligence@var:agent_in_mission }
-	add_to_temp_variable = { net_size = agent_charisma@var:agent_in_mission }
+	set_temp_variable = { net_size = agent_intelligence }
+	add_to_temp_variable = { net_size = agent_charisma }
 	divide_temp_variable = { net_size = 2 }
 	multiply_temp_variable = { net_size = 8 }
 	multiply_temp_variable = { net_size = Total_counterespionage_vs_espionage_percentage} ## multiply the bonuses to get total net size
@@ -252,7 +397,7 @@ steal_blueprint_mission_end_effect = {
 			check_variable = {
 				var = chance_of_success
 				value = net_size
-				compare = less_than_or_equals
+				compare = greater_than_or_equals
 			}
 		}
 		var:targeted_country = {
@@ -266,19 +411,19 @@ steal_blueprint_mission_end_effect = {
 				target = FROM
 				uses = 1
 			}
-			country_event = espionage_missions.32
+			country_event = espionage_missions.5
 		}
-		country_event = espionage_missions.29
+		country_event = espionage_missions.1
 	}else = {## FALIURE
-		country_event = espionage_missions.30
+		country_event = espionage_missions.3
 		var:targeted_country = {
-			country_event = espionage_missions.33
+			country_event = espionage_missions.7
 		}
 	}
 }
 sprout_disease_mission_end_effect = {
-	set_temp_variable = { net_size = agent_intelligence@var:agent_in_mission }
-	add_to_temp_variable = { net_size = agent_charisma@var:agent_in_mission }
+	set_temp_variable = { net_size = agent_intelligence }
+	add_to_temp_variable = { net_size = agent_charisma }
 	divide_temp_variable = { net_size = 2 }
 	multiply_temp_variable = { net_size = 5 }
 	multiply_temp_variable = { net_size = Total_counterespionage_vs_espionage_percentage} ## multiply the bonuses to get total net size
@@ -287,26 +432,26 @@ sprout_disease_mission_end_effect = {
 			check_variable = {
 				var = chance_of_success
 				value = net_size
-				compare = less_than_or_equals
+				compare = greater_than_or_equals
 			}
 		}
 		var:targeted_country = {
 			capital_scope = {
 				add_manpower = -50000
 			}
-			country_event = espionage_missions.38
+			country_event = espionage_missions.5
 		}
-		country_event = espionage_missions.35
+		country_event = espionage_missions.1
 	}else = {## FALIURE
-		country_event = espionage_missions.36
+		country_event = espionage_missions.3
 		var:targeted_country = {
-			country_event = espionage_missions.39
+			country_event = espionage_missions.7
 		}
 	}
 }
 logistics_sabotage_mission_end_effect = {
-	set_temp_variable = { net_size = agent_intelligence@var:agent_in_mission }
-	add_to_temp_variable = { net_size = agent_martial@var:agent_in_mission }
+	set_temp_variable = { net_size = agent_intelligence }
+	add_to_temp_variable = { net_size = agent_martial }
 	divide_temp_variable = { net_size = 2 }
 	multiply_temp_variable = { net_size = 8 }
 	multiply_temp_variable = { net_size = Total_counterespionage_vs_espionage_percentage} ## multiply the bonuses to get total net size
@@ -315,7 +460,7 @@ logistics_sabotage_mission_end_effect = {
 			check_variable = {
 				var = chance_of_success
 				value = net_size
-				compare = less_than_or_equals
+				compare = greater_than_or_equals
 			}
 		}
 		var:targeted_country = {
@@ -323,19 +468,19 @@ logistics_sabotage_mission_end_effect = {
 				idea = logistics_sabotage_espionage
 				days = 40
 			}
-			country_event = espionage_missions.44
+			country_event = espionage_missions.5
 		}
-		country_event = espionage_missions.41
+		country_event = espionage_missions.1
 	}else = {## FALIURE
-		country_event = espionage_missions.42
+		country_event = espionage_missions.3
 		var:targeted_country = {
-			country_event = espionage_missions.45
+			country_event = espionage_missions.7
 		}
 	}
 }
 industrial_sabotage_mission_end_effect = {
-	set_temp_variable = { net_size = agent_intelligence@var:agent_in_mission }
-	add_to_temp_variable = { net_size = agent_martial@var:agent_in_mission }
+	set_temp_variable = { net_size = agent_intelligence }
+	add_to_temp_variable = { net_size = agent_martial }
 	divide_temp_variable = { net_size = 2 }
 	multiply_temp_variable = { net_size = 12 }
 	multiply_temp_variable = { net_size = Total_counterespionage_vs_espionage_percentage} ## multiply the bonuses to get total net size
@@ -344,7 +489,7 @@ industrial_sabotage_mission_end_effect = {
 			check_variable = {
 				var = chance_of_success
 				value = net_size
-				compare = less_than_or_equals
+				compare = greater_than_or_equals
 			}
 		}
 		var:targeted_country = {
@@ -377,19 +522,19 @@ industrial_sabotage_mission_end_effect = {
 					}
 				}
 			}
-			country_event = espionage_missions.50
+			country_event = espionage_missions.3
 		}
-		country_event = espionage_missions.47
+		country_event = espionage_missions.1
 	}else = {## FALIURE
-		country_event = espionage_missions.48
+		country_event = espionage_missions.3
 		var:targeted_country = {
-			country_event = espionage_missions.51
+			country_event = espionage_missions.7
 		}
 	}
 }
 infilitrate_military_mission_end_effect = {
-	set_temp_variable = { net_size = agent_martial@var:agent_in_mission }
-	add_to_temp_variable = { net_size = agent_charisma@var:agent_in_mission }
+	set_temp_variable = { net_size = agent_martial }
+	add_to_temp_variable = { net_size = agent_charisma }
 	divide_temp_variable = { net_size = 2 }
 	multiply_temp_variable = { net_size = 6 }
 	multiply_temp_variable = { net_size = Total_counterespionage_vs_espionage_percentage} ## multiply the bonuses to get total net size
@@ -398,7 +543,7 @@ infilitrate_military_mission_end_effect = {
 			check_variable = {
 				var = chance_of_success
 				value = net_size
-				compare = less_than_or_equals
+				compare = greater_than_or_equals
 			}
 		}
 		add_intel = {
@@ -408,19 +553,19 @@ infilitrate_military_mission_end_effect = {
 			airforce_intel = 30
 		}
 		var:targeted_country = {
-			country_event = espionage_missions.56
+			country_event = espionage_missions.5
 		}
-		country_event = espionage_missions.53
+		country_event = espionage_missions.1
 	}else = {## FALIURE
-		country_event = espionage_missions.54
+		country_event = espionage_missions.3
 		var:targeted_country = {
-			country_event = espionage_missions.57
+			country_event = espionage_missions.7
 		}
 	}
 }
 undermine_guild_mission_end_effect = {
-	set_temp_variable = { net_size = agent_intelligence@var:agent_in_mission }
-	add_to_temp_variable = { net_size = agent_charisma@var:agent_in_mission }
+	set_temp_variable = { net_size = agent_intelligence }
+	add_to_temp_variable = { net_size = agent_charisma }
 	divide_temp_variable = { net_size = 2 }
 	multiply_temp_variable = { net_size = 8 }
 	multiply_temp_variable = { net_size = Total_counterespionage_vs_espionage_percentage} ## multiply the bonuses to get total net size
@@ -429,22 +574,22 @@ undermine_guild_mission_end_effect = {
 			check_variable = {
 				var = chance_of_success
 				value = net_size
-				compare = less_than_or_equals
+				compare = greater_than_or_equals
 			}
 		}
 		var:targeted_country = {
-			country_event = espionage_missions.62
+			country_event = espionage_missions.5
 		}
-		country_event = espionage_missions.59
+		country_event = espionage_missions.1
 	}else = {## FALIURE
-		country_event = espionage_missions.60
+		country_event = espionage_missions.3
 		var:targeted_country = {
-			country_event = espionage_missions.63
+			country_event = espionage_missions.7
 		}
 	}
 }
 destroy_capital_ship_mission_end_effect = {
-	set_temp_variable = { net_size = agent_martial@var:agent_in_mission }
+	set_temp_variable = { net_size = agent_martial }
 	divide_temp_variable = { net_size = 2 }
 	multiply_temp_variable = { net_size = 5 }
 	multiply_temp_variable = { net_size = Total_counterespionage_vs_espionage_percentage} ## multiply the bonuses to get total net size
@@ -453,7 +598,7 @@ destroy_capital_ship_mission_end_effect = {
 			check_variable = {
 				var = chance_of_success
 				value = net_size
-				compare = less_than_or_equals
+				compare = greater_than_or_equals
 			}
 		}
 		var:targeted_country = {
@@ -482,19 +627,19 @@ destroy_capital_ship_mission_end_effect = {
 					count = 1
 				}
 			}
-			country_event = espionage_missions.74
+			country_event = espionage_missions.5
 		}
-		country_event = espionage_missions.71
+		country_event = espionage_missions.1
 	}else = {## FALIURE
-		country_event = espionage_missions.72
+		country_event = espionage_missions.3
 		var:targeted_country = {
-			country_event = espionage_missions.75
+			country_event = espionage_missions.7
 		}
 	}
 }
 steal_equipment_mission_end_effect = {
-	set_temp_variable = { net_size = agent_martial@var:agent_in_mission }
-	add_to_temp_variable = { net_size = agent_intelligence@var:agent_in_mission }
+	set_temp_variable = { net_size = agent_martial }
+	add_to_temp_variable = { net_size = agent_intelligence }
 	divide_temp_variable = { net_size = 2 }
 	multiply_temp_variable = { net_size = 10 }
 	multiply_temp_variable = { net_size = Total_counterespionage_vs_espionage_percentage} ## multiply the bonuses to get total net size
@@ -503,7 +648,7 @@ steal_equipment_mission_end_effect = {
 			check_variable = {
 				var = chance_of_success
 				value = net_size
-				compare = less_than_or_equals
+				compare = greater_than_or_equals
 			}
 		}
 		var:targeted_country = {
@@ -511,19 +656,19 @@ steal_equipment_mission_end_effect = {
 				value = 0.02
 				target = PREV
 			}
-			country_event = espionage_missions.80
+			country_event = espionage_missions.5
 		}
-		country_event = espionage_missions.77
+		country_event = espionage_missions.1
 	}else = {## FALIURE
-		country_event = espionage_missions.78
+		country_event = espionage_missions.3
 		var:targeted_country = {
-			country_event = espionage_missions.81
+			country_event = espionage_missions.7
 		}
 	}
 }
 smuggle_slaves_mission_end_effect = {
-	set_temp_variable = { net_size = agent_martial@var:agent_in_mission }
-	add_to_temp_variable = { net_size = agent_intelligence@var:agent_in_mission }
+	set_temp_variable = { net_size = agent_martial }
+	add_to_temp_variable = { net_size = agent_intelligence }
 	divide_temp_variable = { net_size = 2 }
 	multiply_temp_variable = { net_size = 8 }
 	multiply_temp_variable = { net_size = Total_counterespionage_vs_espionage_percentage} ## multiply the bonuses to get total net size
@@ -532,7 +677,7 @@ smuggle_slaves_mission_end_effect = {
 			check_variable = {
 				var = chance_of_success
 				value = net_size
-				compare = less_than_or_equals
+				compare = greater_than_or_equals
 			}
 		}
 		var:targeted_country = {
@@ -545,20 +690,20 @@ smuggle_slaves_mission_end_effect = {
 			multiply_variable = {slave_value_count_temp = 2}
 			round_variable = slave_value_count_temp
 			set_variable = { slaves^slave_index_espionage_temp = slave_value_count_temp }
-		country_event = espionage_missions.80
+			country_event = espionage_missions.5
 		}
-		country_event = espionage_missions.77
+		country_event = espionage_missions.1
 		set_variable = { slaves^targeted_country.slave_index_espionage_temp = var:targeted_country.slave_value_count_temp} ## this is stupid and should be treated as such
 	}else = {## FALIURE
-		country_event = espionage_missions.78
+		country_event = espionage_missions.3
 		var:targeted_country = {
-			country_event = espionage_missions.81
+			country_event = espionage_missions.7
 		}
 	}
 }
 free_slaves_mission_end_effect = {
-	set_temp_variable = { net_size = agent_martial@var:agent_in_mission }
-	add_to_temp_variable = { net_size = agent_intelligence@var:agent_in_mission }
+	set_temp_variable = { net_size = agent_martial }
+	add_to_temp_variable = { net_size = agent_intelligence }
 	divide_temp_variable = { net_size = 2 }
 	multiply_temp_variable = { net_size = 10 }
 	multiply_temp_variable = { net_size = Total_counterespionage_vs_espionage_percentage} ## multiply the bonuses to get total net size
@@ -567,7 +712,7 @@ free_slaves_mission_end_effect = {
 			check_variable = {
 				var = chance_of_success
 				value = net_size
-				compare = less_than_or_equals
+				compare = greater_than_or_equals
 			}
 		}
 		var:targeted_country = {
@@ -580,19 +725,19 @@ free_slaves_mission_end_effect = {
 			multiply_variable = {slave_value_count_temp = 2}
 			round_variable = slave_value_count_temp
 			set_variable = { slaves^slave_index_espionage_temp = slave_value_count_temp }
-			country_event = espionage_missions.92
+			country_event = espionage_missions.5
 		}
-		country_event = espionage_missions.89
+		country_event = espionage_missions.1
 	}else = {## FALIURE
-		country_event = espionage_missions.90
+		country_event = espionage_missions.3
 		var:targeted_country = {
-			country_event = espionage_missions.93
+			country_event = espionage_missions.7
 		}
 	}
 }
 provoke_slave_revolt_mission_end_effect = {
-	set_temp_variable = { net_size = agent_martial@var:agent_in_mission }
-	add_to_temp_variable = { net_size = agent_charisma@var:agent_in_mission }
+	set_temp_variable = { net_size = agent_martial }
+	add_to_temp_variable = { net_size = agent_charisma }
 	divide_temp_variable = { net_size = 2 }
 	multiply_temp_variable = { net_size = 4 }
 	multiply_temp_variable = { net_size = Total_counterespionage_vs_espionage_percentage} ## multiply the bonuses to get total net size
@@ -601,7 +746,7 @@ provoke_slave_revolt_mission_end_effect = {
 			check_variable = {
 				var = chance_of_success
 				value = net_size
-				compare = less_than_or_equals
+				compare = greater_than_or_equals
 			}
 		}
 		var:targeted_country = {
@@ -631,19 +776,19 @@ provoke_slave_revolt_mission_end_effect = {
 				keep_political_leader = yes
 				keep_political_party_members = yes
 			}
-			country_event = espionage_missions.98
+			country_event = espionage_missions.5
 		}
-		country_event = espionage_missions.95
+		country_event = espionage_missions.1
 	}else = {## FALIURE
-		country_event = espionage_missions.96
+		country_event = espionage_missions.3
 		var:targeted_country = {
-			country_event = espionage_missions.99
+			country_event = espionage_missions.7
 		}
 	}
 }
 arm_dissidents_mission_end_effect = {
-	set_temp_variable = { net_size = agent_martial@var:agent_in_mission }
-	add_to_temp_variable = { net_size = agent_charisma@var:agent_in_mission }
+	set_temp_variable = { net_size = agent_martial }
+	add_to_temp_variable = { net_size = agent_charisma }
 	divide_temp_variable = { net_size = 2 }
 	multiply_temp_variable = { net_size = 10 }
 	multiply_temp_variable = { net_size = Total_counterespionage_vs_espionage_percentage} ## multiply the bonuses to get total net size
@@ -652,7 +797,7 @@ arm_dissidents_mission_end_effect = {
 			check_variable = {
 				var = chance_of_success
 				value = net_size
-				compare = less_than_or_equals
+				compare = greater_than_or_equals
 			}
 		}
 		var:targeted_country = {
@@ -662,19 +807,19 @@ arm_dissidents_mission_end_effect = {
 				}
 				add_resistance = 20 
 			}
-			country_event = espionage_missions.104
+			country_event = espionage_missions.5
 		}
-		country_event = espionage_missions.101
+		country_event = espionage_missions.1
 	}else = {## FALIURE
-		country_event = espionage_missions.102
+		country_event = espionage_missions.3
 		var:targeted_country = {
-			country_event = espionage_missions.105
+			country_event = espionage_missions.7
 		}
 	}
 }
 plant_sleeper_agent_mission_end_effect = {
-	set_temp_variable = { net_size = agent_intelligence@var:agent_in_mission }
-	add_to_temp_variable = { net_size = agent_charisma@var:agent_in_mission }
+	set_temp_variable = { net_size = agent_intelligence }
+	add_to_temp_variable = { net_size = agent_charisma }
 	divide_temp_variable = { net_size = 2 }
 	multiply_temp_variable = { net_size = 12 }
 	multiply_temp_variable = { net_size = Total_counterespionage_vs_espionage_percentage} ## multiply the bonuses to get total net size
@@ -683,24 +828,24 @@ plant_sleeper_agent_mission_end_effect = {
 			check_variable = {
 				var = chance_of_success
 				value = net_size
-				compare = less_than_or_equals
+				compare = greater_than_or_equals
 			}
 		}
 		var:targeted_country = {
-			country_event = espionage_missions.110
+			country_event = espionage_missions.5
 		}
-		country_event = espionage_missions.107
+		country_event = espionage_missions.1
 		set_variable = {higher_chance_espionage_target = var:targeted_country.id }
 	}else = {## FALIURE
-		country_event = espionage_missions.108
+		country_event = espionage_missions.3
 		var:targeted_country = {
-			country_event = espionage_missions.111
+			country_event = espionage_missions.7
 		}
 	}
 }
 reroute_supply_mission_end_effect = {
-	set_temp_variable = { net_size = agent_intelligence@var:agent_in_mission }
-	add_to_temp_variable = { net_size = agent_charisma@var:agent_in_mission }
+	set_temp_variable = { net_size = agent_intelligence }
+	add_to_temp_variable = { net_size = agent_charisma }
 	divide_temp_variable = { net_size = 2 }
 	multiply_temp_variable = { net_size = 8 }
 	multiply_temp_variable = { net_size = Total_counterespionage_vs_espionage_percentage} ## multiply the bonuses to get total net size
@@ -709,24 +854,24 @@ reroute_supply_mission_end_effect = {
 			check_variable = {
 				var = chance_of_success
 				value = net_size
-				compare = less_than_or_equals
+				compare = greater_than_or_equals
 			}
 		}
 		var:targeted_country = {
 			subtract_from_variable = { currency_amount^primary_currency = 1000 }
-			country_event = espionage_missions.116
+			country_event = espionage_missions.5
 		}
-		country_event = espionage_missions.113
+		country_event = espionage_missions.1
 	}else = {## FALIURE
-		country_event = espionage_missions.114
+		country_event = espionage_missions.3
 		var:targeted_country = {
-			country_event = espionage_missions.117
+			country_event = espionage_missions.7
 		}
 	}
 }
 market_crash_mission_end_effect = {
-	set_temp_variable = { net_size = agent_intelligence@var:agent_in_mission }
-	add_to_temp_variable = { net_size = agent_charisma@var:agent_in_mission }
+	set_temp_variable = { net_size = agent_intelligence }
+	add_to_temp_variable = { net_size = agent_charisma }
 	divide_temp_variable = { net_size = 2 }
 	multiply_temp_variable = { net_size = 8 }
 	multiply_temp_variable = { net_size = Total_counterespionage_vs_espionage_percentage} ## multiply the bonuses to get total net size
@@ -735,17 +880,20 @@ market_crash_mission_end_effect = {
 			check_variable = {
 				var = chance_of_success
 				value = net_size
-				compare = less_than_or_equals
+				compare = greater_than_or_equals
 			}
 		}
+		country_event = espionage_missions.1
 		var:targeted_country = {
 			give_resource_rights = { receiver = ROOT state = capital }
+			country_event = espionage_missions.5
 			country_event = {
 				id = espionage.4
 				days = 80
 			}
 		}
 	}else = {## FALIURE
+		country_event = espionage_missions.7
 	}
 }
 
@@ -1154,7 +1302,6 @@ agent_recruitment_polo_lye = { ## ALL FEEDS UP TO create_temporary_agents EFFECT
 }
 
 agent_recruitment_orion_voss = { ## ALL FEEDS UP TO create_temporary_agents EFFECT
-	log = "got here"
 	set_temp_variable = {agent_name = token:orion_voss}
 	set_temp_variable = {agent_charisma = 10} 
 	set_temp_variable = {agent_intelligence = 10}
