@@ -1,4 +1,5 @@
 
+
 RIN_crisis = {
 	RIN_civil_war_mission = {
 		icon = generic_civil_support
@@ -7,37 +8,107 @@ RIN_crisis = {
 			NOT = { has_war_with = RIT }																# Mission is only allowed for TAG
 		}
 		visible = {
-			has_completed_focus = RIN_the_emperors_dead											# The focus that starts the mission - get rid of this if its started by an event
+			has_completed_focus = RIN_the_emperors_dead			
 		}
 		available = { 
 			has_completed_focus = RIN_declaring_ambitions											# The focus needed to complete the mission stop the civil war
 		}
  
  
-		days_mission_timeout = 340													
+		days_mission_timeout = 360													
 		is_good = no																 
 																					
-		fire_only_once = no														
+		fire_only_once = yes														
  
-		days_re_enable = 80	
 		timeout_effect = {
-			98 = { transfer_state_to = RIT	 } 
-				
-			RIT = {
-				RIN = {
-			declare_war_on = {
-					target = RIT
-					type = civil_war
+			hidden_effect = {
+				random_core_state = {
+					prioritize = { 411 98 }
+					transfer_state_to = RIT
+				}	
+				RIT = {
+					RIN = {
+				declare_war_on = {
+						target = RIT
+						type = civil_war
+					}
 				}
 			}
-		}
-			hidden_effect = {
 				RIT = {
+					division_template = {
+						name = "Freedom Fighters"			
+					
+						regiments = {
+							infantry = { x = 0 y = 0 }
+							infantry = { x = 0 y = 1 }
+							infantry = { x = 1 y = 0 }
+							infantry = { x = 1 y = 1 }
+							
+						}
+					}
+					division_template = {
+						name = "Freedom Militia"			
+					
+						regiments = {
+							infantry = { x = 0 y = 0 }
+							infantry = { x = 0 y = 1 }
+							infantry = { x = 0 y = 2 }
+							infantry = { x = 0 y = 3 }
+							infantry = { x = 1 y = 0 }
+							infantry = { x = 1 y = 1 }
+							infantry = { x = 1 y = 2 }
+							infantry = { x = 1 y = 3 }
+							
+						}
+					}
+					}
+				
+					RIT = {
+						random_owned_state = {
+							prioritize = { 411 98 }
+							add_building_construction = {
+								type = arms_factory
+								level = 3
+								instant_build = yes
+							}
+							create_unit = {
+								division = "division_template = \"Freedom Fighters\" start_experience_factor = 0.33" 
+								owner = RIT
+							}
+							create_unit = {
+								division = "division_template = \"Freedom Militia\" start_experience_factor = 0.39" 
+								owner = RIT
+							}
+							create_unit = {
+								division = "division_template = \"Freedom Fighters\" start_experience_factor = 0.33" 
+								owner = RIT
+							}
+							create_unit = {
+								division = "division_template = \"Freedom Militia\" start_experience_factor = 0.39" 
+								owner = RIT
+							}
+							create_unit = {
+								division = "division_template = \"Freedom Fighters\" start_experience_factor = 0.33" 
+								owner = RIT
+							}
+							create_unit = {
+								division = "division_template = \"Freedom Militia\" start_experience_factor = 0.39" 
+								owner = RIT
+							}
+							create_unit = {
+								division = "division_template = \"Freedom Fighters\" start_experience_factor = 0.33" 
+								owner = RIT
+							}
+							create_unit = {
+								division = "division_template = \"Freedom Militia\" start_experience_factor = 0.39" 
+								owner = RIT
+							}
+						}
+					}
 					load_oob = RIT_4
 				}
+			country_event = { id = RIN.7 }
 			}
-		}
- 
 		complete_effect = {
               add_stability = 0.05
 			  add_political_power = 20													# Reward for completing the mission, here adds 5% stability (you can leave this empty if you want)
@@ -195,3 +266,6 @@ RIN_civil_war = {
 				}
 			}
 	 }
+
+
+	 
