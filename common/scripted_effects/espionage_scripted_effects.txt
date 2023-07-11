@@ -53,15 +53,15 @@ espionage_end_mission_effect = {
 	}
 	## GRABBING TRAIT MODIFIERS
 	add_ideas = {
-		agent_class_trait
-		agent_race_trait
-		agent_personality_trait
+		var:agent_class_trait
+		var:agent_race_trait
+		var:agent_personality_trait
 	}
 	meta_effect = { ### Grabbing specfic mission success chance from traits
 		text = {
 			add_to_temp_variable = {Total_counterespionage_vs_espionage_percentage = modifier@[MISSION_NAME]_success_chance} 
 		}
-			MISSION_NAME = "[?effect_mission_identifier.GetTokenKey]"
+		MISSION_NAME = "[?effect_mission_identifier.GetTokenKey]"
 	}
 	set_temp_variable = {critical_success_chance = 10}
 	add_to_temp_variable = {critical_success_chance = modifier@espionage_critical_success_chance}
@@ -90,9 +90,9 @@ espionage_end_mission_effect = {
 	}
 
 	remove_ideas = {
-		agent_class_trait
-		agent_race_trait
-		agent_personality_trait
+		var:agent_class_trait
+		var:agent_race_trait
+		var:agent_personality_trait
 	}
 }
 
@@ -137,12 +137,12 @@ example_end_effect = {
 			check_variable = {
 				var = chance_of_success
 				value = net_size
-				compare = greater_than_or_equals
+				compare = less_than
 			}
 		}
 		if = {
 			limit = {
-				check_variable = {chance_of_success > critical_success_chance} ## If the success chance is over critical success chance (normally 10) (chance rolled didnt roll low} act the nromal effects
+				check_variable = {chance_of_success > critical_success_chance} ## If the success chance is over critical success chance (normally 10) (chance rolled low} act the normal effects
 			}
 			var:targeted_country = {
 				## EFFECTS ON THE TARGETED COUNTRY
@@ -228,7 +228,8 @@ chance_of_death = {
 
 
 
-assassinate_mission_end_effect = { ## assassinate mission end effect
+assassination_mission_end_effect = { ## assassinate mission end effect
+	log = "Assassination Mission Effect Reached"
 	set_temp_variable = { net_size = agent_martial } ## find characters martial and sets net_size to then work out success chance
 	multiply_temp_variable = { net_size = 6 } ## 6 on how easy it is
 	multiply_temp_variable = { net_size = Total_counterespionage_vs_espionage_percentage} ## multiply the bonuses to get total net size
@@ -237,52 +238,46 @@ assassinate_mission_end_effect = { ## assassinate mission end effect
 			check_variable = {
 				var = chance_of_success
 				value = net_size
-				compare = greater_than_or_equals
+				compare = less_than
 			}
 		}
 		if = {
 			limit = {
-				check_variable = {chance_of_success > 10}
+				check_variable = {chance_of_success > critical_success_chance} ## If the success chance is over critical success chance (normally 10) (chance rolled low} act the normal effects
 			}
 			var:targeted_country = {
-				every_unit_leader = {
-					limit = {
-						has_character_flag = targeted_by_mission
-						has_character_flag = targeted_by_@ROOT_1_murder
-					}
+				## EFFECTS ON THE TARGETED COUNTRY
+				random_unit_leader = {
 					add_timed_unit_leader_trait = {
 						trait = wounded
 						days = 180
 					}
-					unit_leader_event = {id = espionage.1}
 				}
+				country_event = espionage_missions.5 ## ESPIOANGE MISSION WAS SUCCESSFUL ON YOUR COUNTRY
 			}
-			country_event = espionage_missions.5
-		}else = {														 ### CRITICAL SUCCESSS
-			var:targeted_country = { ### ASSASSIN KILLS TARGET
-				every_unit_leader = {
-					limit = {
-						has_character_flag = targeted_by_mission
-						has_character_flag = targeted_by_@ROOT_1_murder
-					}
+			country_event = espionage_missions.1 ## SUCCESS MISSION EVENT
+		}else = { ### CRITICAL SUCCESSS EFFECTS
+			var:targeted_country = {
+				## CRITICAL SUCCESSS EFFECTS ON TARGET COUNTRY
+				random_unit_leader = {
 					retire = yes
-					unit_leader_event = {id = espionage.2}
 				}
+				country_event = espionage_missions.6 ## ESPIOANGE CRITICAL SUCCESS WAS SUCCESSFUL ON YOUR COUNTRY
 			}
-			country_event = espionage_missions.14
+			country_event = espionage_missions.2 ## CRITICAL SUCCESS EVENT
 		}
 	}else = {## FALIURE
-		country_event = espionage_missions.6
-		var:targeted_country = {
-			country_event = espionage_missions.9
-			every_unit_leader = {
-				limit = {
-					has_character_flag = targeted_by_mission
-					has_character_flag = targeted_by_@ROOT_1_murder
-				}
-				clr_character_flag = targeted_by_training
-				clr_character_flag = targeted_by_@ROOT_1_murder
+		if = {
+			limit = {
+				check_variable = {chance_of_success < critical_faliure_chance} ## If the success chance is under critical faliure chance (normally 90) (mission wasnt critical failure)
 			}
+			var:targeted_country = {
+				country_event = espionage_missions.7
+				## ESPIOANGE MISSION WAS UNSUCCESSFUL ON YOUR COUNTRY
+			}
+			country_event = espionage_missions.3 ## UNSUCCESSFUL MISSION EVENT
+		}else = {### CRITICAL FAILURE EFFECTS
+			chance_of_death = yes ## CALCULATES WEATHER DEATH CHANCE WILL HAPPEN OR NOT, CRITICAL FALIURE EVENT IS HELD IN HERE
 		}
 	}
 }
@@ -297,17 +292,38 @@ ransom_mission_end_effect = {
 			check_variable = {
 				var = chance_of_success
 				value = net_size
-				compare = greater_than_or_equals
+				compare = less_than
 			}
 		}
-		var:targeted_country = {
-			country_event = {
-				id = espionage.2
-				days = 1
+		if = {
+			limit = {
+				check_variable = {chance_of_success > critical_success_chance} ## If the success chance is over critical success chance (normally 10) (chance rolled low} act the normal effects
 			}
+			var:targeted_country = {
+				## EFFECTS ON THE TARGETED COUNTRY
+				country_event = espionage_missions.5 ## ESPIOANGE MISSION WAS SUCCESSFUL ON YOUR COUNTRY
+			}
+			country_event = espionage_missions.1 ## SUCCESS MISSION EVENT
+		}else = { ### CRITICAL SUCCESSS EFFECTS
+			var:targeted_country = {
+				## CRITICAL SUCCESSS EFFECTS ON TARGET COUNTRY
+				country_event = espionage_missions.6 ## ESPIOANGE CRITICAL SUCCESS WAS SUCCESSFUL ON YOUR COUNTRY
+			}
+			country_event = espionage_missions.2 ## CRITICAL SUCCESS EVENT
 		}
-	}else = {
-		country_event = espionage_missions.3
+	}else = {## FALIURE
+		if = {
+			limit = {
+				check_variable = {chance_of_success < critical_faliure_chance} ## If the success chance is under critical faliure chance (normally 90) (mission wasnt critical failure)
+			}
+			var:targeted_country = {
+				country_event = espionage_missions.7
+				## ESPIOANGE MISSION WAS UNSUCCESSFUL ON YOUR COUNTRY
+			}
+			country_event = espionage_missions.3 ## UNSUCCESSFUL MISSION EVENT
+		}else = {### CRITICAL FAILURE EFFECTS
+			chance_of_death = yes ## CALCULATES WEATHER DEATH CHANCE WILL HAPPEN OR NOT, CRITICAL FALIURE EVENT IS HELD IN HERE
+		}
 	}
 }
 army_training_mission_end_effect = { ## Army Training
@@ -320,38 +336,71 @@ army_training_mission_end_effect = { ## Army Training
 			check_variable = {
 				var = chance_of_success
 				value = net_size
-				compare = greater_than_or_equals
+				compare = less_than
 			}
 		}
-		every_unit_leader = {
+		if = {
 			limit = {
-				has_character_flag = targeted_by_mission
-				has_character_flag = targeted_by_training
+				check_variable = {chance_of_success > critical_success_chance} ## If the success chance is over critical success chance (normally 10) (chance rolled low} act the normal effects
 			}
-			add_random_trait = {
-				organizer
-				cavalry_leader
-				infantry_leader
-				skilled_staffer
-				trickster
-				infantry_officer
-				armor_officer
+			## EFFECTS ON THE TARGETED COUNTRY
+			random_unit_leader = {
+				add_random_trait = {
+					organizer
+					cavalry_leader
+					infantry_leader
+					skilled_staffer
+					trickster
+					infantry_officer
+					armor_officer
+				}
 			}
+		}else = { ### CRITICAL SUCCESSS EFFECTS
+			random_unit_leader = {
+					add_random_trait = {
+						organizer
+						cavalry_leader
+						infantry_leader
+						skilled_staffer
+						trickster
+						infantry_officer
+						armor_officer
+					}
+			}
+			random_unit_leader = {
+					add_random_trait = {
+						organizer
+						cavalry_leader
+						infantry_leader
+						skilled_staffer
+						trickster
+						infantry_officer
+						armor_officer
+					}
+			}
+			random_unit_leader = {
+					add_random_trait = {
+						organizer
+						cavalry_leader
+						infantry_leader
+						skilled_staffer
+						trickster
+						infantry_officer
+						armor_officer
+					}
+			}
+			country_event = espionage_missions.2 ## CRITICAL SUCCESS EVENT
 		}
-		country_event = espionage_missions.1
 	}else = {## FALIURE
-		country_event = espionage_missions.3
-		every_unit_leader = {
+		if = {
 			limit = {
-				has_character_flag = targeted_by_mission
-				has_character_flag = targeted_by_training
+				check_variable = {chance_of_success < critical_faliure_chance} ## If the success chance is under critical faliure chance (normally 90) (mission wasnt critical failure)
 			}
-			clr_character_flag = targeted_by_training
-			clr_character_flag = targeted_by_mission
+			country_event = espionage_missions.3 ## UNSUCCESSFUL MISSION EVENT
 		}
 	}
 }
-intimidate_senator_mission_end_effect = { ## Blackmail Senator
+intimidate_senator_mission_end_effect = { ## Blackmail Senator CHANGE_ME
 	set_temp_variable = { net_size = agent_martial }
 	add_to_temp_variable = { net_size = agent_charisma }
 	divide_temp_variable = { net_size = 2 }
@@ -368,21 +417,44 @@ cyber_attack_mission_end_effect = {
 			check_variable = {
 				var = chance_of_success
 				value = net_size
-				compare = greater_than_or_equals
+				compare = less_than
 			}
 		}
-		var:targeted_country = {
-			add_timed_idea = {
-				idea = cyber_attack_espionage
-				days = 100
+		if = {
+			limit = {
+				check_variable = {chance_of_success > critical_success_chance} ## If the success chance is over critical success chance (normally 10) (chance rolled low} act the normal effects
 			}
-			country_event = espionage_missions.5
+			var:targeted_country = {
+				add_timed_idea = {
+					idea = cyber_attack_espionage
+					days = 50
+				}
+				country_event = espionage_missions.5 ## ESPIOANGE MISSION WAS SUCCESSFUL ON YOUR COUNTRY
+			}
+			country_event = espionage_missions.1 ## SUCCESS MISSION EVENT
+		}else = { ### CRITICAL SUCCESSS EFFECTS
+			var:targeted_country = {
+				## CRITICAL SUCCESSS EFFECTS ON TARGET COUNTRY
+				country_event = espionage_missions.6 ## ESPIOANGE CRITICAL SUCCESS WAS SUCCESSFUL ON YOUR COUNTRY
+				add_timed_idea = {
+					idea = cyber_attack_espionage
+					days = 120
+				}
+			}
+			country_event = espionage_missions.2 ## CRITICAL SUCCESS EVENT
 		}
-		country_event = espionage_missions.1
 	}else = {## FALIURE
-		country_event = espionage_missions.3
-		var:targeted_country = {
-			country_event = espionage_missions.7
+		if = {
+			limit = {
+				check_variable = {chance_of_success < critical_faliure_chance} ## If the success chance is under critical faliure chance (normally 90) (mission wasnt critical failure)
+			}
+			var:targeted_country = {
+				country_event = espionage_missions.7
+				## ESPIOANGE MISSION WAS UNSUCCESSFUL ON YOUR COUNTRY
+			}
+			country_event = espionage_missions.3 ## UNSUCCESSFUL MISSION EVENT
+		}else = {### CRITICAL FAILURE EFFECTS
+			chance_of_death = yes ## CALCULATES WEATHER DEATH CHANCE WILL HAPPEN OR NOT, CRITICAL FALIURE EVENT IS HELD IN HERE
 		}
 	}
 }
@@ -397,10 +469,32 @@ steal_blueprint_mission_end_effect = {
 			check_variable = {
 				var = chance_of_success
 				value = net_size
-				compare = greater_than_or_equals
+				compare = less_than
 			}
 		}
-		var:targeted_country = {
+		if = {
+			limit = {
+				check_variable = {chance_of_success > critical_success_chance} ## If the success chance is over critical success chance (normally 10) (chance rolled low} act the normal effects
+			}
+			steal_random_tech_bonus = {
+				folder = electronics_folder
+				folder = industry_folder
+				bonus = 2.0
+				dynamic = no
+				instant = yes
+				name = operation_steal_tech_civilian
+				target = var:targeted_country
+				uses = 1
+			}
+			var:targeted_country = {
+				country_event = espionage_missions.5 ## ESPIOANGE MISSION WAS SUCCESSFUL ON YOUR COUNTRY
+			}
+			country_event = espionage_missions.1 ## SUCCESS MISSION EVENT
+		}else = { ### CRITICAL SUCCESSS EFFECTS
+			var:targeted_country = {
+				## CRITICAL SUCCESSS EFFECTS ON TARGET COUNTRY
+				country_event = espionage_missions.6 ## ESPIOANGE CRITICAL SUCCESS WAS SUCCESSFUL ON YOUR COUNTRY
+			}
 			steal_random_tech_bonus = {
 				folder = electronics_folder
 				folder = industry_folder
@@ -408,16 +502,33 @@ steal_blueprint_mission_end_effect = {
 				dynamic = no
 				instant = yes
 				name = operation_steal_tech_civilian
-				target = FROM
-				uses = 1
+				target = var:targeted_country
+				uses = 2
 			}
-			country_event = espionage_missions.5
+			country_event = espionage_missions.2 ## CRITICAL SUCCESS EVENT
 		}
-		country_event = espionage_missions.1
 	}else = {## FALIURE
-		country_event = espionage_missions.3
-		var:targeted_country = {
-			country_event = espionage_missions.7
+		if = {
+			limit = {
+				check_variable = {chance_of_success < critical_faliure_chance} ## If the success chance is under critical faliure chance (normally 90) (mission wasnt critical failure)
+			}
+			var:targeted_country = {
+				country_event = espionage_missions.7
+				## ESPIOANGE MISSION WAS UNSUCCESSFUL ON YOUR COUNTRY
+				steal_random_tech_bonus = {
+					folder = electronics_folder
+					folder = industry_folder
+					bonus = 3.0
+					dynamic = no
+					instant = yes
+					name = operation_steal_tech_civilian
+					target = var:targeted_country
+					uses = 2
+				}
+			}
+			country_event = espionage_missions.3 ## UNSUCCESSFUL MISSION EVENT
+		}else = {### CRITICAL FAILURE EFFECTS
+			chance_of_death = yes ## CALCULATES WEATHER DEATH CHANCE WILL HAPPEN OR NOT, CRITICAL FALIURE EVENT IS HELD IN HERE
 		}
 	}
 }
@@ -432,20 +543,42 @@ sprout_disease_mission_end_effect = {
 			check_variable = {
 				var = chance_of_success
 				value = net_size
-				compare = greater_than_or_equals
+				compare = less_than
 			}
 		}
-		var:targeted_country = {
-			capital_scope = {
-				add_manpower = -50000
+		if = {
+			limit = {
+				check_variable = {chance_of_success > critical_success_chance} ## If the success chance is over critical success chance (normally 10) (chance rolled low} act the normal effects
 			}
-			country_event = espionage_missions.5
+			var:targeted_country = {
+				country_event = espionage_missions.5 ## ESPIOANGE MISSION WAS SUCCESSFUL ON YOUR COUNTRY
+				capital_scope = {
+					add_manpower = -50000
+				}
+			}
+			country_event = espionage_missions.1 ## SUCCESS MISSION EVENT
+		}else = { ### CRITICAL SUCCESSS EFFECTS
+			var:targeted_country = {
+				## CRITICAL SUCCESSS EFFECTS ON TARGET COUNTRY
+				country_event = espionage_missions.6 ## ESPIOANGE CRITICAL SUCCESS WAS SUCCESSFUL ON YOUR COUNTRY
+				capital_scope = {
+					add_manpower = -150000
+				}
+			}
+			country_event = espionage_missions.2 ## CRITICAL SUCCESS EVENT
 		}
-		country_event = espionage_missions.1
 	}else = {## FALIURE
-		country_event = espionage_missions.3
-		var:targeted_country = {
-			country_event = espionage_missions.7
+		if = {
+			limit = {
+				check_variable = {chance_of_success < critical_faliure_chance} ## If the success chance is under critical faliure chance (normally 90) (mission wasnt critical failure)
+			}
+			var:targeted_country = {
+				country_event = espionage_missions.7
+				## ESPIOANGE MISSION WAS UNSUCCESSFUL ON YOUR COUNTRY
+			}
+			country_event = espionage_missions.3 ## UNSUCCESSFUL MISSION EVENT
+		}else = {### CRITICAL FAILURE EFFECTS
+			chance_of_death = yes ## CALCULATES WEATHER DEATH CHANCE WILL HAPPEN OR NOT, CRITICAL FALIURE EVENT IS HELD IN HERE
 		}
 	}
 }
@@ -460,21 +593,44 @@ logistics_sabotage_mission_end_effect = {
 			check_variable = {
 				var = chance_of_success
 				value = net_size
-				compare = greater_than_or_equals
+				compare = less_than
 			}
 		}
-		var:targeted_country = {
-			add_timed_idea = {
-				idea = logistics_sabotage_espionage
-				days = 40
+		if = {
+			limit = {
+				check_variable = {chance_of_success > critical_success_chance} ## If the success chance is over critical success chance (normally 10) (chance rolled low} act the normal effects
 			}
-			country_event = espionage_missions.5
+			var:targeted_country = {
+				country_event = espionage_missions.5 ## ESPIOANGE MISSION WAS SUCCESSFUL ON YOUR COUNTRY
+				add_timed_idea = {
+					idea = logistics_sabotage_espionage
+					days = 40
+				}
+			}
+			country_event = espionage_missions.1 ## SUCCESS MISSION EVENT
+		}else = { ### CRITICAL SUCCESSS EFFECTS
+			var:targeted_country = {
+				## CRITICAL SUCCESSS EFFECTS ON TARGET COUNTRY
+				add_timed_idea = {
+					idea = logistics_sabotage_espionage
+					days = 80
+				}
+				country_event = espionage_missions.6 ## ESPIOANGE CRITICAL SUCCESS WAS SUCCESSFUL ON YOUR COUNTRY
+			}
+			country_event = espionage_missions.2 ## CRITICAL SUCCESS EVENT
 		}
-		country_event = espionage_missions.1
 	}else = {## FALIURE
-		country_event = espionage_missions.3
-		var:targeted_country = {
-			country_event = espionage_missions.7
+		if = {
+			limit = {
+				check_variable = {chance_of_success < critical_faliure_chance} ## If the success chance is under critical faliure chance (normally 90) (mission wasnt critical failure)
+			}
+			var:targeted_country = {
+				country_event = espionage_missions.7
+				## ESPIOANGE MISSION WAS UNSUCCESSFUL ON YOUR COUNTRY
+			}
+			country_event = espionage_missions.3 ## UNSUCCESSFUL MISSION EVENT
+		}else = {### CRITICAL FAILURE EFFECTS
+			chance_of_death = yes ## CALCULATES WEATHER DEATH CHANCE WILL HAPPEN OR NOT, CRITICAL FALIURE EVENT IS HELD IN HERE
 		}
 	}
 }
@@ -484,51 +640,100 @@ industrial_sabotage_mission_end_effect = {
 	divide_temp_variable = { net_size = 2 }
 	multiply_temp_variable = { net_size = 12 }
 	multiply_temp_variable = { net_size = Total_counterespionage_vs_espionage_percentage} ## multiply the bonuses to get total net size
+	
 	if = {
 		limit = {
 			check_variable = {
 				var = chance_of_success
 				value = net_size
-				compare = greater_than_or_equals
+				compare = less_than
 			}
 		}
-		var:targeted_country = {
-			while_loop_effect = {
-				break = temp_break
-				limit = {
-					NOT = {
-						has_variable = targeted_country
-					}
-				}
-				random_core_state = {
-					if = {
-						limit = {
-							arms_factory > 1
-						}
-						remove_building = {
-							type = arms_factory
-							level = 1
-						}
-						set_temp_variable = {temp_break = 1}
-					}else_if = {
-						limit = {
-							industrial_complex > 1
-						}
-						remove_building = {
-							type = industrial_complex
-							level = 1
-						}
-						set_temp_variable = {temp_break = 1}
-					}
-				}
+		if = {
+			limit = {
+				check_variable = {chance_of_success > critical_success_chance} ## If the success chance is over critical success chance (normally 10) (chance rolled low} act the normal effects
 			}
-			country_event = espionage_missions.3
+			var:targeted_country = {
+				while_loop_effect = {
+					break = temp_break
+					limit = {
+						NOT = {
+							has_variable = targeted_country
+						}
+					}
+					random_core_state = {
+						if = {
+							limit = {
+								arms_factory > 1
+							}
+							remove_building = {
+								type = arms_factory
+								level = 1
+							}
+							set_temp_variable = {temp_break = 1}
+						}else_if = {
+							limit = {
+								industrial_complex > 1
+							}
+							remove_building = {
+								type = industrial_complex
+								level = 1
+							}
+							set_temp_variable = {temp_break = 1}
+						}
+					}
+				}
+				country_event = espionage_missions.5 ## ESPIOANGE MISSION WAS SUCCESSFUL ON YOUR COUNTRY
+			}
+			country_event = espionage_missions.1 ## SUCCESS MISSION EVENT
+		}else = { ### CRITICAL SUCCESSS EFFECTS
+			var:targeted_country = {
+				## CRITICAL SUCCESSS EFFECTS ON TARGET COUNTRY
+				while_loop_effect = {
+					break = temp_break
+					limit = {
+						NOT = {
+							has_variable = targeted_country
+						}
+					}
+					random_core_state = {
+						if = {
+							limit = {
+								arms_factory > 1
+							}
+							remove_building = {
+								type = arms_factory
+								level = 2
+							}
+							set_temp_variable = {temp_break = 1}
+						}else_if = {
+							limit = {
+								industrial_complex > 1
+							}
+							remove_building = {
+								type = industrial_complex
+								level = 2
+							}
+							set_temp_variable = {temp_break = 1}
+						}
+					}
+				}
+				country_event = espionage_missions.6 ## ESPIOANGE CRITICAL SUCCESS WAS SUCCESSFUL ON YOUR COUNTRY
+			}
+			country_event = espionage_missions.2 ## CRITICAL SUCCESS EVENT
 		}
-		country_event = espionage_missions.1
 	}else = {## FALIURE
-		country_event = espionage_missions.3
-		var:targeted_country = {
-			country_event = espionage_missions.7
+		if = {
+			limit = {
+				check_variable = {chance_of_success < critical_faliure_chance} ## If the success chance is under critical faliure chance (normally 90) (mission wasnt critical failure)
+			}
+			var:targeted_country = {
+				country_event = espionage_missions.7
+				## ESPIOANGE MISSION WAS UNSUCCESSFUL ON YOUR COUNTRY
+			}
+			country_event = espionage_missions.3 ## UNSUCCESSFUL MISSION EVENT
+		}else = {### CRITICAL FAILURE EFFECTS
+			chance_of_death = yes ## CALCULATES WEATHER DEATH CHANCE WILL HAPPEN OR NOT, CRITICAL FALIURE EVENT IS HELD IN HERE
 		}
 	}
 }
@@ -543,27 +748,52 @@ infilitrate_military_mission_end_effect = {
 			check_variable = {
 				var = chance_of_success
 				value = net_size
-				compare = greater_than_or_equals
+				compare = less_than
 			}
 		}
-		add_intel = {
-			target = var:targeted_country
-			army_intel = 30
-			navy_intel = 30
-			airforce_intel = 30
+		if = {
+			limit = {
+				check_variable = {chance_of_success > critical_success_chance} ## If the success chance is over critical success chance (normally 10) (chance rolled low} act the normal effects
+			}
+			add_intel = {
+				target = var:targeted_country
+				army_intel = 30
+				navy_intel = 30
+				airforce_intel = 30
+			}
+			var:targeted_country = {
+				country_event = espionage_missions.5 ## ESPIOANGE MISSION WAS SUCCESSFUL ON YOUR COUNTRY
+			}
+			country_event = espionage_missions.1 ## SUCCESS MISSION EVENT
+		}else = { ### CRITICAL SUCCESSS EFFECTS
+			add_intel = {
+				target = var:targeted_country
+				army_intel = 60
+				navy_intel = 60
+				airforce_intel = 60
+			}
+			var:targeted_country = {
+				## CRITICAL SUCCESSS EFFECTS ON TARGET COUNTRY
+				country_event = espionage_missions.6 ## ESPIOANGE CRITICAL SUCCESS WAS SUCCESSFUL ON YOUR COUNTRY
+			}
+			country_event = espionage_missions.2 ## CRITICAL SUCCESS EVENT
 		}
-		var:targeted_country = {
-			country_event = espionage_missions.5
-		}
-		country_event = espionage_missions.1
 	}else = {## FALIURE
-		country_event = espionage_missions.3
-		var:targeted_country = {
-			country_event = espionage_missions.7
+		if = {
+			limit = {
+				check_variable = {chance_of_success < critical_faliure_chance} ## If the success chance is under critical faliure chance (normally 90) (mission wasnt critical failure)
+			}
+			var:targeted_country = {
+				country_event = espionage_missions.7
+				## ESPIOANGE MISSION WAS UNSUCCESSFUL ON YOUR COUNTRY
+			}
+			country_event = espionage_missions.3 ## UNSUCCESSFUL MISSION EVENT
+		}else = {### CRITICAL FAILURE EFFECTS
+			chance_of_death = yes ## CALCULATES WEATHER DEATH CHANCE WILL HAPPEN OR NOT, CRITICAL FALIURE EVENT IS HELD IN HERE
 		}
 	}
 }
-undermine_guild_mission_end_effect = {
+undermine_guild_mission_end_effect = { ## CHANGE_ME Dont know what to change this to
 	set_temp_variable = { net_size = agent_intelligence }
 	add_to_temp_variable = { net_size = agent_charisma }
 	divide_temp_variable = { net_size = 2 }
@@ -574,21 +804,40 @@ undermine_guild_mission_end_effect = {
 			check_variable = {
 				var = chance_of_success
 				value = net_size
-				compare = greater_than_or_equals
+				compare = less_than
 			}
 		}
-		var:targeted_country = {
-			country_event = espionage_missions.5
+		if = {
+			limit = {
+				check_variable = {chance_of_success > critical_success_chance} ## If the success chance is over critical success chance (normally 10) (chance rolled low} act the normal effects
+			}
+			var:targeted_country = {
+				country_event = espionage_missions.5 ## ESPIOANGE MISSION WAS SUCCESSFUL ON YOUR COUNTRY
+			}
+			country_event = espionage_missions.1 ## SUCCESS MISSION EVENT
+		}else = { ### CRITICAL SUCCESSS EFFECTS
+			var:targeted_country = {
+				## CRITICAL SUCCESSS EFFECTS ON TARGET COUNTRY
+				country_event = espionage_missions.6 ## ESPIOANGE CRITICAL SUCCESS WAS SUCCESSFUL ON YOUR COUNTRY
+			}
+			country_event = espionage_missions.2 ## CRITICAL SUCCESS EVENT
 		}
-		country_event = espionage_missions.1
 	}else = {## FALIURE
-		country_event = espionage_missions.3
-		var:targeted_country = {
-			country_event = espionage_missions.7
+		if = {
+			limit = {
+				check_variable = {chance_of_success < critical_faliure_chance} ## If the success chance is under critical faliure chance (normally 90) (mission wasnt critical failure)
+			}
+			var:targeted_country = {
+				country_event = espionage_missions.7
+				## ESPIOANGE MISSION WAS UNSUCCESSFUL ON YOUR COUNTRY
+			}
+			country_event = espionage_missions.3 ## UNSUCCESSFUL MISSION EVENT
+		}else = {### CRITICAL FAILURE EFFECTS
+			chance_of_death = yes ## CALCULATES WEATHER DEATH CHANCE WILL HAPPEN OR NOT, CRITICAL FALIURE EVENT IS HELD IN HERE
 		}
 	}
 }
-destroy_capital_ship_mission_end_effect = {
+destroy_capital_ship_mission_end_effect = { 
 	set_temp_variable = { net_size = agent_martial }
 	divide_temp_variable = { net_size = 2 }
 	multiply_temp_variable = { net_size = 5 }
@@ -598,42 +847,86 @@ destroy_capital_ship_mission_end_effect = {
 			check_variable = {
 				var = chance_of_success
 				value = net_size
-				compare = greater_than_or_equals
+				compare = less_than
 			}
 		}
-		var:targeted_country = {
-			if = {
-				limit = {
-					check_variable = {
-						var = num_ships_with_type@carrier  ## CHANGE_ME, need to ask diosysnus about ship types
-						value = 1
-						compare = greater_than
+		if = {
+			limit = {
+				check_variable = {chance_of_success > critical_success_chance} ## If the success chance is over critical success chance (normally 10) (chance rolled low} act the normal effects
+			}
+			var:targeted_country = {
+				country_event = espionage_missions.5 ## ESPIOANGE MISSION WAS SUCCESSFUL ON YOUR COUNTRY
+				if = {
+					limit = {
+						check_variable = {
+							var = num_ships_with_type@carrier  ## CHANGE_ME, need to ask diosysnus about ship types
+							value = 1
+							compare = greater_than
+						}
 					}
-				}
-				destroy_ships = {
-					type = carrier
-					count = 1
-				}
-			}else_if = {
-				limit = {
-					check_variable = {
-						var = num_ships_with_type@battleship ## CHANGE_ME, need to ask diosysnus about ship types
-						value = 1
-						compare = greater_than
+					destroy_ships = {
+						type = carrier
+						count = 1
 					}
-				}
-				destroy_ships = {
-					type = battleship
-					count = 1
+				}else_if = {
+					limit = {
+						check_variable = {
+							var = num_ships_with_type@battleship ## CHANGE_ME, need to ask diosysnus about ship types
+							value = 1
+							compare = greater_than
+						}
+					}
+					destroy_ships = {
+						type = battleship
+						count = 1
+					}
 				}
 			}
-			country_event = espionage_missions.5
+			country_event = espionage_missions.1 ## SUCCESS MISSION EVENT
+		}else = { ### CRITICAL SUCCESSS EFFECTS
+			var:targeted_country = {
+				## CRITICAL SUCCESSS EFFECTS ON TARGET COUNTRY
+				country_event = espionage_missions.6 ## ESPIOANGE CRITICAL SUCCESS WAS SUCCESSFUL ON YOUR COUNTRY
+				if = {
+					limit = {
+						check_variable = {
+							var = num_ships_with_type@carrier  ## CHANGE_ME, need to ask diosysnus about ship types
+							value = 1
+							compare = greater_than
+						}
+					}
+					destroy_ships = {
+						type = carrier
+						count = 2
+					}
+				}else_if = {
+					limit = {
+						check_variable = {
+							var = num_ships_with_type@battleship ## CHANGE_ME, need to ask diosysnus about ship types
+							value = 1
+							compare = greater_than
+						}
+					}
+					destroy_ships = {
+						type = battleship
+						count = 2
+					}
+				}
+			}
+			country_event = espionage_missions.2 ## CRITICAL SUCCESS EVENT
 		}
-		country_event = espionage_missions.1
 	}else = {## FALIURE
-		country_event = espionage_missions.3
-		var:targeted_country = {
-			country_event = espionage_missions.7
+		if = {
+			limit = {
+				check_variable = {chance_of_success < critical_faliure_chance} ## If the success chance is under critical faliure chance (normally 90) (mission wasnt critical failure)
+			}
+			var:targeted_country = {
+				country_event = espionage_missions.7
+				## ESPIOANGE MISSION WAS UNSUCCESSFUL ON YOUR COUNTRY
+			}
+			country_event = espionage_missions.3 ## UNSUCCESSFUL MISSION EVENT
+		}else = {### CRITICAL FAILURE EFFECTS
+			chance_of_death = yes ## CALCULATES WEATHER DEATH CHANCE WILL HAPPEN OR NOT, CRITICAL FALIURE EVENT IS HELD IN HERE
 		}
 	}
 }
@@ -648,21 +941,44 @@ steal_equipment_mission_end_effect = {
 			check_variable = {
 				var = chance_of_success
 				value = net_size
-				compare = greater_than_or_equals
+				compare = less_than
 			}
 		}
-		var:targeted_country = {
-			send_equipment_fraction = {
-				value = 0.02
-				target = PREV
+		if = {
+			limit = {
+				check_variable = {chance_of_success > critical_success_chance} ## If the success chance is over critical success chance (normally 10) (chance rolled low} act the normal effects
 			}
-			country_event = espionage_missions.5
+			var:targeted_country = {
+				country_event = espionage_missions.5 ## ESPIOANGE MISSION WAS SUCCESSFUL ON YOUR COUNTRY
+				send_equipment_fraction = {
+					value = 0.02
+					target = PREV
+				}
+			}
+			country_event = espionage_missions.1 ## SUCCESS MISSION EVENT
+		}else = { ### CRITICAL SUCCESSS EFFECTS
+			var:targeted_country = {
+				## CRITICAL SUCCESSS EFFECTS ON TARGET COUNTRY
+				country_event = espionage_missions.6 ## ESPIOANGE CRITICAL SUCCESS WAS SUCCESSFUL ON YOUR COUNTRY
+				send_equipment_fraction = {
+					value = 0.07
+					target = PREV
+				}
+			}
+			country_event = espionage_missions.2 ## CRITICAL SUCCESS EVENT
 		}
-		country_event = espionage_missions.1
 	}else = {## FALIURE
-		country_event = espionage_missions.3
-		var:targeted_country = {
-			country_event = espionage_missions.7
+		if = {
+			limit = {
+				check_variable = {chance_of_success < critical_faliure_chance} ## If the success chance is under critical faliure chance (normally 90) (mission wasnt critical failure)
+			}
+			var:targeted_country = {
+				country_event = espionage_missions.7
+				## ESPIOANGE MISSION WAS UNSUCCESSFUL ON YOUR COUNTRY
+			}
+			country_event = espionage_missions.3 ## UNSUCCESSFUL MISSION EVENT
+		}else = {### CRITICAL FAILURE EFFECTS
+			chance_of_death = yes ## CALCULATES WEATHER DEATH CHANCE WILL HAPPEN OR NOT, CRITICAL FALIURE EVENT IS HELD IN HERE
 		}
 	}
 }
@@ -677,27 +993,56 @@ smuggle_slaves_mission_end_effect = {
 			check_variable = {
 				var = chance_of_success
 				value = net_size
-				compare = greater_than_or_equals
+				compare = less_than
 			}
 		}
-		var:targeted_country = {
-			find_highest_in_array = { 
-				array = slaves
-				value = slave_value_count_temp
-				index = slave_index_espionage_temp
+		if = {
+			limit = {
+				check_variable = {chance_of_success > critical_success_chance} ## If the success chance is over critical success chance (normally 10) (chance rolled low} act the normal effects
 			}
-			divide_variable = {slave_value_count_temp = 3} ## Thought this might be cleaner
-			multiply_variable = {slave_value_count_temp = 2}
-			round_variable = slave_value_count_temp
-			set_variable = { slaves^slave_index_espionage_temp = slave_value_count_temp }
-			country_event = espionage_missions.5
+			var:targeted_country = {
+				country_event = espionage_missions.5 ## ESPIOANGE MISSION WAS SUCCESSFUL ON YOUR COUNTRY
+				find_highest_in_array = { 
+					array = slaves
+					value = slave_value_count_temp
+					index = slave_index_espionage_temp
+				}
+				divide_variable = {slave_value_count_temp = 3} ## Thought this might be cleaner
+				multiply_variable = {slave_value_count_temp = 2}
+				round_variable = slave_value_count_temp
+				set_variable = { slaves^slave_index_espionage_temp = slave_value_count_temp }
+			}
+			country_event = espionage_missions.1 ## SUCCESS MISSION EVENT
+			set_variable = { slaves^targeted_country.slave_index_espionage_temp = var:targeted_country.slave_value_count_temp}
+		}else = { ### CRITICAL SUCCESSS EFFECTS
+			var:targeted_country = {
+				## CRITICAL SUCCESSS EFFECTS ON TARGET COUNTRY
+				country_event = espionage_missions.6 ## ESPIOANGE CRITICAL SUCCESS WAS SUCCESSFUL ON YOUR COUNTRY
+				find_highest_in_array = { 
+					array = slaves
+					value = slave_value_count_temp
+					index = slave_index_espionage_temp
+				}
+				divide_variable = {slave_value_count_temp = 4} ## Thought this might be cleaner
+				multiply_variable = {slave_value_count_temp = 3}
+				round_variable = slave_value_count_temp
+				set_variable = { slaves^slave_index_espionage_temp = slave_value_count_temp }
+			}
+			set_variable = { slaves^targeted_country.slave_index_espionage_temp = var:targeted_country.slave_value_count_temp}
+			country_event = espionage_missions.2 ## CRITICAL SUCCESS EVENT
 		}
-		country_event = espionage_missions.1
-		set_variable = { slaves^targeted_country.slave_index_espionage_temp = var:targeted_country.slave_value_count_temp} ## this is stupid and should be treated as such
 	}else = {## FALIURE
-		country_event = espionage_missions.3
-		var:targeted_country = {
-			country_event = espionage_missions.7
+		if = {
+			limit = {
+				check_variable = {chance_of_success < critical_faliure_chance} ## If the success chance is under critical faliure chance (normally 90) (mission wasnt critical failure)
+			}
+			var:targeted_country = {
+				country_event = espionage_missions.7
+				## ESPIOANGE MISSION WAS UNSUCCESSFUL ON YOUR COUNTRY
+			}
+			country_event = espionage_missions.3 ## UNSUCCESSFUL MISSION EVENT
+		}else = {### CRITICAL FAILURE EFFECTS
+			chance_of_death = yes ## CALCULATES WEATHER DEATH CHANCE WILL HAPPEN OR NOT, CRITICAL FALIURE EVENT IS HELD IN HERE
 		}
 	}
 }
@@ -712,26 +1057,54 @@ free_slaves_mission_end_effect = {
 			check_variable = {
 				var = chance_of_success
 				value = net_size
-				compare = greater_than_or_equals
+				compare = less_than
 			}
 		}
-		var:targeted_country = {
-			find_highest_in_array = { 
-				array = slaves
-				value = slave_value_count_temp
-				index = slave_index_espionage_temp
+		if = {
+			limit = {
+				check_variable = {chance_of_success > critical_success_chance} ## If the success chance is over critical success chance (normally 10) (chance rolled low} act the normal effects
 			}
-			divide_variable = {slave_value_count_temp = 3} ## Thought this might be cleaner
-			multiply_variable = {slave_value_count_temp = 2}
-			round_variable = slave_value_count_temp
-			set_variable = { slaves^slave_index_espionage_temp = slave_value_count_temp }
-			country_event = espionage_missions.5
+			var:targeted_country = {
+				country_event = espionage_missions.5 ## ESPIOANGE MISSION WAS SUCCESSFUL ON YOUR COUNTRY
+				find_highest_in_array = { 
+					array = slaves
+					value = slave_value_count_temp
+					index = slave_index_espionage_temp
+				}
+				divide_variable = {slave_value_count_temp = 3} ## Thought this might be cleaner
+				multiply_variable = {slave_value_count_temp = 2}
+				round_variable = slave_value_count_temp
+				set_variable = { slaves^slave_index_espionage_temp = slave_value_count_temp }
+			}
+			country_event = espionage_missions.1 ## SUCCESS MISSION EVENT
+		}else = { ### CRITICAL SUCCESSS EFFECTS
+			var:targeted_country = {
+				## CRITICAL SUCCESSS EFFECTS ON TARGET COUNTRY
+				country_event = espionage_missions.6 ## ESPIOANGE CRITICAL SUCCESS WAS SUCCESSFUL ON YOUR COUNTRY
+				find_highest_in_array = { 
+					array = slaves
+					value = slave_value_count_temp
+					index = slave_index_espionage_temp
+				}
+				divide_variable = {slave_value_count_temp = 4} ## Thought this might be cleaner
+				multiply_variable = {slave_value_count_temp = 3}
+				round_variable = slave_value_count_temp
+				set_variable = { slaves^slave_index_espionage_temp = slave_value_count_temp }
+			}
+			country_event = espionage_missions.2 ## CRITICAL SUCCESS EVENT
 		}
-		country_event = espionage_missions.1
 	}else = {## FALIURE
-		country_event = espionage_missions.3
-		var:targeted_country = {
-			country_event = espionage_missions.7
+		if = {
+			limit = {
+				check_variable = {chance_of_success < critical_faliure_chance} ## If the success chance is under critical faliure chance (normally 90) (mission wasnt critical failure)
+			}
+			var:targeted_country = {
+				country_event = espionage_missions.7
+				## ESPIOANGE MISSION WAS UNSUCCESSFUL ON YOUR COUNTRY
+			}
+			country_event = espionage_missions.3 ## UNSUCCESSFUL MISSION EVENT
+		}else = {### CRITICAL FAILURE EFFECTS
+			chance_of_death = yes ## CALCULATES WEATHER DEATH CHANCE WILL HAPPEN OR NOT, CRITICAL FALIURE EVENT IS HELD IN HERE
 		}
 	}
 }
@@ -797,27 +1170,52 @@ arm_dissidents_mission_end_effect = {
 			check_variable = {
 				var = chance_of_success
 				value = net_size
-				compare = greater_than_or_equals
+				compare = less_than
 			}
 		}
-		var:targeted_country = {
-			every_controlled_state = {
-				limit = {
-					has_active_resistance = yes
+		if = {
+			limit = {
+				check_variable = {chance_of_success > critical_success_chance} ## If the success chance is over critical success chance (normally 10) (chance rolled low} act the normal effects
+			}
+			var:targeted_country = {
+				country_event = espionage_missions.5 ## ESPIOANGE MISSION WAS SUCCESSFUL ON YOUR COUNTRY
+				every_controlled_state = {
+					limit = {
+						has_active_resistance = yes
+					}
+					add_resistance = 20 
 				}
-				add_resistance = 20 
 			}
-			country_event = espionage_missions.5
+			country_event = espionage_missions.1 ## SUCCESS MISSION EVENT
+		}else = { ### CRITICAL SUCCESSS EFFECTS
+			var:targeted_country = {
+				## CRITICAL SUCCESSS EFFECTS ON TARGET COUNTRY
+				country_event = espionage_missions.6 ## ESPIOANGE CRITICAL SUCCESS WAS SUCCESSFUL ON YOUR COUNTRY
+				every_controlled_state = {
+					limit = {
+						has_active_resistance = yes
+					}
+					add_resistance = 40
+				}
+			}
+			country_event = espionage_missions.2 ## CRITICAL SUCCESS EVENT
 		}
-		country_event = espionage_missions.1
 	}else = {## FALIURE
-		country_event = espionage_missions.3
-		var:targeted_country = {
-			country_event = espionage_missions.7
+		if = {
+			limit = {
+				check_variable = {chance_of_success < critical_faliure_chance} ## If the success chance is under critical faliure chance (normally 90) (mission wasnt critical failure)
+			}
+			var:targeted_country = {
+				country_event = espionage_missions.7
+				## ESPIOANGE MISSION WAS UNSUCCESSFUL ON YOUR COUNTRY
+			}
+			country_event = espionage_missions.3 ## UNSUCCESSFUL MISSION EVENT
+		}else = {### CRITICAL FAILURE EFFECTS
+			chance_of_death = yes ## CALCULATES WEATHER DEATH CHANCE WILL HAPPEN OR NOT, CRITICAL FALIURE EVENT IS HELD IN HERE
 		}
 	}
 }
-plant_sleeper_agent_mission_end_effect = {
+plant_sleeper_agent_mission_end_effect = { ## turncoat mechanic CHANGE_ME
 	set_temp_variable = { net_size = agent_intelligence }
 	add_to_temp_variable = { net_size = agent_charisma }
 	divide_temp_variable = { net_size = 2 }
@@ -828,22 +1226,42 @@ plant_sleeper_agent_mission_end_effect = {
 			check_variable = {
 				var = chance_of_success
 				value = net_size
-				compare = greater_than_or_equals
+				compare = less_than
 			}
 		}
-		var:targeted_country = {
-			country_event = espionage_missions.5
+		if = {
+			limit = {
+				check_variable = {chance_of_success > critical_success_chance} ## If the success chance is over critical success chance (normally 10) (chance rolled low} act the normal effects
+			}
+			var:targeted_country = {
+				country_event = espionage_missions.5 ## ESPIOANGE MISSION WAS SUCCESSFUL ON YOUR COUNTRY
+			
+			}
+			country_event = espionage_missions.1 ## SUCCESS MISSION EVENT
+		}else = { ### CRITICAL SUCCESSS EFFECTS
+			var:targeted_country = {
+				## CRITICAL SUCCESSS EFFECTS ON TARGET COUNTRY
+				country_event = espionage_missions.6 ## ESPIOANGE CRITICAL SUCCESS WAS SUCCESSFUL ON YOUR COUNTRY
+				
+			}
+			country_event = espionage_missions.2 ## CRITICAL SUCCESS EVENT
 		}
-		country_event = espionage_missions.1
-		set_variable = {higher_chance_espionage_target = var:targeted_country.id }
 	}else = {## FALIURE
-		country_event = espionage_missions.3
-		var:targeted_country = {
-			country_event = espionage_missions.7
+		if = {
+			limit = {
+				check_variable = {chance_of_success < critical_faliure_chance} ## If the success chance is under critical faliure chance (normally 90) (mission wasnt critical failure)
+			}
+			var:targeted_country = {
+				country_event = espionage_missions.7
+				## ESPIOANGE MISSION WAS UNSUCCESSFUL ON YOUR COUNTRY
+			}
+			country_event = espionage_missions.3 ## UNSUCCESSFUL MISSION EVENT
+		}else = {### CRITICAL FAILURE EFFECTS
+			chance_of_death = yes ## CALCULATES WEATHER DEATH CHANCE WILL HAPPEN OR NOT, CRITICAL FALIURE EVENT IS HELD IN HERE
 		}
 	}
 }
-reroute_supply_mission_end_effect = {
+bank_heist_mission_end_effect = {
 	set_temp_variable = { net_size = agent_intelligence }
 	add_to_temp_variable = { net_size = agent_charisma }
 	divide_temp_variable = { net_size = 2 }
@@ -854,20 +1272,43 @@ reroute_supply_mission_end_effect = {
 			check_variable = {
 				var = chance_of_success
 				value = net_size
-				compare = greater_than_or_equals
+				compare = less_than
 			}
 		}
-		var:targeted_country = {
-			subtract_from_variable = { currency_amount^primary_currency = 1000 }
-			country_event = espionage_missions.5
+		if = {
+			limit = {
+				check_variable = {chance_of_success > critical_success_chance} ## If the success chance is over critical success chance (normally 10) (chance rolled low} act the normal effects
+			}
+			var:targeted_country = {
+				country_event = espionage_missions.5 ## ESPIOANGE MISSION WAS SUCCESSFUL ON YOUR COUNTRY
+				subtract_from_variable = { currency_amount^primary_currency = 200 }
+			}
+			add_to_variable = { currency_amount^primary_currency = 200 }
+			country_event = espionage_missions.1 ## SUCCESS MISSION EVENT
+		}else = { ### CRITICAL SUCCESSS EFFECTS
+			var:targeted_country = {
+				## CRITICAL SUCCESSS EFFECTS ON TARGET COUNTRY
+				country_event = espionage_missions.6 ## ESPIOANGE CRITICAL SUCCESS WAS SUCCESSFUL ON YOUR COUNTRY
+				subtract_from_variable = { currency_amount^primary_currency = 600 }
+			}
+			add_to_variable = { currency_amount^primary_currency = 600 }
+			country_event = espionage_missions.2 ## CRITICAL SUCCESS EVENT
 		}
-		country_event = espionage_missions.1
 	}else = {## FALIURE
-		country_event = espionage_missions.3
-		var:targeted_country = {
-			country_event = espionage_missions.7
+		if = {
+			limit = {
+				check_variable = {chance_of_success < critical_faliure_chance} ## If the success chance is under critical faliure chance (normally 90) (mission wasnt critical failure)
+			}
+			var:targeted_country = {
+				country_event = espionage_missions.7
+				## ESPIOANGE MISSION WAS UNSUCCESSFUL ON YOUR COUNTRY
+			}
+			country_event = espionage_missions.3 ## UNSUCCESSFUL MISSION EVENT
+		}else = {### CRITICAL FAILURE EFFECTS
+			chance_of_death = yes ## CALCULATES WEATHER DEATH CHANCE WILL HAPPEN OR NOT, CRITICAL FALIURE EVENT IS HELD IN HERE
 		}
 	}
+
 }
 market_crash_mission_end_effect = {
 	set_temp_variable = { net_size = agent_intelligence }
@@ -880,21 +1321,48 @@ market_crash_mission_end_effect = {
 			check_variable = {
 				var = chance_of_success
 				value = net_size
-				compare = greater_than_or_equals
+				compare = less_than
 			}
 		}
-		country_event = espionage_missions.1
-		var:targeted_country = {
-			give_resource_rights = { receiver = ROOT state = capital }
-			country_event = espionage_missions.5
-			country_event = {
-				id = espionage.4
-				days = 80
+		if = {
+			limit = {
+				check_variable = {chance_of_success > critical_success_chance} ## If the success chance is over critical success chance (normally 10) (chance rolled low} act the normal effects
 			}
+			var:targeted_country = {
+				country_event = espionage_missions.5 ## ESPIOANGE MISSION WAS SUCCESSFUL ON YOUR COUNTRY
+				subtract_from_variable = { currency_amount^primary_currency = 400 }
+			}
+			country_event = espionage_missions.1 ## SUCCESS MISSION EVENT
+		}else = { ### CRITICAL SUCCESSS EFFECTS
+			var:targeted_country = {
+				## CRITICAL SUCCESSS EFFECTS ON TARGET COUNTRY
+				country_event = espionage_missions.6 ## ESPIOANGE CRITICAL SUCCESS WAS SUCCESSFUL ON YOUR COUNTRY
+				subtract_from_variable = { currency_amount^primary_currency = 1000 }
+			}
+			country_event = espionage_missions.2 ## CRITICAL SUCCESS EVENT
 		}
 	}else = {## FALIURE
-		country_event = espionage_missions.7
+		if = {
+			limit = {
+				check_variable = {chance_of_success < critical_faliure_chance} ## If the success chance is under critical faliure chance (normally 90) (mission wasnt critical failure)
+			}
+			var:targeted_country = {
+				country_event = espionage_missions.7
+				## ESPIOANGE MISSION WAS UNSUCCESSFUL ON YOUR COUNTRY
+			}
+			country_event = espionage_missions.3 ## UNSUCCESSFUL MISSION EVENT
+		}else = {### CRITICAL FAILURE EFFECTS
+			chance_of_death = yes ## CALCULATES WEATHER DEATH CHANCE WILL HAPPEN OR NOT, CRITICAL FALIURE EVENT IS HELD IN HERE
+		}
 	}
+}
+counter_espionage_end_effect = {
+	set_temp_variable = { net_size = agent_intelligence }
+	add_to_temp_variable = { net_size = agent_charisma }
+	divide_temp_variable = { net_size = 2 }
+	multiply_temp_variable = { net_size = 8 }
+	multiply_temp_variable = { net_size = Total_counterespionage_vs_espionage_percentage} ## multiply the bonuses to get total net size
+	
 }
 
 create_temporary_agents = { ## CREATE TEMPORARY AGENTS FOR RECRUITMENT

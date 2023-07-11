@@ -68,31 +68,6 @@ scripted_gui = {
 					has_idea = espionage_mission_5_progress
 				}
             }
-			espionage_agent_recruitment_1_visible = {
-				NOT = {
-					has_variable = agent_name_slot_1
-				}
-			}
-			espionage_agent_recruitment_2_visible = {
-				NOT = {
-					has_variable = agent_name_slot_2
-				}
-			}
-			espionage_agent_recruitment_3_visible = {
-				NOT = {
-					has_variable = agent_name_slot_3
-				}
-			}
-			espionage_agent_recruitment_4_visible = {
-				NOT = {
-					has_variable = agent_name_slot_4
-				}
-			}
-			espionage_agent_recruitment_5_visible = {
-				NOT = {
-					has_variable = agent_name_slot_5
-				}
-			}
 		}
 		effects = {
 			espionage_target_nation_1_click = {
@@ -211,19 +186,34 @@ scripted_gui = {
 				scrap_espionage_mission_5 = yes
 			}
 			espionage_missions_1_initiate_click = {
-				add_ideas = espionage_mission_1_progress
+				add_timed_idea = {
+					idea = espionage_mission_1_progress
+					days = 10
+				}
 			}
 			espionage_missions_2_initiate_click = {
-				add_ideas = espionage_mission_2_progress
+				add_timed_idea = {
+					idea = espionage_mission_2_progress
+					days = 10
+				}
 			}
 			espionage_missions_3_initiate_click = {
-				add_ideas = espionage_mission_3_progress
+				add_timed_idea = {
+					idea = espionage_mission_3_progress
+					days = 10
+				}
 			}
 			espionage_missions_4_initiate_click = {
-				add_ideas = espionage_mission_4_progress
+				add_timed_idea = {
+					idea = espionage_mission_4_progress
+					days = 10
+				}
 			}
 			espionage_missions_5_initiate_click = {
-				add_ideas = espionage_mission_5_progress
+				add_timed_idea = {
+					idea = espionage_mission_5_progress
+					days = 10
+				}
 			}
 			espionage_mission_1_select_mission_click = {
 				clr_country_flag = operation_selection_slot_1
@@ -275,30 +265,70 @@ scripted_gui = {
 				set_country_flag = operation_selection_slot_5
 				set_country_flag = operation_mission_selectio5
 			}
-			espionage_agent_recruitment_1_click = {
-				set_country_flag = agent_recruitment_screen_open
-				set_variable = {what_espionage_slot = 1}
-				create_temporary_agents = yes
+			character_border_1_click = {
+				if = {
+					limit = {
+						NOT = {
+							has_variable = agent_name_slot_1
+							has_country_flag =  agent_recruitment_screen_open
+						}
+					}
+					set_country_flag = agent_recruitment_screen_open
+					set_variable = {what_espionage_slot = 1}
+					create_temporary_agents = yes
+				}
 			}
-			espionage_agent_recruitment_2_click = {
-				set_country_flag = agent_recruitment_screen_open
-				set_variable = {what_espionage_slot = 2}
-				create_temporary_agents = yes
+			character_border_2_click = {
+				if = {
+					limit = {
+						NOT = {
+							has_variable = agent_name_slot_2
+							has_country_flag =  agent_recruitment_screen_open
+						}
+					}
+					set_country_flag = agent_recruitment_screen_open
+					set_variable = {what_espionage_slot = 2}
+					create_temporary_agents = yes
+				}
 			}
-			espionage_agent_recruitment_3_click = {
-				set_country_flag = agent_recruitment_screen_open
-				set_variable = {what_espionage_slot = 3}
-				create_temporary_agents = yes
+			character_border_3_click = {
+				if = {
+					limit = {
+						NOT = {
+							has_variable = agent_name_slot_3
+							has_country_flag =  agent_recruitment_screen_open
+						}
+					}
+					set_country_flag = agent_recruitment_screen_open
+					set_variable = {what_espionage_slot = 3}
+					create_temporary_agents = yes
+				}
 			}
-			espionage_agent_recruitment_4_click = {
-				set_country_flag = agent_recruitment_screen_open
-				set_variable = {what_espionage_slot = 4}
-				create_temporary_agents = yes
+			character_border_4_click = {
+				if = {
+					limit = {
+						NOT = {
+							has_variable = agent_name_slot_4
+							has_country_flag =  agent_recruitment_screen_open
+						}
+					}
+					set_country_flag = agent_recruitment_screen_open
+					set_variable = {what_espionage_slot = 4}
+					create_temporary_agents = yes
+				}
 			}
-			espionage_agent_recruitment_5_click = {
-				set_country_flag = agent_recruitment_screen_open
-				set_variable = {what_espionage_slot = 5}
-				create_temporary_agents = yes
+			character_border_5_click = {
+				if = {
+					limit = {
+						NOT = {
+							has_variable = agent_name_slot_5
+							has_country_flag =  agent_recruitment_screen_open
+						}
+					}
+					set_country_flag = agent_recruitment_screen_open
+					set_variable = {what_espionage_slot = 5}
+					create_temporary_agents = yes
+				}
 			}
 		}
 		properties = {
@@ -429,7 +459,6 @@ scripted_gui = {
 					}
 					set_variable = {mission_identifier_1 = global.espionage_mission_martial_missions^i}
 					log = "Tried Set"
-					log = "[?global.espionage_mission_martial_missions^0]"
 				}else_if = {
 					limit = {
 						has_country_flag = operation_selection_slot_2

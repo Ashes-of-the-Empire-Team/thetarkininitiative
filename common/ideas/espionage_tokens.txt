@@ -2,7 +2,7 @@ ideas = {
 	hidden_ideas = {
 		#HOLDS THE DESCRIPTION AND TITLE LOCALISATION FOR MISSIONS
 	## MISSION TOKENS
-		Assassination = { allowed = { always = no } }
+		assassination = { allowed = { always = no } }
 		ransom = { allowed = { always = no } }
 		army_training = { allowed = { always = no } }
 		intimidate_senator = { allowed = { always = no } }
@@ -20,7 +20,7 @@ ideas = {
 		provoke_slave_revolt = { allowed = { always = no } }
 		arm_dissidents = { allowed = { always = no } }
 		plant_sleeper_agent = { allowed = { always = no } }
-		reroute_supply = { allowed = { always = no } }
+		bank_heist = { allowed = { always = no } }
 		market_crash = { allowed = { always = no } }
 	## AGENT TOKENS
 		## USE NAMES WITH UNDERSCORE
@@ -29,65 +29,275 @@ ideas = {
 		polo_lye = { allowed = { always = no } }
 	## TRAIT TOKENS
 		## EXAMPLE TRAIT
-		# espionage_example_trait = { 
-		# 	allowed = { 
-		# 		always = no 
-		# 	}
-		# 	modifier = {
-		# 		## MISSION SUCCESS CHANCES
-		# 		assassination_success_chance = 5
+			# espionage_example_trait = { 
+			# 	allowed = { 
+			# 		always = no 
+			# 	}
+			# 	modifier = {
+			# 		## MISSION SUCCESS CHANCES
+			#		mission_name_success_chance = whatever number
+			# 		assassination_success_chance = 5
 
-
-		# 		### MODIFIERS
-		# 		espionage_critical_faliure_chance
-		# 		espionage_critical_success_chance
-		# 		espionage_agent_survivability
-		# 		espionage_success_chance
-		# 		espionage_faliure_chance
-		# 		espionage_charisma_score_bonuses
-		# 		espionage_martial_score_bonuses
-		# 		espionage_intelligence_score_bonuses
-		# 		espionage_mission_speed_bonuses
-		# 	}
-		# }
-		## CLASS TRAITS - Modifiers holds payload for adding espoinage results, MISSION SUCCESS CHANCE IS ALWAYS FLAT
+			# 		### MODIFIERS
+			# 		espionage_critical_faliure_chance
+			# 		espionage_critical_success_chance
+			# 		espionage_agent_survivability
+			# 		espionage_success_chance
+			# 		espionage_faliure_chance
+			# 		espionage_charisma_score_bonuses
+			# 		espionage_martial_score_bonuses
+			# 		espionage_intelligence_score_bonuses
+			# 		espionage_mission_speed_bonuses
+			#       espionage_mission_cost_bonuses
+			# 		espionage_turncoat_bonuses
+			# 	}
+			# }
+	## CLASS TRAITS - Modifiers holds payload for adding espoinage results, MISSION SUCCESS CHANCE IS ALWAYS FLAT
 		assassin = { 
 			allowed = { 
 				always = no 
 			}
 			modifier = {
 				assassination_success_chance = 5
+				infilitrate_military_success_chance = 5
+				plant_sleeper_agent_success_chance = 5
 			}
 		}
 
-		bounty_hunter = { allowed = { always = no } }
-		counter_intelligence_officer = { allowed = { always = no } }
-		information_broker = { allowed = { always = no } }
-		pirate = { allowed = { always = no } }
-		slicer = { allowed = { always = no } }
-		smuggler = { allowed = { always = no } }
-		vigo = { allowed = { always = no } }
-		saboteur = { allowed = { always = no } }
-		## RACE TRAITS - LOCALISATION IS THE GFX KEY
-		bothan = { allowed = { always = no } }
-		chiss = { allowed = { always = no } }
-		falleen = { allowed = { always = no } }
-		kubaz = { allowed = { always = no } }
-		mando = { allowed = { always = no } }
-		zeltros = { allowed = { always = no } }
-		## PERSONAILITY TRAITS - LOCALISATION IS THE GFX KEY
-		arrogant = { allowed = { always = no } } ## Mission speed increases, critical faliure increased
-		cautious = { allowed = { always = no } } ## Mission speed decreased
-		cheapskate = { allowed = { always = no } } ## Mission cost decreased
-		clumsy = { allowed = { always = no } } ## Failiure increased
-		escape_artist = { allowed = { always = no } } ## Critical failure reduced
-		famous = { allowed = { always = no } } ## always reveals the agent on mission complete, bonus to some missions (charisma ones)
-		martial_artist = { allowed = { always = no } } ## Bonus to some missions, slight bonus to martial
-		observant = { allowed = { always = no } } ## slight bonus to intelligence, decreased chance of critical failure
-		easily_brought = { allowed = { always = no } } ## increases chance they become turncoat
-		fanatic = { allowed = { always = no } } ## decreased chance of 
-		master_persuader = { allowed = { always = no } } ## increase to persuasen
-		psycopath = { allowed = { always = no } } ## increase chance of becoming turncoat, bonus to martial
-		perfectionist = { allowed = { always = no } } ## mission speed increased, mission cost increased, mission success increased
+		bounty_hunter = { allowed = { 
+				always = no 
+			}
+			modifier = {
+				ransom_success_chance = 5
+				intimidate_senator_success_chance = 5
+				
+			}
+		}
+		counter_intelligence_officer = { 
+			allowed = { 
+				always = no 
+			}
+			modifier = {
+				counter_espionage_success_chance = 5
+			}
+		}
+		information_broker = { 
+			allowed = { 
+				always = no 
+			}
+			modifier = {
+				intimidate_senator_success_chance = 5
+				industrial_sabotage_success_chance = 5
+				steal_blueprint_success_chance = 5
+			}
+		}
+		pirate = { 
+			allowed = { 
+				always = no 
+			}
+			modifier = {
+				smuggle_slaves_success_chance = 5
+				free_slaves_success_chance = 5
+				reroute_supply_success_chance = 5
+			}
+		}
+		slicer = { 
+			allowed = { 
+				always = no 
+			}
+			modifier = {
+				cyber_attack_success_chance = 5
+				steal_blueprint_success_chance = 5
+				market_crash_success_chance = 5
+			}
+		}
+		smuggler = { 
+			allowed = { 
+				always = no 
+			}
+			modifier = {
+				smuggle_slaves_success_chance = 5
+				reroute_supply_success_chance = 5
+				steal_equipment_success_chance = 5
+			}
+		}
+		vigo = { 
+			allowed = { 
+				always = no 
+			}
+			modifier = {
+				
+			}
+		}
+		saboteur = { 
+			allowed = { 
+				always = no 
+			}
+			modifier = {
+				arm_dissidents_success_chance = 5
+				logistics_sabotage_success_chance = 5
+				destroy_capital_ship_success_chance = 5
+			}
+		}
+	## RACE TRAITS - LOCALISATION IS THE GFX KEY
+		bothan = { 
+			allowed = { 
+				always = no 
+			}
+			modifier = {
+				
+			}
+		}
+		chiss = { 
+			allowed = { 
+				always = no 
+			}
+			modifier = {
+				
+			}
+		}
+		falleen = { 
+			allowed = { 
+				always = no 
+			}
+			modifier = {
+				
+			}
+		}
+		kubaz = { 
+			allowed = { 
+				always = no 
+			}
+			modifier = {
+				
+			}
+		}
+		mando = { 
+			allowed = { 
+				always = no 
+			}
+			modifier = {
+				
+			}
+		}
+		zeltros = { 
+			allowed = { 
+				always = no 
+			}
+			modifier = {
+				
+			}
+		}
+	## PERSONAILITY TRAITS - LOCALISATION IS THE GFX KEY
+		arrogant = { 
+			allowed = { 
+				always = no 
+			}
+			modifier = {
+				espionage_mission_speed_bonuses = -10
+				espionage_critical_faliure_chance = 10
+			}
+		} ## Mission speed increases, critical faliure increased
+		cautious = { 
+			allowed = { 
+				always = no 
+			}
+			modifier = {
+				espionage_mission_speed_bonuses = 10
+			}
+		} ## Mission speed decreased
+		cheapskate = { 
+			allowed = { 
+				always = no 
+			}
+			modifier = {
+				espionage_mission_cost_bonuses = -10
+			}
+		} ## Mission cost decreased
+		clumsy = { 
+			allowed = { 
+				always = no 
+			}
+			modifier = {
+				espionage_faliure_chance = 5
+			}
+		} ## Failiure increased
+		escape_artist = { 
+			allowed = { 
+				always = no 
+			}
+			modifier = {
+				espionage_critical_faliure_chance = -10
+			}
+		} ## Critical failure reduced
+		famous = { 
+			allowed = { 
+				always = no 
+			}
+			modifier = {
+				espionage_charisma_score_bonuses = 2
+			}
+		} ## always reveals the agent on mission complete, bonus to some missions (charisma ones)
+		martial_artist = { 
+			allowed = { 
+				always = no 
+			}
+			modifier = {
+				espionage_martial_score_bonuses = 1
+			}
+		} ## Bonus to some missions, slight bonus to martial
+		observant = { 
+			allowed = { 
+				always = no 
+			}
+			modifier = {
+				espionage_intelligence_score_bonuses = 1
+				espionage_critical_faliure_chance = -10
+			}
+		} ## slight bonus to intelligence, decreased chance of critical failure
+		easily_brought = { 
+			allowed = { 
+				always = no 
+			}
+			modifier = {
+				espionage_turncoat_bonuses = 10
+			}
+		} ## increases chance they become turncoat
+		fanatic = { 
+			allowed = { 
+				always = no 
+			}
+			modifier = {
+				espionage_turncoat_bonuses = -5
+				espionage_martial_score_bonuses = 1
+			}
+		} ## decreased chance of turncoat bonus to martial missions
+		master_persuader = { 
+			allowed = { 
+				always = no 
+			}
+			modifier = {
+				espionage_charisma_score_bonuses = 1
+			}
+		} ## increase to persuasen
+		psycopath = { 
+			allowed = { 
+				always = no 
+			}
+			modifier = {
+				espionage_martial_score_bonuses = 2
+				espionage_turncoat_bonuses = 10
+			}
+		} ## increase chance of becoming turncoat, bonus to martial
+		perfectionist = { 
+			allowed = { 
+				always = no 
+			}
+			modifier = {
+				espionage_mission_speed_bonuses = 10
+				espionage_mission_cost_bonuses = 10
+				espionage_success_chance = 10
+			}
+		} ## mission speed increased, mission cost increased, mission success increased
 	}
 }
