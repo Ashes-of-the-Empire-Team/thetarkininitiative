@@ -1,10 +1,14 @@
 bankruptcy = {
      looming_bankruptcy = {
         activation = {
-            check_variable = { currency_amount^primary_currency < 0 }
+            OR = {
+                check_variable = { currency_amount^primary_currency < 0 }
+                check_variable = { total_debt > debt_limit }
+            }
         }
         available = {
             check_variable = { currency_amount^primary_currency > 0 }
+            check_variable = { total_debt < debt_limit }
         }
         is_good = no
         selectable_mission = no

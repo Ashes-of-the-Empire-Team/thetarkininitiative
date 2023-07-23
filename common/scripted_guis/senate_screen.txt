@@ -55,6 +55,13 @@ scripted_gui = {
 					add_to_variable = { Global.votes_for_new_republic_espionage = 1}
 					set_country_flag = votes_for_new_republic_espionage
 				}
+				if = { 
+					limit = {
+						has_country_flag = economic_committee_open
+					}
+					add_to_variable = { Global.votes_for_new_republic_economic = 1}
+					set_country_flag = votes_for_new_republic_economic
+				}
 			}
 			new_rep_no_vote_click = {
 				if = { 
@@ -542,44 +549,64 @@ scripted_gui = {
 				}
 			}
 			new_rep_senate_economy_law_1_click = {
-				set_country_flag = economic_policy_open
-				set_country_flag = new_rep_law_1_selected
-				clr_country_flag = new_rep_law_2_selected
-				clr_country_flag = new_rep_law_3_selected
-				clr_country_flag = new_rep_law_4_selected
-				clr_country_flag = new_rep_law_5_selected
+				if = {
+					limit = {
+						has_country_flag = economic_policy_open
+					}
+					clr_country_flag = economic_policy_open
+				}
+				else = {
+					set_country_flag = economic_policy_open
+					set_variable = { selected_button = 1}
+				}
 			}
 			new_rep_senate_economy_law_2_click = {
-				set_country_flag = economic_policy_open
-				set_country_flag = new_rep_law_2_selected
-				clr_country_flag = new_rep_law_1_selected
-				clr_country_flag = new_rep_law_3_selected
-				clr_country_flag = new_rep_law_4_selected
-				clr_country_flag = new_rep_law_5_selected
+				if = {
+					limit = {
+						has_country_flag = economic_policy_open
+					}
+					clr_country_flag = economic_policy_open
+				}
+				else = {
+					set_country_flag = economic_policy_open
+					set_variable = { selected_button = 2}
+				}
 			}
 			new_rep_senate_economy_law_3_click = {
-				set_country_flag = economic_policy_open
-				set_country_flag = new_rep_law_3_selected
-				clr_country_flag = new_rep_law_1_selected
-				clr_country_flag = new_rep_law_2_selected
-				clr_country_flag = new_rep_law_4_selected
-				clr_country_flag = new_rep_law_5_selected
+				if = {
+					limit = {
+						has_country_flag = economic_policy_open
+					}
+					clr_country_flag = economic_policy_open
+				}
+				else = {
+					set_country_flag = economic_policy_open
+					set_variable = { selected_button = 3}
+				}
 			}
 			new_rep_senate_economy_law_4_click = {
-				set_country_flag = economic_policy_open
-				set_country_flag = new_rep_law_4_selected
-				clr_country_flag = new_rep_law_1_selected
-				clr_country_flag = new_rep_law_2_selected
-				clr_country_flag = new_rep_law_3_selected
-				clr_country_flag = new_rep_law_5_selected
+				if = {
+					limit = {
+						has_country_flag = economic_policy_open
+					}
+					clr_country_flag = economic_policy_open
+				}
+				else = {
+					set_country_flag = economic_policy_open
+					set_variable = { selected_button = 4}
+				}
 			}
 			new_rep_senate_economy_law_5_click = {
-				set_country_flag = economic_policy_open
-				set_country_flag = new_rep_law_5_selected
-				clr_country_flag = new_rep_law_1_selected
-				clr_country_flag = new_rep_law_2_selected
-				clr_country_flag = new_rep_law_3_selected
-				clr_country_flag = new_rep_law_4_selected
+				if = {
+					limit = {
+						has_country_flag = economic_policy_open
+					}
+					clr_country_flag = economic_policy_open
+				}
+				else = {
+					set_country_flag = economic_policy_open
+					set_variable = { selected_button = 5}
+				}
 			}
 		}
 		triggers = {
@@ -2492,6 +2519,213 @@ scripted_gui = {
 				NOT = { 
 					has_global_flag = espionage_vote_ongoing
 					has_global_flag = bothan_spynet_allowed
+				}
+			}
+		}
+	}
+	senate_economy_policy_screen = {
+		context_type = player_context
+		window_name = "senate_policy_economy_screen"
+		parent_window_name = "senate_screen"
+		visible = {
+           has_country_flag = economic_committee_open
+		   has_country_flag = economic_policy_open
+		}
+		effects = {
+			anti_slavery_click = {
+				set_global_flag = anti_slavery_act_rep
+				news_event = {
+					id = newsenateeconomic.1
+					days = 30
+				}
+				set_variable = { Global.new_rep_law_economy_number = selected_button }
+				clr_country_flag = economic_policy_open
+				set_global_flag = {
+					flag = economic_vote_ongoing
+					days = 30
+					value = 1
+				}
+				set_global_flag = {
+					flag = anti_slavery_vote
+					days = 30
+					value = 1
+				}
+			}
+			anti_imp_corp_click = {
+				set_global_flag = anti_imp_corp_act_rep
+				news_event = {
+					id = newsenateeconomic.2
+					days = 30
+				}
+				set_variable = { Global.new_rep_law_economy_number = selected_button }
+				clr_country_flag = economic_policy_open
+				set_global_flag = {
+					flag = economic_vote_ongoing
+					days = 30
+					value = 1
+				}
+				set_global_flag = {
+					flag = anti_imp_corp_act_vote
+					days = 30
+					value = 1
+				}
+			}
+			worker_safety_click = {
+				set_global_flag = worker_safety_act_rep
+				news_event = {
+					id = newsenateeconomic.3
+					days = 30
+				}
+				set_variable = { Global.new_rep_law_economy_number = selected_button }
+				clr_country_flag = economic_policy_open
+				set_global_flag = {
+					flag = economic_vote_ongoing
+					days = 30
+					value = 1
+				}
+				set_global_flag = {
+					flag = worker_safety_vote
+					days = 30
+					value = 1
+				}
+			}
+			urbanization_subsidies_click = {
+				set_global_flag = ubranization_subsidies_rep
+				news_event = {
+					id = newsenateeconomic.4
+					days = 30
+				}
+				set_variable = { Global.new_rep_law_economy_number = selected_button }
+				clr_country_flag = economic_policy_open
+				set_global_flag = {
+					flag = economic_vote_ongoing
+					days = 30
+					value = 1
+				}
+				set_global_flag = {
+					flag = ubranization_subsidies_vote
+					days = 30
+					value = 1
+				}
+			}
+			corporate_tax_click = {
+				set_global_flag = corporate_tax_rep
+				news_event = {
+					id = newsenateeconomic.5
+					days = 30
+				}
+				set_variable = { Global.new_rep_law_economy_number = selected_button }
+				clr_country_flag = economic_policy_open
+				set_global_flag = {
+					flag = economic_vote_ongoing
+					days = 30
+					value = 1
+				}
+				set_global_flag = {
+					flag = corporate_tax_vote
+					days = 30
+					value = 1
+				}
+			}
+			new_republic_conglomorate_click = {
+				set_global_flag = new_republic_conglomorate_click
+				news_event = {
+					id = newsenateeconomic.6
+					days = 30
+				}
+				set_variable = { Global.new_rep_law_economy_number = selected_button }
+				clr_country_flag = economic_policy_open
+				set_global_flag = {
+					flag = economic_vote_ongoing
+					days = 30
+					value = 1
+				}
+				set_global_flag = {
+					flag = new_rep_conglomorate_vote
+					days = 30
+					value = 1
+				}
+			}
+			free_trade_click = {
+				set_global_flag = new_republic_free_trade_click
+				news_event = {
+					id = newsenateeconomic.7
+					days = 30
+				}
+				set_variable = { Global.new_rep_law_economy_number = selected_button }
+				clr_country_flag = economic_policy_open
+				set_global_flag = {
+					flag = economic_vote_ongoing
+					days = 30
+					value = 1
+				}
+				set_global_flag = {
+					flag = new_rep_free_trade_vote
+					days = 30
+					value = 1
+				}
+			}
+			new_rep_bank_click = {
+				set_global_flag = new_republic_bank_click
+				news_event = {
+					id = newsenateeconomic.8
+					days = 30
+				}
+				set_variable = { Global.new_rep_law_economy_number = selected_button }
+				clr_country_flag = economic_policy_open
+				set_global_flag = {
+					flag = economic_vote_ongoing
+					days = 30
+					value = 1
+				}
+				set_global_flag = {
+					flag = new_rep_bank_vote
+					days = 30
+					value = 1
+				}
+			}
+		}
+		triggers = {
+			anti_slavery_click_enabled = {
+				NOT = { 
+					has_global_flag = economic_vote_ongoing
+					has_global_flag = alpha_blue_allowed
+				}
+			}
+			anti_imp_corp_click_enabled = {
+				NOT = { 
+					has_global_flag = economic_vote_ongoing
+				}
+			}
+			worker_safety_click_enabled = {
+				NOT = { 
+					has_global_flag = economic_vote_ongoing
+				}
+			}
+			urbanization_subsidies_click_enabled = {
+				NOT = { 
+					has_global_flag = economic_vote_ongoing
+				}
+			}
+			corporate_tax_click_enabled = {
+				NOT = { 
+					has_global_flag = economic_vote_ongoing
+				}
+			}
+			new_republic_conglomorate_click_enabled = {
+				NOT = { 
+					has_global_flag = economic_vote_ongoing
+					has_global_flag = bothan_spynet_allowed
+				}
+			}
+			free_trade_click_enabled = {
+				NOT = { 
+					has_global_flag = economic_vote_ongoing
+				}
+			}
+			new_rep_bank_click_enabled = {
+				NOT = { 
+					has_global_flag = economic_vote_ongoing
 				}
 			}
 		}
