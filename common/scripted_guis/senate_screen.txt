@@ -71,6 +71,13 @@ scripted_gui = {
 					add_to_variable = { Global.votes_against_new_republic_espionage = 1}
 					set_country_flag = votes_for_new_republic_espionage
 				}
+				if = { 
+					limit = {
+						has_country_flag = economic_committee_open
+					}
+					add_to_variable = { Global.votes_against_new_republic_economic = 1}
+					set_country_flag = votes_for_new_republic_economic
+				}
 			}
 			new_rep_abstain_vote_click = {
 				if = { 
@@ -79,6 +86,13 @@ scripted_gui = {
 					}
 					add_to_variable = { Global.votes_abstained_new_republic_espionage = 1}
 					set_country_flag = votes_for_new_republic_espionage
+				}
+				if = { 
+					limit = {
+						has_country_flag = economic_committee_open
+					}
+					add_to_variable = { Global.votes_abstained_new_republic_economic = 1}
+					set_country_flag = votes_for_new_republic_economic
 				}
 			}
 		}
@@ -679,19 +693,19 @@ scripted_gui = {
 		}
 		properties = {
 			new_rep_senate_economy_law_1 = {
-				frame = new_rep_economic_law_1
+				frame = new_rep_law_economic_1
 			}
 			new_rep_senate_economy_law_2 = {
-				frame = new_rep_economic_law_2
+				frame = new_rep_law_economic_2
 			}
 			new_rep_senate_economy_law_3 = {
-				frame = new_rep_economic_law_3
+				frame = new_rep_law_economic_3
 			}
 			new_rep_senate_economy_law_4 = {
-				frame = new_rep_economic_law_4
+				frame = new_rep_law_economic_4
 			}
 			new_rep_senate_economy_law_5 = {
-				frame = new_rep_economic_law_5
+				frame = new_rep_law_economic_5
 			}
 			new_rep_economic_member_1 = {
 				image = "[?Global.EconomicMemberSenateArray^1.GetFlag]"
@@ -2535,7 +2549,7 @@ scripted_gui = {
 			anti_slavery_click = {
 				set_global_flag = anti_slavery_act_rep
 				news_event = {
-					id = newsenateeconomic.1
+					id = newrepleg.2
 					days = 30
 				}
 				set_variable = { Global.new_rep_law_economy_number = selected_button }
