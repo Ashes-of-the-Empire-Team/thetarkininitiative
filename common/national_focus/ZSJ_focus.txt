@@ -136,7 +136,7 @@ focus_tree = {
 	focus = {
 		id = ZSJ_flexible_command_structure
 		icon = GFX_zsinj_goal
-		x = 6
+		x = 7
 		y = 8
 		cost = 10
 		search_filters = {
@@ -389,6 +389,9 @@ focus_tree = {
 			FOCUS_FILTER_RESEARCH
 		}
 		prerequisite = { focus = ZSJ_the_military_plan  }
+		mutually_exclusive = {
+			focus = ZSJ_attract_rival_troopers
+			}
 		completion_reward = {
 			set_technology = {
 			    raptor_trooper = 1
@@ -428,15 +431,75 @@ focus_tree = {
 	focus = {
 		id = ZSJ_meritocratic_leadership
 		icon = GFX_zsinj_goal
-		x = 8
-		y = 8
+		x = 7
+		y = 9
 		cost = 5
 		search_filters = {
 			FOCUS_FILTER_MANPOWER
 		}
-		prerequisite = { focus = ZSJ_expanded_recruitment  }
+		prerequisite = { focus = ZSJ_flexible_command_structure  }
 		completion_reward = {
 			add_ideas = meritocratic_leadership
+		}
+	}
+
+	#Attract Rival Troopers
+	focus = {
+		id = ZSJ_attract_rival_troopers
+		icon = GFX_zsinj_goal
+		x = 9
+		y = 6
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_RESEARCH
+		}
+		prerequisite = { focus = ZSJ_the_military_plan   }
+		mutually_exclusive = {
+			focus = ZSJ_raptor_troopers
+		}
+		completion_reward = {
+			load_oob = ZSJ_TRP
+		}
+	}
+
+	#A New Academy
+	focus = {
+		id = ZSJ_a_new_academy
+		icon = GFX_zsinj_goal
+		x = 9
+		y = 7
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_RESEARCH
+		}
+		prerequisite = { focus = ZSJ_attract_rival_troopers  }
+		completion_reward = {
+			remove_ideas = ZSJ_lack_of_stormtroopers
+			set_division_template_lock = {
+				division_template = "Stormtrooper Legion"
+				is_locked = no
+			}
+		}
+	}
+
+	#Stormtroopers
+	focus = {
+		id = ZSJ_stormtroopers
+		icon = GFX_zsinj_goal
+		x = 9
+		y = 8
+		cost = 10
+		search_filters = {
+			FOCUS_FILTER_RESEARCH
+		}
+		prerequisite = { focus = ZSJ_a_new_academy  }
+		
+		completion_reward = {
+			add_tech_bonus = {
+			    bonus = 1
+			    uses = 1
+			    category = stormtrooper
+			}
 		}
 	}
 
@@ -444,7 +507,7 @@ focus_tree = {
 	focus = {
 		id = ZSJ_armored_warfare_innovations
 		icon = GFX_zsinj_goal
-		x = 10
+		x = 11
 		y = 6
 		cost = 10
 		search_filters = {
@@ -464,7 +527,7 @@ focus_tree = {
 	focus = {
 		id = ZSJ_mobile_walkers
 		icon = GFX_zsinj_goal
-		x = 9
+		x = 11
 		y = 7
 		cost = 5
 		search_filters = {
@@ -485,12 +548,12 @@ focus_tree = {
 		id = ZSJ_heavy_walkers
 		icon = GFX_zsinj_goal
 		x = 11
-		y = 7
+		y = 8
 		cost = 5
 		search_filters = {
 			FOCUS_FILTER_RESEARCH
 		}
-		prerequisite = { focus = ZSJ_armored_warfare_innovations  }
+		prerequisite = { focus = ZSJ_mobile_walkers  }
 		completion_reward = {
 			add_tech_bonus = {
 			    bonus = 1
