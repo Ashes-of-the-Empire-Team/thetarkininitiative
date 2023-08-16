@@ -225,13 +225,21 @@ focus_tree = {
 		id = KYK_the_attichitcuk_clan
 		icon = GFX_KYK_Frame
 		cost = 7.2
-		x = -1
+		x = -2
 		y = 1
 		ai_will_do = {
 			factor = 1
 		}
 		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus KYK_the_attichitcuk_clan"
+			if = {
+				limit = {
+					has_completed_focus = KYK_attichitcuk
+				}
+				swap_ideas = {
+					remove_idea = attichitcuk_loyal
+					add_idea = attichitcuk_disloyal
+				}
+			}
 		}
 		relative_position_id = KYK_ties_with_the_smugglers
 		prerequisite = { focus = KYK_ties_with_the_smugglers }
@@ -384,6 +392,10 @@ focus_tree = {
 				recruit_character = KYK_tojjevvuk
 			}
 			promote_character = KYK_tojjevvuk
+			swap_ideas = {
+				remove_idea = tojj_disloyal
+				add_idea = tojj_neutral
+			}
 		}
 		relative_position_id = KYK_a_new_leader
 		prerequisite = { focus = KYK_a_new_leader }
@@ -422,7 +434,7 @@ focus_tree = {
 			factor = 1
 		}
 		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus KYK_new_building_techniques"
+			add_ideas = kyk_new_building_techniques
 		}
 		relative_position_id = KYK_wroshyr_trees
 		prerequisite = { focus = KYK_wroshyr_trees }
@@ -502,7 +514,10 @@ focus_tree = {
 			factor = 1
 		}
 		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus KYK_war_chiefs"
+			swap_ideas = {
+				remove_idea = unorganized_military
+				add_idea = unorganized_military_2
+			}
 		}
 		relative_position_id = KYK_keep_tribal_allegiances
 		prerequisite = { focus = KYK_keep_tribal_allegiances }
@@ -550,7 +565,10 @@ focus_tree = {
 			factor = 1
 		}
 		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus KYK_rebuild_what_was_lost"
+			add_timed_idea = {
+				idea = rebuilding_kashyyyk
+				days = 365
+			}
 		}
 	}
 
@@ -578,7 +596,11 @@ focus_tree = {
 			factor = 1
 		}
 		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus KYK_dismantle_it"
+			remove_ideas = imperial_refinery
+			add_timed_idea = {
+				idea = imperial_refinery
+				days = 180
+			}
 		}
 		relative_position_id = KYK_the_imperial_refinery
 		prerequisite = { focus = KYK_the_imperial_refinery }
@@ -589,13 +611,16 @@ focus_tree = {
 		id = KYK_reopen_it
 		icon = GFX_KYK_Frame
 		cost = 7.2
-		x = 1
+		x = 2
 		y = 1
 		ai_will_do = {
 			factor = 1
 		}
 		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus KYK_reopen_it"
+			swap_ideas = {
+				remove_idea = imperial_refinery
+				add_idea = imperial_refinery_bigger
+			}
 		}
 		relative_position_id = KYK_the_imperial_refinery
 		prerequisite = { focus = KYK_the_imperial_refinery }
@@ -644,7 +669,11 @@ focus_tree = {
 			factor = 1
 		}
 		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus KYK_water_treatment_facilities"
+			remove_idea = imperial_refinery_bigger
+			add_timed_idea = {
+				idea = imperial_refinery_bigger
+				days = 180
+			}
 		}
 		relative_position_id = KYK_reopen_it
 		prerequisite = { focus = KYK_reopen_it }
@@ -660,7 +689,7 @@ focus_tree = {
 			factor = 1
 		}
 		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus KYK_selling_wroshyr_sap"
+			add_ideas = wroshyr_sap_sales
 		}
 		relative_position_id = KYK_water_treatment_facilities
 		prerequisite = { focus = KYK_water_treatment_facilities }
@@ -789,7 +818,7 @@ focus_tree = {
 			factor = 1
 		}
 		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus KYK_the_honor_guard"
+			remove_ideas = unorganized_military_2
 		}
 		relative_position_id = KYK_puurrgerr_clan
 		prerequisite = { focus = KYK_puurrgerr_clan }
@@ -821,7 +850,14 @@ focus_tree = {
 			factor = 1
 		}
 		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus KYK_rely_on_domestic_production"
+			random_owned_controlled_state = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
 		}
 		relative_position_id = KYK_defending_our_homes
 		prerequisite = { focus = KYK_defending_our_homes }
@@ -966,7 +1002,14 @@ focus_tree = {
 		}
 		prerequisite = { focus = KYK_rebuild_what_was_lost }
 		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus KYK_rebuild_kachirho"
+			53 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
 		}
 	}
 
@@ -980,7 +1023,14 @@ focus_tree = {
 			factor = 1
 		}
 		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus KYK_resettle_awrathakka"
+			270 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
 		}
 		relative_position_id = KYK_rebuild_what_was_lost
 		prerequisite = { focus = KYK_rebuild_what_was_lost }
@@ -996,7 +1046,14 @@ focus_tree = {
 			factor = 1
 		}
 		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus KYK_rwookrrorro"
+			281 = {
+				add_extra_state_shared_building_slots = 3
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
 		}
 		relative_position_id = KYK_resettle_awrathakka
 		prerequisite = { focus = KYK_resettle_awrathakka }
@@ -1012,7 +1069,14 @@ focus_tree = {
 			factor = 1
 		}
 		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus KYK_an_improved_arms_industry"
+			random_owned_controlled_state = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
 		}
 		relative_position_id = KYK_rwookrrorro
 		prerequisite = { focus = KYK_rwookrrorro }
@@ -1063,7 +1127,7 @@ focus_tree = {
 			factor = 1
 		}
 		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus KYK_camoflaged_homes"
+			add_ideas = camouflaged_homes
 		}
 		relative_position_id = KYK_wroshyr_trees
 		prerequisite = { focus = KYK_wroshyr_trees }
@@ -1111,7 +1175,10 @@ focus_tree = {
 			factor = 1
 		}
 		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus KYK_the_great_enemy"
+			create_wargoal = {
+				type = puppet_wargoal_focus
+				target = TRA
+			}
 		}
 		relative_position_id = KYK_the_attichitcuk_clan
 		prerequisite = { focus = KYK_the_attichitcuk_clan }
@@ -1159,7 +1226,7 @@ focus_tree = {
 			factor = 1
 		}
 		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus KYK_dismantle_the_slave_guilds"
+			remove_ideas = slave_raids_kyk
 		}
 		relative_position_id = KYK_the_great_enemy
 		prerequisite = { focus = KYK_the_great_enemy }
@@ -1207,7 +1274,7 @@ focus_tree = {
 			factor = 1
 		}
 		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus KYK_a_life_debt_payed"
+			remove_ideas = humiliated_by_trandosha
 		}
 		relative_position_id = KYK_dismantle_the_slave_guilds
 		prerequisite = { focus = KYK_dismantle_the_slave_guilds }
@@ -1256,7 +1323,7 @@ focus_tree = {
 			factor = 1
 		}
 		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus KYK_end_the_feud"
+			remove_ideas = humiliated_by_trandosha
 		}
 		relative_position_id = KYK_pelts_for_peace
 		prerequisite = { focus = KYK_pelts_for_peace }
@@ -1305,7 +1372,14 @@ focus_tree = {
 			factor = 1
 		}
 		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus KYK_expansion_of_thikkiiana_city"
+			273 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
 		}
 	}
 
@@ -1333,7 +1407,10 @@ focus_tree = {
 			factor = 1
 		}
 		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus KYK_empowered_tojj_clan"
+			swap_ideas = {
+				remove_idea = tojj_neutral
+				add_idea = tojj_loyal
+			}
 		}
 		relative_position_id = KYK_toyevvuk
 		prerequisite = { focus = KYK_toyevvuk }
