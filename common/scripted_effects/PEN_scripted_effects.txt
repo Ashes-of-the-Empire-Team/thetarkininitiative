@@ -1,4 +1,35 @@
 ##########################################################
+################### Internal Factions ####################
+##########################################################
+
+### Example of effect used in focus: ###
+
+# add_to_variable = {
+#     var = ardus_loyalty
+#     value = 15
+# }
+# clamp_variable = {
+#     var = ardus_loyalty
+#     max = 100
+# }
+# PEN_update_ardus_effects = yes
+
+### Faction tags: ###
+
+# ardus          Ardus Kaine Faction
+# galentro       Galentro Heavy Works
+# automata       Dynamic Automata
+# governors      Imperial Governors
+# vfcz           Velcar Free Commerce Zone
+# ibc            Intergalactic Banking Clan
+
+### Variables: ###
+
+# loyalty        Optional steps: -2, -1, 0, 1, 2; Defines positive or negative effect
+# influence      Optional steps: 0, 0.25, 0.5, 0.75, 1; Defines severity of effect
+#                Base Value (ex: 0.1) * Faction Influence (ex: 0.5) * Faction Loyalty (ex: -2) = -0.1
+
+##########################################################
 ################# Ardus Kaine Faction ####################
 ##########################################################
 PEN_update_ardus_effects = {
@@ -10,9 +41,8 @@ PEN_update_ardus_effects = {
     if = {
         limit = {
             OR = {
-                check_variable = { ardus_loyalty = 0}
-                check_variable = { ardus_loyalty > 0 }
                 check_variable = { ardus_loyalty = 20 }
+                check_variable = { ardus_loyalty < 20 }
             }
         }
         set_variable = {
@@ -24,7 +54,10 @@ PEN_update_ardus_effects = {
     if = {
         limit = {
             OR = {
-                check_variable = { ardus_loyalty > 20}
+                AND = {
+                    check_variable = { ardus_loyalty > 20 }
+                    check_variable = { ardus_loyalty < 40 }
+                }
                 check_variable = { ardus_loyalty = 40 }
             }
         }
@@ -37,7 +70,10 @@ PEN_update_ardus_effects = {
     if = {
         limit = {
             OR = {
-                check_variable = { ardus_loyalty > 40}
+                AND = {
+                    check_variable = { ardus_loyalty > 40 }
+                    check_variable = { ardus_loyalty < 60 }
+                }
                 check_variable = { ardus_loyalty = 60 }
             }
         }
@@ -50,7 +86,10 @@ PEN_update_ardus_effects = {
     if = {
         limit = {
             OR = {
-                check_variable = { ardus_loyalty > 60}
+                AND = {
+                    check_variable = { ardus_loyalty > 60 }
+                    check_variable = { ardus_loyalty < 80 }
+                }
                 check_variable = { ardus_loyalty = 80 }
             }
         }
@@ -64,7 +103,6 @@ PEN_update_ardus_effects = {
         limit = {
             OR = {
                 check_variable = { ardus_loyalty > 80}
-                check_variable = { ardus_loyalty = 100 }
             }
         }
         set_variable = {
@@ -195,9 +233,8 @@ PEN_update_galentro_effects = {
     if = {
         limit = {
             OR = {
-                check_variable = { galentro_loyalty = 0}
-                check_variable = { galentro_loyalty > 0 }
                 check_variable = { galentro_loyalty = 20 }
+                check_variable = { galentro_loyalty < 20 }
             }
         }
         set_variable = {
@@ -209,7 +246,10 @@ PEN_update_galentro_effects = {
     if = {
         limit = {
             OR = {
-                check_variable = { galentro_loyalty > 20}
+                AND = {
+                    check_variable = { galentro_loyalty > 20 }
+                    check_variable = { galentro_loyalty < 40 }
+                }
                 check_variable = { galentro_loyalty = 40 }
             }
         }
@@ -222,7 +262,10 @@ PEN_update_galentro_effects = {
     if = {
         limit = {
             OR = {
-                check_variable = { galentro_loyalty > 40}
+                AND = {
+                    check_variable = { galentro_loyalty > 40 }
+                    check_variable = { galentro_loyalty < 60 }
+                }
                 check_variable = { galentro_loyalty = 60 }
             }
         }
@@ -235,7 +278,10 @@ PEN_update_galentro_effects = {
     if = {
         limit = {
             OR = {
-                check_variable = { galentro_loyalty > 60}
+                AND = {
+                    check_variable = { galentro_loyalty > 60 }
+                    check_variable = { galentro_loyalty < 80 }
+                }
                 check_variable = { galentro_loyalty = 80 }
             }
         }
@@ -249,7 +295,6 @@ PEN_update_galentro_effects = {
         limit = {
             OR = {
                 check_variable = { galentro_loyalty > 80}
-                check_variable = { galentro_loyalty = 100 }
             }
         }
         set_variable = {
@@ -380,9 +425,8 @@ PEN_update_automata_effects = {
     if = {
         limit = {
             OR = {
-                check_variable = { automata_loyalty = 0}
-                check_variable = { automata_loyalty > 0 }
                 check_variable = { automata_loyalty = 20 }
+                check_variable = { automata_loyalty < 20 }
             }
         }
         set_variable = {
@@ -394,7 +438,10 @@ PEN_update_automata_effects = {
     if = {
         limit = {
             OR = {
-                check_variable = { automata_loyalty > 20}
+                AND = {
+                    check_variable = { automata_loyalty > 20 }
+                    check_variable = { automata_loyalty < 40 }
+                }
                 check_variable = { automata_loyalty = 40 }
             }
         }
@@ -407,7 +454,10 @@ PEN_update_automata_effects = {
     if = {
         limit = {
             OR = {
-                check_variable = { automata_loyalty > 40}
+                AND = {
+                    check_variable = { automata_loyalty > 40 }
+                    check_variable = { automata_loyalty < 60 }
+                }
                 check_variable = { automata_loyalty = 60 }
             }
         }
@@ -420,7 +470,10 @@ PEN_update_automata_effects = {
     if = {
         limit = {
             OR = {
-                check_variable = { automata_loyalty > 60}
+                AND = {
+                    check_variable = { automata_loyalty > 60 }
+                    check_variable = { automata_loyalty < 80 }
+                }
                 check_variable = { automata_loyalty = 80 }
             }
         }
@@ -434,7 +487,6 @@ PEN_update_automata_effects = {
         limit = {
             OR = {
                 check_variable = { automata_loyalty > 80}
-                check_variable = { automata_loyalty = 100 }
             }
         }
         set_variable = {
@@ -565,9 +617,8 @@ PEN_update_governors_effects = {
     if = {
         limit = {
             OR = {
-                check_variable = { governors_loyalty = 0}
-                check_variable = { governors_loyalty > 0 }
                 check_variable = { governors_loyalty = 20 }
+                check_variable = { governors_loyalty < 20 }
             }
         }
         set_variable = {
@@ -579,7 +630,10 @@ PEN_update_governors_effects = {
     if = {
         limit = {
             OR = {
-                check_variable = { governors_loyalty > 20}
+                AND = {
+                    check_variable = { governors_loyalty > 20 }
+                    check_variable = { governors_loyalty < 40 }
+                }
                 check_variable = { governors_loyalty = 40 }
             }
         }
@@ -592,7 +646,10 @@ PEN_update_governors_effects = {
     if = {
         limit = {
             OR = {
-                check_variable = { governors_loyalty > 40}
+                AND = {
+                    check_variable = { governors_loyalty > 40 }
+                    check_variable = { governors_loyalty < 60 }
+                }
                 check_variable = { governors_loyalty = 60 }
             }
         }
@@ -605,7 +662,10 @@ PEN_update_governors_effects = {
     if = {
         limit = {
             OR = {
-                check_variable = { governors_loyalty > 60}
+                AND = {
+                    check_variable = { governors_loyalty > 60 }
+                    check_variable = { governors_loyalty < 80 }
+                }
                 check_variable = { governors_loyalty = 80 }
             }
         }
@@ -619,7 +679,6 @@ PEN_update_governors_effects = {
         limit = {
             OR = {
                 check_variable = { governors_loyalty > 80}
-                check_variable = { governors_loyalty = 100 }
             }
         }
         set_variable = {
@@ -771,9 +830,8 @@ PEN_update_vfcz_effects = {
     if = {
         limit = {
             OR = {
-                check_variable = { vfcz_loyalty = 0}
-                check_variable = { vfcz_loyalty > 0 }
                 check_variable = { vfcz_loyalty = 20 }
+                check_variable = { vfcz_loyalty < 20 }
             }
         }
         set_variable = {
@@ -785,7 +843,10 @@ PEN_update_vfcz_effects = {
     if = {
         limit = {
             OR = {
-                check_variable = { vfcz_loyalty > 20}
+                AND = {
+                    check_variable = { vfcz_loyalty > 20 }
+                    check_variable = { vfcz_loyalty < 40 }
+                }
                 check_variable = { vfcz_loyalty = 40 }
             }
         }
@@ -798,7 +859,10 @@ PEN_update_vfcz_effects = {
     if = {
         limit = {
             OR = {
-                check_variable = { vfcz_loyalty > 40}
+                AND = {
+                    check_variable = { vfcz_loyalty > 40 }
+                    check_variable = { vfcz_loyalty < 60 }
+                }
                 check_variable = { vfcz_loyalty = 60 }
             }
         }
@@ -811,7 +875,10 @@ PEN_update_vfcz_effects = {
     if = {
         limit = {
             OR = {
-                check_variable = { vfcz_loyalty > 60}
+                AND = {
+                    check_variable = { vfcz_loyalty > 60 }
+                    check_variable = { vfcz_loyalty < 80 }
+                }
                 check_variable = { vfcz_loyalty = 80 }
             }
         }
@@ -825,7 +892,6 @@ PEN_update_vfcz_effects = {
         limit = {
             OR = {
                 check_variable = { vfcz_loyalty > 80}
-                check_variable = { vfcz_loyalty = 100 }
             }
         }
         set_variable = {
@@ -968,6 +1034,219 @@ PEN_update_vfcz_effects = {
     }
 }
 
+##########################################################
+############## Intergalactic Banking Clan ################
+##########################################################
+PEN_update_ibc_effects = {
+    ###### Loyalty Bar ######
+    #Box 1
+    if = {
+        limit = {
+            OR = {
+                check_variable = { ibc_loyalty = 20 }
+                check_variable = { ibc_loyalty < 20 }
+            }
+        }
+        set_variable = {
+            var = PEN_ibc_loyalty_bar
+            value = -2
+        }
+    }
+    #Box 2
+    if = {
+        limit = {
+            OR = {
+                AND = {
+                    check_variable = { ibc_loyalty > 20 }
+                    check_variable = { ibc_loyalty < 40 }
+                }
+                check_variable = { ibc_loyalty = 40 }
+            }
+        }
+        set_variable = {
+            var = PEN_ibc_loyalty_bar
+            value = -1
+        }
+    }
+    #Box 3
+    if = {
+        limit = {
+            OR = {
+                AND = {
+                    check_variable = { ibc_loyalty > 40 }
+                    check_variable = { ibc_loyalty < 60 }
+                }
+                check_variable = { ibc_loyalty = 60 }
+            }
+        }
+        set_variable = {
+            var = PEN_ibc_loyalty_bar
+            value = 0
+        }
+    }
+    #Box 4
+    if = {
+        limit = {
+            OR = {
+                AND = {
+                    check_variable = { ibc_loyalty > 60 }
+                    check_variable = { ibc_loyalty < 80 }
+                }
+                check_variable = { ibc_loyalty = 80 }
+            }
+        }
+        set_variable = {
+            var = PEN_ibc_loyalty_bar
+            value = 1
+        }
+    }
+    #Box 5
+    if = {
+        limit = {
+            OR = {
+                check_variable = { ibc_loyalty > 80}
+            }
+        }
+        set_variable = {
+            var = PEN_ibc_loyalty_bar
+            value = 2
+        }
+    }
+
+    ###### Influence Bar ######
+    #Box 1
+    if = {
+        limit = {
+            OR = {
+                check_variable = { ibc_influence = 0}
+                check_variable = { ibc_influence > 0 }
+                check_variable = { ibc_influence = 20 }
+            }
+        }
+        set_variable = {
+            var = PEN_ibc_influence_bar
+            value = 0
+        }
+    }
+    #Box 2
+    if = {
+        limit = {
+            OR = {
+                check_variable = { ibc_influence > 20}
+                check_variable = { ibc_influence = 40 }
+            }
+        }
+        set_variable = {
+            var = PEN_ibc_influence_bar
+            value = 0.25
+        }
+    }
+    #Box 3
+    if = {
+        limit = {
+            OR = {
+                check_variable = { ibc_influence > 40}
+                check_variable = { ibc_influence = 60 }
+            }
+        }
+        set_variable = {
+            var = PEN_ibc_influence_bar
+            value = 0.5
+        }
+    }
+    #Box 4
+    if = {
+        limit = {
+            OR = {
+                check_variable = { ibc_influence > 60}
+                check_variable = { ibc_influence = 80 }
+            }
+        }
+        set_variable = {
+            var = PEN_ibc_influence_bar
+            value = 0.75
+        }
+    }
+    #Box 5
+    if = {
+        limit = {
+            OR = {
+                check_variable = { ibc_influence > 80}
+                check_variable = { ibc_influence = 100 }
+            }
+        }
+        set_variable = {
+            var = PEN_ibc_influence_bar
+            value = 1
+        }
+    }
+
+    ###### Calculation ######
+    #Political Power Gain
+    set_variable = {
+        var = PEN_ibc_pp_gain
+        value = 0.1
+    }
+    multiply_variable = {
+        var = PEN_ibc_pp_gain
+        value = PEN_ibc_influence_bar
+    }
+    multiply_variable = {
+        var = PEN_ibc_pp_gain
+        value = PEN_ibc_loyalty_bar
+    }
+    set_variable = {
+       var = PEN_ibc_pp_gain_loc
+       value = PEN_ibc_pp_gain 
+    }
+    multiply_variable = {
+        var = PEN_ibc_pp_gain_loc
+        value = 100
+    }
+    #Trade Opinion
+    set_variable = {
+        var = PEN_ibc_trade_opinion
+        value = 0.15
+    }
+    multiply_variable = {
+        var = PEN_ibc_trade_opinion
+        value = PEN_ibc_influence_bar
+    }
+    multiply_variable = {
+        var = PEN_ibc_trade_opinion
+        value = PEN_ibc_loyalty_bar
+    }
+    set_variable = {
+       var = PEN_ibc_trade_opinion_loc
+       value = PEN_ibc_trade_opinion
+    }
+    multiply_variable = {
+        var = PEN_ibc_trade_opinion_loc
+        value = 100
+    }
+    #Resource Gain Efficiency
+    set_variable = {
+        var = PEN_ibc_resource_gain_efficiency
+        value = 0.1
+    }
+    multiply_variable = {
+        var = PEN_ibc_resource_gain_efficiency
+        value = PEN_ibc_influence_bar
+    }
+    multiply_variable = {
+        var = PEN_ibc_resource_gain_efficiency
+        value = PEN_ibc_loyalty_bar
+    }
+    set_variable = {
+       var = PEN_ibc_resource_gain_efficiency_loc
+       value = PEN_ibc_resource_gain_efficiency
+    }
+    multiply_variable = {
+        var = PEN_ibc_resource_gain_efficiency_loc
+        value = 100
+    }
+}
+
 
 ################################
 #Internal Factions Setup (Initial setup when unlocked)
@@ -1084,6 +1363,37 @@ PEN_setup_internal_factions = {
     }
 }
 
+PEN_setup_ibc_faction = {
+    #IBC
+    set_variable = {
+        var = PEN_ibc_loyalty_max_cap
+        value = 100
+    }
+    set_variable = {
+        var = PEN_ibc_loyalty_min_cap
+        value = 0
+    }
+    set_variable = {
+        var = PEN_ibc_influence_max_cap
+        value = 100
+    }
+    set_variable = {
+        var = ibc_loyalty
+        value = 50
+    }
+    set_variable = {
+        var = ibc_influence
+        value = 50
+    }
+}
+
+
+
+
+
+###########################################
+###########################################
+###########################################
 PEN_new_order_spirit_level_up = {
     if = {
         limit = {

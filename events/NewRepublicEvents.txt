@@ -512,18 +512,28 @@ news_event = {
 	is_triggered_only = yes
 
     option = {
-		trigger = {
-			has_global_flag = legislation_passed_nr
-		}
-		name = "The Legislation has Passed"
-		clr_global_flag = legislation_passed_nr
-	}
+		name = "It has passed"
+			trigger = {
+				check_variable = { Global.votes_for_new_republic_economic > Global.votes_against_new_republic_economic }
+			}
+			set_variable = { Global.new_rep_law_economic_@Global.new_rep_law_economy_number = 2 }
+			clear_variable = Global.votes_for_new_republic_economic
+			clear_variable = Global.votes_against_new_republic_economic
+			clear_variable = Global.votes_abstained_new_republic_economic
+			clr_country_flag = votes_for_new_republic_economic
+        }
 	option = {
+		name = "It has failed"
 		trigger = {
-			has_global_flag = legislation_failed_nr
+			OR = {
+				check_variable = { Global.votes_for_new_republic_economic < Global.votes_against_new_republic_economic }
+				check_variable = { Global.votes_for_new_republic_economic = Global.votes_against_new_republic_economic }
+			}
 		}
-		name = "The Legislation has Failed"
-		clr_global_flag = legislation_failed_nr
+		clear_variable = Global.votes_for_new_republic_economic
+		clear_variable = Global.votes_against_new_republic_economic
+		clear_variable = Global.votes_abstained_new_republic_economic
+		clr_country_flag = votes_for_new_republic_economic
 	}
 }
 
