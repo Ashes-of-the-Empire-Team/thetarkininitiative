@@ -362,6 +362,11 @@ focus_tree = {
 			focus = PEN_aboard_the_reaper
 		}
 		available_if_capitulated = yes
+		select_effect = {
+			hidden_effect = {
+				country_event = { id = PEN_formation.2 days = 7 }
+			}
+		}
 		completion_reward = {
 			custom_effect_tooltip = PEN_invite_local_leaders_loc
 			add_political_power = 20
@@ -388,6 +393,12 @@ focus_tree = {
 			focus = PEN_refiguring_our_economy
 		}
 		available_if_capitulated = yes
+
+		select_effect = {
+			hidden_effect = {
+				country_event = { id = PEN_formation.6 days = 14 }
+			}
+		}
 
 		completion_reward = {
 			custom_effect_tooltip = PEN_pentastar_talks_loc
@@ -571,11 +582,11 @@ focus_tree = {
 		relative_position_id = PEN_pentastar_alignment_treaty
 		cost = 10
 		
-		allow_branch = {
-			PEN = {
-				has_completed_focus = PEN_pentastar_alignment_treaty
-			}
-		}
+		#allow_branch = {
+		#	PEN = {
+		#		has_completed_focus = PEN_pentastar_alignment_treaty
+		#	}
+		#}
 		offset = {
 			x = -3
 			y = 0
@@ -2879,11 +2890,11 @@ focus_tree = {
 		relative_position_id = PEN_pentastar_alignment_treaty
 		cost = 5
 
-		allow_branch = {
-			PEN = {
-				has_completed_focus = PEN_pentastar_alignment_treaty
-			}
-		}
+		#allow_branch = {
+		#	PEN = {
+		#		has_completed_focus = PEN_pentastar_alignment_treaty
+		#	}
+		#}
 
 		ai_will_do = {factor = 1}
 			
@@ -2928,32 +2939,46 @@ focus_tree = {
 				target = ORD
 				transfer_troops = yes
 			}
+			add_state_core = 120
 			custom_effect_tooltip = PEN_bastion_set_compliance
 			hidden_effect = {
-				2 = {
+				1 = {
 					set_compliance = 10
 				}
-				82 = {
+				121 = {
 					set_compliance = 10
 				}
-				86 = {
+				123 = {
 					set_compliance = 10
 				}
-				92 = {
+				115 = {
 					set_compliance = 10
 				}
-				94 = {
+				116 = {
 					set_compliance = 10
 				}
-				104 = {
-					set_compliance = 10
+			}
+
+			#Imperial Governors are upset by losing control over Bastion
+			custom_effect_tooltip = PEN_factions_governors_upset
+			hidden_effect = {
+				add_to_variable = {
+					var = governors_loyalty
+					value = -15
 				}
-				110 = {
-					set_compliance = 10
+				clamp_variable = {
+					var = governors_loyalty
+					max = 100
 				}
-				124 = {
-					set_compliance = 10
+				add_to_variable = {
+					var = governors_influence
+					value = 10
 				}
+				clamp_variable = {
+					var = governors_influence
+					max = 100
+				}
+				PEN_update_governors_effects = yes
 			}
 		}
 	}
@@ -3012,7 +3037,7 @@ focus_tree = {
 		completion_reward = {
 			custom_effect_tooltip = PEN_lay_the_groundworks_loc
 			hidden_effect = {
-				2 = {
+				1 = {
 					add_compliance = 10
 					add_building_construction = {
 						type = infrastructure
@@ -3020,7 +3045,7 @@ focus_tree = {
 						instant_build = yes
 					}
 				}
-				82 = {
+				120 = {
 					add_compliance = 10
 					add_building_construction = {
 						type = infrastructure
@@ -3028,7 +3053,7 @@ focus_tree = {
 						instant_build = yes
 					}
 				}
-				86 = {
+				116 = {
 					add_compliance = 10
 					add_building_construction = {
 						type = infrastructure
@@ -3036,7 +3061,7 @@ focus_tree = {
 						instant_build = yes
 					}
 				}
-				92 = {
+				121 = {
 					add_compliance = 10
 					add_building_construction = {
 						type = infrastructure
@@ -3044,7 +3069,7 @@ focus_tree = {
 						instant_build = yes
 					}
 				}
-				94 = {
+				123 = {
 					add_compliance = 10
 					add_building_construction = {
 						type = infrastructure
@@ -3052,23 +3077,7 @@ focus_tree = {
 						instant_build = yes
 					}
 				}
-				104 = {
-					add_compliance = 10
-					add_building_construction = {
-						type = infrastructure
-						level = 1
-						instant_build = yes
-					}
-				}
-				110 = {
-					add_compliance = 10
-					add_building_construction = {
-						type = infrastructure
-						level = 1
-						instant_build = yes
-					}
-				}
-				124 = {
+				115 = {
 					add_compliance = 10
 					add_building_construction = {
 						type = infrastructure
@@ -3101,7 +3110,7 @@ focus_tree = {
 		}
 		available_if_capitulated = yes
 		completion_reward = {
-			110 = {
+			116 = {
 				add_building_construction = {
 					type = dockyard
 					level = 1
@@ -3109,7 +3118,7 @@ focus_tree = {
 				}
 				add_extra_state_shared_building_slots = 1
 			}
-			94 = {
+			123 = {
 				add_building_construction = {
 					type = dockyard
 					level = 1
@@ -3117,7 +3126,7 @@ focus_tree = {
 				}
 				add_extra_state_shared_building_slots = 1
 			}
-			86 = {
+			115 = {
 				add_building_construction = {
 					type = dockyard
 					level = 1
@@ -3127,28 +3136,22 @@ focus_tree = {
 			}
 			custom_effect_tooltip = PEN_bastion_compliance
 			hidden_effect = {
-				2 = {
+				120 = {
 					add_compliance = 10
 				}
-				82 = {
+				121 = {
 					add_compliance = 10
 				}
-				86 = {
+				123 = {
 					add_compliance = 10
 				}
-				92 = {
+				116 = {
 					add_compliance = 10
 				}
-				94 = {
+				115 = {
 					add_compliance = 10
 				}
-				104 = {
-					add_compliance = 10
-				}
-				110 = {
-					add_compliance = 10
-				}
-				124 = {
+				1 = {
 					add_compliance = 10
 				}
 			}
@@ -3176,7 +3179,7 @@ focus_tree = {
 		}
 		available_if_capitulated = yes
 		completion_reward = {
-			92 = {
+			120 = {
 				add_building_construction = {
 					type = industrial_complex
 					level = 2
@@ -3184,7 +3187,7 @@ focus_tree = {
 				}
 				add_extra_state_shared_building_slots = 2
 			}
-			104 = {
+			116 = {
 				add_building_construction = {
 					type = industrial_complex
 					level = 1
@@ -3195,78 +3198,53 @@ focus_tree = {
 			custom_effect_tooltip = PEN_fortress_ind_loc
 			custom_effect_tooltip = PEN_bastion_compliance
 			hidden_effect = {
-				2 = {
+				1 = {
+					add_compliance = 10
 					add_state_modifier = {
 						modifier = {
 							state_production_speed_coastal_bunker_factor = 0.15
 						}
 					}
 				}
-				82 = {
+				120 = {
+					add_compliance = 10
 					add_state_modifier = {
 						modifier = {
 							state_production_speed_coastal_bunker_factor = 0.15
 						}
 					}
 				}
-				94 = {
+				116 = {
+					add_compliance = 10
 					add_state_modifier = {
 						modifier = {
 							state_production_speed_coastal_bunker_factor = 0.15
 						}
 					}
 				}
-				110 = {
+				121 = {
+					add_compliance = 10
 					add_state_modifier = {
 						modifier = {
 							state_production_speed_coastal_bunker_factor = 0.15
 						}
 					}
 				}
-				124 = {
+				115 = {
+					add_compliance = 10
 					add_state_modifier = {
 						modifier = {
 							state_production_speed_coastal_bunker_factor = 0.15
 						}
 					}
 				}
-				104 = {
+				123 = {
+					add_compliance = 10
 					add_state_modifier = {
 						modifier = {
 							state_production_speed_coastal_bunker_factor = 0.15
 						}
 					}
-				}
-				86 = {
-					add_state_modifier = {
-						modifier = {
-							state_production_speed_coastal_bunker_factor = 0.15
-						}
-					}
-				}
-				2 = {
-					add_compliance = 10
-				}
-				82 = {
-					add_compliance = 10
-				}
-				86 = {
-					add_compliance = 10
-				}
-				92 = {
-					add_compliance = 10
-				}
-				94 = {
-					add_compliance = 10
-				}
-				104 = {
-					add_compliance = 10
-				}
-				110 = {
-					add_compliance = 10
-				}
-				124 = {
-					add_compliance = 10
 				}
 			}
 		}
@@ -3296,7 +3274,7 @@ focus_tree = {
 		}
 		available_if_capitulated = yes
 		completion_reward = {
-			104 = {
+			116 = {
 				add_resource = {
 					type = chromium
 					amount = 8
@@ -3306,7 +3284,7 @@ focus_tree = {
 					amount = 16
 				}
 			}
-			124 = {
+			121 = {
 				add_resource = {
 					type = chromium
 					amount = 10
@@ -3318,30 +3296,22 @@ focus_tree = {
 			}
 			custom_effect_tooltip = PEN_bastion_compliance
 			hidden_effect = {
-				
-				2 = {
-					add_compliance = 10
-
-				}
-				82 = {
+				1 = {
 					add_compliance = 10
 				}
-				86 = {
+				120 = {
 					add_compliance = 10
 				}
-				92 = {
+				121 = {
 					add_compliance = 10
 				}
-				94 = {
+				123 = {
 					add_compliance = 10
 				}
-				104 = {
+				115 = {
 					add_compliance = 10
 				}
-				110 = {
-					add_compliance = 10
-				}
-				124 = {
+				116 = {
 					add_compliance = 10
 				}
 			}
@@ -3357,13 +3327,7 @@ focus_tree = {
 		cost = 5
 
 		ai_will_do = {factor = 1}
-			
-		available = {
-			core_compliance = {
-				occupied_country_tag = ORD
-				value > 90
-			}
-		}
+		
 		bypass = {
 
 		}
@@ -3375,14 +3339,7 @@ focus_tree = {
 		available_if_capitulated = yes
 		completion_reward = {
 			country_event = PEN_bastion.1
-			add_state_core = 2
-			add_state_core = 82
-			add_state_core = 86
-			add_state_core = 92
-			add_state_core = 94
-			add_state_core = 104
-			add_state_core = 110
-			add_state_core = 124
+			ORD = { add_to_ROOT_potential_cores = yes }
 		}
 	}
 
@@ -3520,7 +3477,9 @@ focus_tree = {
 		ai_will_do = {factor = 1}
 			
 		available = {
-
+			IBC = {
+				is_subject_of = PEN
+			}
 		}
 		bypass = {
 
@@ -3533,7 +3492,12 @@ focus_tree = {
 		}
 		available_if_capitulated = yes
 		completion_reward = {
-				
+			set_autonomy = {
+				target = IBC
+				autonomy_state = autonomy_pen_corporate_puppet_autonomous
+				end_wars = no
+				end_civil_wars = no
+			}
 		}
 	}
 
@@ -3548,7 +3512,9 @@ focus_tree = {
 		ai_will_do = {factor = 1}
 			
 		available = {
-
+			IBC = {
+				is_subject_of = PEN
+			}
 		}
 		bypass = {
 
@@ -3587,7 +3553,7 @@ focus_tree = {
 		}
 		available_if_capitulated = yes
 		completion_reward = {
-			5 = {
+			17 = {
 				add_building_construction = {
 					type = industrial_complex
 					level = 2
@@ -3596,6 +3562,7 @@ focus_tree = {
 				add_extra_state_shared_building_slots = 2
 			}
 			add_political_power = 20
+			add_to_variable = { currency_amount^primary_currency = 30 }
 		}
 	}
 
@@ -5003,11 +4970,11 @@ focus_tree = {
 		relative_position_id = PEN_pentastar_alignment_treaty
 		cost = 5
 
-		allow_branch = {
-			PEN = {
-				has_completed_focus = PEN_pentastar_alignment_treaty
-			}
-		}
+		#allow_branch = {
+		#	PEN = {
+		#		has_completed_focus = PEN_pentastar_alignment_treaty
+		#	}
+		#}
 
 		ai_will_do = {factor = 1}
 			
@@ -5959,11 +5926,11 @@ focus_tree = {
 		relative_position_id = PEN_pentastar_alignment_treaty
 		cost = 5
 
-		allow_branch = {
-			PEN = {
-				has_completed_focus = PEN_pentastar_alignment_treaty
-			}
-		}
+		#allow_branch = {
+		#	PEN = {
+		#		has_completed_focus = PEN_pentastar_alignment_treaty
+		#	}
+		#}
 
 		ai_will_do = {factor = 1}
 			

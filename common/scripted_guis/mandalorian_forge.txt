@@ -1,0 +1,93 @@
+scripted_gui = {
+	the_great_forge = {
+		context_type = decision_category
+
+		window_name = "the_great_forge"
+		visible = {
+			always = yes
+		}
+
+		effects = {
+			flamethrower_click = {
+				if = {
+					limit = {
+						check_variable = { flamethrower = 2 }
+					}
+					set_variable = { flamethrower = 1 }
+					subtract_from_variable = { armour_cost = 150 }
+				}
+				else = {
+					set_variable = { flamethrower = 2 }
+					add_to_variable = { armour_cost = 150 }
+				}
+			}
+			jetpack_click = {
+				if = {
+					limit = {
+						check_variable = { jetpack = 2 }
+					}
+					set_variable = { jetpack = 1 }
+					subtract_from_variable = { armour_cost = 150 }
+				}
+				else = {
+					set_variable = { jetpack = 2 }
+					add_to_variable = { armour_cost = 150 }
+				}
+			}
+			shield_click = {
+				if = {
+					limit = {
+						check_variable = { shield = 2 }
+					}
+					set_variable = { shield = 1 }
+					subtract_from_variable = { armour_cost = 150 }
+				}
+				else = {
+					set_variable = { shield = 2 }
+					add_to_variable = { armour_cost = 150 }
+				}
+			}
+			whistling_bird_click = {
+				if = {
+					limit = {
+						check_variable = { whistling_bird = 2 }
+					}
+					set_variable = { whistling_bird = 1 }
+					subtract_from_variable = { armour_cost = 150 }
+				}
+				else = {
+					set_variable = { whistling_bird = 2 }
+					add_to_variable = { armour_cost = 150 }
+				}
+			}
+			craft_armour_click = {
+				activate_decision = forging_armour_mission_2
+			}
+		}
+		triggers = {
+			craft_armour_click = {
+				#NOT = {
+				#	has_active_mission = forging_armour_mission
+				#}
+				#OR = {
+				#	check_variable = { beskar > armour_cost }
+				#	check_variable = { beskar = armour_cost }
+				#}
+			}
+		}
+		properties = {
+			flamethrower = {
+				frame = flamethrower
+			}
+			jetpack = {
+				frame = jetpack
+			}
+			shield = {
+				frame = shield
+			}
+			whistling_bird = {
+				frame = whistling_bird
+			}
+		}
+	}
+}
