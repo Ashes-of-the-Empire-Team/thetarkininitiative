@@ -1,8 +1,9 @@
-add_namespace = eridau
+add_namespace = eriadu
+
 country_event = {
-	id = eridau.0 ## general event detailing the current situtaion in the universe
-        title = eridau.0.t
-        desc = eridau.0.d
+	id = eriadu.0 ## starting flavor event
+    title = eriadu.0.t
+    desc = eriadu.0.d
 	picture = GFX_report_event_election_vote
 
 	is_triggered_only = yes
@@ -10,152 +11,634 @@ country_event = {
 	fire_only_once = yes
 	
 	option = {
-		name = eridau.0.a
+		name = eriadu.0.a
+		add_political_power = 50
+		add_stability = -0.025
+		set_country_flag = ERI_started_insanity
+		hidden_effect = {
+			ERI = {
+				country_event = { id = eriadu.1 days = 5 random_days = 3 }
+			}
+		}
+		ERI_influence_pulse = yes
 	}
 }
+
 country_event = {
-	id = eridau.1 ## Leader walking into the breifing room, general story shit
-        title = eridau.1.t
-        desc = eridau.1.d
+	id = eriadu.1 ## lets make her condition worse
+    title = eriadu.1.t
+    desc = eriadu.1.d
 	picture = GFX_report_event_election_vote
 
 	is_triggered_only = yes
-
 	fire_only_once = yes
 	
 	option = {
-		name = eridau.1.a
+		name = eriadu.1.a
+		custom_effect_tooltip = ERI_cure_decrease_tt
+		add_to_variable = { 
+			var = global.ERINoProgressInfluence
+			value = 20
+		}
+		add_to_variable = { 
+			var = global.ERIProgressInfluence
+			value = -20
+		}
+		ERI_influence_pulse = yes
 	}
 }
+
 country_event = {
-	id = eridau.2 ## Pick tarkin doctrine based off of generals ideas
-        title = eridau.2.t
-        desc = eridau.2.d
+	id = eriadu.2 ## talking to the council
+    title = eriadu.2.t
+    desc = eriadu.2.d
 	picture = GFX_report_event_election_vote
 
 	is_triggered_only = yes
-
 	fire_only_once = yes
 	
 	option = {
-		name = eridau.2.a
+		name = eriadu.2.a ## talk to research
+		custom_effect_tooltip = ERI_cure_increase_tt
+		add_to_variable = { 
+			var = global.ERIProgressInfluence
+			value = 20
+		}
+		add_to_variable = { 
+			var = global.ERINoProgressInfluence
+			value = -20
+		}
+		ERI_influence_pulse = yes
 	}
 	option = {
-		name = eridau_event.2.b
+		name = eriadu.2.b ## therapy session
+		custom_effect_tooltip = ERI_insanity_decrease
+		add_to_variable = { 
+			var = global.ERIInsanity
+			value = -20
+		}
+		ERI_influence_pulse = yes
+	}
+	option = {
+		name = eriadu.2.c ## why not both?
+		custom_effect_tooltip = ERI_cure_insanity_increase
+		add_to_variable = { 
+			var = global.ERIProgressInfluence
+			value = 10
+		}
+		add_to_variable = { 
+			var = global.ERINoProgressInfluence
+			value = -10
+		}
+		add_to_variable = { 
+			var = global.ERIInsanity
+			value = -10
+		}
+		ERI_influence_pulse = yes
 	}
 }
+
 country_event = {
-	id = eridau.3 ## opening of the academy?
-    title = eridau.3.t
-    desc = eridau.3.d
+	id = eriadu.3 ## assasination attempt in city
+    title = eriadu.3.t
+    desc = eriadu.3.d
 	picture = GFX_report_event_election_vote
 
 	is_triggered_only = yes
-
 	fire_only_once = yes
 	
 	option = {
-		name = eridau.3.a
-	}
-	option = {
-		name = eridau.3.b
-	}
-}
-country_event = { ############## ERIDAU CHARACTER EVENTS, Sanders brother sent to the front
-	id = eridau.4
-    title = eridau.4.t
-    desc = eridau.4.d
-	picture = GFX_report_event_election_vote
-
-	is_triggered_only = yes
-
-	fire_only_once = yes
-	
-	option = {
-		name = eridau.4.a
+		name = eriadu.3.a 
+		custom_effect_tooltip = ERI_insanity_increase
+		add_to_variable = { 
+			var = global.ERIInsanity
+			value = 10
+		}
+		ERI_influence_pulse = yes
+		add_country_leader_trait = eri_intimidating_face
+		set_country_leader_portrait = {
+			ideology = imperial
+			portrait = GFX_portrait_sander_eye
+		}
 	}
 }
-country_event = {  ## 
-	id = eridau.5
-    title = eridau.5.t
-    desc = eridau.5.d
+
+country_event = {
+	id = eriadu.4 ## crackdown on dissent
+    title = eriadu.4.t
+    desc = eriadu.4.d
 	picture = GFX_report_event_election_vote
 
 	is_triggered_only = yes
-
 	fire_only_once = yes
 	
 	option = {
-		name = eridau.5.a
+		name = eriadu.4.a 
+		custom_effect_tooltip = ERI_insanity_increase
+		custom_effect_tooltip = ERI_cure_increase_tt
+		add_to_variable = { 
+			var = global.ERIProgressInfluence
+			value = 10
+		}
+		add_to_variable = { 
+			var = global.ERINoProgressInfluence
+			value = -10
+		}
+		add_to_variable = { 
+			var = global.ERIInsanity
+			value = 4
+		}
+		ERI_influence_pulse = yes
+		add_stability = -0.1
 	}
 }
-country_event = {  ## 
-	id = eridau.6
-    title = eridau.6.t
-    desc = eridau.6.d
+
+news_event = {
+	id = eriadu.5 ## declaring independence
+    title = eriadu.5.t
+    desc = eriadu.5.d
 	picture = GFX_report_event_election_vote
 
 	is_triggered_only = yes
-
 	fire_only_once = yes
 	
 	option = {
-		name = eridau.6.a
+		name = eriadu.5.a
+		trigger = {
+      		tag = ERI
+        }
+	}
+	option = {
+		name = eriadu.5.b
+		trigger = {
+            NOT = { tag = ERI }
+        }
 	}
 }
-country_event = {  ## 
-	id = eridau.7
-    title = eridau.7.t
-    desc = eridau.7.d
+
+country_event = {
+	id = eriadu.6 ## assasination attempt in city failed
+    title = eriadu.6.t
+    desc = eriadu.6.d
 	picture = GFX_report_event_election_vote
 
 	is_triggered_only = yes
-
 	fire_only_once = yes
 	
 	option = {
-		name = eridau.7.a
+		name = eriadu.6.a 
+		custom_effect_tooltip = ERI_insanity_increase
+		add_to_variable = { 
+			var = global.ERIInsanity
+			value = 5
+		}
+		ERI_influence_pulse = yes
+		add_stability = 0.05
+		add_political_power = 50
 	}
 }
-country_event = {  ## 
-	id = eridau.8
-    title = eridau.8.t
-    desc = eridau.8.d
+
+country_event = {
+	id = eriadu.7 ## sluis van ultimatium
+    title = eriadu.7.t
+    desc = eriadu.7.d
 	picture = GFX_report_event_election_vote
 
 	is_triggered_only = yes
-
 	fire_only_once = yes
 	
 	option = {
-		name = eridau.8.a
+		name = eriadu.7.a # accept
+		ERI = {
+			annex_country = {
+				target = SLU
+				transfer_troops = yes
+			}
+		}
+	}
+
+	option = {
+		name = eriadu.7.b # deny
+		ERI = { country_event = eriadu.8 }
+		EMP = {
+			end_puppet = SLU
+		}
 	}
 }
-country_event = {  ## 
-	id = eridau.9
-    title = eridau.9.t
-    desc = eridau.9.d
+
+country_event = {
+	id = eriadu.8 ## denied
+    title = eriadu.8.t
+    desc = eriadu.8.d
 	picture = GFX_report_event_election_vote
 
 	is_triggered_only = yes
-
 	fire_only_once = yes
 	
 	option = {
-		name = eridau.9.a
+		name = eriadu.8.a # attack
+		ERI = {
+			declare_war_on = {
+				target = SLU
+				type = annex_everything
+			}
+		}
+	}
+
+	option = {
+		name = eriadu.7.b # do nothing
+		add_war_support = -0.1
+		add_stability = 0.05
 	}
 }
-country_event = {  ## 
-	id = eridau.10
-    title = eridau.10.t
-    desc = eridau.10.d
+
+country_event = {
+	id = eriadu.9 ## seledra zin city
+    title = eriadu.9.t
+    desc = eriadu.9.d
 	picture = GFX_report_event_election_vote
 
 	is_triggered_only = yes
-
 	fire_only_once = yes
 	
 	option = {
-		name = eridau.10.a
+		name = eriadu.9.a # eriadu
+		custom_effect_tooltip = tt_eri_city_eriadu
+		hidden_effect = {
+			set_victory_points = {
+				province = 11013
+				value = 30
+			}
+			430 = {
+				add_manpower = 2000000
+				add_extra_state_shared_building_slots = 6
+				add_building_construction = {
+					type = industrial_complex
+					level = 3
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = arms_factory
+					level = 3
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 2
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = supply_node
+					level = 1
+					instant_build = yes
+					province = 11013
+				}
+				set_state_category = metropolis
+			}
+		}
+	}
+
+	option = {
+		name = eriadu.9.b # bith
+		custom_effect_tooltip = tt_eri_city_bith
+		hidden_effect = {
+			set_victory_points = {
+				province = 11232
+				value = 30
+			}
+			373 = {
+				add_manpower = 1000000
+				add_manpower = 1000000
+				add_manpower = 1000000
+				add_manpower = 1000000
+				add_manpower = 1000000
+				add_extra_state_shared_building_slots = 4
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 2
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = supply_node
+					level = 1
+					instant_build = yes
+					province = 11232
+				}
+				set_state_category = megalopolis
+			}
+		}
+	}
+
+	option = {
+		name = eriadu.9.c # utapau
+		custom_effect_tooltip = tt_eri_city_utapau
+		hidden_effect = {
+			set_victory_points = {
+				province = 11337
+				value = 30
+			}
+			112 = {
+				add_manpower = 2000000
+				add_extra_state_shared_building_slots = 4
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 2
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = supply_node
+					level = 1
+					instant_build = yes
+					province = 11337
+				}
+				set_state_category = metropolis
+			}
+			add_resource = {
+				type = steel
+				amount = 12
+				state = 112
+			}
+			add_resource = {
+				type = oil
+				amount = 12
+				state = 112
+			}
+			add_resource = {
+				type = rubber
+				amount = 12
+				state = 112
+			}
+		}
+	}
+}
+
+country_event = {
+	id = eriadu.10 ## flavor for delvardus
+    title = eriadu.10.t
+    desc = eriadu.10.d
+	picture = GFX_report_event_election_vote
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {
+		name = eriadu.10.a 
+		add_stability = -0.05
+		add_political_power = 30
+	}
+}
+
+country_event = {
+	id = eriadu.11 ## flavor for cronus
+    title = eriadu.11.t
+    desc = eriadu.11.d
+	picture = GFX_report_event_election_vote
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {
+		name = eriadu.11.a 
+		add_stability = 0.025
+		add_political_power = 50
+	}
+}
+
+country_event = {
+	id = eriadu.12 ## choosing army advisor
+    title = eriadu.12.t
+    desc = eriadu.12.d
+	picture = GFX_report_event_election_vote
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {
+		name = eriadu.12.a 
+		set_country_flag = ERI_rix_chosen
+		custom_effect_tooltip = available_political_advisor
+		show_ideas_tooltip = ERI_rix_madin
+	}
+	option = {
+		name = eriadu.12.b 
+		set_country_flag = ERI_gavyn_chosen
+		custom_effect_tooltip = available_political_advisor
+		show_ideas_tooltip = ERI_gavyn_cordall
+	}
+	option = {
+		name = eriadu.12.c 
+		set_country_flag = ERI_graffan_chosen
+		custom_effect_tooltip = available_political_advisor
+		show_ideas_tooltip = ERI_graffan_terrik
+	}
+	option = {
+		name = eriadu.12.e
+		set_country_flag = ERI_finor_chosen
+		custom_effect_tooltip = available_political_advisor
+		show_ideas_tooltip = ERI_finor_jakal
+	}
+}
+
+country_event = {
+	id = eriadu.13 ## choosing navy advisor
+    title = eriadu.13.t
+    desc = eriadu.13.d
+	picture = GFX_report_event_election_vote
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {
+		name = eriadu.13.a 
+		set_country_flag = ERI_lon_chosen
+		custom_effect_tooltip = available_political_advisor
+		show_ideas_tooltip = ERI_lon_cardell
+	}
+	option = {
+		name = eriadu.13.b 
+		set_country_flag = ERI_hugo_chosen
+		custom_effect_tooltip = available_political_advisor
+		show_ideas_tooltip = ERI_hugo_dolphi
+	}
+	option = {
+		name = eriadu.13.c 
+		set_country_flag = ERI_han_chosen
+		custom_effect_tooltip = available_political_advisor
+		show_ideas_tooltip = ERI_han_rikell
+	}
+	option = {
+		name = eriadu.13.e
+		set_country_flag = ERI_rhoro_chosen
+		custom_effect_tooltip = available_political_advisor
+		show_ideas_tooltip = ERI_rhoro_berenk
+	}
+}
+
+country_event = {
+	id = eriadu.14 ## choosing queen path
+    title = eriadu.14.t
+    desc = eriadu.14.d
+	picture = GFX_report_event_election_vote
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {
+		name = eriadu.14.a 
+		set_country_flag = ERI_authority_chosen
+		add_stability = -0.05
+		add_political_power = 50
+	}
+	option = {
+		name = eriadu.14.b 
+		set_country_flag = ERI_people_chosen
+		add_stability = 0.05
+		add_political_power = -50
+	}
+	
+}
+
+country_event = {
+	id = eriadu.15 ## knighthammer done
+    title = eriadu.15.t
+    desc = eriadu.15.d
+	picture = GFX_report_event_election_vote
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {
+		name = eriadu.15.a 
+		add_war_support = 0.1
+		create_ship = {
+			type = resurgent_1
+			equipment_variant = "Knight Hammer"
+			creator = ERI
+			name = "Knight Hammer"
+		}
+	}
+}
+
+country_event = {
+	id = eriadu.16 ## choosing naval stuff
+    title = eriadu.16.t
+    desc = eriadu.16.d
+	picture = GFX_report_event_election_vote
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {
+		name = eriadu.16.a 
+		set_country_flag = ERI_technology_chosen
+	}
+	option = {
+		name = eriadu.16.b 
+		set_country_flag = ERI_numbers_chosen
+	}
+	option = {
+		name = eriadu.16.c
+		set_country_flag = ERI_academy_chosen
+	}
+}
+
+country_event = {
+	id = eriadu.99 ## sander dies
+    title = eriadu.99.t
+    desc = eriadu.99.d
+	picture = GFX_report_event_election_vote
+
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	option = {
+		name = eriadu.99.a
+		set_country_flag = ERI_sander_dead
+		kill_country_leader = yes
+		create_country_leader = {
+			name = "Ivan Cronus"
+			picture = GFX_portrait_cronus
+			ideology = reformist
+			traits={ Human }
+		}
+	}
+}
+
+country_event = {
+	id = eriadu.100 ## she gets cured
+    title = eriadu.100.t
+    desc = eriadu.100.d
+	picture = GFX_report_event_election_vote
+
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	option = {
+		name = eriadu.100.a
+		set_country_flag = ERI_alive_girl
+		set_country_flag = queen_is_back
+		custom_effect_tooltip = ERI_insanity_decrease
+		add_to_variable = { 
+			var = global.ERIInsanity
+			value = -100
+		}
+	}
+}
+
+country_event = {
+	id = eriadu.101 ## she dies
+    title = eriadu.101.t
+    desc = eriadu.101.d
+	picture = GFX_report_event_election_vote
+
+	fire_only_once = yes
+
+	trigger = {
+		has_country_flag = ERI_dead_girl
+	}
+	
+	option = {
+		name = eriadu.101.a
+		custom_effect_tooltip = ERI_insanity_increase
+		add_to_variable = { 
+			var = global.ERIInsanity
+			value = 140
+		}
+		ERI_influence_pulse = yes
+	}
+}
+
+country_event = {
+	id = eriadu.102 ## remove mountain idea
+    title = eriadu.102.t
+    desc = eriadu.102.d
+	picture = GFX_report_event_election_vote
+
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	option = {
+		name = eriadu.102.a
+		remove_ideas = ERI_mountain_economics
 	}
 }

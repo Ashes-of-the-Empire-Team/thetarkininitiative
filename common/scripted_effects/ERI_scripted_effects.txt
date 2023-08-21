@@ -1,0 +1,57 @@
+ERI_influence_pulse = { # ERI_progbar_frame = a(100/(a+b))
+	set_temp_variable = { ERI_struggle_temp = global.ERIProgressInfluence }
+	add_to_temp_variable = { ERI_struggle_temp = global.ERINoProgressInfluence }
+	
+	set_temp_variable = { ERI_struggle_100 = 100 }
+	divide_temp_variable = { ERI_struggle_100 = ERI_struggle_temp }
+	multiply_temp_variable = { ERI_struggle_100 = global.ERIProgressInfluence }
+	set_variable = { ERI_Progress_percentage = ERI_struggle_100 }
+	round_temp_variable = ERI_struggle_100
+	clamp_temp_variable = {
+		var = ERI_struggle_100
+		min = 0
+		max = 100
+	}
+	set_variable = { ERI_progbar_frame = ERI_struggle_100 }
+	
+	# This is for show
+	set_variable = { ERI_NoProgress_percentage = 100 }
+	subtract_from_variable = { ERI_NoProgress_percentage = ERI_Progress_percentage }
+	add_to_variable = { ERI_influence_weight_var = 0.01 }
+}
+
+ERI_economic_level_down = {
+	custom_effect_tooltip = ERI_economic_level_down_tt
+	if = {
+		limit = { has_idea = economic_collapse_emp_5 }
+		remove_ideas = economic_collapse_emp_5
+	}
+	if = {
+		limit = { has_idea = economic_collapse_emp_4 }
+		swap_ideas = {
+			remove_idea = economic_collapse_emp_4
+			add_idea = economic_collapse_emp_5
+		}
+	}
+	if = {
+		limit = { has_idea = economic_collapse_emp_3 }
+		swap_ideas = {
+			remove_idea = economic_collapse_emp_3
+			add_idea = economic_collapse_emp_4
+		}
+	}
+	if = {
+		limit = { has_idea = economic_collapse_emp_2 }
+		swap_ideas = {
+			remove_idea = economic_collapse_emp_2
+			add_idea = economic_collapse_emp_3
+		}
+	}
+	if = {
+		limit = { has_idea = economic_collapse_emp_1 }
+		swap_ideas = {
+			remove_idea = economic_collapse_emp_1
+			add_idea = economic_collapse_emp_2
+		}
+	}
+}

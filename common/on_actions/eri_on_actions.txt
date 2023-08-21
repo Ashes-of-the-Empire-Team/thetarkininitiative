@@ -1,0 +1,28 @@
+on_actions = {   
+    on_weekly_ERI = {
+	    effect = {
+			if = {
+				limit = {
+					tag = ERI
+                    check_variable = { global.ERIInsanity > 61 }
+					NOT = {
+						has_country_flag = ERI_stopcheckingthisshit
+					}
+				}
+				ERI = { country_event = eriadu.99 }	
+				set_country_flag = ERI_stopcheckingthisshit
+			}
+			if = {
+				limit = {
+					tag = ERI
+                    check_variable = { global.ERIProgressInfluence > 99 }
+					NOT = {
+						has_country_flag = ERI_stopcheckingthisshit2
+					}
+				}
+				ERI = { country_event = eriadu.100 }	
+				set_country_flag = ERI_stopcheckingthisshit2
+			}
+        }
+    }
+}

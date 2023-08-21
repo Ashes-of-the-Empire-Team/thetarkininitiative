@@ -1,1832 +1,2008 @@
-# focus_tree = {
-# 	id = Eriadu_Authority 
-	
-# 	country = {
-# 		factor = 0
-		
-# 		modifier = {###### MECHANIC, NEED TO FUFILL OBJECTIVES RELATED TO THE RESURRECTION OF LOVER, IF NOT LEADER WILL GET WORSE TILL HE RIPS COUNTRY APART IN PURSUIT OF HIS GOAL
-# 			add = 10
-# 			tag = ERI
-# 		}
-# 	}
-# 	continuous_focus_position = { x = 100 y = 1300 }
-# 		##########################
-# 		### ERI TARKIN DOCTRINE###
-# 		##########################
-# 	focus = {
-# 		id = ERI_test  ###### TRIGGERS EVENT DETAILING CURRENT SITUTATION
-# 		icon = GFX_WIP_focus
-# 		cost = 5
-# 		x = 30
-# 		y = 0
-		
-# 		available_if_capitulated = yes
-# 		completion_reward = {
-# 			add_equipment_production = {
-# 				equipment = {
-# 					type = isd_1
-# 				}
-# 				requested_factories = 1
-# 				progress = 1.0
-# 				amount = 1
-# 			}
-# 		}
-		
+focus_tree = {
+	id = eriadu
+	country = {
+		factor = 0
+		modifier = {
+			add = 30
+			tag = ERI
+		}
+	}
+	continuous_focus_position = { x = 100 y = 1500 }
+	default = no
 
-# 		ai_will_do = {
-# 			factor = 1
-# 		}
-# 	}
-# 	focus = {
-# 		id = ERI_gone   ###### TRIGGERS EVENT DETAILING CURRENT SITUTATION
-# 		icon = GFX_WIP_focus
-# 		cost = 5
-# 		x = 15
-# 		y = 0
-		
-# 		available_if_capitulated = yes
-# 		select_effect = {
-# 			mark_focus_tree_layout_dirty = yes
-# 		}
-# 		completion_reward = {
-# 		}
-		
+	focus = {
+		id = ERI_the_casket
+		icon = GFX_ERI_bacta
+		x = 5
+		y = 0
+		cost = 6.5
 
-# 		ai_will_do = {
-# 			factor = 1
-# 		}
-# 	}
-# 	########## GROUND ##########
-# 	focus = {
-# 		id = ERI_fear_ground
-# 		icon = GFX_WIP_focus
-# 		cost = 5
-# 		x = 11
-# 		y = 4
-# 		prerequisite = {
-# 			focus = ERI_choose_our_strength
-# 		}
-		
-# 		available_if_capitulated = yes
-# 		mutually_exclusive = {
-# 			focus = ERI_fear_above
-# 		}
-# 		completion_reward = {
-# 			set_country_flag = fear_ground_ERI
-# 			add_ideas = fear_ground_ERI
-# 		}
-		
+		ai_will_do = {
+			base = 10
+		}
 
-# 		ai_will_do = {
-# 			factor = 1
-# 		}
-# 	}
-# 	focus = {
-# 		id = ERI_hardened_spirit
-# 		icon = GFX_WIP_focus
-# 		cost = 5
-# 		x = 10
-# 		y = 5
-# 		prerequisite = {
-# 			focus = ERI_fear_ground
-# 		}
-		
-# 		available_if_capitulated = yes
-		
-# 		completion_reward = {
-# 			add_ideas = hardend_spirit_ERI
+		completion_reward = {
+			set_country_flag = ERI_started_insanity
+			ERI = { country_event = eriadu.0 }	
+			ERI_influence_pulse = yes
+			hidden_effect = {
+				ERI = {
+					country_event = { id = eriadu.102 days = 60 random_days = 20 }
+				}
+			}
+		}
+	}
 
-# 		}
-		
+	focus = {
+		id = ERI_running_out_of_time
+		icon = GFX_ERI_watch
+		x = -2
+		y = 1
+		cost = 6.5
 
-# 		ai_will_do = {
-# 			factor = 1
-# 		}
-# 	}
-# 	focus = {
-# 		id = ERI_a_fight_on_our_turf ## mission to create more forts in return for stability and war support
-# 		icon = GFX_WIP_focus
-# 		cost = 5
-# 		x = 10
-# 		y = 6
-# 		prerequisite = {
-# 			focus = ERI_hardened_spirit
-# 		}
-		
-# 		available_if_capitulated = yes
-		
-# 		completion_reward = {
-# 			activate_mission = fight_on_our_turf
-# 		}
-		
+		ai_will_do = {
+			base = 100
+		}
 
-# 		ai_will_do = {
-# 			factor = 1
-# 		}
-# 	}
-# 	focus = {
-# 		id = ERI_overwhelming_firepower ## Unlocks part of the doctrine
-# 		icon = GFX_WIP_focus
-# 		cost = 5
-# 		x = 12
-# 		y = 6
-# 		prerequisite = {
-# 			focus = ERI_a_live_gift
-# 		}
-		
-# 		available_if_capitulated = yes
-		
-# 		completion_reward = {
-# 			set_country_flag = tarkin_doctrine_2
-# 		}
-		
+		relative_position_id = ERI_the_casket
+		prerequisite = { 
+			focus = ERI_the_casket
+		}
 
-# 		ai_will_do = {
-# 			factor = 1
-# 		}
-# 	}
-# 	focus = {
-# 		id =  ERI_republic_spies ## Unlocks new intelligence missions, slight debuff to entrenchment in a targeted area look at spanish civil war
-# 		icon = GFX_WIP_focus
-# 		cost = 5
-# 		x = 11
-# 		y = 8
-# 		prerequisite = {
-# 			focus = ERI_mass_production
-# 		}
-# 		prerequisite = {
-# 			focus = ERI_EP.9_artillery
-# 		}
-# 		prerequisite = {
-# 			focus = ERI_a_gift_from_the_empire
-# 		}
+		completion_reward = {
+			custom_effect_tooltip = ERI_cure_decrease_tt
+			add_to_variable = { 
+				var = global.ERIProgressInfluence
+				value = -5
+			}
+			add_to_variable = { 
+				var = global.ERINoProgressInfluence
+				value = 5
+			}
+			add_days_mission_timeout = {
+				mission = ERI_death_timer
+				days = 120
+			}
+			ERI_influence_pulse = yes
+		}
+	}
 
-		
-# 		available_if_capitulated = yes
-		
-# 		completion_reward = {
-# 			set_country_flag = republic_spies
-# 		}
-		
+	focus = {
+		id = ERI_divert_spending
+		icon = GFX_ERI_tax
+		x = 0
+		y = 1
+		cost = 6.5
 
-# 		ai_will_do = {
-# 			factor = 1
-# 		}
-# 	}
-# 	focus = {
-# 		id =  ERI_a_live_gift ## imperial staff addition, requires spending of imperial influence
-# 		icon = GFX_WIP_focus
-# 		cost = 5
-# 		x = 12
-# 		y = 5
-# 		prerequisite = {
-# 			focus = ERI_fear_ground
-# 		}
-		
-# 		available_if_capitulated = yes
-		
-# 		completion_reward = {
-# 			subtract_from_variable = {legitimacy_emp = 5}
-# 			ERI = {
-# 				add_corps_commander_role = {
-# 				  character = ERI_sander_delvardus
-# 				  skill = 4
-# 				  attack_skill = 2
-# 				  defense_skill = 3
-# 				  planning_skill = 3
-# 				  logistics_skill = 5
-# 				}
-# 			}
-# 		}
-		
+		ai_will_do = {
+			base = 100
+		}
 
-# 		ai_will_do = {
-# 			factor = 1
-# 		}
-# 	}
-# 	focus = {
-# 		id = ERI_EP.9_artillery ## CHANGE_ME, module or set peice when tanks designed
-# 		icon = GFX_WIP_focus
-# 		cost = 5
-# 		x = 12
-# 		y = 7
-		
-# 		available_if_capitulated = yes
-# 		prerequisite = {
-# 			focus = ERI_overwhelming_firepower
-# 		}
-# 		completion_reward = {
-# 		}
-		
+		relative_position_id = ERI_running_out_of_time
+		prerequisite = { 
+			focus = ERI_running_out_of_time
+		}
 
-# 		ai_will_do = {
-# 			factor = 1
-# 		}
-# 	}
-# 	focus = {
-# 		id = ERI_mass_production
-# 		icon = GFX_WIP_focus
-# 		cost = 5
-# 		x = 10
-# 		y = 7
-		
-# 		available_if_capitulated = yes
-# 		prerequisite = {
-# 			focus = ERI_a_fight_on_our_turf
-# 		}
-# 		completion_reward = {
-# 			add_ideas = mass_production_ERI
-# 		}
-		
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = tt_eri_money_10
+				check_variable = { currency_amount^primary_currency > 10 }
+			}
+		}
 
-# 		ai_will_do = {
-# 			factor = 1
-# 		}
-# 	}
-# 	focus = {
-# 		id =  ERI_choose_our_strength ## Unlocks part of the doctrine
-# 		icon = GFX_WIP_focus
-# 		cost = 5
-# 		x = 15
-# 		y = 3
-# 		prerequisite = {
-# 			focus = ERI_gone
-# 		}
-# 		prerequisite = {
-# 			focus = ERI_lessons_of_our_forefathers
-# 			focus = ERI_advanced_imperial_training_program
-# 		}
-		
-# 		available_if_capitulated = yes
-		
-# 		completion_reward = {
-# 		}
-		
+		completion_reward = {
+			add_to_variable = {currency_amount^primary_currency = -10}
+			custom_effect_tooltip = minus10credits_tt
+			custom_effect_tooltip = ERI_cure_increase_tt
+			add_to_variable = { 
+				var = global.ERIProgressInfluence 
+				value = 12
+			}
+			add_to_variable = { 
+				var = global.ERINoProgressInfluence
+				value = -12
+			}
+			ERI_influence_pulse = yes
+		}
+	}
 
-# 		ai_will_do = {
-# 			factor = 1
-# 		}
-# 	}
-# 	######## NAVY ########
-# 	focus = {
-# 		id = ERI_fear_above
-# 		icon = GFX_WIP_focus
-# 		cost = 5
-# 		x = 19
-# 		y = 4
-# 		prerequisite = {
-# 			focus = ERI_choose_our_strength
-# 		}
-# 		mutually_exclusive = {
-# 			focus = ERI_fear_ground
-# 		}
-# 		available_if_capitulated = yes
-# 		completion_reward = {
-# 			set_country_flag = fear_above_ERI
-# 			add_ideas = fear_above_ERI
-# 		}
-		
+	focus = {
+		id = ERI_take_some_time_off
+		icon = GFX_ERI_vacation
+		x = 0
+		y = 1
+		cost = 6.5
 
-# 		ai_will_do = {
-# 			factor = 1
-# 		}
-# 	}
-# 	focus = {
-# 		id = ERI_tie_scimitar_bomber
-# 		icon = GFX_WIP_focus
-# 		cost = 5
-# 		x = 18
-# 		y = 5
-# 		prerequisite = {
-# 			focus = ERI_fear_above
-# 		}
-# 		available_if_capitulated = yes
-# 		completion_reward = {
-# 		}
-		
+		ai_will_do = {
+			base = 10
+		}
 
-# 		ai_will_do = {
-# 			factor = 1
-# 		}
-# 	}
-# 	focus = {
-# 		id = ERI_stolen_malrood_armour ## module of armour
-# 		icon = GFX_WIP_focus
-# 		cost = 5
-# 		x = 20
-# 		y = 5
-# 		prerequisite = {
-# 			focus = ERI_fear_above
-# 		}
-# 		available_if_capitulated = yes
-# 		completion_reward = {
-# 		}
-		
+		relative_position_id = ERI_the_casket
+		prerequisite = { 
+			focus = ERI_the_casket
+		}
 
-# 		ai_will_do = {
-# 			factor = 1
-# 		}
-# 	}
-# 	focus = {
-# 		id = ERI_barrage_of_guns
-# 		icon = GFX_WIP_focus
-# 		cost = 5
-# 		x = 18
-# 		y = 6
-# 		prerequisite = {
-# 			focus = ERI_tie_scimitar_bomber
-# 		}
-# 		available_if_capitulated = yes
-# 		completion_reward = {
-# 		}
-		
+		completion_reward = {
+			set_country_flag = ERI_vacation_flag
+			custom_effect_tooltip = ERI_vacation_flag
+			custom_effect_tooltip = ERI_insanity_decrease
+			add_to_variable = { 
+				var = global.ERIInsanity
+				value = -5
+			}
+			ERI_influence_pulse = yes
+		}
+	}
 
-# 		ai_will_do = {
-# 			factor = 1
-# 		}
-# 	}
-# 	focus = {
-# 		id = ERI_pride_of_the_fleet
-# 		icon = GFX_WIP_focus
-# 		cost = 5
-# 		x = 20
-# 		y = 6
-# 		prerequisite = {
-# 			focus = ERI_stolen_malrood_armour
-# 		}
-# 		available_if_capitulated = yes
-# 		completion_reward = {
-# 			add_ideas = pride_of_the_fleet_ERI
-# 		}
-		
+	focus = {
+		id = ERI_confide_in_council
+		icon = GFX_ERI_sander_talking
+		x = 0
+		y = 1
+		cost = 6.5
 
-# 		ai_will_do = {
-# 			factor = 1
-# 		}
-# 	}
-# 	focus = {
-# 		id = ERI_recruit_system_bombard_personel ## TORPEDO SHIPS INCREASE TO BOMBARDMENT
-# 		icon = GFX_WIP_focus
-# 		cost = 5
-# 		x = 20
-# 		y = 7
-# 		prerequisite = {
-# 			focus = ERI_pride_of_the_fleet
-# 		}
-# 		available_if_capitulated = yes
-# 		completion_reward = {
-# 		}
-		
+		ai_will_do = {
+			base = 10
+		}
 
-# 		ai_will_do = {
-# 			factor = 1
-# 		}
-# 	}
-# 	focus = {
-# 		id = ERI_elite_navy_gunners ## requires the academy training
-# 		icon = GFX_WIP_focus
-# 		cost = 5
-# 		x = 18
-# 		y = 7
-# 		prerequisite = {
-# 			focus = ERI_barrage_of_guns
-# 		}
-# 		available_if_capitulated = yes
-# 		completion_reward = {
-# 		}
-		
+		relative_position_id = ERI_take_some_time_off
+		prerequisite = { 
+			focus = ERI_take_some_time_off
+		}
 
-# 		ai_will_do = {
-# 			factor = 1
-# 		}
-# 	}
-# 	focus = {
-# 		id = ERI_advice_of_the_twelve ## trait from capturing admility
-# 		icon = GFX_WIP_focus
-# 		cost = 5
-# 		x = 19
-# 		y = 8
-# 		prerequisite = {
-# 			focus = ERI_elite_navy_gunners
-# 		}
-# 		prerequisite = {
-# 			focus = ERI_recruit_system_bombard_personel
-# 		}
-# 		prerequisite = {
-# 			focus = ERI_prepare_a_invasion_force
-# 		}
-# 		available_if_capitulated = yes
-# 		completion_reward = {
-# 		}
-		
+		completion_reward = {
+			ERI = {
+				country_event = { id = eriadu.2 days = 2 random_days = 1 }
+			}
+		}
+	}
 
-# 		ai_will_do = {
-# 			factor = 1
-# 		}
-# 	}
-# 	#####################
-# 	#ECONOMY FOCUSES ERI#
-# 	#####################
-# 	focus = { 
-# 		id = ERI_restructure_economy 
-# 		icon = GFX_WIP_focus
-# 		cost = 5
-# 		x = 18
-# 		y = 1
-# 		prerequisite = {
-# 			focus = ERI_gone
-# 		}
-		
-# 		available_if_capitulated = yes
-		
-# 		completion_reward = {
-# 			swap_ideas = {
-# 			    remove_idea = Economic_disaster_1_ERI
-# 			    add_idea = Economic_disaster_2_ERI
-# 			}
-# 		}
-		
+	focus = {
+		id = ERI_tour_the_city
+		icon = GFX_ERI_tour
+		x = 2
+		y = 1
+		cost = 6.5
 
-# 		ai_will_do = {
-# 			factor = 1
-# 		}
-# 	}
-# 	focus = { 
-# 		id = ERI_lessons_of_our_forefathers
-# 		icon = GFX_WIP_focus
-# 		cost = 5
-# 		x = 17
-# 		y = 2
-# 		prerequisite = {
-# 			focus = ERI_restructure_economy
-# 		}
-		
-# 		available_if_capitulated = yes
-		
-# 		completion_reward = {
-# 			599 = {
-# 				add_resource = {
-# 				    type = steel
-# 				    amount = 8
-# 				    state = 88
-# 				}
-# 			}
-# 			add_ideas = {
-# 				Lessons_of_forefathers_ERI
-# 			}
-# 		}
-		
+		ai_will_do = {
+			base = 10
+		}
 
-# 		ai_will_do = {
-# 			factor = 1
-# 		}
-# 	}
-# 	focus = { 
-# 		id = ERI_deal_with_pirate_threats ## weapons for stability and removal of finical
-# 		icon = GFX_WIP_focus
-# 		cost = 5
-# 		x = 17
-# 		y = 3
-# 		prerequisite = {
-# 			focus = ERI_lessons_of_our_forefathers
-# 		}
-		
-# 		available_if_capitulated = yes
-		
-# 		completion_reward = {
-# 			if = {
-# 				limit = {
-# 					has_idea = Economic_disaster_2_ERI
-# 				}
-# 				swap_ideas = {
-# 				    remove_idea = Economic_disaster_2_ERI
-# 				    add_idea = Economic_disaster_3_ERI
-# 				}
-# 			}else = {
-# 				 remove_ideas = Economic_disaster_3_ERI
-# 			}
-# 		}
-		
+		relative_position_id = ERI_the_casket
+		prerequisite = { 
+			focus = ERI_the_casket
+		}
 
-# 		ai_will_do = {
-# 			factor = 1
-# 		}
-# 	}
-# 	focus = { 
-# 		id = ERI_fortress_surrounded ## forts
-# 		icon = GFX_WIP_focus
-# 		cost = 16
-# 		x = 19
-# 		y = 3
-# 		prerequisite = {
-# 			focus = ERI_recapture_lost_areas
-# 		}
-		
-# 		available_if_capitulated = yes
-		
-# 		completion_reward = {
-# 			custom_effect_tooltip = ERI_100_money_TT
-#  			subtract_from_variable = { currency_amount^primary_currency = 100 }
-# 			74 = {
-# 				add_building_construction = {
-# 				    type = coastal_bunker
-# 				    level = 2
-# 				    instant_build = yes
-# 				    province = {
-# 				        limit_to_coastal  = yes
-# 				        all_provinces = yes
-# 				    }
-# 				}
-# 			}
-# 			582 = {
-# 				add_building_construction = {
-# 				    type = coastal_bunker
-# 				    level = 2
-# 				    instant_build = yes
-# 				    province = {
-# 				        limit_to_coastal  = yes
-# 				        all_provinces = yes
-# 				    }
-# 				}
-# 			}
-# 			593 = {
-# 				add_building_construction = {
-# 				    type = coastal_bunker
-# 				    level = 2
-# 				    instant_build = yes
-# 				    province = {
-# 				        limit_to_coastal  = yes
-# 				        all_provinces = yes
-# 				    }
-# 				}
-# 			}
-# 			609 = {
-# 				add_building_construction = {
-# 				    type = coastal_bunker
-# 				    level = 2
-# 				    instant_build = yes
-# 				    province = {
-# 				        limit_to_coastal  = yes
-# 				        all_provinces = yes
-# 				    }
-# 				}
-# 			}
-# 			606 = {
-# 				add_building_construction = {
-# 				    type = coastal_bunker
-# 				    level = 2
-# 				    instant_build = yes
-# 				    province = {
-# 				        limit_to_coastal  = yes
-# 				        all_provinces = yes
-# 				    }
-# 				}
-# 			}
-# 			595 = {
-# 				add_building_construction = {
-# 				    type = coastal_bunker
-# 				    level = 2
-# 				    instant_build = yes
-# 				    province = {
-# 				        limit_to_coastal  = yes
-# 				        all_provinces = yes
-# 				    }
-# 				}
-# 			}
-# 			586 = {
-# 				add_building_construction = {
-# 				    type = coastal_bunker
-# 				    level = 2
-# 				    instant_build = yes
-# 				    province = {
-# 				        limit_to_coastal  = yes
-# 				        all_provinces = yes
-# 				    }
-# 				}
-# 			}
-# 		}
-# 		ai_will_do = {
-# 			factor = 1
-# 		}
-# 	}
-# 	focus = { 
-# 		id = ERI_recapture_lost_areas ## add civ factories
-# 		icon = GFX_WIP_focus
-# 		cost = 5
-# 		x = 19
-# 		y = 2
-# 		prerequisite = {
-# 			focus = ERI_restructure_economy
-# 		}
-		
-# 		available_if_capitulated = yes
-		
-# 		completion_reward = {
-# 			if = {
-# 				limit = {
-# 					has_idea = Economic_disaster_2_ERI
-# 				}
-# 				swap_ideas = {
-# 				    remove_idea = Economic_disaster_2_ERI
-# 				    add_idea = Economic_disaster_3_ERI
-# 				}
-# 			}else = {
-# 				 remove_ideas = Economic_disaster_3_ERI
-# 			}
-# 			random_owned_controlled_state = {
-# 				limit = {
-# 					free_building_slots = {
-# 						building = industrial_complex
-# 						size > 0
-# 						include_locked = yes
-# 					}
-# 					OR = {
-# 						is_in_home_area = yes
-# 						NOT = {
-# 							owner = {
-# 								any_owned_state = {
-# 									free_building_slots = {
-# 										building = industrial_complex
-# 										size > 0
-# 										include_locked = yes
-# 									}
-# 									is_in_home_area = yes
-# 								}
-# 							}
-# 						}
-# 					}
-# 				}
-# 				add_extra_state_shared_building_slots = 3
-# 				add_building_construction = {
-# 				    type = industrial_complex
-# 				    level = 3
-# 				    instant_build = yes
-# 				}
-# 			}
-# 		}
-# 		ai_will_do = {
-# 			factor = 1
-# 		}
-# 	}
-# 	focus = { 
-# 		id = ERI_diplomatic_outreach
-# 		icon = GFX_WIP_focus
-# 		cost = 5
-# 		x = 23
-# 		y = 1
-# 		prerequisite = {
-# 			focus = ERI_gone
-# 		}
-		
-# 		available_if_capitulated = yes
-		
-# 		completion_reward = {
-# 			add_political_power = 50
-# 		}
-		
+		completion_reward = {
+			add_stability = 0.05
+			random_list = {
+				70 = {
+					ERI = {
+						country_event = { id = eriadu.3 days = 2 random_days = 1 }
+					}
+				}
+				30 = {
+					ERI = {
+						country_event = { id = eriadu.6 days = 2 random_days = 1 }
+					}
+				}
+			}
+		}
+	}
 
-# 		ai_will_do = {
-# 			factor = 1
-# 		}
-# 	}
-# 	focus = { 
-# 		id = ERI_talk_to_the_companies ### event for picking option of which company to pick, event detailing talk after
-# 		icon = GFX_WIP_focus
-# 		cost = 5
-# 		x = 23
-# 		y = 2
-# 		prerequisite = {
-# 			focus = ERI_diplomatic_outreach
-# 		}
-		
-# 		available_if_capitulated = yes
-		
-# 		completion_reward = {
-# 		}
-		
+	focus = {
+		id = ERI_dispel_rumors
+		icon = GFX_ERI_stormtrooper
+		x = 0
+		y = 1
+		cost = 6.5
 
-# 		ai_will_do = {
-# 			factor = 1
-# 		}
-# 	}
-# 	focus = { 
-# 		id = ERI_talk_to_the_Khedive ## desingers sluis van
-# 		icon = GFX_WIP_focus
-# 		cost = 5
-# 		x = 21
-# 		y = 3
-# 		prerequisite = {
-# 			focus = ERI_talk_to_the_companies
-# 		}
-# 		mutually_exclusive = {
-# 			focus = ERI_meet_with_industrial_complex_leaders
-# 		}
-# 		available_if_capitulated = yes
-		
-# 		completion_reward = {
-# 		}
-		
+		ai_will_do = {
+			base = 10
+		}
 
-# 		ai_will_do = {
-# 			factor = 1
-# 		}
-# 	}
-# 	focus = { 
-# 		id = ERI_expand_sluis_van_shipyards  # depends on economy changes wether this gives dockyards or lowered prices
-# 		icon = GFX_WIP_focus
-# 		cost = 5
-# 		x = 21
-# 		y = 4
-# 		prerequisite = {
-# 			focus = ERI_talk_to_the_Khedive
-# 		}
-# 		available_if_capitulated = yes
-		
-# 		completion_reward = {
-# 			613 = {
-# 				add_extra_state_shared_building_slots = 2
-# 				add_building_construction = {
-# 				    type = dockyard
-# 				    level = 2
-# 				    instant_build = yes
-# 				}
-# 			}
-# 			75 = {
-# 				add_extra_state_shared_building_slots = 2
-# 				add_building_construction = {
-# 				    type = dockyard
-# 				    level = 2
-# 				    instant_build = yes
-# 				}
-# 			}
-# 		}
-		
+		relative_position_id = ERI_tour_the_city
+		prerequisite = { 
+			focus = ERI_tour_the_city
+		}
 
-# 		ai_will_do = {
-# 			factor = 1
-# 		}
-# 	}
-# 	focus = { 
-# 		id = ERI_mountain_mining_rails ## rails infrastructure and some mining improvements
-# 		icon = GFX_WIP_focus
-# 		cost = 5
-# 		x = 21
-# 		y = 5
-# 		prerequisite = {
-# 			focus = ERI_expand_sluis_van_shipyards
-# 		}
-		
-# 		available_if_capitulated = yes
-		
-# 		completion_reward = {
+		completion_reward = {
+			ERI = {
+				country_event = { id = eriadu.4 days = 2 random_days = 1 }
+			}
+		}
+	}
+
+	focus = {
+		id = ERI_the_episodes_continue
+		icon = GFX_ERI_episodes
+		x = -1
+		y = 1
+		cost = 6.5
+
+		ai_will_do = {
+			base = 10
+		}
+
+		relative_position_id = ERI_confide_in_council
+		prerequisite = { 
+			focus = ERI_confide_in_council
+			focus = ERI_divert_spending
+		}
+
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = ERI_madmans_obsession
+				add_idea = ERI_madmans_obsession2
+			}
+		}
+	}
+
+	focus = {
+		id = ERI_return_of_the_queen
+		icon = GFX_ERI_queen
+		x = 3
+		y = 1
+		cost = 6.5
+
+		ai_will_do = {
+			base = 10
+		}
+
+		relative_position_id = ERI_the_episodes_continue
+		prerequisite = { 
+			focus = ERI_the_episodes_continue
+		}
+		prerequisite = { 
+			focus = ERI_dispel_rumors
+		}
+		available = {
+			has_country_flag = queen_is_back
+		}
+
+		completion_reward = {
+			remove_ideas = ERI_madmans_obsession2
+		}
+	}
+
+	focus = {
+		id = ERI_connect_with_the_masses
+		icon = GFX_ERI_queen_blue
+		x = 5
+		y = 1
+		cost = 6.5
+
+		ai_will_do = {
+			base = 10
+		}
+
+		relative_position_id = ERI_return_of_the_queen
+		prerequisite = { 
+			focus = ERI_return_of_the_queen
+		}
+		prerequisite = { 
+			focus = ERI_the_queens_role
+		}
+
+		available = {
+			has_country_flag = ERI_people_chosen
+		}
+
+		completion_reward = {
+			add_country_leader_trait = eri_queen_of_the_people
+			custom_effect_tooltip = tt_eri_increase_10_legitimacy
+			add_to_variable = { legitimacy_emp = 10 }
+        	add_to_variable = { legitimacy_emp_equilibirum = 10 }
+		}
+	}
+
+	focus = {
+		id = ERI_give_out_public_loans
+		icon = GFX_ERI_queen_blue
+		x = 1
+		y = 1
+		cost = 6.5
+
+		ai_will_do = {
+			base = 10
+		}
+
+		relative_position_id = ERI_connect_with_the_masses
+		prerequisite = { 
+			focus = ERI_connect_with_the_masses
+		}
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = tt_eri_money_20
+				check_variable = { currency_amount^primary_currency > 20 }
+			}
+		}
+
+		completion_reward = {
+			add_to_variable = {currency_amount^primary_currency = -20}
+			custom_effect_tooltip = minus20credits_tt
+			add_timed_idea = {
+				idea = ERI_loans
+				days = 180
+			}
+			custom_effect_tooltip = ERI_tax_loans_tt
+		}
+	}
+
+	focus = {
+		id = ERI_expand_healthcare
+		icon = GFX_ERI_queen_blue
+		x = -1
+		y = 1
+		cost = 6.5
+
+		ai_will_do = {
+			base = 10
+		}
+
+		relative_position_id = ERI_connect_with_the_masses
+		prerequisite = { 
+			focus = ERI_connect_with_the_masses
+		}
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = tt_eri_money_20
+				check_variable = { currency_amount^primary_currency > 20 }
+			}
+		}
+
+		completion_reward = {
+			add_to_variable = {currency_amount^primary_currency = -20}
+			custom_effect_tooltip = minus20credits_tt
+			add_timed_idea = {
+				idea = ERI_healthcare
+				days = 180
+			}
+		}
+	}
+
+	focus = {
+		id = ERI_imperial_authority
+		icon = GFX_ERI_queen_red
+		x = 1
+		y = 1
+		cost = 6.5
+
+		ai_will_do = {
+			base = 10
+		}
+
+		relative_position_id = ERI_return_of_the_queen
+		prerequisite = { 
+			focus = ERI_return_of_the_queen
+		}
+		prerequisite = { 
+			focus = ERI_the_queens_role
+		}
+
+		available = {
+			has_country_flag = ERI_authority_chosen
+		}
+
+		completion_reward = {
+			add_country_leader_trait = eri_administrative_queen
+			custom_effect_tooltip = tt_eri_increase_15_legitimacy
+			add_to_variable = { legitimacy_emp = 15 }
+        	add_to_variable = { legitimacy_emp_equilibirum = 15 }
+		}
+	}
+
+	focus = {
+		id = ERI_promote_eriadu_nationalism
+		icon = GFX_ERI_queen_red
+		x = 1
+		y = 1
+		cost = 6.5
+
+		ai_will_do = {
+			base = 10
+		}
+
+		relative_position_id = ERI_imperial_authority
+		prerequisite = { 
+			focus = ERI_imperial_authority
+		}
+
+		completion_reward = {
+			add_ideas = ERI_nationalist_fervor
+		}
+	}
+
+	focus = {
+		id = ERI_militarize_the_planet
+		icon = GFX_ERI_queen_red
+		x = -1
+		y = 1
+		cost = 6.5
+
+		ai_will_do = {
+			base = 10
+		}
+
+		relative_position_id = ERI_imperial_authority
+		prerequisite = { 
+			focus = ERI_imperial_authority
+		}
+
+		completion_reward = {
+			add_ideas = ERI_recruitment
+			custom_effect_tooltip = ERI_recruit_2_guards_tt
+			hidden_effect = {
+				load_oob = ERI_4_2
+			}
+		}
+	}
+
+	focus = {
+		id = ERI_now_onto_politics
+		icon = GFX_ERI_eriadu_planet
+		x = 18
+		y = 0
+		cost = 6.5
+
+		available = {
+			OR = {
+				has_country_flag = ERI_alive_girl
+				has_country_flag = ERI_sander_dead
+			}
+		}
+
+		ai_will_do = {
+			base = 10
+		}
+
+		completion_reward = {
+			add_political_power = 20
+			news_event = eriadu.5
+			custom_effect_tooltip = tt_eri_increase_10_legitimacy
+			add_to_variable = { legitimacy_emp = 10 }
+        	add_to_variable = { legitimacy_emp_equilibirum = 10 }
+			var:global.emperor_id = {
+				add_opinion_modifier = {
+					target = ZER
+					modifier = wants_to_dethrone_us
+				}
+				subtract_from_variable = { legitimacy_emp = 10 }
+        		subtract_from_variable = { legitimacy_emp_equilibirum = 10 }
+			}
+			custom_effect_tooltip = tt_eri_independence
+			hidden_effect = {
+				EMP = {
+					end_puppet = ERI
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = ERI_the_loved
+		icon = GFX_ERI_cronus
+		x = 6
+		y = 1
+		cost = 1
+
+		ai_will_do = {
+			base = 10
+		}
+
+		relative_position_id = ERI_now_onto_politics
+		prerequisite = { 
+			focus = ERI_now_onto_politics 
+		}
+
+		available = {
+			has_country_leader = {
+				name = "Ivan Cronus" ruling_only = yes
+			}
+		}
+
+		completion_reward = {
+			hidden_effect = {
+				remove_ideas = ERI_madmans_obsession2
+			}
+			ERI = {
+				country_event = { id = eriadu.11 days = 2 random_days = 1 }
+			}
+		}
+	}
+
+	focus = {
+		id = ERI_construction_of_the_knighthammer
+		icon = GFX_ERI_cronus
+		x = -3
+		y = 1
+		cost = 6.5
+
+		ai_will_do = {
+			base = 10
+		}
+
+		relative_position_id = ERI_the_loved
+		prerequisite = { 
+			focus = ERI_the_loved
+		}
+
+		completion_reward = {
+			custom_effect_tooltip = ERI_knight_hammer_tt
+			hidden_effect = {
+				ERI = {
+					country_event = { id = eriadu.15 days = 300 random_days = 25 }
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = ERI_the_feared
+		icon = GFX_ERI_sander
+		x = -6
+		y = 1
+		cost = 1
+
+		ai_will_do = {
+			base = 10
+		}
+
+		relative_position_id = ERI_now_onto_politics
+		prerequisite = { 
+			focus = ERI_now_onto_politics 
+		}
+
+		available = {
+			has_country_leader = {
+				name = "Sander Delvardus" ruling_only = yes
+			}
+		}
+
+		completion_reward = {
+			ERI = {
+				country_event = { id = eriadu.10 days = 2 random_days = 1 }
+			}
+		}
+	}
+
+	focus = {
+		id = ERI_sanders_cabinet
+		icon = GFX_ERI_officers
+		x = 0
+		y = 1
+		cost = 6.5
+
+		ai_will_do = {
+			base = 10
+		}
+
+		relative_position_id = ERI_the_feared
+		prerequisite = { 
+			focus = ERI_the_feared
+		}
+
+		completion_reward = {
+			ERI = {
+				country_event = { id = eriadu.12 days = 1 }
+			}
+			ERI = {
+				country_event = { id = eriadu.13 days = 8 }
+			}
+		}
+	}
+
+	focus = {
+		id = ERI_better_bureaucrats
+		icon = GFX_ERI_officers
+		x = 0
+		y = 1
+		cost = 6.5
+
+		ai_will_do = {
+			base = 10
+		}
+
+		relative_position_id = ERI_sanders_cabinet
+		prerequisite = { 
+			focus = ERI_sanders_cabinet
+		}
+
+		completion_reward = {
+			add_timed_idea = {
+				idea = ERI_administrative_efficiency
+				days = 180
+			}
+		}
+	}
+
+	focus = {
+		id = ERI_our_own_empire
+		icon = GFX_ERI_empire
+		x = 0
+		y = 1
+		cost = 6.5
+
+		ai_will_do = {
+			base = 10
+		}
+
+		relative_position_id = ERI_better_bureaucrats
+		prerequisite = { 
+			focus = ERI_better_bureaucrats
+		}
+
+		completion_reward = {
+			remove_ideas = death_of_the_emperor_emp_1
+		}
+	}
+
+	focus = {
+		id = ERI_the_queens_role
+		icon = GFX_ERI_queen
+		x = -2
+		y = 2
+		cost = 6.5
+
+		ai_will_do = {
+			base = 10
+		}
+
+		relative_position_id = ERI_sanders_cabinet
+		prerequisite = { 
+			focus = ERI_sanders_cabinet
+		}
+
+		completion_reward = {
+			ERI = {
+				country_event = { id = eriadu.14 days = 2 random_days = 1 }
+			}
+		}
+	}
+
+	focus = {
+		id = ERI_isb_training_improvements
+		icon = GFX_ERI_isb
+		x = 3
+		y = 1
+		cost = 6.5
+
+		ai_will_do = {
+			base = 10
+		}
+
+		relative_position_id = ERI_the_feared
+		prerequisite = { 
+			focus = ERI_the_feared
+		}
+
+		completion_reward = {
+			add_ideas = ERI_isb_efficiency
+		}
+	}
+
+	focus = {
+		id = ERI_establish_administration_on_bith
+		icon = GFX_ERI_eriadu_planet2
+		x = 1
+		y = 1
+		cost = 4
+
+		ai_will_do = {
+			base = 10
+		}
+
+		relative_position_id = ERI_isb_training_improvements
+		prerequisite = { 
+			focus = ERI_isb_training_improvements
+		}
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = controls_core_states_of_bit
+				AND = {
+					119 = {
+						is_controlled_by_ROOT_or_ally = yes
+					}
+					442 = {
+						is_controlled_by_ROOT_or_ally = yes
+					}
+					373 = {
+						is_controlled_by_ROOT_or_ally = yes
+					}
+					439 = {
+						is_controlled_by_ROOT_or_ally = yes
+					}
+				}
+			}
+		}
+
+		completion_reward = {
+			BIT = { add_to_ROOT_potential_cores = yes } 
+		}
+	}
+
+	focus = {
+		id = ERI_establish_administration_on_sluis_van
+		icon = GFX_ERI_eriadu_planet4
+		x = -1
+		y = 1
+		cost = 4
+
+		ai_will_do = {
+			base = 10
+		}
+
+		relative_position_id = ERI_isb_training_improvements
+		prerequisite = { 
+			focus = ERI_isb_training_improvements
+		}
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = controls_core_states_of_slu
+				AND = {
+					339 = {
+						is_controlled_by_ROOT_or_ally = yes
+					}
+					88 = {
+						is_controlled_by_ROOT_or_ally = yes
+					}
+					405 = {
+						is_controlled_by_ROOT_or_ally = yes
+					}
+					114 = {
+						is_controlled_by_ROOT_or_ally = yes
+					}
+				}
+			}
+		}
+
+		completion_reward = {
+			SLU = { add_to_ROOT_potential_cores = yes } 
+		}
+	}
+
+	focus = {
+		id = ERI_ready_the_fleet
+		icon = GFX_ERI_star_destroyer2
+		x = 6
+		y = 0
+		cost = 6.5
+
+		ai_will_do = {
+			base = 10
+		}
+
+		relative_position_id = ERI_the_feared
+		prerequisite = { 
+			focus = ERI_now_onto_politics
+		}
+
+		completion_reward = {
+			add_ideas = ERI_ready_fleet
+		}
+	}
+
+	focus = {
+		id = ERI_conquest_of_bith
+		icon = GFX_ERI_eriadu_planet2
+		x = 1
+		y = 1
+		cost = 6.5
+
+		ai_will_do = {
+			base = 10
+		}
+
+		relative_position_id = ERI_ready_the_fleet
+		prerequisite = { 
+			focus = ERI_ready_the_fleet
+		}
+		available = {
+			has_army_manpower = {
+				size > 100000
+			}
+		}
+
+		completion_reward = {
+			declare_war_on = {
+				target = BIT
+				type = annex_everything
+			}
+		}
+	}
+
+	focus = {
+		id = ERI_conquer_the_utapauns
+		icon = GFX_ERI_eriadu_planet3
+		x = -1
+		y = 1
+		cost = 6.5
+
+		ai_will_do = {
+			base = 10
+		}
+
+		relative_position_id = ERI_ready_the_fleet
+		prerequisite = { 
+			focus = ERI_ready_the_fleet
+		}
+		available = {
+			has_army_manpower = {
+				size > 100000
+			}
+		}
+
+		completion_reward = {
+			declare_war_on = {
+				target = UTA
+				type = annex_everything
+			}
+		}
+	}
+
+	focus = {
+		id = ERI_reorganize_the_collaborators
+		icon = GFX_ERI_stormtrooper
+		x = 0
+		y = 2
+		cost = 6.5
+
+		ai_will_do = {
+			base = 10
+		}
+
+		relative_position_id = ERI_ready_the_fleet
+		prerequisite = { 
+			focus = ERI_conquest_of_bith
+		}
+		prerequisite = { 
+			focus = ERI_conquer_the_utapauns
+		}
+
+		available = {
+			ERI = {
+				owns_state = 110
+				owns_state = 394
+			}
+		}
+
+		completion_reward = {
+			custom_effect_tooltip = tt_eri_5_stormtrooper_divisions
+			division_template = {
+				name = "Collaborator Regiment"
+				is_locked = yes
+				division_names_group = ZER_STORM_1
+				priority = 0
+				regiments = {
+					stormtrooper = { x = 0 y = 0 }
+					pauan = { x = 1 y = 0 }
+					bith = { x = 2 y = 0 }
+					stormtrooper = { x = 0 y = 1 }
+					pauan = { x = 1 y = 1 }
+					bith = { x = 2 y = 1 }
+					stormtrooper = { x = 0 y = 2 }
+					pauan = { x = 1 y = 2 }
+					bith = { x = 2 y = 2 }
+				}
+			}
+			hidden_effect = {
+				110 = {
+					create_unit = {
+						division = "name = \"1st Collaborator Regiment\" division_template = \"Collaborator Regiment\" start_experience_factor = 0.4"
+						owner = ERI
+					}
+					create_unit = {
+						division = "name = \"2nd Collaborator Regiment\" division_template = \"Collaborator Regiment\" start_experience_factor = 0.4"
+						owner = ERI
+					}
+					create_unit = {
+						division = "name = \"3rd Collaborator Regiment\" division_template = \"Collaborator Regiment\" start_experience_factor = 0.4"
+						owner = ERI
+					}
+				}
+				394 = {
+					create_unit = {
+						division = "name = \"4th Collaborator Regiment\" division_template = \"Collaborator Regiment\" start_experience_factor = 0.4"
+						owner = ERI
+					}
+					create_unit = {
+						division = "name = \"5th Collaborator Regiment\" division_template = \"Collaborator Regiment\" start_experience_factor = 0.4"
+						owner = ERI
+					}
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = ERI_capture_the_shipyards
+		icon = GFX_ERI_eriadu_planet4
+		x = 0
+		y = 1
+		cost = 6.5
+
+		ai_will_do = {
+			base = 10
+		}
+
+		relative_position_id = ERI_reorganize_the_collaborators
+		prerequisite = { 
+			focus = ERI_reorganize_the_collaborators
+		}
+		available = {
+			has_army_manpower = {
+				size > 250000
+			}
+		}
+
+		completion_reward = {
+			SLU = {
+				country_event = { id = eriadu.7 days = 2 random_days = 1 }
+			}
+		}
+	}
+
+	focus = {
+		id = ERI_the_eriadu_economy
+		icon = GFX_ERI_eriadu_planet
+		x = 31
+		y = 0
+		cost = 6.5
+
+		ai_will_do = {
+			base = 10
+		}
+
+		available = {
+			OR = {
+				has_country_flag = ERI_alive_girl
+				has_country_flag = ERI_sander_dead
+			}
+		}
+
+		completion_reward = {
+			ERI_economic_level_down = yes
+		}
+	}
+
+	focus = {
+		id = ERI_develop_the_rimma_route
+		icon = GFX_ERI_industry
+		x = 3
+		y = 1
+		cost = 6.5
+
+		ai_will_do = {
+			base = 10
+		}
+
+		relative_position_id = ERI_the_eriadu_economy
+		prerequisite = { 
+			focus = ERI_the_eriadu_economy
+		}
+		available = {
 			
-# 		}
-		
+		}
 
-# 		ai_will_do = {
-# 			factor = 1
-# 		}
-# 	}
-# 	focus = { 
-# 		id = ERI_capture_sorosuub_CEO
-# 		icon = GFX_WIP_focus
-# 		cost = 5
-# 		x = 25
-# 		y = 3
-# 		prerequisite = {
-# 			focus = ERI_talk_to_the_companies
-# 		}
-# 		available_if_capitulated = yes
-		
-# 		completion_reward = {
-# 		}
-		
+		completion_reward = {
+			ERI_economic_level_down = yes
+			custom_effect_tooltip = plus10credits_tt
+			add_to_variable = {currency_amount^primary_currency = 10}
+		}
+	}
 
-# 		ai_will_do = {
-# 			factor = 1
-# 		}
-# 	}
-# 	focus = { 
-# 		id = ERI_sorosuub_equipment_production
-# 		icon = GFX_WIP_focus
-# 		cost = 5
-# 		x = 25
-# 		y = 4
-# 		prerequisite = {
-# 			focus = ERI_capture_sorosuub_CEO
-# 		}
-		
-# 		available_if_capitulated = yes
-		
-# 		completion_reward = {
-# 		}
-		
+	focus = {
+		id = ERI_improved_city_planning
+		icon = GFX_ERI_industry
+		x = 1
+		y = 1
+		cost = 6.5
 
-# 		ai_will_do = {
-# 			factor = 1
-# 		}
-# 	}
-# 	focus = { 
-# 		id = ERI_sorosuub_carrier
-# 		icon = GFX_WIP_focus
-# 		cost = 5
-# 		x = 25
-# 		y = 5
-# 		prerequisite = {
-# 			focus = ERI_sorosuub_equipment_production
-# 		}
-		
-# 		available_if_capitulated = yes
-		
-# 		completion_reward = {
-# 		}
-		
+		ai_will_do = {
+			base = 10
+		}
 
-# 		ai_will_do = {
-# 			factor = 1
-# 		}
-# 	}
-# 	focus = { 
-# 		id = ERI_meet_with_industrial_complex_leaders
-# 		icon = GFX_WIP_focus
-# 		cost = 5
-# 		x = 23
-# 		y = 3
-# 		prerequisite = {
-# 			focus = ERI_talk_to_the_companies
-# 		}
-# 		mutually_exclusive = {
-# 			focus = ERI_talk_to_the_Khedive
-# 		}
-# 		available_if_capitulated = yes
-		
-# 		completion_reward = {
-# 		}
-		
+		relative_position_id = ERI_develop_the_rimma_route
+		prerequisite = { 
+			focus = ERI_develop_the_rimma_route
+		}
+		available = {
+			
+		}
 
-# 		ai_will_do = {
-# 			factor = 1
-# 		}
-# 	}
-# 	focus = { 
-# 		id = ERI_loosen_restrictions_on_pollution
-# 		icon = GFX_WIP_focus
-# 		cost = 5
-# 		x = 23
-# 		y = 4
-# 		prerequisite = {
-# 			focus = ERI_meet_with_industrial_complex_leaders
-# 		}
-		
-# 		available_if_capitulated = yes
-		
-# 		completion_reward = {
-# 		}
-		
+		completion_reward = {
+			add_ideas = ERI_city_planning
+		}
+	}
 
-# 		ai_will_do = {
-# 			factor = 1
-# 		}
-# 	}
-# 	focus = { 
-# 		id = ERI_allow_unsafe_mining
-# 		icon = GFX_WIP_focus
-# 		cost = 5
-# 		x = 23
-# 		y = 5
-# 		prerequisite = {
-# 			focus = ERI_loosen_restrictions_on_pollution
-# 		}
-		
-# 		available_if_capitulated = yes
-		
-# 		completion_reward = {
-# 			add_resource = {
-# 			    type = oil
-# 			    amount = 50
-# 			    state = 88
-# 			}
-# 		}
-		
+	focus = {
+		id = ERI_invite_merchant_guilds
+		icon = GFX_ERI_industry_grey
+		x = 1
+		y = 1
+		cost = 6.5
 
-# 		ai_will_do = {
-# 			factor = 1
-# 		}
-# 	}
-# 	focus = { 
-# 		id = ERI_centrailise_industry ## 1st bonus of all of the other trees leading up to this
-# 		icon = GFX_WIP_focus
-# 		cost = 5
-# 		x = 23
-# 		y = 6
-# 		prerequisite = {
-# 			focus = ERI_mountain_mining_rails
-# 			focus = ERI_allow_unsafe_mining
-# 			focus = ERI_sorosuub_carrier
-# 		}
-		
-# 		available_if_capitulated = yes
-		
-# 		completion_reward = {
-# 		}
-		
+		ai_will_do = {
+			base = 10
+		}
 
-# 		ai_will_do = {
-# 			factor = 1
-# 		}
-# 	}
-# 	focus = { 
-# 		id = ERI_revival_centres ## reduce maddness penaility
-# 		icon = GFX_WIP_focus
-# 		cost = 5
-# 		x = 23
-# 		y = 7
-# 		prerequisite = {
-# 			focus = ERI_centrailise_industry
-# 		}
-		
-# 		available_if_capitulated = yes
-		
-# 		completion_reward = {
-# 		}
-		
+		relative_position_id = ERI_the_eriadu_economy
+		prerequisite = { 
+			focus = ERI_the_eriadu_economy
+		}
+		mutually_exclusive = {
+			focus = ERI_invite_banking_clans
+		}
+		available = {
+			
+		}
 
-# 		ai_will_do = {
-# 			factor = 1
-# 		}
-# 	}
-# 	focus = {
-# 		id = ERI_outwards_focus_WIP
-# 		icon = GFX_WIP_focus
-# 		cost = 5
-# 		x = 26
-# 		y = 2
-# 		prerequisite = {
-# 			focus = ERI_diplomatic_outreach
-# 		}
-		
-# 		available_if_capitulated = yes
-		
-# 		completion_reward = {
-# 		}
-		
+		completion_reward = {
+			add_ideas = ERI_merchant_economy
+		}
+	}
 
-# 		ai_will_do = {
-# 			factor = 1
-# 		}
-# 	}
-# 	focus = {
-# 		id = ERI_devotion_to_the_empire_WIP
-# 		icon = GFX_WIP_focus
-# 		cost = 5
-# 		x = 30
-# 		y = 2
-# 		prerequisite = {
-# 			focus = ERI_diplomatic_outreach
-# 		}
-		
-# 		available_if_capitulated = yes
-		
-# 		completion_reward = {
-# 		}
-		
+	focus = {
+		id = ERI_invite_banking_clans
+		icon = GFX_ERI_industry_grey
+		x = -1
+		y = 1
+		cost = 6.5
 
-# 		ai_will_do = {
-# 			factor = 1
-# 		}
-# 	}
-# 	###############################
-# 	#ERI POLITICAL AND WORLD STAGE#
-# 	###############################
-# 	focus = {
-# 		id = ERI_remind_the_people
-# 		icon = GFX_WIP_focus
-# 		cost = 5
-# 		x = 15
-# 		y = 5
-		
-# 		available_if_capitulated = yes
-# 		prerequisite = {
-# 			focus = ERI_choose_our_strength
-# 		}	
-# 		completion_reward = {
-# 			add_stability = -0.3
-# 			add_ideas = dreams_of_a_better_life_ERI
-# 		}
-		
+		ai_will_do = {
+			base = 10
+		}
 
-# 		ai_will_do = {
-# 			factor = 1
-# 		}
-# 	}
-# 	focus = {
-# 		id = ERI_work_camps
-# 		icon = GFX_WIP_focus
-# 		cost = 5
-# 		x = 14
-# 		y = 6
-		
-# 		available_if_capitulated = yes
-# 		prerequisite = {
-# 			focus = ERI_remind_the_people
-# 		}	
-# 		completion_reward = {
-# 			custom_effect_tooltip = ERI_work_camps_TT
-# 			set_country_flag = ERI_work_camps_true
-# 		}
-		
+		relative_position_id = ERI_the_eriadu_economy
+		prerequisite = { 
+			focus = ERI_the_eriadu_economy
+		}
+		mutually_exclusive = {
+			focus = ERI_invite_merchant_guilds
+		}
+		available = {
+			
+		}
 
-# 		ai_will_do = {
-# 			factor = 1
-# 		}
-# 	}
-# 	focus = {
-# 		id = ERI_dreams_of_sullust
-# 		icon = GFX_WIP_focus
-# 		cost = 5
-# 		x = 16
-# 		y = 6
-		
-# 		available_if_capitulated = yes
-# 		prerequisite = {
-# 			focus = ERI_remind_the_people
-# 		}	
-# 		completion_reward = {
-# 		}
-		
+		completion_reward = {
+			custom_effect_tooltip = plus50credits_tt
+			add_to_variable = {currency_amount^primary_currency = 50}
+			add_ideas = ERI_banking_economy
+		}
+	}
 
-# 		ai_will_do = {
-# 			factor = 1
-# 		}
-# 	}
-# 	focus = {
-# 		id = ERI_prepare_a_invasion_force
-# 		icon = GFX_WIP_focus
-# 		cost = 5
-# 		x = 16
-# 		y = 7
-		
-# 		available_if_capitulated = yes
-# 		prerequisite = {
-# 			focus = ERI_work_camps
-# 			focus = ERI_dreams_of_sullust
-# 		}	
-# 		completion_reward = {
-# 			add_equipment_to_stockpile = {
-# 			    type = convoys
-# 			    amount = 100
-# 			}
-# 		}
-		
+	focus = {
+		id = ERI_economic_prosperity
+		icon = GFX_ERI_industry_grey
+		x = -1
+		y = 1
+		cost = 6.5
 
-# 		ai_will_do = {
-# 			factor = 1
-# 		}
-# 	}
-# 	focus = {
-# 		id = ERI_a_gift_from_the_empire
-# 		icon = GFX_WIP_focus
-# 		cost = 5
-# 		x = 14
-# 		y = 7
-		
-# 		available_if_capitulated = yes
-# 		prerequisite = {
-# 			focus = ERI_work_camps
-# 			focus = ERI_dreams_of_sullust
-# 		}
-# 		completion_reward = {
-# 		}
-		
+		ai_will_do = {
+			base = 10
+		}
 
-# 		ai_will_do = {
-# 			factor = 1
-# 		}
-# 	}
-# 	focus = {
-# 		id = ERI_let_it_begin
-# 		icon = GFX_WIP_focus
-# 		cost = 5
-# 		x = 15
-# 		y = 8
+		relative_position_id = ERI_invite_merchant_guilds
+		prerequisite = { 
+			focus = ERI_invite_merchant_guilds
+			focus = ERI_invite_banking_clans
+		}
 		
-# 		available_if_capitulated = yes
-# 		prerequisite = {
-# 			focus = ERI_dreams_of_sullust
-# 			focus = ERI_a_gift_from_the_empire
-# 			focus = ERI_prepare_a_invasion_force
-# 		}
-# 		completion_reward = {
-# 			declare_war_on = {
-# 			    target = SUL
-# 			    type = annex_everything
-# 			}
-# 		}
-		
+		available = {
+			
+		}
 
-# 		ai_will_do = {
-# 			factor = 1
-# 		}
-# 	}
-# 	#########################
-# 	## ERI LOST SULLUST WAR##
-# 	#########################
-# 	focus = {
-# 		id = ERI_dreams_squashed
-# 		icon = GFX_WIP_focus
-# 		cost = 5
-# 		x = 18
-# 		y = 9
-		
-# 		available_if_capitulated = yes
-# 		prerequisite = {
-# 			focus = ERI_let_it_begin
-# 		}	
-# 		completion_reward = {
-# 		}
-		
+		completion_reward = {
+			ERI_economic_level_down = yes
+		}
+	}
 
-# 		ai_will_do = {
-# 			factor = 1
-# 		}
-# 	}
-# 	focus = {
-# 		id = ERI_damage_control
-# 		icon = GFX_WIP_focus
-# 		cost = 5
-# 		x = 17
-# 		y = 10
-		
-# 		available_if_capitulated = yes
-# 		prerequisite = {
-# 			focus = ERI_dreams_squashed
-# 		}	
-# 		completion_reward = {
-# 		}
-		
+	focus = {
+		id = ERI_lessons_from_the_empire
+		icon = GFX_ERI_industry_grey
+		x = 0
+		y = 1
+		cost = 6.5
 
-# 		ai_will_do = {
-# 			factor = 1
-# 		}
-# 	}
-# 	focus = {
-# 		id = ERI_masscare_the_insurgents # Sluis divolves into anarchy
-# 		icon = GFX_WIP_focus
-# 		cost = 5
-# 		x = 19
-# 		y = 10
-		
-# 		available_if_capitulated = yes
-# 		prerequisite = {
-# 			focus = ERI_dreams_squashed
-# 		}	
-# 		completion_reward = {
-# 		}
-		
+		ai_will_do = {
+			base = 10
+		}
 
-# 		ai_will_do = {
-# 			factor = 1
-# 		}
-# 	}
-# 	########################
-# 	## ERI WON SULLUST WAR##
-# 	########################
-# 	focus = {
-# 		id = ERI_dreams_realised
-# 		icon = GFX_WIP_focus
-# 		cost = 5
-# 		x = 12
-# 		y = 9
+		relative_position_id = ERI_economic_prosperity
+		prerequisite = { 
+			focus = ERI_economic_prosperity
+		}
 		
-# 		available_if_capitulated = yes
-# 		prerequisite = {
-# 			focus = ERI_let_it_begin
-# 		}	
-# 		completion_reward = {
-# 		}
-		
+		available = {
+			
+		}
 
-# 		ai_will_do = {
-# 			factor = 1
-# 		}
-# 	}
-# 	focus = {
-# 		id = ERI_search_the_medical_archive
-# 		icon = GFX_WIP_focus
-# 		cost = 5
-# 		x = 11
-# 		y = 10
-		
-# 		available_if_capitulated = yes
-# 		prerequisite = {
-# 			focus = ERI_dreams_realised
-# 		}	
-# 		completion_reward = {
-# 		}
-		
+		completion_reward = {
+			custom_effect_tooltip = tt_eri_increase_10_legitimacy
+			add_to_variable = { legitimacy_emp = 10 }
+        	add_to_variable = { legitimacy_emp_equilibirum = 10 }
+			add_tech_bonus = {
+				bonus = 1.0
+				uses = 1
+				category = construction_tech
+			}
+		}
+	}
 
-# 		ai_will_do = {
-# 			factor = 1
-# 		}
-# 	}
-# 	focus = {
-# 		id = ERI_rip_sullust_apart
-# 		icon = GFX_WIP_focus
-# 		cost = 5
-# 		x = 11
-# 		y = 11
-		
-# 		available_if_capitulated = yes
-# 		prerequisite = {
-# 			focus = ERI_search_the_medical_archive
-# 			focus = ERI_cement_imperial_rule_over_region
-# 		}	
-# 		completion_reward = {
-# 		}
-		
+	focus = {
+		id = ERI_durasteel_forging
+		icon = GFX_ERI_industry_grey
+		x = -2
+		y = 1
+		cost = 6.5
 
-# 		ai_will_do = {
-# 			factor = 1
-# 		}
-# 	}
-# 	focus = {
-# 		id = ERI_cement_imperial_rule_over_region
-# 		icon = GFX_WIP_focus
-# 		cost = 5
-# 		x = 13
-# 		y = 10
-		
-# 		available_if_capitulated = yes
-# 		prerequisite = {
-# 			focus = ERI_dreams_realised
-# 		}	
-# 		completion_reward = {
-# 		}
-		
+		ai_will_do = {
+			base = 10
+		}
 
-# 		ai_will_do = {
-# 			factor = 1
-# 		}
-# 	}
-# 	focus = {
-# 		id = ERI_deals_with_sorosubb
-# 		icon = GFX_WIP_focus
-# 		cost = 5
-# 		x = 13
-# 		y = 11
+		relative_position_id = ERI_lessons_from_the_empire
+		prerequisite = { 
+			focus = ERI_lessons_from_the_empire
+		}
 		
-# 		available_if_capitulated = yes
-# 		prerequisite = {
-# 			focus = ERI_cement_imperial_rule_over_region
-# 		}	
-# 		completion_reward = {
-# 		}
-		
+		available = {
+			
+		}
 
-# 		ai_will_do = {
-# 			factor = 1
-# 		}
-# 	}
-# 	#######################
-# 	##ERIDAU ARMY ACADEMY##
-# 	#######################
-# 	focus = {
-# 		id = ERI_repair_the_academy### create decision for recruiting new leaders
-# 		icon = GFX_WIP_focus
-# 		cost = 5
-# 		x = 10
-# 		y = 1
-		
-# 		available_if_capitulated = yes
-# 		prerequisite = {
-# 			focus = ERI_gone
-# 		}	
-# 		completion_reward = {
-# 			add_timed_idea = {
-# 			    idea = repairing_the_academy_ERI
-# 			    days = 160
-# 			}
-# 			country_event = {
-#     			id = eridau.3
-#     			days = 160
-#     		}
-# 		}
-		
-# 		ai_will_do = {
-# 			factor = 1
-# 		}
-# 	}
-# 	focus = {
-# 		id = ERI_non_stop_training ### 
-# 		icon = GFX_WIP_focus
-# 		cost = 5
-# 		x = 9
-# 		y = 2
-		
-# 		available_if_capitulated = yes
-# 		prerequisite = {
-# 			focus = ERI_repair_the_academy
-# 		}	
-# 		completion_reward = {
-# 		}
-		
+		completion_reward = {
+			add_resource = {
+				type = steel
+				amount = 8
+				state = 430
+			}
+			add_resource = {
+				type = steel
+				amount = 8
+				state = 104
+			}
+		}
+	}
 
-# 		ai_will_do = {
-# 			factor = 1
-# 		}
-# 	}
-# 	focus = {
-# 		id = ERI_rebellion_era_tactics ## Improvement to tactics of recruited generals, maybe decisions for poeple in faction to recruit eraidu generals??
-# 		icon = GFX_WIP_focus
-# 		cost = 5
-# 		x = 9
-# 		y = 3
-		
-# 		available_if_capitulated = yes
-# 		prerequisite = {
-# 			focus = ERI_non_stop_training
-# 		}	
-# 		completion_reward = {
-# 		}
-		
+	focus = {
+		id = ERI_private_enterprises
+		icon = GFX_ERI_industry_grey
+		x = 0
+		y = 1
+		cost = 6.5
 
-# 		ai_will_do = {
-# 			factor = 1
-# 		}
-# 	}
-# 	focus = {
-# 		id = ERI_logistical_nightmare ## bonus to logistics
-# 		icon = GFX_WIP_focus
-# 		cost = 5
-# 		x = 4
-# 		y = 4
-# 		available_if_capitulated = yes
-# 		prerequisite = {
-# 			focus = ERI_rebellion_era_tactics
-# 		}	
-# 		completion_reward = {
-# 		}
-		
+		ai_will_do = {
+			base = 10
+		}
 
-# 		ai_will_do = {
-# 			factor = 1
-# 		}
-# 	}
-# 	focus = {
-# 		id = ERI_recall_promising_teachers ## gets rid of army penality
-# 		icon = GFX_WIP_focus
-# 		cost = 5
-# 		x = 8
-# 		y = 4
+		relative_position_id = ERI_lessons_from_the_empire
+		prerequisite = { 
+			focus = ERI_lessons_from_the_empire
+		}
 		
-# 		available_if_capitulated = yes
-# 		prerequisite = {
-# 			focus = ERI_rebellion_era_tactics
-# 		}	
-# 		completion_reward = {
-# 		}
-		
+		available = {
+			
+		}
 
-# 		ai_will_do = {
-# 			factor = 1
-# 		}
-# 	}
-# 	focus = {
-# 		id = ERI_new_conscription ## Fill in cant think of anyhting right now
-# 		icon = GFX_WIP_focus
-# 		cost = 5
-# 		x = 7
-# 		y = 6
-		
-# 		available_if_capitulated = yes
-# 		prerequisite = {
-# 			focus = ERI_recall_promising_teachers
-# 		}	
-# 		completion_reward = {
-# 		}
-		
+		completion_reward = {
+			104 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
 
-# 		ai_will_do = {
-# 			factor = 1
-# 		}
-# 	}
-# 	focus = {
-# 		id = ERI_cornered_wolf ## trait to leader
-# 		icon = GFX_WIP_focus
-# 		cost = 5
-# 		x = 6
-# 		y = 5
-		
-# 		available_if_capitulated = yes
-# 		prerequisite = {
-# 			focus = ERI_rebellion_era_tactics
-# 		}	
-# 		completion_reward = {
-# 			add_country_leader_trait = cornered_fox  ## CHANGE_ME, alter trait
-# 		}
-		
+	focus = {
+		id = ERI_rhydonium_deposits
+		icon = GFX_ERI_industry_grey
+		x = 2
+		y = 1
+		cost = 6.5
 
-# 		ai_will_do = {
-# 			factor = 1
-# 		}
-# 	}
-# 	focus = {
-# 		id = ERI_the_new_crop
-# 		icon = GFX_WIP_focus
-# 		cost = 5
-# 		x = 5
-# 		y = 6
-		
-# 		available_if_capitulated = yes
-# 		prerequisite = {
-# 			focus = ERI_logistical_nightmare
-# 		}	
-# 		completion_reward = {
-# 			ERI = {
-# 				add_corps_commander_role = {
-# 				  character = ERI_sloux_derina
-# 				  skill = 4
-# 				  attack_skill = 2
-# 				  defense_skill = 3
-# 				  planning_skill = 3
-# 				  logistics_skill = 5
-# 				}
-# 			}
-# 			ERI = {
-# 				add_corps_commander_role = {
-# 				  character = ERI_garam_beren
-# 				  skill = 4
-# 				  attack_skill = 2
-# 				  defense_skill = 3
-# 				  planning_skill = 3
-# 				  logistics_skill = 5
-# 				}
-# 			}
-# 		}
-# 		ai_will_do = {
-# 			factor = 1
-# 		}
-# 	}
-# 	focus = {
-# 		id = ERI_the_cream_of_the_empire ## last improvement to leaders
-# 		icon = GFX_WIP_focus
-# 		cost = 5
-# 		x = 6
-# 		y = 7
-		
-# 		available_if_capitulated = yes
-# 		prerequisite = {
-# 			focus = ERI_the_new_crop
-# 		}
-# 		prerequisite = {
-# 			focus = ERI_cornered_wolf
-# 		}
-# 		prerequisite = {
-# 			focus = ERI_new_conscription
-# 		}
-# 		completion_reward = {
-# 		}
-		
+		ai_will_do = {
+			base = 10
+		}
 
-# 		ai_will_do = {
-# 			factor = 1
-# 		}
-# 	}
-# 	focus = {
-# 		id = ERI_reinstate_harvaster_program ## Maybe return to this depending on sith and stuff
-# 		icon = GFX_WIP_focus
-# 		cost = 5
-# 		x = 13
-# 		y = 3
+		relative_position_id = ERI_lessons_from_the_empire
+		prerequisite = { 
+			focus = ERI_lessons_from_the_empire
+		}
 		
-# 		available_if_capitulated = yes
-# 		prerequisite = {
-# 			focus = ERI_advanced_imperial_training_program
-# 		}	
-# 		completion_reward = {
-# 		}
-		
+		available = {
+			
+		}
 
-# 		ai_will_do = {
-# 			factor = 1
-# 		}
-# 	}
-# 	focus = {
-# 		id = ERI_advanced_imperial_training_program
-# 		icon = GFX_WIP_focus
-# 		cost = 5
-# 		x = 13
-# 		y = 2
-		
-# 		available_if_capitulated = yes
-# 		prerequisite = {
-# 			focus = ERI_repair_the_academy
-# 		}	
-# 		completion_reward = {
-# 		}
-		
+		completion_reward = {
+			add_resource = {
+				type = oil
+				amount = 8
+				state = 430
+			}
+			add_resource = {
+				type = oil
+				amount = 8
+				state = 104
+			}
+		}
+	}
 
-# 		ai_will_do = {
-# 			factor = 1
-# 		}
-# 	}
-# 	focus = {
-# 		id = ERI_the_pit
-# 		icon = GFX_WIP_focus
-# 		cost = 5
-# 		x = 5
-# 		y = 2
-		
-# 		available_if_capitulated = yes
-# 		prerequisite = {
-# 			focus = ERI_repair_the_academy
-# 		}	
-# 		completion_reward = {
-# 		}
-		
+	focus = {
+		id = ERI_develop_bith
+		icon = GFX_ERI_industry
+		x = -1
+		y = 1
+		cost = 6.5
 
-# 		ai_will_do = {
-# 			factor = 1
-# 		}
-# 	}
-# 	focus = {
-# 		id = ERI_jump_troopers
-# 		icon = GFX_WIP_focus
-# 		cost = 5
-# 		x = 3
-# 		y = 3
-		
-# 		available_if_capitulated = yes
-# 		prerequisite = {
-# 			focus = ERI_the_pit
-# 		}	
-# 		completion_reward = {
-# 			set_technology = {
-# 			    jump_troopers = 1
-# 			}
-# 		}
-		
+		ai_will_do = {
+			base = 10
+		}
 
-# 		ai_will_do = {
-# 			factor = 1
-# 		}
-# 	}
-# 	focus = {
-# 		id = ERI_incinerator_troopers
-# 		icon = GFX_WIP_focus
-# 		cost = 5
-# 		x = 5
-# 		y = 3
+		relative_position_id = ERI_improved_city_planning
+		prerequisite = { 
+			focus = ERI_improved_city_planning
+		}
 		
-# 		available_if_capitulated = yes
-# 		prerequisite = {
-# 			focus = ERI_the_pit
-# 		}	
-# 		completion_reward = {
-# 			set_technology = {
-# 			    incinerator_troopers = 1
-# 			}
-# 		}
-		
+		available = {
+			owns_state = 110
+			custom_trigger_tooltip = {
+				tooltip = tt_eri_money_200
+				check_variable = { currency_amount^primary_currency > 200 }
+			}
+		}
 
-# 		ai_will_do = {
-# 			factor = 1
-# 		}
-# 	}
-# 	focus = {
-# 		id = ERI_magma_troopers
-# 		icon = GFX_WIP_focus
-# 		cost = 5
-# 		x = 1
-# 		y = 3
-		
-# 		available_if_capitulated = yes
-# 		prerequisite = {
-# 			focus = ERI_the_pit
-# 		}	
-# 		completion_reward = {
-# 			set_technology = {
-# 			    magma_troopers = 1
-# 			}
-# 		}
-		
+		completion_reward = {
+			110 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+				add_manpower = 500000
+			}
+			442 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+				add_manpower = 500000
+			}
+			custom_effect_tooltip = minus200credits_tt
+			add_to_variable = {currency_amount^primary_currency = -200}
+		}
+	}
 
-# 		ai_will_do = {
-# 			factor = 1
-# 		}
-# 	}
-# 	focus = {
-# 		id = ERI_forest_troopers
-# 		icon = GFX_WIP_focus
-# 		cost = 5
-# 		x = 7
-# 		y = 3
-		
-# 		available_if_capitulated = yes
-# 		prerequisite = {
-# 			focus = ERI_the_pit
-# 		}	
-# 		completion_reward = {
-# 			set_technology = {
-# 			    forest_troopers = 1
-# 			}
-# 		}
-# 		ai_will_do = {
-# 			factor = 1
-# 		}
-# 	}
-# 	########################################################################################################################
-# 	##################################################### NEXT STEP ########################################################
-# 	########################################################################################################################
-# 	focus = {
-# 		id = ERI_the_next_logical_step
-# 		icon = GFX_WIP_focus
-# 		cost = 5
-# 		x = 15
-# 		y = 12
-		
-# 		available_if_capitulated = yes
-# 		prerequisite = {
-# 			focus = ERI_deals_with_sorosubb
-# 			focus = ERI_rip_sullust_apart
-# 		}
-# 		completion_reward = {
-# 		}
-		
+	focus = {
+		id = ERI_develop_utapau
+		icon = GFX_ERI_industry
+		x = 1
+		y = 1
+		cost = 6.5
 
-# 		ai_will_do = {
-# 			factor = 1
-# 		}
-# 	}
-# 	focus = {
-# 		id = a_robed_figure_appears
-# 		icon = GFX_WIP_focus
-# 		cost = 5
-# 		x = 15
-# 		y = 13
-		
-# 		available_if_capitulated = yes
-# 		prerequisite = {
-# 			focus = ERI_the_next_logical_step
-# 		}
-# 		completion_reward = {
-# 		}
-		
+		ai_will_do = {
+			base = 10
+		}
 
-# 		ai_will_do = {
-# 			factor = 1
-# 		}
-# 	}
-# 	focus = {
-# 		id = death_star_holocrons
-# 		icon = GFX_WIP_focus
-# 		cost = 5
-# 		x = 15
-# 		y = 14
+		relative_position_id = ERI_improved_city_planning
+		prerequisite = { 
+			focus = ERI_improved_city_planning
+		}
 		
-# 		available_if_capitulated = yes
-# 		prerequisite = {
-# 			focus = ERI_the_next_logical_step
-# 		}
-# 		completion_reward = {
-# 		}
-		
+		available = {
+			owns_state = 394
+			custom_trigger_tooltip = {
+				tooltip = tt_eri_money_200
+				check_variable = { currency_amount^primary_currency > 200 }
+			}
+		}
 
-# 		ai_will_do = {
-# 			factor = 1
-# 		}
-# 	}
-# 	focus = {
-# 		id = sith_research_labs
-# 		icon = GFX_WIP_focus
-# 		cost = 5
-# 		x = 15
-# 		y = 15
-		
-# 		available_if_capitulated = yes
-# 		prerequisite = {
-# 			focus = ERI_the_next_logical_step
-# 		}
-# 		completion_reward = {
-# 		}
-		
+		completion_reward = {
+			108 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+				add_manpower = 500000
+			}
+			394 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+				add_manpower = 500000
+			}
+			custom_effect_tooltip = minus200credits_tt
+			add_to_variable = {currency_amount^primary_currency = -200}
+		}
+	}
 
-# 		ai_will_do = {
-# 			factor = 1
-# 		}
-# 	}
-# 	focus = {
-# 		id = reconstruct_sullust
-# 		icon = GFX_WIP_focus
-# 		cost = 5
-# 		x = 13
-# 		y = 16
-		
-# 		available_if_capitulated = yes
-# 		prerequisite = {
-# 			focus = ERI_the_next_logical_step
-# 		}
-# 		completion_reward = {
-# 		}
-		
+	focus = {
+		id = ERI_the_dockyards_of_sluis_van
+		icon = GFX_ERI_industry
+		x = 1
+		y = 1
+		cost = 6.5
 
-# 		ai_will_do = {
-# 			factor = 1
-# 		}
-# 	}
-# 	focus = {
-# 		id = fortify_our_new_planet
-# 		icon = GFX_WIP_focus
-# 		cost = 5
-# 		x = 13
-# 		y = 17
-		
-# 		available_if_capitulated = yes
-# 		prerequisite = {
-# 			focus = ERI_the_next_logical_step
-# 		}
-# 		completion_reward = {
-# 		}
-		
+		ai_will_do = {
+			base = 10
+		}
 
-# 		ai_will_do = {
-# 			factor = 1
-# 		}
-# 	}
-# 	focus = {
-# 		id = librilise_parts_of_society
-# 		icon = GFX_WIP_focus
-# 		cost = 5
-# 		x = 17
-# 		y = 16
+		relative_position_id = ERI_develop_bith
+		prerequisite = { 
+			focus = ERI_develop_bith
+		}
+		prerequisite = { 
+			focus = ERI_develop_utapau
+		}
+		
+		available = {
+			owns_state = 339
+			custom_trigger_tooltip = {
+				tooltip = tt_eri_money_375
+				check_variable = { currency_amount^primary_currency > 375 }
+			}
+		}
+
+		completion_reward = {
+			custom_effect_tooltip = minus375credits_tt
+			add_to_variable = {currency_amount^primary_currency = -375}
+			add_ideas = ERI_dockyards
+			339 = {
+				add_extra_state_shared_building_slots = 3
+				add_building_construction = {
+					type = dockyard
+					level = 3
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = ERI_invest_in_research
+		icon = GFX_ERI_industry_green
+		x = -3
+		y = 1
+		cost = 6.5
+
+		ai_will_do = {
+			base = 10
+		}
+
+		relative_position_id = ERI_the_eriadu_economy
+		prerequisite = { 
+			focus = ERI_the_eriadu_economy
+		}
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = tt_eri_money_20
+				check_variable = { currency_amount^primary_currency > 20 }
+			}
+		}
+
+		completion_reward = {
+			add_timed_idea = {
+				idea = ERI_research
+				days = 240
+			}
+			add_to_variable = {currency_amount^primary_currency = -20}
+			custom_effect_tooltip = minus20credits_tt
+			available = {
+			custom_trigger_tooltip = {
+				tooltip = tt_eri_money_20
+				check_variable = { currency_amount^primary_currency > 20 }
+			}
+		}
+		}
+	}
+
+	focus = {
+		id = ERI_establish_research_nexus
+		icon = GFX_ERI_industry_green
+		x = -1
+		y = 1
+		cost = 6.5
+
+		ai_will_do = {
+			base = 10
+		}
+
+		relative_position_id = ERI_invest_in_research
+		prerequisite = { 
+			focus = ERI_invest_in_research
+		}
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = tt_eri_money_125
+				check_variable = { currency_amount^primary_currency > 125 }
+			}
+		}
+
+		completion_reward = {
+			add_research_slot = 1
+			add_to_variable = {currency_amount^primary_currency = -125}
+			custom_effect_tooltip = minus125credits_tt
+		}
+	}
+
+	focus = {
+		id = ERI_droid_engineering_methods
+		icon = GFX_ERI_industry_green
+		x = -1
+		y = 1
+		cost = 6.5
+
+		ai_will_do = {
+			base = 10
+		}
+
+		relative_position_id = ERI_establish_research_nexus
+		prerequisite = { 
+			focus = ERI_establish_research_nexus
+		}
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = tt_eri_money_50
+				check_variable = { currency_amount^primary_currency > 50 }
+			}
+		}
+
+		completion_reward = {
+			104 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+			add_ideas = ERI_construction
+			add_to_variable = {currency_amount^primary_currency = -50}
+			custom_effect_tooltip = minus50credits_tt
+		}
+	}
+
+	focus = {
+		id = ERI_electronics_optimization
+		icon = GFX_ERI_industry_green
+		x = 1
+		y = 1
+		cost = 6.5
+
+		ai_will_do = {
+			base = 10
+		}
+
+		relative_position_id = ERI_establish_research_nexus
+		prerequisite = { 
+			focus = ERI_establish_research_nexus
+		}
+		available = {
+			
+		}
+
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 0.5
+				uses = 2
+				category = electronics
+			}
+		}
+	}
+
+	focus = {
+		id = ERI_establish_research_nexus2
+		icon = GFX_ERI_industry_green
+		x = -1
+		y = 3
+		cost = 6.5
+
+		ai_will_do = {
+			base = 10
+		}
+
+		relative_position_id = ERI_invest_in_research
+		prerequisite = { 
+			focus = ERI_droid_engineering_methods
+		}
+		prerequisite = { 
+			focus = ERI_electronics_optimization
+		}
+		available = {
+			num_of_factories > 40
+			custom_trigger_tooltip = {
+				tooltip = tt_eri_money_375
+				check_variable = { currency_amount^primary_currency > 375 }
+			}
+		}
+
+		completion_reward = {
+			add_research_slot = 1
+			add_to_variable = {currency_amount^primary_currency = -375}
+			custom_effect_tooltip = minus375credits_tt
+		}
+	}
+
+	focus = {
+		id = ERI_one_for_my_baby
+		icon = GFX_ERI_industry_grey
+		x = 0
+		y = 1
+		cost = 6.5
+
+		ai_will_do = {
+			base = 10
+		}
+
+		relative_position_id = ERI_private_enterprises
+		prerequisite = { 
+			focus = ERI_establish_research_nexus2
+		}
+		prerequisite = { 
+			focus = ERI_durasteel_forging
+		}
+		prerequisite = { 
+			focus = ERI_private_enterprises
+		}
+		prerequisite = { 
+			focus = ERI_rhydonium_deposits
+		}
+		prerequisite = { 
+			focus = ERI_the_dockyards_of_sluis_van
+		}
+		
+		available = {
+			has_country_flag = ERI_alive_girl
+			has_country_leader = {
+				name = "Sander Delvardus" ruling_only = yes
+			}
+			custom_trigger_tooltip = {
+				tooltip = tt_eri_money_1000
+				check_variable = { currency_amount^primary_currency > 1000 }
+			}
+		}
+
+		completion_reward = {
+			add_to_variable = {currency_amount^primary_currency = -1000}
+			custom_effect_tooltip = minus1000credits_tt
+			ERI = {
+				country_event = { id = eriadu.9 days = 2 }
+			}
+		}
+	}
+
+	focus = {
+		id = ERI_traditions_of_the_empire
+		icon = GFX_ERI_stormtrooper
+		x = 40
+		y = 0
+		cost = 6.5
+
+		ai_will_do = {
+			base = 10
+		}
+
 	
-# 		available_if_capitulated = yes
-# 		prerequisite = {
-# 			focus = ERI_the_next_logical_step
-# 		}
-# 		completion_reward = {
-# 		}
-		
+		available = {
+			OR = {
+				has_country_flag = ERI_alive_girl
+				has_country_flag = ERI_sander_dead
+			}
+		}
 
-# 		ai_will_do = {
-# 			factor = 1
-# 		}
-# 	}
-# 	focus = {
-# 		id = take_in_alien_researchers
-# 		icon = GFX_WIP_focus
-# 		cost = 5
-# 		x = 17
-# 		y = 17
-		
-# 		available_if_capitulated = yes
-# 		prerequisite = {
-# 			focus = ERI_the_next_logical_step
-# 		}
-# 		completion_reward = {
-# 		}
-		
+		completion_reward = {
+			army_experience = 50
+		}
+	}
 
-# 		ai_will_do = {
-# 			factor = 1
-# 		}
-# 	}
-# 	focus = {
-# 		id = the_last_steps
-# 		icon = GFX_WIP_focus
-# 		cost = 5
-# 		x = 15
-# 		y = 18
-		
-# 		available_if_capitulated = yes
-# 		prerequisite = {
-# 			focus = ERI_the_next_logical_step
-# 		}
-# 		completion_reward = {
-# 		}
-		
+	focus = {
+		id = ERI_weapons_research
+		icon = GFX_ERI_stormtrooper
+		x = -3
+		y = 1
+		cost = 6.5
 
-# 		ai_will_do = {
-# 			factor = 1
-# 		}
-# 	}
-# 	focus = {
-# 		id = time_of_unknown_consequences
-# 		icon = GFX_WIP_focus
-# 		cost = 5
-# 		x = 15
-# 		y = 19
+		ai_will_do = {
+			base = 10
+		}
+		relative_position_id = ERI_traditions_of_the_empire
+		prerequisite = { 
+			focus = ERI_traditions_of_the_empire
+		}
 		
-# 		available_if_capitulated = yes
-# 		prerequisite = {
-# 			focus = ERI_the_next_logical_step
-# 		}
-# 		completion_reward = {
-# 		}
-		
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 1.0
+				uses = 1
+				category = infantry_weapons
+			}
+		}
+	}
 
-# 		ai_will_do = {
-# 			factor = 1
-# 		}
-# 	}
-# }
+	focus = {
+		id = ERI_support_research
+		icon = GFX_ERI_stormtrooper
+		x = -1
+		y = 1
+		cost = 6.5
+
+		ai_will_do = {
+			base = 10
+		}
+		relative_position_id = ERI_traditions_of_the_empire
+		prerequisite = { 
+			focus = ERI_traditions_of_the_empire
+		}
+		
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 1.0
+				uses = 1
+				category = support_tech
+			}
+		}
+	}
+
+	focus = {
+		id = ERI_vehicle_research
+		icon = GFX_ERI_stormtrooper
+		x = 1
+		y = 1
+		cost = 6.5
+
+		ai_will_do = {
+			base = 10
+		}
+		relative_position_id = ERI_traditions_of_the_empire
+		prerequisite = { 
+			focus = ERI_traditions_of_the_empire
+		}
+		
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 1.0
+				uses = 1
+				category = armoredvehicle
+			}
+		}
+	}
+
+	focus = {
+		id = ERI_aircraft_research
+		icon = GFX_ERI_stormtrooper
+		x = 3
+		y = 1
+		cost = 6.5
+
+		ai_will_do = {
+			base = 10
+		}
+		relative_position_id = ERI_traditions_of_the_empire
+		prerequisite = { 
+			focus = ERI_traditions_of_the_empire
+		}
+		
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 1.0
+				uses = 1
+				category = starfighter
+			}
+		}
+	}
+
+	focus = {
+		id = ERI_improved_production_methods
+		icon = GFX_ERI_stormtrooper
+		x = 1
+		y = 1
+		cost = 6.5
+
+		ai_will_do = {
+			base = 10
+		}
+		relative_position_id = ERI_weapons_research
+		prerequisite = { 
+			focus = ERI_weapons_research
+		}
+		prerequisite = { 
+			focus = ERI_support_research
+		}
+		
+		completion_reward = {
+			add_ideas = ERI_weapon_production
+		}
+	}
+
+	focus = {
+		id = ERI_quality_vehicles
+		icon = GFX_ERI_stormtrooper
+		x = 1
+		y = 1
+		cost = 6.5
+
+		ai_will_do = {
+			base = 10
+		}
+		relative_position_id = ERI_vehicle_research
+		prerequisite = { 
+			focus = ERI_vehicle_research
+		}
+		prerequisite = { 
+			focus = ERI_aircraft_research
+		}
+		
+		completion_reward = {
+			add_ideas = ERI_vehicle_production
+		}
+	}
+
+	focus = {
+		id = ERI_learning_from_our_mistakes
+		icon = GFX_ERI_stormtrooper
+		x = 4
+		y = 1
+		cost = 6.5
+
+		ai_will_do = {
+			base = 10
+		}
+		relative_position_id = ERI_vehicle_research
+		prerequisite = { 
+			focus = ERI_aircraft_research
+		}
+		
+		completion_reward = {
+			remove_ideas = ERI_failed_tie_program
+		}
+	}
+
+	focus = {
+		id = ERI_a_force_to_be_reckoned_with
+		icon = GFX_ERI_stormtrooper
+		x = -2
+		y = 1
+		cost = 6.5
+
+		ai_will_do = {
+			base = 10
+		}
+		relative_position_id = ERI_quality_vehicles
+		prerequisite = { 
+			focus = ERI_improved_production_methods
+		}
+		prerequisite = { 
+			focus = ERI_quality_vehicles
+		}
+		
+		completion_reward = {
+			add_ideas = ERI_a_force_to_be_reckoned_with
+		}
+	}
+
+	focus = {
+		id = ERI_reorganize_the_fleet
+		icon = GFX_ERI_star_destroyer2
+		x = 50
+		y = 0
+		cost = 6.5
+
+		ai_will_do = {
+			base = 10
+		}
+
+	
+		available = {
+			OR = {
+				has_country_flag = ERI_alive_girl
+				has_country_flag = ERI_sander_dead
+			}
+		}
+
+		completion_reward = {
+			navy_experience = 50
+		}
+	}
+
+	focus = {
+		id = ERI_perks_of_being_an_imperial
+		icon = GFX_ERI_star_destroyer2
+		x = -2
+		y = 1
+		cost = 6.5
+
+		ai_will_do = {
+			base = 10
+		}
+		relative_position_id = ERI_reorganize_the_fleet
+		prerequisite = { 
+			focus = ERI_reorganize_the_fleet
+		}
+		
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 0.5
+				uses = 1
+				category = dd_tech
+			}
+			add_tech_bonus = {
+				bonus = 0.5
+				uses = 1
+				category = cl_tech
+			}
+			ERI = {
+				country_event = { id = eriadu.16 days = 8 random_days = 2 }
+			}
+		}
+	}
+
+	focus = {
+		id = ERI_our_technology
+		icon = GFX_ERI_star_destroyer2
+		x = -1
+		y = 1
+		cost = 6.5
+
+		ai_will_do = {
+			base = 10
+		}
+		relative_position_id = ERI_perks_of_being_an_imperial
+		prerequisite = { 
+			focus = ERI_perks_of_being_an_imperial
+		}
+		available = {
+			has_country_flag = ERI_technology_chosen
+		}
+		
+		completion_reward = {
+			add_ideas = ERI_superior_tech
+		}
+	}
+
+	focus = {
+		id = ERI_our_numbers
+		icon = GFX_ERI_star_destroyer2
+		x = 1
+		y = 1
+		cost = 6.5
+
+		ai_will_do = {
+			base = 10
+		}
+		relative_position_id = ERI_perks_of_being_an_imperial
+		prerequisite = { 
+			focus = ERI_perks_of_being_an_imperial
+		}
+		available = {
+			has_country_flag = ERI_numbers_chosen
+		}
+		
+		completion_reward = {
+			add_ideas = ERI_greater_numbers
+		}
+	}
+
+	focus = {
+		id = ERI_our_academy
+		icon = GFX_ERI_star_destroyer2
+		x = 3
+		y = 1
+		cost = 6.5
+
+		ai_will_do = {
+			base = 10
+		}
+		relative_position_id = ERI_perks_of_being_an_imperial
+		prerequisite = { 
+			focus = ERI_perks_of_being_an_imperial
+		}
+		available = {
+			has_country_flag = ERI_academy_chosen
+		}
+		
+		completion_reward = {
+			add_ideas = ERI_better_academies
+		}
+	}
+
+	focus = {
+		id = ERI_a_dockyard_in_every_city
+		icon = GFX_ERI_star_destroyer2
+		x = 2
+		y = 1
+		cost = 6.5
+
+		ai_will_do = {
+			base = 10
+		}
+		relative_position_id = ERI_reorganize_the_fleet
+		prerequisite = { 
+			focus = ERI_reorganize_the_fleet
+		}
+		
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = tt_eri_money_20
+				check_variable = { currency_amount^primary_currency > 20 }
+			}
+		}
+		
+		completion_reward = {
+			add_to_variable = {currency_amount^primary_currency = -20}
+			custom_effect_tooltip = minus20credits_tt
+			add_ideas = ERI_dockyards_in_every_city
+			104 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = dockyard
+					level = 1
+					instant_build = yes
+				}
+			}
+			430 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = dockyard
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+}

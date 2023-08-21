@@ -1,76 +1,307 @@
-ERI_national_missions = {
-	fight_on_our_turf = {
-		allowed = {tag = ERI}
-		selectable_mission = no
-		is_good = no
-		days_mission_timeout = 200
+ERI_insanity_category = {
+	
+	ERI_death_timer = {
+
+		priority = 10
+
+		icon = generic_ignite_civil_war
+
 		available = {
-			606 = {
-				coastal_bunker > 6
-			}
-			582 = {
-				coastal_bunker > 6
-			}
-			604 = {
-				coastal_bunker > 8
+			hidden_trigger = { always = no }
+		}
+
+		days_mission_timeout = 150
+
+		fire_only_once = yes
+
+		activation = {
+			has_country_flag = ERI_started_insanity
+		}
+
+		visible = {
+			NOT = {
+				OR = {
+					has_country_flag = ERI_alive_girl
+					has_country_flag = ERI_sander_dead
+					has_country_flag = ERI_dead_girl
+				}
 			}
 		}
-		activation ={
-			always = no
-		}
+
+		cancel_if_not_visible = yes
+
+		is_good = yes
+
 		timeout_effect = {
-			add_stability = -0.2
-			add_political_power = -40
-		}
-		complete_effect = {
-			add_stability = 0.1
-			add_political_power = 100
+			set_country_flag = ERI_dead_girl
 		}
 	}
-}
-ERI_resurrection_madness = {  ## Every couple months event fires, decide how to deal with mission stalling
-	support_the_mission_with_weapons = {
-		allowed = {tag = ERI}
-		selectable_mission = yes
-		is_good = yes
-		activation ={
-			has_country_flag = mission_stalled
+
+	ERI_insanity_timer = {
+
+		priority = 10
+
+		icon = generic_ignite_civil_war
+
+		available = {
+			hidden_trigger = { always = no }
 		}
-		complete_effect = {
-			add_stability = 0.1
-			add_political_power = 100
+
+		days_mission_timeout = 35
+
+		fire_only_once = yes
+
+		activation = {
+			has_country_flag = ERI_started_insanity
 		}
-	}
-	support_the_mission_with_civilian_factories = {
-		allowed = {tag = ERI}
-		selectable_mission = yes
-		is_good = yes
-		activation ={
-			has_country_flag = mission_stalled
-		}
-		complete_effect = {
-			add_stability = 0.1
-			add_political_power = 100
-		}
-	}
-	support_the_mission_with_mercs = { ## money
-		allowed = {tag = ERI}
-		selectable_mission = yes
-		is_good = yes
-		activation ={
-			has_country_flag = mission_stalled
-		}
-		complete_effect = {
-			add_stability = 0.1
-			add_political_power = 100
-		}
-	}
-	open_maddness_interface = {
-		allowed = {tag = ERI}
-		complete_effect = {
-			ROOT = {
-				set_country_flag = ERI_maddness_interface_open
+
+		visible = {
+			NOT = {
+				OR = {
+					has_country_flag = ERI_alive_girl
+					has_country_flag = ERI_sander_dead
+				}
 			}
 		}
+
+		cancel_if_not_visible = yes
+
+		is_good = yes
+
+		timeout_effect = {
+			activate_mission = ERI_insanity_timer
+			custom_effect_tooltip = ERI_insanity_increase
+			add_to_variable = { 
+				var = global.ERIInsanity
+				value = 5
+			}
+			ERI_influence_pulse = yes
+		}
 	}
-}
+
+	ERI_increase_cure_efforts = {
+
+		icon = GFX_decision_eng_trade_unions_demand
+
+		cost = 75
+
+		days_re_enable = 100
+
+		ai_will_do = {
+			base = 50
+			modifier = {
+				add = 50
+				check_variable = { ERINoProgressInfluence > 35 }
+			}
+			modifier = {
+				add = 100
+				check_variable = { ERINoProgressInfluence > 75 }
+			}
+		}
+
+		visible = {
+			NOT = {
+				OR = {
+					has_country_flag = ERI_alive_girl
+					has_country_flag = ERI_sander_dead
+					has_country_flag = ERI_dead_girl
+				}
+			}
+		}
+
+		complete_effect = {
+			custom_effect_tooltip = ERI_cure_increase_tt
+			add_to_variable = { 
+				var = global.ERIProgressInfluence 
+				value = 12
+			}
+			add_to_variable = { 
+				var = global.ERINoProgressInfluence
+				value = -12
+			}
+			custom_effect_tooltip = ERI_insanity_increase
+			add_to_variable = { 
+				var = global.ERIInsanity
+				value = 5
+			}
+			ERI_influence_pulse = yes
+		}
+	}
+
+	ERI_divert_research_efforts = {
+
+		icon = GFX_decision_eng_trade_unions_demand
+
+		cost = 50
+
+		days_re_enable = 50
+		
+		days_remove = 28
+
+        ai_will_do = {
+			base = 50
+			modifier = {
+				add = 50
+				check_variable = { ERINoProgressInfluence > 35 }
+			}
+			modifier = {
+				add = 100
+				check_variable = { ERINoProgressInfluence > 75 }
+			}
+			modifier = {
+				factor = 2
+				SOV_is_opposition = yes
+			}
+		}
+
+		visible = {
+			NOT = {
+				OR = {
+					has_country_flag = ERI_alive_girl
+					has_country_flag = ERI_sander_dead
+					has_country_flag = ERI_dead_girl
+				}
+			}
+		}
+		
+		modifier = {
+			research_speed_factor = -0.5
+		}
+
+		complete_effect = {
+			custom_effect_tooltip = ERI_cure_increase_tt
+			add_to_variable = { 
+				var = global.ERIProgressInfluence 
+				value = 10
+			}
+			add_to_variable = { 
+				var = global.ERINoProgressInfluence
+				value = -10
+			}
+			ERI_influence_pulse = yes
+		}
+	}
+
+	ERI_hire_private_research_sectors = {
+
+		icon = GFX_decision_eng_trade_unions_demand
+
+		cost = 50
+
+		days_re_enable = 50
+		
+		days_remove = 28
+
+		custom_cost_trigger = {
+            has_political_power > 49
+			check_variable = { currency_amount^primary_currency > 9.9 }
+        }
+        custom_cost_text = ERI_research_sector_cost
+
+		visible = {
+			NOT = {
+				OR = {
+					has_country_flag = ERI_alive_girl
+					has_country_flag = ERI_sander_dead
+					has_country_flag = ERI_dead_girl
+				}
+			}
+		}
+
+        ai_will_do = {
+			base = 50
+			modifier = {
+				add = 50
+				check_variable = { ERINoProgressInfluence > 35 }
+			}
+			modifier = {
+				add = 100
+				check_variable = { ERINoProgressInfluence > 75 }
+			}
+			modifier = {
+				factor = 2
+				SOV_is_opposition = yes
+			}
+		}
+		
+		modifier = {
+			consumer_goods_factor = 0.1
+		}
+
+		complete_effect = {
+			custom_effect_tooltip = ERI_cure_increase_tt
+			add_to_variable = { 
+				var = global.ERIProgressInfluence 
+				value = 10
+			}
+			add_to_variable = { 
+				var = global.ERINoProgressInfluence
+				value = -10
+			}
+			ERI_influence_pulse = yes
+		}
+	}
+
+	ERI_take_a_vacation = {
+
+		icon = GFX_decision_eng_trade_unions_demand
+
+		cost = 30
+
+		days_re_enable = 30
+		
+		days_remove = 7
+
+        ai_will_do = {
+			base = 50
+			modifier = {
+				add = 50
+				check_variable = { ERINoProgressInfluence > 35 }
+			}
+			modifier = {
+				add = 100
+				check_variable = { ERINoProgressInfluence > 75 }
+			}
+			modifier = {
+				factor = 2
+				SOV_is_opposition = yes
+			}
+		}
+
+		available = {
+			has_country_flag = ERI_vacation_flag
+		}
+
+		visible = {
+			NOT = {
+				OR = {
+					has_country_flag = ERI_alive_girl
+					has_country_flag = ERI_sander_dead
+					has_country_flag = ERI_dead_girl
+				}
+			}
+		}
+		
+		modifier = {
+			political_power_factor = -0.5
+		}
+
+		remove_effect = {
+			custom_effect_tooltip = ERI_cure_decrease_tt
+			add_to_variable = { 
+				var = global.ERIProgressInfluence 
+				value = -10
+			}
+			add_to_variable = { 
+				var = global.ERINoProgressInfluence
+				value = 10
+			}
+			custom_effect_tooltip = ERI_insanity_decrease
+			add_to_variable = { 
+				var = global.ERIInsanity
+				value = -15
+			}
+			ERI_influence_pulse = yes
+		}
+	}
+}		
