@@ -769,7 +769,20 @@ focus_tree = {
 			factor = 1
 		}
 		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus KYK_crusade_against_slavery"
+			if = {
+				every_country = {
+					limit = {
+						has_idea = slave_based_economy
+					}
+					KYK = {
+						create_wargoal = {
+							type = annex_everything
+							target = PREV
+							expire = 0
+						}
+					}
+				}
+			}
 		}
 		relative_position_id = KYK_the_white_claws
 		prerequisite = { focus = KYK_the_white_claws }
