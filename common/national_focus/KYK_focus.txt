@@ -158,7 +158,7 @@ focus_tree = {
 
 	focus = {
 		id = KYK_sawa_clan
-		icon = GFX_KYK_Frame
+		icon = GFX_KYK_sawa
 		cost = 7.2
 		x = 0
 		y = 1
@@ -174,7 +174,7 @@ focus_tree = {
 
 	focus = {
 		id = KYK_kaapauku_clan
-		icon = GFX_KYK_Frame
+		icon = GFX_KYK_kaapauku
 		cost = 7.2
 		x = 0
 		y = 1
@@ -190,7 +190,7 @@ focus_tree = {
 
 	focus = {
 		id = KYK_strongfist_clan
-		icon = GFX_KYK_Frame
+		icon = GFX_KYK_strongfist
 		cost = 7.2
 		x = 2
 		y = 1
@@ -207,7 +207,7 @@ focus_tree = {
 
 	focus = {
 		id = KYK_kachirho_clan
-		icon = GFX_KYK_Frame
+		icon = GFX_KYK_kachiro
 		cost = 7.2
 		x = 0
 		y = 1
@@ -223,7 +223,7 @@ focus_tree = {
 
 	focus = {
 		id = KYK_the_attichitcuk_clan
-		icon = GFX_KYK_Frame
+		icon = GFX_KYK_attichitcuk_clan
 		cost = 7.2
 		x = -2
 		y = 1
@@ -248,7 +248,7 @@ focus_tree = {
 
 	focus = {
 		id = KYK_chevappa_clan
-		icon = GFX_KYK_Frame
+		icon = GFX_KYK_chevappa
 		cost = 7.2
 		x = 0
 		y = 1
@@ -264,7 +264,7 @@ focus_tree = {
 
 	focus = {
 		id = KYK_puurrgerr_clan
-		icon = GFX_KYK_Frame
+		icon = GFX_KYK_puurgerr
 		cost = 7.2
 		x = 1
 		y = 1
@@ -281,7 +281,7 @@ focus_tree = {
 
 	focus = {
 		id = KYK_gkrur_clan
-		icon = GFX_KYK_Frame
+		icon = GFX_KYK_gkrur
 		cost = 7.2
 		x = 1
 		y = 1
@@ -298,7 +298,7 @@ focus_tree = {
 
 	focus = {
 		id = KYK_hardcore_clan
-		icon = GFX_KYK_Frame
+		icon = GFX_KYK_tvrrdko
 		cost = 7.2
 		x = 0
 		y = 1
@@ -464,7 +464,10 @@ focus_tree = {
 			factor = 1
 		}
 		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus KYK_a_planetary_military"
+			swap_ideas = {
+				remove_idea = tribal_military
+				add_idea = all_species_allowed
+			}
 		}
 		relative_position_id = KYK_clan_based_military
 		prerequisite = { focus = KYK_clan_based_military }
@@ -574,7 +577,7 @@ focus_tree = {
 
 	focus = {
 		id = KYK_the_imperial_refinery
-		icon = GFX_KYK_Frame
+		icon = GFX_KYK_the_imperial_refinery
 		cost = 7.2
 		x = 18
 		y = 0
@@ -596,6 +599,8 @@ focus_tree = {
 			factor = 1
 		}
 		completion_reward = {
+			custom_effect_tooltip = minus100credits_tt
+			subtract_from_variable = { currency_amount^primary_currency = 100 }
 			remove_ideas = imperial_refinery
 			add_timed_idea = {
 				idea = imperial_refinery
@@ -617,6 +622,8 @@ focus_tree = {
 			factor = 1
 		}
 		completion_reward = {
+			custom_effect_tooltip = minus500credits_tt
+			subtract_from_variable = { currency_amount^primary_currency = 500 }
 			swap_ideas = {
 				remove_idea = imperial_refinery
 				add_idea = imperial_refinery_bigger
@@ -653,7 +660,11 @@ focus_tree = {
 			factor = 1
 		}
 		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus KYK_dispose_of_the_chemicals"
+			custom_effect_tooltip = minus100credits_tt
+			subtract_from_variable = { currency_amount^primary_currency = 100 }
+			273 = {
+				remove_dynamic_modifier = { modifier = KYK_chemical_spillage }
+			}
 		}
 		relative_position_id = KYK_dismantle_it
 		prerequisite = { focus = KYK_dismantle_it }
@@ -669,10 +680,15 @@ focus_tree = {
 			factor = 1
 		}
 		completion_reward = {
+			custom_effect_tooltip = minus300credits_tt
+			subtract_from_variable = { currency_amount^primary_currency = 300 }
 			remove_idea = imperial_refinery_bigger
 			add_timed_idea = {
 				idea = imperial_refinery_bigger
 				days = 180
+			}
+			273 = {
+				remove_dynamic_modifier = { modifier = KYK_chemical_spillage }
 			}
 		}
 		relative_position_id = KYK_reopen_it
@@ -711,7 +727,7 @@ focus_tree = {
 
 	focus = {
 		id = KYK_a_new_leader
-		icon = GFX_KYK_Frame
+		icon = GFX_KYK_a_new_leader
 		cost = 7.2
 		x = 0
 		y = 1
@@ -926,7 +942,7 @@ focus_tree = {
 
 	focus = {
 		id = KYK_the_white_claws
-		icon = GFX_KYK_Frame
+		icon = GFX_KYK_white_claws
 		cost = 7.2
 		x = 0
 		y = 1
@@ -942,7 +958,7 @@ focus_tree = {
 
 	focus = {
 		id = KYK_ties_with_the_smugglers
-		icon = GFX_KYK_Frame
+		icon = GFX_KYK_ties_with_smugglers
 		cost = 7.2
 		x = -1
 		y = 1
@@ -1015,6 +1031,8 @@ focus_tree = {
 		}
 		prerequisite = { focus = KYK_rebuild_what_was_lost }
 		completion_reward = {
+			custom_effect_tooltip = minus100credits_tt
+			subtract_from_variable = { currency_amount^primary_currency = 100 }
 			53 = {
 				add_extra_state_shared_building_slots = 2
 				add_building_construction = {
@@ -1180,7 +1198,7 @@ focus_tree = {
 
 	focus = {
 		id = KYK_the_great_enemy
-		icon = GFX_KYK_Frame
+		icon = GFX_KYK_the_great_enemy
 		cost = 7.2
 		x = 0
 		y = 1
@@ -1385,6 +1403,8 @@ focus_tree = {
 			factor = 1
 		}
 		completion_reward = {
+			custom_effect_tooltip = minus200credits_tt
+			subtract_from_variable = { currency_amount^primary_currency = 200 }
 			273 = {
 				add_extra_state_shared_building_slots = 1
 				add_building_construction = {
@@ -1412,7 +1432,7 @@ focus_tree = {
 	}
 	focus = {
 		id = KYK_empowered_tojj_clan
-		icon = GFX_KYK_Frame
+		icon = GFX_KYK_tojj
 		cost = 7.2
 		x = -3
 		y = 2
@@ -1424,6 +1444,7 @@ focus_tree = {
 				remove_idea = tojj_neutral
 				add_idea = tojj_loyal
 			}
+			custom_effect_tooltip = tojj_clan_tt
 		}
 		relative_position_id = KYK_toyevvuk
 		prerequisite = { focus = KYK_toyevvuk }
