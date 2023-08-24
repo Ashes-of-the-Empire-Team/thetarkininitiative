@@ -13,7 +13,36 @@ scripted_gui = {
 		}
 		
 		effects = {
-
+			building_1_click = {
+				ROOT = {
+					if = {
+						limit = {
+							has_country_flag = building_1_open
+						}
+						clr_country_flag = building_2_open
+						clr_country_flag = building_1_open
+					}
+					else = {
+						set_country_flag = building_1_open
+						clr_country_flag = building_2_open
+					}
+				}
+			}
+			building_2_click = {
+				ROOT = {
+					if = {
+						limit = {
+							has_country_flag = building_2_open
+						}
+						clr_country_flag = building_2_open
+						clr_country_flag = building_1_open
+					}
+					else = {
+						set_country_flag = building_2_open
+						clr_country_flag = building_1_open
+					}
+				}
+			}
 		}
 		
 		triggers = {
@@ -24,10 +53,10 @@ scripted_gui = {
 
 		properties = {
 			building_1 = {
-				frame = building_1_frame
+				image = "[GetBuilding1icon]"
 			}
 			building_2 = {
-				frame = building_2_frame
+				image = "[GetBuilding2icon]"
 			}
 		}
 
@@ -58,10 +87,272 @@ scripted_gui = {
 		}
 		
 		effects = {
-
+			arms_corp1_click = {
+				if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_1_open
+						}
+					}
+					set_variable = { building_1 = 2 }
+				}
+				if = {
+					limit = { 
+						ROOT = {
+							has_country_flag = building_2_open
+						}
+					}
+					set_variable = { building_2 = 2 }
+				}
+			}
+			droid_corp1_click = {
+				if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_1_open
+						}
+					}
+					set_variable = { building_1 = 3 }
+				}
+				if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_2_open
+						}
+					}
+					set_variable = { building_2 = 3 }
+				}
+			}
+			shipyard_1_click = {
+				if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_1_open
+						}
+					}
+					set_variable = { building_1 = token:building_shipyard_1 }
+				}
+				if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_2_open
+						}
+					}
+					set_variable = { building_2 = token:building_shipyard_1 }
+				}
+			}
+			entertainment_corp1_click = {
+				if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_1_open
+						}
+					}
+					set_variable = { building_1 = 5 }
+				}
+				if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_2_open
+						}
+					}
+					set_variable = { building_2 = 5 }
+				}
+			}
+			pharma_corp1_click = {
+				if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_1_open
+						}
+					}
+					set_variable = { building_1 = 6 }
+				}
+				if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_2_open
+						}
+					}
+					set_variable = { building_2 = 6 }
+				}
+			}
+			resources_corp1_click = {
+				if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_1_open
+						}
+					}
+					set_variable = { building_1 = 7 }
+				}
+				if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_2_open
+						}
+					}
+					set_variable = { building_2 = 7 }
+				}
+			}
 		}
 		
 		triggers = {
+			arms_corp1_click_enabled = {
+				if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_1_open
+						}
+					}
+					NOT = {
+						check_variable = { building_1 = 2 }
+					}
+				}
+				else_if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_2_open
+						}
+					}
+					NOT = {
+						check_variable = { building_2 = 2 }
+					}
+				}
+			}
+			arms_corp2_click_enabled = {
+				check_variable = { building_1_lvl = 1 }
+				if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_1_open
+						}
+					}
+					NOT = {
+						check_variable = { building_1 = 2 }
+					}
+				}
+				else_if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_2_open
+						}
+					}
+					NOT = {
+						check_variable = { building_2 = 2 }
+					}
+				}
+			}
+			droid_corp1_click_enabled = {
+				if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_1_open
+						}
+					}
+					NOT = {
+						check_variable = { building_1 = 3 }
+					}
+				}
+				else_if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_2_open
+						}
+					}
+					NOT = {
+						check_variable = { building_2 = 3 }
+					}
+				}
+			}
+			shipyard_1_click_enabled = {
+				if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_1_open
+						}
+					}
+					NOT = {
+						check_variable = { building_1 = 4 }
+					}
+				}
+				else_if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_2_open
+						}
+					}
+					NOT = {
+						check_variable = { building_2 = 4 }
+					}
+				}
+			}
+			entertainment_corp1_click_enabled = {
+				if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_1_open
+						}
+					}
+					NOT = {
+						check_variable = { building_1 = 5 }
+					}
+				}
+				else_if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_2_open
+						}
+					}
+					NOT = {
+						check_variable = { building_2 = 5 }
+					}
+				}
+			}
+			pharma_corp1_click_enabled = {
+				if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_1_open
+						}
+					}
+					NOT = {
+						check_variable = { building_1 = 6 }
+					}
+				}
+				else_if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_2_open
+						}
+					}
+					NOT = {
+						check_variable = { building_2 = 6 }
+					}
+				}
+			}
+			resources_corp1_click_enabled = {
+				if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_1_open
+						}
+					}
+					NOT = {
+						check_variable = { building_1 = 7 }
+					}
+				}
+				else_if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_2_open
+						}
+					}
+					NOT = {
+						check_variable = { building_2 = 7 }
+					}
+				}
+			}
 			building_back_visible = {
 				#has_state_flag = senate_building
 			}
