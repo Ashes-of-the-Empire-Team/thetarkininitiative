@@ -70,18 +70,71 @@ scripted_gui = {
 		ai_weights = {
 		}
 	}
-	corporate_state_construction_screen = {
+	corporate_state_construction_screen_buttons = {
 	
 		context_type = selected_state_context
-		parent_window_token = selected_state_view
+		parent_window_token = corporate_state_construction_screen
 		
-		window_name = "corporate_state_construction_screen"
+		window_name = "corporate_state_construction_screen_buttons"
 		
 		visible = {
 			ROOT = {
 				OR = {
 					has_country_flag = building_1_open
 					has_country_flag = building_2_open
+				}
+			}
+		}
+		effects = {
+			navy_button_click = {
+				ROOT = {
+					set_country_flag = navy_buildings
+					clr_country_flag = military_buildings
+					clr_country_flag = government_buildings
+					clr_country_flag = economics_buildings
+				}
+			}
+			military_button_click = {
+				ROOT = {
+					set_country_flag = military_buildings
+					clr_country_flag = navy_buildings
+					clr_country_flag = government_buildings
+					clr_country_flag = economics_buildings
+				}
+			}
+			government_button_click = {
+				ROOT = {
+					set_country_flag = government_buildings
+					clr_country_flag = navy_buildings
+					clr_country_flag = military_buildings
+					clr_country_flag = economics_buildings
+				}
+			}
+			economic_button_click = {
+				ROOT = {
+					set_country_flag = economics_buildings
+					clr_country_flag = navy_buildings
+					clr_country_flag = military_buildings
+					clr_country_flag = government_buildings
+				}
+			}
+		}
+	}
+	corporate_state_construction_screen_navy = {
+	
+		context_type = selected_state_context
+		parent_window_token = selected_state_view
+		
+		window_name = "corporate_state_construction_screen_navy"
+		
+		visible = {
+			ROOT = {
+				AND = {
+					OR = {
+						has_country_flag = building_1_open
+						has_country_flag = building_2_open
+					}
+					has_country_flag = navy_buildings
 				}
 			}
 		}
@@ -368,6 +421,587 @@ scripted_gui = {
 		ai_weights = {
 		}
 	}
+	corporate_state_construction_screen_military = {
 	
+		context_type = selected_state_context
+		parent_window_token = selected_state_view
+		
+		window_name = "corporate_state_construction_screen_military"
+		
+		visible = {
+			ROOT = {
+				AND = {
+					OR = {
+						has_country_flag = building_1_open
+						has_country_flag = building_2_open
+					}
+					has_country_flag = military_buildings
+				}
+			}
+		}
+		
+		effects = {
+
+		}
+		
+		triggers = {
+			arms_corp1_click_enabled = {
+				if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_1_open
+						}
+					}
+					NOT = {
+						check_variable = { building_1 = 2 }
+					}
+				}
+				else_if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_2_open
+						}
+					}
+					NOT = {
+						check_variable = { building_2 = 2 }
+					}
+				}
+			}
+			arms_corp2_click_enabled = {
+				check_variable = { building_1_lvl = 1 }
+				if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_1_open
+						}
+					}
+					NOT = {
+						check_variable = { building_1 = 2 }
+					}
+				}
+				else_if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_2_open
+						}
+					}
+					NOT = {
+						check_variable = { building_2 = 2 }
+					}
+				}
+			}
+			droid_corp1_click_enabled = {
+				if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_1_open
+						}
+					}
+					NOT = {
+						check_variable = { building_1 = 3 }
+					}
+				}
+				else_if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_2_open
+						}
+					}
+					NOT = {
+						check_variable = { building_2 = 3 }
+					}
+				}
+			}
+			shipyard_1_click_enabled = {
+				if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_1_open
+						}
+					}
+					NOT = {
+						check_variable = { building_1 = 4 }
+					}
+				}
+				else_if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_2_open
+						}
+					}
+					NOT = {
+						check_variable = { building_2 = 4 }
+					}
+				}
+			}
+			entertainment_corp1_click_enabled = {
+				if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_1_open
+						}
+					}
+					NOT = {
+						check_variable = { building_1 = 5 }
+					}
+				}
+				else_if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_2_open
+						}
+					}
+					NOT = {
+						check_variable = { building_2 = 5 }
+					}
+				}
+			}
+			pharma_corp1_click_enabled = {
+				if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_1_open
+						}
+					}
+					NOT = {
+						check_variable = { building_1 = 6 }
+					}
+				}
+				else_if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_2_open
+						}
+					}
+					NOT = {
+						check_variable = { building_2 = 6 }
+					}
+				}
+			}
+			resources_corp1_click_enabled = {
+				if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_1_open
+						}
+					}
+					NOT = {
+						check_variable = { building_1 = 7 }
+					}
+				}
+				else_if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_2_open
+						}
+					}
+					NOT = {
+						check_variable = { building_2 = 7 }
+					}
+				}
+			}
+			building_back_visible = {
+				#has_state_flag = senate_building
+			}
+		}
+
+		ai_enabled = {
+            always = no
+		}
+
+		ai_check = {
+		}
+
+		ai_weights = {
+		}
+	}
+	corporate_state_construction_screen_government = {
+	
+		context_type = selected_state_context
+		parent_window_token = selected_state_view
+		
+		window_name = "corporate_state_construction_screen_government"
+		
+		visible = {
+			ROOT = {
+				AND = {
+					OR = {
+						has_country_flag = building_1_open
+						has_country_flag = building_2_open
+					}
+					has_country_flag = government_buildings
+				}
+			}
+		}
+		
+		effects = {
+
+		}
+		
+		triggers = {
+			arms_corp1_click_enabled = {
+				if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_1_open
+						}
+					}
+					NOT = {
+						check_variable = { building_1 = 2 }
+					}
+				}
+				else_if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_2_open
+						}
+					}
+					NOT = {
+						check_variable = { building_2 = 2 }
+					}
+				}
+			}
+			arms_corp2_click_enabled = {
+				check_variable = { building_1_lvl = 1 }
+				if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_1_open
+						}
+					}
+					NOT = {
+						check_variable = { building_1 = 2 }
+					}
+				}
+				else_if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_2_open
+						}
+					}
+					NOT = {
+						check_variable = { building_2 = 2 }
+					}
+				}
+			}
+			droid_corp1_click_enabled = {
+				if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_1_open
+						}
+					}
+					NOT = {
+						check_variable = { building_1 = 3 }
+					}
+				}
+				else_if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_2_open
+						}
+					}
+					NOT = {
+						check_variable = { building_2 = 3 }
+					}
+				}
+			}
+			shipyard_1_click_enabled = {
+				if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_1_open
+						}
+					}
+					NOT = {
+						check_variable = { building_1 = 4 }
+					}
+				}
+				else_if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_2_open
+						}
+					}
+					NOT = {
+						check_variable = { building_2 = 4 }
+					}
+				}
+			}
+			entertainment_corp1_click_enabled = {
+				if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_1_open
+						}
+					}
+					NOT = {
+						check_variable = { building_1 = 5 }
+					}
+				}
+				else_if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_2_open
+						}
+					}
+					NOT = {
+						check_variable = { building_2 = 5 }
+					}
+				}
+			}
+			pharma_corp1_click_enabled = {
+				if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_1_open
+						}
+					}
+					NOT = {
+						check_variable = { building_1 = 6 }
+					}
+				}
+				else_if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_2_open
+						}
+					}
+					NOT = {
+						check_variable = { building_2 = 6 }
+					}
+				}
+			}
+			resources_corp1_click_enabled = {
+				if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_1_open
+						}
+					}
+					NOT = {
+						check_variable = { building_1 = 7 }
+					}
+				}
+				else_if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_2_open
+						}
+					}
+					NOT = {
+						check_variable = { building_2 = 7 }
+					}
+				}
+			}
+			building_back_visible = {
+				#has_state_flag = senate_building
+			}
+		}
+
+		ai_enabled = {
+            always = no
+		}
+
+		ai_check = {
+		}
+
+		ai_weights = {
+		}
+	}
+	corporate_state_construction_screen_economic = {
+	
+		context_type = selected_state_context
+		parent_window_token = selected_state_view
+		
+		window_name = "corporate_state_construction_screen_economic"
+		
+		visible = {
+			ROOT = {
+				AND = {
+					OR = {
+						has_country_flag = building_1_open
+						has_country_flag = building_2_open
+					}
+					has_country_flag = economics_buildings
+				}
+			}
+		}
+		
+		effects = {
+
+		}
+		
+		triggers = {
+			arms_corp1_click_enabled = {
+				if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_1_open
+						}
+					}
+					NOT = {
+						check_variable = { building_1 = 2 }
+					}
+				}
+				else_if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_2_open
+						}
+					}
+					NOT = {
+						check_variable = { building_2 = 2 }
+					}
+				}
+			}
+			arms_corp2_click_enabled = {
+				check_variable = { building_1_lvl = 1 }
+				if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_1_open
+						}
+					}
+					NOT = {
+						check_variable = { building_1 = 2 }
+					}
+				}
+				else_if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_2_open
+						}
+					}
+					NOT = {
+						check_variable = { building_2 = 2 }
+					}
+				}
+			}
+			droid_corp1_click_enabled = {
+				if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_1_open
+						}
+					}
+					NOT = {
+						check_variable = { building_1 = 3 }
+					}
+				}
+				else_if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_2_open
+						}
+					}
+					NOT = {
+						check_variable = { building_2 = 3 }
+					}
+				}
+			}
+			shipyard_1_click_enabled = {
+				if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_1_open
+						}
+					}
+					NOT = {
+						check_variable = { building_1 = 4 }
+					}
+				}
+				else_if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_2_open
+						}
+					}
+					NOT = {
+						check_variable = { building_2 = 4 }
+					}
+				}
+			}
+			entertainment_corp1_click_enabled = {
+				if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_1_open
+						}
+					}
+					NOT = {
+						check_variable = { building_1 = 5 }
+					}
+				}
+				else_if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_2_open
+						}
+					}
+					NOT = {
+						check_variable = { building_2 = 5 }
+					}
+				}
+			}
+			pharma_corp1_click_enabled = {
+				if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_1_open
+						}
+					}
+					NOT = {
+						check_variable = { building_1 = 6 }
+					}
+				}
+				else_if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_2_open
+						}
+					}
+					NOT = {
+						check_variable = { building_2 = 6 }
+					}
+				}
+			}
+			resources_corp1_click_enabled = {
+				if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_1_open
+						}
+					}
+					NOT = {
+						check_variable = { building_1 = 7 }
+					}
+				}
+				else_if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_2_open
+						}
+					}
+					NOT = {
+						check_variable = { building_2 = 7 }
+					}
+				}
+			}
+			building_back_visible = {
+				#has_state_flag = senate_building
+			}
+		}
+
+		ai_enabled = {
+            always = no
+		}
+
+		ai_check = {
+		}
+
+		ai_weights = {
+		}
+	}
 }
 
