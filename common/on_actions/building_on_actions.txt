@@ -11,6 +11,137 @@ on_actions = {
 	}
 	on_state_control_changed = {
 		effect = {
+	#### BUILDING 1 CONTROLLER
+			## Controls state change ownership when buildings are involved, i.e. taking buildings benfits from the losing side and transferring them to the victor
+			FROM.FROM = {
+				if = {
+					limit = {
+						has_var = building_1
+					}
+					set_variable = {building_name_passer = building_1}
+				}
+			}
+			## Below grabs the building and enacts its removal effect on the country that lost the building
+			if = {
+				limit = {
+					has_variable = building_name_passer
+				}
+				if = {
+					limit = {
+						check_variable = {building_name_passer = var:corporate_office_1}
+					}
+					FROM = {
+						corporate_office_1_remove_effect = yes
+					}
+					ROOT = {
+						corporate_office_1_add_effect = yes
+					}
+				}
+				if = {
+					limit = {
+						check_variable = {building_name_passer = var:corporate_office_2}
+					}
+					FROM = {
+						corporate_office_1_remove_effect = yes
+					}
+					ROOT = {
+						corporate_office_1_add_effect = yes
+					}
+				}
+				if = {
+					limit = {
+						check_variable = {building_name_passer = var:corporate_office_3}
+					}
+					FROM = {
+						corporate_office_1_remove_effect = yes
+					}
+					ROOT = {
+						corporate_office_1_add_effect = yes
+					}
+				}
+				## ADD AND REMOVE IDEAS
+				FROM = {
+					if = {
+						limit = { ## FIND IF ANY STATE ALREADY HAS BUILDING AS NOT TO REMOVE IDEA FROM BUILDINGS THAT ARE THERE
+							NOT ={
+								any_controlled_state = {
+									has_variable = building_name_passer
+								}
+							}
+						}
+						remove_ideas = var:building_name_passer
+					}
+				}
+				ROOT = {
+					add_ideas = var:building_name_passer
+				}
+			}
+			clear_variable = building_name_passer
+	#### BUILDING 2 CONTROLLER
+			FROM.FROM = {
+				if = {
+					limit = {
+						has_var = building_2
+					}
+					set_variable = {building_name_passer = building_2}
+				}
+			}
+			## Below grabs the building and enacts its removal effect on the country that lost the building and add effect on country that gained it
+			if = {
+				limit = {
+					has_variable = building_name_passer
+				}
+				if = {
+					limit = {
+						check_variable = {building_name_passer = var:corporate_office_1}
+					}
+					FROM = {
+						corporate_office_1_remove_effect = yes
+					}
+					ROOT = {
+						corporate_office_1_add_effect = yes
+					}
+				}
+				if = {
+					limit = {
+						check_variable = {building_name_passer = var:corporate_office_2}
+					}
+					FROM = {
+						corporate_office_1_remove_effect = yes
+					}
+					ROOT = {
+						corporate_office_1_add_effect = yes
+					}
+				}
+				if = {
+					limit = {
+						check_variable = {building_name_passer = var:corporate_office_3}
+					}
+					FROM = {
+						corporate_office_1_remove_effect = yes
+					}
+					ROOT = {
+						corporate_office_1_add_effect = yes
+					}
+				}
+				FROM = {
+					if = {
+						limit = { ## FIND IF ANY STATE ALREADY HAS BUILDING AS NOT TO REMOVE IDEA FROM BUILDINGS THAT ARE THERE
+							NOT ={
+								any_controlled_state = {
+									has_variable = building_name_passer
+								}
+							}
+						}
+						remove_ideas = var:building_name_passer
+					}
+				}
+				ROOT = {
+						add_ideas = var:building_name_passer
+				}
+			}
+	### END OF BUILDING CONTROLLER
+	### No idea what this is below - Neverfire
 			if = {
 				limit = {
 					FROM.FROM = {
