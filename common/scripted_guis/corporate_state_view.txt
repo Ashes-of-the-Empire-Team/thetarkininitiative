@@ -12,35 +12,55 @@ scripted_gui = {
 		
 		effects = {
 			building_1_click = {
-				ROOT = {
-					if = {
-						limit = {
-							ROOT = {
-								has_country_flag = building_1_open
+				if = {
+					limit = {
+						is_fully_controlled_by = ROOT
+					}
+					ROOT = {
+						if = {
+							limit = {
+								ROOT = {
+									has_country_flag = building_1_open
+								}
 							}
+							clr_country_flag = building_2_open
+							clr_country_flag = building_1_open
 						}
-						clr_country_flag = building_2_open
-						clr_country_flag = building_1_open
+						else = {
+							set_country_flag = building_1_open
+							clr_country_flag = building_2_open
+						}
 					}
-					else = {
-						set_country_flag = building_1_open
-						clr_country_flag = building_2_open
-					}
+				}
+				else = {
+					clr_country_flag = building_2_open
+					clr_country_flag = building_1_open
 				}
 			}
 			building_2_click = {
-				ROOT = {
-					if = {
-						limit = {
-							has_country_flag = building_2_open
+				if = {
+					limit = {
+						is_fully_controlled_by = ROOT
+					}
+					ROOT = {
+						if = {
+							limit = {
+								ROOT = {
+									has_country_flag = building_2_open
+								}
+							}
+							clr_country_flag = building_2_open
+							clr_country_flag = building_1_open
 						}
-						clr_country_flag = building_2_open
-						clr_country_flag = building_1_open
+						else = {
+							set_country_flag = building_2_open
+							clr_country_flag = building_1_open
+						}
 					}
-					else = {
-						set_country_flag = building_2_open
-						clr_country_flag = building_1_open
-					}
+				}
+				else = {
+					clr_country_flag = building_2_open
+					clr_country_flag = building_1_open
 				}
 			}
 		}
@@ -84,6 +104,8 @@ scripted_gui = {
 					has_country_flag = building_2_open
 				}
 			}
+			is_fully_controlled_by = ROOT
+
 		}
 		effects = {
 			navy_button_click = {
@@ -137,6 +159,8 @@ scripted_gui = {
 					has_country_flag = navy_buildings
 				}
 			}
+			is_fully_controlled_by = ROOT
+
 		}
 		
 		effects = {
@@ -451,79 +475,6 @@ scripted_gui = {
 		}
 		
 		triggers = {
-			arms_corp1_click_enabled = {
-				if = {
-					limit = {
-						ROOT = {
-							has_country_flag = building_1_open
-						}
-					}
-					clear_building_1_effects = yes
-					NOT = {
-						check_variable = { building_1 = 2 }
-					}
-				}
-				else_if = {
-					limit = {
-						ROOT = {
-							has_country_flag = building_2_open
-						}
-					}
-					clear_building_2_effects = yes
-					NOT = {
-						check_variable = { building_2 = 2 }
-					}
-				}
-			}
-			arms_corp2_click_enabled = {
-				check_variable = { building_1_lvl = 1 }
-				if = {
-					limit = {
-						ROOT = {
-							has_country_flag = building_1_open
-						}
-					}
-					clear_building_1_effects = yes
-					NOT = {
-						check_variable = { building_1 = 2 }
-					}
-				}
-				else_if = {
-					limit = {
-						ROOT = {
-							has_country_flag = building_2_open
-						}
-					}
-					clear_building_2_effects = yes
-					NOT = {
-						check_variable = { building_2 = 2 }
-					}
-				}
-			}
-			droid_corp1_click_enabled = {
-				if = {
-					limit = {
-						ROOT = {
-							has_country_flag = building_1_open
-						}
-					}
-					clear_building_1_effects = yes
-					NOT = {
-						check_variable = { building_1 = 3 }
-					}
-				}
-				else_if = {
-					limit = {
-						ROOT = {
-							has_country_flag = building_2_open
-						}
-					}
-					clear_building_2_effects = yes
-					NOT = {
-						check_variable = { building_2 = 3 }
-					}
-				}
-			}
 			shipyard_1_click_enabled = {
 				if = {
 					limit = {
@@ -531,9 +482,8 @@ scripted_gui = {
 							has_country_flag = building_1_open
 						}
 					}
-					clear_building_1_effects = yes
 					NOT = {
-						check_variable = { building_1 = 4 }
+						check_variable = { building_1 = token:building_shipyard_1 }
 					}
 				}
 				else_if = {
@@ -542,22 +492,20 @@ scripted_gui = {
 							has_country_flag = building_2_open
 						}
 					}
-					clear_building_2_effects = yes
 					NOT = {
-						check_variable = { building_2 = 4 }
+						check_variable = { building_2 = token:building_shipyard_1 }
 					}
 				}
 			}
-			entertainment_corp1_click_enabled = {
+			light_shipyard_2_click_enabled = {
 				if = {
 					limit = {
 						ROOT = {
 							has_country_flag = building_1_open
 						}
 					}
-					clear_building_1_effects = yes
 					NOT = {
-						check_variable = { building_1 = 5 }
+						check_variable = { building_1 = token:light_shipyard_2 }
 					}
 				}
 				else_if = {
@@ -566,22 +514,20 @@ scripted_gui = {
 							has_country_flag = building_2_open
 						}
 					}
-					clear_building_2_effects = yes
 					NOT = {
-						check_variable = { building_2 = 5 }
+						check_variable = { building_2 = token:light_shipyard_2 }
 					}
 				}
 			}
-			pharma_corp1_click_enabled = {
+			light_shipyard_2_click_enabled = {
 				if = {
 					limit = {
 						ROOT = {
 							has_country_flag = building_1_open
 						}
 					}
-					clear_building_1_effects = yes
 					NOT = {
-						check_variable = { building_1 = 6 }
+						check_variable = { building_1 = token:light_shipyard_2 }
 					}
 				}
 				else_if = {
@@ -590,22 +536,20 @@ scripted_gui = {
 							has_country_flag = building_2_open
 						}
 					}
-					clear_building_2_effects = yes
 					NOT = {
-						check_variable = { building_2 = 6 }
+						check_variable = { building_2 = token:light_shipyard_2 }
 					}
 				}
 			}
-			resources_corp1_click_enabled = {
+			light_shipyard_3_click_enabled = {
 				if = {
 					limit = {
 						ROOT = {
 							has_country_flag = building_1_open
 						}
 					}
-					clear_building_1_effects = yes
 					NOT = {
-						check_variable = { building_1 = 7 }
+						check_variable = { building_1 = token:light_shipyard_3 }
 					}
 				}
 				else_if = {
@@ -614,17 +558,188 @@ scripted_gui = {
 							has_country_flag = building_2_open
 						}
 					}
-					clear_building_2_effects = yes
 					NOT = {
-						check_variable = { building_2 = 7 }
+						check_variable = { building_2 = token:light_shipyard_3 }
 					}
 				}
 			}
-			building_back_visible = {
-				#has_state_flag = senate_building
+			medium_shipyard_1_click_enabled = {
+				if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_1_open
+						}
+					}
+					NOT = {
+						check_variable = { building_1 = token:medium_shipyard_2 }
+					}
+				}
+				else_if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_2_open
+						}
+					}
+					NOT = {
+						check_variable = { building_2 = token:medium_shipyard_2 }
+					}
+				}
+			}
+			medium_shipyard_2_click_enabled = {
+				if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_1_open
+						}
+					}
+					NOT = {
+						check_variable = { building_1 = token:medium_shipyard_3 }
+					}
+				}
+				else_if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_2_open
+						}
+					}
+					NOT = {
+						check_variable = { building_2 = token:medium_shipyard_3 }
+					}
+				}
+			}
+			heavy_shipyard_click_enabled = {
+				if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_1_open
+						}
+					}
+					NOT = {
+						check_variable = { building_1 = token:heavy_shipyard_3 }
+					}
+				}
+				else_if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_2_open
+						}
+					}
+					NOT = {
+						check_variable = { building_2 = token:heavy_shipyard_3 }
+					}
+				}
+			}
+			starfighters_click_enabled = {
+				if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_1_open
+						}
+					}
+					NOT = {
+						check_variable = { building_1 = token:starfighter_factory_1 }
+					}
+				}
+				else_if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_2_open
+						}
+					}
+					NOT = {
+						check_variable = { building_2 = token:starfighter_factory_1 }
+					}
+				}
+			}
+			starfighters_2_click_enabled = {
+				if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_1_open
+						}
+					}
+					NOT = {
+						check_variable = { building_1 = token:starfighter_factory_2 }
+					}
+				}
+				else_if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_2_open
+						}
+					}
+					NOT = {
+						check_variable = { building_2 = token:starfighter_factory_2 }
+					}
+				}
+			}
+			starfighters_3_click_enabled = {
+				if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_1_open
+						}
+					}
+					NOT = {
+						check_variable = { building_1 = token:starfighter_factory_3 }
+					}
+				}
+				else_if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_2_open
+						}
+					}
+					NOT = {
+						check_variable = { building_2 = token:starfighter_factory_3 }
+					}
+				}
+			}
+			starbombers_click_enabled = {
+				if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_1_open
+						}
+					}
+					NOT = {
+						check_variable = { building_1 = token:starbomber_factory_2 }
+					}
+				}
+				else_if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_2_open
+						}
+					}
+					NOT = {
+						check_variable = { building_2 = token:starbomber_factory_2 }
+					}
+				}
+			}
+			starbombers_2_click_enabled = {
+				if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_1_open
+						}
+					}
+					NOT = {
+						check_variable = { building_1 = token:starbomber_factory_3 }
+					}
+				}
+				else_if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_2_open
+						}
+					}
+					NOT = {
+						check_variable = { building_2 = token:starbomber_factory_3 }
+					}
+				}
 			}
 		}
-
 		ai_enabled = {
             always = no
 		}
@@ -1013,16 +1128,15 @@ scripted_gui = {
 		}
 		
 		triggers = {
-			arms_corp1_click_enabled = {
+			arms_factory_click_enabled = {
 				if = {
 					limit = {
 						ROOT = {
 							has_country_flag = building_1_open
 						}
 					}
-					clear_building_1_effects = yes
 					NOT = {
-						check_variable = { building_1 = 2 }
+						check_variable = { building_1 = token:arms_factory_1 }
 					}
 				}
 				else_if = {
@@ -1031,23 +1145,20 @@ scripted_gui = {
 							has_country_flag = building_2_open
 						}
 					}
-					clear_building_2_effects = yes
 					NOT = {
-						check_variable = { building_2 = 2 }
+						check_variable = { building_2 = token:arms_factory_1 }
 					}
 				}
 			}
-			arms_corp2_click_enabled = {
-				check_variable = { building_1_lvl = 1 }
+			arms_factory_2_click_enabled = {
 				if = {
 					limit = {
 						ROOT = {
 							has_country_flag = building_1_open
 						}
 					}
-					clear_building_1_effects = yes
 					NOT = {
-						check_variable = { building_1 = 2 }
+						check_variable = { building_1 = token:soft_arms_factory_2 }
 					}
 				}
 				else_if = {
@@ -1056,22 +1167,20 @@ scripted_gui = {
 							has_country_flag = building_2_open
 						}
 					}
-					clear_building_2_effects = yes
 					NOT = {
-						check_variable = { building_2 = 2 }
+						check_variable = { building_2 = token:soft_arms_factory_2 }
 					}
 				}
 			}
-			droid_corp1_click_enabled = {
+			arms_factory_3_click_enabled = {
 				if = {
 					limit = {
 						ROOT = {
 							has_country_flag = building_1_open
 						}
 					}
-					clear_building_1_effects = yes
 					NOT = {
-						check_variable = { building_1 = 3 }
+						check_variable = { building_1 = token:soft_arms_factory_3 }
 					}
 				}
 				else_if = {
@@ -1080,22 +1189,20 @@ scripted_gui = {
 							has_country_flag = building_2_open
 						}
 					}
-					clear_building_2_effects = yes
 					NOT = {
-						check_variable = { building_2 = 3 }
+						check_variable = { building_2 = token:soft_arms_factory_3 }
 					}
 				}
 			}
-			shipyard_1_click_enabled = {
+			tank_factory_2_click_enabled = {
 				if = {
 					limit = {
 						ROOT = {
 							has_country_flag = building_1_open
 						}
 					}
-					clear_building_1_effects = yes
 					NOT = {
-						check_variable = { building_1 = 4 }
+						check_variable = { building_1 = token:tank_factory_2 }
 					}
 				}
 				else_if = {
@@ -1104,22 +1211,20 @@ scripted_gui = {
 							has_country_flag = building_2_open
 						}
 					}
-					clear_building_2_effects = yes
 					NOT = {
-						check_variable = { building_2 = 4 }
+						check_variable = { building_2 = token:tank_factory_2 }
 					}
 				}
 			}
-			entertainment_corp1_click_enabled = {
+			tank_factory_3_click_enabled = {
 				if = {
 					limit = {
 						ROOT = {
 							has_country_flag = building_1_open
 						}
 					}
-					clear_building_1_effects = yes
 					NOT = {
-						check_variable = { building_1 = 5 }
+						check_variable = { building_1 = token:tank_factory_3 }
 					}
 				}
 				else_if = {
@@ -1128,22 +1233,20 @@ scripted_gui = {
 							has_country_flag = building_2_open
 						}
 					}
-					clear_building_2_effects = yes
 					NOT = {
-						check_variable = { building_2 = 5 }
+						check_variable = { building_2 = token:tank_factory_3 }
 					}
 				}
 			}
-			pharma_corp1_click_enabled = {
+			training_facilities_click_enabled = {
 				if = {
 					limit = {
 						ROOT = {
 							has_country_flag = building_1_open
 						}
 					}
-					clear_building_1_effects = yes
 					NOT = {
-						check_variable = { building_1 = 6 }
+						check_variable = { building_1 = token:training_facilities_1 }
 					}
 				}
 				else_if = {
@@ -1152,22 +1255,20 @@ scripted_gui = {
 							has_country_flag = building_2_open
 						}
 					}
-					clear_building_2_effects = yes
 					NOT = {
-						check_variable = { building_2 = 6 }
+						check_variable = { building_2 = token:training_facilities_1 }
 					}
 				}
 			}
-			resources_corp1_click_enabled = {
+			special_forces_training_facilities_click_enabled = {
 				if = {
 					limit = {
 						ROOT = {
 							has_country_flag = building_1_open
 						}
 					}
-					clear_building_1_effects = yes
 					NOT = {
-						check_variable = { building_1 = 7 }
+						check_variable = { building_1 = token:special_forces_training_2 }
 					}
 				}
 				else_if = {
@@ -1176,14 +1277,142 @@ scripted_gui = {
 							has_country_flag = building_2_open
 						}
 					}
-					clear_building_2_effects = yes
 					NOT = {
-						check_variable = { building_2 = 7 }
+						check_variable = { building_2 = token:special_forces_training_2 }
 					}
 				}
 			}
-			building_back_visible = {
-				#has_state_flag = senate_building
+			special_forces_training_facilities_2_click_enabled = {
+				if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_1_open
+						}
+					}
+					NOT = {
+						check_variable = { building_1 = token:special_forces_training_3 }
+					}
+				}
+				else_if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_2_open
+						}
+					}
+					NOT = {
+						check_variable = { building_2 = token:special_forces_training_3 }
+					}
+				}
+			}
+			military_bootcamp_2_click_enabled = {
+				if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_1_open
+						}
+					}
+					NOT = {
+						check_variable = { building_1 = token:military_bootcamp_2 }
+					}
+				}
+				else_if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_2_open
+						}
+					}
+					NOT = {
+						check_variable = { building_2 = token:military_bootcamp_2 }
+					}
+				}
+			}
+			military_bootcamp_3_click_enabled = {
+				if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_1_open
+						}
+					}
+					NOT = {
+						check_variable = { building_1 = token:military_bootcamp_3 }
+					}
+				}
+				else_if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_2_open
+						}
+					}
+					NOT = {
+						check_variable = { building_2 = token:military_bootcamp_3 }
+					}
+				}
+			}
+			small_anti_air_click_enabled = {
+				if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_1_open
+						}
+					}
+					NOT = {
+						check_variable = { building_1 = token:anti_air_1 }
+					}
+				}
+				else_if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_2_open
+						}
+					}
+					NOT = {
+						check_variable = { building_2 = token:anti_air_1 }
+					}
+				}
+			}
+			medium_guns_click_enabled = {
+				if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_1_open
+						}
+					}
+					NOT = {
+						check_variable = { building_1 = token:anti_air_2 }
+					}
+				}
+				else_if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_2_open
+						}
+					}
+					NOT = {
+						check_variable = { building_2 = token:anti_air_2 }
+					}
+				}
+			}
+			big_guns_click_enabled = {
+				if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_1_open
+						}
+					}
+					NOT = {
+						check_variable = { building_1 = token:anti_air_3 }
+					}
+				}
+				else_if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_2_open
+						}
+					}
+					NOT = {
+						check_variable = { building_2 = token:anti_air_3 }
+					}
+				}
 			}
 		}
 
@@ -1656,16 +1885,15 @@ scripted_gui = {
 		}
 		
 		triggers = {
-			arms_corp1_click_enabled = {
+			intelligence_center_click_enabled = {
 				if = {
 					limit = {
 						ROOT = {
 							has_country_flag = building_1_open
 						}
 					}
-					clear_building_1_effects = yes
 					NOT = {
-						check_variable = { building_1 = 2 }
+						check_variable = { building_1 = token:intelligence_centre_1 }
 					}
 				}
 				else_if = {
@@ -1674,23 +1902,20 @@ scripted_gui = {
 							has_country_flag = building_2_open
 						}
 					}
-					clear_building_2_effects = yes
 					NOT = {
-						check_variable = { building_2 = 2 }
+						check_variable = { building_2 = token:intelligence_centre_1 }
 					}
 				}
 			}
-			arms_corp2_click_enabled = {
-				check_variable = { building_1_lvl = 1 }
+			monitoring_beacon_click_enabled = {
 				if = {
 					limit = {
 						ROOT = {
 							has_country_flag = building_1_open
 						}
 					}
-					clear_building_1_effects = yes
 					NOT = {
-						check_variable = { building_1 = 2 }
+						check_variable = { building_1 = token:monitoring_beacon_2 }
 					}
 				}
 				else_if = {
@@ -1699,22 +1924,20 @@ scripted_gui = {
 							has_country_flag = building_2_open
 						}
 					}
-					clear_building_2_effects = yes
 					NOT = {
-						check_variable = { building_2 = 2 }
+						check_variable = { building_2 = token:monitoring_beacon_2 }
 					}
 				}
 			}
-			droid_corp1_click_enabled = {
+			monitoring_beacon_2_click_enabled = {
 				if = {
 					limit = {
 						ROOT = {
 							has_country_flag = building_1_open
 						}
 					}
-					clear_building_1_effects = yes
 					NOT = {
-						check_variable = { building_1 = 3 }
+						check_variable = { building_1 = token:monitoring_beacon_3 }
 					}
 				}
 				else_if = {
@@ -1723,22 +1946,20 @@ scripted_gui = {
 							has_country_flag = building_2_open
 						}
 					}
-					clear_building_2_effects = yes
 					NOT = {
-						check_variable = { building_2 = 3 }
+						check_variable = { building_2 = token:monitoring_beacon_3 }
 					}
 				}
 			}
-			shipyard_1_click_enabled = {
+			spy_academy_2_click_enabled = {
 				if = {
 					limit = {
 						ROOT = {
 							has_country_flag = building_1_open
 						}
 					}
-					clear_building_1_effects = yes
 					NOT = {
-						check_variable = { building_1 = 4 }
+						check_variable = { building_1 = token:spy_academy_2 }
 					}
 				}
 				else_if = {
@@ -1747,22 +1968,20 @@ scripted_gui = {
 							has_country_flag = building_2_open
 						}
 					}
-					clear_building_2_effects = yes
 					NOT = {
-						check_variable = { building_2 = 4 }
+						check_variable = { building_2 = token:spy_academy_2 }
 					}
 				}
 			}
-			entertainment_corp1_click_enabled = {
+			spy_academy_3_click_enabled = {
 				if = {
 					limit = {
 						ROOT = {
 							has_country_flag = building_1_open
 						}
 					}
-					clear_building_1_effects = yes
 					NOT = {
-						check_variable = { building_1 = 5 }
+						check_variable = { building_1 = token:spy_academy_3 }
 					}
 				}
 				else_if = {
@@ -1771,22 +1990,20 @@ scripted_gui = {
 							has_country_flag = building_2_open
 						}
 					}
-					clear_building_2_effects = yes
 					NOT = {
-						check_variable = { building_2 = 5 }
+						check_variable = { building_2 = token:spy_academy_3 }
 					}
 				}
 			}
-			pharma_corp1_click_enabled = {
+			research_center_click_enabled = {
 				if = {
 					limit = {
 						ROOT = {
 							has_country_flag = building_1_open
 						}
 					}
-					clear_building_1_effects = yes
 					NOT = {
-						check_variable = { building_1 = 6 }
+						check_variable = { building_1 = token:research_center_1 }
 					}
 				}
 				else_if = {
@@ -1795,22 +2012,20 @@ scripted_gui = {
 							has_country_flag = building_2_open
 						}
 					}
-					clear_building_2_effects = yes
 					NOT = {
-						check_variable = { building_2 = 6 }
+						check_variable = { building_2 = token:research_center_1 }
 					}
 				}
 			}
-			resources_corp1_click_enabled = {
+			research_center_2_click_enabled = {
 				if = {
 					limit = {
 						ROOT = {
 							has_country_flag = building_1_open
 						}
 					}
-					clear_building_1_effects = yes
 					NOT = {
-						check_variable = { building_1 = 7 }
+						check_variable = { building_1 = token:research_center_2 }
 					}
 				}
 				else_if = {
@@ -1819,14 +2034,230 @@ scripted_gui = {
 							has_country_flag = building_2_open
 						}
 					}
-					clear_building_2_effects = yes
 					NOT = {
-						check_variable = { building_2 = 7 }
+						check_variable = { building_2 = token:research_center_2 }
 					}
 				}
 			}
-			building_back_visible = {
-				#has_state_flag = senate_building
+			research_center_3_click_enabled = {
+				if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_1_open
+						}
+					}
+					NOT = {
+						check_variable = { building_1 = token:research_center_3 }
+					}
+				}
+				else_if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_2_open
+						}
+					}
+					NOT = {
+						check_variable = { building_2 = token:research_center_3 }
+					}
+				}
+			}
+			military_academy_click_enabled = {
+				if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_1_open
+						}
+					}
+					NOT = {
+						check_variable = { building_1 = token:military_academy_1 }
+					}
+				}
+				else_if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_2_open
+						}
+					}
+					NOT = {
+						check_variable = { building_2 = token:military_academy_1 }
+					}
+				}
+			}
+			military_college_click_enabled = {
+				if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_1_open
+						}
+					}
+					NOT = {
+						check_variable = { building_1 = token:military_college_2 }
+					}
+				}
+				else_if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_2_open
+						}
+					}
+					NOT = {
+						check_variable = { building_2 = token:military_college_2 }
+					}
+				}
+			}
+			military_college_2_click_enabled = {
+				if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_1_open
+						}
+					}
+					NOT = {
+						check_variable = { building_1 = token:military_college_3 }
+					}
+				}
+				else_if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_2_open
+						}
+					}
+					NOT = {
+						check_variable = { building_2 = token:military_college_3 }
+					}
+				}
+			}
+			naval_academy_click_enabled = {
+				if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_1_open
+						}
+					}
+					NOT = {
+						check_variable = { building_1 = token:naval_academy_2 }
+					}
+				}
+				else_if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_2_open
+						}
+					}
+					NOT = {
+						check_variable = { building_2 = token:naval_academy_2 }
+					}
+				}
+			}
+			admiraly_academy_click_enabled = {
+				if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_1_open
+						}
+					}
+					NOT = {
+						check_variable = { building_1 = token:naval_academy_3 }
+					}
+				}
+				else_if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_2_open
+						}
+					}
+					NOT = {
+						check_variable = { building_2 = token:naval_academy_3 }
+					}
+				}
+			}
+			starship_academy_click_enabled = {
+				if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_1_open
+						}
+					}
+					NOT = {
+						check_variable = { building_1 = token:starfighter_academy_3 }
+					}
+				}
+				else_if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_2_open
+						}
+					}
+					NOT = {
+						check_variable = { building_2 = token:starfighter_academy_3 }
+					}
+				}
+			}
+			taxation_1_click_enabled = {
+				if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_1_open
+						}
+					}
+					NOT = {
+						check_variable = { building_1 = token:taxation_center_1 }
+					}
+				}
+				else_if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_2_open
+						}
+					}
+					NOT = {
+						check_variable = { building_2 = token:taxation_center_1 }
+					}
+				}
+			}
+			taxation_2_click_enabled = {
+				if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_1_open
+						}
+					}
+					NOT = {
+						check_variable = { building_1 = token:taxation_center_2 }
+					}
+				}
+				else_if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_2_open
+						}
+					}
+					NOT = {
+						check_variable = { building_2 = token:taxation_center_2 }
+					}
+				}
+			}
+			taxation_3_click_enabled = {
+				if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_1_open
+						}
+					}
+					NOT = {
+						check_variable = { building_1 = token:taxation_center_3 }
+					}
+				}
+				else_if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_2_open
+						}
+					}
+					NOT = {
+						check_variable = { building_2 = token:taxation_center_3 }
+					}
+				}
 			}
 		}
 
@@ -2241,6 +2672,204 @@ scripted_gui = {
 			}
 			unique_building_3_visible = {
 				has_variable = unique_building_on_state
+			}
+			homstead_click_enabled = {
+				if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_1_open
+						}
+					}
+					NOT = {
+						check_variable = { building_1 = token:homestead_1 }
+					}
+				}
+				else_if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_2_open
+						}
+					}
+					NOT = {
+						check_variable = { building_2 = token:homestead_1 }
+					}
+				}
+			}
+			homstead_2_click_enabled = {
+				if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_1_open
+						}
+					}
+					NOT = {
+						check_variable = { building_1 = token:homestead_2 }
+					}
+				}
+				else_if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_2_open
+						}
+					}
+					NOT = {
+						check_variable = { building_2 = token:homestead_2 }
+					}
+				}
+			}
+			homstead_3_click_enabled = {
+				if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_1_open
+						}
+					}
+					NOT = {
+						check_variable = { building_1 = token:homestead_3 }
+					}
+				}
+				else_if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_2_open
+						}
+					}
+					NOT = {
+						check_variable = { building_2 = token:homestead_3 }
+					}
+				}
+			}
+			corporate_click_enabled = {
+				if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_1_open
+						}
+					}
+					NOT = {
+						check_variable = { building_1 = token:corporate_office_1 }
+					}
+				}
+				else_if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_2_open
+						}
+					}
+					NOT = {
+						check_variable = { building_2 = token:corporate_office_1 }
+					}
+				}
+			}
+			corporate_2_click_enabled = {
+				if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_1_open
+						}
+					}
+					NOT = {
+						check_variable = { building_1 = token:corporate_office_2 }
+					}
+				}
+				else_if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_2_open
+						}
+					}
+					NOT = {
+						check_variable = { building_2 = token:corporate_office_2 }
+					}
+				}
+			}
+			corporate_3_click_enabled = {
+				if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_1_open
+						}
+					}
+					NOT = {
+						check_variable = { building_1 = token:corporate_office_3 }
+					}
+				}
+				else_if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_2_open
+						}
+					}
+					NOT = {
+						check_variable = { building_2 = token:corporate_office_3 }
+					}
+				}
+			}
+			recycle_click_enabled = {
+				if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_1_open
+						}
+					}
+					NOT = {
+						check_variable = { building_1 = token:recycling_center_1 }
+					}
+				}
+				else_if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_2_open
+						}
+					}
+					NOT = {
+						check_variable = { building_2 = token:recycling_center_1 }
+					}
+				}
+			}
+			recycle_2_click_enabled = {
+				if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_1_open
+						}
+					}
+					NOT = {
+						check_variable = { building_1 = token:recycling_center_2 }
+					}
+				}
+				else_if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_2_open
+						}
+					}
+					NOT = {
+						check_variable = { building_2 = token:recycling_center_2 }
+					}
+				}
+			}
+			recycle_3_click_enabled = {
+				if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_1_open
+						}
+					}
+					NOT = {
+						check_variable = { building_1 = token:recycling_center_3 }
+					}
+				}
+				else_if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_2_open
+						}
+					}
+					NOT = {
+						check_variable = { building_2 = token:recycling_center_3 }
+					}
+				}
 			}
 		}
 
