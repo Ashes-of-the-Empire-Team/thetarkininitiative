@@ -1,20 +1,40 @@
 clear_building_1_effects = {
-	remove_ideas = token:building_1
+	if = {
+		limit = { ## FIND IF ANY STATE ALREADY HAS BUILDING AS NOT TO REMOVE IDEA FROM BUILDINGS THAT ARE THERE
+			NOT ={
+				any_controlled_state = {
+					has_variable = building_name_passer
+				}
+			}
+		}
+		remove_ideas = var:building_name_passer
+	}
 	meta_effect = {
 		text = {
 			[BUILDING_NAME]_remove_effect = yes
 		}
 		BUILDING_NAME = "[?building_1.GetTokenKey]"
 	}
+	clear_variable = building_1
 }
 clear_building_2_effects = {
-	remove_ideas = token:building_2
+	if = {
+		limit = { ## FIND IF ANY STATE ALREADY HAS BUILDING AS NOT TO REMOVE IDEA FROM BUILDINGS THAT ARE THERE
+			NOT ={
+				any_controlled_state = {
+					has_variable = building_name_passer
+				}
+			}
+		}
+		remove_ideas = var:building_name_passer
+	}
 	meta_effect = {
 		text = {
 			[BUILDING_NAME]_remove_effect = yes
 		}
 		BUILDING_NAME = "[?building_2.GetTokenKey]"
 	}
+	clear_variable = building_2
 }
 
 
@@ -589,11 +609,9 @@ kessel_coaxium_mines_3_remove_effect = {
 
 
 building_test_effect_add_effect = {
-	log = "Test Effect one"
-	set_variable = {state_id_holder = THIS.id}
+	set_variable = {building_2 = token:research_center_1}
+	set_temp_variable = {creation_building_variable = building_2}
+	owner = {
+		add_ideas = var:creation_building_variable
+	}
 }
-
-tank_factory_2_effect_two = {
-	log = "Test effect two"
-}
-
