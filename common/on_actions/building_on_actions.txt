@@ -2,6 +2,15 @@ on_actions = {
 	on_startup = {
 		effect = {
 			## ADDS UNIQUE BUILDINGS VARIABLE TO THEIR RESPECTIVE STATES
+			3 = {
+				set_variable = {unique_building_on_state = token:the_maw_station}
+			}
+			22 = {
+				set_variable = {unique_building_on_state = token:ring_of_kafrene}
+			}
+			103 = {
+				set_variable = {unique_building_on_state = token:the_wheel}
+			}
 			375 = {
 				set_variable = {unique_building_on_state = token:mustafar_works}
 			}
@@ -31,9 +40,89 @@ on_actions = {
 			}
 		}
 	}
-	on_daily = {
+	on_daily_VON = {
 		effect = {
-
+			## BUILDING CONSTRUCTION CONTROLLER, 4 arrays, building 1,state location and time left ,and building 2. 
+			## It works by tracking building progress linked to its state location and every day reducing by 1. At -1 building will have its effect granted and idea given
+			for_each_loop = {
+				array = global.building_state_constructer_1
+				value = v
+				index = current_array_index
+				set_temp_variable = {state_id_finder = global.building_state_constructer_1^current_array_index}
+				var:state_id_finder = {
+					subtract_from_variable = { time_left_building_1 = 1 }
+				}
+				if = {
+					limit = {
+						var:state_id_finder = {
+							check_variable = { time_left_building_1 = -1 }
+						}
+					}
+					## create building effect
+					var:state_id_finder = {
+						controller = {
+							add_ideas = var:building_1
+						}
+						meta_effect = {
+							text = {
+								[BUILDING_NAME]_add_effect = yes
+							}
+							BUILDING_NAME = "[?building_1.GetTokenKey]"
+						}
+					}
+					##
+					add_to_temp_array = {indexs_to_remove_1 = current_array_index}
+					
+				}
+			}
+			for_each_loop = {
+				array = global.building_state_constructer_2
+				value = v
+				index = current_array_index
+				set_temp_variable = {state_id_finder = global.building_state_constructer_2^current_array_index}
+				var:state_id_finder = {
+					subtract_from_variable = { time_left_building_2 = 1 }
+				}
+				if = {
+					limit = {
+						var:state_id_finder = {
+							check_variable = { time_left_building_2 = -1 }
+						}
+					}
+					## create building effect
+					var:state_id_finder = {
+						controller = {
+							add_ideas = var:building_2
+						}
+						meta_effect = {
+							text = {
+								[BUILDING_NAME]_add_effect = yes
+							}
+							BUILDING_NAME = "[?building_2.GetTokenKey]"
+						}
+					}
+					##
+					add_to_temp_array = {indexs_to_remove_2 = current_array_index}
+					
+				}
+			}
+			## Finally get rid of all indexs that needed to be removed
+			for_each_loop = {
+				array = indexs_to_remove_1
+				value = index_location
+				remove_from_array = {
+					array = building_state_constructer_1
+					index = index_location
+				}
+			}
+			for_each_loop = {
+				array = indexs_to_remove_2
+				value = index_location
+				remove_from_array = {
+					array = building_state_constructer_2
+					index = index_location
+				}
+			}
 		}
 	}
 	on_state_control_changed = {

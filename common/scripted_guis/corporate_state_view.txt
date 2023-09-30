@@ -16,19 +16,27 @@ scripted_gui = {
 					limit = {
 						is_fully_controlled_by = ROOT
 					}
-					ROOT = {
-						if = {
-							limit = {
-								ROOT = {
-									has_country_flag = building_1_open
-								}
-							}
-							clr_country_flag = building_2_open
-							clr_country_flag = building_1_open
+					if = {
+						limit = {
+							has_state_flag = tile_blocker_building_1
 						}
-						else = {
-							set_country_flag = building_1_open
-							clr_country_flag = building_2_open
+						clear_variable = building_1
+						### SETS TILE BLOCKER TO GET RID OF
+					}else = {
+						ROOT = {
+							if = {
+								limit = {
+									ROOT = {
+										has_country_flag = building_1_open
+									}
+								}
+								clr_country_flag = building_2_open
+								clr_country_flag = building_1_open
+							}
+							else = {
+								set_country_flag = building_1_open
+								clr_country_flag = building_2_open
+							}
 						}
 					}
 				}
@@ -175,10 +183,11 @@ scripted_gui = {
 						clear_building_1_effects = yes
 					}
 					set_variable = { building_1 = token:building_shipyard_1 }
-					building_shipyard_1_add_effect = yes
-					ROOT = {
-						add_ideas = building_shipyard_1
-					}
+                    set_variable = { time_left_building_1 = 80}
+                    add_to_array = {
+                        array = global.building_state_constructer_1
+                        value = THIS.id
+                    }
 				}
 				if = {
 					limit = {
@@ -190,10 +199,11 @@ scripted_gui = {
 						clear_building_2_effects = yes
 					}
 					set_variable = { building_2 = token:building_shipyard_1 }
-					building_shipyard_1_add_effect = yes
-					ROOT = {
-						add_ideas = building_shipyard_1
-					}
+                    set_variable = { time_left_building_2 = 80}
+                    add_to_array = {
+                        array = global.building_state_constructer_2
+                        value = THIS.id
+                    }
 				}
 				ROOT = {
 					subtract_from_variable = { currency_amount^primary_currency = 500 }
@@ -211,10 +221,11 @@ scripted_gui = {
 						clear_building_1_effects = yes
 					}
 					set_variable = { building_1 = token:light_shipyard_2 }
-					light_shipyard_2_add_effect = yes
-					ROOT = {
-						add_ideas = light_shipyard_2
-					}
+                    set_variable = { time_left_building_1 = 80}
+                    add_to_array = {
+                        array = global.building_state_constructer_1
+                        value = THIS.id
+                    }
 				}
 				if = {
 					limit = {
@@ -226,10 +237,11 @@ scripted_gui = {
 						clear_building_2_effects = yes
 					}
 					set_variable = { building_2 = token:light_shipyard_2 }
-					light_shipyard_2_add_effect = yes
-					ROOT = {
-						add_ideas = light_shipyard_2
-					}
+                    set_variable = { time_left_building_2 = 80}
+                    add_to_array = {
+                        array = global.building_state_constructer_2
+                        value = THIS.id
+                    }
 				}
 				ROOT = {
 					subtract_from_variable = { currency_amount^primary_currency = 500 }
@@ -246,10 +258,11 @@ scripted_gui = {
 						clear_building_1_effects = yes
 					}
 					set_variable = { building_1 = token:light_shipyard_3 }
-					light_shipyard_3_add_effect = yes
-					ROOT = {
-						add_ideas = light_shipyard_3
-					}
+                    set_variable = { time_left_building_1 = 80}
+                    add_to_array = {
+                        array = global.building_state_constructer_1
+                        value = THIS.id
+                    }
 				}
 				if = {
 					limit = {
@@ -261,10 +274,11 @@ scripted_gui = {
 						clear_building_2_effects = yes
 					}
 					set_variable = { building_2 = token:light_shipyard_3 }
-					light_shipyard_3_add_effect = yes
-					ROOT = {
-						add_ideas = light_shipyard_3
-					}
+                    set_variable = { time_left_building_2 = 80}
+                    add_to_array = {
+                        array = global.building_state_constructer_2
+                        value = THIS.id
+                    }
 				}
 				ROOT = {
 					subtract_from_variable = { currency_amount^primary_currency = 500 }
@@ -281,10 +295,11 @@ scripted_gui = {
 						clear_building_1_effects = yes
 					}
 					set_variable = { building_1 = token:medium_shipyard_2 }
-					medium_shipyard_2_add_effect = yes
-					ROOT = {
-						add_ideas = medium_shipyard_2
-					}
+                    set_variable = { time_left_building_1 = 80}
+                    add_to_array = {
+                        array = global.building_state_constructer_1
+                        value = THIS.id
+                    }
 				}
 				if = {
 					limit = {
@@ -296,10 +311,11 @@ scripted_gui = {
 						clear_building_2_effects = yes
 					}
 					set_variable = { building_2 = token:medium_shipyard_2 }
-					medium_shipyard_2_add_effect = yes
-					ROOT = {
-						add_ideas = medium_shipyard_2
-					}
+                    set_variable = { time_left_building_2 = 80}
+                    add_to_array = {
+                        array = global.building_state_constructer_2
+                        value = THIS.id
+                    }
 				}
 				ROOT = {
 					subtract_from_variable = { currency_amount^primary_currency = 500 }
@@ -316,10 +332,11 @@ scripted_gui = {
 						clear_building_1_effects = yes
 					}
 					set_variable = { building_1 = token:medium_shipyard_3 }
-					medium_shipyard_3_add_effect = yes
-					ROOT = {
-						add_ideas = medium_shipyard_3
-					}
+                    set_variable = { time_left_building_1 = 80}
+                    add_to_array = {
+                        array = global.building_state_constructer_1
+                        value = THIS.id
+                    }
 				}
 				if = {
 					limit = {
@@ -331,10 +348,11 @@ scripted_gui = {
 						clear_building_2_effects = yes
 					}
 					set_variable = { building_2 = token:medium_shipyard_3 }
-					medium_shipyard_3_add_effect = yes
-					ROOT = {
-						add_ideas = medium_shipyard_3
-					}
+                    set_variable = { time_left_building_2 = 80}
+                    add_to_array = {
+                        array = global.building_state_constructer_2
+                        value = THIS.id
+                    }
 				}
 				ROOT = {
 					subtract_from_variable = { currency_amount^primary_currency = 500 }
@@ -351,10 +369,11 @@ scripted_gui = {
 						clear_building_1_effects = yes
 					}
 					set_variable = { building_1 = token:heavy_shipyard_3 }
-					heavy_shipyard_3_add_effect = yes
-					ROOT = {
-						add_ideas = heavy_shipyard_3
-					}
+                    set_variable = { time_left_building_1 = 80}
+                    add_to_array = {
+                        array = global.building_state_constructer_1
+                        value = THIS.id
+                    }
 				}
 				if = {
 					limit = {
@@ -366,10 +385,11 @@ scripted_gui = {
 						clear_building_2_effects = yes
 					}
 					set_variable = { building_2 = token:heavy_shipyard_3 }
-					heavy_shipyard_3_add_effect = yes
-					ROOT = {
-						add_ideas = heavy_shipyard_3
-					}
+                    set_variable = { time_left_building_2 = 80}
+                    add_to_array = {
+                        array = global.building_state_constructer_2
+                        value = THIS.id
+                    }
 				}
 				ROOT = {
 					subtract_from_variable = { currency_amount^primary_currency = 500 }
@@ -386,10 +406,11 @@ scripted_gui = {
 						clear_building_1_effects = yes
 					}
 					set_variable = { building_1 = token:starfighter_factory_1 }
-					starfighter_factory_1_add_effect = yes
-					ROOT = {
-						add_ideas = starfighter_factory_1
-					}
+                    set_variable = { time_left_building_1 = 80}
+                    add_to_array = {
+                        array = global.building_state_constructer_1
+                        value = THIS.id
+                    }
 				}
 				if = {
 					limit = {
@@ -401,10 +422,11 @@ scripted_gui = {
 						clear_building_2_effects = yes
 					}
 					set_variable = { building_2 = token:starfighter_factory_1 }
-					starfighter_factory_1_add_effect = yes
-					ROOT = {
-						add_ideas = starfighter_factory_1
-					}
+                    set_variable = { time_left_building_2 = 80}
+                    add_to_array = {
+                        array = global.building_state_constructer_2
+                        value = THIS.id
+                    }
 				}
 				ROOT = {
 					subtract_from_variable = { currency_amount^primary_currency = 500 }
@@ -421,10 +443,11 @@ scripted_gui = {
 						clear_building_1_effects = yes
 					}
 					set_variable = { building_1 = token:starfighter_factory_2 }
-					starfighter_factory_2_add_effect = yes
-					ROOT = {
-						add_ideas = starfighter_factory_2
-					}
+                    set_variable = { time_left_building_1 = 80}
+                    add_to_array = {
+                        array = global.building_state_constructer_1
+                        value = THIS.id
+                    }
 				}
 				if = {
 					limit = {
@@ -436,10 +459,11 @@ scripted_gui = {
 						clear_building_2_effects = yes
 					}
 					set_variable = { building_2 = token:starfighter_factory_2 }
-					starfighter_factory_2_add_effect = yes
-					ROOT = {
-						add_ideas = starfighter_factory_2
-					}
+                    set_variable = { time_left_building_2 = 80}
+                    add_to_array = {
+                        array = global.building_state_constructer_2
+                        value = THIS.id
+                    }
 				}
 				ROOT = {
 					subtract_from_variable = { currency_amount^primary_currency = 500 }
@@ -456,10 +480,11 @@ scripted_gui = {
 						clear_building_1_effects = yes
 					}
 					set_variable = { building_1 = token:starfighter_factory_3 }
-					starfighter_factory_3_add_effect = yes
-					ROOT = {
-						add_ideas = starfighter_factory_3
-					}
+                    set_variable = { time_left_building_1 = 80}
+                    add_to_array = {
+                        array = global.building_state_constructer_1
+                        value = THIS.id
+                    }
 				}
 				if = {
 					limit = {
@@ -471,10 +496,11 @@ scripted_gui = {
 						clear_building_2_effects = yes
 					}
 					set_variable = { building_2 = token:starfighter_factory_3 }
-					starfighter_factory_3_add_effect = yes
-					ROOT = {
-						add_ideas = starfighter_factory_3
-					}
+                    set_variable = { time_left_building_2 = 80}
+                    add_to_array = {
+                        array = global.building_state_constructer_2
+                        value = THIS.id
+                    }
 				}
 				ROOT = {
 					subtract_from_variable = { currency_amount^primary_currency = 500 }
@@ -491,10 +517,11 @@ scripted_gui = {
 						clear_building_1_effects = yes
 					}
 					set_variable = { building_1 = token:starbomber_factory_2 }
-					starbomber_factory_2_add_effect = yes
-					ROOT = {
-						add_ideas = starfighter_factory_2
-					}
+                    set_variable = { time_left_building_1 = 80}
+                    add_to_array = {
+                        array = global.building_state_constructer_1
+                        value = THIS.id
+                    }
 				}
 				if = {
 					limit = {
@@ -506,10 +533,11 @@ scripted_gui = {
 						clear_building_2_effects = yes
 					}
 					set_variable = { building_2 = token:starbomber_factory_2 }
-					starbomber_factory_2_add_effect = yes
-					ROOT = {
-						add_ideas = starfighter_factory_2
-					}
+                    set_variable = { time_left_building_2 = 80}
+                    add_to_array = {
+                        array = global.building_state_constructer_2
+                        value = THIS.id
+                    }
 				}
 				ROOT = {
 					subtract_from_variable = { currency_amount^primary_currency = 500 }
@@ -526,10 +554,11 @@ scripted_gui = {
 						clear_building_1_effects = yes
 					}
 					set_variable = { building_1 = token:starbomber_factory_3 }
-					starbomber_factory_3_add_effect = yes
-					ROOT = {
-						add_ideas = starfighter_factory_3
-					}
+                    set_variable = { time_left_building_1 = 80}
+                    add_to_array = {
+                        array = global.building_state_constructer_1
+                        value = THIS.id
+                    }
 				}
 				if = {
 					limit = {
@@ -541,10 +570,11 @@ scripted_gui = {
 						clear_building_2_effects = yes
 					}
 					set_variable = { building_2 = token:starbomber_factory_3 }
-					starbomber_factory_3_add_effect = yes
-					ROOT = {
-						add_ideas = starfighter_factory_3
-					}
+                    set_variable = { time_left_building_2 = 80}
+                    add_to_array = {
+                        array = global.building_state_constructer_2
+                        value = THIS.id
+                    }
 				}
 				ROOT = {
 					subtract_from_variable = { currency_amount^primary_currency = 500 }
@@ -857,10 +887,11 @@ scripted_gui = {
 						clear_building_1_effects = yes
 					}
 					set_variable = { building_1 = token:arms_factory_1 }
-					arms_factory_1_add_effect = yes
-					ROOT = {
-						add_ideas = arms_factory_1
-					}
+                    set_variable = { time_left_building_1 = 80}
+                    add_to_array = {
+                        array = global.building_state_constructer_1
+                        value = THIS.id
+                    }
 				}
 				if = {
 					limit = {
@@ -872,10 +903,11 @@ scripted_gui = {
 						clear_building_2_effects = yes
 					}
 					set_variable = { building_2 = token:arms_factory_1 }
-					arms_factory_1_add_effect = yes
-					ROOT = {
-						add_ideas = arms_factory_1
-					}
+                    set_variable = { time_left_building_2 = 80}
+                    add_to_array = {
+                        array = global.building_state_constructer_2
+                        value = THIS.id
+                    }
 				}
 				ROOT = {
 					subtract_from_variable = { currency_amount^primary_currency = 500 }
@@ -892,10 +924,11 @@ scripted_gui = {
 						clear_building_1_effects = yes
 					}
 					set_variable = { building_1 = token:soft_arms_factory_2 }
-					soft_arms_factory_2_add_effect = yes
-					ROOT = {
-						add_ideas = soft_arms_factory_2
-					}
+                    set_variable = { time_left_building_1 = 80}
+                    add_to_array = {
+                        array = global.building_state_constructer_1
+                        value = THIS.id
+                    }
 				}
 				if = {
 					limit = {
@@ -907,10 +940,11 @@ scripted_gui = {
 						clear_building_2_effects = yes
 					}
 					set_variable = { building_2 = token:soft_arms_factory_2 }
-					soft_arms_factory_2_add_effect = yes
-					ROOT = {
-						add_ideas = soft_arms_factory_2
-					}
+                    set_variable = { time_left_building_2 = 80}
+                    add_to_array = {
+                        array = global.building_state_constructer_2
+                        value = THIS.id
+                    }
 				}
 				ROOT = {
 					subtract_from_variable = { currency_amount^primary_currency = 500 }
@@ -927,10 +961,11 @@ scripted_gui = {
 						clear_building_1_effects = yes
 					}
 					set_variable = { building_1 = token:soft_arms_factory_3 }
-					soft_arms_factory_3_add_effect = yes
-					ROOT = {
-						add_ideas = soft_arms_factory_3
-					}
+                    set_variable = { time_left_building_1 = 80}
+                    add_to_array = {
+                        array = global.building_state_constructer_1
+                        value = THIS.id
+                    }
 				}
 				if = {
 					limit = {
@@ -942,10 +977,11 @@ scripted_gui = {
 						clear_building_2_effects = yes
 					}
 					set_variable = { building_2 = token:soft_arms_factory_3 }
-					soft_arms_factory_3_add_effect = yes
-					ROOT = {
-						add_ideas = soft_arms_factory_3
-					}
+                    set_variable = { time_left_building_2 = 80}
+                    add_to_array = {
+                        array = global.building_state_constructer_2
+                        value = THIS.id
+                    }
 				}
 				ROOT = {
 					subtract_from_variable = { currency_amount^primary_currency = 500 }
@@ -962,10 +998,11 @@ scripted_gui = {
 						clear_building_1_effects = yes
 					}
 					set_variable = { building_1 = token:tank_factory_2 }
-					tank_factory_2_add_effect = yes
-					ROOT = {
-						add_ideas = tank_factory_2
-					}
+                    set_variable = { time_left_building_1 = 80}
+                    add_to_array = {
+                        array = global.building_state_constructer_1
+                        value = THIS.id
+                    }
 				}
 				if = {
 					limit = {
@@ -977,10 +1014,11 @@ scripted_gui = {
 						clear_building_2_effects = yes
 					}
 					set_variable = { building_2 = token:tank_factory_2 }
-					tank_factory_2_add_effect = yes
-					ROOT = {
-						add_ideas = tank_factory_2
-					}
+                    set_variable = { time_left_building_2 = 80}
+                    add_to_array = {
+                        array = global.building_state_constructer_2
+                        value = THIS.id
+                    }
 				}
 				ROOT = {
 					subtract_from_variable = { currency_amount^primary_currency = 500 }
@@ -997,10 +1035,11 @@ scripted_gui = {
 						clear_building_1_effects = yes
 					}
 					set_variable = { building_1 = token:tank_factory_3 }
-					tank_factory_3_add_effect = yes
-					ROOT = {
-						add_ideas = tank_factory_3
-					}
+                    set_variable = { time_left_building_1 = 80}
+                    add_to_array = {
+                        array = global.building_state_constructer_1
+                        value = THIS.id
+                    }
 				}
 				if = {
 					limit = {
@@ -1012,10 +1051,11 @@ scripted_gui = {
 						clear_building_2_effects = yes
 					}
 					set_variable = { building_2 = token:tank_factory_3 }
-					tank_factory_3_add_effect = yes
-					ROOT = {
-						add_ideas = tank_factory_3
-					}
+                    set_variable = { time_left_building_2 = 80}
+                    add_to_array = {
+                        array = global.building_state_constructer_2
+                        value = THIS.id
+                    }
 				}
 				ROOT = {
 					subtract_from_variable = { currency_amount^primary_currency = 500 }
@@ -1032,9 +1072,6 @@ scripted_gui = {
 						clear_building_1_effects = yes
 					}
 					set_variable = { building_1 = token:training_facilities_1 }
-					ROOT = {
-						add_ideas = training_facilities_1
-					}
 				}
 				if = {
 					limit = {
@@ -1046,9 +1083,6 @@ scripted_gui = {
 						clear_building_2_effects = yes
 					}
 					set_variable = { building_2 = token:training_facilities_1 }
-					ROOT = {
-						add_ideas = training_facilities_1
-					}
 				}
 				ROOT = {
 					subtract_from_variable = { currency_amount^primary_currency = 500 }
@@ -1065,9 +1099,6 @@ scripted_gui = {
 						clear_building_1_effects = yes
 					}
 					set_variable = { building_1 = token:special_forces_training_2 }
-					ROOT = {
-						add_ideas = special_forces_training_2
-					}
 				}
 				if = {
 					limit = {
@@ -1079,9 +1110,6 @@ scripted_gui = {
 						clear_building_2_effects = yes
 					}
 					set_variable = { building_2 = token:special_forces_training_2 }
-					ROOT = {
-						add_ideas = special_forces_training_2
-					}
 				}
 				ROOT = {
 					subtract_from_variable = { currency_amount^primary_currency = 500 }
@@ -1098,9 +1126,6 @@ scripted_gui = {
 						clear_building_1_effects = yes
 					}
 					set_variable = { building_1 = token:special_forces_training_3 }
-					ROOT = {
-						add_ideas = special_forces_training_3
-					}
 				}
 				if = {
 					limit = {
@@ -1112,9 +1137,6 @@ scripted_gui = {
 						clear_building_2_effects = yes
 					}
 					set_variable = { building_2 = token:special_forces_training_3 }
-					ROOT = {
-						add_ideas = special_forces_training_3
-					}
 				}
 				ROOT = {
 					subtract_from_variable = { currency_amount^primary_currency = 500 }
@@ -1131,9 +1153,6 @@ scripted_gui = {
 						clear_building_1_effects = yes
 					}
 					set_variable = { building_1 = token:military_bootcamp_2 }
-					ROOT = {
-						add_ideas = military_bootcamp_2
-					}
 				}
 				if = {
 					limit = {
@@ -1145,9 +1164,6 @@ scripted_gui = {
 						clear_building_2_effects = yes
 					}
 					set_variable = { building_2 = token:military_bootcamp_2 }
-					ROOT = {
-						add_ideas = military_bootcamp_2
-					}
 				}
 				ROOT = {
 					subtract_from_variable = { currency_amount^primary_currency = 500 }
@@ -1164,9 +1180,6 @@ scripted_gui = {
 						clear_building_1_effects = yes
 					}
 					set_variable = { building_1 = token:military_bootcamp_3 }
-					ROOT = {
-						add_ideas = military_bootcamp_3
-					}
 				}
 				if = {
 					limit = {
@@ -1178,9 +1191,6 @@ scripted_gui = {
 						clear_building_2_effects = yes
 					}
 					set_variable = { building_2 = token:military_bootcamp_3 }
-					ROOT = {
-						add_ideas = military_bootcamp_3
-					}
 				}
 				ROOT = {
 					subtract_from_variable = { currency_amount^primary_currency = 500 }
@@ -1197,10 +1207,11 @@ scripted_gui = {
 						clear_building_1_effects = yes
 					}
 					set_variable = { building_1 = token:anti_air_1 }
-					anti_air_1_add_effect = yes
-					ROOT = {
-						add_ideas = anti_air_1
-					}
+                    set_variable = { time_left_building_1 = 80}
+                    add_to_array = {
+                        array = global.building_state_constructer_1
+                        value = THIS.id
+                    }
 				}
 				if = {
 					limit = {
@@ -1212,10 +1223,11 @@ scripted_gui = {
 						clear_building_2_effects = yes
 					}
 					set_variable = { building_2 = token:anti_air_1 }
-					anti_air_1_add_effect = yes
-					ROOT = {
-						add_ideas = anti_air_1
-					}
+                    set_variable = { time_left_building_2 = 80}
+                    add_to_array = {
+                        array = global.building_state_constructer_2
+                        value = THIS.id
+                    }
 				}
 				ROOT = {
 					subtract_from_variable = { currency_amount^primary_currency = 500 }
@@ -1232,10 +1244,11 @@ scripted_gui = {
 						clear_building_1_effects = yes
 					}
 					set_variable = { building_1 = token:anti_air_2 }
-					anti_air_2_add_effect = yes
-					ROOT = {
-						add_ideas = anti_air_2
-					}
+                    set_variable = { time_left_building_1 = 80}
+                    add_to_array = {
+                        array = global.building_state_constructer_1
+                        value = THIS.id
+                    }
 				}
 				if = {
 					limit = {
@@ -1247,10 +1260,11 @@ scripted_gui = {
 						clear_building_2_effects = yes
 					}
 					set_variable = { building_2 = token:anti_air_2 }
-					anti_air_2_add_effect = yes
-					ROOT = {
-						add_ideas = anti_air_2
-					}
+                    set_variable = { time_left_building_2 = 80}
+                    add_to_array = {
+                        array = global.building_state_constructer_2
+                        value = THIS.id
+                    }
 				}
 				ROOT = {
 					subtract_from_variable = { currency_amount^primary_currency = 500 }
@@ -1267,10 +1281,11 @@ scripted_gui = {
 						clear_building_1_effects = yes
 					}
 					set_variable = { building_1 = token:anti_air_3 }
-					anti_air_3_add_effect = yes
-					ROOT = {
-						add_ideas = anti_air_3
-					}
+                    set_variable = { time_left_building_1 = 80}
+                    add_to_array = {
+                        array = global.building_state_constructer_1
+                        value = THIS.id
+                    }
 				}
 				if = {
 					limit = {
@@ -1282,10 +1297,11 @@ scripted_gui = {
 						clear_building_2_effects = yes
 					}
 					set_variable = { building_2 = token:anti_air_3 }
-					anti_air_3_add_effect = yes
-					ROOT = {
-						add_ideas = anti_air_3
-					}
+                    set_variable = { time_left_building_2 = 80}
+                    add_to_array = {
+                        array = global.building_state_constructer_2
+                        value = THIS.id
+                    }
 				}
 				ROOT = {
 					subtract_from_variable = { currency_amount^primary_currency = 500 }
@@ -1622,10 +1638,11 @@ scripted_gui = {
 						clear_building_1_effects = yes
 					}
 					set_variable = { building_1 = token:intelligence_centre_1 }
-					intelligence_centre_1_add_effect = yes
-					ROOT = {
-						add_ideas = intelligence_centre_1
-					}
+                    set_variable = { time_left_building_1 = 80}
+                    add_to_array = {
+                        array = global.building_state_constructer_1
+                        value = THIS.id
+                    }
 				}
 				if = {
 					limit = {
@@ -1637,10 +1654,11 @@ scripted_gui = {
 						clear_building_2_effects = yes
 					}
 					set_variable = { building_2 = token:intelligence_centre_1 }
-					intelligence_centre_1_add_effect = yes
-					ROOT = {
-						add_ideas = intelligence_centre_1
-					}
+                    set_variable = { time_left_building_2 = 80}
+                    add_to_array = {
+                        array = global.building_state_constructer_2
+                        value = THIS.id
+                    }
 				}
 				ROOT = {
 					subtract_from_variable = { currency_amount^primary_currency = 500 }
@@ -1657,7 +1675,11 @@ scripted_gui = {
 						clear_building_1_effects = yes
 					}
 					set_variable = { building_1 = token:monitoring_beacon_2 }
-					monitoring_beacon_2_add_effect = yes
+                    set_variable = { time_left_building_1 = 80}
+                    add_to_array = {
+                        array = global.building_state_constructer_1
+                        value = THIS.id
+                    }
 				}
 				if = {
 					limit = {
@@ -1669,7 +1691,11 @@ scripted_gui = {
 						clear_building_2_effects = yes
 					}
 					set_variable = { building_2 = token:monitoring_beacon_2 }
-					monitoring_beacon_2_add_effect = yes
+                    set_variable = { time_left_building_2 = 80}
+                    add_to_array = {
+                        array = global.building_state_constructer_2
+                        value = THIS.id
+                    }
 				}
 				ROOT = {
 					subtract_from_variable = { currency_amount^primary_currency = 500 }
@@ -1686,7 +1712,11 @@ scripted_gui = {
 						clear_building_1_effects = yes
 					}
 					set_variable = { building_1 = token:monitoring_beacon_3 }
-					monitoring_beacon_3_add_effect = yes
+                    set_variable = { time_left_building_1 = 80}
+                    add_to_array = {
+                        array = global.building_state_constructer_1
+                        value = THIS.id
+                    }
 				}
 				if = {
 					limit = {
@@ -1698,7 +1728,11 @@ scripted_gui = {
 						clear_building_2_effects = yes
 					}
 					set_variable = { building_2 = token:monitoring_beacon_3 }
-					monitoring_beacon_3_add_effect = yes
+                    set_variable = { time_left_building_2 = 80}
+                    add_to_array = {
+                        array = global.building_state_constructer_2
+                        value = THIS.id
+                    }
 				}
 				ROOT = {
 					subtract_from_variable = { currency_amount^primary_currency = 500 }
@@ -1715,9 +1749,6 @@ scripted_gui = {
 						clear_building_1_effects = yes
 					}
 					set_variable = { building_1 = token:spy_academy_2 }
-					ROOT = {
-						add_ideas = spy_academy_2
-					}
 				}
 				if = {
 					limit = {
@@ -1729,9 +1760,6 @@ scripted_gui = {
 						clear_building_2_effects = yes
 					}
 					set_variable = { building_2 = token:spy_academy_2 }
-					ROOT = {
-						add_ideas = spy_academy_2
-					}
 				}
 				ROOT = {
 					subtract_from_variable = { currency_amount^primary_currency = 500 }
@@ -1748,9 +1776,6 @@ scripted_gui = {
 						clear_building_1_effects = yes
 					}
 					set_variable = { building_1 = token:spy_academy_3 }
-					ROOT = {
-						add_ideas = spy_academy_3
-					}
 				}
 				if = {
 					limit = {
@@ -1762,9 +1787,6 @@ scripted_gui = {
 						clear_building_2_effects = yes
 					}
 					set_variable = { building_2 = token:spy_academy_3 }
-					ROOT = {
-						add_ideas = spy_academy_3
-					}
 				}
 				ROOT = {
 					subtract_from_variable = { currency_amount^primary_currency = 500 }
@@ -1781,9 +1803,6 @@ scripted_gui = {
 						clear_building_1_effects = yes
 					}
 					set_variable = { building_1 = token:research_center_1 }
-					ROOT = {
-						add_ideas = research_center_1
-					}
 				}
 				if = {
 					limit = {
@@ -1795,9 +1814,6 @@ scripted_gui = {
 						clear_building_2_effects = yes
 					}
 					set_variable = { building_2 = token:research_center_1 }
-					ROOT = {
-						add_ideas = research_center_1
-					}
 				}
 				ROOT = {
 					subtract_from_variable = { currency_amount^primary_currency = 500 }
@@ -1814,9 +1830,6 @@ scripted_gui = {
 						clear_building_1_effects = yes
 					}
 					set_variable = { building_1 = token:research_center_2 }
-					ROOT = {
-						add_ideas = research_center_2
-					}
 				}
 				if = {
 					limit = {
@@ -1828,9 +1841,6 @@ scripted_gui = {
 						clear_building_2_effects = yes
 					}
 					set_variable = { building_2 = token:research_center_2 }
-					ROOT = {
-						add_ideas = research_center_2
-					}
 				}
 				ROOT = {
 					subtract_from_variable = { currency_amount^primary_currency = 500 }
@@ -1847,9 +1857,6 @@ scripted_gui = {
 						clear_building_1_effects = yes
 					}
 					set_variable = { building_1 = token:research_center_3 }
-					ROOT = {
-						add_ideas = research_center_3
-					}
 				}
 				if = {
 					limit = {
@@ -1861,9 +1868,6 @@ scripted_gui = {
 						clear_building_2_effects = yes
 					}
 					set_variable = { building_2 = token:research_center_3 }
-					ROOT = {
-						add_ideas = research_center_3
-					}
 				}
 				ROOT = {
 					subtract_from_variable = { currency_amount^primary_currency = 500 }
@@ -1880,9 +1884,6 @@ scripted_gui = {
 						clear_building_1_effects = yes
 					}
 					set_variable = { building_1 = token:military_academy_1 }
-					ROOT = {
-						add_ideas = military_academy_1
-					}
 				}
 				if = {
 					limit = {
@@ -1894,9 +1895,6 @@ scripted_gui = {
 						clear_building_2_effects = yes
 					}
 					set_variable = { building_2 = token:military_academy_1 }
-					ROOT = {
-						add_ideas = military_academy_1
-					}
 				}
 				ROOT = {
 					subtract_from_variable = { currency_amount^primary_currency = 500 }
@@ -1913,9 +1911,6 @@ scripted_gui = {
 						clear_building_1_effects = yes
 					}
 					set_variable = { building_1 = token:military_college_2 }
-					ROOT = {
-						add_ideas = military_college_2
-					}
 				}
 				if = {
 					limit = {
@@ -1927,9 +1922,6 @@ scripted_gui = {
 						clear_building_2_effects = yes
 					}
 					set_variable = { building_2 = token:military_college_2 }
-					ROOT = {
-						add_ideas = military_college_2
-					}
 				}
 				ROOT = {
 					subtract_from_variable = { currency_amount^primary_currency = 500 }
@@ -1946,9 +1938,6 @@ scripted_gui = {
 						clear_building_1_effects = yes
 					}
 					set_variable = { building_1 = token:military_college_3 }
-					ROOT = {
-						add_ideas = military_college_3
-					}
 				}
 				if = {
 					limit = {
@@ -1960,9 +1949,6 @@ scripted_gui = {
 						clear_building_2_effects = yes
 					}
 					set_variable = { building_2 = token:military_college_3 }
-					ROOT = {
-						add_ideas = military_college_3
-					}
 				}
 				ROOT = {
 					subtract_from_variable = { currency_amount^primary_currency = 500 }
@@ -1979,9 +1965,6 @@ scripted_gui = {
 						clear_building_1_effects = yes
 					}
 					set_variable = { building_1 = token:naval_academy_2 }
-					ROOT = {
-						add_ideas = naval_academy_2
-					}
 				}
 				if = {
 					limit = {
@@ -1993,9 +1976,6 @@ scripted_gui = {
 						clear_building_2_effects = yes
 					}
 					set_variable = { building_2 = token:naval_academy_2 }
-					ROOT = {
-						add_ideas = naval_academy_2
-					}
 				}
 				ROOT = {
 					subtract_from_variable = { currency_amount^primary_currency = 500 }
@@ -2012,9 +1992,6 @@ scripted_gui = {
 						clear_building_1_effects = yes
 					}
 					set_variable = { building_1 = token:naval_academy_3 }
-					ROOT = {
-						add_ideas = naval_academy_3
-					}
 				}
 				if = {
 					limit = {
@@ -2026,9 +2003,6 @@ scripted_gui = {
 						clear_building_2_effects = yes
 					}
 					set_variable = { building_2 = token:naval_academy_3 }
-					ROOT = {
-						add_ideas = naval_academy_3
-					}
 				}
 				ROOT = {
 					subtract_from_variable = { currency_amount^primary_currency = 500 }
@@ -2045,9 +2019,6 @@ scripted_gui = {
 						clear_building_1_effects = yes
 					}
 					set_variable = { building_1 = token:starfighter_academy_3 }
-					ROOT = {
-						add_ideas = starfighter_factory_3
-					}
 				}
 				if = {
 					limit = {
@@ -2059,9 +2030,6 @@ scripted_gui = {
 						clear_building_2_effects = yes
 					}
 					set_variable = { building_2 = token:starfighter_academy_3 }
-					ROOT = {
-						add_ideas = starfighter_factory_3
-					}
 				}
 				ROOT = {
 					subtract_from_variable = { currency_amount^primary_currency = 500 }
@@ -2078,9 +2046,6 @@ scripted_gui = {
 						clear_building_1_effects = yes
 					}
 					set_variable = { building_1 = token:taxation_center_1 }
-					ROOT = {
-						add_ideas = taxation_center_1
-					}
 				}
 				if = {
 					limit = {
@@ -2092,9 +2057,6 @@ scripted_gui = {
 						clear_building_2_effects = yes
 					}
 					set_variable = { building_2 = token:taxation_center_1 }
-					ROOT = {
-						add_ideas = taxation_center_1
-					}
 				}
 				ROOT = {
 					subtract_from_variable = { currency_amount^primary_currency = 500 }
@@ -2111,9 +2073,6 @@ scripted_gui = {
 						clear_building_1_effects = yes
 					}
 					set_variable = { building_1 = token:taxation_center_2 }
-					ROOT = {
-						add_ideas = taxation_center_2
-					}
 				}
 				if = {
 					limit = {
@@ -2125,9 +2084,6 @@ scripted_gui = {
 						clear_building_2_effects = yes
 					}
 					set_variable = { building_2 = token:taxation_center_2 }
-					ROOT = {
-						add_ideas = taxation_center_2
-					}
 				}
 				ROOT = {
 					subtract_from_variable = { currency_amount^primary_currency = 500 }
@@ -2144,9 +2100,6 @@ scripted_gui = {
 						clear_building_1_effects = yes
 					}
 					set_variable = { building_1 = token:taxation_center_3 }
-					ROOT = {
-						add_ideas = taxation_center_3
-					}
 				}
 				if = {
 					limit = {
@@ -2158,9 +2111,6 @@ scripted_gui = {
 						clear_building_2_effects = yes
 					}
 					set_variable = { building_2 = token:taxation_center_3 }
-					ROOT = {
-						add_ideas = taxation_center_3
-					}
 				}
 				ROOT = {
 					subtract_from_variable = { currency_amount^primary_currency = 500 }
@@ -2585,15 +2535,6 @@ scripted_gui = {
 						clear_building_1_effects = yes
 					}
 					set_variable = { building_1 = unique_building_on_state }## unique_building_on_state is a state variable holding the states unique building idea, it is used to then locate its add and removal effects
-					meta_effect = {
-						text = {
-							[BUILDING_NAME]_add_effect = yes
-						}
-						BUILDING_NAME = "[?building_1.GetTokenKey]"
-					}
-					ROOT = {
-						add_ideas = token:building_1 ## adds the idea that is linked to building 1 (unique resource building)
-					}
 				}
 				if = {
 					limit = {
@@ -2605,15 +2546,6 @@ scripted_gui = {
 						clear_building_2_effects = yes
 					}
 					set_variable = { building_2 = unique_building_on_state }
-					meta_effect = {
-						text = {
-							[BUILDING_NAME]_add_effect = yes
-						}
-						BUILDING_NAME = "[?building_2.GetTokenKey]"
-					}
-					ROOT = {
-						add_ideas = token:building_2 
-					}
 				}
 				ROOT = {
 					subtract_from_variable = { currency_amount^primary_currency = 500 }
@@ -2630,15 +2562,6 @@ scripted_gui = {
 						clear_building_1_effects = yes
 					}
 					set_variable = { building_1 = unique_building_on_state }## unique_building_on_state is a state variable holding the states unique building idea, it is used to then locate its add and removal effects
-					meta_effect = {
-						text = {
-							[BUILDING_NAME]_2_add_effect = yes
-							ROOT = {
-								add_ideas = [BUILDING_NAME]_2
-							}
-						}
-						BUILDING_NAME = "[?building_1.GetTokenKey]"
-					}
 				}
 				if = {
 					limit = {
@@ -2650,15 +2573,6 @@ scripted_gui = {
 						clear_building_2_effects = yes
 					}
 					set_variable = { building_2 = unique_building_on_state }
-					meta_effect = {
-						text = {
-							[BUILDING_NAME]_2_add_effect = yes
-							ROOT = {
-								add_ideas = [BUILDING_NAME]_2
-							}
-						}
-						BUILDING_NAME = "[?building_2.GetTokenKey]"
-					}
 				}
 				ROOT = {
 					subtract_from_variable = { currency_amount^primary_currency = 500 }
@@ -2675,15 +2589,6 @@ scripted_gui = {
 						clear_building_1_effects = yes
 					}
 					set_variable = { building_1 = unique_building_on_state }## unique_building_on_state is a state variable holding the states unique building idea, it is used to then locate its add and removal effects
-					meta_effect = {
-						text = {
-							[BUILDING_NAME]_3_add_effect = yes
-							ROOT = {
-								add_ideas = [BUILDING_NAME]_3
-							}
-						}
-						BUILDING_NAME = "[?building_1.GetTokenKey]"
-					}
 				}
 				if = {
 					limit = {
@@ -2695,15 +2600,6 @@ scripted_gui = {
 						clear_building_2_effects = yes
 					}
 					set_variable = { building_2 = unique_building_on_state }
-					meta_effect = {
-						text = {
-							[BUILDING_NAME]_3_add_effect = yes
-							ROOT = {
-								add_ideas = [BUILDING_NAME]_2
-							}
-						}
-						BUILDING_NAME = "[?building_2.GetTokenKey]"
-					}
 				}
 				ROOT = {
 					subtract_from_variable = { currency_amount^primary_currency = 500 }
@@ -2720,9 +2616,6 @@ scripted_gui = {
 						clear_building_1_effects = yes
 					}
 					set_variable = { building_1 = token:homestead_1 }
-					ROOT = {
-						add_ideas = homestead_1
-					}
 				}
 				if = {
 					limit = {
@@ -2734,9 +2627,6 @@ scripted_gui = {
 						clear_building_2_effects = yes
 					}
 					set_variable = { building_2 = token:homestead_1 }
-					ROOT = {
-						add_ideas = homestead_1
-					}
 				}
 				ROOT = {
 					subtract_from_variable = { currency_amount^primary_currency = 500 }
@@ -2753,9 +2643,6 @@ scripted_gui = {
 						clear_building_1_effects = yes
 					}	
 					set_variable = { building_1 = token:homestead_2 }
-					ROOT = {
-						add_ideas = homestead_2
-					}
 				}
 				if = {
 					limit = {
@@ -2767,9 +2654,6 @@ scripted_gui = {
 						clear_building_2_effects = yes
 					}	
 					set_variable = { building_2 = token:homestead_2 }
-					ROOT = {
-						add_ideas = homestead_2
-					}
 				}
 				ROOT = {
 					subtract_from_variable = { currency_amount^primary_currency = 500 }
@@ -2786,9 +2670,6 @@ scripted_gui = {
 						clear_building_1_effects = yes
 					}	
 					set_variable = { building_1 = token:homestead_3 }
-					ROOT = {
-						add_ideas = homestead_3
-					}
 				}
 				if = {
 					limit = {
@@ -2800,9 +2681,6 @@ scripted_gui = {
 						clear_building_2_effects = yes
 					}	
 					set_variable = { building_2 = token:homestead_3 }
-					ROOT = {
-						add_ideas = homestead_3
-					}
 				}
 				ROOT = {
 					subtract_from_variable = { currency_amount^primary_currency = 500 }
@@ -2819,10 +2697,11 @@ scripted_gui = {
 						clear_building_1_effects = yes
 					}	
 					set_variable = { building_1 = token:corporate_office_1 }
-					corporate_office_1_add_effect = yes
-					ROOT = {
-						add_ideas = corporate_office_1
-					}
+                    set_variable = { time_left_building_1 = 80}
+                    add_to_array = {
+                        array = global.building_state_constructer_1
+                        value = THIS.id
+                    }
 				}
 				if = {
 					limit = {
@@ -2834,10 +2713,11 @@ scripted_gui = {
 						clear_building_2_effects = yes
 					}	
 					set_variable = { building_2 = token:corporate_office_1 }
-					corporate_office_1_add_effect = yes
-					ROOT = {
-						add_ideas = corporate_office_1
-					}
+                    set_variable = { time_left_building_2 = 80}
+                    add_to_array = {
+                        array = global.building_state_constructer_2
+                        value = THIS.id
+                    }
 				}
 				ROOT = {
 					subtract_from_variable = { currency_amount^primary_currency = 500 }
@@ -2854,10 +2734,11 @@ scripted_gui = {
 						clear_building_1_effects = yes
 					}	
 					set_variable = { building_1 = token:corporate_office_2 }
-					corporate_office_2_add_effect = yes
-					ROOT = {
-						add_ideas = corporate_office_2
-					}
+                    set_variable = { time_left_building_1 = 80}
+                    add_to_array = {
+                        array = global.building_state_constructer_1
+                        value = THIS.id
+                    }
 				}
 				if = {
 					limit = {
@@ -2869,10 +2750,11 @@ scripted_gui = {
 						clear_building_2_effects = yes
 					}	
 					set_variable = { building_2 = token:corporate_office_2 }
-					corporate_office_2_add_effect = yes
-					ROOT = {
-						add_ideas = corporate_office_2
-					}
+                    set_variable = { time_left_building_2 = 80}
+                    add_to_array = {
+                        array = global.building_state_constructer_2
+                        value = THIS.id
+                    }
 				}
 				ROOT = {
 					subtract_from_variable = { currency_amount^primary_currency = 500 }
@@ -2889,10 +2771,11 @@ scripted_gui = {
 						clear_building_1_effects = yes
 					}	
 					set_variable = { building_1 = token:corporate_office_3 }
-					corporate_office_3_add_effect = yes
-					ROOT = {
-						add_ideas = corporate_office_3
-					}
+                    set_variable = { time_left_building_1 = 80}
+                    add_to_array = {
+                        array = global.building_state_constructer_1
+                        value = THIS.id
+                    }
 				}
 				if = {
 					limit = {
@@ -2904,10 +2787,11 @@ scripted_gui = {
 						clear_building_2_effects = yes
 					}	
 					set_variable = { building_2 = token:corporate_office_3 }
-					corporate_office_3_add_effect = yes
-					ROOT = {
-						add_ideas = corporate_office_3
-					}
+                    set_variable = { time_left_building_2 = 80}
+                    add_to_array = {
+                        array = global.building_state_constructer_2
+                        value = THIS.id
+                    }
 				}
 				ROOT = {
 					subtract_from_variable = { currency_amount^primary_currency = 500 }
@@ -2924,10 +2808,11 @@ scripted_gui = {
 						clear_building_1_effects = yes
 					}	
 					set_variable = { building_1 = token:recycling_center_1 }
-					recycle_center_1_add_effect = yes
-					ROOT = {
-						add_ideas = recycle_center_1
-					}
+                    set_variable = { time_left_building_1 = 80}
+                    add_to_array = {
+                        array = global.building_state_constructer_1
+                        value = THIS.id
+                    }
 				}
 				if = {
 					limit = {
@@ -2939,10 +2824,11 @@ scripted_gui = {
 						clear_building_2_effects = yes
 					}	
 					set_variable = { building_2 = token:recycling_center_1 }
-					recycle_center_1_add_effect = yes
-					ROOT = {
-						add_ideas = recycle_center_1
-					}
+                    set_variable = { time_left_building_2 = 80}
+                    add_to_array = {
+                        array = global.building_state_constructer_2
+                        value = THIS.id
+                    }
 				}
 				ROOT = {
 					subtract_from_variable = { currency_amount^primary_currency = 500 }
@@ -2959,10 +2845,11 @@ scripted_gui = {
 						clear_building_1_effects = yes
 					}	
 					set_variable = { building_1 = token:recycling_center_2 }
-					recycle_center_2_add_effect = yes
-					ROOT = {
-						add_ideas = recycle_center_2
-					}
+                    set_variable = { time_left_building_1 = 80}
+                    add_to_array = {
+                        array = global.building_state_constructer_1
+                        value = THIS.id
+                    }
 				}
 				if = {
 					limit = {
@@ -2974,10 +2861,11 @@ scripted_gui = {
 						clear_building_2_effects = yes
 					}	
 					set_variable = { building_2 = token:recycling_center_2 }
-					recycle_center_2_add_effect = yes
-					ROOT = {
-						add_ideas = recycle_center_2
-					}
+                    set_variable = { time_left_building_2 = 80}
+                    add_to_array = {
+                        array = global.building_state_constructer_2
+                        value = THIS.id
+                    }
 				}
 				ROOT = {
 					subtract_from_variable = { currency_amount^primary_currency = 500 }
@@ -2994,10 +2882,12 @@ scripted_gui = {
 						clear_building_1_effects = yes
 					}	
 					set_variable = { building_1 = token:recycling_center_3 }
-					recycle_center_3_add_effect = yes
-					ROOT = {
-						add_ideas = recycle_center_3
-					}
+                    set_variable = { time_left_building_1 = 80}
+                    add_to_array = {
+                        array = global.building_state_constructer_1
+                        value = THIS.id
+                    }
+
 				}
 				if = {
 					limit = {
@@ -3009,10 +2899,11 @@ scripted_gui = {
 						clear_building_2_effects = yes
 					}	
 					set_variable = { building_2 = token:recycling_center_3 }
-					recycle_center_3_add_effect = yes
-					ROOT = {
-						add_ideas = recycle_center_3
-					}
+                    set_variable = { time_left_building_2 = 80}
+                    add_to_array = {
+                        array = global.building_state_constructer_2
+                        value = THIS.id
+                    }
 				}
 				ROOT = {
 					subtract_from_variable = { currency_amount^primary_currency = 500 }
