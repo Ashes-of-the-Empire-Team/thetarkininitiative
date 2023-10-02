@@ -18,11 +18,10 @@ scripted_gui = {
 					}
 					if = {
 						limit = {
-							has_state_flag = tile_blocker_building_1
+							NOT = {
+								has_state_flag = tile_blocker_building_1
+							}
 						}
-						clear_variable = building_1
-						### SETS TILE BLOCKER TO GET RID OF
-					}else = {
 						ROOT = {
 							if = {
 								limit = {
@@ -50,19 +49,26 @@ scripted_gui = {
 					limit = {
 						is_fully_controlled_by = ROOT
 					}
-					ROOT = {
-						if = {
-							limit = {
-								ROOT = {
-									has_country_flag = building_2_open
-								}
+					if = {
+						limit = {
+							NOT = {
+								has_state_flag = tile_blocker_building_2
 							}
-							clr_country_flag = building_2_open
-							clr_country_flag = building_1_open
 						}
-						else = {
-							set_country_flag = building_2_open
-							clr_country_flag = building_1_open
+						ROOT = {
+							if = {
+								limit = {
+									ROOT = {
+										has_country_flag = building_2_open
+									}
+								}
+								clr_country_flag = building_2_open
+								clr_country_flag = building_1_open
+							}
+							else = {
+								set_country_flag = building_2_open
+								clr_country_flag = building_1_open
+							}
 						}
 					}
 				}
@@ -72,12 +78,36 @@ scripted_gui = {
 				}
 			}
 			remove_building_1_click = {
-				set_temp_variable = {building_name_passer = building_1}
-				clear_building_1_effects = yes
+				if = {
+					limit = {
+						has_state_flag = tile_blocker_building_1
+					}
+					meta_effect = {
+						text = {
+							[BUILDING_NAME]_tile_blocker_cost_effect = yes ## ENACTS A CUSTOM TRIGGER IN BUILDING SCRIPTED EFFECTS
+						}
+						BUILDING_NAME = "[?building_1.GetTokenKey]"
+					}
+				}else = {
+					set_temp_variable = {building_name_passer = building_1}
+					clear_building_1_effects = yes
+				}
 			}
 			remove_building_2_click = {
-				set_temp_variable = {building_name_passer = building_2}
-				clear_building_2_effects = yes
+				if = {
+					limit = {
+						has_state_flag = tile_blocker_building_2
+					}
+					meta_effect = {
+						text = {
+							[BUILDING_NAME]_tile_blocker_cost_effect = yes ## ENACTS A CUSTOM TRIGGER IN BUILDING SCRIPTED EFFECTS
+						}
+						BUILDING_NAME = "[?building_2.GetTokenKey]"
+					}
+				}else = {
+					set_temp_variable = {building_name_passer = building_2}
+					clear_building_2_effects = yes
+				}
 			}
 		}
 		
@@ -1080,6 +1110,11 @@ scripted_gui = {
 						clear_building_1_effects = yes
 					}
 					set_variable = { building_1 = token:training_facilities_1 }
+					set_variable = { time_left_building_1 = 80}
+					add_to_array = {
+                        array = global.building_state_constructer_1
+                        value = THIS.id
+                    }
 				}
 				if = {
 					limit = {
@@ -1092,6 +1127,10 @@ scripted_gui = {
 					}
 					set_variable = { time_left_building_2 = 80}
 					set_variable = { building_2 = token:training_facilities_1 }
+					add_to_array = {
+                        array = global.building_state_constructer_2
+                        value = THIS.id
+                    }
 				}
 				ROOT = {
 					subtract_from_variable = { currency_amount^primary_currency = 500 }
@@ -1108,6 +1147,11 @@ scripted_gui = {
 						clear_building_1_effects = yes
 					}
 					set_variable = { building_1 = token:special_forces_training_2 }
+					set_variable = { time_left_building_1 = 80}
+					add_to_array = {
+                        array = global.building_state_constructer_1
+                        value = THIS.id
+                    }
 				}
 				if = {
 					limit = {
@@ -1119,6 +1163,11 @@ scripted_gui = {
 						clear_building_2_effects = yes
 					}
 					set_variable = { building_2 = token:special_forces_training_2 }
+					set_variable = { time_left_building_2 = 80}
+					add_to_array = {
+                        array = global.building_state_constructer_2
+                        value = THIS.id
+                    }
 				}
 				ROOT = {
 					subtract_from_variable = { currency_amount^primary_currency = 500 }
@@ -1135,6 +1184,11 @@ scripted_gui = {
 						clear_building_1_effects = yes
 					}
 					set_variable = { building_1 = token:special_forces_training_3 }
+					set_variable = { time_left_building_1 = 80}
+					add_to_array = {
+                        array = global.building_state_constructer_1
+                        value = THIS.id
+                    }
 				}
 				if = {
 					limit = {
@@ -1147,6 +1201,11 @@ scripted_gui = {
 					}
 					set_variable = { time_left_building_2 = 80}
 					set_variable = { building_2 = token:special_forces_training_3 }
+					add_to_array = {
+                        array = global.building_state_constructer_2
+                        value = THIS.id
+                    }
+					
 				}
 				ROOT = {
 					subtract_from_variable = { currency_amount^primary_currency = 500 }
@@ -1163,6 +1222,11 @@ scripted_gui = {
 						clear_building_1_effects = yes
 					}
 					set_variable = { building_1 = token:military_bootcamp_2 }
+					set_variable = { time_left_building_1 = 80}
+					add_to_array = {
+                        array = global.building_state_constructer_1
+                        value = THIS.id
+                    }
 				}
 				if = {
 					limit = {
@@ -1175,6 +1239,10 @@ scripted_gui = {
 					}
 					set_variable = { time_left_building_2 = 80}
 					set_variable = { building_2 = token:military_bootcamp_2 }
+					add_to_array = {
+                        array = global.building_state_constructer_2
+                        value = THIS.id
+                    }
 				}
 				ROOT = {
 					subtract_from_variable = { currency_amount^primary_currency = 500 }
@@ -1191,6 +1259,11 @@ scripted_gui = {
 						clear_building_1_effects = yes
 					}
 					set_variable = { building_1 = token:military_bootcamp_3 }
+					set_variable = { time_left_building_1 = 80}
+					add_to_array = {
+                        array = global.building_state_constructer_1
+                        value = THIS.id
+                    }
 				}
 				if = {
 					limit = {
@@ -1203,6 +1276,10 @@ scripted_gui = {
 					}
 					set_variable = { time_left_building_2 = 80}
 					set_variable = { building_2 = token:military_bootcamp_3 }
+					add_to_array = {
+                        array = global.building_state_constructer_2
+                        value = THIS.id
+                    }
 				}
 				ROOT = {
 					subtract_from_variable = { currency_amount^primary_currency = 500 }
@@ -1760,7 +1837,12 @@ scripted_gui = {
 					hidden_effect = {
 						clear_building_1_effects = yes
 					}
+					set_variable = { time_left_building_1 = 80}
 					set_variable = { building_1 = token:spy_academy_2 }
+					add_to_array = {
+                        array = global.building_state_constructer_1
+                        value = THIS.id
+                    }
 				}
 				if = {
 					limit = {
@@ -1773,6 +1855,10 @@ scripted_gui = {
 					}
 					set_variable = { time_left_building_2 = 80}
 					set_variable = { building_2 = token:spy_academy_2 }
+					add_to_array = {
+                        array = global.building_state_constructer_2
+                        value = THIS.id
+                    }
 				}
 				ROOT = {
 					subtract_from_variable = { currency_amount^primary_currency = 500 }
@@ -1788,6 +1874,11 @@ scripted_gui = {
 					hidden_effect = {
 						clear_building_1_effects = yes
 					}
+					set_variable = { time_left_building_1 = 80}
+					add_to_array = {
+                        array = global.building_state_constructer_1
+                        value = THIS.id
+                    }
 					set_variable = { building_1 = token:spy_academy_3 }
 				}
 				if = {
@@ -1801,6 +1892,10 @@ scripted_gui = {
 					}
 					set_variable = { time_left_building_2 = 80}
 					set_variable = { building_2 = token:spy_academy_3 }
+					add_to_array = {
+                        array = global.building_state_constructer_2
+                        value = THIS.id
+                    }
 				}
 				ROOT = {
 					subtract_from_variable = { currency_amount^primary_currency = 500 }
@@ -1818,6 +1913,10 @@ scripted_gui = {
 					}
 					set_variable = { building_1 = token:research_center_1 }
 					set_variable = { time_left_building_1 = 80}
+					add_to_array = {
+                        array = global.building_state_constructer_1
+                        value = THIS.id
+                    }
 				}
 				if = {
 					limit = {
@@ -1830,6 +1929,10 @@ scripted_gui = {
 					}
 					set_variable = { building_2 = token:research_center_1 }
 					set_variable = { time_left_building_2 = 80}
+					add_to_array = {
+                        array = global.building_state_constructer_2
+                        value = THIS.id
+                    }
 				}
 				ROOT = {
 					subtract_from_variable = { currency_amount^primary_currency = 500 }
@@ -1847,6 +1950,10 @@ scripted_gui = {
 					}
 					set_variable = { building_1 = token:research_center_2 }
 					set_variable = { time_left_building_1 = 80}
+					add_to_array = {
+                        array = global.building_state_constructer_1
+                        value = THIS.id
+                    }
 				}
 				if = {
 					limit = {
@@ -1859,6 +1966,10 @@ scripted_gui = {
 					}
 					set_variable = { building_2 = token:research_center_2 }
 					set_variable = { time_left_building_2 = 80}
+					add_to_array = {
+                        array = global.building_state_constructer_2
+                        value = THIS.id
+                    }
 				}
 				ROOT = {
 					subtract_from_variable = { currency_amount^primary_currency = 500 }
@@ -1876,6 +1987,10 @@ scripted_gui = {
 					}
 					set_variable = { building_1 = token:research_center_3 }
 					set_variable = { time_left_building_1 = 80}
+					add_to_array = {
+                        array = global.building_state_constructer_1
+                        value = THIS.id
+                    }
 				}
 				if = {
 					limit = {
@@ -1888,6 +2003,10 @@ scripted_gui = {
 					}
 					set_variable = { building_2 = token:research_center_3 }
 					set_variable = { time_left_building_2 = 80}
+					add_to_array = {
+                        array = global.building_state_constructer_2
+                        value = THIS.id
+                    }
 				}
 				ROOT = {
 					subtract_from_variable = { currency_amount^primary_currency = 500 }
@@ -1905,6 +2024,10 @@ scripted_gui = {
 					}
 					set_variable = { time_left_building_1 = 80}
 					set_variable = { building_1 = token:military_academy_1 }
+					add_to_array = {
+                        array = global.building_state_constructer_1
+                        value = THIS.id
+                    }
 				}
 				if = {
 					limit = {
@@ -1917,6 +2040,10 @@ scripted_gui = {
 					}
 					set_variable = { time_left_building_2 = 80}
 					set_variable = { building_2 = token:military_academy_1 }
+					add_to_array = {
+                        array = global.building_state_constructer_2
+                        value = THIS.id
+                    }
 				}
 				ROOT = {
 					subtract_from_variable = { currency_amount^primary_currency = 500 }
@@ -1934,6 +2061,10 @@ scripted_gui = {
 					}
 					set_variable = { time_left_building_1 = 80}
 					set_variable = { building_1 = token:military_college_2 }
+					add_to_array = {
+                        array = global.building_state_constructer_1
+                        value = THIS.id
+                    }
 				}
 				if = {
 					limit = {
@@ -1946,6 +2077,10 @@ scripted_gui = {
 					}
 					set_variable = { time_left_building_2 = 80}
 					set_variable = { building_2 = token:military_college_2 }
+					add_to_array = {
+                        array = global.building_state_constructer_2
+                        value = THIS.id
+                    }
 				}
 				ROOT = {
 					subtract_from_variable = { currency_amount^primary_currency = 500 }
@@ -1963,6 +2098,10 @@ scripted_gui = {
 					}
 					set_variable = { time_left_building_1 = 80}
 					set_variable = { building_1 = token:military_college_3 }
+					add_to_array = {
+                        array = global.building_state_constructer_1
+                        value = THIS.id
+                    }
 				}
 				if = {
 					limit = {
@@ -1975,6 +2114,10 @@ scripted_gui = {
 					}
 					set_variable = { time_left_building_2 = 80}
 					set_variable = { building_2 = token:military_college_3 }
+					add_to_array = {
+                        array = global.building_state_constructer_2
+                        value = THIS.id
+                    }
 				}
 				ROOT = {
 					subtract_from_variable = { currency_amount^primary_currency = 500 }
@@ -1992,6 +2135,10 @@ scripted_gui = {
 					}
 					set_variable = { time_left_building_1 = 80}
 					set_variable = { building_1 = token:naval_academy_2 }
+					add_to_array = {
+                        array = global.building_state_constructer_1
+                        value = THIS.id
+                    }
 				}
 				if = {
 					limit = {
@@ -2004,6 +2151,10 @@ scripted_gui = {
 					}
 					set_variable = { time_left_building_2 = 80}
 					set_variable = { building_2 = token:naval_academy_2 }
+					add_to_array = {
+                        array = global.building_state_constructer_2
+                        value = THIS.id
+                    }
 				}
 				ROOT = {
 					subtract_from_variable = { currency_amount^primary_currency = 500 }
@@ -2021,6 +2172,10 @@ scripted_gui = {
 					}
 					set_variable = { time_left_building_1 = 80}
 					set_variable = { building_1 = token:naval_academy_3 }
+					add_to_array = {
+                        array = global.building_state_constructer_1
+                        value = THIS.id
+                    }
 				}
 				if = {
 					limit = {
@@ -2033,6 +2188,10 @@ scripted_gui = {
 					}
 					set_variable = { time_left_building_2 = 80}
 					set_variable = { building_2 = token:naval_academy_3 }
+					add_to_array = {
+                        array = global.building_state_constructer_2
+                        value = THIS.id
+                    }
 				}
 				ROOT = {
 					subtract_from_variable = { currency_amount^primary_currency = 500 }
@@ -2050,6 +2209,10 @@ scripted_gui = {
 					}
 					set_variable = { time_left_building_1 = 80}
 					set_variable = { building_1 = token:starfighter_academy_3 }
+					add_to_array = {
+                        array = global.building_state_constructer_1
+                        value = THIS.id
+                    }
 				}
 				if = {
 					limit = {
@@ -2062,6 +2225,10 @@ scripted_gui = {
 					}
 					set_variable = { time_left_building_2 = 80}
 					set_variable = { building_2 = token:starfighter_academy_3 }
+					add_to_array = {
+                        array = global.building_state_constructer_2
+                        value = THIS.id
+                    }
 				}
 				ROOT = {
 					subtract_from_variable = { currency_amount^primary_currency = 500 }
@@ -2079,6 +2246,10 @@ scripted_gui = {
 					}
 					set_variable = { time_left_building_1 = 80}
 					set_variable = { building_1 = token:taxation_center_1 }
+					add_to_array = {
+                        array = global.building_state_constructer_1
+                        value = THIS.id
+                    }
 				}
 				if = {
 					limit = {
@@ -2091,6 +2262,10 @@ scripted_gui = {
 					}
 					set_variable = { time_left_building_2 = 80}
 					set_variable = { building_2 = token:taxation_center_1 }
+					add_to_array = {
+                        array = global.building_state_constructer_2
+                        value = THIS.id
+                    }
 				}
 				ROOT = {
 					subtract_from_variable = { currency_amount^primary_currency = 500 }
@@ -2108,6 +2283,10 @@ scripted_gui = {
 					}
 					set_variable = { time_left_building_1 = 80}
 					set_variable = { building_1 = token:taxation_center_2 }
+					add_to_array = {
+                        array = global.building_state_constructer_1
+                        value = THIS.id
+                    }
 				}
 				if = {
 					limit = {
@@ -2120,6 +2299,10 @@ scripted_gui = {
 					}
 					set_variable = { time_left_building_2 = 80}
 					set_variable = { building_2 = token:taxation_center_2 }
+					add_to_array = {
+                        array = global.building_state_constructer_2
+                        value = THIS.id
+                    }
 				}
 				ROOT = {
 					subtract_from_variable = { currency_amount^primary_currency = 500 }
@@ -2137,6 +2320,10 @@ scripted_gui = {
 					}
 					set_variable = { time_left_building_1 = 80}
 					set_variable = { building_1 = token:taxation_center_3 }
+					add_to_array = {
+                        array = global.building_state_constructer_1
+                        value = THIS.id
+                    }
 				}
 				if = {
 					limit = {
@@ -2149,6 +2336,10 @@ scripted_gui = {
 					}
 					set_variable = { time_left_building_2 = 80}
 					set_variable = { building_2 = token:taxation_center_3 }
+					add_to_array = {
+                        array = global.building_state_constructer_2
+                        value = THIS.id
+                    }
 				}
 				ROOT = {
 					subtract_from_variable = { currency_amount^primary_currency = 500 }
@@ -2574,6 +2765,10 @@ scripted_gui = {
 					}
 					set_variable = { time_left_building_1 = 80}
 					set_variable = { building_1 = unique_building_on_state }## unique_building_on_state is a state variable holding the states unique building idea, it is used to then locate its add and removal effects
+					add_to_array = {
+                        array = global.building_state_constructer_1
+                        value = THIS.id
+                    }
 				}
 				if = {
 					limit = {
@@ -2586,6 +2781,10 @@ scripted_gui = {
 					}
 					set_variable = { time_left_building_2 = 80}
 					set_variable = { building_2 = unique_building_on_state }
+					add_to_array = {
+                        array = global.building_state_constructer_2
+                        value = THIS.id
+                    }
 				}
 				ROOT = {
 					subtract_from_variable = { currency_amount^primary_currency = 500 }
@@ -2608,6 +2807,10 @@ scripted_gui = {
 						}
 						BUILDING_NAME = "[?unique_building_on_state.GetTokenKey]"
 					}
+					add_to_array = {
+                        array = global.building_state_constructer_1
+                        value = THIS.id
+                    }
 				}
 				if = {
 					limit = {
@@ -2625,6 +2828,10 @@ scripted_gui = {
 						}
 						BUILDING_NAME = "[?unique_building_on_state.GetTokenKey]"
 					}
+					add_to_array = {
+                        array = global.building_state_constructer_2
+                        value = THIS.id
+                    }
 				}
 				ROOT = {
 					subtract_from_variable = { currency_amount^primary_currency = 500 }
@@ -2647,6 +2854,10 @@ scripted_gui = {
 						}
 						BUILDING_NAME = "[?unique_building_on_state.GetTokenKey]"
 					}
+					add_to_array = {
+                        array = global.building_state_constructer_1
+                        value = THIS.id
+                    }
 					## unique_building_on_state is a state variable holding the states unique building idea, it is used to then locate its add and removal effects
 				}
 				if = {
@@ -2665,6 +2876,10 @@ scripted_gui = {
 						}
 						BUILDING_NAME = "[?unique_building_on_state.GetTokenKey]"
 					}
+					add_to_array = {
+                        array = global.building_state_constructer_2
+                        value = THIS.id
+                    }
 				}
 				ROOT = {
 					subtract_from_variable = { currency_amount^primary_currency = 500 }
@@ -2682,6 +2897,10 @@ scripted_gui = {
 					}
 					set_variable = { time_left_building_1 = 80}
 					set_variable = { building_1 = token:homestead_1 }
+					add_to_array = {
+                        array = global.building_state_constructer_1
+                        value = THIS.id
+                    }
 				}
 				if = {
 					limit = {
@@ -2694,6 +2913,10 @@ scripted_gui = {
 					}
 					set_variable = { time_left_building_2 = 80}
 					set_variable = { building_2 = token:homestead_1 }
+					add_to_array = {
+                        array = global.building_state_constructer_2
+                        value = THIS.id
+                    }
 				}
 				ROOT = {
 					subtract_from_variable = { currency_amount^primary_currency = 500 }
@@ -2711,6 +2934,10 @@ scripted_gui = {
 					}
 					set_variable = { time_left_building_1 = 80}	
 					set_variable = { building_1 = token:homestead_2 }
+					add_to_array = {
+                        array = global.building_state_constructer_1
+                        value = THIS.id
+                    }
 				}
 				if = {
 					limit = {
@@ -2723,6 +2950,10 @@ scripted_gui = {
 					}
 					set_variable = { time_left_building_2 = 80}	
 					set_variable = { building_2 = token:homestead_2 }
+					add_to_array = {
+                        array = global.building_state_constructer_2
+                        value = THIS.id
+                    }
 				}
 				ROOT = {
 					subtract_from_variable = { currency_amount^primary_currency = 500 }
@@ -2740,6 +2971,10 @@ scripted_gui = {
 					}
 					set_variable = { time_left_building_1 = 80}	
 					set_variable = { building_1 = token:homestead_3 }
+					add_to_array = {
+                        array = global.building_state_constructer_1
+                        value = THIS.id
+                    }
 				}
 				if = {
 					limit = {
@@ -2752,6 +2987,10 @@ scripted_gui = {
 					}
 					set_variable = { time_left_building_2 = 80}	
 					set_variable = { building_2 = token:homestead_3 }
+					add_to_array = {
+                        array = global.building_state_constructer_2
+                        value = THIS.id
+                    }
 				}
 				ROOT = {
 					subtract_from_variable = { currency_amount^primary_currency = 500 }

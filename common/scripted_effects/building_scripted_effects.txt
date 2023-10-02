@@ -605,13 +605,26 @@ kessel_coaxium_mines_3_remove_effect = {
 	}
 }
 
+#### TILE BLOCKERS ####
+shadowlands_tile_blocker_cost_effect = { ## EMPTY AS ONLY REMOVED BY FOCUS
 
+}
+shadowlands_spiders_tile_blocker_cost_effect = { ## EMPTY AS ONLY REMOVED BY FOCUS
 
+}
 
-building_test_effect_add_effect = {
-	set_variable = {building_2 = token:research_center_1}
-	set_temp_variable = {creation_building_variable = building_2}
-	owner = {
-		add_ideas = var:creation_building_variable
+### EXAMPLE
+coruscant_undercity_tile_blocker_cost_effect = { ## EXAMPLE OF COST BASED TILE BLOCKER
+	if = {
+		limit = {
+			has_political_power = 100
+			check_variable = {currency_amount^primary_currency > 150} ## ACTUAL TRIGGER TO DECIDE WHAT COST OF THE TILE BLOCKER IS
+		}
+		subtract_from_variable = { currency_amount^primary_currency = 150 }
+		add_political_power = -100
+
+		## BELOW IS ALWAYS NEEDED
+		set_temp_variable = {building_name_passer = building_1}  ### THIS IS WHATS ACTUALLY REMOVING THE BUILDING
+		clear_building_1_effects = yes
 	}
 }
