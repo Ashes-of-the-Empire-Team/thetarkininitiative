@@ -1,5 +1,5 @@
 # Ssi-Ruuvi Imperium Focus Tree
-# Made by Basil Stein
+# Made by Basil Stein & Garion132
 
 focus_tree = {
 	id = SSI_focus
@@ -17,12 +17,78 @@ focus_tree = {
 
 	#The Ssi-ruuvi war
 	focus = {
+		id = SSI_disbatch_the_expeditionary_fleets
+		icon = GFX_WIP_focus
+		cost = 3
+		x = 5
+		y = 0
+		prerequisite = {
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = SSI_taking_cattamascar
+		icon = GFX_WIP_focus
+		cost = 3
+		relative_position_id = SSI_disbatch_the_expeditionary_fleets
+		x = 0
+		y = 1
+		prerequisite = {
+			focus = SSI_disbatch_the_expeditionary_fleets
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = SSI_consecrating_cattamascar
+		icon = GFX_WIP_focus
+		cost = 3
+		relative_position_id = SSI_taking_cattamascar
+		x = 0
+		y = 1
+		prerequisite = {
+			focus = SSI_taking_cattamascar
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
 		id = SSI_invade_bakura
 		icon = GFX_WIP_focus
 		cost = 3
-		x = 6
+		relative_position_id = SSI_disbatch_the_expeditionary_fleets
+		x = 5
 		y = 1
 		prerequisite = {
+			focus = SSI_disbatch_the_expeditionary_fleets
 		}
 		search_filters = {
 		}
@@ -64,12 +130,61 @@ focus_tree = {
 		}
 	}
 	focus = {
+		id = SSI_consecrating_bakura
+		icon = GFX_WIP_focus
+		cost = 3
+		relative_position_id = SSI_invade_bakura
+		x = 0
+		y = 1
+		prerequisite = {
+			focus = SSI_invade_bakura
+		}
+		available = {
+			402={
+				owns_or_subject_of = yes
+			}
+			96={
+				owns_or_subject_of = yes
+			}
+			440={
+				owns_or_subject_of = yes
+			}
+			400={
+				owns_or_subject_of = yes
+			}
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			402={
+				add_core_of = ROOT
+			}
+			96={
+				add_core_of = ROOT
+			}
+			440={
+				add_core_of = ROOT
+			}
+			400={
+				add_core_of = ROOT
+			}
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
 		id = SSI_invade_the_chiss
 		icon = GFX_WIP_focus
 		cost = 3
-		x = 4
+		relative_position_id = SSI_disbatch_the_expeditionary_fleets
+		x = -5
 		y = 1
 		prerequisite = {
+			focus = SSI_disbatch_the_expeditionary_fleets
 		}
 		search_filters = {
 		}
@@ -121,4 +236,60 @@ focus_tree = {
 		}
 	}
 	
+	focus = {
+		id = SSI_conqerer_of_the_unknown_regions
+		icon = GFX_WIP_focus
+		cost = 3
+		#relative_position_id = SSI_disbatch_the_expeditionary_fleets
+		x = 2
+		y = 4
+		#prerequisite = {
+		#	focus = SSI_disbatch_the_expeditionary_fleets
+		#}
+		search_filters = {
+		}
+		available = {
+			controls_state = 440
+			controls_state = 346
+			controls_state = 51
+			controls_state = 44
+			controls_state = 37
+		}
+		mutually_exclusive = {
+			focus = SSI_recovering_from_the_sack_of_lwhekk
+		}
+		completion_reward = {
+			
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = SSI_recovering_from_the_sack_of_lwhekk
+		icon = GFX_WIP_focus
+		cost = 3
+		relative_position_id = SSI_conqerer_of_the_unknown_regions
+		x = 6
+		y = 0
+		#prerequisite = {
+		#	focus = SSI_disbatch_the_expeditionary_fleets
+		#}
+		search_filters = {
+		}
+		mutually_exclusive = {
+			focus = SSI_conqerer_of_the_unknown_regions
+		}
+		available = {
+			has_country_flag = SSI_sack_of_lwhekk
+		}
+		completion_reward = {
+			
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
 }
