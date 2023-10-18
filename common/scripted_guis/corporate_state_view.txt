@@ -81,7 +81,6 @@ scripted_gui = {
 				if = {
 					limit = {
 						has_state_flag = tile_blocker_building_1
-						is_fully_controlled_by = ROOT
 					}
 					meta_effect = {
 						text = {
@@ -116,6 +115,18 @@ scripted_gui = {
 		triggers = {
 			building_back_visible = {
 				#has_state_flag = senate_building
+			}
+			remove_building_1_visible = {
+				is_fully_controlled_by = ROOT
+				NOT = {
+					has_state_flag = wonder_built_no_destroy_1
+				}
+			}
+			remove_building_2_visible = {
+				is_fully_controlled_by = ROOT
+				NOT = {
+					has_state_flag = wonder_built_no_destroy_2
+				}
 			}
 		}
 
@@ -928,6 +939,9 @@ scripted_gui = {
 					}
 					set_variable = { building_1 = token:arms_factory_1 }
                     set_variable = { time_left_building_1 = 80}
+					set_temp_variable = {speed_multiplier_factor = modifier@production_speed_buildings_factor}
+					add_to_temp_variable = {speed_multiplier_factor = modifier@production_speed_buildings_factor}
+					divide_variable = {time_left_building_1 = modifier@production_speed_buildings_factor}
                     add_to_array = {
                         array = global.building_state_constructer_1
                         value = THIS.id
@@ -2771,6 +2785,7 @@ scripted_gui = {
                         array = global.building_state_constructer_1
                         value = THIS.id
                     }
+					set_state_flag = wonder_built_no_destroy_1
 				}
 				if = {
 					limit = {
@@ -2787,6 +2802,7 @@ scripted_gui = {
                         array = global.building_state_constructer_2
                         value = THIS.id
                     }
+					set_state_flag = wonder_built_no_destroy_2
 				}
 				ROOT = {
 					subtract_from_variable = { currency_amount^primary_currency = 500 }
@@ -3348,12 +3364,81 @@ scripted_gui = {
 		triggers = {
 			unique_building_visible = {
 				has_variable = unique_building_on_state
+				if = {
+					limit = {
+						NOT = {
+							has_state_flag = wonder_built_no_destroy_1
+							has_state_flag = wonder_built_no_destroy_2
+						}
+					}
+					always = yes
+				}else_if = {
+					limit = {
+						has_state_flag = building_1_open
+						has_state_flag = wonder_built_no_destroy_1
+					}
+					always = yes
+				}else_if = {
+					limit = {
+						has_state_flag = building_2_open
+						has_state_flag = wonder_built_no_destroy_2
+					}
+					always = yes
+				}else = {
+					always = no
+				}
 			}
 			unique_building_2_visible = {
 				has_variable = unique_building_on_state
+				if = {
+					limit = {
+						NOT = {
+							has_state_flag = wonder_built_no_destroy_1
+							has_state_flag = wonder_built_no_destroy_2
+						}
+					}
+					always = yes
+				}else_if = {
+					limit = {
+						has_state_flag = building_1_open
+						has_state_flag = wonder_built_no_destroy_1
+					}
+					always = yes
+				}else_if = {
+					limit = {
+						has_state_flag = building_2_open
+						has_state_flag = wonder_built_no_destroy_2
+					}
+					always = yes
+				}else = {
+					always = no
+				}
 			}
 			unique_building_3_visible = {
 				has_variable = unique_building_on_state
+				if = {
+					limit = {
+						NOT = {
+							has_state_flag = wonder_built_no_destroy_1
+							has_state_flag = wonder_built_no_destroy_2
+						}
+					}
+					always = yes
+				}else_if = {
+					limit = {
+						has_state_flag = building_1_open
+						has_state_flag = wonder_built_no_destroy_1
+					}
+					always = yes
+				}else_if = {
+					limit = {
+						has_state_flag = building_2_open
+						has_state_flag = wonder_built_no_destroy_2
+					}
+					always = yes
+				}else = {
+					always = no
+				}
 			}
 			homstead_click_enabled = {
 				if = {
