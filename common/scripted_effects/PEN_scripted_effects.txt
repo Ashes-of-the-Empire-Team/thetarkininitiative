@@ -1400,7 +1400,68 @@ PEN_setup_ibc_faction = {
 }
 
 
+################################
+# Quick Loyalty/Influence Effects
+#
+# Use max_cap if value = positive, and use min_cap if value = negative
 
+# Ardus Kaine Faction
+# add_to_variable = { var = ardus_loyalty value = 0 }
+# clamp_variable = { var = ardus_loyalty max = PEN_ardus_loyalty_max_cap }
+# add_to_variable = { var = ardus_influence value = 0 }
+# clamp_variable = { var = ardus_influence max = PEN_ardus_influence_max_cap }
+
+# Dynamic Automata
+# add_to_variable = { var = automata_loyalty value = 0 }
+# clamp_variable = { var = automata_loyalty max = PEN_automata_loyalty_max_cap }
+# add_to_variable = { var = automata_influence value = 0 }
+# clamp_variable = { var = automata_influence max = PEN_automata_influence_max_cap }
+
+# Galentro Heavy Works
+# add_to_variable = { var = galentro_loyalty value = 0 }
+# clamp_variable = { var = galentro_loyalty max = PEN_galentro_loyalty_max_cap }
+# add_to_variable = { var = galentro_influence value = 0 }
+# clamp_variable = { var = galentro_influence max = PEN_galentro_influence_max_cap }
+
+# Imperial Governors
+# add_to_variable = { var = governors_loyalty value = 0 }
+# clamp_variable = { var = governors_loyalty max = PEN_governors_loyalty_max_cap }
+# add_to_variable = { var = governors_influence value = 0 }
+# clamp_variable = { var = governors_influence max = PEN_governors_influence_max_cap }
+
+# Velcar Free Commerce Zone
+# add_to_variable = { var = vfcz_loyalty value = 0 }
+# clamp_variable = { var = vfcz_loyalty max = PEN_vfcz_loyalty_max_cap }
+# add_to_variable = { var = vfcz_influence value = 0 }
+# clamp_variable = { var = vfcz_influence max = PEN_vfcz_influence_max_cap }
+
+# Intergalactic Banking Clan
+# add_to_variable = { var = ibc_loyalty value = 0 }
+# clamp_variable = { var = ibc_loyalty max = PEN_ibc_loyalty_max_cap }
+# add_to_variable = { var = ibc_influence value = 0 }
+# clamp_variable = { var = ibc_influence max = PEN_ibc_influence_max_cap }
+
+
+###########################################################################################################################
+#################################################### Piracy Effects #######################################################
+###########################################################################################################################
+PEN_piracy_setup = {
+    set_variable = { var = PEN_piracy_crisis_meter value = 0 }
+    set_variable = { var = PEN_piracy_crisis_meter_target value = 1 }
+    set_variable = { var = PEN_piracy_crisis_meter_daily value = 0.5 }
+}
+PEN_piracy_start_crisis = {
+    PEN = {
+        if = {
+            limit = {
+                NOT = {
+                    has_country_flag = PEN_piracy_first_crisis_flag
+                }
+            }
+            country_event = PEN_piracy.2
+        }
+    }
+}
 
 
 ###########################################

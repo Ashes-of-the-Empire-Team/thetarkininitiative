@@ -1,0 +1,40 @@
+on_actions = {
+    on_daily = {
+        effect = {
+            if = {
+                limit = {
+                    has_country_flag = PEN_piracy_activated_flag
+                    NOT = {
+                        check_variable = { PEN_piracy_crisis_meter = 100 }
+                        has_country_flag = PEN_piracy_investigated_flag
+                    }
+                }
+                add_to_variable = { var = PEN_piracy_crisis_meter value = 0.5 }
+                clamp_variable = { var = PEN_piracy_crisis_meter max = 100 }
+            }
+            else_if = {
+                limit = {
+                    has_country_flag = PEN_piracy_activated_flag
+                    has_country_flag = PEN_piracy_investigated_flag
+                    NOT = {
+                        check_variable = { PEN_piracy_crisis_meter = 100 }
+                    }
+                }
+                add_to_variable = { var = PEN_piracy_crisis_meter value = 0.35 }
+                clamp_variable = { var = PEN_piracy_crisis_meter max = 100 }
+            }
+            else_if = {
+                limit = {
+                    has_country_flag = PEN_piracy_activated_flag
+                    check_variable = { PEN_piracy_crisis_meter = 100 }
+                    NOT = { 
+                        has_country_flag = PEN_piracy_crisis_active_flag
+                    }
+                }
+                PEN_piracy_start_crisis = yes
+                set_country_flag = PEN_piracy_crisis_active_flag
+                set_variable = { var = PEN_piracy_crisis_meter_target value = 2 }
+            }
+        }
+    }
+}

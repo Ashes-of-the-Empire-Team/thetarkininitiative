@@ -1,6 +1,7 @@
 capital = 135
 set_major = yes
-set_stability = 0.56
+set_stability = 0.86
+set_war_support = 0.6
 
 oob = "PEN_4"
 
@@ -51,6 +52,12 @@ set_technology = {
 
 set_convoys = 10
 
+set_politics = {
+	ruling_party = imperial
+	last_election = "1936.1.1"
+	election_frequency = 48
+	elections_allowed = no
+}
 set_popularities = {
 	democratic = 0
 	consortium = 0
@@ -61,19 +68,40 @@ set_popularities = {
 
 set_country_flag = PEN_ardus_faction_on_flag
 set_country_flag = PEN_kaine_alive_flag
+set_country_flag = PEN_oversector_in_disarray_flag
+set_country_flag = PEN_militarized_economy_flag
 
-set_politics = {
-	ruling_party = imperial
-	last_election = "1936.1.1"
-	election_frequency = 48
-	elections_allowed = no
-}
+set_variable = { var = PEN_oversector_stab_var value = -0.25 }
+set_variable = { var = PEN_oversector_stab_weekly_var value = -0.01 }
+set_variable = { var = PEN_oversector_pp_gain_var value = -0.5 }
+set_variable = { var = PEN_oversector_consumer_goods_var value = 0.3 }
+set_variable = { var = PEN_oversector_research_speed_var value = -0.15 }
+set_variable = { var = PEN_oversector_command_power_mult_var value = -0.5 }
+set_variable = { var = PEN_oversector_conscription_factor_var value = -0.1 }
+set_variable = { var = PEN_oversector_monthly_population_var value = -0.2 }
+set_variable = { var = PEN_oversector_army_organisation_var value = -0.2 }
+set_variable = { var = PEN_oversector_army_xp_var value = -0.4 }
+add_dynamic_modifier = { modifier = PEN_oversector_in_disarray_dyn }
+
+set_variable = { var = PEN_milecon_resource_income_var value = -0.1 }
+set_variable = { var = PEN_milecon_tax_var value = -0.15 }
+set_variable = { var = PEN_milecon_factory_efficiency_gain_factor_var value = -0.5 }
+set_variable = { var = PEN_milecon_civilian_income_var value = -0.1 }
+set_variable = { var = PEN_milecon_military_cost_var value = -0.15 }
+set_variable = { var = PEN_milecon_factory_output_var value = 0.1 }
+set_variable = { var = PEN_milecon_dockyard_output_var value = 0.2 }
+set_variable = { var = PEN_milecon_industry_donations_var value = 2 }
+set_variable = { var = PEN_milecon_military_donations_var value = 7 }
+set_variable = { var = PEN_milecon_dockyard_donations_var value = 6 }
+set_variable = { var = PEN_milecon_construction_var value = -0.2 }
+set_variable = { var = PEN_milecon_war_support_var value = 0.1 }
+set_variable = { var = PEN_milecon_trade_opinion_var value = 0 }
+set_variable = { var = PEN_milecon_resource_factor_var value = 0 }
+add_dynamic_modifier = { modifier = PEN_militarized_economy_dyn }
+
 add_ideas = {
 	#ideas
 	death_of_the_emperor_emp_1
-	PEN_the_new_order3
-	PEN_oversector_in_disarray
-	PEN_inflated_economy
 	#laws
 	free_trade
 	primary_species_only
