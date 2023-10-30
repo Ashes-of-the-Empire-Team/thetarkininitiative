@@ -33,32 +33,13 @@ defined_text = {
 	}
 }
 defined_text = {
-	name = GetUnqiueBuilding1Tooltip
-	text = {
-		localization_key = "[?unique_building_on_state.GetTokenKey]_tt"
-	}
-}
-defined_text = {
-	name = GetUnqiueBuilding2Tooltip
-	text = {
-		localization_key = "[?unique_building_on_state.GetTokenKey]_2_tt"
-	}
-}
-defined_text = {
-	name = GetUnqiueBuilding3Tooltip
-	text = {
-		localization_key = "[?unique_building_on_state.GetTokenKey]_3_tt"
-	}
-}
-
-
-defined_text = {
 	name = tile_blocker_or_normal_building_1
 	text = {
 		trigger = {
 			has_state_flag = tile_blocker_building_1
+			set_temp_variable = {building_type = building_1}
 		}
-		localization_key = "tile_blocker_main_handler_1"
+		localization_key = tile_blocker_grab_name_handler
 	}
 	text = {
 		localization_key = "demolish_building_tt"
@@ -69,23 +50,111 @@ defined_text = {
 	text = {
 		trigger = {
 			has_state_flag = tile_blocker_building_2
+			set_temp_variable = {building_type = building_2}
 		}
-		localization_key = "tile_blocker_main_handler_2"
+		localization_key = tile_blocker_grab_name_handler
 	}
 	text = {
 		localization_key = "demolish_building_tt"
 	}
 }
+defined_text = {
+	name = tile_blocker_grab_name
+	### Trust me this is the best way -runs through genric then switches to unqiue puller (most likely to be generic == less performance drain)
+	text = {
+		trigger = {
+			check_variable = {building_type = token:untamed_jungle}
+		}
+		localization_key = untamed_jungle_cost
+	}
+	text = {
+		trigger = {
+			check_variable = {building_type = token:dead_land_desert}
+		}
+		localization_key = dead_land_desert_cost
+	}
+	text = {
+		trigger = {
+			check_variable = {building_type = token:lava_fields}
+		}
+		localization_key = lava_fields_cost
+	}
+	text = {
+		trigger = {
+			check_variable = {building_type = token:rock_slides}
+		}
+		localization_key = rock_slides_cost
+	}
+	text = {
+		trigger = {
+			check_variable = {building_type = token:undercity_slums}
+		}
+		localization_key = undercity_slums_cost
+	}
+	text = {
+		trigger = {
+			check_variable = {building_type = token:dangerous_fauna}
+		}
+		localization_key = dangerous_fauna_cost
+	}
+	text = {
+		trigger = {
+			check_variable = {building_type = token:ruined_city}
+		}
+		localization_key = ruined_city_cost
+	}
+	text = {
+		trigger = {
+			check_variable = {building_type = token:inhospitable_area}
+		}
+		localization_key = inhospitable_area_cost
+	}
+	text = {
+		trigger = {
+			check_variable = {building_type = token:snow_area}
+		}
+		localization_key = snow_area_cost
+	}
+	text = {
+		localization_key = only_can_be_removed_by_focus_tile_blocker
+	}
+	# text = {
+	# 	trigger = {
+	# 		meta_trigger = {
+	# 			text = {
+	# 				set_temp_variable = {passed_building_type_cost = [BUILDING_NAME]_cost}
+	# 			}
+	# 			BUILDING_NAME = "[?building_type.GetTokenKey]"
+	# 		}
+	# 	}
+	# 	localization_key = unique_tile_blocker_cost
+	# }
+}
+defined_text = {
+	name = wonder_first_level_or_not_puller_first_building ### STUPID PULLER CUZ IM TOO SLEEPY
+	text = {
+		trigger = {
+			has_state_flag = wonder_built_no_destroy_1
+			check_variable = {unique_building_on_state = building_1}
+		}
+		localization_key = GetUnqiueBuilding1Tooltip_handler
+	}
+	text = {
+		localization_key = building_1_tt
+	}
+}
 
 defined_text = {
-	name = GetTileBlockerCostTooltip_1
+	name = wonder_first_level_or_not_puller_second_building ### STUPID PULLER CUZ IM TOO SLEEPY
 	text = {
-		localization_key = "[?building_1.GetTokenKey]_tile_blocker_cost_tt"
+		trigger = {
+			has_state_flag = wonder_built_no_destroy_2
+			check_variable = {unique_building_on_state = building_2}
+		}
+		localization_key = GetUnqiueBuilding1Tooltip_handler
+	}
+	text = {
+		localization_key = building_2_tt
 	}
 }
-defined_text = {
-	name = GetTileBlockerCostTooltip_2
-	text = {
-		localization_key = "[?building_2.GetTokenKey]_tile_blocker_cost_tt"
-	}
-}
+

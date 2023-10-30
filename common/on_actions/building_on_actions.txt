@@ -16,30 +16,38 @@ on_actions = {
 			}
 			375 = {
 				set_variable = {unique_building_on_state = token:mustafar_works}
+				set_state_flag = wonder_built_no_destroy_1
 			}
 			18 = {
 				set_variable = {unique_building_on_state = token:beskar_mine}
 			}
 			445 = {
 				set_variable = {unique_building_on_state = token:cloud_city}
+				set_state_flag = wonder_built_no_destroy_1
 			}
 			97 = {
 				set_variable = {unique_building_on_state = token:theed_palace}
+				set_state_flag = wonder_built_no_destroy_1
 			}
 			554 = {
 				set_variable = {unique_building_on_state = token:jabbas_palace}
+				set_state_flag = wonder_built_no_destroy_1
 			}
 			131 = {
 				set_variable = {unique_building_on_state = token:casino_catonica}
+				set_state_flag = wonder_built_no_destroy_1
 			}
 			151 = {
 				set_variable = {unique_building_on_state = token:yavin_temple}
+				set_state_flag = wonder_built_no_destroy_1
 			}
 			436 = {
 				set_variable = {unique_building_on_state = token:sundari}
+				set_state_flag = wonder_built_no_destroy_1
 			}
 			107 = {
 				set_variable = {unique_building_on_state = token:vaders_castle}
+				set_state_flag = wonder_built_no_destroy_1
 			}
 
 
@@ -82,7 +90,7 @@ on_actions = {
 				set_variable = {building_1 = token:dangerous_fauna}
 				set_variable = {building_2 = token:untamed_jungle}
 			}
-			363 ={
+			373 ={
 				set_state_flag = tile_blocker_building_1
 				set_state_flag = tile_blocker_building_2
 				set_variable = {building_1 = token:untamed_jungle}
@@ -252,6 +260,24 @@ on_actions = {
 				set_state_flag = tile_blocker_building_2
 				set_variable = {building_2 = token:undercity_slums}
 			}
+
+
+			### STATE EVALUATER...... ON STARTUP EVALUATES EACH STATE FOR ITS UNIQUE BUILDING AND IMPLANTS VARIABLES HOLDING LOCALISATION FOR UNIQUE BUILDINGS FOR GRABBING, CONTAINS TOOLTIP FOR HOVER OVER OF EFFECTS
+			every_state = {
+				if = {
+					limit = {
+						has_variable = unique_building_on_state
+					}
+					meta_effect = {
+						text = {
+							set_variable = {unique_building_1_localisation_holder = token:[BUILDING_NAME]_first_tt_localisation_holder}
+							set_variable = {unique_building_2_localisation_holder = token:[BUILDING_NAME]_2}
+							set_variable = {unique_building_3_localisation_holder = token:[BUILDING_NAME]_3}
+						}
+						BUILDING_NAME = "[?unique_building_on_state.GetTokenKey]"
+					}
+				}
+			}
 	### END
 		}
 	}
@@ -326,7 +352,6 @@ on_actions = {
 				}
 			}
 			## Finally get rid of all indexs that needed to be removed
-			log = "[?indexs_to_remove_1^0]"
 			for_each_loop = {
 				array = indexs_to_remove_1
 				value = index_location
@@ -334,7 +359,6 @@ on_actions = {
 					array = global.building_state_constructer_1
 					index = index_location
 				}
-				log = ""
 			}
 			for_each_loop = {
 				array = indexs_to_remove_2
@@ -353,7 +377,7 @@ on_actions = {
 			FROM.FROM = {
 				if = {
 					limit = {
-						has_var = building_1
+						has_variable = building_1
 					}
 					set_variable = {building_name_passer = building_1}
 				}
@@ -418,7 +442,7 @@ on_actions = {
 			FROM.FROM = {
 				if = {
 					limit = {
-						has_var = building_2
+						has_variable = building_2
 					}
 					set_variable = {building_name_passer = building_2}
 				}

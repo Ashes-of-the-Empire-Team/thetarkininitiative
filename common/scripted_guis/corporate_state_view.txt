@@ -84,6 +84,7 @@ scripted_gui = {
 					}
 					meta_effect = {
 						text = {
+							set_temp_variable = {building_1_or_2_holder = 1}
 							[BUILDING_NAME]_tile_blocker_cost_effect = yes ## ENACTS A CUSTOM TRIGGER IN BUILDING SCRIPTED EFFECTS
 						}
 						BUILDING_NAME = "[?building_1.GetTokenKey]"
@@ -101,6 +102,7 @@ scripted_gui = {
 					}
 					meta_effect = {
 						text = {
+							set_temp_variable = {building_1_or_2_holder = 2}
 							[BUILDING_NAME]_tile_blocker_cost_effect = yes ## ENACTS A CUSTOM TRIGGER IN BUILDING SCRIPTED EFFECTS
 						}
 						BUILDING_NAME = "[?building_2.GetTokenKey]"
@@ -128,6 +130,12 @@ scripted_gui = {
 					has_state_flag = wonder_built_no_destroy_2
 				}
 			}
+			test_time_box_1_visible = {
+				has_variable = time_left_building_1
+			}
+			test_time_box_2_visible = {
+				has_variable = time_left_building_2
+			}
 		}
 
 		properties = {
@@ -137,6 +145,7 @@ scripted_gui = {
 			building_2 = {
 				image = "[GetBuilding2icon]"
 			}
+
 		}
 
 		ai_enabled = {
@@ -222,8 +231,8 @@ scripted_gui = {
 		}
 		
 		effects = {
-			shipyard_1_click = {
-				show_ideas_tooltip = building_shipyard_1
+			light_shipyard_1_click = {
+				show_ideas_tooltip = light_shipyard_1
 				if = {
 					limit = {
 						ROOT = {
@@ -233,8 +242,12 @@ scripted_gui = {
 					hidden_effect = {
 						clear_building_1_effects = yes
 					}
-					set_variable = { building_1 = token:building_shipyard_1 }
+					set_variable = { building_1 = token:light_shipyard_1 }
                     set_variable = { time_left_building_1 = 80}
+					set_temp_variable = {speed_multiplier_factor = modifier@production_speed_buildings_factor}
+					subtract_from_temp_variable = {speed_multiplier_factor = modifier@consumer_goods_factor}
+					add_to_temp_variable = {speed_multiplier_factor = 1}
+					divide_variable = {time_left_building_1 = speed_multiplier_factor}
                     add_to_array = {
                         array = global.building_state_constructer_1
                         value = THIS.id
@@ -249,8 +262,12 @@ scripted_gui = {
 					hidden_effect = {
 						clear_building_2_effects = yes
 					}
-					set_variable = { building_2 = token:building_shipyard_1 }
+					set_variable = { building_2 = token:light_shipyard_1 }
                     set_variable = { time_left_building_2 = 80}
+					set_temp_variable = {speed_multiplier_factor = modifier@production_speed_buildings_factor}
+					subtract_from_temp_variable = {speed_multiplier_factor = modifier@consumer_goods_factor}
+					add_to_temp_variable = {speed_multiplier_factor = 1}
+					divide_variable = {time_left_building_2 = speed_multiplier_factor}
                     add_to_array = {
                         array = global.building_state_constructer_2
                         value = THIS.id
@@ -273,6 +290,10 @@ scripted_gui = {
 					}
 					set_variable = { building_1 = token:light_shipyard_2 }
                     set_variable = { time_left_building_1 = 80}
+					set_temp_variable = {speed_multiplier_factor = modifier@production_speed_buildings_factor}
+					subtract_from_temp_variable = {speed_multiplier_factor = modifier@consumer_goods_factor}
+					add_to_temp_variable = {speed_multiplier_factor = 1}
+					divide_variable = {time_left_building_1 = speed_multiplier_factor}
                     add_to_array = {
                         array = global.building_state_constructer_1
                         value = THIS.id
@@ -289,6 +310,10 @@ scripted_gui = {
 					}
 					set_variable = { building_2 = token:light_shipyard_2 }
                     set_variable = { time_left_building_2 = 80}
+					set_temp_variable = {speed_multiplier_factor = modifier@production_speed_buildings_factor}
+					subtract_from_temp_variable = {speed_multiplier_factor = modifier@consumer_goods_factor}
+					add_to_temp_variable = {speed_multiplier_factor = 1}
+					divide_variable = {time_left_building_2 = speed_multiplier_factor}
                     add_to_array = {
                         array = global.building_state_constructer_2
                         value = THIS.id
@@ -310,6 +335,10 @@ scripted_gui = {
 					}
 					set_variable = { building_1 = token:light_shipyard_3 }
                     set_variable = { time_left_building_1 = 80}
+					set_temp_variable = {speed_multiplier_factor = modifier@production_speed_buildings_factor}
+					subtract_from_temp_variable = {speed_multiplier_factor = modifier@consumer_goods_factor}
+					add_to_temp_variable = {speed_multiplier_factor = 1}
+					divide_variable = {time_left_building_1 = speed_multiplier_factor}
                     add_to_array = {
                         array = global.building_state_constructer_1
                         value = THIS.id
@@ -326,6 +355,10 @@ scripted_gui = {
 					}
 					set_variable = { building_2 = token:light_shipyard_3 }
                     set_variable = { time_left_building_2 = 80}
+					set_temp_variable = {speed_multiplier_factor = modifier@production_speed_buildings_factor}
+					subtract_from_temp_variable = {speed_multiplier_factor = modifier@consumer_goods_factor}
+					add_to_temp_variable = {speed_multiplier_factor = 1}
+					divide_variable = {time_left_building_2 = speed_multiplier_factor}
                     add_to_array = {
                         array = global.building_state_constructer_2
                         value = THIS.id
@@ -345,8 +378,12 @@ scripted_gui = {
 					hidden_effect = {
 						clear_building_1_effects = yes
 					}
-					set_variable = { building_1 = token:medium_shipyard_2 }
+					set_variable = { building_1 = token:medium_shipyard_1 }
                     set_variable = { time_left_building_1 = 80}
+					set_temp_variable = {speed_multiplier_factor = modifier@production_speed_buildings_factor}
+					subtract_from_temp_variable = {speed_multiplier_factor = modifier@consumer_goods_factor}
+					add_to_temp_variable = {speed_multiplier_factor = 1}
+					divide_variable = {time_left_building_1 = speed_multiplier_factor}
                     add_to_array = {
                         array = global.building_state_constructer_1
                         value = THIS.id
@@ -361,8 +398,12 @@ scripted_gui = {
 					hidden_effect = {
 						clear_building_2_effects = yes
 					}
-					set_variable = { building_2 = token:medium_shipyard_2 }
+					set_variable = { building_2 = token:medium_shipyard_1 }
                     set_variable = { time_left_building_2 = 80}
+					set_temp_variable = {speed_multiplier_factor = modifier@production_speed_buildings_factor}
+					subtract_from_temp_variable = {speed_multiplier_factor = modifier@consumer_goods_factor}
+					add_to_temp_variable = {speed_multiplier_factor = 1}
+					divide_variable = {time_left_building_2 = speed_multiplier_factor}
                     add_to_array = {
                         array = global.building_state_constructer_2
                         value = THIS.id
@@ -382,8 +423,12 @@ scripted_gui = {
 					hidden_effect = {
 						clear_building_1_effects = yes
 					}
-					set_variable = { building_1 = token:medium_shipyard_3 }
+					set_variable = { building_1 = token:medium_shipyard_2 }
                     set_variable = { time_left_building_1 = 80}
+					set_temp_variable = {speed_multiplier_factor = modifier@production_speed_buildings_factor}
+					subtract_from_temp_variable = {speed_multiplier_factor = modifier@consumer_goods_factor}
+					add_to_temp_variable = {speed_multiplier_factor = 1}
+					divide_variable = {time_left_building_1 = speed_multiplier_factor}
                     add_to_array = {
                         array = global.building_state_constructer_1
                         value = THIS.id
@@ -398,8 +443,12 @@ scripted_gui = {
 					hidden_effect = {
 						clear_building_2_effects = yes
 					}
-					set_variable = { building_2 = token:medium_shipyard_3 }
+					set_variable = { building_2 = token:medium_shipyard_2 }
                     set_variable = { time_left_building_2 = 80}
+					set_temp_variable = {speed_multiplier_factor = modifier@production_speed_buildings_factor}
+					subtract_from_temp_variable = {speed_multiplier_factor = modifier@consumer_goods_factor}
+					add_to_temp_variable = {speed_multiplier_factor = 1}
+					divide_variable = {time_left_building_2 = speed_multiplier_factor}
                     add_to_array = {
                         array = global.building_state_constructer_2
                         value = THIS.id
@@ -419,8 +468,12 @@ scripted_gui = {
 					hidden_effect = {
 						clear_building_1_effects = yes
 					}
-					set_variable = { building_1 = token:heavy_shipyard_3 }
+					set_variable = { building_1 = token:heavy_shipyard_1 }
                     set_variable = { time_left_building_1 = 80}
+					set_temp_variable = {speed_multiplier_factor = modifier@production_speed_buildings_factor}
+					subtract_from_temp_variable = {speed_multiplier_factor = modifier@consumer_goods_factor}
+					add_to_temp_variable = {speed_multiplier_factor = 1}
+					divide_variable = {time_left_building_1 = speed_multiplier_factor}
                     add_to_array = {
                         array = global.building_state_constructer_1
                         value = THIS.id
@@ -435,8 +488,12 @@ scripted_gui = {
 					hidden_effect = {
 						clear_building_2_effects = yes
 					}
-					set_variable = { building_2 = token:heavy_shipyard_3 }
+					set_variable = { building_2 = token:heavy_shipyard_1 }
                     set_variable = { time_left_building_2 = 80}
+					set_temp_variable = {speed_multiplier_factor = modifier@production_speed_buildings_factor}
+					subtract_from_temp_variable = {speed_multiplier_factor = modifier@consumer_goods_factor}
+					add_to_temp_variable = {speed_multiplier_factor = 1}
+					divide_variable = {time_left_building_2 = speed_multiplier_factor}
                     add_to_array = {
                         array = global.building_state_constructer_2
                         value = THIS.id
@@ -458,6 +515,10 @@ scripted_gui = {
 					}
 					set_variable = { building_1 = token:starfighter_factory_1 }
                     set_variable = { time_left_building_1 = 80}
+					set_temp_variable = {speed_multiplier_factor = modifier@production_speed_buildings_factor}
+					subtract_from_temp_variable = {speed_multiplier_factor = modifier@consumer_goods_factor}
+					add_to_temp_variable = {speed_multiplier_factor = 1}
+					divide_variable = {time_left_building_1 = speed_multiplier_factor}
                     add_to_array = {
                         array = global.building_state_constructer_1
                         value = THIS.id
@@ -474,6 +535,10 @@ scripted_gui = {
 					}
 					set_variable = { building_2 = token:starfighter_factory_1 }
                     set_variable = { time_left_building_2 = 80}
+					set_temp_variable = {speed_multiplier_factor = modifier@production_speed_buildings_factor}
+					subtract_from_temp_variable = {speed_multiplier_factor = modifier@consumer_goods_factor}
+					add_to_temp_variable = {speed_multiplier_factor = 1}
+					divide_variable = {time_left_building_2 = speed_multiplier_factor}
                     add_to_array = {
                         array = global.building_state_constructer_2
                         value = THIS.id
@@ -495,6 +560,10 @@ scripted_gui = {
 					}
 					set_variable = { building_1 = token:starfighter_factory_2 }
                     set_variable = { time_left_building_1 = 80}
+					set_temp_variable = {speed_multiplier_factor = modifier@production_speed_buildings_factor}
+					subtract_from_temp_variable = {speed_multiplier_factor = modifier@consumer_goods_factor}
+					add_to_temp_variable = {speed_multiplier_factor = 1}
+					divide_variable = {time_left_building_1 = speed_multiplier_factor}
                     add_to_array = {
                         array = global.building_state_constructer_1
                         value = THIS.id
@@ -511,6 +580,10 @@ scripted_gui = {
 					}
 					set_variable = { building_2 = token:starfighter_factory_2 }
                     set_variable = { time_left_building_2 = 80}
+					set_temp_variable = {speed_multiplier_factor = modifier@production_speed_buildings_factor}
+					subtract_from_temp_variable = {speed_multiplier_factor = modifier@consumer_goods_factor}
+					add_to_temp_variable = {speed_multiplier_factor = 1}
+					divide_variable = {time_left_building_2 = speed_multiplier_factor}
                     add_to_array = {
                         array = global.building_state_constructer_2
                         value = THIS.id
@@ -532,6 +605,10 @@ scripted_gui = {
 					}
 					set_variable = { building_1 = token:starfighter_factory_3 }
                     set_variable = { time_left_building_1 = 80}
+					set_temp_variable = {speed_multiplier_factor = modifier@production_speed_buildings_factor}
+					subtract_from_temp_variable = {speed_multiplier_factor = modifier@consumer_goods_factor}
+					add_to_temp_variable = {speed_multiplier_factor = 1}
+					divide_variable = {time_left_building_1 = speed_multiplier_factor}
                     add_to_array = {
                         array = global.building_state_constructer_1
                         value = THIS.id
@@ -548,6 +625,10 @@ scripted_gui = {
 					}
 					set_variable = { building_2 = token:starfighter_factory_3 }
                     set_variable = { time_left_building_2 = 80}
+					set_temp_variable = {speed_multiplier_factor = modifier@production_speed_buildings_factor}
+					subtract_from_temp_variable = {speed_multiplier_factor = modifier@consumer_goods_factor}
+					add_to_temp_variable = {speed_multiplier_factor = 1}
+					divide_variable = {time_left_building_2 = speed_multiplier_factor}
                     add_to_array = {
                         array = global.building_state_constructer_2
                         value = THIS.id
@@ -567,8 +648,12 @@ scripted_gui = {
 					hidden_effect = {
 						clear_building_1_effects = yes
 					}
-					set_variable = { building_1 = token:starbomber_factory_2 }
+					set_variable = { building_1 = token:starbomber_factory_1 }
                     set_variable = { time_left_building_1 = 80}
+					set_temp_variable = {speed_multiplier_factor = modifier@production_speed_buildings_factor}
+					subtract_from_temp_variable = {speed_multiplier_factor = modifier@consumer_goods_factor}
+					add_to_temp_variable = {speed_multiplier_factor = 1}
+					divide_variable = {time_left_building_1 = speed_multiplier_factor}
                     add_to_array = {
                         array = global.building_state_constructer_1
                         value = THIS.id
@@ -583,8 +668,12 @@ scripted_gui = {
 					hidden_effect = {
 						clear_building_2_effects = yes
 					}
-					set_variable = { building_2 = token:starbomber_factory_2 }
+					set_variable = { building_2 = token:starbomber_factory_1 }
                     set_variable = { time_left_building_2 = 80}
+					set_temp_variable = {speed_multiplier_factor = modifier@production_speed_buildings_factor}
+					subtract_from_temp_variable = {speed_multiplier_factor = modifier@consumer_goods_factor}
+					add_to_temp_variable = {speed_multiplier_factor = 1}
+					divide_variable = {time_left_building_2 = speed_multiplier_factor}
                     add_to_array = {
                         array = global.building_state_constructer_2
                         value = THIS.id
@@ -604,8 +693,12 @@ scripted_gui = {
 					hidden_effect = {
 						clear_building_1_effects = yes
 					}
-					set_variable = { building_1 = token:starbomber_factory_3 }
+					set_variable = { building_1 = token:starbomber_factory_2 }
                     set_variable = { time_left_building_1 = 80}
+					set_temp_variable = {speed_multiplier_factor = modifier@production_speed_buildings_factor}
+					subtract_from_temp_variable = {speed_multiplier_factor = modifier@consumer_goods_factor}
+					add_to_temp_variable = {speed_multiplier_factor = 1}
+					divide_variable = {time_left_building_1 = speed_multiplier_factor}
                     add_to_array = {
                         array = global.building_state_constructer_1
                         value = THIS.id
@@ -620,8 +713,12 @@ scripted_gui = {
 					hidden_effect = {
 						clear_building_2_effects = yes
 					}
-					set_variable = { building_2 = token:starbomber_factory_3 }
+					set_variable = { building_2 = token:starbomber_factory_2 }
                     set_variable = { time_left_building_2 = 80}
+					set_temp_variable = {speed_multiplier_factor = modifier@production_speed_buildings_factor}
+					subtract_from_temp_variable = {speed_multiplier_factor = modifier@consumer_goods_factor}
+					add_to_temp_variable = {speed_multiplier_factor = 1}
+					divide_variable = {time_left_building_2 = speed_multiplier_factor}
                     add_to_array = {
                         array = global.building_state_constructer_2
                         value = THIS.id
@@ -634,7 +731,7 @@ scripted_gui = {
 		}
 		
 		triggers = {
-			shipyard_1_click_enabled = {
+			light_shipyard_1_click_enabled = {
 				if = {
 					limit = {
 						ROOT = {
@@ -642,7 +739,10 @@ scripted_gui = {
 						}
 					}
 					NOT = {
-						check_variable = { building_1 = token:building_shipyard_1 }
+						has_variable = time_left_building_1
+					}
+					NOT = {
+						check_variable = { building_1 = token:light_shipyard_1 }
 					}
 				}
 				else_if = {
@@ -652,7 +752,10 @@ scripted_gui = {
 						}
 					}
 					NOT = {
-						check_variable = { building_2 = token:building_shipyard_1 }
+						has_variable = time_left_building_2
+					}
+					NOT = {
+						check_variable = { building_2 = token:light_shipyard_1 }
 					}
 				}
 			}
@@ -664,8 +767,12 @@ scripted_gui = {
 						}
 					}
 					NOT = {
+						has_variable = time_left_building_1
+					}
+					NOT = {
 						check_variable = { building_1 = token:light_shipyard_2 }
 					}
+					check_variable = { building_1 = token:light_shipyard_1 }
 				}
 				else_if = {
 					limit = {
@@ -674,30 +781,12 @@ scripted_gui = {
 						}
 					}
 					NOT = {
-						check_variable = { building_2 = token:light_shipyard_2 }
-					}
-				}
-			}
-			light_shipyard_2_click_enabled = {
-				if = {
-					limit = {
-						ROOT = {
-							has_country_flag = building_1_open
-						}
-					}
-					NOT = {
-						check_variable = { building_1 = token:light_shipyard_2 }
-					}
-				}
-				else_if = {
-					limit = {
-						ROOT = {
-							has_country_flag = building_2_open
-						}
+						has_variable = time_left_building_2
 					}
 					NOT = {
 						check_variable = { building_2 = token:light_shipyard_2 }
 					}
+					check_variable = { building_2 = token:light_shipyard_1 }
 				}
 			}
 			light_shipyard_3_click_enabled = {
@@ -708,8 +797,12 @@ scripted_gui = {
 						}
 					}
 					NOT = {
+						has_variable = time_left_building_1
+					}
+					NOT = {
 						check_variable = { building_1 = token:light_shipyard_3 }
 					}
+					check_variable = { building_1 = token:light_shipyard_2 }
 				}
 				else_if = {
 					limit = {
@@ -718,8 +811,12 @@ scripted_gui = {
 						}
 					}
 					NOT = {
+						has_variable = time_left_building_2
+					}
+					NOT = {
 						check_variable = { building_2 = token:light_shipyard_3 }
 					}
+					check_variable = { building_2 = token:light_shipyard_2 }
 				}
 			}
 			medium_shipyard_1_click_enabled = {
@@ -730,8 +827,12 @@ scripted_gui = {
 						}
 					}
 					NOT = {
-						check_variable = { building_1 = token:medium_shipyard_2 }
+						has_variable = time_left_building_1
 					}
+					NOT = {
+						check_variable = { building_1 = token:medium_shipyard_1 }
+					}
+					check_variable = { building_1 = token:light_shipyard_1 }
 				}
 				else_if = {
 					limit = {
@@ -740,8 +841,12 @@ scripted_gui = {
 						}
 					}
 					NOT = {
-						check_variable = { building_2 = token:medium_shipyard_2 }
+						has_variable = time_left_building_2
 					}
+					NOT = {
+						check_variable = { building_2 = token:medium_shipyard_1 }
+					}
+					check_variable = { building_2 = token:light_shipyard_1 }
 				}
 			}
 			medium_shipyard_2_click_enabled = {
@@ -752,8 +857,12 @@ scripted_gui = {
 						}
 					}
 					NOT = {
-						check_variable = { building_1 = token:medium_shipyard_3 }
+						has_variable = time_left_building_1
 					}
+					NOT = {
+						check_variable = { building_1 = token:medium_shipyard_2 }
+					}
+					check_variable = { building_1 = token:medium_shipyard_1 }
 				}
 				else_if = {
 					limit = {
@@ -762,8 +871,12 @@ scripted_gui = {
 						}
 					}
 					NOT = {
-						check_variable = { building_2 = token:medium_shipyard_3 }
+						has_variable = time_left_building_2
 					}
+					NOT = {
+						check_variable = { building_2 = token:medium_shipyard_2 }
+					}
+					check_variable = { building_2 = token:medium_shipyard_1 }
 				}
 			}
 			heavy_shipyard_click_enabled = {
@@ -774,8 +887,12 @@ scripted_gui = {
 						}
 					}
 					NOT = {
-						check_variable = { building_1 = token:heavy_shipyard_3 }
+						has_variable = time_left_building_1
 					}
+					NOT = {
+						check_variable = { building_1 = token:heavy_shipyard_1 }
+					}
+					check_variable = { building_1 = token:medium_shipyard_2 }
 				}
 				else_if = {
 					limit = {
@@ -784,8 +901,12 @@ scripted_gui = {
 						}
 					}
 					NOT = {
-						check_variable = { building_2 = token:heavy_shipyard_3 }
+						has_variable = time_left_building_2
 					}
+					NOT = {
+						check_variable = { building_2 = token:heavy_shipyard_1 }
+					}
+					check_variable = { building_2 = token:medium_shipyard_2 }
 				}
 			}
 			starfighters_click_enabled = {
@@ -796,6 +917,9 @@ scripted_gui = {
 						}
 					}
 					NOT = {
+						has_variable = time_left_building_1
+					}
+					NOT = {
 						check_variable = { building_1 = token:starfighter_factory_1 }
 					}
 				}
@@ -804,6 +928,9 @@ scripted_gui = {
 						ROOT = {
 							has_country_flag = building_2_open
 						}
+					}
+					NOT = {
+						has_variable = time_left_building_2
 					}
 					NOT = {
 						check_variable = { building_2 = token:starfighter_factory_1 }
@@ -818,8 +945,12 @@ scripted_gui = {
 						}
 					}
 					NOT = {
+						has_variable = time_left_building_1
+					}
+					NOT = {
 						check_variable = { building_1 = token:starfighter_factory_2 }
 					}
+					check_variable = { building_1 = token:starfighter_factory_1 }
 				}
 				else_if = {
 					limit = {
@@ -828,8 +959,12 @@ scripted_gui = {
 						}
 					}
 					NOT = {
+						has_variable = time_left_building_2
+					}
+					NOT = {
 						check_variable = { building_2 = token:starfighter_factory_2 }
 					}
+					check_variable = { building_2 = token:starfighter_factory_1 }
 				}
 			}
 			starfighters_3_click_enabled = {
@@ -840,8 +975,12 @@ scripted_gui = {
 						}
 					}
 					NOT = {
+						has_variable = time_left_building_1
+					}
+					NOT = {
 						check_variable = { building_1 = token:starfighter_factory_3 }
 					}
+					check_variable = { building_1 = token:starfighter_factory_2 }
 				}
 				else_if = {
 					limit = {
@@ -850,8 +989,12 @@ scripted_gui = {
 						}
 					}
 					NOT = {
+						has_variable = time_left_building_2
+					}
+					NOT = {
 						check_variable = { building_2 = token:starfighter_factory_3 }
 					}
+					check_variable = { building_2 = token:starfighter_factory_2 }
 				}
 			}
 			starbombers_click_enabled = {
@@ -862,8 +1005,12 @@ scripted_gui = {
 						}
 					}
 					NOT = {
-						check_variable = { building_1 = token:starbomber_factory_2 }
+						has_variable = time_left_building_1
 					}
+					NOT = {
+						check_variable = { building_1 = token:starbomber_factory_1 }
+					}
+					check_variable = { building_1 = token:starfighter_factory_1 }
 				}
 				else_if = {
 					limit = {
@@ -872,8 +1019,12 @@ scripted_gui = {
 						}
 					}
 					NOT = {
-						check_variable = { building_2 = token:starbomber_factory_2 }
+						has_variable = time_left_building_2
 					}
+					NOT = {
+						check_variable = { building_2 = token:starbomber_factory_1 }
+					}
+					check_variable = { building_2 = token:starfighter_factory_1 }
 				}
 			}
 			starbombers_2_click_enabled = {
@@ -884,8 +1035,12 @@ scripted_gui = {
 						}
 					}
 					NOT = {
-						check_variable = { building_1 = token:starbomber_factory_3 }
+						has_variable = time_left_building_1
 					}
+					NOT = {
+						check_variable = { building_1 = token:starbomber_factory_2 }
+					}
+					check_variable = { building_1 = token:starbomber_factory_1 }
 				}
 				else_if = {
 					limit = {
@@ -894,8 +1049,12 @@ scripted_gui = {
 						}
 					}
 					NOT = {
-						check_variable = { building_2 = token:starbomber_factory_3 }
+						has_variable = time_left_building_2
 					}
+					NOT = {
+						check_variable = { building_2 = token:starbomber_factory_2 }
+					}
+					check_variable = { building_2 = token:starbomber_factory_1 }
 				}
 			}
 		}
@@ -940,8 +1099,9 @@ scripted_gui = {
 					set_variable = { building_1 = token:arms_factory_1 }
                     set_variable = { time_left_building_1 = 80}
 					set_temp_variable = {speed_multiplier_factor = modifier@production_speed_buildings_factor}
-					add_to_temp_variable = {speed_multiplier_factor = modifier@production_speed_buildings_factor}
-					divide_variable = {time_left_building_1 = modifier@production_speed_buildings_factor}
+					subtract_from_temp_variable = {speed_multiplier_factor = modifier@consumer_goods_factor}
+					add_to_temp_variable = {speed_multiplier_factor = 1}
+					divide_variable = {time_left_building_1 = speed_multiplier_factor}
                     add_to_array = {
                         array = global.building_state_constructer_1
                         value = THIS.id
@@ -958,6 +1118,10 @@ scripted_gui = {
 					}
 					set_variable = { building_2 = token:arms_factory_1 }
                     set_variable = { time_left_building_2 = 80}
+					set_temp_variable = {speed_multiplier_factor = modifier@production_speed_buildings_factor}
+					subtract_from_temp_variable = {speed_multiplier_factor = modifier@consumer_goods_factor}
+					add_to_temp_variable = {speed_multiplier_factor = 1}
+					divide_variable = {time_left_building_2 = speed_multiplier_factor}
                     add_to_array = {
                         array = global.building_state_constructer_2
                         value = THIS.id
@@ -977,8 +1141,12 @@ scripted_gui = {
 					hidden_effect = {
 						clear_building_1_effects = yes
 					}
-					set_variable = { building_1 = token:soft_arms_factory_2 }
+					set_variable = { building_1 = token:soft_arms_factory_1 }
                     set_variable = { time_left_building_1 = 80}
+					set_temp_variable = {speed_multiplier_factor = modifier@production_speed_buildings_factor}
+					subtract_from_temp_variable = {speed_multiplier_factor = modifier@consumer_goods_factor}
+					add_to_temp_variable = {speed_multiplier_factor = 1}
+					divide_variable = {time_left_building_1 = speed_multiplier_factor}
                     add_to_array = {
                         array = global.building_state_constructer_1
                         value = THIS.id
@@ -993,8 +1161,12 @@ scripted_gui = {
 					hidden_effect = {
 						clear_building_2_effects = yes
 					}
-					set_variable = { building_2 = token:soft_arms_factory_2 }
+					set_variable = { building_2 = token:soft_arms_factory_1 }
                     set_variable = { time_left_building_2 = 80}
+					set_temp_variable = {speed_multiplier_factor = modifier@production_speed_buildings_factor}
+					subtract_from_temp_variable = {speed_multiplier_factor = modifier@consumer_goods_factor}
+					add_to_temp_variable = {speed_multiplier_factor = 1}
+					divide_variable = {time_left_building_2 = speed_multiplier_factor}
                     add_to_array = {
                         array = global.building_state_constructer_2
                         value = THIS.id
@@ -1014,8 +1186,12 @@ scripted_gui = {
 					hidden_effect = {
 						clear_building_1_effects = yes
 					}
-					set_variable = { building_1 = token:soft_arms_factory_3 }
+					set_variable = { building_1 = token:soft_arms_factory_2 }
                     set_variable = { time_left_building_1 = 80}
+					set_temp_variable = {speed_multiplier_factor = modifier@production_speed_buildings_factor}
+					subtract_from_temp_variable = {speed_multiplier_factor = modifier@consumer_goods_factor}
+					add_to_temp_variable = {speed_multiplier_factor = 1}
+					divide_variable = {time_left_building_1 = speed_multiplier_factor}
                     add_to_array = {
                         array = global.building_state_constructer_1
                         value = THIS.id
@@ -1030,8 +1206,57 @@ scripted_gui = {
 					hidden_effect = {
 						clear_building_2_effects = yes
 					}
-					set_variable = { building_2 = token:soft_arms_factory_3 }
+					set_variable = { building_2 = token:soft_arms_factory_2 }
                     set_variable = { time_left_building_2 = 80}
+					set_temp_variable = {speed_multiplier_factor = modifier@production_speed_buildings_factor}
+					subtract_from_temp_variable = {speed_multiplier_factor = modifier@consumer_goods_factor}
+					add_to_temp_variable = {speed_multiplier_factor = 1}
+					divide_variable = {time_left_building_2 = speed_multiplier_factor}
+                    add_to_array = {
+                        array = global.building_state_constructer_2
+                        value = THIS.id
+                    }
+				}
+				ROOT = {
+					subtract_from_variable = { currency_amount^primary_currency = 500 }
+				}
+			}
+			tank_factory_1_click = { 
+				if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_1_open
+						}
+					}
+					hidden_effect = {
+						clear_building_1_effects = yes
+					}
+					set_variable = { building_1 = token:tank_factory_1 }
+                    set_variable = { time_left_building_1 = 80}
+					set_temp_variable = {speed_multiplier_factor = modifier@production_speed_buildings_factor}
+					subtract_from_temp_variable = {speed_multiplier_factor = modifier@consumer_goods_factor}
+					add_to_temp_variable = {speed_multiplier_factor = 1}
+					divide_variable = {time_left_building_1 = speed_multiplier_factor}
+                    add_to_array = {
+                        array = global.building_state_constructer_1
+                        value = THIS.id
+                    }
+				}
+				if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_2_open
+						}
+					}
+					hidden_effect = {
+						clear_building_2_effects = yes
+					}
+					set_variable = { building_2 = token:tank_factory_1 }
+                    set_variable = { time_left_building_2 = 80}
+					set_temp_variable = {speed_multiplier_factor = modifier@production_speed_buildings_factor}
+					subtract_from_temp_variable = {speed_multiplier_factor = modifier@consumer_goods_factor}
+					add_to_temp_variable = {speed_multiplier_factor = 1}
+					divide_variable = {time_left_building_2 = speed_multiplier_factor}
                     add_to_array = {
                         array = global.building_state_constructer_2
                         value = THIS.id
@@ -1053,6 +1278,10 @@ scripted_gui = {
 					}
 					set_variable = { building_1 = token:tank_factory_2 }
                     set_variable = { time_left_building_1 = 80}
+					set_temp_variable = {speed_multiplier_factor = modifier@production_speed_buildings_factor}
+					subtract_from_temp_variable = {speed_multiplier_factor = modifier@consumer_goods_factor}
+					add_to_temp_variable = {speed_multiplier_factor = 1}
+					divide_variable = {time_left_building_1 = speed_multiplier_factor}
                     add_to_array = {
                         array = global.building_state_constructer_1
                         value = THIS.id
@@ -1069,43 +1298,10 @@ scripted_gui = {
 					}
 					set_variable = { building_2 = token:tank_factory_2 }
                     set_variable = { time_left_building_2 = 80}
-                    add_to_array = {
-                        array = global.building_state_constructer_2
-                        value = THIS.id
-                    }
-				}
-				ROOT = {
-					subtract_from_variable = { currency_amount^primary_currency = 500 }
-				}
-			}
-			tank_factory_3_click = { 
-				if = {
-					limit = {
-						ROOT = {
-							has_country_flag = building_1_open
-						}
-					}
-					hidden_effect = {
-						clear_building_1_effects = yes
-					}
-					set_variable = { building_1 = token:tank_factory_3 }
-                    set_variable = { time_left_building_1 = 80}
-                    add_to_array = {
-                        array = global.building_state_constructer_1
-                        value = THIS.id
-                    }
-				}
-				if = {
-					limit = {
-						ROOT = {
-							has_country_flag = building_2_open
-						}
-					}
-					hidden_effect = {
-						clear_building_2_effects = yes
-					}
-					set_variable = { building_2 = token:tank_factory_3 }
-                    set_variable = { time_left_building_2 = 80}
+					set_temp_variable = {speed_multiplier_factor = modifier@production_speed_buildings_factor}
+					subtract_from_temp_variable = {speed_multiplier_factor = modifier@consumer_goods_factor}
+					add_to_temp_variable = {speed_multiplier_factor = 1}
+					divide_variable = {time_left_building_2 = speed_multiplier_factor}
                     add_to_array = {
                         array = global.building_state_constructer_2
                         value = THIS.id
@@ -1127,6 +1323,10 @@ scripted_gui = {
 					}
 					set_variable = { building_1 = token:training_facilities_1 }
 					set_variable = { time_left_building_1 = 80}
+					set_temp_variable = {speed_multiplier_factor = modifier@production_speed_buildings_factor}
+					subtract_from_temp_variable = {speed_multiplier_factor = modifier@consumer_goods_factor}
+					add_to_temp_variable = {speed_multiplier_factor = 1}
+					divide_variable = {time_left_building_1 = speed_multiplier_factor}
 					add_to_array = {
                         array = global.building_state_constructer_1
                         value = THIS.id
@@ -1142,6 +1342,10 @@ scripted_gui = {
 						clear_building_2_effects = yes
 					}
 					set_variable = { time_left_building_2 = 80}
+					set_temp_variable = {speed_multiplier_factor = modifier@production_speed_buildings_factor}
+					subtract_from_temp_variable = {speed_multiplier_factor = modifier@consumer_goods_factor}
+					add_to_temp_variable = {speed_multiplier_factor = 1}
+					divide_variable = {time_left_building_2 = speed_multiplier_factor}
 					set_variable = { building_2 = token:training_facilities_1 }
 					add_to_array = {
                         array = global.building_state_constructer_2
@@ -1162,8 +1366,12 @@ scripted_gui = {
 					hidden_effect = {
 						clear_building_1_effects = yes
 					}
-					set_variable = { building_1 = token:special_forces_training_2 }
+					set_variable = { building_1 = token:special_forces_training_facilities_1 }
 					set_variable = { time_left_building_1 = 80}
+					set_temp_variable = {speed_multiplier_factor = modifier@production_speed_buildings_factor}
+					subtract_from_temp_variable = {speed_multiplier_factor = modifier@consumer_goods_factor}
+					add_to_temp_variable = {speed_multiplier_factor = 1}
+					divide_variable = {time_left_building_1 = speed_multiplier_factor}
 					add_to_array = {
                         array = global.building_state_constructer_1
                         value = THIS.id
@@ -1178,8 +1386,12 @@ scripted_gui = {
 					hidden_effect = {
 						clear_building_2_effects = yes
 					}
-					set_variable = { building_2 = token:special_forces_training_2 }
+					set_variable = { building_2 = token:special_forces_training_facilities_1 }
 					set_variable = { time_left_building_2 = 80}
+					set_temp_variable = {speed_multiplier_factor = modifier@production_speed_buildings_factor}
+					subtract_from_temp_variable = {speed_multiplier_factor = modifier@consumer_goods_factor}
+					add_to_temp_variable = {speed_multiplier_factor = 1}
+					divide_variable = {time_left_building_2 = speed_multiplier_factor}
 					add_to_array = {
                         array = global.building_state_constructer_2
                         value = THIS.id
@@ -1199,8 +1411,12 @@ scripted_gui = {
 					hidden_effect = {
 						clear_building_1_effects = yes
 					}
-					set_variable = { building_1 = token:special_forces_training_3 }
+					set_variable = { building_1 = token:special_forces_training_facilities_2 }
 					set_variable = { time_left_building_1 = 80}
+					set_temp_variable = {speed_multiplier_factor = modifier@production_speed_buildings_factor}
+					subtract_from_temp_variable = {speed_multiplier_factor = modifier@consumer_goods_factor}
+					add_to_temp_variable = {speed_multiplier_factor = 1}
+					divide_variable = {time_left_building_1 = speed_multiplier_factor}
 					add_to_array = {
                         array = global.building_state_constructer_1
                         value = THIS.id
@@ -1216,12 +1432,61 @@ scripted_gui = {
 						clear_building_2_effects = yes
 					}
 					set_variable = { time_left_building_2 = 80}
-					set_variable = { building_2 = token:special_forces_training_3 }
+					set_temp_variable = {speed_multiplier_factor = modifier@production_speed_buildings_factor}
+					subtract_from_temp_variable = {speed_multiplier_factor = modifier@consumer_goods_factor}
+					add_to_temp_variable = {speed_multiplier_factor = 1}
+					divide_variable = {time_left_building_2 = speed_multiplier_factor}
+					set_variable = { building_2 = token:special_forces_training_facilities_2 }
 					add_to_array = {
                         array = global.building_state_constructer_2
                         value = THIS.id
                     }
 					
+				}
+				ROOT = {
+					subtract_from_variable = { currency_amount^primary_currency = 500 }
+				}
+			}
+			military_bootcamp_1_click = {
+				if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_1_open
+						}
+					}
+					hidden_effect = {
+						clear_building_1_effects = yes
+					}
+					set_variable = { building_1 = token:military_bootcamp_1 }
+					set_variable = { time_left_building_1 = 80}
+					set_temp_variable = {speed_multiplier_factor = modifier@production_speed_buildings_factor}
+					subtract_from_temp_variable = {speed_multiplier_factor = modifier@consumer_goods_factor}
+					add_to_temp_variable = {speed_multiplier_factor = 1}
+					divide_variable = {time_left_building_1 = speed_multiplier_factor}
+					add_to_array = {
+                        array = global.building_state_constructer_1
+                        value = THIS.id
+                    }
+				}
+				if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_2_open
+						}
+					}
+					hidden_effect = {
+						clear_building_2_effects = yes
+					}
+					set_variable = { time_left_building_2 = 80}
+					set_temp_variable = {speed_multiplier_factor = modifier@production_speed_buildings_factor}
+					subtract_from_temp_variable = {speed_multiplier_factor = modifier@consumer_goods_factor}
+					add_to_temp_variable = {speed_multiplier_factor = 1}
+					divide_variable = {time_left_building_2 = speed_multiplier_factor}
+					set_variable = { building_2 = token:military_bootcamp_1 }
+					add_to_array = {
+                        array = global.building_state_constructer_2
+                        value = THIS.id
+                    }
 				}
 				ROOT = {
 					subtract_from_variable = { currency_amount^primary_currency = 500 }
@@ -1239,6 +1504,10 @@ scripted_gui = {
 					}
 					set_variable = { building_1 = token:military_bootcamp_2 }
 					set_variable = { time_left_building_1 = 80}
+					set_temp_variable = {speed_multiplier_factor = modifier@production_speed_buildings_factor}
+					subtract_from_temp_variable = {speed_multiplier_factor = modifier@consumer_goods_factor}
+					add_to_temp_variable = {speed_multiplier_factor = 1}
+					divide_variable = {time_left_building_1 = speed_multiplier_factor}
 					add_to_array = {
                         array = global.building_state_constructer_1
                         value = THIS.id
@@ -1254,44 +1523,11 @@ scripted_gui = {
 						clear_building_2_effects = yes
 					}
 					set_variable = { time_left_building_2 = 80}
+					set_temp_variable = {speed_multiplier_factor = modifier@production_speed_buildings_factor}
+					subtract_from_temp_variable = {speed_multiplier_factor = modifier@consumer_goods_factor}
+					add_to_temp_variable = {speed_multiplier_factor = 1}
+					divide_variable = {time_left_building_2 = speed_multiplier_factor}
 					set_variable = { building_2 = token:military_bootcamp_2 }
-					add_to_array = {
-                        array = global.building_state_constructer_2
-                        value = THIS.id
-                    }
-				}
-				ROOT = {
-					subtract_from_variable = { currency_amount^primary_currency = 500 }
-				}
-			}
-			military_bootcamp_3_click = {
-				if = {
-					limit = {
-						ROOT = {
-							has_country_flag = building_1_open
-						}
-					}
-					hidden_effect = {
-						clear_building_1_effects = yes
-					}
-					set_variable = { building_1 = token:military_bootcamp_3 }
-					set_variable = { time_left_building_1 = 80}
-					add_to_array = {
-                        array = global.building_state_constructer_1
-                        value = THIS.id
-                    }
-				}
-				if = {
-					limit = {
-						ROOT = {
-							has_country_flag = building_2_open
-						}
-					}
-					hidden_effect = {
-						clear_building_2_effects = yes
-					}
-					set_variable = { time_left_building_2 = 80}
-					set_variable = { building_2 = token:military_bootcamp_3 }
 					add_to_array = {
                         array = global.building_state_constructer_2
                         value = THIS.id
@@ -1313,6 +1549,10 @@ scripted_gui = {
 					}
 					set_variable = { building_1 = token:anti_air_1 }
                     set_variable = { time_left_building_1 = 80}
+					set_temp_variable = {speed_multiplier_factor = modifier@production_speed_buildings_factor}
+					subtract_from_temp_variable = {speed_multiplier_factor = modifier@consumer_goods_factor}
+					add_to_temp_variable = {speed_multiplier_factor = 1}
+					divide_variable = {time_left_building_1 = speed_multiplier_factor}
                     add_to_array = {
                         array = global.building_state_constructer_1
                         value = THIS.id
@@ -1329,6 +1569,10 @@ scripted_gui = {
 					}
 					set_variable = { building_2 = token:anti_air_1 }
                     set_variable = { time_left_building_2 = 80}
+					set_temp_variable = {speed_multiplier_factor = modifier@production_speed_buildings_factor}
+					subtract_from_temp_variable = {speed_multiplier_factor = modifier@consumer_goods_factor}
+					add_to_temp_variable = {speed_multiplier_factor = 1}
+					divide_variable = {time_left_building_2 = speed_multiplier_factor}
                     add_to_array = {
                         array = global.building_state_constructer_2
                         value = THIS.id
@@ -1350,6 +1594,10 @@ scripted_gui = {
 					}
 					set_variable = { building_1 = token:anti_air_2 }
                     set_variable = { time_left_building_1 = 80}
+					set_temp_variable = {speed_multiplier_factor = modifier@production_speed_buildings_factor}
+					subtract_from_temp_variable = {speed_multiplier_factor = modifier@consumer_goods_factor}
+					add_to_temp_variable = {speed_multiplier_factor = 1}
+					divide_variable = {time_left_building_1 = speed_multiplier_factor}
                     add_to_array = {
                         array = global.building_state_constructer_1
                         value = THIS.id
@@ -1366,6 +1614,10 @@ scripted_gui = {
 					}
 					set_variable = { building_2 = token:anti_air_2 }
                     set_variable = { time_left_building_2 = 80}
+					set_temp_variable = {speed_multiplier_factor = modifier@production_speed_buildings_factor}
+					subtract_from_temp_variable = {speed_multiplier_factor = modifier@consumer_goods_factor}
+					add_to_temp_variable = {speed_multiplier_factor = 1}
+					divide_variable = {time_left_building_2 = speed_multiplier_factor}
                     add_to_array = {
                         array = global.building_state_constructer_2
                         value = THIS.id
@@ -1387,6 +1639,10 @@ scripted_gui = {
 					}
 					set_variable = { building_1 = token:anti_air_3 }
                     set_variable = { time_left_building_1 = 80}
+					set_temp_variable = {speed_multiplier_factor = modifier@production_speed_buildings_factor}
+					subtract_from_temp_variable = {speed_multiplier_factor = modifier@consumer_goods_factor}
+					add_to_temp_variable = {speed_multiplier_factor = 1}
+					divide_variable = {time_left_building_1 = speed_multiplier_factor}
                     add_to_array = {
                         array = global.building_state_constructer_1
                         value = THIS.id
@@ -1403,6 +1659,10 @@ scripted_gui = {
 					}
 					set_variable = { building_2 = token:anti_air_3 }
                     set_variable = { time_left_building_2 = 80}
+					set_temp_variable = {speed_multiplier_factor = modifier@production_speed_buildings_factor}
+					subtract_from_temp_variable = {speed_multiplier_factor = modifier@consumer_goods_factor}
+					add_to_temp_variable = {speed_multiplier_factor = 1}
+					divide_variable = {time_left_building_2 = speed_multiplier_factor}
                     add_to_array = {
                         array = global.building_state_constructer_2
                         value = THIS.id
@@ -1423,6 +1683,9 @@ scripted_gui = {
 						}
 					}
 					NOT = {
+						has_variable = time_left_building_1
+					}
+					NOT = {
 						check_variable = { building_1 = token:arms_factory_1 }
 					}
 				}
@@ -1431,6 +1694,9 @@ scripted_gui = {
 						ROOT = {
 							has_country_flag = building_2_open
 						}
+					}
+					NOT = {
+						has_variable = time_left_building_2
 					}
 					NOT = {
 						check_variable = { building_2 = token:arms_factory_1 }
@@ -1445,8 +1711,12 @@ scripted_gui = {
 						}
 					}
 					NOT = {
-						check_variable = { building_1 = token:soft_arms_factory_2 }
+						has_variable = time_left_building_1
 					}
+					NOT = {
+						check_variable = { building_1 = token:soft_arms_factory_1 }
+					}
+					check_variable = { building_1 = token:arms_factory_1 }
 				}
 				else_if = {
 					limit = {
@@ -1455,8 +1725,12 @@ scripted_gui = {
 						}
 					}
 					NOT = {
-						check_variable = { building_2 = token:soft_arms_factory_2 }
+						has_variable = time_left_building_2
 					}
+					NOT = {
+						check_variable = { building_2 = token:soft_arms_factory_1 }
+					}
+					check_variable = { building_2 = token:arms_factory_1 }
 				}
 			}
 			arms_factory_3_click_enabled = {
@@ -1467,8 +1741,12 @@ scripted_gui = {
 						}
 					}
 					NOT = {
-						check_variable = { building_1 = token:soft_arms_factory_3 }
+						has_variable = time_left_building_1
 					}
+					NOT = {
+						check_variable = { building_1 = token:soft_arms_factory_2 }
+					}
+					check_variable = { building_1 = token:soft_arms_factory_1 }
 				}
 				else_if = {
 					limit = {
@@ -1477,8 +1755,42 @@ scripted_gui = {
 						}
 					}
 					NOT = {
-						check_variable = { building_2 = token:soft_arms_factory_3 }
+						has_variable = time_left_building_2
 					}
+					NOT = {
+						check_variable = { building_2 = token:soft_arms_factory_2 }
+					}
+					check_variable = { building_2 = token:soft_arms_factory_1 }
+				}
+			}
+			tank_factory_1_click_enabled = {
+				if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_1_open
+						}
+					}
+					NOT = {
+						has_variable = time_left_building_1
+					}
+					NOT = {
+						check_variable = { building_1 = token:tank_factory_1 }
+					}
+					check_variable = { building_1 = token:arms_factory_1 }
+				}
+				else_if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_2_open
+						}
+					}
+					NOT = {
+						has_variable = time_left_building_2
+					}
+					NOT = {
+						check_variable = { building_2 = token:tank_factory_1 }
+					}
+					check_variable = { building_2 = token:arms_factory_1 }
 				}
 			}
 			tank_factory_2_click_enabled = {
@@ -1489,40 +1801,26 @@ scripted_gui = {
 						}
 					}
 					NOT = {
+						has_variable = time_left_building_1
+					}
+					NOT = {
 						check_variable = { building_1 = token:tank_factory_2 }
 					}
+					check_variable = { building_1 = token:tank_factory_1 }
 				}
 				else_if = {
 					limit = {
 						ROOT = {
 							has_country_flag = building_2_open
 						}
+					}
+					NOT = {
+						has_variable = time_left_building_2
 					}
 					NOT = {
 						check_variable = { building_2 = token:tank_factory_2 }
 					}
-				}
-			}
-			tank_factory_3_click_enabled = {
-				if = {
-					limit = {
-						ROOT = {
-							has_country_flag = building_1_open
-						}
-					}
-					NOT = {
-						check_variable = { building_1 = token:tank_factory_3 }
-					}
-				}
-				else_if = {
-					limit = {
-						ROOT = {
-							has_country_flag = building_2_open
-						}
-					}
-					NOT = {
-						check_variable = { building_2 = token:tank_factory_3 }
-					}
+					check_variable = { building_2 = token:tank_factory_1 }
 				}
 			}
 			training_facilities_click_enabled = {
@@ -1533,6 +1831,9 @@ scripted_gui = {
 						}
 					}
 					NOT = {
+						has_variable = time_left_building_1
+					}
+					NOT = {
 						check_variable = { building_1 = token:training_facilities_1 }
 					}
 				}
@@ -1541,6 +1842,9 @@ scripted_gui = {
 						ROOT = {
 							has_country_flag = building_2_open
 						}
+					}
+					NOT = {
+						has_variable = time_left_building_2
 					}
 					NOT = {
 						check_variable = { building_2 = token:training_facilities_1 }
@@ -1555,8 +1859,12 @@ scripted_gui = {
 						}
 					}
 					NOT = {
-						check_variable = { building_1 = token:special_forces_training_2 }
+						has_variable = time_left_building_1
 					}
+					NOT = {
+						check_variable = { building_1 = token:special_forces_training_facilities_1 }
+					}
+					check_variable = { building_1 = token:training_facilities_1 }
 				}
 				else_if = {
 					limit = {
@@ -1565,8 +1873,12 @@ scripted_gui = {
 						}
 					}
 					NOT = {
-						check_variable = { building_2 = token:special_forces_training_2 }
+						has_variable = time_left_building_2
 					}
+					NOT = {
+						check_variable = { building_2 = token:special_forces_training_facilities_1 }
+					}
+					check_variable = { building_2 = token:training_facilities_1 }
 				}
 			}
 			special_forces_training_facilities_2_click_enabled = {
@@ -1577,8 +1889,12 @@ scripted_gui = {
 						}
 					}
 					NOT = {
-						check_variable = { building_1 = token:special_forces_training_3 }
+						has_variable = time_left_building_1
 					}
+					NOT = {
+						check_variable = { building_1 = token:special_forces_training_facilities_2 }
+					}
+					check_variable = { building_1 = token:special_forces_training_facilities_1 }
 				}
 				else_if = {
 					limit = {
@@ -1587,8 +1903,42 @@ scripted_gui = {
 						}
 					}
 					NOT = {
-						check_variable = { building_2 = token:special_forces_training_3 }
+						has_variable = time_left_building_2
 					}
+					NOT = {
+						check_variable = { building_2 = token:special_forces_training_facilities_2 }
+					}
+					check_variable = { building_2 = token:special_forces_training_facilities_1 }
+				}
+			}
+			military_bootcamp_1_click_enabled = {
+				if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_1_open
+						}
+					}
+					NOT = {
+						has_variable = time_left_building_1
+					}
+					NOT = {
+						check_variable = { building_1 = token:military_bootcamp_2 }
+					}
+					check_variable = { building_1 = token:training_facilities_1 }
+				}
+				else_if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_2_open
+						}
+					}
+					NOT = {
+						has_variable = time_left_building_2
+					}
+					NOT = {
+						check_variable = { building_2 = token:military_bootcamp_2 }
+					}
+					check_variable = { building_2 = token:training_facilities_1 }
 				}
 			}
 			military_bootcamp_2_click_enabled = {
@@ -1599,40 +1949,26 @@ scripted_gui = {
 						}
 					}
 					NOT = {
+						has_variable = time_left_building_1
+					}
+					NOT = {
 						check_variable = { building_1 = token:military_bootcamp_2 }
 					}
+					check_variable = { building_1 = token:military_bootcamp_1 }
 				}
 				else_if = {
 					limit = {
 						ROOT = {
 							has_country_flag = building_2_open
 						}
+					}
+					NOT = {
+						has_variable = time_left_building_2
 					}
 					NOT = {
 						check_variable = { building_2 = token:military_bootcamp_2 }
 					}
-				}
-			}
-			military_bootcamp_3_click_enabled = {
-				if = {
-					limit = {
-						ROOT = {
-							has_country_flag = building_1_open
-						}
-					}
-					NOT = {
-						check_variable = { building_1 = token:military_bootcamp_3 }
-					}
-				}
-				else_if = {
-					limit = {
-						ROOT = {
-							has_country_flag = building_2_open
-						}
-					}
-					NOT = {
-						check_variable = { building_2 = token:military_bootcamp_3 }
-					}
+					check_variable = { building_2 = token:military_bootcamp_1 }
 				}
 			}
 			small_anti_air_click_enabled = {
@@ -1643,6 +1979,9 @@ scripted_gui = {
 						}
 					}
 					NOT = {
+						has_variable = time_left_building_1
+					}
+					NOT = {
 						check_variable = { building_1 = token:anti_air_1 }
 					}
 				}
@@ -1651,6 +1990,9 @@ scripted_gui = {
 						ROOT = {
 							has_country_flag = building_2_open
 						}
+					}
+					NOT = {
+						has_variable = time_left_building_2
 					}
 					NOT = {
 						check_variable = { building_2 = token:anti_air_1 }
@@ -1665,8 +2007,12 @@ scripted_gui = {
 						}
 					}
 					NOT = {
+						has_variable = time_left_building_1
+					}
+					NOT = {
 						check_variable = { building_1 = token:anti_air_2 }
 					}
+					check_variable = { building_1 = token:anti_air_1 }
 				}
 				else_if = {
 					limit = {
@@ -1675,8 +2021,12 @@ scripted_gui = {
 						}
 					}
 					NOT = {
+						has_variable = time_left_building_2
+					}
+					NOT = {
 						check_variable = { building_2 = token:anti_air_2 }
 					}
+					check_variable = { building_2 = token:anti_air_1 }
 				}
 			}
 			big_guns_click_enabled = {
@@ -1687,8 +2037,12 @@ scripted_gui = {
 						}
 					}
 					NOT = {
+						has_variable = time_left_building_1
+					}
+					NOT = {
 						check_variable = { building_1 = token:anti_air_3 }
 					}
+					check_variable = { building_1 = token:anti_air_2 }
 				}
 				else_if = {
 					limit = {
@@ -1697,8 +2051,12 @@ scripted_gui = {
 						}
 					}
 					NOT = {
+						has_variable = time_left_building_2
+					}
+					NOT = {
 						check_variable = { building_2 = token:anti_air_3 }
 					}
+					check_variable = { building_2 = token:anti_air_2 }
 				}
 			}
 		}
@@ -1742,8 +2100,12 @@ scripted_gui = {
 					hidden_effect = {
 						clear_building_1_effects = yes
 					}
-					set_variable = { building_1 = token:intelligence_centre_1 }
+					set_variable = { building_1 = token:intelligence_center_1 }
                     set_variable = { time_left_building_1 = 80}
+					set_temp_variable = {speed_multiplier_factor = modifier@production_speed_buildings_factor}
+					subtract_from_temp_variable = {speed_multiplier_factor = modifier@consumer_goods_factor}
+					add_to_temp_variable = {speed_multiplier_factor = 1}
+					divide_variable = {time_left_building_1 = speed_multiplier_factor}
                     add_to_array = {
                         array = global.building_state_constructer_1
                         value = THIS.id
@@ -1758,8 +2120,12 @@ scripted_gui = {
 					hidden_effect = {
 						clear_building_2_effects = yes
 					}
-					set_variable = { building_2 = token:intelligence_centre_1 }
+					set_variable = { building_2 = token:intelligence_center_1 }
                     set_variable = { time_left_building_2 = 80}
+					set_temp_variable = {speed_multiplier_factor = modifier@production_speed_buildings_factor}
+					subtract_from_temp_variable = {speed_multiplier_factor = modifier@consumer_goods_factor}
+					add_to_temp_variable = {speed_multiplier_factor = 1}
+					divide_variable = {time_left_building_2 = speed_multiplier_factor}
                     add_to_array = {
                         array = global.building_state_constructer_2
                         value = THIS.id
@@ -1769,7 +2135,7 @@ scripted_gui = {
 					subtract_from_variable = { currency_amount^primary_currency = 500 }
 				}
 			}
-			monitoring_beacon_click = {
+			sensor_array_1_click = {
 				if = {
 					limit = {
 						ROOT = {
@@ -1779,8 +2145,12 @@ scripted_gui = {
 					hidden_effect = {
 						clear_building_1_effects = yes
 					}
-					set_variable = { building_1 = token:monitoring_beacon_2 }
+					set_variable = { building_1 = token:sensor_array_1 }
                     set_variable = { time_left_building_1 = 80}
+					set_temp_variable = {speed_multiplier_factor = modifier@production_speed_buildings_factor}
+					subtract_from_temp_variable = {speed_multiplier_factor = modifier@consumer_goods_factor}
+					add_to_temp_variable = {speed_multiplier_factor = 1}
+					divide_variable = {time_left_building_1 = speed_multiplier_factor}
                     add_to_array = {
                         array = global.building_state_constructer_1
                         value = THIS.id
@@ -1795,8 +2165,12 @@ scripted_gui = {
 					hidden_effect = {
 						clear_building_2_effects = yes
 					}
-					set_variable = { building_2 = token:monitoring_beacon_2 }
+					set_variable = { building_2 = token:sensor_array_1 }
                     set_variable = { time_left_building_2 = 80}
+					set_temp_variable = {speed_multiplier_factor = modifier@production_speed_buildings_factor}
+					subtract_from_temp_variable = {speed_multiplier_factor = modifier@consumer_goods_factor}
+					add_to_temp_variable = {speed_multiplier_factor = 1}
+					divide_variable = {time_left_building_2 = speed_multiplier_factor}
                     add_to_array = {
                         array = global.building_state_constructer_2
                         value = THIS.id
@@ -1806,7 +2180,7 @@ scripted_gui = {
 					subtract_from_variable = { currency_amount^primary_currency = 500 }
 				}
 			}
-			monitoring_beacon_2_click = {
+			sensor_array_2_click = {
 				if = {
 					limit = {
 						ROOT = {
@@ -1816,8 +2190,12 @@ scripted_gui = {
 					hidden_effect = {
 						clear_building_1_effects = yes
 					}
-					set_variable = { building_1 = token:monitoring_beacon_3 }
+					set_variable = { building_1 = token:sensor_array_2 }
                     set_variable = { time_left_building_1 = 80}
+					set_temp_variable = {speed_multiplier_factor = modifier@production_speed_buildings_factor}
+					subtract_from_temp_variable = {speed_multiplier_factor = modifier@consumer_goods_factor}
+					add_to_temp_variable = {speed_multiplier_factor = 1}
+					divide_variable = {time_left_building_1 = speed_multiplier_factor}
                     add_to_array = {
                         array = global.building_state_constructer_1
                         value = THIS.id
@@ -1832,9 +2210,58 @@ scripted_gui = {
 					hidden_effect = {
 						clear_building_2_effects = yes
 					}
-					set_variable = { building_2 = token:monitoring_beacon_3 }
+					set_variable = { building_2 = token:sensor_array_2 }
                     set_variable = { time_left_building_2 = 80}
+					set_temp_variable = {speed_multiplier_factor = modifier@production_speed_buildings_factor}
+					subtract_from_temp_variable = {speed_multiplier_factor = modifier@consumer_goods_factor}
+					add_to_temp_variable = {speed_multiplier_factor = 1}
+					divide_variable = {time_left_building_2 = speed_multiplier_factor}
                     add_to_array = {
+                        array = global.building_state_constructer_2
+                        value = THIS.id
+                    }
+				}
+				ROOT = {
+					subtract_from_variable = { currency_amount^primary_currency = 500 }
+				}
+			}
+			spy_academy_1_click = {
+				if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_1_open
+						}
+					}
+					hidden_effect = {
+						clear_building_1_effects = yes
+					}
+					set_variable = { time_left_building_1 = 80}
+					set_temp_variable = {speed_multiplier_factor = modifier@production_speed_buildings_factor}
+					subtract_from_temp_variable = {speed_multiplier_factor = modifier@consumer_goods_factor}
+					add_to_temp_variable = {speed_multiplier_factor = 1}
+					divide_variable = {time_left_building_1 = speed_multiplier_factor}
+					set_variable = { building_1 = token:spy_academy_1 }
+					add_to_array = {
+                        array = global.building_state_constructer_1
+                        value = THIS.id
+                    }
+				}
+				if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_2_open
+						}
+					}
+					hidden_effect = {
+						clear_building_2_effects = yes
+					}
+					set_variable = { time_left_building_2 = 80}
+					set_temp_variable = {speed_multiplier_factor = modifier@production_speed_buildings_factor}
+					subtract_from_temp_variable = {speed_multiplier_factor = modifier@consumer_goods_factor}
+					add_to_temp_variable = {speed_multiplier_factor = 1}
+					divide_variable = {time_left_building_2 = speed_multiplier_factor}
+					set_variable = { building_2 = token:spy_academy_1 }
+					add_to_array = {
                         array = global.building_state_constructer_2
                         value = THIS.id
                     }
@@ -1854,11 +2281,15 @@ scripted_gui = {
 						clear_building_1_effects = yes
 					}
 					set_variable = { time_left_building_1 = 80}
+					set_temp_variable = {speed_multiplier_factor = modifier@production_speed_buildings_factor}
+					subtract_from_temp_variable = {speed_multiplier_factor = modifier@consumer_goods_factor}
+					add_to_temp_variable = {speed_multiplier_factor = 1}
+					divide_variable = {time_left_building_1 = speed_multiplier_factor}
+					add_to_array = {
+                        array = global.building_state_constructer_1
+                        value = THIS.id
+                    }
 					set_variable = { building_1 = token:spy_academy_2 }
-					add_to_array = {
-                        array = global.building_state_constructer_1
-                        value = THIS.id
-                    }
 				}
 				if = {
 					limit = {
@@ -1870,44 +2301,11 @@ scripted_gui = {
 						clear_building_2_effects = yes
 					}
 					set_variable = { time_left_building_2 = 80}
+					set_temp_variable = {speed_multiplier_factor = modifier@production_speed_buildings_factor}
+					subtract_from_temp_variable = {speed_multiplier_factor = modifier@consumer_goods_factor}
+					add_to_temp_variable = {speed_multiplier_factor = 1}
+					divide_variable = {time_left_building_2 = speed_multiplier_factor}
 					set_variable = { building_2 = token:spy_academy_2 }
-					add_to_array = {
-                        array = global.building_state_constructer_2
-                        value = THIS.id
-                    }
-				}
-				ROOT = {
-					subtract_from_variable = { currency_amount^primary_currency = 500 }
-				}
-			}
-			spy_academy_3_click = {
-				if = {
-					limit = {
-						ROOT = {
-							has_country_flag = building_1_open
-						}
-					}
-					hidden_effect = {
-						clear_building_1_effects = yes
-					}
-					set_variable = { time_left_building_1 = 80}
-					add_to_array = {
-                        array = global.building_state_constructer_1
-                        value = THIS.id
-                    }
-					set_variable = { building_1 = token:spy_academy_3 }
-				}
-				if = {
-					limit = {
-						ROOT = {
-							has_country_flag = building_2_open
-						}
-					}
-					hidden_effect = {
-						clear_building_2_effects = yes
-					}
-					set_variable = { time_left_building_2 = 80}
-					set_variable = { building_2 = token:spy_academy_3 }
 					add_to_array = {
                         array = global.building_state_constructer_2
                         value = THIS.id
@@ -1929,6 +2327,10 @@ scripted_gui = {
 					}
 					set_variable = { building_1 = token:research_center_1 }
 					set_variable = { time_left_building_1 = 80}
+					set_temp_variable = {speed_multiplier_factor = modifier@production_speed_buildings_factor}
+					subtract_from_temp_variable = {speed_multiplier_factor = modifier@consumer_goods_factor}
+					add_to_temp_variable = {speed_multiplier_factor = 1}
+					divide_variable = {time_left_building_1 = speed_multiplier_factor}
 					add_to_array = {
                         array = global.building_state_constructer_1
                         value = THIS.id
@@ -1945,6 +2347,10 @@ scripted_gui = {
 					}
 					set_variable = { building_2 = token:research_center_1 }
 					set_variable = { time_left_building_2 = 80}
+					set_temp_variable = {speed_multiplier_factor = modifier@production_speed_buildings_factor}
+					subtract_from_temp_variable = {speed_multiplier_factor = modifier@consumer_goods_factor}
+					add_to_temp_variable = {speed_multiplier_factor = 1}
+					divide_variable = {time_left_building_2 = speed_multiplier_factor}
 					add_to_array = {
                         array = global.building_state_constructer_2
                         value = THIS.id
@@ -1966,6 +2372,10 @@ scripted_gui = {
 					}
 					set_variable = { building_1 = token:research_center_2 }
 					set_variable = { time_left_building_1 = 80}
+					set_temp_variable = {speed_multiplier_factor = modifier@production_speed_buildings_factor}
+					subtract_from_temp_variable = {speed_multiplier_factor = modifier@consumer_goods_factor}
+					add_to_temp_variable = {speed_multiplier_factor = 1}
+					divide_variable = {time_left_building_1 = speed_multiplier_factor}
 					add_to_array = {
                         array = global.building_state_constructer_1
                         value = THIS.id
@@ -1982,6 +2392,10 @@ scripted_gui = {
 					}
 					set_variable = { building_2 = token:research_center_2 }
 					set_variable = { time_left_building_2 = 80}
+					set_temp_variable = {speed_multiplier_factor = modifier@production_speed_buildings_factor}
+					subtract_from_temp_variable = {speed_multiplier_factor = modifier@consumer_goods_factor}
+					add_to_temp_variable = {speed_multiplier_factor = 1}
+					divide_variable = {time_left_building_2 = speed_multiplier_factor}
 					add_to_array = {
                         array = global.building_state_constructer_2
                         value = THIS.id
@@ -2003,6 +2417,10 @@ scripted_gui = {
 					}
 					set_variable = { building_1 = token:research_center_3 }
 					set_variable = { time_left_building_1 = 80}
+					set_temp_variable = {speed_multiplier_factor = modifier@production_speed_buildings_factor}
+					subtract_from_temp_variable = {speed_multiplier_factor = modifier@consumer_goods_factor}
+					add_to_temp_variable = {speed_multiplier_factor = 1}
+					divide_variable = {time_left_building_1 = speed_multiplier_factor}
 					add_to_array = {
                         array = global.building_state_constructer_1
                         value = THIS.id
@@ -2019,6 +2437,10 @@ scripted_gui = {
 					}
 					set_variable = { building_2 = token:research_center_3 }
 					set_variable = { time_left_building_2 = 80}
+					set_temp_variable = {speed_multiplier_factor = modifier@production_speed_buildings_factor}
+					subtract_from_temp_variable = {speed_multiplier_factor = modifier@consumer_goods_factor}
+					add_to_temp_variable = {speed_multiplier_factor = 1}
+					divide_variable = {time_left_building_2 = speed_multiplier_factor}
 					add_to_array = {
                         array = global.building_state_constructer_2
                         value = THIS.id
@@ -2039,6 +2461,10 @@ scripted_gui = {
 						clear_building_1_effects = yes
 					}
 					set_variable = { time_left_building_1 = 80}
+					set_temp_variable = {speed_multiplier_factor = modifier@production_speed_buildings_factor}
+					subtract_from_temp_variable = {speed_multiplier_factor = modifier@consumer_goods_factor}
+					add_to_temp_variable = {speed_multiplier_factor = 1}
+					divide_variable = {time_left_building_1 = speed_multiplier_factor}
 					set_variable = { building_1 = token:military_academy_1 }
 					add_to_array = {
                         array = global.building_state_constructer_1
@@ -2055,6 +2481,10 @@ scripted_gui = {
 						clear_building_2_effects = yes
 					}
 					set_variable = { time_left_building_2 = 80}
+					set_temp_variable = {speed_multiplier_factor = modifier@production_speed_buildings_factor}
+					subtract_from_temp_variable = {speed_multiplier_factor = modifier@consumer_goods_factor}
+					add_to_temp_variable = {speed_multiplier_factor = 1}
+					divide_variable = {time_left_building_2 = speed_multiplier_factor}
 					set_variable = { building_2 = token:military_academy_1 }
 					add_to_array = {
                         array = global.building_state_constructer_2
@@ -2076,7 +2506,11 @@ scripted_gui = {
 						clear_building_1_effects = yes
 					}
 					set_variable = { time_left_building_1 = 80}
-					set_variable = { building_1 = token:military_college_2 }
+					set_temp_variable = {speed_multiplier_factor = modifier@production_speed_buildings_factor}
+					subtract_from_temp_variable = {speed_multiplier_factor = modifier@consumer_goods_factor}
+					add_to_temp_variable = {speed_multiplier_factor = 1}
+					divide_variable = {time_left_building_1 = speed_multiplier_factor}
+					set_variable = { building_1 = token:military_academy_2 }
 					add_to_array = {
                         array = global.building_state_constructer_1
                         value = THIS.id
@@ -2092,7 +2526,11 @@ scripted_gui = {
 						clear_building_2_effects = yes
 					}
 					set_variable = { time_left_building_2 = 80}
-					set_variable = { building_2 = token:military_college_2 }
+					set_temp_variable = {speed_multiplier_factor = modifier@production_speed_buildings_factor}
+					subtract_from_temp_variable = {speed_multiplier_factor = modifier@consumer_goods_factor}
+					add_to_temp_variable = {speed_multiplier_factor = 1}
+					divide_variable = {time_left_building_2 = speed_multiplier_factor}
+					set_variable = { building_2 = token:military_academy_2 }
 					add_to_array = {
                         array = global.building_state_constructer_2
                         value = THIS.id
@@ -2102,7 +2540,7 @@ scripted_gui = {
 					subtract_from_variable = { currency_amount^primary_currency = 500 }
 				}
 			}
-			military_college_2_click = {
+			military_academy_2_click = {
 				if = {
 					limit = {
 						ROOT = {
@@ -2113,7 +2551,11 @@ scripted_gui = {
 						clear_building_1_effects = yes
 					}
 					set_variable = { time_left_building_1 = 80}
-					set_variable = { building_1 = token:military_college_3 }
+					set_temp_variable = {speed_multiplier_factor = modifier@production_speed_buildings_factor}
+					subtract_from_temp_variable = {speed_multiplier_factor = modifier@consumer_goods_factor}
+					add_to_temp_variable = {speed_multiplier_factor = 1}
+					divide_variable = {time_left_building_1 = speed_multiplier_factor}
+					set_variable = { building_1 = token:military_academy_3 }
 					add_to_array = {
                         array = global.building_state_constructer_1
                         value = THIS.id
@@ -2129,7 +2571,11 @@ scripted_gui = {
 						clear_building_2_effects = yes
 					}
 					set_variable = { time_left_building_2 = 80}
-					set_variable = { building_2 = token:military_college_3 }
+					set_temp_variable = {speed_multiplier_factor = modifier@production_speed_buildings_factor}
+					subtract_from_temp_variable = {speed_multiplier_factor = modifier@consumer_goods_factor}
+					add_to_temp_variable = {speed_multiplier_factor = 1}
+					divide_variable = {time_left_building_2 = speed_multiplier_factor}
+					set_variable = { building_2 = token:military_academy_3 }
 					add_to_array = {
                         array = global.building_state_constructer_2
                         value = THIS.id
@@ -2150,7 +2596,11 @@ scripted_gui = {
 						clear_building_1_effects = yes
 					}
 					set_variable = { time_left_building_1 = 80}
-					set_variable = { building_1 = token:naval_academy_2 }
+					set_temp_variable = {speed_multiplier_factor = modifier@production_speed_buildings_factor}
+					subtract_from_temp_variable = {speed_multiplier_factor = modifier@consumer_goods_factor}
+					add_to_temp_variable = {speed_multiplier_factor = 1}
+					divide_variable = {time_left_building_1 = speed_multiplier_factor}
+					set_variable = { building_1 = token:naval_academy_1 }
 					add_to_array = {
                         array = global.building_state_constructer_1
                         value = THIS.id
@@ -2166,7 +2616,11 @@ scripted_gui = {
 						clear_building_2_effects = yes
 					}
 					set_variable = { time_left_building_2 = 80}
-					set_variable = { building_2 = token:naval_academy_2 }
+					set_temp_variable = {speed_multiplier_factor = modifier@production_speed_buildings_factor}
+					subtract_from_temp_variable = {speed_multiplier_factor = modifier@consumer_goods_factor}
+					add_to_temp_variable = {speed_multiplier_factor = 1}
+					divide_variable = {time_left_building_2 = speed_multiplier_factor}
+					set_variable = { building_2 = token:naval_academy_1 }
 					add_to_array = {
                         array = global.building_state_constructer_2
                         value = THIS.id
@@ -2187,7 +2641,11 @@ scripted_gui = {
 						clear_building_1_effects = yes
 					}
 					set_variable = { time_left_building_1 = 80}
-					set_variable = { building_1 = token:naval_academy_3 }
+					set_temp_variable = {speed_multiplier_factor = modifier@production_speed_buildings_factor}
+					subtract_from_temp_variable = {speed_multiplier_factor = modifier@consumer_goods_factor}
+					add_to_temp_variable = {speed_multiplier_factor = 1}
+					divide_variable = {time_left_building_1 = speed_multiplier_factor}
+					set_variable = { building_1 = token:admiralty_academy_1 }
 					add_to_array = {
                         array = global.building_state_constructer_1
                         value = THIS.id
@@ -2203,7 +2661,11 @@ scripted_gui = {
 						clear_building_2_effects = yes
 					}
 					set_variable = { time_left_building_2 = 80}
-					set_variable = { building_2 = token:naval_academy_3 }
+					set_temp_variable = {speed_multiplier_factor = modifier@production_speed_buildings_factor}
+					subtract_from_temp_variable = {speed_multiplier_factor = modifier@consumer_goods_factor}
+					add_to_temp_variable = {speed_multiplier_factor = 1}
+					divide_variable = {time_left_building_2 = speed_multiplier_factor}
+					set_variable = { building_2 = token:admiralty_academy_1 }
 					add_to_array = {
                         array = global.building_state_constructer_2
                         value = THIS.id
@@ -2224,7 +2686,11 @@ scripted_gui = {
 						clear_building_1_effects = yes
 					}
 					set_variable = { time_left_building_1 = 80}
-					set_variable = { building_1 = token:starfighter_academy_3 }
+					set_temp_variable = {speed_multiplier_factor = modifier@production_speed_buildings_factor}
+					subtract_from_temp_variable = {speed_multiplier_factor = modifier@consumer_goods_factor}
+					add_to_temp_variable = {speed_multiplier_factor = 1}
+					divide_variable = {time_left_building_1 = speed_multiplier_factor}
+					set_variable = { building_1 = token:starfighter_academy_1 }
 					add_to_array = {
                         array = global.building_state_constructer_1
                         value = THIS.id
@@ -2240,7 +2706,11 @@ scripted_gui = {
 						clear_building_2_effects = yes
 					}
 					set_variable = { time_left_building_2 = 80}
-					set_variable = { building_2 = token:starfighter_academy_3 }
+					set_temp_variable = {speed_multiplier_factor = modifier@production_speed_buildings_factor}
+					subtract_from_temp_variable = {speed_multiplier_factor = modifier@consumer_goods_factor}
+					add_to_temp_variable = {speed_multiplier_factor = 1}
+					divide_variable = {time_left_building_2 = speed_multiplier_factor}
+					set_variable = { building_2 = token:starfighter_academy_1 }
 					add_to_array = {
                         array = global.building_state_constructer_2
                         value = THIS.id
@@ -2261,6 +2731,10 @@ scripted_gui = {
 						clear_building_1_effects = yes
 					}
 					set_variable = { time_left_building_1 = 80}
+					set_temp_variable = {speed_multiplier_factor = modifier@production_speed_buildings_factor}
+					subtract_from_temp_variable = {speed_multiplier_factor = modifier@consumer_goods_factor}
+					add_to_temp_variable = {speed_multiplier_factor = 1}
+					divide_variable = {time_left_building_1 = speed_multiplier_factor}
 					set_variable = { building_1 = token:taxation_center_1 }
 					add_to_array = {
                         array = global.building_state_constructer_1
@@ -2277,6 +2751,10 @@ scripted_gui = {
 						clear_building_2_effects = yes
 					}
 					set_variable = { time_left_building_2 = 80}
+					set_temp_variable = {speed_multiplier_factor = modifier@production_speed_buildings_factor}
+					subtract_from_temp_variable = {speed_multiplier_factor = modifier@consumer_goods_factor}
+					add_to_temp_variable = {speed_multiplier_factor = 1}
+					divide_variable = {time_left_building_2 = speed_multiplier_factor}
 					set_variable = { building_2 = token:taxation_center_1 }
 					add_to_array = {
                         array = global.building_state_constructer_2
@@ -2298,6 +2776,10 @@ scripted_gui = {
 						clear_building_1_effects = yes
 					}
 					set_variable = { time_left_building_1 = 80}
+					set_temp_variable = {speed_multiplier_factor = modifier@production_speed_buildings_factor}
+					subtract_from_temp_variable = {speed_multiplier_factor = modifier@consumer_goods_factor}
+					add_to_temp_variable = {speed_multiplier_factor = 1}
+					divide_variable = {time_left_building_1 = speed_multiplier_factor}
 					set_variable = { building_1 = token:taxation_center_2 }
 					add_to_array = {
                         array = global.building_state_constructer_1
@@ -2314,6 +2796,10 @@ scripted_gui = {
 						clear_building_2_effects = yes
 					}
 					set_variable = { time_left_building_2 = 80}
+					set_temp_variable = {speed_multiplier_factor = modifier@production_speed_buildings_factor}
+					subtract_from_temp_variable = {speed_multiplier_factor = modifier@consumer_goods_factor}
+					add_to_temp_variable = {speed_multiplier_factor = 1}
+					divide_variable = {time_left_building_2 = speed_multiplier_factor}
 					set_variable = { building_2 = token:taxation_center_2 }
 					add_to_array = {
                         array = global.building_state_constructer_2
@@ -2335,6 +2821,10 @@ scripted_gui = {
 						clear_building_1_effects = yes
 					}
 					set_variable = { time_left_building_1 = 80}
+					set_temp_variable = {speed_multiplier_factor = modifier@production_speed_buildings_factor}
+					subtract_from_temp_variable = {speed_multiplier_factor = modifier@consumer_goods_factor}
+					add_to_temp_variable = {speed_multiplier_factor = 1}
+					divide_variable = {time_left_building_1 = speed_multiplier_factor}
 					set_variable = { building_1 = token:taxation_center_3 }
 					add_to_array = {
                         array = global.building_state_constructer_1
@@ -2351,6 +2841,10 @@ scripted_gui = {
 						clear_building_2_effects = yes
 					}
 					set_variable = { time_left_building_2 = 80}
+					set_temp_variable = {speed_multiplier_factor = modifier@production_speed_buildings_factor}
+					subtract_from_temp_variable = {speed_multiplier_factor = modifier@consumer_goods_factor}
+					add_to_temp_variable = {speed_multiplier_factor = 1}
+					divide_variable = {time_left_building_2 = speed_multiplier_factor}
 					set_variable = { building_2 = token:taxation_center_3 }
 					add_to_array = {
                         array = global.building_state_constructer_2
@@ -2372,7 +2866,10 @@ scripted_gui = {
 						}
 					}
 					NOT = {
-						check_variable = { building_1 = token:intelligence_centre_1 }
+						has_variable = time_left_building_1
+					}
+					NOT = {
+						check_variable = { building_1 = token:intelligence_center_1 }
 					}
 				}
 				else_if = {
@@ -2382,11 +2879,14 @@ scripted_gui = {
 						}
 					}
 					NOT = {
-						check_variable = { building_2 = token:intelligence_centre_1 }
+						has_variable = time_left_building_2
+					}
+					NOT = {
+						check_variable = { building_2 = token:intelligence_center_1 }
 					}
 				}
 			}
-			monitoring_beacon_click_enabled = {
+			sensor_array_1_click_enabled = {
 				if = {
 					limit = {
 						ROOT = {
@@ -2394,8 +2894,12 @@ scripted_gui = {
 						}
 					}
 					NOT = {
-						check_variable = { building_1 = token:monitoring_beacon_2 }
+						has_variable = time_left_building_1
 					}
+					NOT = {
+						check_variable = { building_1 = token:sensor_array_1 }
+					}
+					check_variable = { building_1 = token:intelligence_center_1 }
 				}
 				else_if = {
 					limit = {
@@ -2404,11 +2908,15 @@ scripted_gui = {
 						}
 					}
 					NOT = {
-						check_variable = { building_2 = token:monitoring_beacon_2 }
+						has_variable = time_left_building_2
 					}
+					NOT = {
+						check_variable = { building_2 = token:sensor_array_1 }
+					}
+					check_variable = { building_2 = token:intelligence_center_1 }
 				}
 			}
-			monitoring_beacon_2_click_enabled = {
+			sensor_array_2_click_enabled = {
 				if = {
 					limit = {
 						ROOT = {
@@ -2416,8 +2924,12 @@ scripted_gui = {
 						}
 					}
 					NOT = {
-						check_variable = { building_1 = token:monitoring_beacon_3 }
+						has_variable = time_left_building_1
 					}
+					NOT = {
+						check_variable = { building_1 = token:sensor_array_2 }
+					}
+					check_variable = { building_1 = token:sensor_array_1 }
 				}
 				else_if = {
 					limit = {
@@ -2426,8 +2938,42 @@ scripted_gui = {
 						}
 					}
 					NOT = {
-						check_variable = { building_2 = token:monitoring_beacon_3 }
+						has_variable = time_left_building_2
 					}
+					NOT = {
+						check_variable = { building_2 = token:sensor_array_2 }
+					}
+					check_variable = { building_2 = token:sensor_array_1 }
+				}
+			}
+			spy_academy_1_click_enabled = {
+				if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_1_open
+						}
+					}
+					NOT = {
+						has_variable = time_left_building_1
+					}
+					NOT = {
+						check_variable = { building_1 = token:spy_academy_1 }
+					}
+					check_variable = { building_1 = token:intelligence_center_1 }
+				}
+				else_if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_2_open
+						}
+					}
+					NOT = {
+						has_variable = time_left_building_2
+					}
+					NOT = {
+						check_variable = { building_2 = token:spy_academy_1 }
+					}
+					check_variable = { building_2 = token:intelligence_center_1 }
 				}
 			}
 			spy_academy_2_click_enabled = {
@@ -2438,40 +2984,26 @@ scripted_gui = {
 						}
 					}
 					NOT = {
+						has_variable = time_left_building_1
+					}
+					NOT = {
 						check_variable = { building_1 = token:spy_academy_2 }
 					}
+					check_variable = { building_1 = token:spy_academy_1 }
 				}
 				else_if = {
 					limit = {
 						ROOT = {
 							has_country_flag = building_2_open
 						}
+					}
+					NOT = {
+						has_variable = time_left_building_2
 					}
 					NOT = {
 						check_variable = { building_2 = token:spy_academy_2 }
 					}
-				}
-			}
-			spy_academy_3_click_enabled = {
-				if = {
-					limit = {
-						ROOT = {
-							has_country_flag = building_1_open
-						}
-					}
-					NOT = {
-						check_variable = { building_1 = token:spy_academy_3 }
-					}
-				}
-				else_if = {
-					limit = {
-						ROOT = {
-							has_country_flag = building_2_open
-						}
-					}
-					NOT = {
-						check_variable = { building_2 = token:spy_academy_3 }
-					}
+					check_variable = { building_2 = token:spy_academy_1 }
 				}
 			}
 			research_center_click_enabled = {
@@ -2482,6 +3014,9 @@ scripted_gui = {
 						}
 					}
 					NOT = {
+						has_variable = time_left_building_1
+					}
+					NOT = {
 						check_variable = { building_1 = token:research_center_1 }
 					}
 				}
@@ -2490,6 +3025,9 @@ scripted_gui = {
 						ROOT = {
 							has_country_flag = building_2_open
 						}
+					}
+					NOT = {
+						has_variable = time_left_building_2
 					}
 					NOT = {
 						check_variable = { building_2 = token:research_center_1 }
@@ -2504,8 +3042,12 @@ scripted_gui = {
 						}
 					}
 					NOT = {
+						has_variable = time_left_building_1
+					}
+					NOT = {
 						check_variable = { building_1 = token:research_center_2 }
 					}
+					check_variable = { building_1 = token:research_center_1 }
 				}
 				else_if = {
 					limit = {
@@ -2514,8 +3056,12 @@ scripted_gui = {
 						}
 					}
 					NOT = {
+						has_variable = time_left_building_2
+					}
+					NOT = {
 						check_variable = { building_2 = token:research_center_2 }
 					}
+					check_variable = { building_2 = token:research_center_1 }
 				}
 			}
 			research_center_3_click_enabled = {
@@ -2526,8 +3072,12 @@ scripted_gui = {
 						}
 					}
 					NOT = {
+						has_variable = time_left_building_1
+					}
+					NOT = {
 						check_variable = { building_1 = token:research_center_3 }
 					}
+					check_variable = { building_1 = token:research_center_2 }
 				}
 				else_if = {
 					limit = {
@@ -2536,8 +3086,12 @@ scripted_gui = {
 						}
 					}
 					NOT = {
+						has_variable = time_left_building_2
+					}
+					NOT = {
 						check_variable = { building_2 = token:research_center_3 }
 					}
+					check_variable = { building_2 = token:research_center_2 }
 				}
 			}
 			military_academy_click_enabled = {
@@ -2548,6 +3102,9 @@ scripted_gui = {
 						}
 					}
 					NOT = {
+						has_variable = time_left_building_1
+					}
+					NOT = {
 						check_variable = { building_1 = token:military_academy_1 }
 					}
 				}
@@ -2556,6 +3113,9 @@ scripted_gui = {
 						ROOT = {
 							has_country_flag = building_2_open
 						}
+					}
+					NOT = {
+						has_variable = time_left_building_2
 					}
 					NOT = {
 						check_variable = { building_2 = token:military_academy_1 }
@@ -2570,8 +3130,12 @@ scripted_gui = {
 						}
 					}
 					NOT = {
-						check_variable = { building_1 = token:military_college_2 }
+						has_variable = time_left_building_1
 					}
+					NOT = {
+						check_variable = { building_1 = token:military_academy_2 }
+					}
+					check_variable = { building_1 = token:military_academy_1 }
 				}
 				else_if = {
 					limit = {
@@ -2580,11 +3144,15 @@ scripted_gui = {
 						}
 					}
 					NOT = {
-						check_variable = { building_2 = token:military_college_2 }
+						has_variable = time_left_building_2
 					}
+					NOT = {
+						check_variable = { building_2 = token:military_academy_2 }
+					}
+					check_variable = { building_2 = token:military_academy_1 }
 				}
 			}
-			military_college_2_click_enabled = {
+			military_academy_2_click_enabled = {
 				if = {
 					limit = {
 						ROOT = {
@@ -2592,8 +3160,12 @@ scripted_gui = {
 						}
 					}
 					NOT = {
-						check_variable = { building_1 = token:military_college_3 }
+						has_variable = time_left_building_1
 					}
+					NOT = {
+						check_variable = { building_1 = token:military_academy_3 }
+					}
+					check_variable = { building_1 = token:military_academy_2 }
 				}
 				else_if = {
 					limit = {
@@ -2602,8 +3174,12 @@ scripted_gui = {
 						}
 					}
 					NOT = {
-						check_variable = { building_2 = token:military_college_3 }
+						has_variable = time_left_building_2
 					}
+					NOT = {
+						check_variable = { building_2 = token:military_academy_3 }
+					}
+					check_variable = { building_2 = token:military_academy_2 }
 				}
 			}
 			naval_academy_click_enabled = {
@@ -2614,8 +3190,12 @@ scripted_gui = {
 						}
 					}
 					NOT = {
-						check_variable = { building_1 = token:naval_academy_2 }
+						has_variable = time_left_building_1
 					}
+					NOT = {
+						check_variable = { building_1 = token:naval_academy_1 }
+					}
+					check_variable = { building_1 = token:military_academy_1 }
 				}
 				else_if = {
 					limit = {
@@ -2624,8 +3204,12 @@ scripted_gui = {
 						}
 					}
 					NOT = {
-						check_variable = { building_2 = token:naval_academy_2 }
+						has_variable = time_left_building_2
 					}
+					NOT = {
+						check_variable = { building_2 = token:naval_academy_1 }
+					}
+					check_variable = { building_2 = token:military_academy_1 }
 				}
 			}
 			admiraly_academy_click_enabled = {
@@ -2636,8 +3220,12 @@ scripted_gui = {
 						}
 					}
 					NOT = {
-						check_variable = { building_1 = token:naval_academy_3 }
+						has_variable = time_left_building_1
 					}
+					NOT = {
+						check_variable = { building_1 = token:admiralty_academy_1 }
+					}
+					check_variable = { building_1 = token:naval_academy_1 }
 				}
 				else_if = {
 					limit = {
@@ -2646,8 +3234,12 @@ scripted_gui = {
 						}
 					}
 					NOT = {
-						check_variable = { building_2 = token:naval_academy_3 }
+						has_variable = time_left_building_2
 					}
+					NOT = {
+						check_variable = { building_2 = token:admiralty_academy_1 }
+					}
+					check_variable = { building_2 = token:naval_academy_1 }
 				}
 			}
 			starship_academy_click_enabled = {
@@ -2658,8 +3250,12 @@ scripted_gui = {
 						}
 					}
 					NOT = {
-						check_variable = { building_1 = token:starfighter_academy_3 }
+						has_variable = time_left_building_1
 					}
+					NOT = {
+						check_variable = { building_1 = token:starfighter_academy_1 }
+					}
+					check_variable = { building_1 = token:naval_academy_1 }
 				}
 				else_if = {
 					limit = {
@@ -2668,8 +3264,12 @@ scripted_gui = {
 						}
 					}
 					NOT = {
-						check_variable = { building_2 = token:starfighter_academy_3 }
+						has_variable = time_left_building_2
 					}
+					NOT = {
+						check_variable = { building_2 = token:starfighter_academy_1 }
+					}
+					check_variable = { building_2 = token:naval_academy_1 }
 				}
 			}
 			taxation_1_click_enabled = {
@@ -2680,6 +3280,9 @@ scripted_gui = {
 						}
 					}
 					NOT = {
+						has_variable = time_left_building_1
+					}
+					NOT = {
 						check_variable = { building_1 = token:taxation_center_1 }
 					}
 				}
@@ -2688,6 +3291,9 @@ scripted_gui = {
 						ROOT = {
 							has_country_flag = building_2_open
 						}
+					}
+					NOT = {
+						has_variable = time_left_building_2
 					}
 					NOT = {
 						check_variable = { building_2 = token:taxation_center_1 }
@@ -2702,8 +3308,12 @@ scripted_gui = {
 						}
 					}
 					NOT = {
+						has_variable = time_left_building_1
+					}
+					NOT = {
 						check_variable = { building_1 = token:taxation_center_2 }
 					}
+					check_variable = { building_1 = token:taxation_center_1 }
 				}
 				else_if = {
 					limit = {
@@ -2712,8 +3322,12 @@ scripted_gui = {
 						}
 					}
 					NOT = {
+						has_variable = time_left_building_2
+					}
+					NOT = {
 						check_variable = { building_2 = token:taxation_center_2 }
 					}
+					check_variable = { building_2 = token:taxation_center_1 }
 				}
 			}
 			taxation_3_click_enabled = {
@@ -2724,8 +3338,12 @@ scripted_gui = {
 						}
 					}
 					NOT = {
+						has_variable = time_left_building_1
+					}
+					NOT = {
 						check_variable = { building_1 = token:taxation_center_3 }
 					}
+					check_variable = { building_1 = token:taxation_center_2 }
 				}
 				else_if = {
 					limit = {
@@ -2734,8 +3352,12 @@ scripted_gui = {
 						}
 					}
 					NOT = {
+						has_variable = time_left_building_2
+					}
+					NOT = {
 						check_variable = { building_2 = token:taxation_center_3 }
 					}
+					check_variable = { building_2 = token:taxation_center_2 }
 				}
 			}
 		}
@@ -2780,6 +3402,10 @@ scripted_gui = {
 						clear_building_1_effects = yes
 					}
 					set_variable = { time_left_building_1 = 80}
+					set_temp_variable = {speed_multiplier_factor = modifier@production_speed_buildings_factor}
+					subtract_from_temp_variable = {speed_multiplier_factor = modifier@consumer_goods_factor}
+					add_to_temp_variable = {speed_multiplier_factor = 1}
+					divide_variable = {time_left_building_1 = speed_multiplier_factor}
 					set_variable = { building_1 = unique_building_on_state }## unique_building_on_state is a state variable holding the states unique building idea, it is used to then locate its add and removal effects
 					add_to_array = {
                         array = global.building_state_constructer_1
@@ -2797,6 +3423,10 @@ scripted_gui = {
 						clear_building_2_effects = yes
 					}
 					set_variable = { time_left_building_2 = 80}
+					set_temp_variable = {speed_multiplier_factor = modifier@production_speed_buildings_factor}
+					subtract_from_temp_variable = {speed_multiplier_factor = modifier@consumer_goods_factor}
+					add_to_temp_variable = {speed_multiplier_factor = 1}
+					divide_variable = {time_left_building_2 = speed_multiplier_factor}
 					set_variable = { building_2 = unique_building_on_state }
 					add_to_array = {
                         array = global.building_state_constructer_2
@@ -2819,6 +3449,10 @@ scripted_gui = {
 						clear_building_1_effects = yes
 					}
 					set_variable = { time_left_building_1 = 80}
+					set_temp_variable = {speed_multiplier_factor = modifier@production_speed_buildings_factor}
+					subtract_from_temp_variable = {speed_multiplier_factor = modifier@consumer_goods_factor}
+					add_to_temp_variable = {speed_multiplier_factor = 1}
+					divide_variable = {time_left_building_1 = speed_multiplier_factor}
 					meta_effect = {
 						text = {
 							set_variable = { building_2 = token:[BUILDING_NAME]_2 }
@@ -2840,6 +3474,10 @@ scripted_gui = {
 						clear_building_2_effects = yes
 					}
 					set_variable = { time_left_building_2 = 80}
+					set_temp_variable = {speed_multiplier_factor = modifier@production_speed_buildings_factor}
+					subtract_from_temp_variable = {speed_multiplier_factor = modifier@consumer_goods_factor}
+					add_to_temp_variable = {speed_multiplier_factor = 1}
+					divide_variable = {time_left_building_2 = speed_multiplier_factor}
 					meta_effect = {
 						text = {
 							set_variable = { building_2 = token:[BUILDING_NAME]_2 }
@@ -2866,6 +3504,10 @@ scripted_gui = {
 						clear_building_1_effects = yes
 					}
 					set_variable = { time_left_building_1 = 80}
+					set_temp_variable = {speed_multiplier_factor = modifier@production_speed_buildings_factor}
+					subtract_from_temp_variable = {speed_multiplier_factor = modifier@consumer_goods_factor}
+					add_to_temp_variable = {speed_multiplier_factor = 1}
+					divide_variable = {time_left_building_1 = speed_multiplier_factor}
 					meta_effect = {
 						text = {
 							set_variable = { building_1 = token:[BUILDING_NAME]_3 }
@@ -2888,6 +3530,10 @@ scripted_gui = {
 						clear_building_2_effects = yes
 					}
 					set_variable = { time_left_building_2 = 80}
+					set_temp_variable = {speed_multiplier_factor = modifier@production_speed_buildings_factor}
+					subtract_from_temp_variable = {speed_multiplier_factor = modifier@consumer_goods_factor}
+					add_to_temp_variable = {speed_multiplier_factor = 1}
+					divide_variable = {time_left_building_2 = speed_multiplier_factor}
 					meta_effect = {
 						text = {
 							set_variable = { building_2 = token:[BUILDING_NAME]_3 }
@@ -2914,6 +3560,10 @@ scripted_gui = {
 						clear_building_1_effects = yes
 					}
 					set_variable = { time_left_building_1 = 80}
+					set_temp_variable = {speed_multiplier_factor = modifier@production_speed_buildings_factor}
+					subtract_from_temp_variable = {speed_multiplier_factor = modifier@consumer_goods_factor}
+					add_to_temp_variable = {speed_multiplier_factor = 1}
+					divide_variable = {time_left_building_1 = speed_multiplier_factor}
 					set_variable = { building_1 = token:homestead_1 }
 					add_to_array = {
                         array = global.building_state_constructer_1
@@ -2930,6 +3580,10 @@ scripted_gui = {
 						clear_building_2_effects = yes
 					}
 					set_variable = { time_left_building_2 = 80}
+					set_temp_variable = {speed_multiplier_factor = modifier@production_speed_buildings_factor}
+					subtract_from_temp_variable = {speed_multiplier_factor = modifier@consumer_goods_factor}
+					add_to_temp_variable = {speed_multiplier_factor = 1}
+					divide_variable = {time_left_building_2 = speed_multiplier_factor}
 					set_variable = { building_2 = token:homestead_1 }
 					add_to_array = {
                         array = global.building_state_constructer_2
@@ -2950,7 +3604,11 @@ scripted_gui = {
 					hidden_effect = {
 						clear_building_1_effects = yes
 					}
-					set_variable = { time_left_building_1 = 80}	
+					set_variable = { time_left_building_1 = 80}
+					set_temp_variable = {speed_multiplier_factor = modifier@production_speed_buildings_factor}
+					subtract_from_temp_variable = {speed_multiplier_factor = modifier@consumer_goods_factor}
+					add_to_temp_variable = {speed_multiplier_factor = 1}
+					divide_variable = {time_left_building_1 = speed_multiplier_factor}	
 					set_variable = { building_1 = token:homestead_2 }
 					add_to_array = {
                         array = global.building_state_constructer_1
@@ -2966,7 +3624,11 @@ scripted_gui = {
 					hidden_effect = {
 						clear_building_2_effects = yes
 					}
-					set_variable = { time_left_building_2 = 80}	
+					set_variable = { time_left_building_2 = 80}
+					set_temp_variable = {speed_multiplier_factor = modifier@production_speed_buildings_factor}
+					subtract_from_temp_variable = {speed_multiplier_factor = modifier@consumer_goods_factor}
+					add_to_temp_variable = {speed_multiplier_factor = 1}
+					divide_variable = {time_left_building_2 = speed_multiplier_factor}	
 					set_variable = { building_2 = token:homestead_2 }
 					add_to_array = {
                         array = global.building_state_constructer_2
@@ -2987,7 +3649,11 @@ scripted_gui = {
 					hidden_effect = {
 						clear_building_1_effects = yes
 					}
-					set_variable = { time_left_building_1 = 80}	
+					set_variable = { time_left_building_1 = 80}
+					set_temp_variable = {speed_multiplier_factor = modifier@production_speed_buildings_factor}
+					subtract_from_temp_variable = {speed_multiplier_factor = modifier@consumer_goods_factor}
+					add_to_temp_variable = {speed_multiplier_factor = 1}
+					divide_variable = {time_left_building_1 = speed_multiplier_factor}	
 					set_variable = { building_1 = token:homestead_3 }
 					add_to_array = {
                         array = global.building_state_constructer_1
@@ -3003,7 +3669,11 @@ scripted_gui = {
 					hidden_effect = {
 						clear_building_2_effects = yes
 					}
-					set_variable = { time_left_building_2 = 80}	
+					set_variable = { time_left_building_2 = 80}
+					set_temp_variable = {speed_multiplier_factor = modifier@production_speed_buildings_factor}
+					subtract_from_temp_variable = {speed_multiplier_factor = modifier@consumer_goods_factor}
+					add_to_temp_variable = {speed_multiplier_factor = 1}
+					divide_variable = {time_left_building_2 = speed_multiplier_factor}	
 					set_variable = { building_2 = token:homestead_3 }
 					add_to_array = {
                         array = global.building_state_constructer_2
@@ -3026,6 +3696,10 @@ scripted_gui = {
 					}	
 					set_variable = { building_1 = token:corporate_office_1 }
                     set_variable = { time_left_building_1 = 80}
+					set_temp_variable = {speed_multiplier_factor = modifier@production_speed_buildings_factor}
+					subtract_from_temp_variable = {speed_multiplier_factor = modifier@consumer_goods_factor}
+					add_to_temp_variable = {speed_multiplier_factor = 1}
+					divide_variable = {time_left_building_1 = speed_multiplier_factor}
                     add_to_array = {
                         array = global.building_state_constructer_1
                         value = THIS.id
@@ -3042,6 +3716,10 @@ scripted_gui = {
 					}	
 					set_variable = { building_2 = token:corporate_office_1 }
                     set_variable = { time_left_building_2 = 80}
+					set_temp_variable = {speed_multiplier_factor = modifier@production_speed_buildings_factor}
+					subtract_from_temp_variable = {speed_multiplier_factor = modifier@consumer_goods_factor}
+					add_to_temp_variable = {speed_multiplier_factor = 1}
+					divide_variable = {time_left_building_2 = speed_multiplier_factor}
                     add_to_array = {
                         array = global.building_state_constructer_2
                         value = THIS.id
@@ -3063,6 +3741,10 @@ scripted_gui = {
 					}	
 					set_variable = { building_1 = token:corporate_office_2 }
                     set_variable = { time_left_building_1 = 80}
+					set_temp_variable = {speed_multiplier_factor = modifier@production_speed_buildings_factor}
+					subtract_from_temp_variable = {speed_multiplier_factor = modifier@consumer_goods_factor}
+					add_to_temp_variable = {speed_multiplier_factor = 1}
+					divide_variable = {time_left_building_1 = speed_multiplier_factor}
                     add_to_array = {
                         array = global.building_state_constructer_1
                         value = THIS.id
@@ -3079,6 +3761,10 @@ scripted_gui = {
 					}	
 					set_variable = { building_2 = token:corporate_office_2 }
                     set_variable = { time_left_building_2 = 80}
+					set_temp_variable = {speed_multiplier_factor = modifier@production_speed_buildings_factor}
+					subtract_from_temp_variable = {speed_multiplier_factor = modifier@consumer_goods_factor}
+					add_to_temp_variable = {speed_multiplier_factor = 1}
+					divide_variable = {time_left_building_2 = speed_multiplier_factor}
                     add_to_array = {
                         array = global.building_state_constructer_2
                         value = THIS.id
@@ -3100,6 +3786,10 @@ scripted_gui = {
 					}	
 					set_variable = { building_1 = token:corporate_office_3 }
                     set_variable = { time_left_building_1 = 80}
+					set_temp_variable = {speed_multiplier_factor = modifier@production_speed_buildings_factor}
+					subtract_from_temp_variable = {speed_multiplier_factor = modifier@consumer_goods_factor}
+					add_to_temp_variable = {speed_multiplier_factor = 1}
+					divide_variable = {time_left_building_1 = speed_multiplier_factor}
                     add_to_array = {
                         array = global.building_state_constructer_1
                         value = THIS.id
@@ -3116,6 +3806,10 @@ scripted_gui = {
 					}	
 					set_variable = { building_2 = token:corporate_office_3 }
                     set_variable = { time_left_building_2 = 80}
+					set_temp_variable = {speed_multiplier_factor = modifier@production_speed_buildings_factor}
+					subtract_from_temp_variable = {speed_multiplier_factor = modifier@consumer_goods_factor}
+					add_to_temp_variable = {speed_multiplier_factor = 1}
+					divide_variable = {time_left_building_2 = speed_multiplier_factor}
                     add_to_array = {
                         array = global.building_state_constructer_2
                         value = THIS.id
@@ -3137,6 +3831,10 @@ scripted_gui = {
 					}	
 					set_variable = { building_1 = token:recycle_center_1 }
                     set_variable = { time_left_building_1 = 80}
+					set_temp_variable = {speed_multiplier_factor = modifier@production_speed_buildings_factor}
+					subtract_from_temp_variable = {speed_multiplier_factor = modifier@consumer_goods_factor}
+					add_to_temp_variable = {speed_multiplier_factor = 1}
+					divide_variable = {time_left_building_1 = speed_multiplier_factor}
                     add_to_array = {
                         array = global.building_state_constructer_1
                         value = THIS.id
@@ -3153,6 +3851,10 @@ scripted_gui = {
 					}	
 					set_variable = { building_2 = token:recycle_center_1 }
                     set_variable = { time_left_building_2 = 80}
+					set_temp_variable = {speed_multiplier_factor = modifier@production_speed_buildings_factor}
+					subtract_from_temp_variable = {speed_multiplier_factor = modifier@consumer_goods_factor}
+					add_to_temp_variable = {speed_multiplier_factor = 1}
+					divide_variable = {time_left_building_2 = speed_multiplier_factor}
                     add_to_array = {
                         array = global.building_state_constructer_2
                         value = THIS.id
@@ -3174,6 +3876,10 @@ scripted_gui = {
 					}	
 					set_variable = { building_1 = token:recycle_center_2 }
                     set_variable = { time_left_building_1 = 80}
+					set_temp_variable = {speed_multiplier_factor = modifier@production_speed_buildings_factor}
+					subtract_from_temp_variable = {speed_multiplier_factor = modifier@consumer_goods_factor}
+					add_to_temp_variable = {speed_multiplier_factor = 1}
+					divide_variable = {time_left_building_1 = speed_multiplier_factor}
                     add_to_array = {
                         array = global.building_state_constructer_1
                         value = THIS.id
@@ -3190,6 +3896,10 @@ scripted_gui = {
 					}	
 					set_variable = { building_2 = token:recycle_center_2 }
                     set_variable = { time_left_building_2 = 80}
+					set_temp_variable = {speed_multiplier_factor = modifier@production_speed_buildings_factor}
+					subtract_from_temp_variable = {speed_multiplier_factor = modifier@consumer_goods_factor}
+					add_to_temp_variable = {speed_multiplier_factor = 1}
+					divide_variable = {time_left_building_2 = speed_multiplier_factor}
                     add_to_array = {
                         array = global.building_state_constructer_2
                         value = THIS.id
@@ -3211,6 +3921,10 @@ scripted_gui = {
 					}	
 					set_variable = { building_1 = token:recycle_center_3 }
                     set_variable = { time_left_building_1 = 80}
+					set_temp_variable = {speed_multiplier_factor = modifier@production_speed_buildings_factor}
+					subtract_from_temp_variable = {speed_multiplier_factor = modifier@consumer_goods_factor}
+					add_to_temp_variable = {speed_multiplier_factor = 1}
+					divide_variable = {time_left_building_1 = speed_multiplier_factor}
                     add_to_array = {
                         array = global.building_state_constructer_1
                         value = THIS.id
@@ -3228,6 +3942,10 @@ scripted_gui = {
 					}	
 					set_variable = { building_2 = token:recycle_center_3 }
                     set_variable = { time_left_building_2 = 80}
+					set_temp_variable = {speed_multiplier_factor = modifier@production_speed_buildings_factor}
+					subtract_from_temp_variable = {speed_multiplier_factor = modifier@consumer_goods_factor}
+					add_to_temp_variable = {speed_multiplier_factor = 1}
+					divide_variable = {time_left_building_2 = speed_multiplier_factor}
                     add_to_array = {
                         array = global.building_state_constructer_2
                         value = THIS.id
@@ -3249,6 +3967,10 @@ scripted_gui = {
 					}	
 					set_variable = { building_1 = token:fuel_refinery_1 }
                     set_variable = { time_left_building_1 = 80}
+					set_temp_variable = {speed_multiplier_factor = modifier@production_speed_buildings_factor}
+					subtract_from_temp_variable = {speed_multiplier_factor = modifier@consumer_goods_factor}
+					add_to_temp_variable = {speed_multiplier_factor = 1}
+					divide_variable = {time_left_building_1 = speed_multiplier_factor}
                     add_to_array = {
                         array = global.building_state_constructer_1
                         value = THIS.id
@@ -3265,6 +3987,10 @@ scripted_gui = {
 					}	
 					set_variable = { building_2 = token:fuel_refinery_1 }
                     set_variable = { time_left_building_2 = 80}
+					set_temp_variable = {speed_multiplier_factor = modifier@production_speed_buildings_factor}
+					subtract_from_temp_variable = {speed_multiplier_factor = modifier@consumer_goods_factor}
+					add_to_temp_variable = {speed_multiplier_factor = 1}
+					divide_variable = {time_left_building_2 = speed_multiplier_factor}
                     add_to_array = {
                         array = global.building_state_constructer_2
                         value = THIS.id
@@ -3286,6 +4012,10 @@ scripted_gui = {
 					}	
 					set_variable = { building_1 = token:fuel_refinery_2 }
                     set_variable = { time_left_building_1 = 80}
+					set_temp_variable = {speed_multiplier_factor = modifier@production_speed_buildings_factor}
+					subtract_from_temp_variable = {speed_multiplier_factor = modifier@consumer_goods_factor}
+					add_to_temp_variable = {speed_multiplier_factor = 1}
+					divide_variable = {time_left_building_1 = speed_multiplier_factor}
                     add_to_array = {
                         array = global.building_state_constructer_1
                         value = THIS.id
@@ -3302,6 +4032,10 @@ scripted_gui = {
 					}	
 					set_variable = { building_2 = token:fuel_refinery_2 }
                     set_variable = { time_left_building_2 = 80}
+					set_temp_variable = {speed_multiplier_factor = modifier@production_speed_buildings_factor}
+					subtract_from_temp_variable = {speed_multiplier_factor = modifier@consumer_goods_factor}
+					add_to_temp_variable = {speed_multiplier_factor = 1}
+					divide_variable = {time_left_building_2 = speed_multiplier_factor}
                     add_to_array = {
                         array = global.building_state_constructer_2
                         value = THIS.id
@@ -3323,6 +4057,10 @@ scripted_gui = {
 					}	
 					set_variable = { building_1 = token:fuel_refinery_3 }
                     set_variable = { time_left_building_1 = 80}
+					set_temp_variable = {speed_multiplier_factor = modifier@production_speed_buildings_factor}
+					subtract_from_temp_variable = {speed_multiplier_factor = modifier@consumer_goods_factor}
+					add_to_temp_variable = {speed_multiplier_factor = 1}
+					divide_variable = {time_left_building_1 = speed_multiplier_factor}
                     add_to_array = {
                         array = global.building_state_constructer_1
                         value = THIS.id
@@ -3340,6 +4078,10 @@ scripted_gui = {
 					}	
 					set_variable = { building_2 = token:fuel_refinery_3 }
                     set_variable = { time_left_building_2 = 80}
+					set_temp_variable = {speed_multiplier_factor = modifier@production_speed_buildings_factor}
+					subtract_from_temp_variable = {speed_multiplier_factor = modifier@consumer_goods_factor}
+					add_to_temp_variable = {speed_multiplier_factor = 1}
+					divide_variable = {time_left_building_2 = speed_multiplier_factor}
                     add_to_array = {
                         array = global.building_state_constructer_2
                         value = THIS.id
@@ -3440,12 +4182,103 @@ scripted_gui = {
 					always = no
 				}
 			}
+			unique_building_1_click_enabled = {
+				if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_1_open
+						}
+					}
+					NOT = {
+						has_variable = time_left_building_1
+					}
+					NOT = {
+						check_variable = { building_1 = unique_building_on_state }
+					}
+				}
+				else_if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_2_open
+						}
+					}
+					NOT = {
+						has_variable = time_left_building_2
+					}
+					NOT = {
+						check_variable = { building_2 = unique_building_on_state }
+					}
+				}
+			}
+			unique_building_2_click_enabled = {
+				if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_1_open
+						}
+					}
+					NOT = {
+						has_variable = time_left_building_1
+					}
+					NOT = {
+						check_variable = { building_1 = unique_building_2_localisation_holder }
+					}
+					check_variable = { building_1 = unique_building_1_localisation_holder }
+				}
+				else_if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_2_open
+						}
+					}
+					NOT = {
+						has_variable = time_left_building_2
+					}
+					NOT = {
+						check_variable = { building_2 = unique_building_2_localisation_holder }
+					}
+					check_variable = { building_2 = unique_building_1_localisation_holder }
+				}
+			}
+			unique_building_3_click_enabled = {
+				if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_1_open
+						}
+					}
+					NOT = {
+						has_variable = time_left_building_1
+					}
+					NOT = {
+						check_variable = { building_1 = unique_building_3_localisation_holder }
+					}
+					check_variable = { building_1 = unique_building_2_localisation_holder }
+				}
+				else_if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_2_open
+						}
+					}
+					NOT = {
+						has_variable = time_left_building_2
+					}
+					NOT = {
+						check_variable = { building_2 = unique_building_3_localisation_holder }
+					}
+					check_variable = { building_2 = unique_building_2_localisation_holder }
+				}
+			}
 			homstead_click_enabled = {
 				if = {
 					limit = {
 						ROOT = {
 							has_country_flag = building_1_open
 						}
+					}
+					NOT = {
+						has_variable = time_left_building_1
 					}
 					NOT = {
 						check_variable = { building_1 = token:homestead_1 }
@@ -3456,6 +4289,9 @@ scripted_gui = {
 						ROOT = {
 							has_country_flag = building_2_open
 						}
+					}
+					NOT = {
+						has_variable = time_left_building_2
 					}
 					NOT = {
 						check_variable = { building_2 = token:homestead_1 }
@@ -3470,8 +4306,12 @@ scripted_gui = {
 						}
 					}
 					NOT = {
+						has_variable = time_left_building_1
+					}
+					NOT = {
 						check_variable = { building_1 = token:homestead_2 }
 					}
+					check_variable = { building_1 = token:homestead_1 }
 				}
 				else_if = {
 					limit = {
@@ -3480,8 +4320,12 @@ scripted_gui = {
 						}
 					}
 					NOT = {
+						has_variable = time_left_building_2
+					}
+					NOT = {
 						check_variable = { building_2 = token:homestead_2 }
 					}
+					check_variable = { building_2 = token:homestead_1 }
 				}
 			}
 			homstead_3_click_enabled = {
@@ -3492,8 +4336,12 @@ scripted_gui = {
 						}
 					}
 					NOT = {
+						has_variable = time_left_building_1
+					}
+					NOT = {
 						check_variable = { building_1 = token:homestead_3 }
 					}
+					check_variable = { building_1 = token:homestead_2 }
 				}
 				else_if = {
 					limit = {
@@ -3502,8 +4350,12 @@ scripted_gui = {
 						}
 					}
 					NOT = {
+						has_variable = time_left_building_2
+					}
+					NOT = {
 						check_variable = { building_2 = token:homestead_3 }
 					}
+					check_variable = { building_2 = token:homestead_2 }
 				}
 			}
 			corporate_click_enabled = {
@@ -3514,6 +4366,9 @@ scripted_gui = {
 						}
 					}
 					NOT = {
+						has_variable = time_left_building_1
+					}
+					NOT = {
 						check_variable = { building_1 = token:corporate_office_1 }
 					}
 				}
@@ -3522,6 +4377,9 @@ scripted_gui = {
 						ROOT = {
 							has_country_flag = building_2_open
 						}
+					}
+					NOT = {
+						has_variable = time_left_building_2
 					}
 					NOT = {
 						check_variable = { building_2 = token:corporate_office_1 }
@@ -3536,8 +4394,12 @@ scripted_gui = {
 						}
 					}
 					NOT = {
+						has_variable = time_left_building_1
+					}
+					NOT = {
 						check_variable = { building_1 = token:corporate_office_2 }
 					}
+					check_variable = { building_1 = token:corporate_office_1 }
 				}
 				else_if = {
 					limit = {
@@ -3546,8 +4408,12 @@ scripted_gui = {
 						}
 					}
 					NOT = {
+						has_variable = time_left_building_2
+					}
+					NOT = {
 						check_variable = { building_2 = token:corporate_office_2 }
 					}
+					check_variable = { building_2 = token:corporate_office_1 }
 				}
 			}
 			corporate_3_click_enabled = {
@@ -3558,8 +4424,12 @@ scripted_gui = {
 						}
 					}
 					NOT = {
+						has_variable = time_left_building_1
+					}
+					NOT = {
 						check_variable = { building_1 = token:corporate_office_3 }
 					}
+					check_variable = { building_1 = token:corporate_office_2 }
 				}
 				else_if = {
 					limit = {
@@ -3568,8 +4438,12 @@ scripted_gui = {
 						}
 					}
 					NOT = {
+						has_variable = time_left_building_2
+					}
+					NOT = {
 						check_variable = { building_2 = token:corporate_office_3 }
 					}
+					check_variable = { building_2 = token:corporate_office_2 }
 				}
 			}
 			recycle_click_enabled = {
@@ -3580,6 +4454,9 @@ scripted_gui = {
 						}
 					}
 					NOT = {
+						has_variable = time_left_building_1
+					}
+					NOT = {
 						check_variable = { building_1 = token:recycle_center_1 }
 					}
 				}
@@ -3588,6 +4465,9 @@ scripted_gui = {
 						ROOT = {
 							has_country_flag = building_2_open
 						}
+					}
+					NOT = {
+						has_variable = time_left_building_2
 					}
 					NOT = {
 						check_variable = { building_2 = token:recycle_center_1 }
@@ -3602,8 +4482,12 @@ scripted_gui = {
 						}
 					}
 					NOT = {
+						has_variable = time_left_building_1
+					}
+					NOT = {
 						check_variable = { building_1 = token:recycle_center_2 }
 					}
+					check_variable = { building_1 = token:recycle_center_1 }
 				}
 				else_if = {
 					limit = {
@@ -3612,8 +4496,12 @@ scripted_gui = {
 						}
 					}
 					NOT = {
+						has_variable = time_left_building_2
+					}
+					NOT = {
 						check_variable = { building_2 = token:recycle_center_2 }
 					}
+					check_variable = { building_2 = token:recycle_center_1 }
 				}
 			}
 			recycle_3_click_enabled = {
@@ -3624,8 +4512,12 @@ scripted_gui = {
 						}
 					}
 					NOT = {
+						has_variable = time_left_building_1
+					}
+					NOT = {
 						check_variable = { building_1 = token:recycle_center_3 }
 					}
+					check_variable = { building_1 = token:recycle_center_2 }
 				}
 				else_if = {
 					limit = {
@@ -3634,8 +4526,12 @@ scripted_gui = {
 						}
 					}
 					NOT = {
+						has_variable = time_left_building_2
+					}
+					NOT = {
 						check_variable = { building_2 = token:recycle_center_3 }
 					}
+					check_variable = { building_2 = token:recycle_center_2 }
 				}
 			}
 			refinery_click_enabled = {
@@ -3646,6 +4542,9 @@ scripted_gui = {
 						}
 					}
 					NOT = {
+						has_variable = time_left_building_1
+					}
+					NOT = {
 						check_variable = { building_1 = token:fuel_refinery_1 }
 					}
 				}
@@ -3654,6 +4553,9 @@ scripted_gui = {
 						ROOT = {
 							has_country_flag = building_2_open
 						}
+					}
+					NOT = {
+						has_variable = time_left_building_2
 					}
 					NOT = {
 						check_variable = { building_2 = token:fuel_refinery_1 }
@@ -3668,8 +4570,12 @@ scripted_gui = {
 						}
 					}
 					NOT = {
+						has_variable = time_left_building_1
+					}
+					NOT = {
 						check_variable = { building_1 = token:fuel_refinery_2 }
 					}
+					check_variable = { building_1 = token:fuel_refinery_1 }
 				}
 				else_if = {
 					limit = {
@@ -3678,8 +4584,12 @@ scripted_gui = {
 						}
 					}
 					NOT = {
+						has_variable = time_left_building_2
+					}
+					NOT = {
 						check_variable = { building_2 = token:fuel_refinery_2 }
 					}
+					check_variable = { building_2 = token:fuel_refinery_1 }
 				}
 			}
 			refinery_3_click_enabled = {
@@ -3690,8 +4600,12 @@ scripted_gui = {
 						}
 					}
 					NOT = {
+						has_variable = time_left_building_1
+					}
+					NOT = {
 						check_variable = { building_1 = token:fuel_refinery_3 }
 					}
+					check_variable = { building_1 = token:fuel_refinery_2 }
 				}
 				else_if = {
 					limit = {
@@ -3700,8 +4614,12 @@ scripted_gui = {
 						}
 					}
 					NOT = {
+						has_variable = time_left_building_2
+					}
+					NOT = {
 						check_variable = { building_2 = token:fuel_refinery_3 }
 					}
+					check_variable = { building_2 = token:fuel_refinery_2 }
 				}
 			}
 		}

@@ -43,10 +43,10 @@ clear_building_2_effects = {
 
 
 
-building_shipyard_1_add_effect = {
+light_shipyard_1_add_effect = {
 	add_building_construction = { type = dockyard level = 5 instant_build = yes}
 }
-building_shipyard_1_remove_effect = {
+light_shipyard_1_remove_effect = {
 	add_building_construction = { type = dockyard level = -5 instant_build = yes}
 }
 light_shipyard_2_add_effect = {
@@ -61,22 +61,22 @@ light_shipyard_3_add_effect = {
 light_shipyard_3_remove_effect = {
 	add_building_construction = { type = dockyard level = -15 instant_build = yes}
 }
-medium_shipyard_2_add_effect = {
+medium_shipyard_1_add_effect = {
   	add_building_construction = { type = dockyard level = 10 instant_build = yes}
 }
-medium_shipyard_2_remove_effect = {
+medium_shipyard_1_remove_effect = {
   	add_building_construction = { type = dockyard level = -10 instant_build = yes}
 }
-medium_shipyard_3_add_effect = {
+medium_shipyard_2_add_effect = {
   	add_building_construction = { type = dockyard level = 15 instant_build = yes}
 }
-medium_shipyard_3_remove_effect = {
+medium_shipyard_2_remove_effect = {
   	add_building_construction = { type = dockyard level = -15 instant_build = yes}
 }
-heavy_shipyard_3_add_effect = {
+heavy_shipyard_1_add_effect = {
   	add_building_construction = { type = dockyard level = 15 instant_build = yes}
 }
-heavy_shipyard_3_remove_effect = {
+heavy_shipyard_1_remove_effect = {
   	add_building_construction = { type = dockyard level = -15 instant_build = yes}
 }
 arms_factory_1_add_effect = {
@@ -85,28 +85,28 @@ arms_factory_1_add_effect = {
 arms_factory_1_remove_effect = {
   	add_building_construction = { type = arms_factory level = -5 instant_build = yes}
 }
-soft_arms_factory_2_add_effect = {
+soft_arms_factory_1_add_effect = {
 	add_building_construction = { type = arms_factory level = 10 instant_build = yes}
 }
-soft_arms_factory_2_add_effect = {
+soft_arms_factory_1_add_effect = {
 	add_building_construction = { type = arms_factory level = -10 instant_build = yes}
 }
-soft_arms_factory_3_add_effect = {
+soft_arms_factory_2_add_effect = {
 	add_building_construction = { type = arms_factory level = 15 instant_build = yes}
 }
-soft_arms_factory_3_add_effect = {
+soft_arms_factory_2_add_effect = {
   	add_building_construction = { type = arms_factory level = -15 instant_build = yes}
 }
-tank_factory_2_add_effect = {
+tank_factory_1_add_effect = {
   	add_building_construction = { type = arms_factory level = 10 instant_build = yes}
 }
-tank_factory_2_add_effect = {
+tank_factory_1_add_effect = {
   	add_building_construction = { type = arms_factory level = -10 instant_build = yes}
 }
-tank_factory_3_add_effect = {
+tank_factory_2_add_effect = {
   	add_building_construction = { type = arms_factory level = 15 instant_build = yes}
 }
-tank_factory_3_add_effect = {
+tank_factory_2_add_effect = {
   	add_building_construction = { type = arms_factory level = -15 instant_build = yes}
 }
 starfighter_factory_1_add_effect = {
@@ -127,34 +127,34 @@ starfighter_factory_3_add_effect = {
 starfighter_factory_3_remove_effect = {
   	add_building_construction = { type = arms_factory level = -15 instant_build = yes}
 }
-starbomber_factory_2_add_effect = {
+starbomber_factory_1_add_effect = {
   	add_building_construction = { type = arms_factory level = 10 instant_build = yes}
 }
-starbomber_factory_2_remove_effect = {
+starbomber_factory_1_remove_effect = {
   	add_building_construction = { type = arms_factory level = -10 instant_build = yes}
 }
-starbomber_factory_3_add_effect = {
+starbomber_factory_2_add_effect = {
   	add_building_construction = { type = arms_factory level = 15 instant_build = yes}
 }
-starbomber_factory_3_remove_effect = {
+starbomber_factory_2_remove_effect = {
   	add_building_construction = { type = arms_factory level = -15 instant_build = yes}
 }
-intelligence_centre_1_add_effect = {
+intelligence_center_1_add_effect = {
   	add_building_construction = { type = radar_station level = 1 instant_build = yes}
 }
-intelligence_centre_1_remove_effect = {
+intelligence_center_1_remove_effect = {
   	add_building_construction = { type = radar_station level = -1 instant_build = yes}
 }
-monitoring_beacon_2_add_effect = {
+sensor_array_1_add_effect = {
   	add_building_construction = { type = radar_station level = 2 instant_build = yes}
 }
-monitoring_beacon_2_remove_effect = {
+sensor_array_1_remove_effect = {
   	add_building_construction = { type = radar_station level = -2 instant_build = yes}
 }
-monitoring_beacon_3_add_effect = {
+sensor_array_2_add_effect = {
   	add_building_construction = { type = radar_station level = 4 instant_build = yes}
 }
-monitoring_beacon_3_remove_effect = {
+sensor_array_2_remove_effect = {
   	add_building_construction = { type = radar_station level = -4 instant_build = yes}
 }
 anti_air_1_add_effect = {
@@ -618,17 +618,138 @@ shadowlands_spiders_tile_blocker_cost_effect = { ## EMPTY AS ONLY REMOVED BY FOC
 }
 
 ### EXAMPLE
-coruscant_undercity_tile_blocker_cost_effect = { ## EXAMPLE OF COST BASED TILE BLOCKER
+undercity_slums_tile_blocker_cost_effect = { ## EXAMPLE OF COST BASED TILE BLOCKER
 	if = {
 		limit = {
-			has_political_power = 100
-			check_variable = {currency_amount^primary_currency > 150} ## ACTUAL TRIGGER TO DECIDE WHAT COST OF THE TILE BLOCKER IS
+			controller = {
+				has_political_power > 100 ## Finds controller of states politcal power
+			}
+			check_variable = {currency_amount^primary_currency > 150} ## ACTUAL TRIGGER TO DECIDE WHAT COST OF THE TILE BLOCKER IS in money
 		}
-		subtract_from_variable = { currency_amount^primary_currency = 150 }
+		subtract_from_variable = { currency_amount^primary_currency = 150 } ## REMOVES COST
 		add_political_power = -100
 
-		## BELOW IS ALWAYS NEEDED
+		## BELOW IS ALWAYS NEEDED, CAN HAVE TILE BLOCKER IDEAS THAT WILL BE REMOVED BY THIS, ONLY COUNTRY IDEAS NOT STATE
+		check_building_1_or_2_removal_effect = yes
+	}
+}
+untamed_jungle_tile_blocker_cost_effect = { ## EXAMPLE OF COST BASED TILE BLOCKER
+	if = {
+		limit = {
+			controller = {
+				has_political_power > 100 ## Finds controller of states politcal power
+			}
+			check_variable = {currency_amount^primary_currency > 150} ## ACTUAL TRIGGER TO DECIDE WHAT COST OF THE TILE BLOCKER IS in money
+		}
+		subtract_from_variable = { currency_amount^primary_currency = 150 } ## REMOVES COST
+		add_political_power = -100
+
+		## BELOW IS ALWAYS NEEDED, CAN HAVE TILE BLOCKER IDEAS THAT WILL BE REMOVED BY THIS, ONLY COUNTRY IDEAS NOT STATE
+		check_building_1_or_2_removal_effect = yes
+	}
+}
+dead_land_desert_tile_blocker_cost_effect = { ## EXAMPLE OF COST BASED TILE BLOCKER
+	if = {
+		limit = {
+			controller = {
+				has_political_power > 100 ## Finds controller of states politcal power
+			}
+			check_variable = {currency_amount^primary_currency > 150} ## ACTUAL TRIGGER TO DECIDE WHAT COST OF THE TILE BLOCKER IS in money
+		}
+		subtract_from_variable = { currency_amount^primary_currency = 150 } ## REMOVES COST
+		add_political_power = -100
+
+		## BELOW IS ALWAYS NEEDED, CAN HAVE TILE BLOCKER IDEAS THAT WILL BE REMOVED BY THIS, ONLY COUNTRY IDEAS NOT STATE
+		check_building_1_or_2_removal_effect = yes
+	}
+}
+lava_fields_tile_blocker_cost_effect = { ## EXAMPLE OF COST BASED TILE BLOCKER
+	if = {
+		limit = {
+			controller = {
+				has_political_power > 100 ## Finds controller of states politcal power
+			}
+			check_variable = {currency_amount^primary_currency > 150} ## ACTUAL TRIGGER TO DECIDE WHAT COST OF THE TILE BLOCKER IS in money
+		}
+		subtract_from_variable = { currency_amount^primary_currency = 150 } ## REMOVES COST
+		add_political_power = -100
+
+		## BELOW IS ALWAYS NEEDED, CAN HAVE TILE BLOCKER IDEAS THAT WILL BE REMOVED BY THIS, ONLY COUNTRY IDEAS NOT STATE
+		check_building_1_or_2_removal_effect = yes
+	}
+}
+rock_slides_tile_blocker_cost_effect = { ## EXAMPLE OF COST BASED TILE BLOCKER
+	if = {
+		limit = {
+			controller = {
+				has_political_power > 100 ## Finds controller of states politcal power
+			}
+			check_variable = {currency_amount^primary_currency > 150} ## ACTUAL TRIGGER TO DECIDE WHAT COST OF THE TILE BLOCKER IS in money
+		}
+		subtract_from_variable = { currency_amount^primary_currency = 150 } ## REMOVES COST
+		add_political_power = -100
+
+		## BELOW IS ALWAYS NEEDED, CAN HAVE TILE BLOCKER IDEAS THAT WILL BE REMOVED BY THIS, ONLY COUNTRY IDEAS NOT STATE
+		check_building_1_or_2_removal_effect = yes
+	}
+}
+dangerous_fauna_tile_blocker_cost_effect = { ## EXAMPLE OF COST BASED TILE BLOCKER
+	if = {
+		limit = {
+			controller = {
+				has_political_power > 100 ## Finds controller of states politcal power
+			}
+			check_variable = {currency_amount^primary_currency > 150} ## ACTUAL TRIGGER TO DECIDE WHAT COST OF THE TILE BLOCKER IS in money
+		}
+		subtract_from_variable = { currency_amount^primary_currency = 150 } ## REMOVES COST
+		add_political_power = -100
+
+		## BELOW IS ALWAYS NEEDED, CAN HAVE TILE BLOCKER IDEAS THAT WILL BE REMOVED BY THIS, ONLY COUNTRY IDEAS NOT STATE
+		check_building_1_or_2_removal_effect = yes
+	}
+}
+ruined_city_tile_blocker_cost_effect = { ## EXAMPLE OF COST BASED TILE BLOCKER
+	if = {
+		limit = {
+			controller = {
+				has_political_power > 100 ## Finds controller of states politcal power
+			}
+			check_variable = {currency_amount^primary_currency > 150} ## ACTUAL TRIGGER TO DECIDE WHAT COST OF THE TILE BLOCKER IS in money
+		}
+		subtract_from_variable = { currency_amount^primary_currency = 150 } ## REMOVES COST
+		add_political_power = -100
+
+		## BELOW IS ALWAYS NEEDED, CAN HAVE TILE BLOCKER IDEAS THAT WILL BE REMOVED BY THIS, ONLY COUNTRY IDEAS NOT STATE
+		check_building_1_or_2_removal_effect = yes
+	}
+}
+inhospitable_area_tile_blocker_cost_effect = {
+	
+}
+snow_area_tile_blocker_cost_effect = { ## EXAMPLE OF COST BASED TILE BLOCKER
+	if = {
+		limit = {
+			controller = {
+				has_political_power > 100 ## Finds controller of states politcal power
+			}
+			check_variable = {currency_amount^primary_currency > 150} ## ACTUAL TRIGGER TO DECIDE WHAT COST OF THE TILE BLOCKER IS in money
+		}
+		subtract_from_variable = { currency_amount^primary_currency = 150 } ## REMOVES COST
+		add_political_power = -100
+
+		## BELOW IS ALWAYS NEEDED, CAN HAVE TILE BLOCKER IDEAS THAT WILL BE REMOVED BY THIS, ONLY COUNTRY IDEAS NOT STATE
+		check_building_1_or_2_removal_effect = yes
+	}
+}
+check_building_1_or_2_removal_effect = {
+	if = {
+		limit = {
+			check_variable = {building_1_or_2_holder = 1}
+		}
 		set_temp_variable = {building_name_passer = building_1}  ### THIS IS WHATS ACTUALLY REMOVING THE BUILDING
 		clear_building_1_effects = yes
+	}else = {
+		set_temp_variable = {building_name_passer = building_2}  ### THIS IS WHATS ACTUALLY REMOVING THE BUILDING
+		clear_building_2_effects = yes
 	}
 }
