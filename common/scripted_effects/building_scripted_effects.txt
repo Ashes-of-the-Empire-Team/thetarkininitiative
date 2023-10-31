@@ -1,3 +1,96 @@
+Add_building_to_slot_with_time_constraint = { ## THIS IS FOR ADDING BUILDINGS FOR NO COST BUT STILL REQUIRING BUILD TIME, STATE SCOPE
+	if = {
+		limit = { ## TRIES TO BUILD IN 1st SLOT THEN IN SECOND, WILL ALWAYS REPLACE SECOND BUILDING
+			NOT = {
+				has_variable = building_1
+			}
+		}
+		hidden_effect = {
+			clear_building_1_effects = yes
+		}
+		set_variable = { building_1 = REQUESTED_BUILDING }
+		set_variable = { time_left_building_1 = CONSTRUCT_TIME}
+		set_temp_variable = {speed_multiplier_factor = modifier@production_speed_buildings_factor}
+		subtract_from_temp_variable = {speed_multiplier_factor = modifier@consumer_goods_factor}
+		add_to_temp_variable = {speed_multiplier_factor = 1}
+		divide_variable = {time_left_building_1 = speed_multiplier_factor}
+		add_to_array = {
+			array = global.building_state_constructer_1
+			value = THIS.id
+		}
+	}else = {
+		hidden_effect = {
+			clear_building_2_effects = yes
+		}
+		set_variable = { building_2 = REQUESTED_BUILDING }
+		set_variable = { time_left_building_2 = CONSTRUCT_TIME}
+		set_temp_variable = {speed_multiplier_factor = modifier@production_speed_buildings_factor}
+		subtract_from_temp_variable = {speed_multiplier_factor = modifier@consumer_goods_factor}
+		add_to_temp_variable = {speed_multiplier_factor = 1}
+		divide_variable = {time_left_building_2 = speed_multiplier_factor}
+		add_to_array = {
+			array = global.building_state_constructer_2
+			value = THIS.id
+		}
+	}
+}
+Add_building_to_slot_immediately = { ## THIS ADDS BUILDINGS FOR FREE AND IMMEDIATLY, STATE SCOPE
+	if = {
+		limit = { ## TRIES TO BUILD IN 1st SLOT THEN IN SECOND, WILL ALWAYS REPLACE SECOND BUILDING
+			NOT = {
+				has_variable = building_1
+			}
+		}
+		hidden_effect = {
+			clear_building_1_effects = yes
+		}
+		set_variable = { building_1 = REQUESTED_BUILDING }
+		set_temp_variable = {idea_token_passer = building_1}
+		controller = {
+			add_ideas = var:building_1
+		}
+		meta_effect = {
+			text = {
+				[BUILDING_NAME]_add_effect = yes
+			}
+			BUILDING_NAME = "[?building_1.GetTokenKey]"
+		}
+	}else = {
+		hidden_effect = {
+			clear_building_2_effects = yes
+		}
+		set_variable = { building_2 = REQUESTED_BUILDING }
+		set_temp_variable = {idea_token_passer = building_2}
+		controller = {
+			add_ideas = var:building_2
+		}
+		meta_effect = {
+			text = {
+				[BUILDING_NAME]_add_effect = yes
+			}
+			BUILDING_NAME = "[?building_2.GetTokenKey]"
+		}
+	}
+}
+
+
+#### ADDING BUILDING FOR EXAMPLE IN FOCUS TREE -- SPECFIC STATE EXAMPLE
+# 287 = {
+# 	set_temp_variable = {REQUESTED_BUILDING = token:military_academy_2}
+# 	Add_building_to_slot_immediately = yes
+# }
+
+
+#### ADDING BUILDING FOR EXAMPLE IN FOCUS TREE -- ANY EMPTY BUILDING STATE
+# random_owned_state = {
+# 	limit = {
+# 		has_avaliable_building_slot = yes
+# 	}
+# 	set_temp_variable = {REQUESTED_BUILDING = token:military_academy_2}
+# 	Add_building_to_slot_immediately = yes
+# }
+
+
 clear_building_1_effects = {
 	if = {
 		limit = { ## FIND IF ANY STATE ALREADY HAS BUILDING AS NOT TO REMOVE IDEA FROM BUILDINGS THAT ARE THERE
