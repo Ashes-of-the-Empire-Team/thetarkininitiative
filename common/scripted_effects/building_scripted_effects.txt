@@ -10,10 +10,8 @@ Add_building_to_slot_with_time_constraint = { ## THIS IS FOR ADDING BUILDINGS FO
 		}
 		set_variable = { building_1 = REQUESTED_BUILDING }
 		set_variable = { time_left_building_1 = CONSTRUCT_TIME}
-		set_temp_variable = {speed_multiplier_factor = modifier@production_speed_buildings_factor}
-		subtract_from_temp_variable = {speed_multiplier_factor = modifier@consumer_goods_factor}
-		add_to_temp_variable = {speed_multiplier_factor = 1}
-		divide_variable = {time_left_building_1 = speed_multiplier_factor}
+		set_state_flag = building_1_to_be_handled
+		time_calculation_for_buildings = yes
 		add_to_array = {
 			array = global.building_state_constructer_1
 			value = THIS.id
@@ -24,10 +22,7 @@ Add_building_to_slot_with_time_constraint = { ## THIS IS FOR ADDING BUILDINGS FO
 		}
 		set_variable = { building_2 = REQUESTED_BUILDING }
 		set_variable = { time_left_building_2 = CONSTRUCT_TIME}
-		set_temp_variable = {speed_multiplier_factor = modifier@production_speed_buildings_factor}
-		subtract_from_temp_variable = {speed_multiplier_factor = modifier@consumer_goods_factor}
-		add_to_temp_variable = {speed_multiplier_factor = 1}
-		divide_variable = {time_left_building_2 = speed_multiplier_factor}
+		time_calculation_for_buildings = yes
 		add_to_array = {
 			array = global.building_state_constructer_2
 			value = THIS.id
@@ -134,7 +129,21 @@ clear_building_2_effects = {
 	clear_variable = building_2
 }
 
+time_calculation_for_buildings = {
+	set_temp_variable = {speed_multiplier_factor = modifier@production_speed_buildings_factor}
+	subtract_from_temp_variable = {speed_multiplier_factor = modifier@consumer_goods_factor}
+	add_to_temp_variable = {speed_multiplier_factor = 1}
 
+	if = {
+		limit = {
+			has_state_flag = building_1_to_be_handled
+		}
+		divide_variable = {time_left_building_1 = speed_multiplier_factor}
+		clr_state_flag = building_1_to_be_handled
+	}else = {
+		divide_variable = {time_left_building_2 = speed_multiplier_factor}
+	}
+}
 
 light_shipyard_1_add_effect = {
 	add_building_construction = { type = dockyard level = 5 instant_build = yes}
@@ -616,42 +625,42 @@ cloud_city_3_remove_effect = {
 	}
 }
 
-mustafar_mining_complex_add_effect = {
+mustafar_works_add_effect = {
 	add_resource = {
 		type = steel
 		amount = 20
 		state = THIS
 	}
 }
-mustafar_mining_complex_remove_effect = {
+mustafar_works_remove_effect = {
 	add_resource = {
 		type = steel
 		amount = -20
 		state = THIS
 	}
 }
-mustafar_mining_complex_2_add_effect = {
+mustafar_works_2_add_effect = {
 	add_resource = {
 		type = steel
 		amount = 30
 		state = THIS
 	}
 }
-mustafar_mining_complex_2_remove_effect = {
+mustafar_works_2_remove_effect = {
 	add_resource = {
 		type = steel
 		amount = -30
 		state = THIS
 	}
 }
-mustafar_mining_complex_3_add_effect = {
+mustafar_works_3_add_effect = {
 	add_resource = {
 		type = steel
 		amount = 40
 		state = THIS
 	}
 }
-mustafar_mining_complex_3_remove_effect = {
+mustafar_works_3_remove_effect = {
 	add_resource = {
 		type = steel
 		amount = -40
@@ -700,6 +709,25 @@ kessel_coaxium_mines_3_remove_effect = {
 		amount = -40
 		state = THIS
 	}
+}
+
+casino_catonica_add_effect = {
+	add_to_variable = { corporate_office_bonus = 0.2}
+}
+casino_catonica_remove_effect = {
+	add_to_variable = { corporate_office_bonus = -0.2}
+}
+casino_catonica_2_add_effect = {
+	add_to_variable = { corporate_office_bonus = 0.4}
+}
+casino_catonica_2_remove_effect = {
+	add_to_variable = { corporate_office_bonus = -0.4}
+}
+casino_catonica_3_add_effect = {
+	add_to_variable = { corporate_office_bonus = 0.6}
+}
+casino_catonica_3_remove_effect = {
+	add_to_variable = { corporate_office_bonus = -0.6}
 }
 
 #### TILE BLOCKERS ####

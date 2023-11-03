@@ -14,6 +14,19 @@ on_actions = {
 				set_variable = {unique_building_on_state = token:the_wheel}
 				set_state_flag = wonder_built_no_destroy_1
 			}
+
+			38 = {
+				set_variable = {unique_building_on_state = token:bilbringi_station}
+				set_state_flag = wonder_built_no_destroy_1
+			}
+			366 = {
+				set_variable = {unique_building_on_state = token:fondor_shipyard}
+				set_state_flag = wonder_built_no_destroy_1
+			}
+
+			297 = {
+				set_variable = {unique_building_on_state = token:jeddah_temple}
+			}
 			375 = {
 				set_variable = {unique_building_on_state = token:mustafar_works}
 				set_state_flag = wonder_built_no_destroy_1
@@ -41,15 +54,15 @@ on_actions = {
 				set_variable = {unique_building_on_state = token:yavin_temple}
 				set_state_flag = wonder_built_no_destroy_1
 			}
-			436 = {
-				set_variable = {unique_building_on_state = token:sundari}
-				set_state_flag = wonder_built_no_destroy_1
-			}
 			107 = {
 				set_variable = {unique_building_on_state = token:vaders_castle}
 				set_state_flag = wonder_built_no_destroy_1
 			}
 
+			197 = {
+				set_variable = {unique_building_on_state = token:mon_cala_shipyards}
+				set_state_flag = wonder_built_no_destroy_1
+			}
 
 	### TILE BLOCKER SET UP, dont have to do it here but makes it easier to edit generalised tile blockers.
 	## For Unique tile blockers its recommended to use the countries history file rather then this file (but commands will be same as below)
@@ -262,8 +275,17 @@ on_actions = {
 			}
 
 
-			### STATE EVALUATER...... ON STARTUP EVALUATES EACH STATE FOR ITS UNIQUE BUILDING AND IMPLANTS VARIABLES HOLDING LOCALISATION FOR UNIQUE BUILDINGS FOR GRABBING, CONTAINS TOOLTIP FOR HOVER OVER OF EFFECTS
+			### STATE EVALUATER.. ON STARTUP EVALUATES EACH STATE FOR ITS UNIQUE BUILDING AND IMPLANTS VARIABLES HOLDING LOCALISATION FOR UNIQUE BUILDINGS FOR GRABBING, CONTAINS TOOLTIP FOR HOVER OVER OF EFFECTS
 			every_state = {
+				if = {
+					limit = {
+						has_variable = building_1 ## IMPLANTS IDEAS FOR COUNTRIES WITH PREEXISTING IDEAS
+					}
+					set_temp_variable = { up_passer = building_1}
+					controller = {
+						add_ideas = var:up_passer
+					}
+				}
 				if = {
 					limit = {
 						has_variable = unique_building_on_state
