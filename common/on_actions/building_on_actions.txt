@@ -274,16 +274,136 @@ on_actions = {
 				set_variable = {building_2 = token:undercity_slums}
 			}
 
-
+	## PRIMITIVE BUILDINGS ASSINGING
 			### STATE EVALUATER.. ON STARTUP EVALUATES EACH STATE FOR ITS UNIQUE BUILDING AND IMPLANTS VARIABLES HOLDING LOCALISATION FOR UNIQUE BUILDINGS FOR GRABBING, CONTAINS TOOLTIP FOR HOVER OVER OF EFFECTS
 			every_state = {
+				set_temp_variable = {chance_for_primitive_resource_extraction_building = 10}
+				set_temp_variable = {chance_for_primitive_farm_building = 10}
+				set_temp_variable = {chance_for_primitive_office_building = 10}
+				set_temp_variable = {chance_for_primitive_industry_building = 10}
+				### STANDARD INITALISATION BEFORE TRIGGERS
+				if = {
+					limit = {
+						OR = {
+							has_state_category = wasteland
+							has_state_category = enclave
+						}
+					}
+					add_to_temp_variable = {chance_for_primitive_industry_building = -10}
+					add_to_temp_variable = {chance_for_primitive_office_building = -10}
+					add_to_temp_variable = {chance_for_primitive_farm_building = -10}
+					add_to_temp_variable = {chance_for_primitive_resource_extraction_building = 20}
+				}
+				if = {
+					limit = {
+						OR = {
+							has_state_category = rural
+							has_state_category = pastoral
+						}
+					}
+					add_to_temp_variable = {chance_for_primitive_industry_building = -10}
+					add_to_temp_variable = {chance_for_primitive_office_building = 5}
+					add_to_temp_variable = {chance_for_primitive_farm_building = 15}
+					add_to_temp_variable = {chance_for_primitive_resource_extraction_building = 10}
+				}
+				if = {
+					limit = {
+						or = {
+							has_state_category = town
+							has_state_category = large_town
+							has_state_category = city
+						}
+					}
+					add_to_temp_variable = {chance_for_primitive_industry_building = 10}
+					add_to_temp_variable = {chance_for_primitive_office_building = 15}
+					add_to_temp_variable = {chance_for_primitive_farm_building = 5}
+					add_to_temp_variable = {chance_for_primitive_resource_extraction_building = -10}
+				}
+				if = {
+					limit = {
+						or = {
+							has_state_category = megalopolis
+							has_state_category = metropolis
+							has_state_category = large_city
+						}
+					}
+					add_to_temp_variable = {chance_for_primitive_industry_building = 20}
+					add_to_temp_variable = {chance_for_primitive_office_building = 10}
+					add_to_temp_variable = {chance_for_primitive_farm_building = -10}
+					add_to_temp_variable = {chance_for_primitive_resource_extraction_building = -10}
+				}
+				if = { ## Simple Neverfire being lazy and getting the computer to auto create primitive buildings
+					limit = {
+						NOT = {
+							has_variable = building_1
+						}
+					}
+					random_list = {
+						chance_for_primitive_industry_building = {
+							set_variable = {building_1 = token:primitive_industry}
+							primitive_industry_add_effect = yes
+						}
+						chance_for_primitive_office_building = {
+							set_variable = {building_1 = token:primitive_offices}
+							primitive_offices_add_effect = yes
+						}
+						chance_for_primitive_farm_building = {
+							set_variable = {building_1 = token:primitive_farm}
+							primitive_farm_add_effect = yes
+						}
+						chance_for_primitive_resource_extraction_building = {
+							set_variable = {building_1 = token:primitive_resource_extraction}
+							primitive_resource_extraction_add_effect = yes
+						}
+						45 = {
+							## No effect
+						}
+					}
+				}
+				if = {
+					limit = {
+						NOT = {
+							has_variable = building_2
+						}
+					}
+					random_list = {
+						chance_for_primitive_industry_building = {
+							set_variable = {building_2 = token:primitive_industry}
+							primitive_industry_add_effect = yes
+						}
+						chance_for_primitive_office_building = {
+							set_variable = {building_2 = token:primitive_offices}
+							primitive_offices_add_effect = yes
+						}
+						chance_for_primitive_farm_building = {
+							set_variable = {building_2 = token:primitive_farm}
+							primitive_farm_add_effect = yes
+						}
+						chance_for_primitive_resource_extraction_building = {
+							set_variable = {building_2 = token:primitive_resource_extraction}
+							primitive_resource_extraction_add_effect = yes
+						}
+						45 = {
+							## No effect
+						}
+					}
+				}
 				if = {
 					limit = {
 						has_variable = building_1 ## IMPLANTS IDEAS FOR COUNTRIES WITH PREEXISTING IDEAS
 					}
-					set_temp_variable = { up_passer = building_1}
+					set_temp_variable = {passer_upper = building_1 }
 					controller = {
-						add_ideas = var:up_passer
+						add_ideas = var:passer_upper
+					}
+				}
+				if = {
+					limit = {
+						has_variable = building_2 ## IMPLANTS IDEAS FOR COUNTRIES WITH PREEXISTING IDEAS
+					}
+					set_temp_variable = {passer_upper = building_2 }
+					controller = {
+						add_ideas = var:passer_upper
 					}
 				}
 				if = {
