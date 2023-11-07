@@ -331,7 +331,7 @@ PixelShader =
 				lerp(
 					float3(1.0f, 1.0f, 1.0f),
 					min(TerrainColor.rgb*10.0f, 1.0f),
-					0.63f // This value effectively controls the saturation
+					0.40f // This value effectively controls the saturation
 					)
 			;
 
