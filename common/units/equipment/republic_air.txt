@@ -12,7 +12,15 @@ equipments = {
             fighter
             interceptor
         }
-        allow_mission_type = training
+        ## INTERCEPTOR MISSIONS
+        allow_mission_type = {
+			air_superiority
+			interception
+            naval_patrol
+            training
+		}
+
+        
         group_by = archetype
         sprite = light_plane
         carrier_capable = yes
@@ -58,7 +66,7 @@ equipments = {
         allowed_types = {
             tactical_bomber
         }
-        allow_mission_type = training
+        
         group_by = archetype
         sprite = light_plane
         carrier_capable = yes
@@ -83,8 +91,19 @@ equipments = {
 		air_bombing = 24
 		maximum_speed = 600
 
-
-        weight = 6
+        ## BOMBER MISSIONS
+        allow_mission_type = {
+            cas
+            strategic_bomber
+            naval_bomber
+            port_strike
+            attack_logistics
+            naval_mines_planting
+            naval_mines_sweeping
+            naval_patrol
+            training
+        }
+        weight = 0
         build_cost_ic = 12.5
         resources = {
             aluminium = 2
@@ -104,7 +123,7 @@ equipments = {
         allowed_types = {
             tactical_bomber
         }
-        allow_mission_type = training
+        
         group_by = archetype
         sprite = light_plane
         carrier_capable = yes
@@ -129,7 +148,18 @@ equipments = {
 		maximum_speed = 400
 
 
-
+        ## BOMBER MISSIONS
+        allow_mission_type = {
+            cas
+            strategic_bomber
+            naval_bomber
+            port_strike
+            attack_logistics
+            naval_mines_planting
+            naval_mines_sweeping
+            naval_patrol
+            training
+        }
         weight = 0
         build_cost_ic = 8
         resources = {
@@ -153,7 +183,7 @@ equipments = {
             cas
             naval_bomber
         }
-        allow_mission_type = training
+        
         group_by = archetype
         sprite = light_plane
         carrier_capable = yes
@@ -163,7 +193,19 @@ equipments = {
         interface_overview_category_index = 1
         reliability = 0.3
 
-
+        ## FIGHTER-BOMBER MISSIONS
+        allow_mission_type = {
+            cas
+            naval_bomber
+            port_strike
+            attack_logistics
+            naval_mines_planting
+            naval_mines_sweeping
+            naval_patrol
+            air_superiority
+            interception
+            training
+        }
         air_attack = 65
 		air_agility = 40
 		air_defence = 15
@@ -182,7 +224,7 @@ equipments = {
 
 
 
-        weight = 7
+        weight = 0
         build_cost_ic = 12
         resources = {
             aluminium = 2
@@ -203,7 +245,19 @@ equipments = {
             fighter
             tactical_bomber
         }
-        allow_mission_type = training
+         ## BOMBER MISSIONS
+         allow_mission_type = {
+			cas
+			strategic_bomber
+			naval_bomber
+			port_strike
+			attack_logistics
+			naval_mines_planting
+			naval_mines_sweeping
+            naval_patrol
+            training
+		}
+        
         group_by = archetype
         sprite = light_plane
         carrier_capable = yes
@@ -254,7 +308,20 @@ equipments = {
             interceptor
             cas
         }
-        allow_mission_type = training
+        ## FIGHTER-BOMBER MISSIONS
+        allow_mission_type = {
+			cas
+			naval_bomber
+			port_strike
+			attack_logistics
+			naval_mines_planting
+			naval_mines_sweeping
+            naval_patrol
+            air_superiority
+            interception
+            training
+		}
+        
         group_by = archetype
         sprite = light_plane
         carrier_capable = yes
@@ -279,7 +346,7 @@ equipments = {
 		maximum_speed = 500
 
 
-        weight = 7
+        weight = 0
         build_cost_ic = 8.0
         resources = {
             aluminium = 2
@@ -299,7 +366,7 @@ equipments = {
         allowed_types = {
             cas
         }
-        allow_mission_type = training
+        
         group_by = archetype
         sprite = light_plane
         carrier_capable = yes
@@ -316,24 +383,26 @@ equipments = {
         maximum_speed = 0
         air_agility = 35
         air_defence = 6
-        weight = 6
+        weight = 0
         build_cost_ic = 13.5
-            resources = {
-                aluminium = 2
-                steel = 1
-            }
-            
-            manpower = 5
-            fuel_consumption = 0.05
-
-        default_modules = {
-            fixed_main_weapon_slot = proton_torpedo_bomb_pod
-            fixed_auxiliary_weapon_slot_1 = proton_torpedo_bomb_pod
-            fixed_auxiliary_weapon_slot_2 = empty
-            engine_type_slot = starbomber_engine_1
-            special_type_slot_1 = starfighter_hyperdrive_cl5
-            special_type_slot_2 = starfighter_sr10
+        ## CAS MISSIONS
+        allow_mission_type = {
+			cas
+			naval_bomber
+			port_strike
+			attack_logistics
+			naval_mines_planting
+			naval_mines_sweeping
+            naval_patrol
+            training
+		}
+        resources = {
+            aluminium = 2
+            steel = 1
         }
+        
+        manpower = 5
+        fuel_consumption = 0.05
     }
     u_wing_airframe_0 = { #Inter-War
         abbreviation = "afs0"
@@ -342,7 +411,6 @@ equipments = {
 			has_tech = u_wing
 		}
         archetype = u_wing_airframe
-        module_slots = inherit
         priority = 5
     }
     u_wing_airframe_1 = {
@@ -353,7 +421,6 @@ equipments = {
 		}
         parent = u_wing_airframe_0
         archetype = u_wing_airframe
-        module_slots = inherit
         priority = 5
         naval_strike_attack = 1
         naval_strike_targetting = 1
@@ -371,7 +438,6 @@ equipments = {
 			has_tech = x_wing 
 		}
         archetype = x_wing_airframe
-        module_slots = inherit
         priority = 5
     }
     x_wing_airframe_1 = { #Inter-War
@@ -382,7 +448,6 @@ equipments = {
 		}
         archetype = x_wing_airframe
         parent = x_wing_airframe_0
-        module_slots = inherit
         priority = 5
         reliability = 0.7
         naval_strike_attack = 1
@@ -392,7 +457,7 @@ equipments = {
         maximum_speed = 40
         air_agility = 57
         air_defence = 6
-        weight = 9
+        weight = 0
         build_cost_ic = 13.2
     }
     x_wing_airframe_2 = { #Inter-War
@@ -403,7 +468,6 @@ equipments = {
 		}
         archetype = x_wing_airframe
         parent = x_wing_airframe_1
-        module_slots = inherit
         priority = 5
         reliability = 0.7
         naval_strike_attack = 1
@@ -413,7 +477,7 @@ equipments = {
         maximum_speed = 50
         air_agility = 60
         air_defence = 8
-        weight = 11
+        weight = 0
         build_cost_ic = 15.3
     }
     e_wing_airframe_0 = { #Inter-War
@@ -423,7 +487,6 @@ equipments = {
 			has_tech = e_wing
 		}
         archetype = e_wing_airframe
-        module_slots = inherit
         priority = 5
     }
     y_wing_airframe_0 = { #Inter-War
@@ -433,7 +496,6 @@ equipments = {
 			has_tech = y_wing
 		}
         archetype = y_wing_airframe
-        module_slots = inherit
         priority = 5
     }
     y_wing_airframe_1 = { #Inter-War
@@ -463,7 +525,7 @@ equipments = {
         maximum_speed = 10
         air_agility = 37
         air_defence = 8
-        weight = 6
+        weight = 0
         build_cost_ic = 14.4
     }
     b_wing_airframe_0 = { #Inter-War
@@ -473,7 +535,6 @@ equipments = {
 			has_tech = b_wing
 		}
         archetype = b_wing_airframe
-        module_slots = inherit
         priority = 5
     }
     b_wing_airframe_1 = { #Inter-War
@@ -502,7 +563,6 @@ equipments = {
 			has_tech = k_wing
 		}
         archetype = k_wing_airframe
-        module_slots = inherit
         priority = 5
     }
     a_wing_airframe_0 = { #Inter-War
@@ -512,7 +572,6 @@ equipments = {
 			has_tech = a_wing
 		}
         archetype = a_wing_airframe
-        module_slots = inherit
         priority = 5
     }
     a_wing_airframe_1 = { #Inter-War
@@ -523,7 +582,6 @@ equipments = {
 		}
         archetype = a_wing_airframe
         parent = a_wing_airframe_0
-        module_slots = inherit
         priority = 5
         reliability = 0.65
         naval_strike_attack = 1
@@ -533,7 +591,7 @@ equipments = {
         maximum_speed = 120
         air_agility = 50
         air_defence = 4
-        weight = 4
+        weight = 0
         build_cost_ic = 11.2
     }
 }
