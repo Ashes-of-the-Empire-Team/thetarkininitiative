@@ -129,6 +129,92 @@ clear_building_2_effects = {
 	clear_variable = building_2
 }
 
+add_building_to_construct_slot_1 = {
+	var:state_located_for_building_changes = {
+		hidden_effect = {
+			clear_building_1_effects = yes
+		}
+		set_variable = { building_1 = potential_building_holder_for_event }
+		set_variable = { time_left_building_1 = potential_time_left_building_holder_for_event}
+		set_state_flag = building_1_to_be_handled
+		time_calculation_for_buildings = yes
+		add_to_array = {
+			array = global.building_state_constructer_1
+			value = THIS.id
+		}
+	}
+	ROOT = {
+		subtract_from_variable = { currency_amount^primary_currency = potential_cost_holder_for_event }
+	}
+}
+add_building_to_construct_slot_2 = {
+	var:state_located_for_building_changes = {
+		hidden_effect = {
+			clear_building_2_effects = yes
+		}
+		set_variable = { building_2 = potential_building_holder_for_event }
+		set_variable = { time_left_building_2 = potential_time_left_building_holder_for_event}
+		time_calculation_for_buildings = yes
+		add_to_array = {
+			array = global.building_state_constructer_2
+			value = THIS.id
+		}
+	}
+	ROOT = {
+		subtract_from_variable = { currency_amount^primary_currency = potential_cost_holder_for_event }
+	}
+}
+
+sends_event_for_replacement_building = {
+	if = {
+		limit = {
+			ROOT = {
+				has_country_flag = building_1_open
+			}
+			has_variable = building_1
+		}
+		ROOT = {
+			country_event = BUILDING.1
+		}
+		### EVENT FOR BUILDING 1 CHANGE
+	}else_if = {
+		limit = {
+			ROOT = {
+				has_country_flag = building_2_open
+			}
+			has_variable = building_2
+		}
+		ROOT = {
+			country_event = BUILDING.2
+		}
+		### EVENT FOR BUILDING 2 CHANGE
+	}
+}
+sends_event_for_replacement_building_unique_building = {
+	if = {
+		limit = {
+			ROOT = {
+				has_country_flag = building_1_open
+			}
+			has_variable = building_1
+		}
+		ROOT = {
+			country_event = BUILDING.3
+		}
+		### EVENT FOR BUILDING 1 CHANGE
+	}else_if = {
+		limit = {
+			has_country_flag = building_2_open
+			has_variable = building_2
+		}
+		ROOT = {
+			country_event = BUILDING.4
+		}
+		### EVENT FOR BUILDING 2 CHANGE
+	}
+}
+
+
 time_calculation_for_buildings = {
 	set_temp_variable = {speed_multiplier_factor = modifier@production_speed_buildings_factor}
 	subtract_from_temp_variable = {speed_multiplier_factor = modifier@consumer_goods_factor}
@@ -1001,4 +1087,15 @@ primitive_resource_extraction_remove_effect = {
 test_building_effect = {
 	set_variable = {test_variable = token:primitive_industry}
 	log = "[?test_variable]"
+}
+
+
+clear_left_over_building_event_variables = {
+	var:state_located_for_building_changes = {
+		clear_variable = potential_building_holder_for_event
+		clear_variable = potential_time_left_building_holder_for_event
+	}
+	clear_variable = potential_cost_holder_for_event
+	clear_variable = state_located_for_building_changes
+
 }

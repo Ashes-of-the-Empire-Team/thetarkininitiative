@@ -1,0 +1,142 @@
+add_namespace = BUILDING
+
+country_event = { ## BUILDING SLOT 1 CHOICE
+    id = BUILDING.1
+    title = BUILDING.1.t
+    desc = BUILDING.1.d
+    picture = GFX_report_event_election_vote
+    is_triggered_only = yes
+    fire_only_once = no
+    immediate = {
+        
+    }
+    option = {
+		### YES OPTION
+		name = BUILDING.1.1
+		var:state_located_for_building_changes = {
+			hidden_effect = {
+				clear_building_1_effects = yes
+			}
+			set_variable = { building_1 = potential_building_holder_for_event }
+			set_variable = { time_left_building_1 = potential_time_left_building_holder_for_event}
+			set_state_flag = building_1_to_be_handled
+			time_calculation_for_buildings = yes
+			add_to_array = {
+				array = global.building_state_constructer_1
+				value = THIS.id
+			}
+		}
+		subtract_from_variable = { currency_amount^primary_currency = potential_cost_holder_for_event }
+		clear_left_over_building_event_variables = yes
+	}
+	option = {
+		### NO OPTION
+		name = BUILDING.1.2
+	}
+}
+country_event = { ## BUILDING SLOT 2 CHOICE
+    id = BUILDING.2
+    title = BUILDING.2.t
+    desc = BUILDING.2.d
+    picture = GFX_report_event_election_vote
+    is_triggered_only = yes
+    fire_only_once = no
+    immediate = {
+        
+    }
+    option = {
+		### YES OPTION
+		name = BUILDING.2.1
+		var:state_located_for_building_changes = {
+			hidden_effect = {
+				clear_building_2_effects = yes
+			}
+			set_variable = { building_2 = potential_building_holder_for_event }
+			set_variable = { time_left_building_2 = potential_time_left_building_holder_for_event}
+			time_calculation_for_buildings = yes
+			add_to_array = {
+				array = global.building_state_constructer_2
+				value = THIS.id
+			}
+		}
+		subtract_from_variable = { currency_amount^primary_currency = potential_cost_holder_for_event }
+		clear_left_over_building_event_variables = yes
+	}
+	option = {
+		### NO OPTION
+		name = BUILDING.2.2
+	}
+}
+
+
+### EVENTS FOR UNIQUE BUILDINGS
+country_event = { ## BUILDING SLOT 1 CHOICE
+    id = BUILDING.3
+    title = BUILDING.3.t
+    desc = BUILDING.3.d
+    picture = GFX_report_event_election_vote
+    is_triggered_only = yes
+    fire_only_once = no
+    immediate = {
+        
+    }
+    option = {
+		### YES OPTION
+		name = BUILDING.3.1
+		var:state_located_for_building_changes = {
+			set_variable = { building_1 = potential_building_holder_for_event }
+			set_variable = { time_left_building_1 = potential_time_left_building_holder_for_event}
+			set_state_flag = building_1_to_be_handled
+			time_calculation_for_buildings = yes
+			add_to_array = {
+				array = global.building_state_constructer_1
+				value = THIS.id
+			}
+			hidden_effect = {
+				clear_building_1_effects = yes
+			}
+			set_state_flag = wonder_built_no_destroy_1
+		}
+		subtract_from_variable = { currency_amount^primary_currency = potential_cost_holder_for_event }
+		clear_left_over_building_event_variables = yes
+	}
+	option = {
+		### NO OPTION
+		name = BUILDING.3.2
+	}
+}
+
+country_event = { ## BUILDING SLOT 2 CHOICE
+    id = BUILDING.4
+    title = BUILDING.4.t
+    desc = BUILDING.4.d
+    picture = GFX_report_event_election_vote
+    is_triggered_only = yes
+    fire_only_once = no
+    immediate = {
+        
+    }
+    option = {
+		### YES OPTION
+		name = BUILDING.4.1
+		var:state_located_for_building_changes = {
+			set_variable = { building_2 = potential_building_holder_for_event }
+			set_variable = { time_left_building_2 = potential_time_left_building_holder_for_event}
+			time_calculation_for_buildings = yes
+			add_to_array = {
+				array = global.building_state_constructer_2
+				value = THIS.id
+			}
+			hidden_effect = {
+				clear_building_2_effects = yes
+			}
+			set_state_flag = wonder_built_no_destroy_2
+		}
+		subtract_from_variable = { currency_amount^primary_currency = potential_cost_holder_for_event }
+		clear_left_over_building_event_variables = yes
+	}
+	option = {
+		### NO OPTION
+		name = BUILDING.4.2
+	}
+}

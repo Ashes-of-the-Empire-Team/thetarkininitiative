@@ -119,11 +119,13 @@ scripted_gui = {
 				ROOT = {
 					has_country_flag = building_1_open
 				}
+				is_fully_controlled_by = ROOT
 			}
 			building_2_glow_visible = {
 				ROOT = {
 					has_country_flag = building_2_open
 				}
+				is_fully_controlled_by = ROOT
 			}
 			building_back_visible = {
 				#has_state_flag = senate_building
@@ -249,444 +251,345 @@ scripted_gui = {
 		effects = {
 			light_shipyard_1_click = {
 				show_ideas_tooltip = light_shipyard_1
-				if = {
-					limit = {
-						ROOT = {
-							has_country_flag = building_1_open
-						}
-					}
-					hidden_effect = {
-						clear_building_1_effects = yes
-					}
-					set_variable = { building_1 = token:light_shipyard_1 }
-                    set_variable = { time_left_building_1 = 80}
-					set_state_flag = building_1_to_be_handled
-					time_calculation_for_buildings = yes
-                    add_to_array = {
-                        array = global.building_state_constructer_1
-                        value = THIS.id
-                    }
+				set_variable = { potential_building_holder_for_event = token:light_shipyard_1 }
+				set_variable = { potential_time_left_building_holder_for_event = 80}
+				controller = {
+					set_variable = { state_located_for_building_changes = PREV.id}
+					set_variable = { potential_cost_holder_for_event = 200}
 				}
 				if = {
 					limit = {
-						ROOT = {
-							has_country_flag = building_2_open
+						replacement_event_building_is_needed_or_no = yes
+					}
+					sends_event_for_replacement_building = yes
+				}else = {
+					if = {
+						limit = {
+							ROOT = {
+								has_country_flag = building_1_open
+							}
 						}
+						add_building_to_construct_slot_1 = yes
 					}
-					hidden_effect = {
-						clear_building_2_effects = yes
+					if = {
+						limit = {
+							ROOT = {
+								has_country_flag = building_2_open
+							}
+						}
+						add_building_to_construct_slot_2 = yes
 					}
-					set_variable = { building_2 = token:light_shipyard_1 }
-                    set_variable = { time_left_building_2 = 80}
-					time_calculation_for_buildings = yes
-                    add_to_array = {
-                        array = global.building_state_constructer_2
-                        value = THIS.id
-                    }
-				}
-				ROOT = {
-					subtract_from_variable = { currency_amount^primary_currency = 200 }
 				}
 			}
 			light_shipyard_2_click = {
 				show_ideas_tooltip = light_shipyard_2
-				if = {
-					limit = {
-						ROOT = {
-							has_country_flag = building_1_open
-						}
-					}
-					hidden_effect = {
-						clear_building_1_effects = yes
-					}
-					set_variable = { building_1 = token:light_shipyard_2 }
-                    set_variable = { time_left_building_1 = 80}
-					set_state_flag = building_1_to_be_handled
-					time_calculation_for_buildings = yes
-                    add_to_array = {
-                        array = global.building_state_constructer_1
-                        value = THIS.id
-                    }
+				set_variable = { potential_building_holder_for_event = token:light_shipyard_2 }
+				set_variable = { potential_time_left_building_holder_for_event = 80}
+				controller = {
+					set_variable = { state_located_for_building_changes = PREV.id}
+					set_variable = { potential_cost_holder_for_event = 200}
 				}
 				if = {
 					limit = {
-						ROOT = {
-							has_country_flag = building_2_open
+						replacement_event_building_is_needed_or_no = yes
+					}
+					sends_event_for_replacement_building = yes
+				}else = {
+					if = {
+						limit = {
+							ROOT = {
+								has_country_flag = building_1_open
+							}
 						}
+						add_building_to_construct_slot_1 = yes
 					}
-					hidden_effect = {
-						clear_building_2_effects = yes
+					if = {
+						limit = {
+							ROOT = {
+								has_country_flag = building_2_open
+							}
+						}
+						add_building_to_construct_slot_2 = yes
 					}
-					set_variable = { building_2 = token:light_shipyard_2 }
-                    set_variable = { time_left_building_2 = 80}
-					time_calculation_for_buildings = yes
-                    add_to_array = {
-                        array = global.building_state_constructer_2
-                        value = THIS.id
-                    }
-				}
-				ROOT = {
-					subtract_from_variable = { currency_amount^primary_currency = 200 }
 				}
 			}
 			light_shipyard_3_click = {
-				if = {
-					limit = {
-						ROOT = {
-							has_country_flag = building_1_open
-						}
-					}
-					hidden_effect = {
-						clear_building_1_effects = yes
-					}
-					set_variable = { building_1 = token:light_shipyard_3 }
-                    set_variable = { time_left_building_1 = 80}
-					set_state_flag = building_1_to_be_handled
-					time_calculation_for_buildings = yes
-                    add_to_array = {
-                        array = global.building_state_constructer_1
-                        value = THIS.id
-                    }
+				set_variable = { potential_building_holder_for_event = token:light_shipyard_3 }
+				set_variable = { potential_time_left_building_holder_for_event = 80}
+				controller = {
+					set_variable = { state_located_for_building_changes = PREV.id}
+					set_variable = { potential_cost_holder_for_event = 200}
 				}
 				if = {
 					limit = {
-						ROOT = {
-							has_country_flag = building_2_open
+						replacement_event_building_is_needed_or_no = yes
+					}
+					sends_event_for_replacement_building = yes
+				}else = {
+					if = {
+						limit = {
+							ROOT = {
+								has_country_flag = building_1_open
+							}
 						}
+						add_building_to_construct_slot_1 = yes
 					}
-					hidden_effect = {
-						clear_building_2_effects = yes
+					if = {
+						limit = {
+							ROOT = {
+								has_country_flag = building_2_open
+							}
+						}
+						add_building_to_construct_slot_2 = yes
 					}
-					set_variable = { building_2 = token:light_shipyard_3 }
-                    set_variable = { time_left_building_2 = 80}
-					time_calculation_for_buildings = yes
-                    add_to_array = {
-                        array = global.building_state_constructer_2
-                        value = THIS.id
-                    }
-				}
-				ROOT = {
-					subtract_from_variable = { currency_amount^primary_currency = 200 }
 				}
 			}
 			medium_shipyard_1_click = {
-				if = {
-					limit = {
-						ROOT = {
-							has_country_flag = building_1_open
-						}
-					}
-					hidden_effect = {
-						clear_building_1_effects = yes
-					}
-					set_variable = { building_1 = token:medium_shipyard_1 }
-                    set_variable = { time_left_building_1 = 80}
-					set_state_flag = building_1_to_be_handled
-					time_calculation_for_buildings = yes
-                    add_to_array = {
-                        array = global.building_state_constructer_1
-                        value = THIS.id
-                    }
+				set_variable = { potential_building_holder_for_event = token:medium_shipyard_1 }
+				set_variable = { potential_time_left_building_holder_for_event = 80}
+				controller = {
+					set_variable = { state_located_for_building_changes = PREV.id}
+					set_variable = { potential_cost_holder_for_event = 200}
 				}
 				if = {
 					limit = {
-						ROOT = {
-							has_country_flag = building_2_open
+						replacement_event_building_is_needed_or_no = yes
+					}
+					sends_event_for_replacement_building = yes
+				}else = {
+					if = {
+						limit = {
+							ROOT = {
+								has_country_flag = building_1_open
+							}
 						}
+						add_building_to_construct_slot_1 = yes
 					}
-					hidden_effect = {
-						clear_building_2_effects = yes
+					if = {
+						limit = {
+							ROOT = {
+								has_country_flag = building_2_open
+							}
+						}
+						add_building_to_construct_slot_2 = yes
 					}
-					set_variable = { building_2 = token:medium_shipyard_1 }
-                    set_variable = { time_left_building_2 = 80}
-					time_calculation_for_buildings = yes
-                    add_to_array = {
-                        array = global.building_state_constructer_2
-                        value = THIS.id
-                    }
-				}
-				ROOT = {
-					subtract_from_variable = { currency_amount^primary_currency = 200 }
 				}
 			}
 			medium_shipyard_2_click = {
-				if = {
-					limit = {
-						ROOT = {
-							has_country_flag = building_1_open
-						}
-					}
-					hidden_effect = {
-						clear_building_1_effects = yes
-					}
-					set_variable = { building_1 = token:medium_shipyard_2 }
-                    set_variable = { time_left_building_1 = 80}
-					set_state_flag = building_1_to_be_handled
-					time_calculation_for_buildings = yes
-                    add_to_array = {
-                        array = global.building_state_constructer_1
-                        value = THIS.id
-                    }
+				set_variable = { potential_building_holder_for_event = token:medium_shipyard_2 }
+				set_variable = { potential_time_left_building_holder_for_event = 80}
+				controller = {
+					set_variable = { state_located_for_building_changes = PREV.id}
+					set_variable = { potential_cost_holder_for_event = 200}
 				}
 				if = {
 					limit = {
-						ROOT = {
-							has_country_flag = building_2_open
+						replacement_event_building_is_needed_or_no = yes
+					}
+					sends_event_for_replacement_building = yes
+				}else = {
+					if = {
+						limit = {
+							ROOT = {
+								has_country_flag = building_1_open
+							}
 						}
+						add_building_to_construct_slot_1 = yes
 					}
-					hidden_effect = {
-						clear_building_2_effects = yes
+					if = {
+						limit = {
+							ROOT = {
+								has_country_flag = building_2_open
+							}
+						}
+						add_building_to_construct_slot_2 = yes
 					}
-					set_variable = { building_2 = token:medium_shipyard_2 }
-                    set_variable = { time_left_building_2 = 80}
-					time_calculation_for_buildings = yes
-                    add_to_array = {
-                        array = global.building_state_constructer_2
-                        value = THIS.id
-                    }
-				}
-				ROOT = {
-					subtract_from_variable = { currency_amount^primary_currency = 200 }
 				}
 			}
 			heavy_shipyard_click = {
-				if = {
-					limit = {
-						ROOT = {
-							has_country_flag = building_1_open
-						}
-					}
-					hidden_effect = {
-						clear_building_1_effects = yes
-					}
-					set_variable = { building_1 = token:heavy_shipyard_1 }
-                    set_variable = { time_left_building_1 = 80}
-					set_state_flag = building_1_to_be_handled
-					time_calculation_for_buildings = yes
-                    add_to_array = {
-                        array = global.building_state_constructer_1
-                        value = THIS.id
-                    }
+				set_variable = { potential_building_holder_for_event = token:heavy_shipyard_1 }
+				set_variable = { potential_time_left_building_holder_for_event = 80}
+				controller = {
+					set_variable = { state_located_for_building_changes = PREV.id}
+					set_variable = { potential_cost_holder_for_event = 200}
 				}
 				if = {
 					limit = {
-						ROOT = {
-							has_country_flag = building_2_open
+						replacement_event_building_is_needed_or_no = yes
+					}
+					sends_event_for_replacement_building = yes
+				}else = {
+					if = {
+						limit = {
+							ROOT = {
+								has_country_flag = building_1_open
+							}
 						}
+						add_building_to_construct_slot_1 = yes
 					}
-					hidden_effect = {
-						clear_building_2_effects = yes
+					if = {
+						limit = {
+							ROOT = {
+								has_country_flag = building_2_open
+							}
+						}
+						add_building_to_construct_slot_2 = yes
 					}
-					set_variable = { building_2 = token:heavy_shipyard_1 }
-                    set_variable = { time_left_building_2 = 80}
-					time_calculation_for_buildings = yes
-                    add_to_array = {
-                        array = global.building_state_constructer_2
-                        value = THIS.id
-                    }
-				}
-				ROOT = {
-					subtract_from_variable = { currency_amount^primary_currency = 200 }
 				}
 			}
 			starfighters_click = {
-				if = {
-					limit = {
-						ROOT = {
-							has_country_flag = building_1_open
-						}
-					}
-					hidden_effect = {
-						clear_building_1_effects = yes
-					}
-					set_variable = { building_1 = token:starfighter_factory_1 }
-                    set_variable = { time_left_building_1 = 80}
-					set_state_flag = building_1_to_be_handled
-					time_calculation_for_buildings = yes
-                    add_to_array = {
-                        array = global.building_state_constructer_1
-                        value = THIS.id
-                    }
+				set_variable = { potential_building_holder_for_event = token:starfighter_factory_1 }
+				set_variable = { potential_time_left_building_holder_for_event = 80}
+				controller = {
+					set_variable = { state_located_for_building_changes = PREV.id}
+					set_variable = { potential_cost_holder_for_event = 200}
 				}
 				if = {
 					limit = {
-						ROOT = {
-							has_country_flag = building_2_open
+						replacement_event_building_is_needed_or_no = yes
+					}
+					sends_event_for_replacement_building = yes
+				}else = {
+					if = {
+						limit = {
+							ROOT = {
+								has_country_flag = building_1_open
+							}
 						}
+						add_building_to_construct_slot_1 = yes
 					}
-					hidden_effect = {
-						clear_building_2_effects = yes
+					if = {
+						limit = {
+							ROOT = {
+								has_country_flag = building_2_open
+							}
+						}
+						add_building_to_construct_slot_2 = yes
 					}
-					set_variable = { building_2 = token:starfighter_factory_1 }
-                    set_variable = { time_left_building_2 = 80}
-					time_calculation_for_buildings = yes
-                    add_to_array = {
-                        array = global.building_state_constructer_2
-                        value = THIS.id
-                    }
-				}
-				ROOT = {
-					subtract_from_variable = { currency_amount^primary_currency = 200 }
 				}
 			}
 			starfighters_2_click = {
-				if = {
-					limit = {
-						ROOT = {
-							has_country_flag = building_1_open
-						}
-					}
-					hidden_effect = {
-						clear_building_1_effects = yes
-					}
-					set_variable = { building_1 = token:starfighter_factory_2 }
-                    set_variable = { time_left_building_1 = 80}
-					set_state_flag = building_1_to_be_handled
-					time_calculation_for_buildings = yes
-                    add_to_array = {
-                        array = global.building_state_constructer_1
-                        value = THIS.id
-                    }
+				set_variable = { potential_building_holder_for_event = token:starfighter_factory_2 }
+				set_variable = { potential_time_left_building_holder_for_event = 80}
+				controller = {
+					set_variable = { state_located_for_building_changes = PREV.id}
+					set_variable = { potential_cost_holder_for_event = 200}
 				}
 				if = {
 					limit = {
-						ROOT = {
-							has_country_flag = building_2_open
+						replacement_event_building_is_needed_or_no = yes
+					}
+					sends_event_for_replacement_building = yes
+				}else = {
+					if = {
+						limit = {
+							ROOT = {
+								has_country_flag = building_1_open
+							}
 						}
+						add_building_to_construct_slot_1 = yes
 					}
-					hidden_effect = {
-						clear_building_2_effects = yes
+					if = {
+						limit = {
+							ROOT = {
+								has_country_flag = building_2_open
+							}
+						}
+						add_building_to_construct_slot_2 = yes
 					}
-					set_variable = { building_2 = token:starfighter_factory_2 }
-                    set_variable = { time_left_building_2 = 80}
-					time_calculation_for_buildings = yes
-                    add_to_array = {
-                        array = global.building_state_constructer_2
-                        value = THIS.id
-                    }
-				}
-				ROOT = {
-					subtract_from_variable = { currency_amount^primary_currency = 200 }
 				}
 			}
 			starfighters_3_click = {
-				if = {
-					limit = {
-						ROOT = {
-							has_country_flag = building_1_open
-						}
-					}
-					hidden_effect = {
-						clear_building_1_effects = yes
-					}
-					set_variable = { building_1 = token:starfighter_factory_3 }
-                    set_variable = { time_left_building_1 = 80}
-					set_state_flag = building_1_to_be_handled
-					time_calculation_for_buildings = yes
-                    add_to_array = {
-                        array = global.building_state_constructer_1
-                        value = THIS.id
-                    }
+				set_variable = { potential_building_holder_for_event = token:starfighter_factory_3 }
+				set_variable = { potential_time_left_building_holder_for_event = 80}
+				controller = {
+					set_variable = { state_located_for_building_changes = PREV.id}
+					set_variable = { potential_cost_holder_for_event = 200}
 				}
 				if = {
 					limit = {
-						ROOT = {
-							has_country_flag = building_2_open
+						replacement_event_building_is_needed_or_no = yes
+					}
+					sends_event_for_replacement_building = yes
+				}else = {
+					if = {
+						limit = {
+							ROOT = {
+								has_country_flag = building_1_open
+							}
 						}
+						add_building_to_construct_slot_1 = yes
 					}
-					hidden_effect = {
-						clear_building_2_effects = yes
+					if = {
+						limit = {
+							ROOT = {
+								has_country_flag = building_2_open
+							}
+						}
+						add_building_to_construct_slot_2 = yes
 					}
-					set_variable = { building_2 = token:starfighter_factory_3 }
-                    set_variable = { time_left_building_2 = 80}
-					time_calculation_for_buildings = yes
-                    add_to_array = {
-                        array = global.building_state_constructer_2
-                        value = THIS.id
-                    }
-				}
-				ROOT = {
-					subtract_from_variable = { currency_amount^primary_currency = 200 }
 				}
 			}
 			starbombers_click = {
-				if = {
-					limit = {
-						ROOT = {
-							has_country_flag = building_1_open
-						}
-					}
-					hidden_effect = {
-						clear_building_1_effects = yes
-					}
-					set_variable = { building_1 = token:starbomber_factory_1 }
-                    set_variable = { time_left_building_1 = 80}
-					set_state_flag = building_1_to_be_handled
-					time_calculation_for_buildings = yes
-                    add_to_array = {
-                        array = global.building_state_constructer_1
-                        value = THIS.id
-                    }
+				set_variable = { potential_building_holder_for_event = token:starbomber_factory_1 }
+				set_variable = { potential_time_left_building_holder_for_event = 80}
+				controller = {
+					set_variable = { state_located_for_building_changes = PREV.id}
+					set_variable = { potential_cost_holder_for_event = 200}
 				}
 				if = {
 					limit = {
-						ROOT = {
-							has_country_flag = building_2_open
+						replacement_event_building_is_needed_or_no = yes
+					}
+					sends_event_for_replacement_building = yes
+				}else = {
+					if = {
+						limit = {
+							ROOT = {
+								has_country_flag = building_1_open
+							}
 						}
+						add_building_to_construct_slot_1 = yes
 					}
-					hidden_effect = {
-						clear_building_2_effects = yes
+					if = {
+						limit = {
+							ROOT = {
+								has_country_flag = building_2_open
+							}
+						}
+						add_building_to_construct_slot_2 = yes
 					}
-					set_variable = { building_2 = token:starbomber_factory_1 }
-                    set_variable = { time_left_building_2 = 80}
-					time_calculation_for_buildings = yes
-                    add_to_array = {
-                        array = global.building_state_constructer_2
-                        value = THIS.id
-                    }
-				}
-				ROOT = {
-					subtract_from_variable = { currency_amount^primary_currency = 200 }
 				}
 			}
 			starbombers_2_click = {
-				if = {
-					limit = {
-						ROOT = {
-							has_country_flag = building_1_open
-						}
-					}
-					hidden_effect = {
-						clear_building_1_effects = yes
-					}
-					set_variable = { building_1 = token:starbomber_factory_2 }
-                    set_variable = { time_left_building_1 = 80}
-					set_state_flag = building_1_to_be_handled
-					time_calculation_for_buildings = yes
-                    add_to_array = {
-                        array = global.building_state_constructer_1
-                        value = THIS.id
-                    }
+				set_variable = { potential_building_holder_for_event = token:starbomber_factory_2 }
+				set_variable = { potential_time_left_building_holder_for_event = 80}
+				controller = {
+					set_variable = { state_located_for_building_changes = PREV.id}
+					set_variable = { potential_cost_holder_for_event = 200}
 				}
 				if = {
 					limit = {
-						ROOT = {
-							has_country_flag = building_2_open
+						replacement_event_building_is_needed_or_no = yes
+					}
+					sends_event_for_replacement_building = yes
+				}else = {
+					if = {
+						limit = {
+							ROOT = {
+								has_country_flag = building_1_open
+							}
 						}
+						add_building_to_construct_slot_1 = yes
 					}
-					hidden_effect = {
-						clear_building_2_effects = yes
+					if = {
+						limit = {
+							ROOT = {
+								has_country_flag = building_2_open
+							}
+						}
+						add_building_to_construct_slot_2 = yes
 					}
-					set_variable = { building_2 = token:starbomber_factory_2 }
-                    set_variable = { time_left_building_2 = 80}
-					time_calculation_for_buildings = yes
-                    add_to_array = {
-                        array = global.building_state_constructer_2
-                        value = THIS.id
-                    }
-				}
-				ROOT = {
-					subtract_from_variable = { currency_amount^primary_currency = 200 }
 				}
 			}
 		}
@@ -1103,524 +1006,406 @@ scripted_gui = {
 		
 		effects = {
 			arms_factory_click = {
-				if = {
-					limit = {
-						ROOT = {
-							has_country_flag = building_1_open
-						}
-					}
-					hidden_effect = {
-						clear_building_1_effects = yes
-					}
-					set_variable = { building_1 = token:arms_factory_1 }
-                    set_variable = { time_left_building_1 = 80}
-					set_state_flag = building_1_to_be_handled
-					time_calculation_for_buildings = yes
-                    add_to_array = {
-                        array = global.building_state_constructer_1
-                        value = THIS.id
-                    }
+				set_variable = { potential_building_holder_for_event = token:arms_factory_1 }
+				set_variable = { potential_time_left_building_holder_for_event = 80}
+				controller = {
+					set_variable = { state_located_for_building_changes = PREV.id}
+					set_variable = { potential_cost_holder_for_event = 200}
 				}
 				if = {
 					limit = {
-						ROOT = {
-							has_country_flag = building_2_open
+						replacement_event_building_is_needed_or_no = yes
+					}
+					sends_event_for_replacement_building = yes
+				}else = {
+					if = {
+						limit = {
+							ROOT = {
+								has_country_flag = building_1_open
+							}
 						}
+						add_building_to_construct_slot_1 = yes
 					}
-					hidden_effect = {
-						clear_building_2_effects = yes
+					if = {
+						limit = {
+							ROOT = {
+								has_country_flag = building_2_open
+							}
+						}
+						add_building_to_construct_slot_2 = yes
 					}
-					set_variable = { building_2 = token:arms_factory_1 }
-                    set_variable = { time_left_building_2 = 80}
-					time_calculation_for_buildings = yes
-                    add_to_array = {
-                        array = global.building_state_constructer_2
-                        value = THIS.id
-                    }
-				}
-				ROOT = {
-					subtract_from_variable = { currency_amount^primary_currency = 200 }
 				}
 			}
 			arms_factory_2_click = {
-				if = {
-					limit = {
-						ROOT = {
-							has_country_flag = building_1_open
-						}
-					}
-					hidden_effect = {
-						clear_building_1_effects = yes
-					}
-					set_variable = { building_1 = token:soft_arms_factory_1 }
-                    set_variable = { time_left_building_1 = 80}
-					set_state_flag = building_1_to_be_handled
-					time_calculation_for_buildings = yes
-                    add_to_array = {
-                        array = global.building_state_constructer_1
-                        value = THIS.id
-                    }
+				set_variable = { potential_building_holder_for_event = token:arms_factory_2 }
+				set_variable = { potential_time_left_building_holder_for_event = 80}
+				controller = {
+					set_variable = { state_located_for_building_changes = PREV.id}
+					set_variable = { potential_cost_holder_for_event = 200}
 				}
 				if = {
 					limit = {
-						ROOT = {
-							has_country_flag = building_2_open
+						replacement_event_building_is_needed_or_no = yes
+					}
+					sends_event_for_replacement_building = yes
+				}else = {
+					if = {
+						limit = {
+							ROOT = {
+								has_country_flag = building_1_open
+							}
 						}
+						add_building_to_construct_slot_1 = yes
 					}
-					hidden_effect = {
-						clear_building_2_effects = yes
+					if = {
+						limit = {
+							ROOT = {
+								has_country_flag = building_2_open
+							}
+						}
+						add_building_to_construct_slot_2 = yes
 					}
-					set_variable = { building_2 = token:soft_arms_factory_1 }
-                    set_variable = { time_left_building_2 = 80}
-					time_calculation_for_buildings = yes
-                    add_to_array = {
-                        array = global.building_state_constructer_2
-                        value = THIS.id
-                    }
-				}
-				ROOT = {
-					subtract_from_variable = { currency_amount^primary_currency = 200 }
 				}
 			}
 			arms_factory_3_click = {
-				if = {
-					limit = {
-						ROOT = {
-							has_country_flag = building_1_open
-						}
-					}
-					hidden_effect = {
-						clear_building_1_effects = yes
-					}
-					set_variable = { building_1 = token:soft_arms_factory_2 }
-                    set_variable = { time_left_building_1 = 80}
-					set_state_flag = building_1_to_be_handled
-					time_calculation_for_buildings = yes
-                    add_to_array = {
-                        array = global.building_state_constructer_1
-                        value = THIS.id
-                    }
+				set_variable = { potential_building_holder_for_event = token:arms_factory_3 }
+				set_variable = { potential_time_left_building_holder_for_event = 80}
+				controller = {
+					set_variable = { state_located_for_building_changes = PREV.id}
+					set_variable = { potential_cost_holder_for_event = 200}
 				}
 				if = {
 					limit = {
-						ROOT = {
-							has_country_flag = building_2_open
+						replacement_event_building_is_needed_or_no = yes
+					}
+					sends_event_for_replacement_building = yes
+				}else = {
+					if = {
+						limit = {
+							ROOT = {
+								has_country_flag = building_1_open
+							}
 						}
+						add_building_to_construct_slot_1 = yes
 					}
-					hidden_effect = {
-						clear_building_2_effects = yes
+					if = {
+						limit = {
+							ROOT = {
+								has_country_flag = building_2_open
+							}
+						}
+						add_building_to_construct_slot_2 = yes
 					}
-					set_variable = { building_2 = token:soft_arms_factory_2 }
-                    set_variable = { time_left_building_2 = 80}
-					time_calculation_for_buildings = yes
-                    add_to_array = {
-                        array = global.building_state_constructer_2
-                        value = THIS.id
-                    }
-				}
-				ROOT = {
-					subtract_from_variable = { currency_amount^primary_currency = 200 }
 				}
 			}
 			tank_factory_1_click = { 
-				if = {
-					limit = {
-						ROOT = {
-							has_country_flag = building_1_open
-						}
-					}
-					hidden_effect = {
-						clear_building_1_effects = yes
-					}
-					set_variable = { building_1 = token:tank_factory_1 }
-                    set_variable = { time_left_building_1 = 80}
-					set_state_flag = building_1_to_be_handled
-					time_calculation_for_buildings = yes
-                    add_to_array = {
-                        array = global.building_state_constructer_1
-                        value = THIS.id
-                    }
+				set_variable = { potential_building_holder_for_event = token:tank_factory_1 }
+				set_variable = { potential_time_left_building_holder_for_event = 80}
+				controller = {
+					set_variable = { state_located_for_building_changes = PREV.id}
+					set_variable = { potential_cost_holder_for_event = 200}
 				}
 				if = {
 					limit = {
-						ROOT = {
-							has_country_flag = building_2_open
+						replacement_event_building_is_needed_or_no = yes
+					}
+					sends_event_for_replacement_building = yes
+				}else = {
+					if = {
+						limit = {
+							ROOT = {
+								has_country_flag = building_1_open
+							}
 						}
+						add_building_to_construct_slot_1 = yes
 					}
-					hidden_effect = {
-						clear_building_2_effects = yes
+					if = {
+						limit = {
+							ROOT = {
+								has_country_flag = building_2_open
+							}
+						}
+						add_building_to_construct_slot_2 = yes
 					}
-					set_variable = { building_2 = token:tank_factory_1 }
-                    set_variable = { time_left_building_2 = 80}
-					time_calculation_for_buildings = yes
-                    add_to_array = {
-                        array = global.building_state_constructer_2
-                        value = THIS.id
-                    }
-				}
-				ROOT = {
-					subtract_from_variable = { currency_amount^primary_currency = 200 }
 				}
 			}
 			tank_factory_2_click = { 
-				if = {
-					limit = {
-						ROOT = {
-							has_country_flag = building_1_open
-						}
-					}
-					hidden_effect = {
-						clear_building_1_effects = yes
-					}
-					set_variable = { building_1 = token:tank_factory_2 }
-                    set_variable = { time_left_building_1 = 80}
-					set_state_flag = building_1_to_be_handled
-					time_calculation_for_buildings = yes
-                    add_to_array = {
-                        array = global.building_state_constructer_1
-                        value = THIS.id
-                    }
+				set_variable = { potential_building_holder_for_event = token:tank_factory_2 }
+				set_variable = { potential_time_left_building_holder_for_event = 80}
+				controller = {
+					set_variable = { state_located_for_building_changes = PREV.id}
+					set_variable = { potential_cost_holder_for_event = 200}
 				}
 				if = {
 					limit = {
-						ROOT = {
-							has_country_flag = building_2_open
+						replacement_event_building_is_needed_or_no = yes
+					}
+					sends_event_for_replacement_building = yes
+				}else = {
+					if = {
+						limit = {
+							ROOT = {
+								has_country_flag = building_1_open
+							}
 						}
+						add_building_to_construct_slot_1 = yes
 					}
-					hidden_effect = {
-						clear_building_2_effects = yes
+					if = {
+						limit = {
+							ROOT = {
+								has_country_flag = building_2_open
+							}
+						}
+						add_building_to_construct_slot_2 = yes
 					}
-					set_variable = { building_2 = token:tank_factory_2 }
-                    set_variable = { time_left_building_2 = 80}
-					time_calculation_for_buildings = yes
-                    add_to_array = {
-                        array = global.building_state_constructer_2
-                        value = THIS.id
-                    }
-				}
-				ROOT = {
-					subtract_from_variable = { currency_amount^primary_currency = 200 }
 				}
 			}
 			training_facilities_click = {
-				if = {
-					limit = {
-						ROOT = {
-							has_country_flag = building_1_open
-						}
-					}
-					hidden_effect = {
-						clear_building_1_effects = yes
-					}
-					set_variable = { building_1 = token:training_facilities_1 }
-					set_variable = { time_left_building_1 = 80}
-					set_state_flag = building_1_to_be_handled
-					time_calculation_for_buildings = yes
-					add_to_array = {
-                        array = global.building_state_constructer_1
-                        value = THIS.id
-                    }
+				set_variable = { potential_building_holder_for_event = token:training_facilities_1 }
+				set_variable = { potential_time_left_building_holder_for_event = 80}
+				controller = {
+					set_variable = { state_located_for_building_changes = PREV.id}
+					set_variable = { potential_cost_holder_for_event = 200}
 				}
 				if = {
 					limit = {
-						ROOT = {
-							has_country_flag = building_2_open
+						replacement_event_building_is_needed_or_no = yes
+					}
+					sends_event_for_replacement_building = yes
+				}else = {
+					if = {
+						limit = {
+							ROOT = {
+								has_country_flag = building_1_open
+							}
 						}
+						add_building_to_construct_slot_1 = yes
 					}
-					hidden_effect = {
-						clear_building_2_effects = yes
+					if = {
+						limit = {
+							ROOT = {
+								has_country_flag = building_2_open
+							}
+						}
+						add_building_to_construct_slot_2 = yes
 					}
-					set_variable = { time_left_building_2 = 80}
-					time_calculation_for_buildings = yes
-					set_variable = { building_2 = token:training_facilities_1 }
-					add_to_array = {
-                        array = global.building_state_constructer_2
-                        value = THIS.id
-                    }
-				}
-				ROOT = {
-					subtract_from_variable = { currency_amount^primary_currency = 200 }
 				}
 			}
 			special_forces_training_facilities_click = {
-				if = {
-					limit = {
-						ROOT = {
-							has_country_flag = building_1_open
-						}
-					}
-					hidden_effect = {
-						clear_building_1_effects = yes
-					}
-					set_variable = { building_1 = token:special_forces_training_facilities_1 }
-					set_variable = { time_left_building_1 = 80}
-					set_state_flag = building_1_to_be_handled
-					time_calculation_for_buildings = yes
-					add_to_array = {
-                        array = global.building_state_constructer_1
-                        value = THIS.id
-                    }
+				set_variable = { potential_building_holder_for_event = token:special_forces_training_facilities_1 }
+				set_variable = { potential_time_left_building_holder_for_event = 80}
+				controller = {
+					set_variable = { state_located_for_building_changes = PREV.id}
+					set_variable = { potential_cost_holder_for_event = 200}
 				}
 				if = {
 					limit = {
-						ROOT = {
-							has_country_flag = building_2_open
+						replacement_event_building_is_needed_or_no = yes
+					}
+					sends_event_for_replacement_building = yes
+				}else = {
+					if = {
+						limit = {
+							ROOT = {
+								has_country_flag = building_1_open
+							}
 						}
+						add_building_to_construct_slot_1 = yes
 					}
-					hidden_effect = {
-						clear_building_2_effects = yes
+					if = {
+						limit = {
+							ROOT = {
+								has_country_flag = building_2_open
+							}
+						}
+						add_building_to_construct_slot_2 = yes
 					}
-					set_variable = { building_2 = token:special_forces_training_facilities_1 }
-					set_variable = { time_left_building_2 = 80}
-					time_calculation_for_buildings = yes
-					add_to_array = {
-                        array = global.building_state_constructer_2
-                        value = THIS.id
-                    }
-				}
-				ROOT = {
-					subtract_from_variable = { currency_amount^primary_currency = 200 }
 				}
 			}
 			special_forces_training_facilities_2_click = {
-				if = {
-					limit = {
-						ROOT = {
-							has_country_flag = building_1_open
-						}
-					}
-					hidden_effect = {
-						clear_building_1_effects = yes
-					}
-					set_variable = { building_1 = token:special_forces_training_facilities_2 }
-					set_variable = { time_left_building_1 = 80}
-					set_state_flag = building_1_to_be_handled
-					time_calculation_for_buildings = yes
-					add_to_array = {
-                        array = global.building_state_constructer_1
-                        value = THIS.id
-                    }
+				set_variable = { potential_building_holder_for_event = token:special_forces_training_facilities_2 }
+				set_variable = { potential_time_left_building_holder_for_event = 80}
+				controller = {
+					set_variable = { state_located_for_building_changes = PREV.id}
+					set_variable = { potential_cost_holder_for_event = 200}
 				}
 				if = {
 					limit = {
-						ROOT = {
-							has_country_flag = building_2_open
+						replacement_event_building_is_needed_or_no = yes
+					}
+					sends_event_for_replacement_building = yes
+				}else = {
+					if = {
+						limit = {
+							ROOT = {
+								has_country_flag = building_1_open
+							}
 						}
+						add_building_to_construct_slot_1 = yes
 					}
-					hidden_effect = {
-						clear_building_2_effects = yes
+					if = {
+						limit = {
+							ROOT = {
+								has_country_flag = building_2_open
+							}
+						}
+						add_building_to_construct_slot_2 = yes
 					}
-					set_variable = { time_left_building_2 = 80}
-					time_calculation_for_buildings = yes
-					set_variable = { building_2 = token:special_forces_training_facilities_2 }
-					add_to_array = {
-                        array = global.building_state_constructer_2
-                        value = THIS.id
-                    }
-					
-				}
-				ROOT = {
-					subtract_from_variable = { currency_amount^primary_currency = 200 }
 				}
 			}
 			military_bootcamp_1_click = {
-				if = {
-					limit = {
-						ROOT = {
-							has_country_flag = building_1_open
-						}
-					}
-					hidden_effect = {
-						clear_building_1_effects = yes
-					}
-					set_variable = { building_1 = token:military_bootcamp_1 }
-					set_variable = { time_left_building_1 = 80}
-					set_state_flag = building_1_to_be_handled
-					time_calculation_for_buildings = yes
-					add_to_array = {
-                        array = global.building_state_constructer_1
-                        value = THIS.id
-                    }
+				set_variable = { potential_building_holder_for_event = token:military_bootcamp_1 }
+				set_variable = { potential_time_left_building_holder_for_event = 80}
+				controller = {
+					set_variable = { state_located_for_building_changes = PREV.id}
+					set_variable = { potential_cost_holder_for_event = 200}
 				}
 				if = {
 					limit = {
-						ROOT = {
-							has_country_flag = building_2_open
+						replacement_event_building_is_needed_or_no = yes
+					}
+					sends_event_for_replacement_building = yes
+				}else = {
+					if = {
+						limit = {
+							ROOT = {
+								has_country_flag = building_1_open
+							}
 						}
+						add_building_to_construct_slot_1 = yes
 					}
-					hidden_effect = {
-						clear_building_2_effects = yes
+					if = {
+						limit = {
+							ROOT = {
+								has_country_flag = building_2_open
+							}
+						}
+						add_building_to_construct_slot_2 = yes
 					}
-					set_variable = { time_left_building_2 = 80}
-					time_calculation_for_buildings = yes
-					set_variable = { building_2 = token:military_bootcamp_1 }
-					add_to_array = {
-                        array = global.building_state_constructer_2
-                        value = THIS.id
-                    }
-				}
-				ROOT = {
-					subtract_from_variable = { currency_amount^primary_currency = 200 }
 				}
 			}
 			military_bootcamp_2_click = {
-				if = {
-					limit = {
-						ROOT = {
-							has_country_flag = building_1_open
-						}
-					}
-					hidden_effect = {
-						clear_building_1_effects = yes
-					}
-					set_variable = { building_1 = token:military_bootcamp_2 }
-					set_variable = { time_left_building_1 = 80}
-					set_state_flag = building_1_to_be_handled
-					time_calculation_for_buildings = yes
-					add_to_array = {
-                        array = global.building_state_constructer_1
-                        value = THIS.id
-                    }
+				set_variable = { potential_building_holder_for_event = token:military_bootcamp_2 }
+				set_variable = { potential_time_left_building_holder_for_event = 80}
+				controller = {
+					set_variable = { state_located_for_building_changes = PREV.id}
+					set_variable = { potential_cost_holder_for_event = 200}
 				}
 				if = {
 					limit = {
-						ROOT = {
-							has_country_flag = building_2_open
+						replacement_event_building_is_needed_or_no = yes
+					}
+					sends_event_for_replacement_building = yes
+				}else = {
+					if = {
+						limit = {
+							ROOT = {
+								has_country_flag = building_1_open
+							}
 						}
+						add_building_to_construct_slot_1 = yes
 					}
-					hidden_effect = {
-						clear_building_2_effects = yes
+					if = {
+						limit = {
+							ROOT = {
+								has_country_flag = building_2_open
+							}
+						}
+						add_building_to_construct_slot_2 = yes
 					}
-					set_variable = { time_left_building_2 = 80}
-					time_calculation_for_buildings = yes
-					set_variable = { building_2 = token:military_bootcamp_2 }
-					add_to_array = {
-                        array = global.building_state_constructer_2
-                        value = THIS.id
-                    }
-				}
-				ROOT = {
-					subtract_from_variable = { currency_amount^primary_currency = 200 }
 				}
 			}
 			small_anti_air_click = {
-				if = {
-					limit = {
-						ROOT = {
-							has_country_flag = building_1_open
-						}
-					}
-					hidden_effect = {
-						clear_building_1_effects = yes
-					}
-					set_variable = { building_1 = token:anti_air_1 }
-                    set_variable = { time_left_building_1 = 80}
-					set_state_flag = building_1_to_be_handled
-					time_calculation_for_buildings = yes
-                    add_to_array = {
-                        array = global.building_state_constructer_1
-                        value = THIS.id
-                    }
+				set_variable = { potential_building_holder_for_event = token:anti_air_1 }
+				set_variable = { potential_time_left_building_holder_for_event = 80}
+				controller = {
+					set_variable = { state_located_for_building_changes = PREV.id}
+					set_variable = { potential_cost_holder_for_event = 200}
 				}
 				if = {
 					limit = {
-						ROOT = {
-							has_country_flag = building_2_open
+						replacement_event_building_is_needed_or_no = yes
+					}
+					sends_event_for_replacement_building = yes
+				}else = {
+					if = {
+						limit = {
+							ROOT = {
+								has_country_flag = building_1_open
+							}
 						}
+						add_building_to_construct_slot_1 = yes
 					}
-					hidden_effect = {
-						clear_building_2_effects = yes
+					if = {
+						limit = {
+							ROOT = {
+								has_country_flag = building_2_open
+							}
+						}
+						add_building_to_construct_slot_2 = yes
 					}
-					set_variable = { building_2 = token:anti_air_1 }
-                    set_variable = { time_left_building_2 = 80}
-					time_calculation_for_buildings = yes
-                    add_to_array = {
-                        array = global.building_state_constructer_2
-                        value = THIS.id
-                    }
-				}
-				ROOT = {
-					subtract_from_variable = { currency_amount^primary_currency = 200 }
 				}
 			}
 			medium_guns_click = {
-				if = {
-					limit = {
-						ROOT = {
-							has_country_flag = building_1_open
-						}
-					}
-					hidden_effect = {
-						clear_building_1_effects = yes
-					}
-					set_variable = { building_1 = token:anti_air_2 }
-                    set_variable = { time_left_building_1 = 80}
-					set_state_flag = building_1_to_be_handled
-					time_calculation_for_buildings = yes
-                    add_to_array = {
-                        array = global.building_state_constructer_1
-                        value = THIS.id
-                    }
+				set_variable = { potential_building_holder_for_event = token:anti_air_2 }
+				set_variable = { potential_time_left_building_holder_for_event = 80}
+				controller = {
+					set_variable = { state_located_for_building_changes = PREV.id}
+					set_variable = { potential_cost_holder_for_event = 200}
 				}
 				if = {
 					limit = {
-						ROOT = {
-							has_country_flag = building_2_open
+						replacement_event_building_is_needed_or_no = yes
+					}
+					sends_event_for_replacement_building = yes
+				}else = {
+					if = {
+						limit = {
+							ROOT = {
+								has_country_flag = building_1_open
+							}
 						}
+						add_building_to_construct_slot_1 = yes
 					}
-					hidden_effect = {
-						clear_building_2_effects = yes
+					if = {
+						limit = {
+							ROOT = {
+								has_country_flag = building_2_open
+							}
+						}
+						add_building_to_construct_slot_2 = yes
 					}
-					set_variable = { building_2 = token:anti_air_2 }
-                    set_variable = { time_left_building_2 = 80}
-					time_calculation_for_buildings = yes
-                    add_to_array = {
-                        array = global.building_state_constructer_2
-                        value = THIS.id
-                    }
-				}
-				ROOT = {
-					subtract_from_variable = { currency_amount^primary_currency = 200 }
 				}
 			}
 			big_guns_click = {
-				if = {
-					limit = {
-						ROOT = {
-							has_country_flag = building_1_open
-						}
-					}
-					hidden_effect = {
-						clear_building_1_effects = yes
-					}
-					set_variable = { building_1 = token:anti_air_3 }
-                    set_variable = { time_left_building_1 = 80}
-					set_state_flag = building_1_to_be_handled
-					time_calculation_for_buildings = yes
-                    add_to_array = {
-                        array = global.building_state_constructer_1
-                        value = THIS.id
-                    }
+				set_variable = { potential_building_holder_for_event = token:anti_air_3 }
+				set_variable = { potential_time_left_building_holder_for_event = 80}
+				controller = {
+					set_variable = { state_located_for_building_changes = PREV.id}
+					set_variable = { potential_cost_holder_for_event = 200}
 				}
 				if = {
 					limit = {
-						ROOT = {
-							has_country_flag = building_2_open
+						replacement_event_building_is_needed_or_no = yes
+					}
+					sends_event_for_replacement_building = yes
+				}else = {
+					if = {
+						limit = {
+							ROOT = {
+								has_country_flag = building_1_open
+							}
 						}
+						add_building_to_construct_slot_1 = yes
 					}
-					hidden_effect = {
-						clear_building_2_effects = yes
+					if = {
+						limit = {
+							ROOT = {
+								has_country_flag = building_2_open
+							}
+						}
+						add_building_to_construct_slot_2 = yes
 					}
-					set_variable = { building_2 = token:anti_air_3 }
-                    set_variable = { time_left_building_2 = 80}
-					time_calculation_for_buildings = yes
-                    add_to_array = {
-                        array = global.building_state_constructer_2
-                        value = THIS.id
-                    }
-				}
-				ROOT = {
-					subtract_from_variable = { currency_amount^primary_currency = 200 }
 				}
 			}
 		}
@@ -2107,683 +1892,530 @@ scripted_gui = {
 		
 		effects = {
 			intelligence_center_click = {
-				if = {
-					limit = {
-						ROOT = {
-							has_country_flag = building_1_open
-						}
-					}
-					hidden_effect = {
-						clear_building_1_effects = yes
-					}
-					set_variable = { building_1 = token:intelligence_center_1 }
-                    set_variable = { time_left_building_1 = 80}
-					set_state_flag = building_1_to_be_handled
-					time_calculation_for_buildings = yes
-                    add_to_array = {
-                        array = global.building_state_constructer_1
-                        value = THIS.id
-                    }
+				set_variable = { potential_building_holder_for_event = token:intelligence_center_1 }
+				set_variable = { potential_time_left_building_holder_for_event = 80}
+				controller = {
+					set_variable = { state_located_for_building_changes = PREV.id}
+					set_variable = { potential_cost_holder_for_event = 200}
 				}
 				if = {
 					limit = {
-						ROOT = {
-							has_country_flag = building_2_open
+						replacement_event_building_is_needed_or_no = yes
+					}
+					sends_event_for_replacement_building = yes
+				}else = {
+					if = {
+						limit = {
+							ROOT = {
+								has_country_flag = building_1_open
+							}
 						}
+						add_building_to_construct_slot_1 = yes
 					}
-					hidden_effect = {
-						clear_building_2_effects = yes
+					if = {
+						limit = {
+							ROOT = {
+								has_country_flag = building_2_open
+							}
+						}
+						add_building_to_construct_slot_2 = yes
 					}
-					set_variable = { building_2 = token:intelligence_center_1 }
-                    set_variable = { time_left_building_2 = 80}
-					time_calculation_for_buildings = yes
-                    add_to_array = {
-                        array = global.building_state_constructer_2
-                        value = THIS.id
-                    }
-				}
-				ROOT = {
-					subtract_from_variable = { currency_amount^primary_currency = 200 }
 				}
 			}
 			sensor_array_1_click = {
-				if = {
-					limit = {
-						ROOT = {
-							has_country_flag = building_1_open
-						}
-					}
-					hidden_effect = {
-						clear_building_1_effects = yes
-					}
-					set_variable = { building_1 = token:sensor_array_1 }
-                    set_variable = { time_left_building_1 = 80}
-					set_state_flag = building_1_to_be_handled
-					time_calculation_for_buildings = yes
-                    add_to_array = {
-                        array = global.building_state_constructer_1
-                        value = THIS.id
-                    }
+				set_variable = { potential_building_holder_for_event = token:sensor_array_1 }
+				set_variable = { potential_time_left_building_holder_for_event = 80}
+				controller = {
+					set_variable = { state_located_for_building_changes = PREV.id}
+					set_variable = { potential_cost_holder_for_event = 200}
 				}
 				if = {
 					limit = {
-						ROOT = {
-							has_country_flag = building_2_open
+						replacement_event_building_is_needed_or_no = yes
+					}
+					sends_event_for_replacement_building = yes
+				}else = {
+					if = {
+						limit = {
+							ROOT = {
+								has_country_flag = building_1_open
+							}
 						}
+						add_building_to_construct_slot_1 = yes
 					}
-					hidden_effect = {
-						clear_building_2_effects = yes
+					if = {
+						limit = {
+							ROOT = {
+								has_country_flag = building_2_open
+							}
+						}
+						add_building_to_construct_slot_2 = yes
 					}
-					set_variable = { building_2 = token:sensor_array_1 }
-                    set_variable = { time_left_building_2 = 80}
-					time_calculation_for_buildings = yes
-                    add_to_array = {
-                        array = global.building_state_constructer_2
-                        value = THIS.id
-                    }
-				}
-				ROOT = {
-					subtract_from_variable = { currency_amount^primary_currency = 200 }
 				}
 			}
 			sensor_array_2_click = {
-				if = {
-					limit = {
-						ROOT = {
-							has_country_flag = building_1_open
-						}
-					}
-					hidden_effect = {
-						clear_building_1_effects = yes
-					}
-					set_variable = { building_1 = token:sensor_array_2 }
-                    set_variable = { time_left_building_1 = 80}
-					set_state_flag = building_1_to_be_handled
-					time_calculation_for_buildings = yes
-                    add_to_array = {
-                        array = global.building_state_constructer_1
-                        value = THIS.id
-                    }
+				set_variable = { potential_building_holder_for_event = token:sensor_array_2 }
+				set_variable = { potential_time_left_building_holder_for_event = 80}
+				controller = {
+					set_variable = { state_located_for_building_changes = PREV.id}
+					set_variable = { potential_cost_holder_for_event = 200}
 				}
 				if = {
 					limit = {
-						ROOT = {
-							has_country_flag = building_2_open
+						replacement_event_building_is_needed_or_no = yes
+					}
+					sends_event_for_replacement_building = yes
+				}else = {
+					if = {
+						limit = {
+							ROOT = {
+								has_country_flag = building_1_open
+							}
 						}
+						add_building_to_construct_slot_1 = yes
 					}
-					hidden_effect = {
-						clear_building_2_effects = yes
+					if = {
+						limit = {
+							ROOT = {
+								has_country_flag = building_2_open
+							}
+						}
+						add_building_to_construct_slot_2 = yes
 					}
-					set_variable = { building_2 = token:sensor_array_2 }
-                    set_variable = { time_left_building_2 = 80}
-					time_calculation_for_buildings = yes
-                    add_to_array = {
-                        array = global.building_state_constructer_2
-                        value = THIS.id
-                    }
-				}
-				ROOT = {
-					subtract_from_variable = { currency_amount^primary_currency = 200 }
 				}
 			}
 			spy_academy_1_click = {
-				if = {
-					limit = {
-						ROOT = {
-							has_country_flag = building_1_open
-						}
-					}
-					hidden_effect = {
-						clear_building_1_effects = yes
-					}
-					set_variable = { time_left_building_1 = 80}
-					set_state_flag = building_1_to_be_handled
-					time_calculation_for_buildings = yes
-					set_variable = { building_1 = token:spy_academy_1 }
-					add_to_array = {
-                        array = global.building_state_constructer_1
-                        value = THIS.id
-                    }
+				set_variable = { potential_building_holder_for_event = token:spy_academy_1 }
+				set_variable = { potential_time_left_building_holder_for_event = 80}
+				controller = {
+					set_variable = { state_located_for_building_changes = PREV.id}
+					set_variable = { potential_cost_holder_for_event = 200}
 				}
 				if = {
 					limit = {
-						ROOT = {
-							has_country_flag = building_2_open
+						replacement_event_building_is_needed_or_no = yes
+					}
+					sends_event_for_replacement_building = yes
+				}else = {
+					if = {
+						limit = {
+							ROOT = {
+								has_country_flag = building_1_open
+							}
 						}
+						add_building_to_construct_slot_1 = yes
 					}
-					hidden_effect = {
-						clear_building_2_effects = yes
+					if = {
+						limit = {
+							ROOT = {
+								has_country_flag = building_2_open
+							}
+						}
+						add_building_to_construct_slot_2 = yes
 					}
-					set_variable = { time_left_building_2 = 80}
-					time_calculation_for_buildings = yes
-					set_variable = { building_2 = token:spy_academy_1 }
-					add_to_array = {
-                        array = global.building_state_constructer_2
-                        value = THIS.id
-                    }
-				}
-				ROOT = {
-					subtract_from_variable = { currency_amount^primary_currency = 200 }
 				}
 			}
 			spy_academy_2_click = {
-				if = {
-					limit = {
-						ROOT = {
-							has_country_flag = building_1_open
-						}
-					}
-					hidden_effect = {
-						clear_building_1_effects = yes
-					}
-					set_variable = { time_left_building_1 = 80}
-					set_state_flag = building_1_to_be_handled
-					time_calculation_for_buildings = yes
-					add_to_array = {
-                        array = global.building_state_constructer_1
-                        value = THIS.id
-                    }
-					set_variable = { building_1 = token:spy_academy_2 }
+				set_variable = { potential_building_holder_for_event = token:spy_academy_2 }
+				set_variable = { potential_time_left_building_holder_for_event = 80}
+				controller = {
+					set_variable = { state_located_for_building_changes = PREV.id}
+					set_variable = { potential_cost_holder_for_event = 200}
 				}
 				if = {
 					limit = {
-						ROOT = {
-							has_country_flag = building_2_open
+						replacement_event_building_is_needed_or_no = yes
+					}
+					sends_event_for_replacement_building = yes
+				}else = {
+					if = {
+						limit = {
+							ROOT = {
+								has_country_flag = building_1_open
+							}
 						}
+						add_building_to_construct_slot_1 = yes
 					}
-					hidden_effect = {
-						clear_building_2_effects = yes
+					if = {
+						limit = {
+							ROOT = {
+								has_country_flag = building_2_open
+							}
+						}
+						add_building_to_construct_slot_2 = yes
 					}
-					set_variable = { time_left_building_2 = 80}
-					time_calculation_for_buildings = yes
-					set_variable = { building_2 = token:spy_academy_2 }
-					add_to_array = {
-                        array = global.building_state_constructer_2
-                        value = THIS.id
-                    }
-				}
-				ROOT = {
-					subtract_from_variable = { currency_amount^primary_currency = 200 }
 				}
 			}
 			research_center_click = {
-				if = {
-					limit = {
-						ROOT = {
-							has_country_flag = building_1_open
-						}
-					}
-					hidden_effect = {
-						clear_building_1_effects = yes
-					}
-					set_variable = { building_1 = token:research_center_1 }
-					set_variable = { time_left_building_1 = 80}
-					set_state_flag = building_1_to_be_handled
-					time_calculation_for_buildings = yes
-					add_to_array = {
-                        array = global.building_state_constructer_1
-                        value = THIS.id
-                    }
+				set_variable = { potential_building_holder_for_event = token:research_center_1 }
+				set_variable = { potential_time_left_building_holder_for_event = 80}
+				controller = {
+					set_variable = { state_located_for_building_changes = PREV.id}
+					set_variable = { potential_cost_holder_for_event = 200}
 				}
 				if = {
 					limit = {
-						ROOT = {
-							has_country_flag = building_2_open
+						replacement_event_building_is_needed_or_no = yes
+					}
+					sends_event_for_replacement_building = yes
+				}else = {
+					if = {
+						limit = {
+							ROOT = {
+								has_country_flag = building_1_open
+							}
 						}
+						add_building_to_construct_slot_1 = yes
 					}
-					hidden_effect = {
-						clear_building_2_effects = yes
+					if = {
+						limit = {
+							ROOT = {
+								has_country_flag = building_2_open
+							}
+						}
+						add_building_to_construct_slot_2 = yes
 					}
-					set_variable = { building_2 = token:research_center_1 }
-					set_variable = { time_left_building_2 = 80}
-					time_calculation_for_buildings = yes
-					add_to_array = {
-                        array = global.building_state_constructer_2
-                        value = THIS.id
-                    }
-				}
-				ROOT = {
-					subtract_from_variable = { currency_amount^primary_currency = 200 }
 				}
 			}
 			research_center_2_click = {
-				if = {
-					limit = {
-						ROOT = {
-							has_country_flag = building_1_open
-						}
-					}
-					hidden_effect = {
-						clear_building_1_effects = yes
-					}
-					set_variable = { building_1 = token:research_center_2 }
-					set_variable = { time_left_building_1 = 80}
-					set_state_flag = building_1_to_be_handled
-					time_calculation_for_buildings = yes
-					add_to_array = {
-                        array = global.building_state_constructer_1
-                        value = THIS.id
-                    }
+				set_variable = { potential_building_holder_for_event = token:research_center_2 }
+				set_variable = { potential_time_left_building_holder_for_event = 80}
+				controller = {
+					set_variable = { state_located_for_building_changes = PREV.id}
+					set_variable = { potential_cost_holder_for_event = 200}
 				}
 				if = {
 					limit = {
-						ROOT = {
-							has_country_flag = building_2_open
+						replacement_event_building_is_needed_or_no = yes
+					}
+					sends_event_for_replacement_building = yes
+				}else = {
+					if = {
+						limit = {
+							ROOT = {
+								has_country_flag = building_1_open
+							}
 						}
+						add_building_to_construct_slot_1 = yes
 					}
-					hidden_effect = {
-						clear_building_2_effects = yes
+					if = {
+						limit = {
+							ROOT = {
+								has_country_flag = building_2_open
+							}
+						}
+						add_building_to_construct_slot_2 = yes
 					}
-					set_variable = { building_2 = token:research_center_2 }
-					set_variable = { time_left_building_2 = 80}
-					time_calculation_for_buildings = yes
-					add_to_array = {
-                        array = global.building_state_constructer_2
-                        value = THIS.id
-                    }
-				}
-				ROOT = {
-					subtract_from_variable = { currency_amount^primary_currency = 200 }
 				}
 			}
 			research_center_3_click = {
-				if = {
-					limit = {
-						ROOT = {
-							has_country_flag = building_1_open
-						}
-					}
-					hidden_effect = {
-						clear_building_1_effects = yes
-					}
-					set_variable = { building_1 = token:research_center_3 }
-					set_variable = { time_left_building_1 = 80}
-					set_state_flag = building_1_to_be_handled
-					time_calculation_for_buildings = yes
-					add_to_array = {
-                        array = global.building_state_constructer_1
-                        value = THIS.id
-                    }
+				set_variable = { potential_building_holder_for_event = token:research_center_3 }
+				set_variable = { potential_time_left_building_holder_for_event = 80}
+				controller = {
+					set_variable = { state_located_for_building_changes = PREV.id}
+					set_variable = { potential_cost_holder_for_event = 200}
 				}
 				if = {
 					limit = {
-						ROOT = {
-							has_country_flag = building_2_open
+						replacement_event_building_is_needed_or_no = yes
+					}
+					sends_event_for_replacement_building = yes
+				}else = {
+					if = {
+						limit = {
+							ROOT = {
+								has_country_flag = building_1_open
+							}
 						}
+						add_building_to_construct_slot_1 = yes
 					}
-					hidden_effect = {
-						clear_building_2_effects = yes
+					if = {
+						limit = {
+							ROOT = {
+								has_country_flag = building_2_open
+							}
+						}
+						add_building_to_construct_slot_2 = yes
 					}
-					set_variable = { building_2 = token:research_center_3 }
-					set_variable = { time_left_building_2 = 80}
-					time_calculation_for_buildings = yes
-					add_to_array = {
-                        array = global.building_state_constructer_2
-                        value = THIS.id
-                    }
-				}
-				ROOT = {
-					subtract_from_variable = { currency_amount^primary_currency = 200 }
 				}
 			}
 			military_academy_click = {
-				if = {
-					limit = {
-						ROOT = {
-							has_country_flag = building_1_open
-						}
-					}
-					hidden_effect = {
-						clear_building_1_effects = yes
-					}
-					set_variable = { time_left_building_1 = 80}
-					set_state_flag = building_1_to_be_handled
-					time_calculation_for_buildings = yes
-					set_variable = { building_1 = token:military_academy_1 }
-					add_to_array = {
-                        array = global.building_state_constructer_1
-                        value = THIS.id
-                    }
+				set_variable = { potential_building_holder_for_event = token:military_academy_1 }
+				set_variable = { potential_time_left_building_holder_for_event = 80}
+				controller = {
+					set_variable = { state_located_for_building_changes = PREV.id}
+					set_variable = { potential_cost_holder_for_event = 200}
 				}
 				if = {
 					limit = {
-						ROOT = {
-							has_country_flag = building_2_open
+						replacement_event_building_is_needed_or_no = yes
+					}
+					sends_event_for_replacement_building = yes
+				}else = {
+					if = {
+						limit = {
+							ROOT = {
+								has_country_flag = building_1_open
+							}
 						}
+						add_building_to_construct_slot_1 = yes
 					}
-					hidden_effect = {
-						clear_building_2_effects = yes
+					if = {
+						limit = {
+							ROOT = {
+								has_country_flag = building_2_open
+							}
+						}
+						add_building_to_construct_slot_2 = yes
 					}
-					set_variable = { time_left_building_2 = 80}
-					time_calculation_for_buildings = yes
-					set_variable = { building_2 = token:military_academy_1 }
-					add_to_array = {
-                        array = global.building_state_constructer_2
-                        value = THIS.id
-                    }
-				}
-				ROOT = {
-					subtract_from_variable = { currency_amount^primary_currency = 200 }
 				}
 			}
 			military_college_click = {
-				if = {
-					limit = {
-						ROOT = {
-							has_country_flag = building_1_open
-						}
-					}
-					hidden_effect = {
-						clear_building_1_effects = yes
-					}
-					set_variable = { time_left_building_1 = 80}
-					set_state_flag = building_1_to_be_handled
-					time_calculation_for_buildings = yes
-					set_variable = { building_1 = token:military_academy_2 }
-					add_to_array = {
-                        array = global.building_state_constructer_1
-                        value = THIS.id
-                    }
+				set_variable = { potential_building_holder_for_event = token:military_academy_2 }
+				set_variable = { potential_time_left_building_holder_for_event = 80}
+				controller = {
+					set_variable = { state_located_for_building_changes = PREV.id}
+					set_variable = { potential_cost_holder_for_event = 200}
 				}
 				if = {
 					limit = {
-						ROOT = {
-							has_country_flag = building_2_open
+						replacement_event_building_is_needed_or_no = yes
+					}
+					sends_event_for_replacement_building = yes
+				}else = {
+					if = {
+						limit = {
+							ROOT = {
+								has_country_flag = building_1_open
+							}
 						}
+						add_building_to_construct_slot_1 = yes
 					}
-					hidden_effect = {
-						clear_building_2_effects = yes
+					if = {
+						limit = {
+							ROOT = {
+								has_country_flag = building_2_open
+							}
+						}
+						add_building_to_construct_slot_2 = yes
 					}
-					set_variable = { time_left_building_2 = 80}
-					time_calculation_for_buildings = yes
-					set_variable = { building_2 = token:military_academy_2 }
-					add_to_array = {
-                        array = global.building_state_constructer_2
-                        value = THIS.id
-                    }
-				}
-				ROOT = {
-					subtract_from_variable = { currency_amount^primary_currency = 200 }
 				}
 			}
 			military_academy_2_click = {
-				if = {
-					limit = {
-						ROOT = {
-							has_country_flag = building_1_open
-						}
-					}
-					hidden_effect = {
-						clear_building_1_effects = yes
-					}
-					set_variable = { time_left_building_1 = 80}
-					set_state_flag = building_1_to_be_handled
-					time_calculation_for_buildings = yes
-					set_variable = { building_1 = token:military_academy_3 }
-					add_to_array = {
-                        array = global.building_state_constructer_1
-                        value = THIS.id
-                    }
+				set_variable = { potential_building_holder_for_event = token:military_academy_3 }
+				set_variable = { potential_time_left_building_holder_for_event = 80}
+				controller = {
+					set_variable = { state_located_for_building_changes = PREV.id}
+					set_variable = { potential_cost_holder_for_event = 200}
 				}
 				if = {
 					limit = {
-						ROOT = {
-							has_country_flag = building_2_open
+						replacement_event_building_is_needed_or_no = yes
+					}
+					sends_event_for_replacement_building = yes
+				}else = {
+					if = {
+						limit = {
+							ROOT = {
+								has_country_flag = building_1_open
+							}
 						}
+						add_building_to_construct_slot_1 = yes
 					}
-					hidden_effect = {
-						clear_building_2_effects = yes
+					if = {
+						limit = {
+							ROOT = {
+								has_country_flag = building_2_open
+							}
+						}
+						add_building_to_construct_slot_2 = yes
 					}
-					set_variable = { time_left_building_2 = 80}
-					time_calculation_for_buildings = yes
-					set_variable = { building_2 = token:military_academy_3 }
-					add_to_array = {
-                        array = global.building_state_constructer_2
-                        value = THIS.id
-                    }
-				}
-				ROOT = {
-					subtract_from_variable = { currency_amount^primary_currency = 200 }
 				}
 			}
 			naval_academy_click = {
-				if = {
-					limit = {
-						ROOT = {
-							has_country_flag = building_1_open
-						}
-					}
-					hidden_effect = {
-						clear_building_1_effects = yes
-					}
-					set_variable = { time_left_building_1 = 80}
-					set_state_flag = building_1_to_be_handled
-					time_calculation_for_buildings = yes
-					set_variable = { building_1 = token:naval_academy_1 }
-					add_to_array = {
-                        array = global.building_state_constructer_1
-                        value = THIS.id
-                    }
+				set_variable = { potential_building_holder_for_event = token:naval_academy_1 }
+				set_variable = { potential_time_left_building_holder_for_event = 80}
+				controller = {
+					set_variable = { state_located_for_building_changes = PREV.id}
+					set_variable = { potential_cost_holder_for_event = 200}
 				}
 				if = {
 					limit = {
-						ROOT = {
-							has_country_flag = building_2_open
+						replacement_event_building_is_needed_or_no = yes
+					}
+					sends_event_for_replacement_building = yes
+				}else = {
+					if = {
+						limit = {
+							ROOT = {
+								has_country_flag = building_1_open
+							}
 						}
+						add_building_to_construct_slot_1 = yes
 					}
-					hidden_effect = {
-						clear_building_2_effects = yes
+					if = {
+						limit = {
+							ROOT = {
+								has_country_flag = building_2_open
+							}
+						}
+						add_building_to_construct_slot_2 = yes
 					}
-					set_variable = { time_left_building_2 = 80}
-					time_calculation_for_buildings = yes
-					set_variable = { building_2 = token:naval_academy_1 }
-					add_to_array = {
-                        array = global.building_state_constructer_2
-                        value = THIS.id
-                    }
-				}
-				ROOT = {
-					subtract_from_variable = { currency_amount^primary_currency = 200 }
 				}
 			}
 			admiraly_academy_click = {
-				if = {
-					limit = {
-						ROOT = {
-							has_country_flag = building_1_open
-						}
-					}
-					hidden_effect = {
-						clear_building_1_effects = yes
-					}
-					set_variable = { time_left_building_1 = 80}
-					set_state_flag = building_1_to_be_handled
-					time_calculation_for_buildings = yes
-					set_variable = { building_1 = token:admiralty_academy_1 }
-					add_to_array = {
-                        array = global.building_state_constructer_1
-                        value = THIS.id
-                    }
+				set_variable = { potential_building_holder_for_event = token:admiralty_academy_1 }
+				set_variable = { potential_time_left_building_holder_for_event = 80}
+				controller = {
+					set_variable = { state_located_for_building_changes = PREV.id}
+					set_variable = { potential_cost_holder_for_event = 200}
 				}
 				if = {
 					limit = {
-						ROOT = {
-							has_country_flag = building_2_open
+						replacement_event_building_is_needed_or_no = yes
+					}
+					sends_event_for_replacement_building = yes
+				}else = {
+					if = {
+						limit = {
+							ROOT = {
+								has_country_flag = building_1_open
+							}
 						}
+						add_building_to_construct_slot_1 = yes
 					}
-					hidden_effect = {
-						clear_building_2_effects = yes
+					if = {
+						limit = {
+							ROOT = {
+								has_country_flag = building_2_open
+							}
+						}
+						add_building_to_construct_slot_2 = yes
 					}
-					set_variable = { time_left_building_2 = 80}
-					time_calculation_for_buildings = yes
-					set_variable = { building_2 = token:admiralty_academy_1 }
-					add_to_array = {
-                        array = global.building_state_constructer_2
-                        value = THIS.id
-                    }
-				}
-				ROOT = {
-					subtract_from_variable = { currency_amount^primary_currency = 200 }
 				}
 			}
 			starship_academy_click = {
-				if = {
-					limit = {
-						ROOT = {
-							has_country_flag = building_1_open
-						}
-					}
-					hidden_effect = {
-						clear_building_1_effects = yes
-					}
-					set_variable = { time_left_building_1 = 80}
-					set_state_flag = building_1_to_be_handled
-					time_calculation_for_buildings = yes
-					set_variable = { building_1 = token:starfighter_academy_1 }
-					add_to_array = {
-                        array = global.building_state_constructer_1
-                        value = THIS.id
-                    }
+				set_variable = { potential_building_holder_for_event = token:starfighter_academy_1 }
+				set_variable = { potential_time_left_building_holder_for_event = 80}
+				controller = {
+					set_variable = { state_located_for_building_changes = PREV.id}
+					set_variable = { potential_cost_holder_for_event = 200}
 				}
 				if = {
 					limit = {
-						ROOT = {
-							has_country_flag = building_2_open
+						replacement_event_building_is_needed_or_no = yes
+					}
+					sends_event_for_replacement_building = yes
+				}else = {
+					if = {
+						limit = {
+							ROOT = {
+								has_country_flag = building_1_open
+							}
 						}
+						add_building_to_construct_slot_1 = yes
 					}
-					hidden_effect = {
-						clear_building_2_effects = yes
+					if = {
+						limit = {
+							ROOT = {
+								has_country_flag = building_2_open
+							}
+						}
+						add_building_to_construct_slot_2 = yes
 					}
-					set_variable = { time_left_building_2 = 80}
-					time_calculation_for_buildings = yes
-					set_variable = { building_2 = token:starfighter_academy_1 }
-					add_to_array = {
-                        array = global.building_state_constructer_2
-                        value = THIS.id
-                    }
-				}
-				ROOT = {
-					subtract_from_variable = { currency_amount^primary_currency = 200 }
 				}
 			}
 			taxation_1_click = {
-				if = {
-					limit = {
-						ROOT = {
-							has_country_flag = building_1_open
-						}
-					}
-					hidden_effect = {
-						clear_building_1_effects = yes
-					}
-					set_variable = { time_left_building_1 = 80}
-					set_state_flag = building_1_to_be_handled
-					time_calculation_for_buildings = yes
-					set_variable = { building_1 = token:taxation_center_1 }
-					add_to_array = {
-                        array = global.building_state_constructer_1
-                        value = THIS.id
-                    }
+				set_variable = { potential_building_holder_for_event = token:taxation_center_1 }
+				set_variable = { potential_time_left_building_holder_for_event = 80}
+				controller = {
+					set_variable = { state_located_for_building_changes = PREV.id}
+					set_variable = { potential_cost_holder_for_event = 200}
 				}
 				if = {
 					limit = {
-						ROOT = {
-							has_country_flag = building_2_open
+						replacement_event_building_is_needed_or_no = yes
+					}
+					sends_event_for_replacement_building = yes
+				}else = {
+					if = {
+						limit = {
+							ROOT = {
+								has_country_flag = building_1_open
+							}
 						}
+						add_building_to_construct_slot_1 = yes
 					}
-					hidden_effect = {
-						clear_building_2_effects = yes
+					if = {
+						limit = {
+							ROOT = {
+								has_country_flag = building_2_open
+							}
+						}
+						add_building_to_construct_slot_2 = yes
 					}
-					set_variable = { time_left_building_2 = 80}
-					time_calculation_for_buildings = yes
-					set_variable = { building_2 = token:taxation_center_1 }
-					add_to_array = {
-                        array = global.building_state_constructer_2
-                        value = THIS.id
-                    }
-				}
-				ROOT = {
-					subtract_from_variable = { currency_amount^primary_currency = 200 }
 				}
 			}
 			taxation_2_click = {
-				if = {
-					limit = {
-						ROOT = {
-							has_country_flag = building_1_open
-						}
-					}
-					hidden_effect = {
-						clear_building_1_effects = yes
-					}
-					set_variable = { time_left_building_1 = 80}
-					set_state_flag = building_1_to_be_handled
-					time_calculation_for_buildings = yes
-					set_variable = { building_1 = token:taxation_center_2 }
-					add_to_array = {
-                        array = global.building_state_constructer_1
-                        value = THIS.id
-                    }
+				set_variable = { potential_building_holder_for_event = token:taxation_center_2 }
+				set_variable = { potential_time_left_building_holder_for_event = 80}
+				controller = {
+					set_variable = { state_located_for_building_changes = PREV.id}
+					set_variable = { potential_cost_holder_for_event = 200}
 				}
 				if = {
 					limit = {
-						ROOT = {
-							has_country_flag = building_2_open
+						replacement_event_building_is_needed_or_no = yes
+					}
+					sends_event_for_replacement_building = yes
+				}else = {
+					if = {
+						limit = {
+							ROOT = {
+								has_country_flag = building_1_open
+							}
 						}
+						add_building_to_construct_slot_1 = yes
 					}
-					hidden_effect = {
-						clear_building_2_effects = yes
+					if = {
+						limit = {
+							ROOT = {
+								has_country_flag = building_2_open
+							}
+						}
+						add_building_to_construct_slot_2 = yes
 					}
-					set_variable = { time_left_building_2 = 80}
-					time_calculation_for_buildings = yes
-					set_variable = { building_2 = token:taxation_center_2 }
-					add_to_array = {
-                        array = global.building_state_constructer_2
-                        value = THIS.id
-                    }
-				}
-				ROOT = {
-					subtract_from_variable = { currency_amount^primary_currency = 200 }
 				}
 			}
 			taxation_3_click = {
-				if = {
-					limit = {
-						ROOT = {
-							has_country_flag = building_1_open
-						}
-					}
-					hidden_effect = {
-						clear_building_1_effects = yes
-					}
-					set_variable = { time_left_building_1 = 80}
-					set_state_flag = building_1_to_be_handled
-					time_calculation_for_buildings = yes
-					set_variable = { building_1 = token:taxation_center_3 }
-					add_to_array = {
-                        array = global.building_state_constructer_1
-                        value = THIS.id
-                    }
+				set_variable = { potential_building_holder_for_event = token:taxation_center_3 }
+				set_variable = { potential_time_left_building_holder_for_event = 80}
+				controller = {
+					set_variable = { state_located_for_building_changes = PREV.id}
+					set_variable = { potential_cost_holder_for_event = 200}
 				}
 				if = {
 					limit = {
-						ROOT = {
-							has_country_flag = building_2_open
+						replacement_event_building_is_needed_or_no = yes
+					}
+					sends_event_for_replacement_building = yes
+				}else = {
+					if = {
+						limit = {
+							ROOT = {
+								has_country_flag = building_1_open
+							}
 						}
+						add_building_to_construct_slot_1 = yes
 					}
-					hidden_effect = {
-						clear_building_2_effects = yes
+					if = {
+						limit = {
+							ROOT = {
+								has_country_flag = building_2_open
+							}
+						}
+						add_building_to_construct_slot_2 = yes
 					}
-					set_variable = { time_left_building_2 = 80}
-					time_calculation_for_buildings = yes
-					set_variable = { building_2 = token:taxation_center_3 }
-					add_to_array = {
-                        array = global.building_state_constructer_2
-                        value = THIS.id
-                    }
-				}
-				ROOT = {
-					subtract_from_variable = { currency_amount^primary_currency = 200 }
 				}
 			}
 		}
@@ -3408,628 +3040,526 @@ scripted_gui = {
 		
 		effects = {
 			unique_building_click = {
-				if = {
-					limit = {
-						ROOT = {
-							has_country_flag = building_1_open
-						}
-					}
-					hidden_effect = {
-						clear_building_1_effects = yes
-					}
-					set_variable = { time_left_building_1 = 80}
-					set_state_flag = building_1_to_be_handled
-					time_calculation_for_buildings = yes
-					set_variable = { building_1 = unique_building_on_state }## unique_building_on_state is a state variable holding the states unique building idea, it is used to then locate its add and removal effects
-					add_to_array = {
-                        array = global.building_state_constructer_1
-                        value = THIS.id
-                    }
-					set_state_flag = wonder_built_no_destroy_1
+				set_variable = { potential_building_holder_for_event = unique_building_on_state }
+				set_variable = { potential_time_left_building_holder_for_event = 80}
+				controller = {
+					set_variable = { state_located_for_building_changes = PREV.id}
+					set_variable = { potential_cost_holder_for_event = 200}
 				}
 				if = {
 					limit = {
-						ROOT = {
-							has_country_flag = building_2_open
-						}
+						has_variable = unique_building_custom_time ## THIS IS IF SOMEONE WANTS TO PUT THEIR OWN TIME FOR A WONDER RATHER THEN DEFAULT 80, WILL TAKE THAT VARIABLE INSTEAD
 					}
-					hidden_effect = {
-						clear_building_2_effects = yes
-					}
-					set_variable = { time_left_building_2 = 80}
-					time_calculation_for_buildings = yes
-					set_variable = { building_2 = unique_building_on_state }
-					add_to_array = {
-                        array = global.building_state_constructer_2
-                        value = THIS.id
-                    }
-					set_state_flag = wonder_built_no_destroy_2
+					set_variable = { potential_time_left_building_holder_for_event = unique_building_custom_time}
 				}
-				ROOT = {
-					subtract_from_variable = { currency_amount^primary_currency = 200 }
+				if = {
+					limit = {
+						has_variable = unique_building_custom_cost ## THIS IS IF SOMEONE WANTS TO PUT THEIR OWN COST FOR A WONDER RATHER THEN DEFAULT 80, WILL TAKE THAT VARIABLE INSTEAD
+					}
+					set_temp_variable = { quick_passer = unique_building_custom_cost}
+					controller = {
+						set_variable = { potential_cost_holder_for_event = quick_passer}
+					}
+				}
+				if = {
+					limit = {
+						replacement_event_building_is_needed_or_no = yes
+					}
+					sends_event_for_replacement_building_unique_building = yes
+				}else = {
+					if = {
+						limit = {
+							ROOT = {
+								has_country_flag = building_1_open
+							}
+						}
+						add_building_to_construct_slot_1 = yes
+						
+					}
+					if = {
+						limit = {
+							ROOT = {
+								has_country_flag = building_2_open
+							}
+						}
+						add_building_to_construct_slot_2 = yes
+					}
 				}
 			}
 			unique_building_2_click = {
-				if = {
-					limit = {
-						ROOT = {
-							has_country_flag = building_1_open
-						}
+				meta_effect = {
+					text = {
+						set_variable = { potential_building_holder_for_event = token:[BUILDING_NAME]_2 }
 					}
-					hidden_effect = {
-						clear_building_1_effects = yes
-					}
-					set_variable = { time_left_building_1 = 80}
-					set_state_flag = building_1_to_be_handled
-					time_calculation_for_buildings = yes
-					meta_effect = {
-						text = {
-							set_variable = { building_1 = token:[BUILDING_NAME]_2 }
-						}
-						BUILDING_NAME = "[?unique_building_on_state.GetTokenKey]"
-					}
-					add_to_array = {
-                        array = global.building_state_constructer_1
-                        value = THIS.id
-                    }
+					BUILDING_NAME = "[?unique_building_on_state.GetTokenKey]"
+				}
+				set_variable = { potential_time_left_building_holder_for_event = 80}
+				controller = {
+					set_variable = { state_located_for_building_changes = PREV.id}
+					set_variable = { potential_cost_holder_for_event = 200}
 				}
 				if = {
 					limit = {
-						ROOT = {
-							has_country_flag = building_2_open
-						}
+						has_variable = unique_building_custom_time ## THIS IS IF SOMEONE WANTS TO PUT THEIR OWN TIME FOR A WONDER RATHER THEN DEFAULT 80, WILL TAKE THAT VARIABLE INSTEAD
 					}
-					hidden_effect = {
-						clear_building_2_effects = yes
-					}
-					set_variable = { time_left_building_2 = 80}
-					time_calculation_for_buildings = yes
-					meta_effect = {
-						text = {
-							set_variable = { building_2 = token:[BUILDING_NAME]_2 }
-						}
-						BUILDING_NAME = "[?unique_building_on_state.GetTokenKey]"
-					}
-					add_to_array = {
-                        array = global.building_state_constructer_2
-                        value = THIS.id
-                    }
+					set_variable = { potential_time_left_building_holder_for_event = unique_building_custom_time}
 				}
-				ROOT = {
-					subtract_from_variable = { currency_amount^primary_currency = 200 }
+				if = {
+					limit = {
+						has_variable = unique_building_custom_cost ## THIS IS IF SOMEONE WANTS TO PUT THEIR OWN COST FOR A WONDER RATHER THEN DEFAULT 80, WILL TAKE THAT VARIABLE INSTEAD
+					}
+					set_temp_variable = { quick_passer = unique_building_custom_cost}
+					controller = {
+						set_variable = { potential_cost_holder_for_event = quick_passer}
+					}
+				}
+				if = {
+					limit = {
+						replacement_event_building_is_needed_or_no = yes
+					}
+					sends_event_for_replacement_building_unique_building = yes
+				}else = {
+					if = {
+						limit = {
+							ROOT = {
+								has_country_flag = building_1_open
+							}
+						}
+						add_building_to_construct_slot_1 = yes
+						
+					}
+					if = {
+						limit = {
+							ROOT = {
+								has_country_flag = building_2_open
+							}
+						}
+						add_building_to_construct_slot_2 = yes
+					}
 				}
 			}
 			unique_building_3_click = {
-				if = {
-					limit = {
-						ROOT = {
-							has_country_flag = building_1_open
-						}
+				meta_effect = {
+					text = {
+						set_variable = { potential_building_holder_for_event = token:[BUILDING_NAME]_3 }
 					}
-					hidden_effect = {
-						clear_building_1_effects = yes
-					}
-					set_variable = { time_left_building_1 = 80}
-					set_state_flag = building_1_to_be_handled
-					time_calculation_for_buildings = yes
-					meta_effect = {
-						text = {
-							set_variable = { building_1 = token:[BUILDING_NAME]_3 }
-						}
-						BUILDING_NAME = "[?unique_building_on_state.GetTokenKey]"
-					}
-					add_to_array = {
-                        array = global.building_state_constructer_1
-                        value = THIS.id
-                    }
-					## unique_building_on_state is a state variable holding the states unique building idea, it is used to then locate its add and removal effects
+					BUILDING_NAME = "[?unique_building_on_state.GetTokenKey]"
+				}
+				set_variable = { potential_time_left_building_holder_for_event = 80}
+				controller = {
+					set_variable = { state_located_for_building_changes = PREV.id}
+					set_variable = { potential_cost_holder_for_event = 200}
 				}
 				if = {
 					limit = {
-						ROOT = {
-							has_country_flag = building_2_open
-						}
+						has_variable = unique_building_custom_time ## THIS IS IF SOMEONE WANTS TO PUT THEIR OWN TIME FOR A WONDER RATHER THEN DEFAULT 80, WILL TAKE THAT VARIABLE INSTEAD
 					}
-					hidden_effect = {
-						clear_building_2_effects = yes
-					}
-					set_variable = { time_left_building_2 = 80}
-					time_calculation_for_buildings = yes
-					meta_effect = {
-						text = {
-							set_variable = { building_2 = token:[BUILDING_NAME]_3 }
-						}
-						BUILDING_NAME = "[?unique_building_on_state.GetTokenKey]"
-					}
-					add_to_array = {
-                        array = global.building_state_constructer_2
-                        value = THIS.id
-                    }
+					set_variable = { potential_time_left_building_holder_for_event = unique_building_custom_time}
 				}
-				ROOT = {
-					subtract_from_variable = { currency_amount^primary_currency = 200 }
+				if = {
+					limit = {
+						has_variable = unique_building_custom_cost ## THIS IS IF SOMEONE WANTS TO PUT THEIR OWN COST FOR A WONDER RATHER THEN DEFAULT 80, WILL TAKE THAT VARIABLE INSTEAD
+					}
+					set_temp_variable = { quick_passer = unique_building_custom_cost}
+					controller = {
+						set_variable = { potential_cost_holder_for_event = quick_passer}
+					}
+				}
+				if = {
+					limit = {
+						replacement_event_building_is_needed_or_no = yes
+					}
+					sends_event_for_replacement_building_unique_building = yes
+				}else = {
+					if = {
+						limit = {
+							ROOT = {
+								has_country_flag = building_1_open
+							}
+						}
+						add_building_to_construct_slot_1 = yes
+						
+					}
+					if = {
+						limit = {
+							ROOT = {
+								has_country_flag = building_2_open
+							}
+						}
+						add_building_to_construct_slot_2 = yes
+					}
 				}
 			}
 			homstead_click = {
-				if = {
-					limit = {
-						ROOT = {
-							has_country_flag = building_1_open
-						}
-					}
-					hidden_effect = {
-						clear_building_1_effects = yes
-					}
-					set_variable = { time_left_building_1 = 80}
-					set_state_flag = building_1_to_be_handled
-					time_calculation_for_buildings = yes
-					set_variable = { building_1 = token:homestead_1 }
-					add_to_array = {
-                        array = global.building_state_constructer_1
-                        value = THIS.id
-                    }
+				set_variable = { potential_building_holder_for_event = token:homestead_1 }
+				set_variable = { potential_time_left_building_holder_for_event = 80}
+				controller = {
+					set_variable = { state_located_for_building_changes = PREV.id}
+					set_variable = { potential_cost_holder_for_event = 200}
 				}
 				if = {
 					limit = {
-						ROOT = {
-							has_country_flag = building_2_open
+						replacement_event_building_is_needed_or_no = yes
+					}
+					sends_event_for_replacement_building = yes
+				}else = {
+					if = {
+						limit = {
+							ROOT = {
+								has_country_flag = building_1_open
+							}
 						}
+						add_building_to_construct_slot_1 = yes
 					}
-					hidden_effect = {
-						clear_building_2_effects = yes
+					if = {
+						limit = {
+							ROOT = {
+								has_country_flag = building_2_open
+							}
+						}
+						add_building_to_construct_slot_2 = yes
 					}
-					set_variable = { time_left_building_2 = 80}
-					time_calculation_for_buildings = yes
-					set_variable = { building_2 = token:homestead_1 }
-					add_to_array = {
-                        array = global.building_state_constructer_2
-                        value = THIS.id
-                    }
-				}
-				ROOT = {
-					subtract_from_variable = { currency_amount^primary_currency = 200 }
 				}
 			}
 			homstead_2_click = {
-				if = {
-					limit = {
-						ROOT = {
-							has_country_flag = building_1_open
-						}
-					}
-					hidden_effect = {
-						clear_building_1_effects = yes
-					}
-					set_variable = { time_left_building_1 = 80}
-					set_state_flag = building_1_to_be_handled
-					time_calculation_for_buildings = yes	
-					set_variable = { building_1 = token:homestead_2 }
-					add_to_array = {
-                        array = global.building_state_constructer_1
-                        value = THIS.id
-                    }
+				set_variable = { potential_building_holder_for_event = token:homestead_2 }
+				set_variable = { potential_time_left_building_holder_for_event = 80}
+				controller = {
+					set_variable = { state_located_for_building_changes = PREV.id}
+					set_variable = { potential_cost_holder_for_event = 200}
 				}
 				if = {
 					limit = {
-						ROOT = {
-							has_country_flag = building_2_open
+						replacement_event_building_is_needed_or_no = yes
+					}
+					sends_event_for_replacement_building = yes
+				}else = {
+					if = {
+						limit = {
+							ROOT = {
+								has_country_flag = building_1_open
+							}
 						}
+						add_building_to_construct_slot_1 = yes
 					}
-					hidden_effect = {
-						clear_building_2_effects = yes
+					if = {
+						limit = {
+							ROOT = {
+								has_country_flag = building_2_open
+							}
+						}
+						add_building_to_construct_slot_2 = yes
 					}
-					set_variable = { time_left_building_2 = 80}
-					time_calculation_for_buildings = yes	
-					set_variable = { building_2 = token:homestead_2 }
-					add_to_array = {
-                        array = global.building_state_constructer_2
-                        value = THIS.id
-                    }
-				}
-				ROOT = {
-					subtract_from_variable = { currency_amount^primary_currency = 200 }
 				}
 			}
 			homstead_3_click = {
-				if = {
-					limit = {
-						ROOT = {
-							has_country_flag = building_1_open
-						}
-					}
-					hidden_effect = {
-						clear_building_1_effects = yes
-					}
-					set_variable = { time_left_building_1 = 80}
-					set_state_flag = building_1_to_be_handled
-					time_calculation_for_buildings = yes	
-					set_variable = { building_1 = token:homestead_3 }
-					add_to_array = {
-                        array = global.building_state_constructer_1
-                        value = THIS.id
-                    }
+				set_variable = { potential_building_holder_for_event = token:homestead_3 }
+				set_variable = { potential_time_left_building_holder_for_event = 80}
+				controller = {
+					set_variable = { state_located_for_building_changes = PREV.id}
+					set_variable = { potential_cost_holder_for_event = 200}
 				}
 				if = {
 					limit = {
-						ROOT = {
-							has_country_flag = building_2_open
+						replacement_event_building_is_needed_or_no = yes
+					}
+					sends_event_for_replacement_building = yes
+				}else = {
+					if = {
+						limit = {
+							ROOT = {
+								has_country_flag = building_1_open
+							}
 						}
+						add_building_to_construct_slot_1 = yes
 					}
-					hidden_effect = {
-						clear_building_2_effects = yes
+					if = {
+						limit = {
+							ROOT = {
+								has_country_flag = building_2_open
+							}
+						}
+						add_building_to_construct_slot_2 = yes
 					}
-					set_variable = { time_left_building_2 = 80}
-					time_calculation_for_buildings = yes	
-					set_variable = { building_2 = token:homestead_3 }
-					add_to_array = {
-                        array = global.building_state_constructer_2
-                        value = THIS.id
-                    }
-				}
-				ROOT = {
-					subtract_from_variable = { currency_amount^primary_currency = 200 }
 				}
 			}
 			corporate_click = {
-				if = {
-					limit = {
-						ROOT = {
-							has_country_flag = building_1_open
-						}
-					}
-					hidden_effect = {
-						clear_building_1_effects = yes
-					}	
-					set_variable = { building_1 = token:corporate_office_1 }
-                    set_variable = { time_left_building_1 = 80}
-					set_state_flag = building_1_to_be_handled
-					time_calculation_for_buildings = yes
-                    add_to_array = {
-                        array = global.building_state_constructer_1
-                        value = THIS.id
-                    }
+				set_variable = { potential_building_holder_for_event = token:corporate_office_1 }
+				set_variable = { potential_time_left_building_holder_for_event = 80}
+				controller = {
+					set_variable = { state_located_for_building_changes = PREV.id}
+					set_variable = { potential_cost_holder_for_event = 200}
 				}
 				if = {
 					limit = {
-						ROOT = {
-							has_country_flag = building_2_open
-						}
+						replacement_event_building_is_needed_or_no = yes
 					}
-					hidden_effect = {
-						clear_building_2_effects = yes
-					}	
-					set_variable = { building_2 = token:corporate_office_1 }
-                    set_variable = { time_left_building_2 = 80}
-					time_calculation_for_buildings = yes
-                    add_to_array = {
-                        array = global.building_state_constructer_2
-                        value = THIS.id
-                    }
-				}
-				ROOT = {
-					subtract_from_variable = { currency_amount^primary_currency = 200 }
+					sends_event_for_replacement_building = yes
+				}else = {
+					if = {
+						limit = {
+							ROOT = {
+								has_country_flag = building_1_open
+							}
+						}
+						add_building_to_construct_slot_1 = yes
+					}
+					if = {
+						limit = {
+							ROOT = {
+								has_country_flag = building_2_open
+							}
+						}
+						add_building_to_construct_slot_2 = yes
+					}
 				}
 			}
 			corporate_2_click = {
-				if = {
-					limit = {
-						ROOT = {
-							has_country_flag = building_1_open
-						}
-					}
-					hidden_effect = {
-						clear_building_1_effects = yes
-					}	
-					set_variable = { building_1 = token:corporate_office_2 }
-                    set_variable = { time_left_building_1 = 80}
-					set_state_flag = building_1_to_be_handled
-					time_calculation_for_buildings = yes
-                    add_to_array = {
-                        array = global.building_state_constructer_1
-                        value = THIS.id
-                    }
+				set_variable = { potential_building_holder_for_event = token:corporate_office_2 }
+				set_variable = { potential_time_left_building_holder_for_event = 80}
+				controller = {
+					set_variable = { state_located_for_building_changes = PREV.id}
+					set_variable = { potential_cost_holder_for_event = 200}
 				}
 				if = {
 					limit = {
-						ROOT = {
-							has_country_flag = building_2_open
-						}
+						replacement_event_building_is_needed_or_no = yes
 					}
-					hidden_effect = {
-						clear_building_2_effects = yes
-					}	
-					set_variable = { building_2 = token:corporate_office_2 }
-                    set_variable = { time_left_building_2 = 80}
-					time_calculation_for_buildings = yes
-                    add_to_array = {
-                        array = global.building_state_constructer_2
-                        value = THIS.id
-                    }
-				}
-				ROOT = {
-					subtract_from_variable = { currency_amount^primary_currency = 200 }
+					sends_event_for_replacement_building = yes
+				}else = {
+					if = {
+						limit = {
+							ROOT = {
+								has_country_flag = building_1_open
+							}
+						}
+						add_building_to_construct_slot_1 = yes
+					}
+					if = {
+						limit = {
+							ROOT = {
+								has_country_flag = building_2_open
+							}
+						}
+						add_building_to_construct_slot_2 = yes
+					}
 				}
 			}
 			corporate_3_click = {
-				if = {
-					limit = {
-						ROOT = {
-							has_country_flag = building_1_open
-						}
-					}
-					hidden_effect = {
-						clear_building_1_effects = yes
-					}	
-					set_variable = { building_1 = token:corporate_office_3 }
-                    set_variable = { time_left_building_1 = 80}
-					set_state_flag = building_1_to_be_handled
-					time_calculation_for_buildings = yes
-                    add_to_array = {
-                        array = global.building_state_constructer_1
-                        value = THIS.id
-                    }
+				set_variable = { potential_building_holder_for_event = token:corporate_office_3 }
+				set_variable = { potential_time_left_building_holder_for_event = 80}
+				controller = {
+					set_variable = { state_located_for_building_changes = PREV.id}
+					set_variable = { potential_cost_holder_for_event = 200}
 				}
 				if = {
 					limit = {
-						ROOT = {
-							has_country_flag = building_2_open
-						}
+						replacement_event_building_is_needed_or_no = yes
 					}
-					hidden_effect = {
-						clear_building_2_effects = yes
-					}	
-					set_variable = { building_2 = token:corporate_office_3 }
-                    set_variable = { time_left_building_2 = 80}
-					time_calculation_for_buildings = yes
-                    add_to_array = {
-                        array = global.building_state_constructer_2
-                        value = THIS.id
-                    }
-				}
-				ROOT = {
-					subtract_from_variable = { currency_amount^primary_currency = 200 }
+					sends_event_for_replacement_building = yes
+				}else = {
+					if = {
+						limit = {
+							ROOT = {
+								has_country_flag = building_1_open
+							}
+						}
+						add_building_to_construct_slot_1 = yes
+					}
+					if = {
+						limit = {
+							ROOT = {
+								has_country_flag = building_2_open
+							}
+						}
+						add_building_to_construct_slot_2 = yes
+					}
 				}
 			}
 			recycle_click = {
-				if = {
-					limit = {
-						ROOT = {
-							has_country_flag = building_1_open
-						}
-					}
-					hidden_effect = {
-						clear_building_1_effects = yes
-					}	
-					set_variable = { building_1 = token:recycle_center_1 }
-                    set_variable = { time_left_building_1 = 80}
-					set_state_flag = building_1_to_be_handled
-					time_calculation_for_buildings = yes
-                    add_to_array = {
-                        array = global.building_state_constructer_1
-                        value = THIS.id
-                    }
+				set_variable = { potential_building_holder_for_event = token:recycle_center_1 }
+				set_variable = { potential_time_left_building_holder_for_event = 80}
+				controller = {
+					set_variable = { state_located_for_building_changes = PREV.id}
+					set_variable = { potential_cost_holder_for_event = 200}
 				}
 				if = {
 					limit = {
-						ROOT = {
-							has_country_flag = building_2_open
-						}
+						replacement_event_building_is_needed_or_no = yes
 					}
-					hidden_effect = {
-						clear_building_2_effects = yes
-					}	
-					set_variable = { building_2 = token:recycle_center_1 }
-                    set_variable = { time_left_building_2 = 80}
-					time_calculation_for_buildings = yes
-                    add_to_array = {
-                        array = global.building_state_constructer_2
-                        value = THIS.id
-                    }
-				}
-				ROOT = {
-					subtract_from_variable = { currency_amount^primary_currency = 200 }
+					sends_event_for_replacement_building = yes
+				}else = {
+					if = {
+						limit = {
+							ROOT = {
+								has_country_flag = building_1_open
+							}
+						}
+						add_building_to_construct_slot_1 = yes
+					}
+					if = {
+						limit = {
+							ROOT = {
+								has_country_flag = building_2_open
+							}
+						}
+						add_building_to_construct_slot_2 = yes
+					}
 				}
 			}
 			recycle_2_click = {
-				if = {
-					limit = {
-						ROOT = {
-							has_country_flag = building_1_open
-						}
-					}
-					hidden_effect = {
-						clear_building_1_effects = yes
-					}	
-					set_variable = { building_1 = token:recycle_center_2 }
-                    set_variable = { time_left_building_1 = 80}
-					set_state_flag = building_1_to_be_handled
-					time_calculation_for_buildings = yes
-                    add_to_array = {
-                        array = global.building_state_constructer_1
-                        value = THIS.id
-                    }
+				set_variable = { potential_building_holder_for_event = token:recycle_center_2 }
+				set_variable = { potential_time_left_building_holder_for_event = 80}
+				controller = {
+					set_variable = { state_located_for_building_changes = PREV.id}
+					set_variable = { potential_cost_holder_for_event = 200}
 				}
 				if = {
 					limit = {
-						ROOT = {
-							has_country_flag = building_2_open
-						}
+						replacement_event_building_is_needed_or_no = yes
 					}
-					hidden_effect = {
-						clear_building_2_effects = yes
-					}	
-					set_variable = { building_2 = token:recycle_center_2 }
-                    set_variable = { time_left_building_2 = 80}
-					time_calculation_for_buildings = yes
-                    add_to_array = {
-                        array = global.building_state_constructer_2
-                        value = THIS.id
-                    }
-				}
-				ROOT = {
-					subtract_from_variable = { currency_amount^primary_currency = 200 }
+					sends_event_for_replacement_building = yes
+				}else = {
+					if = {
+						limit = {
+							ROOT = {
+								has_country_flag = building_1_open
+							}
+						}
+						add_building_to_construct_slot_1 = yes
+					}
+					if = {
+						limit = {
+							ROOT = {
+								has_country_flag = building_2_open
+							}
+						}
+						add_building_to_construct_slot_2 = yes
+					}
 				}
 			}
 			recycle_3_click = {
-				if = {
-					limit = {
-						ROOT = {
-							has_country_flag = building_1_open
-						}
-					}
-					hidden_effect = {
-						clear_building_1_effects = yes
-					}	
-					set_variable = { building_1 = token:recycle_center_3 }
-                    set_variable = { time_left_building_1 = 80}
-					set_state_flag = building_1_to_be_handled
-					time_calculation_for_buildings = yes
-                    add_to_array = {
-                        array = global.building_state_constructer_1
-                        value = THIS.id
-                    }
-
+				set_variable = { potential_building_holder_for_event = token:recycle_center_3 }
+				set_variable = { potential_time_left_building_holder_for_event = 80}
+				controller = {
+					set_variable = { state_located_for_building_changes = PREV.id}
+					set_variable = { potential_cost_holder_for_event = 200}
 				}
 				if = {
 					limit = {
-						ROOT = {
-							has_country_flag = building_2_open
-						}
+						replacement_event_building_is_needed_or_no = yes
 					}
-					hidden_effect = {
-						clear_building_2_effects = yes
-					}	
-					set_variable = { building_2 = token:recycle_center_3 }
-                    set_variable = { time_left_building_2 = 80}
-					time_calculation_for_buildings = yes
-                    add_to_array = {
-                        array = global.building_state_constructer_2
-                        value = THIS.id
-                    }
-				}
-				ROOT = {
-					subtract_from_variable = { currency_amount^primary_currency = 200 }
+					sends_event_for_replacement_building = yes
+				}else = {
+					if = {
+						limit = {
+							ROOT = {
+								has_country_flag = building_1_open
+							}
+						}
+						add_building_to_construct_slot_1 = yes
+					}
+					if = {
+						limit = {
+							ROOT = {
+								has_country_flag = building_2_open
+							}
+						}
+						add_building_to_construct_slot_2 = yes
+					}
 				}
 			}
 			refinery_click = {
-				if = {
-					limit = {
-						ROOT = {
-							has_country_flag = building_1_open
-						}
-					}
-					hidden_effect = {
-						clear_building_1_effects = yes
-					}	
-					set_variable = { building_1 = token:fuel_refinery_1 }
-                    set_variable = { time_left_building_1 = 80}
-					set_state_flag = building_1_to_be_handled
-					time_calculation_for_buildings = yes
-                    add_to_array = {
-                        array = global.building_state_constructer_1
-                        value = THIS.id
-                    }
+				set_variable = { potential_building_holder_for_event = token:fuel_refinery_1 }
+				set_variable = { potential_time_left_building_holder_for_event = 80}
+				controller = {
+					set_variable = { state_located_for_building_changes = PREV.id}
+					set_variable = { potential_cost_holder_for_event = 200}
 				}
 				if = {
 					limit = {
-						ROOT = {
-							has_country_flag = building_2_open
-						}
+						replacement_event_building_is_needed_or_no = yes
 					}
-					hidden_effect = {
-						clear_building_2_effects = yes
-					}	
-					set_variable = { building_2 = token:fuel_refinery_1 }
-                    set_variable = { time_left_building_2 = 80}
-					time_calculation_for_buildings = yes
-                    add_to_array = {
-                        array = global.building_state_constructer_2
-                        value = THIS.id
-                    }
-				}
-				ROOT = {
-					subtract_from_variable = { currency_amount^primary_currency = 200 }
+					sends_event_for_replacement_building = yes
+				}else = {
+					if = {
+						limit = {
+							ROOT = {
+								has_country_flag = building_1_open
+							}
+						}
+						add_building_to_construct_slot_1 = yes
+					}
+					if = {
+						limit = {
+							ROOT = {
+								has_country_flag = building_2_open
+							}
+						}
+						add_building_to_construct_slot_2 = yes
+					}
 				}
 			}
 			refinery_2_click = {
-				if = {
-					limit = {
-						ROOT = {
-							has_country_flag = building_1_open
-						}
-					}
-					hidden_effect = {
-						clear_building_1_effects = yes
-					}	
-					set_variable = { building_1 = token:fuel_refinery_2 }
-                    set_variable = { time_left_building_1 = 80}
-					set_state_flag = building_1_to_be_handled
-					time_calculation_for_buildings = yes
-                    add_to_array = {
-                        array = global.building_state_constructer_1
-                        value = THIS.id
-                    }
+				set_variable = { potential_building_holder_for_event = token:fuel_refinery_2 }
+				set_variable = { potential_time_left_building_holder_for_event = 80}
+				controller = {
+					set_variable = { state_located_for_building_changes = PREV.id}
+					set_variable = { potential_cost_holder_for_event = 200}
 				}
 				if = {
 					limit = {
-						ROOT = {
-							has_country_flag = building_2_open
-						}
+						replacement_event_building_is_needed_or_no = yes
 					}
-					hidden_effect = {
-						clear_building_2_effects = yes
-					}	
-					set_variable = { building_2 = token:fuel_refinery_2 }
-                    set_variable = { time_left_building_2 = 80}
-					time_calculation_for_buildings = yes
-                    add_to_array = {
-                        array = global.building_state_constructer_2
-                        value = THIS.id
-                    }
-				}
-				ROOT = {
-					subtract_from_variable = { currency_amount^primary_currency = 200 }
+					sends_event_for_replacement_building = yes
+				}else = {
+					if = {
+						limit = {
+							ROOT = {
+								has_country_flag = building_1_open
+							}
+						}
+						add_building_to_construct_slot_1 = yes
+					}
+					if = {
+						limit = {
+							ROOT = {
+								has_country_flag = building_2_open
+							}
+						}
+						add_building_to_construct_slot_2 = yes
+					}
 				}
 			}
 			refinery_3_click = {
-				if = {
-					limit = {
-						ROOT = {
-							has_country_flag = building_1_open
-						}
-					}
-					hidden_effect = {
-						clear_building_1_effects = yes
-					}	
-					set_variable = { building_1 = token:fuel_refinery_3 }
-                    set_variable = { time_left_building_1 = 80}
-					set_state_flag = building_1_to_be_handled
-					time_calculation_for_buildings = yes
-                    add_to_array = {
-                        array = global.building_state_constructer_1
-                        value = THIS.id
-                    }
-
+				set_variable = { potential_building_holder_for_event = token:fuel_refinery_3 }
+				set_variable = { potential_time_left_building_holder_for_event = 80}
+				controller = {
+					set_variable = { state_located_for_building_changes = PREV.id}
+					set_variable = { potential_cost_holder_for_event = 200}
 				}
 				if = {
 					limit = {
-						ROOT = {
-							has_country_flag = building_2_open
-						}
+						replacement_event_building_is_needed_or_no = yes
 					}
-					hidden_effect = {
-						clear_building_2_effects = yes
-					}	
-					set_variable = { building_2 = token:fuel_refinery_3 }
-                    set_variable = { time_left_building_2 = 80}
-					time_calculation_for_buildings = yes
-                    add_to_array = {
-                        array = global.building_state_constructer_2
-                        value = THIS.id
-                    }
-				}
-				ROOT = {
-					subtract_from_variable = { currency_amount^primary_currency = 200 }
+					sends_event_for_replacement_building = yes
+				}else = {
+					if = {
+						limit = {
+							ROOT = {
+								has_country_flag = building_1_open
+							}
+						}
+						add_building_to_construct_slot_1 = yes
+					}
+					if = {
+						limit = {
+							ROOT = {
+								has_country_flag = building_2_open
+							}
+						}
+						add_building_to_construct_slot_2 = yes
+					}
 				}
 			}
 		}
