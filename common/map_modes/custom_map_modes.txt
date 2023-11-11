@@ -97,6 +97,66 @@
 #}
 
 scripted_map_modes = {
+    building_map_mode = {
+        top = {
+            type = state
+
+            color = {
+                set_temp_variable = { red = 0 }
+                set_temp_variable = { blue = 0.0 }
+                set_temp_variable = { green = 0.0 }
+                set_temp_variable = { alpha = 0 }
+				set_temp_variable = { thickness = 10 }
+				set_temp_variable = { highlighted = 1.0 }
+            }
+		thickness = yes
+        }
+		bottom = {
+            type = state
+
+            color = {
+                set_temp_variable = { red = 0 }
+                set_temp_variable = { blue = 0 }
+                set_temp_variable = { green = 0}
+                set_temp_variable = { alpha = 1.0 }
+
+                if = {
+                    limit = {
+                        FROM = {
+                            count_triggers = {
+                                amount = 1
+                                has_variable = building_1
+                                has_variable = building_2
+                            }
+                        }
+                    }
+                    set_temp_variable = { red = 0.6 }
+                    set_temp_variable = { blue = 0.2 }
+                    set_temp_variable = { green = 0.0 }
+                    set_temp_variable = { alpha = 1.0 }
+                    set_temp_variable = { thickness = 10 }
+                }
+                if = {
+                    limit = {
+                        FROM = {
+                            count_triggers = {
+                                amount = 2
+                                has_variable = building_1
+                                has_variable = building_2
+                            }
+                        }
+                    }
+                    set_temp_variable = { red = 1.0 }
+                    set_temp_variable = { blue = 0.0 }
+                    set_temp_variable = { green = 0.0 }
+                    set_temp_variable = { alpha = 1.0 }
+                    set_temp_variable = { thickness = 10 }
+                }
+            }
+        }
+        update_daily = yes
+
+    }
     imperial_map_mode = {
         top = {
             type = country
