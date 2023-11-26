@@ -176,57 +176,7 @@ scripted_gui = {
 		ai_weights = {
 		}
 	}
-	corporate_state_construction_screen_buttons = {
-	
-		context_type = selected_state_context
-		parent_window_token = corporate_state_construction_screen
-		
-		window_name = "corporate_state_construction_screen_buttons"
-		
-		visible = {
-			ROOT = {
-				OR = {
-					has_country_flag = building_1_open
-					has_country_flag = building_2_open
-				}
-			}
-			is_fully_controlled_by = ROOT
-		}
-		effects = {
-			navy_button_click = {
-				ROOT = {
-					set_country_flag = navy_buildings
-					clr_country_flag = military_buildings
-					clr_country_flag = government_buildings
-					clr_country_flag = economics_buildings
-				}
-			}
-			military_button_click = {
-				ROOT = {
-					set_country_flag = military_buildings
-					clr_country_flag = navy_buildings
-					clr_country_flag = government_buildings
-					clr_country_flag = economics_buildings
-				}
-			}
-			government_button_click = {
-				ROOT = {
-					set_country_flag = government_buildings
-					clr_country_flag = navy_buildings
-					clr_country_flag = military_buildings
-					clr_country_flag = economics_buildings
-				}
-			}
-			economic_button_click = {
-				ROOT = {
-					set_country_flag = economics_buildings
-					clr_country_flag = navy_buildings
-					clr_country_flag = military_buildings
-					clr_country_flag = government_buildings
-				}
-			}
-		}
-	}
+
 	corporate_state_construction_screen_navy = {
 	
 		context_type = selected_state_context
@@ -245,7 +195,6 @@ scripted_gui = {
 				}
 			}
 			is_fully_controlled_by = ROOT
-
 		}
 		
 		effects = {
@@ -996,9 +945,12 @@ scripted_gui = {
 		
 		visible = {
 			ROOT = {
-				OR = {
-					has_country_flag = building_1_open
-					has_country_flag = building_2_open
+				AND = {
+					OR = {
+						has_country_flag = building_1_open
+						has_country_flag = building_2_open
+					}
+					has_country_flag = military_buildings
 				}
 			}
 			is_fully_controlled_by = ROOT
@@ -4214,6 +4166,57 @@ scripted_gui = {
 		}
 
 		ai_weights = {
+		}
+	}
+	corporate_state_construction_screen_buttons = {
+	
+		context_type = selected_state_context
+		parent_window_token = selected_state_view
+		
+		window_name = "corporate_state_construction_screen_buttons"
+		
+		visible = {
+			ROOT = {
+				OR = {
+					has_country_flag = building_1_open
+					has_country_flag = building_2_open
+				}
+			}
+			is_fully_controlled_by = ROOT
+		}
+		effects = {
+			navy_button_click = {
+				ROOT = {
+					set_country_flag = navy_buildings
+					clr_country_flag = military_buildings
+					clr_country_flag = government_buildings
+					clr_country_flag = economics_buildings
+				}
+			}
+			military_button_click = {
+				ROOT = {
+					set_country_flag = military_buildings
+					clr_country_flag = navy_buildings
+					clr_country_flag = government_buildings
+					clr_country_flag = economics_buildings
+				}
+			}
+			government_button_click = {
+				ROOT = {
+					set_country_flag = government_buildings
+					clr_country_flag = navy_buildings
+					clr_country_flag = military_buildings
+					clr_country_flag = economics_buildings
+				}
+			}
+			economic_button_click = {
+				ROOT = {
+					set_country_flag = economics_buildings
+					clr_country_flag = navy_buildings
+					clr_country_flag = military_buildings
+					clr_country_flag = government_buildings
+				}
+			}
 		}
 	}
 }

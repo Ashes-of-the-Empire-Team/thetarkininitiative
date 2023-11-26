@@ -74,27 +74,32 @@ scripted_gui = {
 					clr_country_flag = policy_screen_open_1
 				}
 			}
-			leader_empire_click = {
-				imperial_legitimacy_coronate = yes ## checks if a ID is the highest legitimacy
-				if = {
-					limit = {
-						tag = var:global.emperor_potential
-						check_variable = { legitimacy_emp > 70 }
-						has_idea = claimant_stance
+			storm_commando_click = {
+				division_template = {
+					name = "Deathtroopers"
+					is_locked = yes
+					division_cap = 0 
+					division_names_group = USA_INF_01
+					priority = 0
+					regiments = {
+						death_trooper = { x = 0 y = 0 }
+						death_trooper = { x = 1 y = 0 }
+						death_trooper = { x = 2 y = 0 }
+						death_trooper = { x = 0 y = 1 }
+						death_trooper = { x = 1 y = 1 }
+						death_trooper = { x = 2 y = 1 }
+						death_trooper = { x = 0 y = 2 }
+						death_trooper = { x = 1 y = 2 }
+						death_trooper = { x = 2 y = 2 }
 					}
-					set_country_flag = emperor
-					set_cosmetic_tag = IMP
-					set_variable = { global.emperor_id = THIS.id }
-					country_event = {
-					    id = emperor_deals.6
-					    days = 4
+					support = {
+						#military_police = { x = 0 y = 0 }
 					}
 				}
-			}
-			warlord_flag_click = {
 				capital_scope = {
-					ROOT = {
-						goto_state = PREV
+					create_unit = {
+						division = "name = \"Storm Commandos\" division_template = \"Storm Commandos\" start_experience_factor = 1"
+						owner = ROOT
 					}
 				}
 			}
@@ -107,36 +112,6 @@ scripted_gui = {
 				}
 				else = {
 					set_country_flag = policies_open_warlord_screen
-				}
-			}
-			voting_for_flag_click = {
-				capital_scope = {
-					ROOT = {
-						goto_state = PREV
-					}
-				}
-			}
-			warlord_deal_click = {
-				if = {
-					limit = {
-						NOT = {
-							has_country_Flag = warlord_deal_open
-						}
-					}
-					set_country_flag = warlord_deal_open
-				}
-				else = {
-					clr_country_flag = warlord_deal_open
-				}
-			}
-			imperial_marshal_picture_click = {
-				if = {
-					limit = {
-						has_country_flag = marshal_open
-					}
-					clr_country_flag = marshal_open
-				}else = {
-					set_country_flag = marshal_open	
 				}
 			}
 		}
