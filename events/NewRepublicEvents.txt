@@ -300,6 +300,7 @@ country_event = {
 			target = TOF
 			type = annex_everything
 		}
+		complete_national_focus = REB_nagai_problem
 		ai_chance = {base = 0}
 	}
 	option = {
@@ -359,6 +360,7 @@ country_event = {
 				type = annex_everything
 			}
 		}
+		complete_national_focus = REB_a_new_friend
 		add_to_faction = NAG
 		ai_chance = {base = 100}
 	}
@@ -841,5 +843,52 @@ news_event = {
 
 	option = {
 		name = "Let us vote"
+	}
+}
+country_event = {
+	id = new_rep_elections.13 ## NEW REPUBLIC ELECTION 1 DEBUG
+	title = new_rep_elections.13.title
+	desc = new_rep_elections.13.desc
+	picture = GFX_report_event
+	is_triggered_only = yes
+	immediate={
+		clr_country_flag = NEW_election_leia_organa_a
+		clr_country_flag = NEW_election_mon_mothma_a
+		clr_country_flag = NEW_election_borskfeylya_a
+		CHA={
+			clr_country_flag = NEW_election_winner
+			mark_focus_tree_layout_dirty = yes
+		}
+		BOT={
+			clr_country_flag = NEW_election_winner
+			mark_focus_tree_layout_dirty = yes
+		}
+		mark_focus_tree_layout_dirty = yes
+	}
+
+	option = {
+		name = "Leia"
+		set_country_flag = NEW_election_leia_organa_a
+		mark_focus_tree_layout_dirty = yes
+	}
+	option = {
+		name = "Mon Mothma"
+		set_country_flag = NEW_election_mon_mothma_a
+		mark_focus_tree_layout_dirty = yes
+		CHA={
+			set_country_flag = NEW_election_winner
+			mark_focus_tree_layout_dirty = yes
+			unlock_national_focus = REB_the_first_chief_of_state
+		}
+	}
+	option = {
+		name = "Borsk Fey'lya"
+		set_country_flag = NEW_election_borskfeylya_a
+		mark_focus_tree_layout_dirty = yes
+		BOT={
+			set_country_flag = NEW_election_winner
+			mark_focus_tree_layout_dirty = yes
+			unlock_national_focus = REB_the_first_chief_of_state
+		}
 	}
 }
