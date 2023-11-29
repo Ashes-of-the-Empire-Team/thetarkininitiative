@@ -465,41 +465,6 @@ scripted_gui = {
             #has_country_flag = operations_open
 			has_country_flag = operation_mission_selection
 		}
-		triggers = {
-			select_martial_missions_click_enabled = {
-				NOT = {
-					has_country_flag = martial_mission_box_open
-				}
-			}
-			select_intelligence_missions_click_enabled = {
-				NOT = {
-					has_country_flag = intelligence_mission_box_open
-				}
-			}
-			select_charisma_missions_click_enabled = {
-				NOT = {
-					has_country_flag = charisma_mission_box_open
-				}
-			}
-			Title_of_mission_intelligence_visible = {
-				has_country_flag = intelligence_mission_box_open
-			}
-			background_box_intelligence_visible = {
-				has_country_flag = intelligence_mission_box_open
-			}
-			background_box_charisma_visible = {
-				has_country_flag = charisma_mission_box_open
-			}
-			Title_of_mission_charisma_visible = {
-				has_country_flag = charisma_mission_box_open
-			}
-			background_box_martial_visible = {
-				has_country_flag = martial_mission_box_open
-			}
-			Title_of_mission_martial_visible = {
-				has_country_flag = martial_mission_box_open
-			}
-		}
 		effects = {
 			background_box_martial_click = {
 				if = {
@@ -607,23 +572,50 @@ scripted_gui = {
 				set_country_flag = charisma_mission_box_open
 			}
 		}
-		dynamic_lists = {
-            martial_mission_gridbox = {
-                array = global.espionage_mission_martial_missions
-                entry_container = martial_espionage_mission_boxes
-                change_scope = no
-            }
-			intelligence_mission_gridbox = {
-                array = global.espionage_mission_intelligence_missions
-                entry_container = intelligence_espionage_mission_boxes
-                change_scope = no
-            }
-			charisma_mission_gridbox = {
-                array = global.espionage_mission_charisma_missions
-                entry_container = charisma_espionage_mission_boxes
-                change_scope = no
-            }
-        }
+		triggers = {
+			select_martial_missions_click_enabled = {
+				NOT = {
+					has_country_flag = martial_mission_box_open
+				}
+			}
+			select_intelligence_missions_click_enabled = {
+				NOT = {
+					has_country_flag = intelligence_mission_box_open
+				}
+			}
+			select_charisma_missions_click_enabled = {
+				NOT = {
+					has_country_flag = charisma_mission_box_open
+				}
+			}
+		}
+	}
+	espionage_mission_military = {
+		context_type = player_context
+		parent_window_name = "espionage_mission_selection"
+        window_name = "espionage_mission_military"
+		visible = {
+            #has_country_flag = operations_open
+			has_country_flag = martial_mission_box_open
+		}
+	}
+	espionage_mission_intelligence = {
+		context_type = player_context
+		parent_window_name = "espionage_mission_selection"
+        window_name = "espionage_mission_intelligence"
+		visible = {
+            #has_country_flag = operations_open
+			has_country_flag = intelligence_mission_box_open
+		}
+	}
+	espionage_mission_charisma = {
+		context_type = player_context
+		parent_window_name = "espionage_mission_selection"
+        window_name = "espionage_mission_charisma"
+		visible = {
+            #has_country_flag = operations_open
+			has_country_flag = charisma_mission_box_open
+		}
 	}
 	espionage_agent_recruitment_screen = {
 		context_type = player_context
