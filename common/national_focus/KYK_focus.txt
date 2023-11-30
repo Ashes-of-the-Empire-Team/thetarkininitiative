@@ -134,12 +134,14 @@ focus_tree = {
 			factor = 1
 		}
 		completion_reward = {
-			555 = {
-				clear_building_2_effects = yes
-				clear_building_1_effects = yes
-				clr_state_flag = tile_blocker_building_1
-			}		
-			custom_effect_tooltip = "This will remove both tile blockers in the Shadowlands"
+			hidden_effect = {
+				555 = {
+					clear_building_2_effects = yes
+					clear_building_1_effects = yes
+					clr_state_flag = tile_blocker_building_1
+				}		
+			}
+			custom_effect_tooltip = tileblocker_kyk_tt
 		}
 		relative_position_id = KYK_the_shadowlands
 		prerequisite = { focus = KYK_the_shadowlands }
@@ -652,10 +654,13 @@ focus_tree = {
 		completion_reward = {
 			custom_effect_tooltip = minus150credits_tt
 			subtract_from_variable = { currency_amount^primary_currency = 150 }
-			swap_ideas = {
-				remove_idea = imperial_refinery
-				add_idea = imperial_refinery_bigger
-			}
+			281 = {
+				clear_building_1_effects = yes
+				set_variable = {unique_building_on_state = token:imperial_refinery_positive}
+				set_temp_variable = {REQUESTED_BUILDING = token:imperial_refinery_positive}
+				Add_building_to_slot_immediately = yes
+                set_state_flag = wonder_built_no_destroy_1
+			} 
 		}
 		relative_position_id = KYK_the_imperial_refinery
 		prerequisite = { focus = KYK_the_imperial_refinery }
