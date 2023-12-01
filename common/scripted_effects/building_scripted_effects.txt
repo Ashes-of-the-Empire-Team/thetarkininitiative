@@ -1,69 +1,99 @@
 Add_building_to_slot_with_time_constraint = { ## THIS IS FOR ADDING BUILDINGS FOR NO COST BUT STILL REQUIRING BUILD TIME, STATE SCOPE
-	if = {
-		limit = { ## TRIES TO BUILD IN 1st SLOT THEN IN SECOND, WILL ALWAYS REPLACE SECOND BUILDING
-			NOT = {
-				has_variable = building_1
+	hidden_effect = {
+		if = {
+			limit = { ## TRIES TO BUILD IN 1st SLOT THEN IN SECOND, WILL ALWAYS REPLACE SECOND BUILDING
+				NOT = {
+					has_variable = building_1
+				}
 			}
-		}
-		hidden_effect = {
-			clear_building_1_effects = yes
-		}
-		set_variable = { building_1 = REQUESTED_BUILDING }
-		set_variable = { time_left_building_1 = CONSTRUCT_TIME}
-		set_state_flag = building_1_to_be_handled
-		time_calculation_for_buildings = yes
-		add_to_array = {
-			array = global.building_state_constructer_1
-			value = THIS.id
-		}
-	}else = {
-		hidden_effect = {
-			clear_building_2_effects = yes
-		}
-		set_variable = { building_2 = REQUESTED_BUILDING }
-		set_variable = { time_left_building_2 = CONSTRUCT_TIME}
-		time_calculation_for_buildings = yes
-		add_to_array = {
-			array = global.building_state_constructer_2
-			value = THIS.id
+			hidden_effect = {
+				clear_building_1_effects = yes
+			}
+			set_variable = { building_1 = REQUESTED_BUILDING }
+			set_variable = { time_left_building_1 = CONSTRUCT_TIME}
+			set_state_flag = building_1_to_be_handled
+			time_calculation_for_buildings = yes
+			add_to_array = {
+				array = global.building_state_constructer_1
+				value = THIS.id
+			}
+			if = {
+				limit = {
+					check_variable = {building_1 = unique_building_on_state}
+				}
+				set_state_flag = wonder_built_no_destroy_1
+			}
+		}else = {
+			hidden_effect = {
+				clear_building_2_effects = yes
+			}
+			set_variable = { building_2 = REQUESTED_BUILDING }
+			set_variable = { time_left_building_2 = CONSTRUCT_TIME}
+			time_calculation_for_buildings = yes
+			add_to_array = {
+				array = global.building_state_constructer_2
+				value = THIS.id
+			}
+			if = {
+				limit = {
+					check_variable = {building_2 = unique_building_on_state}
+				}
+				set_state_flag = wonder_built_no_destroy_2
+			}
 		}
 	}
 }
 Add_building_to_slot_immediately = { ## THIS ADDS BUILDINGS FOR FREE AND IMMEDIATLY, STATE SCOPE
-	if = {
-		limit = { ## TRIES TO BUILD IN 1st SLOT THEN IN SECOND, WILL ALWAYS REPLACE SECOND BUILDING
-			NOT = {
-				has_variable = building_1
+	custom_effect_tooltip = add_building_to_slot
+	hidden_effect = {
+		if = {
+			limit = { ## TRIES TO BUILD IN 1st SLOT THEN IN SECOND, WILL ALWAYS REPLACE SECOND BUILDING
+				NOT = {
+					has_variable = building_1
+				}
 			}
-		}
-		hidden_effect = {
-			clear_building_1_effects = yes
-		}
-		set_variable = { building_1 = REQUESTED_BUILDING }
-		set_temp_variable = {idea_token_passer = building_1}
-		controller = {
-			add_ideas = var:building_1
-		}
-		meta_effect = {
-			text = {
-				[BUILDING_NAME]_add_effect = yes
+			hidden_effect = {
+				clear_building_1_effects = yes
 			}
-			BUILDING_NAME = "[?building_1.GetTokenKey]"
-		}
-	}else = {
-		hidden_effect = {
-			clear_building_2_effects = yes
-		}
-		set_variable = { building_2 = REQUESTED_BUILDING }
-		set_temp_variable = {idea_token_passer = building_2}
-		controller = {
-			add_ideas = var:building_2
-		}
-		meta_effect = {
-			text = {
-				[BUILDING_NAME]_add_effect = yes
+			set_variable = { building_1 = REQUESTED_BUILDING }
+			set_temp_variable = {idea_token_passer = building_1}
+			controller = {
+				add_ideas = var:building_1
 			}
-			BUILDING_NAME = "[?building_2.GetTokenKey]"
+			meta_effect = {
+				text = {
+					[BUILDING_NAME]_add_effect = yes
+				}
+				BUILDING_NAME = "[?building_1.GetTokenKey]"
+				debug = yes
+			}
+			if = {
+				limit = {
+					check_variable = {building_1 = unique_building_on_state}
+				}
+				set_state_flag = wonder_built_no_destroy_1
+			}
+		}else = {
+			hidden_effect = {
+				clear_building_2_effects = yes
+			}
+			set_variable = { building_2 = REQUESTED_BUILDING }
+			set_temp_variable = {idea_token_passer = building_2}
+			controller = {
+				add_ideas = var:building_2
+			}
+			meta_effect = {
+				text = {
+					[BUILDING_NAME]_add_effect = yes
+				}
+				BUILDING_NAME = "[?building_2.GetTokenKey]"
+			}
+			if = {
+				limit = {
+					check_variable = {building_2 = unique_building_on_state}
+				}
+				set_state_flag = wonder_built_no_destroy_2
+			}
 		}
 	}
 }
@@ -87,48 +117,54 @@ Add_building_to_slot_immediately = { ## THIS ADDS BUILDINGS FOR FREE AND IMMEDIA
 
 
 clear_building_1_effects = { ## USE THIS FOR GETTING RID OF A BUILDING
-	if = {
-		limit = { ## FIND IF ANY STATE ALREADY HAS BUILDING AS NOT TO REMOVE IDEA FROM BUILDINGS THAT ARE THERE
-			NOT ={
-				controller = {
-					any_controlled_state = {
-						has_variable = building_name_passer
+	custom_effect_tooltip = clear_building_off_slot_1
+	hidden_effect = {
+		if = {
+			limit = { ## FIND IF ANY STATE ALREADY HAS BUILDING AS NOT TO REMOVE IDEA FROM BUILDINGS THAT ARE THERE
+				NOT ={
+					controller = {
+						any_controlled_state = {
+							has_variable = building_name_passer
+						}
 					}
 				}
 			}
+			remove_ideas = var:building_name_passer
 		}
-		remove_ideas = var:building_name_passer
-	}
-	meta_effect = {
-		text = {
-			[BUILDING_NAME]_remove_effect = yes
+		meta_effect = {
+			text = {
+				[BUILDING_NAME]_remove_effect = yes
+			}
+			BUILDING_NAME = "[?building_1.GetTokenKey]"
 		}
-		BUILDING_NAME = "[?building_1.GetTokenKey]"
+		clear_variable = building_1
+		clr_state_flag = tile_blocker_building_1
 	}
-	clear_variable = building_1
-	clr_state_flag = tile_blocker_building_1
 }
 clear_building_2_effects = { ## USE THIS FOR GETTING RID OF A BUILDING
-	if = {
-		limit = { ## FIND IF ANY STATE ALREADY HAS BUILDING AS NOT TO REMOVE IDEA FROM BUILDINGS THAT ARE THERE
-			NOT ={
-				controller = {
-					any_controlled_state = {
-						has_variable = building_name_passer
+	custom_effect_tooltip = clear_building_off_slot_2
+	hidden_effect = {
+		if = {
+			limit = { ## FIND IF ANY STATE ALREADY HAS BUILDING AS NOT TO REMOVE IDEA FROM BUILDINGS THAT ARE THERE
+				NOT ={
+					controller = {
+						any_controlled_state = {
+							has_variable = building_name_passer
+						}
 					}
 				}
 			}
+			remove_ideas = var:building_name_passer
 		}
-		remove_ideas = var:building_name_passer
-	}
-	meta_effect = {
-		text = {
-			[BUILDING_NAME]_remove_effect = yes
+		meta_effect = {
+			text = {
+				[BUILDING_NAME]_remove_effect = yes
+			}
+			BUILDING_NAME = "[?building_2.GetTokenKey]"
 		}
-		BUILDING_NAME = "[?building_2.GetTokenKey]"
+		clear_variable = building_2
+		clr_state_flag = tile_blocker_building_2
 	}
-	clear_variable = building_2
-	clr_state_flag = tile_blocker_building_2
 }
 
 add_building_to_construct_slot_1 = {
@@ -1084,7 +1120,13 @@ primitive_resource_extraction_remove_effect = {
 		state = THIS
 	}
 }
+imperial_refinery_remove_effect = {
 
+}
+
+
+imperial_refinery_positive_add_effect = {
+}
 
 test_building_effect = {
 	set_variable = {test_variable = token:primitive_industry}
@@ -1099,5 +1141,12 @@ clear_left_over_building_event_variables = {
 	}
 	clear_variable = potential_cost_holder_for_event
 	clear_variable = state_located_for_building_changes
+
+}
+
+_add_effect = { ## This is really stupid dont question it, also dont remove it or 10000000 errors
+
+}
+_remove_effect = { ## This is really stupid dont question it, also dont remove it or 10000000 errors
 
 }
