@@ -1751,6 +1751,7 @@ create_temporary_agents = { ## CREATE TEMPORARY AGENTS FOR RECRUITMENT
 
 agent_recruitment_kairan_ember = { ## ALL FEEDS UP TO create_temporary_agents EFFECT
 	set_temp_variable = {agent_name = token:kairan_ember}
+	set_temp_variable = {agent_desc = token:kairan_ember_desc}
 	set_temp_variable = {agent_charisma = 10} 
 	set_temp_variable = {agent_intelligence = 10}
 	set_temp_variable = {agent_martial = 10}
@@ -1761,6 +1762,7 @@ agent_recruitment_kairan_ember = { ## ALL FEEDS UP TO create_temporary_agents EF
 
 agent_recruitment_polo_lye = { ## ALL FEEDS UP TO create_temporary_agents EFFECT
 	set_temp_variable = {agent_name = token:polo_lye}
+	set_temp_variable = {agent_desc = token:polo_lye_desc}
 	set_temp_variable = {agent_charisma = 10} 
 	set_temp_variable = {agent_intelligence = 10}
 	set_temp_variable = {agent_martial = 10}
@@ -1771,6 +1773,7 @@ agent_recruitment_polo_lye = { ## ALL FEEDS UP TO create_temporary_agents EFFECT
 
 agent_recruitment_orion_voss = { ## ALL FEEDS UP TO create_temporary_agents EFFECT
 	set_temp_variable = {agent_name = token:orion_voss}
+	set_temp_variable = {agent_desc = token:orion_voss_desc}
 	set_temp_variable = {agent_charisma = 10} 
 	set_temp_variable = {agent_intelligence = 10}
 	set_temp_variable = {agent_martial = 10}
@@ -1883,4 +1886,75 @@ clear_temp_variable_in_agents = {
 	clr_country_flag = agent_3_Espionage_counterintelligence_array
 	clr_country_flag = agent_3_Espionage_smugglers_array
 	clr_country_flag = agent_3_Espionage_bounty_hunter_array
+}
+
+### EXAMPLE OF USING IN FOCUS TREES
+#
+#set_variable = {supplied_agent_name = token:kairan_ember}
+#agent_recruitment_effect = yes
+
+###
+
+agent_recruitment_effect = {
+	### REQUIRES supplied_agent_name, this is a idea token created in espionage tokens with the name of the agent
+	if = {
+		limit = {
+			NOT = {
+				has_variable = agent_name_slot_1
+			}
+		}
+		set_variable = {what_espionage_slot = 1}
+	}else_if = {
+		limit = {
+			NOT = {
+				has_variable = agent_name_slot_2
+			}
+		}
+		set_variable = {what_espionage_slot = 2}
+	}else_if = {
+		limit = {
+			NOT = {
+				has_variable = agent_name_slot_3
+			}
+		}
+		set_variable = {what_espionage_slot = 3}
+	}else_if = {
+		limit = {
+			NOT = {
+				has_variable = agent_name_slot_4
+			}
+		}
+		set_variable = {what_espionage_slot = 4}
+	}else_if = {
+		limit = {
+			NOT = {
+				has_variable = agent_name_slot_5
+			}
+		}
+		set_variable = {what_espionage_slot = 5}
+	}
+
+
+
+	meta_effect = {
+		text = {
+			agent_recruitment_[AGENT_NAME] = yes
+		}
+		AGENT_NAME = "[?supplied_agent_name.GetTokenKey]"
+	}
+	meta_effect = {
+		text = {
+
+			set_variable = { agent_name_slot_[WHAT_SLOT_IT_IS]  = agent_name} 
+			set_variable = { agent_charisma_slot_[WHAT_SLOT_IT_IS]  = agent_charisma} 
+			set_variable = { agent_intelligence_slot_[WHAT_SLOT_IT_IS]  = agent_intelligence} 
+			set_variable = { agent_martial_slot_[WHAT_SLOT_IT_IS]  = agent_martial} 
+			set_variable = { personality_trait_slot_[WHAT_SLOT_IT_IS]  = personality_trait} 
+			set_variable = { class_trait_slot_[WHAT_SLOT_IT_IS]  = class_trait} 
+			set_variable = { race_trait_slot_[WHAT_SLOT_IT_IS]  = race_trait}
+			set_variable = { expertise_slot_[WHAT_SLOT_IT_IS]  = 1}
+		}
+		WHAT_SLOT_IT_IS = "[?what_espionage_slot]"
+	}
+
 }
