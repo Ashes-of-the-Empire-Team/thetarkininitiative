@@ -160,6 +160,9 @@ focus_tree = {
 		completion_reward = {
 			
 		}
+		ai_will_do = {
+			factor = 0
+		}
 	}
 	focus = {
 		id = REB_defence_of_kashyyyk
@@ -942,6 +945,32 @@ focus_tree = {
 				set_capital = {
 					state = 235
 					remember_old_capital = no
+				}
+			}
+			for_each_scope_loop = {
+				array = Global.rep_populists
+				if = {
+					limit = {
+						NOT = { is_in_faction_with = REB }
+						NOT={tag = REB}
+						is_subject = no
+					}
+					REB={
+						add_to_faction = PREV
+					}
+				}
+			}
+			for_each_scope_loop = {
+				array = Global.rep_centrists
+				if = {
+					limit = {
+						NOT = { is_in_faction_with = REB }
+						NOT={tag = REB}
+						is_subject = no
+					}
+					REB={
+						add_to_faction = PREV
+					}
 				}
 			}
 			#set_power_balance = {

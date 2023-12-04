@@ -44,26 +44,68 @@ focus_tree = {
 		}
 	}
 
-	
-
-	
-
-	
-	#Outside Help
+	#The War on Crime
 	focus = {
-		id = REB_outside_help
-		icon = GFX_WIP_focus
+		id = REB_the_war_on_crime
+		icon = GFX_rebel_goal
 		text_icon = REPUBLIC_focus_style
-		relative_position_id = REB_leia_organa_a
+		relative_position_id = REB_rebuild_coruscant
+		x = -4
+		y = 1
+		cost = 7.2
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = REB_rebuild_coruscant  }
+		completion_reward = {
+			unlock_decision_category_tooltip = REB_the_war_on_crime_decisions
+		}
+	}
+	#New Republic Police Force
+	focus = {
+		id = REB_new_republic_police_force
+		icon = GFX_rebel_goal
+		text_icon = REPUBLIC_focus_style
+		relative_position_id = REB_the_war_on_crime
+		x = -1
+		y = 1
+		cost = 10
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = REB_the_war_on_crime  }
+	}
+	#Corruption Crack Down
+	focus = {
+		id = REB_corruption_crack_down
+		icon = GFX_rebel_goal
+		text_icon = REPUBLIC_focus_style
+		relative_position_id = REB_new_republic_police_force
 		x = 0
 		y = 1
 		cost = 7.2
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
-		prerequisite = { focus = REB_leia_organa_a  }
+		prerequisite = { focus = REB_new_republic_police_force  }
 		completion_reward = {
+			corruption_decrease = yes
 		}
+	}
+
+	#The BoSS code
+	focus = {
+		id = REB_the_boss_code
+		icon = GFX_rebel_goal
+		text_icon = REPUBLIC_focus_style
+		relative_position_id = REB_the_war_on_crime
+		x = 1
+		y = 1
+		cost = 7.2
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = REB_the_war_on_crime  }
 	}
 	#The Civilian Sector
 	focus = {
@@ -91,169 +133,6 @@ focus_tree = {
 			  } 
 		}
 	}
-
-	#Expand the Rail System
-	focus = {
-		id = REB_expand_the_rail_system
-		icon = GFX_rebel_goal
-		text_icon = REPUBLIC_focus_style
-		relative_position_id = REB_rebuild_coruscant
-		x = 4
-		y = 1
-		cost = 7.2
-		search_filters = {
-			FOCUS_FILTER_INDUSTRY
-		}
-		prerequisite = { focus = REB_rebuild_coruscant  }
-	}
-
-	#Foreign Experts
-	focus = {
-		id = REB_foreign_experts
-		icon = GFX_rebel_goal
-		text_icon = REPUBLIC_focus_style
-		relative_position_id = REB_expand_the_rail_system
-		x = -1
-		y = 1
-		cost = 7.2
-		search_filters = {
-			FOCUS_FILTER_INDUSTRY
-		}
-		prerequisite = { focus = REB_expand_the_rail_system  }
-		mutually_exclusive = { focus = REB_national_rail_company  }
-
-		completion_reward = {
-			
-		}
-	}
-
-	#National Rail Company
-	focus = {
-		id = REB_national_rail_company
-		icon = GFX_WIP_focus
-		text_icon = REPUBLIC_focus_style
-		relative_position_id = REB_expand_the_rail_system
-		x = 1
-		y = 1
-		cost = 10
-		search_filters = {
-			FOCUS_FILTER_INDUSTRY
-		}
-		prerequisite = { focus = REB_expand_the_rail_system  }
-		mutually_exclusive = { focus = REB_foreign_experts  }
-	}
-
-	#The War on Crime
-	focus = {
-		id = REB_the_war_on_crime
-		icon = GFX_rebel_goal
-		text_icon = REPUBLIC_focus_style
-		relative_position_id = REB_rebuild_coruscant
-		x = -4
-		y = 1
-		cost = 7.2
-		search_filters = {
-			FOCUS_FILTER_POLITICAL
-		}
-		prerequisite = { focus = REB_rebuild_coruscant  }
-		completion_reward = {
-			unlock_decision_category_tooltip = REB_the_war_on_crime_decisions
-		}
-	}
-
-	#The BoSS code
-	focus = {
-		id = REB_the_boss_code
-		icon = GFX_rebel_goal
-		text_icon = REPUBLIC_focus_style
-		relative_position_id = REB_the_war_on_crime
-		x = 1
-		y = 1
-		cost = 7.2
-		search_filters = {
-			FOCUS_FILTER_POLITICAL
-		}
-		prerequisite = { focus = REB_the_war_on_crime  }
-	}
-
-	#Purchase Bacta
-	focus = {
-		id = REB_purchase_bacta
-		icon = GFX_WIP_focus
-		text_icon = REPUBLIC_focus_style
-		relative_position_id = REB_secure_a_source_of_bacta
-		x = 1
-		y = 1
-		cost = 7.2
-		search_filters = {
-			FOCUS_FILTER_INDUSTRY
-		}
-		prerequisite = { focus = REB_secure_a_source_of_bacta  }
-		completion_reward = {
-			add_to_variable = {
-				var = currency_amount^primary_currency #(doesn't matter what)
-				value = -250
-				tooltip = cost_focus_tooltip
-			  } 
-		}
-	}
-
-	#New Republic Police Force
-	focus = {
-		id = REB_new_republic_police_force
-		icon = GFX_rebel_goal
-		text_icon = REPUBLIC_focus_style
-		relative_position_id = REB_the_war_on_crime
-		x = -1
-		y = 1
-		cost = 10
-		search_filters = {
-			FOCUS_FILTER_POLITICAL
-		}
-		prerequisite = { focus = REB_the_war_on_crime  }
-	}
-
-	#Secure a Source of Bacta
-	focus = {
-		id = REB_secure_a_source_of_bacta
-		icon = GFX_rebel_goal
-		text_icon = REPUBLIC_focus_style
-		relative_position_id = REB_the_civilian_sector
-		x = 1
-		y = 1
-		cost = 7.2
-		search_filters = {
-			FOCUS_FILTER_INDUSTRY
-		}
-		prerequisite = { focus = REB_the_civilian_sector  }
-		completion_reward = {
-			news_event = {
-				id = REP_Bacta.1
-				days = 5
-			}
-		}
-	}
-
-	
-
-	#Corruption Crack Down
-	focus = {
-		id = REB_corruption_crack_down
-		icon = GFX_rebel_goal
-		text_icon = REPUBLIC_focus_style
-		relative_position_id = REB_new_republic_police_force
-		x = 0
-		y = 1
-		cost = 7.2
-		search_filters = {
-			FOCUS_FILTER_POLITICAL
-		}
-		prerequisite = { focus = REB_new_republic_police_force  }
-		completion_reward = {
-			corruption_decrease = yes
-		}
-	}
-
 	#Rights of Sentience
 	focus = {
 		id = REB_rights_of_sentience
@@ -290,80 +169,734 @@ focus_tree = {
 			set_country_flag = anti_slavery_sanctions_enabled
 		}
 	}
-
-	#Bacta Imports
-	focus = {
-		id = REB_bacta_imports
-		icon = GFX_WIP_focus
-		text_icon = REPUBLIC_focus_style
-		relative_position_id = REB_secure_a_source_of_bacta
-		x = -1
-		y = 1
-		cost = 7.2
-		search_filters = {
-			FOCUS_FILTER_POLITICAL
-		}
-		prerequisite = { focus = REB_secure_a_source_of_bacta  }
-		completion_reward = {
-			news_event = {
-				id = REP_Bacta.2
-				days = 5
+		#Secure a Source of Bacta
+		focus = {
+			id = REB_secure_a_source_of_bacta
+			icon = GFX_rebel_goal
+			text_icon = REPUBLIC_focus_style
+			relative_position_id = REB_the_civilian_sector
+			x = 1
+			y = 1
+			cost = 7.2
+			search_filters = {
+				FOCUS_FILTER_INDUSTRY
+			}
+			prerequisite = { focus = REB_the_civilian_sector  }
+			completion_reward = {
+				news_event = {
+					id = REP_Bacta.1
+					days = 5
+				}
 			}
 		}
-	}
+		#Purchase Bacta
+		focus = {
+			id = REB_purchase_bacta
+			icon = GFX_WIP_focus
+			text_icon = REPUBLIC_focus_style
+			relative_position_id = REB_secure_a_source_of_bacta
+			x = 1
+			y = 1
+			cost = 7.2
+			search_filters = {
+				FOCUS_FILTER_INDUSTRY
+			}
+			prerequisite = { focus = REB_secure_a_source_of_bacta  }
+			completion_reward = {
+				add_to_variable = {
+					var = currency_amount^primary_currency #(doesn't matter what)
+					value = -250
+					tooltip = cost_focus_tooltip
+				} 
+			}
+		}
+		#Bacta Imports
+		focus = {
+			id = REB_bacta_imports
+			icon = GFX_WIP_focus
+			text_icon = REPUBLIC_focus_style
+			relative_position_id = REB_secure_a_source_of_bacta
+			x = -1
+			y = 1
+			cost = 7.2
+			search_filters = {
+				FOCUS_FILTER_POLITICAL
+			}
+			prerequisite = { focus = REB_secure_a_source_of_bacta  }
+			completion_reward = {
+				news_event = {
+					id = REP_Bacta.2
+					days = 5
+				}
+			}
+		}
+	
+		#Pathogen Act
+		focus = {
+			id = REB_pathogen_act
+			icon = GFX_WIP_focus
+			text_icon = REPUBLIC_focus_style
+			relative_position_id = REB_purchase_bacta
+			x = -1
+			y = 1
+			cost = 7.2
+			search_filters = {
+				FOCUS_FILTER_POLITICAL
+			}
+			prerequisite = { focus = REB_purchase_bacta  }
+			prerequisite = { focus = REB_bacta_imports  }
+			completion_reward = {
+				set_country_flag = pathogen_act_enabled
+			}
+		}
+	
+		#Republic Virology Labs
+		focus = {
+			id = REB_republic_virology_labs
+			icon = GFX_WIP_focus
+			text_icon = REPUBLIC_focus_style
+			relative_position_id = REB_pathogen_act
+			x = 0
+			y = 1
+			cost = 7.2
+			search_filters = {
+				FOCUS_FILTER_RESEARCH
+			}
+			prerequisite = { focus = REB_pathogen_act  }
+		}
+	
+		#The Sanitation Act
+		focus = {
+			id = REB_the_sanitation_act
+			icon = GFX_WIP_focus
+			text_icon = REPUBLIC_focus_style
+			relative_position_id = REB_republic_virology_labs
+			x = 0
+			y = 1
+			cost = 10
+			search_filters = {
+				FOCUS_FILTER_POLITICAL
+			}
+			prerequisite = { focus = REB_republic_virology_labs  }
+			completion_reward = {
+				set_country_flag = sanination_act_enabled
+			}
+		}
 
-	#Pathogen Act
+	#Expand the Rail System
 	focus = {
-		id = REB_pathogen_act
-		icon = GFX_WIP_focus
+		id = REB_expand_the_rail_system
+		icon = GFX_rebel_goal
 		text_icon = REPUBLIC_focus_style
-		relative_position_id = REB_purchase_bacta
+		relative_position_id = REB_rebuild_coruscant
+		x = 4
+		y = 1
+		cost = 7.2
+		search_filters = {
+			FOCUS_FILTER_INDUSTRY
+		}
+		prerequisite = { focus = REB_rebuild_coruscant  }
+	}
+	#Foreign Experts
+	focus = {
+		id = REB_foreign_experts
+		icon = GFX_rebel_goal
+		text_icon = REPUBLIC_focus_style
+		relative_position_id = REB_expand_the_rail_system
 		x = -1
 		y = 1
 		cost = 7.2
 		search_filters = {
-			FOCUS_FILTER_POLITICAL
+			FOCUS_FILTER_INDUSTRY
 		}
-		prerequisite = { focus = REB_purchase_bacta  }
-		prerequisite = { focus = REB_bacta_imports  }
+		prerequisite = { focus = REB_expand_the_rail_system  }
+		mutually_exclusive = { focus = REB_national_rail_company  }
+
 		completion_reward = {
-			set_country_flag = pathogen_act_enabled
+			
 		}
 	}
-
-	#Republic Virology Labs
+	#National Rail Company
 	focus = {
-		id = REB_republic_virology_labs
+		id = REB_national_rail_company
 		icon = GFX_WIP_focus
 		text_icon = REPUBLIC_focus_style
-		relative_position_id = REB_pathogen_act
-		x = 0
-		y = 1
-		cost = 7.2
-		search_filters = {
-			FOCUS_FILTER_RESEARCH
-		}
-		prerequisite = { focus = REB_pathogen_act  }
-	}
-
-	#The Sanitation Act
-	focus = {
-		id = REB_the_sanitation_act
-		icon = GFX_WIP_focus
-		text_icon = REPUBLIC_focus_style
-		relative_position_id = REB_republic_virology_labs
-		x = 0
+		relative_position_id = REB_expand_the_rail_system
+		x = 1
 		y = 1
 		cost = 10
 		search_filters = {
+			FOCUS_FILTER_INDUSTRY
+		}
+		prerequisite = { focus = REB_expand_the_rail_system  }
+		mutually_exclusive = { focus = REB_foreign_experts  }
+	}
+
+	
+	#Negotiations with the Hapes
+	focus = {
+		id = REB_negotiations_with_the_hapes
+		#relative_position_id = REB_the_base_of_operations
+		icon = GFX_negotiation_hapes
+		text_icon = REPUBLIC_focus_style
+		x= 17
+		y = 0
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_WAR_SUPPORT
+		}
+		#prerequisite = { focus = REB_the_base_of_operations  }
+		completion_reward = {
+			country_event = leia_hapes.1
+		}
+	}
+	#Prince Isolder
+	focus = {
+		id = REB_prince_isolder
+		icon = GFX_rebel_goal
+		text_icon = REPUBLIC_focus_style
+		relative_position_id = REB_negotiations_with_the_hapes
+		x= 0
+		y = 1
+		cost = 5
+		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
-		prerequisite = { focus = REB_republic_virology_labs  }
+		prerequisite = { focus = REB_negotiations_with_the_hapes  }
 		completion_reward = {
-			set_country_flag = sanination_act_enabled
+			country_event = leia_hapes.2
+		}
+	}
+	#The Dual Princess
+	focus = {
+		id = REB_the_dual_princess
+		icon = GFX_rebel_goal
+		text_icon = REPUBLIC_focus_style
+		relative_position_id = REB_prince_isolder
+		x= -1
+		y = 1
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		available = {
+			has_country_flag = isolder_chosen
+		}
+		prerequisite = { focus = REB_prince_isolder  }
+		mutually_exclusive = { focus = REB_han_solo  }
+		completion_reward = {
+			add_trait = {
+				character = REB_leia
+				ideology = rebel_ideology
+				trait = hapan_princess
+			}
+			retire_character = REB_han_solo
+		}
+	}
+	#Gifts from the Hapes
+	focus = {
+		id = REB_gifts_from_the_hapes
+		icon = GFX_gifts_from_the_hapes
+		relative_position_id = REB_the_dual_princess
+		x= -1
+		y = 1
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = REB_the_dual_princess  }
+	}
+	#Star Destroyers
+	focus = {
+		id = REB_star_destroyers
+		icon = GFX_hapes_star_destroyer
+		relative_position_id = REB_gifts_from_the_hapes
+		x= 1
+		y = 1
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = REB_gifts_from_the_hapes  }
+	}
+	#Gun of Command
+	focus = {
+		id = REB_gun_of_command
+		icon = GFX_guns_of_command
+		relative_position_id = REB_gifts_from_the_hapes
+		x= -1
+		y = 1
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_RESEARCH
+		}
+		prerequisite = { focus = REB_gifts_from_the_hapes  }
+		completion_reward = {
+			set_technology = {
+				hapes_gun_of_command = 1
+			}
+		} 
+	}
+	#Leia's Battledragons
+	focus = {
+		id = REB_leiasbattledragons
+		icon = GFX_hapan_battle_dragon_leia
+		relative_position_id = REB_star_destroyers
+		x= 0
+		y = 1
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_RESEARCH
+		}
+		prerequisite = { focus = REB_star_destroyers  } 
+		prerequisite = { focus = REB_gun_of_command  }
+		completion_reward = {
+			set_technology = {
+				hapes_battle_dragon = 1
+			}
+		}
+	}
+	#Hapan Royal Guard
+	focus = {
+		id = REB_hapan_royal_guard
+		icon = GFX_hapan_royal_guard_leia
+		relative_position_id = REB_gun_of_command
+		x= -0
+		y = 1
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = REB_gun_of_command  } prerequisite = { focus = REB_star_destroyers  }
+		completion_reward = {
+
+		}
+	}
+			#Han Solo
+			focus = {
+				id = REB_han_solo
+				icon = GFX_han_solo_marriage
+				text_icon = REPUBLIC_focus_style
+				relative_position_id = REB_prince_isolder
+				x= 1
+				y = 1
+				cost = 5
+				search_filters = {
+					FOCUS_FILTER_POLITICAL
+				}
+				available = {
+					has_country_flag = han_solo_chosen
+				}
+				prerequisite = { focus = REB_prince_isolder  }
+				mutually_exclusive = { focus = REB_the_dual_princess  }
+				completion_reward = {
+					country_event = LEIA.5
+				}
+			}
+	#The Smugglers Alliance
+	focus = {
+		id = REB_the_smugglers_alliance
+		icon = GFX_reb_smugglers_alliance_goal
+		relative_position_id = REB_han_solo
+		x= 1
+		y = 1
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = REB_han_solo  }
+		completion_reward = {
+			add_to_variable = { smugglers_influence = 10 }
+			add_to_variable = { smugglers_loyalty = 10 }
+		}
+	}
+	#Criminal Contacts
+	focus = {
+		id = REB_criminal_contacts
+		icon = GFX_criminal_connections
+		relative_position_id = REB_the_smugglers_alliance
+		x= -1
+		y = 1
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = REB_the_smugglers_alliance  }
+	}
+	#New Republic Privateers
+	focus = {
+		id = REB_new_republic_privateers
+		icon = GFX_new_rep_privateers
+		relative_position_id = REB_criminal_contacts
+		x= 0
+		y = 1
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = REB_criminal_contacts  }
+	}
+	#Solo Command
+	focus = {
+		id = REB_solo_command_leia
+		icon = GFX_solo_command
+		relative_position_id = REB_the_smugglers_alliance
+		x= 1
+		y = 1
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = REB_the_smugglers_alliance  }
+	}
+	#Imperial Heists
+	focus = {
+		id = REB_imperial_heists
+		icon = GFX_imperial_heists
+		relative_position_id = REB_solo_command_leia
+		x= 0
+		y = 1
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = REB_solo_command_leia  }
+	}
+	#Renowned Smugglers
+	focus = {
+		id = REB_renowned_smugglers
+		icon = GFX_reb_rebel_smuggler_goal
+		relative_position_id = REB_imperial_heists
+		x= -1
+		y = 1
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = REB_imperial_heists  }
+		completion_reward = {
+			add_ideas = renowned_smugglers
+		}
+	}
+	#Modified Protocol Droid
+	focus = {
+		id = REB_modified_protocol_droid
+		icon = GFX_modified_protocol_droid
+		relative_position_id = REB_imperial_heists
+		x= 1
+		y = 1
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = REB_imperial_heists  }
+		completion_reward = {
+			intelligence_bonus_add = yes
+			add_ideas = modified_protocol_droids
+		}
+	}
+	#Imperial Codebreakers
+	focus = {
+		id = REB_imperial_codebreakers
+		icon = GFX_imperial_codebreakers
+		relative_position_id = REB_renowned_smugglers
+		x= 1
+		y = 1
+		cost = 6
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = REB_renowned_smugglers  } prerequisite = { focus = REB_modified_protocol_droid  }
+		completion_reward = {
+			add_ideas = imperial_codebreakers
 		}
 	}
 
+
+	#The Long Shadow of Vader
+	focus = {
+		id = REB_the_long_shadow_of_vader
+		icon = GFX_long_shadow_vader
+		text_icon = REPUBLIC_focus_style
+		x= 24
+		y = 0
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			add_ideas = long_shadow_of_vader
+		}
+	}
+	#Restorer of Balance
+	focus = {
+		id = REB_restorer_of_balance
+		icon = GFX_rebel_goal
+		text_icon = REPUBLIC_focus_style
+		relative_position_id = REB_the_long_shadow_of_vader
+		x= -2
+		y = 1
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = REB_the_long_shadow_of_vader  }
+		mutually_exclusive = { focus = REB_terror_of_the_galaxy  }
+		completion_reward = {
+			#TODO
+			#swap_ideas = {
+			#	remove_idea = long_shadow_of_vader
+			#	add_idea = bringer_of_balance
+			#}
+		}
+	}
+	#Terror of the Galaxy
+	focus = {
+		id = REB_terror_of_the_galaxy
+		icon = GFX_terror_of_the_galaxy
+		text_icon = REPUBLIC_focus_style
+		relative_position_id = REB_the_long_shadow_of_vader
+		x= 2
+		y = 1
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = REB_the_long_shadow_of_vader  }
+		mutually_exclusive = { focus = REB_restorer_of_balance  }
+		completion_reward = {
+			remove_ideas = long_shadow_of_vader
+		}
+	}
+	#Daughter of the Republic
+	focus = {
+		id = REB_daughter_of_the_republic
+		icon = GFX_rebel_goal
+		text_icon = REPUBLIC_focus_style
+		relative_position_id = REB_terror_of_the_galaxy
+		x= 0
+		y = 1
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = REB_terror_of_the_galaxy  }
+	}
+		#The Call for Freedom
+		focus = {
+			id = REB_the_call_for_freedom
+			icon = GFX_rebel_goal
+			text_icon = REPUBLIC_focus_style
+			relative_position_id = REB_daughter_of_the_republic
+			x= 1
+			y = 1
+			cost = 5
+			search_filters = {
+				FOCUS_FILTER_POLITICAL
+			}
+			prerequisite = { focus = REB_daughter_of_the_republic  }
+		}
+	#Build the Jedi Temple
+	focus = {
+		id = REB_build_the_jedi_temple
+		icon = GFX_rebel_goal
+		text_icon = REPUBLIC_focus_style
+		relative_position_id = REB_terror_of_the_galaxy
+		x= -2
+		y = 1
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = REB_terror_of_the_galaxy  focus = REB_restorer_of_balance  }
+	}
+	#Investments into the Jedi
+	focus = {
+		id = REB_investments_into_the_jedi
+		icon = GFX_rebel_goal
+		text_icon = REPUBLIC_focus_style
+		relative_position_id = REB_build_the_jedi_temple
+		x= 0
+		y = 2
+		cost = 7.2
+		prerequisite = { focus = REB_build_the_jedi_temple  }
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+	
+		}
+	}
+	#Daughter of Anakin
+	focus = {
+		id = REB_daughter_of_anakin
+		icon = GFX_daughter_of_anakin
+		text_icon = REPUBLIC_focus_style
+		relative_position_id = REB_restorer_of_balance
+		x= 0
+		y = 1
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = REB_restorer_of_balance  }
+	}
+	#Leia's Fist
+	focus = {
+		id = REB_leiasfist
+		icon = GFX_rebel_goal
+		text_icon = REPUBLIC_focus_style
+		relative_position_id = REB_daughter_of_anakin
+		x= -1
+		y = 1
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = REB_daughter_of_anakin  }
+	}
+	#Luke's Apprentice
+	focus = {
+		id = REB_lukesapprentice
+		icon = GFX_WIP_focus
+		text_icon = REPUBLIC_focus_style
+		relative_position_id = REB_daughter_of_anakin
+		x= 0
+		y = 2
+		cost = 15
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = REB_jedi_generals } prerequisite = { focus = REB_leiasfist }
+		completion_reward = {
+
+		}
+	}
+	#Restorer of Balance
+	focus = {
+		id = REB_restorer_of_balance_leia
+		icon = GFX_WIP_focus
+		text_icon = REPUBLIC_focus_style
+		relative_position_id = REB_lukesapprentice
+		x= 0
+		y = 1
+		cost = 15
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = REB_lukesapprentice  }
+		completion_reward = {
+			add_trait = {
+				character = REB_leia
+				ideology = rebel_ideology
+				trait = restorer_of_balance
+			}
+		}
+	}
+	#Keepers of the Peace
+	focus = {
+		id = REB_keepers_of_the_peace
+		icon = GFX_rebel_goal
+		text_icon = REPUBLIC_focus_style
+		relative_position_id = REB_build_the_jedi_temple
+		x= 1
+		y = 1
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = REB_build_the_jedi_temple  }
+		mutually_exclusive = { focus = REB_jedi_generals  }
+		completion_reward = {
+			add_stability = 0.10
+		}
+	}
+	#Hero of Democracy
+	focus = {
+		id = REB_hero_of_democracy
+		icon = GFX_WIP_focus
+		text_icon = REPUBLIC_focus_style
+		relative_position_id = REB_daughter_of_the_republic
+		x= 0
+		y = 2
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = REB_the_call_for_freedom  } prerequisite = { focus = REB_keepers_of_the_peace  }
+	}
+	#Savior of the Republic
+	focus = {
+		id = REB_savior_of_the_republic
+		icon = GFX_WIP_focus
+		text_icon = REPUBLIC_focus_style
+		relative_position_id = REB_hero_of_democracy
+		x= 0
+		y = 1
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = REB_hero_of_democracy  }
+	}
+
+	#Jedi Generals
+	focus = {
+		id = REB_jedi_generals
+		icon = GFX_jedi_generals
+		text_icon = REPUBLIC_focus_style
+		relative_position_id = REB_build_the_jedi_temple
+		x= -1
+		y = 1
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = REB_build_the_jedi_temple  }
+		mutually_exclusive = { focus = REB_keepers_of_the_peace  }
+		completion_reward = {
+			REB_luke = {
+				add_corps_commander_role = {
+					traits = { jedi }
+					skill = 5
+					attack_skill = 5
+					defense_skill = 5
+					planning_skill = 1
+					logistics_skill = 1
+					legacy_id = -1
+				}
+			}
+			REB_mara_jade = {
+				add_corps_commander_role = {
+					traits = { jedi }
+					skill = 5
+					attack_skill = 5
+					defense_skill = 5
+					planning_skill = 1
+					logistics_skill = 1
+					legacy_id = -1
+				}
+			}
+		}
+	}
+	
+
+	#Outside Help
+	focus = {
+		id = REB_outside_help
+		icon = GFX_WIP_focus
+		text_icon = REPUBLIC_focus_style
+		relative_position_id = REB_leia_organa_a
+		x = 0
+		y = 1
+		cost = 7.2
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = REB_leia_organa_a  }
+		completion_reward = {
+		}
+	}
 	#Restoration of the Jedi Temple
 	focus = {
 		id = REB_restoration_of_the_jedi_temple
@@ -377,7 +910,6 @@ focus_tree = {
 		}
 		prerequisite = { focus = REB_outside_help  }
 	}
-
 	#Resettle the refugees
 	focus = {
 		id = REB_resettle_the_refugees
@@ -394,7 +926,6 @@ focus_tree = {
 			country_event = new_republic_focus.6
 		}
 	}
-
 	#The Beacon of Hope
 	focus = {
 		id = REB_the_beacon_of_hope
@@ -408,9 +939,6 @@ focus_tree = {
 		}
 		prerequisite = { focus = REB_resettle_the_refugees  }
 	}
-
-	
-
 	#A New Army
 	focus = {
 		id = REB_a_new_army
@@ -424,7 +952,6 @@ focus_tree = {
 		}
 		prerequisite = { focus = REB_outside_help  }
 	}
-
 	#The Republic Academy
 	focus = {
 		id = REB_the_republic_academy
@@ -438,7 +965,6 @@ focus_tree = {
 		}
 		prerequisite = { focus = REB_a_new_army  }
 	}
-
 	#Heroes of the Republic
 	focus = {
 		id = REB_heroes_of_the_republic
@@ -456,434 +982,7 @@ focus_tree = {
 	
 		}
 	}
-	
-		#Luke's Apprentice
-		focus = {
-			id = REB_lukesapprentice
-			icon = GFX_WIP_focus
-			text_icon = REPUBLIC_focus_style
-			relative_position_id = REB_daughter_of_anakin
-			x= 0
-			y = 2
-			cost = 15
-			search_filters = {
-				FOCUS_FILTER_POLITICAL
-			}
-			prerequisite = { focus = REB_jedi_generals } prerequisite = { focus = REB_leiasfist }
-			completion_reward = {
-	
-			}
-		}
-	
-		#Restorer of Balance
-		focus = {
-			id = REB_restorer_of_balance_leia
-			icon = GFX_WIP_focus
-			text_icon = REPUBLIC_focus_style
-			relative_position_id = REB_lukesapprentice
-			x= 0
-			y = 1
-			cost = 15
-			search_filters = {
-				FOCUS_FILTER_POLITICAL
-			}
-			prerequisite = { focus = REB_lukesapprentice  }
-			completion_reward = {
-				add_trait = {
-					character = REB_leia
-					ideology = rebel_ideology
-					trait = restorer_of_balance
-				}
-			}
-		}
-	
-		#Savior of the Republic
-		focus = {
-			id = REB_savior_of_the_republic
-			icon = GFX_WIP_focus
-			text_icon = REPUBLIC_focus_style
-			relative_position_id = REB_hero_of_democracy
-			x= 0
-			y = 1
-			cost = 5
-			search_filters = {
-				FOCUS_FILTER_POLITICAL
-			}
-			prerequisite = { focus = REB_hero_of_democracy  }
-		}
-	
-		#Hero of Democracy
-		focus = {
-			id = REB_hero_of_democracy
-			icon = GFX_WIP_focus
-			text_icon = REPUBLIC_focus_style
-			relative_position_id = REB_daughter_of_the_republic
-			x= 0
-			y = 2
-			cost = 5
-			search_filters = {
-				FOCUS_FILTER_POLITICAL
-			}
-			prerequisite = { focus = REB_the_call_for_freedom  } prerequisite = { focus = REB_keepers_of_the_peace  }
-		}
-	
-		#Leia's Fist
-		focus = {
-			id = REB_leiasfist
-			icon = GFX_rebel_goal
-		text_icon = REPUBLIC_focus_style
-			relative_position_id = REB_daughter_of_anakin
-			x= -1
-			y = 1
-			cost = 5
-			search_filters = {
-				FOCUS_FILTER_POLITICAL
-			}
-			prerequisite = { focus = REB_daughter_of_anakin  }
-		}
-	
-		#The Call for Freedom
-		focus = {
-			id = REB_the_call_for_freedom
-			icon = GFX_rebel_goal
-			text_icon = REPUBLIC_focus_style
-			relative_position_id = REB_daughter_of_the_republic
-			x= 1
-			y = 1
-			cost = 5
-			search_filters = {
-				FOCUS_FILTER_POLITICAL
-			}
-			prerequisite = { focus = REB_daughter_of_the_republic  }
-		}
-	
-		#Daughter of the Republic
-		focus = {
-			id = REB_daughter_of_the_republic
-			icon = GFX_rebel_goal
-			text_icon = REPUBLIC_focus_style
-			relative_position_id = REB_terror_of_the_galaxy
-			x= 0
-			y = 1
-			cost = 5
-			search_filters = {
-				FOCUS_FILTER_POLITICAL
-			}
-			prerequisite = { focus = REB_terror_of_the_galaxy  }
-		}
-	
-		#Build the Jedi Temple
-		focus = {
-			id = REB_build_the_jedi_temple
-			icon = GFX_rebel_goal
-			text_icon = REPUBLIC_focus_style
-			relative_position_id = REB_terror_of_the_galaxy
-			x= -2
-			y = 1
-			cost = 5
-			search_filters = {
-				FOCUS_FILTER_POLITICAL
-			}
-			prerequisite = { focus = REB_terror_of_the_galaxy  focus = REB_restorer_of_balance  }
-		}
-		#Investments into the Jedi
-		focus = {
-			id = REB_investments_into_the_jedi
-			icon = GFX_rebel_goal
-			text_icon = REPUBLIC_focus_style
-			relative_position_id = REB_build_the_jedi_temple
-			x= 0
-			y = 2
-			cost = 7.2
-			prerequisite = { focus = REB_build_the_jedi_temple  }
-			search_filters = {
-				FOCUS_FILTER_POLITICAL
-			}
-			completion_reward = {
-		
-			}
-		}
-	
-		#Daughter of Anakin
-		focus = {
-			id = REB_daughter_of_anakin
-			icon = GFX_daughter_of_anakin
-			text_icon = REPUBLIC_focus_style
-			relative_position_id = REB_restorer_of_balance
-			x= 0
-			y = 1
-			cost = 5
-			search_filters = {
-				FOCUS_FILTER_POLITICAL
-			}
-			prerequisite = { focus = REB_restorer_of_balance  }
-		}
-	
-		#Keepers of the Peace
-		focus = {
-			id = REB_keepers_of_the_peace
-			icon = GFX_rebel_goal
-			text_icon = REPUBLIC_focus_style
-			relative_position_id = REB_build_the_jedi_temple
-			x= 1
-			y = 1
-			cost = 5
-			search_filters = {
-				FOCUS_FILTER_POLITICAL
-			}
-			prerequisite = { focus = REB_build_the_jedi_temple  }
-			mutually_exclusive = { focus = REB_jedi_generals  }
-			completion_reward = {
-				add_stability = 0.10
-			}
-		}
-	
-		#Jedi Generals
-		focus = {
-			id = REB_jedi_generals
-			icon = GFX_jedi_generals
-			text_icon = REPUBLIC_focus_style
-			relative_position_id = REB_build_the_jedi_temple
-			x= -1
-			y = 1
-			cost = 5
-			search_filters = {
-				FOCUS_FILTER_POLITICAL
-			}
-			prerequisite = { focus = REB_build_the_jedi_temple  }
-			mutually_exclusive = { focus = REB_keepers_of_the_peace  }
-			completion_reward = {
-				REB_luke = {
-					add_corps_commander_role = {
-						traits = { jedi }
-						skill = 5
-						attack_skill = 5
-						defense_skill = 5
-						planning_skill = 1
-						logistics_skill = 1
-						legacy_id = -1
-					}
-				}
-				REB_mara_jade = {
-					add_corps_commander_role = {
-						traits = { jedi }
-						skill = 5
-						attack_skill = 5
-						defense_skill = 5
-						planning_skill = 1
-						logistics_skill = 1
-						legacy_id = -1
-					}
-				}
-			}
-		}
-	
-		
-	
-			#Gifts from the Hapes
-			focus = {
-				id = REB_gifts_from_the_hapes
-				icon = GFX_gifts_from_the_hapes
-				relative_position_id = REB_the_dual_princess
-				x= -1
-				y = 1
-				cost = 5
-				search_filters = {
-					FOCUS_FILTER_POLITICAL
-				}
-				prerequisite = { focus = REB_the_dual_princess  }
-			}
-		
-			#Star Destroyers
-			focus = {
-				id = REB_star_destroyers
-				icon = GFX_hapes_star_destroyer
-				relative_position_id = REB_gifts_from_the_hapes
-				x= 1
-				y = 1
-				cost = 5
-				search_filters = {
-					FOCUS_FILTER_POLITICAL
-				}
-				prerequisite = { focus = REB_gifts_from_the_hapes  }
-			}
-		
-			#Gun of Command
-			focus = {
-				id = REB_gun_of_command
-				icon = GFX_guns_of_command
-				relative_position_id = REB_gifts_from_the_hapes
-				x= -1
-				y = 1
-				cost = 5
-				search_filters = {
-					FOCUS_FILTER_RESEARCH
-				}
-				prerequisite = { focus = REB_gifts_from_the_hapes  }
-				completion_reward = {
-					set_technology = {
-						hapes_gun_of_command = 1
-					}
-				} 
-			}
-	
-		#Leia's Battledragons
-		focus = {
-			id = REB_leiasbattledragons
-			icon = GFX_hapan_battle_dragon_leia
-			relative_position_id = REB_star_destroyers
-			x= 0
-			y = 1
-			cost = 5
-			search_filters = {
-				FOCUS_FILTER_RESEARCH
-			}
-			prerequisite = { focus = REB_star_destroyers  } 
-			prerequisite = { focus = REB_gun_of_command  }
-			completion_reward = {
-				set_technology = {
-					hapes_battle_dragon = 1
-				}
-			}
-		}
-		#Hapan Royal Guard
-		focus = {
-			id = REB_hapan_royal_guard
-			icon = GFX_hapan_royal_guard_leia
-			relative_position_id = REB_gun_of_command
-			x= -0
-			y = 1
-			cost = 5
-			search_filters = {
-				FOCUS_FILTER_POLITICAL
-			}
-			prerequisite = { focus = REB_gun_of_command  } prerequisite = { focus = REB_star_destroyers  }
-			completion_reward = {
-	
-			}
-		}
-	
-		#Han Solo
-		focus = {
-			id = REB_han_solo
-			icon = GFX_han_solo_marriage
-			text_icon = REPUBLIC_focus_style
-			relative_position_id = REB_prince_isolder
-			x= 1
-			y = 1
-			cost = 5
-			search_filters = {
-				FOCUS_FILTER_POLITICAL
-			}
-			prerequisite = { focus = REB_prince_isolder  }
-			mutually_exclusive = { focus = REB_the_dual_princess  }
-			completion_reward = {
-				country_event = LEIA.5
-			}
-		}
-	
-		#Solo Command
-		focus = {
-			id = REB_solo_command_leia
-			icon = GFX_solo_command
-			relative_position_id = REB_the_smugglers_alliance
-			x= 1
-			y = 1
-			cost = 5
-			search_filters = {
-				FOCUS_FILTER_POLITICAL
-			}
-			prerequisite = { focus = REB_the_smugglers_alliance  }
-		}
-	
-		#Prince Isolder
-		focus = {
-			id = REB_prince_isolder
-			icon = GFX_rebel_goal
-			text_icon = REPUBLIC_focus_style
-			relative_position_id = REB_negotiations_with_the_hapes
-			x= 0
-			y = 1
-			cost = 5
-			search_filters = {
-				FOCUS_FILTER_POLITICAL
-			}
-			prerequisite = { focus = REB_negotiations_with_the_hapes  }
-			completion_reward = {
-				country_event = leia_hapes.2
-			}
-		}
-	
-		#The Dual Princess
-		focus = {
-			id = REB_the_dual_princess
-			icon = GFX_rebel_goal
-			text_icon = REPUBLIC_focus_style
-			relative_position_id = REB_prince_isolder
-			x= -1
-			y = 1
-			cost = 5
-			search_filters = {
-				FOCUS_FILTER_POLITICAL
-			}
-			prerequisite = { focus = REB_prince_isolder  }
-			mutually_exclusive = { focus = REB_han_solo  }
-			completion_reward = {
-				add_trait = {
-					character = REB_leia
-					ideology = rebel_ideology
-					trait = hapan_princess
-				}
-				retire_character = REB_han_solo
-			}
-		}
-	
-		#The Smugglers Alliance
-		focus = {
-			id = REB_the_smugglers_alliance
-			icon = GFX_reb_smugglers_alliance_goal
-			relative_position_id = REB_han_solo
-			x= 1
-			y = 1
-			cost = 5
-			search_filters = {
-				FOCUS_FILTER_POLITICAL
-			}
-			prerequisite = { focus = REB_han_solo  }
-			completion_reward = {
-				add_to_variable = { smugglers_influence = 10 }
-				add_to_variable = { smugglers_loyalty = 10 }
-			}
-		}
-	
-		#New Republic Privateers
-		focus = {
-			id = REB_new_republic_privateers
-			icon = GFX_new_rep_privateers
-			relative_position_id = REB_criminal_contacts
-			x= 0
-			y = 1
-			cost = 5
-			search_filters = {
-				FOCUS_FILTER_POLITICAL
-			}
-			prerequisite = { focus = REB_criminal_contacts  }
-		}
-	
-		#Criminal Contacts
-		focus = {
-			id = REB_criminal_contacts
-			icon = GFX_criminal_connections
-			relative_position_id = REB_the_smugglers_alliance
-			x= -1
-			y = 1
-			cost = 5
-			search_filters = {
-				FOCUS_FILTER_POLITICAL
-			}
-			prerequisite = { focus = REB_the_smugglers_alliance  }
-		}
-	
+
 		#Old Friends
 		focus = {
 			id = REB_old_friends
@@ -898,147 +997,15 @@ focus_tree = {
 			#prerequisite = { focus = REB_the_smugglers_alliance  }
 		}
 	
-		#Imperial Heists
-		focus = {
-			id = REB_imperial_heists
-			icon = GFX_imperial_heists
-			relative_position_id = REB_solo_command_leia
-			x= 0
-			y = 1
-			cost = 5
-			search_filters = {
-				FOCUS_FILTER_POLITICAL
-			}
-			prerequisite = { focus = REB_solo_command_leia  }
-		}
-	
-		#Renowned Smugglers
-		focus = {
-			id = REB_renowned_smugglers
-			icon = GFX_reb_rebel_smuggler_goal
-			relative_position_id = REB_imperial_heists
-			x= -1
-			y = 1
-			cost = 5
-			search_filters = {
-				FOCUS_FILTER_POLITICAL
-			}
-			prerequisite = { focus = REB_imperial_heists  }
-			completion_reward = {
-				add_ideas = renowned_smugglers
-			}
-		}
-	
-		#Modified Protocol Droid
-		focus = {
-			id = REB_modified_protocol_droid
-			icon = GFX_modified_protocol_droid
-			relative_position_id = REB_imperial_heists
-			x= 1
-			y = 1
-			cost = 5
-			search_filters = {
-				FOCUS_FILTER_POLITICAL
-			}
-			prerequisite = { focus = REB_imperial_heists  }
-			completion_reward = {
-				intelligence_bonus_add = yes
-				add_ideas = modified_protocol_droids
-			}
-		}
-	
-		#Imperial Codebreakers
-		focus = {
-			id = REB_imperial_codebreakers
-			icon = GFX_imperial_codebreakers
-			relative_position_id = REB_renowned_smugglers
-			x= 1
-			y = 1
-			cost = 6
-			search_filters = {
-				FOCUS_FILTER_POLITICAL
-			}
-			prerequisite = { focus = REB_renowned_smugglers  } prerequisite = { focus = REB_modified_protocol_droid  }
-			completion_reward = {
-				add_ideas = imperial_codebreakers
-			}
-		}
-		#The Long Shadow of Vader
-		focus = {
-			id = REB_the_long_shadow_of_vader
-			icon = GFX_long_shadow_vader
-			text_icon = REPUBLIC_focus_style
-			x= 24
-			y = 0
-			cost = 5
-			search_filters = {
-				FOCUS_FILTER_POLITICAL
-			}
-			completion_reward = {
-				add_ideas = long_shadow_of_vader
-			}
-		}
-	
-		#Negotiations with the Hapes
-		focus = {
-			id = REB_negotiations_with_the_hapes
-			#relative_position_id = REB_the_base_of_operations
-			icon = GFX_negotiation_hapes
-			text_icon = REPUBLIC_focus_style
-			x= 17
-			y = 0
-			cost = 5
-			search_filters = {
-				FOCUS_FILTER_WAR_SUPPORT
-			}
-			#prerequisite = { focus = REB_the_base_of_operations  }
-			completion_reward = {
-				country_event = leia_hapes.1
-			}
-		}
+		
+		
 	
 		
 	
-		#Terror of the Galaxy
-		focus = {
-			id = REB_terror_of_the_galaxy
-			icon = GFX_terror_of_the_galaxy
-			text_icon = REPUBLIC_focus_style
-			relative_position_id = REB_the_long_shadow_of_vader
-			x= 2
-			y = 1
-			cost = 5
-			search_filters = {
-				FOCUS_FILTER_POLITICAL
-			}
-			prerequisite = { focus = REB_the_long_shadow_of_vader  }
-			mutually_exclusive = { focus = REB_restorer_of_balance  }
-			completion_reward = {
-				remove_ideas = long_shadow_of_vader
-			}
-		}
+		
 	
-		#Restorer of Balance
-		focus = {
-			id = REB_restorer_of_balance
-			icon = GFX_rebel_goal
-			text_icon = REPUBLIC_focus_style
-			relative_position_id = REB_the_long_shadow_of_vader
-			x= -2
-			y = 1
-			cost = 5
-			search_filters = {
-				FOCUS_FILTER_POLITICAL
-			}
-			prerequisite = { focus = REB_the_long_shadow_of_vader  }
-			mutually_exclusive = { focus = REB_terror_of_the_galaxy  }
-			completion_reward = {
-				#TODO
-				#swap_ideas = {
-				#	remove_idea = long_shadow_of_vader
-				#	add_idea = bringer_of_balance
-				#}
-			}
-		}
+		
+	
+		
 
 }
