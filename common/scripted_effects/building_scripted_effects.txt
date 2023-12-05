@@ -1234,17 +1234,14 @@ imperial_refinery_positive_add_effect = {
 }
 
 test_building_effect = {
-	set_variable = {test_variable = token:arms_factory_building_construction_speed}
-
-	set_variable = {test_variable = arms_factory_building_construction_speed}
-	set_variable = {actual_test = 2}
-
-	log = "out test [?test_variable.GetTokenKey]"
-	log = "out test [?modifier@arms_factory_building_construction_speed]"
-	log = "out test [?modifier@test_variable]"
-	log = "out test [?test_2_variable?global.arms_factory_1_global_speed]"
+	set_variable = {test_variable = token:spice_market_1}
+	log = "[?test_variable]"
+	log = "appended_to_@test_variable"
+	appended_to_@test_variable = yes
 }
-
+appended_to_26729 = {
+	log = "got here"
+}
 
 clear_left_over_building_event_variables = {
 	var:state_located_for_building_changes = {
@@ -1626,6 +1623,10 @@ refresh_building_time_and_cost_modifiers = {
 	set_temp_variable = {building_modifier_name = token:anti_air_building_construction_speed}
 	construction_speed_calculator = yes
 
+	set_temp_variable = {building_modifier_value = modifier@training_building_construction_speed}
+	set_temp_variable = {building_modifier_name = token:training_building_construction_speed}
+	construction_speed_calculator = yes
+
 	## NAVAL CATEGORY
 	set_temp_variable = {building_category_value = modifier@naval_building_construction_speed}
 
@@ -1640,10 +1641,6 @@ refresh_building_time_and_cost_modifiers = {
 
 	##Goverment
 	set_temp_variable = {building_category_value = modifier@goverment_building_construction_speed}
-
-	set_temp_variable = {building_modifier_value = modifier@training_building_construction_speed}
-	set_temp_variable = {building_modifier_name = token:training_building_construction_speed}
-	construction_speed_calculator = yes
 
 	set_temp_variable = {building_modifier_value = modifier@intelligence_building_construction_speed}
 	set_temp_variable = {building_modifier_name = token:intelligence_building_construction_speed}
@@ -1693,6 +1690,10 @@ refresh_building_time_and_cost_modifiers = {
 	set_temp_variable = {building_modifier_name = token:arms_factory_building_construction_cost}
 	construction_speed_calculator = yes
 
+	set_temp_variable = {building_modifier_value = modifier@training_building_construction_cost}
+	set_temp_variable = {building_modifier_name = token:training_building_construction_cost}
+	construction_speed_calculator = yes
+
 	set_temp_variable = {building_modifier_value = modifier@anti_air_building_construction_cost}
 	set_temp_variable = {building_modifier_name = token:anti_air_building_construction_cost}
 	construction_speed_calculator = yes
@@ -1711,10 +1712,6 @@ refresh_building_time_and_cost_modifiers = {
 
 	##Goverment
 	set_temp_variable = {building_category_value = modifier@goverment_building_construction_cost}
-
-	set_temp_variable = {building_modifier_value = modifier@training_building_construction_cost}
-	set_temp_variable = {building_modifier_name = token:training_building_construction_cost}
-	construction_speed_calculator = yes
 
 	set_temp_variable = {building_modifier_value = modifier@intelligence_building_construction_cost}
 	set_temp_variable = {building_modifier_name = token:intelligence_building_construction_cost}
