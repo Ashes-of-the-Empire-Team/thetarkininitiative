@@ -172,6 +172,22 @@ example_end_effect = {
 	}
 }
 
+agent_death_effect = {
+	meta_effect = { # REMOVING AGENT VARIABLES
+		text = {
+			clear_variable = agent_name_slot_[WHAT_SLOT_IT_IS]
+			clear_variable = agent_charisma_slot_[WHAT_SLOT_IT_IS]
+			clear_variable = agent_intelligence_slot_[WHAT_SLOT_IT_IS]
+			clear_variable = agent_martial_slot_[WHAT_SLOT_IT_IS]
+			clear_variable = personality_trait_slot_[WHAT_SLOT_IT_IS]
+			clear_variable = class_trait_slot_[WHAT_SLOT_IT_IS]
+			clear_variable = race_trait_slot_[WHAT_SLOT_IT_IS]
+			clear_variable = expertise_slot_[WHAT_SLOT_IT_IS]
+			clear_variable = expertise_progress_slot_[WHAT_SLOT_IT_IS]
+		}
+		WHAT_SLOT_IT_IS = "[?agent_slot_number]"
+	}
+}
 
 chance_of_death = {
 	set_temp_variable = {agent_surviability_bonuses = modifier@espionage_agent_survivability}
@@ -201,20 +217,7 @@ chance_of_death = {
 			## CRITICAL FAILURE EFFECTS ON TARGET COUNTRY
 			country_event = espionage_missions.10 ## ESPIOANGE CRITICAL SUCCESS WAS UNSUCCESSFUL ON YOUR COUNTRY
 		}
-		meta_effect = { # REMOVING AGENT VARIABLES
-			text = {
-				clear_variable = agent_name_slot_[WHAT_SLOT_IT_IS]
-				clear_variable = agent_charisma_slot_[WHAT_SLOT_IT_IS]
-				clear_variable = agent_intelligence_slot_[WHAT_SLOT_IT_IS]
-				clear_variable = agent_martial_slot_[WHAT_SLOT_IT_IS]
-				clear_variable = personality_trait_slot_[WHAT_SLOT_IT_IS]
-				clear_variable = class_trait_slot_[WHAT_SLOT_IT_IS]
-				clear_variable = race_trait_slot_[WHAT_SLOT_IT_IS]
-				clear_variable = expertise_slot_[WHAT_SLOT_IT_IS]
-				clear_variable = expertise_progress_slot_[WHAT_SLOT_IT_IS]
-			}
-			WHAT_SLOT_IT_IS = "[?agent_slot_number]"
-		}
+		agent_death_effect = yes
 	}else = {
 		var:targeted_country = {
 			## CRITICAL FAILURE EFFECTS ON TARGET COUNTRY
