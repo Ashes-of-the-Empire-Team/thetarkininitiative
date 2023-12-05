@@ -175,7 +175,6 @@ add_building_to_construct_slot_1 = {
 		set_variable = { building_1 = potential_building_holder_for_event }
 		set_variable = { time_left_building_1 = potential_time_left_building_holder_for_event}
 		set_state_flag = building_1_to_be_handled
-		time_calculation_for_buildings = yes
 		add_to_array = {
 			array = global.building_state_constructer_1
 			value = THIS.id
@@ -255,8 +254,17 @@ sends_event_for_replacement_building_unique_building = {
 
 time_calculation_for_buildings = {
 	set_temp_variable = {speed_multiplier_factor = modifier@production_speed_buildings_factor}
-	subtract_from_temp_variable = {speed_multiplier_factor = modifier@consumer_goods_factor}
+	add_to_temp_variable = {speed_multiplier_factor = modifier@consumer_goods_factor}
 	add_to_temp_variable = {speed_multiplier_factor = 1}
+
+	if = {
+		limit  = {
+			has_variable = potential_building_holder_for_event
+		}
+		set_temp_variable = { REQUESTED_BUILDING = potential_building_holder_for_event}
+	}
+
+
 
 	if = {
 		limit = {
@@ -1226,8 +1234,15 @@ imperial_refinery_positive_add_effect = {
 }
 
 test_building_effect = {
-	set_variable = {test_variable = token:primitive_industry}
-	log = "[?test_variable]"
+	set_variable = {test_variable = token:arms_factory_building_construction_speed}
+
+	set_variable = {test_variable = arms_factory_building_construction_speed}
+	set_variable = {actual_test = 2}
+
+	log = "out test [?test_variable.GetTokenKey]"
+	log = "out test [?modifier@arms_factory_building_construction_speed]"
+	log = "out test [?modifier@test_variable]"
+	log = "out test [?test_2_variable?global.arms_factory_1_global_speed]"
 }
 
 
@@ -1245,5 +1260,486 @@ _add_effect = { ## This is really stupid dont question it, also dont remove it o
 
 }
 _remove_effect = { ## This is really stupid dont question it, also dont remove it or 10000000 errors
+
+}
+
+
+
+### FOR SAKE OF PEOPLES SANITY DO NOT LOOK FUTHER THIS IS THE MOST COMPLEX SHIT EVER DEVISED
+
+
+arms_factory_building_construction_speed_variable_setter = {
+
+	set_variable = {arms_factory_1_speed = global.arms_factory_1_global_speed}
+	set_variable = {soft_arms_factory_1_speed = global.soft_arms_factory_1_global_speed}
+	set_variable = {soft_arms_factory_2_speed = global.soft_arms_factory_2_global_speed}
+	set_variable = {tank_factory_1_speed = global.tank_factory_1_global_speed}
+	set_variable = {tank_factory_2_speed = global.tank_factory_2_global_speed}
+	
+	multiply_variable = {arms_factory_1_speed = final_calulation_multiplier}
+	multiply_variable = {soft_arms_factory_1_speed = final_calulation_multiplier}
+	multiply_variable = {soft_arms_factory_2_speed = final_calulation_multiplier}
+	multiply_variable = {tank_factory_1_speed = final_calulation_multiplier}
+	multiply_variable = {tank_factory_2_speed = final_calulation_multiplier}
+
+}
+shipyard_building_construction_speed_variable_setter = {
+	set_variable = {light_shipyard_1_speed = global.light_shipyard_1_global_speed}
+	set_variable = {light_shipyard_2_speed = global.light_shipyard_2_global_speed}
+	set_variable = {light_shipyard_3_speed = global.light_shipyard_3_global_speed}
+	set_variable = {medium_shipyard_1_speed = global.medium_shipyard_1_global_speed}
+	set_variable = {medium_shipyard_2_speed = global.medium_shipyard_2_global_speed}
+	set_variable = {heavy_shipyard_1_speed = global.heavy_shipyard_1_global_speed}
+	
+	multiply_variable = {arms_factory_1_speed = final_calulation_multiplier}
+	multiply_variable = {soft_arms_factory_1_speed = final_calulation_multiplier}
+	multiply_variable = {soft_arms_factory_2_speed = final_calulation_multiplier}
+	multiply_variable = {tank_factory_1_speed = final_calulation_multiplier}
+	multiply_variable = {tank_factory_2_speed = final_calulation_multiplier}
+}
+training_building_construction_speed_variable_setter = {
+	set_variable = {training_facilities_1_speed = global.training_facilities_1_global_speed}
+	set_variable = {special_forces_training_facilities_1_speed = global.special_forces_training_facilities_1_global_speed}
+	set_variable = {special_forces_training_facilities_2_speed = global.special_forces_training_facilities_2_global_speed}
+	set_variable = {military_bootcamp_1_speed = global.military_bootcamp_1_global_speed}
+	set_variable = {military_bootcamp_2_speed = global.military_bootcamp_2_global_speed}
+	
+	multiply_variable = {training_facilities_1_speed = final_calulation_multiplier}
+	multiply_variable = {special_forces_training_facilities_1_speed = final_calulation_multiplier}
+	multiply_variable = {special_forces_training_facilities_2_speed = final_calulation_multiplier}
+	multiply_variable = {military_bootcamp_1_speed = final_calulation_multiplier}
+	multiply_variable = {military_bootcamp_2_speed = final_calulation_multiplier}
+}
+intelligence_building_construction_speed_variable_setter = {
+	set_variable = {intelligence_center_1_speed = global.intelligence_center_1_global_speed}
+	set_variable = {sensor_array_1_speed = global.sensor_array_1_global_speed}
+	set_variable = {sensor_array_2_speed = global.sensor_array_2_global_speed}
+	set_variable = {spy_academy_1_speed = global.spy_academy_1_global_speed}
+	set_variable = {spy_academy_2_speed = global.spy_academy_2_global_speed}
+	
+	multiply_variable = {intelligence_center_1_speed = research_center_1_global_speed}
+	multiply_variable = {sensor_array_1_speed = final_calulation_multiplier}
+	multiply_variable = {sensor_array_2_speed = final_calulation_multiplier}
+	multiply_variable = {spy_academy_1_speed = final_calulation_multiplier}
+	multiply_variable = {spy_academy_2_speed = final_calulation_multiplier}
+}
+research_building_construction_speed_variable_setter = {
+	set_variable = {research_center_1_speed = global.research_center_1_global_speed}
+	set_variable = {research_center_2_speed = global.research_center_2_global_speed}
+	set_variable = {research_center_3_speed = global.research_center_3_global_speed}
+	
+	multiply_variable = {research_center_1_speed = final_calulation_multiplier}
+	multiply_variable = {research_center_2_speed = final_calulation_multiplier}
+	multiply_variable = {research_center_3_speed = final_calulation_multiplier}
+}
+military_building_construction_speed_variable_setter = {
+	set_variable = {military_academy_1_speed = global.military_academy_1_global_speed}
+	set_variable = {military_academy_2_speed = global.military_academy_2_global_speed}
+	set_variable = {military_academy_3_speed = global.military_academy_3_global_speed}
+	set_variable = {starfighter_academy_1_speed = global.starfighter_academy_1_global_speed}
+	set_variable = {admiralty_academy_1_speed = global.admiralty_academy_1_global_speed}
+	set_variable = {naval_academy_1_speed = global.naval_academy_1_global_speed}
+	
+	multiply_variable = {military_academy_1_speed = final_calulation_multiplier}
+	multiply_variable = {military_academy_2_speed = final_calulation_multiplier}
+	multiply_variable = {military_academy_3_speed = final_calulation_multiplier}
+	multiply_variable = {starfighter_academy_1_speed = final_calulation_multiplier}
+	multiply_variable = {admiralty_academy_1_speed = final_calulation_multiplier}
+	multiply_variable = {naval_academy_1_speed = final_calulation_multiplier}
+}
+homestead_building_construction_speed_variable_setter = {
+	set_variable = {homestead_1_speed = global.homestead_1_global_speed}
+	set_variable = {homestead_2_speed = global.homestead_2_global_speed}
+	set_variable = {homestead_3_speed = global.homestead_3_global_speed}
+	
+	multiply_variable = {homestead_1_speed = final_calulation_multiplier}
+	multiply_variable = {homestead_2_speed = final_calulation_multiplier}
+	multiply_variable = {homestead_3_speed = final_calulation_multiplier}
+}
+corporate_office_building_construction_speed_variable_setter = {
+	set_variable = {corporate_office_1_speed = global.corporate_office_1_global_speed}
+	set_variable = {corporate_office_2_speed = global.corporate_office_2_global_speed}
+	set_variable = {corporate_office_3_speed = global.corporate_office_3_global_speed}
+	
+	multiply_variable = {corporate_office_1_speed = final_calulation_multiplier}
+	multiply_variable = {corporate_office_2_speed = final_calulation_multiplier}
+	multiply_variable = {corporate_office_3_speed = final_calulation_multiplier}
+}
+recycle_center_building_construction_speed_variable_setter = {
+	set_variable = {recycle_center_1_speed = global.recycle_center_1_global_speed}
+	set_variable = {recycle_center_2_speed = global.recycle_center_2_global_speed}
+	set_variable = {recycle_center_3_speed = global.recycle_center_3_global_speed}
+	
+	multiply_variable = {recycle_center_1_speed = final_calulation_multiplier}
+	multiply_variable = {recycle_center_2_speed = final_calulation_multiplier}
+	multiply_variable = {recycle_center_3_speed = final_calulation_multiplier}
+}
+spice_market_building_construction_speed_variable_setter = {
+	set_variable = {spice_market_1_speed = global.spice_market_1_global_speed}
+	set_variable = {spice_market_2_speed = global.spice_market_2_global_speed}
+	set_variable = {spice_market_3_speed = global.spice_market_3_global_speed}
+	
+	multiply_variable = {spice_market_1_speed = final_calulation_multiplier}
+	multiply_variable = {spice_market_2_speed = final_calulation_multiplier}
+	multiply_variable = {spice_market_3_speed = final_calulation_multiplier}
+}
+fuel_refinery_building_construction_speed_variable_setter = {
+	set_variable = {fuel_refinery_1_speed = global.fuel_refinery_1_global_speed}
+	set_variable = {fuel_refinery_2_speed = global.fuel_refinery_2_global_speed}
+	set_variable = {fuel_refinery_3_speed = global.fuel_refinery_3_global_speed}
+	
+	multiply_variable = {fuel_refinery_1_speed = final_calulation_multiplier}
+	multiply_variable = {fuel_refinery_2_speed = final_calulation_multiplier}
+	multiply_variable = {fuel_refinery_3_speed = final_calulation_multiplier}
+}
+anti_air_building_construction_speed_variable_setter = {
+	set_variable = {anti_air_1_speed = global.anti_air_1_global_speed}
+	set_variable = {anti_air_2_speed = global.anti_air_2_global_speed}
+	set_variable = {anti_air_3_speed = global.anti_air_3_global_speed}
+	
+	multiply_variable = {anti_air_1_speed = final_calulation_multiplier}
+	multiply_variable = {anti_air_2_speed = final_calulation_multiplier}
+	multiply_variable = {anti_air_3_speed = final_calulation_multiplier}
+}
+starfighter_building_construction_speed_variable_setter = {
+	set_variable = {starfighter_factory_1_speed = global.starfighter_factory_1_global_speed}
+	set_variable = {starfighter_factory_2_speed = global.starfighter_factory_2_global_speed}
+	set_variable = {starfighter_factory_3_speed = global.starfighter_factory_3_global_speed}
+	set_variable = {starbomber_factory_1_speed = global.starbomber_factory_1_global_speed}
+	set_variable = {starbomber_factory_2_speed = global.starbomber_factory_2_global_speed}
+	
+	multiply_variable = {starfighter_factory_1_speed = final_calulation_multiplier}
+	multiply_variable = {starfighter_factory_2_speed = final_calulation_multiplier}
+	multiply_variable = {starfighter_factory_3_speed = final_calulation_multiplier}
+	multiply_variable = {starbomber_factory_1_speed = final_calulation_multiplier}
+	multiply_variable = {starbomber_factory_2_speed = final_calulation_multiplier}
+}
+taxation_center_construction_cost_variable_setter = {
+	set_variable = {taxation_center_1_cost = global.taxation_center_1_global_cost}
+	set_variable = {taxation_center_2_cost = global.taxation_center_2_global_cost}
+	set_variable = {taxation_center_3_cost = global.taxation_center_3_global_cost}
+	
+	multiply_variable = {taxation_center_1_cost = final_calulation_multiplier}
+	multiply_variable = {taxation_center_2_cost = final_calulation_multiplier}
+	multiply_variable = {taxation_center_3_cost = final_calulation_multiplier}
+}
+## Cost
+arms_factory_building_construction_cost_variable_setter = {
+
+	set_variable = {arms_factory_1_cost = global.arms_factory_1_global_cost}
+	set_variable = {soft_arms_factory_1_cost = global.soft_arms_factory_1_global_cost}
+	set_variable = {soft_arms_factory_2_cost = global.soft_arms_factory_2_global_cost}
+	set_variable = {tank_factory_1_cost = global.tank_factory_1_global_cost}
+	set_variable = {tank_factory_2_cost = global.tank_factory_2_global_cost}
+	
+	multiply_variable = {arms_factory_1_cost = final_calulation_multiplier}
+	multiply_variable = {soft_arms_factory_1_cost = final_calulation_multiplier}
+	multiply_variable = {soft_arms_factory_2_cost = final_calulation_multiplier}
+	multiply_variable = {tank_factory_1_cost = final_calulation_multiplier}
+	multiply_variable = {tank_factory_2_cost = final_calulation_multiplier}
+
+}
+shipyard_building_construction_cost_variable_setter = {
+	set_variable = {light_shipyard_1_cost = global.light_shipyard_1_global_cost}
+	set_variable = {light_shipyard_2_cost = global.light_shipyard_2_global_cost}
+	set_variable = {light_shipyard_3_cost = global.light_shipyard_3_global_cost}
+	set_variable = {medium_shipyard_1_cost = global.medium_shipyard_1_global_cost}
+	set_variable = {medium_shipyard_2_cost = global.medium_shipyard_2_global_cost}
+	set_variable = {heavy_shipyard_1_cost = global.heavy_shipyard_1_global_cost}
+	
+	multiply_variable = {arms_factory_1_cost = final_calulation_multiplier}
+	multiply_variable = {soft_arms_factory_1_cost = final_calulation_multiplier}
+	multiply_variable = {soft_arms_factory_2_cost = final_calulation_multiplier}
+	multiply_variable = {tank_factory_1_cost = final_calulation_multiplier}
+	multiply_variable = {tank_factory_2_cost = final_calulation_multiplier}
+}
+training_building_construction_cost_variable_setter = {
+	set_variable = {training_facilities_1_cost = global.training_facilities_1_global_cost}
+	set_variable = {special_forces_training_facilities_1_cost = global.special_forces_training_facilities_1_global_cost}
+	set_variable = {special_forces_training_facilities_2_cost = global.special_forces_training_facilities_2_global_cost}
+	set_variable = {military_bootcamp_1_cost = global.military_bootcamp_1_global_cost}
+	set_variable = {military_bootcamp_2_cost = global.military_bootcamp_2_global_cost}
+	
+	multiply_variable = {training_facilities_1_cost = final_calulation_multiplier}
+	multiply_variable = {special_forces_training_facilities_1_cost = final_calulation_multiplier}
+	multiply_variable = {special_forces_training_facilities_2_cost = final_calulation_multiplier}
+	multiply_variable = {military_bootcamp_1_cost = final_calulation_multiplier}
+	multiply_variable = {military_bootcamp_2_cost = final_calulation_multiplier}
+}
+intelligence_building_construction_cost_variable_setter = {
+	set_variable = {intelligence_center_1_cost = global.intelligence_center_1_global_cost}
+	set_variable = {sensor_array_1_cost = global.sensor_array_1_global_cost}
+	set_variable = {sensor_array_2_cost = global.sensor_array_2_global_cost}
+	set_variable = {spy_academy_1_cost = global.spy_academy_1_global_cost}
+	set_variable = {spy_academy_2_cost = global.spy_academy_2_global_cost}
+	
+	multiply_variable = {intelligence_center_1_cost = research_center_1_global_cost}
+	multiply_variable = {sensor_array_1_cost = final_calulation_multiplier}
+	multiply_variable = {sensor_array_2_cost = final_calulation_multiplier}
+	multiply_variable = {spy_academy_1_cost = final_calulation_multiplier}
+	multiply_variable = {spy_academy_2_cost = final_calulation_multiplier}
+}
+research_building_construction_cost_variable_setter = {
+	set_variable = {research_center_1_cost = global.research_center_1_global_cost}
+	set_variable = {research_center_2_cost = global.research_center_2_global_cost}
+	set_variable = {research_center_3_cost = global.research_center_3_global_cost}
+	
+	multiply_variable = {research_center_1_cost = final_calulation_multiplier}
+	multiply_variable = {research_center_2_cost = final_calulation_multiplier}
+	multiply_variable = {research_center_3_cost = final_calulation_multiplier}
+}
+military_building_construction_cost_variable_setter = {
+	set_variable = {military_academy_1_cost = global.military_academy_1_global_cost}
+	set_variable = {military_academy_2_cost = global.military_academy_2_global_cost}
+	set_variable = {military_academy_3_cost = global.military_academy_3_global_cost}
+	set_variable = {starfighter_academy_1_cost = global.starfighter_academy_1_global_cost}
+	set_variable = {admiralty_academy_1_cost = global.admiralty_academy_1_global_cost}
+	set_variable = {naval_academy_1_cost = global.naval_academy_1_global_cost}
+	
+	multiply_variable = {military_academy_1_cost = final_calulation_multiplier}
+	multiply_variable = {military_academy_2_cost = final_calulation_multiplier}
+	multiply_variable = {military_academy_3_cost = final_calulation_multiplier}
+	multiply_variable = {starfighter_academy_1_cost = final_calulation_multiplier}
+	multiply_variable = {admiralty_academy_1_cost = final_calulation_multiplier}
+	multiply_variable = {naval_academy_1_cost = final_calulation_multiplier}
+}
+homestead_building_construction_cost_variable_setter = {
+	set_variable = {homestead_1_cost = global.homestead_1_global_cost}
+	set_variable = {homestead_2_cost = global.homestead_2_global_cost}
+	set_variable = {homestead_3_cost = global.homestead_3_global_cost}
+	
+	multiply_variable = {homestead_1_cost = final_calulation_multiplier}
+	multiply_variable = {homestead_2_cost = final_calulation_multiplier}
+	multiply_variable = {homestead_3_cost = final_calulation_multiplier}
+}
+corporate_office_building_construction_cost_variable_setter = {
+	set_variable = {corporate_office_1_cost = global.corporate_office_1_global_cost}
+	set_variable = {corporate_office_2_cost = global.corporate_office_2_global_cost}
+	set_variable = {corporate_office_3_cost = global.corporate_office_3_global_cost}
+	
+	multiply_variable = {corporate_office_1_cost = final_calulation_multiplier}
+	multiply_variable = {corporate_office_2_cost = final_calulation_multiplier}
+	multiply_variable = {corporate_office_3_cost = final_calulation_multiplier}
+}
+recycle_center_building_construction_cost_variable_setter = {
+	set_variable = {recycle_center_1_cost = global.recycle_center_1_global_cost}
+	set_variable = {recycle_center_2_cost = global.recycle_center_2_global_cost}
+	set_variable = {recycle_center_3_cost = global.recycle_center_3_global_cost}
+	
+	multiply_variable = {recycle_center_1_cost = final_calulation_multiplier}
+	multiply_variable = {recycle_center_2_cost = final_calulation_multiplier}
+	multiply_variable = {recycle_center_3_cost = final_calulation_multiplier}
+}
+spice_market_building_construction_cost_variable_setter = {
+	set_variable = {spice_market_1_cost = global.spice_market_1_global_cost}
+	set_variable = {spice_market_2_cost = global.spice_market_2_global_cost}
+	set_variable = {spice_market_3_cost = global.spice_market_3_global_cost}
+	
+	multiply_variable = {spice_market_1_cost = final_calulation_multiplier}
+	multiply_variable = {spice_market_2_cost = final_calulation_multiplier}
+	multiply_variable = {spice_market_3_cost = final_calulation_multiplier}
+}
+fuel_refinery_building_construction_cost_variable_setter = {
+	set_variable = {fuel_refinery_1_cost = global.fuel_refinery_1_global_cost}
+	set_variable = {fuel_refinery_2_cost = global.fuel_refinery_2_global_cost}
+	set_variable = {fuel_refinery_3_cost = global.fuel_refinery_3_global_cost}
+	
+	multiply_variable = {fuel_refinery_1_cost = final_calulation_multiplier}
+	multiply_variable = {fuel_refinery_2_cost = final_calulation_multiplier}
+	multiply_variable = {fuel_refinery_3_cost = final_calulation_multiplier}
+}
+anti_air_building_construction_cost_variable_setter = {
+	set_variable = {anti_air_1_cost = global.anti_air_1_global_cost}
+	set_variable = {anti_air_2_cost = global.anti_air_2_global_cost}
+	set_variable = {anti_air_3_cost = global.anti_air_3_global_cost}
+	
+	multiply_variable = {anti_air_1_cost = final_calulation_multiplier}
+	multiply_variable = {anti_air_2_cost = final_calulation_multiplier}
+	multiply_variable = {anti_air_3_cost = final_calulation_multiplier}
+}
+starfighter_building_construction_cost_variable_setter = {
+	set_variable = {starfighter_factory_1_cost = global.starfighter_factory_1_global_cost}
+	set_variable = {starfighter_factory_2_cost = global.starfighter_factory_2_global_cost}
+	set_variable = {starfighter_factory_3_cost = global.starfighter_factory_3_global_cost}
+	set_variable = {starbomber_factory_1_cost = global.starbomber_factory_1_global_cost}
+	set_variable = {starbomber_factory_2_cost = global.starbomber_factory_2_global_cost}
+	
+	multiply_variable = {starfighter_factory_1_cost = final_calulation_multiplier}
+	multiply_variable = {starfighter_factory_2_cost = final_calulation_multiplier}
+	multiply_variable = {starfighter_factory_3_cost = final_calulation_multiplier}
+	multiply_variable = {starbomber_factory_1_cost = final_calulation_multiplier}
+	multiply_variable = {starbomber_factory_2_cost = final_calulation_multiplier}
+}
+taxation_center_construction_cost_variable_setter = {
+	set_variable = {taxation_center_1_cost = global.taxation_center_1_global_cost}
+	set_variable = {taxation_center_2_cost = global.taxation_center_2_global_cost}
+	set_variable = {taxation_center_3_cost = global.taxation_center_3_global_cost}
+	
+	multiply_variable = {taxation_center_1_cost = final_calulation_multiplier}
+	multiply_variable = {taxation_center_2_cost = final_calulation_multiplier}
+	multiply_variable = {taxation_center_3_cost = final_calulation_multiplier}
+}
+
+construction_speed_calculator = {
+	if = {
+		limit = {
+			OR = {
+				check_variable = {
+					var = building_modifier_value
+					value = 0
+					compare = not_equals
+				}
+				check_variable = {
+					var = building_category_value
+					value = 0
+					compare = not_equals
+				}
+			}
+		}
+
+		set_temp_variable = {final_calulation_multiplier = 1}
+		add_to_temp_variable = {final_calulation_multiplier = building_category_value}
+		add_to_temp_variable = {final_calulation_multiplier = building_modifier_value}
+
+		meta_effect = {
+			text = {
+				[BUILDING_MODIFIER]_variable_setter = yes 
+			}
+			BUILDING_MODIFIER = "[?building_modifier_name.GetTokenKey]"
+		}
+
+	}
+}
+
+refresh_building_time_and_cost_modifiers = {
+
+	## ARMY CATEGORY
+	set_temp_variable = {building_category_value = modifier@army_building_construction_speed}
+
+
+	set_temp_variable = {building_modifier_value = modifier@arms_factory_building_construction_speed}
+	set_temp_variable = {building_modifier_name = token:arms_factory_building_construction_speed}
+	construction_speed_calculator = yes
+
+	set_temp_variable = {building_modifier_value = modifier@anti_air_building_construction_speed}
+	set_temp_variable = {building_modifier_name = token:anti_air_building_construction_speed}
+	construction_speed_calculator = yes
+
+	## NAVAL CATEGORY
+	set_temp_variable = {building_modifier_value = modifier@shipyard_building_construction_speed}
+	set_temp_variable = {building_modifier_name = token:shipyard_building_construction_speed}
+	construction_speed_calculator = yes
+
+	set_temp_variable = {building_modifier_value = modifier@starfighter_building_construction_speed}
+	set_temp_variable = {building_modifier_name = token:starfighter_building_construction_speed}
+	construction_speed_calculator = yes
+
+
+	##Goverment
+	set_temp_variable = {building_modifier_value = modifier@training_building_construction_speed}
+	set_temp_variable = {building_modifier_name = token:training_building_construction_speed}
+	construction_speed_calculator = yes
+
+	set_temp_variable = {building_modifier_value = modifier@intelligence_building_construction_speed}
+	set_temp_variable = {building_modifier_name = token:intelligence_building_construction_speed}
+	construction_speed_calculator = yes
+
+	set_temp_variable = {building_modifier_value = modifier@research_building_construction_speed}
+	set_temp_variable = {building_modifier_name = token:research_building_construction_speed}
+	construction_speed_calculator = yes
+
+	set_temp_variable = {building_modifier_value = modifier@military_building_construction_speed}
+	set_temp_variable = {building_modifier_name = token:military_building_construction_speed}
+	construction_speed_calculator = yes
+
+	set_temp_variable = {building_modifier_value = modifier@taxation_center_construction_speed}
+	set_temp_variable = {building_modifier_name = token:taxation_center_construction_speed}
+	construction_speed_calculator = yes
+	
+	## ECONOMIC
+	set_temp_variable = {building_modifier_value = modifier@homestead_building_construction_speed}
+	set_temp_variable = {building_modifier_name = token:homestead_building_construction_speed}
+	construction_speed_calculator = yes
+
+	set_temp_variable = {building_modifier_value = modifier@corporate_office_building_construction_speed}
+	set_temp_variable = {building_modifier_name = token:corporate_office_building_construction_speed}
+	construction_speed_calculator = yes
+
+	set_temp_variable = {building_modifier_value = modifier@recycle_center_building_construction_speed}
+	set_temp_variable = {building_modifier_name = token:recycle_center_building_construction_speed}
+	construction_speed_calculator = yes
+
+	set_temp_variable = {building_modifier_value = modifier@spice_market_building_construction_speed}
+	set_temp_variable = {building_modifier_name = token:spice_market_building_construction_speed}
+	construction_speed_calculator = yes
+
+	set_temp_variable = {building_modifier_value = modifier@fuel_refinery_building_construction_speed}
+	set_temp_variable = {building_modifier_name = token:fuel_refinery_building_construction_speed}
+	construction_speed_calculator = yes
+
+# COST
+## ARMY CATEGORY
+	set_temp_variable = {building_category_value = modifier@army_building_construction_cost}
+
+
+	set_temp_variable = {building_modifier_value = modifier@arms_factory_building_construction_cost}
+	set_temp_variable = {building_modifier_name = token:arms_factory_building_construction_cost}
+	construction_speed_calculator = yes
+
+	set_temp_variable = {building_modifier_value = modifier@anti_air_building_construction_cost}
+	set_temp_variable = {building_modifier_name = token:anti_air_building_construction_cost}
+	construction_speed_calculator = yes
+
+	## NAVAL CATEGORY
+	set_temp_variable = {building_modifier_value = modifier@shipyard_building_construction_cost}
+	set_temp_variable = {building_modifier_name = token:shipyard_building_construction_cost}
+	construction_speed_calculator = yes
+
+	set_temp_variable = {building_modifier_value = modifier@starfighter_building_construction_cost}
+	set_temp_variable = {building_modifier_name = token:starfighter_building_construction_cost}
+	construction_speed_calculator = yes
+
+
+	##Goverment
+	set_temp_variable = {building_modifier_value = modifier@training_building_construction_cost}
+	set_temp_variable = {building_modifier_name = token:training_building_construction_cost}
+	construction_speed_calculator = yes
+
+	set_temp_variable = {building_modifier_value = modifier@intelligence_building_construction_cost}
+	set_temp_variable = {building_modifier_name = token:intelligence_building_construction_cost}
+	construction_speed_calculator = yes
+
+	set_temp_variable = {building_modifier_value = modifier@research_building_construction_cost}
+	set_temp_variable = {building_modifier_name = token:research_building_construction_cost}
+	construction_speed_calculator = yes
+
+	set_temp_variable = {building_modifier_value = modifier@military_building_construction_cost}
+	set_temp_variable = {building_modifier_name = token:military_building_construction_cost}
+	construction_speed_calculator = yes
+
+	set_temp_variable = {building_modifier_value = modifier@taxation_center_construction_cost}
+	set_temp_variable = {building_modifier_name = token:taxation_center_construction_cost}
+	construction_speed_calculator = yes
+
+	## ECONOMIC
+	set_temp_variable = {building_modifier_value = modifier@homestead_building_construction_cost}
+	set_temp_variable = {building_modifier_name = token:homestead_building_construction_cost}
+	construction_speed_calculator = yes
+
+	set_temp_variable = {building_modifier_value = modifier@corporate_office_building_construction_cost}
+	set_temp_variable = {building_modifier_name = token:corporate_office_building_construction_cost}
+	construction_speed_calculator = yes
+
+	set_temp_variable = {building_modifier_value = modifier@recycle_center_building_construction_cost}
+	set_temp_variable = {building_modifier_name = token:recycle_center_building_construction_cost}
+	construction_speed_calculator = yes
+
+	set_temp_variable = {building_modifier_value = modifier@spice_market_building_construction_cost}
+	set_temp_variable = {building_modifier_name = token:spice_market_building_construction_cost}
+	construction_speed_calculator = yes
+
+	set_temp_variable = {building_modifier_value = modifier@fuel_refinery_building_construction_cost}
+	set_temp_variable = {building_modifier_name = token:fuel_refinery_building_construction_cost}
+	construction_speed_calculator = yes
 
 }
