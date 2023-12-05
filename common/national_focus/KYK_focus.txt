@@ -84,7 +84,7 @@ focus_tree = {
 		id = KYK_wyyyschokk_spiders
 		icon = GFX_KYK_spiders
 		cost = 7.2
-		x = 0
+		x = 5
 		y = 1
 		ai_will_do = {
 			factor = 1
@@ -93,8 +93,8 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus KYK_wyyyschokk_spiders"
 		}
-		relative_position_id = KYK_the_shadoweave_caverns
-		prerequisite = { focus = KYK_the_shadoweave_caverns }
+		relative_position_id = KYK_the_shadowlands
+		prerequisite = { focus = KYK_the_shadowlands }
 	}
 
 	focus = {
@@ -275,13 +275,22 @@ focus_tree = {
 		completion_reward = {
 			if = {
 				limit = {
-					has_completed_focus = KYK_attichitcuk
+					has_completed_focus = KYK_tojjevvuk
 				}
 				swap_ideas = {
 					remove_idea = attichitcuk_loyal
 					add_idea = attichitcuk_disloyal
 				}
 			}
+			if = {
+				limit = {
+					has_completed_focus = KYK_attichitcuk
+				}
+				set_variable = {supplied_agent_name = token:chewbacca}
+				agent_recruitment_effect = yes
+			}
+			set_variable = {supplied_agent_name = token:chewbacca}
+				agent_recruitment_effect = yes
 		}
 		relative_position_id = KYK_ties_with_the_smugglers
 		prerequisite = {
@@ -375,23 +384,6 @@ focus_tree = {
 		}
 		relative_position_id = KYK_gkrur_clan
 		prerequisite = { focus = KYK_gkrur_clan }
-	}
-
-	focus = {
-		id = KYK_the_shadoweave_caverns
-		icon = GFX_KYK_Frame
-		cost = 7.2
-		x = 5
-		y = 1
-		ai_will_do = {
-			factor = 1
-		}
-		text_icon = Kashyyyk_focus_style
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus KYK_the_shadoweave_caverns"
-		}
-		relative_position_id = KYK_taming_the_wild_life
-		prerequisite = { focus = KYK_taming_the_wild_life }
 	}
 
 	focus = {
@@ -545,7 +537,9 @@ focus_tree = {
 		}
 		text_icon = Kashyyyk_focus_style
 		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus KYK_appazanna_engineering_works"
+			mio:appazanna_engineering_organization = {
+				add_mio_size = 1
+			}
 		}
 		relative_position_id = KYK_rebuild_what_was_lost
 		prerequisite = { focus = KYK_rebuild_what_was_lost }
@@ -983,13 +977,12 @@ focus_tree = {
 		}
 		text_icon = Kashyyyk_focus_style
 		completion_reward = {
-			random_owned_controlled_state = {
-				add_extra_state_shared_building_slots = 2
-				add_building_construction = {
-					type = arms_factory
-					level = 2
-					instant_build = yes
+			random_owned_state = {
+				limit = {
+					has_avaliable_building_slot = yes
 				}
+				set_temp_variable = {REQUESTED_BUILDING = token:soft_arms_factory_1}
+				Add_building_to_slot_immediately = yes
 			}
 		}
 		relative_position_id = KYK_defending_our_homes
@@ -1178,13 +1171,12 @@ focus_tree = {
 		}
 		text_icon = Kashyyyk_focus_style
 		completion_reward = {
-			random_owned_controlled_state = {
-				add_extra_state_shared_building_slots = 1
-				add_building_construction = {
-					type = arms_factory
-					level = 2
-					instant_build = yes
+			random_owned_state = {
+				limit = {
+					has_avaliable_building_slot = yes
 				}
+				set_temp_variable = {REQUESTED_BUILDING = token:arms_factory_1}
+				Add_building_to_slot_immediately = yes
 			}
 		}
 		relative_position_id = KYK_rwookrrorro
@@ -1530,7 +1522,11 @@ focus_tree = {
 		}
 		text_icon = Kashyyyk_focus_style
 		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus KYK_government_subsidies"
+			custom_effect_tooltip = minus100credits_tt
+			subtract_from_variable = { currency_amount^primary_currency = 100 }
+			mio:appazanna_engineering_organization = {
+				add_mio_funds = 1000
+			}
 		}
 	}
 	focus = {
