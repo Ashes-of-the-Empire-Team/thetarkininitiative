@@ -1941,64 +1941,69 @@ clear_temp_variable_in_agents = {
 
 agent_recruitment_effect = {
 	### REQUIRES supplied_agent_name, this is a idea token created in espionage tokens with the name of the agent
-	if = {
-		limit = {
-			NOT = {
-				has_variable = agent_name_slot_1
+	custom_effect_tooltip = recruit_agent_tooltip_focuses
+	hidden_effect = {
+		if = {
+			limit = {
+				NOT = {
+					has_variable = agent_name_slot_1
+				}
 			}
-		}
-		set_variable = {what_espionage_slot = 1}
-	}else_if = {
-		limit = {
-			NOT = {
-				has_variable = agent_name_slot_2
+			set_variable = {what_espionage_slot = 1}
+		}else_if = {
+			limit = {
+				NOT = {
+					has_variable = agent_name_slot_2
+				}
 			}
-		}
-		set_variable = {what_espionage_slot = 2}
-	}else_if = {
-		limit = {
-			NOT = {
-				has_variable = agent_name_slot_3
+			set_variable = {what_espionage_slot = 2}
+		}else_if = {
+			limit = {
+				NOT = {
+					has_variable = agent_name_slot_3
+				}
 			}
-		}
-		set_variable = {what_espionage_slot = 3}
-	}else_if = {
-		limit = {
-			NOT = {
-				has_variable = agent_name_slot_4
+			set_variable = {what_espionage_slot = 3}
+		}else_if = {
+			limit = {
+				NOT = {
+					has_variable = agent_name_slot_4
+				}
 			}
-		}
-		set_variable = {what_espionage_slot = 4}
-	}else_if = {
-		limit = {
-			NOT = {
-				has_variable = agent_name_slot_5
+			set_variable = {what_espionage_slot = 4}
+		}else_if = {
+			limit = {
+				NOT = {
+					has_variable = agent_name_slot_5
+				}
 			}
+			set_variable = {what_espionage_slot = 5}
 		}
-		set_variable = {what_espionage_slot = 5}
+
+
+
+		meta_effect = {
+			text = {
+				agent_recruitment_[AGENT_NAME] = yes
+			}
+			AGENT_NAME = "[?supplied_agent_name.GetTokenKey]"
+		}
+		meta_effect = {
+			text = {
+
+				set_variable = { agent_name_slot_[WHAT_SLOT_IT_IS]  = agent_name} 
+				set_variable = { agent_charisma_slot_[WHAT_SLOT_IT_IS]  = agent_charisma} 
+				set_variable = { agent_intelligence_slot_[WHAT_SLOT_IT_IS]  = agent_intelligence} 
+				set_variable = { agent_martial_slot_[WHAT_SLOT_IT_IS]  = agent_martial} 
+				set_variable = { personality_trait_slot_[WHAT_SLOT_IT_IS]  = personality_trait} 
+				set_variable = { class_trait_slot_[WHAT_SLOT_IT_IS]  = class_trait} 
+				set_variable = { race_trait_slot_[WHAT_SLOT_IT_IS]  = race_trait}
+				set_variable = { expertise_slot_[WHAT_SLOT_IT_IS]  = 1}
+			}
+			WHAT_SLOT_IT_IS = "[?what_espionage_slot]"
+		}
 	}
-
-
-
-	meta_effect = {
-		text = {
-			agent_recruitment_[AGENT_NAME] = yes
-		}
-		AGENT_NAME = "[?supplied_agent_name.GetTokenKey]"
-	}
-	meta_effect = {
-		text = {
-
-			set_variable = { agent_name_slot_[WHAT_SLOT_IT_IS]  = agent_name} 
-			set_variable = { agent_charisma_slot_[WHAT_SLOT_IT_IS]  = agent_charisma} 
-			set_variable = { agent_intelligence_slot_[WHAT_SLOT_IT_IS]  = agent_intelligence} 
-			set_variable = { agent_martial_slot_[WHAT_SLOT_IT_IS]  = agent_martial} 
-			set_variable = { personality_trait_slot_[WHAT_SLOT_IT_IS]  = personality_trait} 
-			set_variable = { class_trait_slot_[WHAT_SLOT_IT_IS]  = class_trait} 
-			set_variable = { race_trait_slot_[WHAT_SLOT_IT_IS]  = race_trait}
-			set_variable = { expertise_slot_[WHAT_SLOT_IT_IS]  = 1}
-		}
-		WHAT_SLOT_IT_IS = "[?what_espionage_slot]"
-	}
+}
+agent_recruitment_ = {
 
 }
