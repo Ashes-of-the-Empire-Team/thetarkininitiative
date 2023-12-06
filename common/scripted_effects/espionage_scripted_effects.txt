@@ -1826,6 +1826,7 @@ agent_recruitment_just_lucky = { ## ALL FEEDS UP TO create_temporary_agents EFFE
 }
 
 agent_recruitment_mak_eshkarey = { ## ALL FEEDS UP TO create_temporary_agents EFFECT
+	log = "got here"
 	set_temp_variable = {agent_name = token:mak_eshkarey}
 	set_temp_variable = {agent_martial = 7}
 	set_temp_variable = {agent_charisma = 4} 
@@ -1934,7 +1935,7 @@ clear_temp_variable_in_agents = {
 
 ### EXAMPLE OF USING IN FOCUS TREES
 #
-#set_variable = {supplied_agent_name = token:kairan_ember}
+#set_temp_variable = {supplied_agent_name = token:kairan_ember}
 #agent_recruitment_effect = yes
 
 ###
@@ -2006,4 +2007,15 @@ agent_recruitment_effect = {
 }
 agent_recruitment_ = {
 
+}
+
+test_effect_agent = {
+	set_temp_variable = {agent_name = token:mak_eshkarey}
+	meta_effect = {
+		text = {
+			agent_recruitment_[AGENT_NAME] = yes
+		}
+		AGENT_NAME = "[?agent_name.GetTokenKey]"
+	}
+	log = "[?agent_name.GetTokenKey]"
 }
