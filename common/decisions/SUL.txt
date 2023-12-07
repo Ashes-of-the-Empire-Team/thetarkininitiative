@@ -272,6 +272,7 @@ rebuiling_sullust_category = {
 	}
 }
 
+
 government_loyalty = {
 	SUL_strenthen_the_government = {
 		priority = 20
@@ -317,7 +318,7 @@ government_loyalty = {
 			complete_effect = {
 				add_power_balance_value = {
 					id = SUL_balance
-					value = 0.05
+					value = -0.05
 					tooltip_side = sorosub_left_side
 				}
 			}
@@ -325,6 +326,36 @@ government_loyalty = {
 		}
 }
 
+political_actions={
+	SUL_sorosuub_nationalized = {
+		activation = {
+			always = no
+		}
+		available = {
+			always = no
+		}
+		cancel_trigger = {
+			power_balance_value = {
+				id = SUL_balance
+				value > 0.75
+			}
+		}
+		icon = mission_icon     # For GFX_decision_mission_icon
+		days_mission_timeout = 365
+		complete_effect = {
+			
+		}
+		timeout_effect = {
+			SUL={
+				add_state_core = 417
+				annex_country = {
+					target = SOR
+					end_wars = no
+				}
+			}
+		}
+	}
+}
 political_actions={
 	SUL_sorosuub_depency_bill = {
 		activation = {
@@ -345,9 +376,9 @@ political_actions={
 			
 		}
 		timeout_effect = {
-			SOR={
+			SUL={
 				puppet = {
-					target = SUL
+					target = SOR
 					end_wars = no
 				}
 			}

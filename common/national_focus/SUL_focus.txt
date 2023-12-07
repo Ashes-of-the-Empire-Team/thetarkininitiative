@@ -86,6 +86,32 @@ focus_tree = {
 		}
 	}
 	focus = {
+		id = SUL_elect_new_republic__senator
+		icon = GFX_reb_goal
+		cost = 5
+		x = 0
+		y = 1
+		relative_position_id = SUL_sullust_not_sorosub
+		prerequisite = {
+			focus = SUL_sullust_not_sorosub
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			add_power_balance_value = {
+				id = SUL_balance
+				value = 0.15
+				tooltip_side = government_right_side
+			}
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
 		id = SUL_support_sorosub
 		icon = GFX_reb_goal
 		cost = 5
@@ -127,6 +153,11 @@ focus_tree = {
 		mutually_exclusive = {
 		}
 		completion_reward = {
+			add_power_balance_value = {
+				id = SUL_balance
+				value = -0.1
+				tooltip_side = sorosub_left_side
+			}
 		}
 
 		ai_will_do = {
@@ -134,7 +165,7 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = SUL_filler_1
+		id = SUL_sullust_deffense_consul
 		icon = GFX_reb_goal
 		cost = 5
 		x = 0
@@ -148,7 +179,10 @@ focus_tree = {
 		mutually_exclusive = {
 		}
 		completion_reward = {
-			
+			swap_ideas = {
+				remove_idea = SUL_imperial_cells
+				add_idea = SUL_imperial_cells2
+			}
 		}
 
 		ai_will_do = {
@@ -156,20 +190,27 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = SUL_filler_4
+		id = SUL_preparing_for_the_unknown
 		icon = GFX_reb_goal
 		cost = 5
 		x = -1
 		y = 1
-		relative_position_id = SUL_filler_1
+		relative_position_id = SUL_sullust_deffense_consul
 		prerequisite = {
-			focus = SUL_filler_1
+			focus = SUL_sullust_deffense_consul
 		}
 		search_filters = {
 		}
 		mutually_exclusive = {
 		}
 		completion_reward = {
+			random_owned_state = {
+				limit = {
+					has_avaliable_building_slot = yes
+				}
+				set_temp_variable = {REQUESTED_BUILDING = token:arms_factory_1}
+				Add_building_to_slot_immediately = yes
+			}
 			
 		}
 
@@ -178,21 +219,29 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = SUL_filler_5
+		id = SUL_new_republic_aid
 		icon = GFX_reb_goal
 		cost = 5
 		x = 0
 		y = 1
-		relative_position_id = SUL_filler_4
+		relative_position_id = SUL_preparing_for_the_unknown
 		prerequisite = {
-			focus = SUL_filler_4
+			focus = SUL_preparing_for_the_unknown
 		}
 		search_filters = {
 		}
 		mutually_exclusive = {
 		}
-		completion_reward = {
+		available = {
+			REB = {
+				has_cosmetic_tag = NEW
+				owns_state = 235
+			}
 			
+		}
+		completion_reward = {
+			custom_effect_tooltip = tt_rin_gain_150_credits
+		add_from_variable = { currency_amount^primary_currency = 150 }
 		}
 
 		ai_will_do = {
@@ -205,9 +254,9 @@ focus_tree = {
 		cost = 5
 		x = 1
 		y = 1
-		relative_position_id = SUL_filler_1
+		relative_position_id = SUL_sullust_deffense_consul
 		prerequisite = {
-			focus = SUL_filler_1
+			focus = SUL_sullust_deffense_consul
 		}
 		search_filters = {
 		}
@@ -287,10 +336,8 @@ focus_tree = {
 		y = 1
 		relative_position_id = SUL_defence_pact_bith
 		prerequisite = {
+			focus = SUL_new_republic_aid
 			focus = SUL_defence_pact_bith
-		}
-		prerequisite = {
-			focus = SUL_filler_5
 		}
 		available={
 			ERI={
