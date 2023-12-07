@@ -18,6 +18,9 @@ focus_tree = {
 
 	focus = {
 		id = CHA_disturbing_rumours
+		available = {
+			has_completed_focus = CHA_return_of_mon_mothma
+		}
 		icon = GFX_cha_goal
 		cost = 7.2
 		x = 2
@@ -166,7 +169,7 @@ focus_tree = {
 
 	focus = {
 		id = CHA_surveil_everyone
-		icon = GFX_cha_goal
+		icon = GFX_CHA_surveil_everyone
 		cost = 7.2
 		x = 0
 		y = 1
@@ -202,7 +205,7 @@ focus_tree = {
 
 	focus = {
 		id = CHA_continue_appearing_in_public
-		icon = GFX_cha_goal
+		icon = GFX_CHA_continue_appearing_in_public
 		cost = 7.2
 		x = 0
 		y = 1
@@ -238,7 +241,7 @@ focus_tree = {
 
 	focus = {
 		id = CHA_holovision_appearances
-		icon = GFX_cha_goal
+		icon = GFX_CHA_holovision_appearances
 		cost = 7.2
 		x = 0
 		y = 1
@@ -286,10 +289,11 @@ focus_tree = {
 		text_icon = Chandrila_focus_style
 
 		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus CHA_negotiate_with_the_imperial_governor"
+			add_stability = 0.10
 		}
 		relative_position_id = CHA_reclaiming_our_sovereignty
 		prerequisite = { focus = CHA_reclaiming_our_sovereignty }
+		mutually_exclusive = { focus = CHA_armed_resistance }
 	}
 
 	focus = {
@@ -328,7 +332,7 @@ focus_tree = {
 
 	focus = {
 		id = CHA_freedom_at_last
-		icon = GFX_cha_goal
+		icon = GFX_CHA_freedom_at_last
 		cost = 7.2
 		x = 1
 		y = 1
@@ -361,11 +365,12 @@ focus_tree = {
 		}
 		relative_position_id = CHA_reclaiming_our_sovereignty
 		prerequisite = { focus = CHA_reclaiming_our_sovereignty }
+		mutually_exclusive = { focus = CHA_negotiate_with_the_imperial_governor }
 	}
 
 	focus = {
 		id = CHA_request_the_help_of_the_alliance_fleet
-		icon = GFX_cha_goal
+		icon = GFX_CHA_help_of_alliance_fleet
 		cost = 7.2
 		x = 0
 		y = 1
@@ -393,7 +398,11 @@ focus_tree = {
 		text_icon = Chandrila_focus_style
 
 		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus CHA_return_of_mon_mothma"
+			remove_trait = {
+				character = CHA_mon_mothma
+				ideology = centrist_group
+				trait = exiled
+		   }
 		}
 		relative_position_id = CHA_freedom_at_last
 		prerequisite = { focus = CHA_freedom_at_last }
@@ -449,6 +458,7 @@ focus_tree = {
 		}
 		relative_position_id = CHA_the_environment
 		prerequisite = { focus = CHA_the_environment }
+		mutually_exclusive = { focus = CHA_clean_environment_act }
 	}
 
 	focus = {
@@ -485,6 +495,7 @@ focus_tree = {
 		}
 		relative_position_id = CHA_the_environment
 		prerequisite = { focus = CHA_the_environment }
+		mutually_exclusive = { focus = CHA_exploit_mineral_reserves }
 	}
 
 	focus = {
@@ -577,7 +588,7 @@ focus_tree = {
 
 	focus = {
 		id = CHA_batteryfarming
-		icon = GFX_cha_goal
+		icon = GFX_CHA_battery_farming
 		cost = 7.2
 		x = 0
 		y = 1
@@ -595,7 +606,7 @@ focus_tree = {
 
 	focus = {
 		id = CHA_squallburgers
-		icon = GFX_cha_goal
+		icon = GFX_CHA_squall_burgers
 		cost = 7.2
 		x = 0
 		y = 1
@@ -685,7 +696,7 @@ focus_tree = {
 
 	focus = {
 		id = CHA_squall_cuisine
-		icon = GFX_cha_goal
+		icon = GFX_CHA_squall_cuisine
 		cost = 7.2
 		x = 0
 		y = 1
@@ -796,7 +807,7 @@ focus_tree = {
 
 	focus = {
 		id = CHA_the_bankers_of_chandrila
-		icon = GFX_cha_goal
+		icon = GFX_CHA_bankers_of_chandrila
 		cost = 7.2
 		x = -3
 		y = 1
@@ -862,7 +873,7 @@ focus_tree = {
 		text_icon = Chandrila_focus_style
 
 		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus CHA_the_kolma_bank"
+			custom_effect_tooltip = plus100credits_tt
 		}
 		relative_position_id = CHA_the_bankers_of_chandrila
 		prerequisite = { focus = CHA_the_bankers_of_chandrila }
@@ -881,7 +892,7 @@ focus_tree = {
 		text_icon = Chandrila_focus_style
 
 		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus CHA_the_sculdun_bank"
+			custom_effect_tooltip = plus300credits_tt
 		}
 		relative_position_id = CHA_the_bankers_of_chandrila
 		prerequisite = { focus = CHA_the_bankers_of_chandrila }
@@ -944,7 +955,7 @@ focus_tree = {
 
 	focus = {
 		id = CHA_approach_the_igc
-		icon = GFX_cha_goal
+		icon = GFX_CHA_ibc_loan
 		cost = 7.2
 		x = 0
 		y = 1
@@ -962,7 +973,7 @@ focus_tree = {
 
 	focus = {
 		id = CHA_the_tagge_family
-		icon = GFX_cha_goal
+		icon = GFX_CHA_the_tagge_family
 		cost = 7.2
 		x = 2
 		y = 1
@@ -972,7 +983,8 @@ focus_tree = {
 		text_icon = Chandrila_focus_style
 
 		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus CHA_the_tagge_family"
+			custom_effect_tooltip = plus400credits_tt
+			corp_influence_increase = yes
 		}
 		relative_position_id = CHA_an_outside_loan
 		prerequisite = { focus = CHA_an_outside_loan }
@@ -1016,7 +1028,7 @@ focus_tree = {
 
 	focus = {
 		id = CHA_diplomatic_mission_to_caamas
-		icon = GFX_cha_goal
+		icon = GFX_CHA_mission_to_caamas
 		cost = 7.2
 		x = -2
 		y = 1
@@ -1026,7 +1038,7 @@ focus_tree = {
 		text_icon = Chandrila_focus_style
 
 		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus CHA_diplomatic_mission_to_caamas"
+
 		}
 		relative_position_id = CHA_the_alliance_of_free_planet
 		prerequisite = { focus = CHA_the_alliance_of_free_planet }
@@ -1044,7 +1056,7 @@ focus_tree = {
 		text_icon = Chandrila_focus_style
 
 		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus CHA_united_in_vision"
+			add_ideas = CHA_caamas_agreement
 		}
 		relative_position_id = CHA_diplomatic_mission_to_caamas
 		prerequisite = { focus = CHA_diplomatic_mission_to_caamas }
@@ -1052,7 +1064,7 @@ focus_tree = {
 
 	focus = {
 		id = CHA_diplomatic_mission_to_taris
-		icon = GFX_cha_goal
+		icon = GFX_CHA_mission_to_taris
 		cost = 7.2
 		x = 0
 		y = 1
@@ -1088,7 +1100,7 @@ focus_tree = {
 
 	focus = {
 		id = CHA_diplomatic_mission_to_mimban
-		icon = GFX_cha_goal
+		icon = GFX_CHA_mission_to_mimban
 		cost = 7.2
 		x = 2
 		y = 1
