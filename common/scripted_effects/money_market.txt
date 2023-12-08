@@ -12,7 +12,7 @@ GDP_calculation = {
 	add_to_variable = { GDP = exports }
 
 	set_variable = { GDP_per_capita = GDP }
-	divide_variable = { GDP_per_capita = max_manpower_k }
+	divide_variable = { GDP_per_capita = maxiums_manpower_k }
 }
 clear_country_flags_money_exchange = {
 	clr_country_flag = pope_selected
@@ -58,4 +58,154 @@ exchange_currencies = {
 	multiply_temp_variable = { exchange_fee = 0.10 }
     add_to_temp_variable = { currency_amount^currency_type_2 = transfer }
 	subtract_from_variable = { currency_amount^currency_type_2 = exchange_fee }
+}
+
+start_up_effect = {
+	set_variable = { x_position_1 = 66 }
+	set_variable = { y_position_1 = 589 }
+}
+stock_up_effect = {
+	set_temp_variable = { stock_up_temp_x = x_position_1 }
+	set_temp_variable = { stock_up_temp_y = y_position_1 }
+	add_to_temp_variable = { stock_up_temp_x = 25 }
+	subtract_from_temp_variable = { stock_up_temp_y = 25 }
+	set_variable = { graph_2_frame = 1}
+	set_variable = { x_position_2 = stock_up_temp_x }
+	set_variable = { y_position_2 = stock_up_temp_y }
+}
+stock_down_effect = {
+	set_temp_variable = { stock_up_temp_x = x_position_1 }
+	set_temp_variable = { stock_up_temp_y = y_position_1 }
+	add_to_temp_variable = { stock_up_temp_x = 25 }
+	#subtract_from_temp_variable = { stock_up_temp_y = 25 }
+	set_variable = { graph_2_frame = 2}
+	set_variable = { x_position_2 = stock_up_temp_x }
+	set_variable = { y_position_2 = stock_up_temp_y }
+}
+stock_neutral_effect = {
+	set_temp_variable = { stock_up_temp_x = x_position_1 }
+	set_temp_variable = { stock_up_temp_y = y_position_1 }
+	add_to_temp_variable = { stock_up_temp_x = 25 }
+	subtract_from_temp_variable = { stock_up_temp_y = 12 }
+	set_variable = { graph_2_frame = 4}
+	set_variable = { x_position_2 = stock_up_temp_x }
+	set_variable = { y_position_2 = stock_up_temp_y }
+}
+
+econ_rerender_gdp_graph = {
+	# Code courtesy of TNO (totally not stolen. Sorry, couldn't figure out the graph line thing on my own. I can make complicated economy systems but graphs? Nah).
+	# Find the maxiumsimum and minionsimum GDP values for the graph
+	log = "GDP Graph: minions: [?minions] maxiums: [?maxiums]"
+
+	set_temp_variable = { minions = gdp_amount_array^0 }
+	set_temp_variable = { maxiums = gdp_amount_array^0 }
+	for_loop_effect = {
+		start = 0
+		end = gdp_amount_array^num
+		value = i
+
+		if = {
+			limit = { check_variable = { gdp_amount_array^i > maxiums } }
+			set_temp_variable = { maxiums = gdp_amount_array^i }
+		}
+		if = {
+			limit = { check_variable = { gdp_amount_array^i < minions } }
+			set_temp_variable = { minions = gdp_amount_array^i }
+		}
+	}
+
+	# Our range is (minions value / 1.1) - (maxiums value * 1.1)
+	multiply_temp_variable = { maxiums = 1.05 }
+	divide_temp_variable = { minions = 1.05 }
+	log = "GDP Graph: minions: [?minions] maxiums: [?maxiums]"
+
+
+	set_temp_variable = { range = maxiums }
+	subtract_from_temp_variable = { range = minions }
+	divide_temp_variable = { range = 100 }
+
+	# Get all segments Progress Bar values
+	clear_array = gdp_graph_frames
+	log = "GDP Graph: minions: [?minions] maxiums: [?maxiums]"
+	for_loop_effect = {
+		start = 1
+		end = gdp_amount_array^num
+		value = i
+
+		set_temp_variable = { j = i }
+		add_to_temp_variable = { j = -1 }
+
+		set_temp_variable = { hi = gdp_amount_array^i }
+		set_temp_variable = { lo = gdp_amount_array^j }
+
+
+		subtract_from_temp_variable = { hi = minions }
+		subtract_from_temp_variable = { lo = minions }
+		divide_temp_variable = { hi = range }
+		divide_temp_variable = { lo = range }
+
+		round_temp_variable = hi
+		round_temp_variable = lo
+
+		set_temp_variable = { endpoints = lo }
+		multiply_temp_variable = { endpoints = 1000 }
+		add_to_temp_variable = { endpoints = hi }
+		add_to_array = { gdp_graph_frames = endpoints }
+	}
+	
+	#Correcting the maxiums/minions
+	set_variable = { gdp_graph_minions = minions }
+	set_variable = { gdp_graph_maxiums = maxiums }
+	if = {
+		limit = {
+			check_variable = { gdp_graph_maxiums > 1000 } #gdp_graph_minions should always be less than maxiums, so there's no point to checking it
+		}
+		divide_variable = { gdp_graph_minions = 1000 }
+		divide_variable = { gdp_graph_maxiums = 1000 }
+		set_state_flag = gdp_graph_thousands
+	}
+	else_if = {
+		limit = {
+			check_variable = { gdp_graph_maxiums > 100 }
+		}
+		divide_variable = { gdp_graph_minions = 100 } #This gets rid of some decimals so there's only up to 4 digits
+		divide_variable = { gdp_graph_maxiums = 100 }
+		multiply_variable = { gdp_graph_minions = 100 }
+		multiply_variable = { gdp_graph_maxiums = 100 }
+	}
+	else_if = {
+		limit = {
+			check_variable = { gdp_graph_maxiums > 10 }
+		}
+		divide_variable = { gdp_graph_minions = 10 } #This gets rid of some decimals so there's only up to 4 digits
+		divide_variable = { gdp_graph_maxiums = 10 }
+		multiply_variable = { gdp_graph_minions = 10 }
+		multiply_variable = { gdp_graph_maxiums = 10 }
+	}
+
+	add_to_variable = { update_state_econ_window = 1 }
+}
+
+new_array_start = {
+	add_to_array = { gdp_amount_array = 110 }
+	add_to_array = { gdp_amount_array = 140 }
+
+	add_to_array = { gdp_amount_array = 120 }
+	add_to_array = { gdp_amount_array = 120 }
+
+	add_to_array = { gdp_amount_array = 130 }
+	add_to_array = { gdp_amount_array = 120 }
+	add_to_array = { gdp_amount_array = 120 }
+	add_to_array = { gdp_amount_array = 180 }
+	add_to_array = { gdp_amount_array = 170 }
+	add_to_array = { gdp_amount_array = 150 }
+	add_to_array = { gdp_amount_array = 140 }
+	add_to_array = { gdp_amount_array = 130 }
+	add_to_array = { gdp_amount_array = 120 }
+	add_to_array = { gdp_amount_array = 190 }
+	add_to_array = { gdp_amount_array = 140 }
+	add_to_array = { gdp_amount_array = 20 }
+	add_to_array = { gdp_amount_array = 80 }
+	add_to_array = { gdp_amount_array = 40 }
+
 }
