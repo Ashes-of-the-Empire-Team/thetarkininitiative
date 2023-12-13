@@ -1,0 +1,103 @@
+scripted_gui = {
+    Marketplace_selection = {
+        context_type = player_context
+        window_name = "new_buying_market"
+        parent_window_name = countryinternationalmarketview
+        visible = {
+            always = yes
+        }
+        dynamic_lists = {
+            buying_items_grid = {
+                array = current_selected_market_category_array
+                entry_container = buying_item_box
+                change_scope = no
+            }
+        }
+        effects = {
+            naval_category_click = {
+                set_variable = {market_category = global.naval_market_category}
+                create_new_category_for_market = yes
+            }
+            army_category_click = {
+                set_variable = {market_category = global.land_market_category}
+                create_new_category_for_market = yes
+            }
+            air_category_click = {
+                set_variable = {market_category = global.air_market_category}
+                create_new_category_for_market = yes
+            }
+            buy_button_click = {
+                set_temp_variable = {item_to_buy = current_selected_market_category_array^i}
+                if = {
+                    limit = {
+                        check_variable = {market_category = global.naval_market_category}
+                    }
+                    set_temp_variable = {amount_to_purchase = 1}
+                }else = {
+                    set_temp_variable = {amount_to_purchase = 100}
+                }
+                if = {
+                    limit = {
+                        set_temp_variable = {owner_of_item = who_owns_item@token:item_to_buy}
+                        set_temp_variable = {money_to_pass = currency_amount^primary_currency}
+                        set_temp_variable = {total_price = global.price_of_item_@token:item_to_buy}
+                        multiply_temp_variable = {total_price = amount_to_purchase}
+                        check_variable = { money_to_pass > total_price}
+                    }
+                    buy_item_scripted_effect = yes
+                }
+			}
+            buy_button_control_click = {
+                if = {
+                    limit = {
+                        check_variable = {market_category = global.naval_market_category}
+                    }
+                    set_temp_variable = {amount_to_purchase = 5}
+                }else = {
+                    set_temp_variable = {amount_to_purchase = 500}
+                }
+                if = {
+                    limit = {
+                        set_temp_variable = {owner_of_item = who_owns_item@token:item_to_buy}
+                        set_temp_variable = {money_to_pass = currency_amount^primary_currency}
+                        var:owner_of_item = {
+                            set_temp_variable = {total_price = price_of_item_@token:item_to_buy}
+                            multiply_temp_variable = {total_price = amount_to_purchase}
+                            check_variable = { money_to_pass > total_price}
+                        }
+                    }
+                    set_variable = {item_to_buy = current_selected_market_category_array^i}
+                    buy_item_scripted_effect = yes
+                }
+			}
+            buy_button_shift_click = {
+                if = {
+                    limit = {
+                        check_variable = {market_category = global.naval_market_category}
+                    }
+                    set_temp_variable = {amount_to_purchase = 10}
+                }else = {
+                    set_temp_variable = {amount_to_purchase = 1000}
+                }
+                if = {
+                    limit = {
+                        set_temp_variable = {owner_of_item = who_owns_item@token:item_to_buy}
+                        set_temp_variable = {money_to_pass = currency_amount^primary_currency}
+                        var:owner_of_item = {
+                            set_temp_variable = {total_price = price_of_item_@token:item_to_buy}
+                            multiply_temp_variable = {total_price = amount_to_purchase}
+                            check_variable = { money_to_pass > total_price}
+                        }
+                    }
+                    set_variable = {item_to_buy = current_selected_market_category_array^i}
+                    buy_item_scripted_effect = yes
+                }
+			}
+        }
+        properties = {
+            buy_button = {
+                image = "[market_image_getter]"
+            }
+        }
+    }
+}

@@ -47,7 +47,7 @@ Add_building_to_slot_immediately = { ## THIS ADDS BUILDINGS FOR FREE AND IMMEDIA
 	custom_effect_tooltip = add_building_to_slot
 	hidden_effect = {
 		if = {
-			limit = { ## TRIES TO BUILD IN 1st SLOT THEN IN SECOND, WILL ALWAYS REPLACE SECOND BUILDING
+			limit = { ## TRIES TO BUILD IN 1st SLOT THEN IN SECOND, IF 2ND IS A WONDER BUILD IN FIRST INSTEAD
 				NOT = {
 					has_variable = building_1
 				}
@@ -65,7 +65,6 @@ Add_building_to_slot_immediately = { ## THIS ADDS BUILDINGS FOR FREE AND IMMEDIA
 					[BUILDING_NAME]_add_effect = yes
 				}
 				BUILDING_NAME = "[?building_1.GetTokenKey]"
-				debug = yes
 			}
 			if = {
 				limit = {
@@ -73,7 +72,12 @@ Add_building_to_slot_immediately = { ## THIS ADDS BUILDINGS FOR FREE AND IMMEDIA
 				}
 				set_state_flag = wonder_built_no_destroy_1
 			}
-		}else = {
+		}else_if = {
+			limit = {
+				NOT = {
+					has_state_flag = wonder_built_no_destroy_2
+				}
+			}
 			hidden_effect = {
 				clear_building_2_effects = yes
 			}
@@ -93,6 +97,27 @@ Add_building_to_slot_immediately = { ## THIS ADDS BUILDINGS FOR FREE AND IMMEDIA
 					check_variable = {building_2 = unique_building_on_state}
 				}
 				set_state_flag = wonder_built_no_destroy_2
+			}
+		}else = {
+			hidden_effect = {
+				clear_building_1_effects = yes
+			}
+			set_variable = { building_1 = REQUESTED_BUILDING }
+			set_temp_variable = {idea_token_passer = building_1}
+			controller = {
+				add_ideas = var:building_1
+			}
+			meta_effect = {
+				text = {
+					[BUILDING_NAME]_add_effect = yes
+				}
+				BUILDING_NAME = "[?building_1.GetTokenKey]"
+			}
+			if = {
+				limit = {
+					check_variable = {building_1 = unique_building_on_state}
+				}
+				set_state_flag = wonder_built_no_destroy_1
 			}
 		}
 	}

@@ -1,0 +1,76 @@
+on_actions = {
+	on_startup = {
+		effect = {
+			## TECH
+			KUA = {
+				set_technology = {
+					at_at = 1
+				}
+			}
+			set_variable = {naval_market_category = 0}
+			set_variable = {land_market_category = 1}
+			set_variable = {air_market_category = 2}
+
+
+			set_variable = {air_market_category = 2}
+
+			set_variable = {empire_market_choice = 0}
+			set_variable = {republic_market_choice = 1}
+			set_variable = {neutral_market_choice = 2}
+
+			## NEED TO ASSIGN PRICE, AND WHAT FACTION BELONGS TO
+
+
+			##
+			## GLOBAL ARRAY OF ALL EQUIPMENT, SEPERATED INTO CATEGORIES. WILL THEN SPLIT INTO LOCAL ARRAYS LATER FOR GRIDBOXES
+			### ADD IN NEW STUFF UNDER THE CORRECT FACTION TYPE
+			## EMPIRE
+			add_to_array = {
+				array = Market_array@var:land_market_category
+				value = token:at_at_chassis_0
+			}
+			set_variable = {who_owns_item@token:at_at_chassis_0 = KUA}
+			set_variable = {ic_cost@token:at_at_chassis_0 = 50}
+			set_variable = {belonging_to_what_faction@token:at_at_chassis_0 = empire_item}
+			set_variable = {price_of_item_@token:at_at_chassis_0 = 50}
+			KUA = {
+				add_to_array = {
+					array = Production_array@var:land_market_category
+					value = token:at_at_chassis_0
+				}
+			}
+
+
+
+			add_to_array = {
+				array = Market_array@var:land_market_category
+				value = token:at_at_chassis_1
+			}
+			set_variable = {who_owns_item@token:at_at_chassis_1 = KUA}
+			set_variable = {ic_cost@token:at_at_chassis_1 = 50}
+			set_variable = {belonging_to_what_faction@token:at_at_chassis_1 = empire_item}
+			set_variable = {price_of_item_@token:at_at_chassis_1 = 150}
+			KUA = {
+				add_to_array = {
+					array = Production_array@var:land_market_category
+					value = token:at_at_chassis_1
+				}
+			}
+			## NAVY
+			add_to_array = {
+				array = Market_array@var:naval_market_category
+				value = token:isd_1
+			}
+			set_variable = {who_owns_item@token:isd_1 = KUA}
+			set_variable = {ic_cost@token:isd_1 = 50}
+			set_variable = {belonging_to_what_faction@token:isd_1 = empire_item}
+			set_variable = {price_of_item_@token:isd_1 = 50}
+			KUA = {
+				add_to_array = {
+					array = Production_array@var:naval_market_category
+					value = token:isd_1
+				}
+			}
+		}
+	}
+}
