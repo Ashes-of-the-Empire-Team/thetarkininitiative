@@ -24,7 +24,7 @@ focus_tree = {
 	#The Empire Restored
 	focus = {
 		id = ZSJ_the_empire_restored
-		icon = GFX_zsinj_goal
+		icon = GFX_the_empire_restored_goal
 		x = 14
 		y = 15
 		cost = 5
@@ -66,7 +66,7 @@ focus_tree = {
 	#The Economic Plan
 	focus = {
 		id = ZSJ_the_economic_plan
-		icon = GFX_zsinj_goal
+		icon = GFX_economic_plan_goal
 		x = 20
 		y = 5
 		cost = 1.5
@@ -102,7 +102,7 @@ focus_tree = {
 	#The New Republic
 	focus = {
 		id = ZSJ_the_new_republic
-		icon = GFX_zsinj_goal
+		icon = GFX_peace_with_new_rep_goal
 		x = 14
 		y = 1
 		cost = 10
@@ -115,7 +115,7 @@ focus_tree = {
 	#Expanded Recruitment
 	focus = {
 		id = ZSJ_expanded_recruitment
-		icon = GFX_zsinj_goal  
+		icon = GFX_expanded_recruitment_goal  
 		x = 7
 		y = 7
 		cost = 10
@@ -166,7 +166,7 @@ focus_tree = {
 	#Hunt Down Rivals
 	focus = {
 		id = ZSJ_hunt_down_rivals
-		icon = GFX_zsinj_goal
+		icon = GFX_hunt_down_rivals_goal
 		x = 14
 		y = 2
 		cost = 10
@@ -218,7 +218,7 @@ focus_tree = {
 	#Plans Within Plans
 	focus = {
 		id = ZSJ_plans_within_plans
-		icon = GFX_zsinj_goal
+		icon = GFX_plans_within_plans_goal
 		x = 14
 		y = 4
 		cost = 10
@@ -240,13 +240,12 @@ focus_tree = {
 		}
 		prerequisite = { focus = ZSJ_the_military_plan  }
 		completion_reward = {
-			5 = {
-				add_building_construction = {
-					type = arms_factory
-					level = 2
-					instant_build = yes
+			random_owned_state = {
+				limit = {
+					has_avaliable_building_slot = yes
 				}
-				add_extra_state_shared_building_slots = 2
+				set_temp_variable = {REQUESTED_BUILDING = token:arms_factory_1}
+				Add_building_to_slot_immediately = yes
 			}
 			custom_effect_tooltip = ZSJ_250_credits_tt
 		}
@@ -255,7 +254,7 @@ focus_tree = {
 	#Serenno Munitions
 	focus = {
 		id = ZSJ_serenno_munitions
-		icon = GFX_zsinj_goal
+		icon = GFX_serenno_munitions_goal
 		x = 1
 		y = 7
 		cost = 5
@@ -265,12 +264,11 @@ focus_tree = {
 		prerequisite = { focus = ZSJ_expand_the_military_industry  }
 		completion_reward = {
 			130 = {
-				add_building_construction = {
-					type = arms_factory
-					level = 2
-					instant_build = yes
+				limit = {
+					has_avaliable_building_slot = yes
 				}
-				add_extra_state_shared_building_slots = 2
+				set_temp_variable = {REQUESTED_BUILDING = token:arms_factory_1}
+				Add_building_to_slot_immediately = yes
 			}
 			subtract_from_variable = { currency_amount^primary_currency = 250 }
 			custom_effect_tooltip = ZSJ_250_credits_tt
@@ -280,7 +278,7 @@ focus_tree = {
 	#The Military Plan
 	focus = {
 		id = ZSJ_the_military_plan
-		icon = GFX_zsinj_goal
+		icon = GFX_military_plan_goal
 		x = 6
 		y = 5
 		cost = 1.5
@@ -315,7 +313,7 @@ focus_tree = {
 	#Tie Raptors
 	focus = {
 		id = ZSJ_tie_raptors
-		icon = GFX_zsinj_goal
+		icon = GFX_tie_raptor_goal
 		x = 4
 		y = 6
 		cost = 7.2
@@ -347,7 +345,7 @@ focus_tree = {
 	#Improved Models
 	focus = {
 		id = ZSJ_improved_models
-		icon = GFX_zsinj_goal
+		icon = GFX_tie_advanced_goal
 		x = 5
 		y = 7
 		cost = 10
@@ -361,7 +359,7 @@ focus_tree = {
 	#The Next Tie
 	focus = {
 		id = ZSJ_the_next_tie
-		icon = GFX_zsinj_goal
+		icon = GFX_tie_advanced_goal
 		x = 4
 		y = 8
 		cost = 10
@@ -381,7 +379,7 @@ focus_tree = {
 	#Raptor Troopers
 	focus = {
 		id = ZSJ_raptor_troopers
-		icon = GFX_zsinj_goal
+		icon = GFX_raptor_troopers_goal
 		x = 7
 		y = 6
 		cost = 10
@@ -402,7 +400,7 @@ focus_tree = {
 	#An Unlikely Ally
 	focus = {
 		id = ZSJ_an_unlikely_ally
-		icon = GFX_zsinj_goal
+		icon = GFX_an_unlikely_ally_goal
 		x = 13
 		y = 7
 		cost = 5
@@ -446,7 +444,7 @@ focus_tree = {
 	#Attract Rival Troopers
 	focus = {
 		id = ZSJ_attract_rival_troopers
-		icon = GFX_zsinj_goal
+		icon = GFX_attract_rivals_goal
 		x = 9
 		y = 6
 		cost = 5
@@ -465,7 +463,7 @@ focus_tree = {
 	#A New Academy
 	focus = {
 		id = ZSJ_a_new_academy
-		icon = GFX_zsinj_goal
+		icon = GFX_a_new_academy_goal
 		x = 9
 		y = 7
 		cost = 5
@@ -485,7 +483,7 @@ focus_tree = {
 	#Stormtroopers
 	focus = {
 		id = ZSJ_stormtroopers
-		icon = GFX_zsinj_goal
+		icon = GFX_stormtroopers_goal
 		x = 9
 		y = 8
 		cost = 10
@@ -506,7 +504,7 @@ focus_tree = {
 	#Armored Warfare Innovations
 	focus = {
 		id = ZSJ_armored_warfare_innovations
-		icon = GFX_zsinj_goal
+		icon = GFX_armored_innovation_goal
 		x = 11
 		y = 6
 		cost = 10
@@ -526,7 +524,7 @@ focus_tree = {
 	#Mobile Walkers
 	focus = {
 		id = ZSJ_mobile_walkers
-		icon = GFX_zsinj_goal
+		icon = GFX_mobile_walker_goal
 		x = 11
 		y = 7
 		cost = 5
@@ -546,7 +544,7 @@ focus_tree = {
 	#Heavy Walkers
 	focus = {
 		id = ZSJ_heavy_walkers
-		icon = GFX_zsinj_goal
+		icon = GFX_heavy_walker_goal
 		x = 11
 		y = 8
 		cost = 5
@@ -566,7 +564,7 @@ focus_tree = {
 	#The Dathomir Plan
 	focus = {
 		id = ZSJ_the_dathomir_plan
-		icon = GFX_zsinj_goal
+		icon = GFX_dathomir_plan_goal
 		x = 14
 		y = 5
 		cost = 1.5
@@ -598,7 +596,7 @@ focus_tree = {
 	#Annihilate the Witches
 	focus = {
 		id = ZSJ_annihilate_the_witches
-		icon = GFX_zsinj_goal
+		icon = GFX_annihilate_witches_goal
 		x = 15
 		y = 7
 		cost = 5
@@ -612,13 +610,18 @@ focus_tree = {
 			    target = DAT
 			    type = annex_everything
 			}
+			add_to_variable = {
+				imperial_fervor = 100
+				tooltip = imperial_fervor_tt
+			}
+			
 		}
 	}
 
 	#Dathomir Shipyards
 	focus = {
 		id = ZSJ_dathomir_shipyards
-		icon = GFX_zsinj_goal
+		icon = GFX_dathomir_shipyard_goal
 		x = 14
 		y = 8
 		cost = 7.2
@@ -628,12 +631,15 @@ focus_tree = {
 		prerequisite = { focus = ZSJ_annihilate_the_witches  focus = ZSJ_an_unlikely_ally  }
 		completion_reward = {
 			487 = {
-				add_building_construction = {
-					type = dockyard
-					level = 5
-					instant_build = yes
+				clear_building_2_effects = yes
+				clear_building_1_effects = yes
+				clr_state_flag = tile_blocker_building_1
+				clr_state_flag = tile_blocker_building_2
+				limit = {
+					has_avaliable_building_slot = yes
 				}
-				add_extra_state_shared_building_slots = 5
+				set_temp_variable = {REQUESTED_BUILDING = token:heavy_shipyard_1}
+				Add_building_to_slot_immediately = yes
 			}
 		}
 	}
@@ -829,7 +835,7 @@ focus_tree = {
 	#Teubbo the Hutt
 	focus = {
 		id = ZSJ_teubbo_the_hutt
-		icon = GFX_zsinj_goal
+		icon = GFX_teubbo_goal
 		x = 20
 		y = 6
 		cost = 5
@@ -845,7 +851,7 @@ focus_tree = {
 	#Zygerria
 	focus = {
 		id = ZSJ_zygerria
-		icon = GFX_zsinj_goal
+		icon = GFX_zygerria_goal
 		x = 18
 		y = 7
 		cost = 5
@@ -853,6 +859,12 @@ focus_tree = {
 			FOCUS_FILTER_POLITICAL
 		}
 		prerequisite = { focus = ZSJ_teubbo_the_hutt  }
+		completion_reward = {
+			create_wargoal = {
+				type = puppet_wargoal_focus
+				target = ZYG
+			}
+		}
 	}
 
 	#Ban Slavery
@@ -951,7 +963,7 @@ focus_tree = {
 	#Santhe Contributions
 	focus = {
 		id = ZSJ_santhe_contributions
-		icon = GFX_zsinj_goal
+		icon = GFX_santhe_contributions_goal
 		x = 24
 		y = 9
 		cost = 5
@@ -967,7 +979,7 @@ focus_tree = {
 	#Approach the CSA
 	focus = {
 		id = ZSJ_approach_the_csa
-		icon = GFX_zsinj_goal
+		icon = GFX_approach_the_csa_goal
 		x = 23
 		y = 7
 		cost = 5
@@ -1030,7 +1042,7 @@ focus_tree = {
 	#Support Santhe
 	focus = {
 		id = ZSJ_support_santhe
-		icon = GFX_zsinj_goal
+		icon = GFX_support_santhe_goal
 		x = 24
 		y = 8
 		cost = 5
@@ -1056,20 +1068,18 @@ focus_tree = {
 		prerequisite = { focus = ZSJ_stabilize_the_economy  }
 		completion_reward = {
 		488 = {
-			add_building_construction = {
-				type = industrial_complex
-				level = 2
-				instant_build = yes
+			limit = {
+				has_avaliable_building_slot = yes
 			}
-			add_extra_state_shared_building_slots = 2
+			set_temp_variable = {REQUESTED_BUILDING = token:corporate_office_1}
+			Add_building_to_slot_immediately = yes
 		}
 		490 = {
-			add_building_construction = {
-				type = industrial_complex
-				level = 2
-				instant_build = yes
+			limit = {
+				has_avaliable_building_slot = yes
 			}
-			add_extra_state_shared_building_slots = 2
+			set_temp_variable = {REQUESTED_BUILDING = token:corporate_office_1}
+			Add_building_to_slot_immediately = yes
 		}
 		subtract_from_variable = { currency_amount^primary_currency = 200 }
 		custom_effect_tooltip = ZSJ_200_credits_tt
@@ -1079,7 +1089,7 @@ focus_tree = {
 	#D'Asta Family
 	focus = {
 		id = ZSJ_dastafamily
-		icon = GFX_zsinj_goal
+		icon = GFX_dasta_family_goal
 		x = 26
 		y = 9
 		cost = 5
@@ -1101,13 +1111,19 @@ focus_tree = {
 		}
 		prerequisite = { focus = ZSJ_investments_in_serenno  }
 		completion_reward = {
-			129 = {
-				add_building_construction = {
-					type = industrial_complex
-					level = 2
-					instant_build = yes
+			488 = {
+				limit = {
+					has_avaliable_building_slot = yes
 				}
-				add_extra_state_shared_building_slots = 2
+				set_temp_variable = {REQUESTED_BUILDING = token:corporate_office_2}
+				Add_building_to_slot_immediately = yes
+			}
+			490 = {
+				limit = {
+					has_avaliable_building_slot = yes
+				}
+				set_temp_variable = {REQUESTED_BUILDING = token:corporate_office_2}
+				Add_building_to_slot_immediately = yes
 			}
 			subtract_from_variable = { currency_amount^primary_currency = 200 }
 			custom_effect_tooltip = ZSJ_200_credits_tt
@@ -1117,7 +1133,7 @@ focus_tree = {
 	#Serenno Refineries
 	focus = {
 		id = ZSJ_serenno_refineries
-		icon = GFX_zsinj_goal
+		icon = GFX_serenno_refinery_goal
 		x = 29
 		y = 10
 		cost = 5
@@ -1126,14 +1142,11 @@ focus_tree = {
 		}
 		prerequisite = { focus = ZSJ_expand_the_civil_sector  }
 		completion_reward = {
-			489 = {
-				add_building_construction = {
-					type = synthetic_refinery
-					level = 2
-					instant_build = yes
-				}
-				add_extra_state_shared_building_slots = 2
+			limit = {
+				has_avaliable_building_slot = yes
 			}
+			set_temp_variable = {REQUESTED_BUILDING = token:fuel_refinery_2}
+			Add_building_to_slot_immediately = yes
 			subtract_from_variable = { currency_amount^primary_currency = 150 }
 			custom_effect_tooltip = ZSJ_150_credits_tt
 		}
@@ -1166,7 +1179,7 @@ focus_tree = {
 	#The Clandestine Plan
 	focus = {
 		id = ZSJ_the_clandestine_plan
-		icon = GFX_zsinj_goal
+		icon = GFX_clandestine_plan_goal
 		x = 32
 		y = 5
 		cost = 1.5
@@ -1241,7 +1254,7 @@ focus_tree = {
 	#Imperial Intelligence
 	focus = {
 		id = ZSJ_imperial_intelligence
-		icon = GFX_zsinj_goal
+		icon = GFX_imperial_intelligence_goal
 		x = 33
 		y = 6
 		cost = 5

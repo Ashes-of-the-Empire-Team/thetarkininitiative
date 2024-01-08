@@ -1,0 +1,114 @@
+test_effect_market = {
+	set_temp_variable = {item_to_buy = token:isd_1}
+	set_temp_variable = {producer = KUA}
+	meta_effect = {
+		text = {
+			add_equipment_to_stockpile = {
+				type = [MARKET_ITEM]
+				amount = amount_to_purchase
+				producer = [PRODUCER]
+			}
+		}
+		MARKET_ITEM = "[?item_to_buy.GetTokenKey]" 
+		PRODUCER = "[?producer.GetTag]" 
+	}
+}
+
+create_new_category_for_market = {
+	clear_array = current_selected_market_category_array
+	for_each_loop = {
+		array = global.Market_array@var:market_category
+		value = v
+		index = i
+		add_to_array = {
+			array = current_selected_market_category_array
+			value = global.Market_array@var:market_category^i
+		}
+	}
+	sift_through_alliance_types = yes
+}
+sift_through_alliance_types = {
+	if = {
+		limit  ={
+			has_government = imperial
+		}
+		set_temp_variable = {country_belongs_to_what_faction = global.empire_market_choice}
+	}else_if = {
+		limit = {
+			has_goverment = democratic
+		}
+		set_temp_variable = {country_belongs_to_what_faction = global.republic_market_choice}
+	}else = {
+		set_temp_variable = {country_belongs_to_what_faction = global.neutral_market_choice}
+	}
+
+	for_each_loop = {
+		array = current_selected_market_category_array
+		value = v
+		index = i
+		set_temp_variable = {current_looking_at_equipment = v}
+		if = {
+			limit = {
+				OR = {
+					check_variable = {global.belonging_to_what_faction@var:current_looking_at_equipment = global.neutral_market_choice}
+					NOT = {
+						check_variable = {global.belonging_to_what_faction@var:current_looking_at_equipment = country_belongs_to_what_faction} #if they fit their faction type then they get access
+					}
+				}
+			}
+			add_to_temp_array = {
+				array = removal_array
+				value = i
+			}
+		}
+	}
+	set_temp_variable = {actual_index = 0}
+	for_each_loop = {
+		array = removal_array
+		value = v
+		set_temp_variable = {value_to_remove_test = v}
+		subtract_from_temp_variable = {value_to_remove_test = actual_index}
+		add_to_temp_variable = {actual_index = 1}
+		remove_from_array = {
+			array = current_selected_market_category_array
+			index = value_to_remove_test
+		}
+	}
+}
+buy_item_scripted_effect = {
+	set_temp_variable = {producer = global.who_owns_item@var:item_to_buy} ## THIS RELIES ON THE PRODUCER ACTUALLY HAVING THE ABILITY TO PRODUCE THE EQUIPMENT WHEN SELLING IT, OTHERWISE BAD SHIT HAPPENS
+	subtract_from_variable = {currency_amount^primary_currency = total_price}
+	if = {
+		limit = {
+			check_variable = {market_category = global.naval_market_category}
+		}
+		meta_effect = {
+			text = {
+				add_equipment_production = {
+					equipment = {
+						type = [MARKET_ITEM]
+						creator = [PRODUCER]
+					}
+					requested_factories = 1
+					progress = 1.00
+					amount = 1
+				}
+			}
+			MARKET_ITEM = "[?item_to_buy.GetTokenKey]"
+			PRODUCER = "[?producer.GetTag]" 
+		}
+
+	}else = {
+		meta_effect = {
+			text = {
+				add_equipment_to_stockpile = {
+					type = [MARKET_ITEM]
+					amount = amount_to_purchase
+					producer = [PRODUCER]
+				}
+			}
+			MARKET_ITEM = "[?item_to_buy.GetTokenKey]" 
+			PRODUCER = "[?producer.GetTag]" 
+		}
+	}
+}
