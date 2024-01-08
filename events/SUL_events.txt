@@ -152,3 +152,144 @@ country_event = { # SUL and BIT Alliance declines
         add_political_power = 100
 }
 }
+
+country_event = { # Sullist Eradiua peace
+    id = SUL_events.4
+    title = SUL_events.4.t
+    desc = SUL_events.4.d
+    picture = GFX_report_event_conference_room
+
+    is_triggered_only = yes
+    trigger = {
+        tag = ERI
+    }
+
+    fire_only_once = no
+
+    option = { #sabotage
+        name = SUL_events.4.a
+        ai_chance = {
+			factor = 60
+		}
+        hidden_effect = {
+        random_owned_controlled_state = {
+            limit = {
+                is_core_of = SUL
+            }
+        damage_building = {
+            type = arms_factory
+            damage = 1
+        }
+        damage_building = {
+            type = industrial_complex
+            damage = 1
+        }
+        damage_building = {
+            type = infrastructure
+            damage = 1
+        }
+    }
+    }
+        SUL = {
+            country_event = SUL_events.41
+         }
+       }
+
+       option = { #decline
+        name = SUL_events.4.b
+        ai_chance = {
+			factor = 35
+		}
+        add_political_power = 100
+        ERI = {
+            add_opinion_modifier = {
+                target = SUL
+                modifier = SUL_Failed_Peace_talks
+            } 
+        }
+        SUL = {
+            country_event = SUL_events.42
+        }
+    }
+
+    option = { #accept
+        name = SUL_events.4.c
+        ai_chance = {
+			factor = 5
+		}
+        add_political_power = 100
+        ERI = {
+            add_opinion_modifier = {
+                target = SUL
+                modifier = SUL_Successful_Peace_talks
+            } 
+        }
+        SUL = {
+            country_event = SUL_events.43
+        }
+    }
+}
+
+country_event = { #Sabotage happens
+    id = SUL_events.41
+    title = SUL_events.41.t
+    desc = SUL_events.41.d
+    picture = GFX_report_event_conference_room
+
+    is_triggered_only = yes
+
+    fire_only_once = no
+
+    option = {
+        name = SUL_events.41.f
+        ERI = { declare_war_on = {
+            target = SUL
+            type = annex_everything
+        } }
+    }
+}
+country_event = { # no accord
+    id = SUL_events.42
+    title = SUL_events.42.t
+    desc = SUL_events.42.d
+    picture = GFX_report_event_conference_room
+
+    is_triggered_only = yes
+
+    fire_only_once = no
+
+    option = {
+        name = SUL_events.42.f
+        SUL = {
+            add_opinion_modifier = {
+                target = ERI
+                modifier = SUL_Failed_Peace_talks
+            }
+        }
+    }
+}
+country_event = { # Accord met
+    id = SUL_events.43
+    title = SUL_events.43.t
+    desc = SUL_events.43.d
+    picture = GFX_report_event_conference_room
+
+    is_triggered_only = yes
+
+    fire_only_once = no
+
+    option = {
+        name = SUL_events.43.f
+        SUL = {
+            add_opinion_modifier = {
+                target = ERI
+                modifier = SUL_Successful_Peace_talks
+            }
+            diplomatic_relation = {
+                country = ERI
+                relation = non_aggression_pact
+                active = yes
+            }
+        }
+    }
+}
