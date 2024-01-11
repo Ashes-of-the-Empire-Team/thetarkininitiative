@@ -243,9 +243,10 @@ country_event = {
     is_triggered_only = yes
     option = {
         name = "This is all very suspicious..."
-        EMP = {
-            country_event = {id=EMP.10}
-        }
+		add_power_balance_value = {
+			id = EMP_leadership_power_balance
+			value = -0.1
+		}
         ai_chance = { factor = 100 }
         #tooltip
     }
@@ -267,14 +268,11 @@ country_event = {
     is_triggered_only = yes
     option = {
         name = "What a disgrace!"
-        EMP = {
-            country_event = {id=EMP.11}
-        }
         ai_chance = { factor = 100 }
         EMP = {
             retire_character = EMP_sate_pestage
         }
-        #tooltip
+		promote_character = EMP_ruling_council
     }
 }
 country_event = {
@@ -447,7 +445,11 @@ country_event = {
         #tooltip
         news_event = {id=empnews.8 hours=12}
         ai_chance = { factor = 100 }
-        promote_character = EMP_ysanne_isard
+        kill_country_leader = yes
+		promote_character = {
+			character = EMP_ysanne_isard
+			ideology = imperial_ideology
+		}
     }
 }
 
@@ -467,19 +469,37 @@ country_event = {
     }
     fire_only_once = yes
     option = {
-        name = "Let us bide our time..."
+        name = EMP.17.a
 		add_ideas = EMP_leadership_crisis_1
 		set_power_balance = {
 			id = EMP_leadership_power_balance
 			left_side = EMP_pestage_side
 			right_side = EMP_council_side
 		}
+		hidden_effect={
+			add_power_balance_modifier = {
+				id = EMP_leadership_power_balance
+				modifier = EMP_leadership_power_pestage_crowned
+			}
+			add_power_balance_modifier = {
+				id = EMP_leadership_power_balance
+				modifier = EMP_leadership_power_ciutric_holdings
+			}
+			add_power_balance_modifier = {
+				id = EMP_leadership_power_balance
+				modifier = EMP_leadership_power_council_influence
+			}
+			add_power_balance_modifier = {
+				id = EMP_leadership_power_balance
+				modifier = EMP_leadership_power_tribunial
+			}
+		}
 		mark_focus_tree_layout_dirty = yes
     }
 }
 
 country_event = {
-    id = EMP.18 ##Clamping Down(choice)
+    id = EMP.18 ##Clamping Down
     title = EMP.18
     desc = EMP.18.d
     picture = GFX_WIP_focus
@@ -494,22 +514,9 @@ country_event = {
     fire_only_once = no
     is_triggered_only = yes
     option = {
-        name = "Yes! The mad Emperor must go!"
-        ai_chance = { factor = 90 }
-        complete_national_focus = EMP_the_conspiracy
-        country_event = {id=EMP.12}
-        kill_country_leader = yes
-        promote_character = EMP_ruling_council
-        #Tooltip
-    }
-    option = {
-        name = "No! Crush the traitorous council!"
-        complete_national_focus = EMP_close_the_fist
-        
-			start_civil_war = {
-				ideology = imperial
-				size = 0.1
-			}
+        name = "Crush Isard and the traitorous council!"
+        retire_character = EMP_ruling_council
+		retire_character = EMP_ysanne_isard
         #tooltip
         ai_chance = { factor = 10 }
     }

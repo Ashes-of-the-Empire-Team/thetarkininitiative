@@ -3,7 +3,7 @@
 
 focus_tree = {
 	id = EMP
-	continuous_focus_position = { x = 2290 y = 0 } 
+	continuous_focus_position = { x = 1250 y = 1100 } 
 	country = {
 		factor = 0
 		modifier = {
@@ -214,6 +214,16 @@ focus_tree = {
 		cost = 7.2
 		x = 6
 		y = 0
+		available = {
+			has_completed_focus = EMP_find_jeng_droga
+			OR={
+				has_completed_focus = EMP_isb_primacy
+				has_completed_focus = EMP_strengthen_imperial_intelligence
+			}
+		}
+		allow_branch = {
+			controls_state=235
+		}
 		search_filters = {
 		}
 		mutually_exclusive = {
@@ -399,13 +409,15 @@ focus_tree = {
 	focus = {
 		id = EMP_mobilize_the_admiralty
 		icon = GFX_WIP_focus
-		relative_position_id = EMP_integrate_the_lower_levels
 		cost = 10.8
-		x = 3
-		y = 1
-		prerequisite = {
-			focus = EMP_integrate_the_lower_levels
-			focus = EMP_surface_level_subsidies
+		x = 10
+		y = 0	
+		available = {
+			has_completed_focus = EMP_find_jeng_droga
+			OR={
+				has_completed_focus = EMP_isb_primacy
+				has_completed_focus = EMP_strengthen_imperial_intelligence
+			}
 		}
 		search_filters = {
 		}
@@ -1163,29 +1175,7 @@ focus = {
 		}
 	}
 
-	#Retreat to the Deep Core
-	focus = {
-		id = EMP_retreat_to_the_deep_core
-		icon = GFX_WIP_focus
-		relative_position_id = EMP_abandon_coruscant
-		cost = 7.2
-		x = -2
-		y = 1
-		allow_branch = {
-			has_country_flag = EMP_pestage_victory
-		}
-		prerequisite = {
-			focus = EMP_abandon_coruscant
-		}
-		search_filters = {
-		}
-		completion_reward = {
-		}
 
-		ai_will_do = {
-			factor = 1
-		}
-	}
 	#Eidolon Base
 	focus = {
 		id = EMP_eidolon_base
@@ -1271,7 +1261,8 @@ focus = {
 		search_filters = {
 		}
 		completion_reward = {
-			
+			unlock_decision_tooltip = EMP_discredit_council
+			unlock_decision_tooltip = EMP_discredit_pestage
 		}
 
 		ai_will_do = {
@@ -1280,7 +1271,7 @@ focus = {
 	}
 	focus = {
 		id = EMP_brentaal_IV_plan
-		icon = GFX_emp_the_conspiracy_goal
+		icon = GFX_WIP_focus
 		relative_position_id = EMP_the_conspiracy
 		text_icon = EMPIRE_focus_style
 		cost = 1.5
@@ -1295,7 +1286,31 @@ focus = {
 		search_filters = {
 		}
 		completion_reward = {
-			
+			custom_effect_tooltip = EMP_minus2legit
+			add_to_variable = {
+				legitimacy_emp = -2
+			}
+			custom_effect_tooltip = power_balance_trend_center_tt
+			hidden_effect = {
+				if={
+					limit={
+						power_balance_value = {
+							id = EMP_leadership_power_balance
+							value > 0
+						}
+					}
+					add_power_balance_value = {
+						id = EMP_leadership_power_balance
+						value = -0.05
+					}
+				}
+				else={
+					add_power_balance_value = {
+						id = EMP_leadership_power_balance
+						value = 0.05
+					}
+				}
+			}
 		}
 
 		ai_will_do = {
@@ -1304,7 +1319,7 @@ focus = {
 	}
 	focus = {
 		id = EMP_project_ambition
-		icon = GFX_emp_the_conspiracy_goal
+		icon = GFX_WIP_focus
 		relative_position_id = EMP_brentaal_IV_plan
 		text_icon = EMPIRE_focus_style
 		cost = 1.5
@@ -1319,7 +1334,10 @@ focus = {
 		search_filters = {
 		}
 		completion_reward = {
-			
+			add_political_power = 50
+		}
+		select_effect = {
+			country_event = {id= EMP.8 days = 3}
 		}
 
 		ai_will_do = {
@@ -1328,7 +1346,7 @@ focus = {
 	}
 	focus = {
 		id = EMP_sway_krennal
-		icon = GFX_emp_the_conspiracy_goal
+		icon = GFX_WIP_focus
 		relative_position_id = EMP_project_ambition
 		text_icon = EMPIRE_focus_style
 		cost = 1.5
@@ -1346,16 +1364,43 @@ focus = {
 		search_filters = {
 		}
 		completion_reward = {
-			
+			remove_power_balance_modifier = {
+				id = EMP_leadership_power_balance
+				modifier = EMP_leadership_power_ciutric_holdings
+			}
+			random_list = {
+				75={
+					custom_effect_tooltip = EMP_sway_krennal_75_tt
+					set_country_flag = pestage_dead
+					EMP_delak_krennel={
+						set_nationality = {
+							target_country = CIU
+						}
+					}
+					CIU={
+						promote_character = {
+							character = EMP_delak_krennel
+							ideology = imperial_ideology
+						}
+					}
+					remove_power_balance_modifier = {
+						id = EMP_leadership_power_balance
+						modifier = EMP_leadership_power_pestage_crowned
+					}
+				}
+				25={
+					add_political_power = -50
+				}
+			}
 		}
 
 		ai_will_do = {
-			factor = 1
+			factor = 10
 		}
 	}
 	focus = {
 		id = EMP_elimiate_krennal
-		icon = GFX_emp_the_conspiracy_goal
+		icon = GFX_WIP_focus
 		relative_position_id = EMP_project_ambition
 		text_icon = EMPIRE_focus_style
 		cost = 1.5
@@ -1373,7 +1418,12 @@ focus = {
 		search_filters = {
 		}
 		completion_reward = {
-			
+			remove_power_balance_modifier = {
+				id = EMP_leadership_power_balance
+				modifier = EMP_leadership_power_council_influence
+			}
+			retire_character = EMP_delak_krennel
+			add_stability = -0.05
 		}
 
 		ai_will_do = {
@@ -1382,7 +1432,7 @@ focus = {
 	}
 	focus = {
 		id = EMP_neutralising_tribunal
-		icon = GFX_emp_the_conspiracy_goal
+		icon = GFX_WIP_focus
 		relative_position_id = EMP_project_ambition
 		text_icon = EMPIRE_focus_style
 		cost = 1.5
@@ -1400,16 +1450,19 @@ focus = {
 		search_filters = {
 		}
 		completion_reward = {
-			
+			remove_power_balance_modifier = {
+				id = EMP_leadership_power_balance
+				modifier = EMP_leadership_power_tribunial
+			}
 		}
 
 		ai_will_do = {
-			factor = 1
+			factor = 10
 		}
 	}
 	focus = {
 		id = EMP_sidelining_the_tribunal
-		icon = GFX_emp_the_conspiracy_goal
+		icon = GFX_WIP_focus
 		relative_position_id = EMP_project_ambition
 		text_icon = EMPIRE_focus_style
 		cost = 1.5
@@ -1427,7 +1480,7 @@ focus = {
 		search_filters = {
 		}
 		completion_reward = {
-			
+			add_political_power = 100
 		}
 
 		ai_will_do = {
@@ -1436,7 +1489,7 @@ focus = {
 	}
 	focus = {
 		id = EMP_desperate_measures
-		icon = GFX_emp_the_conspiracy_goal
+		icon = GFX_WIP_focus
 		relative_position_id = EMP_project_ambition
 		text_icon = EMPIRE_focus_style
 		cost = 1.5
@@ -1460,6 +1513,7 @@ focus = {
 		search_filters = {
 		}
 		completion_reward = {
+			custom_effect_tooltip = EMP_desperate_measures_tt
 			if={#Pestage stays
 				limit={
 					power_balance_value = {
@@ -1467,6 +1521,9 @@ focus = {
 						value > 0.33
 					}
 				}
+				custom_effect_tooltip = EMP_pestage_will_win_tt
+				country_event = EMP.18
+				set_country_flag = EMP_pestage_victory
 			}
 			else_if={#council takes power
 				limit={
@@ -1475,16 +1532,16 @@ focus = {
 						value < -0.33
 					}
 				}
-				remove_ideas = EMP_complacent_bureaucracy
+				custom_effect_tooltip = EMP_council_will_win_tt
+				country_event = EMP.10
 				custom_effect_tooltip = EMP_minus2legit
 				add_to_variable = {
 					legitimacy_emp = -2
 				}
-				kill_country_leader = yes
-				promote_character = EMP_ruling_council
+				set_country_flag = EMP_council_victory
 			}
 			else={#isard coups them both
-				kill_country_leader = yes
+				custom_effect_tooltip = EMP_isard_will_win_tt
 				EMP = {
 					country_event = {id=EMP.16}
 				}
@@ -1492,9 +1549,15 @@ focus = {
 				add_to_variable = {
 					legitimacy_emp = -5
 				}
+				set_country_flag = EMP_isard_victory
 			}
-			remove_ideas = EMP_leadership_crisis_1
-			mark_focus_tree_layout_dirty = yes
+			hidden_effect={
+				remove_ideas = EMP_leadership_crisis_1
+				mark_focus_tree_layout_dirty = yes
+			}
+			remove_power_balance = {
+				id = EMP_leadership_power_balance
+			}
 		}
 
 		ai_will_do = {
@@ -1516,8 +1579,7 @@ focus = {
 		search_filters = {
 		}
 		completion_reward = {
-			
-			
+			remove_ideas = EMP_complacent_bureaucracy
 		}
 
 		ai_will_do = {
@@ -1536,9 +1598,6 @@ focus = {
 			focus = EMP_oligarchy
 		}
 		search_filters = {
-		}
-		mutually_exclusive = {
-			focus = EMP_appoint_isard
 		}
 		completion_reward = {
 			country_event = {id=EMP.23}
@@ -1724,9 +1783,7 @@ focus = {
 		search_filters = {
 		}
 		completion_reward = {
-			#tooltip
-			mark_focus_tree_layout_dirty = yes
-			
+			remove_ideas = EMP_complacent_bureaucracy
 		}
 
 		ai_will_do = {
@@ -1757,30 +1814,12 @@ focus = {
 		}
 		completion_reward = {
 			#tooltip
-			if = {
-				limit = {
-					has_completed_focus = EMP_betrayal
-				}
-				news_event = { hours = 12 id = empnews.7 }
-			}
-			else = {
-				news_event = { hours = 12 id = empnews.6 }
-			}
-			promote_character = {
-				character = EMP_ysanne_isard
-				ideology = imperial_ideology
-			} 
-			remove_ideas = EMP_complacent_bureaucracy
-			remove_ideas = EMP_leadership_crisis_1
+			news_event = { hours = 12 id = empnews.6 }
 			add_ideas = EMP_trioculus_palpatines_son
-			
 			swap_ideas = {
 				remove_idea = EMP_church_1
 				add_idea = EMP_church_2
 			}
-			
-			
-			
 		}
 
 		ai_will_do = {
@@ -2003,6 +2042,7 @@ focus = {
 		y = 1
 		allow_branch = {
 			has_country_flag = EMP_isard_victory
+			has_global_flag = EMP_war_begun
 		}
 		prerequisite = {
 			focus = EMP_abandon_coruscant
@@ -2142,6 +2182,7 @@ focus = {
 				}
 				white_peace = EMP
 			}
+			load_focus_tree = EMP_fled_xuphra
 		}
 
 		ai_will_do = {
@@ -2159,9 +2200,15 @@ focus = {
 		cost = 1.5
 		x = 0
 		y = 4
+		offset = {
+			x = 0
+			y = 7
+			trigger = {
+				has_idea = EMP_leadership_crisis_1
+			}
+		}
 		allow_branch = {
 			has_global_flag = EMP_war_begun
-			NOT={has_idea = EMP_leadership_crisis_1}
 		}
 		bypass = {
 			always = yes
@@ -2199,7 +2246,7 @@ focus = {
 		icon = GFX_WIP_focus
 		relative_position_id = EMP_fall_of_borleias
 		cost = 7.2
-		x = -3
+		x = -4
 		y = 1
 		prerequisite = {
 			focus = EMP_fall_of_borleias
@@ -2227,7 +2274,7 @@ focus = {
 		icon = GFX_WIP_focus
 		relative_position_id = EMP_fall_of_borleias
 		cost = 2.9
-		x = 3
+		x = 4
 		y = 1
 		prerequisite = {
 			focus = EMP_fall_of_borleias
@@ -2412,14 +2459,14 @@ focus = {
 
 	#Move Operations to Byss(Pestage) 
 	focus = {
-		id = EMP_move_operations_to_byss
+		id = EMP_move_operations_to_ciutric
 		icon = GFX_WIP_focus
-		relative_position_id = EMP_retreat_to_the_deep_core
+		relative_position_id = EMP_retreat_to_our_holdings
 		cost = 7.2
 		x = 0
 		y = 1
 		prerequisite = {
-			focus = EMP_retreat_to_the_deep_core
+			focus = EMP_retreat_to_our_holdings
 		}
 		search_filters = {
 		}
@@ -2434,16 +2481,40 @@ focus = {
 		}
 	}
 
-	#We'll Be Back(Pestage) 
+	
+	#Retreat to the Deep Core (Pestage) 
+	focus = {
+		id = EMP_retreat_to_our_holdings
+		icon = GFX_WIP_focus
+		relative_position_id = EMP_abandon_coruscant
+		cost = 7.2
+		x = -1
+		y = 1
+		allow_branch = {
+			has_country_flag = EMP_pestage_victory
+			has_global_flag = EMP_war_begun
+		}
+		prerequisite = {
+			focus = EMP_abandon_coruscant
+		}
+		search_filters = {
+		}
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	#We'll Be Back
 	focus = {
 		id = EMP_well_be_back
 		icon = GFX_WIP_focus
-		relative_position_id = EMP_move_operations_to_byss
+		relative_position_id = EMP_move_operations_to_ciutric
 		cost = 7.2
 		x = 0
 		y = 1
 		prerequisite = {
-			focus = EMP_move_operations_to_byss
+			focus = EMP_move_operations_to_ciutric
 		}
 		search_filters = {
 		}
@@ -2451,6 +2522,18 @@ focus = {
 			
 		}
 		completion_reward = {
+			hidden_effect={#reestablish control over the ciutric holdings
+				set_cosmetic_tag = CIUPESTAGE
+				annex_country = {
+					target = CIU
+				}
+				CIU={
+					every_core_state = {
+						add_core_of = EMP
+						remove_core_of = CIU
+					}
+				}
+			}
 			REB = {
 				set_state_owner = 235
 				set_state_controller = 235
@@ -2473,6 +2556,14 @@ focus = {
 				set_state_owner = 189
 				set_state_controller = 189
 			}
+			every_other_country = {
+				limit = {
+					has_government = democratic
+					has_war_with = EMP
+				}
+				white_peace = EMP
+			}
+			load_focus_tree = EMP_fled_ciutric
 		}
 
 		ai_will_do = {
@@ -2490,6 +2581,7 @@ focus = {
 		y = 1
 		allow_branch = {
 			has_country_flag = EMP_council_victory
+			has_global_flag = EMP_war_begun
 		}
 		prerequisite = {
 			focus = EMP_abandon_coruscant
@@ -2572,7 +2664,10 @@ focus = {
 		x = 0
 		y = 2
 		prerequisite = { 
-			focus = EMP_abandon_the_populace
+			focus = EMP_save_the_admiralty
+		}
+		prerequisite = { 
+			focus = EMP_save_the_nobility
 		}
 		search_filters = {
 		}
@@ -2582,9 +2677,17 @@ focus = {
 			#tooltip
 			clr_country_flag = emperor
 			clr_global_flag = emperor_proclaimed
-			set_cosmetic_tag = COUNCIL
-			annex_country = {
-				target = ORC
+			hidden_effect = {
+				set_cosmetic_tag = COUNCIL
+				annex_country = {
+					target = ORC
+				}
+				ORC={
+					every_core_state = {
+						add_core_of = EMP
+						remove_core_of = ORC
+					}
+				}
 			}
 			REB = {
 				set_state_owner = 235
@@ -2615,76 +2718,7 @@ focus = {
 				}
 				white_peace = EMP
 			}
-			
-		}
-
-		ai_will_do = {
-			factor = 1
-		}
-	}
-	#Setting up on Ord Cantrell(Ruling Council)
-	focus = {
-		id = EMP_setting_up_on_ord_cantrell
-		icon = GFX_WIP_focus
-		relative_position_id = EMP_protection_from_kaine
-		cost = 7.2
-		x = 0
-		y = 1
-		prerequisite = {
-			focus = EMP_protection_from_kaine
-		}
-		search_filters = {
-		}
-		mutually_exclusive = {
-		}
-		completion_reward = {
-		}
-
-		ai_will_do = {
-			factor = 1
-		}
-	}
-	#Join the Alignment(Ruling Council)
-	focus = {
-		id = EMP_join_the_alignment
-		icon = GFX_WIP_focus
-		relative_position_id = EMP_setting_up_on_ord_cantrell
-		cost = 7.2
-		x = -1
-		y = 1
-		prerequisite = {
-			focus = EMP_setting_up_on_ord_cantrell
-		}
-		search_filters = {
-		}
-		mutually_exclusive = {
-			focus = EMP_the_royal_guard_coup
-		}
-		completion_reward = {
-		}
-
-		ai_will_do = {
-			factor = 1
-		}
-	}
-	#The Royal Guard Coup(Ruling Council)
-	focus = {
-		id = EMP_the_royal_guard_coup
-		icon = GFX_WIP_focus
-		relative_position_id = EMP_setting_up_on_ord_cantrell
-		cost = 7.2
-		x = 1
-		y = 1
-		prerequisite = {
-			focus = EMP_setting_up_on_ord_cantrell
-		}
-		search_filters = {
-		}
-		mutually_exclusive = {
-			focus = EMP_join_the_alignment
-		}
-		completion_reward = {
-			set_cosmetic_tag = CRIMSON
+			load_focus_tree = EMP_fled_ord
 		}
 
 		ai_will_do = {
