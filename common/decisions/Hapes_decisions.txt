@@ -1,0 +1,213 @@
+HAP_hostilities_with_empire = {
+	HAP_border_skirmishes = {
+        priority = 10
+        icon = GFX_hapes_decisions
+
+        allowed = {
+			tag = HAP
+        }
+        visible = {
+            always=yes
+			#NOT = {
+			#	has_country_flag = intervention_in_zsinj
+			#}
+        }
+        cost = 50
+        available = {
+			OR = {
+				ZSJ = {
+					ships_in_area = { area = 363 size > 1 }
+				}
+				ZSJ = {
+					ships_in_area = { area = 339 size > 1 }
+				}
+				ZSJ = {
+					ships_in_area = { area = 355 size > 1 }
+				}
+			}
+        }
+        complete_effect = {
+			set_country_flag = intervention_in_zsinj
+			if = {
+				limit = {
+					ZSJ = {
+						ships_in_area = { area = 363 size > 1 }
+					}
+				}
+				random_list = {
+					50 = {
+						damage_units = {
+							region = 363
+							limit = { tag = ZSJ }
+							damage = 0.25
+							org_damage = 0.25
+							str_damage = 0.25
+							ratio = yes
+							army = no
+							navy = yes
+						}
+						custom_effect_tooltip = "Damageing Zsinj's navy in Taanabs' Orbit"
+						country_event = HAPB.2
+					}
+					25 = {
+						country_event = HAPB.1
+					}
+					25 = {
+						HAP = {
+							destroy_ships = {
+								type = destroyer
+								count = 1
+							}
+						}
+						country_event = HAPB.3
+					}
+				}
+			}
+			else_if = {
+				if = {
+					limit = {
+						ZSJ = {
+							ships_in_area = { area = 339 size > 1 }
+						}
+					}
+					random_list = {
+						50 = {
+							damage_units = {
+								region = 339
+								limit = { tag = ZSJ }
+								damage = 0.25
+								org_damage = 0.25
+								str_damage = 0.25
+								ratio = yes
+								army = no
+								navy = yes
+							}
+							custom_effect_tooltip = "Damageing Zsinj's navy in Zeltros' Orbit"
+							country_event = HAPB.2
+						}
+						25 = {
+							country_event = HAPB.1
+						}
+						25 = {
+							HAP = {
+								destroy_ships = {
+									type = destroyer
+									count = 1
+								}
+							}
+							country_event = HAPB.3
+						}
+					}
+				}
+			}
+			else_if = {
+				if = {
+					limit = {
+						ZSJ = {
+							ships_in_area = { area = 355 size > 1 }
+						}
+					}
+					random_list = {
+						50 = {
+							damage_units = {
+								region = 355
+								limit = { tag = ZSJ }
+								damage = 0.25
+								org_damage = 0.25
+								str_damage = 0.25
+								ratio = yes
+								army = no
+								navy = yes
+							}
+							custom_effect_tooltip = "Damageing Zsinj's navy in Yavins' Orbit"
+							country_event = HAPB.2
+						}
+						25 = {
+							country_event = HAPB.1
+						}
+						25 = {
+							HAP = {
+								destroy_ships = {
+									type = destroyer
+									count = 1
+								}
+							}
+							country_event = HAPB.3
+						}
+					}
+				}
+			}
+			#random_list = {
+			#	50 = {
+			#		damage_units = {
+			#			region = 363
+			#			damage = 0.5
+			#			org_damage = 0.5
+			#			str_damage = 0.5
+			#			ratio = yes
+			#			army = no
+			#			navy = yes
+			#		}
+			#	}
+			#	50 = {
+			#		add_political_power = 20
+			#	}
+			#}
+			fixed_random_seed = no
+		}
+	}
+
+	HAP_send_volunteers = {
+        priority = 10
+        icon = GFX_hapes_decisions
+
+        allowed = {
+			tag = HAP
+        }
+        visible = {
+            always=yes
+			NOT = {
+				has_country_flag = intervention_in_zsinj
+			}
+        }
+        cost = 50
+        available = {
+		
+        }
+        #days_remove = 120
+        complete_effect = {
+			set_country_flag = intervention_in_zsinj
+        }
+        #remove_effect = {
+		#}
+    }
+	HAP_attack_zsinj = {
+        priority = 10
+        icon = GFX_hapes_decisions
+
+        allowed = {
+			tag = HAP
+        }
+        visible = {
+            always=yes
+			has_country_flag = intervention_in_zsinj
+        }
+        cost = 50
+        available = {
+			has_country_flag = intervention_in_zsinj
+			NOT = {
+				has_global_flag = zsinj_defeated
+			}
+        }
+        #days_remove = 120
+        complete_effect = {
+			declare_war_on = {
+				target = ZSJ
+				type = take_state_focus
+			}
+			clr_country_flag = intervention_in_zsinj
+        }
+        #remove_effect = {
+		#}
+    }
+}
