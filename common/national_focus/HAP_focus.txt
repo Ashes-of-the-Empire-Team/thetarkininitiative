@@ -29,14 +29,14 @@ focus = {
 
 focus = {
 	id = HAP_the_future_mother
-	icon = GFX_hapes_goal
+	icon = GFX_the_future_mother_goal
 	cost = 7.2
 	x = 24
 	y = 0
 	text_icon = HAPES_focus_style
 	
 	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus HAP_the_future_mother"
+		country_event = HAP.3
 	}
 }
 
@@ -49,7 +49,10 @@ focus = {
 	text_icon = HAPES_focus_style
 	
 	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus HAP_teneniel_djo"
+		hidden_effect = {
+			recruit_character = HAP_teneniel_djo
+		}
+		promote_character = HAP_teneniel_djo
 	}
 	relative_position_id = HAP_the_abdication
 	prerequisite = { focus = HAP_the_abdication }
@@ -57,14 +60,14 @@ focus = {
 
 focus = {
 	id = HAP_a_future_hapan
-	icon = GFX_hapes_goal
+	icon = GFX_a_future_hapen_goal
 	cost = 7.2
 	x = 2
 	y = 1
 	text_icon = HAPES_focus_style
 	
 	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus HAP_a_future_hapan"
+		custom_effect_tooltip = HAP_a_future_hapan_tt
 	}
 	relative_position_id = HAP_the_queens_advisors
 	prerequisite = { focus = HAP_the_queens_advisors }
@@ -72,14 +75,14 @@ focus = {
 
 focus = {
 	id = HAP_her_own_path
-	icon = GFX_hapes_goal
+	icon = GFX_her_own_path_goal
 	cost = 7.2
 	x = -2
 	y = 1
 	text_icon = HAPES_focus_style
 	
 	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus HAP_her_own_path"
+		custom_effect_tooltip = HAP_her_own_path_tt
 	}
 	relative_position_id = HAP_the_queens_advisors
 	prerequisite = { focus = HAP_the_queens_advisors }
@@ -107,7 +110,7 @@ focus = {
 	icon = GFX_battledragons_goal
 	cost = 7.2
 	x = 1
-	y = 2
+	y = 1
 	text_icon = HAPES_focus_style
 	
 	completion_reward = {
@@ -144,7 +147,7 @@ focus = {
 	icon = GFX_miytil_starfighters_goal
 	cost = 7.2
 	x = -1
-	y = 2
+	y = 1
 	text_icon = HAPES_focus_style
 	
 	completion_reward = {
@@ -183,14 +186,14 @@ focus = {
 
 focus = {
 	id = HAP_secure_the_succession
-	icon = GFX_hapes_goal
+	icon = GFX_secure_the_succession_goal
 	cost = 7.2
 	x = 0
 	y = 2
 	text_icon = HAPES_focus_style
 	
 	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus HAP_secure_the_succession"
+		country_event = HAP.2
 	}
 	relative_position_id = HAP_the_future_mother
 	prerequisite = { focus = HAP_the_future_mother }
@@ -198,14 +201,17 @@ focus = {
 
 focus = {
 	id = HAP_taa_chumes_spies
-	icon = GFX_hapes_goal
+	icon = GFX_taa_chume_spies_goal
 	cost = 7.2
 	x = -7
 	y = 1
 	text_icon = HAPES_focus_style
 	
 	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus HAP_taa_chumes_spies"
+		set_temp_variable = {supplied_agent_name = token:trista_zel}
+		agent_recruitment_effect = yes
+		set_temp_variable = {supplied_agent_name = token:taryn_zel}
+		agent_recruitment_effect = yes
 	}
 	relative_position_id = HAP_secure_the_succession
 	prerequisite = { focus = HAP_secure_the_succession }
@@ -213,7 +219,7 @@ focus = {
 
 focus = {
 	id = HAP_the_great_houses
-	icon = GFX_hapes_goal
+	icon = GFX_the_great_houses_goal
 	cost = 7.2
 	x = 0
 	y = 2
@@ -270,7 +276,7 @@ focus = {
 	text_icon = HAPES_focus_style
 	
 	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus HAP_corporate_espionage"
+		add_ideas = HAP_corporate_espionage
 	}
 	relative_position_id = HAP_taa_chumes_spies
 	prerequisite = { focus = HAP_taa_chumes_spies }
@@ -315,7 +321,7 @@ focus = {
 	text_icon = HAPES_focus_style
 	
 	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus HAP_the_abdication"
+		retire_character = HAP_taa_chume
 	}
 	relative_position_id = HAP_open_the_cluster
 	prerequisite = { focus = HAP_open_the_cluster }
@@ -354,14 +360,20 @@ focus = {
 
 focus = {
 	id = HAP_expand_the_naval_facilities
-	icon = GFX_hapes_goal
+	icon = GFX_expand_relephon_shipyards_goal
 	cost = 7.2
 	x = 0
 	y = 1
 	text_icon = HAPES_focus_style
 	
 	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus HAP_expand_the_naval_facilities"
+		random_owned_state = {
+			limit = {
+				has_avaliable_building_slot = yes
+			}
+			set_temp_variable = {REQUESTED_BUILDING = token:medium_shipyard_1}
+			Add_building_to_slot_immediately = yes
+		}
 	}
 	relative_position_id = HAP_the_battle_dragons
 	prerequisite = { focus = HAP_the_battle_dragons }
@@ -411,7 +423,38 @@ focus = {
 	text_icon = HAPES_focus_style
 	
 	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus HAP_expanding_the_royal_guard"
+		division_template = {
+			name = "Hapan Royal Guard"
+			division_names_group = USA_INF_01
+			priority = 1
+			regiments = {
+				hapan_royal_guard = { x = 0 y = 0 }
+				hapan_royal_guard = { x = 1 y = 0 }
+				hapan_royal_guard = { x = 2 y = 0 }
+				hapan_royal_guard = { x = 0 y = 1 }
+				hapan_royal_guard = { x = 1 y = 1 }
+				hapan_royal_guard = { x = 2 y = 1 }
+				hapan_royal_guard = { x = 0 y = 2 }
+				hapan_royal_guard = { x = 1 y = 2 }
+				hapan_royal_guard = { x = 2 y = 2 }
+
+			}
+			support = {
+				#military_police = { x = 0 y = 0 }
+			}
+		}
+		ROOT = {
+			capital_scope = {
+				create_unit = {
+					division = "name = \"Hapan Royal Guard\" division_template = \"Hapan Royal Guard\" start_experience_factor = 1"
+					owner = ROOT
+				}
+				create_unit = {
+					division = "name = \"Hapan Royal Guard\" division_template = \"Hapan Royal Guard\" start_experience_factor = 1"
+					owner = ROOT
+				}
+			}
+		}
 	}
 	relative_position_id = HAP_securing_allegiances
 	prerequisite = { focus = HAP_securing_allegiances }
@@ -442,7 +485,12 @@ focus = {
 	text_icon = HAPES_focus_style
 	
 	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus HAP_isolated_neutrality"
+		add_ideas = hap_isolated_neutrality
+		add_power_balance_value = {
+            id = HAP_queen_mother_BOP
+            value = -0.15
+            tooltip_side = HAP_queen_legitimacy_high_side
+        }
 	}
 	relative_position_id = HAP_relations_with_the_outside
 	prerequisite = { focus = HAP_relations_with_the_outside }
@@ -471,7 +519,7 @@ focus = {
 	text_icon = HAPES_focus_style
 	
 	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus HAP_martial_arts_training"
+		add_ideas = hap_martial_arts
 	}
 	relative_position_id = HAP_the_royal_space_marines
 	prerequisite = { focus = HAP_the_royal_space_marines }
@@ -486,7 +534,12 @@ focus = {
 	text_icon = HAPES_focus_style
 	
 	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus HAP_securing_allegiances"
+		custom_effect_tooltip = HAP_securing_allegiances_tt
+		add_power_balance_value = {
+			id = HAP_queen_mother_BOP
+			value = -0.05
+			tooltip_side = HAP_queen_legitimacy_high_side
+		}
 	}
 	relative_position_id = HAP_the_great_houses
 	prerequisite = { focus = HAP_the_great_houses }
@@ -501,7 +554,7 @@ focus = {
 	text_icon = HAPES_focus_style
 	
 	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus HAP_house_of_charubah"
+		country_event = HAPW.10
 	}
 	relative_position_id = HAP_the_duchas
 	prerequisite = { focus = HAP_the_duchas }
@@ -516,7 +569,7 @@ focus = {
 	text_icon = HAPES_focus_style
 	
 	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus HAP_house_of_gallinore"
+		country_event = HAPW.9
 	}
 	relative_position_id = HAP_the_duchas
 	prerequisite = { focus = HAP_the_duchas }
@@ -659,7 +712,7 @@ focus = {
 	text_icon = HAPES_focus_style
 	
 	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus HAP_house_of_relephon"
+		country_event = HAPW.11
 	}
 	relative_position_id = HAP_the_duchas
 	prerequisite = { focus = HAP_the_duchas }
@@ -674,7 +727,7 @@ focus = {
 	text_icon = HAPES_focus_style
 	
 	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus HAP_house_of_terephon"
+		country_event = HAPW.12
 	}
 	relative_position_id = HAP_the_duchas
 	prerequisite = { focus = HAP_the_duchas }
@@ -753,7 +806,6 @@ focus = {
 	completion_reward = {
 		225 = {
 			clear_building_2_effects = yes
-			set_variable = {unique_building_on_state = token:tree_of_wisdom}
 			set_temp_variable = {REQUESTED_BUILDING = token:tree_of_wisdom}
 			Add_building_to_slot_immediately = yes
 		}
@@ -874,7 +926,12 @@ focus = {
 	text_icon = HAPES_focus_style
 	
 	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus HAP_the_hapan_crown"
+		add_power_balance_value = {
+            id = HAP_queen_mother_BOP
+            value = -0.25
+            tooltip_side = HAP_queen_legitimacy_high_side
+        }
+		add_stability = 0.15
 	}
 	relative_position_id = HAP_rainbow_gems
 	prerequisite = { focus = HAP_rainbow_gems }
@@ -976,7 +1033,21 @@ focus = {
 	x = 25
 	y = 9
 	text_icon = HAPES_focus_style
-	
+	available = {
+		OR = {
+			any_subject_country = { tag = DAT }
+			any_subject_country = { tag = SIN }
+			AND = {
+				controls_state = 8
+				controls_state = 142
+				controls_state = 487
+				controls_state = 485
+				controls_state = 143
+				controls_state = 140
+				controls_state = 486
+			}
+		}
+	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus HAP_dathomir"
 	}
@@ -1060,7 +1131,7 @@ focus = {
 }
 
 focus = {
-	id = HAP_expand_the_industries
+	id = HAP_subsidize_recontruction
 	icon = GFX_hapes_goal
 	cost = 7.2
 	x = 1
@@ -1087,7 +1158,7 @@ focus = {
 	}
 	relative_position_id = HAP_expand_the_industries
 	prerequisite = { focus = HAP_expand_the_industries }
-	prerequisite = { focus = HAP_expand_the_industries }
+	prerequisite = { focus = HAP_subsidize_recontruction }
 }
 
 focus = {
@@ -1115,7 +1186,38 @@ focus = {
 	text_icon = HAPES_focus_style
 	
 	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus HAP_improved_infrastructure"
+		225 = {
+			add_building_construction = {
+				type = infrastructure
+				level = 3
+				instant_build = yes
+			}
+		}
+		223 = {
+			add_building_construction = {
+				type = infrastructure
+				level = 3
+				instant_build = yes
+			}
+		}
+		232 = {
+			add_building_construction = {
+				type = infrastructure
+				level = 2
+				instant_build = yes
+			}
+		}
+		35 = {
+			add_building_construction = {
+				type = infrastructure
+				level = 2
+				instant_build = yes
+			}
+		}
+		subtract_from_variable = {
+			currency_amount^primary_currency = 100
+			tooltip = credits_remove_tt
+		}
 	}
 	relative_position_id = HAP_economic_center_of_the_cluster
 	prerequisite = { focus = HAP_economic_center_of_the_cluster }
@@ -1123,7 +1225,7 @@ focus = {
 
 focus = {
 	id = HAP_hapan_research_facilities
-	icon = GFX_hapes_goal
+	icon = GFX_olanji_research_center_goal
 	cost = 7.2
 	x = 1
 	y = 1
@@ -1167,7 +1269,12 @@ focus = {
 	text_icon = HAPES_focus_style
 	
 	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus HAP_taxation_of_the_houses"
+		add_ideas = HAP_house_taxation
+		add_power_balance_value = {
+            id = HAP_queen_mother_BOP
+            value = 0.10
+            tooltip_side = HAP_queen_legitimacy_low_side
+        }
 	}
 	relative_position_id = HAP_zadarian_brandy
 	prerequisite = { focus = HAP_zadarian_brandy }

@@ -13,6 +13,7 @@ HAP_hostilities_with_empire = {
 			#}
         }
         cost = 50
+		days_re_enable = 100
         available = {
 			OR = {
 				ZSJ = {
@@ -206,6 +207,38 @@ HAP_hostilities_with_empire = {
 				type = take_state_focus
 			}
 			clr_country_flag = intervention_in_zsinj
+        }
+        #remove_effect = {
+		#}
+    }
+}
+
+TER_overthrow_queen_mother = {
+	TER_overthrow_queen_mother = {
+        priority = 10
+        icon = GFX_hapes_decisions
+
+        allowed = {
+			tag = TER
+        }
+        visible = {
+            has_country_flag = HAP_queen_mother_no_legitimacy
+        }
+        cost = 50
+        available = {
+		
+        }
+        #days_remove = 120
+        complete_effect = {
+			HAP = {
+				release = TER
+			}
+			leave_faction = yes
+			declare_war_on = {
+                target = HAP
+                type = annex_everything
+            }
+			clr_country_flag = HAP_queen_mother_no_legitimacy
         }
         #remove_effect = {
 		#}
