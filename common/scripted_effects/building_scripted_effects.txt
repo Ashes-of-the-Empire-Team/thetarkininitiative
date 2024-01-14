@@ -10,9 +10,9 @@ Add_building_to_slot_with_time_constraint = { ## THIS IS FOR ADDING BUILDINGS FO
 				clear_building_1_effects = yes
 			}
 			set_variable = { building_1 = REQUESTED_BUILDING }
-			set_variable = { time_left_building_1 = CONSTRUCT_TIME}
-			set_state_flag = building_1_to_be_handled
+			set_temp_variable = { time_left_to_calculate = CONSTRUCT_TIME}
 			time_calculation_for_buildings = yes
+			set_variable = { time_left_building_1 = time_left_to_calculate}
 			add_to_array = {
 				array = global.building_state_constructer_1
 				value = THIS.id
@@ -28,8 +28,9 @@ Add_building_to_slot_with_time_constraint = { ## THIS IS FOR ADDING BUILDINGS FO
 				clear_building_2_effects = yes
 			}
 			set_variable = { building_2 = REQUESTED_BUILDING }
-			set_variable = { time_left_building_2 = CONSTRUCT_TIME}
+			set_temp_variable = { time_left_to_calculate = CONSTRUCT_TIME}
 			time_calculation_for_buildings = yes
+			set_variable = { time_left_building_2 = time_left_to_calculate}
 			add_to_array = {
 				array = global.building_state_constructer_2
 				value = THIS.id
@@ -196,8 +197,10 @@ add_building_to_construct_slot_1 = {
 			clear_building_1_effects = yes
 		}
 		set_variable = { building_1 = potential_building_holder_for_event }
-		set_variable = { time_left_building_1 = potential_time_left_building_holder_for_event}
-		set_state_flag = building_1_to_be_handled
+		set_temp_variable = {time_left_to_calculate = potential_time_left_building_holder_for_event}
+
+		time_calculation_for_buildings = yes
+		set_variable = { time_left_building_1 = time_left_to_calculate}
 		add_to_array = {
 			array = global.building_state_constructer_1
 			value = THIS.id
@@ -213,8 +216,10 @@ add_building_to_construct_slot_2 = {
 			clear_building_2_effects = yes
 		}
 		set_variable = { building_2 = potential_building_holder_for_event }
-		set_variable = { time_left_building_2 = potential_time_left_building_holder_for_event}
+		set_temp_variable = {time_left_to_calculate = potential_time_left_building_holder_for_event}
+
 		time_calculation_for_buildings = yes
+		set_variable = { time_left_building_2 = time_left_to_calculate}
 		add_to_array = {
 			array = global.building_state_constructer_2
 			value = THIS.id
@@ -287,17 +292,7 @@ time_calculation_for_buildings = {
 		set_temp_variable = { REQUESTED_BUILDING = potential_building_holder_for_event}
 	}
 
-
-
-	if = {
-		limit = {
-			has_state_flag = building_1_to_be_handled
-		}
-		divide_variable = {time_left_building_1 = speed_multiplier_factor}
-		clr_state_flag = building_1_to_be_handled
-	}else = {
-		divide_variable = {time_left_building_2 = speed_multiplier_factor}
-	}
+	divide_temp_variable = {time_left_to_calculate = speed_multiplier_factor}
 }
 
 rainbow_gems_add_effect = {
@@ -1362,16 +1357,6 @@ imperial_refinery_remove_effect = {
 imperial_refinery_positive_add_effect = {
 }
 
-
-test_building_effect = {
-	set_variable = {test_variable = token:spice_market_1}
-	log = "[?test_variable]"
-	log = "appended_to_@test_variable"
-	appended_to_@test_variable = yes
-}
-appended_to_26729 = {
-	log = "got here"
-}
 
 clear_left_over_building_event_variables = {
 	var:state_located_for_building_changes = {

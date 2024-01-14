@@ -186,7 +186,6 @@ on_actions = {
 				set_variable = { building_1 = token:secret_imperial_base_man }
 				set_variable = {unique_building_on_state = token:secret_imperial_base_man}
 				set_state_flag = wonder_built_no_destroy_1
-				Add_building_to_slot_immediately = yes
 			}
 
 			297 = {
@@ -493,10 +492,26 @@ on_actions = {
 				set_state_flag = tile_blocker_building_2
 				set_variable = {building_2 = token:undercity_slums}
 			}
-
+#################### DO NOT PUT BUILDINGS IN PAST THIS LINE, YOU WILL FUCK UP THE EFFECT FOR IT ################
 	## PRIMITIVE BUILDINGS ASSINGING
 			### STATE EVALUATER.. ON STARTUP EVALUATES EACH STATE FOR ITS UNIQUE BUILDING AND IMPLANTS VARIABLES HOLDING LOCALISATION FOR UNIQUE BUILDINGS FOR GRABBING, CONTAINS TOOLTIP FOR HOVER OVER OF EFFECTS
 			every_state = {
+				#### IF THERE IS A BUILDING ADD ITS ADD EFFECT INTO THE GAME
+				meta_effect = {
+					text = {
+						[BUILDING_NAME]_add_effect = yes
+					}
+					BUILDING_NAME = "[?building_1.GetTokenKey]"
+				}
+				meta_effect = {
+					text = {
+						[BUILDING_NAME]_add_effect = yes
+					}
+					BUILDING_NAME = "[?building_2.GetTokenKey]"
+				}
+				####
+
+
 				set_temp_variable = {chance_for_primitive_resource_extraction_building = 10}
 				set_temp_variable = {chance_for_primitive_farm_building = 10}
 				set_temp_variable = {chance_for_primitive_office_building = 10}
@@ -552,6 +567,9 @@ on_actions = {
 					add_to_temp_variable = {chance_for_primitive_farm_building = -10}
 					add_to_temp_variable = {chance_for_primitive_resource_extraction_building = -10}
 				}
+
+
+
 				if = { ## Simple Neverfire being lazy and getting the computer to auto create primitive buildings
 					limit = {
 						NOT = {
