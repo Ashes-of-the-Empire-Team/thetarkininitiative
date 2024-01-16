@@ -1826,7 +1826,6 @@ agent_recruitment_just_lucky = { ## ALL FEEDS UP TO create_temporary_agents EFFE
 }
 
 agent_recruitment_mak_eshkarey = { ## ALL FEEDS UP TO create_temporary_agents EFFECT
-	log = "got here"
 	set_temp_variable = {agent_name = token:mak_eshkarey}
 	set_temp_variable = {agent_martial = 7}
 	set_temp_variable = {agent_charisma = 4} 
@@ -2038,4 +2037,52 @@ test_effect_agent = {
 		AGENT_NAME = "[?agent_name.GetTokenKey]"
 	}
 	log = "[?agent_name.GetTokenKey]"
+}
+
+grab_espionage_mission_timer = {
+	## TEMPORARY SPEED MAY NEED TO CHANGE FOR DIFFIFERNT MISSION SPEEDS
+	set_temp_variable = { temp_time_for_mission = 80 }
+	set_temp_variable = { modifier_speed_boost = modifier@espionage_mission_speed_bonuses }
+	multiply_temp_variable = { temp_time_for_mission = modifier_speed_boost }
+}
+
+grab_what_mission_slot_and_time_this_is = {
+	set_temp_variable = {temp_time_for_mission = 0}
+	if = {
+		limit = {
+			has_country_flag = operation_selection_slot_1
+		}
+		set_variable = {mission_identifier_1 = mission_identifier_temp}
+		grab_espionage_mission_timer = yes
+		set_variable = {mission_1_day_timer = temp_time_for_mission}
+	}else_if = {
+		limit = {
+			has_country_flag = operation_selection_slot_2
+		}
+		set_variable = {mission_identifier_2 = mission_identifier_temp}
+		grab_espionage_mission_timer = yes
+		set_variable = {mission_2_day_timer = temp_time_for_mission}
+	}else_if = {
+		limit = {
+			has_country_flag = operation_selection_slot_3
+		}
+		set_variable = {mission_identifier_3 = mission_identifier_temp}
+		grab_espionage_mission_timer = yes
+		set_variable = {mission_3_day_timer = temp_time_for_mission}
+	}else_if = {
+		limit = {
+			has_country_flag = operation_selection_slot_4
+		}
+		set_variable = {mission_identifier_4 = mission_identifier_temp}
+		grab_espionage_mission_timer = yes
+		set_variable = {mission_4_day_timer = temp_time_for_mission}
+	}else_if = {
+		limit = {
+			has_country_flag = operation_selection_slot_5
+		}
+		set_variable = {mission_identifier_5 = mission_identifier_temp}
+		grab_espionage_mission_timer = yes
+		set_variable = {mission_5_day_timer = temp_time_for_mission}
+	}
+	clr_country_flag = operation_mission_selection
 }

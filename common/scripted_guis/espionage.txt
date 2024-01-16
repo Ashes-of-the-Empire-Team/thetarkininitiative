@@ -9,28 +9,43 @@ scripted_gui = {
 		}
 		triggers = {
 			agent_Background_cover_visible = {
-				NOT = {
-					check_variable = {agent_maximum_total > 0}
+				OR = {
+					NOT = {
+						check_variable = {agent_maximum_total > 0}
+					}
+					has_variable = agent_name_slot_1
 				}
 			}
 			agent_2_Background_cover_visible = {
-				NOT = {
-					check_variable = {agent_maximum_total > 1}
+				OR = {
+					NOT = {
+						check_variable = {agent_maximum_total > 1}
+					}
+					has_variable = agent_name_slot_2
 				}
 			}
 			agent_3_Background_cover_visible = {
-				NOT = {
-					check_variable = {agent_maximum_total > 2}
+				OR = {
+					NOT = {
+						check_variable = {agent_maximum_total > 2}
+					}
+					has_variable = agent_name_slot_3
 				}
 			}
 			agent_4_Background_cover_visible = {
-				NOT = {
-					check_variable = {agent_maximum_total > 3}
+				OR = {
+					NOT = {
+						check_variable = {agent_maximum_total > 3}
+					}
+					has_variable = agent_name_slot_4
 				}
 			}
 			agent_5_Background_cover_visible = {
-				NOT = {
-					check_variable = {agent_maximum_total > 4}
+				OR = {
+					NOT = {
+						check_variable = {agent_maximum_total > 4}
+					}
+					has_variable = agent_name_slot_5
 				}
 			}
 			espionage_mission_1_select_mission_visible = {
@@ -108,6 +123,36 @@ scripted_gui = {
 			character_border_5_click_enabled = {
 				check_variable = {agent_maximum_total > 4}
             }
+			espionage_target_nation_1_visible = {
+				has_variable = mission_identifier_1
+			}
+			espionage_target_nation_icon_1_visible = {
+				has_variable = mission_identifier_1
+			}
+			espionage_target_nation_2_visible = {
+				has_variable = mission_identifier_2
+			}
+			espionage_target_nation_icon_2_visible = {
+				has_variable = mission_identifier_2
+			}
+			espionage_target_nation_3_visible = {
+				has_variable = mission_identifier_3
+			}
+			espionage_target_nation_icon_3_visible = {
+				has_variable = mission_identifier_3
+			}
+			espionage_target_nation_4_visible = {
+				has_variable = mission_identifier_4
+			}
+			espionage_target_nation_icon_4_visible = {
+				has_variable = mission_identifier_4
+			}
+			espionage_target_nation_5_visible = {
+				has_variable = mission_identifier_5
+			}
+			espionage_target_nation_icon_5_visible = {
+				has_variable = mission_identifier_5
+			}
 		}
 		effects = {
 			espionage_missions_1_get_rid_of_click = {
@@ -248,31 +293,31 @@ scripted_gui = {
 			espionage_missions_1_initiate_click = {
 				add_timed_idea = {
 					idea = espionage_mission_1_progress
-					days = 10
+					days = mission_1_day_timer
 				}
 			}
 			espionage_missions_2_initiate_click = {
 				add_timed_idea = {
 					idea = espionage_mission_2_progress
-					days = 10
+					days = mission_2_day_timer
 				}
 			}
 			espionage_missions_3_initiate_click = {
 				add_timed_idea = {
 					idea = espionage_mission_3_progress
-					days = 10
+					days = mission_3_day_timer
 				}
 			}
 			espionage_missions_4_initiate_click = {
 				add_timed_idea = {
 					idea = espionage_mission_4_progress
-					days = 10
+					days = mission_4_day_timer
 				}
 			}
 			espionage_missions_5_initiate_click = {
 				add_timed_idea = {
 					idea = espionage_mission_5_progress
-					days = 10
+					days = mission_5_day_timer
 				}
 			}
 			espionage_mission_1_select_mission_click = {
@@ -526,93 +571,6 @@ scripted_gui = {
 			has_country_flag = operation_mission_selection
 		}
 		effects = {
-			background_box_martial_click = {
-				if = {
-					limit = {
-						has_country_flag = operation_selection_slot_1
-					}
-					set_variable = {mission_identifier_1 = global.espionage_mission_martial_missions^i}
-				}else_if = {
-					limit = {
-						has_country_flag = operation_selection_slot_2
-					}
-					set_variable = {mission_identifier_2 = global.espionage_mission_martial_missions^i}
-				}else_if = {
-					limit = {
-						has_country_flag = operation_selection_slot_3
-					}
-					set_variable = {mission_identifier_3 = global.espionage_mission_martial_missions^i}
-				}else_if = {
-					limit = {
-						has_country_flag = operation_selection_slot_4
-					}
-					set_variable = {mission_identifier_4 = global.espionage_mission_martial_missions^i}
-				}else_if = {
-					limit = {
-						has_country_flag = operation_selection_slot_5
-					}
-					set_variable = {mission_identifier_5 = global.espionage_mission_martial_missions^i}
-				}
-				clr_country_flag = operation_mission_selection
-			}
-			background_box_intelligence_click = {
-				if = {
-					limit = {
-						has_country_flag = operation_selection_slot_1
-					}
-					set_variable = {mission_identifier_1 = global.espionage_mission_intelligence_missions^i}
-				}else_if = {
-					limit = {
-						has_country_flag = operation_selection_slot_2
-					}
-					set_variable = {mission_identifier_2 = global.espionage_mission_intelligence_missions^i}
-				}else_if = {
-					limit = {
-						has_country_flag = operation_selection_slot_3
-					}
-					set_variable = {mission_identifier_3 = global.espionage_mission_intelligence_missions^i}
-				}else_if = {
-					limit = {
-						has_country_flag = operation_selection_slot_4
-					}
-					set_variable = {mission_identifier_4 = global.espionage_mission_intelligence_missions^i}
-				}else_if = {
-					limit = {
-						has_country_flag = operation_selection_slot_5
-					}
-					set_variable = {mission_identifier_5 = global.espionage_mission_intelligence_missions^i}
-				}
-				clr_country_flag = operation_mission_selection
-			}
-			background_box_charisma_click = {
-				if = {
-					limit = {
-						has_country_flag = operation_selection_slot_1
-					}
-					set_variable = {mission_identifier_1 = global.espionage_mission_charisma_missions^i}
-				}else_if = {
-					limit = {
-						has_country_flag = operation_selection_slot_2
-					}
-					set_variable = {mission_identifier_2 = global.espionage_mission_charisma_missions^i}
-				}else_if = {
-					limit = {
-						has_country_flag = operation_selection_slot_3
-					}
-					set_variable = {mission_identifier_3 = global.espionage_mission_charisma_missions^i}
-				}else_if = {
-					limit = {
-						has_country_flag = operation_selection_slot_4
-					}
-					set_variable = {mission_identifier_4 = global.espionage_mission_charisma_missions^i}
-				}else_if = {
-					limit = {
-						has_country_flag = operation_selection_slot_5
-					}
-					set_variable = {mission_identifier_5 = global.espionage_mission_charisma_missions^i}
-				}
-				clr_country_flag = operation_mission_selection
-			}
 			select_martial_missions_click = {
 				clr_country_flag = charisma_mission_box_open
 				clr_country_flag = intelligence_mission_box_open
@@ -658,6 +616,32 @@ scripted_gui = {
             #has_country_flag = operations_open
 			has_country_flag = martial_mission_box_open
 		}
+		effects = {
+			army_training_mission_click = {
+				set_temp_variable = {mission_identifier_temp = token:army_training}
+				grab_what_mission_slot_this_is = yes
+			}
+			assassinate_officer_click = {
+				set_temp_variable = {mission_identifier_temp = token:assassination}
+				grab_what_mission_slot_this_is = yes
+			}
+			destroy_capital_click = {
+				set_temp_variable = {mission_identifier_temp = token:destroy_capital_ship}
+				grab_what_mission_slot_this_is = yes
+			}
+			steal_equipment_click = {
+				set_temp_variable = {mission_identifier_temp = token:steal_equipment}
+				grab_what_mission_slot_this_is = yes
+			}
+			arm_dissidents_click = {
+				set_temp_variable = {mission_identifier_temp = token:arm_dissidents}
+				grab_what_mission_slot_this_is = yes
+			}
+			kidnapping_click = {
+				set_temp_variable = {mission_identifier_temp = token:ransom}
+				grab_what_mission_slot_this_is = yes
+			}
+		}
 	}
 	espionage_mission_intelligence = {
 		context_type = player_context
@@ -667,6 +651,32 @@ scripted_gui = {
             #has_country_flag = operations_open
 			has_country_flag = intelligence_mission_box_open
 		}
+		effects = {
+			steal_blueprint_click = {
+				set_temp_variable = {mission_identifier_temp = token:steal_blueprint}
+				grab_what_mission_slot_this_is = yes
+			}
+			sprout_disease_click = {
+				set_temp_variable = {mission_identifier_temp = token:sprout_disease}
+				grab_what_mission_slot_this_is = yes
+			}
+			logistics_sabotage_click = {
+				set_temp_variable = {mission_identifier_temp = token:logistics_sabotage}
+				grab_what_mission_slot_this_is = yes
+			}
+			industrial_sabotage_click = {
+				set_temp_variable = {mission_identifier_temp = token:industrial_sabotage}
+				grab_what_mission_slot_this_is = yes
+			}
+			reroute_supply_click = {
+				set_temp_variable = {mission_identifier_temp = token:reroute_supply}
+				grab_what_mission_slot_this_is = yes
+			}
+			market_crash_click = {
+				set_temp_variable = {mission_identifier_temp = token:army_training}
+				grab_what_mission_slot_this_is = yes
+			}
+		}
 	}
 	espionage_mission_charisma = {
 		context_type = player_context
@@ -675,6 +685,16 @@ scripted_gui = {
 		visible = {
             #has_country_flag = operations_open
 			has_country_flag = charisma_mission_box_open
+		}
+		effects = {
+			intimidate_senator_click = {
+				set_temp_variable = {mission_identifier_temp = token:intimidate_senator}
+				grab_what_mission_slot_this_is = yes
+			}
+			infiltrate_military_click = {
+				set_temp_variable = {mission_identifier_temp = token:infilitrate_military}
+				grab_what_mission_slot_this_is = yes
+			}
 		}
 	}
 	espionage_agent_recruitment_screen = {
