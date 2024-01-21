@@ -170,17 +170,21 @@ scripted_map_modes = {
                 if = {
                     limit = {
                         FROM = {
-                            has_country_flag = emperor
+							OR={
+								has_country_flag = emperor
+								overlord = {has_country_flag = emperor}
+							}
                         }
                     }
-                    set_temp_variable = { red = 0.0 }
-                    set_temp_variable = { blue = 1.0 }
+                    set_temp_variable = { red = 1.0 }
+                    set_temp_variable = { blue = 0.0 }
                     set_temp_variable = { green = 0.0 }
                     set_temp_variable = { alpha = 1.0 }
                 }
                 if = {
                     limit = {
                         FROM = {
+							NOT={ overlord = {has_country_flag = emperor}}
                             has_government = imperial
                         }
                     }
@@ -194,6 +198,7 @@ scripted_map_modes = {
                         FROM = {
                             NOT = {
                                 has_country_flag = emperor
+								overlord = {has_country_flag = emperor}
                             }
                             has_country_flag = warlord
                         }
@@ -203,7 +208,7 @@ scripted_map_modes = {
                     set_temp_variable = { green = 0.79 }
                     set_temp_variable = { alpha = 1.0 }
                 }
-				set_temp_variable = { thickness = 10 }
+				set_temp_variable = { thickness = 100 }
 				set_temp_variable = { highlighted = 1.0 }
             }
 		thickness = yes
@@ -220,7 +225,7 @@ scripted_map_modes = {
                 if = {
                     limit = {
                         FROM = {
-                            has_country_flag = emperor
+							has_country_flag = emperor
                         }
                     }
                     set_temp_variable = { red = 0.6 }
