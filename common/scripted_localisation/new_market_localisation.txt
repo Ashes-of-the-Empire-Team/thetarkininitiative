@@ -1,0 +1,69 @@
+defined_text = {
+    name = market_production_amount_grabber
+	text = {
+        trigger = {
+            check_variable = {market_category = global.naval_market_category}
+        }
+        localization_key = market_item_counting_in_1s
+    }
+	text = {
+        localization_key = market_item_counting_in_100s
+    }
+}
+defined_text = {
+    name = market_item_price_grabber
+	text = {
+        trigger = {
+            set_temp_variable = {passer_upper_variable = current_selected_market_category_array^i}
+        }
+        localization_key = market_item_price_actual
+    }
+}
+defined_text = {
+    name = market_item_stock_grabber
+	text = {
+        trigger = {
+            set_temp_variable = {passer_upper_variable = current_selected_market_category_array^i}
+        }
+        localization_key = market_item_stock_actual
+    }
+}
+defined_text = {
+	name = market_amount_being_produced_getter
+	text = {
+		trigger = {
+			set_temp_variable = {scoping_to_owner = global.who_owns_item@var:current_selected_market_category_array^i}
+			set_temp_variable = {passing_array_number = current_selected_market_category_array^i}
+			var:scoping_to_owner = {
+				set_temp_variable = {amount_being_produced = production_item_amount@var:passing_array_number}
+			}
+		}
+		localization_key = "market_production_amount"
+	}
+}
+defined_text = {
+	name = market_image_getter
+	text = {
+		localization_key = "GFX_market_photo_[?current_selected_market_category_array^i.GetTokenKey]"
+	}
+}
+defined_text = {
+	name = market_flag_getter
+	text = {
+        trigger = {
+            set_temp_variable = {getting_item_number = current_selected_market_category_array^i}
+            set_temp_variable = {getting_tag = global.who_owns_item@var:getting_item_number}
+        }
+		localization_key = "[?getting_tag.GetFlag]"
+	}
+}
+defined_text = {
+	name = market_producer_name
+	text = {
+        trigger = {
+            set_temp_variable = {getting_item_number = current_selected_market_category_array^i}
+            set_temp_variable = {getting_tag = global.who_owns_item@var:getting_item_number}
+        }
+		localization_key = "[?getting_tag.GetName]"
+	}
+}

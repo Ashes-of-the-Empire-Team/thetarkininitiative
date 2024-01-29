@@ -28,19 +28,12 @@ scripted_gui = {
             }
             buy_button_click = {
                 set_temp_variable = {item_to_buy = current_selected_market_category_array^i}
+                set_temp_variable = {amount_to_purchase = 1}
                 if = {
                     limit = {
-                        check_variable = {market_category = global.naval_market_category}
-                    }
-                    set_temp_variable = {amount_to_purchase = 1}
-                }else = {
-                    set_temp_variable = {amount_to_purchase = 100}
-                }
-                if = {
-                    limit = {
-                        set_temp_variable = {owner_of_item = who_owns_item@token:item_to_buy}
+                        set_temp_variable = {owner_of_item = who_owns_item@var:item_to_buy}
                         set_temp_variable = {money_to_pass = currency_amount^primary_currency}
-                        set_temp_variable = {total_price = global.price_of_item_@token:item_to_buy}
+                        set_temp_variable = {total_price = global.price_of_item_@var:item_to_buy}
                         multiply_temp_variable = {total_price = amount_to_purchase}
                         check_variable = { money_to_pass > total_price}
                     }
@@ -54,14 +47,14 @@ scripted_gui = {
                     }
                     set_temp_variable = {amount_to_purchase = 5}
                 }else = {
-                    set_temp_variable = {amount_to_purchase = 500}
+                    set_temp_variable = {amount_to_purchase = 10}
                 }
                 if = {
                     limit = {
-                        set_temp_variable = {owner_of_item = who_owns_item@token:item_to_buy}
+                        set_temp_variable = {owner_of_item = who_owns_item@var:item_to_buy}
                         set_temp_variable = {money_to_pass = currency_amount^primary_currency}
                         var:owner_of_item = {
-                            set_temp_variable = {total_price = price_of_item_@token:item_to_buy}
+                            set_temp_variable = {total_price = global.price_of_item_@var:item_to_buy}
                             multiply_temp_variable = {total_price = amount_to_purchase}
                             check_variable = { money_to_pass > total_price}
                         }
@@ -77,14 +70,14 @@ scripted_gui = {
                     }
                     set_temp_variable = {amount_to_purchase = 10}
                 }else = {
-                    set_temp_variable = {amount_to_purchase = 1000}
+                    set_temp_variable = {amount_to_purchase = 100}
                 }
                 if = {
                     limit = {
-                        set_temp_variable = {owner_of_item = who_owns_item@token:item_to_buy}
+                        set_temp_variable = {owner_of_item = who_owns_item@var:item_to_buy}
                         set_temp_variable = {money_to_pass = currency_amount^primary_currency}
                         var:owner_of_item = {
-                            set_temp_variable = {total_price = price_of_item_@token:item_to_buy}
+                            set_temp_variable = {total_price = global.price_of_item_@var:item_to_buy}
                             multiply_temp_variable = {total_price = amount_to_purchase}
                             check_variable = { money_to_pass > total_price}
                         }
@@ -93,10 +86,24 @@ scripted_gui = {
                     buy_item_scripted_effect = yes
                 }
 			}
+            flag_producer_click = {
+                set_temp_variable = {getting_item_number = current_selected_market_category_array^i}
+                set_temp_variable = {getting_tag = global.who_owns_item@var:getting_item_number}
+                var:getting_tag = {
+                    capital_scope = {
+                        ROOT = {
+                            goto_state = PREV
+                        }
+                    }
+                }
+            }
         }
         properties = {
             buy_button = {
                 image = "[market_image_getter]"
+            }
+            flag_producer = {
+                image = "[market_flag_getter]"
             }
         }
     }
