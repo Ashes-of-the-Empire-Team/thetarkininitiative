@@ -67,7 +67,7 @@ focus_tree = {
 	focus = {
 		id = ZSJ_the_economic_plan
 		icon = GFX_economic_plan_goal
-		x = 20
+		x = 27
 		y = 5
 		cost = 1.5
 		search_filters = {
@@ -402,7 +402,7 @@ focus_tree = {
 		id = ZSJ_an_unlikely_ally
 		icon = GFX_an_unlikely_ally_goal
 		x = 13
-		y = 7
+		y = 9
 		cost = 5
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
@@ -561,9 +561,9 @@ focus_tree = {
 		}
 	}
 
-	#The Dathomir Plan
+	#The Toprawa Resistance
 	focus = {
-		id = ZSJ_the_dathomir_plan
+		id = ZSJ_toprawa_resistance
 		icon = GFX_dathomir_plan_goal
 		x = 14
 		y = 5
@@ -577,12 +577,62 @@ focus_tree = {
 		}
 	}
 
+	#Strengthen Trust
+	focus = {
+		id = ZSJ_strengthen_trust
+		icon = GFX_dathomir_plan_goal
+		x = 13
+		y = 6
+		cost = 1.5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = ZSJ_toprawa_resistance  }
+		mutually_exclusive = { focus = ZSJ_hard_labour  }
+		completion_reward = {
+			add_command_power = -80
+		}
+	}
+
+	#hard_labour
+	focus = {
+		id = ZSJ_hard_labour
+		icon = GFX_dathomir_plan_goal
+		x = 15
+		y = 6
+		cost = 1.5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = ZSJ_toprawa_resistance  }
+		mutually_exclusive = { focus = ZSJ_strengthen_trust  }
+		completion_reward = {
+			add_command_power = -80
+		}
+	}
+
+	#The Dathomir Plan
+	focus = {
+		id = ZSJ_the_dathomir_plan
+		icon = GFX_dathomir_plan_goal
+		x = 14
+		y = 7
+		cost = 1.5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = ZSJ_hard_labour focus = ZSJ_strengthen_trust }
+		completion_reward = {
+			add_command_power = -80
+		}
+	}
+
 	#The Hidden Base
 	focus = {
 		id = ZSJ_the_hidden_base
 		icon = GFX_zsinj_goal
 		x = 14
-		y = 6
+		y = 8
 		cost = 7.2
 		search_filters = {
 			FOCUS_FILTER_ANNEXATION
@@ -598,7 +648,7 @@ focus_tree = {
 		id = ZSJ_annihilate_the_witches
 		icon = GFX_annihilate_witches_goal
 		x = 15
-		y = 7
+		y = 9
 		cost = 5
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
@@ -622,13 +672,14 @@ focus_tree = {
 	focus = {
 		id = ZSJ_dathomir_shipyards
 		icon = GFX_dathomir_shipyard_goal
-		x = 14
-		y = 8
+		x = 7
+		y = 1
 		cost = 7.2
+		relative_position_id = ZSJ_the_hidden_base
 		search_filters = {
 			FOCUS_FILTER_INDUSTRY
 		}
-		prerequisite = { focus = ZSJ_annihilate_the_witches  focus = ZSJ_an_unlikely_ally  }
+		prerequisite = { focus = ZSJ_the_hidden_base  }
 		completion_reward = {
 			487 = {
 				clear_building_2_effects = yes
@@ -648,9 +699,10 @@ focus_tree = {
 	focus = {
 		id = ZSJ_focus_on_retrofitting
 		icon = GFX_zsinj_goal
-		x = 13
-		y = 9
+		x = -1
+		y = 1
 		cost = 7.2
+		relative_position_id = ZSJ_dathomir_shipyards
 		search_filters = {
 			FOCUS_FILTER_INDUSTRY
 		}
@@ -666,14 +718,119 @@ focus_tree = {
 	focus = {
 		id = ZSJ_focus_on_shipbuilding
 		icon = GFX_zsinj_goal
-		x = 15
-		y = 9
+		x = 1
+		y = 1
 		cost = 7.2
+		relative_position_id = ZSJ_dathomir_shipyards
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
 		prerequisite = { focus = ZSJ_dathomir_shipyards  }
 		mutually_exclusive = { focus = ZSJ_focus_on_retrofitting  }
+		completion_reward = {
+			add_ideas = ZSJ_shipbuilding
+		}
+	}
+
+	#Victory Class Star Destroyers
+	focus = {
+		id = ZSJ_victory_class_star_destroyers
+		icon = GFX_zsinj_goal
+		x = -1
+		y = 1
+		cost = 7.2
+		relative_position_id = ZSJ_focus_on_retrofitting
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = ZSJ_focus_on_shipbuilding focus = ZSJ_focus_on_retrofitting  }
+		completion_reward = {
+			add_ideas = ZSJ_shipbuilding
+		}
+	}
+
+	#Victory Class 2 Star Destroyers
+	focus = {
+		id = ZSJ_victory_2_class_star_destroyers
+		icon = GFX_zsinj_goal
+		x = 0
+		y = 1
+		cost = 7.2
+		relative_position_id = ZSJ_victory_class_star_destroyers
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = ZSJ_victory_class_star_destroyers  }
+		completion_reward = {
+			add_ideas = ZSJ_shipbuilding
+		}
+	}
+
+	#Skilled_fleet_commanders
+	focus = {
+		id = ZSJ_skilled_fleet_commanders
+		icon = GFX_zsinj_goal
+		x = 1
+		y = 1
+		cost = 7.2
+		relative_position_id = ZSJ_focus_on_shipbuilding
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = ZSJ_focus_on_shipbuilding focus = ZSJ_focus_on_retrofitting  }
+		completion_reward = {
+			add_ideas = ZSJ_shipbuilding
+		}
+	}
+
+	
+	#Innovative Tactics
+	focus = {
+		id = ZSJ_innovative_tactics
+		icon = GFX_zsinj_goal
+		x = -1
+		y = 1
+		cost = 7.2
+		relative_position_id = ZSJ_focus_on_shipbuilding
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = ZSJ_focus_on_shipbuilding focus = ZSJ_focus_on_retrofitting  }
+		completion_reward = {
+			add_ideas = ZSJ_shipbuilding
+		}
+	}
+
+	#Our Own Star Destroyers
+	focus = {
+		id = ZSJ_our_own_star_destroyers
+		icon = GFX_zsinj_goal
+		x = 0
+		y = 1
+		cost = 7.2
+		relative_position_id = ZSJ_innovative_tactics
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = ZSJ_innovative_tactics  }
+		completion_reward = {
+			add_ideas = ZSJ_shipbuilding
+		}
+	}
+
+	
+	#Crimson Command
+	focus = {
+		id = ZSJ_crimson_command
+		icon = GFX_zsinj_goal
+		x = 0
+		y = 1
+		cost = 7.2
+		relative_position_id = ZSJ_our_own_star_destroyers
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = ZSJ_our_own_star_destroyers  }
 		completion_reward = {
 			add_ideas = ZSJ_shipbuilding
 		}
@@ -689,7 +846,7 @@ focus_tree = {
 		search_filters = {
 			FOCUS_FILTER_INDUSTRY
 		}
-		prerequisite = { focus = ZSJ_focus_on_shipbuilding  focus = ZSJ_focus_on_retrofitting  }
+		prerequisite = { focus = ZSJ_an_unlikely_ally  focus = ZSJ_annihilate_the_witches  }
 		completion_reward = {
 			declare_war_on = {
 			    target = SIN
@@ -711,13 +868,56 @@ focus_tree = {
 		prerequisite = { focus = ZSJ_secure_control_of_the_surface  }
 	}
 
+	#Secure Mirial
+	focus = {
+		id = ZSJ_secure_mirial
+		icon = GFX_zsinj_goal
+		x = -3
+		y = 1
+		cost = 5
+		relative_position_id = ZSJ_the_rebel_government
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = ZSJ_the_rebel_government  }
+	}
+
+	#Imperial Occupation Zones
+	focus = {
+		id = ZSJ_imperial_occupation_zones
+		icon = GFX_zsinj_goal
+		x = 0
+		y = 1
+		cost = 5
+		relative_position_id = ZSJ_secure_mirial
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = ZSJ_secure_mirial  }
+	}
+
+	#Imperial Occupation Zones
+	focus = {
+		id = ZSJ_closing_the_sector
+		icon = GFX_zsinj_goal
+		x = 0
+		y = 1
+		cost = 5
+		relative_position_id = ZSJ_imperial_occupation_zones
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = ZSJ_imperial_occupation_zones  }
+	}
+
 	#Approach Anaxes
 	focus = {
 		id = ZSJ_approach_anaxes
 		icon = GFX_zsinj_goal
-		x = 11
-		y = 12
+		x = -1
+		y = 1
 		cost = 5
+		relative_position_id = ZSJ_the_rebel_government
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
@@ -836,9 +1036,10 @@ focus_tree = {
 	focus = {
 		id = ZSJ_teubbo_the_hutt
 		icon = GFX_teubbo_goal
-		x = 20
-		y = 6
+		x = 0
+		y = 1
 		cost = 5
+		relative_position_id = ZSJ_the_economic_plan
 		search_filters = {
 			FOCUS_FILTER_INDUSTRY
 		}
@@ -852,9 +1053,10 @@ focus_tree = {
 	focus = {
 		id = ZSJ_zygerria
 		icon = GFX_zygerria_goal
-		x = 18
-		y = 7
+		x = -1
+		y = 1
 		cost = 5
+		relative_position_id = ZSJ_teubbo_the_hutt
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
@@ -871,9 +1073,10 @@ focus_tree = {
 	focus = {
 		id = ZSJ_ban_slavery
 		icon = GFX_zsinj_goal
-		x = 19
-		y = 8
+		x = 0
+		y = 1
 		cost = 5
+		relative_position_id = ZSJ_zygerria
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
@@ -890,12 +1093,13 @@ focus_tree = {
 	focus = {
 		id = ZSJ_forced_labour
 		icon = GFX_zsinj_goal
-		x = 17
-		y = 8
+		x = -2
+		y = 1
 		cost = 5
 		available = {
 			always = no
 		}
+		relative_position_id = ZSJ_zygerria
 		search_filters = {
 			FOCUS_FILTER_INDUSTRY
 		}
@@ -907,9 +1111,10 @@ focus_tree = {
 	focus = {
 		id = ZSJ_corporate_based_economy
 		icon = GFX_zsinj_goal
-		x = 19
-		y = 9
+		x = 0
+		y = 1
 		cost = 5
+		relative_position_id = ZSJ_ban_slavery
 		search_filters = {
 			FOCUS_FILTER_INDUSTRY
 		}
@@ -924,9 +1129,10 @@ focus_tree = {
 	focus = {
 		id = ZSJ_the_bacta_cartel
 		icon = GFX_zsinj_goal
-		x = 19
-		y = 10
+		x = 0
+		y = 1
 		cost = 5
+		relative_position_id = ZSJ_corporate_based_economy
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
@@ -937,9 +1143,10 @@ focus_tree = {
 	focus = {
 		id = ZSJ_slave_treaty
 		icon = GFX_zsinj_goal
-		x = 17
-		y = 9
+		x = 0
+		y = 1
 		cost = 5
+		relative_position_id = ZSJ_forced_labour
 		search_filters = {
 			FOCUS_FILTER_INDUSTRY
 		}
@@ -950,9 +1157,10 @@ focus_tree = {
 	focus = {
 		id = ZSJ_stabilize_the_economy
 		icon = GFX_zsinj_goal
-		x = 26
-		y = 7
+		x = 6
+		y = 1
 		cost = 5
+		relative_position_id = ZSJ_teubbo_the_hutt
 		search_filters = {
 			FOCUS_FILTER_INDUSTRY
 		}
@@ -968,9 +1176,10 @@ focus_tree = {
 	focus = {
 		id = ZSJ_santhe_contributions
 		icon = GFX_santhe_contributions_goal
-		x = 24
-		y = 9
+		x = 0
+		y = 1
 		cost = 5
+		relative_position_id = ZSJ_support_santhe
 		search_filters = {
 			FOCUS_FILTER_INDUSTRY
 		}
@@ -984,9 +1193,10 @@ focus_tree = {
 	focus = {
 		id = ZSJ_approach_the_csa
 		icon = GFX_approach_the_csa_goal
-		x = 23
-		y = 7
+		x = 3
+		y = 1
 		cost = 5
+		relative_position_id = ZSJ_teubbo_the_hutt
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
@@ -1002,9 +1212,10 @@ focus_tree = {
 	focus = {
 		id = ZSJ_corporate_free_trade_zone
 		icon = GFX_zsinj_goal
-		x = 22
-		y = 8
+		x = -1
+		y = 1
 		cost = 5
+		relative_position_id = ZSJ_approach_the_csa
 		search_filters = {
 			FOCUS_FILTER_INDUSTRY
 		}
@@ -1018,9 +1229,10 @@ focus_tree = {
 	focus = {
 		id = ZSJ_extraction_industry_expansion
 		icon = GFX_zsinj_goal
-		x = 21
-		y = 10
+		x = -1
+		y = 2
 		cost = 5
+		relative_position_id = ZSJ_corporate_free_trade_zone
 		search_filters = {
 			FOCUS_FILTER_INDUSTRY
 		}
@@ -1031,9 +1243,10 @@ focus_tree = {
 	focus = {
 		id = ZSJ_wealthy_sponsors
 		icon = GFX_zsinj_goal
-		x = 22
-		y = 9
+		x = 0
+		y = 1
 		cost = 5
+		relative_position_id = ZSJ_corporate_free_trade_zone
 		search_filters = {
 			FOCUS_FILTER_INDUSTRY
 		}
@@ -1047,9 +1260,10 @@ focus_tree = {
 	focus = {
 		id = ZSJ_support_santhe
 		icon = GFX_support_santhe_goal
-		x = 24
-		y = 8
+		x = 1
+		y = 1
 		cost = 5
+		relative_position_id = ZSJ_approach_the_csa
 		available = {
 			always = no
 		}
@@ -1063,9 +1277,10 @@ focus_tree = {
 	focus = {
 		id = ZSJ_investments_in_serenno
 		icon = GFX_zsinj_goal
-		x = 27
-		y = 8
+		x = 1
+		y = 1
 		cost = 5
+		relative_position_id = ZSJ_stabilize_the_economy
 		search_filters = {
 			FOCUS_FILTER_INDUSTRY
 		}
@@ -1094,9 +1309,10 @@ focus_tree = {
 	focus = {
 		id = ZSJ_dastafamily
 		icon = GFX_dasta_family_goal
-		x = 26
-		y = 9
+		x = -1
+		y = 1
 		cost = 5
+		relative_position_id = ZSJ_investments_in_serenno
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
@@ -1107,9 +1323,11 @@ focus_tree = {
 	focus = {
 		id = ZSJ_expand_the_civil_sector
 		icon = GFX_zsinj_goal
-		x = 28
-		y = 9
+		x = 1
+		y = 1
 		cost = 5
+		relative_position_id = ZSJ_investments_in_serenno
+
 		search_filters = {
 			FOCUS_FILTER_INDUSTRY
 		}
@@ -1138,9 +1356,10 @@ focus_tree = {
 	focus = {
 		id = ZSJ_serenno_refineries
 		icon = GFX_serenno_refinery_goal
-		x = 29
-		y = 10
+		x = 1
+		y = 1
 		cost = 5
+		relative_position_id = ZSJ_expand_the_civil_sector
 		search_filters = {
 			FOCUS_FILTER_INDUSTRY
 		}
@@ -1160,9 +1379,10 @@ focus_tree = {
 	focus = {
 		id = ZSJ_thedastasector
 		icon = GFX_zsinj_goal
-		x = 27
-		y = 10
+		x = -1
+		y = 1
 		cost = 5
+		relative_position_id = ZSJ_expand_the_civil_sector
 		search_filters = {
 			FOCUS_FILTER_INDUSTRY
 		}
@@ -1184,7 +1404,7 @@ focus_tree = {
 	focus = {
 		id = ZSJ_the_clandestine_plan
 		icon = GFX_clandestine_plan_goal
-		x = 32
+		x = 39
 		y = 5
 		cost = 1.5
 		search_filters = {
@@ -1200,9 +1420,10 @@ focus_tree = {
 	focus = {
 		id = ZSJ_experimental_research
 		icon = GFX_zsinj_goal
-		x = 30
-		y = 6
+		x = -1
+		y = 1
 		cost = 5
+		relative_position_id = ZSJ_the_clandestine_plan
 		search_filters = {
 			FOCUS_FILTER_INDUSTRY
 		}
@@ -1217,9 +1438,10 @@ focus_tree = {
 	focus = {
 		id = ZSJ_project_morrt
 		icon = GFX_zsinj_goal
-		x = 28
-		y = 7
+		x = -3
+		y = 1
 		cost = 5
+		relative_position_id = ZSJ_experimental_research
 		search_filters = {
 			FOCUS_FILTER_WAR_SUPPORT
 		}
@@ -1233,9 +1455,10 @@ focus_tree = {
 	focus = {
 		id = ZSJ_project_raptor
 		icon = GFX_zsinj_goal
-		x = 30
-		y = 7
+		x = -1
+		y = 1
 		cost = 5
+		relative_position_id = ZSJ_experimental_research
 		search_filters = {
 			FOCUS_FILTER_RESEARCH
 		}
@@ -1246,9 +1469,10 @@ focus_tree = {
 	focus = {
 		id = ZSJ_project_minefield
 		icon = GFX_zsinj_goal
-		x = 32
-		y = 7
+		x = 1
+		y = 1
 		cost = 5
+		relative_position_id = ZSJ_experimental_research
 		search_filters = {
 			FOCUS_FILTER_RESEARCH
 		}
@@ -1259,9 +1483,10 @@ focus_tree = {
 	focus = {
 		id = ZSJ_imperial_intelligence
 		icon = GFX_imperial_intelligence_goal
-		x = 33
-		y = 6
+		x = 1
+		y = 1
 		cost = 5
+		relative_position_id = ZSJ_the_clandestine_plan
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
@@ -1275,9 +1500,10 @@ focus_tree = {
 	focus = {
 		id = ZSJ_project_funeral
 		icon = GFX_zsinj_goal
-		x = 32
-		y = 8
+		x = 0
+		y = 1
 		cost = 5
+		relative_position_id = ZSJ_project_minefield
 		search_filters = {
 			FOCUS_FILTER_RESEARCH
 		}
@@ -1288,9 +1514,10 @@ focus_tree = {
 	focus = {
 		id = ZSJ_sleeper_agents
 		icon = GFX_zsinj_goal
-		x = 32
-		y = 9
+		x = 0
+		y = 1
 		cost = 5
+		relative_position_id = ZSJ_project_funeral
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
@@ -1301,9 +1528,10 @@ focus_tree = {
 	focus = {
 		id = ZSJ_dissent_campaigns
 		icon = GFX_zsinj_goal
-		x = 34
-		y = 7
+		x = 1
+		y = 1
 		cost = 5
+		relative_position_id = ZSJ_imperial_intelligence
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
@@ -1314,9 +1542,10 @@ focus_tree = {
 	focus = {
 		id = ZSJ_interrogation_training
 		icon = GFX_zsinj_goal
-		x = 34
-		y = 8
+		x = 0
+		y = 1
 		cost = 5
+		relative_position_id = ZSJ_dissent_campaigns
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
@@ -1330,9 +1559,10 @@ focus_tree = {
 	focus = {
 		id = ZSJ_the_great_deception
 		icon = GFX_zsinj_goal
-		x = 36
-		y = 7
+		x = 3
+		y = 1
 		cost = 5
+		relative_position_id = ZSJ_imperial_intelligence
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
