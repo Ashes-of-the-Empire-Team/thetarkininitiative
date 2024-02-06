@@ -6,13 +6,30 @@ on_actions = {
 				if = {
 					limit = {
 						NOT = {
-							has_country_flag = major_influencial_nation
+							OR = {
+								has_country_flag = major_influencial_nation
+								has_country_flag = non_influence_nation
+							}
 						}
 						capital_scope = {
 							is_on_continent = hutt_space
 						}
 					}
 					add_to_array = { Global.the_slice_array = THIS.id }
+				}
+				if = {
+					limit = {
+						NOT = {
+							OR = {
+								has_country_flag = major_influencial_nation
+								has_country_flag = non_influence_nation
+							}
+						}
+						capital_scope = {
+							is_on_continent = upper_rim
+						}
+					}
+					add_to_array = { Global.the_trans_hydian_screen = THIS.id }
 				}
 			}
 		}
