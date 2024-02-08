@@ -1,16 +1,63 @@
 scripted_gui = {
-    Marketplace_main_selection = {
+    production_market_selection = {
         context_type = player_context
         parent_window_name = countryinternationalmarketview
         window_name = "the_newest_and_best_production_screen"
         visible = {
-            always = no
+            always = yes
         }
         effects = {
-
+            naval_category_click = {
+                clear_array = current_looking_at_production_array
+                for_each_loop = {
+                    array = Production_array@var:global.naval_market_category
+                    value = current_item_we_are_looking_at
+                    add_to_array = {
+                        array = current_looking_at_production_array
+                        value = current_item_we_are_looking_at
+                    }
+                }
+            }
+            army_category_click = {
+                clear_array = current_looking_at_production_array
+                for_each_loop = {
+                    array = Production_array@var:global.tank_market_category
+                    value = current_item_we_are_looking_at
+                    add_to_array = {
+                        array = current_looking_at_production_array
+                        value = current_item_we_are_looking_at
+                    }
+                }
+            }
+            air_category_click = {
+                clear_array = current_looking_at_production_array
+                for_each_loop = {
+                    array = Production_array@var:global.air_market_category
+                    value = current_item_we_are_looking_at
+                    add_to_array = {
+                        array = current_looking_at_production_array
+                        value = current_item_we_are_looking_at
+                    }
+                }
+            }
+            production_increase_click = {
+                set_temp_variable = {item_id = current_looking_at_production_array^i}
+                add_to_variable = {factories_on_item@var:item_id = 1}
+            }
+            production_decrease_click = {
+                set_temp_variable = {item_id = current_looking_at_production_array^i}
+                add_to_variable = {factories_on_item@var:item_id = -1}
+                
+            }
         }
         triggers = {
+            production_increase_click_enabled = {
 
+            }
+            production_decrease_click_enabled = {
+                set_temp_variable = {item_id = current_looking_at_production_array^i}
+                check_variable = {factories_on_item@var:item_id > 0}
+            }
         }
         properties = {
             stock_graph_1 = {
@@ -47,7 +94,11 @@ scripted_gui = {
                 value = segment_value
                 index = segment_idx
             }
+            production_item_list = {
+                array = current_looking_at_production_array
+                entry_container = production_item_box
+                change_scope = no
+            }
         }
     }
-}   
- ################################################################################## BUYING SHIPS END #########################################################################
+}
