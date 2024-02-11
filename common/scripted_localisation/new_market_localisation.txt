@@ -15,8 +15,18 @@ defined_text = {
 	text = {
         trigger = {
             set_temp_variable = {passer_upper_variable = current_selected_market_category_array^i}
+            set_temp_variable = {owner = global.who_owns_item@var:passer_upper_variable}
+            has_variable = company_modifier@var:owner
+            set_temp_variable = {actual_price = company_modifier@var:owner}
+            multiply_temp_variable = {actual_price = global.price_of_item_@var:passer_upper_variable}
         }
         localization_key = market_item_price_actual
+    }
+    text = {
+        trigger = {
+            set_temp_variable = {passer_upper_variable = current_selected_market_category_array^i}
+        }
+        localization_key = market_item_price_actual_no_modifier
     }
 }
 defined_text = {
@@ -75,4 +85,55 @@ defined_text = {
         }
         localization_key = factory_amount_actual
     }
+}
+defined_text = {
+    name = production_factory_output_grabber
+	text = {
+        trigger = {
+            set_temp_variable = {passer_upper_variable = current_looking_at_production_array^i}
+        }
+        localization_key = factory_output_actual
+    }
+}
+defined_text = {
+    name = production_revenue_grabber
+	text = {
+        trigger = {
+            set_temp_variable = {passer_upper_variable = current_looking_at_production_array^i}
+        }
+        localization_key = production_revenue_actual
+    }
+}
+defined_text = {
+    name = production_profit_grabber
+	text = {
+        trigger = {
+            set_temp_variable = {passer_upper_variable = current_looking_at_production_array^i}
+        }
+        localization_key = production_profit_actual
+    }
+}
+defined_text = {
+    name = production_cost_grabber
+	text = {
+        trigger = {
+            set_temp_variable = {passer_upper_variable = current_looking_at_production_array^i}
+        }
+        localization_key = production_cost_actual
+    }
+}
+defined_text = {
+    name = production_efficiency_grabber
+	text = {
+        trigger = {
+            set_temp_variable = {passer_upper_variable = current_looking_at_production_array^i}
+        }
+        localization_key = production_efficiency_actual
+    }
+}
+defined_text = {
+	name = production_image_getter
+	text = {
+		localization_key = "GFX_market_photo_[?current_looking_at_production_array^i.GetTokenKey]"
+	}
 }

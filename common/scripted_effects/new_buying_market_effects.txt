@@ -35,7 +35,7 @@ sift_through_alliance_types = {
 		set_temp_variable = {country_belongs_to_what_faction = global.empire_market_choice}
 	}else_if = {
 		limit = {
-			has_goverment = democratic
+			has_government = democratic
 		}
 		set_temp_variable = {country_belongs_to_what_faction = global.republic_market_choice}
 	}else = {
@@ -91,7 +91,7 @@ buy_item_scripted_effect = {
 					}
 					requested_factories = 1
 					progress = 1.00
-					amount = 1
+					amount = amount_to_purchase
 				}
 			}
 			MARKET_ITEM = "[?item_to_buy.GetTokenKey]"
@@ -99,6 +99,7 @@ buy_item_scripted_effect = {
 		}
 	}else = {
 		multiply_temp_variable = {amount_to_purchase = 100}
+		log = "test"
 		meta_effect = {
 			text = {
 				add_equipment_to_stockpile = {
@@ -111,10 +112,91 @@ buy_item_scripted_effect = {
 			PRODUCER = "[?producer.GetTag]" 
 		}
 	}
+	var:producer = {
+		add_to_variable = {currency_amount^primary_currency = total_price}
+	}
+	subtract_from_variable = {global.stock_of_item@var:item_to_buy = amount_to_purchase}
 }
+
+weekly_production_of_item_calculation_scripted_effect = {
+	set_temp_variable = {temporary_factory_output_calculator = factories_on_item@var:current_item_we_are_looking_at}
+	multiply_temp_variable = { temporary_factory_output_calculator = production_efficiency@var:current_item_we_are_looking_at }
+	multiply_temp_variable = { temporary_factory_output_calculator = global.CONSTANT_FACTORY_OUTPUT_MULTIPLIER }
+	divide_temp_variable = {temporary_factory_output_calculator = global.ic_cost@var:current_item_we_are_looking_at}
+	set_variable = {weekly_production_of_item@var:current_item_we_are_looking_at = temporary_factory_output_calculator}
+}
+
+production_efficiency_calculator = {
+	if = {
+		limit = {
+			check_variable = {factories_on_item@var:current_item_we_are_looking_at > 0}
+		}
+		set_variable = {temporary_efficiency_growth = global.CONSTANT_PRODUCTION_EFFICIENCY_GROWTH}
+
+		set_temp_variable = {modifier_production_efficency = modifier@production_efficiency_multiplier}
+		add_to_temp_variable = {modifier_production_efficency = 1}
+		multiply_variable = {
+			var = temporary_efficiency_growth
+			value = modifier_production_efficency
+		}
+		add_to_variable = {production_efficiency@var:current_item_we_are_looking_at = temporary_efficiency_growth}
+		if = {
+			limit = {
+				check_variable = {
+					var = modifier@production_efficiency_cap_multiplier
+					value = 0
+					compare = not_equals
+				}
+			}
+			set_variable = {capped_production_efficiency_amount = 1}
+			set_temp_variable = {temporary_calculator = 1}
+			add_to_temp_variable = {temporary_calculator = modifier@production_efficiency_cap_multiplier}
+			multiply_variable = {capped_production_efficiency_amount = temporary_calculator}
+		}
+		clamp_variable = {
+			var = production_efficiency@var:current_item_we_are_looking_at
+			max = capped_production_efficiency_amount?1
+		}
+	}
+}
+work_out_total_factory_price = {
+
+	add_to_temp_variable = {modifier_of_this_items_cost = 1}
+
+	set_variable = {cost_amount@var:current_item_we_are_looking_at = global.CONSTANT_CORPORATE_FACTORY_COST}
+	multiply_variable = {cost_amount@var:current_item_we_are_looking_at = factories_on_item@var:current_item_we_are_looking_at}
+
+	multiply_variable = {cost_amount@var:current_item_we_are_looking_at = modifier_of_this_items_cost}
+
+	set_temp_variable = {working_out_price = cost_amount@var:current_item_we_are_looking_at}
+	divide_temp_variable = {working_out_price = 30}
+	add_to_variable = {total_corporate_factory_cost = working_out_price}
+
+}
+
+example_subsidy_show_and_tell = {
+	set_temp_variable = {company_tag = KUA}
+	set_temp_variable = {modifier_percentage = -0.2} ## Decreases price by 20%
+	add_subsidy_for_buying_equipment = yes ## WILL HANDLE THE LOCALISATION FOR YOU
+}
+
+
+add_subsidy_for_buying_equipment = { ## WILL RETURN LOCALISATION FOR YOU
+	### REQUIRES TWO VARIABLES ASSIGNED BY MODDER
+	## company_tag COMPANY THAT YOU WANT TO BUY THE EQUIPMENT OFF CHEAPER (Tag format i.e. ROT)
+	## modifier_percentage WHAT MODIFIER (Percentage amount i.e. -0.2 is 20% off the total price)
+	custom_effect_tooltip =  add_subsidy_tooltip
+	if = {
+		limit = {
+			NOT = {
+				has_variable = company_modifier@var:company_tag
+			}
+		}
+		set_variable = {company_modifier@var:company_tag = 1}
+	}
+	add_to_variable = {company_modifier@var:company_tag = modifier_percentage}
+}
+
 buying_market_test_effect = {
-	set_temp_variable = {item_id = current_looking_at_production_array^0}
-	log = "[?current_looking_at_production_array^0]"
-	add_to_variable = {factories_on_item@var:item_id = 1}
-	log = "[?factories_on_item@var:item_id]"
+	
 }

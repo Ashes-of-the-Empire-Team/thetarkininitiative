@@ -4,7 +4,7 @@ scripted_gui = {
         parent_window_name = countryinternationalmarketview
         window_name = "the_newest_and_best_production_screen"
         visible = {
-            always = yes
+            has_country_flag = open_production_market_menu
         }
         effects = {
             naval_category_click = {
@@ -17,6 +17,9 @@ scripted_gui = {
                         value = current_item_we_are_looking_at
                     }
                 }
+            }
+            open_buy_market_menu_click = {
+                clr_country_flag = open_production_market_menu
             }
             army_category_click = {
                 clear_array = current_looking_at_production_array
@@ -43,11 +46,17 @@ scripted_gui = {
             production_increase_click = {
                 set_temp_variable = {item_id = current_looking_at_production_array^i}
                 add_to_variable = {factories_on_item@var:item_id = 1}
+                ## Caluclautes production efficecny drop
+                set_temp_variable = {production_efficency_loss_percentage = 1}
+                divide_temp_variable = {production_efficency_loss_percentage = factories_on_item@var:item_id}
+                set_temp_variable = {production_efficency_loss_actual = 1}
+                subtract_from_temp_variable = { production_efficency_loss_actual = production_efficency_loss_percentage}
+                multiply_variable = {production_efficiency@var:item_id = production_efficency_loss_actual}
+                
             }
             production_decrease_click = {
                 set_temp_variable = {item_id = current_looking_at_production_array^i}
                 add_to_variable = {factories_on_item@var:item_id = -1}
-                
             }
         }
         triggers = {
@@ -60,6 +69,9 @@ scripted_gui = {
             }
         }
         properties = {
+            buy_button = {
+                image = "[production_image_getter]"
+            }
             stock_graph_1 = {
                 frame = graph_1_frame
             }

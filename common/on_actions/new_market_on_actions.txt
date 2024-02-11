@@ -1,7 +1,7 @@
 on_actions = {
 	on_startup = {
 		effect = {
-			## TECH
+		## TECH
 			KUA = {
 				set_technology = {
 					at_at = 1
@@ -19,26 +19,56 @@ on_actions = {
 			set_variable = {republic_market_choice = 1}
 			set_variable = {neutral_market_choice = 2}
 
-			## NEED TO ASSIGN PRICE, AND WHAT FACTION BELONGS TO
 
-			##
+			## THIS VARIABLE CONTROLS THE CONSTANT FACTORY OUTPUT MULTIPLIER -- IF YOU WANT MORE THINGS BUILT EVERY TIME, UP THIS NUMBER
+			set_variable = {CONSTANT_FACTORY_OUTPUT_MULTIPLIER = 150} 
+
+			## THIS VARIABLE CONTROLS THE PRODUCTION EFFICIENCY GROWTH -- IF YOU WANT THE EFFICIENCY TO RISE QUICKER, UP THIS NUMBER
+			set_variable = {CONSTANT_PRODUCTION_EFFICIENCY_GROWTH = 0.02}
+
+			## THIS VARIABLE CONTROLS THE STANDARD PRICE OF A RUNNING CORPORATE FACTORY EVERY DAY
+			set_variable = {CONSTANT_CORPORATE_FACTORY_COST = 5}
+
+			## How this system works
+				## this system is based of of tokenisation, we are taking the token value (a unique number that correlates to the equipment) of the equipments and attaching 
+				## those equipment numbers to a bunch of variables that hold data about the equipment.
+				## Advantages ----
+				## Easily can see what each equipment is, find the correct values in a 1 to 1 exchange instantly
+				## Disadvantages  -----
+				## We Must have a unique equipment for everything on the market. I.e. Infantry equipment needs imperial equipment and republic equipment and neutral equipment
+				## if we want multiple sellers of the same equipment
+
+
 			#####   GLOBAL VARIABLES CONSIST OF
-			# WHO OWNS THE ITEM --- who_owns_item@token:item_name
-			# IC COST OF ITEM --- ic_cost@token:item_name
-			# WHAT FACTION DOES THE ITEM BELONG TO --- belonging_to_what_faction@token:item_name
-			# PRICE OF THE ITEM --- price_of_item_@token:item_name
-			# STOCK OF ITEM --- stock_of_item@token:item_name
-			# WEEKLY PRODUCTION OF ITEM --- weekly_production_of_item@token:item_name
+			# WHO OWNS THE ITEM --- who_owns_item@var:item_name
+			# IC COST OF ITEM --- ic_cost@var:item_name
+			# WHAT FACTION DOES THE ITEM BELONG TO --- belonging_to_what_faction@var:item_name
+			# PRICE OF THE ITEM --- price_of_item_@var:item_name
+			# STOCK OF ITEM --- stock_of_item@var:item_name
+			# WEEKLY PRODUCTION OF ITEM --- weekly_production_of_item@var:item_name
 			##### 
 
 			##### LOCAL VARIABLES (for companies) CONSIST OF
-			## FACTORIES ASSIGNED TO ITEM  -- factories_on_item@token:item_name
-			## HOW MUCH HAS BEEN SOLD LAST MONTH -- sold_in_last_month@token:item_name
-			## HOW MUCH HAS BEEN PRODUCED VS SOLD -- produced_v_sold@token:item_name
-			## PRODUCTION EFFICIENCY OF ITEM -- production_efficiency@token:item_name
-			## PRODUCTION EFFICIENCY GROWTH -- production_efficiency_growth@token:item_name
+			## FACTORIES ASSIGNED TO ITEM  -- factories_on_item@var:item_name
+			## HOW MUCH GENERATED REVENUE -- revenue_amount@var:item_name
+			## HOW MUCH PROFIT -- profit_amount@var:item_name
+			## HOW MUCH COST -- cost_amount@var:item_name
+			## PRODUCTION EFFICIENCY OF ITEM -- production_efficiency@var:item_name
+			## PRODUCTION EFFICIENCY GROWTH -- production_efficiency_growth@var:item_name
 			#####
 
+			##### MODIFIERS CONSIST OF
+			## PRODUCTION EFFICIENCY MULTIPLIER -- production_efficiency_multiplier 
+			## PRODUCTION EFFICIENCY CAP MULTIPLIER -- production_efficiency_cap_multiplier
+
+
+			## SCRIPTED EFFECTS FOR MODDERS CONSIST OF
+			##########
+			## add_subsidy_for_buying_equipment = yes       WILL ADD A DECREASE (or increase if you really want) IN BUYING EQUIPMENT OFF OF A SPECFIC COMPANY
+			## Will need two temp variables fed into the effect
+			## company_tag COMPANY THAT YOU WANT TO BUY THE EQUIPMENT OFF CHEAPER (Tag format i.e. ROT)
+			## modifier_percentage WHAT MODIFIER (Percentage amount i.e. 0.2 is 20% off the total price)
+			##########
 
 			##
 			# YOU DO NOT NEED TO HAVE THE EQUIPMENT ALWAYS IN THE ARRAYS, THIS DOES MEAN WE CAN HAVE EQUIPMENT COME IN HALFWAY THROUGH GAME
@@ -1665,6 +1695,67 @@ on_actions = {
 					array = Production_array@var:global.air_market_category
 					value = token:star_fortress_airframe_1
 				}
+			}
+		}
+	}
+	on_daily = {
+		effect = {
+			set_variable = {total_corporate_factory_cost = 0}
+		## CALCLUATES WEEKLY PRODUCTION AMOUNT and PRODUCTION GROWTH GAIN
+			for_each_loop = {
+				array = Production_array@var:global.air_market_category
+				value = current_item_we_are_looking_at
+
+				set_temp_variable = {modifier_of_this_items_cost = modifier@production_cost_of_air_multiplier }
+
+				weekly_production_of_item_calculation_scripted_effect = yes
+				production_efficiency_calculator = yes
+				work_out_total_factory_price = yes
+			}
+			for_each_loop = {
+				array = Production_array@var:global.tank_market_category
+				value = current_item_we_are_looking_at
+
+				set_temp_variable = {modifier_of_this_items_cost = modifier@production_cost_of_tanks_multiplier }
+
+				weekly_production_of_item_calculation_scripted_effect = yes
+				production_efficiency_calculator = yes
+				work_out_total_factory_price = yes
+			}
+			for_each_loop = {
+				array = Production_array@var:global.naval_market_category
+				value = current_item_we_are_looking_at
+
+				set_temp_variable = {modifier_of_this_items_cost = modifier@production_cost_of_naval_multiplier }
+
+				weekly_production_of_item_calculation_scripted_effect = yes
+				production_efficiency_calculator = yes
+				work_out_total_factory_price = yes
+			}
+			divide_variable = {total_corporate_factory_cost = 30} # works out the cost for this day around about
+			subtract_from_variable = {currency_amount^primary_currency = total_corporate_factory_cost}
+		}
+	}
+	on_weekly = {
+		effect = {
+			## LOOP THROUGH EACH PRODUCTION CATEGORY AND CALCULATE STOCK MONTHLY
+			for_each_loop = {
+				array = Production_array@var:global.air_market_category
+				value = current_item_we_are_looking_at
+                add_to_variable = {global.stock_of_item@var:current_item_we_are_looking_at = weekly_production_of_item@var:current_item_we_are_looking_at}
+			}
+			for_each_loop = {
+				array = Production_array@var:global.tank_market_category
+				value = current_item_we_are_looking_at
+				log = "[?weekly_production_of_item@var:current_item_we_are_looking_at]"
+				add_to_variable = {global.stock_of_item@var:current_item_we_are_looking_at = weekly_production_of_item@var:current_item_we_are_looking_at}
+				log = "[?global.stock_of_item@var:current_item_we_are_looking_at]"
+			}
+			for_each_loop = {
+				array = Production_array@var:global.naval_market_category
+				value = current_item_we_are_looking_at
+
+				add_to_variable = {global.stock_of_item@var:current_item_we_are_looking_at = weekly_production_of_item@var:current_item_we_are_looking_at}
 			}
 		}
 	}
