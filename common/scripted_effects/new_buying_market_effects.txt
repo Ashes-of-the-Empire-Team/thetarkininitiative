@@ -77,6 +77,14 @@ sift_through_alliance_types = {
 }
 buy_item_scripted_effect = {
 	set_temp_variable = {producer = global.who_owns_item@var:item_to_buy} ## THIS RELIES ON THE PRODUCER ACTUALLY HAVING THE ABILITY TO PRODUCE THE EQUIPMENT WHEN SELLING IT, OTHERWISE BAD SHIT HAPPENS
+	if = {
+		limit = {
+			var:producer = {
+				has_country_flag = has_been_brought_out
+			}
+		}
+		set_variable = {producer = who_brought_out_this_company}
+	}
 	subtract_from_variable = {currency_amount^primary_currency = total_price}
 	if = {
 		limit = {
@@ -113,10 +121,7 @@ buy_item_scripted_effect = {
 	}
 	var:producer = {
 		add_to_variable = {currency_amount^primary_currency = total_price}
-		add_to_array = {
-			array = monthly_profit_array@var:item_to_buy
-			value = total_price
-		}
+		add_to_variable = {quartely_revenue@var:item_to_buy = total_price}
 	}
 	subtract_from_variable = {global.stock_of_item@var:item_to_buy = amount_to_purchase}
 }
@@ -163,18 +168,16 @@ production_efficiency_calculator = {
 	}
 }
 work_out_total_factory_price = {
-
 	add_to_temp_variable = {modifier_of_this_items_cost = 1}
 
-	set_variable = {cost_amount@var:current_item_we_are_looking_at = global.CONSTANT_CORPORATE_FACTORY_COST}
-	multiply_variable = {cost_amount@var:current_item_we_are_looking_at = factories_on_item@var:current_item_we_are_looking_at}
+	set_temp_variable = {cost_temp = global.CONSTANT_CORPORATE_FACTORY_COST}
+	multiply_temp_variable = {cost_temp = factories_on_item@var:current_item_we_are_looking_at}
 
-	multiply_variable = {cost_amount@var:current_item_we_are_looking_at = modifier_of_this_items_cost}
+	multiply_temp_variable = {cost_temp = modifier_of_this_items_cost}
 
-	set_temp_variable = {working_out_price = cost_amount@var:current_item_we_are_looking_at}
-	divide_temp_variable = {working_out_price = 30}
-	add_to_variable = {total_corporate_factory_cost = working_out_price}
-
+	divide_temp_variable = {cost_temp = 30}
+	add_to_variable = {total_corporate_factory_cost = cost_temp}
+	add_to_variable = {quartely_cost@var:current_item_we_are_looking_at = cost_temp}
 }
 
 example_subsidy_show_and_tell = {
@@ -199,19 +202,47 @@ add_subsidy_for_buying_equipment = { ## WILL RETURN LOCALISATION FOR YOU
 	}
 	add_to_variable = {company_modifier@var:company_tag = modifier_percentage}
 }
+test_effect_7 = {
+	set_temp_variable = {}
+	log ="GFX_[?current_looking_at_production_array^i.GetTokenKey]_market"
+}
 
-test_effect_2 = {
-	set_variable = {ztest_variable = 100}
-	add_to_array = {
-		array = ztesticle_array@55
-		value = ztest_variable
+
+buy_out_transfer_production_effect = { ## RUNS ON THE BROUGHT OUT COMPANY
+	set_variable = {who_brought_out_this_company = PREV.id} # save who brought out the company
+	set_country_flag = has_been_brought_out
+
+	for_each_loop = {
+		array = Production_array@var:global.air_market_category
+		value = current_item_we_are_looking_at
+
+		var:who_brought_out_this_company = {
+			add_to_array = {
+				array = Production_array@var:global.air_market_category
+				value = current_item_we_are_looking_at
+			}
+		}
 	}
-	# add_to_array = {
-	# 	array = ztesticle_array@var:test_variable
-	# 	value = 10
-	# }
-	log = "[?ztesticle_array@var:test_variable^0]"
-	log = "[?ztesticle_array@var:test_variable^1]"
-	log = "[?ztesticle_array@var:test_variable^2]"
-	log = "[?ztesticle_array@var:test_variable^3]"
+	for_each_loop = {
+		array = Production_array@var:global.tank_market_category
+		value = current_item_we_are_looking_at
+		
+		var:who_brought_out_this_company = {
+			add_to_array = {
+				array = Production_array@var:global.tank_market_category
+				value = current_item_we_are_looking_at
+			}
+		}
+	}
+	for_each_loop = {
+		array = Production_array@var:global.naval_market_category
+		value = current_item_we_are_looking_at
+		
+		var:who_brought_out_this_company = {
+			add_to_array = {
+				array = Production_array@var:global.naval_market_category
+				value = current_item_we_are_looking_at
+			}
+		}
+	}
 }

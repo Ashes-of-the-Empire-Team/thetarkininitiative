@@ -52,7 +52,7 @@ on_actions = {
 			## FACTORIES ASSIGNED TO ITEM  -- factories_on_item@var:item_name
 			## HOW MUCH GENERATED REVENUE -- revenue_amount@var:item_name
 			## HOW MUCH PROFIT -- profit_amount@var:item_name
-			## HOW MUCH COST -- cost_amount@var:item_name
+			## HOW MUCH COST -- quartely_cost@var:item_name
 			## PRODUCTION EFFICIENCY OF ITEM -- production_efficiency@var:item_name
 			## PRODUCTION EFFICIENCY GROWTH -- production_efficiency_growth@var:item_name
 			#####
@@ -1696,60 +1696,6 @@ on_actions = {
 					value = token:star_fortress_airframe_1
 				}
 			}
-
-			### IGNORE
-			for_each_loop = {
-				array = Production_array@var:global.air_market_category
-				value = current_item_we_are_looking_at
-
-				add_to_array = {
-					array = monthly_profit_array@var:current_item_we_are_looking_at
-					value = 0
-				}
-				add_to_array = {
-					array = monthly_profit_array@var:current_item_we_are_looking_at
-					value = 0
-				}
-				add_to_array = {
-					array = monthly_profit_array@var:current_item_we_are_looking_at
-					value = 0
-				}
-				## removes longest lasting record
-			}
-			for_each_loop = {
-				array = Production_array@var:global.tank_market_category
-				value = current_item_we_are_looking_at
-				
-				add_to_array = {
-					array = monthly_profit_array@var:current_item_we_are_looking_at
-					value = 0
-				}
-				add_to_array = {
-					array = monthly_profit_array@var:current_item_we_are_looking_at
-					value = 0
-				}
-				add_to_array = {
-					array = monthly_profit_array@var:current_item_we_are_looking_at
-					value = 0
-				}
-			}
-			for_each_loop = {
-				array = Production_array@var:global.naval_market_category
-				value = current_item_we_are_looking_at
-				
-				add_to_array = {
-					array = monthly_profit_array@var:current_item_we_are_looking_at
-					value = 0
-				}
-				add_to_array = {
-					array = monthly_profit_array@var:current_item_we_are_looking_at
-					value = 0
-				}
-				add_to_array = {
-					array = monthly_profit_array@var:current_item_we_are_looking_at
-					value = 0
-				}
-			}
 		}
 	}
 	on_daily = {
@@ -1786,7 +1732,6 @@ on_actions = {
 				production_efficiency_calculator = yes
 				work_out_total_factory_price = yes
 			}
-			divide_variable = {total_corporate_factory_cost = 30} # works out the cost for this day around about
 			subtract_from_variable = {currency_amount^primary_currency = total_corporate_factory_cost}
 		}
 	}
@@ -1810,36 +1755,48 @@ on_actions = {
 			}
 		}
 	}
+	on_monthly_VON = {
+		effect = {
+			add_to_variable = {global.what_month_are_we = 1}
+		}
+	}
 	on_monthly = {
 		effect = {
+			if = {
+				limit = {
+					check_variable = {global.what_month_are_we = 3}
+				}
+				for_each_loop = {
+					array = Production_array@var:global.air_market_category
+					value = current_item_we_are_looking_at
 
-			for_each_loop = {
-				array = Production_array@var:global.air_market_category
-				value = current_item_we_are_looking_at
-
-				remove_from_array = {
-					array = monthly_profit_array@var:current_item_we_are_looking_at
-					index = 0
+					set_variable = {quartely_revenue@var:current_item_we_are_looking_at = 0}
+					set_variable = {quartely_cost@var:current_item_we_are_looking_at = 0}
 				}
-				## removes longest lasting record
+				for_each_loop = {
+					array = Production_array@var:global.tank_market_category
+					value = current_item_we_are_looking_at
+					
+					set_variable = {quartely_revenue@var:current_item_we_are_looking_at = 0}
+					set_variable = {quartely_cost@var:current_item_we_are_looking_at = 0}
+				}
+				for_each_loop = {
+					array = Production_array@var:global.naval_market_category
+					value = current_item_we_are_looking_at
+					
+					set_variable = {quartely_revenue@var:current_item_we_are_looking_at = 0}
+					set_variable = {quartely_cost@var:current_item_we_are_looking_at = 0}
+				}
 			}
-			for_each_loop = {
-				array = Production_array@var:global.tank_market_category
-				value = current_item_we_are_looking_at
-				
-				remove_from_array = {
-					array = monthly_profit_array@var:current_item_we_are_looking_at
-					index = 0
+		}
+	}
+	on_monthly_VON = {
+		effect = {
+			if = {
+				limit = {
+					check_variable = {global.what_month_are_we = 3}
 				}
-			}
-			for_each_loop = {
-				array = Production_array@var:global.naval_market_category
-				value = current_item_we_are_looking_at
-				
-				remove_from_array = {
-					array = monthly_profit_array@var:current_item_we_are_looking_at
-					index = 0
-				}
+				set_variable = {global.what_month_are_we = 0}
 			}
 		}
 	}

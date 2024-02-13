@@ -54,7 +54,7 @@ defined_text = {
 defined_text = {
 	name = market_image_getter
 	text = {
-		localization_key = "GFX_market_photo_[?current_selected_market_category_array^i.GetTokenKey]"
+		localization_key = "GFX_[?current_selected_market_category_array^i.GetTokenKey]_market"
 	}
 }
 defined_text = {
@@ -109,9 +109,8 @@ defined_text = {
 	text = {
         trigger = {
             set_temp_variable = {passer_upper_variable = current_looking_at_production_array^i}
-            set_temp_variable = {profit_amount = monthly_profit_array@var:passer_upper_variable^0}
-            add_to_temp_variable = {profit_amount = monthly_profit_array@var:passer_upper_variable^1}
-            add_to_temp_variable = {profit_amount = monthly_profit_array@var:passer_upper_variable^2}
+            set_temp_variable = {profit_amount = quartely_revenue@var:passer_upper_variable}
+            subtract_from_variable = {profit_amount = quartely_cost@var:passer_upper_variable}
         }
         localization_key = production_profit_actual
     }
@@ -137,6 +136,6 @@ defined_text = {
 defined_text = {
 	name = production_image_getter
 	text = {
-		localization_key = "GFX_market_photo_[?current_looking_at_production_array^i.GetTokenKey]"
+		localization_key = "GFX_[?current_looking_at_production_array^i.GetTokenKey]_market"
 	}
 }
