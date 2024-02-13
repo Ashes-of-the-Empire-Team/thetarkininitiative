@@ -99,7 +99,6 @@ buy_item_scripted_effect = {
 		}
 	}else = {
 		multiply_temp_variable = {amount_to_purchase = 100}
-		log = "test"
 		meta_effect = {
 			text = {
 				add_equipment_to_stockpile = {
@@ -114,6 +113,10 @@ buy_item_scripted_effect = {
 	}
 	var:producer = {
 		add_to_variable = {currency_amount^primary_currency = total_price}
+		add_to_array = {
+			array = monthly_profit_array@var:item_to_buy
+			value = total_price
+		}
 	}
 	subtract_from_variable = {global.stock_of_item@var:item_to_buy = amount_to_purchase}
 }
@@ -197,6 +200,18 @@ add_subsidy_for_buying_equipment = { ## WILL RETURN LOCALISATION FOR YOU
 	add_to_variable = {company_modifier@var:company_tag = modifier_percentage}
 }
 
-buying_market_test_effect = {
-	
+test_effect_2 = {
+	set_variable = {ztest_variable = 100}
+	add_to_array = {
+		array = ztesticle_array@55
+		value = ztest_variable
+	}
+	# add_to_array = {
+	# 	array = ztesticle_array@var:test_variable
+	# 	value = 10
+	# }
+	log = "[?ztesticle_array@var:test_variable^0]"
+	log = "[?ztesticle_array@var:test_variable^1]"
+	log = "[?ztesticle_array@var:test_variable^2]"
+	log = "[?ztesticle_array@var:test_variable^3]"
 }

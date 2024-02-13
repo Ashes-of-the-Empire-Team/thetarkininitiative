@@ -1696,6 +1696,60 @@ on_actions = {
 					value = token:star_fortress_airframe_1
 				}
 			}
+
+			### IGNORE
+			for_each_loop = {
+				array = Production_array@var:global.air_market_category
+				value = current_item_we_are_looking_at
+
+				add_to_array = {
+					array = monthly_profit_array@var:current_item_we_are_looking_at
+					value = 0
+				}
+				add_to_array = {
+					array = monthly_profit_array@var:current_item_we_are_looking_at
+					value = 0
+				}
+				add_to_array = {
+					array = monthly_profit_array@var:current_item_we_are_looking_at
+					value = 0
+				}
+				## removes longest lasting record
+			}
+			for_each_loop = {
+				array = Production_array@var:global.tank_market_category
+				value = current_item_we_are_looking_at
+				
+				add_to_array = {
+					array = monthly_profit_array@var:current_item_we_are_looking_at
+					value = 0
+				}
+				add_to_array = {
+					array = monthly_profit_array@var:current_item_we_are_looking_at
+					value = 0
+				}
+				add_to_array = {
+					array = monthly_profit_array@var:current_item_we_are_looking_at
+					value = 0
+				}
+			}
+			for_each_loop = {
+				array = Production_array@var:global.naval_market_category
+				value = current_item_we_are_looking_at
+				
+				add_to_array = {
+					array = monthly_profit_array@var:current_item_we_are_looking_at
+					value = 0
+				}
+				add_to_array = {
+					array = monthly_profit_array@var:current_item_we_are_looking_at
+					value = 0
+				}
+				add_to_array = {
+					array = monthly_profit_array@var:current_item_we_are_looking_at
+					value = 0
+				}
+			}
 		}
 	}
 	on_daily = {
@@ -1747,15 +1801,45 @@ on_actions = {
 			for_each_loop = {
 				array = Production_array@var:global.tank_market_category
 				value = current_item_we_are_looking_at
-				log = "[?weekly_production_of_item@var:current_item_we_are_looking_at]"
 				add_to_variable = {global.stock_of_item@var:current_item_we_are_looking_at = weekly_production_of_item@var:current_item_we_are_looking_at}
-				log = "[?global.stock_of_item@var:current_item_we_are_looking_at]"
 			}
 			for_each_loop = {
 				array = Production_array@var:global.naval_market_category
 				value = current_item_we_are_looking_at
-
 				add_to_variable = {global.stock_of_item@var:current_item_we_are_looking_at = weekly_production_of_item@var:current_item_we_are_looking_at}
+			}
+		}
+	}
+	on_monthly = {
+		effect = {
+
+			for_each_loop = {
+				array = Production_array@var:global.air_market_category
+				value = current_item_we_are_looking_at
+
+				remove_from_array = {
+					array = monthly_profit_array@var:current_item_we_are_looking_at
+					index = 0
+				}
+				## removes longest lasting record
+			}
+			for_each_loop = {
+				array = Production_array@var:global.tank_market_category
+				value = current_item_we_are_looking_at
+				
+				remove_from_array = {
+					array = monthly_profit_array@var:current_item_we_are_looking_at
+					index = 0
+				}
+			}
+			for_each_loop = {
+				array = Production_array@var:global.naval_market_category
+				value = current_item_we_are_looking_at
+				
+				remove_from_array = {
+					array = monthly_profit_array@var:current_item_we_are_looking_at
+					index = 0
+				}
 			}
 		}
 	}
