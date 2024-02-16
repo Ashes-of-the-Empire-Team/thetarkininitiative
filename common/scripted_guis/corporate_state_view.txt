@@ -3514,6 +3514,99 @@ scripted_gui = {
 					}
 				}
 			}
+			trade_complex_1 = {
+				set_variable = { potential_building_holder_for_event = token:trade_complex_1 }
+				set_variable = { potential_time_left_building_holder_for_event = trade_complex_1_speed?global.trade_complex_1_global_speed}
+				controller = {
+					set_variable = { state_located_for_building_changes = PREV.id}
+					set_variable = { potential_cost_holder_for_event = trade_complex_1_cost?global.trade_complex_1_global_cost}
+				}
+				if = {
+					limit = {
+						replacement_event_building_is_needed_or_no = yes
+					}
+					sends_event_for_replacement_building = yes
+				}else = {
+					if = {
+						limit = {
+							ROOT = {
+								has_country_flag = building_1_open
+							}
+						}
+						add_building_to_construct_slot_1 = yes
+					}
+					if = {
+						limit = {
+							ROOT = {
+								has_country_flag = building_2_open
+							}
+						}
+						add_building_to_construct_slot_2 = yes
+					}
+				}
+			}
+			trade_complex_2 = {
+				set_variable = { potential_building_holder_for_event = token:trade_complex_2 }
+				set_variable = { potential_time_left_building_holder_for_event = trade_complex_2_speed?global.trade_complex_2_global_speed}
+				controller = {
+					set_variable = { state_located_for_building_changes = PREV.id}
+					set_variable = { potential_cost_holder_for_event = trade_complex_2_cost?global.trade_complex_2_global_cost}
+				}
+				if = {
+					limit = {
+						replacement_event_building_is_needed_or_no = yes
+					}
+					sends_event_for_replacement_building = yes
+				}else = {
+					if = {
+						limit = {
+							ROOT = {
+								has_country_flag = building_1_open
+							}
+						}
+						add_building_to_construct_slot_1 = yes
+					}
+					if = {
+						limit = {
+							ROOT = {
+								has_country_flag = building_2_open
+							}
+						}
+						add_building_to_construct_slot_2 = yes
+					}
+				}
+			}
+			trade_complex_3 = {
+				set_variable = { potential_building_holder_for_event = token:trade_complex_3 }
+				set_variable = { potential_time_left_building_holder_for_event = trade_complex_3_speed?global.trade_complex_3_global_speed}
+				controller = {
+					set_variable = { state_located_for_building_changes = PREV.id}
+					set_variable = { potential_cost_holder_for_event = trade_complex_3_cost?global.trade_complex_3_global_cost}
+				}
+				if = {
+					limit = {
+						replacement_event_building_is_needed_or_no = yes
+					}
+					sends_event_for_replacement_building = yes
+				}else = {
+					if = {
+						limit = {
+							ROOT = {
+								has_country_flag = building_1_open
+							}
+						}
+						add_building_to_construct_slot_1 = yes
+					}
+					if = {
+						limit = {
+							ROOT = {
+								has_country_flag = building_2_open
+							}
+						}
+						add_building_to_construct_slot_2 = yes
+					}
+				}
+			}
 		}
 		properties = {
 			unique_building = {
@@ -4156,6 +4249,109 @@ scripted_gui = {
 					check_variable = { building_2 = token:fuel_refinery_2 }
 				}
 			}
+			trade_complex_1_click_enabled = {
+				ROOT = {
+				   check_variable = { currency_amount^primary_currency > trade_complex_1_cost?global.trade_complex_1_global_cost }
+			   }
+			   if = {
+				   limit = {
+					   ROOT = {
+						   has_country_flag = building_1_open
+					   }
+				   }
+				   NOT = {
+					   has_variable = time_left_building_1
+					   has_state_flag = wonder_built_no_destroy_1
+				   }
+				   NOT = {
+					   check_variable = { building_1 = token:trade_complex_1 }
+				   }
+			   }
+			   else_if = {
+				   limit = {
+					   ROOT = {
+						   has_country_flag = building_2_open
+					   }
+				   }
+				   NOT = {
+					   has_variable = time_left_building_2
+					   has_state_flag = wonder_built_no_destroy_2
+				   }
+				   NOT = {
+					   check_variable = { building_2 = token:trade_complex_1 }
+				   }
+			   }
+		    }
+		    trade_complex_2_click_enabled = {
+				ROOT = {
+				   check_variable = { currency_amount^primary_currency > trade_complex_2_cost?global.trade_complex_2_global_cost }
+			   }
+			   if = {
+				   limit = {
+					   ROOT = {
+						   has_country_flag = building_1_open
+					   }
+				   }
+				   NOT = {
+					   has_variable = time_left_building_1
+					   has_state_flag = wonder_built_no_destroy_1
+				   }
+				   NOT = {
+					   check_variable = { building_1 = token:trade_complex_2 }
+				   }
+				   check_variable = { building_1 = token:trade_complex_1 }
+			   }
+			   else_if = {
+				   limit = {
+					   ROOT = {
+						   has_country_flag = building_2_open
+					   }
+				   }
+				   NOT = {
+					   has_variable = time_left_building_2
+					   has_state_flag = wonder_built_no_destroy_2
+				   }
+				   NOT = {
+					   check_variable = { building_2 = token:trade_complex_2 }
+				   }
+				   check_variable = { building_2 = token:trade_complex_1 }
+			   }
+		    }
+		    trade_complex_3_click_enabled = {
+				ROOT = {
+				   check_variable = { currency_amount^primary_currency > trade_complex_3_cost?global.trade_complex_3_global_cost }
+			   }
+			   if = {
+				   limit = {
+					   ROOT = {
+						   has_country_flag = building_1_open
+					   }
+				   }
+				   NOT = {
+					   has_variable = time_left_building_1
+					   has_state_flag = wonder_built_no_destroy_1
+				   }
+				   NOT = {
+					   check_variable = { building_1 = token:trade_complex_3 }
+				   }
+				   check_variable = { building_1 = token:trade_complex_2 }
+			   }
+			   else_if = {
+				   limit = {
+					   ROOT = {
+						   has_country_flag = building_2_open
+					   }
+				   }
+				   NOT = {
+					   has_variable = time_left_building_2
+					   has_state_flag = wonder_built_no_destroy_2
+				   }
+				   NOT = {
+					   check_variable = { building_2 = token:trade_complex_3 }
+				   }
+				   check_variable = { building_2 = token:trade_complex_2 }
+			   }
+		   }
 		}
 
 		ai_enabled = {
