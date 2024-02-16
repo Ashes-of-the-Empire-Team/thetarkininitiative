@@ -13,37 +13,57 @@ technologies = {
 		start_year = 4
 		folder = {
 			name = emp_air_folder
-			position = { x = 5 y = 2 }
+			position = { x = -3 y = 3 }
 		}
-		
-		path = {
-			leads_to_tech = tie_interceptor
-			research_cost_coeff = 1
-		}
-		path = {
-			leads_to_tech = tie_bomber
-			research_cost_coeff = 1
-		}		
-		path = {
-			leads_to_tech = tie_advanced
-			research_cost_coeff = 1
-		}		
+			
 		path = {
 			leads_to_tech = tie_raptor
 			research_cost_coeff = 1
 		}		
 		path = {
-			leads_to_tech = tie_fighter_upgrade
+			leads_to_tech = tie_fighter_2
 			research_cost_coeff = 1
 		}		
 		# path = {
 		# 	leads_to_tech = tie_reaper
 		# 	research_cost_coeff = 1
 		# }		
+
+		sub_technologies = {
+			tie_fighter_sub_1
+		}
 		categories = {
 			tie_line
 			tie_fighter
 			starfighter
+			air_equipment
+		}
+		
+		ai_will_do = {
+			factor = 0
+
+			modifier = {
+				factor = 1
+				has_government = imperial
+			}
+		}
+	}
+
+	tie_fighter_sub_1 = {
+
+		category_tie_fighter = {
+			air_attack = 0.05
+		}
+		category_tie_interceptor = {
+			air_attack = 0.05
+		}
+		equipment_conversion_speed = 0.01
+
+		research_cost = 1.5
+		start_year = 6
+
+		categories = {
+			tie_line
 			air_equipment
 		}
 		
@@ -125,7 +145,7 @@ technologies = {
 		start_year = 6
 		folder = {
 			name = emp_air_folder
-			position = { x = 10 y = 4 }
+			position = { x = 30 y = 4 }
 		}
 			
 		categories = {
@@ -146,41 +166,6 @@ technologies = {
 		}
 	}
 
-	tie_fighter_upgrade = {
-
-		category_tie_fighter = {
-			air_attack = 0.05
-		}
-		category_tie_interceptor = {
-			air_attack = 0.05
-		}
-		equipment_conversion_speed = 0.01
-
-		research_cost = 1.5
-		start_year = 6
-		folder = {
-			name = emp_air_folder
-			position = { x = -1 y = 4 }
-		}
-			path = {
-				leads_to_tech = tie_fighter_2
-				research_cost_coeff = 1
-			}
-
-		categories = {
-			tie_line
-			air_equipment
-		}
-		
-		ai_will_do = {
-			factor = 0
-
-			modifier = {
-				factor = 1
-				has_government = imperial
-			}
-		}
-	}
 	tie_fighter_2 = {
 		on_research_complete = {
 				add_to_array = {
@@ -202,13 +187,17 @@ technologies = {
 		start_year = 9
 		folder = {
 			name = emp_air_folder
-			position = { x = -1 y = 7 }
+			position = { x = 2 y = 3 }
 		}
-			path = {
-				leads_to_tech = tie_fighter_2_upgrade
-				research_cost_coeff = 1
-			}
 
+		path = {
+			leads_to_tech = tie_dagger
+			research_cost_coeff = 1
+		}
+
+		sub_technologies = {
+			tie_fighter_sub_2
+		}
 		categories = {
 			tie_line
 			tie_fighter
@@ -225,7 +214,7 @@ technologies = {
 			}
 		}
 	}
-	tie_fighter_2_upgrade = {
+	tie_fighter_sub_2 = {
 
 		category_tie_fighter = {
 			air_agility = 0.05
@@ -237,14 +226,6 @@ technologies = {
 
 		research_cost = 1.5
 		start_year = 11
-		folder = {
-			name = emp_air_folder
-			position = { x = -1 y = 9 }
-		}
-			path = {
-				leads_to_tech = tie_dagger
-				research_cost_coeff = 1
-			}
 
 		categories = {
 			tie_line
@@ -282,12 +263,12 @@ technologies = {
 		start_year = 14
 		folder = {
 			name = emp_air_folder
-			position = { x = -1 y = 12 }
+			position = { x = 7 y = 3 }
 		}
-			path = {
-				leads_to_tech = tie_predator
-				research_cost_coeff = 1
-			}
+		path = {
+			leads_to_tech = tie_predator
+			research_cost_coeff = 1
+		}
 
 		categories = {
 			tie_line
@@ -327,7 +308,7 @@ technologies = {
 		start_year = 16
 		folder = {
 			name = emp_air_folder
-			position = { x = 1 y = 14 }
+			position = { x = 12 y = 4 }
 		}
 
 		categories = {
@@ -369,7 +350,7 @@ technologies = {
 		start_year = 6
 		folder = {
 			name = emp_air_folder
-			position = { x = 5 y = 4 }
+			position = { x = 5 y = 5 }
 		}
 			path = {
 				leads_to_tech = tie_hunter
@@ -418,12 +399,19 @@ technologies = {
 		start_year = 6
 		folder = {
 			name = emp_air_folder
-			position = { x = 15 y = 4 }
+			position = { x = -3 y = 10 }
 		}
-			path = {
-				leads_to_tech = tie_advanced_upgrade
-				research_cost_coeff = 1
-			}
+		path = {
+			leads_to_tech = tie_aggressor
+			research_cost_coeff = 1
+		}
+		path = {
+			leads_to_tech = tie_oppressor
+			research_cost_coeff = 1
+		}
+		sub_technologies = {
+			tie_advanced_sub_1
+		}
 			
 		categories = {
 			tie_line
@@ -442,7 +430,7 @@ technologies = {
 		}
 	}
 
-	tie_advanced_upgrade = {
+	tie_advanced_sub_1 = {
 		category_tie_fighter_bomber = {
 			air_attack = 0.05
 			air_ground_attack = 0.05
@@ -451,18 +439,6 @@ technologies = {
 
 		research_cost = 1.5
 		start_year = 8
-		folder = {
-			name = emp_air_folder
-			position = { x = 15 y = 6 }
-		}
-			path = {
-				leads_to_tech = tie_aggressor
-				research_cost_coeff = 1
-			}
-			path = {
-				leads_to_tech = tie_oppressor
-				research_cost_coeff = 1
-			}
 			
 		categories = {
 			tie_line
@@ -500,7 +476,7 @@ technologies = {
 		start_year = 10
 		folder = {
 			name = emp_air_folder
-			position = { x = 17 y = 8 }
+			position = { x = 2 y = 12.5 }
 		}
 
 		categories = {
@@ -543,7 +519,7 @@ technologies = {
 		start_year = 12
 		folder = {
 			name = emp_air_folder
-			position = { x = 14 y = 10 }
+			position = { x = 2 y = 10 }
 		}
 
 		path = {
@@ -588,12 +564,16 @@ technologies = {
 		research_cost = 2
 		start_year = 8
 		path = {
-			leads_to_tech = advanced_tech
+			leads_to_tech = tie_phantom
+			research_cost_coeff = 1
+		}
+		path = {
+			leads_to_tech = tie_automated
 			research_cost_coeff = 1
 		}
 		folder = {
 			name = emp_air_folder
-			position = { x = 9 y = 6 }
+			position = { x = 2 y = 7 }
 		}	
 		categories = {
 			tie_line
@@ -612,38 +592,7 @@ technologies = {
 			}
 		}
 	}
-	advanced_tech = {
-		equipment_conversion_speed = 0.01
-		research_speed_factor = 0.05
 
-		research_cost = 2
-		start_year = 10
-		path = {
-			leads_to_tech = tie_phantom
-			research_cost_coeff = 1
-		}
-		path = {
-			leads_to_tech = tie_automated
-			research_cost_coeff = 1
-		}
-		folder = {
-			name = emp_air_folder
-			position = { x = 9 y = 8 }
-		}	
-		categories = {
-			tie_line
-			air_equipment
-		}
-		
-		ai_will_do = {
-			factor = 0
-
-			modifier = {
-				factor = 1
-				has_government = imperial
-			}
-		}
-	}
 	tie_phantom = {
 		enable_equipment_modules = {
 			
@@ -668,7 +617,7 @@ technologies = {
 		#}
 		folder = {
 			name = emp_air_folder
-			position = { x = 7 y = 11 }
+			position = { x = 7 y = 7 }
 		}	
 		categories = {
 			tie_line
@@ -702,7 +651,7 @@ technologies = {
 		#}
 		folder = {
 			name = emp_air_folder
-			position = { x = 11 y = 11 }
+			position = { x = 7 y = 9 }
 		}	
 		categories = {
 			tie_line
@@ -739,13 +688,16 @@ technologies = {
 		research_cost = 2
 		start_year = 8
 		path = {
-			leads_to_tech = tie_hunter_upgrade
+			leads_to_tech = tie_silencer
 			research_cost_coeff = 1
 		}
 		folder = {
 			name = emp_air_folder
-			position = { x = 3 y = 6 }
+			position = { x = 2 y = 5 }
 		}	
+		sub_technologies = {
+			tie_fighter_sub_2
+		}
 		categories = {
 			tie_line
 			tie_fighter
@@ -764,7 +716,7 @@ technologies = {
 		}
 	}
 
-	tie_hunter_upgrade = {
+	tie_hunter_sub_1 = {
 		category_tie_interceptor = {
 			air_agility = 0.05
 		}
@@ -772,14 +724,7 @@ technologies = {
 
 		research_cost = 2
 		start_year = 10
-		path = {
-			leads_to_tech = tie_silencer
-			research_cost_coeff = 1
-		}
-		folder = {
-			name = emp_air_folder
-			position = { x = 3 y = 8 }
-		}	
+		
 		categories = {
 			tie_line
 			air_equipment
@@ -815,13 +760,16 @@ technologies = {
 		research_cost = 2
 		start_year = 12
 		path = {
-			leads_to_tech = tie_silencer_upgrade
+			leads_to_tech = tie_predator
 			research_cost_coeff = 1
 		}
 		folder = {
 			name = emp_air_folder
-			position = { x = 3 y = 10 }
+			position = { x = 7 y = 5 }
 		}	
+		sub_technologies = {
+			tie_silencer_sub_1
+		}
 		categories = {
 			tie_line
 			tie_fighter
@@ -840,7 +788,7 @@ technologies = {
 		}
 	}
 
-	tie_silencer_upgrade = {
+	tie_silencer_sub_1 = {
 
 		category_tie_interceptor = {
 			air_agility = 0.05
@@ -849,15 +797,7 @@ technologies = {
 
 		research_cost = 2
 		start_year = 14
-		path = {
-			leads_to_tech = tie_predator
-			research_cost_coeff = 1
-		}
 
-		folder = {
-			name = emp_air_folder
-			position = { x = 3 y = 12 }
-		}	
 		categories = {
 			tie_line
 			air_equipment
@@ -888,11 +828,18 @@ technologies = {
 			leads_to_tech = tie_oppressor
 			research_cost_coeff = 1
 		}
+		path = {
+			leads_to_tech = tie_heavy_bomber
+			research_cost_coeff = 1
+		}
+		sub_technologies = {
+			tie_bomber_sub_1
+		}
 		research_cost = 1.5
 		start_year = 4
 		folder = {
 			name = emp_air_folder
-			position = { x = 20 y = 2 }
+			position = { x = -3 y = 15 }
 		}	
 		categories = {
 			tie_line
@@ -910,7 +857,7 @@ technologies = {
 			}
 		}
 	}
-	tie_bomber_upgrade = {
+	tie_bomber_sub_1 = {
 	
 		enable_equipment_modules = {
 			single_ion_engine_1
@@ -923,16 +870,9 @@ technologies = {
 		}
 		equipment_conversion_speed = 0.01
 
-		path = {
-			leads_to_tech = tie_heavy_bomber
-			research_cost_coeff = 1
-		}
 		research_cost = 0.5
 		start_year = 6
-		folder = {
-			name = emp_air_folder
-			position = { x = 22 y = 4 }
-		}
+
 		categories = {
 			tie_line
 			air_equipment
@@ -975,7 +915,7 @@ technologies = {
 		start_year = 8
 		folder = {
 			name = emp_air_folder
-			position = { x = 22 y = 6 }
+			position = { x = 2 y = 15 }
 		}	
 		categories = {
 			tie_line
@@ -1017,7 +957,7 @@ technologies = {
 		start_year = 13
 		folder = {
 			name = emp_air_folder
-			position = { x = 24 y = 11 }
+			position = { x = 7 y = 16 }
 		}	
 		categories = {
 			tie_line
@@ -1059,7 +999,7 @@ technologies = {
 		start_year = 13
 		folder = {
 			name = emp_air_folder
-			position = { x = 20 y = 11 }
+			position = { x = 7 y = 14 }
 		}	
 		categories = {
 			tie_line
@@ -1097,7 +1037,7 @@ technologies = {
 		start_year = 16
 		folder = {
 			name = emp_air_folder
-			position = { x = 22 y = 14 }
+			position = { x = 12 y = 15 }
 		}	
 		categories = {
 			tie_line
