@@ -76,34 +76,44 @@ scripted_gui = {
 			espionage_missions_1_initiate_click_enabled = {
 				has_variable = mission_identifier_1
 				has_variable = agent_name_slot_1
-				NOT = {
-					has_idea = espionage_mission_1_progress
-				}
 			}
 			espionage_missions_2_initiate_click_enabled = {
 				has_variable = mission_identifier_2
 				has_variable = agent_name_slot_2
-				NOT = {
-					has_idea = espionage_mission_2_progress
-				}
 			}
             espionage_missions_3_initiate_click_enabled = {
 				has_variable = mission_identifier_3
 				has_variable = agent_name_slot_3
-				NOT = {
-					has_idea = espionage_mission_3_progress
-				}
             }
 			espionage_missions_4_initiate_click_enabled = {
 				has_variable = mission_identifier_4
 				has_variable = agent_name_slot_4
-				NOT = {
-					has_idea = espionage_mission_4_progress
-				}
             }
 			espionage_missions_5_initiate_click_enabled = {
 				has_variable = mission_identifier_5
 				has_variable = agent_name_slot_5
+            }
+			espionage_missions_1_initiate_visible = {
+				NOT = {
+					has_idea = espionage_mission_1_progress
+				}
+			}
+			espionage_missions_2_initiate_visible = {
+				NOT = {
+					has_idea = espionage_mission_2_progress
+				}
+			}
+            espionage_missions_3_initiate_visible = {
+				NOT = {
+					has_idea = espionage_mission_3_progress
+				}
+            }
+			espionage_missions_4_initiate_visible = {
+				NOT = {
+					has_idea = espionage_mission_4_progress
+				}
+            }
+			espionage_missions_5_initiate_visible = {
 				NOT = {
 					has_idea = espionage_mission_5_progress
 				}
@@ -155,6 +165,21 @@ scripted_gui = {
 			}
 		}
 		effects = {
+			espionage_missions_1_select_new_mission_click = {
+				clear_variable = mission_identifier_1
+			}
+			espionage_missions_2_select_new_mission_click = {
+				clear_variable = mission_identifier_2
+			}
+			espionage_missions_3_select_new_mission_click = {
+				clear_variable = mission_identifier_3
+			}
+			espionage_missions_4_select_new_mission_click = {
+				clear_variable = mission_identifier_4
+			}
+			espionage_missions_5_select_new_mission_click = {
+				clear_variable = mission_identifier_5
+			}
 			espionage_missions_1_get_rid_of_click = {
 				set_temp_variable = {agent_slot_number = 1}
 				agent_death_effect = yes
@@ -546,20 +571,20 @@ scripted_gui = {
 			character_slot_5 = {
 				image = "[get_agent_photo_5]"
 			}
-			mission_1_progress_bar = {
-				frame = mission_1_progress_var
+			espionage_mission_1_progress_bar = {
+				frame = mission_1_day_timer
 			}
-			mission_2_progress_bar = {
-				frame = mission_2_progress_var
+			espionage_mission_2_progress_bar = {
+				frame = mission_2_day_timer
 			}
-			mission_3_progress_bar = {
-				frame = mission_3_progress_var
+			espionage_mission_3_progress_bar = {
+				frame = mission_3_day_timer
 			}
-			mission_4_progress_bar = {
-				frame = mission_4_progress_var
+			espionage_mission_4_progress_bar = {
+				frame = mission_4_day_timer
 			}
-			mission_5_progress_bar = {
-				frame = mission_5_progress_var
+			espionage_mission_5_progress_bar = {
+				frame = mission_5_day_timer
 			}
 		}
 	}
@@ -668,12 +693,8 @@ scripted_gui = {
 				set_temp_variable = {mission_identifier_temp = token:industrial_sabotage}
 				grab_what_mission_slot_and_time_this_is = yes
 			}
-			reroute_supply_click = {
-				set_temp_variable = {mission_identifier_temp = token:reroute_supply}
-				grab_what_mission_slot_and_time_this_is = yes
-			}
 			market_crash_click = {
-				set_temp_variable = {mission_identifier_temp = token:army_training}
+				set_temp_variable = {mission_identifier_temp = token:market_crash}
 				grab_what_mission_slot_and_time_this_is = yes
 			}
 		}
@@ -693,6 +714,10 @@ scripted_gui = {
 			}
 			infiltrate_military_click = {
 				set_temp_variable = {mission_identifier_temp = token:infilitrate_military}
+				grab_what_mission_slot_and_time_this_is = yes
+			}
+			reroute_supply_click = {
+				set_temp_variable = {mission_identifier_temp = token:reroute_supply}
 				grab_what_mission_slot_and_time_this_is = yes
 			}
 		}
