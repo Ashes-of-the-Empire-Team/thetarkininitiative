@@ -42,4 +42,105 @@ debug_SW_category = {
             }
 		}
 	}
+	debug_declare_new_republic= {
+
+		allowed = {
+			always = yes
+		}
+		
+
+		cost = 0
+		complete_effect = {
+			REB={
+				add_ideas = bacta_crisis
+				custom_effect_tooltip = new_republic_formation
+				load_focus_tree = REB_Main
+				set_cosmetic_tag = NEW
+				set_capital = {
+					state = 235
+					remember_old_capital = no
+				}
+				set_state_owner = 189
+				set_state_controller = 189
+				add_state_core = 189
+				set_state_owner = 230
+				set_state_controller = 230
+				add_state_core = 230
+				set_state_owner = 240
+				set_state_controller = 240
+				add_state_core = 240
+				set_state_owner = 235
+				set_state_controller = 235
+				add_state_core = 235
+				set_state_owner = 60
+				set_state_controller = 60
+				add_state_core = 60
+				set_state_owner = 39
+				set_state_controller = 39
+				add_state_core = 39
+				set_state_owner = 57
+				set_state_controller = 57
+				add_state_core = 57
+				set_state_owner = 229
+				set_state_controller = 229
+				add_state_core = 229
+				set_state_owner = 315
+				set_state_controller = 315
+				add_state_core = 315
+				set_state_owner = 40
+				set_state_controller = 40
+				add_state_core = 40
+				add_ideas = rampant_crime
+				for_each_scope_loop = {
+					array = Global.rep_populists
+					if = {
+						limit = {
+							NOT = { is_in_faction_with = REB }
+							NOT={tag = REB}
+							is_subject = no
+						}
+						REB={
+							add_to_faction = PREV
+						}
+					}
+				}
+				for_each_scope_loop = {
+					array = Global.rep_centrists
+					if = {
+						limit = {
+							NOT = { is_in_faction_with = REB }
+							NOT={tag = REB}
+							is_subject = no
+						}
+						REB={
+							add_to_faction = PREV
+						}
+					}
+				}
+			}
+			every_country = {
+				if={
+					limit={
+						is_ai = no
+					}
+					set_country_flag = reclamation_of_coruscant
+					play_song = "reclamation_of_coruscant"
+				}
+				if={
+					limit={
+						is_subject_of = EMP
+						NOT={tag = FON}
+					}
+					EMP={
+						set_autonomy = {
+							target = PREV
+							autonomy_state = autonomy_free
+							end_wars = no
+							end_civil_wars = no
+						}
+					}
+				}
+			}
+		}
+	}
 }

@@ -40,7 +40,7 @@ focus_tree = {
 				var = currency_amount^primary_currency #(doesn't matter what)
 				value = -100
 				tooltip = cost_focus_tooltip
-			  } 
+			} 
 		}
 	}
 
@@ -398,6 +398,7 @@ focus_tree = {
 		id = REB_gifts_from_the_hapes
 		icon = GFX_gifts_from_the_hapes
 		relative_position_id = REB_the_dual_princess
+		text_icon = HAPES_focus_style
 		x= -1
 		y = 1
 		cost = 5
@@ -405,12 +406,20 @@ focus_tree = {
 			FOCUS_FILTER_POLITICAL
 		}
 		prerequisite = { focus = REB_the_dual_princess  }
+		completion_reward = {
+			add_to_variable = {
+				var = currency_amount^primary_currency #(doesn't matter what)
+				value = 100
+				tooltip = plus100credits_tt
+			}
+		}
 	}
 	#Star Destroyers
 	focus = {
 		id = REB_star_destroyers
 		icon = GFX_hapes_star_destroyer
 		relative_position_id = REB_gifts_from_the_hapes
+		text_icon = HAPES_focus_style
 		x= 1
 		y = 1
 		cost = 5
@@ -423,6 +432,7 @@ focus_tree = {
 	focus = {
 		id = REB_gun_of_command
 		icon = GFX_guns_of_command
+		text_icon = HAPES_focus_style
 		relative_position_id = REB_gifts_from_the_hapes
 		x= -1
 		y = 1
@@ -441,6 +451,7 @@ focus_tree = {
 	focus = {
 		id = REB_leiasbattledragons
 		icon = GFX_hapan_battle_dragon_leia
+		text_icon = HAPES_focus_style
 		relative_position_id = REB_star_destroyers
 		x= 0
 		y = 1
@@ -452,7 +463,7 @@ focus_tree = {
 		prerequisite = { focus = REB_gun_of_command  }
 		completion_reward = {
 			set_technology = {
-				hapes_battle_dragon = 1
+				battledragon = 1
 			}
 		}
 	}
@@ -460,6 +471,7 @@ focus_tree = {
 	focus = {
 		id = REB_hapan_royal_guard
 		icon = GFX_hapan_royal_guard_leia
+		text_icon = HAPES_focus_style
 		relative_position_id = REB_gun_of_command
 		x= -0
 		y = 1
@@ -469,7 +481,10 @@ focus_tree = {
 		}
 		prerequisite = { focus = REB_gun_of_command  } prerequisite = { focus = REB_star_destroyers  }
 		completion_reward = {
-
+			set_technology={
+				hapan_royal_guard = 1
+			}
+			load_oob = HAP_LEIA
 		}
 	}
 			#Han Solo
@@ -708,6 +723,9 @@ focus_tree = {
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
+		bypass = {
+			has_completed_focus = REB_restoration_of_the_jedi_temple
+		}
 		prerequisite = { focus = REB_terror_of_the_galaxy  focus = REB_restorer_of_balance  }
 	}
 	#Investments into the Jedi
@@ -758,7 +776,7 @@ focus_tree = {
 	#Luke's Apprentice
 	focus = {
 		id = REB_lukesapprentice
-		icon = GFX_WIP_focus
+		icon = GFX_rebel_goal
 		text_icon = REPUBLIC_focus_style
 		relative_position_id = REB_daughter_of_anakin
 		x= 0
@@ -775,7 +793,7 @@ focus_tree = {
 	#Restorer of Balance
 	focus = {
 		id = REB_restorer_of_balance_leia
-		icon = GFX_WIP_focus
+		icon = GFX_rebel_goal
 		text_icon = REPUBLIC_focus_style
 		relative_position_id = REB_lukesapprentice
 		x= 0
@@ -814,7 +832,7 @@ focus_tree = {
 	#Hero of Democracy
 	focus = {
 		id = REB_hero_of_democracy
-		icon = GFX_WIP_focus
+		icon = GFX_rebel_goal
 		text_icon = REPUBLIC_focus_style
 		relative_position_id = REB_daughter_of_the_republic
 		x= 0
@@ -828,7 +846,7 @@ focus_tree = {
 	#Savior of the Republic
 	focus = {
 		id = REB_savior_of_the_republic
-		icon = GFX_WIP_focus
+		icon = GFX_rebel_goal
 		text_icon = REPUBLIC_focus_style
 		relative_position_id = REB_hero_of_democracy
 		x= 0
@@ -907,6 +925,9 @@ focus_tree = {
 		cost = 10
 		search_filters = {
 			FOCUS_FILTER_INDUSTRY
+		}
+		bypass = {
+			has_completed_focus = REB_build_the_jedi_temple
 		}
 		prerequisite = { focus = REB_outside_help  }
 	}
