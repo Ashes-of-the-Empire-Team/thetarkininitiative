@@ -59,6 +59,14 @@ technologies = {
 
 	tech_engineers_2 = {
 
+		engineer = {	
+			entrenchment = 0.50
+			fort = {
+				defence = 0.10
+				attack = 0.10
+			}
+		}
+
 		research_cost = 2
 		start_year = 6
 		
@@ -69,6 +77,14 @@ technologies = {
 	}
 	tech_engineers_3 = {
 
+		engineer = {
+			entrenchment = 0.50
+			forest = {
+				attack = 0.1	
+				defence = 0.10
+			}
+		}
+
 		research_cost = 2
 		start_year = 8
 		
@@ -76,9 +92,19 @@ technologies = {
 			support_tech
 			engineers_tech
 		}
+		dependencies = {
+			tech_engineers_2 = 1
+		}
 	}
 	tech_engineers_4 = {
 		
+		engineer = {
+			entrenchment = 0.50
+			urban = {
+				attack = 0.1	
+				defence = 0.1
+			}
+		}
 
 		research_cost = 2
 		start_year = 12
@@ -86,6 +112,9 @@ technologies = {
 		categories = {
 			support_tech
 			engineers_tech
+		}
+		dependencies = {
+			tech_engineers_3 = 1
 		}
 	}
 	
@@ -96,6 +125,12 @@ technologies = {
 			mot_recon
 			armored_car_recon
 			light_tank_recon
+		}
+
+		sub_technologies = {
+			tech_recon_2
+			tech_recon_3
+			tech_recon_4
 		}
 
 		research_cost = 2
@@ -110,6 +145,57 @@ technologies = {
 			recon_tech
 		}
 	}
+
+	tech_recon_2 = {
+
+		category_recon = {
+			recon = 2
+		}
+
+		research_cost = 2
+		start_year = 6
+		
+		categories = {
+			support_tech
+			recon_tech
+		}
+	}
+
+	tech_recon_3 = {
+
+		category_recon = {
+			recon = 2
+		}
+
+		research_cost = 2
+		start_year = 8
+		
+		categories = {
+			support_tech
+			recon_tech
+		}
+		dependencies = {
+			tech_recon_2 = 1
+		}
+	}
+
+	tech_recon_4 = {
+
+		category_recon = {
+			recon = 2
+		}
+
+		research_cost = 2
+		start_year = 12
+		
+		categories = {
+			support_tech
+			recon_tech
+		}
+		dependencies = {
+			tech_recon_3 = 1
+		}
+	}
 	
 	tech_military_police = {
 
@@ -117,6 +203,11 @@ technologies = {
 			military_police
 		}
 
+		sub_technologies = {
+			tech_military_police_2
+			tech_military_police_3
+			tech_military_police_4
+		}
 
 		research_cost = 2
 		start_year = 4
@@ -131,10 +222,67 @@ technologies = {
 		}
 	}
 
+	tech_military_police_2 = {
+
+		military_police = {
+			suppression_factor = 0.1
+		}
+
+		research_cost = 2
+		start_year = 6
+		
+		categories = {
+			support_tech
+			military_police_tech
+		}
+	}
+
+	tech_military_police_3 = {
+
+		military_police = {
+			suppression_factor = 0.1
+		}
+
+		research_cost = 2
+		start_year = 8
+		
+		categories = {
+			support_tech
+			military_police_tech
+		}
+		dependencies = {
+			tech_military_police_2 = 1
+		}
+	}
+
+	tech_military_police_4 = {
+		
+		military_police = {
+			suppression_factor = 0.1
+		}
+
+		research_cost = 2
+		start_year = 12
+		
+		categories = {
+			support_tech
+			military_police_tech
+		}
+		dependencies = {
+			tech_military_police_3 = 1
+		}
+	}
+
 	tech_maintenance_company = {
 
 		enable_subunits = {
 			maintenance_company
+		}
+
+		sub_technologies = {
+			tech_maintenance_company_2
+			tech_maintenance_company_3
+			tech_maintenance_company_4
 		}
 		
 		research_cost = 2
@@ -150,10 +298,88 @@ technologies = {
 		}
 	}
 
+	tech_maintenance_company_2 = {
+		
+		maintenance_company = {
+			reliability_factor = 0.05
+			equipment_capture_factor = 0.05
+		}
+
+		research_cost = 2
+		start_year = 6
+		folder = {
+			name = support_folder
+			position = { x = 0 y = 9 }
+		}
+		
+		categories = {
+			support_tech
+			maintenance_company_tech
+		}
+	}
+
+	tech_maintenance_company_3 = {
+		
+		maintenance_company = {
+			reliability_factor = 0.05
+			
+			battalion_mult = {
+				category = category_all_armor
+				equipment_capture_factor = 0.01
+				add = yes
+			}
+			
+		}
+
+		research_cost = 2
+		start_year = 8
+		folder = {
+			name = support_folder
+			position = { x = 0 y = 10 }
+		}
+		
+		categories = {
+			support_tech
+			maintenance_company_tech
+		}
+		dependencies = {
+			tech_maintenance_company_2 = 1
+		}
+	}
+
+	tech_maintenance_company_4 = {
+		
+		maintenance_company = {
+			reliability_factor = 0.05
+			equipment_capture_factor = 0.05
+		}
+
+		research_cost = 2
+		start_year = 12
+		folder = {
+			name = support_folder
+			position = { x = 0 y = 11 }
+		}
+		
+		categories = {
+			support_tech
+			maintenance_company_tech
+		}
+		dependencies = {
+			tech_maintenance_company_3 = 1
+		}
+	}
+
 	tech_field_hospital = {
 
 		enable_subunits = {
 			field_hospital
+		}
+
+		sub_technologies = {
+			tech_field_hospital_2
+			tech_field_hospital_3
+			tech_field_hospital_4
 		}
 
 		dependencies = {
@@ -174,10 +400,75 @@ technologies = {
 		}
 	}
 
+	tech_field_hospital_2 = {
+		
+		field_hospital = {
+			casualty_trickleback = 0.10
+			experience_loss_factor = -0.10
+		}
+
+		research_cost = 2
+		start_year = 6
+		
+		categories = {
+			support_tech
+			hospital_tech
+			motorized_equipment
+		}
+	}
+
+	tech_field_hospital_3 = {
+		
+		field_hospital = {
+			casualty_trickleback = 0.1
+			experience_loss_factor = -0.10
+		}
+
+		research_cost = 2
+		start_year = 8
+		
+		categories = {
+			support_tech
+			hospital_tech
+			motorized_equipment
+		}
+
+		dependencies = {
+			tech_field_hospital_2 = 1
+		}
+	}
+
+	tech_field_hospital_4 = {
+
+		field_hospital = {
+			casualty_trickleback = 0.1
+			experience_loss_factor = -0.10
+		}
+		
+		research_cost = 2
+		start_year = 12
+		
+		categories = {
+			support_tech
+			hospital_tech
+			motorized_equipment
+		}
+
+		dependencies = {
+			tech_field_hospital_3 = 1
+		}
+	}
+
 	tech_logistics_company = {
 
 		enable_subunits = {
 			logistics_company
+		}
+
+		sub_technologies = {
+			tech_logistics_company_2
+			tech_logistics_company_3
+			tech_logistics_company_4
 		}
 
 		dependencies = {
@@ -198,10 +489,75 @@ technologies = {
 		}
 	}
 
+	tech_logistics_company_2 = {
+
+		logistics_company = {
+			supply_consumption_factor = -0.1
+			fuel_consumption_factor = -0.05
+		}
+		
+		research_cost = 2
+		start_year = 6
+		
+		categories = {
+			support_tech
+			logistics_tech
+			motorized_equipment
+		}
+
+	}
+
+	tech_logistics_company_3 = {
+
+		logistics_company = {
+			supply_consumption_factor = -0.1
+			fuel_consumption_factor = -0.05
+		}
+		
+		research_cost = 2
+		start_year = 8
+		
+		categories = {
+			support_tech
+			logistics_tech
+			motorized_equipment
+		}
+
+		dependencies = {
+			tech_logistics_company_2 = 1
+		}
+	}
+
+	tech_logistics_company_4 = {
+
+		logistics_company = {
+			supply_consumption_factor = -0.1
+			fuel_consumption_factor = -0.05
+		}
+		
+		research_cost = 2
+		start_year = 12
+		
+		categories = {
+			support_tech
+			logistics_tech
+			motorized_equipment
+		}
+		dependencies = {
+			tech_logistics_company_3 = 1
+		}
+	}
+
 	tech_signal_company = {
 
 		enable_subunits = {
 			signal_company
+		}
+
+		sub_technologies = {
+			tech_signal_company_2
+			tech_signal_company_3
+			tech_signal_company_4
 		}
 
 		dependencies = {
@@ -221,10 +577,71 @@ technologies = {
 			electronics
 		}
 	}
+
+	tech_signal_company_2 = {
+
+		signal_company = {
+			initiative = 0.12
+		}
+		
+		research_cost = 2
+		start_year = 6
+		
+		categories = {
+			support_tech
+			signal_company_tech
+			electronics
+		}
+	}
+
+	tech_signal_company_3 = {
+
+		signal_company = {
+			initiative = 0.12
+		}
+		
+		research_cost = 2
+		start_year = 8
+		
+		categories = {
+			support_tech
+			signal_company_tech
+			electronics
+		}
+		dependencies = {
+			tech_signal_company_2 = 1
+		}
+	}
+
+	tech_signal_company_4 = {
+		
+		signal_company = {
+			initiative = 0.12
+		}
+
+		research_cost = 2
+		start_year = 12
+		
+		categories = {
+			support_tech
+			signal_company_tech
+			electronics
+		}
+		dependencies = {
+			tech_signal_company_3 = 1
+		}
+	}
+
 	tech_volcanic_company = {
 
 		enable_subunits = {
 			volcanic_support_company
+		}
+
+		sub_technologies = {
+			tech_volcanic_company_1
+			tech_volcanic_company_2
+			tech_volcanic_company_3
 		}
 		
 		research_cost = 2
@@ -238,10 +655,103 @@ technologies = {
 			support_tech
 		}
 	}
+	tech_volcanic_company_1 = {
+		
+		volcanic_support_company = {
+			lavalake = { #This can end up stacking with terrain benefits
+				attack = 0.05
+				defence = 0.05
+				movement = 0.05
+			}
+			volcanic_mountain = { #This can end up stacking with terrain benefits
+				attack = 0.05
+				defence = 0.05
+				movement = 0.05
+			}
+			volcanic_plains = { #This can end up stacking with terrain benefits
+				attack = 0.05
+				defence = 0.05
+				movement = 0.05
+			}
+		}
+
+		research_cost = 2
+		start_year = 4
+		
+		categories = {
+			support_tech
+		}
+	}
+	tech_volcanic_company_2 = {
+
+		volcanic_support_company = {
+			lavalake = { #This can end up stacking with terrain benefits
+				attack = 0.05
+				defence = 0.05
+				movement = 0.05
+			}
+			volcanic_mountain = { #This can end up stacking with terrain benefits
+				attack = 0.05
+				defence = 0.05
+				movement = 0.05
+			}
+			volcanic_plains = { #This can end up stacking with terrain benefits
+				attack = 0.05
+				defence = 0.05
+				movement = 0.05
+			}
+		}
+
+		research_cost = 2
+		start_year = 4
+		
+		categories = {
+			support_tech
+		}
+		dependencies = {
+			tech_volcanic_company_1 = 1
+		}
+	}
+	tech_volcanic_company_3 = {
+		
+		volcanic_support_company = {
+			lavalake = { #This can end up stacking with terrain benefits
+				attack = 0.05
+				defence = 0.05
+				movement = 0.05
+			}
+			volcanic_mountain = { #This can end up stacking with terrain benefits
+				attack = 0.05
+				defence = 0.05
+				movement = 0.05
+			}
+			volcanic_plains = { #This can end up stacking with terrain benefits
+				attack = 0.05
+				defence = 0.05
+				movement = 0.05
+			}
+		}
+
+		research_cost = 2
+		start_year = 4
+
+		categories = {
+			support_tech
+		}
+		dependencies = {
+			tech_volcanic_company_2 = 1
+		}
+	}
 	tech_snow_company = {
 
 		enable_subunits = {
 			snow_support_company
+		}
+
+		sub_technologies = {
+			tech_snow_company_1
+			tech_snow_company_2
+			tech_snow_company_3
 		}
 		
 		research_cost = 2
@@ -255,10 +765,92 @@ technologies = {
 			support_tech
 		}
 	}
+
+	tech_snow_company_1 = {
+		
+		snow_support_company = {
+			snowplains = { #This can end up stacking with terrain benefits
+			attack = 0.05
+			defence = 0.05
+			movement = 0.05
+		}
+			snowmountains = { #This can end up stacking with terrain benefits
+				attack = 0.05
+				defence = 0.05
+				movement = 0.05
+			}
+		}
+
+		research_cost = 2
+		start_year = 4
+		
+		categories = {
+			support_tech
+		}
+	}
+
+	tech_snow_company_2 = {
+
+		snow_support_company = {
+			snowplains = { #This can end up stacking with terrain benefits
+			attack = 0.05
+			defence = 0.05
+			movement = 0.05
+		}
+			snowmountains = { #This can end up stacking with terrain benefits
+				attack = 0.05
+				defence = 0.05
+				movement = 0.05
+			}
+		}
+
+		research_cost = 2
+		start_year = 4
+		
+		categories = {
+			support_tech
+		}
+		dependencies = {
+			tech_snow_company_1 = 1
+		}
+	}
+
+	tech_snow_company_3 = {
+		
+		snow_support_company = {
+			snowplains = { #This can end up stacking with terrain benefits
+			attack = 0.05
+			defence = 0.05
+			movement = 0.05
+		}
+			snowmountains = { #This can end up stacking with terrain benefits
+				attack = 0.05
+				defence = 0.05
+				movement = 0.05
+			}
+		}
+
+		research_cost = 2
+		start_year = 4
+
+		categories = {
+			support_tech
+		}
+		dependencies = {
+			tech_snow_company_2 = 1
+		}
+	}
+
 	tech_water_company = {
 
 		enable_subunits = {
 			water_support_company
+		}
+
+		sub_technologies = {
+			tech_water_company_1
+			tech_water_company_2
+			tech_water_company_3
 		}
 		
 		research_cost = 2
@@ -272,10 +864,148 @@ technologies = {
 			support_tech
 		}
 	}
+	tech_water_company_1 = {
+		
+		water_support_company = {
+			water_deep_ocean = { #This can end up stacking with terrain benefits
+				attack = 0.05
+				defence = 0.05
+				movement = 0.1
+			}
+			water_shallow_sea = { #This can end up stacking with terrain benefits
+				attack = 0.05
+				defence = 0.05
+				movement = 0.1
+			}
+			urbansea = { #This can end up stacking with terrain benefits
+				attack = 0.05
+				defence = 0.05
+				movement = 0.1
+			}
+			coralsea = { #This can end up stacking with terrain benefits
+				attack = 0.05
+				defence = 0.05
+				movement = 0.1
+			}
+			freshwater = { #This can end up stacking with terrain benefits
+				attack = 0.05
+				defence = 0.05
+				movement = 0.1
+			}
+			island_chain = { #This can end up stacking with terrain benefits
+				attack = 0.05
+				defence = 0.05
+				movement = 0.1
+			}
+		}
+
+		research_cost = 2
+		start_year = 4
+		
+		categories = {
+			support_tech
+		}
+	}
+	tech_water_company_2 = {
+
+		water_support_company = {
+			water_deep_ocean = { #This can end up stacking with terrain benefits
+				attack = 0.05
+				defence = 0.05
+				movement = 0.1
+			}
+			water_shallow_sea = { #This can end up stacking with terrain benefits
+				attack = 0.05
+				defence = 0.05
+				movement = 0.1
+			}
+			urbansea = { #This can end up stacking with terrain benefits
+				attack = 0.05
+				defence = 0.05
+				movement = 0.1
+			}
+			coralsea = { #This can end up stacking with terrain benefits
+				attack = 0.05
+				defence = 0.05
+				movement = 0.1
+			}
+			freshwater = { #This can end up stacking with terrain benefits
+				attack = 0.05
+				defence = 0.05
+				movement = 0.1
+			}
+			island_chain = { #This can end up stacking with terrain benefits
+				attack = 0.05
+				defence = 0.05
+				movement = 0.1
+			}
+		}
+
+		research_cost = 2
+		start_year = 4
+		
+		categories = {
+			support_tech
+		}
+		dependencies = {
+			tech_water_company_1 = 1
+		}
+	}
+	tech_water_company_3 = {
+
+		water_support_company = {
+			water_deep_ocean = { #This can end up stacking with terrain benefits
+				attack = 0.05
+				defence = 0.05
+				movement = 0.1
+			}
+			water_shallow_sea = { #This can end up stacking with terrain benefits
+				attack = 0.05
+				defence = 0.05
+				movement = 0.1
+			}
+			urbansea = { #This can end up stacking with terrain benefits
+				attack = 0.05
+				defence = 0.05
+				movement = 0.1
+			}
+			coralsea = { #This can end up stacking with terrain benefits
+				attack = 0.05
+				defence = 0.05
+				movement = 0.1
+			}
+			freshwater = { #This can end up stacking with terrain benefits
+				attack = 0.05
+				defence = 0.05
+				movement = 0.1
+			}
+			island_chain = { #This can end up stacking with terrain benefits
+				attack = 0.05
+				defence = 0.05
+				movement = 0.1
+			}
+		}
+		
+		research_cost = 2
+		start_year = 4
+
+		categories = {
+			support_tech
+		}
+		dependencies = {
+			tech_water_company_2 = 1
+		}
+	}
 	tech_dessert_company = {
 
 		enable_subunits = {
 			dessert_support_company
+		}
+
+		sub_technologies = {
+			tech_dessert_company_1
+			tech_dessert_company_2
+			tech_dessert_company_3
 		}
 		
 		research_cost = 2
@@ -289,10 +1019,73 @@ technologies = {
 			support_tech
 		}
 	}
+	tech_dessert_company_1 = {
+		
+		dessert_support_company = {
+			desert = { #This can end up stacking with terrain benefits
+				attack = 0.05
+				defence = 0.05
+				movement = 0.05
+			}
+		}
+
+		research_cost = 2
+		start_year = 4
+		
+		categories = {
+			support_tech
+		}
+	}
+	tech_dessert_company_2 = {
+
+		dessert_support_company = {
+			desert = { #This can end up stacking with terrain benefits
+				attack = 0.05
+				defence = 0.05
+				movement = 0.05
+			}
+		}
+
+		research_cost = 2
+		start_year = 4
+		
+		categories = {
+			support_tech
+		}
+		dependencies = {
+			tech_dessert_company_1 = 1
+		}
+	}
+	tech_dessert_company_3 = {
+	
+		dessert_support_company = {
+			desert = { #This can end up stacking with terrain benefits
+				attack = 0.05
+				defence = 0.05
+				movement = 0.05
+			}
+		}
+
+		research_cost = 2
+		start_year = 4
+
+		categories = {
+			support_tech
+		}
+		dependencies = {
+			tech_dessert_company_2 = 1
+		}
+	}
 	tech_tropical_company = {
 
 		enable_subunits = {
 			forest_support_company
+		}
+
+		sub_technologies = {
+			tech_tropical_company_1
+			tech_tropical_company_2
+			tech_tropical_company_3
 		}
 		
 		research_cost = 2
@@ -304,6 +1097,96 @@ technologies = {
 		
 		categories = {
 			support_tech
+		}
+	}
+
+	tech_tropical_company_1 = {
+		
+		forest_support_company = {
+			jungle = { #This can end up stacking with terrain benefits
+				attack = 0.05
+				defence = 0.05
+				movement = 0.05
+			}
+			forest = { #This can end up stacking with terrain benefits
+				attack = 0.05
+				defence = 0.05
+				movement = 0.05
+			}
+			marsh = { #This can end up stacking with terrain benefits
+				attack = 0.05
+				defence = 0.05
+				movement = 0.05
+			}
+		}
+
+		research_cost = 2
+		start_year = 4
+		
+		categories = {
+			support_tech
+		}
+	}
+	
+	tech_tropical_company_2 = {
+
+		forest_support_company = {
+			jungle = { #This can end up stacking with terrain benefits
+				attack = 0.05
+				defence = 0.05
+				movement = 0.05
+			}
+			forest = { #This can end up stacking with terrain benefits
+				attack = 0.05
+				defence = 0.05
+				movement = 0.05
+			}
+			marsh = { #This can end up stacking with terrain benefits
+				attack = 0.05
+				defence = 0.05
+				movement = 0.05
+			}
+		}
+
+		research_cost = 2
+		start_year = 4
+		
+		categories = {
+			support_tech
+		}
+		dependencies = {
+			tech_tropical_company_1 = 1
+		}
+	}
+
+	tech_tropical_company_3 = {
+		
+		forest_support_company = {
+			jungle = { #This can end up stacking with terrain benefits
+				attack = 0.05
+				defence = 0.05
+				movement = 0.05
+			}
+			forest = { #This can end up stacking with terrain benefits
+				attack = 0.05
+				defence = 0.05
+				movement = 0.05
+			}
+			marsh = { #This can end up stacking with terrain benefits
+				attack = 0.05
+				defence = 0.05
+				movement = 0.05
+			}
+		}
+
+		research_cost = 2
+		start_year = 4
+
+		categories = {
+			support_tech
+		}
+		dependencies = {
+			tech_tropical_company_2 = 1
 		}
 	}
 
