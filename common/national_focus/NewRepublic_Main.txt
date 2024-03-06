@@ -29,13 +29,21 @@ focus_tree = {
 		search_filters = {
 			FOCUS_FILTER_INDUSTRY
 		}
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = has_100credits_tt
+				check_variable = {
+					currency_amount^primary_currency = 100
+					compare = greater_than_or_equals
+				}
+			}
+		}
 		prerequisite = { focus = REB_the_republic_reborn  }
 		completion_reward = {
-			#TODO
-			#add_timed_idea = {
-			#	idea = rebuild_coruscant
-			#	days = 180
-			#}
+			add_timed_idea = {
+				idea = rebuild_coruscant
+				days = 180
+			}
 			add_to_variable = {
 				var = currency_amount^primary_currency #(doesn't matter what)
 				value = -100
@@ -119,18 +127,27 @@ focus_tree = {
 		search_filters = {
 			FOCUS_FILTER_INDUSTRY
 		}
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = has_100credits_tt
+				check_variable = {
+					currency_amount^primary_currency = 100
+					compare = greater_than_or_equals
+				}
+			}
+		}
 		prerequisite = { focus = REB_rebuild_coruscant  }
 		completion_reward = {
 			#TODO
-			#add_timed_idea = {
-			#	idea = the_civilian_sector
-			#	days = 180
-			#}
+			swap_ideas ={
+				add_idea = REB_rampant_poverty_2
+				remove_idea = REB_rampant_poverty
+			}
 			add_to_variable = {
 				var = currency_amount^primary_currency #(doesn't matter what)
 				value = -100
 				tooltip = cost_focus_tooltip
-			  } 
+			} 
 		}
 	}
 	#Rights of Sentience
@@ -192,7 +209,7 @@ focus_tree = {
 		#Purchase Bacta
 		focus = {
 			id = REB_purchase_bacta
-			icon = GFX_WIP_focus
+			icon = GFX_rebel_goal
 			text_icon = REPUBLIC_focus_style
 			relative_position_id = REB_secure_a_source_of_bacta
 			x = 1
@@ -202,6 +219,28 @@ focus_tree = {
 				FOCUS_FILTER_INDUSTRY
 			}
 			prerequisite = { focus = REB_secure_a_source_of_bacta  }
+			available = {
+				check_variable = {
+					currency_amount^primary_currency = 250
+					compare = greater_than_or_equals
+					tooltip = credits_requires_tt
+				}
+				OR={
+					AND={
+						NOT={has_country_flag = sanction_imperial_enabled}
+						503={
+							controller = {
+								has_government = imperial
+							}
+						}
+					}
+					503={
+						controller = {
+							NOT={has_government = imperial}
+						}
+					}
+				}
+			}
 			completion_reward = {
 				add_to_variable = {
 					var = currency_amount^primary_currency #(doesn't matter what)
@@ -213,7 +252,7 @@ focus_tree = {
 		#Bacta Imports
 		focus = {
 			id = REB_bacta_imports
-			icon = GFX_WIP_focus
+			icon = GFX_rebel_goal
 			text_icon = REPUBLIC_focus_style
 			relative_position_id = REB_secure_a_source_of_bacta
 			x = -1
@@ -221,6 +260,9 @@ focus_tree = {
 			cost = 7.2
 			search_filters = {
 				FOCUS_FILTER_POLITICAL
+			}
+			available = {
+				has_country_flag = won_bacta_war
 			}
 			prerequisite = { focus = REB_secure_a_source_of_bacta  }
 			completion_reward = {
@@ -234,7 +276,7 @@ focus_tree = {
 		#Pathogen Act
 		focus = {
 			id = REB_pathogen_act
-			icon = GFX_WIP_focus
+			icon = GFX_rebel_goal
 			text_icon = REPUBLIC_focus_style
 			relative_position_id = REB_purchase_bacta
 			x = -1
@@ -268,7 +310,7 @@ focus_tree = {
 		#The Sanitation Act
 		focus = {
 			id = REB_the_sanitation_act
-			icon = GFX_WIP_focus
+			icon = GFX_rebel_goal
 			text_icon = REPUBLIC_focus_style
 			relative_position_id = REB_republic_virology_labs
 			x = 0
@@ -344,6 +386,12 @@ focus_tree = {
 		cost = 5
 		search_filters = {
 			FOCUS_FILTER_WAR_SUPPORT
+		}
+		available = {
+			OR={
+				has_country_flag = NEW_C_hunting_zsinj
+				any_allied_country={has_country_flag = NEW_C_hunting_zsinj}
+			}
 		}
 		#prerequisite = { focus = REB_the_base_of_operations  }
 		completion_reward = {
@@ -639,8 +687,11 @@ focus_tree = {
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
+		available = {
+			has_idea = long_shadow_of_vader
+		}
 		completion_reward = {
-			add_ideas = long_shadow_of_vader
+			add_political_power = 50
 		}
 	}
 	#Restorer of Balance
@@ -910,6 +961,10 @@ focus_tree = {
 		cost = 7.2
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
+		}
+		allow_branch = {
+			NOT={has_country_flag = NEW_election_2}
+			has_country_flag = NEW_election_leia_organa_a
 		}
 		prerequisite = { focus = REB_leia_organa_a  }
 		completion_reward = {

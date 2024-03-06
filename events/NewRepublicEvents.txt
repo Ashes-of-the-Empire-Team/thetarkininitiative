@@ -46,6 +46,51 @@ news_event = {
 	}
 }
 
+news_event = {
+	id = newsenate.2
+	title = "Anti-Monopoly Act"
+	desc = newsenate.2.desc
+	picture = GFX_report_event
+	is_triggered_only = yes
+
+    option = {
+		name = "It has passed"
+		trigger = {
+			check_variable = { Global.votes_for_new_republic_law > Global.votes_against_new_republic_law }
+		}
+		clear_variable = Global.votes_for_new_republic_law
+		clear_variable = Global.votes_against_new_republic_law
+		clear_variable = Global.votes_abstained_new_republic_law
+		clear_variable = Global.new_rep_law_number_in_vote
+		REB={set_country_flag = NR_anti_monopoly_act_enabled}
+		every_country={
+			limit={
+				has_country_flag = votes_for_new_republic_law
+			}
+			clr_country_flag = votes_for_new_republic_law
+		}
+    }
+	option = {
+		name = "It has failed"
+		trigger = {
+			OR = {
+				check_variable = { Global.votes_for_new_republic_law < Global.votes_against_new_republic_law }
+				check_variable = { Global.votes_for_new_republic_law = Global.votes_against_new_republic_law }
+			}
+		}
+		clear_variable = Global.votes_for_new_republic_law
+		clear_variable = Global.votes_against_new_republic_law
+		clear_variable = Global.votes_abstained_new_republic_law
+		clear_variable = Global.new_rep_law_number_in_vote
+		every_country={
+			limit={
+				has_country_flag = votes_for_new_republic_law
+			}
+			clr_country_flag = votes_for_new_republic_law
+		}
+	}
+}
+
 country_event = {
 	id = new_rep_reaches.1
 	title = "The New Republic Reaches Out"
@@ -434,18 +479,16 @@ news_event = {
 country_event = {
 	id = newrepevent.2
 	title = "New Bureaucracy"
-	desc = "D"
+	desc = newrepevent.2.d
 	picture = GFX_report_event
 	is_triggered_only = yes
 
     option = {
 		name = "Long Live The New Republic"
 		hidden_effect = { 
-		add_ideas = REB_high_crime 
-		add_ideas = REB_coruscant_ruins_3
-		add_ideas = REB_rouge_military_units
-		add_ideas = REB_political_chaos 
-		add_ideas = REB_rampant_poverty
+			add_ideas = {
+				REB_coruscant_ruins_3 REB_rouge_military_units REB_political_chaos REB_rampant_poverty rampant_crime
+			}
 		}
 	}
 }
@@ -864,41 +907,104 @@ country_event = {
 			mark_focus_tree_layout_dirty = yes
 		}
 		mark_focus_tree_layout_dirty = yes
+		activate_mission = NR_head_of_state_term
 	}
 
 	option = {
 		name = "Leia"
 		set_country_flag = NEW_election_leia_organa_a
+		REB_leia = {
+			promote_character = yes
+		}
 		mark_focus_tree_layout_dirty = yes
+		REB={save_global_event_target_as = NR_head_of_state_scope}
 	}
 	option = {
 		name = "Mon Mothma"
 		set_country_flag = NEW_election_mon_mothma_a
 		mark_focus_tree_layout_dirty = yes
-		REB={
-			promote_character = {
-				character = REB_mon_mothma
-				ideology = rebel_ideology
-			}
+		REB_mon_mothma = {
+			promote_character = yes
 		}
 		CHA={
 			set_country_flag = NEW_election_winner
 			mark_focus_tree_layout_dirty = yes
 			unlock_national_focus = REB_the_first_chief_of_state
+			save_global_event_target_as = NR_head_of_state_scope
 		}
 	}
 	option = {
 		name = "Borsk Fey'lya"
 		set_country_flag = NEW_election_borskfeylya_a
 		mark_focus_tree_layout_dirty = yes
-		promote_character = {
-			character = REB_borsk_feylya
-			ideology = rebel_ideology
+		REB_borsk_feylya = {
+			promote_character = yes
 		}	
 		BOT={
 			set_country_flag = NEW_election_winner
 			mark_focus_tree_layout_dirty = yes
 			unlock_national_focus = REB_the_first_chief_of_state
+			save_global_event_target_as = NR_head_of_state_scope
+		}
+	}
+}
+country_event = {
+	id = new_rep_elections.14 ## NEW REPUBLIC ELECTION 2 DEBUG
+	title = new_rep_elections.14.title
+	desc = new_rep_elections.14.desc
+	picture = GFX_report_event
+	is_triggered_only = yes
+	immediate={
+		clr_country_flag = NEW_2nd_election_leia_organa_a
+		clr_country_flag = NEW_2nd_election_mon_mothma_a
+		clr_country_flag = NEW_2nd_election_borskfeylya_a
+		CHA={
+			clr_country_flag = NEW_election_winner
+			mark_focus_tree_layout_dirty = yes
+		}
+		BOT={
+			clr_country_flag = NEW_election_winner
+			mark_focus_tree_layout_dirty = yes
+		}
+		mark_focus_tree_layout_dirty = yes
+		activate_mission = NR_head_of_state_term
+	}
+
+	option = {
+		name = "Leia"
+		set_country_flag = NEW_2nd_election_leia_organa
+		REB_leia = {
+			promote_character = yes
+		}
+		mark_focus_tree_layout_dirty = yes
+		save_global_event_target_as = NR_head_of_state_scope
+	}
+	option = {
+		name = "Mon Mothma"
+		set_country_flag = NEW_2nd_election_mon_mothma
+		mark_focus_tree_layout_dirty = yes
+		REB_mon_mothma = {
+			promote_character = yes
+		}
+		CHA={
+			set_country_flag = NEW_election_winner
+			mark_focus_tree_layout_dirty = yes
+			unlock_national_focus = REB_the_second_chief_of_state
+			save_global_event_target_as = NR_head_of_state_scope
+		}
+	}
+	option = {
+		name = "Borsk Fey'lya"
+		set_country_flag = NEW_2nd_election_borskfeylya
+		mark_focus_tree_layout_dirty = yes
+		REB_borsk_feylya = {
+			promote_character = yes
+		}
+		BOT={
+			set_country_flag = NEW_election_winner
+			mark_focus_tree_layout_dirty = yes
+			unlock_national_focus = REB_the_second_chief_of_state
+			save_global_event_target_as = NR_head_of_state_scope
 		}
 	}
 }

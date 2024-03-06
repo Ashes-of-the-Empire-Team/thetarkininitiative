@@ -27,6 +27,7 @@
 			FOCUS_FILTER_POLITICAL
 		}
 		completion_reward = {
+			remove_ideas = {REB_political_chaos}
 			country_event = new_rep_elections.13
 		}
 	}
@@ -80,9 +81,7 @@
 			}
 		}
 		joint_trigger = { 
-			ROOT={
-				NR_basic_joint_trigger= yes
-			} 
+			NR_basic_joint_trigger= yes
 		}
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
@@ -104,12 +103,12 @@
 			FOCUS_FILTER_POLITICAL
 		}
 		joint_trigger = {
-			ROOT={
-				NR_political_joint_trigger = yes 
-			}
+			NR_political_joint_trigger = yes 
 		}
 		prerequisite = { focus = REB_members_of_the_new_republic  }
-		completion_reward = {}
+		completion_reward = {
+			add_stability = 0.02
+		}
 	}
 	#Expand Membership
 	joint_focus = {
@@ -123,9 +122,9 @@
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
-		joint_trigger = { ROOT={
-				NR_political_joint_trigger = yes 
-			}}
+		joint_trigger = {
+			NR_political_joint_trigger = yes 
+		}
 		prerequisite = { focus = REB_members_of_the_new_republic  }
 		completion_reward = {}
 	}
@@ -142,11 +141,13 @@
 		search_filters = {
 			FOCUS_FILTER_WAR_SUPPORT
 		}
-		joint_trigger = { ROOT={
-				NR_political_joint_trigger = yes 
-			}}
+		joint_trigger = { 
+			NR_political_joint_trigger = yes 
+		}
 		prerequisite = { focus = REB_expand_membership  }
-		completion_reward = {}
+		completion_reward_joint_originator = {
+
+		}
 	}
 
 	#De-Imperialisation
@@ -161,11 +162,13 @@
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
-		joint_trigger = { ROOT={
-				NR_political_joint_trigger = yes 
-			}}
+		joint_trigger = { 
+			NR_basic_joint_trigger = yes 
+		}
 		prerequisite = { focus = REB_expand_membership  }
-		completion_reward = {}
+		completion_reward = {
+			imperial_influence_decrease = yes
+		}
 	}
 
 	#Peace and Prosperity
@@ -180,9 +183,9 @@
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
-		joint_trigger = { ROOT={
-				NR_political_joint_trigger = yes 
-			}}
+		joint_trigger = { 
+			NR_political_joint_trigger = yes 
+		}
 		prerequisite = { focus = REB_prepare_coruscant  } 
 		prerequisite = { focus = REB_deimperialisation  }
 		completion_reward = {}
@@ -200,11 +203,13 @@
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
-		joint_trigger = { ROOT={
-				NR_political_joint_trigger = yes 
-			}}
+		joint_trigger = { 
+			NR_basic_joint_trigger = yes 
+		}
 		prerequisite = { focus = REB_peace_and_prosperity  }
-		completion_reward = {}
+		completion_reward_joint_member = {
+			add_ideas = NR_idea_denationalised_PSF
+		}
 	}
 	#D9020616
 	joint_focus = {
@@ -218,9 +223,9 @@
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
-		joint_trigger = {ROOT={
+		joint_trigger = {
 				NR_political_joint_trigger = yes 
-			}}
+		}
 		prerequisite = { focus = REB_members_of_the_new_republic  }
 		completion_reward = {}
 	}
@@ -291,11 +296,17 @@
 		search_filters = {
 			FOCUS_FILTER_INDUSTRY
 		}
-		joint_trigger = { ROOT={
-				NR_political_joint_trigger = yes 
-			}}
+		joint_trigger = { 
+			NR_basic_joint_trigger = yes 
+		}
 		prerequisite = { focus = REB_borskfeylya_a  }
-		completion_reward = {}
+		completion_reward_joint_member = {
+			add_to_variable = {
+				var = currency_amount^primary_currency #(doesn't matter what)
+				value = 50
+				tooltip = plus10credits_tt
+			}
+		}
 	}
 
 	#Secure Loyalty
@@ -310,9 +321,9 @@
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
-		joint_trigger = { ROOT={
-				NR_political_joint_trigger = yes 
-			}}
+		joint_trigger = { 
+			NR_political_joint_trigger = yes 
+		}
 		prerequisite = { focus = REB_wealth_of_the_republic  }
 		completion_reward = {}
 	}
@@ -329,9 +340,9 @@
 		search_filters = {
 			FOCUS_FILTER_INDUSTRY
 		}
-		joint_trigger = { ROOT={
-				NR_political_joint_trigger = yes 
-			}}
+		joint_trigger = { 
+			NR_political_joint_trigger = yes 
+		}
 		prerequisite = { focus = REB_secure_loyalty  }
 		completion_reward = {}
 	}
@@ -348,9 +359,9 @@
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
-		joint_trigger = { ROOT={
-				NR_political_joint_trigger = yes 
-			}}
+		joint_trigger = { 
+			NR_political_joint_trigger = yes 
+		}
 		prerequisite = { focus = REB_secure_loyalty  }
 		completion_reward_joint_originator = {
 			REB={
@@ -382,9 +393,9 @@
 		search_filters = {
 			FOCUS_FILTER_STABILITY
 		}
-		joint_trigger = { ROOT={
-				NR_political_joint_trigger = yes 
-			}}
+		joint_trigger = { 
+			NR_political_joint_trigger = yes 
+		}
 		prerequisite = { focus = REB_efficient_bureaucrats  } 
 		prerequisite = { focus = REB_reduced_corporation_tax_act  }
 		completion_reward = {}
@@ -402,9 +413,9 @@
 		search_filters = {
 			FOCUS_FILTER_INDUSTRY
 		}
-		joint_trigger = { ROOT={
-				NR_political_joint_trigger = yes 
-			}}
+		joint_trigger = { 
+			NR_political_joint_trigger = yes 
+		}
 		prerequisite = { focus = REB_the_new_republic_undercover_police  }
 		completion_reward = {}
 	}
@@ -421,9 +432,9 @@
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
-		joint_trigger = { ROOT={
-				NR_political_joint_trigger = yes 
-			}}
+		joint_trigger = { 
+			NR_political_joint_trigger = yes 
+		}
 		prerequisite = { focus = REB_secure_loyalty  }
 		completion_reward = {}
 	}
@@ -440,9 +451,9 @@
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
-		joint_trigger = { ROOT={
-				NR_political_joint_trigger = yes 
-			}}
+		joint_trigger = { 
+			NR_political_joint_trigger = yes 
+		}
 		prerequisite = { focus = REB_reparations_to_nonhumans  }
 		completion_reward = {}
 	}
@@ -459,16 +470,17 @@
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
-		joint_trigger = { ROOT={
-				NR_political_joint_trigger = yes 
-			}}
+		joint_trigger = { 
+			NR_political_joint_trigger = yes 
+		}
 		prerequisite = { focus = REB_reparations_to_nonhumans  }
 		completion_reward = {}
 	}
-#The Second Chief of State
+#The Second Chief of State NB: likely to have many candidates start to show up now
 	shared_focus = {
 		id = REB_the_second_chief_of_state
-		icon = GFX_WIP_focus
+		icon = GFX_rebel_goal
+		text_icon = REPUBLIC_focus_style
 		relative_position_id = REB_the_first_chief_of_state
 		x = 0
 		y = 2
@@ -484,8 +496,39 @@
 			}
 		}
 		completion_reward = {
+			remove_ideas ={NR_election_season}
+			add_political_power = 100
+			country_event = new_rep_elections.14
+		}
+	}
+	#Mon Mothma - "historical"
+	shared_focus = {
+		id = REB_mon_mothma_b
+		icon = GFX_mon_mothma
+		text_icon = REPUBLIC_focus_style
+		relative_position_id = REB_the_second_chief_of_state
+		x = 0
+		y = 1
+		cost = 7.2
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = REB_the_second_chief_of_state  }
+		allow_branch={
+			REB={
+				has_country_flag = NEW_2nd_election_mon_mothma
+			}
+			OR={
+				tag = REB
+				AND={
+					has_country_flag = NEW_election_winner
+					NOT={REB={has_country_flag = NEW_election_3}}
+				}
+			}
+		}
+		completion_reward = {
 			add_political_power = 50
-			add_stability = 0.05
+			
 		}
 	}
 	
@@ -541,9 +584,9 @@
 		}
 		relative_position_id = REB_the_warlord_crisis
 		prerequisite = { focus = REB_the_warlord_crisis  }
-		joint_trigger = { ROOT={
-				NR_basic_joint_trigger= yes
-			}  }
+		joint_trigger = {
+			NR_basic_joint_trigger= yes
+		}
 		available={
 			NOT={
 				any_allied_country={has_country_flag = NEW_C_hunting_zsinj}
@@ -574,6 +617,9 @@
 		available={
 			has_country_flag = NEW_C_hunting_zsinj
 		}
+		joint_trigger = {
+			NR_basic_joint_trigger= yes
+		}
 		prerequisite = { focus = NEW_hunt_for_zsinj  }
 		completion_reward = {
 			
@@ -588,9 +634,9 @@
 		x = -2
 		y = 1
 		cost = 7.2
-		joint_trigger = { ROOT={
-				NR_basic_joint_trigger= yes
-			}  }
+		joint_trigger = {
+			NR_basic_joint_trigger= yes
+		}
 		available={
 			has_country_flag = NEW_C_hunting_zsinj
 		}
@@ -609,9 +655,9 @@
 		x = 0
 		y = 1
 		cost = 7.2
-		joint_trigger = { ROOT={
-				NR_basic_joint_trigger= yes
-			}  }
+		joint_trigger = {
+			NR_basic_joint_trigger= yes
+		}
 		available={
 			has_country_flag = NEW_C_hunting_zsinj
 		}
@@ -633,6 +679,9 @@
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
+		joint_trigger = {
+			NR_basic_joint_trigger= yes
+		}
 		available={
 			has_country_flag = NEW_C_hunting_zsinj
 		}
@@ -651,9 +700,9 @@
 		x = 2
 		y = 1
 		cost = 7.2
-		joint_trigger = { ROOT={
-				NR_basic_joint_trigger= yes
-			}  }
+		joint_trigger = {
+			NR_basic_joint_trigger= yes
+		}
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
@@ -674,9 +723,9 @@
 		x = -1
 		y = 1
 		cost = 7.2
-		joint_trigger = { ROOT={
-				NR_basic_joint_trigger= yes
-			}  }
+		joint_trigger = {
+			NR_basic_joint_trigger= yes
+		}
 		available={
 			has_country_flag = NEW_C_hunting_zsinj
 		}
@@ -696,9 +745,9 @@
 		x = 1
 		y = 1
 		cost = 7.2
-		joint_trigger = { ROOT={
-				NR_basic_joint_trigger= yes
-			}  }
+		joint_trigger = {
+			NR_basic_joint_trigger= yes
+		}
 		available={
 			has_country_flag = NEW_C_hunting_zsinj
 		}
@@ -719,9 +768,9 @@
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
-		joint_trigger = { ROOT={
-				NR_basic_joint_trigger= yes
-			}  }
+		joint_trigger = {
+			NR_basic_joint_trigger= yes
+		}
 		available={
 			has_country_flag = NEW_C_hunting_zsinj
 		}
@@ -771,9 +820,9 @@ joint_focus = {
 	}
 	relative_position_id = REB_the_warlord_crisis
 	prerequisite = { focus = REB_the_warlord_crisis  }
-	joint_trigger = { ROOT={
-				NR_basic_joint_trigger= yes
-			}  }
+	joint_trigger = {
+		NR_basic_joint_trigger= yes
+	}
 	available={
 		NOT={
 			any_allied_country={has_country_flag = NEW_C_fighting_isard}
@@ -873,7 +922,7 @@ joint_focus = {
 			}
 		}
 		completion_reward = {
-		
+			army_experience = 25
 		}
 	}
 	#Rangers of the Republic
@@ -892,19 +941,24 @@ joint_focus = {
 			}
 			relative_position_id = REB_new_republic_defense_forces
 			prerequisite = { focus = REB_new_republic_defense_forces  }
-			completion_reward = {
-				subtract_from_variable = { currency_amount^primary_currency = 100 }
+			completion_reward_joint_originator = {
+				subtract_from_variable = { 
+					tooltip = credits_remove_tt
+					currency_amount^primary_currency = 100 
+				}
 				
 			}
-			joint_trigger = { ROOT={
-				NR_basic_joint_trigger= yes
-			}  }
+			joint_trigger = { 
+				ROOT={
+					NR_basic_joint_trigger= yes
+				} 
+			}
 			
 			completion_reward = {
+				set_variable = { REB_nr_rangers_special_forces_min = 2 }
 				add_dynamic_modifier = {
 					modifier = REB_rangers_of_the_republic
 				}
-				set_variable = { REB_nr_rangers_special_forces_min = 2 }
 			}
 		}
 		#Harsh Training Regime
@@ -978,7 +1032,13 @@ joint_focus = {
 			}  }
 			prerequisite = { focus = REB_elite_fighting_force  } 
 			prerequisite = { focus = REB_harsh_training_regime  }
-			completion_reward = {}
+			completion_reward = {
+				add_tech_bonus = {
+					bonus = 0.33
+					uses = 3
+					category = support_tech
+				}
+			}
 		}
 		#Mobile Rangers
 		joint_focus = {
@@ -1041,7 +1101,10 @@ joint_focus = {
 			has_country_flag = member_of_military_committee
 		}
 		prerequisite = { focus = REB_new_republic_defense_forces }
-		completion_reward = {}
+		completion_reward_joint_originator={set_global_flag = REC_enabled}
+		completion_reward = {
+			custom_effect_tooltip = REC_unlocked
+		}
 	}
 
 	#New Class Modernization Program
@@ -1049,8 +1112,8 @@ joint_focus = {
 		id = REB_new_class_modernization_program
 		icon = GFX_rebel_goal
 		text_icon = REPUBLIC_JOINT_MIL_focus_style
-		relative_position_id = REB_republic_engineering_corporation
-		x = 1
+		relative_position_id = REB_the_defender_program
+		x = 0
 		y = 1
 		cost = 7.2
 		search_filters = {
@@ -1061,7 +1124,7 @@ joint_focus = {
 			has_country_flag = member_of_military_committee
 			has_completed_focus = REB_standardisation_of_equipment
 		}
-		prerequisite = { focus = REB_republic_engineering_corporation  }
+		prerequisite = { focus = REB_the_defender_program  }
 		completion_reward_joint_originator = {
 			set_global_flag = NEW_NCMP
 		}
@@ -1077,8 +1140,8 @@ joint_focus = {
 		id = REB_the_defender_program
 		icon = GFX_rebel_goal
 		text_icon = REPUBLIC_JOINT_MIL_focus_style
-		relative_position_id = REB_new_class_modernization_program
-		x = -1
+		relative_position_id = REB_republic_engineering_corporation
+		x = 1
 		y = 1
 		cost = 10
 		search_filters = {
@@ -1088,8 +1151,10 @@ joint_focus = {
 		available={
 			has_country_flag = member_of_military_committee
 		}
-		prerequisite = { focus = REB_new_class_modernization_program  }
-		completion_reward = {}
+		prerequisite = { focus = REB_republic_engineering_corporation  }
+		completion_reward = {
+			#unlocks defender-class starfighter
+		}
 	}
 	#Joint Training Excercises
 	joint_focus = {
@@ -1130,9 +1195,14 @@ joint_focus = {
 		available={
 			has_country_flag = member_of_military_committee
 		}
+		joint_trigger = { NR_basic_joint_trigger = yes }
 		prerequisite = { focus = REB_new_republic_defense_forces  }
 		completion_reward = {
-				
+			add_tech_bonus = {
+				bonus = 0.33
+				uses = 2
+				category = naval_doctrine
+			}
 		}
 	}
 	#Expand the Shipyards
@@ -1150,6 +1220,7 @@ joint_focus = {
 		available={
 			has_country_flag = member_of_military_committee
 		}
+		joint_trigger = { NR_basic_joint_trigger = yes }
 		prerequisite = { focus = REB_prepare_out_doctrine  }
 		prerequisite = { focus = REB_republic_engineering_corporation  }
 		completion_reward = {
@@ -1172,6 +1243,7 @@ joint_focus = {
 		available={
 			has_country_flag = member_of_military_committee
 		}
+		joint_trigger = { NR_basic_joint_trigger = yes }
 		prerequisite = { focus = REB_prepare_out_doctrine  }
 		completion_reward = {
 				
@@ -1193,10 +1265,16 @@ joint_focus = {
 		available={
 			has_country_flag = member_of_military_committee
 		}
+		joint_trigger = { NR_basic_joint_trigger = yes }
 		prerequisite = { focus = REB_expand_the_shipyards  }
 		prerequisite = { focus = REB_starfighter_purchases  }
-		completion_reward = {
-				
+		completion_reward_joint_originator = {
+			CAL={
+				add_timed_idea={
+					idea = REB_CAL_subsidies
+					days = 720
+				}
+			}
 		}
 	}
 ##NR Economy
@@ -1233,6 +1311,9 @@ joint_focus = {
 		}
 		available={
 			has_country_flag = member_of_economic_committee
+			ROOT={
+				NR_basic_joint_trigger = yes
+			}
 		}
 		completion_reward = {
 		
@@ -1244,7 +1325,7 @@ joint_focus = {
 		icon = GFX_rebel_goal
 		text_icon = REPUBLIC_JOINT_ECO_focus_style
 		relative_position_id = REB_new_republic_economy
-		x = 3
+		x = 2
 		y = 1
 		cost = 7.2
 		search_filters = {
@@ -1262,7 +1343,7 @@ joint_focus = {
 		icon = GFX_rebel_goal
 		text_icon = REPUBLIC_JOINT_ECO_focus_style
 		relative_position_id = REB_new_republic_economy
-		x = -3
+		x = -2
 		y = 1
 		cost = 7.2
 		search_filters = {
@@ -1326,8 +1407,8 @@ joint_focus = {
 		icon = GFX_rebel_goal
 		text_icon = REPUBLIC_JOINT_ECO_focus_style
 		relative_position_id = REB_csa_stance
-		x = 1
-		y = 2
+		x = -1
+		y = 1
 		cost = 7.2
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
@@ -1337,7 +1418,9 @@ joint_focus = {
 		}
 		prerequisite = { focus = REB_csa_stance  }
 		mutually_exclusive = { focus = REB_no_more_corrupt_governing  }
-		completion_reward = {}
+		completion_reward_joint_originator = {
+			AUT={country_event = REP_CSA.2}
+		}
 	}
 
 	#No More Corrupt Governing
@@ -1346,8 +1429,8 @@ joint_focus = {
 		icon = GFX_rebel_goal
 		text_icon = REPUBLIC_JOINT_ECO_focus_style
 		relative_position_id = REB_csa_stance
-		x = 3
-		y = 2
+		x = 1
+		y = 1
 		cost = 7.2
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
@@ -1357,14 +1440,14 @@ joint_focus = {
 		}
 		prerequisite = { focus = REB_csa_stance  }
 		mutually_exclusive = { focus = REB_offer_new_republic_membership  }
-		completion_reward = {}
+		completion_reward = {add_political_power = 25}
 	}
 	#Sanction Imperial Companies
 	joint_focus = {
 		id = REB_sanction_imperial_companies
 		icon = GFX_rebel_goal
 		text_icon = REPUBLIC_JOINT_ECO_focus_style
-		relative_position_id = REB_csa_stance
+		relative_position_id = REB_penalize_imperial_companies
 		x = -2
 		y = 1
 		cost = 10
@@ -1374,9 +1457,12 @@ joint_focus = {
 		available={
 			has_country_flag = member_of_economic_committee
 		}
-		prerequisite = { focus = REB_csa_stance  }
+		prerequisite = { focus = REB_penalize_imperial_companies  }
+		completion_reward_joint_originator = {
+			REB={set_country_flag = sanction_imperial_enabled}
+		}
 		completion_reward = {
-			set_country_flag = sanction_imperial_enabled
+			custom_effect_tooltip = REB_sanction_imperial_companies_tt
 		}
 	}
 
@@ -1385,8 +1471,8 @@ joint_focus = {
 		id = REB_free_capital
 		icon = GFX_rebel_goal
 		text_icon = REPUBLIC_JOINT_ECO_focus_style
-		relative_position_id = REB_csa_stance
-		x = -3
+		relative_position_id = REB_fixing_credits_issue
+		x = -1
 		y = 2
 		cost = 7.2
 		search_filters = {
@@ -1395,17 +1481,23 @@ joint_focus = {
 		available={
 			has_country_flag = member_of_economic_committee
 		}
-		prerequisite = { focus = REB_csa_stance  }
+		prerequisite = { focus = REB_fixing_credits_issue  }
 		mutually_exclusive = { focus = REB_antimonopoly_act  }
-		completion_reward = {}
+		completion_reward = {
+			add_to_variable = {
+				var = currency_amount^primary_currency #(doesn't matter what)
+				value = 10
+				tooltip = plus10credits_tt
+			}
+		}
 	}
 	#Anti-Monopoly Act
 	joint_focus = {
 		id = REB_antimonopoly_act
 		icon = GFX_rebel_goal
 		text_icon = REPUBLIC_JOINT_ECO_focus_style
-		relative_position_id = REB_csa_stance
-		x = -1
+		relative_position_id = REB_fixing_credits_issue
+		x = 1
 		y = 2
 		cost = 7.2
 		search_filters = {
@@ -1413,11 +1505,30 @@ joint_focus = {
 		}
 		available={
 			has_country_flag = member_of_economic_committee
+			NOT={has_global_flag = NR_law_vote_ongoing}
 		}
-		prerequisite = { focus = REB_csa_stance  }
+		prerequisite = { focus = REB_fixing_credits_issue  }
 		mutually_exclusive = { focus = REB_free_capital  }
-		completion_reward = {
-			set_country_flag = anti_monpoloy_enabled
+		completion_reward_joint_originator = {
+			#set_country_flag = anti_monpoloy_enabled
+			custom_effect_tooltip = NR_vote_started_tt
+			hidden_effect={
+				#starts NR law vote
+				news_event = {
+					id = newsenate.2
+					days = 30
+				}
+				set_variable = { Global.new_rep_law_number_in_vote = 1 }
+				set_global_flag = {
+					flag = NR_law_vote_ongoing
+					days = 30
+					value = 1
+				}
+			}
+		}
+		completion_reward_joint_member = {
+			#informs NR law vote
+			set_country_flag = vote_in_NR_notifaction
 		}
 	}
 
@@ -1426,8 +1537,8 @@ joint_focus = {
 		id = REB_corporate_tax_act
 		icon = GFX_rebel_goal
 		text_icon = REPUBLIC_JOINT_ECO_focus_style
-		relative_position_id = REB_csa_stance
-		x = 2
+		relative_position_id = REB_fixing_credits_issue
+		x = 0
 		y = 1
 		cost = 7.2
 		search_filters = {
@@ -1436,9 +1547,12 @@ joint_focus = {
 		available={
 			has_country_flag = member_of_economic_committee
 		}
-		prerequisite = { focus = REB_csa_stance  }
+		prerequisite = { focus = REB_fixing_credits_issue  }
+		completion_reward_joint_originator = {
+			REB={set_country_flag = corporate_tax_enabled}
+		}
 		completion_reward = {
-			set_country_flag = corporate_tax_enabled
+			custom_effect_tooltip = REB_corporate_tax_act_tt
 		}
 	}
 
@@ -1470,6 +1584,9 @@ joint_focus = {
 		}
 		available={
 			has_country_flag = member_of_espionage_committee
+			ROOT={
+				NR_basic_joint_trigger = yes
+			}
 		}
 		allow_branch = {
 			ROOT={
@@ -1480,7 +1597,7 @@ joint_focus = {
 			}
 		}
 		completion_reward = {
-		
+			
 		}
 	}
 ##NR Research
@@ -1511,6 +1628,9 @@ joint_focus = {
 		}
 		available={
 			has_country_flag = member_of_research_committee
+			ROOT={
+				NR_basic_joint_trigger = yes
+			}
 		}
 		allow_branch = {
 			ROOT={
@@ -1529,7 +1649,7 @@ joint_focus = {
 		icon = GFX_rebel_goal
 		text_icon = REPUBLIC_JOINT_RES_focus_style
 		relative_position_id = REB_new_republic_research
-		x = 0
+		x = -2
 		y = 1
 		cost = 7.2
 		search_filters = {
@@ -1586,5 +1706,170 @@ joint_focus = {
 			has_country_flag = member_of_research_committee
 		}
 		prerequisite = { focus = REB_new_republic_research }
-		completion_reward = {}
+		completion_reward = {
+			custom_effect_tooltip = NR_unlock_standardisation
+		}
+	}
+	joint_focus = {
+		id = REB_the_general_ministry_institutes
+		icon = GFX_rebel_goal
+		text_icon = REPUBLIC_JOINT_RES_focus_style
+		relative_position_id = REB_new_republic_research
+		x = 0
+		y = 2
+		cost = 7.2
+		search_filters = {
+			FOCUS_FILTER_WAR_SUPPORT
+		}
+		joint_trigger = { NR_basic_joint_trigger = yes }
+		available={
+			has_country_flag = member_of_research_committee
+		}
+		prerequisite = { focus = REB_new_republic_research }
+		completion_reward = {
+			custom_effect_tooltip=REB_the_general_ministry_institutes_tt
+			hidden_effect={
+				set_variable = { REB_research_speed = 0.08 }
+				add_dynamic_modifier = {
+					modifier = REB_GM_institutes
+				}
+			}
+		}
+	}
+	joint_focus = {
+		id = REB_ASI
+		icon = GFX_rebel_goal
+		text_icon = REPUBLIC_JOINT_RES_focus_style
+		relative_position_id = REB_the_general_ministry_institutes
+		x = 1
+		y = 3
+		cost = 7.2
+		search_filters = {
+			FOCUS_FILTER_WAR_SUPPORT
+		}
+		joint_trigger = { NR_basic_joint_trigger = yes }
+		available={
+			has_country_flag = member_of_research_committee
+		}
+		prerequisite = { focus = REB_the_general_ministry_institutes }
+		completion_reward = {
+			add_to_variable = { REB_research_speed = 0.02 }
+			custom_effect_tooltip = REB_GM_institutes_increase_tt
+		}
+	}
+	joint_focus = {
+		id = REB_extragalactic_society
+		icon = GFX_rebel_goal
+		text_icon = REPUBLIC_JOINT_RES_focus_style
+		relative_position_id = REB_the_general_ministry_institutes
+		x = 2
+		y = 2
+		cost = 7.2
+		search_filters = {
+			FOCUS_FILTER_WAR_SUPPORT
+		}
+		joint_trigger = { NR_basic_joint_trigger = yes }
+		available={
+			has_country_flag = member_of_research_committee
+		}
+		prerequisite = { focus = REB_the_general_ministry_institutes }
+		completion_reward = {
+			add_to_variable = { REB_research_speed = 0.02 }
+			custom_effect_tooltip = REB_GM_institutes_increase_tt
+		}
+	}
+	joint_focus = {
+		id = REB_institute_sentient_studies
+		icon = GFX_rebel_goal
+		text_icon = REPUBLIC_JOINT_RES_focus_style
+		relative_position_id = REB_the_general_ministry_institutes
+		x = 3
+		y = 1
+		cost = 7.2
+		search_filters = {
+			FOCUS_FILTER_WAR_SUPPORT
+		}
+		joint_trigger = { NR_basic_joint_trigger = yes }
+		available={
+			has_country_flag = member_of_research_committee
+		}
+		prerequisite = { focus = REB_the_general_ministry_institutes }
+		completion_reward = {
+			add_to_variable = { REB_research_speed = 0.02 }
+			custom_effect_tooltip = REB_GM_institutes_increase_tt
+		}
+	}
+	joint_focus = {
+		id = REB_FAED
+		icon = GFX_rebel_goal
+		text_icon = REPUBLIC_JOINT_RES_focus_style
+		relative_position_id = REB_the_general_ministry_institutes
+		x = -1
+		y = 3
+		cost = 7.2
+		search_filters = {
+			FOCUS_FILTER_WAR_SUPPORT
+		}
+		joint_trigger = { NR_basic_joint_trigger = yes }
+		available={
+			has_country_flag = member_of_research_committee
+			366={
+				is_controlled_by_ROOT_or_ally = yes
+			}
+		}
+		prerequisite = { focus = REB_the_general_ministry_institutes }
+		completion_reward_joint_originator={
+			add_tech_bonus = {
+				bonus = 0.15
+				uses = 4
+				category = industry
+				category = electronics
+			}
+		}
+		completion_reward = {
+			add_to_variable = { REB_research_speed = 0.02 }
+			custom_effect_tooltip = REB_GM_institutes_increase_tt
+		}
+	}
+	joint_focus = {
+		id = REB_KIGH
+		icon = GFX_rebel_goal
+		text_icon = REPUBLIC_JOINT_RES_focus_style
+		relative_position_id = REB_the_general_ministry_institutes
+		x = -2
+		y = 2
+		cost = 7.2
+		search_filters = {
+			FOCUS_FILTER_WAR_SUPPORT
+		}
+		joint_trigger = { NR_basic_joint_trigger = yes }
+		available={
+			has_country_flag = member_of_research_committee
+		}
+		prerequisite = { focus = REB_the_general_ministry_institutes }
+		completion_reward = {
+			add_to_variable = { REB_research_speed = 0.02 }
+			custom_effect_tooltip = REB_GM_institutes_increase_tt
+		}
+	}
+	joint_focus = {
+		id = REB_MCLS
+		icon = GFX_rebel_goal
+		text_icon = REPUBLIC_JOINT_RES_focus_style
+		relative_position_id = REB_the_general_ministry_institutes
+		x = -3
+		y = 1
+		cost = 7.2
+		search_filters = {
+			FOCUS_FILTER_WAR_SUPPORT
+		}
+		joint_trigger = { NR_basic_joint_trigger = yes }
+		available={
+			has_country_flag = member_of_research_committee
+		}
+		prerequisite = { focus = REB_the_general_ministry_institutes }
+		completion_reward = {
+			custom_effect_tooltip = REB_GM_institutes_increase_tt
+			add_to_variable = { REB_research_speed = 0.02 }
+		}
 	}

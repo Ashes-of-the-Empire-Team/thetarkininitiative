@@ -88,7 +88,7 @@ new_republic_missions = {
 				set_state_owner = 40
 				set_state_controller = 40
 				add_state_core = 40
-				add_ideas = rampant_crime
+				country_event = newrepevent.2
 			}
 			every_country = {
 				set_country_flag = reclamation_of_coruscant
@@ -149,6 +149,50 @@ new_republic_missions = {
 
 		timeout_effect = {
 			remove_ideas = {REB_republic_momentum}
+		}
+
+		ai_will_do = {
+			#factor = 200
+		}
+	}
+	NR_head_of_state_term = {
+
+		activation = {
+			always = no
+		}
+
+		icon = GFX_rebel_momentum_in_text
+
+		available = {
+			always = no
+		}
+
+		#cost = GER_mefo_bill_counter?10
+
+		days_mission_timeout = 730
+		is_good = yes
+
+		cancel_trigger = {
+			always = no
+		}
+
+
+		complete_effect = {
+		}
+
+		timeout_effect = {
+			add_ideas = NR_election_season
+			##advance elections
+			custom_effect_tooltip = NR_head_of_state_elections_start
+			if={
+				limit={
+					has_country_flag = NEW_election_2
+				}
+				set_country_flag = NEW_election_3
+			}
+			else={
+				set_country_flag = NEW_election_2
+			}
 		}
 
 		ai_will_do = {
