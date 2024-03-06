@@ -49,11 +49,9 @@ sift_through_alliance_types = {
 		set_temp_variable = {current_looking_at_equipment = v}
 		if = {
 			limit = {
-				OR = {
+				NOT = {
 					check_variable = {global.belonging_to_what_faction@var:current_looking_at_equipment = global.neutral_market_choice}
-					NOT = {
-						check_variable = {global.belonging_to_what_faction@var:current_looking_at_equipment = country_belongs_to_what_faction} #if they fit their faction type then they get access
-					}
+					check_variable = {global.belonging_to_what_faction@var:current_looking_at_equipment = country_belongs_to_what_faction} #if they fit their faction type then they get access
 				}
 			}
 			add_to_temp_array = {
