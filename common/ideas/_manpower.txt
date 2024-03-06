@@ -4,193 +4,200 @@ ideas = {
 	mobilization_laws = { 
 		law = yes
 		use_list_view = yes
-		primary_species_only = {
+		Professionalism_and_Technology = {
 						
 			cost = 150
 			removal_cost = -1
-			level = 6
+			level = 1
 			
 			available = {
-				OR = {
-					has_government = imperial
-					has_government = neutrality
-				}
-				NOT = {
-					has_country_flag = no_ideas
-				}
-			}
-
-			modifier = {
-				army_core_attack_factor = 0.1
-				army_core_defence_factor = 0.1
-				conscription = 0.05
-			}
-			
-			default = yes
-			
-			cancel_if_invalid = yes
-		}
-		required_conscription = {
-						
-			cost = 150
-			removal_cost = -1
-			level = 5
-
-			available = {
-				OR = {
-					has_government = imperial
-					has_government = neutrality
-				}
-				has_idea = primary_species_only
-				NOT = {
-					has_country_flag = no_ideas
-				}
-			}
-			visible = {
-				has_idea = primary_species_only
-			}
-
-			modifier = {
-				army_core_attack_factor = 0.05
-				army_core_defence_factor = 0.05
-				conscription = 0.06
-			}
-			
-			cancel_if_invalid = no
-		}
-		fanatic_loyalists = {
-						
-			cost = 150
-			removal_cost = -1
-			level = 4
-
-			available = {
-				OR = {
-					has_government = imperial
-					has_government = neutrality
-				}
-				has_idea = primary_species_only
-				NOT = {
-					has_country_flag = no_ideas
-				}
-			}
-			visible = {
-				has_idea = primary_species_only
-			}
-
-			modifier = {
-				army_core_attack_factor = 0.15
-				army_core_defence_factor = 0.15
-				conscription = 0.02
-			}
-			on_add = {
-				custom_effect_tooltip = fanatic_loyalists_tt
-				hidden_effect = {
-					set_variable = { volunteer_only_var = party_popularity@ruling_party }
-					multiply_variable = { volunteer_only_var = has_war_support }
-					multiply_variable = { volunteer_only_var = 0.0045 }
-					subtract_from_variable = { volunteer_only_var = 0.015 }
-					add_dynamic_modifier = { modifier = fanatic_loyalists_dyn }
-				}
-			}
-			cancel_if_invalid = no
-		}
-		all_species_allowed = {
-						
-			cost = 150
-			removal_cost = -1
-			level = 3
-
-			available = {
-				NOT = {
-					has_country_flag = no_ideas
-				}
-			}
-
-			modifier = {
-				conscription = 0.06
-				non_core_manpower = 0.08
-			}
-			
-			default = yes
-			
-			cancel_if_invalid = yes
-		}
-		every_citizen_a_soldier = {
-						
-			cost = 150
-			removal_cost = -1
-			level = 2
-
-			available = {
-				has_idea = all_species_allowed
 				NOT = {
 					has_country_flag = no_ideas
 				}
 			}
 
 			on_add = {
-			}
+                custom_effect_tooltip = Professionalism_and_Technology_tt
+            }
 
 			modifier = {
-				stability_factor = -0.1
-				war_support_factor = -0.1
-				conscription = 0.8
-				non_core_manpower = 0.15
+				conscription = 0.01
 			}
-
-			visible = {
-				has_idea = all_species_allowed
-			}
-
-
-			cancel_if_invalid = no
+			
+			default = no
+			
+			cancel_if_invalid = yes
 		}
-		citizenship_through_enlistment = {
+		quantity_and_fanaticism = {
 						
 			cost = 150
 			removal_cost = -1
 			level = 1
-
+			
 			available = {
-				has_idea = all_species_allowed
 				NOT = {
 					has_country_flag = no_ideas
 				}
 			}
-			visible = {
-				has_idea = all_species_allowed
-			}
+
+			on_add = {
+                custom_effect_tooltip = quantity_and_fanaticism_tt
+            }
 
 			modifier = {
-				conscription = 0.06
-				weekly_manpower = 1000
+				conscription = 0.01
 			}
 			
-			cancel_if_invalid = no
+			default = yes
+			
+			cancel_if_invalid = yes
 		}
-		tribal_military = {
+		subjugation_and_exploitation = {
 						
 			cost = 150
 			removal_cost = -1
 			level = 1
-
+			
 			available = {
-				tag = KYK
+				NOT = {
+					has_country_flag = no_ideas
+					has_government = democratic
+				}
 			}
-			visible = {
-				tag = KYK
-			}
+
+			on_add = {
+                custom_effect_tooltip = subjugation_and_exploitation_tt
+            }
 
 			modifier = {
-				conscription = 0.00
+				conscription = 0.01
+			}
+			
+			default = no
+			
+			cancel_if_invalid = yes
+		}
+		droid_warfare = {
+						
+			cost = 150
+			removal_cost = -1
+			level = 1
+			
+			available = {
+				NOT = {
+					has_country_flag = no_ideas
+				}
 			}
 
-			allowed_to_remove = {
+			visible = {
 				always = no
 			}
+
+			modifier = {
+				conscription = 0.01
+			}
 			
-			cancel_if_invalid = no
+			default = no
+			
+			cancel_if_invalid = yes
+		}
+		mercenary_reliance = {
+						
+			cost = 150
+			removal_cost = -1
+			level = 1
+			
+			available = {
+				NOT = {
+					has_country_flag = no_ideas
+				}
+			}
+
+			visible = {
+				always = no
+			}
+
+			modifier = {
+				conscription = 0.01
+			}
+			
+			default = no
+			
+			cancel_if_invalid = yes
+		}
+		the_elite_path = {
+						
+			cost = 150
+			removal_cost = -1
+			level = 1
+			
+			available = {
+				NOT = {
+					has_country_flag = no_ideas
+				}
+			}
+
+			on_add = {
+                custom_effect_tooltip = the_elite_path_tt
+            }
+
+
+			modifier = {
+				conscription = 0.01
+			}
+			
+			default = no
+			
+			cancel_if_invalid = yes
+		}
+		attrition_and_endurance = {
+						
+			cost = 150
+			removal_cost = -1
+			level = 1
+			
+			available = {
+				NOT = {
+					has_country_flag = no_ideas
+				}
+			}
+
+			modifier = {
+				conscription = 0.01
+			}
+
+			on_add = {
+                custom_effect_tooltip = attrition_and_endurance_tt
+            }
+			
+			default = no
+			
+			cancel_if_invalid = yes
+		}
+		united_republic_defence_forces = {
+						
+			cost = 150
+			removal_cost = -1
+			level = 1
+			
+			available = {
+				NOT = {
+					has_country_flag = no_ideas
+				}
+				has_government = democratic
+			}
+
+			on_add = {
+                custom_effect_tooltip = united_republic_defence_forces_tt
+            }
+
+			modifier = {
+				conscription = 0.01
+			}
+			
+			default = no
+			
+			cancel_if_invalid = yes
 		}
 	}
 }
