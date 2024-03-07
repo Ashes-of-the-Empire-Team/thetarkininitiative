@@ -1988,7 +1988,12 @@ on_actions = {
 				for_each_loop = {
 					array = Production_array@var:global.naval_market_category
 					value = current_item_we_are_looking_at
-					add_to_variable = {global.stock_of_item@var:current_item_we_are_looking_at = 100}
+					if = {
+						limit = {
+							check_variable = {global.stock_of_item@var:current_item_we_are_looking_at < 50}
+						}
+						add_to_variable = {global.stock_of_item@var:current_item_we_are_looking_at = 1}
+					}
 				}
 			}
 			every_country = {
@@ -1999,7 +2004,12 @@ on_actions = {
 				for_each_loop = {
 					array = Production_array@var:global.tank_market_category
 					value = current_item_we_are_looking_at
-					add_to_variable = {global.stock_of_item@var:current_item_we_are_looking_at = 100}
+					if = {
+						limit = {
+							check_variable = {global.stock_of_item@var:current_item_we_are_looking_at < 800}
+						}
+						add_to_variable = {global.stock_of_item@var:current_item_we_are_looking_at = 50}
+					}
 				}
 			}
 			every_country = {
@@ -2010,7 +2020,12 @@ on_actions = {
 				for_each_loop = {
 					array = Production_array@var:global.air_market_category
 					value = current_item_we_are_looking_at
-					add_to_variable = {global.stock_of_item@var:current_item_we_are_looking_at = 100}
+					if = {
+						limit = {
+							check_variable = {global.stock_of_item@var:current_item_we_are_looking_at < 600}
+						}
+						add_to_variable = {global.stock_of_item@var:current_item_we_are_looking_at = 40}
+					}
 				}
 			}
 			every_country = {
@@ -2021,7 +2036,12 @@ on_actions = {
 				for_each_loop = {
 					array = Production_array@var:global.land_market_category
 					value = current_item_we_are_looking_at
-					add_to_variable = {global.stock_of_item@var:current_item_we_are_looking_at = 100}
+					if = {
+						limit = {
+							check_variable = {global.stock_of_item@var:current_item_we_are_looking_at < 10000}
+						}
+						add_to_variable = {global.stock_of_item@var:current_item_we_are_looking_at = 100}
+					}
 				}
 			}
 		}

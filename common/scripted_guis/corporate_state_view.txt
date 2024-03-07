@@ -3710,6 +3710,36 @@ scripted_gui = {
 					always = no
 				}
 			}
+			unique_building_background_visible = {
+				has_variable = unique_building_on_state
+				if = {
+					limit = {
+						NOT = {
+							has_state_flag = wonder_built_no_destroy_1
+							has_state_flag = wonder_built_no_destroy_2
+						}
+					}
+					always = yes
+				}else_if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_1_open
+						}
+						has_state_flag = wonder_built_no_destroy_1
+					}
+					always = yes
+				}else_if = {
+					limit = {
+						ROOT = {
+							has_country_flag = building_2_open
+						}
+						has_state_flag = wonder_built_no_destroy_2
+					}
+					always = yes
+				}else = {
+					always = no
+				}
+			}
 			unique_building_click_enabled = {
  				ROOT = {
 					check_variable = { currency_amount^primary_currency > 200 }
