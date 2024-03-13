@@ -48,7 +48,7 @@ espionage_end_mission_effect = {
 	}
 ## ADD MODIFIERS FOR SUCCESS CHANCE HERE
 	set_temp_variable = {Total_counterespionage_vs_espionage_percentage = modifier@espionage_value } ## grab espionage value (the good for you one)
-	targeted_country = {
+	var:targeted_country = {
 		subtract_from_temp_variable = {Total_counterespionage_vs_espionage_percentage = modifier@counter_espionage_value} ## grab opponetnts counter espionage value (bad for you)
 	}
 	## GRABBING TRAIT MODIFIERS
@@ -81,6 +81,7 @@ espionage_end_mission_effect = {
 		max = 100
 	}
 
+	set_temp_variable = {net_size = 0}
 	## ABOVE IS GRABBING THE CORRECT AGENTS VARIABLES
 	meta_effect = { # grab the mission identifier and enact that scripted effect, each scripted effects holds the end results of a operation
 		text = {
@@ -93,6 +94,12 @@ espionage_end_mission_effect = {
 		var:agent_class_trait
 		var:agent_race_trait
 		var:agent_personality_trait
+	}
+	if = {
+		limit = {
+			has_country_flag = success_chance_generator
+		}
+		set_variable = {pass_up_success_chance = net_size}
 	}
 }
 
@@ -190,40 +197,47 @@ agent_death_effect = {
 }
 
 chance_of_death = {
-	set_temp_variable = {agent_surviability_bonuses = modifier@espionage_agent_survivability}
-	set_temp_variable = {death_chance = 10}
-	subtract_from_temp_variable = {death_chance = agent_surviability_bonuses}
-	subtract_from_temp_variable = {death_chance = agent_expertise}
-	clamp_temp_variable = {
-		var = death_chance
-		min = 5
-	}
-	randomize_temp_variable = {  ## death generator
-		var = chance_of_death
-		distribution = uniform
-		min = 1
-		max = 100
-	}
-	if = {
+	if =  {
 		limit = {
-			check_variable = {
-				var = chance_of_death
-				value = death_chance
-				compare = less_than_or_equals
+			NOT = {
+				has_country_flag = success_chance_generator
 			}
 		}
-		country_event = espionage_missions.9 ## CRITICAL FAILURE EVENT AGENT DEATH
-		var:targeted_country = {
-			## CRITICAL FAILURE EFFECTS ON TARGET COUNTRY
-			country_event = espionage_missions.10 ## ESPIOANGE CRITICAL SUCCESS WAS UNSUCCESSFUL ON YOUR COUNTRY
+		set_temp_variable = {agent_surviability_bonuses = modifier@espionage_agent_survivability}
+		set_temp_variable = {death_chance = 10}
+		subtract_from_temp_variable = {death_chance = agent_surviability_bonuses}
+		subtract_from_temp_variable = {death_chance = agent_expertise}
+		clamp_temp_variable = {
+			var = death_chance
+			min = 5
 		}
-		agent_death_effect = yes
-	}else = {
-		var:targeted_country = {
-			## CRITICAL FAILURE EFFECTS ON TARGET COUNTRY
-			country_event = espionage_missions.8 ## ESPIOANGE CRITICAL SUCCESS WAS UNSUCCESSFUL ON YOUR COUNTRY
+		randomize_temp_variable = {  ## death generator
+			var = chance_of_death
+			distribution = uniform
+			min = 1
+			max = 100
 		}
-		country_event = espionage_missions.4 ## CRITICAL FAILURE EVENT
+		if = {
+			limit = {
+				check_variable = {
+					var = chance_of_death
+					value = death_chance
+					compare = less_than_or_equals
+				}
+			}
+			country_event = espionage_missions.9 ## CRITICAL FAILURE EVENT AGENT DEATH
+			var:targeted_country = {
+				## CRITICAL FAILURE EFFECTS ON TARGET COUNTRY
+				country_event = espionage_missions.10 ## ESPIOANGE CRITICAL SUCCESS WAS UNSUCCESSFUL ON YOUR COUNTRY
+			}
+			agent_death_effect = yes
+		}else = {
+			var:targeted_country = {
+				## CRITICAL FAILURE EFFECTS ON TARGET COUNTRY
+				country_event = espionage_missions.8 ## ESPIOANGE CRITICAL SUCCESS WAS UNSUCCESSFUL ON YOUR COUNTRY
+			}
+			country_event = espionage_missions.4 ## CRITICAL FAILURE EVENT
+		}
 	}
 }
 
@@ -2095,6 +2109,89 @@ grab_espionage_mission_timer = {
 
 grab_what_mission_slot_and_time_this_is = {
 	set_temp_variable = {temp_time_for_mission = 0}
+	set_country_flag = success_chance_generator
+	if = {
+		limit = {
+			has_country_flag = operation_selection_slot_1
+		}
+		set_variable = {mission_identifier_1 = mission_identifier_temp}
+		grab_espionage_mission_timer = yes
+		set_variable = {mission_1_day_timer = temp_time_for_mission}
+		set_variable = {mission_1_total_time = temp_time_for_mission}
+
+		set_variable = {effect_mission_identifier = mission_identifier_1}
+		set_variable = {agent_slot_number = 1}
+		set_variable = {success_chance_1 = 0}
+		espionage_end_mission_effect = yes
+		set_variable = {success_chance_1 = pass_up_success_chance}
+
+	}else_if = {
+		limit = {
+			has_country_flag = operation_selection_slot_2
+		}
+		set_variable = {mission_identifier_2 = mission_identifier_temp}
+		grab_espionage_mission_timer = yes
+		set_variable = {mission_2_day_timer = temp_time_for_mission}
+		set_variable = {mission_2_total_time = temp_time_for_mission}
+
+		set_variable = {effect_mission_identifier = mission_identifier_1}
+		set_variable = {agent_slot_number = 2}
+		set_variable = {success_chance_2 = 0}
+		espionage_end_mission_effect = yes
+		set_variable = {success_chance_2 = pass_up_success_chance}
+		
+	}else_if = {
+		limit = {
+			has_country_flag = operation_selection_slot_3
+		}
+		set_variable = {mission_identifier_3 = mission_identifier_temp}
+		grab_espionage_mission_timer = yes
+		set_variable = {mission_3_day_timer = temp_time_for_mission}
+		set_variable = {mission_3_total_time = temp_time_for_mission}
+
+		set_variable = {effect_mission_identifier = mission_identifier_1}
+		set_variable = {agent_slot_number = 3}
+		set_variable = {success_chance_3 = 0}
+		espionage_end_mission_effect = yes
+		set_variable = {success_chance_3 = pass_up_success_chance}
+	}else_if = {
+		limit = {
+			has_country_flag = operation_selection_slot_4
+		}
+		set_variable = {mission_identifier_4 = mission_identifier_temp}
+		grab_espionage_mission_timer = yes
+		set_variable = {mission_4_day_timer = temp_time_for_mission}
+		set_variable = {mission_4_total_time = temp_time_for_mission}
+
+		set_variable = {effect_mission_identifier = mission_identifier_1}
+		set_variable = {agent_slot_number = 4}
+		set_variable = {success_chance_4 = 0}
+		espionage_end_mission_effect = yes
+		set_variable = {success_chance_4 = pass_up_success_chance}
+	}else_if = {
+		limit = {
+			has_country_flag = operation_selection_slot_5
+		}
+		set_variable = {mission_identifier_5 = mission_identifier_temp}
+		grab_espionage_mission_timer = yes
+		set_variable = {mission_5_day_timer = temp_time_for_mission}
+		set_variable = {mission_5_total_time = temp_time_for_mission}
+
+		set_variable = {effect_mission_identifier = mission_identifier_1}
+		set_variable = {agent_slot_number = 5}
+		set_variable = {success_chance_5 = 0}
+		espionage_end_mission_effect = yes
+		set_variable = {success_chance_5 = pass_up_success_chance}
+	}
+	clr_country_flag = operation_mission_selection
+	clear_variable = effect_mission_identifier
+	clear_variable = pass_up_success_chance
+}
+espionage_work_out_success_chance = {
+	set_variable = {effect_mission_identifier = mission_identifier_1}
+	set_variable = {targeted_country = targeted_country_slot_1}
+
+
 	if = {
 		limit = {
 			has_country_flag = operation_selection_slot_1
@@ -2136,5 +2233,4 @@ grab_what_mission_slot_and_time_this_is = {
 		set_variable = {mission_5_day_timer = temp_time_for_mission}
 		set_variable = {mission_5_total_time = temp_time_for_mission}
 	}
-	clr_country_flag = operation_mission_selection
 }
