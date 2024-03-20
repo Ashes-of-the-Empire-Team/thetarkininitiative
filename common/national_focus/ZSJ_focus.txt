@@ -437,7 +437,7 @@ focus_tree = {
 		}
 		prerequisite = { focus = ZSJ_flexible_command_structure  }
 		completion_reward = {
-			add_ideas = meritocratic_leadership
+			add_ideas = ZSJ_meritocratic_leadership
 		}
 	}
 
@@ -748,7 +748,11 @@ focus_tree = {
 		}
 		prerequisite = { focus = ZSJ_focus_on_shipbuilding focus = ZSJ_focus_on_retrofitting  }
 		completion_reward = {
-			add_ideas = ZSJ_shipbuilding
+			add_tech_bonus = {
+			    bonus = 1
+			    uses = 1
+			    category = victory_1
+			}
 		}
 	}
 
@@ -765,7 +769,11 @@ focus_tree = {
 		}
 		prerequisite = { focus = ZSJ_victory_class_star_destroyers  }
 		completion_reward = {
-			add_ideas = ZSJ_shipbuilding
+			add_tech_bonus = {
+			    bonus = 1
+			    uses = 1
+			    technology = victory_2
+			}
 		}
 	}
 
@@ -1136,7 +1144,15 @@ focus_tree = {
 		prerequisite = { focus = ZSJ_ban_slavery  }
 		completion_reward = {
 			set_country_flag = corporate_based_economy_emp
-			add_ideas = corporate_economy_emp
+			if = {
+				limit = {
+					NOT = {
+						has_ideas = corporate_authority
+					}
+					add_ideas = corporate_authority
+				}
+			}
+			upgrade_corporate_authority_law = yes
 		}
 	}
 
@@ -1236,7 +1252,15 @@ focus_tree = {
 		}
 		prerequisite = { focus = ZSJ_approach_the_csa  } prerequisite = { focus = ZSJ_stabilize_the_economy  }
 		completion_reward = {
-			add_ideas = free_trade
+			if = {
+				limit = {
+					NOT = {
+						has_ideas = the_galactic_marketplace
+					}
+					add_ideas = the_galactic_marketplace
+				}
+			}
+			upgrade_the_galactic_marketplace = yes
 		}
 	}
 
