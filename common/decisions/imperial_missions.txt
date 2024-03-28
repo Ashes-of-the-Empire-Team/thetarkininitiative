@@ -1,4 +1,69 @@
-#imperial_missions = {
+imperial_missions = {
+	form_the_empire = {
+        priority = 10
+        icon = GFX_emp_decision
+        
+        available = {
+			has_government = imperial
+			controls_state = 235
+			check_variable = { legitimacy_emp > 80 }
+        }
+
+        visible = {
+            has_government = imperial
+			NOT = {
+				TAG = EMP
+			}
+        }
+
+		custom_cost_trigger = {
+            check_variable = { legitimacy_emp > 80 }
+        }
+
+		custom_cost_text = form_the_empire_cost
+
+		complete_effect = {
+			country_event = ZER_empire_reformation.1
+			custom_effect_tooltip = tt_zer_cores_on_coruscant
+
+			hidden_effect = {
+				235 = {
+					add_core_of = ROOT
+				}
+				39 = {
+					add_core_of = ROOT
+				}
+				57 = {
+					add_core_of = ROOT
+				}
+				229 = {
+					add_core_of = ROOT
+				}
+				315 = {
+					add_core_of = ROOT
+				}
+				40 = {
+					add_core_of = ROOT
+				}
+				189 = {
+					add_core_of = ROOT
+				}
+				230 = {
+					add_core_of = ROOT
+				}
+				240 = {
+					add_core_of = ROOT
+				}
+				60 = {
+					add_core_of = ROOT
+				}
+			}
+		}
+
+        cost = 100
+		fire_only_once = yes
+    }
+}
 #	request_industry_mission = {
 #		cost = 50
 #		visible = {

@@ -60,6 +60,10 @@ focus_tree = {
 		prerequisite = { focus = ZSJ_secure_the_new_holdings  }
 		completion_reward = {
 			#activate_decision = strike_at_the_capital
+			declare_war_on = {
+			    target = REB
+			    type = annex_everything
+			}
 		}
 	}
 
@@ -105,11 +109,18 @@ focus_tree = {
 		icon = GFX_peace_with_new_rep_goal
 		x = 14
 		y = 1
-		cost = 10
+		cost = 7.2
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
 		prerequisite = { focus = ZSJ_consolidate_the_empire  }
+		completion_reward = {
+			diplomatic_relation = {
+				country = REB
+				relation = non_aggression_pact
+				active = yes
+			}
+		}
 	}
 
 	#Expanded Recruitment
@@ -118,7 +129,7 @@ focus_tree = {
 		icon = GFX_expanded_recruitment_goal  
 		x = 7
 		y = 7
-		cost = 10
+		cost = 7.2
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
@@ -138,7 +149,7 @@ focus_tree = {
 		icon = GFX_zsinj_goal
 		x = 7
 		y = 8
-		cost = 10
+		cost = 7.2
 		search_filters = {
 			FOCUS_FILTER_WAR_SUPPORT
 		}
@@ -154,7 +165,7 @@ focus_tree = {
 		icon = GFX_zsinj_goal
 		x = 14
 		y = 0
-		cost = 10
+		cost = 7.2
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
@@ -169,7 +180,7 @@ focus_tree = {
 		icon = GFX_hunt_down_rivals_goal
 		x = 14
 		y = 2
-		cost = 10
+		cost = 7.2
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
@@ -185,7 +196,7 @@ focus_tree = {
 		icon = GFX_zsinj_goal
 		x = 14
 		y = 3
-		cost = 10
+		cost = 7.2
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
@@ -201,7 +212,7 @@ focus_tree = {
 		icon = GFX_zsinj_goal
 		x = 12
 		y = 4
-		cost = 10
+		cost = 7.2
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
@@ -221,11 +232,17 @@ focus_tree = {
 		icon = GFX_plans_within_plans_goal
 		x = 14
 		y = 4
-		cost = 10
+		cost = 7.2
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
 		prerequisite = { focus = ZSJ_attract_imperial_officers  }
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = death_of_the_emperor_emp_1
+				add_idea = death_of_the_emperor_emp_3
+			}
+		}
 	}
 
 	#Expand the Military Industry
@@ -234,7 +251,7 @@ focus_tree = {
 		icon = GFX_zsinj_goal
 		x = 1
 		y = 6
-		cost = 10
+		cost = 7.2
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
@@ -334,7 +351,7 @@ focus_tree = {
 		icon = GFX_zsinj_goal
 		x = 3
 		y = 7
-		cost = 10
+		cost = 7.2
 		search_filters = {
 			FOCUS_FILTER_INDUSTRY
 		}
@@ -348,7 +365,7 @@ focus_tree = {
 		icon = GFX_tie_advanced_goal
 		x = 5
 		y = 7
-		cost = 10
+		cost = 7.2
 		search_filters = {
 			FOCUS_FILTER_INDUSTRY
 		}
@@ -362,7 +379,7 @@ focus_tree = {
 		icon = GFX_tie_advanced_goal
 		x = 4
 		y = 8
-		cost = 10
+		cost = 7.2
 		search_filters = {
 			FOCUS_FILTER_RESEARCH
 		}
@@ -382,7 +399,7 @@ focus_tree = {
 		icon = GFX_raptor_troopers_goal
 		x = 7
 		y = 6
-		cost = 10
+		cost = 7.2
 		search_filters = {
 			FOCUS_FILTER_RESEARCH
 		}
@@ -486,7 +503,7 @@ focus_tree = {
 		icon = GFX_stormtroopers_goal
 		x = 9
 		y = 8
-		cost = 10
+		cost = 7.2
 		search_filters = {
 			FOCUS_FILTER_RESEARCH
 		}
@@ -507,7 +524,7 @@ focus_tree = {
 		icon = GFX_armored_innovation_goal
 		x = 11
 		y = 6
-		cost = 10
+		cost = 7.2
 		search_filters = {
 			FOCUS_FILTER_RESEARCH
 		}
@@ -808,7 +825,11 @@ focus_tree = {
 		}
 		prerequisite = { focus = ZSJ_focus_on_shipbuilding focus = ZSJ_focus_on_retrofitting  }
 		completion_reward = {
-			add_ideas = ZSJ_shipbuilding
+			add_doctrine_cost_reduction = {
+				cost_reduction = 0.5
+				uses = 2
+				category = naval_doctrine
+			}
 		}
 	}
 
@@ -946,7 +967,7 @@ focus_tree = {
 		}
 		prerequisite = { focus = ZSJ_the_rebel_government  }
 		completion_reward = {
-			#country_event = { }
+			country_event = ZSJ.4
 		}
 	}
 
