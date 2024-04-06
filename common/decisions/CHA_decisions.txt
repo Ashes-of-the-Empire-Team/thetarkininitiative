@@ -1,0 +1,174 @@
+
+CHA_balance_of_power_category = {
+	CHA_exploit_mineral_reserves_decision = {
+		priority = 1115
+		icon = GFX_decision_steel
+
+		visible = {
+			has_completed_focus = CHA_exploit_mineral_reserves
+		}
+
+		available = {
+		
+		}
+
+		cost = 10
+
+        complete_effect = {
+            add_ideas = CHA_exploiting_minerals
+            add_power_balance_value = {
+                id = CHA_industrial_power_balance
+                value = 0.1
+            }
+        }
+	}
+    CHA_clean_environment_act_decision = {
+		priority = 1115
+		icon = GFX_decision_steel
+
+		visible = {
+			has_completed_focus = CHA_clean_environment_act
+		}
+
+		available = {
+		
+		}
+
+		cost = 10
+
+        complete_effect = {
+            add_ideas = CHA_clean_environment_act_idea
+            add_power_balance_value = {
+                id = CHA_industrial_power_balance
+                value = -0.1
+            }
+        }
+	}
+    CHA_land_reform_reserves_decision = {
+		priority = 1115
+		icon = GFX_decision_hol_inundate_water_lines
+
+		visible = {
+			has_completed_focus = CHA_exploit_mineral_reserves
+            NOT = {has_country_flag = CHA_land_reform_industry_flag}
+		}
+
+		available = {
+            NOT = {has_country_flag = CHA_land_reform_industry_flag}
+		}
+
+		cost = 35
+
+		days_remove = 45
+        remove_effect = {
+            add_ideas = CHA_exploiting_minerals
+        }
+        complete_effect = {
+            add_power_balance_value = {
+                id = CHA_industrial_power_balance
+                value = -0.1
+            }
+            custom_effect_tooltip = CHA_land_reform_reserves_tt
+            set_country_flag = CHA_land_reform_reserves_flag
+        }
+	}
+    CHA_land_reform_industry_decision = {
+		priority = 1113
+		icon = GFX_decision_generic_industry
+
+		visible = {
+			has_completed_focus = CHA_exploit_mineral_reserves
+            NOT = {has_country_flag = CHA_land_reform_reserves_flag}
+		}
+
+		available = {
+            NOT = {has_country_flag = CHA_land_reform_reserves_flag}
+		}
+
+		cost = 35
+
+		days_remove = 45
+        remove_effect = {
+            random_owned_controlled_state = {
+				add_extra_state_shared_building_slots = 2
+			}
+            random_owned_controlled_state = {
+				add_extra_state_shared_building_slots = 1
+			}
+        }
+        complete_effect = {
+            add_power_balance_value = {
+                id = CHA_industrial_power_balance
+                value = 0.1
+            }
+            custom_effect_tooltip = CHA_land_reform_industry_tt
+            set_country_flag = CHA_land_reform_industry_flag
+        }
+	}
+    CHA_efficiency_before_ecology_decision = {
+		priority = 1113
+		icon = GFX_decision_gre_paying_ifc_debt
+
+		visible = {
+			has_completed_focus = CHA_efficiency_before_ecology
+		}
+
+		cost = 40
+
+		days_remove = 60
+        modifier = {
+            production_factory_efficiency_gain_factor = 0.1
+            production_factory_max_efficiency_factor = 0.05
+		}
+        complete_effect = {
+            add_power_balance_value = {
+                id = CHA_industrial_power_balance
+                value = 0.1
+            }
+        }
+	}
+    CHA_industrial_pollution_restrictions_decision = {
+		priority = 1113
+		icon = GFX_decision_generic_wreckers
+
+		visible = {
+			has_completed_focus = CHA_restrictions_for_industrial_pollution
+		}
+
+		cost = 40
+
+		days_remove = 60
+        modifier = {
+            production_factory_efficiency_gain_factor = -0.05
+            production_factory_max_efficiency_factor = -0.05
+		}
+        complete_effect = {
+            add_power_balance_value = {
+                id = CHA_industrial_power_balance
+                value = -0.1
+            }
+        }
+	}
+    CHA_preservation_act_decision = {
+		priority = 1113
+		icon = GFX_decision_generic_wreckers
+
+		visible = {
+			has_completed_focus = CHA_preservation_act
+		}
+
+		cost = 10
+
+		days_remove = 60
+        modifier = {
+            political_power_gain = 0.1
+            stability_weekly = 0.005
+		}
+        complete_effect = {
+            add_power_balance_value = {
+                id = CHA_industrial_power_balance
+                value = -0.1
+            }
+        }
+	}
+}
