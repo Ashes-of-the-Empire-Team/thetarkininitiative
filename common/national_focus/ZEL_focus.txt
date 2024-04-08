@@ -579,4 +579,482 @@ focus_tree = {
 
 		}
 	}
+
+	### Military tree 
+	focus = {
+		id = ZEL_taking_stock_of_the_military
+		icon = GFX_the_future_mother_goal
+		cost = 7.2
+		x = 34
+		y = 8
+		text_icon = HAPES_focus_style
+		
+		completion_reward = {
+		}
+	}
+	focus = {
+		id = ZEL_expand_the_royal_guard
+		icon = GFX_the_future_mother_goal
+		cost = 7.2
+		x = -1
+		y = 1
+		text_icon = HAPES_focus_style
+		relative_position_id = ZEL_taking_stock_of_the_military
+		prerequisite = { focus = ZEL_taking_stock_of_the_military }
+		mutually_exclusive = { 
+			focus = ZEL_start_the_civilian_defense_league 
+		}
+		completion_reward = {
+			hidden_effect = {
+				set_variable = { ZEL_recruitable_population_factor = 0 }
+				set_variable = { ZEL_training_time_factor = 0 }
+				set_variable = { ZEL_special_forces_cap = 0 }
+				set_variable = { ZEL_army_attack_factor = -0.1 }
+				set_variable = { ZEL_army_defence_factor = -0.1 }
+			}
+			add_dynamic_modifier = {
+				modifier = ZEL_zeltron_guard
+			}
+		}
+	}
+	focus = {
+		id = ZEL_modernise_our_equipment
+		icon = GFX_the_future_mother_goal
+		cost = 7.2
+		x = -2
+		y = 1
+		text_icon = HAPES_focus_style
+		relative_position_id = ZEL_expand_the_royal_guard
+		prerequisite = { focus = ZEL_expand_the_royal_guard }
+		completion_reward = {
+			add_tech_bonus = {
+				name = weapons_bonus
+				bonus = 0.5
+				uses = 2
+				category = mountaineers_tech
+				category = marine_tech
+				category = para_tech
+			}
+		}
+	}
+	focus = {
+		id = ZEL_prepare_for_combat
+		icon = GFX_the_future_mother_goal
+		cost = 7.2
+		x = 0
+		y = 1
+		text_icon = HAPES_focus_style
+		relative_position_id = ZEL_modernise_our_equipment
+		prerequisite = { focus = ZEL_modernise_our_equipment }
+		completion_reward = {
+			add_to_variable = { ZEL_army_attack_factor = 0.1 }
+			add_to_variable  = { ZEL_army_defence_factor = 0.1 }
+			custom_effect_tooltip = ZEL_prepare_for_combat_tt
+		}
+	}
+	focus = {
+		id = ZEL_integrate_esoteric_elements
+		icon = GFX_the_future_mother_goal
+		cost = 7.2
+		x = 0
+		y = 1
+		text_icon = HAPES_focus_style
+		relative_position_id = ZEL_prepare_for_combat
+		available = {
+			OR = {
+				has_completed_focus = ZEL_ecstasys_embrace
+				has_completed_focus = ZEL_blissful_fellowship
+				has_completed_focus = ZEL_the_order_of_feast
+				has_completed_focus = ZEL_the_zeltron_veil
+			}
+		}
+		prerequisite = { focus = ZEL_prepare_for_combat }
+		mutually_exclusive = { focus = ZEL_defenders_of_the_galaxy}
+		completion_reward = {
+
+		}
+	}
+	focus = {
+		id = ZEL_wipe_out_the_opposition
+		icon = GFX_the_future_mother_goal
+		cost = 7.2
+		x = 0
+		y = 1
+		text_icon = HAPES_focus_style
+		relative_position_id = ZEL_integrate_esoteric_elements
+		prerequisite = { focus = ZEL_integrate_esoteric_elements }
+		completion_reward = {
+			country_event = ZEL.1
+		}
+	}
+	focus = {
+		id = ZEL_never_a_tenth
+		icon = GFX_the_future_mother_goal
+		cost = 7.2
+		x = 0
+		y = 1
+		text_icon = HAPES_focus_style
+		relative_position_id = ZEL_expand_the_royal_guard
+		prerequisite = { focus = ZEL_expand_the_royal_guard }
+		completion_reward = {
+
+		}
+	}
+	focus = {
+		id = ZEL_only_the_best_within_our_ranks
+		icon = GFX_the_future_mother_goal
+		cost = 7.2
+		x = 0
+		y = 1
+		text_icon = HAPES_focus_style
+		relative_position_id = ZEL_never_a_tenth
+		prerequisite = { focus = ZEL_never_a_tenth }
+		completion_reward = {
+
+		}
+	}
+	focus = {
+		id = ZEL_defenders_of_the_galaxy
+		icon = GFX_the_future_mother_goal
+		cost = 7.2
+		x = 0
+		y = 1
+		text_icon = HAPES_focus_style
+		relative_position_id = ZEL_only_the_best_within_our_ranks
+		prerequisite = { focus = ZEL_only_the_best_within_our_ranks }
+		mutually_exclusive = { focus = ZEL_integrate_esoteric_elements}
+		completion_reward = {
+
+		}
+	}
+	focus = {
+		id = ZEL_expand_the_guard
+		icon = GFX_the_future_mother_goal
+		cost = 7.2
+		x = 0
+		y = 1
+		text_icon = HAPES_focus_style
+		relative_position_id = ZEL_defenders_of_the_galaxy
+		prerequisite = { focus = ZEL_defenders_of_the_galaxy }
+		completion_reward = {
+
+		}
+	}
+	focus = {
+		id = ZEL_start_the_civilian_defense_league
+		icon = GFX_the_future_mother_goal
+		cost = 7.2
+		x = 1
+		y = 1
+		text_icon = HAPES_focus_style
+		relative_position_id = ZEL_taking_stock_of_the_military
+		prerequisite = { focus = ZEL_taking_stock_of_the_military }
+		mutually_exclusive = { 
+			focus = ZEL_expand_the_royal_guard 
+		}
+		completion_reward = {
+
+		}
+	}
+	focus = {
+		id = ZEL_train_our_people
+		icon = GFX_the_future_mother_goal
+		cost = 7.2
+		x = 0
+		y = 1
+		text_icon = HAPES_focus_style
+		relative_position_id = ZEL_start_the_civilian_defense_league
+		prerequisite = { focus = ZEL_start_the_civilian_defense_league }
+		completion_reward = {
+
+		}
+	}
+	focus = {
+		id = ZEL_organise_the_weapon_supply_caches
+		icon = GFX_the_future_mother_goal
+		cost = 7.2
+		x = 0
+		y = 1
+		text_icon = HAPES_focus_style
+		relative_position_id = ZEL_train_our_people
+		prerequisite = { focus = ZEL_train_our_people }
+		completion_reward = {
+
+		}
+	}
+	focus = {
+		id = ZEL_galactic_liberators
+		icon = GFX_the_future_mother_goal
+		cost = 7.2
+		x = 0
+		y = 1
+		text_icon = HAPES_focus_style
+		relative_position_id = ZEL_organise_the_weapon_supply_caches
+		mutually_exclusive = { focus = ZEL_stay_true_to_our_name}
+		prerequisite = { focus = ZEL_organise_the_weapon_supply_caches }
+		completion_reward = {
+
+		}
+	}
+	focus = {
+		id = ZEL_operation_galactic_relief
+		icon = GFX_the_future_mother_goal
+		cost = 7.2
+		x = 0
+		y = 1
+		text_icon = HAPES_focus_style
+		relative_position_id = ZEL_galactic_liberators
+		prerequisite = { focus = ZEL_galactic_liberators }
+		completion_reward = {
+
+		}
+	}
+	focus = {
+		id = ZEL_defend_our_home
+		icon = GFX_the_future_mother_goal
+		cost = 7.2
+		x = 2
+		y = 1
+		text_icon = HAPES_focus_style
+		relative_position_id = ZEL_start_the_civilian_defense_league
+		prerequisite = { focus = ZEL_start_the_civilian_defense_league }
+		completion_reward = {
+
+		}
+	}
+	focus = {
+		id = ZEL_integrate_royal_guard_veterans
+		icon = GFX_the_future_mother_goal
+		cost = 7.2
+		x = 0
+		y = 1
+		text_icon = HAPES_focus_style
+		relative_position_id = ZEL_defend_our_home
+		prerequisite = { focus = ZEL_defend_our_home }
+		completion_reward = {
+
+		}
+	}
+	focus = {
+		id = ZEL_stay_true_to_our_name
+		icon = GFX_the_future_mother_goal
+		cost = 7.2
+		x = 0
+		y = 1
+		text_icon = HAPES_focus_style
+		relative_position_id = ZEL_integrate_royal_guard_veterans
+		prerequisite = { focus = ZEL_integrate_royal_guard_veterans }
+		mutually_exclusive = { focus = ZEL_galactic_liberators}
+		completion_reward = {
+
+		}
+	}
+	focus = {
+		id = ZEL_operation_nova_shield
+		icon = GFX_the_future_mother_goal
+		cost = 7.2
+		x = 0
+		y = 1
+		text_icon = HAPES_focus_style
+		relative_position_id = ZEL_stay_true_to_our_name
+		prerequisite = { focus = ZEL_stay_true_to_our_name }
+		completion_reward = {
+
+		}
+	}
+	focus = {
+		id = ZEL_celebrate_our_victories
+		icon = GFX_the_future_mother_goal
+		cost = 7.2
+		x = 1
+		y = 1
+		text_icon = HAPES_focus_style
+		relative_position_id = ZEL_expand_the_guard
+		prerequisite = { 
+			focus = ZEL_wipe_out_the_opposition 
+			focus = ZEL_expand_the_guard 
+			focus = ZEL_operation_galactic_relief 
+			focus = ZEL_operation_nova_shield 
+		}
+		completion_reward = {
+
+		}
+	}
+	focus = {
+		id = ZEL_the_dark_underside
+		icon = GFX_the_future_mother_goal
+		cost = 7.2
+		x = 7
+		y = 1
+		text_icon = HAPES_focus_style
+		relative_position_id = ZEL_taking_stock_of_the_military
+		prerequisite = { focus = ZEL_taking_stock_of_the_military }
+		completion_reward = {
+
+		}
+	}
+	focus = {
+		id = ZEL_ecstasys_embrace
+		icon = GFX_the_future_mother_goal
+		cost = 7.2
+		x = -2
+		y = 1
+		available = {
+			not = {has_country_flag = ZEL_destroyed_cults}
+		}
+		text_icon = HAPES_focus_style
+		mutually_exclusive = {focus = ZEL_the_order_of_feast}
+		relative_position_id = ZEL_the_dark_underside
+		prerequisite = { focus = ZEL_the_dark_underside }
+		completion_reward = {
+			if = {
+				limit = {
+					has_completed_focus = ZEL_appeal_to_the_masses
+				}
+				add_ideas = ZEL_hedonism_2
+			}
+			else = {
+				add_ideas = ZEL_hedonism
+			}
+		}
+	}
+	focus = {
+		id = ZEL_the_order_of_feast
+		icon = GFX_the_future_mother_goal
+		cost = 7.2
+		x = 2
+		y = 1
+		text_icon = HAPES_focus_style
+		available = {
+			not = {has_country_flag = ZEL_destroyed_cults}
+		}
+		mutually_exclusive = {focus = ZEL_ecstasys_embrace}
+		relative_position_id = ZEL_the_dark_underside
+		prerequisite = { focus = ZEL_the_dark_underside }
+		completion_reward = {
+			if = {
+				limit = {
+					has_completed_focus = ZEL_appeal_to_the_masses
+				}
+				add_ideas = ZEL_gluttony_2
+			}
+			else = {
+				add_ideas = ZEL_gluttony
+			}
+		}
+	}
+	focus = {
+		id = ZEL_blissful_fellowship
+		icon = GFX_the_future_mother_goal
+		cost = 7.2
+		x = -1
+		y = 2
+		text_icon = HAPES_focus_style
+		available = {
+			not = {has_country_flag = ZEL_destroyed_cults}
+		}
+		mutually_exclusive = {focus = ZEL_the_zeltron_veil}
+		relative_position_id = ZEL_the_dark_underside
+		prerequisite = { focus = ZEL_the_dark_underside }
+		completion_reward = {
+			if = {
+				limit = {
+					has_completed_focus = ZEL_appeal_to_the_masses
+				}
+				add_ideas = ZEL_sadism_2
+			}
+			else = {
+				add_ideas = ZEL_sadism
+			}
+		}
+	}
+	focus = {
+		id = ZEL_the_zeltron_veil
+		icon = GFX_the_future_mother_goal
+		cost = 7.2
+		x = 1
+		y = 2
+		text_icon = HAPES_focus_style
+		available = {
+			not = {has_country_flag = ZEL_destroyed_cults}
+		}
+		mutually_exclusive = {focus = ZEL_blissful_fellowship}
+		relative_position_id = ZEL_the_dark_underside
+		prerequisite = { focus = ZEL_the_dark_underside }
+		completion_reward = {
+			if = {
+				limit = {
+					has_completed_focus = ZEL_appeal_to_the_masses
+				}
+				add_ideas = ZEL_trickery_2
+			}
+			else = {
+				add_ideas = ZEL_trickery
+			}
+		}
+	}
+	focus = {
+		id = ZEL_appeal_to_the_masses
+		icon = GFX_the_future_mother_goal
+		cost = 7.2
+		x = 0
+		y = 3
+		text_icon = HAPES_focus_style
+		available = {
+			not = {has_country_flag = ZEL_destroyed_cults}
+		}
+		relative_position_id = ZEL_the_dark_underside
+		prerequisite = { focus = ZEL_the_dark_underside }
+		completion_reward = {
+			custom_effect_tooltip = ZEL_appeal_to_the_masses_tt
+			hidden_effect = {
+				if = {
+					limit = {has_idea = ZEL_hedonism}
+					swap_ideas = {
+						remove_idea = ZEL_hedonism
+						add_idea = ZEL_hedonism_2
+					}
+				}
+				if = {
+					limit = {has_idea = ZEL_sadism}
+					swap_ideas = {
+						remove_idea = ZEL_sadism
+						add_idea = ZEL_sadism_2
+					}
+				}
+				if = {
+					limit = {has_idea = ZEL_gluttony}
+					swap_ideas = {
+						remove_idea = ZEL_gluttony
+						add_idea = ZEL_gluttony_2
+					}
+				}
+				if = {
+					limit = {has_idea = ZEL_trickery}
+					swap_ideas = {
+						remove_idea = ZEL_trickery
+						add_idea = ZEL_trickery_2
+					}
+				}
+			}
+			
+		}
+	}
+	focus = {
+		id = ZEL_cult_supremacy
+		icon = GFX_the_future_mother_goal
+		cost = 7.2
+		x = 0
+		y = 1
+		text_icon = HAPES_focus_style
+		available = {
+			not = {has_country_flag = ZEL_destroyed_cults}
+		}
+		relative_position_id = ZEL_appeal_to_the_masses
+		prerequisite = { focus = ZEL_appeal_to_the_masses }
+		completion_reward = {
+
+		}
+	}
+
 }
