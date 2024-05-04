@@ -2011,15 +2011,19 @@ on_actions = {
 	on_monthly = {
 		effect = {
 			if = {
+				###### PALPY HERE #####
 				limit = {
 					check_variable = {global.what_month_are_we = 3}
 				}
+				set_temp_variable = {total_revenue_this_month = 0}
 				for_each_loop = {
 					array = Production_array@var:global.air_market_category
 					value = current_item_we_are_looking_at
 
 					set_variable = {quartely_revenue@var:current_item_we_are_looking_at = 0}
 					set_variable = {quartely_cost@var:current_item_we_are_looking_at = 0}
+
+					add_to_temp_variable = {total_revenue_this_month = quartely_revenue@var:current_item_we_are_looking_at }
 				}
 				for_each_loop = {
 					array = Production_array@var:global.tank_market_category
@@ -2027,6 +2031,8 @@ on_actions = {
 					
 					set_variable = {quartely_revenue@var:current_item_we_are_looking_at = 0}
 					set_variable = {quartely_cost@var:current_item_we_are_looking_at = 0}
+					
+					add_to_temp_variable = {total_revenue_this_month = quartely_revenue@var:current_item_we_are_looking_at }
 				}
 				for_each_loop = {
 					array = Production_array@var:global.naval_market_category
@@ -2034,7 +2040,22 @@ on_actions = {
 					
 					set_variable = {quartely_revenue@var:current_item_we_are_looking_at = 0}
 					set_variable = {quartely_cost@var:current_item_we_are_looking_at = 0}
+
+					add_to_temp_variable = {total_revenue_this_month = quartely_revenue@var:current_item_we_are_looking_at }
 				}
+				for_each_loop = {
+					array = Production_array@var:global.land_market_category
+					value = current_item_we_are_looking_at
+					
+					set_variable = {quartely_revenue@var:current_item_we_are_looking_at = 0}
+					set_variable = {quartely_cost@var:current_item_we_are_looking_at = 0}
+
+					add_to_temp_variable = {total_revenue_this_month = quartely_revenue@var:current_item_we_are_looking_at }
+				}
+				### CALCULATE SHARE PRICE ###
+
+
+				set_variable = {quartley_money_last_month = total_revenue_this_month}
 			}
 		}
 	}
