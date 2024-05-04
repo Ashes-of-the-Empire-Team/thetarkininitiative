@@ -2,7 +2,12 @@ on_actions = {
 	on_startup = {
 		effect = {
 			every_country = {
-				add_to_array = { Global.stock_market_array = THIS.id }
+				if = {
+					limit = {
+						has_government = corporation
+					}
+					add_to_array = { Global.stock_market_array = THIS.id }
+				}
 			}
 		}
 	}
