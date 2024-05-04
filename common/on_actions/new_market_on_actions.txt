@@ -79,6 +79,19 @@ on_actions = {
 
 			## GLOBAL ARRAY OF ALL EQUIPMENT, SEPERATED INTO CATEGORIES. WILL THEN SPLIT INTO LOCAL ARRAYS LATER FOR GRIDBOXES
 			### ADD IN NEW STUFF UNDER THE CORRECT FACTION TYPE -- THIS ISNT NECCESSARY BUT IT DOES ALLOW EASY LOOKUPS SO PLEASE DO IT
+	
+			every_country={
+				if = {
+					limit = {
+						has_government = corporation
+					}
+					set_variable = { Global.stock_price_@ROOT = 10} 
+					set_variable = { Global.total_stocks_@ROOT = 1000 }
+					set_variable = { total_revenue_this_month = 1000 }
+					set_variable = { quartley_money_last_month = 1000 }
+				}
+			}
+	
 	## REPUBLIC
 		## TANKS
 			add_to_array = {
@@ -2054,6 +2067,9 @@ on_actions = {
 				}
 				### CALCULATE SHARE PRICE ###
 
+				set_temp_variable = { stock_change_multiplier = total_revenue_this_month }
+				divide_temp_variable = { stock_change_multiplier = quartley_money_last_month }
+				multiply_variable = { Global.stock_price_@ROOT = stock_change_multiplier }
 
 				set_variable = {quartley_money_last_month = total_revenue_this_month}
 			}
