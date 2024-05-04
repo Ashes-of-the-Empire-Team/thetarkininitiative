@@ -867,7 +867,27 @@ technologies = {
 			bothan_assault_1	
 		}
 
-
+		on_research_complete = {
+			if = {
+				limit = {
+					tag = BOT
+				}
+				add_to_array = {
+					array = Market_array@var:global.naval_market_category
+					value = token:bothan_assault_1
+				}
+				set_variable = {who_owns_item@token:bothan_assault_1 = BOT}
+				set_variable = {ic_cost@token:bothan_assault_1 = 50}
+				set_variable = {belonging_to_what_faction@token:bothan_assault_1 = republic_market_choice}
+				set_variable = {price_of_item_@token:bothan_assault_1 = 50}
+				BOT = {
+					add_to_array = {
+						array = Production_array@var:global.naval_market_category
+						value = token:bothan_assault_1
+					}
+				}
+			}
+		}
 		research_cost = 1.75
 
 		start_year = 4
