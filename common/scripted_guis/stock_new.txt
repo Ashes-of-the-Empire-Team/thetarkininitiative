@@ -63,6 +63,23 @@ scripted_gui = {
 			}
 		}
 		triggers = {
+			buy_button_click_enabled = {
+				if = {
+					limit = {
+						OR = {
+							has_country_flag = buying_50_share
+							has_country_flag = buying_10_share
+						}
+					}
+					check_variable = { currency_amount^primary_currency > stock_being_bought }
+				}
+				else_if = {
+					limit = {
+						has_country_flag = buying_1_share
+					}
+					check_variable = { currency_amount^primary_currency > Global.stock_price_@PREV }
+				}
+			}
 			buy_1_button_click_enabled = {
 				NOT = {
 					has_country_flag = buying_1_share
