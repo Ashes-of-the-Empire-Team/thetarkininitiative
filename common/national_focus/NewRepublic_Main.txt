@@ -21,7 +21,7 @@ focus_tree = {
 	#Rebuild Coruscant
 	focus = {
 		id = REB_rebuild_coruscant
-		icon = GFX_rebel_goal
+		icon = GFX_reb_rebuild_coruscant_goal
 		text_icon = REPUBLIC_focus_style
 		x = 9
 		y = 0
@@ -72,7 +72,7 @@ focus_tree = {
 	#New Republic Police Force
 	focus = {
 		id = REB_new_republic_police_force
-		icon = GFX_rebel_goal
+		icon = GFX_reb_NRPF_goal
 		text_icon = REPUBLIC_focus_style
 		relative_position_id = REB_the_war_on_crime
 		x = -1
@@ -285,10 +285,36 @@ focus_tree = {
 			search_filters = {
 				FOCUS_FILTER_POLITICAL
 			}
+			available = {
+				NOT={has_global_flag = NR_law_vote_ongoing}
+			}
 			prerequisite = { focus = REB_purchase_bacta  }
 			prerequisite = { focus = REB_bacta_imports  }
 			completion_reward = {
-				set_country_flag = pathogen_act_enabled
+				custom_effect_tooltip = NR_vote_started_tt
+				hidden_effect={
+					#starts NR law vote
+					news_event = {
+						id = newsenate.3
+						days = 30
+					}
+					set_variable = { Global.new_rep_law_number_in_vote = 2 }
+					add_to_array = {
+						array = Global.NR_proposed_law_id_array
+						value = 1
+						index = 0
+					}
+					add_to_array = {
+						array = Global.NR_proposed_law_id_status_array
+						value = 0
+						index = 0
+					}
+					set_global_flag = {
+						flag = NR_law_vote_ongoing
+						days = 30
+						value = 1
+					}
+				}
 			}
 		}
 	
@@ -303,6 +329,19 @@ focus_tree = {
 			cost = 7.2
 			search_filters = {
 				FOCUS_FILTER_RESEARCH
+			}
+			available = {
+				custom_trigger_tooltip={
+					tooltip = REB_borleias_controlled_by_NR
+					32={
+						owner={
+							has_government = democratic
+							is_in_faction_with = REB
+							owns_state = 214
+							owns_state = 199
+						}
+					}
+				}
 			}
 			prerequisite = { focus = REB_pathogen_act  }
 		}
@@ -319,9 +358,35 @@ focus_tree = {
 			search_filters = {
 				FOCUS_FILTER_POLITICAL
 			}
+			available = {
+				NOT={has_global_flag = NR_law_vote_ongoing}
+			}
 			prerequisite = { focus = REB_republic_virology_labs  }
 			completion_reward = {
-				set_country_flag = sanination_act_enabled
+				custom_effect_tooltip = NR_vote_started_tt
+				hidden_effect={
+					#starts NR law vote
+					news_event = {
+						id = newsenate.4
+						days = 30
+					}
+					set_variable = { Global.new_rep_law_number_in_vote = 2 }
+					add_to_array = {
+						array = Global.NR_proposed_law_id_array
+						value = 1
+						index = 0
+					}
+					add_to_array = {
+						array = Global.NR_proposed_law_id_status_array
+						value = 0
+						index = 0
+					}
+					set_global_flag = {
+						flag = NR_law_vote_ongoing
+						days = 30
+						value = 1
+					}
+				}
 			}
 		}
 
@@ -560,6 +625,7 @@ focus_tree = {
 	focus = {
 		id = REB_the_smugglers_alliance
 		icon = GFX_reb_smugglers_alliance_goal
+		text_icon = HUTT_focus_style
 		relative_position_id = REB_han_solo
 		x= 1
 		y = 1
@@ -577,6 +643,7 @@ focus_tree = {
 	focus = {
 		id = REB_criminal_contacts
 		icon = GFX_criminal_connections
+		text_icon = HUTT_focus_style
 		relative_position_id = REB_the_smugglers_alliance
 		x= -1
 		y = 1
@@ -590,6 +657,7 @@ focus_tree = {
 	focus = {
 		id = REB_new_republic_privateers
 		icon = GFX_new_rep_privateers
+		text_icon = HUTT_focus_style
 		relative_position_id = REB_criminal_contacts
 		x= 0
 		y = 1
@@ -603,6 +671,7 @@ focus_tree = {
 	focus = {
 		id = REB_solo_command_leia
 		icon = GFX_solo_command
+		text_icon = HUTT_focus_style
 		relative_position_id = REB_the_smugglers_alliance
 		x= 1
 		y = 1
@@ -616,6 +685,7 @@ focus_tree = {
 	focus = {
 		id = REB_imperial_heists
 		icon = GFX_imperial_heists
+		text_icon = HUTT_focus_style
 		relative_position_id = REB_solo_command_leia
 		x= 0
 		y = 1
@@ -629,6 +699,7 @@ focus_tree = {
 	focus = {
 		id = REB_renowned_smugglers
 		icon = GFX_reb_rebel_smuggler_goal
+		text_icon = HUTT_focus_style
 		relative_position_id = REB_imperial_heists
 		x= -1
 		y = 1
@@ -645,6 +716,7 @@ focus_tree = {
 	focus = {
 		id = REB_modified_protocol_droid
 		icon = GFX_modified_protocol_droid
+		text_icon = HUTT_focus_style
 		relative_position_id = REB_imperial_heists
 		x= 1
 		y = 1
@@ -662,6 +734,7 @@ focus_tree = {
 	focus = {
 		id = REB_imperial_codebreakers
 		icon = GFX_imperial_codebreakers
+		text_icon = HUTT_focus_style
 		relative_position_id = REB_renowned_smugglers
 		x= 1
 		y = 1

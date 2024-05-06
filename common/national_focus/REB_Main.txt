@@ -593,13 +593,10 @@
 			}
 		}
 		completion_reward = {
-				
+			country_event = new_republic_focus.13
 		}
 		completion_reward_joint_originator = {
 			set_country_flag = NEW_C_hunting_zsinj
-		}
-		completion_reward_joint_member = {
-			#country_event = latin_america.1
 		}
 	}
 	#Preparation for Invasions
@@ -644,7 +641,16 @@
 			FOCUS_FILTER_WAR_SUPPORT
 		}
 		prerequisite = { focus = REB_preparation_for_invasions  }
-		completion_reward = {}
+		completion_reward_joint_originator = {
+			ZSJ={
+				every_owned_state={
+					limit={
+						has_resistance = yes
+					}
+					add_resistance = 20
+				}
+			}
+		}
 	}
 	#Secure Hapes Consortium Aid
 	joint_focus = {
@@ -684,10 +690,13 @@
 		}
 		available={
 			has_country_flag = NEW_C_hunting_zsinj
+			SIN={
+				has_war_with = ZSJ
+			}
 		}
 		prerequisite = { focus = REB_contact_partisans }
-		completion_reward = {
-			
+		completion_reward_joint_originator = {
+			SIN={country_event = new_republic_focus.14}
 		}
 	}
 	
@@ -710,8 +719,8 @@
 			has_country_flag = NEW_C_hunting_zsinj
 		}
 		prerequisite = { focus = REB_preparation_for_invasions  }
-		completion_reward = {
-				
+		completion_reward_joint_originator = {
+			country_event = new_republic_focus.15
 		}
 	}
 	#Propaganda Campaigns
@@ -733,7 +742,9 @@
 			FOCUS_FILTER_WAR_SUPPORT
 		}
 		prerequisite = { focus = REB_securing_a_major_fleet  }
-		completion_reward = {}
+		completion_reward_joint_originator = {
+			add_war_support = 0.05
+		}
 	}
 
 	#Sabotage Imperial Installments
@@ -755,7 +766,11 @@
 			FOCUS_FILTER_WAR_SUPPORT
 		}
 		prerequisite = { focus = REB_securing_a_major_fleet  }
-		completion_reward = {}
+		completion_reward_joint_originator = {
+			ZSJ={
+				add_ideas = {REB_sabotage}
+			}
+		}
 	}
 	joint_focus = {
 		id = REB_more_autonomy_for_the_army
@@ -1245,8 +1260,19 @@ joint_focus = {
 		}
 		joint_trigger = { NR_basic_joint_trigger = yes }
 		prerequisite = { focus = REB_prepare_out_doctrine  }
-		completion_reward = {
-				
+		completion_reward_joint_originator = {
+			add_equipment_to_stockpile = {
+				type = x_wing_airframe
+				amount = 100
+				producer = REB
+			}
+		}
+		completion_reward_joint_member = {
+			add_equipment_to_stockpile = {
+				type = x_wing_airframe
+				amount = 50
+				producer = REB
+			}
 		}
 	}
 
@@ -1519,6 +1545,16 @@ joint_focus = {
 					days = 30
 				}
 				set_variable = { Global.new_rep_law_number_in_vote = 1 }
+				add_to_array = {
+					array = Global.NR_proposed_law_id_array
+					value = 1
+					index = 0
+				}
+				add_to_array = {
+					array = Global.NR_proposed_law_id_status_array
+					value = 0
+					index = 0
+				}
 				set_global_flag = {
 					flag = NR_law_vote_ongoing
 					days = 30
@@ -1560,7 +1596,7 @@ joint_focus = {
 	#New Republic intelligence
 	shared_focus = {
 		id = REB_new_republic_intelligence
-		icon = GFX_rebel_goal
+		icon = GFX_reb_new_republic_intellenge
 		text_icon = REPUBLIC_JOINT_SPY_focus_style
 		x = 44
 		y = 0
@@ -1655,19 +1691,33 @@ joint_focus = {
 		search_filters = {
 			FOCUS_FILTER_WAR_SUPPORT
 		}
-		joint_trigger = { NR_basic_joint_trigger = yes }
+		joint_trigger = { 
+			NR_basic_joint_trigger = yes 
+			
+		}
 		available={
 			has_country_flag = member_of_research_committee
 		}
 		prerequisite = { focus = REB_new_republic_research }
-		completion_reward_joint_originator = {
-			every_country ={
-				limit ={
-					has_country_flag = member_of_research_committee
+		completion_reward_joint_member = {
+			hidden_effect={
+				if={
+					limit={
+						has_country_flag = member_of_research_committee
+					}
+					add_research_slot = 1
 				}
-				add_research_slot = 1
 			}
-
+		}
+		completion_reward_joint_originator = {
+			effect_tooltip = {
+				every_country = {
+					limit={
+						has_country_flag = member_of_research_committee
+					}
+					add_research_slot = 1
+				}
+			}
 		}
 	}
 	joint_focus = {

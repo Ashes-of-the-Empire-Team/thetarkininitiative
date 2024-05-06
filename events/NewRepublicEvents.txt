@@ -30,6 +30,7 @@ news_event = {
 			clear_variable = Global.votes_against_new_republic_espionage
 			clear_variable = Global.votes_abstained_new_republic_espionage
 			clr_country_flag = votes_for_new_republic_espionage
+			clr_global_flag = NR_law_vote_ongoing
         }
 	option = {
 		name = "It has failed"
@@ -43,6 +44,7 @@ news_event = {
 		clear_variable = Global.votes_against_new_republic_espionage
 		clear_variable = Global.votes_abstained_new_republic_espionage
 		clr_country_flag = votes_for_new_republic_espionage
+		clr_global_flag = NR_law_vote_ongoing
 	}
 }
 
@@ -63,12 +65,14 @@ news_event = {
 		clear_variable = Global.votes_abstained_new_republic_law
 		clear_variable = Global.new_rep_law_number_in_vote
 		REB={set_country_flag = NR_anti_monopoly_act_enabled}
+		set_variable = { Global.NR_proposed_law_id_status_array^0 = 1}
 		every_country={
 			limit={
 				has_country_flag = votes_for_new_republic_law
 			}
 			clr_country_flag = votes_for_new_republic_law
 		}
+		clr_global_flag = NR_law_vote_ongoing
     }
 	option = {
 		name = "It has failed"
@@ -82,12 +86,111 @@ news_event = {
 		clear_variable = Global.votes_against_new_republic_law
 		clear_variable = Global.votes_abstained_new_republic_law
 		clear_variable = Global.new_rep_law_number_in_vote
+		set_variable = { Global.NR_proposed_law_id_status_array^0 = 2}
 		every_country={
 			limit={
 				has_country_flag = votes_for_new_republic_law
 			}
 			clr_country_flag = votes_for_new_republic_law
 		}
+		clr_global_flag = NR_law_vote_ongoing
+	}
+}
+
+news_event = {
+	id = newsenate.3
+	title = "Pathogen Act"
+	desc = newsenate.3.desc
+	picture = GFX_report_event
+	is_triggered_only = yes
+
+    option = {
+		name = "It has passed"
+		trigger = {
+			check_variable = { Global.votes_for_new_republic_law > Global.votes_against_new_republic_law }
+		}
+		clear_variable = Global.votes_for_new_republic_law
+		clear_variable = Global.votes_against_new_republic_law
+		clear_variable = Global.votes_abstained_new_republic_law
+		clear_variable = Global.new_rep_law_number_in_vote
+		REB={set_country_flag = NR_pathogen_act_enabled}
+		set_variable = { Global.NR_proposed_law_id_status_array^0 = 1}
+		every_country={
+			limit={
+				has_country_flag = votes_for_new_republic_law
+			}
+			clr_country_flag = votes_for_new_republic_law
+		}
+		clr_global_flag = NR_law_vote_ongoing
+    }
+	option = {
+		name = "It has failed"
+		trigger = {
+			OR = {
+				check_variable = { Global.votes_for_new_republic_law < Global.votes_against_new_republic_law }
+				check_variable = { Global.votes_for_new_republic_law = Global.votes_against_new_republic_law }
+			}
+		}
+		clear_variable = Global.votes_for_new_republic_law
+		clear_variable = Global.votes_against_new_republic_law
+		clear_variable = Global.votes_abstained_new_republic_law
+		clear_variable = Global.new_rep_law_number_in_vote
+		set_variable = { Global.NR_proposed_law_id_status_array^0 = 2}
+		every_country={
+			limit={
+				has_country_flag = votes_for_new_republic_law
+			}
+			clr_country_flag = votes_for_new_republic_law
+		}
+		clr_global_flag = NR_law_vote_ongoing
+	}
+}
+news_event = {
+	id = newsenate.4
+	title = "Sanitation Act"
+	desc = newsenate.4.desc
+	picture = GFX_report_event
+	is_triggered_only = yes
+
+    option = {
+		name = "It has passed"
+		trigger = {
+			check_variable = { Global.votes_for_new_republic_law > Global.votes_against_new_republic_law }
+		}
+		clear_variable = Global.votes_for_new_republic_law
+		clear_variable = Global.votes_against_new_republic_law
+		clear_variable = Global.votes_abstained_new_republic_law
+		clear_variable = Global.new_rep_law_number_in_vote
+		REB={set_country_flag = NR_sanitation_act_enabled}
+		set_variable = { Global.NR_proposed_law_id_status_array^0 = 1}
+		every_country={
+			limit={
+				has_country_flag = votes_for_new_republic_law
+			}
+			clr_country_flag = votes_for_new_republic_law
+		}
+		clr_global_flag = NR_law_vote_ongoing
+    }
+	option = {
+		name = "It has failed"
+		trigger = {
+			OR = {
+				check_variable = { Global.votes_for_new_republic_law < Global.votes_against_new_republic_law }
+				check_variable = { Global.votes_for_new_republic_law = Global.votes_against_new_republic_law }
+			}
+		}
+		clear_variable = Global.votes_for_new_republic_law
+		clear_variable = Global.votes_against_new_republic_law
+		clear_variable = Global.votes_abstained_new_republic_law
+		clear_variable = Global.new_rep_law_number_in_vote
+		set_variable = { Global.NR_proposed_law_id_status_array^0 = 2}
+		every_country={
+			limit={
+				has_country_flag = votes_for_new_republic_law
+			}
+			clr_country_flag = votes_for_new_republic_law
+		}
+		clr_global_flag = NR_law_vote_ongoing
 	}
 }
 
@@ -460,6 +563,61 @@ country_event = {
 		name = new_republic_focus.12.b
 		clr_country_flag = REB_currently_in_operation
 		clr_country_flag = utapau_negotiation
+	}
+}
+country_event = {
+	id = new_republic_focus.13
+	title = new_republic_focus.13.t
+	desc = new_republic_focus.13.desc
+	picture = GFX_report_event
+	is_triggered_only = yes
+
+    option = {#ok
+		name = new_republic_focus.13.a
+		
+	}
+}
+country_event = {
+	id = new_republic_focus.14
+	title = new_republic_focus.14.t
+	desc = new_republic_focus.14.desc
+	picture = GFX_report_event
+	is_triggered_only = yes
+
+    option = {#Join the NR
+		name = new_republic_focus.14.a
+		REB={
+			add_to_faction = ROOT
+		}
+		FROM={
+			add_to_war = {
+				targeted_alliance = ROOT
+				enemy = ZSJ
+				hostility_reason = asked_to_join
+			}
+		}
+	}
+	option = {#Accept only Material Aid
+		name = new_republic_focus.14.b
+		FROM={
+			send_equipment = {
+				equipment = infantry_equipment
+				amount = 200
+				target = ROOT
+			}
+		}
+	}
+}
+country_event = {#Solo Command
+	id = new_republic_focus.15
+	title = new_republic_focus.15.t
+	desc = new_republic_focus.15.desc
+	picture = GFX_report_event
+	is_triggered_only = yes
+
+    option = {#ok
+		name = new_republic_focus.15.a
+		
 	}
 }
 ### NEWS EVENTS ###
@@ -908,6 +1066,21 @@ country_event = {
 		}
 		mark_focus_tree_layout_dirty = yes
 		activate_mission = NR_head_of_state_term
+		if={
+			limit={
+				NOT={is_in_array = { NR_proposed_law_id_array = 5 }}
+			}
+			add_to_array = {
+				array = Global.NR_proposed_law_id_array
+				value = 5
+				index = 0
+			}
+			add_to_array = {
+				array = Global.NR_proposed_law_id_status_array
+				value = 4
+				index = 0
+			}
+		}
 	}
 
 	option = {
@@ -968,6 +1141,21 @@ country_event = {
 		}
 		mark_focus_tree_layout_dirty = yes
 		activate_mission = NR_head_of_state_term
+		if={
+			limit={
+				NOT={is_in_array = { NR_proposed_law_id_array = 6 }}
+			}
+			add_to_array = {
+				array = Global.NR_proposed_law_id_array
+				value = 6
+				index = 0
+			}
+			add_to_array = {
+				array = Global.NR_proposed_law_id_status_array
+				value = 4
+				index = 0
+			}
+		}
 	}
 
 	option = {
@@ -1005,6 +1193,23 @@ country_event = {
 			mark_focus_tree_layout_dirty = yes
 			unlock_national_focus = REB_the_second_chief_of_state
 			save_global_event_target_as = NR_head_of_state_scope
+		}
+	}
+}
+
+country_event = {
+	id = new_rep_elections.15 ## NEW REPUBLIC ELECTION 2 DEBUG
+	title = new_rep_elections.15.title
+	desc = new_rep_elections.15.desc
+	picture = GFX_report_event
+	is_triggered_only = yes
+
+	option = {
+		name = "Test"
+		add_to_array = {
+			array = Global.NR_proposed_law_id_array
+			value = 3
+			index = 0
 		}
 	}
 }
