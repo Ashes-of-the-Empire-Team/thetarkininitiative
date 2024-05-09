@@ -553,6 +553,13 @@
 				has_focus_tree = CHA
 			}
 		}
+		offset = {
+			x = -15
+			y = -9
+			trigger = {
+				has_focus_tree = zel_focus
+			}
+		}
 		cost = 7.2
 		available = {
 			has_global_flag = NEW_warlord_crisis
@@ -1342,7 +1349,11 @@ joint_focus = {
 			}
 		}
 		completion_reward = {
-		
+			add_to_variable = {
+				var = currency_amount^primary_currency #(doesn't matter what)
+				value = 10
+				tooltip = plus10credits_tt
+			}
 		}
 	}
 	#Penalize Imperial Companies
@@ -1396,10 +1407,11 @@ joint_focus = {
 		}
 		available={
 			has_country_flag = member_of_economic_committee
+			date > 7.6.1
 		}
 		prerequisite = { focus = REB_penalize_imperial_companies  }
 		completion_reward_joint_originator = {
-			
+			KUA={country_event = {id = new_republic_focus.16}}
 		}
 	}
 

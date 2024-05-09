@@ -620,6 +620,55 @@ country_event = {#Solo Command
 		
 	}
 }
+
+country_event = {#Taking of Kuat act 1
+	id = new_republic_focus.16
+	title = new_republic_focus.16.t
+	desc = new_republic_focus.16.desc
+	picture = GFX_report_event
+	is_triggered_only = yes
+
+    option = {#surrender
+		name = new_republic_focus.16.a
+		REB={add_to_faction = KUA}
+		country_event = new_republic_focus.18
+	}
+	option = {#fight
+		name = new_republic_focus.16.b
+		FROM={
+			country_event = new_republic_focus.17
+		}
+	}
+}
+
+country_event = {#Kuat vote fails
+	id = new_republic_focus.17
+	title = new_republic_focus.17.t
+	desc = new_republic_focus.17.desc
+	picture = GFX_report_event
+	is_triggered_only = yes
+
+    option = {#The Hard Way
+		name = new_republic_focus.17.a
+		declare_war_on = {
+			target = KUA
+			type = puppet_wargoal_focus
+		}
+	}
+}
+
+news_event = {
+	id = new_republic_focus.18
+	title = new_republic_focus.18.t
+	desc = new_republic_focus.18.desc
+	picture = GFX_news_event_NR_ships
+	is_triggered_only = yes
+	major = yes
+
+    option = {
+		name = "The New Republic have gained a Valuable Piece"
+	}
+}
 ### NEWS EVENTS ###
 
 news_event = {
