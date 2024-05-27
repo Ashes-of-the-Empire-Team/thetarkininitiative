@@ -692,7 +692,8 @@ country_event = {
 
     option = {
 		name = "Long Live The New Republic"
-		hidden_effect = { 
+		set_global_flag = new_republic_declared_flag
+		hidden_effect = {
 			add_ideas = {
 				REB_coruscant_ruins_3 REB_rouge_military_units REB_political_chaos REB_rampant_poverty rampant_crime
 			}
@@ -724,6 +725,26 @@ country_event = {
 	}
     option = {
 		name = "Time to take back our land"
+	}
+}
+
+country_event = {#Threat of the Warlords
+	id = newrepevent.5
+	title = "Threat of the Warlords"
+	desc = "D"
+	picture = GFX_report_event
+	trigger={
+		tag = REB
+		has_global_flag = new_republic_declared_flag
+		OR={
+			check_variable = {global.current_era = 2}
+			date > 7.5.1
+		}
+	}
+
+    option = {
+		name = "We Will Deal With These Warlords"
+		set_global_flag = NEW_warlord_crisis
 	}
 }
 
