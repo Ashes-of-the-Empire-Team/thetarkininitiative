@@ -12,9 +12,6 @@ on_actions = {
 			set_variable = {air_market_category = 2}
 			set_variable = {land_market_category = 3}
 
-
-			set_variable = {air_market_category = 2}
-
 			set_variable = {empire_market_choice = 0}
 			set_variable = {republic_market_choice = 1}
 			set_variable = {neutral_market_choice = 2}
@@ -33,8 +30,8 @@ on_actions = {
 				## this system is based of of tokenisation, we are taking the token value (a unique number that correlates to the equipment) of the equipments and attaching 
 				## those equipment numbers to a bunch of variables that hold data about the equipment.
 				## Advantages ----
-				## Easily can see what each equipment is, find the correct values in a 1 to 1 exchange instantly
-				## Disadvantages  -----
+				## Easily can see what each equipment is, find the correct values in a 1 to 1 exchange instantly, no looping or extreme kill me scenarios of coding
+				## Disadvantages  ----
 				## We Must have a unique equipment for everything on the market. I.e. Infantry equipment needs imperial equipment and republic equipment and neutral equipment
 				## if we want multiple sellers of the same equipment
 
@@ -46,6 +43,7 @@ on_actions = {
 			# PRICE OF THE ITEM --- price_of_item_@var:item_name
 			# STOCK OF ITEM --- stock_of_item@var:item_name
 			# WEEKLY PRODUCTION OF ITEM --- weekly_production_of_item@var:item_name
+			# REQUIRED TECHNOLOGY -- required_researched_technology@var:item_name
 			##### 
 
 			##### LOCAL VARIABLES (for companies) CONSIST OF
@@ -68,12 +66,36 @@ on_actions = {
 			## Will need two temp variables fed into the effect
 			## company_tag COMPANY THAT YOU WANT TO BUY THE EQUIPMENT OFF CHEAPER (Tag format i.e. ROT)
 			## modifier_percentage WHAT MODIFIER (Percentage amount i.e. 0.2 is 20% off the total price)
+			###### EXAMPLE #####
+			##	set_temp_variable = {company_tag = KUA}
+			##  set_temp_variable = {modifier_percentage = 0.2}
+			##  add_subsidy_for_buying_equipment = yes
 			##########
+
+
 
 			##
 			# YOU DO NOT NEED TO HAVE THE EQUIPMENT ALWAYS IN THE ARRAYS, THIS DOES MEAN WE CAN HAVE EQUIPMENT COME IN HALFWAY THROUGH GAME
 			# I.E IF YOU WANT TO CREATE A CORP THAT DOESNT ALWAYS EXIST AND PRODUCES ITS OWN STUFF
 			#
+
+			### EXAMPLE OF HOW TO ADD EQUIPMENT ######
+
+			add_to_array = {  
+				array = Global.Market_array@var:global.tank_market_category  ## Decide what market the equipment is going under, this is the same as production later on. EG tank_market_category for tanks
+				value = token:t3_b_chassis_1
+			}
+			set_variable = {who_owns_item@token:t3_b_chassis_1 = YUT} ## What country is producing the equipment at the start, this is important later for lookups
+			set_variable = {ic_cost@token:t3_b_chassis_1 = 43.4} ## each corporate factory produces 1 IC per day (at time of writing if global variable is not changed), this is thus how many days one factory would take to produce 100 of the equipment  (or 1 in ships case)
+			set_variable = {belonging_to_what_faction@token:t3_b_chassis_1 = republic_market_choice} ## What equipment faction does it belong to
+			set_variable = {price_of_item_@token:t3_b_chassis_1 = 110} ## Price of the item itself
+			set_variable = {required_researched_technology@token:t3_b_chassis_1 = token:t3_b_advanced} ## What technology is needed to produce this equipment
+			YUT = {
+				add_to_array = {
+					array = Production_array@var:global.tank_market_category ## What category of production is the equipment, treat as same as market category
+					value = token:t3_b_chassis_1
+				}
+			}
 
 
 
@@ -92,6 +114,9 @@ on_actions = {
 				}
 			}
 	
+	
+
+
 	## REPUBLIC
 		## TANKS
 			add_to_array = {
@@ -108,6 +133,8 @@ on_actions = {
 					value = token:t3_b_chassis_0
 				}
 			}
+
+			
 			add_to_array = {
 				array = Global.Market_array@var:global.tank_market_category
 				value = token:t3_b_chassis_1
@@ -115,7 +142,8 @@ on_actions = {
 			set_variable = {who_owns_item@token:t3_b_chassis_1 = YUT}
 			set_variable = {ic_cost@token:t3_b_chassis_1 = 43.4}
 			set_variable = {belonging_to_what_faction@token:t3_b_chassis_1 = republic_market_choice}
-			set_variable = {price_of_item_@token:t3_b_chassis_1 = 50}
+			set_variable = {price_of_item_@token:t3_b_chassis_1 = 110}
+			set_variable = {required_researched_technology@token:t3_b_chassis_1 = token:t3_b_advanced}
 			YUT = {
 				add_to_array = {
 					array = Production_array@var:global.tank_market_category
@@ -123,24 +151,53 @@ on_actions = {
 				}
 			}
 
-			
+			add_to_array = {
+				array = Global.Market_array@var:global.tank_market_category
+				value = token:t4_b_chassis_0
+			}
 			set_variable = {who_owns_item@token:t4_b_chassis_0 = YUT}
 			set_variable = {ic_cost@token:t4_b_chassis_0 = 46}
 			set_variable = {belonging_to_what_faction@token:t4_b_chassis_0 = republic_market_choice}
-			set_variable = {price_of_item_@token:t4_b_chassis_0 = 50}
+			set_variable = {price_of_item_@token:t4_b_chassis_0 = 115}
+			set_variable = {required_researched_technology@token:t4_b_chassis_0 = token:t4_b}
+			YUT = {
+				add_to_array = {
+					array = Production_array@var:global.tank_market_category
+					value = token:t4_b_chassis_0
+				}
+			}
 			
 			
-
+			add_to_array = {
+				array = Global.Market_array@var:global.tank_market_category
+				value = token:t4_b_chassis_1
+			}
 			set_variable = {who_owns_item@token:t4_b_chassis_1 = YUT}
 			set_variable = {ic_cost@token:t4_b_chassis_1 = 46}
 			set_variable = {belonging_to_what_faction@token:t4_b_chassis_1 = republic_market_choice}
-			set_variable = {price_of_item_@token:t4_b_chassis_1 = 47.6}
+			set_variable = {price_of_item_@token:t4_b_chassis_1 = 121}
+			set_variable = {required_researched_technology@token:t4_b_chassis_1 = token:t4_b_advanced}
+			YUT = {
+				add_to_array = {
+					array = Production_array@var:global.tank_market_category
+					value = token:t4_b_chassis_1
+				}
+			}
 			
-			
+			add_to_array = {
+				array = Global.Market_array@var:global.tank_market_category
+				value = token:t2_b_chassis_0
+			}
 			set_variable = {who_owns_item@token:t2_b_chassis_0 = YUT}
-			set_variable = {ic_cost@token:t2_b_chassis_0 = 47.6}
+			set_variable = {ic_cost@token:t2_b_chassis_0 = 16}
 			set_variable = {belonging_to_what_faction@token:t2_b_chassis_0 = republic_market_choice}
 			set_variable = {price_of_item_@token:t2_b_chassis_0 = 41}
+			YUT = {
+				add_to_array = {
+					array = Production_array@var:global.tank_market_category
+					value = token:t2_b_chassis_0
+				}
+			}
 
 
 			add_to_array = {
@@ -148,9 +205,10 @@ on_actions = {
 				value = token:t2_b_chassis_1
 			}
 			set_variable = {who_owns_item@token:t2_b_chassis_1 = YUT}
-			set_variable = {ic_cost@token:t2_b_chassis_1 = 50}
+			set_variable = {ic_cost@token:t2_b_chassis_1 = 17}
 			set_variable = {belonging_to_what_faction@token:t2_b_chassis_1 = republic_market_choice}
 			set_variable = {price_of_item_@token:t2_b_chassis_1 = 45}
+			set_variable = {required_researched_technology@token:t2_b_chassis_1 = token:t2_b_advanced}
 			YUT = {
 				add_to_array = {
 					array = Production_array@var:global.tank_market_category
@@ -163,7 +221,7 @@ on_actions = {
 				value = token:t1_c_chassis_0
 			}
 			set_variable = {who_owns_item@token:t1_c_chassis_0 = YUT}
-			set_variable = {ic_cost@token:t1_c_chassis_0 = 50}
+			set_variable = {ic_cost@token:t1_c_chassis_0 = 23.4}
 			set_variable = {belonging_to_what_faction@token:t1_c_chassis_0 = republic_market_choice}
 			set_variable = {price_of_item_@token:t1_c_chassis_0 = 60}
 			YUT = {
@@ -173,17 +231,29 @@ on_actions = {
 				}
 			}
 
+
+			add_to_array = {
+				array = Global.Market_array@var:global.tank_market_category
+				value = token:t1_c_chassis_1
+			}
 			set_variable = {who_owns_item@token:t1_c_chassis_1 = YUT}
-			set_variable = {ic_cost@token:t1_c_chassis_1 = 50}
+			set_variable = {ic_cost@token:t1_c_chassis_1 = 25.7}
 			set_variable = {belonging_to_what_faction@token:t1_c_chassis_1 = republic_market_choice}
 			set_variable = {price_of_item_@token:t1_c_chassis_1 = 63}
+			set_variable = {required_researched_technology@token:t1_c_chassis_1 = token:t1_c_advanced}
+			YUT = {
+				add_to_array = {
+					array = Production_array@var:global.tank_market_category
+					value = token:t1_c_chassis_1
+				}
+			}
 
 			add_to_array = {
 				array = Global.Market_array@var:global.tank_market_category
 				value = token:AAC_1_speeder_tank_chassis_0
 			}
 			set_variable = {who_owns_item@token:AAC_1_speeder_tank_chassis_0 = SOR}
-			set_variable = {ic_cost@token:AAC_1_speeder_tank_chassis_0 = 50}
+			set_variable = {ic_cost@token:AAC_1_speeder_tank_chassis_0 = 26.3}
 			set_variable = {belonging_to_what_faction@token:AAC_1_speeder_tank_chassis_0 = republic_market_choice}
 			set_variable = {price_of_item_@token:AAC_1_speeder_tank_chassis_0 = 65}
 			SOR = {
@@ -200,9 +270,10 @@ on_actions = {
 				value = token:AAC_1_speeder_tank_chassis_1
 			}
 			set_variable = {who_owns_item@token:AAC_1_speeder_tank_chassis_1 = SOR}
-			set_variable = {ic_cost@token:AAC_1_speeder_tank_chassis_1 = 50}
+			set_variable = {ic_cost@token:AAC_1_speeder_tank_chassis_1 = 28.1}
 			set_variable = {belonging_to_what_faction@token:AAC_1_speeder_tank_chassis_1 = republic_market_choice}
 			set_variable = {price_of_item_@token:AAC_1_speeder_tank_chassis_1 = 70}
+			set_variable = {required_researched_technology@token:AAC_1_speeder_tank_chassis_1 = token:AAC_1_speeder_tank_advanced}
 			SOR = {
 				add_to_array = {
 					array = Production_array@var:global.tank_market_category
@@ -215,7 +286,7 @@ on_actions = {
 				value = token:combat_speeder_chassis_0
 			}
 			set_variable = {who_owns_item@token:combat_speeder_chassis_0 = SOR}
-			set_variable = {ic_cost@token:combat_speeder_chassis_0 = 50}
+			set_variable = {ic_cost@token:combat_speeder_chassis_0 = 7}
 			set_variable = {belonging_to_what_faction@token:combat_speeder_chassis_0 = republic_market_choice}
 			set_variable = {price_of_item_@token:combat_speeder_chassis_0 = 18}
 			SOR = {
@@ -225,11 +296,21 @@ on_actions = {
 				}
 			}
 			
-
+			add_to_array = {
+				array = Global.Market_array@var:global.tank_market_category
+				value = token:combat_speeder_chassis_1
+			}
 			set_variable = {who_owns_item@token:combat_speeder_chassis_1 = SOR}
-			set_variable = {ic_cost@token:combat_speeder_chassis_1 = 50}
+			set_variable = {ic_cost@token:combat_speeder_chassis_1 = 8.8}
 			set_variable = {belonging_to_what_faction@token:combat_speeder_chassis_1 = republic_market_choice}
 			set_variable = {price_of_item_@token:combat_speeder_chassis_1 = 20.5}
+			set_variable = {required_researched_technology@token:combat_speeder_chassis_1 = token:combat_speeder_advanced}
+			SOR = {
+				add_to_array = {
+					array = Production_array@var:global.tank_market_category
+					value = token:combat_speeder_chassis_1
+				}
+			}
 			
 
 			add_to_array = {
@@ -237,7 +318,7 @@ on_actions = {
 				value = token:flash_speeder_chassis_0
 			}
 			set_variable = {who_owns_item@token:flash_speeder_chassis_0 = SOR}
-			set_variable = {ic_cost@token:flash_speeder_chassis_0 = 50}
+			set_variable = {ic_cost@token:flash_speeder_chassis_0 = 9.1}
 			set_variable = {belonging_to_what_faction@token:flash_speeder_chassis_0 = republic_market_choice}
 			set_variable = {price_of_item_@token:flash_speeder_chassis_0 = 23}
 			SOR = {
@@ -247,12 +328,21 @@ on_actions = {
 				}
 			}
 
-			
+			add_to_array = {
+				array = Global.Market_array@var:global.tank_market_category
+				value = token:flash_speeder_chassis_1
+			}
 			set_variable = {who_owns_item@token:flash_speeder_chassis_1 = SOR}
-			set_variable = {ic_cost@token:flash_speeder_chassis_1 = 50}
+			set_variable = {ic_cost@token:flash_speeder_chassis_1 = 10.2}
 			set_variable = {belonging_to_what_faction@token:flash_speeder_chassis_1 = republic_market_choice}
 			set_variable = {price_of_item_@token:flash_speeder_chassis_1 = 26}
-			
+			set_variable = {required_researched_technology@token:flash_speeder_chassis_1 = token:flash_speeder_advanced}
+			SOR = {
+				add_to_array = {
+					array = Production_array@var:global.tank_market_category
+					value = token:flash_speeder_chassis_1
+				}
+			}
 
 		## NAVY
 			add_to_array = {
@@ -260,9 +350,9 @@ on_actions = {
 				value = token:CR70_1
 			}
 			set_variable = {who_owns_item@token:CR70_1 = COR}
-			set_variable = {ic_cost@token:CR70_1 = 50}
+			set_variable = {ic_cost@token:CR70_1 = 18}
 			set_variable = {belonging_to_what_faction@token:CR70_1 = republic_market_choice}
-			set_variable = {price_of_item_@token:CR70_1 = 50}
+			set_variable = {price_of_item_@token:CR70_1 = 28.5}
 			COR = {
 				add_to_array = {
 					array = Production_array@var:global.naval_market_category
@@ -274,9 +364,10 @@ on_actions = {
 				value = token:CR70_2
 			}
 			set_variable = {who_owns_item@token:CR70_2 = COR}
-			set_variable = {ic_cost@token:CR70_2 = 50}
+			set_variable = {ic_cost@token:CR70_2 = 21.2}
 			set_variable = {belonging_to_what_faction@token:CR70_2 = republic_market_choice}
-			set_variable = {price_of_item_@token:CR70_2 = 50}
+			set_variable = {price_of_item_@token:CR70_2 = 32.5}
+			set_variable = {required_researched_technology@token:CR70_2 = token:cr70_2}
 			COR = {
 				add_to_array = {
 					array = Production_array@var:global.naval_market_category
@@ -288,9 +379,10 @@ on_actions = {
 				value = token:warrior_1
 			}
 			set_variable = {who_owns_item@token:warrior_1 = REN}
-			set_variable = {ic_cost@token:warrior_1 = 50}
+			set_variable = {ic_cost@token:warrior_1 = 26}
 			set_variable = {belonging_to_what_faction@token:warrior_1 = republic_market_choice}
-			set_variable = {price_of_item_@token:warrior_1 = 50}
+			set_variable = {price_of_item_@token:warrior_1 = 40}
+			set_variable = {required_researched_technology@token:warrior_1 = token:warrior_1}
 			REN = {
 				add_to_array = {
 					array = Production_array@var:global.naval_market_category
@@ -302,9 +394,9 @@ on_actions = {
 				value = token:pelta_1
 			}
 			set_variable = {who_owns_item@token:pelta_1 = KUA}
-			set_variable = {ic_cost@token:pelta_1 = 50}
+			set_variable = {ic_cost@token:pelta_1 = 30}
 			set_variable = {belonging_to_what_faction@token:pelta_1 = republic_market_choice}
-			set_variable = {price_of_item_@token:pelta_1 = 50}
+			set_variable = {price_of_item_@token:pelta_1 = 78.5}
 			KUA = {
 				add_to_array = {
 					array = Production_array@var:global.naval_market_category
@@ -316,9 +408,9 @@ on_actions = {
 				value = token:mc30_1
 			}
 			set_variable = {who_owns_item@token:mc30_1 = CAL}
-			set_variable = {ic_cost@token:mc30_1 = 50}
+			set_variable = {ic_cost@token:mc30_1 = 62}
 			set_variable = {belonging_to_what_faction@token:mc30_1 = republic_market_choice}
-			set_variable = {price_of_item_@token:mc30_1 = 50}
+			set_variable = {price_of_item_@token:mc30_1 = 85}
 			CAL = {
 				add_to_array = {
 					array = Production_array@var:global.naval_market_category
@@ -330,7 +422,7 @@ on_actions = {
 				value = token:Nebulon_1
 			}
 			set_variable = {who_owns_item@token:Nebulon_1 = KUA}
-			set_variable = {ic_cost@token:Nebulon_1 = 50}
+			set_variable = {ic_cost@token:Nebulon_1 = 35}
 			set_variable = {belonging_to_what_faction@token:Nebulon_1 = republic_market_choice}
 			set_variable = {price_of_item_@token:Nebulon_1 = 50}
 			KUA = {
@@ -344,9 +436,10 @@ on_actions = {
 				value = token:Nebulon_2
 			}
 			set_variable = {who_owns_item@token:Nebulon_2 = KUA}
-			set_variable = {ic_cost@token:Nebulon_2 = 50}
+			set_variable = {ic_cost@token:Nebulon_2 = 37}
 			set_variable = {belonging_to_what_faction@token:Nebulon_2 = republic_market_choice}
-			set_variable = {price_of_item_@token:Nebulon_2 = 50}
+			set_variable = {price_of_item_@token:Nebulon_2 = 56}
+			set_variable = {required_researched_technology@token:Nebulon_2 = token:Nebulon_2}
 			KUA = {
 				add_to_array = {
 					array = Production_array@var:global.naval_market_category
@@ -358,9 +451,10 @@ on_actions = {
 				value = token:Corona_1
 			}
 			set_variable = {who_owns_item@token:Corona_1 = KUA}
-			set_variable = {ic_cost@token:Corona_1 = 50}
+			set_variable = {ic_cost@token:Corona_1 = 45}
 			set_variable = {belonging_to_what_faction@token:Corona_1 = republic_market_choice}
-			set_variable = {price_of_item_@token:Corona_1 = 50}
+			set_variable = {price_of_item_@token:Corona_1 = 65}
+			set_variable = {required_researched_technology@token:Corona_1 = token:Corona_1}
 			KUA = {
 				add_to_array = {
 					array = Production_array@var:global.naval_market_category
@@ -372,9 +466,9 @@ on_actions = {
 				value = token:assault_1
 			}
 			set_variable = {who_owns_item@token:assault_1 = REN}
-			set_variable = {ic_cost@token:assault_1 = 50}
+			set_variable = {ic_cost@token:assault_1 = 72}
 			set_variable = {belonging_to_what_faction@token:assault_1 = republic_market_choice}
-			set_variable = {price_of_item_@token:assault_1 = 50}
+			set_variable = {price_of_item_@token:assault_1 = 120}
 			REN = {
 				add_to_array = {
 					array = Production_array@var:global.naval_market_category
@@ -386,9 +480,9 @@ on_actions = {
 				value = token:assault_2
 			}
 			set_variable = {who_owns_item@token:assault_2 = REN}
-			set_variable = {ic_cost@token:assault_2 = 50}
+			set_variable = {ic_cost@token:assault_2 = 78}
 			set_variable = {belonging_to_what_faction@token:assault_2 = republic_market_choice}
-			set_variable = {price_of_item_@token:assault_2 = 50}
+			set_variable = {price_of_item_@token:assault_2 = 127.5}
 			REN = {
 				add_to_array = {
 					array = Production_array@var:global.naval_market_category
@@ -400,9 +494,9 @@ on_actions = {
 				value = token:mc40_1
 			}
 			set_variable = {who_owns_item@token:mc40_1 = CAL}
-			set_variable = {ic_cost@token:mc40_1 = 50}
+			set_variable = {ic_cost@token:mc40_1 = 89}
 			set_variable = {belonging_to_what_faction@token:mc40_1 = republic_market_choice}
-			set_variable = {price_of_item_@token:mc40_1 = 50}
+			set_variable = {price_of_item_@token:mc40_1 = 135}
 			CAL = {
 				add_to_array = {
 					array = Production_array@var:global.naval_market_category
@@ -414,9 +508,9 @@ on_actions = {
 				value = token:quaser_1
 			}
 			set_variable = {who_owns_item@token:quaser_1 = SOR}
-			set_variable = {ic_cost@token:quaser_1 = 50}
+			set_variable = {ic_cost@token:quaser_1 = 100}
 			set_variable = {belonging_to_what_faction@token:quaser_1 = republic_market_choice}
-			set_variable = {price_of_item_@token:quaser_1 = 50}
+			set_variable = {price_of_item_@token:quaser_1 = 120}
 			SOR = {
 				add_to_array = {
 					array = Production_array@var:global.naval_market_category
@@ -428,9 +522,9 @@ on_actions = {
 				value = token:mc75_1
 			}
 			set_variable = {who_owns_item@token:mc75_1 = CAL}
-			set_variable = {ic_cost@token:mc75_1 = 50}
+			set_variable = {ic_cost@token:mc75_1 = 180}
 			set_variable = {belonging_to_what_faction@token:mc75_1 = republic_market_choice}
-			set_variable = {price_of_item_@token:mc75_1 = 50}
+			set_variable = {price_of_item_@token:mc75_1 = 210}
 			CAL = {
 				add_to_array = {
 					array = Production_array@var:global.naval_market_category
@@ -442,9 +536,9 @@ on_actions = {
 				value = token:bothan_assault_1
 			}
 			set_variable = {who_owns_item@token:bothan_assault_1 = BOT}
-			set_variable = {ic_cost@token:bothan_assault_1 = 50}
+			set_variable = {ic_cost@token:bothan_assault_1 = 140}
 			set_variable = {belonging_to_what_faction@token:bothan_assault_1 = republic_market_choice}
-			set_variable = {price_of_item_@token:bothan_assault_1 = 50}
+			set_variable = {price_of_item_@token:bothan_assault_1 = 160}
 			BOT = {
 				add_to_array = {
 					array = Production_array@var:global.naval_market_category
@@ -456,9 +550,9 @@ on_actions = {
 				value = token:mc80_liberty_1
 			}
 			set_variable = {who_owns_item@token:mc80_liberty_1 = CAL}
-			set_variable = {ic_cost@token:mc80_liberty_1 = 50}
+			set_variable = {ic_cost@token:mc80_liberty_1 = 250}
 			set_variable = {belonging_to_what_faction@token:mc80_liberty_1 = republic_market_choice}
-			set_variable = {price_of_item_@token:mc80_liberty_1 = 50}
+			set_variable = {price_of_item_@token:mc80_liberty_1 = 270}
 			CAL = {
 				add_to_array = {
 					array = Production_array@var:global.naval_market_category
@@ -470,9 +564,9 @@ on_actions = {
 				value = token:starhawk_1
 			}
 			set_variable = {who_owns_item@token:starhawk_1 = REB}
-			set_variable = {ic_cost@token:starhawk_1 = 50}
+			set_variable = {ic_cost@token:starhawk_1 = 260}
 			set_variable = {belonging_to_what_faction@token:starhawk_1 = republic_market_choice}
-			set_variable = {price_of_item_@token:starhawk_1 = 50}
+			set_variable = {price_of_item_@token:starhawk_1 = 285}
 			REB = {
 				add_to_array = {
 					array = Production_array@var:global.naval_market_category
@@ -484,9 +578,9 @@ on_actions = {
 				value = token:dauntless_1
 			}
 			set_variable = {who_owns_item@token:dauntless_1 = SOR}
-			set_variable = {ic_cost@token:dauntless_1 = 50}
+			set_variable = {ic_cost@token:dauntless_1 = 300}
 			set_variable = {belonging_to_what_faction@token:dauntless_1 = republic_market_choice}
-			set_variable = {price_of_item_@token:dauntless_1 = 50}
+			set_variable = {price_of_item_@token:dauntless_1 = 320}
 			SOR = {
 				add_to_array = {
 					array = Production_array@var:global.naval_market_category
@@ -498,9 +592,9 @@ on_actions = {
 				value = token:mc80_home_one_1
 			}
 			set_variable = {who_owns_item@token:mc80_home_one_1 = CAL}
-			set_variable = {ic_cost@token:mc80_home_one_1 = 50}
+			set_variable = {ic_cost@token:mc80_home_one_1 = 290}
 			set_variable = {belonging_to_what_faction@token:mc80_home_one_1 = republic_market_choice}
-			set_variable = {price_of_item_@token:mc80_home_one_1 = 50}
+			set_variable = {price_of_item_@token:mc80_home_one_1 = 310}
 			CAL = {
 				add_to_array = {
 					array = Production_array@var:global.naval_market_category
@@ -512,9 +606,9 @@ on_actions = {
 				value = token:mc90_1
 			}
 			set_variable = {who_owns_item@token:mc90_1 = CAL}
-			set_variable = {ic_cost@token:mc90_1 = 50}
+			set_variable = {ic_cost@token:mc90_1 = 240}
 			set_variable = {belonging_to_what_faction@token:mc90_1 = republic_market_choice}
-			set_variable = {price_of_item_@token:mc90_1 = 50}
+			set_variable = {price_of_item_@token:mc90_1 = 262}
 			CAL = {
 				add_to_array = {
 					array = Production_array@var:global.naval_market_category
@@ -526,9 +620,9 @@ on_actions = {
 				value = token:nebula_1
 			}
 			set_variable = {who_owns_item@token:nebula_1 = REB}
-			set_variable = {ic_cost@token:nebula_1 = 50}
+			set_variable = {ic_cost@token:nebula_1 = 335}
 			set_variable = {belonging_to_what_faction@token:nebula_1 = republic_market_choice}
-			set_variable = {price_of_item_@token:nebula_1 = 50}
+			set_variable = {price_of_item_@token:nebula_1 = 355}
 			REB = {
 				add_to_array = {
 					array = Production_array@var:global.naval_market_category
@@ -540,9 +634,9 @@ on_actions = {
 				value = token:republic_star_1
 			}
 			set_variable = {who_owns_item@token:republic_star_1 = REB}
-			set_variable = {ic_cost@token:republic_star_1 = 50}
+			set_variable = {ic_cost@token:republic_star_1 = 296}
 			set_variable = {belonging_to_what_faction@token:republic_star_1 = republic_market_choice}
-			set_variable = {price_of_item_@token:republic_star_1 = 50}
+			set_variable = {price_of_item_@token:republic_star_1 = 317.5}
 			REB = {
 				add_to_array = {
 					array = Production_array@var:global.naval_market_category
@@ -555,9 +649,9 @@ on_actions = {
 				value = token:u_wing_airframe_0
 			}
 			set_variable = {who_owns_item@token:u_wing_airframe_0 = INC}
-			set_variable = {ic_cost@token:u_wing_airframe_0 = 50}
+			set_variable = {ic_cost@token:u_wing_airframe_0 = 22.4}
 			set_variable = {belonging_to_what_faction@token:u_wing_airframe_0 = republic_market_choice}
-			set_variable = {price_of_item_@token:u_wing_airframe_0 = 50}
+			set_variable = {price_of_item_@token:u_wing_airframe_0 = 58}
 			INC = {
 				add_to_array = {
 					array = Production_array@var:global.air_market_category
@@ -569,9 +663,10 @@ on_actions = {
 				value = token:u_wing_airframe_1
 			}
 			set_variable = {who_owns_item@token:u_wing_airframe_1 = INC}
-			set_variable = {ic_cost@token:u_wing_airframe_1 = 50}
+			set_variable = {ic_cost@token:u_wing_airframe_1 = 23.6}
 			set_variable = {belonging_to_what_faction@token:u_wing_airframe_1 = republic_market_choice}
-			set_variable = {price_of_item_@token:u_wing_airframe_1 = 50}
+			set_variable = {price_of_item_@token:u_wing_airframe_1 = 60}
+			set_variable = {required_researched_technology@token:u_wing_airframe_1 = token:u_wing_1}
 			INC = {
 				add_to_array = {
 					array = Production_array@var:global.air_market_category
@@ -584,9 +679,10 @@ on_actions = {
 				value = token:e_wing_airframe_0
 			}
 			set_variable = {who_owns_item@token:e_wing_airframe_0 = INC}
-			set_variable = {ic_cost@token:e_wing_airframe_0 = 50}
+			set_variable = {ic_cost@token:e_wing_airframe_0 = 30.4}
 			set_variable = {belonging_to_what_faction@token:e_wing_airframe_0 = republic_market_choice}
-			set_variable = {price_of_item_@token:e_wing_airframe_0 = 50}
+			set_variable = {price_of_item_@token:e_wing_airframe_0 = 72}
+			set_variable = {required_researched_technology@token:e_wing_airframe_0 = token:e_wing}
 			INC = {
 				add_to_array = {
 					array = Production_array@var:global.air_market_category
@@ -599,9 +695,9 @@ on_actions = {
 				value = token:a_wing_airframe_0
 			}
 			set_variable = {who_owns_item@token:a_wing_airframe_0 = KUA}
-			set_variable = {ic_cost@token:a_wing_airframe_0 = 50}
+			set_variable = {ic_cost@token:a_wing_airframe_0 = 23.3}
 			set_variable = {belonging_to_what_faction@token:a_wing_airframe_0 = republic_market_choice}
-			set_variable = {price_of_item_@token:a_wing_airframe_0 = 50}
+			set_variable = {price_of_item_@token:a_wing_airframe_0 = 59}
 			KUA = {
 				add_to_array = {
 					array = Production_array@var:global.air_market_category
@@ -613,9 +709,10 @@ on_actions = {
 				value = token:a_wing_airframe_1
 			}
 			set_variable = {who_owns_item@token:a_wing_airframe_1 = KUA}
-			set_variable = {ic_cost@token:a_wing_airframe_1 = 50}
+			set_variable = {ic_cost@token:a_wing_airframe_1 = 24.4}
 			set_variable = {belonging_to_what_faction@token:a_wing_airframe_1 = republic_market_choice}
-			set_variable = {price_of_item_@token:a_wing_airframe_1 = 50}
+			set_variable = {price_of_item_@token:a_wing_airframe_1 = 62}
+			set_variable = {required_researched_technology@token:a_wing_airframe_1 = token:a_wing}
 			KUA = {
 				add_to_array = {
 					array = Production_array@var:global.air_market_category
@@ -628,9 +725,10 @@ on_actions = {
 				value = token:k_wing_airframe_0
 			}
 			set_variable = {who_owns_item@token:k_wing_airframe_0 = KOE}
-			set_variable = {ic_cost@token:k_wing_airframe_0 = 50}
+			set_variable = {ic_cost@token:k_wing_airframe_0 = 45.4}
 			set_variable = {belonging_to_what_faction@token:k_wing_airframe_0 = republic_market_choice}
-			set_variable = {price_of_item_@token:k_wing_airframe_0 = 50}
+			set_variable = {price_of_item_@token:k_wing_airframe_0 = 103}
+			set_variable = {required_researched_technology@token:k_wing_airframe_0 = token:k_wing}
 			KOE = {
 				add_to_array = {
 					array = Production_array@var:global.air_market_category
@@ -643,9 +741,9 @@ on_actions = {
 				value = token:x_wing_airframe_0
 			}
 			set_variable = {who_owns_item@token:x_wing_airframe_0 = INC}
-			set_variable = {ic_cost@token:x_wing_airframe_0 = 50}
+			set_variable = {ic_cost@token:x_wing_airframe_0 = 20.2}
 			set_variable = {belonging_to_what_faction@token:x_wing_airframe_0 = republic_market_choice}
-			set_variable = {price_of_item_@token:x_wing_airframe_0 = 50}
+			set_variable = {price_of_item_@token:x_wing_airframe_0 = 51}
 			INC = {
 				add_to_array = {
 					array = Production_array@var:global.air_market_category
@@ -657,9 +755,10 @@ on_actions = {
 				value = token:x_wing_airframe_1
 			}
 			set_variable = {who_owns_item@token:x_wing_airframe_1 = INC}
-			set_variable = {ic_cost@token:x_wing_airframe_1 = 50}
+			set_variable = {ic_cost@token:x_wing_airframe_1 = 23.4}
 			set_variable = {belonging_to_what_faction@token:x_wing_airframe_1 = republic_market_choice}
-			set_variable = {price_of_item_@token:x_wing_airframe_1 = 50}
+			set_variable = {price_of_item_@token:x_wing_airframe_1 = 56}
+			set_variable = {required_researched_technology@token:x_wing_airframe_1 = token:x_wing_70}
 			INC = {
 				add_to_array = {
 					array = Production_array@var:global.air_market_category
@@ -671,9 +770,10 @@ on_actions = {
 				value = token:x_wing_airframe_2
 			}
 			set_variable = {who_owns_item@token:x_wing_airframe_2 = INC}
-			set_variable = {ic_cost@token:x_wing_airframe_2 = 50}
+			set_variable = {ic_cost@token:x_wing_airframe_2 = 26.4}
 			set_variable = {belonging_to_what_faction@token:x_wing_airframe_2 = republic_market_choice}
-			set_variable = {price_of_item_@token:x_wing_airframe_2 = 50}
+			set_variable = {price_of_item_@token:x_wing_airframe_2 = 61}
+			set_variable = {required_researched_technology@token:x_wing_airframe_2 = token:x_wing_85}
 			INC = {
 				add_to_array = {
 					array = Production_array@var:global.air_market_category
@@ -685,9 +785,10 @@ on_actions = {
 				value = token:x_wing_airframe_3
 			}
 			set_variable = {who_owns_item@token:x_wing_airframe_3 = INC}
-			set_variable = {ic_cost@token:x_wing_airframe_3 = 50}
+			set_variable = {ic_cost@token:x_wing_airframe_3 = 28.8}
 			set_variable = {belonging_to_what_faction@token:x_wing_airframe_3 = republic_market_choice}
-			set_variable = {price_of_item_@token:x_wing_airframe_3 = 50}
+			set_variable = {price_of_item_@token:x_wing_airframe_3 = 63}
+			set_variable = {required_researched_technology@token:x_wing_airframe_3 = token:x_wing_stealth_x}
 			INC = {
 				add_to_array = {
 					array = Production_array@var:global.air_market_category
@@ -700,9 +801,9 @@ on_actions = {
 				value = token:y_wing_airframe_0
 			}
 			set_variable = {who_owns_item@token:y_wing_airframe_0 = KOE}
-			set_variable = {ic_cost@token:y_wing_airframe_0 = 50}
+			set_variable = {ic_cost@token:y_wing_airframe_0 = 18.1}
 			set_variable = {belonging_to_what_faction@token:y_wing_airframe_0 = republic_market_choice}
-			set_variable = {price_of_item_@token:y_wing_airframe_0 = 50}
+			set_variable = {price_of_item_@token:y_wing_airframe_0 = 46}
 			KOE = {
 				add_to_array = {
 					array = Production_array@var:global.air_market_category
@@ -714,9 +815,10 @@ on_actions = {
 				value = token:y_wing_airframe_1
 			}
 			set_variable = {who_owns_item@token:y_wing_airframe_1 = KOE}
-			set_variable = {ic_cost@token:y_wing_airframe_1 = 50}
+			set_variable = {ic_cost@token:y_wing_airframe_1 = 20.8}
 			set_variable = {belonging_to_what_faction@token:y_wing_airframe_1 = republic_market_choice}
-			set_variable = {price_of_item_@token:y_wing_airframe_1 = 50}
+			set_variable = {price_of_item_@token:y_wing_airframe_1 = 48}
+			set_variable = {required_researched_technology@token:y_wing_airframe_1 = token:y_wing_airframe_2}
 			KOE = {
 				add_to_array = {
 					array = Production_array@var:global.air_market_category
@@ -729,9 +831,10 @@ on_actions = {
 				value = token:b_wing_airframe_0
 			}
 			set_variable = {who_owns_item@token:b_wing_airframe_0 = SLK}
-			set_variable = {ic_cost@token:b_wing_airframe_0 = 50}
+			set_variable = {ic_cost@token:b_wing_airframe_0 = 28.4}
 			set_variable = {belonging_to_what_faction@token:b_wing_airframe_0 = republic_market_choice}
-			set_variable = {price_of_item_@token:b_wing_airframe_0 = 50}
+			set_variable = {price_of_item_@token:b_wing_airframe_0 = 72}
+			set_variable = {required_researched_technology@token:b_wing_airframe_0 = token:b_wing}
 			SLK = {
 				add_to_array = {
 					array = Production_array@var:global.air_market_category
@@ -743,9 +846,10 @@ on_actions = {
 				value = token:b_wing_airframe_1
 			}
 			set_variable = {who_owns_item@token:b_wing_airframe_1 = SLK}
-			set_variable = {ic_cost@token:b_wing_airframe_1 = 50}
+			set_variable = {ic_cost@token:b_wing_airframe_1 = 32.4}
 			set_variable = {belonging_to_what_faction@token:b_wing_airframe_1 = republic_market_choice}
-			set_variable = {price_of_item_@token:b_wing_airframe_1 = 50}
+			set_variable = {price_of_item_@token:b_wing_airframe_1 = 78}
+			set_variable = {required_researched_technology@token:b_wing_airframe_1 = token:b_wing_airframe_1}
 			SLK = {
 				add_to_array = {
 					array = Production_array@var:global.air_market_category
@@ -759,9 +863,9 @@ on_actions = {
 				value = token:at_at_chassis_0
 			}
 			set_variable = {who_owns_item@token:at_at_chassis_0 = KUA}
-			set_variable = {ic_cost@token:at_at_chassis_0 = 50}
+			set_variable = {ic_cost@token:at_at_chassis_0 = 45}
 			set_variable = {belonging_to_what_faction@token:at_at_chassis_0 = empire_market_choice}
-			set_variable = {price_of_item_@token:at_at_chassis_0 = 50}
+			set_variable = {price_of_item_@token:at_at_chassis_0 = 115}
 			KUA = {
 				add_to_array = {
 					array = Production_array@var:global.tank_market_category
@@ -773,9 +877,10 @@ on_actions = {
 				value = token:at_at_chassis_1
 			}
 			set_variable = {who_owns_item@token:at_at_chassis_1 = KUA}
-			set_variable = {ic_cost@token:at_at_chassis_1 = 50}
+			set_variable = {ic_cost@token:at_at_chassis_1 = 48}
 			set_variable = {belonging_to_what_faction@token:at_at_chassis_1 = empire_market_choice}
-			set_variable = {price_of_item_@token:at_at_chassis_1 = 150}
+			set_variable = {price_of_item_@token:at_at_chassis_1 = 122.5}
+			set_variable = {required_researched_technology@token:at_at_chassis_1 = token:at_at_advanced}
 			KUA = {
 				add_to_array = {
 					array = Production_array@var:global.tank_market_category
@@ -788,9 +893,9 @@ on_actions = {
 				value = token:at_aa_chassis_0
 			}
 			set_variable = {who_owns_item@token:at_aa_chassis_0 = ROT}
-			set_variable = {ic_cost@token:at_aa_chassis_0 = 50}
+			set_variable = {ic_cost@token:at_aa_chassis_0 = 36.4}
 			set_variable = {belonging_to_what_faction@token:at_aa_chassis_0 = empire_market_choice}
-			set_variable = {price_of_item_@token:at_aa_chassis_0 = 50}
+			set_variable = {price_of_item_@token:at_aa_chassis_0 = 93}
 			ROT = {
 				add_to_array = {
 					array = Production_array@var:global.tank_market_category
@@ -802,9 +907,10 @@ on_actions = {
 				value = token:at_aa_chassis_1
 			}
 			set_variable = {who_owns_item@token:at_aa_chassis_1 = ROT}
-			set_variable = {ic_cost@token:at_aa_chassis_1 = 50}
+			set_variable = {ic_cost@token:at_aa_chassis_1 = 38}
 			set_variable = {belonging_to_what_faction@token:at_aa_chassis_1 = empire_market_choice}
-			set_variable = {price_of_item_@token:at_aa_chassis_1 = 50}
+			set_variable = {price_of_item_@token:at_aa_chassis_1 = 95}
+			set_variable = {required_researched_technology@token:at_at_chassis_1 = token:at_aa_advanced}
 			ROT = {
 				add_to_array = {
 					array = Production_array@var:global.tank_market_category
@@ -817,9 +923,9 @@ on_actions = {
 				value = token:juggernaut_chassis_0
 			}
 			set_variable = {who_owns_item@token:juggernaut_chassis_0 = KUA}
-			set_variable = {ic_cost@token:juggernaut_chassis_0 = 50}
+			set_variable = {ic_cost@token:juggernaut_chassis_0 = 39.2}
 			set_variable = {belonging_to_what_faction@token:juggernaut_chassis_0 = empire_market_choice}
-			set_variable = {price_of_item_@token:juggernaut_chassis_0 = 50}
+			set_variable = {price_of_item_@token:juggernaut_chassis_0 = 100}
 			KUA = {
 				add_to_array = {
 					array = Production_array@var:global.tank_market_category
@@ -831,9 +937,10 @@ on_actions = {
 				value = token:juggernaut_chassis_1
 			}
 			set_variable = {who_owns_item@token:juggernaut_chassis_1 = KUA}
-			set_variable = {ic_cost@token:juggernaut_chassis_1 = 50}
+			set_variable = {ic_cost@token:juggernaut_chassis_1 = 40.3}
 			set_variable = {belonging_to_what_faction@token:juggernaut_chassis_1 = empire_market_choice}
-			set_variable = {price_of_item_@token:juggernaut_chassis_1 = 50}
+			set_variable = {price_of_item_@token:juggernaut_chassis_1 = 103}
+			set_variable = {required_researched_technology@token:at_at_chassis_1 = token:juggernaut_advanced}
 			KUA = {
 				add_to_array = {
 					array = Production_array@var:global.tank_market_category
@@ -846,9 +953,9 @@ on_actions = {
 				value = token:at_st_chassis_0
 			}
 			set_variable = {who_owns_item@token:at_st_chassis_0 = KUA}
-			set_variable = {ic_cost@token:at_st_chassis_0 = 50}
+			set_variable = {ic_cost@token:at_st_chassis_0 = 19}
 			set_variable = {belonging_to_what_faction@token:at_st_chassis_0 = empire_market_choice}
-			set_variable = {price_of_item_@token:at_st_chassis_0 = 50}
+			set_variable = {price_of_item_@token:at_st_chassis_0 = 45}
 			KUA = {
 				add_to_array = {
 					array = Production_array@var:global.tank_market_category
@@ -860,9 +967,10 @@ on_actions = {
 				value = token:at_st_chassis_1
 			}
 			set_variable = {who_owns_item@token:at_st_chassis_1 = KUA}
-			set_variable = {ic_cost@token:at_st_chassis_1 = 50}
+			set_variable = {ic_cost@token:at_st_chassis_1 = 20}
 			set_variable = {belonging_to_what_faction@token:at_st_chassis_1 = empire_market_choice}
-			set_variable = {price_of_item_@token:at_st_chassis_1 = 50}
+			set_variable = {price_of_item_@token:at_st_chassis_1 = 51}
+			set_variable = {required_researched_technology@token:at_at_chassis_1 = token:at_st_advanced}
 			KUA = {
 				add_to_array = {
 					array = Production_array@var:global.tank_market_category
@@ -875,9 +983,10 @@ on_actions = {
 				value = token:tx_130T_chassis_0
 			}
 			set_variable = {who_owns_item@token:tx_130T_chassis_0 = ROT}
-			set_variable = {ic_cost@token:tx_130T_chassis_0 = 50}
+			set_variable = {ic_cost@token:tx_130T_chassis_0 = 22.4}
 			set_variable = {belonging_to_what_faction@token:tx_130T_chassis_0 = empire_market_choice}
-			set_variable = {price_of_item_@token:tx_130T_chassis_0 = 50}
+			set_variable = {price_of_item_@token:tx_130T_chassis_0 = 52}
+			set_variable = {required_researched_technology@token:tx_130T_chassis_0 = token:tx_130T}
 			ROT = {
 				add_to_array = {
 					array = Production_array@var:global.tank_market_category
@@ -889,9 +998,10 @@ on_actions = {
 				value = token:tx_130T_chassis_1
 			}
 			set_variable = {who_owns_item@token:tx_130T_chassis_1 = ROT}
-			set_variable = {ic_cost@token:tx_130T_chassis_1 = 50}
+			set_variable = {ic_cost@token:tx_130T_chassis_1 = 23.5}
 			set_variable = {belonging_to_what_faction@token:tx_130T_chassis_1 = empire_market_choice}
-			set_variable = {price_of_item_@token:tx_130T_chassis_1 = 50}
+			set_variable = {price_of_item_@token:tx_130T_chassis_1 = 57}
+			set_variable = {required_researched_technology@token:tx_130T_chassis_1 = token:tx_130T_advanced}
 			ROT = {
 				add_to_array = {
 					array = Production_array@var:global.tank_market_category
@@ -904,9 +1014,9 @@ on_actions = {
 				value = token:at_dp_chassis_0
 			}
 			set_variable = {who_owns_item@token:at_dp_chassis_0 = KUA}
-			set_variable = {ic_cost@token:at_dp_chassis_0 = 50}
+			set_variable = {ic_cost@token:at_dp_chassis_0 = 7}
 			set_variable = {belonging_to_what_faction@token:at_dp_chassis_0 = empire_market_choice}
-			set_variable = {price_of_item_@token:at_dp_chassis_0 = 50}
+			set_variable = {price_of_item_@token:at_dp_chassis_0 = 18}
 			KUA = {
 				add_to_array = {
 					array = Production_array@var:global.tank_market_category
@@ -918,9 +1028,10 @@ on_actions = {
 				value = token:at_dp_chassis_1
 			}
 			set_variable = {who_owns_item@token:at_dp_chassis_1 = KUA}
-			set_variable = {ic_cost@token:at_dp_chassis_1 = 50}
+			set_variable = {ic_cost@token:at_dp_chassis_1 = 9.3}
 			set_variable = {belonging_to_what_faction@token:at_dp_chassis_1 = empire_market_choice}
-			set_variable = {price_of_item_@token:at_dp_chassis_1 = 50}
+			set_variable = {price_of_item_@token:at_dp_chassis_1 = 24}
+			set_variable = {required_researched_technology@token:at_dp_chassis_1 = token:at_dp_advanced}
 			KUA = {
 				add_to_array = {
 					array = Production_array@var:global.tank_market_category
@@ -933,9 +1044,10 @@ on_actions = {
 				value = token:tie_crawler_chassis_0
 			}
 			set_variable = {who_owns_item@token:tie_crawler_chassis_0 = SFS}
-			set_variable = {ic_cost@token:tie_crawler_chassis_0 = 50}
+			set_variable = {ic_cost@token:tie_crawler_chassis_0 = 9.2}
 			set_variable = {belonging_to_what_faction@token:tie_crawler_chassis_0 = empire_market_choice}
-			set_variable = {price_of_item_@token:tie_crawler_chassis_0 = 50}
+			set_variable = {price_of_item_@token:tie_crawler_chassis_0 = 23}
+			set_variable = {required_researched_technology@token:tie_crawler_chassis_1 = token:tie_crawler}
 			SFS = {
 				add_to_array = {
 					array = Production_array@var:global.tank_market_category
@@ -947,9 +1059,10 @@ on_actions = {
 				value = token:tie_crawler_chassis_1
 			}
 			set_variable = {who_owns_item@token:tie_crawler_chassis_1 = SFS}
-			set_variable = {ic_cost@token:tie_crawler_chassis_1 = 50}
+			set_variable = {ic_cost@token:tie_crawler_chassis_1 = 10.1}
 			set_variable = {belonging_to_what_faction@token:tie_crawler_chassis_1 = empire_market_choice}
-			set_variable = {price_of_item_@token:tie_crawler_chassis_1 = 50}
+			set_variable = {price_of_item_@token:tie_crawler_chassis_1 = 26}
+			set_variable = {required_researched_technology@token:tie_crawler_chassis_1 = token:tie_crawler_2}
 			SFS = {
 				add_to_array = {
 					array = Production_array@var:global.tank_market_category
@@ -963,9 +1076,9 @@ on_actions = {
 				value = token:IPV_1_1
 			}
 			set_variable = {who_owns_item@token:IPV_1_1 = SFS}
-			set_variable = {ic_cost@token:IPV_1_1 = 50}
+			set_variable = {ic_cost@token:IPV_1_1 = 18}
 			set_variable = {belonging_to_what_faction@token:IPV_1_1 = empire_market_choice}
-			set_variable = {price_of_item_@token:IPV_1_1 = 50}
+			set_variable = {price_of_item_@token:IPV_1_1 = 30}
 			SFS = {
 				add_to_array = {
 					array = Production_array@var:global.naval_market_category
@@ -977,9 +1090,9 @@ on_actions = {
 				value = token:gozanti_1
 			}
 			set_variable = {who_owns_item@token:gozanti_1 = COR}
-			set_variable = {ic_cost@token:gozanti_1 = 50}
+			set_variable = {ic_cost@token:gozanti_1 = 30}
 			set_variable = {belonging_to_what_faction@token:gozanti_1 = empire_market_choice}
-			set_variable = {price_of_item_@token:gozanti_1 = 50}
+			set_variable = {price_of_item_@token:gozanti_1 = 37.5}
 			COR = {
 				add_to_array = {
 					array = Production_array@var:global.naval_market_category
@@ -991,9 +1104,9 @@ on_actions = {
 				value = token:raider_1
 			}
 			set_variable = {who_owns_item@token:raider_1 = KUA}
-			set_variable = {ic_cost@token:raider_1 = 50}
+			set_variable = {ic_cost@token:raider_1 = 37}
 			set_variable = {belonging_to_what_faction@token:raider_1 = empire_market_choice}
-			set_variable = {price_of_item_@token:raider_1 = 50}
+			set_variable = {price_of_item_@token:raider_1 = 45}
 			KUA = {
 				add_to_array = {
 					array = Production_array@var:global.naval_market_category
@@ -1005,9 +1118,9 @@ on_actions = {
 				value = token:raider_2
 			}
 			set_variable = {who_owns_item@token:raider_2 = KUA}
-			set_variable = {ic_cost@token:raider_2 = 50}
+			set_variable = {ic_cost@token:raider_2 = 34}
 			set_variable = {belonging_to_what_faction@token:raider_2 = empire_market_choice}
-			set_variable = {price_of_item_@token:raider_2 = 50}
+			set_variable = {price_of_item_@token:raider_2 = 46.5}
 			KUA = {
 				add_to_array = {
 					array = Production_array@var:global.naval_market_category
@@ -1019,9 +1132,9 @@ on_actions = {
 				value = token:lancer_1
 			}
 			set_variable = {who_owns_item@token:lancer_1 = KUA}
-			set_variable = {ic_cost@token:lancer_1 = 50}
+			set_variable = {ic_cost@token:lancer_1 = 40}
 			set_variable = {belonging_to_what_faction@token:lancer_1 = empire_market_choice}
-			set_variable = {price_of_item_@token:lancer_1 = 50}
+			set_variable = {price_of_item_@token:lancer_1 = 52.5}
 			KUA = {
 				add_to_array = {
 					array = Production_array@var:global.naval_market_category
@@ -1033,9 +1146,9 @@ on_actions = {
 				value = token:arquitens_1
 			}
 			set_variable = {who_owns_item@token:arquitens_1 = KUA}
-			set_variable = {ic_cost@token:arquitens_1 = 50}
+			set_variable = {ic_cost@token:arquitens_1 = 73}
 			set_variable = {belonging_to_what_faction@token:arquitens_1 = empire_market_choice}
-			set_variable = {price_of_item_@token:arquitens_1 = 50}
+			set_variable = {price_of_item_@token:arquitens_1 = 90}
 			KUA = {
 				add_to_array = {
 					array = Production_array@var:global.naval_market_category
@@ -1047,9 +1160,9 @@ on_actions = {
 				value = token:interdictor_1
 			}
 			set_variable = {who_owns_item@token:interdictor_1 = SFS}
-			set_variable = {ic_cost@token:interdictor_1 = 50}
+			set_variable = {ic_cost@token:interdictor_1 = 115}
 			set_variable = {belonging_to_what_faction@token:interdictor_1 = empire_market_choice}
-			set_variable = {price_of_item_@token:interdictor_1 = 50}
+			set_variable = {price_of_item_@token:interdictor_1 = 130}
 			SFS = {
 				add_to_array = {
 					array = Production_array@var:global.naval_market_category
@@ -1061,9 +1174,9 @@ on_actions = {
 				value = token:dreadnaught_1
 			}
 			set_variable = {who_owns_item@token:dreadnaught_1 = REN}
-			set_variable = {ic_cost@token:dreadnaught_1 = 50}
+			set_variable = {ic_cost@token:dreadnaught_1 = 90}
 			set_variable = {belonging_to_what_faction@token:dreadnaught_1 = empire_market_choice}
-			set_variable = {price_of_item_@token:dreadnaught_1 = 50}
+			set_variable = {price_of_item_@token:dreadnaught_1 = 110}
 			REN = {
 				add_to_array = {
 					array = Production_array@var:global.naval_market_category
@@ -1075,9 +1188,9 @@ on_actions = {
 				value = token:victory_1
 			}
 			set_variable = {who_owns_item@token:victory_1 = KUA}
-			set_variable = {ic_cost@token:victory_1 = 50}
+			set_variable = {ic_cost@token:victory_1 = 130}
 			set_variable = {belonging_to_what_faction@token:victory_1 = empire_market_choice}
-			set_variable = {price_of_item_@token:victory_1 = 50}
+			set_variable = {price_of_item_@token:victory_1 = 150}
 			KUA = {
 				add_to_array = {
 					array = Production_array@var:global.naval_market_category
@@ -1089,9 +1202,9 @@ on_actions = {
 				value = token:victory_2
 			}
 			set_variable = {who_owns_item@token:victory_2 = KUA}
-			set_variable = {ic_cost@token:victory_2 = 50}
+			set_variable = {ic_cost@token:victory_2 = 135}
 			set_variable = {belonging_to_what_faction@token:victory_2 = empire_market_choice}
-			set_variable = {price_of_item_@token:victory_2 = 50}
+			set_variable = {price_of_item_@token:victory_2 = 155}
 			KUA = {
 				add_to_array = {
 					array = Production_array@var:global.naval_market_category
@@ -1103,9 +1216,9 @@ on_actions = {
 				value = token:isd_1
 			}
 			set_variable = {who_owns_item@token:isd_1 = KUA}
-			set_variable = {ic_cost@token:isd_1 = 50}
+			set_variable = {ic_cost@token:isd_1 = 235}
 			set_variable = {belonging_to_what_faction@token:isd_1 = empire_market_choice}
-			set_variable = {price_of_item_@token:isd_1 = 50}
+			set_variable = {price_of_item_@token:isd_1 = 260}
 			KUA = {
 				add_to_array = {
 					array = Production_array@var:global.naval_market_category
@@ -1117,9 +1230,9 @@ on_actions = {
 				value = token:isd_2
 			}
 			set_variable = {who_owns_item@token:isd_2 = KUA}
-			set_variable = {ic_cost@token:isd_2 = 50}
+			set_variable = {ic_cost@token:isd_2 = 250}
 			set_variable = {belonging_to_what_faction@token:isd_2 = empire_market_choice}
-			set_variable = {price_of_item_@token:isd_2 = 50}
+			set_variable = {price_of_item_@token:isd_2 = 275}
 			KUA = {
 				add_to_array = {
 					array = Production_array@var:global.naval_market_category
@@ -1131,9 +1244,9 @@ on_actions = {
 				value = token:resurgent_1
 			}
 			set_variable = {who_owns_item@token:resurgent_1 = KUA}
-			set_variable = {ic_cost@token:resurgent_1 = 50}
+			set_variable = {ic_cost@token:resurgent_1 = 335}
 			set_variable = {belonging_to_what_faction@token:resurgent_1 = empire_market_choice}
-			set_variable = {price_of_item_@token:resurgent_1 = 50}
+			set_variable = {price_of_item_@token:resurgent_1 = 355}
 			KUA = {
 				add_to_array = {
 					array = Production_array@var:global.naval_market_category
@@ -1145,9 +1258,9 @@ on_actions = {
 				value = token:praetor_1
 			}
 			set_variable = {who_owns_item@token:praetor_1 = KUA}
-			set_variable = {ic_cost@token:praetor_1 = 50}
+			set_variable = {ic_cost@token:praetor_1 = 340}
 			set_variable = {belonging_to_what_faction@token:praetor_1 = empire_market_choice}
-			set_variable = {price_of_item_@token:praetor_1 = 50}
+			set_variable = {price_of_item_@token:praetor_1 = 350}
 			KUA = {
 				add_to_array = {
 					array = Production_array@var:global.naval_market_category
@@ -1161,9 +1274,10 @@ on_actions = {
 				value = token:tie_defender_airframe_0
 			}
 			set_variable = {who_owns_item@token:tie_defender_airframe_0 = SFS}
-			set_variable = {ic_cost@token:tie_defender_airframe_0 = 50}
+			set_variable = {ic_cost@token:tie_defender_airframe_0 = 28.4}
 			set_variable = {belonging_to_what_faction@token:tie_defender_airframe_0 = empire_market_choice}
-			set_variable = {price_of_item_@token:tie_defender_airframe_0 = 50}
+			set_variable = {price_of_item_@token:tie_defender_airframe_0 = 71}
+			set_variable = {required_researched_technology@token:tie_defender_airframe_0 = token:tie_defender}
 			KUA = {
 				add_to_array = {
 					array = Production_array@var:global.air_market_category
@@ -1175,9 +1289,10 @@ on_actions = {
 				value = token:tie_phantom_airframe_0
 			}
 			set_variable = {who_owns_item@token:tie_phantom_airframe_0 = SFS}
-			set_variable = {ic_cost@token:tie_phantom_airframe_0 = 50}
+			set_variable = {ic_cost@token:tie_phantom_airframe_0 = 32.4}
 			set_variable = {belonging_to_what_faction@token:tie_phantom_airframe_0 = empire_market_choice}
-			set_variable = {price_of_item_@token:tie_phantom_airframe_0 = 50}
+			set_variable = {price_of_item_@token:tie_phantom_airframe_0 = 82}
+			set_variable = {required_researched_technology@token:tie_defender_airframe_0 = token:tie_phantom}
 			SFS = {
 				add_to_array = {
 					array = Production_array@var:global.air_market_category
@@ -1189,9 +1304,10 @@ on_actions = {
 				value = token:tie_automated_airframe_0
 			}
 			set_variable = {who_owns_item@token:tie_automated_airframe_0 = SFS}
-			set_variable = {ic_cost@token:tie_automated_airframe_0 = 50}
+			set_variable = {ic_cost@token:tie_automated_airframe_0 = 20.4}
 			set_variable = {belonging_to_what_faction@token:tie_automated_airframe_0 = empire_market_choice}
-			set_variable = {price_of_item_@token:tie_automated_airframe_0 = 50}
+			set_variable = {price_of_item_@token:tie_automated_airframe_0 = 51}
+			set_variable = {required_researched_technology@token:tie_defender_airframe_0 = token:tie_automated}
 			SFS = {
 				add_to_array = {
 					array = Production_array@var:global.air_market_category
@@ -1203,9 +1319,10 @@ on_actions = {
 				value = token:tie_automated_airframe_1
 			}
 			set_variable = {who_owns_item@token:tie_automated_airframe_1 = SFS}
-			set_variable = {ic_cost@token:tie_automated_airframe_1 = 50}
+			set_variable = {ic_cost@token:tie_automated_airframe_1 = 21.4}
 			set_variable = {belonging_to_what_faction@token:tie_automated_airframe_1 = empire_market_choice}
-			set_variable = {price_of_item_@token:tie_automated_airframe_1 = 50}
+			set_variable = {price_of_item_@token:tie_automated_airframe_1 = 54}
+			set_variable = {required_researched_technology@token:tie_automated_airframe_1 = token:tie_hunter}
 			SFS = {
 				add_to_array = {
 					array = Production_array@var:global.air_market_category
@@ -1217,9 +1334,9 @@ on_actions = {
 				value = token:tie_fighter_airframe_0
 			}
 			set_variable = {who_owns_item@token:tie_fighter_airframe_0 = SFS}
-			set_variable = {ic_cost@token:tie_fighter_airframe_0 = 50}
+			set_variable = {ic_cost@token:tie_fighter_airframe_0 = 17.4}
 			set_variable = {belonging_to_what_faction@token:tie_fighter_airframe_0 = empire_market_choice}
-			set_variable = {price_of_item_@token:tie_fighter_airframe_0 = 50}
+			set_variable = {price_of_item_@token:tie_fighter_airframe_0 = 44}
 			SFS = {
 				add_to_array = {
 					array = Production_array@var:global.air_market_category
@@ -1231,9 +1348,10 @@ on_actions = {
 				value = token:tie_fighter_airframe_1
 			}
 			set_variable = {who_owns_item@token:tie_fighter_airframe_1 = SFS}
-			set_variable = {ic_cost@token:tie_fighter_airframe_1 = 50}
+			set_variable = {ic_cost@token:tie_fighter_airframe_1 = 19.4}
 			set_variable = {belonging_to_what_faction@token:tie_fighter_airframe_1 = empire_market_choice}
-			set_variable = {price_of_item_@token:tie_fighter_airframe_1 = 50}
+			set_variable = {price_of_item_@token:tie_fighter_airframe_1 = 48}
+			set_variable = {required_researched_technology@token:tie_fighter_airframe_1 = token:tie_fighter_2}
 			SFS = {
 				add_to_array = {
 					array = Production_array@var:global.air_market_category
@@ -1245,65 +1363,73 @@ on_actions = {
 				value = token:tie_fighter_airframe_2
 			}
 			set_variable = {who_owns_item@token:tie_fighter_airframe_2 = SFS}
-			set_variable = {ic_cost@token:tie_fighter_airframe_2 = 50}
+			set_variable = {ic_cost@token:tie_fighter_airframe_2 = 22.3}
 			set_variable = {belonging_to_what_faction@token:tie_fighter_airframe_2 = empire_market_choice}
-			set_variable = {price_of_item_@token:tie_fighter_airframe_2 = 50}
+			set_variable = {price_of_item_@token:tie_fighter_airframe_2 = 52}
+			set_variable = {required_researched_technology@token:tie_fighter_airframe_2 = token:tie_dagger}
 			SFS = {
 				add_to_array = {
 					array = Production_array@var:global.air_market_category
 					value = token:tie_fighter_airframe_2
 				}
 			}
+
 			add_to_array = {
 				array = Global.Market_array@var:global.air_market_category
 				value = token:tie_fighter_airframe_3
 			}
 			set_variable = {who_owns_item@token:tie_fighter_airframe_3 = SFS}
-			set_variable = {ic_cost@token:tie_fighter_airframe_3 = 50}
+			set_variable = {ic_cost@token:tie_fighter_airframe_3 = 24.3}
 			set_variable = {belonging_to_what_faction@token:tie_fighter_airframe_3 = empire_market_choice}
-			set_variable = {price_of_item_@token:tie_fighter_airframe_3 = 50}
+			set_variable = {price_of_item_@token:tie_fighter_airframe_3 = 56}
+			set_variable = {required_researched_technology@token:tie_fighter_airframe_3 = token:tie_predator}
 			SFS = {
 				add_to_array = {
 					array = Production_array@var:global.air_market_category
 					value = token:tie_fighter_airframe_3
 				}
 			}
+
 			add_to_array = {
 				array = Global.Market_array@var:global.air_market_category
 				value = token:tie_interceptor_airframe_0
 			}
 			set_variable = {who_owns_item@token:tie_interceptor_airframe_0 = SFS}
-			set_variable = {ic_cost@token:tie_interceptor_airframe_0 = 50}
+			set_variable = {ic_cost@token:tie_interceptor_airframe_0 = 18.1}
 			set_variable = {belonging_to_what_faction@token:tie_interceptor_airframe_0 = empire_market_choice}
-			set_variable = {price_of_item_@token:tie_interceptor_airframe_0 = 50}
+			set_variable = {price_of_item_@token:tie_interceptor_airframe_0 = 45}
 			SFS = {
 				add_to_array = {
 					array = Production_array@var:global.air_market_category
 					value = token:tie_interceptor_airframe_0
 				}
 			}
+
 			add_to_array = {
 				array = Global.Market_array@var:global.air_market_category
 				value = token:tie_interceptor_airframe_1
 			}
 			set_variable = {who_owns_item@token:tie_interceptor_airframe_1 = SFS}
-			set_variable = {ic_cost@token:tie_interceptor_airframe_1 = 50}
+			set_variable = {ic_cost@token:tie_interceptor_airframe_1 = 20.7}
 			set_variable = {belonging_to_what_faction@token:tie_interceptor_airframe_1 = empire_market_choice}
-			set_variable = {price_of_item_@token:tie_interceptor_airframe_1 = 50}
+			set_variable = {price_of_item_@token:tie_interceptor_airframe_1 = 52}
+			set_variable = {required_researched_technology@token:tie_interceptor_airframe_1 = token:tie_hunter}
 			SFS = {
 				add_to_array = {
 					array = Production_array@var:global.air_market_category
 					value = token:tie_interceptor_airframe_1
 				}
 			}
+
 			add_to_array = {
 				array = Global.Market_array@var:global.air_market_category
 				value = token:tie_interceptor_airframe_2
 			}
 			set_variable = {who_owns_item@token:tie_interceptor_airframe_2 = SFS}
-			set_variable = {ic_cost@token:tie_interceptor_airframe_2 = 50}
+			set_variable = {ic_cost@token:tie_interceptor_airframe_2 = 20.7}
 			set_variable = {belonging_to_what_faction@token:tie_interceptor_airframe_2 = empire_market_choice}
-			set_variable = {price_of_item_@token:tie_interceptor_airframe_2 = 50}
+			set_variable = {price_of_item_@token:tie_interceptor_airframe_2 = 58}
+			set_variable = {required_researched_technology@token:tie_interceptor_airframe_2 = token:tie_raptor}
 			SFS = {
 				add_to_array = {
 					array = Production_array@var:global.air_market_category
@@ -1315,23 +1441,27 @@ on_actions = {
 				value = token:tie_interceptor_airframe_3
 			}
 			set_variable = {who_owns_item@token:tie_interceptor_airframe_3 = SFS}
-			set_variable = {ic_cost@token:tie_interceptor_airframe_3 = 50}
+			set_variable = {ic_cost@token:tie_interceptor_airframe_3 = 23.4}
 			set_variable = {belonging_to_what_faction@token:tie_interceptor_airframe_3 = empire_market_choice}
-			set_variable = {price_of_item_@token:tie_interceptor_airframe_3 = 50}
+			set_variable = {price_of_item_@token:tie_interceptor_airframe_3 = 62}
+			set_variable = {required_researched_technology@token:tie_interceptor_airframe_3 = token:tie_silencer}
 			SFS = {
 				add_to_array = {
 					array = Production_array@var:global.air_market_category
 					value = token:tie_interceptor_airframe_3
 				}
 			}
+
+
+			
 			add_to_array = {
 				array = Global.Market_array@var:global.air_market_category
 				value = token:tie_fighterbomber_airframe_0
 			}
 			set_variable = {who_owns_item@token:tie_fighterbomber_airframe_0 = SFS}
-			set_variable = {ic_cost@token:tie_fighterbomber_airframe_0 = 50}
+			set_variable = {ic_cost@token:tie_fighterbomber_airframe_0 = 24.4}
 			set_variable = {belonging_to_what_faction@token:tie_fighterbomber_airframe_0 = empire_market_choice}
-			set_variable = {price_of_item_@token:tie_fighterbomber_airframe_0 = 50}
+			set_variable = {price_of_item_@token:tie_fighterbomber_airframe_0 = 62}
 			SFS = {
 				add_to_array = {
 					array = Production_array@var:global.air_market_category
@@ -1343,51 +1473,57 @@ on_actions = {
 				value = token:tie_fighterbomber_airframe_1
 			}
 			set_variable = {who_owns_item@token:tie_fighterbomber_airframe_1 = SFS}
-			set_variable = {ic_cost@token:tie_fighterbomber_airframe_1 = 50}
+			set_variable = {ic_cost@token:tie_fighterbomber_airframe_1 = 26.4}
 			set_variable = {belonging_to_what_faction@token:tie_fighterbomber_airframe_1 = empire_market_choice}
-			set_variable = {price_of_item_@token:tie_fighterbomber_airframe_1 = 50}
+			set_variable = {price_of_item_@token:tie_fighterbomber_airframe_1 = 66}
+			set_variable = {required_researched_technology@token:tie_fighterbomber_airframe_1 = token:tie_oppressor}
 			SFS = {
 				add_to_array = {
 					array = Production_array@var:global.air_market_category
 					value = token:tie_fighterbomber_airframe_1
 				}
 			}
+
 			add_to_array = {
 				array = Global.Market_array@var:global.air_market_category
 				value = token:tie_fighterbomber_airframe_2
 			}
 			set_variable = {who_owns_item@token:tie_fighterbomber_airframe_2 = SFS}
-			set_variable = {ic_cost@token:tie_fighterbomber_airframe_2 = 50}
+			set_variable = {ic_cost@token:tie_fighterbomber_airframe_2 = 28.4}
 			set_variable = {belonging_to_what_faction@token:tie_fighterbomber_airframe_2 = empire_market_choice}
-			set_variable = {price_of_item_@token:tie_fighterbomber_airframe_2 = 50}
+			set_variable = {price_of_item_@token:tie_fighterbomber_airframe_2 = 70}
+			set_variable = {required_researched_technology@token:tie_fighterbomber_airframe_2 = token:tie_aggressor}
 			SFS = {
 				add_to_array = {
 					array = Production_array@var:global.air_market_category
 					value = token:tie_fighterbomber_airframe_2
 				}
 			}
+
 			add_to_array = {
 				array = Global.Market_array@var:global.air_market_category
 				value = token:tie_bomber_airframe_0
 			}
 			set_variable = {who_owns_item@token:tie_bomber_airframe_0 = SFS}
-			set_variable = {ic_cost@token:tie_bomber_airframe_0 = 50}
+			set_variable = {ic_cost@token:tie_bomber_airframe_0 = 19.8}
 			set_variable = {belonging_to_what_faction@token:tie_bomber_airframe_0 = empire_market_choice}
-			set_variable = {price_of_item_@token:tie_bomber_airframe_0 = 50}
+			set_variable = {price_of_item_@token:tie_bomber_airframe_0 = 55}
 			SFS = {
 				add_to_array = {
 					array = Production_array@var:global.air_market_category
 					value = token:tie_bomber_airframe_0
 				}
 			}
+
 			add_to_array = {
 				array = Global.Market_array@var:global.air_market_category
 				value = token:tie_bomber_airframe_1
 			}
 			set_variable = {who_owns_item@token:tie_bomber_airframe_1 = SFS}
-			set_variable = {ic_cost@token:tie_bomber_airframe_1 = 50}
+			set_variable = {ic_cost@token:tie_bomber_airframe_1 = 23.4}
 			set_variable = {belonging_to_what_faction@token:tie_bomber_airframe_1 = empire_market_choice}
-			set_variable = {price_of_item_@token:tie_bomber_airframe_1 = 50}
+			set_variable = {price_of_item_@token:tie_bomber_airframe_1 = 60}
+			set_variable = {required_researched_technology@token:tie_bomber_airframe_1 = token:tie_heavy_bomber}
 			SFS = {
 				add_to_array = {
 					array = Production_array@var:global.air_market_category
@@ -1399,29 +1535,33 @@ on_actions = {
 				value = token:tie_bomber_airframe_2
 			}
 			set_variable = {who_owns_item@token:tie_bomber_airframe_2 = SFS}
-			set_variable = {ic_cost@token:tie_bomber_airframe_2 = 50}
+			set_variable = {ic_cost@token:tie_bomber_airframe_2 = 26.4}
 			set_variable = {belonging_to_what_faction@token:tie_bomber_airframe_2 = empire_market_choice}
-			set_variable = {price_of_item_@token:tie_bomber_airframe_2 = 50}
+			set_variable = {price_of_item_@token:tie_bomber_airframe_2 = 65}
+			set_variable = {required_researched_technology@token:tie_bomber_airframe_2 = token:tie_punisher}
 			SFS = {
 				add_to_array = {
 					array = Production_array@var:global.air_market_category
 					value = token:tie_bomber_airframe_2
 				}
 			}
+
 			add_to_array = {
 				array = Global.Market_array@var:global.air_market_category
 				value = token:tie_bomber_airframe_3
 			}
 			set_variable = {who_owns_item@token:tie_bomber_airframe_3 = SFS}
-			set_variable = {ic_cost@token:tie_bomber_airframe_3 = 50}
+			set_variable = {ic_cost@token:tie_bomber_airframe_3 = 30.4}
 			set_variable = {belonging_to_what_faction@token:tie_bomber_airframe_3 = empire_market_choice}
-			set_variable = {price_of_item_@token:tie_bomber_airframe_3 = 50}
+			set_variable = {price_of_item_@token:tie_bomber_airframe_3 = 70}
+			set_variable = {required_researched_technology@token:tie_bomber_airframe_3 = token:tie_scimitar}
 			SFS = {
 				add_to_array = {
 					array = Production_array@var:global.air_market_category
 					value = token:tie_bomber_airframe_3
 				}
 			}
+			
 	## NEUTRAL
 		## TANKS
 			add_to_array = {
@@ -1429,7 +1569,7 @@ on_actions = {
 				value = token:aat_chassis_0
 			}
 			set_variable = {who_owns_item@token:aat_chassis_0 = UBK}
-			set_variable = {ic_cost@token:aat_chassis_0 = 50}
+			set_variable = {ic_cost@token:aat_chassis_0 = 36}
 			set_variable = {belonging_to_what_faction@token:aat_chassis_0 = neutral_market_choice}
 			set_variable = {price_of_item_@token:aat_chassis_0 = 37}
 			UBK = {
@@ -1443,7 +1583,7 @@ on_actions = {
 				value = token:aat_chassis_1
 			}
 			set_variable = {who_owns_item@token:aat_chassis_1 = UBK}
-			set_variable = {ic_cost@token:aat_chassis_1 = 50}
+			set_variable = {ic_cost@token:aat_chassis_1 = 38}
 			set_variable = {belonging_to_what_faction@token:aat_chassis_1 = neutral_market_choice}
 			set_variable = {price_of_item_@token:aat_chassis_1 = 38.5}
 			UBK = {
@@ -1457,7 +1597,7 @@ on_actions = {
 				value = token:a_25_truck_chassis_0
 			}
 			set_variable = {who_owns_item@token:a_25_truck_chassis_0 = TAG}
-			set_variable = {ic_cost@token:a_25_truck_chassis_0 = 50}
+			set_variable = {ic_cost@token:a_25_truck_chassis_0 = 15}
 			set_variable = {belonging_to_what_faction@token:a_25_truck_chassis_0 = neutral_market_choice}
 			set_variable = {price_of_item_@token:a_25_truck_chassis_0 = 20}
 			TAG = {
@@ -1471,7 +1611,7 @@ on_actions = {
 				value = token:a_25_truck_chassis_1
 			}
 			set_variable = {who_owns_item@token:a_25_truck_chassis_1 = TAG}
-			set_variable = {ic_cost@token:a_25_truck_chassis_1 = 50}
+			set_variable = {ic_cost@token:a_25_truck_chassis_1 = 16.5}
 			set_variable = {belonging_to_what_faction@token:a_25_truck_chassis_1 = neutral_market_choice}
 			set_variable = {price_of_item_@token:a_25_truck_chassis_1 = 27}
 			TAG = {
@@ -1485,7 +1625,7 @@ on_actions = {
 				value = token:x_34_landspeeder_chassis_0
 			}
 			set_variable = {who_owns_item@token:x_34_landspeeder_chassis_0 = TAG}
-			set_variable = {ic_cost@token:x_34_landspeeder_chassis_0 = 50}
+			set_variable = {ic_cost@token:x_34_landspeeder_chassis_0 = 7}
 			set_variable = {belonging_to_what_faction@token:x_34_landspeeder_chassis_0 = neutral_market_choice}
 			set_variable = {price_of_item_@token:x_34_landspeeder_chassis_0 = 15}
 			TAG = {
@@ -1499,7 +1639,7 @@ on_actions = {
 				value = token:x_34_landspeeder_chassis_1
 			}
 			set_variable = {who_owns_item@token:x_34_landspeeder_chassis_1 = TAG}
-			set_variable = {ic_cost@token:x_34_landspeeder_chassis_1 = 50}
+			set_variable = {ic_cost@token:x_34_landspeeder_chassis_1 = 8.6}
 			set_variable = {belonging_to_what_faction@token:x_34_landspeeder_chassis_1 = neutral_market_choice}
 			set_variable = {price_of_item_@token:x_34_landspeeder_chassis_1 = 16.5}
 			TAG = {
@@ -1585,9 +1725,9 @@ on_actions = {
 				value = token:z_95_airframe_0
 			}
 			set_variable = {who_owns_item@token:z_95_airframe_0 = INC}
-			set_variable = {ic_cost@token:z_95_airframe_0 = 50}
+			set_variable = {ic_cost@token:z_95_airframe_0 = 17.2}
 			set_variable = {belonging_to_what_faction@token:z_95_airframe_0 = neutral_market_choice}
-			set_variable = {price_of_item_@token:z_95_airframe_0 = 50}
+			set_variable = {price_of_item_@token:z_95_airframe_0 = 40}
 			INC = {
 				add_to_array = {
 					array = Production_array@var:global.air_market_category
@@ -1599,9 +1739,9 @@ on_actions = {
 				value = token:z_95_airframe_1
 			}
 			set_variable = {who_owns_item@token:z_95_airframe_1 = INC}
-			set_variable = {ic_cost@token:z_95_airframe_1 = 50}
+			set_variable = {ic_cost@token:z_95_airframe_1 = 19.2}
 			set_variable = {belonging_to_what_faction@token:z_95_airframe_1 = neutral_market_choice}
-			set_variable = {price_of_item_@token:z_95_airframe_1 = 50}
+			set_variable = {price_of_item_@token:z_95_airframe_1 = 44}
 			INC = {
 				add_to_array = {
 					array = Production_array@var:global.air_market_category
@@ -1614,9 +1754,9 @@ on_actions = {
 				value = token:v_wing_airframe_0
 			}
 			set_variable = {who_owns_item@token:v_wing_airframe_0 = KUA}
-			set_variable = {ic_cost@token:v_wing_airframe_0 = 50}
+			set_variable = {ic_cost@token:v_wing_airframe_0 = 16.0}
 			set_variable = {belonging_to_what_faction@token:v_wing_airframe_0 = neutral_market_choice}
-			set_variable = {price_of_item_@token:v_wing_airframe_0 = 50}
+			set_variable = {price_of_item_@token:v_wing_airframe_0 = 38}
 			KUA = {
 				add_to_array = {
 					array = Production_array@var:global.air_market_category
@@ -1628,9 +1768,9 @@ on_actions = {
 				value = token:v_wing_airframe_1
 			}
 			set_variable = {who_owns_item@token:v_wing_airframe_1 = KUA}
-			set_variable = {ic_cost@token:v_wing_airframe_1 = 50}
+			set_variable = {ic_cost@token:v_wing_airframe_1 = 16.8}
 			set_variable = {belonging_to_what_faction@token:v_wing_airframe_1 = neutral_market_choice}
-			set_variable = {price_of_item_@token:v_wing_airframe_1 = 50}
+			set_variable = {price_of_item_@token:v_wing_airframe_1 = 44}
 			KUA = {
 				add_to_array = {
 					array = Production_array@var:global.air_market_category
@@ -1643,9 +1783,9 @@ on_actions = {
 				value = token:star_fortress_airframe_0
 			}
 			set_variable = {who_owns_item@token:star_fortress_airframe_0 = SLK}
-			set_variable = {ic_cost@token:star_fortress_airframe_0 = 50}
+			set_variable = {ic_cost@token:star_fortress_airframe_0 = 24}
 			set_variable = {belonging_to_what_faction@token:star_fortress_airframe_0 = neutral_market_choice}
-			set_variable = {price_of_item_@token:star_fortress_airframe_0 = 50}
+			set_variable = {price_of_item_@token:star_fortress_airframe_0 = 60}
 			SLK = {
 				add_to_array = {
 					array = Production_array@var:global.air_market_category
@@ -1657,9 +1797,9 @@ on_actions = {
 				value = token:star_fortress_airframe_1
 			}
 			set_variable = {who_owns_item@token:star_fortress_airframe_1 = SLK}
-			set_variable = {ic_cost@token:star_fortress_airframe_1 = 50}
+			set_variable = {ic_cost@token:star_fortress_airframe_1 = 26}
 			set_variable = {belonging_to_what_faction@token:star_fortress_airframe_1 = neutral_market_choice}
-			set_variable = {price_of_item_@token:star_fortress_airframe_1 = 50}
+			set_variable = {price_of_item_@token:star_fortress_airframe_1 = 65}
 			SLK = {
 				add_to_array = {
 					array = Production_array@var:global.air_market_category
@@ -1672,9 +1812,24 @@ on_actions = {
 				value = token:infantry_equipment_1
 			}
 			set_variable = {who_owns_item@token:infantry_equipment_1 = CZE}
-			set_variable = {ic_cost@token:infantry_equipment_1 = 5}
+			set_variable = {ic_cost@token:infantry_equipment_1 = 0.8}
 			set_variable = {belonging_to_what_faction@token:infantry_equipment_1 = neutral_market_choice}
-			set_variable = {price_of_item_@token:infantry_equipment_1 = 15}
+			set_variable = {price_of_item_@token:infantry_equipment_1 = 2}
+			CZE = {
+				add_to_array = {
+					array = Production_array@var:global.land_market_category
+					value = token:infantry_equipment_1
+				}
+			}
+
+			add_to_array = {
+				array = Global.Market_array@var:global.land_market_category
+				value = token:infantry_equipment_1
+			}
+			set_variable = {who_owns_item@token:infantry_equipment_1 = CZE}
+			set_variable = {ic_cost@token:infantry_equipment_1 = 0.84}
+			set_variable = {belonging_to_what_faction@token:infantry_equipment_1 = neutral_market_choice}
+			set_variable = {price_of_item_@token:infantry_equipment_1 = 2.2}
 			CZE = {
 				add_to_array = {
 					array = Production_array@var:global.land_market_category
@@ -1687,9 +1842,9 @@ on_actions = {
 				value = token:infantry_equipment_2
 			}
 			set_variable = {who_owns_item@token:infantry_equipment_2 = CZE}
-			set_variable = {ic_cost@token:infantry_equipment_2 = 5}
+			set_variable = {ic_cost@token:infantry_equipment_2 = 0.88}
 			set_variable = {belonging_to_what_faction@token:infantry_equipment_2 = neutral_market_choice}
-			set_variable = {price_of_item_@token:infantry_equipment_2 = 15}
+			set_variable = {price_of_item_@token:infantry_equipment_2 = 2.4}
 			CZE = {
 				add_to_array = {
 					array = Production_array@var:global.land_market_category
@@ -1702,9 +1857,9 @@ on_actions = {
 				value = token:infantry_equipment_3
 			}
 			set_variable = {who_owns_item@token:infantry_equipment_3 = CZE}
-			set_variable = {ic_cost@token:infantry_equipment_3 = 5}
+			set_variable = {ic_cost@token:infantry_equipment_3 = 0.92}
 			set_variable = {belonging_to_what_faction@token:infantry_equipment_3 = neutral_market_choice}
-			set_variable = {price_of_item_@token:infantry_equipment_3 = 15}
+			set_variable = {price_of_item_@token:infantry_equipment_3 = 2.5}
 			CZE = {
 				add_to_array = {
 					array = Production_array@var:global.land_market_category
@@ -1717,9 +1872,9 @@ on_actions = {
 				value = token:infantry_equipment_4
 			}
 			set_variable = {who_owns_item@token:infantry_equipment_4 = CZE}
-			set_variable = {ic_cost@token:infantry_equipment_4 = 5}
+			set_variable = {ic_cost@token:infantry_equipment_4 = 0.96}
 			set_variable = {belonging_to_what_faction@token:infantry_equipment_4 = neutral_market_choice}
-			set_variable = {price_of_item_@token:infantry_equipment_4 = 15}
+			set_variable = {price_of_item_@token:infantry_equipment_4 = 2.7}
 			CZE = {
 				add_to_array = {
 					array = Production_array@var:global.land_market_category
@@ -1730,15 +1885,15 @@ on_actions = {
 
 
 
-		## INF weapons
+	## INF weapons
 			add_to_array = {
 				array = Global.Market_array@var:global.land_market_category
 				value = token:infantry_equipment_empire_0
 			}
 			set_variable = {who_owns_item@token:infantry_equipment_empire_0 = BLS}
-			set_variable = {ic_cost@token:infantry_equipment_empire_0 = 5}
+			set_variable = {ic_cost@token:infantry_equipment_empire_0 = 0.8}
 			set_variable = {belonging_to_what_faction@token:infantry_equipment_empire_0 = neutral_market_choice}
-			set_variable = {price_of_item_@token:infantry_equipment_empire_0 = 15}
+			set_variable = {price_of_item_@token:infantry_equipment_empire_0 = 2}
 			BLS = {
 				add_to_array = {
 					array = Production_array@var:global.land_market_category
@@ -1751,9 +1906,9 @@ on_actions = {
 				value = token:infantry_equipment_empire_1
 			}
 			set_variable = {who_owns_item@token:infantry_equipment_empire_1 = BLS}
-			set_variable = {ic_cost@token:infantry_equipment_empire_1 = 5}
+			set_variable = {ic_cost@token:infantry_equipment_empire_1 = 0.84}
 			set_variable = {belonging_to_what_faction@token:infantry_equipment_empire_1 = neutral_market_choice}
-			set_variable = {price_of_item_@token:infantry_equipment_empire_1 = 15}
+			set_variable = {price_of_item_@token:infantry_equipment_empire_1 = 2.2}
 			BLS = {
 				add_to_array = {
 					array = Production_array@var:global.land_market_category
@@ -1766,9 +1921,9 @@ on_actions = {
 				value = token:infantry_equipment_empire_2
 			}
 			set_variable = {who_owns_item@token:infantry_equipment_empire_2 = BLS}
-			set_variable = {ic_cost@token:infantry_equipment_empire_2 = 5}
+			set_variable = {ic_cost@token:infantry_equipment_empire_2 = 0.88}
 			set_variable = {belonging_to_what_faction@token:infantry_equipment_empire_2 = neutral_market_choice}
-			set_variable = {price_of_item_@token:infantry_equipment_empire_2 = 15}
+			set_variable = {price_of_item_@token:infantry_equipment_empire_2 = 2.4}
 			BLS = {
 				add_to_array = {
 					array = Production_array@var:global.land_market_category
@@ -1781,9 +1936,9 @@ on_actions = {
 				value = token:infantry_equipment_empire_3
 			}
 			set_variable = {who_owns_item@token:infantry_equipment_empire_3 = BLS}
-			set_variable = {ic_cost@token:infantry_equipment_empire_3 = 5}
+			set_variable = {ic_cost@token:infantry_equipment_empire_3 = 0.92}
 			set_variable = {belonging_to_what_faction@token:infantry_equipment_empire_3 = neutral_market_choice}
-			set_variable = {price_of_item_@token:infantry_equipment_empire_3 = 15}
+			set_variable = {price_of_item_@token:infantry_equipment_empire_3 = 2.5}
 			BLS = {
 				add_to_array = {
 					array = Production_array@var:global.land_market_category
@@ -1796,9 +1951,9 @@ on_actions = {
 				value = token:infantry_equipment_empire_4
 			}
 			set_variable = {who_owns_item@token:infantry_equipment_empire_4 = BLS}
-			set_variable = {ic_cost@token:infantry_equipment_empire_4 = 5}
+			set_variable = {ic_cost@token:infantry_equipment_empire_4 = 0.96}
 			set_variable = {belonging_to_what_faction@token:infantry_equipment_empire_4 = neutral_market_choice}
-			set_variable = {price_of_item_@token:infantry_equipment_empire_4 = 15}
+			set_variable = {price_of_item_@token:infantry_equipment_empire_4 = 2.7}
 			BLS = {
 				add_to_array = {
 					array = Production_array@var:global.land_market_category
@@ -1815,9 +1970,9 @@ on_actions = {
 				value = token:infantry_equipment_republic_0
 			}
 			set_variable = {who_owns_item@token:infantry_equipment_republic_0 = BLS}
-			set_variable = {ic_cost@token:infantry_equipment_republic_0 = 5}
+			set_variable = {ic_cost@token:infantry_equipment_republic_0 = 0.8}
 			set_variable = {belonging_to_what_faction@token:infantry_equipment_republic_0 = neutral_market_choice}
-			set_variable = {price_of_item_@token:infantry_equipment_republic_0 = 15}
+			set_variable = {price_of_item_@token:infantry_equipment_republic_0 = 2}
 			BLS = {
 				add_to_array = {
 					array = Production_array@var:global.land_market_category
@@ -1830,9 +1985,9 @@ on_actions = {
 				value = token:infantry_equipment_republic_1
 			}
 			set_variable = {who_owns_item@token:infantry_equipment_republic_1 = BLS}
-			set_variable = {ic_cost@token:infantry_equipment_republic_1 = 5}
+			set_variable = {ic_cost@token:infantry_equipment_republic_1 = 0.84}
 			set_variable = {belonging_to_what_faction@token:infantry_equipment_republic_1 = neutral_market_choice}
-			set_variable = {price_of_item_@token:infantry_equipment_republic_1 = 15}
+			set_variable = {price_of_item_@token:infantry_equipment_republic_1 = 2.2}
 			BLS = {
 				add_to_array = {
 					array = Production_array@var:global.land_market_category
@@ -1845,9 +2000,9 @@ on_actions = {
 				value = token:infantry_equipment_republic_2
 			}
 			set_variable = {who_owns_item@token:infantry_equipment_republic_2 = BLS}
-			set_variable = {ic_cost@token:infantry_equipment_republic_2 = 5}
+			set_variable = {ic_cost@token:infantry_equipment_republic_2 = 0.88}
 			set_variable = {belonging_to_what_faction@token:infantry_equipment_republic_2 = neutral_market_choice}
-			set_variable = {price_of_item_@token:infantry_equipment_republic_2 = 15}
+			set_variable = {price_of_item_@token:infantry_equipment_republic_2 = 2.4}
 			BLS = {
 				add_to_array = {
 					array = Production_array@var:global.land_market_category
@@ -1860,9 +2015,9 @@ on_actions = {
 				value = token:infantry_equipment_republic_3
 			}
 			set_variable = {who_owns_item@token:infantry_equipment_republic_3 = BLS}
-			set_variable = {ic_cost@token:infantry_equipment_republic_3 = 5}
+			set_variable = {ic_cost@token:infantry_equipment_republic_3 = 0.92}
 			set_variable = {belonging_to_what_faction@token:infantry_equipment_republic_3 = neutral_market_choice}
-			set_variable = {price_of_item_@token:infantry_equipment_republic_3 = 15}
+			set_variable = {price_of_item_@token:infantry_equipment_republic_3 = 2.5}
 			BLS = {
 				add_to_array = {
 					array = Production_array@var:global.land_market_category
@@ -1875,9 +2030,9 @@ on_actions = {
 				value = token:infantry_equipment_republic_4
 			}
 			set_variable = {who_owns_item@token:infantry_equipment_republic_4 = BLS}
-			set_variable = {ic_cost@token:infantry_equipment_republic_4 = 5}
+			set_variable = {ic_cost@token:infantry_equipment_republic_4 = 0.96}
 			set_variable = {belonging_to_what_faction@token:infantry_equipment_republic_4 = neutral_market_choice}
-			set_variable = {price_of_item_@token:infantry_equipment_republic_4 = 15}
+			set_variable = {price_of_item_@token:infantry_equipment_republic_4 = 2.7}
 			BLS = {
 				add_to_array = {
 					array = Production_array@var:global.land_market_category
@@ -1920,7 +2075,32 @@ on_actions = {
 				production_efficiency_calculator = yes
 				work_out_total_factory_price = yes
 			}
+			for_each_loop = {
+				array = Production_array@var:global.land_market_category
+				value = current_item_we_are_looking_at
+
+				set_temp_variable = {modifier_of_this_items_cost = modifier@production_cost_of_land_multiplier }
+
+				weekly_production_of_item_calculation_scripted_effect = yes
+				production_efficiency_calculator = yes
+				work_out_total_factory_price = yes
+			}
 			subtract_from_variable = {currency_amount^primary_currency = total_corporate_factory_cost}
+			### SNEAKY SNEAKY, refreshes production menu daily IF you have the menu open (we are avoiding palpy being mad at me D: )
+			if = {
+				limit = {
+					has_country_flag = open_production_market_menu
+				}
+				set_temp_variable = {temp_category_type = looking_at_production_array_type}
+				for_each_loop = {
+					array = Production_array@var:temp_category_type
+					value = current_item_we_are_looking_at
+					add_to_array = {
+						array = current_looking_at_production_array
+						value = current_item_we_are_looking_at
+					}
+				}
+			}
 		}
 	}
 	on_weekly = {

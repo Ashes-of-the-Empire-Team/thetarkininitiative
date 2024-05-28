@@ -49,11 +49,13 @@ sift_through_alliance_types = {
 		set_temp_variable = {current_looking_at_equipment = v}
 		if = {
 			limit = {
-				NOT = {
-					check_variable = {global.belonging_to_what_faction@var:current_looking_at_equipment = global.neutral_market_choice}
-					check_variable = {global.belonging_to_what_faction@var:current_looking_at_equipment = country_belongs_to_what_faction} #if they fit their faction type then they get access
+				OR = {
+					NOT = {
+						check_variable = {global.belonging_to_what_faction@var:current_looking_at_equipment = global.neutral_market_choice}
+						check_variable = {global.belonging_to_what_faction@var:current_looking_at_equipment = country_belongs_to_what_faction} #if they fit their faction type then they get access
+					}
+					check_variable = {global.stock_of_item@var:current_looking_at_equipment = 0}
 				}
-				check_variable = {global.stock_of_item@var:current_looking_at_equipment = 0}
 			}
 			add_to_temp_array = {
 				array = removal_array
@@ -239,10 +241,47 @@ buy_out_transfer_production_effect = { ## RUNS ON THE BROUGHT OUT COMPANY
 			}
 		}
 	}
+	for_each_loop = {
+		array = Production_array@var:global.land_market_category
+		value = current_item_we_are_looking_at
+		
+		var:who_brought_out_this_company = {
+			add_to_array = {
+				array = Production_array@var:global.land_market_category
+				value = current_item_we_are_looking_at
+			}
+		}
+	}
 }
+add_to_current_production_array = {
+	for_each_loop = {
+		array = Production_array@var:looking_at_production_array_type
+		value = current_item_we_are_looking_at
+		if = {
+			limit = {
+				OR = {
+					### IF you have come to fix a error here, there is no error here. This code is correct, just the compiler doesnt like it. Please leave it alone unless you know what you are doing
+					has_tech = var:global.required_researched_technology@var:current_item_we_are_looking_at
+					check_variable = {var:global.required_researched_technology@var:current_item_we_are_looking_at = 0}
+					check_variable = {var:global.required_researched_technology@var:current_item_we_are_looking_at = current_item_we_are_looking_at} ## this is a error check, checks too see that it isnt a incorrect technology
+				}
+			}
+			add_to_array = {
+				array = current_looking_at_production_array
+				value = current_item_we_are_looking_at
+			}
+		}
+	}
+}
+
+
 test_effect_70 = {
-	add_to_array = {
-		array = Global.zzzarket_array@var:global.tank_market_category
-		value = token:t4_b_chassis_0
+	set_variable = {temp_var = 7}
+	set_variable = {global.required_researched_technology@7 = token:infantry_weapons1 }
+	if = {
+		limit = {
+			has_tech = var:global.required_researched_technology@var:temp_var
+		}
+		log = "achieved Test"
 	}
 }
