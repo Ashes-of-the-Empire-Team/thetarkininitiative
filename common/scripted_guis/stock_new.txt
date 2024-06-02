@@ -61,6 +61,17 @@ scripted_gui = {
 					multiply_variable = { share_percentage@PREV = 100 }
 				}
 			}
+			buyout_button_click = { 
+				ROOT = {
+					set_variable = { shares_held_@PREV = Global.total_stocks_@PREV }
+					set_variable = { share_percentage@PREV = 100 }
+					set_variable = { stock_calc_buy = Global.total_stocks_@PREV }
+					subtract_from_variable = { stock_calc_buy = shares_held_@PREV }
+					log = "[?stock_calc_buy]" 
+					multiply_variable = { stock_calc_buy = Global.stock_price_@PREV }
+					subtract_from_variable = { currency_amount^primary_currency = stock_calc_buy }
+				}
+			}
 		}
 		triggers = {
 			buy_button_click_enabled = {
@@ -71,13 +82,17 @@ scripted_gui = {
 							has_country_flag = buying_10_share
 						}
 					}
-					check_variable = { currency_amount^primary_currency > stock_being_bought }
+					ROOT = {
+						check_variable = { currency_amount^primary_currency > stock_being_bought }
+					}
 				}
 				else_if = {
 					limit = {
 						has_country_flag = buying_1_share
 					}
-					check_variable = { currency_amount^primary_currency > Global.stock_price_@PREV }
+					ROOT = {
+						check_variable = { currency_amount^primary_currency > Global.stock_price_@PREV }
+					}
 				}
 			}
 			buy_1_button_click_enabled = {
@@ -93,6 +108,15 @@ scripted_gui = {
 			buy_3_button_click_enabled = {
 				NOT = {
 					has_country_flag = buying_50_share
+				}
+			}
+			buyout_button_click_enabled = {
+				ROOT = {
+					check_variable = { share_percentage@PREV > 50 }
+					set_temp_variable = { stock_calc = Global.total_stocks_@PREV }
+					subtract_from_temp_variable = { stock_calc = shares_held_@PREV }
+					multiply_temp_variable = { stock_calc = Global.stock_price_@PREV }
+					check_variable = { currency_amount^primary_currency > stock_calc }
 				}
 			}
 		}
