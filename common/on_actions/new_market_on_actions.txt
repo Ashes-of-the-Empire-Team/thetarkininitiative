@@ -1,12 +1,10 @@
 on_actions = {
 	on_startup = {
 		effect = {
-		## TECH
-			KUA = {
-				set_technology = {
-					at_at = 1
-				}
-			}
+
+
+
+
 			set_variable = {naval_market_category = 0}
 			set_variable = {tank_market_category = 1}
 			set_variable = {air_market_category = 2}
@@ -2039,7 +2037,7 @@ on_actions = {
 					value = token:infantry_equipment_republic_4
 				}
 			}
-		}
+		}	
 	}
 	on_daily = {
 		effect = {
@@ -2199,6 +2197,13 @@ on_actions = {
 	on_monthly_VON = {
 		effect = {
 			add_to_variable = {global.what_month_are_we = 1}
+			clr_global_flag = month_three_of_stocks
+			if = {
+				limit = {
+					check_variable = {global.what_month_are_we = 3}
+				}
+				set_global_flag = month_three_of_stocks
+			}
 		}
 	}
 	on_monthly = {
@@ -2206,7 +2211,7 @@ on_actions = {
 			if = {
 				###### PALPY HERE #####
 				limit = {
-					check_variable = {global.what_month_are_we = 3}
+					has_global_flag = month_three_of_stocks
 				}
 				set_temp_variable = {total_revenue_this_month = 0}
 				for_each_loop = {
@@ -2246,22 +2251,20 @@ on_actions = {
 					add_to_temp_variable = {total_revenue_this_month = quartely_revenue@var:current_item_we_are_looking_at }
 				}
 				### CALCULATE SHARE PRICE ###
-
+				log = "[?total_revenue_this_month]"
 				set_temp_variable = { stock_change_multiplier = total_revenue_this_month }
 				divide_temp_variable = { stock_change_multiplier = quartley_money_last_month }
+				clamp_variable = {
+					var = stock_change_multiplier
+					min = 0.5
+				}
 				multiply_variable = { Global.stock_price_@ROOT = stock_change_multiplier }
+				clamp_variable = {
+					var = Global.stock_price_@ROOT
+					min = 0.005
+				}
 
 				set_variable = {quartley_money_last_month = total_revenue_this_month}
-			}
-		}
-	}
-	on_monthly_VON = {
-		effect = {
-			if = {
-				limit = {
-					check_variable = {global.what_month_are_we = 3}
-				}
-				set_variable = {global.what_month_are_we = 0}
 			}
 		}
 	}

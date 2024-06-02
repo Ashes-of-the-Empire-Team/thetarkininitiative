@@ -27,6 +27,51 @@ create_new_category_for_market = {
 	}
 	sift_through_alliance_types = yes
 }
+create_new_category_for_market_ai_version = {
+	if = {
+		limit = {
+			check_variable = {current_selected_market_category_array^num > 0 }
+		}
+		clear_array = current_selected_market_category_array
+	}
+	for_each_loop = {
+		array = global.Market_array@var:global.naval_market_category
+		value = v
+		index = i
+		add_to_array = {
+			array = current_selected_market_category_array
+			value = global.Market_array@0^i
+		}
+	}
+	for_each_loop = {
+		array = global.Market_array@var:global.tank_market_category
+		value = v
+		index = i
+		add_to_array = {
+			array = current_selected_market_category_array
+			value = global.Market_array@var:global.tank_market_category^i
+		}
+	}
+	for_each_loop = {
+		array = global.Market_array@var:global.air_market_category
+		value = v
+		index = i
+		add_to_array = {
+			array = current_selected_market_category_array
+			value = global.Market_array@var:global.air_market_category^i
+		}
+	}
+	for_each_loop = {
+		array = global.Market_array@var:global.land_market_category
+		value = v
+		index = i
+		add_to_array = {
+			array = current_selected_market_category_array
+			value = global.Market_array@var:global.land_market_category^i
+		}
+	}
+	sift_through_alliance_types = yes
+}
 sift_through_alliance_types = {
 	if = {
 		limit  ={

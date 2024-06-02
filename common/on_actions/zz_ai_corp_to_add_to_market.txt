@@ -453,4 +453,76 @@ on_actions = {
 			}
 		}
 	}
+
+	## NEW MARKET ON ACTIONS
+	on_weekly = { ### This on action decides how much equipment should be brought from the market, and what is the most likely
+		effect = {
+			for_each_loop = {
+				array = current_selected_market_category_array
+				value = current_selected_item
+				index = i
+				if = { ## Dont buy weapons if you have shit tons of them
+					limit = {
+						NOT = {
+							has_equipment = {
+								var:current_selected_item > 10
+							}
+						}
+					}
+				}else_if = {
+
+				}else_if = {
+
+				}else_if = {
+
+				}
+			}
+		}
+	}
+
+	on_monthly = { ## This monthly on action decides what equipments should potentially be considerd for buying, only looks at technology and behaviour
+		effect = {
+			if = {
+				limit = {
+					is_ai = yes
+				}
+				create_new_category_for_market_ai_version = yes ## refreshes buying list so ai buys new equipment (scripted gui has to be visible)
+			}
+
+
+			## Creates array of potential equipment that should be purchased this month
+			if = {
+				limit = {
+					stockpile_ratio = {
+						archetype = infantry_equipment_0
+						ratio > 0.5
+					}
+					#has_equipment = {
+#
+					#}
+					#dont_spend_money = no
+					log = "achieved test result"
+				}
+			}
+		}
+	}
+	on_startup = {
+		### Specifying behaviour, whos trying to buy what###
+
+			## Behavior 1 - country with no money, buys inf equipment, artillery and anti tank (cheap units)
+
+			## Behavior 2 - country with no money, buys cheap tanks and aims to overwhelm
+
+			## Behavior 3 - Country with med money, buys inf equipment and light tanks, corvettes and frigates and fighterbombers (eg xwing)
+
+			## Behavior 4 - Country with high money and Rep leaning, buys airplanes and medium tanks, skewed towards carriers,light cruisers frigates and fighterbombers
+
+			## Behaviour 5 - Country with high money and Emp leaning, inf and heavy tanks, skewed towards,isds, heavy cruisers and corvettes and fighters and bombers seperatly 
+
+			## Custom behaviours - programmed by dev to better represent their wanted equipment
+		effect = {
+			set_variable = {ai_wanted_equipment@token:tx_130T_chassis_0 = 50}
+		}
+	}
+
 }
