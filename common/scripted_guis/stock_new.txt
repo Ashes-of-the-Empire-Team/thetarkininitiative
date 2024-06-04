@@ -31,6 +31,10 @@ scripted_gui = {
 					ROOT = {
 						add_to_variable = { shares_held_@PREV = 1 }
 						subtract_from_variable = { currency_amount^primary_currency = Global.stock_price_@PREV }
+						set_temp_variable = { increase_calc = stock_being_bought }
+						divide_temp_variable = { increase_calc = Global.total_stocks_@PREV }
+						add_to_temp_variable = { increase_calc = 1 }
+						multiply_variable = { Global.stock_price_@PREV = increase_calc }
 					}
 				}
 				if = {
@@ -42,6 +46,10 @@ scripted_gui = {
 						set_temp_variable = { stock_being_bought = Global.stock_price_@PREV}
 						multiply_temp_variable = { stock_being_bought = 10 }
 						subtract_from_variable = { currency_amount^primary_currency = stock_being_bought }
+						set_temp_variable = { increase_calc = stock_being_bought }
+						divide_temp_variable = { increase_calc = Global.total_stocks_@PREV }
+						add_to_temp_variable = { increase_calc = 1 }
+						multiply_variable = { Global.stock_price_@PREV = increase_calc }
 					}
 				}
 				if = {
@@ -53,6 +61,10 @@ scripted_gui = {
 						set_temp_variable = { stock_being_bought = Global.stock_price_@PREV}
 						multiply_temp_variable = { stock_being_bought = 50 }
 						subtract_from_variable = { currency_amount^primary_currency = stock_being_bought }
+						set_temp_variable = { increase_calc = stock_being_bought }
+						divide_temp_variable = { increase_calc = Global.total_stocks_@PREV }
+						add_to_temp_variable = { increase_calc = 1 }
+						multiply_variable = { Global.stock_price_@PREV = increase_calc }
 					}
 				}
 				ROOT = {
@@ -63,13 +75,12 @@ scripted_gui = {
 			}
 			buyout_button_click = { 
 				ROOT = {
+					set_temp_variable = { stock_calc_buy = Global.total_stocks_@PREV }
+					subtract_from_temp_variable = { stock_calc_buy = shares_held_@PREV }
+					multiply_temp_variable = { stock_calc_buy = Global.stock_price_@PREV }
+					subtract_from_variable = { currency_amount^primary_currency = stock_calc_buy }
 					set_variable = { shares_held_@PREV = Global.total_stocks_@PREV }
 					set_variable = { share_percentage@PREV = 100 }
-					set_variable = { stock_calc_buy = Global.total_stocks_@PREV }
-					subtract_from_variable = { stock_calc_buy = shares_held_@PREV }
-					log = "[?stock_calc_buy]" 
-					multiply_variable = { stock_calc_buy = Global.stock_price_@PREV }
-					subtract_from_variable = { currency_amount^primary_currency = stock_calc_buy }
 				}
 			}
 		}
