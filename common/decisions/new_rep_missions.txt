@@ -418,6 +418,9 @@ new_republic_galatic_liberation={
         }
         #remove_effect = {
 		#}
+		ai_will_do = {
+			factor = 15
+		}
     }
 	REB_send_guns_bespin_decision = {
         priority = 9
@@ -512,6 +515,9 @@ new_republic_galatic_liberation={
 				}
 			}
         }
+		ai_will_do = {
+			factor = 20
+		}
         #remove_effect = {
 		#}
     }
@@ -571,6 +577,9 @@ new_republic_galatic_liberation={
 		}
         #remove_effect = {
 		#}
+		ai_will_do = {
+			factor = 15
+		}
     }
 	REB_tatooine_uprising_decision = {
         priority = 8
@@ -597,6 +606,9 @@ new_republic_galatic_liberation={
         }
         #remove_effect = {
 		#}
+		ai_will_do = {
+			factor = 15
+		}
     }
 	REB_send_guns_tatooine_decision = {
         priority = 9
@@ -688,5 +700,81 @@ new_republic_galatic_liberation={
         }
         #remove_effect = {
 		#}
+		ai_will_do = {
+			factor = 20
+		}
     }
+}
+
+political_actions={
+	REB_handover_coruscant_to_REB_decision = {
+        priority = 11
+        icon = GFX_new_republic_decision
+
+        allowed = {
+			always = yes
+			NOT={tag = REB}
+        }
+        visible = {
+			has_government = democratic
+			OR={
+				189={
+					controls_or_subject_of = yes
+				}
+				230={
+					controls_or_subject_of = yes
+				}
+				240={
+					controls_or_subject_of = yes
+				}
+				235={
+					controls_or_subject_of = yes
+				}
+				60={
+					controls_or_subject_of = yes
+				}
+				39={
+					controls_or_subject_of = yes
+				}
+				57={
+					controls_or_subject_of = yes
+				}
+				229={
+					controls_or_subject_of = yes
+				}
+				315={
+					controls_or_subject_of = yes
+				}
+				40={
+					controls_or_subject_of = yes
+				}
+			}
+        }
+        #days_remove = 120
+        complete_effect = {
+			every_owned_state={
+				limit={
+					OR={
+						state = 189
+						state = 230
+						state = 240
+						state = 235
+						state = 60
+						state = 39
+						state = 57
+						state = 229
+						state = 315
+						state = 40
+					}
+				}
+				transfer_state_to = REB
+			}
+        }
+        #remove_effect = {
+		#}
+		ai_will_do = {
+			factor = 20
+		}
+    }
+
 }
