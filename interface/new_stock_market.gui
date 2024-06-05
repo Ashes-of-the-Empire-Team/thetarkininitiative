@@ -1,21 +1,59 @@
 guiTypes = {
 	containerWindowType = {
         name = "stock_market_new"
-        position = { x = 0 y = 120 } #990
-        size = { width=556 height=800 }
+		position = { x=-606 y=115}
+        size = { width=556 height=100%% }
+		show_position = { x=-6 y =115 }
+		show_animation_type = decelerated
+		hide_animation_type = accelerated
+		animation_time = 300	
         moveable = no
-		verticalScrollbar = "right_vertical_slider"
 
         background = {
             name = "Background"        
             quadTextureSprite ="GFX_tiled_bg"
         }
 		margin = { top = 15 bottom = 12 }
-		gridboxtype = {
-			name = "stock_market_grid"
-			position = { x = 170 y = 30 }
-			slotsize = { width = 250 height = 192 }
-			max_slots_horizontal = 2
+		containerWindowType = {
+			name = "stock_grid_container"
+			position = { x = 0 y = 157 } #990
+			size = { width=100% height=85% }
+			moveable = no
+			margin = { top = 13 bottom = 12 }
+
+			verticalScrollbar = "right_vertical_slider"
+
+			background = {
+				name = "Background"        
+				quadTextureSprite ="GFX_tiled_bg"
+			}
+
+			gridboxtype = {
+				name = "stock_market_grid"
+				position = { x = 170 y = 0 }
+				slotsize = { width = 250 height = 192 }
+				max_slots_horizontal = 2
+			}
+		}
+		icontype = {
+            name = "stock_top" 
+            position = { x = 0 y = 0 }
+            spriteType = "GFX_stock_top"
+        }
+		buttonType = {
+			name ="subsidiary_select"
+			spriteType = "GFX_stock_subsidiary_select"
+			position = { x = 376 y = 95 }
+		}
+		buttonType = {
+			name ="market_select"
+			spriteType = "GFX_stock_market_select"
+			position = { x = 199 y = 95 }
+		}
+		buttonType = {
+			name ="buy_sell_select"
+			spriteType = "GFX_buy_sell_select"
+			position = { x = 19 y = 95 }
 		}
 	}
 	containerWindowType = {
@@ -34,6 +72,11 @@ guiTypes = {
 			position = { x = 15 y = 110 }
 		}
 		buttonType = {
+			name ="sell_button"
+			spriteType = "GFX_stock_sell"
+			position = { x = 15 y = 110 }
+		}
+		buttonType = {
             name = "flag_producer" 
             position = { x = 43 y = 20 }
             spriteType = "GFX_shield_medium"
@@ -49,7 +92,7 @@ guiTypes = {
 		buttonType = {
 			name ="stock_price"
 			buttonFont = "russo_one16"
-			buttonText = "[?Global.stock_price_@THIS]"
+			buttonText = "[?Global.stock_price_@THIS|2]"
 			spriteType = "GFX_stock_price"
 			position = { x = 43 y = 80 }
 			pdx_tooltip = "stock_price_tt"
@@ -59,7 +102,7 @@ guiTypes = {
 			position = { x = 65 y = 114 }
 			font = "russo_one14"
 			borderSize = {x = 0 y = 0}
-			text = "[?Global.total_stocks_@THIS]"
+			text = "[?Global.total_stocks_available_@THIS]"
 			format = left
 		}
 		instantTextboxType = {

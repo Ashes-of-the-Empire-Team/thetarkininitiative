@@ -4,7 +4,7 @@ scripted_gui = {
 		window_name = "stock_market_new"
 		visible = {
 			has_government = corporation
-			always = yes
+			has_country_flag = stock_open
 		}
 
 		effects = {
@@ -23,6 +23,62 @@ scripted_gui = {
 				clr_country_flag = buying_1_share
 				clr_country_flag = buying_10_share
 			}
+			sell_button_click = {
+				if = {
+					limit = {
+						has_country_flag = buying_1_share
+					}
+					ROOT = {
+						subtract_from_variable = { shares_held_@PREV = 1 }
+						add_to_variable = { currency_amount^primary_currency = Global.stock_price_@PREV }
+						add_to_variable = { Global.total_stocks_available_@PREV = 1 }
+						set_temp_variable = { increase_calc = 1 }
+						divide_temp_variable = { increase_calc = Global.total_stocks_@PREV }
+						multiply_variable = { Global.stock_price_@PREV = increase_calc }
+						subtract_from_temp_variable = { increase_calc = 1 }
+						multiply_temp_variable = { increase_calc = -1 }
+					}
+				}
+				if = {
+					limit = {
+						has_country_flag = buying_10_share
+					}
+					ROOT = {
+						subtract_from_variable = { shares_held_@PREV = 10 }
+						set_temp_variable = { stock_being_bought = Global.stock_price_@PREV}
+						multiply_temp_variable = { stock_being_bought = 10 }
+						add_to_variable = { currency_amount^primary_currency = stock_being_bought }
+						add_to_variable = { Global.total_stocks_available_@PREV = 10 }
+						set_temp_variable = { increase_calc = 50 }
+						divide_temp_variable = { increase_calc = Global.total_stocks_@PREV }
+						subtract_from_temp_variable = { increase_calc = 1 }
+						multiply_temp_variable = { increase_calc = -1 }
+						multiply_variable = { Global.stock_price_@PREV = increase_calc }
+					}
+				}
+				if = {
+					limit = {
+						has_country_flag = buying_50_share
+					}
+					ROOT = {
+						subtract_from_variable = { shares_held_@PREV = 50 }
+						set_temp_variable = { stock_being_bought = Global.stock_price_@PREV}
+						multiply_temp_variable = { stock_being_bought = 50 }
+						add_to_variable = { currency_amount^primary_currency = stock_being_bought }
+						add_to_variable = { Global.total_stocks_available_@PREV = 50 }
+						set_temp_variable = { increase_calc = 50 }
+						divide_temp_variable = { increase_calc = Global.total_stocks_@PREV }
+						subtract_from_temp_variable = { increase_calc = 1 }
+						multiply_temp_variable = { increase_calc = -1 }
+						multiply_variable = { Global.stock_price_@PREV = increase_calc }
+					}
+				}
+				ROOT = {
+					set_variable = { share_percentage@PREV = shares_held_@PREV }
+					divide_variable = { share_percentage@PREV = Global.total_stocks_@PREV }
+					multiply_variable = { share_percentage@PREV = 100 }
+				}
+			}
 			buy_button_click = {
 				if = {
 					limit = {
@@ -31,7 +87,8 @@ scripted_gui = {
 					ROOT = {
 						add_to_variable = { shares_held_@PREV = 1 }
 						subtract_from_variable = { currency_amount^primary_currency = Global.stock_price_@PREV }
-						set_temp_variable = { increase_calc = stock_being_bought }
+						subtract_from_variable = { Global.total_stocks_available_@PREV = 1}
+						set_temp_variable = { increase_calc = 1 }
 						divide_temp_variable = { increase_calc = Global.total_stocks_@PREV }
 						add_to_temp_variable = { increase_calc = 1 }
 						multiply_variable = { Global.stock_price_@PREV = increase_calc }
@@ -46,7 +103,8 @@ scripted_gui = {
 						set_temp_variable = { stock_being_bought = Global.stock_price_@PREV}
 						multiply_temp_variable = { stock_being_bought = 10 }
 						subtract_from_variable = { currency_amount^primary_currency = stock_being_bought }
-						set_temp_variable = { increase_calc = stock_being_bought }
+						subtract_from_variable = { Global.total_stocks_available_@PREV = 10}
+						set_temp_variable = { increase_calc = 50 }
 						divide_temp_variable = { increase_calc = Global.total_stocks_@PREV }
 						add_to_temp_variable = { increase_calc = 1 }
 						multiply_variable = { Global.stock_price_@PREV = increase_calc }
@@ -61,7 +119,8 @@ scripted_gui = {
 						set_temp_variable = { stock_being_bought = Global.stock_price_@PREV}
 						multiply_temp_variable = { stock_being_bought = 50 }
 						subtract_from_variable = { currency_amount^primary_currency = stock_being_bought }
-						set_temp_variable = { increase_calc = stock_being_bought }
+						subtract_from_variable = { Global.total_stocks_available_@PREV = 50}
+						set_temp_variable = { increase_calc = 50 }
 						divide_temp_variable = { increase_calc = Global.total_stocks_@PREV }
 						add_to_temp_variable = { increase_calc = 1 }
 						multiply_variable = { Global.stock_price_@PREV = increase_calc }
@@ -78,13 +137,94 @@ scripted_gui = {
 					set_temp_variable = { stock_calc_buy = Global.total_stocks_@PREV }
 					subtract_from_temp_variable = { stock_calc_buy = shares_held_@PREV }
 					multiply_temp_variable = { stock_calc_buy = Global.stock_price_@PREV }
+					multiply_temp_variable = { stock_calc_buy = 1.1 }
+					multiply_variable = { Global.stock_price_@PREV = 1.1 }
 					subtract_from_variable = { currency_amount^primary_currency = stock_calc_buy }
+					set_variable = { Global.total_stocks_available_@PREV = 0 }
 					set_variable = { shares_held_@PREV = Global.total_stocks_@PREV }
 					set_variable = { share_percentage@PREV = 100 }
+					add_to_array = { subsidiary_array = PREV }
+					set_temp_variable = { tag_holder = ROOT.id }
+					set_temp_variable = { company_holder = PREV.id }
+					PREV = {
+						set_country_flag = bought_out
+					}
+				}
+				every_country = {
+						if = {
+							limit = {
+								check_variable = { shares_held_@PREV > 0 }
+								NOT = {
+									tag = tag_holder
+								}
+							}
+							PREV = {
+								set_temp_variable = { buyout = Global.stock_price_@company_holder }
+								multiply_temp_variable = { buyout = shares_held_@company_holder }
+								add_to_variable = { currency_amount^primary_currency = buyout }
+								set_variable = { shares_held_@company_holder = 0 }
+								set_variable = { share_percentage@company_holder = 0 }
+								country_event = stock_buyout.1
+								set_temp_variable = { test = PREV.id }
+								set_temp_variable = { test_1 = ROOT.id }
+								log = "[?test_1.GetName]"
+								log = "[?test.GetName]"
+								log = "[?company_holder.GetName]"
+								log = "[?PREV.share_percentage@company_holder]"
+						}
+					}
+				}
+			}
+			market_select_click = {
+				if = {
+					limit = {
+						check_variable = { market_select_var = 1 }
+					}
+					set_variable = { market_select_var = 2 }
+					set_variable = { market_subsidiary = 1 }
+				}
+			}
+			subsidiary_select_click = {
+				if = {
+					limit = {
+						check_variable = { market_select_var = 2 }
+					}
+					set_variable = { market_select_var = 1 }
+					set_variable = { market_subsidiary = 2 }
+				}
+			}
+			buy_sell_select_click = {
+				if = {
+					limit = {
+						check_variable = { buy_sell_var = 1 }
+					}
+					set_variable = { buy_sell_var = 2 }
+				}
+				else = {
+					set_variable = { buy_sell_var = 1 }
 				}
 			}
 		}
 		triggers = {
+			buy_button_visible = {
+				ROOT = { 
+					check_variable = { buy_sell_var = 2 }
+				}
+			}
+			sell_button_visible = {
+				ROOT = {
+					check_variable = { buy_sell_var = 1 }
+				}
+			}
+			sell_button_click_enabled = {
+				ROOT = {
+					check_variable = { shares_held_@PREV > 0 }
+					OR = {
+						check_variable = { shares_held_@PREV > stock_being_bought }
+						check_variable = { shares_held_@PREV = stock_being_bought }
+					}
+				}
+			}
 			buy_button_click_enabled = {
 				if = {
 					limit = {
@@ -104,6 +244,13 @@ scripted_gui = {
 					ROOT = {
 						check_variable = { currency_amount^primary_currency > Global.stock_price_@PREV }
 					}
+				}
+				OR = {
+					check_variable = { Global.total_stocks_available_@PREV > stock_being_bought }
+					check_variable = { Global.total_stocks_available_@PREV = stock_being_bought }
+				}
+				NOT = {
+					check_variable = { Global.total_stocks_available_@PREV = 0 }
 				}
 			}
 			buy_1_button_click_enabled = {
@@ -128,6 +275,11 @@ scripted_gui = {
 					subtract_from_temp_variable = { stock_calc = shares_held_@PREV }
 					multiply_temp_variable = { stock_calc = Global.stock_price_@PREV }
 					check_variable = { currency_amount^primary_currency > stock_calc }
+					PREV = {
+						NOT = {
+							has_country_flag = bought_out
+						}
+					}
 				}
 			}
 		}
@@ -141,6 +293,15 @@ scripted_gui = {
 		properties = {
 			flag_producer = {
 				image = "[This.GetFlag]"
+			}
+			market_select = {
+				frame = market_select_var
+			}
+			subsidiary_select = {
+				frame = market_subsidiary
+			}
+			buy_sell_select = {
+				frame = buy_sell_var
 			}
 		}
 	}
