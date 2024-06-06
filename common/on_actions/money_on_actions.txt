@@ -340,21 +340,6 @@ on_actions = {
 				}
 				round_variable = dx
 			}
-		###Money ai###
-			every_country = {
-				if = {
-					limit = {
-						check_variable = { dx < 20}
-					}
-					set_country_flag = dontspendmoney
-				}
-				if = {
-					limit = {
-						check_variable = { dx > 20}
-					}
-					clr_country_flag = dontspendmoney
-				}
-			}
 		}
 	}
 	on_weekly = {
@@ -435,6 +420,63 @@ on_actions = {
 			add_to_variable = { debt_limit = cfff }
 			add_to_variable = { debt_limit = investment_income }
 			multiply_variable = { debt_limit = 100 }
+
+
+			## Neverfires Money Chest
+			## The money chest is a rough approximation of how much is earned by ai in a month. This means we can then get the ai to buy equipment/buildings based on this "chest"
+			
+			## calculating money chest amount
+			set_variable = {money_chest_amount = nmn}
+			multiply_variable = {money_chest_amount = 30}
+
+
+			#### decide ratio of equipment to buildings to extra to treasury	
+			if = {
+				limit = {
+					check_variable = {currency_amount^primary_currency < 0} ## Im in serious debt
+				}
+				set_temp_variable = {equipment_ratio = 10}
+				set_temp_variable = {buildings_ratio = 10}
+				set_temp_variable = {treasury_ratio = 80}
+			}else_if = { ## at war and losing maybe
+				limit = {
+					or = {
+						AND = {
+							has_war = yes
+							enemies_strength_ratio > 0.5
+						}
+						has_country_flag = prepairing_for_war
+					}
+				}
+				set_temp_variable = {equipment_ratio = 65}
+				set_temp_variable = {buildings_ratio = 30}
+				set_temp_variable = {treasury_ratio = 5}
+			}else_if = { ## all my neighbours are scary
+				limit = {
+					check_variable = {threat > 0.8}
+				}
+				set_temp_variable = {equipment_ratio = 50}
+				set_temp_variable = {buildings_ratio = 30}
+				set_temp_variable = {treasury_ratio = 20}
+			}
+			else = {
+				## developing/standard - buildings taking priority
+				set_temp_variable = {equipment_ratio = 25}
+				set_temp_variable = {buildings_ratio = 55}
+				set_temp_variable = {treasury_ratio = 20}
+			}
+			##
+
+			divide_variable = {money_chest_amount = 100}
+			set_variable = {equipment_money_chest_amount = money_chest_amount}
+			set_variable = {buildings_money_chest_amount = money_chest_amount}
+
+			multiply_variable = {equipment_money_chest_amount = equipment_ratio}
+			multiply_variable = {equipment_money_chest_amount = buildings_ratio}
+			##ignore treasury, just letting it sit
+
+			## subdivied equipment into navy and land equipment
+
 		}
 	}
 }

@@ -355,154 +355,155 @@ on_actions = {
 			}
 		}
 	}
-	on_monthly_VON = {
-		#soft_market_array
-		#market_tank_holder
-		#market_starfighter_holder
-		#market_ship_holder
-		effect = {
-			if = {
-				limit = {	
-					date > 05.12.01
-					NOT = {
-						has_country_flag = year_2_done
-					}
-				}
-				set_country_flag = year_2_done
-				ai_corp_set_tech_for_year_2 = yes
-			}
-			if = {
-				limit = {	
-					date > 06.12.01
-					NOT = {
-						has_country_flag = year_3_done
-					}
-				}
-				set_country_flag = year_3_done
-				ai_corp_set_tech_for_year_3 = yes
-			}
-			if = {
-				limit = {	
-					date > 07.12.01
-					NOT = {
-						has_country_flag = year_4_done
-					}
-				}
-				set_country_flag = year_4_done
-				ai_corp_set_tech_for_year_4 = yes
-			}
-			if = {
-				limit = {	
-					date > 08.12.01
-					NOT = {
-						has_country_flag = year_5_done
-					}
-				}
-				set_country_flag = year_5_done
-				ai_corp_set_tech_for_year_5 = yes
-			}
-			if = {
-				limit = {	
-					date > 09.12.01
-					NOT = {
-						has_country_flag = year_6_done
-					}
-				}
-				set_country_flag = year_6_done
-				ai_corp_set_tech_for_year_6 = yes
-			}
-			if = {
-				limit = {	
-					date > 10.12.01
-					NOT = {
-						has_country_flag = year_7_done
-					}
-				}
-				set_country_flag = year_7_done
-				ai_corp_set_tech_for_year_7 = yes
-			}
-			if = {
-				limit = {	
-					date > 11.12.01
-					NOT = {
-						has_country_flag = year_8_done
-					}
-				}
-				set_country_flag = year_8_done
-				ai_corp_set_tech_for_year_8 = yes
-			}
-			if = {
-				limit = {	
-					date > 12.12.01
-					NOT = {
-						has_country_flag = year_9_done
-					}
-				}
-				set_country_flag = year_9_done
-				ai_corp_set_tech_for_year_9 = yes
-			}
-			if = {
-				limit = {	
-					date > 13.12.01
-					NOT = {
-						has_country_flag = year_10_done
-					}
-				}
-				set_country_flag = year_10_done
-				ai_corp_set_tech_for_year_10 = yes
-			}
-		}
-	}
 
 	## NEW MARKET ON ACTIONS
-	on_weekly = { ### This on action decides how much equipment should be brought from the market, and what is the most likely
-		effect = {
-			for_each_loop = {
-				array = current_selected_market_category_array
-				value = current_selected_item
-				index = i
-				if = { ## Dont buy weapons if you have shit tons of them
-					limit = {
-						NOT = {
-							has_equipment = {
-								var:current_selected_item > 10
-							}
-						}
-					}
-				}else_if = {
-
-				}else_if = {
-
-				}else_if = {
-
-				}
-			}
-		}
-	}
-
-	on_monthly = { ## This monthly on action decides what equipments should potentially be considerd for buying, only looks at technology and behaviour
+	on_daily = { ## I tried making them were the scripted gui but ai makes my brain hurt
+		## THIS SETS A EQUIPMENT TO BE PURCHASED EVERY DAY UP TO A QUANTITY BASED ON HOW MUCH THE COUNTRY HAS DECIDED IT CAN SPEND (this is linked to the building system)
 		effect = {
 			if = {
 				limit = {
 					is_ai = yes
 				}
-				create_new_category_for_market_ai_version = yes ## refreshes buying list so ai buys new equipment (scripted gui has to be visible)
+				set_variable = {what_we_buying_today = 0}
+				set_temp_variable = {what_to_buy_today_compare_variable = 0}
+				for_each_loop = {
+					array = current_selected_market_category_array
+					value = current_selected_item
+					index = i
+					
+					set_temp_variable = {temporary_compare = num_equipment@var:current_selected_item}
+					divide_temp_variable = {temporary_compare = maxium_stockpile@var:current_selected_item}
+
+					if = {
+						limit = {
+							check_variable = {what_to_buy_today_compare_variable > temporary_compare}
+						}
+						set_variable = {what_to_buy_today = temp_item}
+						set_temp_variable = {what_to_buy_today_compare_variable = temporary_compare}
+					}
+				}
+				set_temp_variable = {item_to_buy = what_to_buy_today}
+				set_temp_variable = {amount_to_purchase = equipment_money_chest_amount}
+				divide_temp_variable = {amount_to_purchase = global.price_of_item_@var:item_to_buy}
+				round_temp_variable = amount_to_purchase
+				multiply_temp_variable = {amount_to_purchase = 100}
+
+				## buy action
+				set_temp_variable = {amount_checker = amount_to_purchase}
+				if = {
+					limit = {
+						set_temp_variable = {money_to_pass = currency_amount^primary_currency}
+						set_temp_variable = {total_price = global.price_of_item_@var:item_to_buy}
+						multiply_temp_variable = {total_price = amount_to_purchase}
+						check_variable = { money_to_pass > total_price}
+						check_variable = {global.stock_of_item@var:item_to_buy > amount_checker}
+					}
+					buy_item_scripted_effect = yes
+				}
 			}
 
+		}
+	}
+	on_monthly = {
+		effect = {
+			## re calculates maxium_stockpile
+			recalculate_maxium_stockpile = yes ## this effect is also used for ai nations on declairation of war (or lead up to war if wanted by devs) to make stockpiles bigger
+		}
+	}
+	on_monthly_VON = {
+		## THIS monthly on action removes ai desire for technology that should be outdated by this point
 
-			## Creates array of potential equipment that should be purchased this month
+		effect = {
 			if = {
-				limit = {
-					stockpile_ratio = {
-						archetype = infantry_equipment_0
-						ratio > 0.5
+				limit = {	
+					date > 05.12.01
+					NOT = {
+						has_country_flag = year_2_desire_reduction_done
 					}
-					#has_equipment = {
-#
-					#}
-					#dont_spend_money = no
-					log = "achieved test result"
 				}
+				set_country_flag = year_2_desire_reduction_done
+
+
+				set_temp_variable = {wanted_base@token:at_at_chassis_0 = 0}
+				
+
+			}
+			if = {
+				limit = {	
+					date > 06.12.01
+					NOT = {
+						has_country_flag = year_3_desire_reduction_done
+					}
+				}
+				set_country_flag = year_3_desire_reduction_done
+			}
+			if = {
+				limit = {	
+					date > 07.12.01
+					NOT = {
+						has_country_flag = year_4_desire_reduction_done
+					}
+				}
+				set_country_flag = year_4_desire_reduction_done
+			}
+			if = {
+				limit = {	
+					date > 08.12.01
+					NOT = {
+						has_country_flag = year_5_desire_reduction_done
+					}
+				}
+				set_country_flag = year_5_desire_reduction_done
+			}
+			if = {
+				limit = {	
+					date > 09.12.01
+					NOT = {
+						has_country_flag = year_6_desire_reduction_done
+					}
+				}
+				set_country_flag = year_6_desire_reduction_done
+
+			}
+			if = {
+				limit = {	
+					date > 10.12.01
+					NOT = {
+						has_country_flag = year_7_desire_reduction_done
+					}
+				}
+				set_country_flag = year_7_desire_reduction_done
+
+			}
+			if = {
+				limit = {	
+					date > 11.12.01
+					NOT = {
+						has_country_flag = year_8_desire_reduction_done
+					}
+				}
+				set_country_flag = year_8_desire_reduction_done
+
+			}
+			if = {
+				limit = {	
+					date > 12.12.01
+					NOT = {
+						has_country_flag = year_9_desire_reduction_done
+					}
+				}
+				set_country_flag = year_9_desire_reduction_done
+
+			}
+			if = {
+				limit = {	
+					date > 13.12.01
+					NOT = {
+						has_country_flag = year_10_desire_reduction_done
+					}
+				}
+				set_country_flag = year_10_desire_reduction_done
+
 			}
 		}
 	}
@@ -521,7 +522,21 @@ on_actions = {
 
 			## Custom behaviours - programmed by dev to better represent their wanted equipment
 		effect = {
-			set_variable = {ai_wanted_equipment@token:tx_130T_chassis_0 = 50}
+			evaluate_behaviour = yes
+
+
+
+
+
+			### CUSTOM BEHAVIOUR EXAMPLE, YOU MUST INCLUDE ALL THE EQUIPMENT YOU WANT (Minus that of infantry equipment, artillery and support equipment which is standard)
+			EMP = { ## We want a fuckton of at ats
+				add_to_array = {
+					array = ai_wanted_equipment
+					value = token:at_at_chassis_0
+				}
+			}
+
+
 		}
 	}
 

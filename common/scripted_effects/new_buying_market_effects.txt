@@ -40,9 +40,27 @@ create_new_category_for_market_ai_version = {
 		index = i
 		add_to_array = {
 			array = current_selected_market_category_array
-			value = global.Market_array@0^i
+			value = global.Market_array@global.naval_market_category^i
 		}
 	}
+	sift_through_alliance_types = yes
+	for_each_loop = {
+		array = current_selected_market_category_array
+		value = v
+		index = i
+		add_to_array = {
+			array = naval_market_ai_array
+			value = v
+		}
+	}
+	if = {
+		limit = {
+			check_variable = {current_selected_market_category_array^num > 0 }
+		}
+		clear_array = current_selected_market_category_array
+	}
+
+
 	for_each_loop = {
 		array = global.Market_array@var:global.tank_market_category
 		value = v
@@ -319,6 +337,120 @@ add_to_current_production_array = {
 	}
 }
 
+
+recalculate_maxium_stockpile = {
+	set_temp_variable = {temp_stockpile_constant = global.stockpile_constant}
+	if = {
+		limit = { ## we want to increase stockpiles of weapons
+			or = {
+				if = {
+					limit = {
+						has_war = yes
+					}
+					enemies_strength_ratio > 0.5
+				}
+				has_country_flag = prepairing_for_war
+			}
+		}
+		multiply_temp_variable = {temp_stockpile_constant = 4}
+	}
+	for_each_loop = {
+		array = ai_wanted_equipment
+		value = current_selected_item
+		index = i
+		
+		set_variable = {maxium_stockpile@var:current_selected_item = wanted_base@var:current_selected_item}
+		multiply_variable = {maxium_stockpile@var:current_selected_item = temp_stockpile_constant}
+
+	} ## lowest percentage of stockpile is brought first
+}
+evaluate_behaviour = {
+	if = {
+		limit = {
+			check_variable = {nmn < 1.0}
+		}
+		random_list = {
+			## BEHAVIOURS 1 AND 2, CHEAP EQUIPMENT
+			10 = {
+				if = {
+					limit = {
+						has_government = imperial
+					}
+					behaviour_1_empire_array_creation_and_desire = yes
+				}else_if = {
+					limit = {
+						has_government = republic
+					}
+					behaviour_1_republic_array_creation_and_desire = yes
+				}else = {
+					behaviour_1_neutral_array_creation_and_desire = yes
+				}
+			}
+			10 = {
+				if = {
+					limit = {
+						has_government = imperial
+					}
+					behaviour_2_empire_array_creation_and_desire = yes
+				}else_if = {
+					limit = {
+						has_government = republic
+					}
+					behaviour_2_republic_array_creation_and_desire = yes
+				}else = {
+					behaviour_2_neutral_array_creation_and_desire = yes
+				}
+			}
+		}
+	}else_if = {
+		limit = {
+			check_variable = {nmn < 2.0}
+		}
+		if = {
+			limit = {
+				has_government = imperial
+			}
+			behaviour_3_empire_array_creation_and_desire = yes
+		}else_if = {
+			limit = {
+				has_government = republic
+			}
+			behaviour_3_republic_array_creation_and_desire = yes
+		}else = {
+			behaviour_3_neutral_array_creation_and_desire = yes
+		}
+	}else = {
+		if = {
+			limit = {
+				has_government = imperial
+			}
+			behaviour_4_empire_array_creation_and_desire = yes
+		}else_if = {
+			limit = {
+				has_government = republic
+			}
+			behaviour_4_republic_array_creation_and_desire = yes
+		}else = {
+			behaviour_4_neutral_array_creation_and_desire = yes
+		}
+	}
+	add_standard_equipment_desire_and_array = yes
+}
+
+### BEHAVIOUR EFFECTS
+add_standard_equipment_desire_and_array = {
+	add_to_array = {
+		array = ai_wanted_equipment
+		value = infantry_equipment_0
+	}
+}
+
+behaviour_1_empire_array_creation_and_desire = {
+	add_to_array = {
+		array = ai_wanted_equipment
+		value = infantry_equipment_0
+	}
+}
 
 test_effect_70 = {
 	set_variable = {temp_var = 7}
