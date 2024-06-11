@@ -938,8 +938,28 @@ focus_tree = {
 		}
 		prerequisite = { focus = REB_the_alliance_of_free_planets  }
 		completion_reward = {
-			add_ideas = bacta_crisis
 			custom_effect_tooltip = new_republic_formation
+			if={
+				limit={
+					OR={
+						has_global_flag = CRU_ruined
+						has_global_flag = IMP_krytos_virus
+					}
+				}
+				custom_effect_tooltip = IMP_gifts_have_been_left
+				if={
+					limit = {
+						has_global_flag = IMP_krytos_virus
+					}
+					add_ideas = bacta_crisis
+				}
+				if={
+					limit = {
+						has_global_flag = CRU_ruined
+					}
+					add_ideas = EMP_coruscant_ruined_2
+				}
+			}
 			hidden_effect = {
 				load_focus_tree = REB_Main
 				set_cosmetic_tag = NEW
