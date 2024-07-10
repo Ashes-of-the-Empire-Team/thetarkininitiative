@@ -669,6 +669,88 @@ news_event = {
 		name = "The New Republic have gained a Valuable Piece"
 	}
 }
+
+country_event = {#
+	id = new_republic_focus.19
+	title = new_republic_focus.19.t
+	desc = new_republic_focus.19.desc
+	picture = GFX_report_event
+	is_triggered_only = yes
+
+    option = {#agree
+		name = new_republic_focus.19.a
+		FROM={
+			country_event = new_republic_focus.20
+		}
+	}
+	option = {#refuse
+		name = new_republic_focus.19.b
+		FROM={
+			country_event = new_republic_focus.21
+		}
+	}
+}
+country_event = {#PRO agrees
+	id = new_republic_focus.20
+	title = new_republic_focus.20.t
+	desc = new_republic_focus.20.desc
+	picture = GFX_report_event
+	is_triggered_only = yes
+
+    option = {#
+		name = new_republic_focus.20.a
+		set_country_flag = PRO_mindor_support
+		division_template = {
+			name = "Mandalore Protectors"
+			is_locked = yes
+			division_cap = 1 
+			#division_names_group = USA_INF_01
+			priority = 0
+			template_counter = 0
+			regiments = {
+				mandalorian_warrior = { x = 0 y = 0 }
+				mandalorian_warrior = { x = 0 y = 1 }
+				mandalorian_warrior = { x = 1 y = 0 }
+				mandalorian_warrior = { x = 1 y = 1 }
+			}
+		}
+	}
+}
+country_event = {#PRO refuses
+	id = new_republic_focus.21
+	title = new_republic_focus.21.t
+	desc = new_republic_focus.21.desc
+	picture = GFX_report_event
+	is_triggered_only = yes
+
+    option = {#
+		name = new_republic_focus.21.a
+	}
+}
+news_event = {
+	id = new_republic_focus.22
+	title = new_republic_focus.22.t
+	desc = new_republic_focus.22.desc
+	picture = GFX_news_event_NR_ships
+	is_triggered_only = yes
+	major = yes
+
+    option = {
+		name = "May the Force be With Them"
+	}
+}
+news_event = {
+	id = new_republic_focus.23
+	title = new_republic_focus.23.t
+	desc = new_republic_focus.23.desc
+	picture = GFX_news_event_NR_ships
+	is_triggered_only = yes
+	major = yes
+
+    option = {
+		name = "Time to End the Shadow"
+	}
+}
 ### NEWS EVENTS ###
 
 news_event = {
@@ -745,6 +827,22 @@ country_event = {#Threat of the Warlords
     option = {
 		name = "We Will Deal With These Warlords"
 		set_global_flag = NEW_warlord_crisis
+	}
+}
+
+country_event = {
+	id = newrepevent.6 ## Repprochment offered
+	title = "Join The New Repubic?"
+	desc = newrepevent.6.d
+	picture = GFX_report_event
+	is_triggered_only = yes
+	
+    option = {
+		name = newrepevent.6.a
+		REB = { add_to_faction = GRM }
+	}
+	option = {
+		name = newrepevent.6.b
 	}
 }
 

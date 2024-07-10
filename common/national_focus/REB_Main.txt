@@ -609,6 +609,17 @@
 		completion_reward_joint_originator = {
 			set_country_flag = NEW_C_hunting_zsinj
 		}
+		ai_will_do = {
+			factor = 1
+			modifier={
+				factor = 0.5
+				OR={
+					has_country_flag = NEW_C_shadowspawn
+					has_country_flag = NEW_C_fighting_isard
+					has_country_flag = NEW_C_delvardus_campaign
+				}
+			}
+		}
 	}
 	#Preparation for Invasions
 	joint_focus = {
@@ -669,7 +680,7 @@
 		icon = GFX_rebel_goal
 		text_icon = REPUBLIC_JOINT_focus_style
 		relative_position_id = REB_preparation_for_invasions
-		x = 0
+		x = 2
 		y = 1
 		cost = 7.2
 		joint_trigger = {
@@ -690,7 +701,7 @@
 		icon = GFX_leia_dathomir
 		text_icon = REPUBLIC_JOINT_focus_style
 		relative_position_id = REB_contact_partisans
-		x = 0
+		x = -1
 		y = 1
 		cost = 5
 		search_filters = {
@@ -717,7 +728,7 @@
 		icon = GFX_rebel_goal
 		text_icon = REPUBLIC_JOINT_focus_style
 		relative_position_id = REB_preparation_for_invasions
-		x = 2
+		x = 0
 		y = 1
 		cost = 7.2
 		joint_trigger = {
@@ -784,7 +795,7 @@
 		}
 	}
 	joint_focus = {
-		id = REB_more_autonomy_for_the_army
+		id = REB_zsnj_military_intervention
 		icon = GFX_rebel_goal
 		text_icon = REPUBLIC_JOINT_focus_style
 		relative_position_id = REB_securing_a_major_fleet
@@ -802,7 +813,12 @@
 		}
 		prerequisite = { focus = REB_sabotage_imperial_installments  } 
 		prerequisite = { focus = REB_propaganda_campaigns  }
-		completion_reward = {}
+		completion_reward_joint_originator = {
+			declare_war_on = {
+				target = ZSJ
+				type = topple_government
+			}
+		}
 	}
 
 	
@@ -831,6 +847,133 @@
 		}
 		completion_reward_joint_originator = {
 			set_country_flag = NEW_C_shadowspawn
+		}
+		completion_reward={
+			country_event = new_republic_focus.23
+		}
+	}
+	#getting luke skywalker
+	joint_focus = {
+		id = NEW_assigning_luke_skywalker
+		icon = GFX_rebel_goal
+		text_icon = REPUBLIC_JOINT_focus_style
+		relative_position_id = NEW_mindor_campaign
+		x = 1
+		y = 1
+		cost = 7.2
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		available={
+			has_country_flag = NEW_C_shadowspawn
+		}
+		joint_trigger = {
+			NR_basic_joint_trigger= yes
+		}
+		prerequisite = { focus = NEW_mindor_campaign  }
+		completion_reward_joint_originator = {
+			
+		}
+	}
+	#mandal protectors helped too
+	joint_focus = {
+		id = NEW_getting_aid_from_PRO
+		icon = GFX_rebel_goal
+		text_icon = REPUBLIC_JOINT_focus_style
+		relative_position_id = NEW_mindor_campaign
+		x = -1
+		y = 1
+		cost = 7.2
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		available={
+			has_country_flag = NEW_C_shadowspawn
+		}
+		joint_trigger = {
+			NR_basic_joint_trigger= yes
+		}
+		prerequisite = { focus = NEW_mindor_campaign  }
+		completion_reward_joint_originator = {
+			PRO={
+				country_event = new_republic_focus.19
+			}
+		}
+	}
+	#time to kill shadowspawn
+	joint_focus = {
+		id = NEW_begining_mindor_assualt
+		icon = GFX_rebel_goal
+		text_icon = REPUBLIC_JOINT_focus_style
+		relative_position_id = NEW_mindor_campaign
+		x = 0
+		y = 2
+		cost = 7.2
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		available={
+			has_country_flag = NEW_C_shadowspawn
+		}
+		joint_trigger = {
+			NR_basic_joint_trigger= yes
+		}
+		prerequisite = { focus = NEW_assigning_luke_skywalker  }
+		prerequisite = { focus = NEW_getting_aid_from_PRO  }
+		completion_reward_joint_originator = {
+			declare_war_on = {
+				target = MIN
+				type = topple_government
+			}
+		}
+	}
+	#help ai get to the planet. is also how they got to the surface lore wise
+	joint_focus = {
+		id = NEW_hiding_the_landing
+		icon = GFX_rebel_goal
+		text_icon = REPUBLIC_JOINT_focus_style
+		relative_position_id = NEW_begining_mindor_assualt
+		x = 0
+		y = 1
+		cost = 7.2
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		available={
+			has_country_flag = NEW_C_shadowspawn
+			has_war_with = MIN
+			alliance_naval_strength_ratio > 0.5
+		}
+		joint_trigger = {
+			NR_basic_joint_trigger= yes
+		}
+		prerequisite = { focus = NEW_begining_mindor_assualt  }
+		completion_reward_joint_originator = {
+			set_province_controller = 12180
+			521={
+				add_building_construction = {
+					type = naval_base
+					level = 1
+					instant_build = yes
+					province = 12180
+				}
+				create_unit = {
+					division = "name = \"Rebel Battalion\" division_template = \"Rebel Battalion\" start_experience_factor = 0.5"
+					owner = ROOT
+					allow_spawning_on_enemy_provs = yes
+				}
+				if={
+					limit ={
+						has_country_flag = PRO_mindor_support
+					}
+					create_unit = {
+						division = "name = \"Fenn Shysa's Protectors\" division_template = \"Mandalore Protectors\" start_experience_factor = 0.5"
+						owner = ROOT
+						allow_spawning_on_enemy_provs = yes
+					}
+				}
+			}
+
 		}
 	}
 #Bacta War
@@ -878,7 +1021,220 @@ joint_focus = {
 		}
 		prerequisite = { focus = NEW_bacta_war  }
 		completion_reward = {
+			country_event = new_republic_focus.22
+		}
+	}
+	#Aid to Asherns
+	joint_focus = {
+		id = REB_send_aid_to_ashern
+		icon = GFX_rebel_goal
+		text_icon = REPUBLIC_JOINT_focus_style
+		relative_position_id = REB_rogue_rogue_squadron
+		x = 0
+		y = 1
+		cost = 7.2
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		joint_trigger = { 
+			ROOT={
+				NR_basic_joint_trigger= yes
+			}  
+		}
+		available={
+			has_country_flag = NEW_C_fighting_isard
+		}
+		prerequisite = { focus = REB_rogue_rogue_squadron  }
+		completion_reward_joint_originator = {
+			ASH={
+
+			}
+		}
+	}
+	#locate_
+	joint_focus = {
+		id = REB_locate_rouges_to_thyfera
+		icon = GFX_rebel_goal
+		text_icon = REPUBLIC_JOINT_focus_style
+		relative_position_id = REB_send_aid_to_ashern
+		x = 2
+		y = 1
+		cost = 7.2
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		joint_trigger = { 
+			ROOT={
+				NR_basic_joint_trigger= yes
+			}  
+		}
+		available={
+			has_country_flag = NEW_C_fighting_isard
+		}
+		prerequisite = { focus = REB_send_aid_to_ashern  }
+		completion_reward_joint_originator = {
+			ASH={
+				add_ace = {
+					name = "Wedge"
+					surname = "Antilles"
+					callsign = "Rogue Leader"
+					type = fighter_genius
+				}
+				add_equipment_to_stockpile = {
+					type = x_wing_airframe_0
+					amount = 100
+					producer = INC
+				}
+			}
+		}
+	}
+	#locate_
+	joint_focus = {
+		id = REB_arming_thyferans
+		icon = GFX_rebel_goal
+		text_icon = REPUBLIC_JOINT_focus_style
+		relative_position_id = REB_send_aid_to_ashern
+		x = -2
+		y = 1
+		cost = 7.2
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		joint_trigger = { 
+			ROOT={
+				NR_basic_joint_trigger= yes
+			}  
+		}
+		available={
+			has_country_flag = NEW_C_fighting_isard
+		}
+		prerequisite = { focus = REB_send_aid_to_ashern  }
+		completion_reward_joint_originator = {
+			send_equipment = {
+				equipment = infantry_equipment
+				amount = 200
+				target = ASH
+			}
+		}
+	}
+	#locate_
+	joint_focus = {
+		id = REB_alliance_with_zaltin
+		icon = GFX_rebel_goal
+		text_icon = REPUBLIC_JOINT_focus_style
+		relative_position_id = REB_send_aid_to_ashern
+		x = 0
+		y = 1
+		cost = 7.2
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		joint_trigger = { 
+			ROOT={
+				NR_basic_joint_trigger= yes
+			}  
+		}
+		available={
+			has_country_flag = NEW_C_fighting_isard
+		}
+		prerequisite = { focus = REB_send_aid_to_ashern  }
+		completion_reward_joint_originator = {
 			
+		}
+	}
+	#locate_
+	joint_focus = {
+		id = REB_assault_on_isard
+		icon = GFX_rebel_goal
+		text_icon = REPUBLIC_JOINT_focus_style
+		relative_position_id = REB_alliance_with_zaltin
+		x = 0
+		y = 1
+		cost = 7.2
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		joint_trigger = {
+			ROOT={
+				NR_basic_joint_trigger= yes
+			}
+		}
+		available={
+			has_country_flag = NEW_C_fighting_isard
+		}
+		prerequisite = { focus = REB_alliance_with_zaltin  }
+		prerequisite = { focus = REB_arming_thyferans  }
+		prerequisite = { focus = REB_locate_rouges_to_thyfera  }
+		completion_reward_joint_originator = {
+			REB={
+				add_to_faction = ASH
+			}
+			if={
+				limit={
+					EMP={
+						has_cosmetic_tag = XUCISARD
+					}
+				}
+				ASH={
+					declare_war_on = {
+						target = EMP
+						type = civil_war
+					}
+					add_civil_war_target = EMP
+				}
+				add_to_war = {
+					targeted_alliance = ASH
+					enemy = EMP
+					hostility_reason = asked_to_join
+				}
+			}
+			else={
+				ASH={
+					declare_war_on = {
+						target = THY
+						type = civil_war
+					}
+					add_civil_war_target = THY
+				}
+				add_to_war = {
+					targeted_alliance = ASH
+					enemy = THY
+					hostility_reason = asked_to_join
+				}
+			}
+		}
+	}
+	joint_focus = {
+		id = REB_rouges_return
+		icon = GFX_rebel_goal
+		text_icon = REPUBLIC_JOINT_focus_style
+		relative_position_id = REB_assault_on_isard
+		x = 0
+		y = 1
+		cost = 7.2
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		joint_trigger = { 
+			ROOT={
+				NR_basic_joint_trigger= yes
+			}  
+		}
+		available={
+			has_country_flag = NEW_C_fighting_isard
+		}
+		prerequisite = { focus = REB_assault_on_isard  }
+		completion_reward_joint_originator = {
+			ASH={
+			}
+			REB={
+				add_ace = {
+					name = "Wedge"
+					surname = "Antilles"
+					callsign = "Rogue Leader"
+					type = fighter_genius
+				}
+			}
 		}
 	}
 #Delvardus Campaign

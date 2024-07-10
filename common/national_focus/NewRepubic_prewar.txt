@@ -763,76 +763,6 @@ focus_tree = {
 		}
 	}
 
-	#Take Back the Capital
-	focus = {
-		id = REB_take_back_the_capital
-		icon = GFX_new_rep_invasion
-		text_icon = REPUBLIC_focus_style
-		relative_position_id = REB_prepare_for_reclamation
-		x = 0
-		y = 3
-		cost = 3.7
-		search_filters = {
-			FOCUS_FILTER_POLITICAL
-		}
-		prerequisite = { focus = REB_rallying_alliance_members  }
-		available = {
-			214={
-				owner={has_government = democratic}
-			}
-			119={
-				owner={has_government = democratic}
-			}
-			199={
-				owner={has_government = democratic}
-			}
-			32={
-				owner={has_government = democratic}
-			}
-		}
-		bypass={
-			owns_state = 235
-		}
-		will_lead_to_war_with = EMP
-		completion_reward = {
-			activate_mission_tooltip = invasion_of_coruscant
-			declare_war_on = {
-				target = EMP
-				type = annex_everything
-			}
-			set_global_flag = EMP_war_begun
-			EMP = {
-				mark_focus_tree_layout_dirty = yes
-			}
-			if = {
-				limit = {
-					has_country_flag = resistance_cells_invasion_coruscant
-				}
-				set_province_controller = 519
-				230 = {
-					create_unit = {
-						allow_spawning_on_enemy_provs = yes
-						division = "name = \"Rebel Battalion\" division_template = \"Rebel Battalion\" start_experience_factor = 0.5"
-						owner = REB
-						prioritize_location = 519
-					}
-					create_unit = {
-						allow_spawning_on_enemy_provs = yes
-						division = "name = \"Rebel Battalion\" division_template = \"Rebel Battalion\" start_experience_factor = 0.5"
-						owner = REB
-						prioritize_location = 4087
-					}
-					create_unit = {
-						allow_spawning_on_enemy_provs = yes
-						division = "name = \"Rebel Battalion\" division_template = \"Rebel Battalion\" start_experience_factor = 0.5"
-						owner = REB
-						prioritize_location = 4703
-					}
-				}
-			}
-		}
-	} 
-
 	#Encourage Resistance Cells
 	focus = {
 		id = REB_encourage_resistance_cells
@@ -912,6 +842,166 @@ focus_tree = {
 						division = "name = \"Rebel Battalion\" division_template = \"Rebel Battalion\" start_experience_factor = 0.5"
 						owner = REB
 					}
+				}
+			}
+		}
+	}
+	#Take Back the Capital
+	focus = {
+		id = REB_take_back_the_capital
+		icon = GFX_new_rep_invasion
+		text_icon = REPUBLIC_focus_style
+		relative_position_id = REB_prepare_for_reclamation
+		x = 0
+		y = 3
+		cost = 3.7
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = REB_rallying_alliance_members  }
+		available = {
+			214={
+				owner={has_government = democratic}
+			}
+			119={
+				owner={has_government = democratic}
+			}
+			199={
+				owner={has_government = democratic}
+			}
+			32={
+				owner={has_government = democratic}
+			}
+		}
+		bypass={
+			owns_state = 235
+		}
+		will_lead_to_war_with = EMP
+		completion_reward = {
+			activate_mission_tooltip = invasion_of_coruscant
+			declare_war_on = {
+				target = EMP
+				type = annex_everything
+			}
+			set_global_flag = EMP_war_begun
+			EMP = {
+				mark_focus_tree_layout_dirty = yes
+			}
+			if = {
+				limit = {
+					has_country_flag = resistance_cells_invasion_coruscant
+				}
+				set_province_controller = 519
+				230 = {
+					create_unit = {
+						allow_spawning_on_enemy_provs = yes
+						division = "name = \"Rebel Battalion\" division_template = \"Rebel Battalion\" start_experience_factor = 0.5"
+						owner = REB
+						prioritize_location = 519
+					}
+					create_unit = {
+						allow_spawning_on_enemy_provs = yes
+						division = "name = \"Rebel Battalion\" division_template = \"Rebel Battalion\" start_experience_factor = 0.5"
+						owner = REB
+						prioritize_location = 4087
+					}
+					create_unit = {
+						allow_spawning_on_enemy_provs = yes
+						division = "name = \"Rebel Battalion\" division_template = \"Rebel Battalion\" start_experience_factor = 0.5"
+						owner = REB
+						prioritize_location = 4703
+					}
+				}
+			}
+			mark_focus_tree_layout_dirty = yes
+		}
+	} 
+	#coruscant war focii
+	focus = {
+		id = REB_sabotage_coruscant_plantary_shield
+		icon = GFX_rebel_goal
+		text_icon = REPUBLIC_focus_style
+		x = 13
+		y = 0
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_ANNEXATION
+		}
+		bypass = {
+			NOT={has_war_with = EMP}
+		}
+		allow_branch = {
+			has_completed_focus = REB_take_back_the_capital
+		}
+		completion_reward = {
+			EMP={
+				add_timed_idea = {
+					idea = REB_planetary_shield_down
+					days = 180
+				}
+			}
+		}
+	}
+	focus = {
+		id = REB_taking_the_palace
+		icon = GFX_rebel_goal
+		text_icon = REPUBLIC_focus_style
+		relative_position_id = REB_sabotage_coruscant_plantary_shield
+		x = 0
+		y = 1
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_ANNEXATION
+		}
+		available = {
+			count_triggers = {
+				amount = 6
+				189={
+					is_controlled_by_ROOT_or_ally = yes
+				}
+				230={
+					is_controlled_by_ROOT_or_ally = yes
+				}
+				240={
+					is_controlled_by_ROOT_or_ally = yes
+				}
+				235={
+					is_controlled_by_ROOT_or_ally = yes
+				}
+				60={
+					is_controlled_by_ROOT_or_ally = yes
+				}
+				39={
+					is_controlled_by_ROOT_or_ally = yes
+				}
+				57={
+					is_controlled_by_ROOT_or_ally = yes
+				}
+				229={
+					is_controlled_by_ROOT_or_ally = yes
+				}
+				315={
+					is_controlled_by_ROOT_or_ally = yes
+				}
+				40={
+					is_controlled_by_ROOT_or_ally = yes
+				}
+			}
+		}
+		bypass = {
+			NOT={has_war_with = EMP}
+		}
+		prerequisite = { 
+			focus = REB_sabotage_coruscant_plantary_shield  
+		}
+		completion_reward = {
+			if={
+				limit={
+					has_active_mission = republican_momentum
+				}
+				add_days_mission_timeout = {
+					mission = republican_momentum
+					days = 90
 				}
 			}
 		}

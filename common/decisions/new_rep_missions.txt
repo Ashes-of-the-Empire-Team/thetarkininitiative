@@ -9,35 +9,42 @@ new_republic_missions = {
 		icon = GFX_new_republic_decision
 
 		available = {
-			189={
-				is_controlled_by_ROOT_or_ally = yes
-			}
-			230={
-				is_controlled_by_ROOT_or_ally = yes
-			}
-			240={
-				is_controlled_by_ROOT_or_ally = yes
-			}
-			235={
-				is_controlled_by_ROOT_or_ally = yes
-			}
-			60={
-				is_controlled_by_ROOT_or_ally = yes
-			}
-			39={
-				is_controlled_by_ROOT_or_ally = yes
-			}
-			57={
-				is_controlled_by_ROOT_or_ally = yes
-			}
-			229={
-				is_controlled_by_ROOT_or_ally = yes
-			}
-			315={
-				is_controlled_by_ROOT_or_ally = yes
-			}
-			40={
-				is_controlled_by_ROOT_or_ally = yes
+			OR={
+				EMP={
+					surrender_progress > 0.95
+				}
+				AND={
+					189={
+						is_controlled_by_ROOT_or_ally = yes
+					}
+					230={
+						is_controlled_by_ROOT_or_ally = yes
+					}
+					240={
+						is_controlled_by_ROOT_or_ally = yes
+					}
+					235={
+						is_controlled_by_ROOT_or_ally = yes
+					}
+					60={
+						is_controlled_by_ROOT_or_ally = yes
+					}
+					39={
+						is_controlled_by_ROOT_or_ally = yes
+					}
+					57={
+						is_controlled_by_ROOT_or_ally = yes
+					}
+					229={
+						is_controlled_by_ROOT_or_ally = yes
+					}
+					315={
+						is_controlled_by_ROOT_or_ally = yes
+					}
+					40={
+						is_controlled_by_ROOT_or_ally = yes
+					}
+				}
 			}
 		}
 
@@ -248,6 +255,7 @@ new_republic_missions = {
 
 		timeout_effect = {
 			add_ideas = NR_election_season
+			mark_focus_tree_layout_dirty = yes
 			##advance elections
 			custom_effect_tooltip = NR_head_of_state_elections_start
 			if={
@@ -277,15 +285,16 @@ new_republic_galatic_liberation={
         visible = {
             always=yes
 			NOT={has_country_flag = bakura_operation}
+			NOT={has_country_flag = bakura_resolved}
         }
         cost = 50
         available = {
             has_completed_focus = REB_unknown_region_focus
-			NOT={has_country_flag = REB_currently_in_operation}
+			#NOT={has_country_flag = REB_currently_in_operation}
         }
         #days_remove = 120
         complete_effect = {
-			set_country_flag = REB_currently_in_operation
+			#set_country_flag = REB_currently_in_operation
 			set_country_flag = bakura_operation
 			custom_effect_tooltip = REB_intervene_in_bakura_decision_tt
         }
@@ -355,6 +364,38 @@ new_republic_galatic_liberation={
         #remove_effect = {
 		#}
     }
+	REB_send_guns_bakura_decision = {
+        priority = 9
+        icon = GFX_new_republic_decision
+
+        allowed = {
+			tag = REB
+        }
+        visible = {
+            always=yes
+			has_country_flag = bakura_operation
+			BAK={
+				is_subject = no
+			}
+        }
+        cost = 50
+        available = {
+			has_country_flag = bakura_operation
+        }
+        #days_remove = 120
+        complete_effect = {
+			send_equipment = {
+				equipment = infantry_equipment
+				amount = 500
+				target = BAK
+			}
+        }
+        #remove_effect = {
+		#}
+		ai_will_do = {
+			factor = 15
+		}
+    }
 	REB_abandon_bakura_decision = {
         priority = 11
         icon = GFX_new_republic_decision
@@ -364,6 +405,7 @@ new_republic_galatic_liberation={
         }
         visible = {
             has_country_flag = bakura_operation
+			NOT={has_country_flag = bakura_resolved}
         }
         cost = 25
         available = {
@@ -371,7 +413,6 @@ new_republic_galatic_liberation={
         }
         #days_remove = 120
         complete_effect = {
-			clr_country_flag = REB_currently_in_operation
 			clr_country_flag = bakura_operation
 			custom_effect_tooltip = REB_abandon_bakura_decision_tt
 			add_war_support = -0.05
@@ -392,6 +433,12 @@ new_republic_galatic_liberation={
 					is_subject = yes
 				}
 			}
+			modifier = {
+				add = 1000
+				BAK={
+					exists = no
+				}
+			}
 		}
     }
 	REB_take_back_bespin_decision = {
@@ -404,15 +451,16 @@ new_republic_galatic_liberation={
         visible = {
             always=yes
 			NOT={has_country_flag = bespin_operation}
+			NOT={has_country_flag = bespin_resolved}
         }
         cost = 50
         available = {
             has_completed_focus = REB_western_reaches_focus
-			NOT={has_country_flag = REB_currently_in_operation}
+			#NOT={has_country_flag = REB_currently_in_operation}
         }
         #days_remove = 120
         complete_effect = {
-			set_country_flag = REB_currently_in_operation
+			#set_country_flag = REB_currently_in_operation
 			set_country_flag = bespin_operation
 			custom_effect_tooltip = REB_take_back_bespin_decision_tt
         }
@@ -486,6 +534,7 @@ new_republic_galatic_liberation={
 			custom_effect_tooltip = REB_begin_the_war_decision_tt
 			set_country_flag = bespin_civil_war_started
 			clr_country_flag = bespin_operation
+			set_country_flag = bespin_resolved
 			BES = {
 				hidden_effect = {
 					start_civil_war = {
@@ -535,11 +584,11 @@ new_republic_galatic_liberation={
         cost = 50
         available = {
             has_completed_focus = REB_western_reaches_focus
-			NOT={has_country_flag = REB_currently_in_operation}
+			#NOT={has_country_flag = REB_currently_in_operation}
         }
         #days_remove = 120
         complete_effect = {
-			set_country_flag = REB_currently_in_operation
+			#set_country_flag = REB_currently_in_operation
 			set_country_flag = utapau_negotiation
 			#custom_effect_tooltip = REB_diplomatic_mission_to_utapau_decision_tt
 			UTA = {
@@ -595,12 +644,12 @@ new_republic_galatic_liberation={
         
         available = {
             has_completed_focus = REB_trailing_sectors_focus
-			NOT={has_country_flag = REB_currently_in_operation}
+			#NOT={has_country_flag = REB_currently_in_operation}
         }
 		cost = 50
         #days_remove = 120
         complete_effect = {
-			set_country_flag = REB_currently_in_operation
+			#set_country_flag = REB_currently_in_operation
 			set_country_flag = tatooine_operation
 			custom_effect_tooltip = REB_tatooine_uprising_decision_tt
         }
@@ -707,74 +756,74 @@ new_republic_galatic_liberation={
 }
 
 political_actions={
-	REB_handover_coruscant_to_REB_decision = {
-        priority = 11
-        icon = GFX_new_republic_decision
+	# REB_handover_coruscant_to_REB_decision = {
+        # priority = 11
+        # icon = GFX_new_republic_decision
 
-        allowed = {
-			always = yes
-			NOT={tag = REB}
-        }
-        visible = {
-			has_government = democratic
-			OR={
-				189={
-					controls_or_subject_of = yes
-				}
-				230={
-					controls_or_subject_of = yes
-				}
-				240={
-					controls_or_subject_of = yes
-				}
-				235={
-					controls_or_subject_of = yes
-				}
-				60={
-					controls_or_subject_of = yes
-				}
-				39={
-					controls_or_subject_of = yes
-				}
-				57={
-					controls_or_subject_of = yes
-				}
-				229={
-					controls_or_subject_of = yes
-				}
-				315={
-					controls_or_subject_of = yes
-				}
-				40={
-					controls_or_subject_of = yes
-				}
-			}
-        }
-        #days_remove = 120
-        complete_effect = {
-			every_owned_state={
-				limit={
-					OR={
-						state = 189
-						state = 230
-						state = 240
-						state = 235
-						state = 60
-						state = 39
-						state = 57
-						state = 229
-						state = 315
-						state = 40
-					}
-				}
-				transfer_state_to = REB
-			}
-        }
-        #remove_effect = {
-		#}
-		ai_will_do = {
-			factor = 20
-		}
-    }
+        # allowed = {
+			# always = yes
+			# NOT={tag = REB}
+        # }
+        # visible = {
+			# has_government = democratic
+			# OR={
+				# 189={
+					# controls_or_subject_of = yes
+				# }
+				# 230={
+					# controls_or_subject_of = yes
+				# }
+				# 240={
+					# controls_or_subject_of = yes
+				# }
+				# 235={
+					# controls_or_subject_of = yes
+				# }
+				# 60={
+					# controls_or_subject_of = yes
+				# }
+				# 39={
+					# controls_or_subject_of = yes
+				# }
+				# 57={
+					# controls_or_subject_of = yes
+				# }
+				# 229={
+					# controls_or_subject_of = yes
+				# }
+				# 315={
+					# controls_or_subject_of = yes
+				# }
+				# 40={
+					# controls_or_subject_of = yes
+				# }
+			# }
+        # }
+        # #days_remove = 120
+        # complete_effect = {
+			# every_owned_state={
+				# limit={
+					# OR={
+						# state = 189
+						# state = 230
+						# state = 240
+						# state = 235
+						# state = 60
+						# state = 39
+						# state = 57
+						# state = 229
+						# state = 315
+						# state = 40
+					# }
+				# }
+				# transfer_state_to = REB
+			# }
+        # }
+        # #remove_effect = {
+		# #}
+		# ai_will_do = {
+			# factor = 20
+		# }
+    # }
 
 }
