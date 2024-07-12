@@ -360,7 +360,7 @@ recalculate_maxium_stockpile = {
 		index = i
 		
 		set_variable = {maxium_stockpile@var:current_selected_item = wanted_base@var:current_selected_item}
-		multiply_variable = {maxium_stockpile@var:current_selected_item = temp_stockpile_constant}
+		multiply_variable = {maxium_stockpile@var:current_selected_item = global.temp_stockpile_constant}
 
 	} ## lowest percentage of stockpile is brought first
 }
@@ -448,17 +448,38 @@ add_standard_equipment_desire_and_array = {
 behaviour_1_empire_array_creation_and_desire = {
 	add_to_array = {
 		array = ai_wanted_equipment
-		value = infantry_equipment_0
+		value = at_st_chassis_0
 	}
+	set_variable = {wanted_base@token:at_st_chassis_0 = 40}
 }
 
 test_effect_70 = {
-	set_variable = {temp_var = 7}
-	set_variable = {global.required_researched_technology@7 = token:infantry_weapons1 }
 	if = {
 		limit = {
-			has_tech = var:global.required_researched_technology@var:temp_var
+			any_owned_state = {
+				or = {
+					if = {
+						limit = {
+							check_variable = {building_1 = token:corporate_office_1}
+						}
+						NOT = {
+							has_variable = time_left_building_1
+						}
+					}else_if = {
+						limit = {
+							check_variable = {building_2 = token:corporate_office_1}
+						}
+						NOT = {
+							has_variable = time_left_building_2
+						}
+					}else = {
+						always = yes
+					}
+				}
+				set_temp_variable = {state_finder = This.id}
+			}
+			check_variable = {buildings_money_chest_amount > global.corporate_office_2_global_cost}
 		}
-		log = "achieved Test"
+		log = "test"
 	}
 }

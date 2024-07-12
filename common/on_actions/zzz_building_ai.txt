@@ -1,0 +1,213 @@
+on_actions = {
+	on_weekly = {
+		effect = {
+			if = {
+				limit = {
+					is_ai = yes
+				}
+
+				set_temp_variable = {highest_desired_building = 0}
+				set_temp_variable = {highest_desired_building_desire_amount = 0}
+				### Deciding what building to build
+				
+				# if = {
+				# 	limit = {
+				# 		check_variable = {highest_desired_building_desire_amount < temporary_desire_amount}
+				# 	}
+				# 	set_temp_variable = {highest_desired_building = temporary_desired_building}
+				# }
+
+				## Money first
+
+				set_temp_variable = {money_per_day_target_multiplier = 4}
+				if ={
+					limit = {
+						has_war = yes
+					}
+					set_temp_variable = {money_per_day_target_multiplier = 2}
+				}
+				if = {
+					limit = {
+						or = {
+							set_temp_variable = {calculated_ratio = allexpenses}
+							multiply_temp_variable = {calculated_ratio = money_per_day_target_multiplier}
+							check_variable = {nmn < calculated_ratio}
+							check_variable = {nmn < 5}
+						}
+					}
+					set_temp_variable = {temporary_desire_amount = 100}
+
+
+					if = {
+						limit = {
+							check_variable = {highest_desired_building_desire_amount < temporary_desire_amount}
+						}
+						set_temp_variable = {highest_desired_building = token:corporate_office_1}
+					}
+				}else = {
+					## we got enough money, lets build some mils
+					set_temp_variable = {highest_desired_building = token:arms_factory_1}
+
+				}
+
+				if = {
+					limit = {
+						tag = HUT
+					}
+					log = "[?highest_desired_building.GetTokenKey]"
+					log = "[?buildings_money_chest_amount]"
+				}
+
+
+				
+
+
+				## If office building is wanted, find upgrade first
+				## UPGRADE MANAGER
+				if = {
+					limit = {
+						check_variable = {highest_desired_building = token:corporate_office_1}
+					}
+					set_temp_variable = {upgrade_version_1_of_building = token:corporate_office_1 }
+					set_temp_variable = {upgrade_version_2_of_building = token:corporate_office_2 }
+					set_temp_variable = {upgrade_version_3_of_building = token:corporate_office_3 }
+				}
+				if = {
+					limit = {
+						check_variable = {highest_desired_building = token:arms_factory_1}
+					}
+					set_temp_variable = {upgrade_version_1_of_building = token:arms_factory_1 }
+					set_temp_variable = {upgrade_version_2_of_building = token:soft_arms_factory_1 }
+					set_temp_variable = {upgrade_version_3_of_building = token:soft_arms_factory_2 }
+				}
+
+
+				## OVERALL TEMPLATE
+				meta_effect = {
+					text = {
+						set_temp_variable = {upgrade_version_1_of_building_speed = [BUILDING_UPGRADE_1_NAME]_speed?global.[BUILDING_UPGRADE_1_NAME]_global_speed}
+						set_temp_variable = {upgrade_version_1_of_building_cost = [BUILDING_UPGRADE_1_NAME]_cost?global.[BUILDING_UPGRADE_1_NAME]_global_cost}
+						set_temp_variable = {upgrade_version_2_of_building_speed = [BUILDING_UPGRADE_2_NAME]_speed?global.[BUILDING_UPGRADE_2_NAME]_global_speed}
+						set_temp_variable = {upgrade_version_2_of_building_cost = [BUILDING_UPGRADE_2_NAME]_cost?global.[BUILDING_UPGRADE_2_NAME]_global_cost}
+						set_temp_variable = {upgrade_version_3_of_building_speed = [BUILDING_UPGRADE_3_NAME]_speed?global.[BUILDING_UPGRADE_3_NAME]_global_speed}
+						set_temp_variable = {upgrade_version_3_of_building_cost = [BUILDING_UPGRADE_3_NAME]_cost?global.[BUILDING_UPGRADE_3_NAME]_global_cost}
+					}
+					BUILDING_UPGRADE_1_NAME = "[?upgrade_version_1_of_building.GetTokenKey]"
+					BUILDING_UPGRADE_2_NAME = "[?upgrade_version_2_of_building.GetTokenKey]"
+					BUILDING_UPGRADE_3_NAME = "[?upgrade_version_3_of_building.GetTokenKey]"
+				}
+				if = {
+					limit = { ## UPGRADE 2
+						any_owned_state = {
+							or = {
+								if = {
+									limit = {
+										check_variable = {building_1 = upgrade_version_1_of_building}
+									}
+									NOT = {
+										has_variable = time_left_building_1
+									}
+								}else_if = {
+									limit = {
+										check_variable = {building_2 = upgrade_version_1_of_building}
+									}
+									NOT = {
+										has_variable = time_left_building_2
+									}
+								}else = {
+									always = no
+								}
+							}
+							set_temp_variable = {state_located_for_building_changes = This.id}
+						}
+						check_variable = {buildings_money_chest_amount > upgrade_version_2_of_building_cost}
+					}
+					set_variable = { potential_cost_holder_for_event = upgrade_version_2_of_building_cost}
+					var:state_located_for_building_changes = {
+						set_variable = { potential_building_holder_for_event = upgrade_version_2_of_building }
+						set_variable = { potential_time_left_building_holder_for_event = upgrade_version_2_of_building_speed}
+					}
+					subtract_from_variable = {buildings_money_chest_amount = upgrade_version_2_of_building_cost}
+					if = {
+						limit = {
+							check_variable = {building_1 = upgrade_version_1_of_building}
+							NOT = {
+								has_variable = time_left_building_1
+							}
+						}
+						add_building_to_construct_slot_1 = yes
+					}else = {
+						add_building_to_construct_slot_2 = yes
+					}
+				}else_if = { ## UPGRADE 3
+					limit = {
+						any_owned_state = {
+							or = {
+								if = {
+									limit = {
+										check_variable = {building_1 = upgrade_version_2_of_building}
+									}
+									NOT = {
+										has_variable = time_left_building_1
+									}
+								}else_if = {
+									limit = {
+										check_variable = {building_2 = upgrade_version_2_of_building}
+									}
+									NOT = {
+										has_variable = time_left_building_2
+									}
+								}else = {
+									always = no
+								}
+							}
+							set_temp_variable = {state_located_for_building_changes = This.id}
+						}
+						check_variable = {buildings_money_chest_amount > upgrade_version_3_of_building_cost}
+					}
+					set_variable = { potential_cost_holder_for_event = upgrade_version_3_of_building_cost}
+					var:state_located_for_building_changes = {
+						set_variable = { potential_building_holder_for_event = upgrade_version_3_of_building }
+						set_variable = { potential_time_left_building_holder_for_event = upgrade_version_3_of_building_speed}
+					}
+					subtract_from_variable = {buildings_money_chest_amount = upgrade_version_3_of_building_cost}
+					if = {
+						limit = {
+							check_variable = {building_1 = upgrade_version_2_of_building}
+							NOT = {
+								has_variable = time_left_building_1
+							}
+						}
+						add_building_to_construct_slot_1 = yes
+					}else = {
+						add_building_to_construct_slot_2 = yes
+					}
+				}else_if = { ## NEW
+					limit = {
+						check_variable = {buildings_money_chest_amount > upgrade_version_1_of_building_cost}
+					}
+					set_variable = { potential_cost_holder_for_event = upgrade_version_1_of_building_cost}
+					subtract_from_variable = {buildings_money_chest_amount = upgrade_version_1_of_building_cost}
+					random_owned_state = {
+						limit = {
+							has_avaliable_building_slot = yes
+						}
+						set_temp_variable = {state_located_for_building_changes = This.id}
+						set_variable = { potential_building_holder_for_event = upgrade_version_1_of_building }
+						set_variable = { potential_time_left_building_holder_for_event = upgrade_version_1_of_building_speed}
+						if = {
+							limit = {
+								NOT = {
+									has_variable = building_1
+								}
+							}
+							add_building_to_construct_slot_1 = yes
+						}else = {
+							add_building_to_construct_slot_2 = yes
+						}
+					}
+				}
+			}
+		}
+	}
+}

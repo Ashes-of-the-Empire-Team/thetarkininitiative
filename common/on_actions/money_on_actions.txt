@@ -468,11 +468,14 @@ on_actions = {
 			##
 
 			divide_variable = {money_chest_amount = 100}
-			set_variable = {equipment_money_chest_amount = money_chest_amount}
-			set_variable = {buildings_money_chest_amount = money_chest_amount}
+			set_temp_variable = {equipment_money_to_add = money_chest_amount}
+			set_temp_variable = {buildings_money_to_add = money_chest_amount}
 
-			multiply_variable = {equipment_money_chest_amount = equipment_ratio}
-			multiply_variable = {equipment_money_chest_amount = buildings_ratio}
+			multiply_temp_variable = {equipment_money_to_add = equipment_ratio}
+			multiply_temp_variable = {buildings_money_to_add = buildings_ratio}
+			
+			add_to_variable = {equipment_money_chest_amount = equipment_money_to_add} ## Keeps money not spent still in play
+			add_to_variable = {buildings_money_chest_amount = buildings_money_to_add}
 			##ignore treasury, just letting it sit
 
 			## subdivied equipment into navy and land equipment
@@ -481,7 +484,7 @@ on_actions = {
 	}
 }
 # num_of_controlled_planets :Variable that determines taxable states...excludes spacestates from #of owned states
-# dx : how much money you have
+# currency_amount^primary_currency : how much money you have
 # debttotal : how much debt you owe
 ##########Expenses##########
 # allexpenses : adds all of the following to create total expenses per day
@@ -501,7 +504,7 @@ on_actions = {
 	# oil_import : each oil import costs 1/300
 	# steel_import : each steel import costs 1/600
 ##########Income##########
-# nmn : Daily income
+# nmn : Daily profit
 # cfff : Number of civilian factories each is worth 1/20
 # tax : equal to population / 10,000
 # resourceincome : total income from all resource exports
