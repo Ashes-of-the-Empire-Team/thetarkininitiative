@@ -8,45 +8,162 @@ focus_tree = {
 			tag = PRO
 		}
 	}
-
-
+	###Reclaim Mandalore Tree
 	focus = {
-		id = PRO_ban_exports
-		icon = GFX_generic_suspend_constitution
-		cost = 7.2		x = -10
-		y = 1
-		ai_will_do = {
-			factor = 1
-		}
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus PRO_ban_exports"
-		}
-		relative_position_id = PRO_the_ore_of_our_people
-		prerequisite = { focus = PRO_the_ore_of_our_people }
-		mutually_exclusive = { focus = PRO_trade_with_the_galaxy }
-	}
-
-	focus = {
-		id = PRO_the_great_purge
-		icon = GFX_the_great_purge_goal
-		cost = 7.2		x = 24
+		id = PRO_The_Great_Purge
+		icon = GFX_The_Great_Purge_goal	
+		x = 29
 		y = 0
-		ai_will_do = {
-			factor = 1
-		}
+		cost = 7.2
+		ai_will_do = { factor = 1 }
 		completion_reward = {
 			country_event = { id = mandalore.1 }
 		}
 	}
-
 	focus = {
-		id = PRO_bokatan_kryze
-		icon = GFX_bo_katan_goal
-		cost = 7.2		x = 2
-		y = 2
-		ai_will_do = {
-			factor = 1
+		id = PRO_Fenn_Shysha
+		icon = GFX_fenn_shysha_goal
+		prerequisite = { focus = PRO_The_Great_Purge }
+		mutually_exclusive = { focus = PRO_Bokatan_Kryze }
+		relative_position_id = PRO_The_Great_Purge
+		x = -2
+		y = 1
+		cost = 7.2
+		ai_will_do = { factor = 1 }
+		completion_reward = {
+			hidden_effect = {
+				#recruit_character = PRO_fenn_shysa
+			}
+			promote_character = {
+				character = PRO_fenn_shysa
+				ideology = aristocracy
+			}	
 		}
+	}
+	focus = {
+		id = PRO_The_True_Mandalore
+		icon = GFX_true_mandalore_goal
+		prerequisite = { focus = PRO_Fenn_Shysha }
+		relative_position_id = PRO_Fenn_Shysha	
+		x = -1
+		y = 1
+		cost = 7.2
+		ai_will_do = { factor = 1 }
+		completion_reward = {
+		}
+	}
+	focus = {
+		id = PRO_Lost_Protector_Supplies
+		icon = GFX_generic_suspend_constitution
+		prerequisite = { focus = PRO_Fenn_Shysha }
+		relative_position_id = PRO_Fenn_Shysha	
+		x = 1
+		y = 1
+		cost = 7.2
+		ai_will_do = { factor = 1 }
+		completion_reward = {
+		}
+	}
+	focus = {
+		id = PRO_Reaching_Out_To_The_Rebellion
+		icon = GFX_alliance_of_free_planets_goal
+		prerequisite = { focus = PRO_The_True_Mandalore }
+		relative_position_id = PRO_The_True_Mandalore	
+		x = 0
+		y = 1
+		cost = 7.2
+		ai_will_do = { factor = 1 }
+		completion_reward = {
+		}
+	}
+	focus = {
+		id = PRO_Mandalorian_Mercenary_Clans
+		icon = GFX_generic_suspend_constitution
+		prerequisite = { focus = PRO_Lost_Protector_Supplies }
+		relative_position_id = PRO_Lost_Protector_Supplies	
+		x = 0
+		y = 1
+		cost = 7.2
+		ai_will_do = { factor = 1 }
+		completion_reward = {
+		}
+	}
+	focus = {
+		id = PRO_The_Liberation_Of_Nagai
+		icon = GFX_generic_suspend_constitution
+		prerequisite = { focus = PRO_Reaching_Out_To_The_Rebellion }
+		prerequisite = { focus = PRO_Mandalorian_Mercenary_Clans }
+		relative_position_id = PRO_Reaching_Out_To_The_Rebellion	
+		x = 1
+		y = 1
+		cost = 7.2
+		ai_will_do = { factor = 1 }
+		completion_reward = {
+		}
+	}
+	focus = {
+		id = PRO_Kept_Alliance_Support
+		icon = GFX_generic_suspend_constitution
+		prerequisite = { focus = PRO_The_Liberation_Of_Nagai }
+		mutually_exclusive = { focus = PRO_Lost_Alliance_Support }
+		relative_position_id = PRO_The_Liberation_Of_Nagai
+		x = -1
+		y = 1
+		cost = 7.2
+		ai_will_do = { factor = 1 }
+		completion_reward = {	
+		}
+	}
+	focus = {
+		id = PRO_Lost_Alliance_Support
+		icon = GFX_generic_suspend_constitution
+		prerequisite = { focus = PRO_The_Liberation_Of_Nagai }
+		mutually_exclusive = { focus = PRO_Kept_Alliance_Support }
+		relative_position_id = PRO_The_Liberation_Of_Nagai
+		x = 1
+		y = 1
+		cost = 7.2
+		ai_will_do = { factor = 1 }
+		completion_reward = {	
+		}
+	}
+	focus = {
+		id = PRO_Alliance_Reinforcements
+		icon = GFX_generic_suspend_constitution
+		prerequisite = { focus = PRO_Kept_Alliance_Support }
+		relative_position_id = PRO_Kept_Alliance_Support	
+		x = -1
+		y = 1
+		cost = 7.2
+		ai_will_do = { factor = 1 }
+		completion_reward = {
+		}
+	}
+	focus = {
+		id = PRO_Lessons_Of_Nagai
+		icon = GFX_generic_suspend_constitution
+		prerequisite = { 
+			focus = PRO_Kept_Alliance_Support 
+			focus = PRO_Lost_Alliance_Support 
+		}
+		relative_position_id = PRO_Kept_Alliance_Support	
+		x = 1
+		y = 1
+		cost = 7.2
+		ai_will_do = { factor = 1 }
+		completion_reward = {
+		}
+	}
+	focus = {
+		id = PRO_Bokatan_Kryze
+		icon = GFX_bo_katan_goal
+		prerequisite = { focus = PRO_The_Great_Purge }
+		mutually_exclusive = { focus = PRO_The_Great_Purge }
+		relative_position_id = PRO_The_Great_Purge	
+		x = 2
+		y = 1
+		cost = 7.2
+		ai_will_do = { factor = 1 }
 		completion_reward = {
 			hidden_effect = {
 				recruit_character = KRY_bo_katan_kryze
@@ -57,98 +174,185 @@ focus_tree = {
 			}	
 			#retire_character = PRO_fenn_rau
 		}
-		relative_position_id = PRO_the_great_purge
-		prerequisite = { focus = PRO_the_great_purge }
-		mutually_exclusive = { focus = PRO_fenn_shysha }
 	}
-	
-
 	focus = {
-		id = PRO_fenn_shysha
-		icon = GFX_fenn_shysha_goal
-		cost = 7.2		x = -2
-		y = 2
-		ai_will_do = {
-			factor = 1
-		}
-		completion_reward = {
-			hidden_effect = {
-				#recruit_character = PRO_fenn_shysa
-			}
-			promote_character = {
-				character = PRO_fenn_shysa
-				ideology = aristocracy
-			}	
-		}
-		relative_position_id = PRO_the_great_purge
-		prerequisite = { focus = PRO_the_great_purge }
-		mutually_exclusive = { focus = PRO_bokatan_kryze }
-	}
-
-	focus = {
-		id = PRO_the_nagai
+		id = PRO_Loot_Deathwatch_Supplies
 		icon = GFX_generic_suspend_constitution
-		cost = 7.2		x = 0
-		y = 2
-		ai_will_do = {
-			factor = 1
-		}
+		prerequisite = { focus = PRO_Bokatan_Kryze }
+		relative_position_id = PRO_Bokatan_Kryze	
+		x = -1
+		y = 1
+		cost = 7.2
+		ai_will_do = { factor = 1 }
 		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus PRO_the_nagai"
 		}
-		relative_position_id = PRO_the_true_mandalore
-		prerequisite = { focus = PRO_the_true_mandalore }
 	}
-
 	focus = {
-		id = PRO_mercenary_recruitment
-		icon = GFX_generic_suspend_constitution
-		cost = 7.2		x = -2
-		y = 2
-		ai_will_do = {
-			factor = 1
-		}
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus PRO_mercenary_recruitment"
-		}
-		relative_position_id = PRO_the_true_mandalore
-		prerequisite = { focus = PRO_the_true_mandalore }
-	}
-
-	focus = {
-		id = PRO_the_search_for_the_darksaber
+		id = PRO_Search_For_The_Daksaber
 		icon = GFX_darksaber_search_goal
-		cost = 7.2		x = 0
+		prerequisite = { focus = PRO_Bokatan_Kryze }
+		relative_position_id = PRO_Bokatan_Kryze	
+		x = 1
 		y = 1
-		ai_will_do = {
-			factor = 1
-		}
+		cost = 7.2
+		ai_will_do = { factor = 1 }
 		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus PRO_the_search_for_the_darksaber"
 		}
-		relative_position_id = PRO_bokatan_kryze
-		prerequisite = { focus = PRO_bokatan_kryze }
 	}
-
 	focus = {
-		id = PRO_the_liberation_of_nagi
+		id = PRO_Old_Concord_Dawn_Facilities
 		icon = GFX_generic_suspend_constitution
-		cost = 7.2		x = 0
+		prerequisite = { focus = PRO_Loot_Deathwatch_Supplies }
+		relative_position_id = PRO_Loot_Deathwatch_Supplies	
+		x = 0
 		y = 1
+		cost = 7.2
+		ai_will_do = { factor = 1 }
+		completion_reward = {
+		}
+	}
+	focus = {
+		id = PRO_The_Mandalorian
+		icon = GFX_the_mandalorian_goal
+		prerequisite = { focus = PRO_Search_For_The_Daksaber }
+		relative_position_id = PRO_Search_For_The_Daksaber	
+		x = 0
+		y = 1
+		cost = 7.2
+		ai_will_do = { factor = 1 }
+		completion_reward = {
+		}
+	}
+	focus = {
+		id = PRO_The_Hunt_For_Gideon
+		icon = GFX_generic_suspend_constitution
+		prerequisite = { focus = PRO_Old_Concord_Dawn_Facilities }
+		prerequisite = { focus = PRO_The_Mandalorian }
+		relative_position_id = PRO_Old_Concord_Dawn_Facilities	
+		x = 1
+		y = 1
+		cost = 7.2
+		ai_will_do = { factor = 1 }
+		completion_reward = {
+		}
+	}
+	focus = {
+		id = PRO_Darksaber_Reclaimed
+		icon = GFX_generic_suspend_constitution
+		prerequisite = { focus = PRO_The_Hunt_For_Gideon }
+		mutually_exclusive = { focus = PRO_Darksaber_Lost }
+		relative_position_id = PRO_The_Hunt_For_Gideon	
+		x = -1
+		y = 1
+		cost = 7.2
+		ai_will_do = { factor = 1 }
+		completion_reward = {
+		}
+	}
+	focus = {
+		id = PRO_Darksaber_Lost
+		icon = GFX_generic_suspend_constitution
+		prerequisite = { focus = PRO_The_Hunt_For_Gideon }
+		mutually_exclusive = { focus = PRO_Darksaber_Reclaimed }
+		relative_position_id = PRO_The_Hunt_For_Gideon	
+		x = 1
+		y = 1
+		cost = 7.2
+		ai_will_do = { factor = 1 }
+		completion_reward = {
+			ELD = {
+				transfer_state = 510
+			}
+			AWA = {
+				transfer_state = 511
+			}
+			ROK = {
+				transfer_state = 512
+			}
+		}
+	}
+	focus = {
+		id = PRO_Reinforce_Authority
+		icon = GFX_generic_suspend_constitution
+		prerequisite = { focus = PRO_Darksaber_Lost }
+		relative_position_id = PRO_Darksaber_Lost	
+		x = 1
+		y = 1
+		cost = 7.2
+		ai_will_do = { factor = 1 }
+		completion_reward = {
+		}
+	}
+	focus = {
+		id = PRO_Warriors_By_Right
+		icon = GFX_generic_suspend_constitution
+		prerequisite = { 
+			focus = PRO_Darksaber_Reclaimed
+			focus = PRO_Darksaber_Lost 
+		}
+		relative_position_id = PRO_Darksaber_Reclaimed	
+		x = 1
+		y = 1
+		cost = 7.2
+		ai_will_do = { factor = 1 }
+		completion_reward = {
+		}
+	}
+	focus = {
+		id = PRO_Time_Of_Reclaimation
+		icon = GFX_generic_suspend_constitution
+		prerequisite = { 
+			focus = PRO_Lessons_Of_Nagai
+			focus = PRO_Warriors_By_Right
+		 }
+		relative_position_id = PRO_Warriors_By_Right	
+		x = -2
+		y = 1
+		cost = 7.2
+		ai_will_do = { factor = 1 }
+		completion_reward = {
+			declare_war_on = {
+			    target = MAN
+			    type = annex_everything
+			}
+			MAN={
+				every_core_state={
+					add_core_of = ROOT
+				}
+			}
+		}
+	}
+	focus = {
+		id = PRO_The_Mandalorian_Fleet
+		icon = GFX_generic_suspend_constitution
+		cost = 7.2
+		x = 18
+		y = 2
 		ai_will_do = {
 			factor = 1
 		}
 		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus PRO_the_liberation_of_nagi"
+			add_to_variable = { beskar = 1000 }
+			custom_effect_tooltip = PRO_the_ore_of_our_people_effect
 		}
-		relative_position_id = PRO_the_alliance_of_free_planets
-		prerequisite = { focus = PRO_the_alliance_of_free_planets }
 	}
-
+	focus = {
+		id = PRO_Warriors_By_Right
+		icon = GFX_generic_suspend_constitution
+		prerequisite = { focus = PRO_Darksaber_Reclaimed }
+		relative_position_id = PRO_Darksaber_Reclaimed	
+		x = 1
+		y = 1
+		cost = 7.2
+		ai_will_do = { factor = 1 }
+		completion_reward = {
+		}
+	}
 	focus = {
 		id = PRO_the_search_for_foundlings
 		icon = GFX_foundlings_goal
-		cost = 7.2		x = -2
+		cost = 7.2
+		x = -2
 		y = 2
 		ai_will_do = {
 			factor = 1
@@ -161,24 +365,10 @@ focus_tree = {
 	}
 
 	focus = {
-		id = PRO_the_true_mandalore
-		icon = GFX_true_mandalore_goal
-		cost = 7.2		x = 0
-		y = 1
-		ai_will_do = {
-			factor = 1
-		}
-		completion_reward = {
-			add_country_leader_trait = Mandalor_trait
-		}
-		relative_position_id = PRO_fenn_shysha
-		prerequisite = { focus = PRO_fenn_shysha }
-	}
-
-	focus = {
 		id = PRO_the_great_forge
 		icon = GFX_the_forge_goal
-		cost = 7.2		x = 0
+		cost = 7.2
+		x = 0
 		y = 1
 		ai_will_do = {
 			factor = 1
@@ -197,26 +387,10 @@ focus_tree = {
 	}
 
 	focus = {
-		id = PRO_the_alliance_of_free_planets
-		icon = GFX_alliance_of_free_planets_goal
-		cost = 7.2		x = 0
-		y = 1
-		ai_will_do = {
-			factor = 1
-		}
-		completion_reward = {
-			REB = {
-				add_to_faction = PRO
-			}
-		}
-		relative_position_id = PRO_the_nagai
-		prerequisite = { focus = PRO_the_nagai }
-	}
-
-	focus = {
 		id = PRO_clear_the_mines
 		icon = GFX_generic_suspend_constitution
-		cost = 7.2		x = -4
+		cost = 7.2
+		x = -4
 		y = 1
 		available = {
 			ROOT = {
@@ -236,7 +410,8 @@ focus_tree = {
 	focus = {
 		id = PRO_preserve_our_traditions
 		icon = GFX_generic_suspend_constitution
-		cost = 7.2		x = 35
+		cost = 7.2
+		x = 38
 		y = 0
 		ai_will_do = {
 			factor = 1
@@ -250,7 +425,8 @@ focus_tree = {
 	focus = {
 		id = PRO_a_time_for_change
 		icon = GFX_generic_suspend_constitution
-		cost = 7.2		x = 45
+		cost = 7.2
+		x = 45
 		y = 0
 		ai_will_do = {
 			factor = 1
@@ -264,7 +440,8 @@ focus_tree = {
 	focus = {
 		id = PRO_biocubes
 		icon = GFX_bio_cube_goal
-		cost = 7.2		x = 0
+		cost = 7.2
+		x = 0
 		y = 1
 		ai_will_do = {
 			factor = 1
@@ -275,26 +452,11 @@ focus_tree = {
 		relative_position_id = PRO_a_time_for_change
 		prerequisite = { focus = PRO_a_time_for_change }
 	}
-
-	focus = {
-		id = PRO_the_mandalorian
-		icon = GFX_the_mandalorian_goal
-		cost = 7.2		x = 0
-		y = 2
-		ai_will_do = {
-			factor = 1
-		}
-		completion_reward = {
-			recruit_character = PRO_the_mandalorian
-		}
-		relative_position_id = PRO_the_search_for_the_darksaber
-		prerequisite = { focus = PRO_the_search_for_the_darksaber }
-	}
-
 	focus = {
 		id = PRO_the_ore_of_our_people
 		icon = GFX_generic_suspend_constitution
-		cost = 7.2		x = 10
+		cost = 7.2
+		x = 4
 		y = 2
 		ai_will_do = {
 			factor = 1
@@ -308,7 +470,8 @@ focus_tree = {
 	focus = {
 		id = PRO_crop_for_peace
 		icon = GFX_generic_suspend_constitution
-		cost = 7.2		x = -2
+		cost = 7.2
+		x = -2
 		y = 1
 		ai_will_do = {
 			factor = 1
@@ -324,7 +487,8 @@ focus_tree = {
 	focus = {
 		id = PRO_beskar_for_war
 		icon = GFX_generic_suspend_constitution
-		cost = 7.2		x = 2
+		cost = 7.2
+		x = 2
 		y = 1
 		ai_will_do = {
 			factor = 1
@@ -340,7 +504,8 @@ focus_tree = {
 	focus = {
 		id = PRO_expansion_of_the_mines
 		icon = GFX_generic_suspend_constitution
-		cost = 7.2		x = 0
+		cost = 7.2
+		x = 0
 		y = 1
 		ai_will_do = {
 			factor = 1
@@ -355,7 +520,8 @@ focus_tree = {
 	focus = {
 		id = PRO_mixed_alloys
 		icon = GFX_generic_suspend_constitution
-		cost = 7.2		x = 1
+		cost = 7.2
+		x = 1
 		y = 2
 		ai_will_do = {
 			factor = 1
@@ -371,7 +537,8 @@ focus_tree = {
 	focus = {
 		id = PRO_pure_beskar
 		icon = GFX_generic_suspend_constitution
-		cost = 7.2		x = 6
+		cost = 7.2
+		x = 6
 		y = 2
 		ai_will_do = {
 			factor = 1
@@ -388,7 +555,8 @@ focus_tree = {
 	focus = {
 		id = PRO_vhehyaim
 		icon = GFX_vheh_goal
-		cost = 7.2		x = 0
+		cost = 7.2
+		x = 0
 		y = 1
 		ai_will_do = {
 			factor = 1
@@ -403,7 +571,8 @@ focus_tree = {
 	focus = {
 		id = PRO_path_of_the_mandalores
 		icon = GFX_generic_suspend_constitution
-		cost = 7.2		x = 0
+		cost = 7.2
+		x = 0
 		y = 1
 		ai_will_do = {
 			factor = 1
@@ -418,7 +587,8 @@ focus_tree = {
 	focus = {
 		id = PRO_the_new_mandalorians
 		icon = GFX_new_mandalorians_goal
-		cost = 7.2		x = 0
+		cost = 7.2
+		x = 0
 		y = 1
 		ai_will_do = {
 			factor = 1
@@ -433,7 +603,8 @@ focus_tree = {
 	focus = {
 		id = PRO_advanced_building_techniques
 		icon = GFX_generic_suspend_constitution
-		cost = 7.2		x = -2
+		cost = 7.2
+		x = -2
 		y = 1
 		ai_will_do = {
 			factor = 1
@@ -448,7 +619,8 @@ focus_tree = {
 	focus = {
 		id = PRO_pure_beskar_armor
 		icon = GFX_generic_suspend_constitution
-		cost = 7.2		x = 0
+		cost = 7.2
+		x = 0
 		y = 1
 		ai_will_do = {
 			factor = 1
@@ -464,7 +636,8 @@ focus_tree = {
 	focus = {
 		id = PRO_the_old_gods
 		icon = GFX_the_old_gods_goal
-		cost = 7.2		x = 1
+		cost = 7.2
+		x = 1
 		y = 1
 		ai_will_do = {
 			factor = 1
@@ -480,7 +653,8 @@ focus_tree = {
 	focus = {
 		id = PRO_war_as_a_religion
 		icon = GFX_generic_suspend_constitution
-		cost = 7.2		x = -1
+		cost = 7.2
+		x = -1
 		y = 1
 		ai_will_do = {
 			factor = 1
@@ -496,7 +670,8 @@ focus_tree = {
 	focus = {
 		id = PRO_a_new_era_of_peace
 		icon = GFX_generic_suspend_constitution
-		cost = 7.2		x = 0
+		cost = 7.2
+		x = 0
 		y = 2
 		ai_will_do = {
 			factor = 1
@@ -511,7 +686,8 @@ focus_tree = {
 	focus = {
 		id = PRO_remembering_the_first_dutchess
 		icon = GFX_dutchess_goal
-		cost = 7.2		x = -2
+		cost = 7.2
+		x = -2
 		y = 1
 		ai_will_do = {
 			factor = 1
@@ -526,7 +702,8 @@ focus_tree = {
 	focus = {
 		id = PRO_the_royal_guard
 		icon = GFX_royal_guard_goal
-		cost = 7.2		x = 2
+		cost = 7.2
+		x = 2
 		y = 1
 		ai_will_do = {
 			factor = 1
@@ -541,7 +718,8 @@ focus_tree = {
 	focus = {
 		id = PRO_a_new_set_of_ideals
 		icon = GFX_generic_suspend_constitution
-		cost = 7.2		x = 2
+		cost = 7.2
+		x = 2
 		y = 2
 		ai_will_do = {
 			factor = 1
@@ -553,67 +731,11 @@ focus_tree = {
 		prerequisite = { focus = PRO_remembering_the_first_dutchess }
 		prerequisite = { focus = PRO_the_royal_guard }
 	}
-
-	focus = {
-		id = PRO_reclaim_mandalore
-		icon = GFX_generic_suspend_constitution
-		cost = 7.2		x = 2
-		y = 2
-		ai_will_do = {
-			factor = 1
-		}
-		completion_reward = {
-			declare_war_on = {
-			    target = MAN
-			    type = annex_everything
-			}
-			MAN={
-				every_core_state={
-					add_core_of = ROOT
-				}
-			}
-		}
-		relative_position_id = PRO_the_call_for_return
-		prerequisite = { 
-			focus = PRO_the_call_for_return 
-			focus = PRO_mending_the_schism 
-		}
-	}
-
-	focus = {
-		id = PRO_secure_support_for_restoration
-		icon = GFX_generic_suspend_constitution
-		cost = 7.2		x = 0
-		y = 1
-		ai_will_do = {
-			factor = 1
-		}
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus PRO_secure_support_for_restoration"
-		}
-		relative_position_id = PRO_the_liberation_of_nagi
-		prerequisite = { focus = PRO_the_liberation_of_nagi }
-	}
-
-	focus = {
-		id = PRO_the_new_republic
-		icon = GFX_generic_suspend_constitution
-		cost = 7.2		x = -2
-		y = 1
-		ai_will_do = {
-			factor = 1
-		}
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus PRO_the_new_republic"
-		}
-		relative_position_id = PRO_the_alliance_of_free_planets
-		prerequisite = { focus = PRO_the_alliance_of_free_planets }
-	}
-
 	focus = {
 		id = PRO_improved_techniques
 		icon = GFX_generic_suspend_constitution
-		cost = 7.2		x = 0
+		cost = 7.2
+		x = 0
 		y = 1
 		ai_will_do = {
 			factor = 1
@@ -628,7 +750,8 @@ focus_tree = {
 	focus = {
 		id = PRO_the_search_for_beskar
 		icon = GFX_generic_suspend_constitution
-		cost = 7.2		x = 0
+		cost = 7.2
+		x = 0
 		y = 1
 		ai_will_do = {
 			factor = 1
@@ -643,7 +766,8 @@ focus_tree = {
 	focus = {
 		id = PRO_the_rebuilding_effort
 		icon = GFX_generic_suspend_constitution
-		cost = 7.2		x = 6
+		cost = 7.2
+		x = 6
 		y = 1
 		ai_will_do = {
 			factor = 1
@@ -658,7 +782,8 @@ focus_tree = {
 	focus = {
 		id = PRO_bring_mandalmotors_home
 		icon = GFX_generic_suspend_constitution
-		cost = 7.2		x = -2
+		cost = 7.2
+		x = -2
 		y = 2
 		ai_will_do = {
 			factor = 1
@@ -671,69 +796,10 @@ focus_tree = {
 	}
 
 	focus = {
-		id = PRO_the_call_for_return
-		icon = GFX_generic_suspend_constitution
-		cost = 7.2		x = 0
-		y = 1
-		ai_will_do = {
-			factor = 1
-		}
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus PRO_the_call_for_return"
-		}
-		relative_position_id = PRO_secure_support_for_restoration
-		prerequisite = { focus = PRO_secure_support_for_restoration }
-	}
-
-	focus = {
-		id = PRO_recruit_the_mercenary_clans
-		icon = GFX_generic_suspend_constitution
-		cost = 7.2		x = 0
-		y = 1
-		ai_will_do = {
-			factor = 1
-		}
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus PRO_recruit_the_mercenary_clans"
-		}
-		relative_position_id = PRO_the_mandalorian
-		prerequisite = { focus = PRO_the_mandalorian }
-	}
-
-	focus = {
-		id = PRO_mercenary_contracts
-		icon = GFX_generic_suspend_constitution
-		cost = 7.2		x = 2
-		y = 1
-		ai_will_do = {
-			factor = 1
-		}
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus PRO_mercenary_contracts"
-		}
-		relative_position_id = PRO_the_mandalorian
-		prerequisite = { focus = PRO_the_mandalorian }
-	}
-
-	focus = {
-		id = PRO_the_hunt_for_gideon
-		icon = GFX_generic_suspend_constitution
-		cost = 7.2		x = 0
-		y = 1
-		ai_will_do = {
-			factor = 1
-		}
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus PRO_the_hunt_for_gideon"
-		}
-		relative_position_id = PRO_recruit_the_mercenary_clans
-		prerequisite = { focus = PRO_recruit_the_mercenary_clans }
-	}
-
-	focus = {
 		id = PRO_the_way
 		icon = GFX_the_way_goal
-		cost = 7.2		x = 0
+		cost = 7.2
+		x = 0
 		y = 1
 		ai_will_do = {
 			factor = 1
@@ -749,7 +815,8 @@ focus_tree = {
 	focus = {
 		id = PRO_immigration_campaigns
 		icon = GFX_generic_suspend_constitution
-		cost = 7.2		x = 1
+		cost = 7.2
+		x = 1
 		y = 2
 		ai_will_do = {
 			factor = 1
@@ -764,7 +831,8 @@ focus_tree = {
 	focus = {
 		id = PRO_restoring_ancient_clans
 		icon = GFX_generic_suspend_constitution
-		cost = 7.2		x = 2
+		cost = 7.2
+		x = 2
 		y = 2
 		ai_will_do = {
 			factor = 1
@@ -779,7 +847,8 @@ focus_tree = {
 	focus = {
 		id = PRO_reconstruct_ronion
 		icon = GFX_generic_suspend_constitution
-		cost = 7.2		x = 4
+		cost = 7.2
+		x = 4
 		y = 2
 		ai_will_do = {
 			factor = 1
@@ -794,7 +863,8 @@ focus_tree = {
 	focus = {
 		id = PRO_keldabe
 		icon = GFX_generic_suspend_constitution
-		cost = 7.2		x = 1
+		cost = 7.2
+		x = 1
 		y = 1
 		ai_will_do = {
 			factor = 1
@@ -810,7 +880,8 @@ focus_tree = {
 	focus = {
 		id = PRO_fortify_mandalore
 		icon = GFX_generic_suspend_constitution
-		cost = 7.2		x = -3
+		cost = 7.2
+		x = -3
 		y = 1
 		ai_will_do = {
 			factor = 1
@@ -825,7 +896,8 @@ focus_tree = {
 	focus = {
 		id = PRO_restore_the_faith
 		icon = GFX_generic_suspend_constitution
-		cost = 7.2		x = 5
+		cost = 7.2
+		x = 5
 		y = 3
 		ai_will_do = {
 			factor = 1
@@ -836,69 +908,11 @@ focus_tree = {
 		relative_position_id = PRO_the_way
 		prerequisite = { focus = PRO_the_way }
 	}
-
-	focus = {
-		id = PRO_the_dark_saber_retrieved
-		icon = GFX_generic_suspend_constitution
-		cost = 7.2		x = -1
-		y = 1
-		ai_will_do = {
-			factor = 1
-		}
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus PRO_the_dark_saber_retrieved"
-		}
-		relative_position_id = PRO_the_hunt_for_gideon
-		prerequisite = { focus = PRO_the_hunt_for_gideon }
-		mutually_exclusive = { focus = PRO_lost_once_again }
-	}
-
-	focus = {
-		id = PRO_lost_once_again
-		icon = GFX_generic_suspend_constitution
-		cost = 7.2		x = 1
-		y = 1
-		ai_will_do = {
-			factor = 1
-		}
-		completion_reward = {
-			ELD = {
-				transfer_state = 510
-			}
-			AWA = {
-				transfer_state = 511
-			}
-			ROK = {
-				transfer_state = 512
-			}
-		}
-		relative_position_id = PRO_the_hunt_for_gideon
-		prerequisite = { focus = PRO_the_hunt_for_gideon }
-		mutually_exclusive = { focus = PRO_the_dark_saber_retrieved }
-	}
-
-	focus = {
-		id = PRO_mending_the_schism
-		icon = GFX_generic_suspend_constitution
-		cost = 7.2		x = 1
-		y = 1
-		ai_will_do = {
-			factor = 1
-		}
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus PRO_mending_the_schism"
-		}
-		relative_position_id = PRO_the_dark_saber_retrieved
-		prerequisite = { 
-			focus = PRO_the_dark_saber_retrieved 
-			focus = PRO_lost_once_again 
-		}
-	}
-
 	focus = {
 		id = PRO_basilik_droids
 		icon = GFX_generic_suspend_constitution
-		cost = 7.2		x = 0
+		cost = 7.2
+		x = 0
 		y = 1
 		ai_will_do = {
 			factor = 1
@@ -913,7 +927,8 @@ focus_tree = {
 	focus = {
 		id = PRO_kendosii_dearnaught
 		icon = GFX_generic_suspend_constitution
-		cost = 7.2		x = 3
+		cost = 7.2
+		x = 3
 		y = 1
 		ai_will_do = {
 			factor = 1
@@ -928,7 +943,8 @@ focus_tree = {
 	focus = {
 		id = PRO_studying_foreign_techniques
 		icon = GFX_generic_suspend_constitution
-		cost = 7.2		x = 0
+		cost = 7.2
+		x = 0
 		y = 1
 		ai_will_do = {
 			factor = 1
@@ -943,7 +959,8 @@ focus_tree = {
 	focus = {
 		id = PRO_the_defense_fleet
 		icon = GFX_generic_suspend_constitution
-		cost = 7.2		x = 2
+		cost = 7.2
+		x = 2
 		y = 2
 		ai_will_do = {
 			factor = 1
@@ -959,7 +976,8 @@ focus_tree = {
 	focus = {
 		id = PRO_keldabe_class
 		icon = GFX_generic_suspend_constitution
-		cost = 7.2		x = -2
+		cost = 7.2
+		x = -2
 		y = 1
 		ai_will_do = {
 			factor = 1
@@ -974,7 +992,8 @@ focus_tree = {
 	focus = {
 		id = PRO_crusaderclass_corvette
 		icon = GFX_generic_suspend_constitution
-		cost = 7.2		x = 2
+		cost = 7.2
+		x = 2
 		y = 1
 		ai_will_do = {
 			factor = 1
@@ -989,7 +1008,8 @@ focus_tree = {
 	focus = {
 		id = PRO_new_production_methods
 		icon = GFX_generic_suspend_constitution
-		cost = 7.2		x = 0
+		cost = 7.2
+		x = 0
 		y = 1
 		ai_will_do = {
 			factor = 1
@@ -1004,7 +1024,8 @@ focus_tree = {
 	focus = {
 		id = PRO_recycling_armour
 		icon = GFX_generic_suspend_constitution
-		cost = 7.2		x = 0
+		cost = 7.2
+		x = 0
 		y = 1
 		ai_will_do = {
 			factor = 1
@@ -1019,7 +1040,8 @@ focus_tree = {
 	focus = {
 		id = PRO_trade_with_the_galaxy
 		icon = GFX_generic_suspend_constitution
-		cost = 7.2		x = -7
+		cost = 7.2
+		x = -7
 		y = 1
 		ai_will_do = {
 			factor = 1
@@ -1035,7 +1057,8 @@ focus_tree = {
 	focus = {
 		id = PRO_beskar_contracts
 		icon = GFX_generic_suspend_constitution
-		cost = 7.2		x = 2
+		cost = 7.2
+		x = 2
 		y = 1
 		ai_will_do = {
 			factor = 1
