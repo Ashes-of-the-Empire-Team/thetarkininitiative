@@ -280,6 +280,57 @@ focus_tree = {
 		}
 	}
 	focus = {
+		id = EOH_request_chiss_phalanx
+		icon = GFX_thrawn_aid
+		cost = 7.2
+		x = 0
+		y = 1
+		relative_position_id = EOH_a_helping_hand
+
+		prerequisite = {
+			focus = EOH_a_helping_hand
+		}
+		search_filters = {
+		}
+
+		completion_reward = {
+		}
+	}
+	focus = {
+		id = EOH_patronage_from_both_fronts
+		icon = GFX_thrawn_aid
+		cost = 7.2
+		x = 0
+		y = 1
+		relative_position_id = EOH_request_chiss_phalanx
+
+		prerequisite = {
+			focus = EOH_request_chiss_phalanx
+		}
+		search_filters = {
+		}
+
+		completion_reward = {
+		}
+	}
+	focus = {
+		id = EOH_maintaining_balance
+		icon = GFX_thrawn_aid
+		cost = 7.2
+		x = 0
+		y = 1
+		relative_position_id = EOH_patronage_from_both_fronts
+
+		prerequisite = {
+			focus = EOH_patronage_from_both_fronts
+		}
+		search_filters = {
+		}
+
+		completion_reward = {
+		}
+	}
+	focus = {
 		id = EOH_chiss_research_program
 		icon = GFX_thrawn_aid
 		cost = 7.2
@@ -406,33 +457,23 @@ focus_tree = {
 		id = EOH_contact_ardus_kaine
 		icon = GFX_thrawn_contact_kaine
 		cost = 7.2
-		x = -3
+		x = -1
 		y = 1
-		relative_position_id = EOH_a_helping_hand
-		allow_branch = {
-			NOT = {
-				has_completed_focus = EOH_guardian_of_the_unknown_regions
-			}
-		}
+		relative_position_id = EOH_none_evade_thrawns_grasp
+
 		available = {
 		}
 		prerequisite = {
-			focus = EOH_a_helping_hand
-			focus = EOH_abandon_the_chiss
+			focus = EOH_none_evade_thrawns_grasp
+			focus = EOH_reconciliation_with_zaarin
 		}
 		search_filters = {
-		}
-		mutually_exclusive = {
-			focus = EOH_connect_to_the_criminal_underworld
 		}
 		completion_reward = {
 			PEN = {
 				country_event = { id = EOH.7 }
 			}
-			
 		}
-
-		
 	}
 	focus = {
 		id = EOH_mutual_development_assurances
@@ -455,76 +496,8 @@ focus_tree = {
 				country_event = { id = EOH.8 }
 			}
 		}
-
-		
 	}
-	focus = {
-		id = EOH_connect_to_the_criminal_underworld
-		icon = GFX_thrawn_criminal
-		cost = 7.2
-		x = 2
-		y = 0
-		relative_position_id = EOH_contact_ardus_kaine
-		allow_branch = {
-			NOT = {
-				has_completed_focus = EOH_guardian_of_the_unknown_regions
-			}
-		}
-		#allow_branch = {
-			#OR = {
-				#has_completed_focus = EOH_a_helping_hand
-				#has_completed_focus = EOH_abandon_the_chiss
-			#}
-		#}
-		available = {
-		}
-		prerequisite = {
-			focus = EOH_a_helping_hand
-			focus = EOH_abandon_the_chiss
-		}
-		search_filters = {
-		}
-		mutually_exclusive = {
-			focus = EOH_contact_ardus_kaine
-		}
-		completion_reward = {
-			custom_effect_tooltip = EOH_add
-			add_to_variable = {thrawn_insights = 1}
-			BLA = {
-				country_event = {id = EOH.9}
-			}
-		}
 
-		
-	}
-	focus = {
-		id = EOH_begin_smuggling_operations
-		icon = GFX_thrawn_boxes
-		cost = 10.8
-		x = 0
-		y = 1
-		relative_position_id = EOH_connect_to_the_criminal_underworld
-		available = {
-		}
-		prerequisite = {
-			focus = EOH_connect_to_the_criminal_underworld
-		}
-		search_filters = {
-		}
-		mutually_exclusive = {
-		}
-		completion_reward = {
-			203 = {
-				add_resource = {
-					type = rubber
-					amount = 8
-				}
-			}
-			#Relations with smugglers guild, add smuggler
-		}
-
-		
-	}
 	focus = {
 		id = EOH_abandon_the_chiss
 		icon = GFX_thrawn_ssi
@@ -554,177 +527,94 @@ focus_tree = {
 			custom_effect_tooltip = EOH_future_tt
 			##leaves the situation as it is, loses opinion with chiss and such
 		}
-
-		
 	}
 	focus = {
-		id = EOH_there_are_no_unknown_regions
-		icon = GFX_WIP_focus
+		id = EOH_imperial_first
+		icon = GFX_thrawn_ssi
 		cost = 7.2
-		x = -3
+		x = 0
 		y = 1
 		relative_position_id = EOH_abandon_the_chiss
-		available = {
-		}
-		allow_branch = {
-			has_completed_focus = EOH_abandon_the_chiss
-		}
+
 		prerequisite = {
 			focus = EOH_abandon_the_chiss
 		}
 		search_filters = {
 		}
-		mutually_exclusive = {
-			focus = EOH_secret_transmissions_to_the_shreeftut
-		}
 		completion_reward = {
-			##unknown regions nations get restricted diplomacy
-		}
 
-		
+		}
 	}
 	focus = {
-		id = EOH_edge_of_the_galaxy
-		icon = GFX_WIP_focus
-		cost = 14.3
-		x = 0
-		y = 1
-		relative_position_id = EOH_there_are_no_unknown_regions
-		available = {
-		}
-		prerequisite = {
-			focus = EOH_there_are_no_unknown_regions
-		}
-		search_filters = {
-		}
-		mutually_exclusive = {
-		}
-		completion_reward = {
-			##travel to unknown regions banned? development in southern reach, research bonuses? forts? idk
-		}
-
-		
-	}
-	focus = {
-		id = EOH_secret_transmissions_to_the_shreeftut
-		icon = GFX_WIP_focus
-		cost = 10.8
-		x = 2
-		y = 0
-		relative_position_id = EOH_there_are_no_unknown_regions
-		allow_branch = {
-			has_completed_focus = EOH_abandon_the_chiss
-		}
-		available = {
-		}
-		prerequisite = {
-			focus = EOH_abandon_the_chiss
-		}
-		search_filters = {
-		}
-		mutually_exclusive = {
-			focus = EOH_there_are_no_unknown_regions
-		}
-		completion_reward = {
-			SSI = {
-				country_event = {id=EOH.15}
-			}
-		}
-
-		
-	}
-	focus = {
-		id = EOH_the_phantom_menace
-		icon = GFX_WIP_focus
-		cost = 10.8
-		x = 0
-		y = 1
-		relative_position_id = EOH_secret_transmissions_to_the_shreeftut
-		available = {
-		}
-		prerequisite = {
-			focus = EOH_secret_transmissions_to_the_shreeftut
-		}
-		search_filters = {
-		}
-		mutually_exclusive = {
-		}
-		completion_reward = {
-			custom_effect_tooltip = EOH_add
-			add_to_variable = {thrawn_insights = 1}
-			SSI = {
-				country_event = {id=EOH.10}
-			}
-			CHS = {
-				country_event = {id=EOH.11}
-			}
-			MIT = {
-				country_event = {id=EOH.11}
-			}
-			INR = {
-				country_event = {id=EOH.11}
-			}
-			BAK = {
-				country_event = {id=EOH.11}
-			}
-		}
-
-		
-	}
-	focus = {
-		id = EOH_open_to_chiss_refugees
-		icon = GFX_thrawn_chiss_refugees
+		id = EOH_restoration_of_compnor
+		icon = GFX_thrawn_ssi
 		cost = 7.2
-		relative_position_id = EOH_the_ssi_ruuvi_threat
-		x = 7
+		x = -1
 		y = 1
-		#available = {
-			#EOH = {
-				#has_completed_focus = EOH_the_ssi_ruuvi_threat
-			#}
-		#}
-		bypass = {
-			SSI = {
-				has_war = no
-			}
-		}
+		relative_position_id = EOH_imperial_first
+
 		prerequisite = {
-			focus = EOH_the_ssi_ruuvi_threat
+			focus = EOH_imperial_first
 		}
 		search_filters = {
 		}
-		mutually_exclusive = {
+		completion_reward = {
+
+		}
+	}
+	focus = {
+		id = EOH_bring_in_the_inquisition
+		icon = GFX_thrawn_ssi
+		cost = 7.2
+		x = -1
+		y = 1
+		relative_position_id = EOH_restoration_of_compnor
+
+		prerequisite = {
+			focus = EOH_restoration_of_compnor
+		}
+		search_filters = {
 		}
 		completion_reward = {
-			add_stability = -0.05
-			186 = {
-				if = {
-					limit = { is_controlled_by = ROOT }
-					add_victory_points = {
-						province = 4133
-						value = 7
-					}
-					add_victory_points = {
-						province = 6326
-						value = 5 
-					}
-					add_victory_points = {
-						province = 6308
-						value = 5
-					}
-					add_building_construction = {
-						type = dockyard
-						level = 1
-						instant_build = yes
-					}
-					add_extra_state_shared_building_slots = 1
-					add_manpower = 145000
-				}
-			}
-			#Victory point wizardry
+
 		}
-		
 	}
+	focus = {
+		id = EOH_the_hardliners
+		icon = GFX_thrawn_ssi
+		cost = 7.2
+		x = 1
+		y = 1
+		relative_position_id = EOH_restoration_of_compnor
+
+		prerequisite = {
+			focus = EOH_restoration_of_compnor
+		}
+		search_filters = {
+		}
+		completion_reward = {
+
+		}
+	}
+	focus = {
+		id = EOH_newfound_imperial_fervor
+		icon = GFX_thrawn_ssi
+		cost = 7.2
+		x = -1
+		y = 1
+		relative_position_id = EOH_the_hardliners
+
+		prerequisite = {
+			focus = EOH_the_hardliners
+			focus = EOH_bring_in_the_inquisition
+		}
+		search_filters = {
+		}
+		completion_reward = {
+
+		}
+	}
+
 	focus = {
 		id = EOH_industrious_integration
 		icon = GFX_thrawn_industry_integration
@@ -1103,7 +993,6 @@ focus_tree = {
 				remove_idea = EOH_demetrius_zaarin_1
 				add_idea = EOH_demetrius_zaarin_2
 			}
-			mark_focus_tree_layout_dirty = yes
 		}
 		
 	}
@@ -1136,9 +1025,7 @@ focus_tree = {
 			hidden_effect = {
 				load_oob = "EOH_ZAA_4"	
 			}
-			
 		}
-		
 	}
 	focus = {
 		id = EOH_none_evade_thrawns_grasp
@@ -1170,11 +1057,177 @@ focus_tree = {
 		
 	}
 	focus = {
+		id = EOH_the_loyalists_abroad
+		icon = GFX_reconciliation
+		cost = 10.8
+		relative_position_id = EOH_reconciliation_with_zaarin
+		x = -2
+		y = 1
+		prerequisite = {
+			focus = EOH_reconciliation_with_zaarin
+			focus = EOH_none_evade_thrawns_grasp
+		}
+		search_filters = {
+		}
+
+		completion_reward = {
+
+		}
+	}
+	focus = {
+		id = EOH_convince_fel_to_our_cause
+		icon = GFX_reconciliation
+		cost = 10.8
+		relative_position_id = EOH_the_loyalists_abroad
+		x = -3
+		y = 1
+		prerequisite = {
+			focus = EOH_the_loyalists_abroad
+		}
+		search_filters = {
+		}
+
+		completion_reward = {
+
+		}
+	}
+	focus = {
+		id = EOH_the_fel_family
+		icon = GFX_reconciliation
+		cost = 10.8
+		relative_position_id = EOH_convince_fel_to_our_cause
+		x = 0
+		y = 1
+		prerequisite = {
+			focus = EOH_convince_fel_to_our_cause
+		}
+		search_filters = {
+		}
+
+		completion_reward = {
+
+		}
+	}
+	focus = {
+		id = EOH_hand_of_judgement
+		icon = GFX_reconciliation
+		cost = 10.8
+		relative_position_id = EOH_the_loyalists_abroad
+		x = -1
+		y = 1
+		prerequisite = {
+			focus = EOH_the_loyalists_abroad
+		}
+		search_filters = {
+		}
+
+		completion_reward = {
+
+		}
+	}
+	focus = {
+		id = EOH_the_economic_plan
+		icon = GFX_reconciliation
+		cost = 10.8
+		relative_position_id = EOH_the_loyalists_abroad
+		x = 0
+		y = 1
+		prerequisite = {
+			focus = EOH_the_loyalists_abroad
+		}
+		search_filters = {
+		}
+
+		completion_reward = {
+
+		}
+	}
+	focus = {
+		id = EOH_a_new_company
+		icon = GFX_reconciliation
+		cost = 10.8
+		relative_position_id = EOH_the_economic_plan
+		x = -1
+		y = 1
+		prerequisite = {
+			focus = EOH_the_economic_plan
+		}
+		mutually_exclusive = {
+			focus = EOH_kuat_contracts
+		}
+		search_filters = {
+		}
+
+		completion_reward = {
+
+		}
+	}
+	focus = {
+		id = EOH_kuat_contracts
+		icon = GFX_reconciliation
+		cost = 10.8
+		relative_position_id = EOH_the_economic_plan
+		x = 1
+		y = 1
+		prerequisite = {
+			focus = EOH_the_economic_plan
+		}
+		mutually_exclusive = {
+			focus = EOH_a_new_company
+		}
+		search_filters = {
+		}
+
+		completion_reward = {
+
+		}
+	}
+	focus = {
+		id = EOH_sienar
+		icon = GFX_reconciliation
+		cost = 10.8
+		relative_position_id = EOH_a_new_company
+		x = -1
+		y = 1
+		prerequisite = {
+			focus = EOH_a_new_company
+		}
+		mutually_exclusive = {
+			focus = EOH_a_chiss_solution
+		}
+		search_filters = {
+		}
+
+		completion_reward = {
+
+		}
+	}
+	focus = {
+		id = EOH_a_chiss_solution
+		icon = GFX_reconciliation
+		cost = 10.8
+		relative_position_id = EOH_a_new_company
+		x = 1
+		y = 1
+		prerequisite = {
+			focus = EOH_a_new_company
+		}
+		mutually_exclusive = {
+			focus = EOH_sienar
+		}
+		search_filters = {
+		}
+
+		completion_reward = {
+
+		}
+	}
+	focus = {
 		id = EOH_taming_nirauan
 		icon = GFX_thrawn_taming
 		cost = 10.8
 		relative_position_id = EOH_reconciliation_with_zaarin
-		x = 1
+		x = 8
 		y = 1
 		#allow_branch = {
 		#	OR = {
@@ -1589,6 +1642,27 @@ focus_tree = {
 		
 	}
 	focus = {
+		id = EOH_human_domination
+		icon = GFX_thrawn_alien_colony
+		cost = 10.8
+		relative_position_id = EOH_taming_nirauan
+		x = 2
+		y = 1
+		prerequisite = {
+			focus = EOH_taming_nirauan
+		}
+		mutually_exclusive = {
+			focus = EOH_fund_alien_colonization
+			focus = EOH_fund_alien_colonization
+		}
+		search_filters = {
+		}
+		completion_reward = {
+			
+		}
+		
+	}
+	focus = {
 		id = EOH_a_new_home_for_the_noghri
 		icon = GFX_thrawn_noghri
 		cost = 10.8
@@ -1618,39 +1692,7 @@ focus_tree = {
 		}
 		
 	}
-	focus = {
-		id = EOH_new_dathomir
-		icon = GFX_thrawn_zabrak
-		cost = 10.8
-		relative_position_id = EOH_a_new_home_for_the_noghri
-		x = 0
-		y = 1
-		prerequisite = {
-			focus = EOH_a_new_home_for_the_noghri
-		}
-		search_filters = {
-		}
-		completion_reward = {
-			25 = {
-				if = {
-					limit = { is_controlled_by = ROOT }
-					add_victory_points = {
-						province = 4712
-						value = 5
-					}
-					add_building_construction = {
-						type = dockyard
-						level = 1
-						instant_build = yes
-					}
-					add_extra_state_shared_building_slots = 1
-				}
-			}
-			
-			#victory point magic, buildings
-		}
-		
-	}
+
 	focus = {
 		id = EOH_eyes_everywhere
 		icon = GFX_WIP_focus
@@ -1784,7 +1826,7 @@ focus_tree = {
 			focus = EOH_establish_mining_operations
 		}
 		prerequisite = {
-			focus = EOH_new_dathomir
+			focus = EOH_a_new_home_for_the_noghri
 			focus = EOH_import_labor_1
 		}
 		search_filters = {
@@ -1822,12 +1864,11 @@ focus_tree = {
 		id = EOH_battle_of_quethold
 		icon = GFX_thrawn_quethold
 		cost = 5
-		relative_position_id = EOH_assasinate_oxtroe
-		x = -1
-		y = 2
+		relative_position_id = EOH_mutual_development_assurances
+		x = 0
+		y = 1
 		prerequisite = {
-			focus = EOH_assasinate_oxtroe
-			focus = EOH_ensure_failure_of_peace_talks
+			focus = EOH_mutual_development_assurances
 		}
 		search_filters = {
 		}
