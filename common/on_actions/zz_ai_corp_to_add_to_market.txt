@@ -357,53 +357,53 @@ on_actions = {
 	}
 
 	## NEW MARKET ON ACTIONS
-	on_daily = { ## I tried making them were the scripted gui but ai makes my brain hurt
-		## THIS SETS A EQUIPMENT TO BE PURCHASED EVERY DAY UP TO A QUANTITY BASED ON HOW MUCH THE COUNTRY HAS DECIDED IT CAN SPEND (this is linked to the building system)
-		effect = {
-			if = {
-				limit = {
-					is_ai = yes
-				}
-				set_variable = {what_we_buying_today = 0}
-				set_temp_variable = {what_to_buy_today_compare_variable = 0}
-				for_each_loop = {
-					array = current_selected_market_category_array
-					value = current_selected_item
-					index = i
+	# on_daily = { ## I tried making them were the scripted gui but ai makes my brain hurt
+	# 	## THIS SETS A EQUIPMENT TO BE PURCHASED EVERY DAY UP TO A QUANTITY BASED ON HOW MUCH THE COUNTRY HAS DECIDED IT CAN SPEND (this is linked to the building system)
+	# 	effect = {
+	# 		if = {
+	# 			limit = {
+	# 				is_ai = yes
+	# 			}
+	# 			set_variable = {what_we_buying_today = 0}
+	# 			set_temp_variable = {what_to_buy_today_compare_variable = 0}
+	# 			for_each_loop = {
+	# 				array = current_selected_market_category_array
+	# 				value = current_selected_item
+	# 				index = i
 					
-					set_temp_variable = {temporary_compare = num_equipment@var:current_selected_item}
-					divide_temp_variable = {temporary_compare = maxium_stockpile@var:current_selected_item}
+	# 				set_temp_variable = {temporary_compare = num_equipment@var:current_selected_item}
+	# 				divide_temp_variable = {temporary_compare = maxium_stockpile@var:current_selected_item}
 
-					if = {
-						limit = {
-							check_variable = {what_to_buy_today_compare_variable > temporary_compare}
-						}
-						set_variable = {what_to_buy_today = temp_item}
-						set_temp_variable = {what_to_buy_today_compare_variable = temporary_compare}
-					}
-				}
-				set_temp_variable = {item_to_buy = what_to_buy_today}
-				set_temp_variable = {amount_to_purchase = equipment_money_chest_amount}
-				divide_temp_variable = {amount_to_purchase = global.price_of_item_@var:item_to_buy}
-				round_temp_variable = amount_to_purchase
-				multiply_temp_variable = {amount_to_purchase = 100}
+	# 				if = {
+	# 					limit = {
+	# 						check_variable = {what_to_buy_today_compare_variable > temporary_compare}
+	# 					}
+	# 					set_variable = {what_to_buy_today = temp_item}
+	# 					set_temp_variable = {what_to_buy_today_compare_variable = temporary_compare}
+	# 				}
+	# 			}
+	# 			set_temp_variable = {item_to_buy = what_to_buy_today}
+	# 			set_temp_variable = {amount_to_purchase = equipment_money_chest_amount}
+	# 			divide_temp_variable = {amount_to_purchase = global.price_of_item_@var:item_to_buy}
+	# 			round_temp_variable = amount_to_purchase
+	# 			multiply_temp_variable = {amount_to_purchase = 100}
 
-				## buy action
-				set_temp_variable = {amount_checker = amount_to_purchase}
-				if = {
-					limit = {
-						set_temp_variable = {money_to_pass = currency_amount^primary_currency}
-						set_temp_variable = {total_price = global.price_of_item_@var:item_to_buy}
-						multiply_temp_variable = {total_price = amount_to_purchase}
-						check_variable = { money_to_pass > total_price}
-						check_variable = {global.stock_of_item@var:item_to_buy > amount_checker}
-					}
-					buy_item_scripted_effect = yes
-				}
-			}
+	# 			## buy action
+	# 			set_temp_variable = {amount_checker = amount_to_purchase}
+	# 			if = {
+	# 				limit = {
+	# 					set_temp_variable = {money_to_pass = currency_amount^primary_currency}
+	# 					set_temp_variable = {total_price = global.price_of_item_@var:item_to_buy}
+	# 					multiply_temp_variable = {total_price = amount_to_purchase}
+	# 					check_variable = { money_to_pass > total_price}
+	# 					check_variable = {global.stock_of_item@var:item_to_buy > amount_checker}
+	# 				}
+	# 				buy_item_scripted_effect = yes
+	# 			}
+	# 		}
 
-		}
-	}
+	# 	}
+	# }
 	on_monthly = {
 		effect = {
 			## re calculates maxium_stockpile
