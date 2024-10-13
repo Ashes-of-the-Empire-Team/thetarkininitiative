@@ -153,7 +153,9 @@ clear_building_1_effects = { ## USE THIS FOR GETTING RID OF A BUILDING
 					}
 				}
 			}
-			remove_ideas = var:building_name_passer
+			controller = {
+				remove_ideas = var:building_name_passer
+			}
 		}
 		meta_effect = {
 			text = {
@@ -178,7 +180,9 @@ clear_building_2_effects = { ## USE THIS FOR GETTING RID OF A BUILDING
 					}
 				}
 			}
-			remove_ideas = var:building_name_passer
+			controller = {
+				remove_ideas = var:building_name_passer
+			}
 		}
 		meta_effect = {
 			text = {
@@ -463,21 +467,69 @@ sensor_array_2_remove_effect = {
 }
 anti_air_1_add_effect = {
 	add_building_construction = { type = anti_air_building level = 1 instant_build = yes}
+	set_building_level = {
+		type = coastal_bunker
+		level = 1
+		province = {
+			all_provinces = yes
+			limit_to_coastal = yes
+		}
+	}
 }
 anti_air_1_remove_effect = {
 	add_building_construction = { type = anti_air_building level = -1 instant_build = yes}
+	set_building_level = {
+		type = coastal_bunker
+		level = 0
+		province = {
+			all_provinces = yes
+			limit_to_coastal = yes
+		}
+	}
 }
 anti_air_2_add_effect = {
 	add_building_construction = { type = anti_air_building level = 2 instant_build = yes}
+	set_building_level = {
+		type = coastal_bunker
+		level = 2
+		province = {
+			all_provinces = yes
+			limit_to_coastal = yes
+		}
+	}
 }
 anti_air_2_remove_effect = {
 	add_building_construction = { type = anti_air_building level = -2 instant_build = yes}
+	set_building_level = {
+		type = coastal_bunker
+		level = 0
+		province = {
+			all_provinces = yes
+			limit_to_coastal = yes
+		}
+	}
 }
 anti_air_3_add_effect = {
 	add_building_construction = { type = anti_air_building level = 4 instant_build = yes}
+	set_building_level = {
+		type = coastal_bunker
+		level = 3
+		province = {
+			all_provinces = yes
+			limit_to_coastal = yes
+		}
+	}
 }
 anti_air_3_remove_effect = {
 	add_building_construction = { type = anti_air_building level = -4 instant_build = yes}
+	set_building_level = {
+		type = coastal_bunker
+		level = 0
+		province = {
+			all_provinces = yes
+			limit_to_coastal = yes
+		}
+	}
 }
 corporate_office_1_add_effect = {
 	controller = {
@@ -1475,6 +1527,94 @@ clear_left_over_building_event_variables = {
 
 }
 
+
+the_maw_station_add_effect = {
+
+}
+dathomir_badlands_add_effect = {
+
+}
+rock_slides_add_effect = {
+
+}
+ruined_city_add_effect = {
+
+}
+scipio_vault_add_effect = {
+
+}
+glassed_surface_add_effect = {
+
+}
+ring_of_kafrene_add_effect = {
+
+}
+rolling_mountains_add_effect = {
+
+}
+kuat_rings_add_effect = {
+	
+}
+dead_land_desert_add_effect = {
+
+}
+kuat_rings_add_effect = {
+	
+}
+snow_area_add_effect = {
+
+}
+the_wheel_add_effect = {
+
+}
+vaders_castle_add_effect = {
+
+}
+rolling_mountains_add_effect = {
+
+}
+yavin_temple_add_effect = {
+
+}
+hand_of_thrawn_add_effect = {
+	
+}
+senate_building_add_effect = {
+	
+}
+undercity_slums_add_effect = {
+	
+}
+palpatine_palace_add_effect = {
+	
+}
+untamed_jungle_add_effect = {
+	
+}
+imperial_refinery_add_effect = {
+	
+}
+inhospitable_area_add_effect = {
+	
+}
+untamed_jungle_add_effect = {
+	
+}
+lava_fields_add_effect = {
+	
+}
+dangerous_fauna_add_effect = {
+	
+}
+jabbas_palace_add_effect = {
+	
+}
+shadowlands_add_effect = {
+	
+}
+shadowlands_spiders_add_effect = {
+
+}
 _add_effect = { ## This is really stupid dont question it, also dont remove it or 10000000 errors
 
 }
@@ -1982,6 +2122,7 @@ refresh_building_time_and_cost_modifiers = {
 	set_temp_variable = {building_modifier_name = token:trade_complex_construction_cost}
 	construction_speed_calculator = yes
 }
+
 test_effect_20 = {
 	set_temp_variable = {test_variable_20 = num_battalions_with_type@infantry}
 	log = "[?num_battalions_with_type@infantry]"

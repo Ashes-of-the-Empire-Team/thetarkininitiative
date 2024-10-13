@@ -454,32 +454,15 @@ behaviour_1_empire_array_creation_and_desire = {
 }
 
 test_effect_70 = {
-	if = {
-		limit = {
-			any_owned_state = {
-				or = {
-					if = {
-						limit = {
-							check_variable = {building_1 = token:corporate_office_1}
-						}
-						NOT = {
-							has_variable = time_left_building_1
-						}
-					}else_if = {
-						limit = {
-							check_variable = {building_2 = token:corporate_office_1}
-						}
-						NOT = {
-							has_variable = time_left_building_2
-						}
-					}else = {
-						always = yes
-					}
-				}
-				set_temp_variable = {state_finder = This.id}
+	189 = {
+		add_building_construction = {
+			type = coastal_bunker
+			level = -2
+			instant_build = yes
+			province = {
+				limit_to_coastal = yes	
+				all_provinces = yes
 			}
-			check_variable = {buildings_money_chest_amount > global.corporate_office_2_global_cost}
 		}
-		log = "test"
 	}
 }

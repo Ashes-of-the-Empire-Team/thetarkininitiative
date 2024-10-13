@@ -1,0 +1,3506 @@
+# Empire of the Hand Focus Tree
+# Made by Basil Stein
+
+focus_tree = {
+	id = EOH_focus
+	
+	country = {
+		factor = 0
+		
+		modifier = {
+			add = 10
+			tag = EOH
+		}
+	}
+	default = no
+	continuous_focus_position = { x = 2400 y = 000 }
+
+	#Thrawn in the Unknown Regions
+	focus = {
+		id = EOH_legacy_of_outbound_flight
+		icon = GFX_thrawn_outbound_flight
+		cost = 2.9
+		x = 8
+		y = 1
+		prerequisite = {
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			custom_effect_tooltip = EOH_add
+			add_to_variable = {thrawn_insights = 1}
+			EOH = {
+				country_event = { id = EOH.5 }
+			}
+			
+		}
+
+		
+	}
+	focus = {
+		id = EOH_the_ssi_ruuvi_threat
+		icon = GFX_thrawn_ssi
+		cost = 5
+		x = -9
+		y = 1
+		relative_position_id = EOH_legacy_of_outbound_flight
+		available = {
+			has_navy_size = {
+    			size > 20 #make 20 when market works
+			}
+			SSI = {
+				has_war = yes
+			}
+		}
+		prerequisite = {
+			focus = EOH_legacy_of_outbound_flight
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = { 
+			add_war_support = 0.15
+
+		} 
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = EOH_guardian_of_the_unknown_regions
+		icon = GFX_guardians_of_the_unknown_regions
+		cost = 7.2
+		x = 4
+		y = 1
+		relative_position_id = EOH_the_ssi_ruuvi_threat
+		available = {
+			SSI = {
+				has_war = yes
+			}
+			28 = {
+				is_owned_and_controlled_by = EOH
+			}
+		}
+		prerequisite = {
+			focus = EOH_the_ssi_ruuvi_threat
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+			focus = EOH_abandon_the_chiss
+			focus = EOH_a_helping_hand
+		}
+		completion_reward = {
+			custom_effect_tooltip = EOH_add
+			add_to_variable = {thrawn_insights = 1}
+			custom_effect_tooltip = EOH_add
+			add_to_variable = {thrawn_insights = 1}
+			declare_war_on = { target = SSI    type = topple_government }
+			add_ideas = EOH_thrawn_guardian
+			create_faction = EOH_UNKNOWN_REGION_PROTECTION_LEAGUE
+			##add chiss and bakura getting imperial support
+			SSI = {
+				country_event = { id = SSI.1 }
+			}
+			CHS = {
+				country_event = { id = CHISS.1 }
+			}
+			MIT = {
+				country_event = { id = CHISS.1 }
+			}
+			INR = {
+				country_event = { id = CHISS.1 }
+			}
+			BAK = {
+				country_event = { id = CHISS.1 }
+			}
+
+		}
+
+		
+	}
+	focus = {
+		id = EOH_chiss_intelligence_sharing
+		icon = GFX_chiss_intelligence_sharing
+		cost = 7.2
+		x = 0
+		y = 1
+		relative_position_id = EOH_guardian_of_the_unknown_regions
+
+		prerequisite = {
+			focus = EOH_guardian_of_the_unknown_regions
+		}
+		search_filters = {
+		}
+		completion_reward = {
+		}
+	}
+	focus = {
+		id = EOH_request_chiss_ship_designs
+		icon = GFX_request_chiss_ship
+		cost = 7.2
+		x = 0
+		y = 1
+		relative_position_id = EOH_chiss_intelligence_sharing
+
+		prerequisite = {
+			focus = EOH_chiss_intelligence_sharing
+		}
+		search_filters = {
+		}
+		completion_reward = {
+			### Add Event
+		}
+	}
+	focus = {
+		id = EOH_a_formal_alliance
+		icon = GFX_thrawn_guardian
+		cost = 7.2
+		x = 0
+		y = 1
+		relative_position_id = EOH_request_chiss_ship_designs
+
+		prerequisite = {
+			focus = EOH_request_chiss_ship_designs
+		}
+		search_filters = {
+		}
+		completion_reward = {
+			CHS = { add_to_faction = EOH }
+		}
+	}
+	focus = {
+		id = EOH_the_chiss_expansionary_fleet
+		icon = GFX_chiss_expansionary_fleet
+		cost = 7.2
+		x = -1
+		y = 1
+		relative_position_id = EOH_a_formal_alliance
+
+		prerequisite = {
+			focus = EOH_a_formal_alliance
+		}
+		search_filters = {
+		}
+		completion_reward = {
+		}
+	}
+	focus = {
+		id = EOH_prepare_for_the_far_outsiders
+		icon = GFX_prepare_for_far_outsiders
+		cost = 7.2
+		x = 1
+		y = 1
+		relative_position_id = EOH_a_formal_alliance
+
+		prerequisite = {
+			focus = EOH_a_formal_alliance
+		}
+		search_filters = {
+		}
+		completion_reward = {
+		}
+	}
+	focus = {
+		id = EOH_a_new_noble_house
+		icon = GFX_a_new_noble_house
+		cost = 7.2
+		x = 1
+		y = 1
+		relative_position_id = EOH_the_chiss_expansionary_fleet
+
+		prerequisite = {
+			focus = EOH_the_chiss_expansionary_fleet
+			focus = EOH_prepare_for_the_far_outsiders
+		}
+		search_filters = {
+		}
+		completion_reward = {
+		}
+	}
+	focus = {
+		id = EOH_work_within_the_ascendency
+		icon = GFX_thrawn_guardian
+		cost = 7.2
+		x = 0
+		y = 1
+		relative_position_id = EOH_a_new_noble_house
+
+		prerequisite = {
+			focus = EOH_a_new_noble_house
+		}
+		search_filters = {
+		}
+		completion_reward = {
+		}
+	}
+	focus = {
+		id = EOH_a_helping_hand
+		icon = GFX_thrawn_aid
+		cost = 7.2
+		x = 0
+		y = 1
+		relative_position_id = EOH_the_ssi_ruuvi_threat
+		available = {
+			SSI = {
+				has_war = yes
+			}
+		}
+		prerequisite = {
+			focus = EOH_the_ssi_ruuvi_threat
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+			focus = EOH_guardian_of_the_unknown_regions
+			focus = EOH_abandon_the_chiss
+		}
+		completion_reward = {
+			custom_effect_tooltip = EOH_add
+			add_to_variable = {thrawn_insights = 1}
+
+			CHS = {
+				country_event = { id = EOH.14 }
+			}
+			MIT = {
+				country_event = { id = EOH.14 }
+			}
+			INR = {
+				country_event = { id = EOH.14 }
+			}
+			BAK = {
+				country_event = { id = EOH.14 }
+			}
+		}
+	}
+	focus = {
+		id = EOH_calling_in_imperial_assets
+		icon = GFX_thrawn_aid
+		cost = 7.2
+		x = -2
+		y = 1
+		relative_position_id = EOH_a_helping_hand
+
+		prerequisite = {
+			focus = EOH_a_helping_hand
+			focus = EOH_abandon_the_chiss
+		}
+		search_filters = {
+		}
+
+		completion_reward = {
+		}
+	}
+	focus = {
+		id = EOH_request_chiss_phalanx
+		icon = GFX_chiss_phalanx
+		cost = 7.2
+		x = 0
+		y = 1
+		relative_position_id = EOH_a_helping_hand
+
+		prerequisite = {
+			focus = EOH_a_helping_hand
+		}
+		search_filters = {
+		}
+
+		completion_reward = {
+		}
+	}
+	focus = {
+		id = EOH_patronage_from_both_fronts
+		icon = GFX_thrawn_aid
+		cost = 7.2
+		x = 0
+		y = 1
+		relative_position_id = EOH_request_chiss_phalanx
+
+		prerequisite = {
+			focus = EOH_request_chiss_phalanx
+		}
+		search_filters = {
+		}
+
+		completion_reward = {
+		}
+	}
+	focus = {
+		id = EOH_maintaining_balance
+		icon = GFX_thrawn_aid
+		cost = 7.2
+		x = 0
+		y = 1
+		relative_position_id = EOH_patronage_from_both_fronts
+
+		prerequisite = {
+			focus = EOH_patronage_from_both_fronts
+		}
+		search_filters = {
+		}
+
+		completion_reward = {
+		}
+	}
+	focus = {
+		id = EOH_chiss_research_program
+		icon = GFX_chiss_research_program
+		cost = 7.2
+		x = 2
+		y = 1
+		relative_position_id = EOH_a_helping_hand
+
+		prerequisite = {
+			focus = EOH_a_helping_hand
+			focus = EOH_guardian_of_the_unknown_regions
+		}
+		search_filters = {
+		}
+
+		completion_reward = {
+			add_to_tech_sharing_group = chiss_tech_group
+		}
+	}
+	focus = {
+		id = EOH_advisors_to_the_chiss
+		icon = GFX_thrawn_chiss_advisors
+		cost = 7.2
+		x = 3
+		y = 1
+		relative_position_id = EOH_a_helping_hand
+		allow_branch = {
+			has_completed_focus = EOH_a_helping_hand
+		}
+		available = {
+			SSI = {
+				has_war = yes
+			}
+		}
+		prerequisite = {
+			focus = EOH_a_helping_hand
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			CHS = {
+				country_event = {id=EOH.12}
+			}
+			MIT = {
+				country_event = {id=EOH.12}
+			}
+			INR = {
+				country_event = {id=EOH.12}
+			}
+		}
+
+		
+	}
+	focus = { 
+		id = EOH_advisors_to_bakura
+		icon = GFX_thrawn_bakura_advisors
+		cost = 7.2
+		x = 1
+		y = 1
+		relative_position_id = EOH_a_helping_hand
+		allow_branch = {
+			has_completed_focus = EOH_a_helping_hand
+		}
+		available = {
+			SSI = {
+				has_war = yes
+			}
+		}
+		prerequisite = {
+			focus = EOH_a_helping_hand
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			BAK = {
+				country_event = {id=EOH.12}
+			}
+		}
+
+		
+	}
+	focus = {
+		id = EOH_fund_chiss_arms
+		icon = GFX_thrawn_bankroll
+		cost = 7.2
+		x = 0
+		y = 1
+		relative_position_id = EOH_advisors_to_bakura
+		available = {
+			SSI = {
+				has_war = yes
+			}
+		}
+		prerequisite = {
+			focus = EOH_advisors_to_bakura
+		}
+		prerequisite = {
+			focus = EOH_advisors_to_the_chiss
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			subtract_from_variable = { currency_amount^primary_currency = 200 }
+			custom_effect_tooltip = minus200credits_tt
+			CHS = {
+				country_event = {id=EOH.13}
+			}
+			MIT = {
+				country_event = {id=EOH.13}
+			}
+			INR = {
+				country_event = {id=EOH.13}
+			}
+		}
+
+		
+	}
+	focus = {
+		id = EOH_none_evade_thrawns_grasp
+		icon = GFX_12th_admiral
+		cost = 5
+		relative_position_id = EOH_the_twelfth_grand_admiral
+		x = 1
+		y = 1
+		prerequisite = {
+			focus = EOH_the_twelfth_grand_admiral
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+			focus = EOH_reconciliation_with_zaarin
+		}
+		completion_reward = {
+			custom_effect_tooltip = EOH_add
+			add_to_variable = {thrawn_insights = 1}
+			## gets rid of debuffs from zaarin, noghri like you less
+
+			custom_effect_tooltip = EOH_order_noghri_tt
+			ZAA = {
+				country_event = {id=EOH.17}
+			}
+			remove_ideas = EOH_demetrius_zaarin_2
+		}
+	}
+	focus = {
+		id = EOH_contact_ardus_kaine
+		icon = GFX_thrawn_contact_kaine
+		cost = 7.2
+		x = -1
+		y = 1
+		relative_position_id = EOH_none_evade_thrawns_grasp
+
+		available = {
+		}
+		prerequisite = {
+			focus = EOH_none_evade_thrawns_grasp
+			focus = EOH_reconciliation_with_zaarin
+		}
+		search_filters = {
+		}
+		completion_reward = {
+			PEN = {
+				country_event = { id = EOH.7 }
+			}
+		}
+	}
+	focus = {
+		id = EOH_mutual_development_assurances
+		icon = GFX_thrawn_mutual_dev
+		cost = 7.2
+		x = 0
+		y = 1
+		relative_position_id = EOH_contact_ardus_kaine
+		available = {
+		}
+		prerequisite = {
+			focus = EOH_contact_ardus_kaine
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			PEN = {
+				country_event = { id = EOH.8 }
+			}
+		}
+	}
+
+	focus = {
+		id = EOH_abandon_the_chiss
+		icon = GFX_thrawn_ssi
+		cost = 7.2
+		x = -4
+		y = 1
+		relative_position_id = EOH_the_ssi_ruuvi_threat
+		available = {
+			SSI = {
+				has_war = yes
+			}
+			##no volunteers sent
+		}
+		prerequisite = {
+			focus = EOH_the_ssi_ruuvi_threat
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+			focus = EOH_a_helping_hand
+			focus = EOH_guardian_of_the_unknown_regions
+		}
+		completion_reward = {
+			country_event = { id = EOH.6 }
+			custom_effect_tooltip = EOH_future_tt
+			##leaves the situation as it is, loses opinion with chiss and such
+		}
+	}
+	focus = {
+		id = EOH_imperial_first
+		icon = GFX_thrawn_ssi
+		cost = 7.2
+		x = 0
+		y = 1
+		relative_position_id = EOH_abandon_the_chiss
+
+		prerequisite = {
+			focus = EOH_abandon_the_chiss
+		}
+		search_filters = {
+		}
+		completion_reward = {
+
+		}
+	}
+	focus = {
+		id = EOH_restoration_of_compnor
+		icon = GFX_thrawn_ssi
+		cost = 7.2
+		x = 0
+		y = 1
+		relative_position_id = EOH_imperial_first
+
+		prerequisite = {
+			focus = EOH_imperial_first
+		}
+		search_filters = {
+		}
+		completion_reward = {
+
+		}
+	}
+	focus = {
+		id = EOH_bring_in_the_inquisition
+		icon = GFX_thrawn_ssi
+		cost = 7.2
+		x = -1
+		y = 1
+		relative_position_id = EOH_restoration_of_compnor
+
+		prerequisite = {
+			focus = EOH_restoration_of_compnor
+		}
+		search_filters = {
+		}
+		completion_reward = {
+
+		}
+	}
+	focus = {
+		id = EOH_the_hardliners
+		icon = GFX_thrawn_ssi
+		cost = 7.2
+		x = 1
+		y = 1
+		relative_position_id = EOH_restoration_of_compnor
+
+		prerequisite = {
+			focus = EOH_restoration_of_compnor
+		}
+		search_filters = {
+		}
+		completion_reward = {
+
+		}
+	}
+	focus = {
+		id = EOH_newfound_imperial_fervor
+		icon = GFX_thrawn_ssi
+		cost = 7.2
+		x = -1
+		y = 1
+		relative_position_id = EOH_the_hardliners
+
+		prerequisite = {
+			focus = EOH_the_hardliners
+			focus = EOH_bring_in_the_inquisition
+		}
+		search_filters = {
+		}
+		completion_reward = {
+
+		}
+	}
+
+	focus = {
+		id = EOH_fleet_of_unknown_regions
+		icon = GFX_thrawn_fleet_regions
+		cost = 7.2
+		relative_position_id = EOH_guardian_of_the_unknown_regions
+		x = 0
+		y = 1
+		allow_branch = {
+			has_completed_focus = EOH_guardian_of_the_unknown_regions
+		}
+		available = {
+		}
+		prerequisite = {
+			focus = EOH_guardian_of_the_unknown_regions
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			custom_effect_tooltip = EOH_add
+			add_to_variable = {thrawn_insights = 1}
+			203 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = dockyard
+					level = 2
+					instant_build = yes
+				}
+			}
+			add_tech_bonus = {
+				name = navy_bonus
+				bonus = 1
+				uses = 1
+				category = naval_equipment ##or whatever emp naval category is
+			}
+		}
+		
+	}
+	focus = {
+		id = EOH_rebuild_bakura
+		icon = GFX_thrawn_rebuild_bakura
+		cost = 7.2
+		relative_position_id = EOH_guardian_of_the_unknown_regions
+		x = -2
+		y = 1
+		allow_branch = {
+			has_completed_focus = EOH_guardian_of_the_unknown_regions
+		}
+		available = {
+			BAK = {
+				has_full_control_of_state = 96
+				has_full_control_of_state = 400
+				has_full_control_of_state = 402
+				has_full_control_of_state = 440
+				NOT={
+					is_subject_of = SSI
+				}
+			}
+		}
+		prerequisite = {
+			focus = EOH_guardian_of_the_unknown_regions
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			BAK = {
+				add_offsite_building = { type = industrial_complex level = 2 }
+				add_popularity = {
+					ideology = imperial
+					popularity = 0.5
+				}
+			}
+			subtract_from_variable = { currency_amount^primary_currency = 10 }
+		}
+		
+	}
+	focus = {
+		id = EOH_rebuild_csaus
+		icon = GFX_thrawn_rebuild_csaus
+		cost = 7.2
+		relative_position_id = EOH_guardian_of_the_unknown_regions
+		x = 2
+		y = 1
+		allow_branch = {
+			has_completed_focus = EOH_guardian_of_the_unknown_regions
+		}
+		available = {
+			INR = {
+				has_full_control_of_state = 51
+				has_full_control_of_state = 267
+				has_full_control_of_state = 275
+				has_full_control_of_state = 272
+			}
+		}
+		prerequisite = {
+			focus = EOH_guardian_of_the_unknown_regions
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			MIT = {
+				add_offsite_building = { type = industrial_complex level = 2 }
+				add_popularity = {
+					ideology = imperial
+					popularity = 0.5
+				}
+			}
+			subtract_from_variable = { currency_amount^primary_currency = 10 }
+		}
+		
+	}
+	focus = {
+		id = EOH_allied_invasion_of_lwhekk
+		icon = GFX_thrawn_invade_lwhekk
+		cost = 2.9
+		relative_position_id = EOH_rebuild_bakura
+		x = 2
+		y = 1
+		prerequisite = {
+			focus = EOH_rebuild_bakura
+			focus = EOH_rebuild_csaus
+		}
+		prerequisite = {
+			focus = EOH_fleet_of_unknown_regions
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			EOH = {
+				add_timed_idea = {
+					idea = EOH_chiss_imperial_offensive
+					days = 180
+				}
+			}
+			CHS = {
+				country_event = { id = CHISS.2 }
+			}
+			INR = {
+				country_event = { id = CHISS.2 }
+			}
+			MIT = {
+				country_event = { id = CHISS.2 }
+			}
+			BAK = {
+				country_event = { id = BAK.2 }
+			}
+		}
+		
+	}
+	focus = {
+		id = EOH_leave_lwhekk
+		icon = GFX_thrawn_leave_lwhekk
+		cost = 5
+		relative_position_id = EOH_allied_invasion_of_lwhekk
+		x = -1
+		y = 1
+		available = {
+			## War won
+			346={
+				owns_or_subject_of = yes
+			}
+		}
+		prerequisite = {
+			focus = EOH_allied_invasion_of_lwhekk
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+			focus = EOH_prevent_ssi-ruuvi_resurgence
+		}
+		completion_reward = {
+			release_puppet = SSI
+		}
+		
+	}
+	focus = {
+		id = EOH_prevent_ssi-ruuvi_resurgence
+		icon = GFX_thrawn_imperial_lwhekk
+		cost = 7.2
+		relative_position_id = EOH_allied_invasion_of_lwhekk
+		x = 1
+		y = 1
+		available = {
+			## War won
+			346={
+				owns_or_subject_of = yes
+			}
+		}
+		prerequisite = {
+			focus = EOH_allied_invasion_of_lwhekk
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+			focus = EOH_leave_lwhekk
+		}
+		completion_reward = {
+			add_stability = -0.1
+			SSI={
+				set_country_flag = SSI_sack_of_lwhekk
+			}
+			## removes occupying focus idea from ssi-ruuvi, adds idea that lasts a couple years and makes them worse
+		}
+		
+	}
+
+	## Right side of unknown regions
+	focus = {
+		id = EOH_the_twelfth_grand_admiral
+		icon = GFX_thrawn_insignia
+		cost = 5
+		relative_position_id = EOH_legacy_of_outbound_flight
+		x = 5
+		y = 1
+		prerequisite = {
+			focus = EOH_legacy_of_outbound_flight
+		}
+		search_filters = {
+			FOCUS_FILTER_MILITARY
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			custom_effect_tooltip = EOH_add
+			add_to_variable = {thrawn_insights = 1}
+			## Slightly reduces debuffs from Zaarin
+			navy_experience = 50
+			swap_ideas = {
+				remove_idea = EOH_demetrius_zaarin_1
+				add_idea = EOH_demetrius_zaarin_2
+			}
+		}
+		
+	}
+	focus = {
+		id = EOH_reconciliation_with_zaarin
+		icon = GFX_reconciliation
+		cost = 5
+		relative_position_id = EOH_the_twelfth_grand_admiral
+		x = -1
+		y = 1
+		prerequisite = {
+			focus = EOH_the_twelfth_grand_admiral
+		}
+		search_filters = {
+			FOCUS_FILTER_MILITARY
+		}
+		mutually_exclusive = {
+			focus = EOH_none_evade_thrawns_grasp
+		}
+		completion_reward = {
+			custom_effect_tooltip = EOH_zaarin_ships_tt
+			## gets rid of debuffs from zaarin, recruits him, tech bonus for w/e he was working on, palpatine likes you less
+
+			ZAA = {
+				country_event = {id=EOH.16}
+			}
+			remove_ideas = EOH_demetrius_zaarin_2
+			
+			hidden_effect = {
+				load_oob = "EOH_ZAA_4"	
+			}
+		}
+	}
+	focus = {
+		id = EOH_the_loyalists_abroad
+		icon = GFX_reconciliation
+		cost = 7.2
+		relative_position_id = EOH_reconciliation_with_zaarin
+		x = -4
+		y = 1
+		prerequisite = {
+			focus = EOH_reconciliation_with_zaarin
+			focus = EOH_none_evade_thrawns_grasp
+		}
+		search_filters = {
+		}
+
+		completion_reward = {
+
+		}
+	}
+	focus = {
+		id = EOH_convince_fel_to_our_cause
+		icon = GFX_reconciliation
+		cost = 7.2
+		relative_position_id = EOH_the_loyalists_abroad
+		x = -2
+		y = 1
+		prerequisite = {
+			focus = EOH_the_loyalists_abroad
+		}
+		search_filters = {
+		}
+
+		completion_reward = {
+
+		}
+	}
+	focus = {
+		id = EOH_the_fel_family
+		icon = GFX_reconciliation
+		cost = 7.2
+		relative_position_id = EOH_convince_fel_to_our_cause
+		x = 0
+		y = 1
+		prerequisite = {
+			focus = EOH_convince_fel_to_our_cause
+		}
+		search_filters = {
+		}
+
+		completion_reward = {
+
+		}
+	}
+	focus = {
+		id = EOH_hand_of_judgement
+		icon = GFX_reconciliation
+		cost = 7.2
+		relative_position_id = EOH_the_loyalists_abroad
+		x = 0
+		y = 1
+		prerequisite = {
+			focus = EOH_the_loyalists_abroad
+		}
+		search_filters = {
+		}
+
+		completion_reward = {
+
+		}
+	}
+	focus = {
+		id = EOH_the_economic_plan
+		icon = GFX_reconciliation
+		cost = 7.2
+		relative_position_id = EOH_the_loyalists_abroad
+		x = 2
+		y = 1
+		prerequisite = {
+			focus = EOH_the_loyalists_abroad
+		}
+		search_filters = {
+		}
+
+		completion_reward = {
+
+		}
+	}
+	focus = {
+		id = EOH_a_new_company
+		icon = GFX_reconciliation
+		cost = 7.2
+		relative_position_id = EOH_the_economic_plan
+		x = -1
+		y = 1
+		prerequisite = {
+			focus = EOH_the_economic_plan
+		}
+		mutually_exclusive = {
+			focus = EOH_kuat_contracts
+		}
+		search_filters = {
+		}
+
+		completion_reward = {
+
+		}
+	}
+	focus = {
+		id = EOH_kuat_contracts
+		icon = GFX_reconciliation
+		cost = 7.2
+		relative_position_id = EOH_the_economic_plan
+		x = 1
+		y = 1
+		prerequisite = {
+			focus = EOH_the_economic_plan
+		}
+		mutually_exclusive = {
+			focus = EOH_a_new_company
+		}
+		search_filters = {
+		}
+
+		completion_reward = {
+
+		}
+	}
+	focus = {
+		id = EOH_sienar
+		icon = GFX_reconciliation
+		cost = 7.2
+		relative_position_id = EOH_a_new_company
+		x = -1
+		y = 1
+		prerequisite = {
+			focus = EOH_a_new_company
+		}
+		mutually_exclusive = {
+			focus = EOH_a_chiss_solution
+		}
+		search_filters = {
+		}
+
+		completion_reward = {
+
+		}
+	}
+	focus = {
+		id = EOH_a_chiss_solution
+		icon = GFX_reconciliation
+		cost = 7.2
+		relative_position_id = EOH_a_new_company
+		x = 1
+		y = 1
+		prerequisite = {
+			focus = EOH_a_new_company
+		}
+		mutually_exclusive = {
+			focus = EOH_sienar
+		}
+		search_filters = {
+		}
+
+		completion_reward = {
+
+		}
+	}
+	focus = {
+		id = EOH_the_collector
+		icon = GFX_thrawn_taming
+		cost = 7.2
+		relative_position_id = EOH_reconciliation_with_zaarin
+		x = 21
+		y = 1
+
+		prerequisite = {
+			focus = EOH_reconciliation_with_zaarin
+			focus = EOH_none_evade_thrawns_grasp
+		}
+		search_filters = {
+		}
+		completion_reward = {
+			
+		}
+	}
+	focus = {
+		id = EOH_establish_connections_to_the_underworld
+		icon = GFX_thrawn_taming
+		cost = 7.2
+		relative_position_id = EOH_the_collector
+		x = -1
+		y = 1
+
+		prerequisite = {
+			focus = EOH_the_collector
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+			focus = EOH_noghri_special_forces
+		}
+		completion_reward = {
+
+		}
+	}
+	focus = {
+		id = EOH_noghri_special_forces
+		icon = GFX_thrawn_taming
+		cost = 7.2
+		relative_position_id = EOH_the_collector
+		x = 1
+		y = 1
+
+		prerequisite = {
+			focus = EOH_the_collector
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+			focus = EOH_establish_connections_to_the_underworld
+		}
+		completion_reward = {
+
+		}
+	}
+	focus = {
+		id = EOH_the_religious_collection
+		icon = GFX_thrawn_taming
+		cost = 7.2
+		relative_position_id = EOH_noghri_special_forces
+		x = -4
+		y = 1
+
+		prerequisite = {
+			focus = EOH_noghri_special_forces
+			focus = EOH_establish_connections_to_the_underworld
+		}
+		search_filters = {
+		}
+		completion_reward = {
+
+		}
+	}
+	focus = {
+		id = EOH_relics_of_the_force
+		icon = GFX_thrawn_taming
+		cost = 7.2
+		relative_position_id = EOH_noghri_special_forces
+		x = -2
+		y = 1
+
+		prerequisite = {
+			focus = EOH_noghri_special_forces
+			focus = EOH_establish_connections_to_the_underworld
+		}
+		search_filters = {
+		}
+		completion_reward = {
+
+		}
+	}
+	focus = {
+		id = EOH_martial_arts_datapads
+		icon = GFX_thrawn_taming
+		cost = 7.2
+		relative_position_id = EOH_noghri_special_forces
+		x = 0
+		y = 1
+
+		prerequisite = {
+			focus = EOH_noghri_special_forces
+			focus = EOH_establish_connections_to_the_underworld
+		}
+		search_filters = {
+		}
+		completion_reward = {
+
+		}
+	}
+	focus = {
+		id = EOH_biological_samples
+		icon = GFX_thrawn_taming
+		cost = 7.2
+		relative_position_id = EOH_noghri_special_forces
+		x = 2
+		y = 1
+
+		prerequisite = {
+			focus = EOH_noghri_special_forces
+			focus = EOH_establish_connections_to_the_underworld
+		}
+		search_filters = {
+		}
+		completion_reward = {
+
+		}
+	}
+	focus = {
+		id = EOH_a_wealthy_benefactor
+		icon = GFX_thrawn_taming
+		cost = 5
+		x = 35
+		y = 8
+
+		search_filters = {
+		}
+
+		completion_reward = {
+
+		}
+	}
+
+	focus = {
+		id = EOH_the_tagge_family
+		icon = GFX_thrawn_taming
+		cost = 5
+		relative_position_id = EOH_a_wealthy_benefactor
+		x = -3
+		y = 1
+
+		search_filters = {
+		}
+		prerequisite = {
+			focus = EOH_a_wealthy_benefactor
+		}
+		mutually_exclusive = {
+			focus = EOH_the_santhe_family
+			focus = EOH_morgan_elsbeth
+			focus = EOH_the_nuruodo_family
+		}
+
+		completion_reward = {
+
+		}
+	}
+	focus = {
+		id = EOH_large_cash_influx
+		icon = GFX_thrawn_taming
+		cost = 5
+		relative_position_id = EOH_the_tagge_family
+		x = 0
+		y = 1
+
+		search_filters = {
+		}
+		prerequisite = {
+			focus = EOH_the_tagge_family
+		}
+
+		completion_reward = {
+
+		}
+	}
+	focus = {
+		id = EOH_imperial_propaganda_campaigns
+		icon = GFX_thrawn_taming
+		cost = 5
+		relative_position_id = EOH_large_cash_influx
+		x = 0
+		y = 1
+
+		search_filters = {
+		}
+		prerequisite = {
+			focus = EOH_large_cash_influx
+		}
+
+		completion_reward = {
+
+		}
+	}
+	focus = {
+		id = EOH_the_santhe_family
+		icon = GFX_thrawn_taming
+		cost = 5
+		relative_position_id = EOH_a_wealthy_benefactor
+		x = -1
+		y = 1
+
+		search_filters = {
+		}
+		prerequisite = {
+			focus = EOH_a_wealthy_benefactor
+		}
+		mutually_exclusive = {
+			focus = EOH_the_tagge_family
+			focus = EOH_morgan_elsbeth
+			focus = EOH_the_nuruodo_family
+		}
+
+		completion_reward = {
+
+		}
+	}
+	focus = {
+		id = EOH_starship_discounts
+		icon = GFX_thrawn_taming
+		cost = 5
+		relative_position_id = EOH_the_santhe_family
+		x = 0
+		y = 1
+
+		search_filters = {
+		}
+		prerequisite = {
+			focus = EOH_the_santhe_family
+		}
+
+		completion_reward = {
+
+		}
+	}
+	focus = {
+		id = EOH_next_generation_designs
+		icon = GFX_thrawn_taming
+		cost = 5
+		relative_position_id = EOH_starship_discounts
+		x = 0
+		y = 1
+
+		search_filters = {
+		}
+		prerequisite = {
+			focus = EOH_starship_discounts
+		}
+
+		completion_reward = {
+
+		}
+	}
+	focus = {
+		id = EOH_morgan_elsbeth
+		icon = GFX_thrawn_taming
+		cost = 5
+		relative_position_id = EOH_a_wealthy_benefactor
+		x = 1
+		y = 1
+
+		search_filters = {
+		}
+		prerequisite = {
+			focus = EOH_a_wealthy_benefactor
+		}
+		mutually_exclusive = {
+			focus = EOH_the_tagge_family
+			focus = EOH_the_santhe_family
+			focus = EOH_the_nuruodo_family
+		}
+
+		completion_reward = {
+
+		}
+	}
+	focus = {
+		id = EOH_hk87_assassin_droids
+		icon = GFX_thrawn_taming
+		cost = 5
+		relative_position_id = EOH_morgan_elsbeth
+		x = 0
+		y = 1
+
+		search_filters = {
+		}
+		prerequisite = {
+			focus = EOH_morgan_elsbeth
+		}
+
+		completion_reward = {
+
+		}
+	}
+	focus = {
+		id = EOH_the_sisters
+		icon = GFX_thrawn_taming
+		cost = 5
+		relative_position_id = EOH_hk87_assassin_droids
+		x = 0
+		y = 1
+
+		search_filters = {
+		}
+		prerequisite = {
+			focus = EOH_hk87_assassin_droids
+		}
+
+		completion_reward = {
+
+		}
+	}
+	focus = {
+		id = EOH_the_nuruodo_family
+		icon = GFX_the_nurodo_family
+		cost = 5
+		relative_position_id = EOH_a_wealthy_benefactor
+		x = 3
+		y = 1
+
+		search_filters = {
+		}
+		prerequisite = {
+			focus = EOH_a_wealthy_benefactor
+		}
+		mutually_exclusive = {
+			focus = EOH_the_tagge_family
+			focus = EOH_the_santhe_family
+			focus = EOH_morgan_elsbeth
+		}
+
+		completion_reward = {
+
+		}
+	}
+	focus = {
+		id = EOH_a_gift_from_the_homeland
+		icon = GFX_gift_from_the_homeland
+		cost = 5
+		relative_position_id = EOH_the_nuruodo_family
+		x = 0
+		y = 1
+
+		search_filters = {
+		}
+		prerequisite = {
+			focus = EOH_the_nuruodo_family
+		}
+
+		completion_reward = {
+
+		}
+	}
+	focus = {
+		id = EOH_a_new_flagship
+		icon = GFX_new_flagship
+		cost = 5
+		relative_position_id = EOH_a_gift_from_the_homeland
+		x = 0
+		y = 1
+
+		search_filters = {
+		}
+		prerequisite = {
+			focus = EOH_a_gift_from_the_homeland
+		}
+
+		completion_reward = {
+
+		}
+	}
+	focus = {
+		id = EOH_chiss_tactics
+		icon = GFX_chiss_tactics
+		cost = 7.2
+		x = 23
+		y = 8
+
+		search_filters = {
+		}
+		mutually_exclusive = {
+			focus = EOH_imperial_tactics
+			focus = EOH_mixed_tactics
+		}
+		completion_reward = {
+
+		}
+	}
+	focus = {
+		id = EOH_chiss_star_destroyers
+		icon = GFX_chiss_star_destroyer
+		cost = 7.2
+		relative_position_id = EOH_chiss_tactics
+		x = -1
+		y = 1
+
+		search_filters = {
+		}
+		prerequisite = {
+			focus = EOH_chiss_tactics
+		}
+
+		completion_reward = {
+
+		}
+	}
+	focus = {
+		id = EOH_chiss_heavy_cruiser
+		icon = GFX_chiss_heavy_cruiser
+		cost = 7.2
+		relative_position_id = EOH_chiss_tactics
+		x = 1
+		y = 1
+
+		search_filters = {
+		}
+		prerequisite = {
+			focus = EOH_chiss_tactics
+			focus = EOH_mixed_tactics
+		}
+
+		completion_reward = {
+
+		}
+	}
+	focus = {
+		id = EOH_the_phalanx_formation
+		icon = GFX_thrawn_taming
+		cost = 7.2
+		relative_position_id = EOH_chiss_star_destroyers
+		x = 1
+		y = 1
+
+		search_filters = {
+		}
+		prerequisite = {
+			focus = EOH_chiss_heavy_cruiser
+		}
+		prerequisite = {
+			focus = EOH_chiss_star_destroyers
+		}
+
+		completion_reward = {
+
+		}
+	}
+	focus = {
+		id = EOH_mixed_tactics
+		icon = GFX_thrawn_taming
+		cost = 7.2
+		relative_position_id = EOH_chiss_tactics
+		x = 3
+		y = 0
+
+		search_filters = {
+		}
+		mutually_exclusive = {
+			focus = EOH_chiss_tactics
+			focus = EOH_imperial_tactics
+		}
+		completion_reward = {
+
+		}
+	}
+	focus = {
+		id = EOH_imperial_tactics
+		icon = GFX_thrawn_taming
+		cost = 7.2
+		relative_position_id = EOH_chiss_tactics
+		x = 6
+		y = 0
+
+		search_filters = {
+		}
+		mutually_exclusive = {
+			focus = EOH_chiss_tactics
+			focus = EOH_mixed_tactics
+		}
+		completion_reward = {
+
+		}
+	}
+	focus = {
+		id = EOH_imperial_star_destroyers
+		icon = GFX_thrawn_taming
+		cost = 7.2
+		relative_position_id = EOH_mixed_tactics
+		x = 0
+		y = 1
+
+		search_filters = {
+		}
+		prerequisite = {
+			focus = EOH_mixed_tactics
+			focus = EOH_chiss_tactics
+			focus = EOH_imperial_tactics
+		}
+
+		completion_reward = {
+
+		}
+	}
+	focus = {
+		id = EOH_adapting_to_the_situation
+		icon = GFX_thrawn_taming
+		cost = 7.2
+		relative_position_id = EOH_imperial_star_destroyers
+		x = 0
+		y = 1
+
+		search_filters = {
+		}
+		prerequisite = {
+			focus = EOH_imperial_star_destroyers
+		}
+
+		completion_reward = {
+
+		}
+	}
+	focus = {
+		id = EOH_stormtrooper_focus
+		icon = GFX_thrawn_taming
+		cost = 7.2
+		relative_position_id = EOH_imperial_tactics
+		x = -1
+		y = 1
+
+		search_filters = {
+		}
+		prerequisite = {
+			focus = EOH_mixed_tactics
+			focus = EOH_imperial_tactics
+		}
+
+		completion_reward = {
+			add_ideas = EOH_stormtrooper_focus
+		}
+	}
+	focus = {
+		id = EOH_fleet_in_being_tactics
+		icon = GFX_thrawn_taming
+		cost = 7.2
+		relative_position_id = EOH_imperial_tactics
+		x = 1
+		y = 1
+
+		search_filters = {
+		}
+		prerequisite = {
+			focus = EOH_imperial_tactics
+		}
+
+		completion_reward = {
+
+		}
+	}
+	focus = {
+		id = EOH_praetor_class_battlecruiser
+		icon = GFX_thrawn_taming
+		cost = 7.2
+		relative_position_id = EOH_fleet_in_being_tactics
+		x = -1
+		y = 1
+
+		search_filters = {
+		}
+		prerequisite = {
+			focus = EOH_stormtrooper_focus
+		}
+		prerequisite = {
+			focus = EOH_fleet_in_being_tactics
+		}
+
+		completion_reward = {
+
+		}
+	}
+	focus = {
+		id = EOH_taming_nirauan
+		icon = GFX_thrawn_taming
+		cost = 7.2
+		relative_position_id = EOH_reconciliation_with_zaarin
+		x = 8
+		y = 1
+		#allow_branch = {
+		#	OR = {
+		#		has_completed_focus = EOH_none_evade_thrawns_grasp
+		#		has_completed_focus = EOH_reconciliation_with_zaarin
+		#	}
+		#}
+		prerequisite = {
+			focus = EOH_reconciliation_with_zaarin
+			focus = EOH_none_evade_thrawns_grasp
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = EOH_nirauan_1
+				add_idea = EOH_nirauan_2
+			}
+		}
+	}
+	focus = {
+		id = EOH_eradicate_the_vermin
+		icon = GFX_thrawn_stormtroop
+		cost = 7.2
+		relative_position_id = EOH_taming_nirauan
+		x = -4
+		y = 1
+		available = {
+			NOT = { army_manpower_in_state = { state = 457 amount < 100000 } }
+			NOT = { army_manpower_in_state = { state = 182 amount < 100000 } }
+		}
+		prerequisite = {
+			focus = EOH_taming_nirauan
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+			focus = EOH_language_of_the_qom_jha
+		}
+		completion_reward = {
+			custom_effect_tooltip = EOH_add
+			add_to_variable = {thrawn_insights = 1}
+
+			229 = {
+				add_manpower = -10000
+				add_state_modifier = {
+					modifier = {attrition_for_controller = -1.0}
+				}
+			}
+			221 = {
+				add_manpower = -10000
+				add_state_modifier = {
+					modifier = {attrition_for_controller = -1.0}
+				}
+			}
+		}
+		
+	}
+	focus = {
+		id = EOH_eastern_renovation
+		icon = GFX_thrawn_renovation
+		cost = 7.2
+		relative_position_id = EOH_eradicate_the_vermin
+		x = 0
+		y = 2
+		prerequisite = {
+			focus = EOH_eradicate_the_vermin
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			457 = {
+				limit = {
+					has_avaliable_building_slot = yes
+				}
+				set_temp_variable = {REQUESTED_BUILDING = token:arms_factory_1}
+				Add_building_to_slot_immediately = yes
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			182 = {
+				limit = {
+					has_avaliable_building_slot = yes
+				}
+				set_temp_variable = {REQUESTED_BUILDING = token:fuel_refinery_1}
+				Add_building_to_slot_immediately = yes
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			EOH = {
+				add_state_core = 457
+				add_state_core = 182
+			}
+		}
+		
+	}
+	focus = {
+		id = EOH_language_of_the_qom_jha
+		icon = GFX_WIP_focus
+		cost = 7.2
+		relative_position_id = EOH_taming_nirauan
+		x = -2
+		y = 1
+		prerequisite = {
+			focus = EOH_taming_nirauan
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+			focus = EOH_eradicate_the_vermin
+		}
+		completion_reward = {
+
+			custom_effect_tooltip = EOH_qom_jha_focus_tt
+		}
+		
+	}
+	focus = {
+		id = EOH_peace_in_the_jungle
+		icon = GFX_thrawn_peace_jungle
+		cost = 7.2
+		relative_position_id = EOH_language_of_the_qom_jha
+		x = 0
+		y = 1
+		#available = {
+			#has_completed_focus = EOH_language_of_the_qom_jha
+		#}
+		prerequisite = {
+			focus = EOH_language_of_the_qom_jha
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			custom_effect_tooltip = EOH_add
+			add_to_variable = {thrawn_insights = 1}
+			##gives celebration event with the Qom Qae and Qom Jha
+			EOH = {
+				add_state_core = 457
+				add_state_core = 182
+			}
+		}
+		
+	}
+	focus = {
+		id = EOH_assistance_and_urbanization
+		icon = GFX_thrawn_increase_urban
+		cost = 7.2
+		relative_position_id = EOH_peace_in_the_jungle
+		x = 0
+		y = 1
+		prerequisite = {
+			focus = EOH_peace_in_the_jungle
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			##victory point wizardry
+			457 = {
+				limit = {
+					has_avaliable_building_slot = yes
+				}
+				set_temp_variable = {REQUESTED_BUILDING = token:corporate_office_1}
+				Add_building_to_slot_immediately = yes
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+				add_extra_state_shared_building_slots = 1
+			}
+			182 = {
+				limit = {
+					has_avaliable_building_slot = yes
+				}
+				set_temp_variable = {REQUESTED_BUILDING = token:trade_complex_1}
+				Add_building_to_slot_immediately = yes
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+				add_extra_state_shared_building_slots = 1
+			}
+		}
+		
+	}
+	focus = {
+		id = EOH_repurpose_zaarins_operations
+		icon = GFX_repurpose
+		cost = 7.2
+		relative_position_id = EOH_taming_nirauan
+		x = 0
+		y = 1
+		prerequisite = {
+			focus = EOH_taming_nirauan
+		}
+		search_filters = {
+		}
+		available = {
+			28 = {
+				owns_or_subject_of = yes
+			}
+		}
+		completion_reward = {
+			28 = {
+				if={
+					limit={
+						NOT={is_owned_by = EOH}
+					}
+					transfer_state_to = EOH
+				}
+				add_core_of = EOH
+				add_extra_state_shared_building_slots = 1
+				limit = {
+					has_avaliable_building_slot = yes
+				}
+				set_temp_variable = {REQUESTED_BUILDING = token:arms_factory_1}
+				Add_building_to_slot_immediately = yes
+			}
+		}
+		
+	}
+	focus = {
+		id = EOH_prospecting_and_exploration
+		icon = GFX_thrawn_prospecting
+		cost = 7.2
+		relative_position_id = EOH_repurpose_zaarins_operations
+		x = 0
+		y = 1
+		prerequisite = {
+			focus = EOH_repurpose_zaarins_operations
+		}
+		search_filters = {
+		}
+		completion_reward = {
+			#Victory point wizardry
+
+			456 = {
+				if = {
+					limit = { is_controlled_by = ROOT }
+					add_victory_points = {
+						province = 1695
+						value = 1
+					}
+					add_victory_points = {
+						province = 6457
+						value = 2
+					}
+					add_victory_points = {
+						province = 1059
+						value = 1
+					}
+					add_building_construction = {
+						type = infrastructure
+						level = 1
+						instant_build = yes
+					}
+				}
+			}
+
+		}
+		
+	}
+	focus = {
+		id = EOH_establish_mining_operations
+		icon = GFX_thrawn_mining_droid
+		cost = 7.2
+		relative_position_id = EOH_prospecting_and_exploration
+		x = 0
+		y = 1
+		prerequisite = {
+			focus = EOH_prospecting_and_exploration
+		}
+		search_filters = {
+		}
+		completion_reward = {
+			#Victory point wizardry
+			456 = {
+				if = {
+					limit = { is_controlled_by = ROOT }
+					add_victory_points = {
+						province = 898
+						value = 10
+					}
+					add_building_construction = {
+						type = industrial_complex
+						level = 2
+						instant_build = yes
+					}
+					add_extra_state_shared_building_slots = 2
+				}
+			}
+			add_resource = {
+				type = steel
+				amount = 6
+				state = 456
+			}
+			add_resource = {
+				type = tungsten
+				amount = 16
+				state = 456
+			}
+			add_resource = {
+				type = chromium
+				amount = 6
+				state = 456
+			}
+		}
+		
+	}
+	focus = {
+		id = EOH_human_chiss_status_quo
+		icon = GFX_thrawn_human_chiss
+		cost = 5
+		relative_position_id = EOH_taming_nirauan
+		x = 5
+		y = 1
+		prerequisite = {
+			focus = EOH_taming_nirauan
+		}
+		mutually_exclusive = {
+			focus = EOH_fund_alien_colonization
+		}
+		search_filters = {
+		}
+		completion_reward = {
+
+			add_stability = 0.03
+		}
+		
+	}
+
+	focus = {
+		id = EOH_fund_alien_colonization
+		icon = GFX_thrawn_alien_colony
+		cost = 7.2
+		relative_position_id = EOH_taming_nirauan
+		x = 2
+		y = 1
+		prerequisite = {
+			focus = EOH_taming_nirauan
+		}
+		mutually_exclusive = {
+			focus = EOH_human_chiss_status_quo
+		}
+		search_filters = {
+		}
+		completion_reward = {
+
+			subtract_from_variable = { currency_amount^primary_currency = 20 }
+			custom_effect_tooltip = minus20credits_tt
+			add_stability = -0.03
+		}
+		
+	}
+	focus = {
+		id = EOH_human_domination
+		icon = GFX_thrawn_alien_colony
+		cost = 7.2
+		relative_position_id = EOH_taming_nirauan
+		x = 7
+		y = 1
+		prerequisite = {
+			focus = EOH_taming_nirauan
+		}
+		mutually_exclusive = {
+			focus = EOH_fund_alien_colonization
+			focus = EOH_fund_alien_colonization
+		}
+		search_filters = {
+		}
+		completion_reward = {
+
+		}
+	}
+	focus = {
+		id = EOH_unified_vision
+		icon = GFX_thrawn_alien_colony
+		cost = 7.2
+		relative_position_id = EOH_human_domination
+		x = 1
+		y = 1
+		prerequisite = {
+			focus = EOH_human_domination
+		}
+		search_filters = {
+		}
+		completion_reward = {
+
+		}
+	}
+	focus = {
+		id = EOH_import_labor_1
+		icon = GFX_thrawn_alien_colony
+		cost = 7.2
+		relative_position_id = EOH_human_domination
+		x = -1
+		y = 1
+		prerequisite = {
+			focus = EOH_human_domination
+			focus = EOH_human_chiss_status_quo
+		}
+		search_filters = {
+		}
+		completion_reward = {
+			#subtract manpower from chiss planets, coruscant, entralla
+			203 = {
+				add_manpower = 18000
+			}
+			186 = {
+				add_manpower = 18000
+			}
+			25 = {
+				add_manpower = 18000
+			}
+			188 = {
+				add_manpower = 18000
+			}
+			37 = {
+				add_manpower = -36000
+			}
+			235 = {
+				add_manpower = -36000
+			}
+		}
+	}
+	focus = {
+		id = EOH_chiss_experts
+		icon = GFX_thrawn_alien_colony
+		cost = 7.2
+		relative_position_id = EOH_fund_alien_colonization
+		x = 2
+		y = 1
+		prerequisite = {
+			focus = EOH_fund_alien_colonization
+			focus = EOH_human_chiss_status_quo
+		}
+		search_filters = {
+		}
+		completion_reward = {
+			add_ideas = EOH_chiss_experts
+		}
+	}
+	focus = {
+		id = EOH_a_new_home_for_the_noghri
+		icon = GFX_thrawn_noghri
+		cost = 7.2
+		relative_position_id = EOH_fund_alien_colonization
+		x = 0
+		y = 1
+		prerequisite = {
+			focus = EOH_fund_alien_colonization
+		}
+		search_filters = {
+		}
+		completion_reward = {
+			188 = {
+				add_victory_points = {
+					province = 4496
+					value = 5
+				}
+			}
+			add_manpower = 100000
+			#victory point magic, buildings
+		}
+		
+	}
+
+	focus = {
+		id = EOH_eyes_everywhere
+		icon = GFX_WIP_focus
+		cost = 7.2
+		relative_position_id = EOH_the_twelfth_grand_admiral
+		x = -2
+		y = 2
+		allow_branch = {
+			always = no
+			#OR = {
+				#has_completed_focus = EOH_reconciliation_with_zaarin
+				#has_completed_focus = EOH_none_evade_thrawns_grasp
+			#}
+		}
+		prerequisite = {
+			focus = EOH_reconciliation_with_zaarin
+			focus = EOH_none_evade_thrawns_grasp
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			custom_effect_tooltip = EOH_add
+			add_to_variable = {thrawn_insights = 1}
+
+			## establishes spy network
+		}
+		
+	}
+	focus = {
+		id = EOH_convince_fel_of_our_cause
+		icon = GFX_thrawn_convince_fel
+		cost = 7.2
+		relative_position_id = EOH_eyes_everywhere
+		x = -1
+		y = 1
+		prerequisite = {
+			focus = EOH_eyes_everywhere
+		}
+		search_filters = {
+			FOCUS_FILTER_MILITARY
+		}
+		mutually_exclusive = {
+			focus = EOH_death_to_the_traitor
+		}
+		completion_reward = {
+			## gets fel
+		}
+		
+	}
+	focus = {
+		id = EOH_death_to_the_traitor
+		icon = GFX_thrawn_kill_fel
+		cost = 7.2
+		relative_position_id = EOH_eyes_everywhere
+		x = 1
+		y = 1
+		prerequisite = {
+			focus = EOH_eyes_everywhere
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+			focus = EOH_convince_fel_of_our_cause
+		}
+		completion_reward = {
+			## kills fel, noghri like you less
+			custom_effect_tooltip = EOH_order_noghri_tt
+			
+		}
+		
+	}
+	focus = {
+		id = EOH_ensure_failure_of_peace_talks
+		icon = GFX_WIP_focus
+		cost = 7.2
+		relative_position_id = EOH_convince_fel_of_our_cause
+		x = 0
+		y = 1
+		prerequisite = {
+			focus = EOH_convince_fel_of_our_cause
+			focus = EOH_death_to_the_traitor
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+			focus = EOH_assasinate_oxtroe
+		}
+		completion_reward = {
+
+			# ensures failure of peace talks
+		}
+		
+	}
+	focus = {
+		id = EOH_assasinate_oxtroe
+		icon = GFX_WIP_focus
+		cost = 7.2
+		relative_position_id = EOH_ensure_failure_of_peace_talks
+		x = 2
+		y = 0
+		prerequisite = {
+			focus = EOH_convince_fel_of_our_cause
+			focus = EOH_death_to_the_traitor
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+			focus = EOH_ensure_failure_of_peace_talks
+		}
+		completion_reward = {
+
+			# kills oxtroe, noghri like you less
+			custom_effect_tooltip = EOH_order_noghri_tt
+		}
+		
+	}
+	focus = {
+		id = EOH_the_hand
+		icon = GFX_WIP_focus
+		cost = 7.2
+		relative_position_id = EOH_establish_mining_operations
+		x = 1
+		y = 1
+		prerequisite = {
+			focus = EOH_assistance_and_urbanization
+			focus = EOH_eastern_renovation
+		}
+		prerequisite = {
+			focus = EOH_establish_mining_operations
+		}
+		prerequisite = {
+			focus = EOH_a_new_home_for_the_noghri
+			focus = EOH_import_labor_1
+		}
+		search_filters = {
+		}
+		completion_reward = {
+			custom_effect_tooltip = EOH_add
+			add_to_variable = {thrawn_insights = 1}
+
+			203 = {
+				if = {
+					limit = { is_controlled_by = ROOT }
+					add_building_construction = {
+						type = industrial_complex
+						level = 1
+						instant_build = yes
+					}
+					add_building_construction = {
+						type = dockyard
+						level = 2
+						instant_build = yes
+					}
+					add_building_construction = {
+						type = arms_factory
+						level = 1
+						instant_build = yes
+					}
+					add_extra_state_shared_building_slots = 5
+				}
+			}
+			#victory point magic, buildings
+		}
+		
+	}
+	focus = {
+		id = EOH_battle_of_quethold
+		icon = GFX_thrawn_quethold
+		cost = 5
+		relative_position_id = EOH_mutual_development_assurances
+		x = 0
+		y = 1
+		prerequisite = {
+			focus = EOH_mutual_development_assurances
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			custom_effect_tooltip = EOH_add
+			add_to_variable = {thrawn_insights = 1}
+			swap_ideas = {
+				remove_idea = EOH_thrawn_unknown_regions
+				add_idea = EOH_thrawn_unknown_regions_2
+			}
+
+		}
+		
+	}
+	focus = {
+		id = EOH_the_return
+		icon = GFX_thrawn_return
+		cost = 7.2
+		relative_position_id = EOH_battle_of_quethold
+		x = 0
+		y = 1
+
+		prerequisite = {
+			focus = EOH_battle_of_quethold
+		}
+
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			custom_effect_tooltip = EOH_add
+			add_to_variable = {thrawn_insights = 1}
+			custom_effect_tooltip = EOH_add
+			add_to_variable = {thrawn_insights = 1}
+			news_event = { hours = 12 id = empnews.12 }
+			remove_ideas = EOH_thrawn_unknown_regions_2
+			remove_ideas = EOH_thrawn_guardian
+
+			#set_state_owner = 38
+		}
+	}
+
+	focus = {
+		id = EOH_revitalization_of_the_imperial_military
+		icon = GFX_thrawn_troopers
+		cost = 7.2
+		relative_position_id = EOH_the_return
+		x = -5
+		y = 2
+		prerequisite = {
+			focus = EOH_the_return
+		}
+		search_filters = {
+			FOCUS_FILTER_MILITARY
+			FOCUS_FILTER_DIPLOMACY
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			army_experience = 25
+			every_country = {
+				limit = {
+					has_government = imperial
+				}
+				add_timed_idea = {
+					idea = EOH_imperial_military_revitalization
+					days = 140
+				}
+			}
+
+		}
+		
+	}
+	focus = {
+		id = EOH_secure_the_fortress_worlds
+		icon = GFX_thrawn_fortress
+		cost = 7.2
+		relative_position_id = EOH_the_return
+		x = 0
+		y = 1
+		prerequisite = {
+			focus = EOH_the_return
+		}
+		search_filters = {
+			FOCUS_FILTER_DIPLOMACY
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			COR = {
+				if={
+					limit={
+						has_government = imperial
+					}
+					add_timed_idea = {
+						idea = EOH_support_from_thrawn
+						days = 365
+					}
+				}
+			}
+			ICO = {
+				if={
+					limit={
+						has_government = imperial
+					}
+					add_timed_idea = {
+						idea = EOH_support_from_thrawn
+						days = 365
+					}
+				}
+			}
+			EAD = {
+				if={
+					limit={
+						has_government = imperial
+					}
+					add_timed_idea = {
+						idea = EOH_support_from_thrawn
+						days = 365
+					}
+				}
+			} 
+
+		}
+		
+	}
+	focus = {
+		id = EOH_thrawns_confederation
+		icon = GFX_thrawn_confederation
+		cost = 7.2
+		relative_position_id = EOH_secure_the_fortress_worlds
+		x = 0
+		y = 1
+		prerequisite = {
+			focus = EOH_secure_the_fortress_worlds
+		}
+		search_filters = {
+			FOCUS_FILTER_DIPLOMACY
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			custom_effect_tooltip = EOH_add
+			add_to_variable = {thrawn_insights = 1}
+			create_faction = "Thrawn's Confederation"
+			every_country = {
+				limit = {
+					AND = {
+						has_government = imperial
+					}
+					
+				}
+				country_event = {
+					id = EOH.2
+				}
+			}
+
+		}
+		
+	}
+	focus = {
+		id = EOH_follow_the_emperors_trail
+		icon = GFX_thrawn_palp_behind
+		cost = 7.2
+		relative_position_id = EOH_the_return
+		x = 2
+		y = 1
+		prerequisite = {
+			focus = EOH_the_return
+		}
+		available = {
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			declare_war_on = { target = WAY    type = annex_everything }
+			177 = {
+				set_state_controller_to = EOH
+				create_unit = {
+					division = "division_template = \"Stormtrooper Regiment\" start_experience_factor = 0.23" 
+					owner = ROOT
+				}
+				create_unit = {
+					division = "division_template = \"Stormtrooper Regiment\" start_experience_factor = 0.29" 
+					owner = ROOT
+				}
+				create_unit = {
+					division = "division_template = \"Stormtrooper Regiment\" start_experience_factor = 0.26" 
+					owner = ROOT
+				}
+				create_unit = {
+					division = "division_template = \"Stormtrooper Regiment\" start_experience_factor = 0.26" 
+					owner = ROOT
+				}
+				create_unit = {
+					division = "division_template = \"Stormtrooper Regiment\" start_experience_factor = 0.26" 
+					owner = ROOT
+				}
+			}
+		}
+		
+	}
+	focus = {
+		id = EOH_the_emperors_storehouse
+		icon = GFX_thrawn_storehouse
+		cost = 7.2
+		relative_position_id = EOH_follow_the_emperors_trail
+		x = 0
+		y = 1
+		prerequisite = {
+			focus = EOH_follow_the_emperors_trail
+		}
+		available = {
+			20 = {
+				owns_or_subject_of = yes
+			}
+		}
+		search_filters = {
+			FOCUS_FILTER_RESEARCH
+		}
+		completion_reward = {
+			custom_effect_tooltip = EOH_add
+			add_to_variable = {thrawn_insights = 1}
+			add_research_slot = 1
+
+		}
+	}
+
+	#Mount Tantiss Campaign and Following
+	focus = {
+		id = EOH_mount_tantiss_campaign
+		icon = GFX_thrawn_tantiss_campaign
+		cost = 7.2
+		relative_position_id = EOH_thrawns_confederation
+		x = -3
+		y = 1
+		prerequisite = {
+			focus = EOH_revitalization_of_the_imperial_military
+		}
+		prerequisite = {
+			focus = EOH_thrawns_confederation
+		}
+		prerequisite = {
+			focus = EOH_the_emperors_storehouse
+		}
+		available = {
+			ZSJ={
+				NOT={
+					has_country_leader = {
+						character = ZSJ_zsinj
+						ruling_only = yes
+					}
+				}
+			}
+			#Zsinj war over
+		}
+		search_filters = {
+			FOCUS_FILTER_EXPANSION
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			custom_effect_tooltip = EOH_add
+			add_to_variable = {thrawn_insights = 1}
+			add_timed_idea = {
+				idea = EOH_mount_tantiss_campaign
+				days = 180
+			}
+			declare_war_on = { target = REB    type = puppet_wargoal_focus }
+
+		}
+		
+	}
+	focus = {
+		id = EOH_initial_success
+		icon = GFX_WIP_focus
+		cost = 7.2
+		relative_position_id = EOH_mount_tantiss_campaign
+		x = 0
+		y = 2
+		prerequisite = {
+			focus = EOH_mount_tantiss_campaign
+		}
+		allow_branch = {
+			always = no
+		}
+		available = {
+			#requires certain planets
+		}
+		search_filters = {
+			FOCUS_FILTER_EXPANSION
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			REB = {
+				add_war_support = -0.15
+			}
+
+		}
+		
+	}
+	focus = {
+		id = EOH_falling_republic
+		icon = GFX_WIP_focus
+		cost = 7.2
+		relative_position_id = EOH_initial_success
+		x = 0
+		y = 1
+		prerequisite = {
+			focus = EOH_initial_success
+		}
+		available = {
+			#requires certain planets
+		}
+		search_filters = {
+			FOCUS_FILTER_EXPANSION
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			REB = {
+				add_war_support = -0.15
+			}
+		}
+		
+	}
+	focus = {
+		id = EOH_deal_with_rogue_warlords
+		icon = GFX_WIP_focus
+		cost = 7.2
+		relative_position_id = EOH_falling_republic
+		x = -1
+		y = 1
+		prerequisite = {
+			focus = EOH_falling_republic
+		}
+		available = {
+		}
+		search_filters = {
+			FOCUS_FILTER_EXPANSION
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			#lose legitimacy
+			create_wargoal = {
+				type = annex_everything
+				target = ZSJ
+				expire = 0
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = ERI
+				expire = 0
+			}
+		}
+		
+	}
+	focus = {
+		id = EOH_victory_through_peace
+		icon = GFX_WIP_focus
+		cost = 7.2
+		relative_position_id = EOH_falling_republic
+		x = 1
+		y = 1
+		prerequisite = {
+			focus = EOH_falling_republic
+		}
+		available = {
+		}
+		search_filters = {
+			FOCUS_FILTER_DIPLOMACY
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			white_peace = REB
+		}
+		
+	}
+
+	#First Military Tree 
+	focus = {
+		id = EOH_traditional_warfare
+		icon = GFX_thrawn_stormtroopleft
+		cost = 7.2
+		relative_position_id = EOH_revitalization_of_the_imperial_military
+		x = 0
+		y = 2
+		prerequisite = {
+			focus = EOH_revitalization_of_the_imperial_military
+		}
+		search_filters = {
+			FOCUS_FILTER_MILITARY
+		}
+		mutually_exclusive = {
+			focus = EOH_stateless_strategy
+		}
+		completion_reward = {
+			add_ideas = EOH_traditional_warfare_1
+		}
+	}
+	focus = {
+		id = EOH_the_delta_source
+		icon = GFX_thrawn_stormtroopleft
+		cost = 7.2
+		relative_position_id = EOH_revitalization_of_the_imperial_military
+		x = -6
+		y = 1
+		prerequisite = {
+			focus = EOH_revitalization_of_the_imperial_military
+		}
+		search_filters = {
+		}
+		completion_reward = {
+		}
+	}
+	focus = {
+		id = EOH_secure_bilbringi
+		icon = GFX_thrawn_stormtroopleft
+		cost = 7.2
+		relative_position_id = EOH_revitalization_of_the_imperial_military
+		x = -4
+		y = 1
+		prerequisite = {
+			focus = EOH_revitalization_of_the_imperial_military
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+			focus = EOH_secure_the_ring_of_kafrene
+		}
+		completion_reward = {
+		}
+	}
+	focus = {
+		id = EOH_secure_the_ring_of_kafrene
+		icon = GFX_thrawn_stormtroopleft
+		cost = 7.2
+		relative_position_id = EOH_revitalization_of_the_imperial_military
+		x = -2
+		y = 1
+		prerequisite = {
+			focus = EOH_revitalization_of_the_imperial_military
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+			focus = EOH_secure_bilbringi
+		}
+		completion_reward = {
+		}
+	}
+	focus = {
+		id = EOH_the_borleias_route
+		icon = GFX_thrawn_stormtroopleft
+		cost = 7.2
+		relative_position_id = EOH_secure_bilbringi
+		x = 0
+		y = 1
+		prerequisite = {
+			focus = EOH_secure_bilbringi
+		}
+		search_filters = {
+		}
+
+		completion_reward = {
+		}
+	}
+	focus = {
+		id = EOH_secure_the_sector
+		icon = GFX_thrawn_stormtroopleft
+		cost = 7.2
+		relative_position_id = EOH_the_borleias_route
+		x = 0
+		y = 1
+		prerequisite = {
+			focus = EOH_the_borleias_route
+		}
+		search_filters = {
+		}
+
+		completion_reward = {
+		}
+	}
+	focus = {
+		id = EOH_the_bespin_route
+		icon = GFX_thrawn_stormtroopleft
+		cost = 7.2
+		relative_position_id = EOH_secure_the_ring_of_kafrene
+		x = 0
+		y = 1
+		prerequisite = {
+			focus = EOH_secure_the_ring_of_kafrene
+		}
+		search_filters = {
+		}
+
+		completion_reward = {
+		}
+	}
+	focus = {
+		id = EOH_mustafars_cache
+		icon = GFX_thrawn_stormtroopleft
+		cost = 7.2
+		relative_position_id = EOH_the_bespin_route
+		x = 0
+		y = 1
+		prerequisite = {
+			focus = EOH_the_bespin_route
+		}
+		search_filters = {
+		}
+
+		completion_reward = {
+		}
+	}
+	focus = {
+		id = EOH_the_war_of_restoration
+		icon = GFX_thrawn_stormtroopleft
+		cost = 7.2
+		relative_position_id = EOH_mustafars_cache
+		x = -1
+		y = 1
+		prerequisite = {
+			focus = EOH_mustafars_cache
+			focus = EOH_secure_the_sector
+		}
+		search_filters = {
+		}
+
+		completion_reward = {
+		}
+	}
+	focus = {
+		id = EOH_the_capital_secured
+		icon = GFX_thrawn_stormtroopleft
+		cost = 7.2
+		relative_position_id = EOH_the_war_of_restoration
+		x = 0
+		y = 1
+		prerequisite = {
+			focus = EOH_the_war_of_restoration
+		}
+		search_filters = {
+		}
+
+		completion_reward = {
+		}
+	}
+	focus = {
+		id = EOH_restore_the_empire
+		icon = GFX_thrawn_stormtroopleft
+		cost = 7.2
+		relative_position_id = EOH_the_capital_secured
+		x = 0
+		y = 1
+		prerequisite = {
+			focus = EOH_the_capital_secured
+		}
+		search_filters = {
+		}
+
+		completion_reward = {
+		}
+	}
+	focus = {
+		id = EOH_stateless_strategy
+		icon = GFX_thrawn_stateless
+		cost = 7.2
+		relative_position_id = EOH_mount_tantiss_campaign
+		x = 0
+		y = 1
+		prerequisite = {
+			focus = EOH_mount_tantiss_campaign
+		}
+		available = {
+		}
+		search_filters = {
+			FOCUS_FILTER_MILITARY
+		}
+		mutually_exclusive = {
+			focus = EOH_traditional_warfare
+		}
+		completion_reward = {
+			custom_effect_tooltip = EOH_add
+			add_to_variable = {thrawn_insights = 1}
+			add_ideas = EOH_stateless_strategy_1
+
+		}
+		
+	}
+	focus = {
+		id = EOH_the_hidden_hand
+		icon = GFX_thrawn_hidden_hand
+		cost = 7.2
+		relative_position_id = EOH_stateless_strategy
+		x = 0
+		y = 1
+		prerequisite = {
+			focus = EOH_stateless_strategy
+		}
+		available = {
+		}
+		search_filters = {
+			FOCUS_FILTER_MILITARY
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			custom_effect_tooltip = EOH_add
+			add_to_variable = {thrawn_insights = 1}
+			203 = {
+				limit = {
+					has_avaliable_building_slot = yes
+				}
+				set_temp_variable = {REQUESTED_BUILDING = token:sensor_array_1}
+				Add_building_to_slot_immediately = yes
+			}
+			swap_ideas={
+				remove_idea = EOH_stateless_strategy_1
+				add_idea = EOH_stateless_strategy_2
+			}
+
+		}
+		
+	}
+	focus = {
+		id = EOH_skillful_officers
+		icon = GFX_thrawn_officer
+		cost = 7.2
+		relative_position_id = EOH_traditional_warfare
+		x = 0
+		y = 1
+		available = {
+			EOH = {
+				has_completed_focus = EOH_traditional_warfare
+			}
+		}
+		prerequisite = {
+			focus = EOH_traditional_warfare
+		}
+		available = {
+		}
+		search_filters = {
+			FOCUS_FILTER_MILITARY
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			swap_ideas={
+				remove_idea = EOH_traditional_warfare_1
+				add_idea = EOH_traditional_warfare_2
+			}
+		}
+		
+	}
+
+	#Espionage Tree
+	focus = {
+		id = EOH_delta_source
+		icon = GFX_WIP_focus
+		cost = 7.2
+		relative_position_id = EOH_revitalization_of_the_imperial_military
+		x = -5
+		y = 1
+		allow_branch = {
+			always = no
+		}
+		available = {
+			OR = {
+				EOH = {
+					has_completed_focus = EOH_revitalization_of_the_imperial_military
+				}
+				EOH = {
+					has_completed_focus = EOH_mount_tantiss_campaign
+				}
+			}
+		}
+		prerequisite = {
+			focus = EOH_revitalization_of_the_imperial_military
+		}
+		available = {
+		}
+		search_filters = {
+			FOCUS_FILTER_ESPIONAGE
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			add_ideas = EOH_delta_source
+
+		}
+		
+	}
+	focus = {
+		id = EOH_frame_calrissian
+		icon = GFX_WIP_focus
+		cost = 5
+		relative_position_id = EOH_delta_source
+		x = -1
+		y = 1
+		prerequisite = {
+			focus = EOH_delta_source
+		}
+		available = {
+		}
+		search_filters = {
+			FOCUS_FILTER_ESPIONAGE
+		}
+		mutually_exclusive = {
+			focus = EOH_frame_ackbar
+		}
+		completion_reward = {
+			REB = {
+				#country_event = { id = reb_calrissian_framed }
+			}
+		}
+		
+	}
+	focus = {
+		id = EOH_frame_ackbar
+		icon = GFX_WIP_focus
+		cost = 5
+		relative_position_id = EOH_delta_source
+		x = 1
+		y = 1
+		prerequisite = {
+			focus = EOH_delta_source
+		}
+		available = {
+		}
+		search_filters = {
+			FOCUS_FILTER_ESPIONAGE
+		}
+		mutually_exclusive = {
+			focus = EOH_frame_calrissian
+		}
+		completion_reward = {
+			REB = {
+				#country_event = { id = reb_ackbar_framed }
+			}
+		}
+		
+	}
+	focus = {
+		id = EOH_sources_in_civilian_government
+		icon = GFX_WIP_focus
+		cost = 5
+		relative_position_id = EOH_frame_ackbar
+		x = 0
+		y = 2
+		available = {
+			EOH = {
+				has_completed_focus = EOH_delta_source
+			}
+		}
+		prerequisite = {
+			focus = EOH_frame_ackbar
+			focus = EOH_frame_calrissian
+		}
+		available = {
+		}
+		search_filters = {
+			FOCUS_FILTER_ESPIONAGE
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			#idk
+		}
+		
+	}
+	focus = {
+		id = EOH_the_question_of_protection
+		icon = GFX_WIP_focus
+		cost = 7.2
+		relative_position_id = EOH_frame_calrissian
+		x = 0
+		y = 2
+		available = {
+			EOH = {
+				has_completed_focus = EOH_delta_source
+			}
+		}
+		prerequisite = {
+			focus = EOH_frame_calrissian
+			focus = EOH_frame_ackbar
+		}
+		available = {
+		}
+		search_filters = {
+			FOCUS_FILTER_ESPIONAGE
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			#gets rid of noghri bodyguards, reducing chance of thrawn dying
+		}
+		
+	}
+	focus = {
+		id = EOH_discipline_and_self_defence
+		icon = GFX_WIP_focus
+		cost = 7.2
+		relative_position_id = EOH_the_question_of_protection
+		x = 0
+		y = 1
+		prerequisite = {
+			focus = EOH_the_question_of_protection
+		}
+		available = {
+		}
+		search_filters = {
+			FOCUS_FILTER_ESPIONAGE
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			#further decreases chance of thrawn's death
+		}
+		
+	}
+
+	#Research Tree
+	focus = {
+		id = EOH_hidden_weapons
+		icon = GFX_WIP_focus
+		cost = 7.2
+		relative_position_id = EOH_the_emperors_storehouse
+		x = -2
+		y = 1
+		prerequisite = {
+			focus = EOH_the_emperors_storehouse
+		}
+		search_filters = {
+			FOCUS_FILTER_RESEARCH
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			add_tech_bonus = {
+				name = infantry_bonus
+				bonus = 0.5
+				ahead_reduction = 2
+				uses = 2
+				category = infantry_tech
+				category = infantry_weapons
+			}
+		}
+		
+	}
+	focus = {
+		id = EOH_hidden_blueprints
+		icon = GFX_WIP_focus
+		cost = 7.2
+		relative_position_id = EOH_the_emperors_storehouse
+		x = 2
+		y = 1
+		prerequisite = {
+			focus = EOH_the_emperors_storehouse
+		}
+		search_filters = {
+			FOCUS_FILTER_RESEARCH
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			add_tech_bonus = {
+				name = engineering_construction_bonus
+				bonus = 0.5
+				ahead_reduction = 2
+				uses = 2
+				category = industry
+				category = electronics
+			}
+		}
+		
+	}
+	focus = {
+		id = EOH_cloning_on_nirauan
+		icon = GFX_thrawn_nirauan_cloning
+		cost = 7.2
+		relative_position_id = EOH_the_emperors_storehouse
+		x = 0
+		y = 1
+		prerequisite = {
+			focus = EOH_the_emperors_storehouse
+		}
+		available = {
+		}
+		search_filters = {
+			FOCUS_FILTER_RESEARCH
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			custom_effect_tooltip = EOH_future_tt
+			##add_tech_bonus = {
+				##name = infantry_bonus
+				##bonus = 1
+				##uses = 2
+				##category = cloning
+			##}
+			##Cloning research bonus
+		}
+	}
+	focus = {
+		id = EOH_the_template
+		icon = GFX_thrawn_nirauan_cloning
+		cost = 7.2
+		relative_position_id = EOH_cloning_on_nirauan
+		x = 1
+		y = 1
+		prerequisite = {
+			focus = EOH_cloning_on_nirauan
+		}
+		available = {
+		}
+		search_filters = {
+			FOCUS_FILTER_RESEARCH
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+
+		}
+	}
+	focus = {
+		id = EOH_soontir_fell
+		icon = GFX_thrawn_nirauan_cloning
+		cost = 7.2
+		relative_position_id = EOH_the_template
+		x = -2
+		y = 1
+		prerequisite = {
+			focus = EOH_the_template
+		}
+		available = {
+		}
+		search_filters = {
+			FOCUS_FILTER_RESEARCH
+		}
+		mutually_exclusive = {
+			focus = EOH_sift_through_the_ranks
+			focus = EOH_a_new_phalanx
+		}
+		completion_reward = {
+
+		}
+	}
+	focus = {
+		id = EOH_sift_through_the_ranks
+		icon = GFX_thrawn_nirauan_cloning
+		cost = 7.2
+		relative_position_id = EOH_the_template
+		x = 0
+		y = 1
+		prerequisite = {
+			focus = EOH_the_template
+		}
+		available = {
+		}
+		search_filters = {
+			FOCUS_FILTER_RESEARCH
+		}
+		mutually_exclusive = {
+			focus = EOH_soontir_fell
+			focus = EOH_a_new_phalanx
+		}
+		completion_reward = {
+
+		}
+	}
+	focus = {
+		id = EOH_a_new_phalanx
+		icon = GFX_thrawn_nirauan_cloning
+		cost = 7.2
+		relative_position_id = EOH_the_template
+		x = 2
+		y = 1
+		prerequisite = {
+			focus = EOH_the_template
+		}
+		available = {
+		}
+		search_filters = {
+			FOCUS_FILTER_RESEARCH
+		}
+		mutually_exclusive = {
+			focus = EOH_soontir_fell
+			focus = EOH_sift_through_the_ranks
+		}
+		completion_reward = {
+
+		}
+	}
+	focus = {
+		id = EOH_reopen_the_facility
+		icon = GFX_thrawn_thrawn_tube
+		cost = 7.2
+		relative_position_id = EOH_cloning_on_nirauan
+		x = -3
+		y = 1
+		prerequisite = {
+			focus = EOH_cloning_on_nirauan
+		}
+		available = {
+			#Thrawn hasn't died
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			custom_effect_tooltip = EOH_future_tt
+			#starts cloning thrawn
+		}
+		
+	}
+	focus = {
+		id = EOH_plan_b
+		icon = GFX_thrawn_thrawn_tube
+		cost = 7.2
+		relative_position_id = EOH_reopen_the_facility
+		x = 0
+		y = 1
+		prerequisite = {
+			focus = EOH_reopen_the_facility
+		}
+		available = {
+			#Thrawn hasn't died
+		}
+		search_filters = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			custom_effect_tooltip = EOH_future_tt
+			#starts cloning thrawn
+		}
+		
+	}
+	focus = {
+		id = EOH_new_age_imperial_starships
+		icon = GFX_thrawn_imperial_ships
+		cost = 5
+		relative_position_id = EOH_the_emperors_storehouse
+		x = 5
+		y = 1
+		prerequisite = {
+			focus = EOH_the_emperors_storehouse
+		}
+		available = {
+		}
+		search_filters = {
+			FOCUS_FILTER_RESEARCH
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			add_tech_bonus = {
+				name = infantry_bonus
+				ahead_reduction = 2
+				uses = 2
+				category = ship_modules_tech
+				category = naval_equipment
+			}
+
+		}
+		
+	}
+	focus = {
+		id = EOH_new_age_imperial_shipyards
+		icon = GFX_thrawn_imperial_shipyards
+		cost = 5
+		relative_position_id = EOH_new_age_imperial_starships
+		x = 0
+		y = 1
+		prerequisite = {
+			focus = EOH_new_age_imperial_starships
+		}
+		available = {
+		}
+		search_filters = {
+			FOCUS_FILTER_INDUSTRY
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			186 = {
+				limit = {
+					has_avaliable_building_slot = yes
+				}
+				set_temp_variable = {REQUESTED_BUILDING = token:medium_shipyard_1}
+				Add_building_to_slot_immediately = yes
+			}
+			25 = {
+				limit = {
+					has_avaliable_building_slot = yes
+				}
+				set_temp_variable = {REQUESTED_BUILDING = token:light_shipyard_2}
+				Add_building_to_slot_immediately = yes
+			}
+		}
+		
+	}
+
+	focus = {
+		id = EOH_new_imperial_frontier
+		icon = GFX_thrawn_frontier
+		cost = 5
+		relative_position_id = EOH_new_age_imperial_shipyards
+		x = 0
+		y = 1
+		prerequisite = {
+			focus = EOH_new_age_imperial_shipyards
+		}
+		available = {
+			#Owns or allied to chiss planets
+		}
+		search_filters = {
+			FOCUS_FILTER_INDUSTRY
+			FOCUS_FILTER_DIPLOMACY
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			37 = {
+				limit = {
+					has_avaliable_building_slot = yes
+				}
+				set_temp_variable = {REQUESTED_BUILDING = token:soft_arms_factory_1}
+				Add_building_to_slot_immediately = yes
+			}
+			44 = {
+				limit = {
+					has_avaliable_building_slot = yes
+				}
+				set_temp_variable = {REQUESTED_BUILDING = token:tank_factory_1}
+				Add_building_to_slot_immediately = yes
+			}
+			51 = {
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+				add_extra_state_shared_building_slots = 2
+			}
+		}
+	}
+}

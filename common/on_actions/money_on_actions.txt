@@ -2,8 +2,12 @@ on_actions = {
 	on_startup = {
 		effect = {
 			every_country={
+
 				set_variable = { debttotal = 0}
+		# GDP Calculation Beginning
 				add_to_array = { global.all_countries_gdp = THIS.id }
+		
+		# Economy Modifiers
 		#	set_variable = { mil_spending_multip = 1 }
 		#	set_variable = { education_spending_multip = 1 }
 		#	set_variable = { social_spending_multip = 1 }
@@ -13,6 +17,7 @@ on_actions = {
 			set_variable = { resource_income_modifier = 1 }
 			set_variable = { resource_expense_modifier = 1 }
 			}
+			# Bank Imterest Rates and Investment Rates
 			set_variable = { Global.ibc_interest_loan = 0.007 }
 			set_variable = { Global.bank_of_core_loan = 0.009 }
 			set_variable = { Global.bank_of_aargau_loan = 0.006 }
@@ -22,9 +27,9 @@ on_actions = {
 			set_variable = { Global.bank_of_aargau_investment = 0.002 }
 		}
 	}
-	#on_state_control_changed = { 
+	#on_state_control_changed = {
 	#	effect = {
-	#	#These distinguish planetside vs space states so people dont get money from tax on hyperspace lanes 
+	#	#These distinguish planetside vs space states so people dont get money from tax on hyperspace lanes
 	#	#using a state flag set on space states
 	#		IF = {
 	#			limit = {
@@ -41,8 +46,8 @@ on_actions = {
 	#				add_to_variable = {  num_of_controlled_planets  = -1 }
 	#			}
 	#		}
-	#	}  
-	#}	
+	#	}
+	#}
 	on_daily = {
 		effect = {
 		#Every day the income from resources and all expenses are deleted and recalculated
@@ -92,12 +97,12 @@ on_actions = {
 			divide_variable = { navf = 20 }
 
 
-			set_variable = { bio_maintenace_cal = bio_maintenace }
-			set_variable = { space_maintenace_cal = space_maintenace }
-			multiply_variable = { bio_maintenace_cal = 3 }
-			multiply_variable = { space_maintenace_cal = 4 }
-			add_to_variable = { bio_maintenace_cal = allexpenses }
-			add_to_variable = { space_maintenace_cal = allexpenses }
+			#set_variable = { bio_maintenace_cal = bio_maintenace }
+			# set_variable = { space_maintenace_cal = space_maintenace }
+			# multiply_variable = { bio_maintenace_cal = 3 }
+			# multiply_variable = { space_maintenace_cal = 4 }
+			# add_to_variable = { bio_maintenace_cal = allexpenses }
+			# add_to_variable = { space_maintenace_cal = allexpenses }
 
 
 		#These variables define themselves as equal to the number of the respective resource export
@@ -117,6 +122,7 @@ on_actions = {
 			set_variable = { investment_income = 0 }
 			set_variable = { interest_payments = 0 }
 			
+			# Debt and Investment Calculations
 			set_variable = { ibc_debt_calc = ibc_debt }
 			set_temp_variable = { ibc_interest = Global.ibc_interest_loan }
 			multiply_variable = { ibc_debt_calc = ibc_interest }
@@ -148,13 +154,14 @@ on_actions = {
 			add_to_variable = { investment_income = bank_of_aargau_investment_calc_invest }
 
 
+			# Debt if you want a universal one
 
 			#set_variable = { debtexp = debttotal }
 			#multiply_variable = { debtexp = Global.interest_rate }
 			#divide_variable = { debtexp = 1000 }
 			#add_to_variable = { Global.debtexp = debtexp }
 
-
+			# GDP Calculations
 			clear_array = Global.nation_list
 			clear_array = Global.nation_debt_list
 			clear_array = Global.nation_debt_monthly_list
@@ -209,6 +216,8 @@ on_actions = {
 			set_temp_variable = { mil_factory_modifier = modifier@mil_factory_cost_modifier }
 			add_to_temp_variable = { mil_factory_cost_modifier = 1 }
 			multiply_variable = { nf = mil_factory_cost_modifier }
+
+			### Country Specific Modifiers ####
 			if = {
 				limit = {
 					has_country_flag = corruption_lvl_2
@@ -312,7 +321,7 @@ on_actions = {
 			add_to_variable = { nmn = resourceincome }
 			add_to_variable = { nmn = cfff }
 			add_to_variable = { nmn = investment_income }
-			### BUILDING INCOME ###
+			### BUILDING INCOME ### Remove if not using Building System
 			add_to_variable = { nmn = building_income }
 
 			if = {
@@ -327,8 +336,9 @@ on_actions = {
 
 			set_variable = { overcome = nmn }
 
+			# Sets to the Primary Currency of the country
 			add_to_variable = { currency_amount^primary_currency = nmn  }
-			
+
 			add_to_variable = { money_loc = 1 }
 
 			if = {
@@ -362,6 +372,8 @@ on_actions = {
 			#set_temp_variable = { droid_ = 0 }
 
 			#add_to_temp_variable = { droid_temp = num_equipment_in_armies@battle_droid }
+
+			# Upkeep for specific battalion types
 
 			add_to_temp_variable = { militia_upkeep_temp = num_battalions_with_type@bith }
 			add_to_temp_variable = { militia_upkeep_temp = num_battalions_with_type@chiss }
@@ -414,6 +426,7 @@ on_actions = {
 	}
 	on_monthly = {
 		effect = {
+			# Determines when a country is getting close to going bankrupt and starts triggering a decision
 			set_variable = { debt_limit = 0}
 			add_to_variable = { debt_limit = tax }
 			add_to_variable = { debt_limit = resourceincome }
