@@ -1,47 +1,5 @@
 scripted_gui = {
-	espionage_screen = {
-		context_type = player_context
-		window_name = "espionage_screen"
-		parent_window_name = countryintelligenceagencyview
-		visible = {
-            always = no
-		}
-		effects = {
-			guild_button_click = {
-				set_country_flag = guilds_open
-				clr_country_flag = operations_open
-			}
-			operations_button_click = {
-				set_country_flag = operations_open
-				clr_country_flag = guilds_open
-				clear_side_guild_screen_flags = yes
-			}
-			duel_button_click = {
-				clear_side_guild_screen_flags = yes
-				if = {
-					limit = {
-						has_country_flag = duel_interface_open
-					}
-					clr_country_flag = duel_interface_open
-				}else = {
-					set_country_flag = duel_interface_open
-				}
-			}
 
-		}
-		triggers = {
-			guild_button_click_enabled = {
-				NOT = {
-					has_country_flag = guilds_open
-				}
-			}
-			operations_button_click_enabled = {
-				NOT = {
-					has_country_flag = operations_open
-				}
-			}
-		}
-	}
 	# guild_screen = {
 	# 	context_type = player_context
 	# 	window_name = "guild_screen"
