@@ -262,6 +262,8 @@ focus_tree = {
 			ROOT = {
 				add_stability = 0.01
 				add_war_support = 0.03
+				recruit_character = PRO_koska_reeves
+				recruit_character = PRO_axe_woves
 			}
 		}
 	}
@@ -275,11 +277,15 @@ focus_tree = {
 		cost = 5
 		ai_will_do = { factor = 1 }
 		completion_reward = {
-			26 = {
-				add_extra_state_shared_building_slots = 2
+			512 = {
+				limit = {
+					has_avaliable_building_slot = yes
+				}
+				set_temp_variable = {REQUESTED_BUILDING = token:arms_factory_1}
+				Add_building_to_slot_immediately = yes
 				add_building_construction = {
-					type = arms_factory
-					level = 2
+					type = infrastructure
+					level = 1
 					instant_build = yes
 				}
 			}
@@ -628,6 +634,7 @@ focus_tree = {
 		cost = 5
 		ai_will_do = { factor = 1 }
 		completion_reward = {
+			air_experience = 35
 		}
 	}
 	focus = {
@@ -737,6 +744,7 @@ focus_tree = {
 		cost = 5
 		ai_will_do = { factor = 1 }
 		completion_reward = {
+			navy_experience = 35
 		}
 	}
 	focus = {
@@ -1037,6 +1045,14 @@ focus_tree = {
 			PRO_bo_katan_kryze = { 
 				retire = yes 
 			}
+			PRO_axe_woves = { 
+				retire = yes 
+			}
+			PRO_koska_reeves = { 
+				retire = yes 
+			}
+			recruit_character = PRO_paz_vizsla
+			recruit_character = PRO_the_armorer
 		}
 	}
 	focus = {
@@ -1065,8 +1081,7 @@ focus_tree = {
 	####### Mandalore Reconquered
 	focus = {
 		id = PRO_Reinvent_The_Wheel
-		icon = GFX_generic_suspend_constitution
-		mutually_exclusive = { focus = PRO_Preserve_Mandalorian_Culture }
+		icon = GFX_PRO_Reinvent_The_Wheel
 		x = 29
 		y = 13
 		cost = 5
@@ -1087,7 +1102,7 @@ focus_tree = {
 	}
 	focus = {
 		id = PRO_Welcome_Home_Mandalmotors
-		icon = GFX_generic_suspend_constitution
+		icon = GFX_PRO_Welcome_Home_Mandalmotors
 		prerequisite = { focus = PRO_Reinvent_The_Wheel }
 		relative_position_id = PRO_Reinvent_The_Wheel	
 		x = 0
@@ -1103,7 +1118,7 @@ focus_tree = {
 	}
 	focus = {
 		id = PRO_Restore_The_Mandalorian_Shipyards
-		icon = GFX_generic_suspend_constitution
+		icon = GFX_PRO_Restore_The_Mandalorian_Shipyards
 		prerequisite = { focus = PRO_Welcome_Home_Mandalmotors }
 		relative_position_id = PRO_Welcome_Home_Mandalmotors	
 		x = 0
@@ -1138,7 +1153,7 @@ focus_tree = {
 	}
 	focus = {
 		id = PRO_Kandosi_Drednoughts
-		icon = GFX_generic_suspend_constitution
+		icon = GFX_PRO_Kandosi_Drednoughts
 		prerequisite = { focus = PRO_Restore_The_Mandalorian_Shipyards }
 		relative_position_id = PRO_Restore_The_Mandalorian_Shipyards	
 		x = -1
@@ -1157,7 +1172,7 @@ focus_tree = {
 	}
 	focus = {
 		id = PRO_Mandalorian_Capital_Ships
-		icon = GFX_generic_suspend_constitution
+		icon = GFX_PRO_Mandalorian_Capital_Ships
 		prerequisite = { focus = PRO_Kandosi_Drednoughts }
 		prerequisite = { focus = PRO_Mandalorian_Picket_Ships }
 		relative_position_id = PRO_Kandosi_Drednoughts	
@@ -1833,9 +1848,9 @@ focus_tree = {
 					instant_build = yes
 				}
 				add_manpower = -5400
-				add_stability = 0.04
-				add_war_support = 0.06
 			}
+			add_stability = 0.04
+			add_war_support = 0.06
 		}
 	}
 	focus = {
@@ -1875,6 +1890,19 @@ focus_tree = {
 		completion_reward = {
 			add_to_variable = { beskar = 200 }
 			custom_effect_tooltip = PRO_the_ore_of_our_people_small_effect
+			26 = {
+				limit = {
+					has_avaliable_building_slot = yes
+				}
+				set_temp_variable = {REQUESTED_BUILDING = token:trade_complex_1}
+				Add_building_to_slot_immediately = yes
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+				add_extra_state_shared_building_slots = 1
+			}
 			26 = {
 				add_resource = {
 					type = rubber
