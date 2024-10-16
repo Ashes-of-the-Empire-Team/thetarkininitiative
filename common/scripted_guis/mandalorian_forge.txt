@@ -61,7 +61,14 @@ scripted_gui = {
 				}
 			}
 			craft_armour_click = {
-				activate_decision = forging_armour_mission_2
+				if = {
+					limit = {
+						set_temp_variable = { temp_cost = armour_cost }
+						subtract_from_temp_variabletemp = { temp_cost = 1 }
+						check_variable = { beskar > temp_cost }
+					}
+					activate_decision = forging_armour_mission_2
+				}
 			}
 		}
 		triggers = {
