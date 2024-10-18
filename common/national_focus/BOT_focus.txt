@@ -21,6 +21,23 @@ focus_tree = {
 	shared_focus = REB_the_first_chief_of_state
 	
 	focus = {
+		id = BOT_councillor_of_all_bothans
+		icon = GFX_BOT_feylya
+		cost = 2.9
+		x = 11
+		y = 0
+		ai_will_do = {
+			factor = 1
+		}
+		completion_reward = {
+			add_trait = {
+				trait = egotistical
+			}
+			country_event = {id=BOT.2}
+		}
+	}
+
+	focus = {
 		id = BOT_many_bothans_died
 		icon = GFX_BOT_bothans_died
 		cost = 2.9
@@ -36,7 +53,7 @@ focus_tree = {
 		relative_position_id = BOT_councillor_of_all_bothans
 		prerequisite = { focus = BOT_councillor_of_all_bothans }
 	}
-	
+
 	focus = {
 		id = BOT_the_spynet
 		icon = GFX_BOT_spynet
@@ -117,6 +134,25 @@ focus_tree = {
 		prerequisite = { focus = BOT_many_bothans_died }
 		mutually_exclusive = { focus = BOT_liberate_the_outer_rim }
 	}
+
+	focus = {
+		id = BOT_master_manipulators
+		icon = GFX_BOT_master_maniupluaters
+		cost = 7.2
+		x = 0
+		y = 1
+		ai_will_do = {
+			factor = 1
+		}
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = BOT_spynet_improvements_1
+				add_idea = BOT_spynet_improvements_2
+			}
+		}
+		relative_position_id = BOT_secret_codes
+		prerequisite = { focus = BOT_secret_codes }
+	}
 	
 	focus = {
 		id = BOT_combat_training
@@ -135,25 +171,6 @@ focus_tree = {
 		}
 		relative_position_id = BOT_master_manipulators
 		prerequisite = { focus = BOT_master_manipulators }
-	}
-	
-	focus = {
-		id = BOT_master_manipulators
-		icon = GFX_BOT_master_maniupluaters
-		cost = 7.2
-		x = 0
-		y = 1
-		ai_will_do = {
-			factor = 1
-		}
-		completion_reward = {
-			swap_ideas = {
-				remove_idea = BOT_spynet_improvements_1
-				add_idea = BOT_spynet_improvements_2
-			}
-		}
-		relative_position_id = BOT_secret_codes
-		prerequisite = { focus = BOT_secret_codes }
 	}
 	
 	focus = {
@@ -240,23 +257,6 @@ focus_tree = {
 		mutually_exclusive = { 
 			focus = BOT_clan_takeovers 
 			focus = BOT_checks_and_balances
-		}
-	}
-	
-	focus = {
-		id = BOT_councillor_of_all_bothans
-		icon = GFX_BOT_feylya
-		cost = 2.9
-		x = 11
-		y = 0
-		ai_will_do = {
-			factor = 1
-		}
-		completion_reward = {
-			add_trait = {
-				trait = egotistical
-			}
-			country_event = {id=BOT.2}
 		}
 	}
 	
@@ -644,6 +644,40 @@ focus_tree = {
 			focus = BOT_equality
 		}
 	}
+
+	focus = {
+		id = BOT_secure_clan_ilya
+		icon = GFX_bothan_goal
+		cost = 7.2
+		x = 0
+		y = 1
+		available = {
+			has_civil_war = no
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		allow_branch = {
+			has_completed_focus = BOT_clan_takeovers
+		}
+		completion_reward = {
+			#tooltip (our friends)
+			custom_effect_tooltip = minus50credits_tt
+			subtract_from_variable = { currency_amount^primary_currency = 50 }
+			478 = {
+				if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_8}}remove_dynamic_modifier = {modifier = BOT_ignored_8}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_7}}remove_dynamic_modifier = {modifier = BOT_ignored_7}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_6}}remove_dynamic_modifier = {modifier = BOT_ignored_6}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_5}}remove_dynamic_modifier = {modifier = BOT_ignored_5}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_4}}remove_dynamic_modifier = {modifier = BOT_ignored_4}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_3}}remove_dynamic_modifier = {modifier = BOT_ignored_3}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_2}}remove_dynamic_modifier = {modifier = BOT_ignored_2}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_1}}remove_dynamic_modifier = {modifier = BOT_ignored_1}}
+            }
+		}
+		relative_position_id = BOT_clan_takeovers
+		prerequisite = { focus = BOT_clan_takeovers }
+	}
 	
 	focus = {
 		id = BOT_crush_clan_askar
@@ -723,93 +757,7 @@ focus_tree = {
 		prerequisite = { focus = BOT_secure_clan_ilya }
 		mutually_exclusive = { focus = BOT_crush_clan_ojia }
 	}
-	
-	focus = {
-		id = BOT_secure_clan_ilya
-		icon = GFX_bothan_goal
-		cost = 7.2
-		x = 0
-		y = 1
-		available = {
-			has_civil_war = no
-		}
-		ai_will_do = {
-			factor = 1
-		}
-		allow_branch = {
-			has_completed_focus = BOT_clan_takeovers
-		}
-		completion_reward = {
-			#tooltip (our friends)
-			custom_effect_tooltip = minus50credits_tt
-			subtract_from_variable = { currency_amount^primary_currency = 50 }
-			478 = {
-				if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_8}}remove_dynamic_modifier = {modifier = BOT_ignored_8}}
-                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_7}}remove_dynamic_modifier = {modifier = BOT_ignored_7}}
-                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_6}}remove_dynamic_modifier = {modifier = BOT_ignored_6}}
-                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_5}}remove_dynamic_modifier = {modifier = BOT_ignored_5}}
-                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_4}}remove_dynamic_modifier = {modifier = BOT_ignored_4}}
-                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_3}}remove_dynamic_modifier = {modifier = BOT_ignored_3}}
-                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_2}}remove_dynamic_modifier = {modifier = BOT_ignored_2}}
-                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_1}}remove_dynamic_modifier = {modifier = BOT_ignored_1}}
-            }
-		}
-		relative_position_id = BOT_clan_takeovers
-		prerequisite = { focus = BOT_clan_takeovers }
-	}
-	
-	focus = {
-		id = BOT_crush_clan_onel
-		icon = GFX_bothan_goal
-		cost = 7.2
-		x = 0
-		y = 1
-		available = {
-			has_civil_war = no
-		}
-		ai_will_do = {
-			factor = 1
-		}
-		mutually_exclusive = {
-			focus = BOT_crush_clan_nial
-		}
-		completion_reward = {
-			#tooltip (onel rebels, nial pacified)
-			start_civil_war = {
-				ideology = neutrality
-				size = 0.2
-				states = {
-					377
-				}
-			}
-			377 = {
-                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_8}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_8}}}
-                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_7}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_7}}}
-                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_6}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_6}}}
-                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_5}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_5}}}
-				if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_4}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_4}}}
-                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_3}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_3}}}
-                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_2}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_2}}}
-                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_1}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_1}}}
-				add_dynamic_modifier = {
-					modifier = BOT_ignored_4
-				}
-            }
-			479 = {
-                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_8}}remove_dynamic_modifier = {modifier = BOT_ignored_8}}
-                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_7}}remove_dynamic_modifier = {modifier = BOT_ignored_7}}
-                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_6}}remove_dynamic_modifier = {modifier = BOT_ignored_6}}
-                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_5}}remove_dynamic_modifier = {modifier = BOT_ignored_5}}
-				if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_4}}remove_dynamic_modifier = {modifier = BOT_ignored_4}}
-                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_3}}remove_dynamic_modifier = {modifier = BOT_ignored_3}}
-                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_2}}remove_dynamic_modifier = {modifier = BOT_ignored_2}}
-                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_1}}remove_dynamic_modifier = {modifier = BOT_ignored_1}}
-            }
-		}
-		relative_position_id = BOT_crush_clan_ojia
-		prerequisite = { focus = BOT_crush_clan_ojia focus = BOT_crush_clan_askar }
-	}
-	
+
 	focus = {
 		id = BOT_crush_clan_ojia
 		icon = GFX_bothan_goal
@@ -900,6 +848,58 @@ focus_tree = {
 		relative_position_id = BOT_secure_clan_ilya
 		prerequisite = { focus = BOT_secure_clan_ilya }
 		mutually_exclusive = { focus = BOT_crush_clan_askar }
+	}
+	
+	focus = {
+		id = BOT_crush_clan_onel
+		icon = GFX_bothan_goal
+		cost = 7.2
+		x = 0
+		y = 1
+		available = {
+			has_civil_war = no
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		mutually_exclusive = {
+			focus = BOT_crush_clan_nial
+		}
+		completion_reward = {
+			#tooltip (onel rebels, nial pacified)
+			start_civil_war = {
+				ideology = neutrality
+				size = 0.2
+				states = {
+					377
+				}
+			}
+			377 = {
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_8}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_8}}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_7}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_7}}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_6}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_6}}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_5}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_5}}}
+				if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_4}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_4}}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_3}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_3}}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_2}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_2}}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_1}}hidden_effect={remove_dynamic_modifier = {modifier = BOT_ignored_1}}}
+				add_dynamic_modifier = {
+					modifier = BOT_ignored_4
+				}
+            }
+			479 = {
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_8}}remove_dynamic_modifier = {modifier = BOT_ignored_8}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_7}}remove_dynamic_modifier = {modifier = BOT_ignored_7}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_6}}remove_dynamic_modifier = {modifier = BOT_ignored_6}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_5}}remove_dynamic_modifier = {modifier = BOT_ignored_5}}
+				if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_4}}remove_dynamic_modifier = {modifier = BOT_ignored_4}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_3}}remove_dynamic_modifier = {modifier = BOT_ignored_3}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_2}}remove_dynamic_modifier = {modifier = BOT_ignored_2}}
+                if = {limit = {has_dynamic_modifier = {modifier = BOT_ignored_1}}remove_dynamic_modifier = {modifier = BOT_ignored_1}}
+            }
+		}
+		relative_position_id = BOT_crush_clan_ojia
+		prerequisite = { focus = BOT_crush_clan_ojia focus = BOT_crush_clan_askar }
 	}
 	
 	focus = {
@@ -1583,6 +1583,23 @@ focus_tree = {
 	}
 	
 	focus = {
+		id = BOT_the_new_republic_nuisance
+		icon = GFX_bothan_goal
+		cost = 7.2
+		x = -2
+		y = 1
+		ai_will_do = {
+			factor = 1
+		}
+		completion_reward = {
+			custom_effect_tooltip = BOT_future_tt
+		}
+		relative_position_id = BOT_the_intelligence_committee
+		prerequisite = { focus = BOT_the_intelligence_committee }
+		mutually_exclusive = { focus = BOT_loyal_to_mothma }
+	}
+
+	focus = {
 		id = BOT_antagonize_ackbar
 		icon = GFX_bothan_goal
 		cost = 7.2
@@ -1601,23 +1618,6 @@ focus_tree = {
 		}
 		relative_position_id = BOT_the_new_republic_nuisance
 		prerequisite = { focus = BOT_the_new_republic_nuisance }
-	}
-	
-	focus = {
-		id = BOT_the_new_republic_nuisance
-		icon = GFX_bothan_goal
-		cost = 7.2
-		x = -2
-		y = 1
-		ai_will_do = {
-			factor = 1
-		}
-		completion_reward = {
-			custom_effect_tooltip = BOT_future_tt
-		}
-		relative_position_id = BOT_the_intelligence_committee
-		prerequisite = { focus = BOT_the_intelligence_committee }
-		mutually_exclusive = { focus = BOT_loyal_to_mothma }
 	}
 	
 	focus = {
@@ -1764,31 +1764,6 @@ focus_tree = {
 	}
 	
 	focus = {
-		id = BOT_compete_with_the_mon_cala
-		icon = GFX_BOT_compete_with_mon_cala
-		cost = 7.2
-		x = 1
-		y = 1
-		ai_will_do = {
-			factor = 1
-		}
-		mutually_exclusive = {
-			focus = BOT_novel_land_techniques
-		}
-		completion_reward = {
-			add_tech_bonus = {
-				name = navy_doctrine_bonus
-				bonus = 1
-				uses = 2
-				category = naval_doctrine
-				category = air_doctrine
-			}
-		}
-		relative_position_id = BOT_feyla_doctrine
-		prerequisite = { focus = BOT_feyla_doctrine }
-	}
-	
-	focus = {
 		id = BOT_feyla_doctrine
 		icon = GFX_BOT_feyla_doctrine
 		cost = 2.9
@@ -1813,6 +1788,31 @@ focus_tree = {
 		relative_position_id = BOT_new_academies
 		prerequisite = { focus = BOT_new_academies }
 		prerequisite = { focus = BOT_bothawui_ascendant }
+	}
+
+	focus = {
+		id = BOT_compete_with_the_mon_cala
+		icon = GFX_BOT_compete_with_mon_cala
+		cost = 7.2
+		x = 1
+		y = 1
+		ai_will_do = {
+			factor = 1
+		}
+		mutually_exclusive = {
+			focus = BOT_novel_land_techniques
+		}
+		completion_reward = {
+			add_tech_bonus = {
+				name = navy_doctrine_bonus
+				bonus = 1
+				uses = 2
+				category = naval_doctrine
+				category = air_doctrine
+			}
+		}
+		relative_position_id = BOT_feyla_doctrine
+		prerequisite = { focus = BOT_feyla_doctrine }
 	}
 	
 	focus = {
