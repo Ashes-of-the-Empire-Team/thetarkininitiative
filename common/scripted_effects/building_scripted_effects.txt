@@ -139,6 +139,476 @@ Add_building_to_slot_immediately = { ## THIS ADDS BUILDINGS FOR FREE AND IMMEDIA
 # 	Add_building_to_slot_immediately = yes
 # }
 
+####################### UPGRADE MANAGER #######################, DESIGNED FOR DEVS, DO NOT USE THIS FOR WONDERS
+
+## INPUT INTO THIS EFFECT WILL LOOK LIKE THIS
+# set_temp_variable = {desired_building = token:arms_factory_1} --- I WANT A UPGRADE TO ARMS FACTORY LINE OF BUILDINGS
+## building_upgrade = yes
+## COUNTRY SCOPE
+
+## You can also use state scope version of this, assigning this state to be upgraded/built. This ensures it does not build random buildings elsewhere in country. This effect looks like below
+## 123 = {
+##		set_temp_variable = {desired_building = token:arms_factory_1} --- I WANT A UPGRADE TO ARMS FACTORY LINE OF BUILDINGS
+## 		building_upgrade_state_scope = yes
+## }
+##
+##
+
+
+building_upgrade_state_scope = {
+	set_temp_variable = {desired_state_location = THIS.id}
+	building_upgrade = yes
+}
+
+building_upgrade = { ## THIS EFFECT LEADS INTO STATE SCOPE, WE FIND A SUTIABLE STATE AND SCOPE INTO THE STATE TO ENACT LATER EFFECTS
+
+	custom_effect_tooltip = building_upgrade_localisation
+
+	hidden_effect = {
+
+
+
+		if = {
+			limit = {
+				NOT = {
+					has_variable = desired_state_location
+				}
+			}
+			## FIND SUTIABLE STATE
+			set_temp_variable = {desired_state_location = 0}
+			set_temp_variable = {building_upgrade_previous_name = 0}
+			building_upgrade_find_state_for_usage = yes
+		}
+
+		## Find building slot
+		if = {
+			limit = {
+				NOT = {
+					has_variable = building_upgrade_previous_name
+				}
+			}
+			var:desired_state_location = { ## we grab the previous building name telling us if slot 1 or two 
+				meta_effect = {
+					text = {
+						if = {
+							limit = {
+								set_temp_variable = {REQUESTED_BUILDING = building_1} ## find out if building 1 is the correct one
+								is_the_building_[FACTORY_NAME]_building_chain = yes
+							}
+							
+							set_temp_variable = {building_upgrade_previous_name = building_1}
+							always = yes
+						}else_if = {
+							limit = {
+								set_temp_variable = {REQUESTED_BUILDING = building_2} ## now building 2
+								is_the_building_[FACTORY_NAME]_building_chain = yes
+							}
+							set_temp_variable = {building_upgrade_previous_name = building_2}
+							always = yes
+						}
+					}
+					FACTORY_NAME = "[This.get_building_upgrade_factory_name]"
+				}	
+			}
+		}
+
+
+
+		### Find correct building upgrade building
+		set_temp_variable = {desired_building_upgrade_version = 0}
+		building_upgrade_building_edge_cases =  yes ## EDGE CASES LEADS INTO A LATER SCOPE IF NOT TRUE, this is to present event to the player on what type of building they want
+		if = {
+			limit = {
+				NOT = {
+					has_country_flag =  edge_case_booleon
+				}
+			}
+			meta_effect = {
+				text = {
+	
+				## Building Upgrade 
+					var:desired_state_location = {
+						set_variable = { potential_building_holder_for_event = desired_building_upgrade_version }
+						set_variable = { potential_time_left_building_holder_for_event = [FACTORY_NAME]_speed?global.[FACTORY_NAME]_global_speed}
+						if = {
+							limit = {
+								check_variable = {building_upgrade_previous_name = building_1}
+							}
+							add_building_to_construct_slot_1 = yes
+						}else = {
+							add_building_to_construct_slot_2 = yes
+						}
+					}
+				}
+				FACTORY_NAME = "[?potential_building_holder_for_event.GetTokenKey]"
+			}
+		}
+		
+		log =  "[?building_upgrade_previous_name.GetTokenLocalizedKey]"
+		log =  "[?potential_building_holder_for_event.GetTokenLocalizedKey]"
+
+		log =  "[?building_upgrade_previous_name.GetTokenLocalizedKey]"
+
+		clr_country_flag = edge_case_booleon
+	}
+
+}
+building_upgrade_find_state_for_usage = {
+	if = {
+		limit = {
+			any_owned_state = {
+				meta_trigger = {
+					text = {
+						if = {
+							limit = {
+								set_temp_variable = {REQUESTED_BUILDING = building_1} ## find out if building 1 is the correct one
+								is_the_building_[FACTORY_NAME]_building_chain = yes
+							}
+							
+							set_temp_variable = {building_upgrade_previous_name = building_1}
+							set_temp_variable = {temp_state_location = THIS.id}
+							always = yes
+						}else_if = {
+							limit = {
+								set_temp_variable = {REQUESTED_BUILDING = building_2} ## now building 2
+								is_the_building_[FACTORY_NAME]_building_chain = yes
+							}
+							set_temp_variable = {building_upgrade_previous_name = building_2}
+							set_temp_variable = {temp_state_location = THIS.id}
+							always = yes
+						}else = {
+							always = no
+						}
+					}
+					FACTORY_NAME = "[This.get_building_upgrade_factory_name]"
+				}
+			}
+		}
+		set_temp_variable = {desired_state_location = temp_state_location}
+	}else = { ## ELSE BUILD RANDOM NEW BUILDING
+		random_owned_state = {
+			limit = {
+				has_avaliable_building_slot = yes
+			}
+			if = {
+				limit = {
+					NOT =  {
+						has_variable = building_2
+					}
+				}
+				set_temp_variable = {building_upgrade_previous_name = building_2}
+			}else = {
+				set_temp_variable = {building_upgrade_previous_name = building_1}
+			}
+			set_temp_variable = {desired_state_location = THIS.id}
+		}
+	}
+}
+building_upgrade_building_edge_cases = {
+	### THIS EFFECT IS TO PRESENT TO THE USER A EVENT ALLOWING THEM TO PICK UPGRADE FOR THEIR BUILDINGS
+	# IMPLEMENTS SIMPLE IF STATEMENTS (not that we can do anything else, rip actual programming languages) TO FIND THE CORRECT BUILDING PATH
+	if = {
+		limit = {
+			check_variable = {building_upgrade_previous_name = medium_shipyard_1}
+		}
+		set_variable = {edge_case_building = medium_shipyard_1 }
+		set_variable = {edge_case_building_option_1 = medium_shipyard_2 }
+		set_variable = {edge_case_building_option_2 = heavy_shipyard_1 }
+		set_country_flag = edge_case_booleon
+	}
+	if = {
+		limit = {
+			check_variable = {building_upgrade_previous_name = light_shipyard_1}
+		}
+		set_variable = {edge_case_building = light_shipyard_1 }
+		set_variable = {edge_case_building_option_1 = light_shipyard_2 }
+		set_variable = {edge_case_building_option_2 = medium_shipyard_1 }
+		set_country_flag = edge_case_booleon
+	}
+	if = {
+		limit = {
+			check_variable = {building_upgrade_previous_name = starfighter_factory_1}
+		}
+		set_variable = {edge_case_building = starfighter_factory_1 }
+		set_variable = {edge_case_building_option_1 = starfighter_factory_1 }
+		set_variable = {edge_case_building_option_2 = starbomber_factory_1 }
+		set_country_flag = edge_case_booleon
+	}
+	if = {
+		limit = {
+			check_variable = {building_upgrade_previous_name = arms_factory_1}
+		}
+		set_variable = {edge_case_building = arms_factory_1 }
+		set_variable = {edge_case_building_option_1 = vehicle_factory }
+		set_variable = {edge_case_building_option_2 = soft_arms_factory_1 }
+		set_country_flag = edge_case_booleon
+	}
+	if = {
+		limit = {
+			check_variable = {building_upgrade_previous_name = training_facilities_1}
+		}
+		set_variable = {edge_case_building = training_facilities_1 }
+		set_variable = {edge_case_building_option_1 = special_forces_training_facilities_1 }
+		set_variable = {edge_case_building_option_2 = military_bootcamp_1 }
+		set_country_flag = edge_case_booleon
+	}
+	if = {
+		limit = {
+			check_variable = {building_upgrade_previous_name = military_academy_1}
+		}
+		set_variable = {edge_case_building = military_academy_1 }
+		set_variable = {edge_case_building_option_1 = military_academy_2 }
+		set_variable = {edge_case_building_option_2 = naval_academy_1 }
+		set_country_flag = edge_case_booleon
+	}
+	if = {
+		limit = {
+			check_variable = {building_upgrade_previous_name = naval_academy_1}
+		}
+		set_variable = {edge_case_building = naval_academy_1 }
+		set_variable = {edge_case_building_option_1 = starfighter_academy_1 }
+		set_variable = {edge_case_building_option_2 = admiralty_academy_1 }
+		set_country_flag = edge_case_booleon
+	}
+	if = {
+		limit = {
+			NOT = {
+				has_country_flag =  edge_case_booleon
+			}
+		}
+		building_upgrade_finder_of_type_of_building = yes
+	}
+}
+building_upgrade_finder_of_type_of_building = {
+	if = {
+		limit = {
+			check_variable = {desired_building = token:arms_factory_1}
+			or = {
+				check_variable = {building_upgrade_previous_name = token:arms_factory_1}
+				check_variable = {building_upgrade_previous_name = token:soft_arms_factory_1}
+			}
+		}
+		set_temp_variable = {upgrade_version_1_of_building = token:arms_factory_1 }
+		set_temp_variable = {upgrade_version_2_of_building = token:soft_arms_factory_1 }
+		set_temp_variable = {upgrade_version_3_of_building = token:soft_arms_factory_2 }
+	}
+	if = {
+		limit = {
+			check_variable = {desired_building = token:arms_factory_1}
+			check_variable = {building_upgrade_previous_name = token:tank_factory_1}
+		}
+		set_temp_variable = {upgrade_version_1_of_building = token:arms_factory_1 }
+		set_temp_variable = {upgrade_version_2_of_building = token:tank_factory_1 }
+		set_temp_variable = {upgrade_version_3_of_building = token:tank_factory_2 }
+	}
+	if = {
+		limit = {
+			check_variable = {desired_building = token:starfighter_factory_1}
+			or = {
+				check_variable = {building_upgrade_previous_name = token:starfighter_factory_1}
+				check_variable = {building_upgrade_previous_name = token:starfighter_factory_2}
+			}
+		}
+		set_temp_variable = {upgrade_version_1_of_building = token:starfighter_factory_1 }
+		set_temp_variable = {upgrade_version_2_of_building = token:starfighter_factory_2 }
+		set_temp_variable = {upgrade_version_3_of_building = token:starfighter_factory_3 }
+	}
+	if = {
+		limit = {
+			check_variable = {desired_building = token:starfighter_factory_1}
+			check_variable = {building_upgrade_previous_name = token:starbomber_factory_1}
+		}
+		set_temp_variable = {upgrade_version_1_of_building = token:starfighter_factory_1 }
+		set_temp_variable = {upgrade_version_2_of_building = token:starbomber_factory_1 }
+		set_temp_variable = {upgrade_version_3_of_building = token:starbomber_factory_2 }
+	}
+	if = {
+		limit = {
+			check_variable = {desired_building = token:light_shipyard_1}
+			or = {
+				check_variable = {building_upgrade_previous_name = token:light_shipyard_1}
+				check_variable = {building_upgrade_previous_name = token:light_shipyard_2}
+			}
+		}
+		set_temp_variable = {upgrade_version_1_of_building = token:light_shipyard_1 }
+		set_temp_variable = {upgrade_version_2_of_building = token:light_shipyard_2 }
+		set_temp_variable = {upgrade_version_3_of_building = token:light_shipyard_3 }
+	}
+	if = {
+		limit = {
+			check_variable = {desired_building = token:training_facilities_1}
+			or = {
+				check_variable = {building_upgrade_previous_name = token:training_facilities_1}
+				check_variable = {building_upgrade_previous_name = token:military_bootcamp_1}
+				check_variable = {building_upgrade_previous_name = token:military_bootcamp_2}
+			}
+		}
+		set_temp_variable = {upgrade_version_1_of_building = token:training_facilities_1 }
+		set_temp_variable = {upgrade_version_2_of_building = token:military_bootcamp_1 }
+		set_temp_variable = {upgrade_version_3_of_building = token:military_bootcamp_2 }
+	}
+	if = {
+		limit = {
+			check_variable = {desired_building = token:training_facilities_1}
+			check_variable = {building_upgrade_previous_name = token:special_forces_training_facilities_1}
+		}
+		set_temp_variable = {upgrade_version_1_of_building = token:training_facilities_1 }
+		set_temp_variable = {upgrade_version_2_of_building = token:special_forces_training_facilities_1 }
+		set_temp_variable = {upgrade_version_3_of_building = token:special_forces_training_facilities_2 }
+	}
+	if = {
+		limit = {
+			check_variable = {desired_building = token:intelligence_center_1}
+			or = {
+			check_variable = {building_upgrade_previous_name = token:intelligence_center_1}
+			check_variable = {building_upgrade_previous_name = token:sensor_array_1}
+			}
+		}
+		set_temp_variable = {upgrade_version_1_of_building = token:intelligence_center_1 }
+		set_temp_variable = {upgrade_version_2_of_building = token:sensor_array_1 }
+		set_temp_variable = {upgrade_version_3_of_building = token:sensor_array_2 }
+	}
+	if = {
+		limit = {
+			check_variable = {desired_building = token:intelligence_center_1}
+			check_variable = {building_upgrade_previous_name = token:spy_academy_1}
+		}
+		set_temp_variable = {upgrade_version_1_of_building = token:intelligence_center_1 }
+		set_temp_variable = {upgrade_version_2_of_building = token:spy_academy_1 }
+		set_temp_variable = {upgrade_version_3_of_building = token:spy_academy_2 }
+	}
+	if = {
+		limit = {
+			check_variable = {desired_building = token:research_center_1}
+			or = {
+				check_variable = {building_upgrade_previous_name = token:research_center_1}
+				check_variable = {building_upgrade_previous_name = token:research_center_2}
+			}
+		}
+		set_temp_variable = {upgrade_version_1_of_building = token:research_center_1 }
+		set_temp_variable = {upgrade_version_2_of_building = token:research_center_2 }
+		set_temp_variable = {upgrade_version_3_of_building = token:research_center_3 }
+	}
+	if = {
+		limit = {
+			check_variable = {desired_building = token:military_academy_1}
+			or = {
+			check_variable = {building_upgrade_previous_name = token:military_academy_1}
+			check_variable = {building_upgrade_previous_name = token:military_academy_2}
+			}
+		}
+		set_temp_variable = {upgrade_version_1_of_building = token:military_academy_1 }
+		set_temp_variable = {upgrade_version_2_of_building = token:military_academy_2 }
+		set_temp_variable = {upgrade_version_3_of_building = token:military_academy_3 }
+	}
+	if = {
+		limit = {
+			check_variable = {desired_building = token:taxation_center_1}
+			or = {
+				check_variable = {building_upgrade_previous_name = token:taxation_center_1}
+				check_variable = {building_upgrade_previous_name = token:taxation_center_2}
+			}
+		}
+		set_temp_variable = {upgrade_version_1_of_building = token:taxation_center_1 }
+		set_temp_variable = {upgrade_version_2_of_building = token:taxation_center_2 }
+		set_temp_variable = {upgrade_version_3_of_building = token:taxation_center_3 }
+	}
+	if = {
+		limit = {
+			check_variable = {desired_building = token:homestead_1}
+			or = {
+			check_variable = {building_upgrade_previous_name = token:homestead_1}
+			check_variable = {building_upgrade_previous_name = token:homestead_2}
+			}
+		}
+		set_temp_variable = {upgrade_version_1_of_building = token:homestead_1 }
+		set_temp_variable = {upgrade_version_2_of_building = token:homestead_2 }
+		set_temp_variable = {upgrade_version_3_of_building = token:homestead_3 }
+	}
+	if = {
+		limit = {
+			check_variable = {desired_building = token:corporate_office_1}
+			or = {
+			check_variable = {building_upgrade_previous_name = token:corporate_office_1}
+			check_variable = {building_upgrade_previous_name = token:corporate_office_2}
+			}
+		}
+		set_temp_variable = {upgrade_version_1_of_building = token:corporate_office_1 }
+		set_temp_variable = {upgrade_version_2_of_building = token:corporate_office_2 }
+		set_temp_variable = {upgrade_version_3_of_building = token:corporate_office_3 }
+	}
+	if = {
+		limit = {
+			check_variable = {desired_building = token:spice_market_1}
+			or = {
+			check_variable = {building_upgrade_previous_name = token:spice_market_1}
+			check_variable = {building_upgrade_previous_name = token:spice_market_2}
+			}
+		}
+		set_temp_variable = {upgrade_version_1_of_building = token:spice_market_1 }
+		set_temp_variable = {upgrade_version_2_of_building = token:spice_market_2 }
+		set_temp_variable = {upgrade_version_3_of_building = token:spice_market_3 }
+	}
+	if = {
+		limit = {
+			check_variable = {desired_building = token:fuel_refinery_1}
+			or = {
+			check_variable = {building_upgrade_previous_name = token:fuel_refinery_1}
+			check_variable = {building_upgrade_previous_name = token:fuel_refinery_2}
+			}
+		}
+		set_temp_variable = {upgrade_version_1_of_building = token:fuel_refinery_1 }
+		set_temp_variable = {upgrade_version_2_of_building = token:fuel_refinery_2 }
+		set_temp_variable = {upgrade_version_3_of_building = token:fuel_refinery_3 }
+	}
+	if = {
+		limit = {
+			check_variable = {desired_building = token:anti_air_1}
+			or = {
+			check_variable = {building_upgrade_previous_name = token:anti_air_1}
+			check_variable = {building_upgrade_previous_name = token:anti_air_2}
+			}
+		}
+		set_temp_variable = {upgrade_version_1_of_building = token:anti_air_1 }
+		set_temp_variable = {upgrade_version_2_of_building = token:anti_air_2 }
+		set_temp_variable = {upgrade_version_3_of_building = token:anti_air_3 }
+	}
+	if = {
+		limit = {
+			check_variable = {desired_building = token:trade_complex_1}
+			or = {
+			check_variable = {building_upgrade_previous_name = token:trade_complex_1}
+			check_variable = {building_upgrade_previous_name = token:trade_complex_2}
+			}
+		}
+		set_temp_variable = {upgrade_version_1_of_building = token:trade_complex_1 }
+		set_temp_variable = {upgrade_version_2_of_building = token:trade_complex_2 }
+		set_temp_variable = {upgrade_version_3_of_building = token:trade_complex_3 }
+	}
+
+	### FIND THE UPGRADE VERSIon, IF ONE UPGRADE TO TWO, IF TWO UPGRADE TO THREE. IF NOT FOUND REVERT TO FIRST BUILDING
+	if = {
+		limit = {
+			NOT = {
+				has_variable = upgrade_version_1_of_building
+			}
+		}
+		set_temp_variable = {desired_building_upgrade_version = desired_building}
+	}else = {
+		if = {
+			limit = {
+				check_variable = {building_upgrade_previous_name = upgrade_version_1_of_building}
+			}
+
+			set_temp_variable = {desired_building_upgrade_version = upgrade_version_2_of_building}
+		}else_if = {
+			limit = {
+				check_variable = {building_upgrade_previous_name = upgrade_version_2_of_building}
+			}
+			set_temp_variable = {desired_building_upgrade_version = upgrade_version_3_of_building}
+		}
+	}
+}
 
 clear_building_1_effects = { ## USE THIS FOR GETTING RID OF A BUILDING
 	custom_effect_tooltip = clear_building_off_slot_1
