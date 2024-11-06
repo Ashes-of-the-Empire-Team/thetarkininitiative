@@ -371,7 +371,9 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			add_to_tech_sharing_group = chiss_tech_group
+			ROOT = {
+				add_to_tech_sharing_group = chiss_tech_group
+			}
 		}
 	}
 	focus = {
@@ -1041,7 +1043,10 @@ focus_tree = {
 		}
 
 		completion_reward = {
-
+			mio:Kuat_organization = {
+				add_mio_size = 1
+				add_mio_funds_gain_factor = 0.25
+			}
 		}
 	}
 	focus = {
@@ -1062,7 +1067,10 @@ focus_tree = {
 		}
 
 		completion_reward = {
-
+			mio:Sienar_organization = {
+				add_mio_size = 1
+				add_mio_funds_gain_factor = 0.25
+			}
 		}
 	}
 	focus = {
@@ -1485,7 +1493,11 @@ focus_tree = {
 			focus = EOH_mixed_tactics
 		}
 		completion_reward = {
-
+			add_doctrine_cost_reduction = {
+				cost_reduction = 0.5
+				uses = 2
+				category = land_doctrine
+			}
 		}
 	}
 	focus = {
@@ -1564,7 +1576,16 @@ focus_tree = {
 			focus = EOH_imperial_tactics
 		}
 		completion_reward = {
-
+			add_doctrine_cost_reduction = {
+				cost_reduction = 0.5
+				uses = 1
+				category = land_doctrine
+			}
+			add_doctrine_cost_reduction = {
+				cost_reduction = 0.5
+				uses = 1
+				category = naval_doctrine
+			}
 		}
 	}
 	focus = {
@@ -1582,7 +1603,11 @@ focus_tree = {
 			focus = EOH_mixed_tactics
 		}
 		completion_reward = {
-
+			add_doctrine_cost_reduction = {
+				cost_reduction = 0.5
+				uses = 2
+				category = naval_doctrine
+			}
 		}
 	}
 	focus = {
@@ -1602,7 +1627,11 @@ focus_tree = {
 		}
 
 		completion_reward = {
-
+			add_tech_bonus = {
+				bonus = 0.5
+				uses = 1
+				category = naval_equipment
+			}
 		}
 	}
 	focus = {
@@ -1937,10 +1966,12 @@ focus_tree = {
 		}
 		completion_reward = {
 			#Victory point wizardry
-
 			456 = {
 				if = {
-					limit = { is_controlled_by = ROOT }
+					limit = { 
+						is_controlled_by = ROOT 
+						has_avaliable_building_slot = yes
+					}
 					add_victory_points = {
 						province = 1695
 						value = 1
@@ -1958,6 +1989,8 @@ focus_tree = {
 						level = 1
 						instant_build = yes
 					}
+					set_temp_variable = {REQUESTED_BUILDING = token:recycle_center_1}
+					Add_building_to_slot_immediately = yes
 				}
 			}
 
@@ -1986,11 +2019,12 @@ focus_tree = {
 						value = 10
 					}
 					add_building_construction = {
-						type = industrial_complex
-						level = 2
+						type = infrastructure
+						level = 1
 						instant_build = yes
 					}
-					add_extra_state_shared_building_slots = 2
+					set_temp_variable = {REQUESTED_BUILDING = token:recycle_center_1}
+					Add_building_to_slot_immediately = yes
 				}
 			}
 			add_resource = {
@@ -2170,124 +2204,6 @@ focus_tree = {
 	}
 
 	focus = {
-		id = EOH_eyes_everywhere
-		icon = GFX_WIP_focus
-		cost = 7.2
-		relative_position_id = EOH_the_twelfth_grand_admiral
-		x = -2
-		y = 2
-		allow_branch = {
-			always = no
-			#OR = {
-				#has_completed_focus = EOH_reconciliation_with_zaarin
-				#has_completed_focus = EOH_none_evade_thrawns_grasp
-			#}
-		}
-		prerequisite = {
-			focus = EOH_reconciliation_with_zaarin
-			focus = EOH_none_evade_thrawns_grasp
-		}
-		search_filters = {
-		}
-		mutually_exclusive = {
-		}
-		completion_reward = {
-			custom_effect_tooltip = EOH_add
-			add_to_variable = {thrawn_insights = 1}
-
-			## establishes spy network
-		}
-		
-	}
-	focus = {
-		id = EOH_convince_fel_of_our_cause
-		icon = GFX_thrawn_convince_fel
-		cost = 7.2
-		relative_position_id = EOH_eyes_everywhere
-		x = -1
-		y = 1
-		prerequisite = {
-			focus = EOH_eyes_everywhere
-		}
-		search_filters = {
-			FOCUS_FILTER_MILITARY
-		}
-		mutually_exclusive = {
-			focus = EOH_death_to_the_traitor
-		}
-		completion_reward = {
-			## gets fel
-		}
-		
-	}
-	focus = {
-		id = EOH_death_to_the_traitor
-		icon = GFX_thrawn_kill_fel
-		cost = 7.2
-		relative_position_id = EOH_eyes_everywhere
-		x = 1
-		y = 1
-		prerequisite = {
-			focus = EOH_eyes_everywhere
-		}
-		search_filters = {
-		}
-		mutually_exclusive = {
-			focus = EOH_convince_fel_of_our_cause
-		}
-		completion_reward = {
-			## kills fel, noghri like you less
-			custom_effect_tooltip = EOH_order_noghri_tt
-			
-		}
-		
-	}
-	focus = {
-		id = EOH_ensure_failure_of_peace_talks
-		icon = GFX_WIP_focus
-		cost = 7.2
-		relative_position_id = EOH_convince_fel_of_our_cause
-		x = 0
-		y = 1
-		prerequisite = {
-			focus = EOH_convince_fel_of_our_cause
-			focus = EOH_death_to_the_traitor
-		}
-		search_filters = {
-		}
-		mutually_exclusive = {
-			focus = EOH_assasinate_oxtroe
-		}
-		completion_reward = {
-
-			# ensures failure of peace talks
-		}
-		
-	}
-	focus = {
-		id = EOH_assasinate_oxtroe
-		icon = GFX_WIP_focus
-		cost = 7.2
-		relative_position_id = EOH_ensure_failure_of_peace_talks
-		x = 2
-		y = 0
-		prerequisite = {
-			focus = EOH_convince_fel_of_our_cause
-			focus = EOH_death_to_the_traitor
-		}
-		search_filters = {
-		}
-		mutually_exclusive = {
-			focus = EOH_ensure_failure_of_peace_talks
-		}
-		completion_reward = {
-
-			# kills oxtroe, noghri like you less
-			custom_effect_tooltip = EOH_order_noghri_tt
-		}
-		
-	}
-	focus = {
 		id = EOH_the_hand
 		icon = GFX_WIP_focus
 		cost = 7.2
@@ -2421,68 +2337,16 @@ focus_tree = {
 		}
 		
 	}
+
 	focus = {
-		id = EOH_secure_the_fortress_worlds
-		icon = GFX_thrawn_fortress
+		id = EOH_thrawns_confederation
+		icon = GFX_thrawn_confederation
 		cost = 7.2
 		relative_position_id = EOH_the_return
 		x = 0
 		y = 1
 		prerequisite = {
 			focus = EOH_the_return
-		}
-		search_filters = {
-			FOCUS_FILTER_DIPLOMACY
-		}
-		mutually_exclusive = {
-		}
-		completion_reward = {
-			COR = {
-				if={
-					limit={
-						has_government = imperial
-					}
-					add_timed_idea = {
-						idea = EOH_support_from_thrawn
-						days = 365
-					}
-				}
-			}
-			ICO = {
-				if={
-					limit={
-						has_government = imperial
-					}
-					add_timed_idea = {
-						idea = EOH_support_from_thrawn
-						days = 365
-					}
-				}
-			}
-			EAD = {
-				if={
-					limit={
-						has_government = imperial
-					}
-					add_timed_idea = {
-						idea = EOH_support_from_thrawn
-						days = 365
-					}
-				}
-			} 
-
-		}
-		
-	}
-	focus = {
-		id = EOH_thrawns_confederation
-		icon = GFX_thrawn_confederation
-		cost = 7.2
-		relative_position_id = EOH_secure_the_fortress_worlds
-		x = 0
-		y = 1
-		prerequisite = {
-			focus = EOH_secure_the_fortress_worlds
 		}
 		search_filters = {
 			FOCUS_FILTER_DIPLOMACY
@@ -2522,35 +2386,22 @@ focus_tree = {
 		}
 		search_filters = {
 		}
-		mutually_exclusive = {
-		}
-		completion_reward = {
-			declare_war_on = { target = WAY    type = annex_everything }
-			177 = {
-				set_state_controller_to = EOH
-				create_unit = {
-					division = "division_template = \"Stormtrooper Regiment\" start_experience_factor = 0.23" 
-					owner = ROOT
-				}
-				create_unit = {
-					division = "division_template = \"Stormtrooper Regiment\" start_experience_factor = 0.29" 
-					owner = ROOT
-				}
-				create_unit = {
-					division = "division_template = \"Stormtrooper Regiment\" start_experience_factor = 0.26" 
-					owner = ROOT
-				}
-				create_unit = {
-					division = "division_template = \"Stormtrooper Regiment\" start_experience_factor = 0.26" 
-					owner = ROOT
-				}
-				create_unit = {
-					division = "division_template = \"Stormtrooper Regiment\" start_experience_factor = 0.26" 
-					owner = ROOT
+		bypass = {
+			WAY = {
+				OR = {
+					is_subject = yes
+					exists = no 
 				}
 			}
 		}
-		
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			annex_country = {
+				target = WAY
+				transfer_troops = no
+			}
+		}
 	}
 	focus = {
 		id = EOH_the_emperors_storehouse
@@ -2741,6 +2592,10 @@ focus_tree = {
 			focus = EOH_secure_the_ring_of_kafrene
 		}
 		completion_reward = {
+			set_state_owner = 38
+			38 = {
+				add_core_of = EOH
+			}
 		}
 	}
 	focus = {
@@ -2759,6 +2614,10 @@ focus_tree = {
 			focus = EOH_secure_bilbringi
 		}
 		completion_reward = {
+			set_state_owner = 22
+			22 = {
+				add_core_of = EOH
+			}
 		}
 	}
 	focus = {
@@ -2775,6 +2634,11 @@ focus_tree = {
 		}
 
 		completion_reward = {
+			create_wargoal = {
+				type = take_state_focus
+				target = 214.CONTROLLER
+				generator = { 32 214 199 }
+			}
 		}
 	}
 	focus = {
@@ -2807,6 +2671,11 @@ focus_tree = {
 		}
 
 		completion_reward = {
+			create_wargoal = {
+				type = take_state_focus
+				target = 445.CONTROLLER
+				generator = { 445 438 }
+			}
 		}
 	}
 	focus = {
@@ -2842,8 +2711,9 @@ focus_tree = {
 		completion_reward = {
 		}
 	}
+
 	focus = {
-		id = EOH_the_capital_secured
+		id = EOH_restore_the_empire
 		icon = GFX_thrawn_stormtroopleft
 		cost = 7.2
 		relative_position_id = EOH_the_war_of_restoration
@@ -2851,22 +2721,6 @@ focus_tree = {
 		y = 1
 		prerequisite = {
 			focus = EOH_the_war_of_restoration
-		}
-		search_filters = {
-		}
-
-		completion_reward = {
-		}
-	}
-	focus = {
-		id = EOH_restore_the_empire
-		icon = GFX_thrawn_stormtroopleft
-		cost = 7.2
-		relative_position_id = EOH_the_capital_secured
-		x = 0
-		y = 1
-		prerequisite = {
-			focus = EOH_the_capital_secured
 		}
 		search_filters = {
 		}
