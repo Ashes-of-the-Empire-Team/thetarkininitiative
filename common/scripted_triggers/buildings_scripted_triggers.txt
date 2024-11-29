@@ -1,8 +1,14 @@
 has_avaliable_building_slot = {
 	NOT = {
-		AND = {
-			has_variable = building_1
-			has_variable = building_2
+		OR = {
+			AND = {
+				has_variable = building_1
+				has_variable = building_2
+			}
+			AND = {
+				check_variable = {building_1 = 0}
+				check_variable = {building_2 = 0}
+			}
 		}
 	}
 }
@@ -196,7 +202,92 @@ is_the_building_fuel_refinery_building_chain = {
 		check_variable = {REQUESTED_BUILDING = token:fuel_refinery_2}
 	}
 }
+is_the_building_trade_complex_building_chain = {
+	OR = {
+		check_variable = {REQUESTED_BUILDING = token:trade_complex_1}
+		check_variable = {REQUESTED_BUILDING = token:trade_complex_2}
+	}
+}
 
+
+does_building_chain_match_requested_building = {
+	if = {
+		limit = {
+			check_variable = {desired_building = arms_factory_1}
+		}
+		is_the_building_land_factory_chain = yes
+	}else_if = {
+		limit = {
+			check_variable = {desired_building = light_shipyard_1}
+		}
+		is_the_building_naval_factory_building_chain = yes
+	}else_if = {
+		limit = {
+			check_variable = {desired_building = anti_air_1}
+		}
+		is_the_building_anti_air_building_chain = yes
+	}else_if = {
+		limit = {
+			check_variable = {desired_building = starfighter_factory_1}
+		}
+		is_the_building_air_factory_building_chain = yes
+	}else_if = {
+		limit = {
+			check_variable = {desired_building = intelligence_center_1}
+		}
+		is_the_building_research_building_chain = yes
+	}else_if = {
+		limit = {
+			check_variable = {desired_building = research_center_1}
+		}
+		is_the_building_research_building_chain = yes
+	}else_if = {
+		limit = {
+			check_variable = {desired_building = military_academy_1}
+		}
+		is_the_building_military_academy_building_chain = yes
+	}else_if = {
+		limit = {
+			check_variable = {desired_building = training_facilities_1}
+		}
+		is_the_building_bootcamp_building_chain = yes
+	}else_if = {
+		limit = {
+			check_variable = {desired_building = taxation_center_1}
+		}
+		is_the_building_taxation_center_building_chain = yes
+	}else_if = {
+		limit = {
+			check_variable = {desired_building = homestead_1}
+		}
+		is_the_building_homestead_building_chain = yes
+	}else_if = {
+		limit = {
+			check_variable = {desired_building = corporate_office_1}
+		}
+		is_the_building_corporate_office_building_chain = yes
+	}else_if = {
+		limit = {
+			check_variable = {desired_building = recycle_center_1}
+		}
+		is_the_building_recycle_center_building_chain = yes
+	}else_if = {
+		limit = {
+			check_variable = {desired_building = spice_market_1}
+		}
+		is_the_building_spice_market_building_chain = yes
+	}else_if = {
+		limit = {
+			check_variable = {desired_building = fuel_refinery_1}
+		}
+		is_the_building_fuel_refinery_building_chain = yes
+	}else_if = {
+		limit = {
+			check_variable = {desired_building = trade_complex_1}
+		}
+		is_the_building_trade_complex_building_chain = yes
+	}
+}
 
 ######  This is here just incase we need to grab the goverment building types with all cases, Above doesnt have 3rd tiers as it was used for seeing if the building needed to be upgraded
 # is_the_building_a_naval_building = {

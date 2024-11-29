@@ -164,9 +164,7 @@ building_upgrade = { ## THIS EFFECT LEADS INTO STATE SCOPE, WE FIND A SUTIABLE S
 
 	custom_effect_tooltip = building_upgrade_localisation
 
-	hidden_effect = {
-
-
+	#hidden_effect = {
 
 		if = {
 			limit = {
@@ -178,8 +176,8 @@ building_upgrade = { ## THIS EFFECT LEADS INTO STATE SCOPE, WE FIND A SUTIABLE S
 			set_temp_variable = {desired_state_location = 0}
 			set_temp_variable = {building_upgrade_previous_name = 0}
 			building_upgrade_find_state_for_usage = yes
+			log =  "Building Previous Name [?building_upgrade_previous_name]"
 		}
-
 		## Find building slot
 		if = {
 			limit = {
@@ -188,35 +186,33 @@ building_upgrade = { ## THIS EFFECT LEADS INTO STATE SCOPE, WE FIND A SUTIABLE S
 				}
 			}
 			var:desired_state_location = { ## we grab the previous building name telling us if slot 1 or two 
-				meta_effect = {
-					text = {
-						if = {
-							limit = {
-								set_temp_variable = {REQUESTED_BUILDING = building_1} ## find out if building 1 is the correct one
-								is_the_building_[FACTORY_NAME]_building_chain = yes
-							}
-							
-							set_temp_variable = {building_upgrade_previous_name = building_1}
-							always = yes
-						}else_if = {
-							limit = {
-								set_temp_variable = {REQUESTED_BUILDING = building_2} ## now building 2
-								is_the_building_[FACTORY_NAME]_building_chain = yes
-							}
-							set_temp_variable = {building_upgrade_previous_name = building_2}
-							always = yes
-						}
+
+
+				if = {
+					limit = {
+						set_temp_variable = {REQUESTED_BUILDING = building_1}
+						does_building_chain_match_requested_building = yes
 					}
-					FACTORY_NAME = "[This.get_building_upgrade_factory_name]"
-				}	
+					set_temp_variable = {building_upgrade_previous_name = building_1}
+				}else_if = {
+					limit = {
+						set_temp_variable = {REQUESTED_BUILDING = building_2}
+						does_building_chain_match_requested_building = yes
+					}
+					set_temp_variable = {building_upgrade_previous_name = building_2}
+				}else = {
+					log = "SOMETHING WENT WRONG - NEVERFIRE"
+					log = "[?REQUESTED_BUILDING.GetTokenLocalizedKey]"
+					log = "[?desired_building.GetTokenLocalizedKey]"
+				}
 			}
 		}
-
 
 
 		### Find correct building upgrade building
 		set_temp_variable = {desired_building_upgrade_version = 0}
 		building_upgrade_building_edge_cases =  yes ## EDGE CASES LEADS INTO A LATER SCOPE IF NOT TRUE, this is to present event to the player on what type of building they want
+		log = "[?building_upgrade_previous_name.GetTokenLocalizedKey]"
 		if = {
 			limit = {
 				NOT = {
@@ -233,6 +229,7 @@ building_upgrade = { ## THIS EFFECT LEADS INTO STATE SCOPE, WE FIND A SUTIABLE S
 						if = {
 							limit = {
 								check_variable = {building_upgrade_previous_name = building_1}
+								log = "[?building_upgrade_previous_name.GetTokenLocalizedKey]"
 							}
 							add_building_to_construct_slot_1 = yes
 						}else = {
@@ -240,56 +237,58 @@ building_upgrade = { ## THIS EFFECT LEADS INTO STATE SCOPE, WE FIND A SUTIABLE S
 						}
 					}
 				}
-				FACTORY_NAME = "[?potential_building_holder_for_event.GetTokenKey]"
+				FACTORY_NAME = "[?desired_building_upgrade_version.GetTokenKey]"
 			}
 		}
 		
 		log =  "[?building_upgrade_previous_name.GetTokenLocalizedKey]"
 		log =  "[?potential_building_holder_for_event.GetTokenLocalizedKey]"
 
-		log =  "[?building_upgrade_previous_name.GetTokenLocalizedKey]"
 
 		clr_country_flag = edge_case_booleon
-	}
+	#}
 
 }
 building_upgrade_find_state_for_usage = {
+	log = "Got to building state usage"
+
+	log = "[?desired_building]"
 	if = {
 		limit = {
 			any_owned_state = {
-				meta_trigger = {
-					text = {
-						if = {
-							limit = {
-								set_temp_variable = {REQUESTED_BUILDING = building_1} ## find out if building 1 is the correct one
-								is_the_building_[FACTORY_NAME]_building_chain = yes
-							}
-							
-							set_temp_variable = {building_upgrade_previous_name = building_1}
-							set_temp_variable = {temp_state_location = THIS.id}
-							always = yes
-						}else_if = {
-							limit = {
-								set_temp_variable = {REQUESTED_BUILDING = building_2} ## now building 2
-								is_the_building_[FACTORY_NAME]_building_chain = yes
-							}
-							set_temp_variable = {building_upgrade_previous_name = building_2}
-							set_temp_variable = {temp_state_location = THIS.id}
-							always = yes
-						}else = {
-							always = no
+				OR = {
+					AND = {
+						set_temp_variable = {REQUESTED_BUILDING = building_1}
+						NOT = {
+							has_variable = time_left_building_1
 						}
+						does_building_chain_match_requested_building = yes
+						set_temp_variable = {building_upgrade_previous_name = building_1}
+						set_temp_variable = {temp_state_location = THIS.id}
+						always = yes
 					}
-					FACTORY_NAME = "[This.get_building_upgrade_factory_name]"
+					AND = {
+						set_temp_variable = {REQUESTED_BUILDING = building_2}
+						NOT = {
+							has_variable = time_left_building_2
+						}
+						does_building_chain_match_requested_building = yes
+						set_temp_variable = {building_upgrade_previous_name = building_2}
+						set_temp_variable = {temp_state_location = THIS.id}
+						always = yes
+					}
 				}
 			}
 		}
+		
 		set_temp_variable = {desired_state_location = temp_state_location}
 	}else = { ## ELSE BUILD RANDOM NEW BUILDING
 		random_owned_state = {
 			limit = {
 				has_avaliable_building_slot = yes
+				
 			}
+			log = "[?REQUESTED_BUILDING]"
 			if = {
 				limit = {
 					NOT =  {
@@ -377,6 +376,9 @@ building_upgrade_building_edge_cases = {
 			}
 		}
 		building_upgrade_finder_of_type_of_building = yes
+	}else = {
+		set_variable = {desired_state_event_holder = desired_state_location}
+		country_event = BUILDING.5
 	}
 }
 building_upgrade_finder_of_type_of_building = {
@@ -2594,7 +2596,6 @@ refresh_building_time_and_cost_modifiers = {
 }
 
 test_effect_20 = {
-	set_temp_variable = {test_variable_20 = num_battalions_with_type@infantry}
-	log = "[?num_battalions_with_type@infantry]"
-	log = "[?num_battalions_with_type@bith]"
+	set_temp_variable = {desired_building = token:arms_factory_1}
+	building_upgrade = yes
 }
