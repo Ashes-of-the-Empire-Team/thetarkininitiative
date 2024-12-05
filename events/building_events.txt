@@ -163,11 +163,11 @@ country_event = {
 			text = {
 			## Building Upgrade 
 				var:desired_state_event_holder = {
-					set_variable = { potential_building_holder_for_event = edge_case_building_option_1 }
+					set_variable = { potential_building_holder_for_event = PREV.edge_case_building_option_1 }
 					set_variable = { potential_time_left_building_holder_for_event = [FACTORY_NAME]_speed?global.[FACTORY_NAME]_global_speed}
 					if = {
 						limit = {
-							check_variable = {edge_case_building = building_1}
+							check_variable = {PREV.edge_case_building = building_1}
 						}
 						add_building_to_construct_slot_1 = yes
 					}else = {
@@ -177,24 +177,21 @@ country_event = {
 			}
 			FACTORY_NAME = "[?edge_case_building_option_1.GetTokenKey]"
 		}
-		log = "[?potential_building_holder_for_event.GetTokenLocalizedKey]"
-		log = "[?edge_case_building.GetTokenLocalizedKey]"
 		subtract_from_variable = { currency_amount^primary_currency = potential_cost_of_building }
 		clear_left_over_building_event_variables = yes
 	}
 	option = {
 		### NO OPTION
 		name = BUILDING.5.2
-		clear_left_over_building_event_variables = yes
 		meta_effect = {
 			text = {
 			## Building Upgrade 
-				var:desired_state_location = {
-					set_variable = { potential_building_holder_for_event = edge_case_building_option_2 }
+				var:desired_state_event_holder = {
+					set_variable = { potential_building_holder_for_event = PREV.edge_case_building_option_2 }
 					set_variable = { potential_time_left_building_holder_for_event = [FACTORY_NAME]_speed?global.[FACTORY_NAME]_global_speed}
 					if = {
 						limit = {
-							check_variable = {edge_case_building = building_1}
+							check_variable = {PREV.edge_case_building = building_1}
 						}
 						add_building_to_construct_slot_1 = yes
 					}else = {

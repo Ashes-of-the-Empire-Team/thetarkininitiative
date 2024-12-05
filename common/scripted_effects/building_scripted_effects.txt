@@ -141,18 +141,18 @@ Add_building_to_slot_immediately = { ## THIS ADDS BUILDINGS FOR FREE AND IMMEDIA
 
 ####################### UPGRADE MANAGER #######################, DESIGNED FOR DEVS, DO NOT USE THIS FOR WONDERS
 
-## INPUT INTO THIS EFFECT WILL LOOK LIKE THIS
+# INPUT INTO THIS EFFECT WILL LOOK LIKE THIS
 # set_temp_variable = {desired_building = token:arms_factory_1} --- I WANT A UPGRADE TO ARMS FACTORY LINE OF BUILDINGS
-## building_upgrade = yes
-## COUNTRY SCOPE
+# building_upgrade = yes
+# COUNTRY SCOPE
 
-## You can also use state scope version of this, assigning this state to be upgraded/built. This ensures it does not build random buildings elsewhere in country. This effect looks like below
-## 123 = {
-##		set_temp_variable = {desired_building = token:arms_factory_1} --- I WANT A UPGRADE TO ARMS FACTORY LINE OF BUILDINGS
-## 		building_upgrade_state_scope = yes
-## }
-##
-##
+# You can also use state scope version of this, assigning this state to be upgraded/built. This ensures it does not build random buildings elsewhere in country. This effect looks like below
+# 123 = {
+# 		set_temp_variable = {desired_building = token:arms_factory_1} --- I WANT A UPGRADE TO ARMS FACTORY LINE OF BUILDINGS
+# 		building_upgrade_state_scope = yes
+# }
+
+
 
 
 building_upgrade_state_scope = {
@@ -176,7 +176,6 @@ building_upgrade = { ## THIS EFFECT LEADS INTO STATE SCOPE, WE FIND A SUTIABLE S
 			set_temp_variable = {desired_state_location = 0}
 			set_temp_variable = {building_upgrade_previous_name = 0}
 			building_upgrade_find_state_for_usage = yes
-			log =  "Building Previous Name [?building_upgrade_previous_name]"
 		}
 		## Find building slot
 		if = {
@@ -212,7 +211,6 @@ building_upgrade = { ## THIS EFFECT LEADS INTO STATE SCOPE, WE FIND A SUTIABLE S
 		### Find correct building upgrade building
 		set_temp_variable = {desired_building_upgrade_version = 0}
 		building_upgrade_building_edge_cases =  yes ## EDGE CASES LEADS INTO A LATER SCOPE IF NOT TRUE, this is to present event to the player on what type of building they want
-		log = "[?building_upgrade_previous_name.GetTokenLocalizedKey]"
 		if = {
 			limit = {
 				NOT = {
@@ -221,7 +219,6 @@ building_upgrade = { ## THIS EFFECT LEADS INTO STATE SCOPE, WE FIND A SUTIABLE S
 			}
 			meta_effect = {
 				text = {
-	
 				## Building Upgrade 
 					var:desired_state_location = {
 						set_variable = { potential_building_holder_for_event = desired_building_upgrade_version }
@@ -229,7 +226,6 @@ building_upgrade = { ## THIS EFFECT LEADS INTO STATE SCOPE, WE FIND A SUTIABLE S
 						if = {
 							limit = {
 								check_variable = {building_upgrade_previous_name = building_1}
-								log = "[?building_upgrade_previous_name.GetTokenLocalizedKey]"
 							}
 							add_building_to_construct_slot_1 = yes
 						}else = {
@@ -240,9 +236,6 @@ building_upgrade = { ## THIS EFFECT LEADS INTO STATE SCOPE, WE FIND A SUTIABLE S
 				FACTORY_NAME = "[?desired_building_upgrade_version.GetTokenKey]"
 			}
 		}
-		
-		log =  "[?building_upgrade_previous_name.GetTokenLocalizedKey]"
-		log =  "[?potential_building_holder_for_event.GetTokenLocalizedKey]"
 
 
 		clr_country_flag = edge_case_booleon
@@ -250,9 +243,7 @@ building_upgrade = { ## THIS EFFECT LEADS INTO STATE SCOPE, WE FIND A SUTIABLE S
 
 }
 building_upgrade_find_state_for_usage = {
-	log = "Got to building state usage"
 
-	log = "[?desired_building]"
 	if = {
 		limit = {
 			any_owned_state = {
@@ -288,7 +279,6 @@ building_upgrade_find_state_for_usage = {
 				has_avaliable_building_slot = yes
 				
 			}
-			log = "[?REQUESTED_BUILDING]"
 			if = {
 				limit = {
 					NOT =  {
@@ -308,65 +298,65 @@ building_upgrade_building_edge_cases = {
 	# IMPLEMENTS SIMPLE IF STATEMENTS (not that we can do anything else, rip actual programming languages) TO FIND THE CORRECT BUILDING PATH
 	if = {
 		limit = {
-			check_variable = {building_upgrade_previous_name = medium_shipyard_1}
+			check_variable = {building_upgrade_previous_name = token:medium_shipyard_1}
 		}
-		set_variable = {edge_case_building = medium_shipyard_1 }
-		set_variable = {edge_case_building_option_1 = medium_shipyard_2 }
-		set_variable = {edge_case_building_option_2 = heavy_shipyard_1 }
+		set_variable = {edge_case_building = token:medium_shipyard_1 }
+		set_variable = {edge_case_building_option_1 = token:medium_shipyard_2 }
+		set_variable = {edge_case_building_option_2 =  token:heavy_shipyard_1 }
 		set_country_flag = edge_case_booleon
 	}
 	if = {
 		limit = {
-			check_variable = {building_upgrade_previous_name = light_shipyard_1}
+			check_variable = {building_upgrade_previous_name = token:light_shipyard_1}
 		}
-		set_variable = {edge_case_building = light_shipyard_1 }
-		set_variable = {edge_case_building_option_1 = light_shipyard_2 }
-		set_variable = {edge_case_building_option_2 = medium_shipyard_1 }
+		set_variable = {edge_case_building = token:light_shipyard_1 }
+		set_variable = {edge_case_building_option_1 = token:light_shipyard_2 }
+		set_variable = {edge_case_building_option_2 = token:medium_shipyard_1 }
 		set_country_flag = edge_case_booleon
 	}
 	if = {
 		limit = {
-			check_variable = {building_upgrade_previous_name = starfighter_factory_1}
+			check_variable = {building_upgrade_previous_name = token:starfighter_factory_1}
 		}
-		set_variable = {edge_case_building = starfighter_factory_1 }
-		set_variable = {edge_case_building_option_1 = starfighter_factory_1 }
-		set_variable = {edge_case_building_option_2 = starbomber_factory_1 }
+		set_variable = {edge_case_building = token:starfighter_factory_1 }
+		set_variable = {edge_case_building_option_1 = token:starfighter_factory_1 }
+		set_variable = {edge_case_building_option_2 = token:starbomber_factory_1 }
 		set_country_flag = edge_case_booleon
 	}
 	if = {
 		limit = {
-			check_variable = {building_upgrade_previous_name = arms_factory_1}
+			check_variable = {building_upgrade_previous_name = token:arms_factory_1}
 		}
-		set_variable = {edge_case_building = arms_factory_1 }
-		set_variable = {edge_case_building_option_1 = vehicle_factory }
-		set_variable = {edge_case_building_option_2 = soft_arms_factory_1 }
+		set_variable = {edge_case_building = token:arms_factory_1 }
+		set_variable = {edge_case_building_option_1 = token:tank_factory_1 }
+		set_variable = {edge_case_building_option_2 = token:soft_arms_factory_1 }
 		set_country_flag = edge_case_booleon
 	}
 	if = {
 		limit = {
-			check_variable = {building_upgrade_previous_name = training_facilities_1}
+			check_variable = {building_upgrade_previous_name = token:training_facilities_1}
 		}
-		set_variable = {edge_case_building = training_facilities_1 }
-		set_variable = {edge_case_building_option_1 = special_forces_training_facilities_1 }
-		set_variable = {edge_case_building_option_2 = military_bootcamp_1 }
+		set_variable = {edge_case_building = token:training_facilities_1 }
+		set_variable = {edge_case_building_option_1 = token:special_forces_training_facilities_1 }
+		set_variable = {edge_case_building_option_2 = token:military_bootcamp_1 }
 		set_country_flag = edge_case_booleon
 	}
 	if = {
 		limit = {
-			check_variable = {building_upgrade_previous_name = military_academy_1}
+			check_variable = {building_upgrade_previous_name = token:military_academy_1}
 		}
-		set_variable = {edge_case_building = military_academy_1 }
-		set_variable = {edge_case_building_option_1 = military_academy_2 }
-		set_variable = {edge_case_building_option_2 = naval_academy_1 }
+		set_variable = {edge_case_building = token:military_academy_1 }
+		set_variable = {edge_case_building_option_1 = token:military_academy_2 }
+		set_variable = {edge_case_building_option_2 = token:naval_academy_1 }
 		set_country_flag = edge_case_booleon
 	}
 	if = {
 		limit = {
-			check_variable = {building_upgrade_previous_name = naval_academy_1}
+			check_variable = {building_upgrade_previous_name = token:naval_academy_1}
 		}
-		set_variable = {edge_case_building = naval_academy_1 }
-		set_variable = {edge_case_building_option_1 = starfighter_academy_1 }
-		set_variable = {edge_case_building_option_2 = admiralty_academy_1 }
+		set_variable = {edge_case_building = token:naval_academy_1 }
+		set_variable = {edge_case_building_option_1 = token:starfighter_academy_1 }
+		set_variable = {edge_case_building_option_2 = token:admiralty_academy_1 }
 		set_country_flag = edge_case_booleon
 	}
 	if = {
@@ -2596,6 +2586,8 @@ refresh_building_time_and_cost_modifiers = {
 }
 
 test_effect_20 = {
-	set_temp_variable = {desired_building = token:arms_factory_1}
-	building_upgrade = yes
+	466 = {
+		set_temp_variable = {desired_building = token:arms_factory_1}
+		building_upgrade_state_scope = yes
+	}
 }
