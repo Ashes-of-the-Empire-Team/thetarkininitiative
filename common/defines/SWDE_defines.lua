@@ -38,6 +38,7 @@ NDefines.NDiplomacy.DIPLOMACY_CREATE_FACTION_FACTOR = 0.40
 
 NDefines.NAir.AIR_WING_FLIGHT_SPEED_MULT = 0.1
 NDefines.NIntel.NAVAL_SUPREMACY_INTEL_LOW = 0
+NDefines.NAir.CARRIER_SIZE_STAT_INCREMENT = 3		-- Added to account for squadron size
 
 -- NAVY
 --[[
