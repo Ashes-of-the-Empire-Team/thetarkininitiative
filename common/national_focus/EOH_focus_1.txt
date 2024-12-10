@@ -973,7 +973,11 @@ focus_tree = {
 		}
 
 		completion_reward = {
-
+			hidden_effect = {
+				recruit_character = EOH_soontir
+			}
+			custom_effect_tooltip = available_theorist
+			show_ideas_tooltip = EOH_soontir
 		}
 	}
 	focus = {
@@ -1007,7 +1011,24 @@ focus_tree = {
 		}
 
 		completion_reward = {
-
+			custom_effect_tooltip = Hand_of_judgement_effect_tt
+			hidden_effect = {
+				division_template = {
+					name = "The Hand of Judgement" #WARNING THIS VALUE NEEDS TOP MATCH THE value in var ITA_militias_cap set in history file
+					#division_names_group = ZER_STORM_1
+					is_locked = yes
+					regiments = {
+						hand_of_judgement = { x = 0 y = 0 }
+					}
+					priority = 1
+				}
+				capital_scope = {
+					create_unit = {
+						division = "name = \"hand_of_judgement\" division_template = \"The Hand of Judgement\" start_manpower_factor = 0"
+						owner = EOH
+					}
+				}
+			}
 		}
 	}
 	focus = {
@@ -1326,7 +1347,7 @@ focus_tree = {
 	}
 	focus = {
 		id = EOH_starship_discounts
-		icon = GFX_eoh_starship_discounts_shine
+		icon = GFX_eoh_starship_discounts
 		cost = 5
 		relative_position_id = EOH_the_santhe_family
 		x = 0
@@ -2425,10 +2446,26 @@ focus_tree = {
 			FOCUS_FILTER_RESEARCH
 		}
 		completion_reward = {
-			custom_effect_tooltip = EOH_add
-			add_to_variable = {thrawn_insights = 1}
+			custom_effect_tooltip = Joruus_effect_tt
 			add_research_slot = 1
-
+			hidden_effect = {
+				division_template = {
+					name = "Joruus C'baoth" #WARNING THIS VALUE NEEDS TOP MATCH THE value in var ITA_militias_cap set in history file
+					#division_names_group = ZER_STORM_1
+					is_locked = yes
+					regiments = {
+						joruus = { x = 0 y = 0 }
+					}
+					priority = 1
+				}
+				capital_scope = {
+					create_unit = {
+						division = "name = \"Joruus C'baoth\" division_template = \"Joruus C'baoth\" start_manpower_factor = 0"
+						owner = EOH
+						id = 123
+					}
+				}
+			}
 		}
 	}
 
@@ -2712,6 +2749,20 @@ focus_tree = {
 		}
 
 		completion_reward = {
+			custom_effect_tooltip = EOH_war_of_restoration_tt
+			hidden_effect = {
+				every_country = {
+					limit = {
+						owns_state = 235
+					}
+					EOH = {
+						create_wargoal = {
+							  target = PREV
+							  type = annex_everything
+						}
+					}
+				}
+			}
 		}
 	}
 
@@ -3033,13 +3084,13 @@ focus_tree = {
 		mutually_exclusive = {
 		}
 		completion_reward = {
-			add_tech_bonus = {
-				name = engineering_construction_bonus
-				bonus = 0.5
-				ahead_reduction = 2
-				uses = 2
-				category = industry
-				category = electronics
+			add_breakthrough_points = {
+				specialization = specialization_land
+				value = 1
+			}
+			add_breakthrough_points = {
+				specialization = specialization_naval
+				value = 1
 			}
 		}
 		
@@ -3062,14 +3113,8 @@ focus_tree = {
 		mutually_exclusive = {
 		}
 		completion_reward = {
-			custom_effect_tooltip = EOH_future_tt
-			##add_tech_bonus = {
-				##name = infantry_bonus
-				##bonus = 1
-				##uses = 2
-				##category = cloning
-			##}
-			##Cloning research bonus
+			custom_effect_tooltip = EOH_cloning_on_nirauan_tt
+
 		}
 	}
 	focus = {
@@ -3090,7 +3135,7 @@ focus_tree = {
 		mutually_exclusive = {
 		}
 		completion_reward = {
-
+			custom_effect_tooltip = EOH_the_template_on_nirauan_tt
 		}
 	}
 	focus = {

@@ -8,6 +8,74 @@ scripted_gui = {
 		}
 
 		effects = {
+			close_button_click = {
+				clr_country_flag = stock_open
+			}
+			market_select_click = {
+				if = {
+					limit = {
+						check_variable = { market_select_var = 1 }
+					}
+					set_variable = { market_select_var = 2 }
+					set_variable = { market_subsidiary = 1 }
+				}
+			}
+			subsidiary_select_click = {
+				if = {
+					limit = {
+						check_variable = { market_select_var = 2 }
+					}
+					set_variable = { market_select_var = 1 }
+					set_variable = { market_subsidiary = 2 }
+				}
+			}
+			buy_sell_select_click = {
+				if = {
+					limit = {
+						check_variable = { buy_sell_var = 1 }
+					}
+					set_variable = { buy_sell_var = 2 }
+				}
+				else = {
+					set_variable = { buy_sell_var = 1 }
+				}
+			}
+		}
+		triggers = {
+
+		}
+		dynamic_lists = {
+			stock_market_grid = {
+				array = Global.stock_market_array
+				entry_container = stock_entry
+				change_scope = yes
+			}
+		}
+		properties = {
+			flag_producer = {
+				image = "[This.GetFlag]"
+			}
+			market_select = {
+				frame = market_select_var
+			}
+			subsidiary_select = {
+				frame = market_subsidiary
+			}
+			buy_sell_select = {
+				frame = buy_sell_var
+			}
+		}
+	}
+	stock_market_buy_sell = {
+		context_type = player_context
+		window_name = "stock_market_buy_sell"
+		visible = {
+			has_government = corporation
+			has_country_flag = stock_open
+			check_variable = { market_subsidiary = 1 }
+		}
+
+		effects = {
 			buy_1_button_click = {
 				set_country_flag = buying_1_share
 				clr_country_flag = buying_10_share
@@ -148,6 +216,12 @@ scripted_gui = {
 					set_temp_variable = { company_holder = PREV.id }
 					PREV = {
 						set_country_flag = bought_out
+						every_country = {
+							remove_from_array = { 
+								array = Global.stock_market_array 
+								value = PREV.id 
+							}
+						}
 					}
 				}
 				every_country = {
@@ -173,35 +247,6 @@ scripted_gui = {
 								log = "[?PREV.share_percentage@company_holder]"
 						}
 					}
-				}
-			}
-			market_select_click = {
-				if = {
-					limit = {
-						check_variable = { market_select_var = 1 }
-					}
-					set_variable = { market_select_var = 2 }
-					set_variable = { market_subsidiary = 1 }
-				}
-			}
-			subsidiary_select_click = {
-				if = {
-					limit = {
-						check_variable = { market_select_var = 2 }
-					}
-					set_variable = { market_select_var = 1 }
-					set_variable = { market_subsidiary = 2 }
-				}
-			}
-			buy_sell_select_click = {
-				if = {
-					limit = {
-						check_variable = { buy_sell_var = 1 }
-					}
-					set_variable = { buy_sell_var = 2 }
-				}
-				else = {
-					set_variable = { buy_sell_var = 1 }
 				}
 			}
 		}
@@ -294,14 +339,33 @@ scripted_gui = {
 			flag_producer = {
 				image = "[This.GetFlag]"
 			}
-			market_select = {
-				frame = market_select_var
+		}
+	}
+	stock_market_subsidiary = {
+		context_type = player_context
+		window_name = "stock_market_subsidiary"
+		visible = {
+			has_government = corporation
+			has_country_flag = stock_open
+			check_variable = { market_subsidiary = 2 }
+		}
+
+		effects = {
+
+		}
+		triggers = {
+
+		}
+		dynamic_lists = {
+			subsidiary_market_grid = {
+				array = subsidiary_array
+				entry_container = stock_entry
+				change_scope = yes
 			}
-			subsidiary_select = {
-				frame = market_subsidiary
-			}
-			buy_sell_select = {
-				frame = buy_sell_var
+		}
+		properties = {
+			flag_producer = {
+				image = "[This.GetFlag]"
 			}
 		}
 	}
