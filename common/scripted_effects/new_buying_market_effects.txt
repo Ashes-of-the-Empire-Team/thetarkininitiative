@@ -186,6 +186,7 @@ buy_item_scripted_effect = {
 	var:producer = {
 		add_to_variable = {currency_amount^primary_currency = total_price}
 		add_to_variable = {quartely_revenue@var:item_to_buy = total_price}
+		add_to_variable = {total_revenue_this_month = total_price}
 	}
 	subtract_from_variable = {global.stock_of_item@var:item_to_buy = amount_to_purchase}
 }
@@ -221,9 +222,31 @@ production_efficiency_calculator = {
 				}
 			}
 			set_variable = {capped_production_efficiency_amount = 1}
-			set_temp_variable = {temporary_calculator = 1}
-			add_to_temp_variable = {temporary_calculator = modifier@production_efficiency_cap_multiplier}
-			multiply_variable = {capped_production_efficiency_amount = temporary_calculator}
+			add_to_variable = {capped_production_efficiency_amount = modifier@production_efficiency_cap_multiplier}
+		}
+		if = {
+			limit = {
+				check_variable = {free_naval_corporate_shipyards < 0}
+			}
+			set_temp_variable = {temp_calculator = free_naval_corporate_shipyards}
+			multiply_temp_variable = {temp_calculator = 6}
+			add_to_variable = {capped_production_efficiency_amount = temp_calculator}
+		}
+		if = {
+			limit = {
+				check_variable = {free_land_corporate_shipyards < 0}
+			}
+			set_temp_variable = {temp_calculator = free_land_corporate_shipyards}
+			multiply_temp_variable = {temp_calculator = 6}
+			add_to_variable = {capped_production_efficiency_amount = temp_calculator}
+		}
+		if = {
+			limit = {
+				check_variable = {free_air_corporate_shipyards < 0}
+			}
+			set_temp_variable = {temp_calculator = free_air_corporate_shipyards}
+			multiply_temp_variable = {temp_calculator = 6}
+			add_to_variable = {capped_production_efficiency_amount = temp_calculator}
 		}
 		clamp_variable = {
 			var = production_efficiency@var:current_item_we_are_looking_at

@@ -52,9 +52,48 @@ scripted_gui = {
                 set_variable = {shifted_position_production_market_y = 120}
                 set_variable = {shifted_position_production_market = 80}
             }
+            land_category_click = {
+                clear_array = current_looking_at_production_array
+                set_variable = {looking_at_production_array_type = global.land_market_category}
+                for_each_loop = {
+                    array = Production_array@var:global.land_market_category
+                    value = current_item_we_are_looking_at
+                    add_to_array = {
+                        array = current_looking_at_production_array
+                        value = current_item_we_are_looking_at
+                    }
+                }
+                set_variable = {shifted_position_production_market_y = 120}
+                set_variable = {shifted_position_production_market = 30}
+            }
             production_increase_click = {
                 set_temp_variable = {item_id = current_looking_at_production_array^i}
                 add_to_variable = {factories_on_item@var:item_id = 1}
+
+                ## Cost a factory
+                if = {
+                    limit = {
+                        check_variable = {looking_at_production_array_type = global.naval_market_category}
+                    }
+                    subtract_from_variable = {total_naval_corporate_shipyards = 1}
+                }else_if = {
+                    limit = {
+                        check_variable = {looking_at_production_array_type = global.air_market_category}
+                    }
+                    subtract_from_variable = {total_air_corporate_shipyards = 1}
+                }else_if = {
+                    limit = {
+                        check_variable = {looking_at_production_array_type = global.tank_market_category}
+                    }
+                    subtract_from_variable = {total_land_corporate_shipyards = 1}
+                }else_if = {
+                    limit = {
+                        check_variable = {looking_at_production_array_type = global.land_market_category}
+                    }
+                    subtract_from_variable = {total_land_corporate_shipyards = 1}
+                }
+                ####
+
                 ## Caluclautes production efficecny drop
                 set_temp_variable = {production_efficency_loss_percentage = 1}
                 divide_temp_variable = {production_efficency_loss_percentage = factories_on_item@var:item_id}
@@ -66,16 +105,58 @@ scripted_gui = {
             production_decrease_click = {
                 set_temp_variable = {item_id = current_looking_at_production_array^i}
                 add_to_variable = {factories_on_item@var:item_id = -1}
+                if = {
+                    limit = {
+                        check_variable = {looking_at_production_array_type = global.naval_market_category}
+                    }
+                    add_to_variable = {total_naval_corporate_shipyards = 1}
+                }else_if = {
+                    limit = {
+                        check_variable = {looking_at_production_array_type = global.air_market_category}
+                    }
+                    add_to_variable = {total_air_corporate_shipyards = 1}
+                }else_if = {
+                    limit = {
+                        check_variable = {looking_at_production_array_type = global.tank_market_category}
+                    }
+                    add_to_variable = {total_land_corporate_shipyards = 1}
+                }else_if = {
+                    limit = {
+                        check_variable = {looking_at_production_array_type = global.land_market_category}
+                    }
+                    add_to_variable = {total_land_corporate_shipyards = 1}
+                }
             }
         }
         triggers = {
             production_increase_click_enabled = {
-
+                if = {
+                    limit = {
+                        check_variable = {looking_at_production_array_type = global.naval_market_category}
+                    }
+                    check_variable = {free_naval_corporate_shipyards > 0}
+                }else_if = {
+                    limit = {
+                        check_variable = {looking_at_production_array_type = global.air_market_category}
+                    }
+                    check_variable = {free_air_corporate_shipyards > 0}
+                }else_if = {
+                    limit = {
+                        check_variable = {looking_at_production_array_type = global.tank_market_category}
+                    }
+                    check_variable = {free_land_corporate_shipyards > 0}
+                }else_if = {
+                    limit = {
+                        check_variable = {looking_at_production_array_type = global.land_market_category}
+                    }
+                    check_variable = {free_land_corporate_shipyards > 0}
+                }
             }
             production_decrease_click_enabled = {
                 set_temp_variable = {item_id = current_looking_at_production_array^i}
                 check_variable = {factories_on_item@var:item_id > 0}
             }
+            
         }
         properties = {
             production_image = {
