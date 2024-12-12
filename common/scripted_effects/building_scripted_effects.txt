@@ -278,7 +278,12 @@ building_upgrade_find_state_for_usage = {
 		}
 		
 		set_temp_variable = {desired_state_location = temp_state_location}
-	}else = { ## ELSE BUILD RANDOM NEW BUILDING
+	}else_if = { ## ELSE BUILD RANDOM NEW BUILDING
+		limit = {
+			any_owned_state = {
+				has_avaliable_building_slot = yes
+			}
+		}
 		random_owned_state = {
 			limit = {
 				has_avaliable_building_slot = yes
@@ -289,6 +294,31 @@ building_upgrade_find_state_for_usage = {
 					NOT =  {
 						has_variable = building_2
 					}
+				}
+				set_temp_variable = {building_upgrade_previous_name = building_2}
+			}else = {
+				set_temp_variable = {building_upgrade_previous_name = building_1}
+			}
+			set_temp_variable = {desired_state_location = THIS.id}
+		}
+	}else = {  ## If NO NEW BUILDING SLOTS, REMOVE PRIMITIVE BUILDINGS
+		random_owned_state = {
+			limit = {
+				check_variable = {building_1 = token:primitive_farm}
+				check_variable = {building_1 = token:primitive_resource_extraction}
+				check_variable = {building_1 = token:primitive_offices}
+				check_variable = {building_1 = token:primitive_industry}
+				check_variable = {building_2 = token:primitive_farm}
+				check_variable = {building_2 = token:primitive_resource_extraction}
+				check_variable = {building_2 = token:primitive_offices}
+				check_variable = {building_2 = token:primitive_industry}
+			}
+			if = {
+				limit = {
+					check_variable = {building_2 = token:primitive_farm}
+					check_variable = {building_2 = token:primitive_resource_extraction}
+					check_variable = {building_2 = token:primitive_offices}
+					check_variable = {building_2 = token:primitive_industry}
 				}
 				set_temp_variable = {building_upgrade_previous_name = building_2}
 			}else = {
@@ -324,7 +354,7 @@ building_upgrade_building_edge_cases = {
 			check_variable = {building_upgrade_previous_name = token:starfighter_factory_1}
 		}
 		set_variable = {edge_case_building = token:starfighter_factory_1 }
-		set_variable = {edge_case_building_option_1 = token:starfighter_factory_1 }
+		set_variable = {edge_case_building_option_1 = token:starfighter_factory_2 }
 		set_variable = {edge_case_building_option_2 = token:starbomber_factory_1 }
 		set_country_flag = edge_case_booleon
 	}
@@ -665,6 +695,14 @@ clear_building_2_effects = { ## USE THIS FOR GETTING RID OF A BUILDING
 
 add_building_to_construct_slot_1 = {
 	var:state_located_for_building_changes = {
+		if = {
+			limit = {
+				NOT = {
+					has_variable = building_name_passer
+				}
+			}
+			set_temp_variable = {building_name_passer = building_1}
+		}
 		hidden_effect = {
 			clear_building_1_effects = yes
 		}
@@ -684,6 +722,14 @@ add_building_to_construct_slot_1 = {
 }
 add_building_to_construct_slot_2 = {
 	var:state_located_for_building_changes = {
+		if = {
+			limit = {
+				NOT = {
+					has_variable = building_name_passer
+				}
+			}
+			set_temp_variable = {building_name_passer = building_2}
+		}
 		hidden_effect = {
 			clear_building_2_effects = yes
 		}
