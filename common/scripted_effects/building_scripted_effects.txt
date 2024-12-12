@@ -220,12 +220,17 @@ building_upgrade = { ## THIS EFFECT LEADS INTO STATE SCOPE, WE FIND A SUTIABLE S
 			meta_effect = {
 				text = {
 				## Building Upgrade 
+					set_temp_variable = {temp_holder_ignore = 0}
 					var:desired_state_location = {
 						set_variable = { potential_building_holder_for_event = desired_building_upgrade_version }
 						set_variable = { potential_time_left_building_holder_for_event = [FACTORY_NAME]_speed?global.[FACTORY_NAME]_global_speed}
+						set_temp_variable = {temp_holder_ignore = building_1}
+					}
+					ROOT = {
+						set_variable = { state_located_for_building_changes = desired_state_location}
 						if = {
 							limit = {
-								check_variable = {building_upgrade_previous_name = building_1}
+								check_variable = {building_upgrade_previous_name = temp_holder_ignore}
 							}
 							add_building_to_construct_slot_1 = yes
 						}else = {
@@ -655,6 +660,7 @@ clear_building_2_effects = { ## USE THIS FOR GETTING RID OF A BUILDING
 		clear_variable = building_2
 		clr_state_flag = tile_blocker_building_2
 	}
+	log = "test"
 }
 
 add_building_to_construct_slot_1 = {
@@ -2277,6 +2283,17 @@ taxation_center_construction_speed_variable_setter = {
 	multiply_variable = {taxation_center_2_speed = final_calulation_multiplier}
 	multiply_variable = {taxation_center_3_speed = final_calulation_multiplier}
 }
+
+
+trade_complex_construction_speed_variable_setter = {
+	set_variable = {trade_complex_1_speed = global.trade_complex_1_global_speed}
+	set_variable = {trade_complex_2_speed = global.trade_complex_2_global_speed}
+	set_variable = {trade_complex_3_speed = global.trade_complex_3_global_speed}
+	
+	multiply_variable = {trade_complex_1_speed = final_calulation_multiplier}
+	multiply_variable = {trade_complex_2_speed = final_calulation_multiplier}
+	multiply_variable = {trade_complex_3_speed = final_calulation_multiplier}
+}
 ## Cost
 arms_factory_building_construction_cost_variable_setter = {
 
@@ -2432,6 +2449,16 @@ taxation_center_construction_cost_variable_setter = {
 	multiply_variable = {taxation_center_1_cost = final_calulation_multiplier}
 	multiply_variable = {taxation_center_2_cost = final_calulation_multiplier}
 	multiply_variable = {taxation_center_3_cost = final_calulation_multiplier}
+}
+
+trade_complex_construction_cost_variable_setter = {
+	set_variable = {trade_complex_1_cost = global.trade_complex_1_global_cost}
+	set_variable = {trade_complex_2_cost = global.trade_complex_2_global_cost}
+	set_variable = {trade_complex_3_cost = global.trade_complex_3_global_cost}
+	
+	multiply_variable = {trade_complex_1_cost = final_calulation_multiplier}
+	multiply_variable = {trade_complex_2_cost = final_calulation_multiplier}
+	multiply_variable = {trade_complex_3_cost = final_calulation_multiplier}
 }
 
 construction_speed_calculator = {
@@ -2618,8 +2645,18 @@ refresh_building_time_and_cost_modifiers = {
 }
 
 test_effect_20 = {
-	466 = {
-		set_temp_variable = {desired_building = token:arms_factory_1}
-		building_upgrade_state_scope = yes
+	set_temp_variable = {desired_building = token:arms_factory_1}
+	building_upgrade = yes
+}
+
+test_effect_23 = {
+	if = {
+		limit = {
+			is_in_array = {
+				array = global.building_state_constructer_1 
+				value = 189
+			}
+		}
+		log = "DOES NOT HAVE A BUILDING"
 	}
 }

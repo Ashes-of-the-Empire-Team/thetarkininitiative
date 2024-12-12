@@ -29,7 +29,7 @@ on_actions = {
 				## CORPORATE OFFICE
 					if = {
 						limit = {
-							check_variable = {nmn < 5}
+							check_variable = {nmn < 4}
 						}
 						add_to_temp_variable = {temporary_desire_amount = 1000}
 					}
@@ -47,6 +47,7 @@ on_actions = {
 							check_variable = {highest_desired_building_desire_amount < temporary_desire_amount}
 						}
 						set_temp_variable = {highest_desired_building = token:corporate_office_1}
+						set_temp_variable = {highest_desired_building_desire_amount = temporary_desire_amount}
 					}
 					set_temp_variable = {temporary_desire_amount = 0}
 
@@ -84,12 +85,12 @@ on_actions = {
 						}
 						multiply_temp_variable = {temporary_desire_amount = 2}
 					}
-
 					if = {
 						limit = {
 							check_variable = {highest_desired_building_desire_amount < temporary_desire_amount}
 						}
 						set_temp_variable = {highest_desired_building = token:starfighter_factory_1}
+						set_temp_variable = {highest_desired_building_desire_amount = temporary_desire_amount}
 					}
 
 					## TANKS WANTED BUILDING
@@ -127,6 +128,7 @@ on_actions = {
 							check_variable = {highest_desired_building_desire_amount < temporary_desire_amount}
 						}
 						set_temp_variable = {highest_desired_building = token:starfighter_factory_1}
+						set_temp_variable = {highest_desired_building_desire_amount = temporary_desire_amount}
 					}
 
 				## BUILD ONCE
@@ -145,10 +147,20 @@ on_actions = {
 				## Homestead under 25 million manpower
 
 				
-
+				
 				set_temp_variable = {desired_building = highest_desired_building}
-				building_upgrade = yes
-
+				if = {
+					limit = {
+						check_variable = {currency_amount^primary_currency > 90 }
+						any_owned_state = {
+							has_avaliable_building_slot = yes
+						}
+						always = no
+					}
+					subtract_from_variable = {currency_amount^primary_currency = 80 }
+					subtract_from_variable = {buildings_money_chest_amount = 80 }
+					building_upgrade = yes
+				}
 
 			}
 		}
