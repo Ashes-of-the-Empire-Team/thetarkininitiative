@@ -75,22 +75,22 @@ scripted_gui = {
                     limit = {
                         check_variable = {looking_at_production_array_type = global.naval_market_category}
                     }
-                    subtract_from_variable = {total_naval_corporate_shipyards = 1}
+                    subtract_from_variable = {free_naval_corporate_shipyards = 1}
                 }else_if = {
                     limit = {
                         check_variable = {looking_at_production_array_type = global.air_market_category}
                     }
-                    subtract_from_variable = {total_air_corporate_shipyards = 1}
+                    subtract_from_variable = {free_air_corporate_shipyards = 1}
                 }else_if = {
                     limit = {
                         check_variable = {looking_at_production_array_type = global.tank_market_category}
                     }
-                    subtract_from_variable = {total_land_corporate_shipyards = 1}
+                    subtract_from_variable = {free_land_corporate_shipyards = 1}
                 }else_if = {
                     limit = {
                         check_variable = {looking_at_production_array_type = global.land_market_category}
                     }
-                    subtract_from_variable = {total_land_corporate_shipyards = 1}
+                    subtract_from_variable = {free_land_corporate_shipyards = 1}
                 }
                 ####
 
@@ -109,22 +109,22 @@ scripted_gui = {
                     limit = {
                         check_variable = {looking_at_production_array_type = global.naval_market_category}
                     }
-                    add_to_variable = {total_naval_corporate_shipyards = 1}
+                    add_to_variable = {free_naval_corporate_shipyards = 1}
                 }else_if = {
                     limit = {
                         check_variable = {looking_at_production_array_type = global.air_market_category}
                     }
-                    add_to_variable = {total_air_corporate_shipyards = 1}
+                    add_to_variable = {free_air_corporate_shipyards = 1}
                 }else_if = {
                     limit = {
                         check_variable = {looking_at_production_array_type = global.tank_market_category}
                     }
-                    add_to_variable = {total_land_corporate_shipyards = 1}
+                    add_to_variable = {free_land_corporate_shipyards = 1}
                 }else_if = {
                     limit = {
                         check_variable = {looking_at_production_array_type = global.land_market_category}
                     }
-                    add_to_variable = {total_land_corporate_shipyards = 1}
+                    add_to_variable = {free_land_corporate_shipyards = 1}
                 }
             }
         }
@@ -155,6 +155,19 @@ scripted_gui = {
             production_decrease_click_enabled = {
                 set_temp_variable = {item_id = current_looking_at_production_array^i}
                 check_variable = {factories_on_item@var:item_id > 0}
+            }
+
+            naval_factory_count_visible = {
+                check_variable = {looking_at_production_array_type = global.naval_market_category}
+            }
+            air_factory_count_visible = {
+                check_variable = {looking_at_production_array_type = global.air_market_category}
+            }
+            land_factory_count_visible = {
+                Or = {
+                    check_variable = {looking_at_production_array_type = global.land_market_category}
+                    check_variable = {looking_at_production_array_type = global.tank_market_category}
+                }
             }
             
         }
