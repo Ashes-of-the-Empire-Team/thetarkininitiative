@@ -1,12 +1,40 @@
 scripted_gui = {
+
+    market_top_bar = {
+        context_type = player_context
+        window_name = "market_top_bar"
+        visible = {
+            always = yes
+        }
+        effects = {
+            market_overlay_ontop_of_diplomacy_button_click = {
+                if = {
+                    limit = {
+                        has_country_flag = open_buying_market_menu
+                    }
+                    clr_country_flag = open_buying_market_menu
+                }else = {
+                  set_country_flag = open_buying_market_menu
+                }
+            }
+        }
+        triggers = {
+            market_overlay_ontop_of_diplomacy_button_click_enabled = {
+                NOT = {
+                    has_country_flag = open_buying_market_menu
+                }
+            }
+        }
+    }
+    
     Marketplace_selection = {
         context_type = player_context
         window_name = "new_buying_market"
-        parent_window_name = countryinternationalmarketview
         ai_enabled = {
             always = yes
         }
         visible = {
+            has_country_flag = open_buying_market_menu
             NOT = {
                 has_country_flag = open_production_market_menu
             }
@@ -129,38 +157,42 @@ scripted_gui = {
             }
         }
         ai_weights = {
-            # buy_button_click = {
-            #     #			ai_will_do = {
-            #     #				base = 10
-            #     #				modifier = {
-            #     #					tag = GER
-            #     #					
-            #     #					add = 50
-            #     #				}
-            #     #			}
-            #     #			ignore_lower_weights = yes # if yes ai will not call effects has lower weight than this
-            #     #			weight = 50 # weight of this option
-            #     #		}
+            buy_button_click = {
+                #			ai_will_do = {
+                #				base = 10
+                #				modifier = {
+                #					tag = GER
+                #					
+                #					add = 50
+                #				}
+                #			}
+                #			ignore_lower_weights = yes # if yes ai will not call effects has lower weight than this
+                #			weight = 50 # weight of this option
+                #		}
 
-            #     ai_will_do = {
-            #         base = 0
-            #         modifier = {
-            #             set_temp_variable = {lookup_variable = current_selected_market_category_array^i}
-            #             has_variable = ai_weight_towards_variable@var:lookup_variable
+                ai_will_do = {
+                    base = 0
+                    modifier = {
+                        set_temp_variable = {name_of_item_currently_selected = current_selected_market_category_array^i}
+                        set_temp_variable = {maxium_stockpile_amount = maxium_stockpile@var:name_of_item_currently_selected}
+                        set_temp_variable = {temp_equipment_in_stockpile = num_equipment@var:name_of_item_currently_selected}
+                        divide_temp_variable = {temp_equipment_in_stockpile = maxium_stockpile_amount}
+                        set_temp_variable = {maxium_stockpile_amount = 1}
+                        subtract_from_temp_variable = {maxium_stockpile_amount = temp_equipment_in_stockpile}
 
-            #             add = ai_weight_towards_variable@var:lookup_variable ## see whatequipment controller is wanting to buy
-            #         }
-            #         modifier = {
-            #             add = 1000 ## Try to take this course of action if equipment stock is below standard amount
-            #             set_temp_variable = {lookup_variable = current_selected_market_category_array^i}
-            #             has_equipment = {
-            #                 var:lookup_variable < -5 ## ignore IDE error, this does work and hoi 4 recongises it
-            #             }
-            #         }
-            #     }
+                        add = temp_equipment_in_stockpile ## should be percentage decimal
+                    }
+                    modifier = {
+                        add = 1000 ## Try to take this course of action if equipment stock is below standard amount
+                        set_temp_variable = {lookup_variable = current_selected_market_category_array^i}
+                        has_equipment = {
+                            var:lookup_variable < -5 ## ignore IDE error, this does work and hoi 4 recongises it
+                        }
+                    }
+                }
 
 
-            #}
+            }
         }
         triggers = {
         }

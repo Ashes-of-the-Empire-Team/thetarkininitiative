@@ -43,24 +43,6 @@ create_new_category_for_market_ai_version = {
 			value = global.Market_array@global.naval_market_category^i
 		}
 	}
-	sift_through_alliance_types = yes
-	for_each_loop = {
-		array = current_selected_market_category_array
-		value = v
-		index = i
-		add_to_array = {
-			array = naval_market_ai_array
-			value = v
-		}
-	}
-	if = {
-		limit = {
-			check_variable = {current_selected_market_category_array^num > 0 }
-		}
-		clear_array = current_selected_market_category_array
-	}
-
-
 	for_each_loop = {
 		array = global.Market_array@var:global.tank_market_category
 		value = v
@@ -189,6 +171,12 @@ buy_item_scripted_effect = {
 		add_to_variable = {total_revenue_this_month = total_price}
 	}
 	subtract_from_variable = {global.stock_of_item@var:item_to_buy = amount_to_purchase}
+	if = {
+		limit = {
+			is_ai = yes
+		}
+		log = "ai Buying equipment"
+	}
 }
 
 weekly_production_of_item_calculation_scripted_effect = {
@@ -378,137 +366,131 @@ recalculate_maxium_stockpile = {
 		multiply_temp_variable = {temp_stockpile_constant = 4}
 	}
 	for_each_loop = {
-		array = ai_wanted_equipment
+		array = current_selected_market_category_array
 		value = current_selected_item
 		index = i
 		
-		set_variable = {maxium_stockpile@var:current_selected_item = wanted_base@var:current_selected_item}
-		multiply_variable = {maxium_stockpile@var:current_selected_item = global.temp_stockpile_constant}
+		set_variable = {maxium_stockpile@var:current_selected_item = global.temp_stockpile_constant }
+		if = {
+			limit = {
+				check_variable = {category_of_market_item@var:current_selected_item = global.light_tank_identifier}
+			}
+			multiply_temp_variable = {maxium_stockpile@var:current_selected_item = desired_light_tanks?0}
+		}else_if = {
+			limit = {
+				check_variable = {category_of_market_item@var:current_selected_item = global.medium_tank_identifier}
+			}
+			multiply_temp_variable = {maxium_stockpile@var:current_selected_item = desired_medium_tanks?0}
+		}else_if = {
+			limit = {
+				check_variable = {category_of_market_item@var:current_selected_item = global.heavy_tank_identifier}
+			}
+			multiply_temp_variable = {maxium_stockpile@var:current_selected_item = desired_heavy_tanks?0}
+		}else_if = {
+			limit = {
+				check_variable = {category_of_market_item@var:current_selected_item = global.multi_role_identifier}
+			}
+			multiply_temp_variable = {maxium_stockpile@var:current_selected_item = desired_multirole_planes?0}
+		}else_if = {
+			limit = {
+				check_variable = {category_of_market_item@var:current_selected_item = global.fighter_plane_identifier}
+			}
+			multiply_temp_variable = {maxium_stockpile@var:current_selected_item = desired_fighters?0}
+		}else_if = {
+			limit = {
+				check_variable = {category_of_market_item@var:current_selected_item = global.bomber_identifier}
+			}
+			multiply_temp_variable = {maxium_stockpile@var:current_selected_item = desired_bombers?0}
+		}else_if = {
+			limit = {
+				check_variable = {category_of_market_item@var:current_selected_item = global.corvette_identifier}
+			}
+			multiply_temp_variable = {maxium_stockpile@var:current_selected_item = desired_corvette?0}
+		}else_if = {
+			limit = {
+				check_variable = {category_of_market_item@var:current_selected_item = global.frigate_light_cruiser_identifier}
+			}
+			multiply_temp_variable = {maxium_stockpile@var:current_selected_item = desired_frigate_light_cruiser?0}
+		}else_if = {
+			limit = {
+				check_variable = {category_of_market_item@var:current_selected_item = global.heavy_cruiser_identifier}
+			}
+			multiply_temp_variable = {maxium_stockpile@var:current_selected_item = desired_heavy_cruiser?0}
+		}else_if = {
+			limit = {
+				check_variable = {category_of_market_item@var:current_selected_item = global.capital_ship_identifier}
+			}
+			multiply_temp_variable = {maxium_stockpile@var:current_selected_item = desired_capital_ships?0}
+		}else = {
+			multiply_temp_variable = {maxium_stockpile@var:current_selected_item = desired_infantry_weapons?20}
+		}
 
-	} ## lowest percentage of stockpile is brought first
+
+	}
 }
 evaluate_behaviour = {
 	if = {
 		limit = {
-			check_variable = {nmn < 1.0}
+			check_variable = {nmn < 3.0}
 		}
 		random_list = {
 			## BEHAVIOURS 1 AND 2, CHEAP EQUIPMENT
 			10 = {
-				if = {
-					limit = {
-						has_government = imperial
-					}
-					behaviour_1_empire_array_creation_and_desire = yes
-				}else_if = {
-					limit = {
-						has_government = republic
-					}
-					behaviour_1_republic_array_creation_and_desire = yes
-				}else = {
-					behaviour_1_neutral_array_creation_and_desire = yes
-				}
+				behaviour_1_array_creation_and_desire = yes
 			}
 			10 = {
-				if = {
-					limit = {
-						has_government = imperial
-					}
-					behaviour_2_empire_array_creation_and_desire = yes
-				}else_if = {
-					limit = {
-						has_government = republic
-					}
-					behaviour_2_republic_array_creation_and_desire = yes
-				}else = {
-					behaviour_2_neutral_array_creation_and_desire = yes
-				}
+				behaviour_2_array_creation_and_desire = yes
 			}
 		}
 	}else_if = {
 		limit = {
-			check_variable = {nmn < 2.0}
+			check_variable = {nmn < 6.0}
 		}
-		if = {
-			limit = {
-				has_government = imperial
-			}
-			behaviour_3_empire_array_creation_and_desire = yes
-		}else_if = {
-			limit = {
-				has_government = republic
-			}
-			behaviour_3_republic_array_creation_and_desire = yes
-		}else = {
-			behaviour_3_neutral_array_creation_and_desire = yes
-		}
+		behaviour_3_array_creation_and_desire = yes
 	}else = {
-		if = {
-			limit = {
-				has_government = imperial
-			}
-			behaviour_4_empire_array_creation_and_desire = yes
-		}else_if = {
-			limit = {
-				has_government = republic
-			}
-			behaviour_4_republic_array_creation_and_desire = yes
-		}else = {
-			behaviour_4_neutral_array_creation_and_desire = yes
-		}
+		behaviour_4_array_creation_and_desire = yes
 	}
-	add_standard_equipment_desire_and_array = yes
 }
 
 ### BEHAVIOUR EFFECTS
-add_standard_equipment_desire_and_array = {
-	add_to_array = {
-		array = ai_wanted_equipment
-		value = infantry_equipment_0
-	}
-}
 
-behaviour_1_empire_array_creation_and_desire = {
-	add_to_array = {
-		array = ai_wanted_equipment
-		value = at_st_chassis_0
+behaviour_1_array_creation_and_desire = {
+	set_variable = {desired_infantry_weapons = 150}
+	set_variable = {desired_multirole_planes = 75}
+}
+behaviour_2_array_creation_and_desire = {
+	set_variable = {desired_infantry_weapons = 100}
+	set_variable = {desired_light_tanks = 100}
+	set_variable = {desired_corvette = 25}
+}
+behaviour_3_array_creation_and_desire = {
+	set_variable = {desired_infantry_weapons = 50}
+	set_variable = {desired_multirole_planes = 100}
+	set_variable = {desired_corvette = 100}
+	set_variable = {desired_heavy_cruiser = 100}
+}
+behaviour_4_array_creation_and_desire = {
+	set_variable = {desired_infantry_weapons = 75}
+
+	if = {
+		limit = {
+			has_government = REB
+		}
+		set_variable = {desired_multirole_planes = 150}
+	}else = {
+		set_variable = {desired_fighters = 75}
+		set_variable = {desired_bombers = 75}
 	}
-	set_variable = {wanted_base@token:at_st_chassis_0 = 40}
+	set_variable = {desired_medium_tanks = 75}
+	set_variable = {desired_heavy_tanks = 100}
+	set_variable = {desired_frigate_light_cruiser = 100}
+	set_variable = {desired_capital_ships = 100}
 }
 
 test_effect_70 = {
+	set_temp_variable = {lookup_variable = token:infantry_equipment_1}
+	set_temp_variable = {test_variable = global.belonging_to_what_faction@equipment_token}
 	
 }
-behaviour_1_republic_array_creation_and_desire = {
 
-}
-behaviour_1_neutral_array_creation_and_desire = {
-
-}
-behaviour_2_empire_array_creation_and_desire = {
-
-}
-behaviour_2_republic_array_creation_and_desire = {
-
-}
-behaviour_2_neutral_array_creation_and_desire = {
-
-}
-behaviour_3_empire_array_creation_and_desire = {
-
-}
-behaviour_3_republic_array_creation_and_desire = {
-
-}
-behaviour_3_neutral_array_creation_and_desire = {
-	
-}
-behaviour_4_empire_array_creation_and_desire = {
-
-}
-behaviour_4_republic_array_creation_and_desire = {
-
-}
-behaviour_4_neutral_array_creation_and_desire = {
-	
-}
+## Market Builders take your variable and assigns it at the wanted base (eg hgher number = more of light tanks, less = less of light tanks)
