@@ -3,7 +3,7 @@ on_actions = {
 		effect = {
 
 
-			set_variable = {stockpile_constant = 1500}
+			set_variable = {stockpile_constant = 200}
 
 			set_variable = {naval_market_category = 0}
 			set_variable = {tank_market_category = 1}
@@ -2126,7 +2126,7 @@ on_actions = {
 			set_variable = {capital_ship_identifier = 9}
 			# NAVY
 			for_each_loop = {
-				array = Global.Market_array@var:global.land_market_category
+				array = Global.Market_array@var:global.naval_market_category
 				value = current_held_item_name
 				if = {
 					limit = {
@@ -2147,7 +2147,8 @@ on_actions = {
 					set_variable = {category_of_market_item@var:current_held_item_name = capital_ship_identifier}
 				}
 			}
-			create_new_category_for_market_ai_version = yes
+			
+			##create_new_category_for_market_ai_version = yes
 		}
 	}
 	on_daily = {
@@ -2240,70 +2241,6 @@ on_actions = {
 	on_weekly_VON = {
 		effect = {
 			## DELETE THIS BIT WHEN AI IS DONE
-			every_country = {
-				limit = {
-					check_variable = {Production_array@var:global.naval_market_category^num > 0}
-					is_ai = yes
-				}
-				for_each_loop = {
-					array = Production_array@var:global.naval_market_category
-					value = current_item_we_are_looking_at
-					if = {
-						limit = {
-							check_variable = {global.stock_of_item@var:current_item_we_are_looking_at < 50}
-						}
-						add_to_variable = {global.stock_of_item@var:current_item_we_are_looking_at = 1}
-					}
-				}
-			}
-			every_country = {
-				limit = {
-					check_variable = {Production_array@var:global.tank_market_category^num > 0}
-					is_ai = yes
-				}
-				for_each_loop = {
-					array = Production_array@var:global.tank_market_category
-					value = current_item_we_are_looking_at
-					if = {
-						limit = {
-							check_variable = {global.stock_of_item@var:current_item_we_are_looking_at < 800}
-						}
-						add_to_variable = {global.stock_of_item@var:current_item_we_are_looking_at = 50}
-					}
-				}
-			}
-			every_country = {
-				limit = {
-					check_variable = {Production_array@var:global.air_market_category^num > 0}
-					is_ai = yes
-				}
-				for_each_loop = {
-					array = Production_array@var:global.air_market_category
-					value = current_item_we_are_looking_at
-					if = {
-						limit = {
-							check_variable = {global.stock_of_item@var:current_item_we_are_looking_at < 600}
-						}
-						add_to_variable = {global.stock_of_item@var:current_item_we_are_looking_at = 40}
-					}
-				}
-			}
-			every_country = {
-				limit = {
-					check_variable = {Production_array@var:global.land_market_category^num > 0}
-					is_ai = yes
-				}
-				for_each_loop = {
-					array = Production_array@var:global.land_market_category
-					value = current_item_we_are_looking_at
-					if = {
-						limit = {
-							check_variable = {global.stock_of_item@var:current_item_we_are_looking_at < 10000}
-						}
-						add_to_variable = {global.stock_of_item@var:current_item_we_are_looking_at = 100}
-					}
-				}
-			}
 		}
 	}
 	on_monthly = {

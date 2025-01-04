@@ -125,6 +125,12 @@ buy_item_scripted_effect = {
 	set_temp_variable = {producer = global.who_owns_item@var:item_to_buy} ## THIS RELIES ON THE PRODUCER ACTUALLY HAVING THE ABILITY TO PRODUCE THE EQUIPMENT WHEN SELLING IT, OTHERWISE BAD SHIT HAPPENS
 	if = {
 		limit = {
+			is_ai = yes
+		}
+		log = "ai Buying equipment"
+	}
+	if = {
+		limit = {
 			var:producer = {
 				has_country_flag = has_been_brought_out
 			}
@@ -134,8 +140,12 @@ buy_item_scripted_effect = {
 	subtract_from_variable = {currency_amount^primary_currency = total_price}
 	if = {
 		limit = {
-			check_variable = {market_category = global.naval_market_category}
+			is_in_array = {
+				array =  Global.Market_array@var:global.naval_market_category
+				value = item_to_buy
+			}
 		}
+		log = "got here"
 		meta_effect = {
 			text = {
 				add_equipment_production = {
@@ -166,17 +176,11 @@ buy_item_scripted_effect = {
 		}
 	}
 	var:producer = {
-		add_to_variable = {currency_amount^primary_currency = total_price}
+		add_to_variable = {9 = total_price}
 		add_to_variable = {quartely_revenue@var:item_to_buy = total_price}
 		add_to_variable = {total_revenue_this_month = total_price}
 	}
 	subtract_from_variable = {global.stock_of_item@var:item_to_buy = amount_to_purchase}
-	if = {
-		limit = {
-			is_ai = yes
-		}
-		log = "ai Buying equipment"
-	}
 }
 
 weekly_production_of_item_calculation_scripted_effect = {
@@ -411,21 +415,23 @@ recalculate_maxium_stockpile = {
 				check_variable = {category_of_market_item@var:current_selected_item = global.frigate_light_cruiser_identifier}
 			}
 			multiply_temp_variable = {maxium_stockpile@var:current_selected_item = desired_frigate_light_cruiser?0}
+			multiply_temp_variable = {maxium_stockpile@var:current_selected_item = desired_corvette?0}
 		}else_if = {
 			limit = {
 				check_variable = {category_of_market_item@var:current_selected_item = global.heavy_cruiser_identifier}
 			}
 			multiply_temp_variable = {maxium_stockpile@var:current_selected_item = desired_heavy_cruiser?0}
+			multiply_temp_variable = {maxium_stockpile@var:current_selected_item = desired_corvette?0}
 		}else_if = {
 			limit = {
 				check_variable = {category_of_market_item@var:current_selected_item = global.capital_ship_identifier}
 			}
 			multiply_temp_variable = {maxium_stockpile@var:current_selected_item = desired_capital_ships?0}
+			multiply_temp_variable = {maxium_stockpile@var:current_selected_item = desired_corvette?0}
 		}else = {
 			multiply_temp_variable = {maxium_stockpile@var:current_selected_item = desired_infantry_weapons?20}
 		}
-
-
+		multiply_temp_variable = {maxium_stockpile@var:current_selected_item = desired_specfic@var:current_selected_item?1}
 	}
 }
 evaluate_behaviour = {
@@ -454,20 +460,30 @@ evaluate_behaviour = {
 
 ### BEHAVIOUR EFFECTS
 
+###global constant set at 200, it is then timsed by your desire
+## for example corvettes will need to be set lower then multirole planes and the likes, otherwise the ai will try to buy 200 corvettes
+## thus you end up with a percentage number
+##
+## Rough Guide
+## Infantry weapons should be set 75 -200 range
+##planes set at 10-30 range 
+## ships at 0 - 0.5 range
+# tanks at 15 - 40 range
+## Think about ratios, what ratio of equipment do you want, eg how many heavy cruisers to corvettes
 behaviour_1_array_creation_and_desire = {
 	set_variable = {desired_infantry_weapons = 150}
-	set_variable = {desired_multirole_planes = 75}
+	set_variable = {desired_multirole_planes = 15}
 }
 behaviour_2_array_creation_and_desire = {
-	set_variable = {desired_infantry_weapons = 100}
-	set_variable = {desired_light_tanks = 100}
-	set_variable = {desired_corvette = 25}
+	set_variable = {desired_infantry_weapons = 75}
+	set_variable = {desired_light_tanks = 35}
+	set_variable = {desired_corvette = 0.1}
 }
 behaviour_3_array_creation_and_desire = {
-	set_variable = {desired_infantry_weapons = 50}
-	set_variable = {desired_multirole_planes = 100}
-	set_variable = {desired_corvette = 100}
-	set_variable = {desired_heavy_cruiser = 100}
+	set_variable = {desired_infantry_weapons = 80}
+	set_variable = {desired_multirole_planes = 15}
+	set_variable = {desired_corvette = 0.2}
+	set_variable = {desired_heavy_cruiser = 0.03}
 }
 behaviour_4_array_creation_and_desire = {
 	set_variable = {desired_infantry_weapons = 75}
@@ -476,21 +492,35 @@ behaviour_4_array_creation_and_desire = {
 		limit = {
 			has_government = REB
 		}
-		set_variable = {desired_multirole_planes = 150}
+		set_variable = {desired_multirole_planes = 30}
 	}else = {
-		set_variable = {desired_fighters = 75}
-		set_variable = {desired_bombers = 75}
+		set_variable = {desired_fighters = 15}
+		set_variable = {desired_bombers = 10}
 	}
-	set_variable = {desired_medium_tanks = 75}
-	set_variable = {desired_heavy_tanks = 100}
+	set_variable = {desired_medium_tanks = 25}
+	set_variable = {desired_heavy_tanks = 15}
 	set_variable = {desired_frigate_light_cruiser = 100}
 	set_variable = {desired_capital_ships = 100}
 }
 
 test_effect_70 = {
-	set_temp_variable = {lookup_variable = token:infantry_equipment_1}
-	set_temp_variable = {test_variable = global.belonging_to_what_faction@equipment_token}
-	
+	set_temp_variable = {atst_token = token:at_st_chassis_0}
+	set_temp_variable = {temp_equipment_in_stockpile = num_equipment@var:atst_token}
+	set_temp_variable = {maxium_stockpile_amount = maxium_stockpile@var:atst_token}
+	log = "[?maxium_stockpile_amount]"
+	divide_temp_variable = {temp_equipment_in_stockpile = maxium_stockpile_amount}
+	set_temp_variable = {maxium_stockpile_amount = 1}
+	subtract_from_temp_variable = {maxium_stockpile_amount = temp_equipment_in_stockpile}
+	set_temp_variable = {percentage_of_max_stockpile = maxium_stockpile_amount}
+	set_variable_to_random = {
+		var = random_error
+		min = -0.03
+		max = 0.03
+		integer = no
+	}
+	## Introduce random probability in order for it to not always buy the same tank or airplane
+	add_to_temp_variable = {percentage_of_max_stockpile = random_error}
+	log = "[?percentage_of_max_stockpile]"
 }
 
 ## Market Builders take your variable and assigns it at the wanted base (eg hgher number = more of light tanks, less = less of light tanks)

@@ -404,25 +404,148 @@ on_actions = {
 
 	# 	}
 	# }
+	on_weekly = {
+		effect = {
+			if = {
+				limit = {
+					is_ai = yes
+				}
+				recalculate_maxium_stockpile = yes
+			}
+			if = {
+				limit = {
+					is_ai = yes
+				}
+				set_temp_variable = {held_lowest_percentage_stockpile_amount = 5}
+				for_each_loop = {
+					array = current_selected_market_category_array
+					value = current_item
+					index = current_index
+
+					## compare to maxium amount
+					set_temp_variable = {name_of_item_currently_selected = current_selected_market_category_array^i}
+					set_temp_variable = {maxium_stockpile_amount = maxium_stockpile@var:current_item}
+					if = {
+						limit = {
+							NOT = {
+								is_in_array = {
+									array =  Global.Market_array@var:global.naval_market_category
+									value = current_item
+								}
+							}
+						}
+						set_temp_variable = {temp_equipment_in_stockpile = num_equipment@var:current_item}
+					}else = {
+						if = {
+							limit = {
+								check_variable = {category_of_market_item@var:current_item = global.corvette_identifier}
+							}
+							set_temp_variable = {temp_equipment_in_stockpile = num_ships_with_type@screen}
+						}else_if = {
+							limit = {
+								check_variable = {category_of_market_item@var:current_item = global.frigate_light_cruiser_identifier}
+							}
+							set_temp_variable = {temp_equipment_in_stockpile = num_ships_with_type@screen}
+							if = {
+								limit = {
+									check_variable = {current_item = token:quaser_1}
+								}
+								add_to_temp_variable = {temp_equipment_in_stockpile = num_ships_with_type@carrier}
+							}
+						}else_if = {
+							limit = {
+								check_variable = {category_of_market_item@var:current_item = global.heavy_cruiser_identifier}
+							}
+							set_temp_variable = {temp_equipment_in_stockpile = num_ships_with_type@capital}
+						}else = {
+							set_temp_variable = {temp_equipment_in_stockpile = num_ships_with_type@capital}
+							add_to_temp_variable = {temp_equipment_in_stockpile = num_ships_with_type@carrier}
+						}
+					}
+					divide_temp_variable = {temp_equipment_in_stockpile = maxium_stockpile_amount}
+					set_temp_variable = {maxium_stockpile_amount = 1}
+					subtract_from_temp_variable = {maxium_stockpile_amount = temp_equipment_in_stockpile}
+					set_temp_variable = {percentage_of_max_stockpile = maxium_stockpile_amount}
+					set_variable_to_random = {
+						var = random_error
+						min = -0.003
+						max = 0.003
+						integer = no
+					}
+					## Introduce random probability in order for it to not always buy the same tank or airplane
+					add_to_temp_variable = {percentage_of_max_stockpile = random_error}
+					if = {
+						limit = {
+							check_variable = {held_lowest_percentage_stockpile_amount > percentage_of_max_stockpile}
+						}
+						log = "Do I switch ever [?held_lowest_percentage_stockpile_amount]"
+						log = "and [?percentage_of_max_stockpile]"
+						set_variable = {held_lowest_percentage_stockpile_amount = percentage_of_max_stockpile}
+						set_variable = {lowest_index_stockpile_amount = current_index}
+					}
+				}
+			}
+		}
+	}
+
+	on_daily = {
+		effect = {
+			## BUYING ITEMS TEST
+			
+			if = {
+				limit = {
+					is_ai = yes
+				}
+				log = "[?current_selected_market_category_array^lowest_index_stockpile_amount.GetTokenKey]"
+					## WE HAVE WORKED OUT LOWEST STOCKPILE, now we buy equipment
+
+				set_temp_variable = {item_to_buy = current_selected_market_category_array^lowest_index_stockpile_amount}
+				set_temp_variable = {amount_to_purchase = 1}
+				set_temp_variable = {amount_checker = amount_to_purchase}
+				if = {
+					limit = {
+						NOT = {
+							is_in_array = {
+								array =  Global.Market_array@var:global.naval_market_category
+								value = name_of_item_currently_selected
+							}
+						}
+					}
+					multiply_temp_variable = {amount_checker = 100}
+				}
+				if = {
+					limit = {
+						set_temp_variable = {money_to_pass = currency_amount^primary_currency}
+						set_temp_variable = {total_price = global.price_of_item_@var:item_to_buy}
+						multiply_temp_variable = {total_price = amount_to_purchase}
+						check_variable = { money_to_pass > total_price}
+						check_variable = {global.stock_of_item@var:item_to_buy > amount_checker}
+					}
+					buy_item_scripted_effect = yes
+				}
+			}
+		}
+	}
 	on_monthly = {
 		effect = {
-			create_new_category_for_market_ai_version = yes
-			### AI BUYING EQUIPMENT
-			evaluate_behaviour = yes
-			## INF EQUIPMENT DESIRE TO BUY
-				## VARIABLE INF_EQUIPMENT_DESIRE
-			## TANKS
-				## VARIABLE TANK_EQUIPMENT_DESIRE
-			## AIR
-				## VARIABLE AIR_EQUIPMENT_DESIRE
-			## NAVAL
-				## VARIABLE NAVAL_EQUIPMENT_DESIRE
-			## CUSTOM DESIRES
-
-			## re calculates maxium_stockpile
-			recalculate_maxium_stockpile = yes ## this effect is also used for ai nations on declairation of war (or lead up to war if wanted by devs) to make stockpiles bigger
-
-
+			if = {
+				limit = {
+					is_ai = yes
+				}
+				set_country_flag = open_buying_market_menu
+				create_new_category_for_market_ai_version = yes
+				### AI BUYING EQUIPMENT
+				evaluate_behaviour = yes
+				## INF EQUIPMENT DESIRE TO BUY
+					## VARIABLE INF_EQUIPMENT_DESIRE
+				## TANKS
+					## VARIABLE TANK_EQUIPMENT_DESIRE
+				## AIR
+					## VARIABLE AIR_EQUIPMENT_DESIRE
+				## NAVAL
+					## VARIABLE NAVAL_EQUIPMENT_DESIRE
+				## CUSTOM DESIRES
+			}
 		}
 	}
 	on_monthly_VON = {
