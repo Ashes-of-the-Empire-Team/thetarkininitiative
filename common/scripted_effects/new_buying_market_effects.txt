@@ -127,7 +127,7 @@ buy_item_scripted_effect = {
 		limit = {
 			is_ai = yes
 		}
-		log = "ai Buying equipment"
+		# log = "ai Buying equipment"
 	}
 	if = {
 		limit = {
@@ -140,12 +140,8 @@ buy_item_scripted_effect = {
 	subtract_from_variable = {currency_amount^primary_currency = total_price}
 	if = {
 		limit = {
-			is_in_array = {
-				array =  Global.Market_array@var:global.naval_market_category
-				value = item_to_buy
-			}
+			am_i_a_ship = yes
 		}
-		log = "got here"
 		meta_effect = {
 			text = {
 				add_equipment_production = {
@@ -176,7 +172,7 @@ buy_item_scripted_effect = {
 		}
 	}
 	var:producer = {
-		add_to_variable = {9 = total_price}
+		add_to_variable = {currency_amount^primary_currency = total_price}
 		add_to_variable = {quartely_revenue@var:item_to_buy = total_price}
 		add_to_variable = {total_revenue_this_month = total_price}
 	}
@@ -504,23 +500,32 @@ behaviour_4_array_creation_and_desire = {
 }
 
 test_effect_70 = {
-	set_temp_variable = {atst_token = token:at_st_chassis_0}
-	set_temp_variable = {temp_equipment_in_stockpile = num_equipment@var:atst_token}
-	set_temp_variable = {maxium_stockpile_amount = maxium_stockpile@var:atst_token}
-	log = "[?maxium_stockpile_amount]"
-	divide_temp_variable = {temp_equipment_in_stockpile = maxium_stockpile_amount}
-	set_temp_variable = {maxium_stockpile_amount = 1}
-	subtract_from_temp_variable = {maxium_stockpile_amount = temp_equipment_in_stockpile}
-	set_temp_variable = {percentage_of_max_stockpile = maxium_stockpile_amount}
-	set_variable_to_random = {
-		var = random_error
-		min = -0.03
-		max = 0.03
-		integer = no
+
+	if = {
+		limit= {
+			has_tech = infantry_weapons1
+		}
+		log = "yes"
 	}
-	## Introduce random probability in order for it to not always buy the same tank or airplane
-	add_to_temp_variable = {percentage_of_max_stockpile = random_error}
-	log = "[?percentage_of_max_stockpile]"
+
+
+	# set_variable = {required_researched_technology@token:t4_b_chassis_1 = token:t4_b_advanced}
+	# set_temp_variable = {needed_tech = required_researched_technology@var:current_item_we_are_looking_at?token:post_endor_survival}
+	# log = "[?needed_tech.GetTokenKey]"
+	# set_technology = {
+	# 	t4_b_advanced = 1
+	# }
+	# if = {
+	# 	limit = {
+	# 		meta_trigger = {
+	# 			text = {
+	# 				has_tech = [TECH_HELD]
+	# 			}
+	# 			TECH_HELD = "[?required_researched_technology@token:t4_b_chassis_1.GetTokenKey]"
+	# 		}
+	# 	}
+	# 	log = "yes"
+	# }
 }
 
 ## Market Builders take your variable and assigns it at the wanted base (eg hgher number = more of light tanks, less = less of light tanks)

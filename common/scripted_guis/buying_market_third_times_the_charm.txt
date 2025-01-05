@@ -1,40 +1,12 @@
-scripted_gui = {
-
-    market_top_bar = {
-        context_type = player_context
-        window_name = "market_top_bar"
-        visible = {
-            always = yes
-        }
-        effects = {
-            market_overlay_ontop_of_diplomacy_button_click = {
-                if = {
-                    limit = {
-                        has_country_flag = open_buying_market_menu
-                    }
-                    clr_country_flag = open_buying_market_menu
-                }else = {
-                  set_country_flag = open_buying_market_menu
-                }
-            }
-        }
-        triggers = {
-            # market_overlay_ontop_of_diplomacy_button_click_enabled = {
-            #     NOT = {
-            #         has_country_flag = open_buying_market_menu
-            #     }
-            # }
-        }
-    }
-    
+scripted_gui = {    
     Marketplace_selection = {
         context_type = player_context
         window_name = "new_buying_market"
+        parent_window_name = countryinternationalmarketview
         ai_enabled = {
             always = yes
         }
         visible = {
-            has_country_flag = open_buying_market_menu
             NOT = {
                 has_country_flag = open_production_market_menu
             }

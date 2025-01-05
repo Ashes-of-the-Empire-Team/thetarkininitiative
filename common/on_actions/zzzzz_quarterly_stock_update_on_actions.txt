@@ -1,0 +1,68 @@
+## THIS FILE NEEDS TO BE AT THE END OF ON ACTIONS DO NOT REMOVE IT OR UPDATE THE NAME UNLESS ITS STILL AT THE END
+## IT WILL AFFECT PRODUCTION AI IF YOU DO MOVE IT
+
+on_action = {
+	on_monthly = {
+		effect = {
+			if = {
+				limit = {
+					has_global_flag = month_three_of_stocks
+				}
+				set_variable = {total_revenue_this_month = 0}
+				for_each_loop = {
+					array = Production_array@var:global.air_market_category
+					value = current_item_we_are_looking_at
+
+					add_to_variable = {total_cost_this_month = quartely_cost@var:current_item_we_are_looking_at}
+
+					set_variable = {quartely_revenue@var:current_item_we_are_looking_at = 0}
+					set_variable = {quartely_cost@var:current_item_we_are_looking_at = 0}
+				}
+				for_each_loop = {
+					array = Production_array@var:global.tank_market_category
+					value = current_item_we_are_looking_at
+
+					add_to_variable = {total_cost_this_month = quartely_cost@var:current_item_we_are_looking_at}
+
+					set_variable = {quartely_revenue@var:current_item_we_are_looking_at = 0}
+					set_variable = {quartely_cost@var:current_item_we_are_looking_at = 0}
+					
+				}
+				for_each_loop = {
+					array = Production_array@var:global.naval_market_category
+					value = current_item_we_are_looking_at
+					
+					add_to_variable = {total_cost_this_month = quartely_cost@var:current_item_we_are_looking_at}
+
+					set_variable = {quartely_revenue@var:current_item_we_are_looking_at = 0}
+					set_variable = {quartely_cost@var:current_item_we_are_looking_at = 0}
+
+				}
+				for_each_loop = {
+					array = Production_array@var:global.land_market_category
+					value = current_item_we_are_looking_at
+
+					add_to_variable = {total_cost_this_month = quartely_cost@var:current_item_we_are_looking_at}
+					
+					set_variable = {quartely_revenue@var:current_item_we_are_looking_at = 0}
+					set_variable = {quartely_cost@var:current_item_we_are_looking_at = 0}
+				}
+				### CALCULATE SHARE PRICE ###
+				set_temp_variable = { stock_change_multiplier = total_revenue_this_month }
+				divide_temp_variable = { stock_change_multiplier = quartley_money_last_month }
+				clamp_variable = {
+					var = stock_change_multiplier
+					min = 0.5
+				}
+				multiply_variable = { Global.stock_price_@ROOT = stock_change_multiplier }
+				clamp_variable = {
+					var = Global.stock_price_@ROOT
+					min = 0.005
+				}
+
+				set_variable = {quartley_money_last_month = total_revenue_this_month}
+				set_variable = {quartley_money_last_month = 0}
+			}
+		}
+	}
+}
