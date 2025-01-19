@@ -1,0 +1,67 @@
+scripted_gui = {
+    trandosha_hunting_screen = {
+        context_type = player_context
+        window_name = "trandosha_hunting_screen"
+        visible = {
+            tag = TRA
+			has_country_flag = tra_hunting_screen_open
+        }
+		effects = {
+			map_box_right_click = {
+				if = {
+					limit = {
+						is_debug = yes
+					}
+					set_variable = {player_character_x_postion = i}
+					modulo_variable = {
+						var = player_character_x_postion
+						value = 32
+					}
+					set_variable = {player_character_y_postion = i}
+					divide_variable = {player_character_y_postion = 32}
+					subtract_from_variable = {player_character_y_postion = 0.499}
+					round_variable = player_character_y_postion
+					multiply_variable = {player_character_x_postion = 20}
+					multiply_variable = {player_character_y_postion = 20}
+
+
+					set_variable = {player_view_x_postion = player_character_x_postion}
+					set_variable = {player_view_y_postion = player_character_y_postion}
+
+					log = "Player view y [?player_view_y_postion]"
+					subtract_from_variable = {player_view_x_postion = 775}
+					subtract_from_variable = {player_view_y_postion = 768}
+					log = "Player view y [?player_view_y_postion]"
+				}
+			}
+			map_box_click = {
+				set_variable = {player_character_x_end_up_position = i}
+				modulo_variable = {
+					var = player_character_x_end_up_position
+					value = 32
+				}
+				set_variable = {player_character_y_end_up_position = i}
+				divide_variable = {player_character_y_end_up_position = 32}
+				subtract_from_variable = {player_character_y_end_up_position = 0.499}
+				round_variable = player_character_y_end_up_position
+
+			}
+		}
+		dynamic_lists = {
+            box_list = {
+                array = trandosha_map_box_array
+                entry_container = trandosha_hunting_box
+            }
+        }
+		properties = {
+			player_character = {
+				x = player_character_x_postion 
+				y = player_character_y_postion
+			}
+			player_view = {
+				x = player_view_x_postion 
+				y = player_view_y_postion
+			}
+		}
+	}
+}

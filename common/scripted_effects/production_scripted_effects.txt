@@ -1,154 +1,220 @@
-create_starfighter_market_effect = {
-	set_temp_variable = {tag_to_use_as_effect = starfighter_tag_holder@var:air_market_equipment_builder^0}
-	set_temp_variable = {amount_to_add = starfighter_amount_contract_holder@var:air_market_equipment_builder^0}
-	set_temp_variable = {market_equipment_actual = global.market_queue_equipment_air^air_market_equipment_builder }
-	var:tag_to_use_as_effect = {
-		meta_effect = {
-			text = {
-				add_equipment_to_stockpile = {
-					type = [MARKET_ITEM]
-					amount = [MARKET_AMOUNT]
-				}
-			}
-			MARKET_ITEM = "[?market_equipment_actual.GetTokenKey]" 
-			MARKET_AMOUNT = "[?amount_to_add]"
-		}
-		# meta_effect = {
-		# 	text = {
-		# 		clr_country_flag = order_in_progress_[MARKET_ITEM_NUMBER]
-		# 	}
-		# 	MARKET_ITEM_NUMBER = "[?market_equipment_number|.0]" 
-		# }
-	}
-}
-create_tank_market_effect = {
-	set_temp_variable = {tag_to_use_as_effect = tank_tag_holder@var:land_market_equipment_builder^0}
-	set_temp_variable = {amount_to_add = tank_amount_contract_holder@var:land_market_equipment_builder^0}
-	set_temp_variable = {market_equipment_actual = global.market_queue_equipment_tank^land_market_equipment_builder }
-	var:tag_to_use_as_effect = {
-		meta_effect = {
-			text = {
-				add_equipment_to_stockpile = {
-					type = [MARKET_ITEM]
-					amount = [MARKET_AMOUNT]
-				}
-			}
-			MARKET_ITEM = "[?market_equipment_actual.GetTokenKey]" 
-			MARKET_AMOUNT = "[?amount_to_add]"
-		}
-		# meta_effect = {
-		# 	text = {
-		# 		clr_country_flag = order_in_progress_[MARKET_ITEM_NUMBER]
-		# 	}
-		# 	MARKET_ITEM_NUMBER = "[?market_equipment_number|.0]" 
-		# }
-	}
-}
-create_soft_market_effect = {
-	set_temp_variable = {tag_to_use_as_effect = soft_tag_holder@var:soft_market_equipment_builder^0}
-	set_temp_variable = {amount_to_add = soft_amount_contract_holder@var:soft_market_equipment_builder^0}
-	set_temp_variable = {market_equipment_actual = global.market_queue_equipment_soft^soft_market_equipment_builder }
-	var:tag_to_use_as_effect = {
-		meta_effect = {
-			text = {
-				add_equipment_to_stockpile = {
-					type = [MARKET_ITEM]
-					amount = [MARKET_AMOUNT]
-					producer = PREV
-				}
-			}
-			MARKET_ITEM = "[?market_equipment_actual.GetTokenKey]" 
-			MARKET_AMOUNT = "[?amount_to_add]"
-		}
-		# meta_effect = {
-		# 	text = {
-		# 		clr_country_flag = order_in_progress_[MARKET_ITEM_NUMBER]
-		# 	}
-		# 	MARKET_ITEM_NUMBER = "[?market_equipment_number|.0]" 
-		# }
-	}
-}
-create_ship_market_effect = {
-	set_temp_variable = {tag_to_use_as_effect = ship_tag_holder@var:ship_market_equipment_builder^0}
-	set_temp_variable = {amount_to_add = ship_amount_contract_holder@var:ship_market_equipment_builder^0}
-	set_temp_variable = {market_equipment_actual = global.market_queue_equipment_ship^ship_market_equipment_builder }
-	var:tag_to_use_as_effect = {
-		meta_effect = {
-			text = {
-				for_loop_effect = {
-					end = [MARKET_AMOUNT]
-					value = temp
-					create_ship = {
-						type = [MARKET_ITEM]
-						equipment_variant = "[MARKET_SHIP_VARIENT_NAME]"
+search_for_items_with_no_production = {
+	for_each_loop = {
+		array = Production_array@var:temp_market_category
+		value = current_item_we_are_looking_at
+		if = {
+			limit = {
+				check_variable = {factories_on_item@var:current_item_we_are_looking_at < 1}
+				set_temp_variable = {needed_tech = global.required_researched_technology@var:current_item_we_are_looking_at?token:post_endor_survival}
+				meta_trigger = {
+					text = {
+						has_tech = [TECH_HELD]
 					}
+					TECH_HELD = "[?needed_tech.GetTokenKey]"
 				}
 			}
-			MARKET_ITEM = "[?market_equipment_actual.GetTokenKey]" 
-			MARKET_AMOUNT = "[?amount_to_add]"
-			MARKET_SHIP_VARIENT_NAME = "[GetShipVarientName]"
+			add_to_temp_array = {
+				array = factories_with_no_current_production
+				value = current_item_we_are_looking_at
+			}
+			## add factory
+		}else_if = {
+			limit = {
+				check_variable = {factories_on_item@var:current_item_we_are_looking_at > 1}
+			}
+			if = {
+				limit = {
+					check_variable = {quartely_revenue@var:current_item_we_are_looking_at > quartely_cost@var:current_item_we_are_looking_at}
+					check_variable = {temp_free_corporate_factories < 1}
+				}
+				## compare quartley income to next worst quartely income
+				set_temp_variable = {temp_quartely_profit = quartely_revenue@var:current_item_we_are_looking_at}
+				subtract_from_temp_variable = {temp_quartely_profit = quartely_cost@var:current_item_we_are_looking_at}
+				if = {
+					limit = {
+						check_variable = {temp_quartely_profit < lowest_profit_in_list}
+					}
+					set_temp_variable = {lowest_profit_in_list = temp_quartely_profit}
+					set_temp_variable = {worst_performing_item = current_item_we_are_looking_at}
+				}
+			}
 		}
-		# meta_effect = {
-		# 	text = {
-		# 		clr_country_flag = order_in_progress_[MARKET_ITEM_NUMBER]
-		# 	}
-		# 	MARKET_ITEM_NUMBER = "[?market_equipment_number|.0]" 
-		# }
 	}
+	if = {
+		limit = {
+			check_variable = {factories_with_no_current_production^num > 0}
+		}
+		for_each_loop = {
+			array = factories_with_no_current_production
+			value = current_item_we_are_looking_at
+			if = {
+				limit = {
+					check_variable = {temp_free_corporate_factories > 0}
+				}
+
+				subtract_from_temp_variable = {temp_free_corporate_factories = 1}
+				add_to_variable = {factories_on_item@var:current_item_we_are_looking_at = 1}
+				set_temp_variable = {production_efficency_loss_percentage = 1}
+				divide_temp_variable = {production_efficency_loss_percentage = factories_on_item@var:current_item_we_are_looking_at}
+				set_temp_variable = {production_efficency_loss_actual = 1}
+				subtract_from_temp_variable = { production_efficency_loss_actual = production_efficency_loss_percentage}
+				multiply_variable = {production_efficiency@var:item_id = production_efficency_loss_actual}
+
+
+			}else_if = {
+				limit = {
+					check_variable = {factories_on_item@var:worst_performing_item > 1}
+				}
+				add_to_variable = {factories_on_item@var:current_item_we_are_looking_at = 1}
+				set_temp_variable = {production_efficency_loss_percentage = 1}
+				divide_temp_variable = {production_efficency_loss_percentage = factories_on_item@var:current_item_we_are_looking_at}
+				set_temp_variable = {production_efficency_loss_actual = 1}
+				subtract_from_temp_variable = { production_efficency_loss_actual = production_efficency_loss_percentage}
+				multiply_variable = {production_efficiency@var:item_id = production_efficency_loss_actual}
+
+				add_to_variable = {factories_on_item@var:worst_performing_item = -1}
+			}
+		}
+	}
+
+	clear_temp_array = factories_with_no_current_production
+	set_temp_variable = {lowest_profit_in_list = 0}
+	set_temp_variable = {worst_performing_item = 0}
 }
 
-## FUTURE CODE FOR LATER 
+## IGNORE KEPT INCASE
+	# #TANK
+	# for_each_loop = {
+	# 	array = Production_array@var:global.tank_market_category
+	# 	value = current_item_we_are_looking_at
+	# 	if = {
+	# 		limit = {
+	# 			check_variable = {factories_on_item@var:current_item_we_are_looking_at < 1}
+	# 			set_temp_variable = {needed_tech = global.required_researched_technology@var:current_item_we_are_looking_at?token:post_endor_survival}
+	# 			meta_trigger = {
+	# 				text = {
+	# 					has_tech = [TECH_HELD]
+	# 				}
+	# 				TECH_HELD = "[?needed_tech.GetTokenKey]"
+	# 			}
+	# 		}
+	# 		add_to_temp_array = {
+	# 			array = factories_with_no_current_production
+	# 			value = current_item_we_are_looking_at
+	# 		}
+	# 		## add factory
+	# 	}else_if = {
+	# 		limit = {
+	# 			check_variable = {factories_on_item@var:current_item_we_are_looking_at > 1}
+	# 		}
+	# 		if = {
+	# 			limit = {
+	# 				check_variable = {quartely_revenue@var:current_item_we_are_looking_at > quartely_cost@var:current_item_we_are_looking_at}
+	# 				check_variable = {free_land_corporate_shipyards < 1}
+	# 			}
+	# 			## compare quartley income to next worst quartely income
+	# 			set_temp_variable = {temp_quartely_profit = quartely_revenue@var:current_item_we_are_looking_at}
+	# 			subtract_from_temp_variable = {temp_quartely_profit = quartely_cost@var:current_item_we_are_looking_at}
+	# 			if = {
+	# 				limit = {
+	# 					check_variable = {temp_quartely_profit < lowest_profit_in_list}
+	# 				}
+	# 				set_temp_variable = {lowest_profit_in_list = temp_quartely_profit}
+	# 				set_temp_variable = {worst_performing_item = current_item_we_are_looking_at}
+	# 			}
+	# 		}
+	# 	}
+	# }
+	# if = {
+	# 	limit = {
+	# 		check_variable = {factories_with_no_current_production^num > 0}
+	# 	}
+	# 	for_each_loop = {
+	# 		array = factories_with_no_current_production
+	# 		value = current_item_we_are_looking_at
 
-# add_to_variable = { amount_in_queue@token:u_wing_airframe_0 = 1 }
+	# 		if = {
+	# 			limit = {
+	# 				check_variable = {factories_on_item@var:worst_performing_item > 1}
+	# 			}
+	# 			add_to_variable = {factories_on_item@var:current_item_we_are_looking_at = 1}
+	# 			set_temp_variable = {production_efficency_loss_percentage = 1}
+	# 			divide_temp_variable = {production_efficency_loss_percentage = factories_on_item@var:current_item_we_are_looking_at}
+	# 			set_temp_variable = {production_efficency_loss_actual = 1}
+	# 			subtract_from_temp_variable = { production_efficency_loss_actual = production_efficency_loss_percentage}
+	# 			multiply_variable = {production_efficiency@var:item_id = production_efficency_loss_actual}
 
-# set_variable = { equip_to_buy = token:u_wing_airframe_0 }
-# add_to_variable = { amount_in_queue@var:equip_to_buy = 1 }
+	# 			add_to_variable = {factories_on_item@var:worst_performing_item = -1}
+	# 		}
+	# 	}
+	# }
 
-# for_each_loop = {
-#     array = in_queue_equipment
-#     value = eq
-#     break = bb1
+	# clear_temp_array = factories_with_no_current_production
+	# set_temp_variable = {lowest_profit_in_list = 0}
+	# set_temp_variable = {worst_performing_item = 0}
+	# #land
+	# for_each_loop = {
+	# 	array = Production_array@var:global.land_market_category
+	# 	value = current_item_we_are_looking_at
+	# 	if = {
+	# 		limit = {
+	# 			check_variable = {factories_on_item@var:current_item_we_are_looking_at < 1}
+	# 			set_temp_variable = {needed_tech = global.required_researched_technology@var:current_item_we_are_looking_at?token:post_endor_survival}
+	# 			meta_trigger = {
+	# 				text = {
+	# 					has_tech = [TECH_HELD]
+	# 				}
+	# 				TECH_HELD = "[?needed_tech.GetTokenKey]"
+	# 			}
+	# 		}
+	# 		log = "Item [?current_item_we_are_looking_at.GetTokenKey]"
+	# 		add_to_temp_array = {
+	# 			array = factories_with_no_current_production
+	# 			value = current_item_we_are_looking_at
+	# 		}
+	# 		## add factory
+	# 	}else_if = {
+	# 		limit = {
+	# 			check_variable = {factories_on_item@var:current_item_we_are_looking_at > 1}
+	# 		}
+	# 		if = {
+	# 			limit = {
+	# 				check_variable = {quartely_revenue@var:current_item_we_are_looking_at > quartely_cost@var:current_item_we_are_looking_at}
+	# 				check_variable = {free_land_corporate_shipyards < 1}
+	# 			}
+	# 			## compare quartley income to next worst quartely income
+	# 			set_temp_variable = {temp_quartely_profit = quartely_revenue@var:current_item_we_are_looking_at}
+	# 			subtract_from_temp_variable = {temp_quartely_profit = quartely_cost@var:current_item_we_are_looking_at}
+	# 			if = {
+	# 				limit = {
+	# 					check_variable = {temp_quartely_profit < lowest_profit_in_list}
+	# 				}
+	# 				set_temp_variable = {lowest_profit_in_list = temp_quartely_profit}
+	# 				set_temp_variable = {worst_performing_item = current_item_we_are_looking_at}
+	# 			}
+	# 		}
+	# 	}
+	# }
+	# if = {
+	# 	limit = {
+	# 		check_variable = {factories_with_no_current_production^num > 0}
+	# 	}
+	# 	for_each_loop = {
+	# 		array = factories_with_no_current_production
+	# 		value = current_item_we_are_looking_at
 
-#     if = {
-#         limit = {
-#             check_variable = { eq = equipment_finder_temp }
-#         }
-        
-#         code
+	# 		if = {
+	# 			limit = {
+	# 				check_variable = {factories_on_item@var:worst_performing_item > 1}
+	# 			}
+	# 			add_to_variable = {factories_on_item@var:current_item_we_are_looking_at = 1}
+	# 			set_temp_variable = {production_efficency_loss_percentage = 1}
+	# 			divide_temp_variable = {production_efficency_loss_percentage = factories_on_item@var:current_item_we_are_looking_at}
+	# 			set_temp_variable = {production_efficency_loss_actual = 1}
+	# 			subtract_from_temp_variable = { production_efficency_loss_actual = production_efficency_loss_percentage}
+	# 			multiply_variable = {production_efficiency@var:item_id = production_efficency_loss_actual}
 
-#         set_temp_variable = { bb1 = 1 }
-#     }
-# }
-
-# for_each_loop = {
-#     array = global.market_equipment_types
-#     value = eq
-#     break = bb1
-
-#     if = {
-#         limit = {
-#             check_variable = { orders_in_queue@var:eq > greatest_temp }
-#         }
-        
-#         set_temp_variable = { greatest_temp = orders_in_queue@var:eq }
-#         set_temp_variable = { greatest_eq_temp = eq }
-
-#         set_temp_variable = { bb1 = 1 }
-#     }
-# }
-
-
-
-# #Adding an equipment to queue
-
-# add_to_array = { global.market_equipment_types = token:u_wing_airframe_0 }
-# add_to_array = { global.market_equipment_types = token:u_wing_airframe_1 }
-# add_to_array = { global.market_equipment_types = token:u_wing_airframe_2 }
-# add_to_array = { global.market_equipment_types = token:u_wing_airframe_3 }
-
-# add_to_variable = { orders_in_queue@token:u_wing_airframe_0 = 1 }
-# add_to_variable = { amount_in_queue@token:u_wing_airframe_0 = 100 }
-# add_to_array = { in_queue_equipment = token:u_wing_airframe_0 }
-# add_to_array = { in_queue_tag = EMP }
-# add_to_array = { in_queue_amount = 100 }
-# add_to_array = { in_queue_cost = 1000 }
+	# 			add_to_variable = {factories_on_item@var:worst_performing_item = -1}
+	# 		}
+	# 	}
+	# }

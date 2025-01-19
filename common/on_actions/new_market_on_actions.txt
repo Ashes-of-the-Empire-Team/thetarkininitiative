@@ -15,16 +15,17 @@ on_actions = {
 			set_variable = {neutral_market_choice = 2}
 
 
-			set_variable = {light_tank_identifier = 0}
-			set_variable = {medium_tank_identifier = 1}
-			set_variable = {heavy_tank_identifier = 2}
-			set_variable = {fighter_plane_identifier = 3}
-			set_variable = {multi_role_identifier = 4}
-			set_variable = {bomber_identifier = 5}
-			set_variable = {corvette_identifier = 6}
-			set_variable = {frigate_light_cruiser_identifier = 7}
-			set_variable = {heavy_cruiser_identifier = 8}
-			set_variable = {capital_ship_identifier = 9}
+			set_variable = {light_tank_identifier = token:light_tank_identifier}
+			set_variable = {medium_tank_identifier = token:medium_tank_identifier}
+			set_variable = {heavy_tank_identifier = token:heavy_tank_identifier}
+			set_variable = {fighter_plane_identifier = token:fighter_plane_identifier}
+			set_variable = {multi_role_identifier = token:multi_role_identifier}
+			set_variable = {bomber_identifier = token:bomber_identifier}
+			set_variable = {corvette_identifier = token:corvette_identifier}
+			set_variable = {frigate_light_cruiser_identifier = token:frigate_light_cruiser_identifier}
+			set_variable = {heavy_cruiser_identifier = token:heavy_cruiser_identifier}
+			set_variable = {capital_ship_identifier = token:capital_ship_identifier}
+			set_variable = {infantry_weapons_identifier = token:infantry_weapons_identifier}
 
 			## THIS VARIABLE CONTROLS THE CONSTANT FACTORY OUTPUT MULTIPLIER -- IF YOU WANT MORE THINGS BUILT EVERY TIME, UP THIS NUMBER
 			set_variable = {CONSTANT_FACTORY_OUTPUT_MULTIPLIER = 150} 
@@ -1833,7 +1834,7 @@ on_actions = {
 			}
 			set_variable = {who_owns_item@token:infantry_equipment_0 = CZE}
 			set_variable = {ic_cost@token:infantry_equipment_0 = 0.8}
-			set_variable = {belonging_to_what_faction@token:infantry_equipment_1 = neutral_market_choice}
+			set_variable = {belonging_to_what_faction@token:infantry_equipment_0 = neutral_market_choice}
 			set_variable = {price_of_item_@token:infantry_equipment_0 = 2}
 			CZE = {
 				add_to_array = {
@@ -2166,13 +2167,21 @@ on_actions = {
 					set_variable = {category_of_market_item@var:current_held_item_name = capital_ship_identifier}
 				}
 			}
-			
+			## LAND
+			for_each_loop = {
+				array = Global.Market_array@var:global.land_market_category
+				value = current_held_item_name
+
+				set_variable = {category_of_market_item@var:current_held_item_name = infantry_weapons_identifier}
+			}
 			##create_new_category_for_market_ai_version = yes
 		}
 	}
 	on_daily = {
 		effect = {
 			set_variable = {total_corporate_factory_cost = 0}
+			set_variable = {capped_production_efficiency_amount = 0}
+			capped_production_efficiency_calc = yes
 		## CALCLUATES WEEKLY PRODUCTION AMOUNT and PRODUCTION GROWTH GAIN
 			for_each_loop = {
 				array = Production_array@var:global.air_market_category

@@ -34,31 +34,90 @@ create_new_category_for_market_ai_version = {
 		}
 		clear_array = current_selected_market_category_array
 	}
+	
 	for_each_loop = {
 		array = global.Market_array@var:global.naval_market_category
 		value = v
 		index = i
-		add_to_array = {
-			array = current_selected_market_category_array
-			value = global.Market_array@global.naval_market_category^i
+		if = {
+			limit = {
+				OR = {
+					AND = {
+						check_variable = {category_of_market_item@var:v = global.corvette_identifier}
+						check_variable = {corvette_identifier_desire > 0}
+					}
+					AND = {
+						check_variable = {category_of_market_item@var:v = global.frigate_light_cruiser_identifier}
+						check_variable = {frigate_light_cruiser_identifier_desire > 0}
+					}
+					AND = {
+						check_variable = {category_of_market_item@var:v = global.heavy_cruiser_identifier}
+						check_variable = {heavy_cruiser_identifier_desire > 0}
+					}
+					AND = {
+						check_variable = {category_of_market_item@var:v = global.capital_ship_identifier}
+						check_variable = {capital_ships_identifier_desire > 0}
+					}
+				}
+			}
+			add_to_array = {
+				array = current_selected_market_category_array
+				value = global.Market_array@global.naval_market_category^i
+			}
 		}
 	}
 	for_each_loop = {
 		array = global.Market_array@var:global.tank_market_category
 		value = v
 		index = i
-		add_to_array = {
-			array = current_selected_market_category_array
-			value = global.Market_array@var:global.tank_market_category^i
+		if = {
+			limit = {
+				OR = {
+					AND = {
+						check_variable = {category_of_market_item@var:v = global.light_tank_identifier}
+						check_variable = {corvette_identifier_desire > 0}
+					}
+					AND = {
+						check_variable = {category_of_market_item@var:v = global.medium_tank_identifier}
+						check_variable = {frigate_light_cruiser_identifier_desire > 0}
+					}
+					AND = {
+						check_variable = {category_of_market_item@var:v = global.heavy_tank_identifier}
+						check_variable = {heavy_cruiser_identifier_desire > 0}
+					}
+				}
+			}
+			add_to_array = {
+				array = current_selected_market_category_array
+				value = global.Market_array@var:global.tank_market_category^i
+			}
 		}
 	}
 	for_each_loop = {
 		array = global.Market_array@var:global.air_market_category
 		value = v
 		index = i
-		add_to_array = {
-			array = current_selected_market_category_array
-			value = global.Market_array@var:global.air_market_category^i
+		if = {
+			limit = {
+				OR = {
+					AND = {
+						check_variable = {category_of_market_item@var:v = global.fighter_plane_identifier}
+						check_variable = {corvette_identifier_desire > 0}
+					}
+					AND = {
+						check_variable = {category_of_market_item@var:v = global.multi_role_identifier}
+						check_variable = {frigate_light_cruiser_identifier_desire > 0}
+					}
+					AND = {
+						check_variable = {category_of_market_item@var:v = global.bomber_identifier}
+						check_variable = {heavy_cruiser_identifier_desire > 0}
+					}
+				}
+			}
+			add_to_array = {
+				array = current_selected_market_category_array
+				value = global.Market_array@var:global.air_market_category^i
+			}
 		}
 	}
 	for_each_loop = {
@@ -201,45 +260,51 @@ production_efficiency_calculator = {
 			value = modifier_production_efficency
 		}
 		add_to_variable = {production_efficiency@var:current_item_we_are_looking_at = temporary_efficiency_growth}
-		if = {
-			limit = {
-				check_variable = {
-					var = modifier@production_efficiency_cap_multiplier
-					value = 0
-					compare = not_equals
-				}
-			}
-			set_variable = {capped_production_efficiency_amount = 1}
-			add_to_variable = {capped_production_efficiency_amount = modifier@production_efficiency_cap_multiplier}
-		}
-		if = {
-			limit = {
-				check_variable = {free_naval_corporate_shipyards < 0}
-			}
-			set_temp_variable = {temp_calculator = free_naval_corporate_shipyards}
-			multiply_temp_variable = {temp_calculator = 6}
-			add_to_variable = {capped_production_efficiency_amount = temp_calculator}
-		}
-		if = {
-			limit = {
-				check_variable = {free_land_corporate_shipyards < 0}
-			}
-			set_temp_variable = {temp_calculator = free_land_corporate_shipyards}
-			multiply_temp_variable = {temp_calculator = 6}
-			add_to_variable = {capped_production_efficiency_amount = temp_calculator}
-		}
-		if = {
-			limit = {
-				check_variable = {free_air_corporate_shipyards < 0}
-			}
-			set_temp_variable = {temp_calculator = free_air_corporate_shipyards}
-			multiply_temp_variable = {temp_calculator = 6}
-			add_to_variable = {capped_production_efficiency_amount = temp_calculator}
-		}
 		clamp_variable = {
 			var = production_efficiency@var:current_item_we_are_looking_at
-			max = capped_production_efficiency_amount?1
+			max = capped_production_efficiency_amount
+			min = 0
 		}
+	}
+}
+capped_production_efficiency_calc = {
+	if = {
+		limit = {
+			check_variable = {free_naval_corporate_shipyards < 0}
+		}
+		set_temp_variable = {temp_calculator = free_naval_corporate_shipyards}
+		multiply_temp_variable = {temp_calculator = 6}
+		add_to_variable = {capped_production_efficiency_amount = temp_calculator}
+	}
+	if = {
+		limit = {
+			check_variable = {free_land_corporate_shipyards < 0}
+		}
+		set_temp_variable = {temp_calculator = free_land_corporate_shipyards}
+		multiply_temp_variable = {temp_calculator = 6}
+		add_to_variable = {capped_production_efficiency_amount = temp_calculator}
+	}
+	if = {
+		limit = {
+			check_variable = {free_air_corporate_shipyards < 0}
+		}
+		set_temp_variable = {temp_calculator = free_air_corporate_shipyards}
+		multiply_temp_variable = {temp_calculator = 6}
+		add_to_variable = {capped_production_efficiency_amount = temp_calculator}
+	}
+	##turn cap into percentage
+	divide_variable = {capped_production_efficiency_amount = 100}
+
+	add_to_variable = {capped_production_efficiency_amount = 1}
+	if = {
+		limit = {
+			check_variable = {
+				var = modifier@production_efficiency_cap_multiplier
+				value = 0
+				compare = not_equals
+			}
+		}
+		add_to_variable = {capped_production_efficiency_amount = modifier@production_efficiency_cap_multiplier}
 	}
 }
 work_out_total_factory_price = {
@@ -371,63 +436,13 @@ recalculate_maxium_stockpile = {
 		index = i
 		
 		set_variable = {maxium_stockpile@var:current_selected_item = global.temp_stockpile_constant }
-		if = {
-			limit = {
-				check_variable = {category_of_market_item@var:current_selected_item = global.light_tank_identifier}
+		meta_effect = {
+			text = {
+				multiply_variable = {maxium_stockpile@var:current_selected_item = [TOKEN_NAME]_desire?0}
 			}
-			multiply_temp_variable = {maxium_stockpile@var:current_selected_item = desired_light_tanks?0}
-		}else_if = {
-			limit = {
-				check_variable = {category_of_market_item@var:current_selected_item = global.medium_tank_identifier}
-			}
-			multiply_temp_variable = {maxium_stockpile@var:current_selected_item = desired_medium_tanks?0}
-		}else_if = {
-			limit = {
-				check_variable = {category_of_market_item@var:current_selected_item = global.heavy_tank_identifier}
-			}
-			multiply_temp_variable = {maxium_stockpile@var:current_selected_item = desired_heavy_tanks?0}
-		}else_if = {
-			limit = {
-				check_variable = {category_of_market_item@var:current_selected_item = global.multi_role_identifier}
-			}
-			multiply_temp_variable = {maxium_stockpile@var:current_selected_item = desired_multirole_planes?0}
-		}else_if = {
-			limit = {
-				check_variable = {category_of_market_item@var:current_selected_item = global.fighter_plane_identifier}
-			}
-			multiply_temp_variable = {maxium_stockpile@var:current_selected_item = desired_fighters?0}
-		}else_if = {
-			limit = {
-				check_variable = {category_of_market_item@var:current_selected_item = global.bomber_identifier}
-			}
-			multiply_temp_variable = {maxium_stockpile@var:current_selected_item = desired_bombers?0}
-		}else_if = {
-			limit = {
-				check_variable = {category_of_market_item@var:current_selected_item = global.corvette_identifier}
-			}
-			multiply_temp_variable = {maxium_stockpile@var:current_selected_item = desired_corvette?0}
-		}else_if = {
-			limit = {
-				check_variable = {category_of_market_item@var:current_selected_item = global.frigate_light_cruiser_identifier}
-			}
-			multiply_temp_variable = {maxium_stockpile@var:current_selected_item = desired_frigate_light_cruiser?0}
-			multiply_temp_variable = {maxium_stockpile@var:current_selected_item = desired_corvette?0}
-		}else_if = {
-			limit = {
-				check_variable = {category_of_market_item@var:current_selected_item = global.heavy_cruiser_identifier}
-			}
-			multiply_temp_variable = {maxium_stockpile@var:current_selected_item = desired_heavy_cruiser?0}
-			multiply_temp_variable = {maxium_stockpile@var:current_selected_item = desired_corvette?0}
-		}else_if = {
-			limit = {
-				check_variable = {category_of_market_item@var:current_selected_item = global.capital_ship_identifier}
-			}
-			multiply_temp_variable = {maxium_stockpile@var:current_selected_item = desired_capital_ships?0}
-			multiply_temp_variable = {maxium_stockpile@var:current_selected_item = desired_corvette?0}
-		}else = {
-			multiply_temp_variable = {maxium_stockpile@var:current_selected_item = desired_infantry_weapons?20}
+			TOKEN_NAME = "[?category_of_market_item@var:current_selected_item.GetTokenKey]"
 		}
-		multiply_temp_variable = {maxium_stockpile@var:current_selected_item = desired_specfic@var:current_selected_item?1}
+		multiply_variable = {maxium_stockpile@var:current_selected_item = specfic_identifier_desire@var:current_selected_item?1}
 	}
 }
 evaluate_behaviour = {
@@ -467,45 +482,56 @@ evaluate_behaviour = {
 # tanks at 15 - 40 range
 ## Think about ratios, what ratio of equipment do you want, eg how many heavy cruisers to corvettes
 behaviour_1_array_creation_and_desire = {
-	set_variable = {desired_infantry_weapons = 150}
-	set_variable = {desired_multirole_planes = 15}
+	set_variable = {infantry_weapons_identifier_desire = 150}
+	set_variable = {multi_role_identifier_desire = 15}
 }
 behaviour_2_array_creation_and_desire = {
-	set_variable = {desired_infantry_weapons = 75}
-	set_variable = {desired_light_tanks = 35}
-	set_variable = {desired_corvette = 0.1}
+	set_variable = {infantry_weapons_identifier_desire = 75}
+	set_variable = {light_tanks_identifier_desire = 35}
+	set_variable = {corvette_identifier_desire = 0.1}
 }
 behaviour_3_array_creation_and_desire = {
-	set_variable = {desired_infantry_weapons = 80}
-	set_variable = {desired_multirole_planes = 15}
-	set_variable = {desired_corvette = 0.2}
-	set_variable = {desired_heavy_cruiser = 0.03}
+	set_variable = {infantry_weapons_identifier_desire = 80}
+	set_variable = {multi_role_identifier_desire = 15}
+	set_variable = {corvette_identifier_desire = 0.2}
+	set_variable = {heavy_cruiser_identifier_desire = 0.03}
 }
 behaviour_4_array_creation_and_desire = {
-	set_variable = {desired_infantry_weapons = 75}
+	set_variable = {infantry_weapons_identifier_desire = 75}
 
 	if = {
 		limit = {
 			has_government = REB
 		}
-		set_variable = {desired_multirole_planes = 30}
+		set_variable = {multi_role_identifier_desire = 30}
 	}else = {
-		set_variable = {desired_fighters = 15}
-		set_variable = {desired_bombers = 10}
+		set_variable = {fighters_identifier_desire = 15}
+		set_variable = {bomber_identifier_desire = 10}
 	}
-	set_variable = {desired_medium_tanks = 25}
-	set_variable = {desired_heavy_tanks = 15}
-	set_variable = {desired_frigate_light_cruiser = 100}
-	set_variable = {desired_capital_ships = 100}
+	set_variable = {medium_tanks_identifier_desire = 25}
+	set_variable = {heavy_tanks_identifier_desire = 15}
+	set_variable = {frigate_light_cruiser_identifier_desire = 100}
+	set_variable = {capital_ships_identifier_desire = 100}
 }
 
 test_effect_70 = {
 
-	if = {
-		limit= {
-			has_tech = infantry_weapons1
+	log = "[?trandosha_map_box_array^num]"
+	for_loop_effect = {
+		end = 512
+
+		add_to_array = {
+			array = trandosha_map_box_array
+			value = 1
 		}
-		log = "yes"
+	}
+	for_loop_effect = {
+		end = 512
+
+		add_to_array = {
+			array = trandosha_map_box_array
+			value = 1
+		}
 	}
 
 

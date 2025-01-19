@@ -1,0 +1,56 @@
+on_actions = {
+	on_daily_TRA = {
+		effect = {
+			set_variable = {CONSTANT_MOVE_SPEED = 20}
+			if = {
+				limit = {
+					has_variable = player_character_x_end_up_position
+				}
+				#player_character_x_postion
+				#player_character_y_postion
+				#player_character_x_end_up_position
+				#player_character_y_end_up_position
+
+
+				set_temp_variable = {player_character_x_temp_variable = player_character_x_end_up_position}
+				set_temp_variable = {player_character_y_temp_variable = player_character_y_end_up_position}
+
+				subtract_from_temp_variable = {player_character_x_temp_variable = player_character_x_postion}
+				subtract_from_temp_variable = {player_character_y_temp_variable = player_character_y_postion}
+
+				## calculate percentage to split 20 into
+				## create absoloute of both y + x end postions
+				## divide by distance to calculate the needed rate
+
+				set_temp_variable = {distance_absolute = player_character_y_temp_variable}
+				if = {
+					limit = {
+						check_variable = {player_character_y_temp_variable < 0} ## if minus
+					}
+					multiply_temp_variable = {distance_absolute = -1}
+				}
+				set_temp_variable = {temp_variable = player_character_x_temp_variable}
+				if = {
+					limit = {
+						check_variable = {temp_variable < 0} ## if minus
+					}
+					multiply_temp_variable = {temp_variable = -1}
+				}
+				add_to_temp_variable = {distance_absolute = temp_variable}
+				
+				divide_temp_variable = {player_character_x_temp_variable = distance_absolute}
+				divide_temp_variable = {player_character_y_temp_variable = distance_absolute}
+
+
+				set_temp_variable = {player_x_move_distance = CONSTANT_MOVE_SPEED}
+				set_temp_variable = {player_y_move_distance = CONSTANT_MOVE_SPEED}
+
+				multiply_temp_variable = {player_x_move_distance = player_character_x_temp_variable}
+				multiply_temp_variable = {player_y_move_distance = player_character_y_temp_variable}
+
+				add_to_variable = {player_character_x_postion = player_x_move_distance}
+				add_to_variable = {player_character_y_postion = player_y_move_distance}
+			}
+		}
+	}
+}

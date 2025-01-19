@@ -666,6 +666,13 @@ on_actions = {
 					if = {
 						limit = {
 							check_variable = {quartely_revenue@var:current_item_we_are_looking_at > quartely_cost@var:current_item_we_are_looking_at}
+							set_temp_variable = {needed_tech = global.required_researched_technology@var:current_item_we_are_looking_at?token:post_endor_survival}
+							meta_trigger = {
+								text = {
+									has_tech = [TECH_HELD]
+								}
+								TECH_HELD = "[?needed_tech.GetTokenKey]"
+							}
 						}
 						## compare quartley income to next worst quartely income
 						set_temp_variable = {temp_quartely_profit = quartely_revenue@var:current_item_we_are_looking_at}
@@ -682,6 +689,11 @@ on_actions = {
 				while_loop_effect = {
 					limit = {
 						check_variable = {free_naval_corporate_shipyards > 0}
+						check_variable = {
+							var = best_performing_item
+							value = 0
+							compare = not_equals
+						}
 					}
 					add_to_variable = {factories_on_item@var:best_performing_item = 1}
 					set_temp_variable = {production_efficency_loss_percentage = 1}
@@ -705,6 +717,13 @@ on_actions = {
 					if = {
 						limit = {
 							check_variable = {quartely_revenue@var:current_item_we_are_looking_at > quartely_cost@var:current_item_we_are_looking_at}
+							set_temp_variable = {needed_tech = global.required_researched_technology@var:current_item_we_are_looking_at?token:post_endor_survival}
+							meta_trigger = {
+								text = {
+									has_tech = [TECH_HELD]
+								}
+								TECH_HELD = "[?needed_tech.GetTokenKey]"
+							}
 						}
 						## compare quartley income to next worst quartely income
 						set_temp_variable = {temp_quartely_profit = quartely_revenue@var:current_item_we_are_looking_at}
@@ -721,6 +740,11 @@ on_actions = {
 				while_loop_effect = {
 					limit = {
 						check_variable = {free_air_corporate_shipyards > 0}
+						check_variable = {
+							var = best_performing_item
+							value = 0
+							compare = not_equals
+						}
 					}
 					add_to_variable = {factories_on_item@var:best_performing_item = 1}
 					set_temp_variable = {production_efficency_loss_percentage = 1}
@@ -744,6 +768,13 @@ on_actions = {
 					if = {
 						limit = {
 							check_variable = {quartely_revenue@var:current_item_we_are_looking_at > quartely_cost@var:current_item_we_are_looking_at}
+							set_temp_variable = {needed_tech = global.required_researched_technology@var:current_item_we_are_looking_at?token:post_endor_survival}
+							meta_trigger = {
+								text = {
+									has_tech = [TECH_HELD]
+								}
+								TECH_HELD = "[?needed_tech.GetTokenKey]"
+							}
 						}
 						## compare quartley income to next worst quartely income
 						set_temp_variable = {temp_quartely_profit = quartely_revenue@var:current_item_we_are_looking_at}
@@ -769,6 +800,13 @@ on_actions = {
 					if = {
 						limit = {
 							check_variable = {quartely_revenue@var:current_item_we_are_looking_at > quartely_cost@var:current_item_we_are_looking_at}
+							set_temp_variable = {needed_tech = global.required_researched_technology@var:current_item_we_are_looking_at?token:post_endor_survival}
+							meta_trigger = {
+								text = {
+									has_tech = [TECH_HELD]
+								}
+								TECH_HELD = "[?needed_tech.GetTokenKey]"
+							}
 						}
 						## compare quartley income to next worst quartely income
 						set_temp_variable = {temp_quartely_profit = quartely_revenue@var:current_item_we_are_looking_at}
@@ -785,6 +823,11 @@ on_actions = {
 				while_loop_effect = {
 					limit = {
 						check_variable = {free_land_corporate_shipyards > 0}
+						check_variable = {
+							var = best_performing_item
+							value = 0
+							compare = not_equals
+						}
 					}
 					add_to_variable = {factories_on_item@var:best_performing_item = 1}
 					set_temp_variable = {production_efficency_loss_percentage = 1}
@@ -833,7 +876,7 @@ on_actions = {
 						}
 
 						
-						add_to_variable = {factories_on_item@var:current_item_we_are_looking_at = quartely_cost_of_item}
+						subtract_from_variable = {factories_on_item@var:current_item_we_are_looking_at = quartely_cost_of_item}
 						add_to_variable = {free_naval_corporate_shipyards = quartely_cost_of_item}
 					}
 				}
@@ -854,9 +897,8 @@ on_actions = {
 							min = 0
 							max = 5
 						}
-
-						add_to_variable = {factories_on_item@var:current_item_we_are_looking_at = quartely_cost_of_item}
-						add_to_variable = {free_naval_corporate_shipyards = quartely_cost_of_item}
+						subtract_from_variable = {factories_on_item@var:current_item_we_are_looking_at = quartely_cost_of_item}
+						add_to_variable = {free_land_corporate_shipyards = quartely_cost_of_item}
 					}
 				}
 				for_each_loop = {
@@ -877,8 +919,8 @@ on_actions = {
 							max = 5
 						}
 
-						add_to_variable = {factories_on_item@var:current_item_we_are_looking_at = quartely_cost_of_item}
-						add_to_variable = {free_naval_corporate_shipyards = quartely_cost_of_item}
+						subtract_from_variable = {factories_on_item@var:current_item_we_are_looking_at = quartely_cost_of_item}
+						add_to_variable = {free_land_corporate_shipyards = quartely_cost_of_item}
 					}
 				}
 				for_each_loop = {
@@ -899,8 +941,8 @@ on_actions = {
 							max = 5
 						}
 
-						add_to_variable = {factories_on_item@var:current_item_we_are_looking_at = quartely_cost_of_item}
-						add_to_variable = {free_naval_corporate_shipyards = quartely_cost_of_item}
+						subtract_from_variable = {factories_on_item@var:current_item_we_are_looking_at = quartely_cost_of_item}
+						add_to_variable = {free_air_corporate_shipyards = quartely_cost_of_item}
 					}
 				}
 			}
@@ -909,276 +951,30 @@ on_actions = {
 			##if no factories spare, remove from lowest income (that more then one factory) factory line and place one factory on it#
 			set_temp_variable = {lowest_profit_in_list = 0}
 			set_temp_variable = {worst_performing_item = 0}
-			for_each_loop = {
-				array = Production_array@var:global.naval_market_category
-				value = current_item_we_are_looking_at
-				if = {
-					limit = {
-						check_variable = {factories_on_item@var:current_item_we_are_looking_at < 1}
-						set_temp_variable = {needed_tech = global.required_researched_technology@var:current_item_we_are_looking_at?token:post_endor_survival}
-						meta_trigger = {
-							text = {
-								has_tech = [TECH_HELD]
-							}
-							TECH_HELD = "[?needed_tech.GetTokenKey]"
-						}
-					}
-					add_to_temp_array = {
-						array = factories_with_no_current_production
-						value = current_item_we_are_looking_at
-					}
-					## add factory
-				}else_if = {
-					limit = {
-						check_variable = {factories_on_item@var:current_item_we_are_looking_at > 1}
-					}
-					if = {
-						limit = {
-							check_variable = {quartely_revenue@var:current_item_we_are_looking_at > quartely_cost@var:current_item_we_are_looking_at}
-							check_variable = {free_naval_corporate_shipyards < 1}
-						}
-						## compare quartley income to next worst quartely income
-						set_temp_variable = {temp_quartely_profit = quartely_revenue@var:current_item_we_are_looking_at}
-						subtract_from_temp_variable = {temp_quartely_profit = quartely_cost@var:current_item_we_are_looking_at}
-						if = {
-							limit = {
-								check_variable = {temp_quartely_profit < lowest_profit_in_list}
-							}
-							set_temp_variable = {lowest_profit_in_list = temp_quartely_profit}
-							set_temp_variable = {worst_performing_item = current_item_we_are_looking_at}
-						}
-					}
-				}
-			}
-			if = {
-				limit = {
-					check_variable = {factories_with_no_current_production^num > 0}
-				}
-				for_each_loop = {
-					array = factories_with_no_current_production
-					value = current_item_we_are_looking_at
+		## NAVAL
+			set_temp_variable = {temp_free_corporate_factories = free_naval_corporate_shipyards}
+			set_temp_variable = {temp_market_category = global.naval_market_category}
+			search_for_items_with_no_production = yes
+			set_variable = {free_naval_corporate_shipyards = temp_free_corporate_factories}
+			
+		#AIR
+			set_temp_variable = {temp_free_corporate_factories = free_air_corporate_shipyards}
+			set_temp_variable = {temp_market_category = global.air_market_category}
+			search_for_items_with_no_production = yes
+			set_variable = {free_air_corporate_shipyards = temp_free_corporate_factories}
+		## TANK
+			set_temp_variable = {temp_free_corporate_factories = free_land_corporate_shipyards}
+			set_temp_variable = {temp_market_category = global.tank_market_category}
+			search_for_items_with_no_production = yes
+			set_variable = {free_land_corporate_shipyards = temp_free_corporate_factories}
 
-					if = {
-						limit = {
-							check_variable = {factories_on_item@var:worst_performing_item > 1}
-						}
-						add_to_variable = {factories_on_item@var:current_item_we_are_looking_at = 1}
-						set_temp_variable = {production_efficency_loss_percentage = 1}
-						divide_temp_variable = {production_efficency_loss_percentage = factories_on_item@var:current_item_we_are_looking_at}
-						set_temp_variable = {production_efficency_loss_actual = 1}
-						subtract_from_temp_variable = { production_efficency_loss_actual = production_efficency_loss_percentage}
-						multiply_variable = {production_efficiency@var:item_id = production_efficency_loss_actual}
 
-						add_to_variable = {factories_on_item@var:worst_performing_item = -1}
-					}
-				}
-			}
-			clear_temp_array = factories_with_no_current_production
-			set_temp_variable = {lowest_profit_in_list = 0}
-			set_temp_variable = {worst_performing_item = 0}
-			#AIR
-			for_each_loop = {
-				array = Production_array@var:global.air_market_category
-				value = current_item_we_are_looking_at
-				if = {
-					limit = {
-						check_variable = {factories_on_item@var:current_item_we_are_looking_at < 1}
-						set_temp_variable = {needed_tech = global.required_researched_technology@var:current_item_we_are_looking_at?token:post_endor_survival}
-						meta_trigger = {
-							text = {
-								has_tech = [TECH_HELD]
-							}
-							TECH_HELD = "[?needed_tech.GetTokenKey]"
-						}
-					}
-					add_to_temp_array = {
-						array = factories_with_no_current_production
-						value = current_item_we_are_looking_at
-					}
-					## add factory
-				}else_if = {
-					limit = {
-						check_variable = {factories_on_item@var:current_item_we_are_looking_at > 1}
-					}
-					if = {
-						limit = {
-							check_variable = {quartely_revenue@var:current_item_we_are_looking_at > quartely_cost@var:current_item_we_are_looking_at}
-							check_variable = {free_air_corporate_shipyards < 1}
-						}
-						## compare quartley income to next worst quartely income
-						set_temp_variable = {temp_quartely_profit = quartely_revenue@var:current_item_we_are_looking_at}
-						subtract_from_temp_variable = {temp_quartely_profit = quartely_cost@var:current_item_we_are_looking_at}
-						if = {
-							limit = {
-								check_variable = {temp_quartely_profit < lowest_profit_in_list}
-							}
-							set_temp_variable = {lowest_profit_in_list = temp_quartely_profit}
-							set_temp_variable = {worst_performing_item = current_item_we_are_looking_at}
-						}
-					}
-				}
-			}
-			if = {
-				limit = {
-					check_variable = {factories_with_no_current_production^num > 0}
-				}
-				for_each_loop = {
-					array = factories_with_no_current_production
-					value = current_item_we_are_looking_at
-
-					if = {
-						limit = {
-							check_variable = {factories_on_item@var:worst_performing_item > 1}
-						}
-						add_to_variable = {factories_on_item@var:current_item_we_are_looking_at = 1}
-						set_temp_variable = {production_efficency_loss_percentage = 1}
-						divide_temp_variable = {production_efficency_loss_percentage = factories_on_item@var:current_item_we_are_looking_at}
-						set_temp_variable = {production_efficency_loss_actual = 1}
-						subtract_from_temp_variable = { production_efficency_loss_actual = production_efficency_loss_percentage}
-						multiply_variable = {production_efficiency@var:item_id = production_efficency_loss_actual}
-
-						add_to_variable = {factories_on_item@var:worst_performing_item = -1}
-					}
-				}
-			}
-
-			clear_temp_array = factories_with_no_current_production
-			set_temp_variable = {lowest_profit_in_list = 0}
-			set_temp_variable = {worst_performing_item = 0}
-			#TANK
-			for_each_loop = {
-				array = Production_array@var:global.tank_market_category
-				value = current_item_we_are_looking_at
-				if = {
-					limit = {
-						check_variable = {factories_on_item@var:current_item_we_are_looking_at < 1}
-						set_temp_variable = {needed_tech = global.required_researched_technology@var:current_item_we_are_looking_at?token:post_endor_survival}
-						meta_trigger = {
-							text = {
-								has_tech = [TECH_HELD]
-							}
-							TECH_HELD = "[?needed_tech.GetTokenKey]"
-						}
-					}
-					add_to_temp_array = {
-						array = factories_with_no_current_production
-						value = current_item_we_are_looking_at
-					}
-					## add factory
-				}else_if = {
-					limit = {
-						check_variable = {factories_on_item@var:current_item_we_are_looking_at > 1}
-					}
-					if = {
-						limit = {
-							check_variable = {quartely_revenue@var:current_item_we_are_looking_at > quartely_cost@var:current_item_we_are_looking_at}
-							check_variable = {free_land_corporate_shipyards < 1}
-						}
-						## compare quartley income to next worst quartely income
-						set_temp_variable = {temp_quartely_profit = quartely_revenue@var:current_item_we_are_looking_at}
-						subtract_from_temp_variable = {temp_quartely_profit = quartely_cost@var:current_item_we_are_looking_at}
-						if = {
-							limit = {
-								check_variable = {temp_quartely_profit < lowest_profit_in_list}
-							}
-							set_temp_variable = {lowest_profit_in_list = temp_quartely_profit}
-							set_temp_variable = {worst_performing_item = current_item_we_are_looking_at}
-						}
-					}
-				}
-			}
-			if = {
-				limit = {
-					check_variable = {factories_with_no_current_production^num > 0}
-				}
-				for_each_loop = {
-					array = factories_with_no_current_production
-					value = current_item_we_are_looking_at
-
-					if = {
-						limit = {
-							check_variable = {factories_on_item@var:worst_performing_item > 1}
-						}
-						add_to_variable = {factories_on_item@var:current_item_we_are_looking_at = 1}
-						set_temp_variable = {production_efficency_loss_percentage = 1}
-						divide_temp_variable = {production_efficency_loss_percentage = factories_on_item@var:current_item_we_are_looking_at}
-						set_temp_variable = {production_efficency_loss_actual = 1}
-						subtract_from_temp_variable = { production_efficency_loss_actual = production_efficency_loss_percentage}
-						multiply_variable = {production_efficiency@var:item_id = production_efficency_loss_actual}
-
-						add_to_variable = {factories_on_item@var:worst_performing_item = -1}
-					}
-				}
-			}
-
-			clear_temp_array = factories_with_no_current_production
-			set_temp_variable = {lowest_profit_in_list = 0}
-			set_temp_variable = {worst_performing_item = 0}
-			#land
-			for_each_loop = {
-				array = Production_array@var:global.land_market_category
-				value = current_item_we_are_looking_at
-				if = {
-					limit = {
-						check_variable = {factories_on_item@var:current_item_we_are_looking_at < 1}
-						set_temp_variable = {needed_tech = global.required_researched_technology@var:current_item_we_are_looking_at?token:post_endor_survival}
-						meta_trigger = {
-							text = {
-								has_tech = [TECH_HELD]
-							}
-							TECH_HELD = "[?needed_tech.GetTokenKey]"
-						}
-					}
-					add_to_temp_array = {
-						array = factories_with_no_current_production
-						value = current_item_we_are_looking_at
-					}
-					## add factory
-				}else_if = {
-					limit = {
-						check_variable = {factories_on_item@var:current_item_we_are_looking_at > 1}
-					}
-					if = {
-						limit = {
-							check_variable = {quartely_revenue@var:current_item_we_are_looking_at > quartely_cost@var:current_item_we_are_looking_at}
-							check_variable = {free_land_corporate_shipyards < 1}
-						}
-						## compare quartley income to next worst quartely income
-						set_temp_variable = {temp_quartely_profit = quartely_revenue@var:current_item_we_are_looking_at}
-						subtract_from_temp_variable = {temp_quartely_profit = quartely_cost@var:current_item_we_are_looking_at}
-						if = {
-							limit = {
-								check_variable = {temp_quartely_profit < lowest_profit_in_list}
-							}
-							set_temp_variable = {lowest_profit_in_list = temp_quartely_profit}
-							set_temp_variable = {worst_performing_item = current_item_we_are_looking_at}
-						}
-					}
-				}
-			}
-			if = {
-				limit = {
-					check_variable = {factories_with_no_current_production^num > 0}
-				}
-				for_each_loop = {
-					array = factories_with_no_current_production
-					value = current_item_we_are_looking_at
-
-					if = {
-						limit = {
-							check_variable = {factories_on_item@var:worst_performing_item > 1}
-						}
-						add_to_variable = {factories_on_item@var:current_item_we_are_looking_at = 1}
-						set_temp_variable = {production_efficency_loss_percentage = 1}
-						divide_temp_variable = {production_efficency_loss_percentage = factories_on_item@var:current_item_we_are_looking_at}
-						set_temp_variable = {production_efficency_loss_actual = 1}
-						subtract_from_temp_variable = { production_efficency_loss_actual = production_efficency_loss_percentage}
-						multiply_variable = {production_efficiency@var:item_id = production_efficency_loss_actual}
-
-						add_to_variable = {factories_on_item@var:worst_performing_item = -1}
-					}
-				}
-			}
+		## LAND
+			set_temp_variable = {temp_free_corporate_factories = free_land_corporate_shipyards}
+			set_temp_variable = {temp_market_category = global.land_market_category}
+			search_for_items_with_no_production = yes
+			set_variable = {free_land_corporate_shipyards = temp_free_corporate_factories}
+			
 		}
 	}
 }
