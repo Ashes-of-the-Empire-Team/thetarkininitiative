@@ -37,92 +37,104 @@ create_new_category_for_market_ai_version = {
 	
 	for_each_loop = {
 		array = global.Market_array@var:global.naval_market_category
-		value = v
+		value = current_item
 		index = i
+		if = {
+			limit = {
+				tag = SUL
+			}
+			log = "mount array [?current_item.GetTokenKey]"
+		}
 		if = {
 			limit = {
 				OR = {
 					AND = {
-						check_variable = {category_of_market_item@var:v = global.corvette_identifier}
+						check_variable = {global.category_of_market_item@var:current_item = global.corvette_identifier}
 						check_variable = {corvette_identifier_desire > 0}
 					}
 					AND = {
-						check_variable = {category_of_market_item@var:v = global.frigate_light_cruiser_identifier}
+						check_variable = {global.category_of_market_item@var:current_item = global.frigate_light_cruiser_identifier}
 						check_variable = {frigate_light_cruiser_identifier_desire > 0}
 					}
 					AND = {
-						check_variable = {category_of_market_item@var:v = global.heavy_cruiser_identifier}
+						check_variable = {global.category_of_market_item@var:current_item = global.heavy_cruiser_identifier}
 						check_variable = {heavy_cruiser_identifier_desire > 0}
 					}
 					AND = {
-						check_variable = {category_of_market_item@var:v = global.capital_ship_identifier}
+						check_variable = {global.category_of_market_item@var:current_item = global.capital_ship_identifier}
 						check_variable = {capital_ships_identifier_desire > 0}
 					}
 				}
 			}
 			add_to_array = {
 				array = current_selected_market_category_array
-				value = global.Market_array@global.naval_market_category^i
+				value = current_item
+			}
+			if = {
+				limit = {
+					tag = SUL
+				}
+				log = "num array[?current_selected_market_category_array^num]"
 			}
 		}
 	}
 	for_each_loop = {
 		array = global.Market_array@var:global.tank_market_category
-		value = v
+		value = current_item
 		index = i
 		if = {
 			limit = {
 				OR = {
 					AND = {
-						check_variable = {category_of_market_item@var:v = global.light_tank_identifier}
+						check_variable = {global.category_of_market_item@var:current_item = global.light_tank_identifier}
 						check_variable = {corvette_identifier_desire > 0}
 					}
 					AND = {
-						check_variable = {category_of_market_item@var:v = global.medium_tank_identifier}
+						check_variable = {global.category_of_market_item@var:current_item = global.medium_tank_identifier}
 						check_variable = {frigate_light_cruiser_identifier_desire > 0}
 					}
 					AND = {
-						check_variable = {category_of_market_item@var:v = global.heavy_tank_identifier}
+						check_variable = {global.category_of_market_item@var:current_item = global.heavy_tank_identifier}
 						check_variable = {heavy_cruiser_identifier_desire > 0}
 					}
 				}
 			}
 			add_to_array = {
 				array = current_selected_market_category_array
-				value = global.Market_array@var:global.tank_market_category^i
+				value = current_item
 			}
 		}
 	}
 	for_each_loop = {
 		array = global.Market_array@var:global.air_market_category
-		value = v
+		value = current_item
 		index = i
 		if = {
 			limit = {
 				OR = {
 					AND = {
-						check_variable = {category_of_market_item@var:v = global.fighter_plane_identifier}
+						check_variable = {global.category_of_market_item@var:current_item = global.fighter_plane_identifier}
 						check_variable = {corvette_identifier_desire > 0}
 					}
 					AND = {
-						check_variable = {category_of_market_item@var:v = global.multi_role_identifier}
+						check_variable = {global.category_of_market_item@var:current_item = global.multi_role_identifier}
 						check_variable = {frigate_light_cruiser_identifier_desire > 0}
 					}
 					AND = {
-						check_variable = {category_of_market_item@var:v = global.bomber_identifier}
+						check_variable = {global.category_of_market_item@var:current_item = global.bomber_identifier}
 						check_variable = {heavy_cruiser_identifier_desire > 0}
 					}
 				}
 			}
 			add_to_array = {
 				array = current_selected_market_category_array
-				value = global.Market_array@var:global.air_market_category^i
+				value = current_item
 			}
 		}
 	}
 	for_each_loop = {
 		array = global.Market_array@var:global.land_market_category
-		value = v
+		value = current_item
 		index = i
 		add_to_array = {
 			array = current_selected_market_category_array
@@ -130,6 +142,13 @@ create_new_category_for_market_ai_version = {
 		}
 	}
 	sift_through_alliance_types = yes
+
+	if = {
+		limit = {
+			tag = SUL
+		}
+		log = "end num array[?current_selected_market_category_array^num]"
+	}
 }
 sift_through_alliance_types = {
 	if = {
@@ -203,18 +222,27 @@ buy_item_scripted_effect = {
 		}
 		meta_effect = {
 			text = {
-				add_equipment_production = {
-					equipment = {
-						type = [MARKET_ITEM]
-						creator = [PRODUCER]
+				for_loop_effect = {
+					end = amount_to_purchase?1
+					add_equipment_production = {
+						equipment = {
+							type = [MARKET_ITEM]
+							creator = [PRODUCER]
+						}
+						requested_factories = 1
+						progress = 1.00
+						amount = 1
 					}
-					requested_factories = 1
-					progress = 1.00
-					amount = amount_to_purchase
 				}
 			}
 			MARKET_ITEM = "[?item_to_buy.GetTokenKey]"
 			PRODUCER = "[?producer.GetTag]" 
+		}
+		if = {
+			limit = {
+				tag = SUL
+			}
+			log = "Sullust Brought Item [?item_to_buy.GetTokenKey]"
 		}
 	}else = {
 		multiply_temp_variable = {amount_to_purchase = 100}
@@ -243,7 +271,16 @@ weekly_production_of_item_calculation_scripted_effect = {
 	multiply_temp_variable = { temporary_factory_output_calculator = production_efficiency@var:current_item_we_are_looking_at }
 	multiply_temp_variable = { temporary_factory_output_calculator = global.CONSTANT_FACTORY_OUTPUT_MULTIPLIER }
 	divide_temp_variable = {temporary_factory_output_calculator = global.ic_cost@var:current_item_we_are_looking_at}
-	set_variable = {weekly_production_of_item@var:current_item_we_are_looking_at = temporary_factory_output_calculator}
+	set_temp_variable = {item_to_buy = current_item_we_are_looking_at}
+	if = {
+		limit = {
+			am_i_a_ship = no
+		}
+		set_variable = {weekly_production_of_item@var:current_item_we_are_looking_at = temporary_factory_output_calculator}
+	}else = {
+		divide_variable = {temporary_factory_output_calculator = 100}
+		set_variable = {weekly_production_of_item@var:current_item_we_are_looking_at = temporary_factory_output_calculator}
+	}
 }
 
 production_efficiency_calculator = {
@@ -435,12 +472,12 @@ recalculate_maxium_stockpile = {
 		value = current_selected_item
 		index = i
 		
-		set_variable = {maxium_stockpile@var:current_selected_item = global.temp_stockpile_constant }
+		set_variable = {maxium_stockpile@var:current_selected_item = temp_stockpile_constant }
 		meta_effect = {
 			text = {
-				multiply_variable = {maxium_stockpile@var:current_selected_item = [TOKEN_NAME]_desire?0}
+				multiply_variable = {maxium_stockpile@var:current_selected_item = [TOKEN_NAME]_desire?1}
 			}
-			TOKEN_NAME = "[?category_of_market_item@var:current_selected_item.GetTokenKey]"
+			TOKEN_NAME = "[?global.category_of_market_item@var:current_selected_item.GetTokenKey]"
 		}
 		multiply_variable = {maxium_stockpile@var:current_selected_item = specfic_identifier_desire@var:current_selected_item?1}
 	}
@@ -515,25 +552,26 @@ behaviour_4_array_creation_and_desire = {
 }
 
 test_effect_70 = {
-
-	log = "[?trandosha_map_box_array^num]"
-	for_loop_effect = {
-		end = 512
-
-		add_to_array = {
-			array = trandosha_map_box_array
-			value = 1
+	set_temp_variable = {item_to_buy = token:CR70_1}
+	set_temp_variable = {producer = global.who_owns_item@var:item_to_buy}
+	meta_effect = {
+		text = {
+			for_loop_effect = {
+				end = amount_to_purchase?1
+				add_equipment_production = {
+					equipment = {
+						type = [MARKET_ITEM]
+						creator = [PRODUCER]
+					}
+					requested_factories = 1
+					progress = 0.99
+					amount = 1
+				}
+			}
 		}
+		MARKET_ITEM = "[?item_to_buy.GetTokenKey]"
+		PRODUCER = "[?producer.GetTag]" 
 	}
-	for_loop_effect = {
-		end = 512
-
-		add_to_array = {
-			array = trandosha_map_box_array
-			value = 1
-		}
-	}
-
 
 	# set_variable = {required_researched_technology@token:t4_b_chassis_1 = token:t4_b_advanced}
 	# set_temp_variable = {needed_tech = required_researched_technology@var:current_item_we_are_looking_at?token:post_endor_survival}
