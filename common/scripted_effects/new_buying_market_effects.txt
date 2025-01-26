@@ -203,12 +203,6 @@ buy_item_scripted_effect = {
 	set_temp_variable = {producer = global.who_owns_item@var:item_to_buy} ## THIS RELIES ON THE PRODUCER ACTUALLY HAVING THE ABILITY TO PRODUCE THE EQUIPMENT WHEN SELLING IT, OTHERWISE BAD SHIT HAPPENS
 	if = {
 		limit = {
-			is_ai = yes
-		}
-		# log = "ai Buying equipment"
-	}
-	if = {
-		limit = {
 			var:producer = {
 				has_country_flag = has_been_brought_out
 			}
@@ -220,30 +214,36 @@ buy_item_scripted_effect = {
 		limit = {
 			am_i_a_ship = yes
 		}
+
 		meta_effect = {
 			text = {
 				for_loop_effect = {
 					end = amount_to_purchase?1
-					add_equipment_production = {
-						equipment = {
-							type = [MARKET_ITEM]
-							creator = [PRODUCER]
-						}
-						requested_factories = 1
-						progress = 1.00
-						amount = 1
-					}
+					create_ship = { type = [MARKET_ITEM] equipment_variant = "[MARKET_NAME] Market" creator = [PRODUCER] }
 				}
 			}
 			MARKET_ITEM = "[?item_to_buy.GetTokenKey]"
-			PRODUCER = "[?producer.GetTag]" 
+			MARKET_NAME = "[?item_to_buy.GetTokenLocalizedKey]"
+		 	PRODUCER = "[?producer.GetTag]"
 		}
-		if = {
-			limit = {
-				tag = SUL
-			}
-			log = "Sullust Brought Item [?item_to_buy.GetTokenKey]"
-		}
+		# meta_effect = {
+		# 	text = {
+		# 		for_loop_effect = {
+		# 			end = amount_to_purchase?1
+		# 			add_equipment_production = {
+		# 				equipment = {
+		# 					type = [MARKET_ITEM]
+		# 					creator = [PRODUCER]
+		# 				}
+		# 				requested_factories = 1
+		# 				progress = 1.00
+		# 				amount = 1
+		# 			}
+		# 		}
+		# 	}
+		# 	MARKET_ITEM = "[?item_to_buy.GetTokenKey]"
+		# 	PRODUCER = "[?producer.GetTag]" 
+		# }
 	}else = {
 		multiply_temp_variable = {amount_to_purchase = 100}
 		meta_effect = {
@@ -344,6 +344,8 @@ capped_production_efficiency_calc = {
 		add_to_variable = {capped_production_efficiency_amount = modifier@production_efficiency_cap_multiplier}
 	}
 }
+
+
 work_out_total_factory_price = {
 	add_to_temp_variable = {modifier_of_this_items_cost = 1}
 
@@ -450,6 +452,7 @@ add_to_current_production_array = {
 	}
 }
 
+### THIS SECTION IS DEVOTED TO ADDING EQUIPMENT VARIANTS TO MARKET PRODUCERS AT START OF GAME
 
 recalculate_maxium_stockpile = {
 	set_temp_variable = {temp_stockpile_constant = global.stockpile_constant}
@@ -482,6 +485,7 @@ recalculate_maxium_stockpile = {
 		multiply_variable = {maxium_stockpile@var:current_selected_item = specfic_identifier_desire@var:current_selected_item?1}
 	}
 }
+## EVALUATE WHAT KIND OF BEHAVIOUR YOU WANT, just add some triggers and your good to go
 evaluate_behaviour = {
 	if = {
 		limit = {
@@ -551,27 +555,38 @@ behaviour_4_array_creation_and_desire = {
 	set_variable = {capital_ships_identifier_desire = 100}
 }
 
+
+
+
+
+
+
+
+
+
+
 test_effect_70 = {
-	set_temp_variable = {item_to_buy = token:CR70_1}
-	set_temp_variable = {producer = global.who_owns_item@var:item_to_buy}
-	meta_effect = {
-		text = {
-			for_loop_effect = {
-				end = amount_to_purchase?1
-				add_equipment_production = {
-					equipment = {
-						type = [MARKET_ITEM]
-						creator = [PRODUCER]
-					}
-					requested_factories = 1
-					progress = 0.99
-					amount = 1
-				}
-			}
-		}
-		MARKET_ITEM = "[?item_to_buy.GetTokenKey]"
-		PRODUCER = "[?producer.GetTag]" 
-	}
+	log = "[?token:gozanti_1.GetTokenKey]"
+	# set_variable = {producer = CEC}
+	# create_ship = { type = gozanti_1 equipment_variant = "Gozanti" creator = CEC }
+	# CEC = {
+	# 	create_equipment_variant = {
+	# 		name = "Gozanti"
+	# 		type = gozanti_1
+	# 		modules = {
+	# 			fixed_ship_battery_slot = rudimentary_laser_cannon
+	# 			fixed_ship_anti_air_slot = ship_point_defence_system_1
+	# 			fixed_ship_fire_control_system_slot = targetting_computer_0
+	# 			fixed_ship_radar_slot = sensor_array_1
+	# 			fixed_ship_engine_slot = hd_5
+	# 			fixed_ship_secondaries_slot = sd_2
+	# 			fixed_ship_armor_slot = sr_10
+	# 			front_1_custom_slot = rudimentary_laser_cannon
+	# 			front_2_custom_slot = rudimentary_laser_cannon
+	# 			rear_1_custom_slot = empty
+	# 		}
+	# 	}
+	# }
 
 	# set_variable = {required_researched_technology@token:t4_b_chassis_1 = token:t4_b_advanced}
 	# set_temp_variable = {needed_tech = required_researched_technology@var:current_item_we_are_looking_at?token:post_endor_survival}
