@@ -1,0 +1,47 @@
+namespace = restoration
+
+#event = {
+    #id = restoration.1
+    #title = "Internal Strife Erupts!"
+    #desc = "Discontent within the ruling fascist regime has escalated into a full-scale civil war. A faction within the military has declared independence, sparking chaos across the nation."
+    #picture = GFX_report_civil_war
+    #major = yes
+
+    #trigger = {
+        #has_government = fascism
+        #NOT = { has_civil_war = yes }  # Prevents another civil war from happening
+        #is_subject = no  # Ensures the country is independent
+        #NOT = { is_major = yes }  # Excludes major countries
+        #has_global_flag = fascist_civil_war_limit_reached  # Stops triggering if limit is reached
+        #has_country_flag = fascist_civil_war_happened  # Ensures the event only happens once per country
+        #random = 0.05  # 5% chance per month
+    #}
+
+    #mean_time_to_happen = {
+    #    months = 24  # Civil war has a chance of firing roughly every 2 years
+    #}
+
+    #option = {
+    #    name = "The country is torn apart!"
+    #    trigger = {
+    #        has_civil_war = no
+    #    }
+    #    ai_chance = { factor = 1 }
+
+    #    create_civil_war = {
+    #        ideology = neutrality  # Rebels will have a non-aligned government
+    #        size = 0.4  # 40% of the country joins the rebels
+    #    }
+    #
+    #    set_country_flag = fascist_civil_war_happened  # Ensures the event won’t fire again for this country
+
+        # Increase global counter
+        #set_variable = { fascist_civil_war_count = fascist_civil_war_count + 1 }
+
+        # If the limit of 10 is reached, set a global flag to disable further events
+        #if = {
+        #    limit = { check_variable = { fascist_civil_war_count >= 10 } }
+        #    set_global_flag = fascist_civil_war_limit_reached
+        #}
+    #}
+#}
