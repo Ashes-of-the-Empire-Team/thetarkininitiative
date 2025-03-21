@@ -42,6 +42,9 @@ NDefines.NAir.CARRIER_SIZE_STAT_INCREMENT = 3		-- Added to account for squadron 
 
 NDefines.NTechnology.MAX_SUBTECHS = 3
 
+
+NDefines.NAI.PEACE_SCORE_SCALE_FACTOR = 1.3
+
 -- NAVY
 --[[
 NNavy = {

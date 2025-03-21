@@ -21,6 +21,14 @@ focus_tree = {
 			base = 10
 		}
 
+		available = {
+			has_country_leader = {
+				name = "Sander Delvardus" ruling_only = yes
+			}
+		}
+		bypass = {
+			has_country_flag = ERI_alive_girl
+		}
 		completion_reward = {
 			set_country_flag = ERI_started_insanity
 			ERI = { country_event = eriadu.0 }	
@@ -47,6 +55,14 @@ focus_tree = {
 		relative_position_id = ERI_the_casket
 		prerequisite = { 
 			focus = ERI_the_casket
+		}
+		available = {
+			has_country_leader = {
+				name = "Sander Delvardus" ruling_only = yes
+			}
+		}
+		bypass = {
+			has_country_flag = ERI_alive_girl
 		}
 
 		completion_reward = {
@@ -84,10 +100,16 @@ focus_tree = {
 		}
 
 		available = {
+			has_country_leader = {
+				name = "Sander Delvardus" ruling_only = yes
+			}
 			custom_trigger_tooltip = {
 				tooltip = tt_eri_money_10
 				check_variable = { currency_amount^primary_currency > 10 }
 			}
+		}
+		bypass = {
+			has_country_flag = ERI_alive_girl
 		}
 
 		completion_reward = {
@@ -116,10 +138,18 @@ focus_tree = {
 		ai_will_do = {
 			base = 10
 		}
+		available = {
+			has_country_leader = {
+				name = "Sander Delvardus" ruling_only = yes
+			}
+		}
 
 		relative_position_id = ERI_the_casket
 		prerequisite = { 
 			focus = ERI_the_casket
+		}
+		bypass = {
+			has_country_flag = ERI_alive_girl
 		}
 
 		completion_reward = {
@@ -144,6 +174,14 @@ focus_tree = {
 		ai_will_do = {
 			base = 10
 		}
+		available = {
+			has_country_leader = {
+				name = "Sander Delvardus" ruling_only = yes
+			}
+		}
+		bypass = {
+			has_country_flag = ERI_alive_girl
+		}
 
 		relative_position_id = ERI_take_some_time_off
 		prerequisite = { 
@@ -166,6 +204,11 @@ focus_tree = {
 
 		ai_will_do = {
 			base = 10
+		}
+		available = {
+			has_country_leader = {
+				name = "Sander Delvardus" ruling_only = yes
+			}
 		}
 
 		relative_position_id = ERI_the_casket
@@ -200,6 +243,11 @@ focus_tree = {
 		ai_will_do = {
 			base = 10
 		}
+		available = {
+			has_country_leader = {
+				name = "Sander Delvardus" ruling_only = yes
+			}
+		}
 
 		relative_position_id = ERI_tour_the_city
 		prerequisite = { 
@@ -223,6 +271,11 @@ focus_tree = {
 		ai_will_do = {
 			base = 10
 		}
+		available = {
+			has_country_leader = {
+				name = "Sander Delvardus" ruling_only = yes
+			}
+		}
 
 		relative_position_id = ERI_confide_in_council
 		prerequisite = { 
@@ -231,10 +284,7 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			swap_ideas = {
-				remove_idea = ERI_madmans_obsession
-				add_idea = ERI_madmans_obsession2
-			}
+			swap_ruler_traits = { remove = eri_madman_1 add = eri_madman_2 }
 		}
 	}
 
@@ -258,10 +308,13 @@ focus_tree = {
 		}
 		available = {
 			has_country_flag = queen_is_back
+			has_country_leader = {
+				name = "Sander Delvardus" ruling_only = yes
+			}
 		}
 
 		completion_reward = {
-			remove_ideas = ERI_madmans_obsession2
+			remove_country_leader_trait = eri_madman_2
 		}
 	}
 
@@ -466,7 +519,7 @@ focus_tree = {
         	add_to_variable = { legitimacy_emp_equilibirum = 10 }
 			var:global.emperor_id = {
 				add_opinion_modifier = {
-					target = ZER
+					target = ERI
 					modifier = wants_to_dethrone_us
 				}
 				subtract_from_variable = { legitimacy_emp = 10 }
@@ -504,9 +557,9 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			hidden_effect = {
-				remove_ideas = ERI_madmans_obsession2
-			}
+			#hidden_effect = {
+				#remove_ideas = ERI_madmans_obsession2
+			#}
 			ERI = {
 				country_event = { id = eriadu.11 days = 2 random_days = 1 }
 			}
@@ -516,7 +569,7 @@ focus_tree = {
 	focus = {
 		id = ERI_construction_of_the_knighthammer
 		icon = GFX_ERI_cronus
-		x = -3
+		x = 0
 		y = 1
 		cost = 6.5
 
@@ -527,6 +580,31 @@ focus_tree = {
 		relative_position_id = ERI_the_loved
 		prerequisite = { 
 			focus = ERI_the_loved
+		}
+
+		completion_reward = {
+			custom_effect_tooltip = ERI_knight_hammer_tt
+			hidden_effect = {
+				ERI = {
+					country_event = { id = eriadu.15 days = 300 random_days = 25 }
+				}
+			}
+		}
+	}
+	focus = {
+		id = ERI_cronus_focus_3
+		icon = GFX_ERI_cronus
+		x = 0
+		y = 3
+		cost = 6.5
+
+		ai_will_do = {
+			base = 10
+		}
+
+		relative_position_id = ERI_construction_of_the_knighthammer
+		prerequisite = { 
+			focus = ERI_construction_of_the_knighthammer
 		}
 
 		completion_reward = {
@@ -597,7 +675,7 @@ focus_tree = {
 	focus = {
 		id = ERI_better_bureaucrats
 		icon = GFX_ERI_officers
-		x = 0
+		x = 2
 		y = 1
 		cost = 6.5
 
@@ -622,7 +700,7 @@ focus_tree = {
 		id = ERI_our_own_empire
 		icon = GFX_ERI_empire
 		x = 0
-		y = 1
+		y = 2
 		cost = 6.5
 
 		ai_will_do = {
@@ -665,7 +743,7 @@ focus_tree = {
 	focus = {
 		id = ERI_isb_training_improvements
 		icon = GFX_ERI_isb
-		x = 3
+		x = 1
 		y = 1
 		cost = 6.5
 
@@ -673,9 +751,9 @@ focus_tree = {
 			base = 10
 		}
 
-		relative_position_id = ERI_the_feared
+		relative_position_id = ERI_reorganize_the_collaborators
 		prerequisite = { 
-			focus = ERI_the_feared
+			focus = ERI_reorganize_the_collaborators
 		}
 
 		completion_reward = {
@@ -787,7 +865,7 @@ focus_tree = {
 	focus = {
 		id = ERI_conquest_of_bith
 		icon = GFX_ERI_eriadu_planet2
-		x = 1
+		x = -1
 		y = 1
 		cost = 6.5
 
@@ -816,7 +894,7 @@ focus_tree = {
 	focus = {
 		id = ERI_conquer_the_utapauns
 		icon = GFX_ERI_eriadu_planet3
-		x = -1
+		x = 1
 		y = 1
 		cost = 6.5
 
@@ -830,7 +908,7 @@ focus_tree = {
 		}
 		available = {
 			has_army_manpower = {
-				size > 100000
+				size > 120000
 			}
 		}
 
@@ -863,8 +941,8 @@ focus_tree = {
 
 		available = {
 			ERI = {
-				owns_state = 110
-				owns_state = 394
+				owns_state = 373
+				owns_state = 112
 			}
 		}
 
@@ -919,7 +997,7 @@ focus_tree = {
 	focus = {
 		id = ERI_capture_the_shipyards
 		icon = GFX_ERI_eriadu_planet4
-		x = 0
+		x = -1
 		y = 1
 		cost = 6.5
 
@@ -941,6 +1019,212 @@ focus_tree = {
 			SLU = {
 				country_event = { id = eriadu.7 days = 2 random_days = 1 }
 			}
+		}
+	}
+
+	focus = {
+		id = ERI_expand_imperial_administration
+		icon = GFX_ERI_eriadu_planet
+		x = 0
+		y = 2
+		cost = 6.5
+
+		ai_will_do = {
+			base = 10
+		}
+
+		relative_position_id = ERI_capture_the_shipyards
+		prerequisite = { 
+			focus = ERI_capture_the_shipyards
+		}
+		prerequisite = { 
+			focus = ERI_our_own_empire
+			focus = ERI_cronus_focus_3
+		}
+		available = {
+			
+			has_army_manpower = {
+				size > 200000
+			}
+		}
+
+		completion_reward = {
+			
+		}
+	}
+
+	focus = {
+		id = ERI_rimma_expansion
+		icon = GFX_ERI_eriadu_planet
+		x = -2
+		y = 1
+		cost = 6.5
+
+		ai_will_do = {
+			base = 10
+		}
+
+		relative_position_id = ERI_expand_imperial_administration
+		prerequisite = { 
+			focus = ERI_expand_imperial_administration
+		}
+		mutually_exclusive = {
+			focus = ERI_hydian_expansion
+		}
+		mutually_exclusive = {
+			focus = ERI_triellus_expansion
+		}
+		available = {
+			has_navy_size = {
+    			size > 29
+			}
+		}
+
+		completion_reward = {
+			
+		}
+	}
+
+	focus = {
+		id = ERI_contact_imperial_cells_on_sullust
+		icon = GFX_ERI_eriadu_planet
+		x = 0
+		y = 1
+		cost = 6.5
+
+		ai_will_do = {
+			base = 10
+		}
+
+		relative_position_id = ERI_rimma_expansion
+		prerequisite = { 
+			focus = ERI_rimma_expansion
+		}
+		available = {
+			
+		}
+
+		completion_reward = {
+			
+		}
+	}
+
+	focus = {
+		id = ERI_open_war_on_sullust
+		icon = GFX_ERI_eriadu_planet
+		x = -1
+		y = 1
+		cost = 6.5
+
+		ai_will_do = {
+			base = 10
+		}
+
+		relative_position_id = ERI_contact_imperial_cells_on_sullust
+		prerequisite = { 
+			focus = ERI_contact_imperial_cells_on_sullust
+		}
+		mutually_exclusive = {
+			focus = ERI_infiltrate_sorosuub
+		}
+		available = {
+			
+		}
+
+		completion_reward = {
+			
+		}
+	}
+
+	focus = {
+		id = ERI_infiltrate_sorosuub
+		icon = GFX_ERI_eriadu_planet
+		x = 1
+		y = 1
+		cost = 6.5
+
+		ai_will_do = {
+			base = 10
+		}
+
+		relative_position_id = ERI_contact_imperial_cells_on_sullust
+		prerequisite = { 
+			focus = ERI_contact_imperial_cells_on_sullust
+		}
+		mutually_exclusive = {
+			focus = ERI_open_war_on_sullust
+		}
+		available = {
+			
+		}
+
+		completion_reward = {
+			
+		}
+	}
+
+
+	focus = {
+		id = ERI_hydian_expansion
+		icon = GFX_ERI_eriadu_planet
+		x = 0
+		y = 1
+		cost = 6.5
+
+		ai_will_do = {
+			base = 10
+		}
+
+		relative_position_id = ERI_expand_imperial_administration
+		prerequisite = { 
+			focus = ERI_expand_imperial_administration
+		}
+		mutually_exclusive = {
+			focus = ERI_rimma_expansion
+		}
+		mutually_exclusive = {
+			focus = ERI_triellus_expansion
+		}
+		available = {
+			has_navy_size = {
+    			size > 29
+			}
+		}
+
+		completion_reward = {
+			
+		}
+	}
+
+	focus = {
+		id = ERI_triellus_expansion
+		icon = GFX_ERI_eriadu_planet
+		x = 2
+		y = 1
+		cost = 6.5
+
+		ai_will_do = {
+			base = 10
+		}
+
+		relative_position_id = ERI_expand_imperial_administration
+		prerequisite = { 
+			focus = ERI_expand_imperial_administration
+		}
+		mutually_exclusive = {
+			focus = ERI_hydian_expansion
+		}
+		mutually_exclusive = {
+			focus = ERI_rimma_expansion
+		}
+		available = {
+			has_navy_size = {
+    			size > 29
+			}
+		}
+
+		completion_reward = {
+			
 		}
 	}
 
@@ -1443,12 +1727,7 @@ focus_tree = {
 			}
 			add_to_variable = {currency_amount^primary_currency = -20}
 			custom_effect_tooltip = minus20credits_tt
-			available = {
-			custom_trigger_tooltip = {
-				tooltip = tt_eri_money_20
-				check_variable = { currency_amount^primary_currency > 20 }
-			}
-		}
+			
 		}
 	}
 

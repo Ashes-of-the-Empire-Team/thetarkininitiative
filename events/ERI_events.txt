@@ -4,7 +4,7 @@ country_event = {
 	id = eriadu.0 ## starting flavor event
     title = eriadu.0.t
     desc = eriadu.0.d
-	picture = GFX_report_event_election_vote
+	picture = GFX_ERI_sander_pic
 
 	is_triggered_only = yes
 
@@ -28,7 +28,7 @@ country_event = {
 	id = eriadu.1 ## lets make her condition worse
     title = eriadu.1.t
     desc = eriadu.1.d
-	picture = GFX_report_event_election_vote
+	picture = GFX_ERI_girl
 
 	is_triggered_only = yes
 	fire_only_once = yes
@@ -171,7 +171,32 @@ news_event = {
 	option = {
 		name = eriadu.5.b
 		trigger = {
-            NOT = { tag = ERI }
+            AND = {
+				NOT = {
+					ERI = {
+						has_country_leader = {
+							name = "Sander Delvardus"
+						}
+					}
+
+				}
+				
+				NOT = { tag = ERI }
+			}
+        }
+	}
+	option = {
+		name = eriadu.5.c
+		trigger = {
+			AND = {
+				ERI = {
+					has_country_leader = {
+						name = "Sander Delvardus"
+					}
+				}
+				NOT = { tag = ERI }
+			}
+            
         }
 	}
 }
@@ -563,6 +588,108 @@ country_event = {
 }
 
 country_event = {
+    id = eriadu.17 #landing on bith
+    title = eriadu.17.t
+    desc = eriadu.17.d
+    picture = GFX_dangerous_fauna
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+
+
+    option = {
+        name = eriadu.17.a
+        add_war_support = -0.05
+		add_manpower = -1000
+    }
+}
+
+country_event = {
+    id = eriadu.18 #Fall of Weogar
+    title = eriadu.18.t
+    desc = eriadu.18.d
+    picture = GFX_event_ERI_bith_cantina
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+
+    option = {
+        name = eriadu.18.a
+        add_political_power = 25
+		custom_effect_tooltip = plus10credits_tt
+		add_to_variable = {currency_amount^primary_currency = 10}
+
+    }
+}
+
+country_event = {
+    id = eriadu.19 #Fall of Buerhoz
+    title = eriadu.19.t
+    desc = eriadu.19.d
+    picture = GFX_event_ERI_forest_city_capture
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+
+    option = {
+        name = eriadu.19.a
+        add_political_power = 10
+    }
+}
+
+country_event = {
+    id = eriadu.20 #The Ruins of Nozho
+    title = eriadu.20.t
+    desc = eriadu.20.d
+    picture = GFX_ruined_city
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+
+    option = {
+        name = eriadu.20.a
+    }
+}
+
+
+country_event = {
+    id = eriadu.21 #landing on utapau
+    title = eriadu.21.t
+    desc = eriadu.21.d
+    picture = GFX_event_ERI_utapau_sinkhole
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+
+
+    option = {
+        name = eriadu.21.a
+    }
+}
+
+country_event = {
+    id = eriadu.22 #fall of pau city
+    title = eriadu.22.t
+    desc = eriadu.22.d
+    picture = GFX_event_ERI_utapau_sinkhole
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+
+    option = {
+        name = eriadu.22.a
+        add_war_support = 0.05
+    }
+}
+
+
+country_event = {
 	id = eriadu.99 ## sander dies
     title = eriadu.99.t
     desc = eriadu.99.d
@@ -642,3 +769,5 @@ country_event = {
 		remove_ideas = ERI_mountain_economics
 	}
 }
+
+
