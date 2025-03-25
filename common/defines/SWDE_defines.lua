@@ -36,6 +36,8 @@ NDefines.NDiplomacy.ASSUME_FACTION_SPYMASTER_COOLDOWN_DAYS = 180
 NDefines.NDiplomacy.FACTION_LEADERSHIP_CHANGE_ALERT_THRESHOLD = 1
 NDefines.NDiplomacy.DIPLOMACY_CREATE_FACTION_FACTOR = 0.40
 
+NDefines.NDiplomacy.PEACE_SCORE_SCALE_FACTOR = 1.3
+
 NDefines.NAir.AIR_WING_FLIGHT_SPEED_MULT = 0.1
 NDefines.NIntel.NAVAL_SUPREMACY_INTEL_LOW = 0
 NDefines.NAir.CARRIER_SIZE_STAT_INCREMENT = 3		-- Added to account for squadron size
@@ -43,7 +45,6 @@ NDefines.NAir.CARRIER_SIZE_STAT_INCREMENT = 3		-- Added to account for squadron 
 NDefines.NTechnology.MAX_SUBTECHS = 3
 
 
-NDefines.NAI.PEACE_SCORE_SCALE_FACTOR = 1.3
 
 -- NAVY
 --[[

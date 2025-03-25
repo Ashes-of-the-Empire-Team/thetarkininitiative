@@ -69,6 +69,9 @@ country_event = {
 			value = -20
 		}
 		ERI_influence_pulse = yes
+		ai_chance = {
+			base = 90
+		}
 	}
 	option = {
 		name = eriadu.2.b ## therapy session
@@ -78,6 +81,9 @@ country_event = {
 			value = -20
 		}
 		ERI_influence_pulse = yes
+		ai_chance = {
+			base = 5
+		}
 	}
 	option = {
 		name = eriadu.2.c ## why not both?
@@ -95,6 +101,9 @@ country_event = {
 			value = -10
 		}
 		ERI_influence_pulse = yes
+		ai_chance = {
+			base = 5
+		}
 	}
 }
 
@@ -685,6 +694,305 @@ country_event = {
     option = {
         name = eriadu.22.a
         add_war_support = 0.05
+    }
+}
+
+
+country_event = {
+    id = eriadu.23 #negotiate with utapau
+    title = eriadu.23.t
+    desc = eriadu.23.d
+    picture = GFX_ERI_sander_pic
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+
+    option = {
+        name = eriadu.23.a
+		custom_effect_tooltip = "§RThis will lead to us becoming an 'Afilliated Planet' to the Eriadu Authority, relinquishing our foreign policy freedom while maintaining internal sovereignty.§!"
+		ERI = {country_event = eriadu.24}
+		ai_chance = {
+			base = 90
+			modifier = {
+				add = -25
+				UTA = {is_guaranteed_by = SUL}
+			}
+			modifier = {
+				add = -25
+				UTA = {is_in_faction_with = SUL}
+			}
+			modifier = {
+				add = -20
+				UTA = {is_guaranteed_by = NAB}
+			}
+			modifier = {
+				add = -20
+				UTA = {is_in_faction_with = NAB}
+			}
+		}
+    }
+	option = {
+        name = eriadu.23.b
+		custom_effect_tooltip = "§RThe Eriadu Authority will have a justification to invade Utapau!§!"
+		ERI = {country_event = eriadu.25}
+		ai_chance = {
+			base = 10
+			modifier = {
+				add = 25
+				UTA = {is_guaranteed_by = SUL}
+			}
+			modifier = {
+				add = 25
+				UTA = {is_in_faction_with = SUL}
+			}
+			modifier = {
+				add = 20
+				UTA = {is_guaranteed_by = NAB}
+			}
+			modifier = {
+				add = 20
+				UTA = {is_in_faction_with = NAB}
+			}
+		}
+		
+    }
+}
+
+country_event = {
+    id = eriadu.24 #utapau agrees
+    title = eriadu.24.t
+    desc = eriadu.24.d
+    picture = GFX_ERI_sander_pic
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+
+    option = {
+        name = eriadu.24.a
+		diplomatic_relation = {
+			country = UTA
+			relation = non_aggression_pact
+		}
+		diplomatic_relation = {
+			country = UTA
+			relation = puppet
+		}
+    }
+}
+
+country_event = {
+    id = eriadu.25 #utapau declines
+    title = eriadu.25.t
+    desc = eriadu.25.d
+    picture = GFX_ERI_sander_pic
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+
+    option = {
+        name = eriadu.25.a
+		create_wargoal = {
+			target = UTA
+			type = annex_everything
+		}
+    }
+}
+
+country_event = {
+    id = eriadu.26 #negotiate with sullust
+    title = eriadu.26.t
+    desc = eriadu.26.d
+    picture = GFX_ERI_sander_pic
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+
+    option = {
+		custom_effect_tooltip = "§YEriadu will enact non-aggresion pacts with all factions on Sullust and agree not to intervene in SoroSuub affairs, and Utapau will no longer receive our support.§!"
+        name = eriadu.26.a
+		ERI = {country_event = eriadu.27}
+		ai_chance = {
+			base = 75
+		}
+    }
+
+	option = {
+		custom_effect_tooltip = "§YOur support for Utapau will stand, though Eriadu will be more likely to invade Sullust.§!"
+        name = eriadu.26.b
+		ERI = {country_event = eriadu.28}
+		ai_chance = {
+			base = 25
+		}
+    }
+}
+
+country_event = {
+    id = eriadu.27 #sullust agrees
+    title = eriadu.27.t
+    desc = eriadu.27.d
+    picture = GFX_ERI_sander_pic
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+
+    option = {
+        name = eriadu.27.a
+		if = {
+			limit = {UTA = {is_guaranteed_by = SUL}}
+			SUL = {diplomatic_relation = { country = UTA relation = guarantee active = no }}
+		}
+		if = {
+			limit = {UTA = {is_in_faction_with = SUL}}
+			SUL = {remove_from_faction = UTA}
+		}
+		diplomatic_relation = {country = SUL relation = non_aggression_pact}
+		diplomatic_relation = {country = SOR relation = non_aggression_pact}
+		diplomatic_relation = {country = YUT relation = non_aggression_pact}
+		SOR = {
+			add_opinion_modifier = {
+				target = ERI
+				modifier = SUL_SoroSuub_Abandoned
+			}
+		}
+		
+    }
+}
+
+country_event = {
+    id = eriadu.28 #sullust declines
+    title = eriadu.28.t
+    desc = eriadu.28.d
+    picture = GFX_ERI_sander_pic
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+
+    option = {
+        name = eriadu.28.a
+		add_opinion_modifier = {
+			target = SUL
+			modifier = Threatened
+		}
+    }
+}
+
+country_event = {
+    id = eriadu.29 #negotiate with naboo
+    title = eriadu.29.t
+    desc = eriadu.29.d
+    picture = GFX_ERI_sander_pic
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+
+    option = {
+		name = eriadu.29.a
+		custom_effect_tooltip = "§YEriadu will enact non-aggression pacts with ourselves and the Gungans, in exchange for abandoning our support for Utapau§!"
+        ERI = {country_event = eriadu.30}
+		ai_chance = {
+			base = 75
+		}
+    }
+
+	option = {
+        name = eriadu.29.b
+		custom_effect_tooltip = "§YWe will maintain our support for the Pauans, though Eriadu will be more likely invade Naboo§!"
+		ERI = {country_event = eriadu.31}
+		
+		ai_chance = {
+			base = 25
+		}
+    }
+}
+
+country_event = {
+    id = eriadu.30 #naboo agrees
+    title = eriadu.30.t
+    desc = eriadu.30.d
+    picture = GFX_ERI_sander_pic
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+
+    option = {
+        name = eriadu.30.a
+		if = {
+			limit = {UTA = {is_guaranteed_by = NAB}}
+			SUL = {diplomatic_relation = { country = UTA relation = guarantee active = no }}
+		}
+		if = {
+			limit = {UTA = {is_in_faction_with = NAB}}
+			SUL = {remove_from_faction = UTA}
+		}
+		diplomatic_relation = {
+			country = NAB
+			relation = non_aggression_pact
+		}
+		diplomatic_relation = {
+			country = GUN
+			relation = non_aggression_pact
+		}
+		
+    }
+}
+
+
+
+country_event = {
+    id = eriadu.31 #naboo declines
+    title = eriadu.31.t
+    desc = eriadu.31.d
+    picture = GFX_ERI_sander_pic
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+
+    option = {
+        name = eriadu.31.a
+		add_opinion_modifier = {
+			target = NAB
+			modifier = Threatened
+		}
+    }
+}
+
+country_event = {
+    id = eriadu.32 #naboo/sullust support for utapau
+    title = eriadu.32.t
+    desc = eriadu.32.d
+    picture = GFX_ERI_sander_pic
+
+	is_triggered_only = yes
+
+
+    option = {
+		name = eriadu.32.a
+        THIS = {
+			diplomatic_relation = {
+				country = UTA
+				relation = guarantee
+			}
+		}
+		ai_chance = {
+			base = 33
+		}
+    }
+
+	option = {
+        name = eriadu.32.b
+		
+		ai_chance = {
+			base = 67
+		}
     }
 }
 
